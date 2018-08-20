@@ -80,7 +80,7 @@ data CertRequestResource s = CertRequestResource'
     -- ^ @private_key_pem@ - (Required, Forces New)
     -- PEM-encoded private key that the certificate will belong to
     --
-    , _subject       :: TF.Attr s [TF.Attr s (SubjectSetting s)]
+    , _subject       :: TF.Attr s [TF.Attr s (CertRequestSubjectSetting s)]
     -- ^ @subject@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -89,7 +89,7 @@ data CertRequestResource s = CertRequestResource'
 certRequestResource
     :: TF.Attr s P.Text -- ^ @key_algorithm@ ('P._keyAlgorithm', 'P.keyAlgorithm')
     -> TF.Attr s P.Text -- ^ @private_key_pem@ ('P._privateKeyPem', 'P.privateKeyPem')
-    -> TF.Attr s [TF.Attr s (SubjectSetting s)] -- ^ @subject@ ('P._subject', 'P.subject')
+    -> TF.Attr s [TF.Attr s (CertRequestSubjectSetting s)] -- ^ @subject@ ('P._subject', 'P.subject')
     -> P.Resource (CertRequestResource s)
 certRequestResource _keyAlgorithm _privateKeyPem _subject =
     TF.unsafeResource "tls_cert_request" TF.validator $
@@ -133,9 +133,9 @@ instance P.HasPrivateKeyPem (CertRequestResource s) (TF.Attr s P.Text) where
         P.lens (_privateKeyPem :: CertRequestResource s -> TF.Attr s P.Text)
                (\s a -> s { _privateKeyPem = a } :: CertRequestResource s)
 
-instance P.HasSubject (CertRequestResource s) (TF.Attr s [TF.Attr s (SubjectSetting s)]) where
+instance P.HasSubject (CertRequestResource s) (TF.Attr s [TF.Attr s (CertRequestSubjectSetting s)]) where
     subject =
-        P.lens (_subject :: CertRequestResource s -> TF.Attr s [TF.Attr s (SubjectSetting s)])
+        P.lens (_subject :: CertRequestResource s -> TF.Attr s [TF.Attr s (CertRequestSubjectSetting s)])
                (\s a -> s { _subject = a } :: CertRequestResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (CertRequestResource s)) (TF.Attr s P.Text) where
@@ -346,36 +346,36 @@ instance s ~ s' => P.HasComputedPublicKeyPem (TF.Ref s' (PrivateKeyResource s)) 
 -- See the <https://www.terraform.io/docs/providers/tls/r/self_signed_cert.html terraform documentation>
 -- for more information.
 data SelfSignedCertResource s = SelfSignedCertResource'
-    { _allowedUses         :: TF.Attr s [TF.Attr s P.Text]
+    { _allowedUses :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @allowed_uses@ - (Required, Forces New)
     -- Uses that are allowed for the certificate
     --
-    , _dnsNames            :: TF.Attr s [TF.Attr s P.Text]
+    , _dnsNames :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @dns_names@ - (Optional, Forces New)
     -- List of DNS names to use as subjects of the certificate
     --
-    , _earlyRenewalHours   :: TF.Attr s P.Int
+    , _earlyRenewalHours :: TF.Attr s P.Int
     -- ^ @early_renewal_hours@ - (Optional, Forces New)
     -- Number of hours before the certificates expiry when a new certificate will
     -- be generated
     --
-    , _ipAddresses         :: TF.Attr s [TF.Attr s P.Text]
+    , _ipAddresses :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @ip_addresses@ - (Optional, Forces New)
     -- List of IP addresses to use as subjects of the certificate
     --
-    , _isCaCertificate     :: TF.Attr s P.Bool
+    , _isCaCertificate :: TF.Attr s P.Bool
     -- ^ @is_ca_certificate@ - (Optional, Forces New)
     -- Whether the generated certificate will be usable as a CA certificate
     --
-    , _keyAlgorithm        :: TF.Attr s P.Text
+    , _keyAlgorithm :: TF.Attr s P.Text
     -- ^ @key_algorithm@ - (Required, Forces New)
     -- Name of the algorithm to use to generate the certificate's private key
     --
-    , _privateKeyPem       :: TF.Attr s P.Text
+    , _privateKeyPem :: TF.Attr s P.Text
     -- ^ @private_key_pem@ - (Required, Forces New)
     -- PEM-encoded private key that the certificate will belong to
     --
-    , _subject             :: TF.Attr s [TF.Attr s (SubjectSetting s)]
+    , _subject :: TF.Attr s [TF.Attr s (SelfSignedCertSubjectSetting s)]
     -- ^ @subject@ - (Required, Forces New)
     --
     , _validityPeriodHours :: TF.Attr s P.Int
@@ -389,7 +389,7 @@ selfSignedCertResource
     :: TF.Attr s P.Text -- ^ @key_algorithm@ ('P._keyAlgorithm', 'P.keyAlgorithm')
     -> TF.Attr s P.Int -- ^ @validity_period_hours@ ('P._validityPeriodHours', 'P.validityPeriodHours')
     -> TF.Attr s P.Text -- ^ @private_key_pem@ ('P._privateKeyPem', 'P.privateKeyPem')
-    -> TF.Attr s [TF.Attr s (SubjectSetting s)] -- ^ @subject@ ('P._subject', 'P.subject')
+    -> TF.Attr s [TF.Attr s (SelfSignedCertSubjectSetting s)] -- ^ @subject@ ('P._subject', 'P.subject')
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @allowed_uses@ ('P._allowedUses', 'P.allowedUses')
     -> P.Resource (SelfSignedCertResource s)
 selfSignedCertResource _keyAlgorithm _validityPeriodHours _privateKeyPem _subject _allowedUses =
@@ -457,9 +457,9 @@ instance P.HasPrivateKeyPem (SelfSignedCertResource s) (TF.Attr s P.Text) where
         P.lens (_privateKeyPem :: SelfSignedCertResource s -> TF.Attr s P.Text)
                (\s a -> s { _privateKeyPem = a } :: SelfSignedCertResource s)
 
-instance P.HasSubject (SelfSignedCertResource s) (TF.Attr s [TF.Attr s (SubjectSetting s)]) where
+instance P.HasSubject (SelfSignedCertResource s) (TF.Attr s [TF.Attr s (SelfSignedCertSubjectSetting s)]) where
     subject =
-        P.lens (_subject :: SelfSignedCertResource s -> TF.Attr s [TF.Attr s (SubjectSetting s)])
+        P.lens (_subject :: SelfSignedCertResource s -> TF.Attr s [TF.Attr s (SelfSignedCertSubjectSetting s)])
                (\s a -> s { _subject = a } :: SelfSignedCertResource s)
 
 instance P.HasValidityPeriodHours (SelfSignedCertResource s) (TF.Attr s P.Int) where

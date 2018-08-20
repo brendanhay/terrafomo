@@ -17,33 +17,33 @@
 --
 module Terrafomo.Datadog.Settings01
     (
-    -- ** conditional_format
-      ConditionalFormatSetting (..)
-    , newConditionalFormatSetting
-
-    -- ** request
-    , RequestSetting (..)
-    , newRequestSetting
-
-    -- ** graph
-    , GraphSetting (..)
-    , newGraphSetting
-
-    -- ** marker
-    , MarkerSetting (..)
-    , newMarkerSetting
-
     -- ** recurrence
-    , RecurrenceSetting (..)
-    , newRecurrenceSetting
-
-    -- ** template_variable
-    , TemplateVariableSetting (..)
-    , newTemplateVariableSetting
+      DowntimeRecurrenceSetting (..)
+    , newDowntimeRecurrenceSetting
 
     -- ** thresholds
-    , ThresholdsSetting (..)
-    , newThresholdsSetting
+    , MonitorThresholdsSetting (..)
+    , newMonitorThresholdsSetting
+
+    -- ** marker
+    , TimeboardGraphMarkerSetting (..)
+    , newTimeboardGraphMarkerSetting
+
+    -- ** graph
+    , TimeboardGraphSetting (..)
+    , newTimeboardGraphSetting
+
+    -- ** request
+    , TimeboardGraphRequestSetting (..)
+    , newTimeboardGraphRequestSetting
+
+    -- ** conditional_format
+    , TimeboardGraphRequestConditionalFormatSetting (..)
+    , newTimeboardGraphRequestConditionalFormatSetting
+
+    -- ** template_variable
+    , TimeboardTemplateVariableSetting (..)
+    , newTimeboardTemplateVariableSetting
 
     ) where
 
@@ -68,463 +68,8 @@ import qualified Terrafomo.HCL           as TF
 import qualified Terrafomo.Name          as TF
 import qualified Terrafomo.Validator     as TF
 
--- | @conditional_format@ nested settings.
-data ConditionalFormatSetting s = ConditionalFormatSetting'
-    { _comparator    :: TF.Attr s P.Text
-    -- ^ @comparator@ - (Required)
-    -- Comparator (<, >, etc)
-    --
-    , _customBgColor :: TF.Attr s P.Text
-    -- ^ @custom_bg_color@ - (Optional)
-    -- Custom background color (e.g., #205081)
-    --
-    , _customFgColor :: TF.Attr s P.Text
-    -- ^ @custom_fg_color@ - (Optional)
-    -- Custom foreground color (e.g., #59afe1)
-    --
-    , _palette       :: TF.Attr s P.Text
-    -- ^ @palette@ - (Optional)
-    -- The palette to use if this condition is met.
-    --
-    , _value         :: TF.Attr s P.Text
-    -- ^ @value@ - (Optional)
-    -- Value that is threshold for conditional format
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @conditional_format@ settings value.
-newConditionalFormatSetting
-    :: TF.Attr s P.Text -- ^ 'P._comparator': @comparator@
-    -> ConditionalFormatSetting s
-newConditionalFormatSetting _comparator =
-    ConditionalFormatSetting'
-        { _comparator = _comparator
-        , _customBgColor = TF.Nil
-        , _customFgColor = TF.Nil
-        , _palette = TF.Nil
-        , _value = TF.Nil
-        }
-
-instance TF.IsValue  (ConditionalFormatSetting s)
-instance TF.IsObject (ConditionalFormatSetting s) where
-    toObject ConditionalFormatSetting'{..} = P.catMaybes
-        [ TF.assign "comparator" <$> TF.attribute _comparator
-        , TF.assign "custom_bg_color" <$> TF.attribute _customBgColor
-        , TF.assign "custom_fg_color" <$> TF.attribute _customFgColor
-        , TF.assign "palette" <$> TF.attribute _palette
-        , TF.assign "value" <$> TF.attribute _value
-        ]
-
-instance TF.IsValid (ConditionalFormatSetting s) where
-    validator = P.mempty
-
-instance P.HasComparator (ConditionalFormatSetting s) (TF.Attr s P.Text) where
-    comparator =
-        P.lens (_comparator :: ConditionalFormatSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _comparator = a } :: ConditionalFormatSetting s)
-
-instance P.HasCustomBgColor (ConditionalFormatSetting s) (TF.Attr s P.Text) where
-    customBgColor =
-        P.lens (_customBgColor :: ConditionalFormatSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _customBgColor = a } :: ConditionalFormatSetting s)
-
-instance P.HasCustomFgColor (ConditionalFormatSetting s) (TF.Attr s P.Text) where
-    customFgColor =
-        P.lens (_customFgColor :: ConditionalFormatSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _customFgColor = a } :: ConditionalFormatSetting s)
-
-instance P.HasPalette (ConditionalFormatSetting s) (TF.Attr s P.Text) where
-    palette =
-        P.lens (_palette :: ConditionalFormatSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _palette = a } :: ConditionalFormatSetting s)
-
-instance P.HasValue (ConditionalFormatSetting s) (TF.Attr s P.Text) where
-    value =
-        P.lens (_value :: ConditionalFormatSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _value = a } :: ConditionalFormatSetting s)
-
--- | @request@ nested settings.
-data RequestSetting s = RequestSetting'
-    { _aggregator        :: TF.Attr s P.Text
-    -- ^ @aggregator@ - (Optional)
-    --
-    , _changeType        :: TF.Attr s P.Text
-    -- ^ @change_type@ - (Optional)
-    -- Type of change for change graphs.
-    --
-    , _compareTo         :: TF.Attr s P.Text
-    -- ^ @compare_to@ - (Optional)
-    -- The time period to compare change against in change graphs.
-    --
-    , _conditionalFormat :: TF.Attr s [TF.Attr s (ConditionalFormatSetting s)]
-    -- ^ @conditional_format@ - (Optional)
-    -- A list of conditional formatting rules.
-    --
-    , _extraCol          :: TF.Attr s P.Text
-    -- ^ @extra_col@ - (Optional)
-    -- If set to 'present', this will include the present values in change graphs.
-    --
-    , _increaseGood      :: TF.Attr s P.Bool
-    -- ^ @increase_good@ - (Optional)
-    -- Decides whether to represent increases as good or bad in change graphs.
-    --
-    , _orderBy           :: TF.Attr s P.Text
-    -- ^ @order_by@ - (Optional)
-    -- The field a change graph will be ordered by.
-    --
-    , _orderDirection    :: TF.Attr s P.Text
-    -- ^ @order_direction@ - (Optional)
-    -- Sort change graph in ascending or descending order.
-    --
-    , _q                 :: TF.Attr s P.Text
-    -- ^ @q@ - (Required)
-    --
-    , _stacked           :: TF.Attr s P.Bool
-    -- ^ @stacked@ - (Optional)
-    --
-    , _style             :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
-    -- ^ @style@ - (Optional)
-    --
-    , _type'             :: TF.Attr s P.Text
-    -- ^ @type@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @request@ settings value.
-newRequestSetting
-    :: TF.Attr s P.Text -- ^ 'P._q': @q@
-    -> RequestSetting s
-newRequestSetting _q =
-    RequestSetting'
-        { _aggregator = TF.Nil
-        , _changeType = TF.Nil
-        , _compareTo = TF.Nil
-        , _conditionalFormat = TF.Nil
-        , _extraCol = TF.Nil
-        , _increaseGood = TF.Nil
-        , _orderBy = TF.Nil
-        , _orderDirection = TF.Nil
-        , _q = _q
-        , _stacked = TF.value P.False
-        , _style = TF.Nil
-        , _type' = TF.value "line"
-        }
-
-instance TF.IsValue  (RequestSetting s)
-instance TF.IsObject (RequestSetting s) where
-    toObject RequestSetting'{..} = P.catMaybes
-        [ TF.assign "aggregator" <$> TF.attribute _aggregator
-        , TF.assign "change_type" <$> TF.attribute _changeType
-        , TF.assign "compare_to" <$> TF.attribute _compareTo
-        , TF.assign "conditional_format" <$> TF.attribute _conditionalFormat
-        , TF.assign "extra_col" <$> TF.attribute _extraCol
-        , TF.assign "increase_good" <$> TF.attribute _increaseGood
-        , TF.assign "order_by" <$> TF.attribute _orderBy
-        , TF.assign "order_direction" <$> TF.attribute _orderDirection
-        , TF.assign "q" <$> TF.attribute _q
-        , TF.assign "stacked" <$> TF.attribute _stacked
-        , TF.assign "style" <$> TF.attribute _style
-        , TF.assign "type" <$> TF.attribute _type'
-        ]
-
-instance TF.IsValid (RequestSetting s) where
-    validator = P.mempty
-
-instance P.HasAggregator (RequestSetting s) (TF.Attr s P.Text) where
-    aggregator =
-        P.lens (_aggregator :: RequestSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _aggregator = a } :: RequestSetting s)
-
-instance P.HasChangeType (RequestSetting s) (TF.Attr s P.Text) where
-    changeType =
-        P.lens (_changeType :: RequestSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _changeType = a } :: RequestSetting s)
-
-instance P.HasCompareTo (RequestSetting s) (TF.Attr s P.Text) where
-    compareTo =
-        P.lens (_compareTo :: RequestSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _compareTo = a } :: RequestSetting s)
-
-instance P.HasConditionalFormat (RequestSetting s) (TF.Attr s [TF.Attr s (ConditionalFormatSetting s)]) where
-    conditionalFormat =
-        P.lens (_conditionalFormat :: RequestSetting s -> TF.Attr s [TF.Attr s (ConditionalFormatSetting s)])
-               (\s a -> s { _conditionalFormat = a } :: RequestSetting s)
-
-instance P.HasExtraCol (RequestSetting s) (TF.Attr s P.Text) where
-    extraCol =
-        P.lens (_extraCol :: RequestSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _extraCol = a } :: RequestSetting s)
-
-instance P.HasIncreaseGood (RequestSetting s) (TF.Attr s P.Bool) where
-    increaseGood =
-        P.lens (_increaseGood :: RequestSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _increaseGood = a } :: RequestSetting s)
-
-instance P.HasOrderBy (RequestSetting s) (TF.Attr s P.Text) where
-    orderBy =
-        P.lens (_orderBy :: RequestSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _orderBy = a } :: RequestSetting s)
-
-instance P.HasOrderDirection (RequestSetting s) (TF.Attr s P.Text) where
-    orderDirection =
-        P.lens (_orderDirection :: RequestSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _orderDirection = a } :: RequestSetting s)
-
-instance P.HasQ (RequestSetting s) (TF.Attr s P.Text) where
-    q =
-        P.lens (_q :: RequestSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _q = a } :: RequestSetting s)
-
-instance P.HasStacked (RequestSetting s) (TF.Attr s P.Bool) where
-    stacked =
-        P.lens (_stacked :: RequestSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _stacked = a } :: RequestSetting s)
-
-instance P.HasStyle (RequestSetting s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
-    style =
-        P.lens (_style :: RequestSetting s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _style = a } :: RequestSetting s)
-
-instance P.HasType' (RequestSetting s) (TF.Attr s P.Text) where
-    type' =
-        P.lens (_type' :: RequestSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a } :: RequestSetting s)
-
--- | @graph@ nested settings.
-data GraphSetting s = GraphSetting'
-    { _autoscale             :: TF.Attr s P.Bool
-    -- ^ @autoscale@ - (Optional)
-    -- Automatically scale graphs
-    --
-    , _customUnit            :: TF.Attr s P.Text
-    -- ^ @custom_unit@ - (Optional)
-    -- Use a custom unit (like 'users')
-    --
-    , _events                :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @events@ - (Optional)
-    -- Filter for events to be overlayed on the graph.
-    --
-    , _group                 :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @group@ - (Optional)
-    -- A list of groupings for hostmap type graphs.
-    --
-    , _includeNoMetricHosts  :: TF.Attr s P.Bool
-    -- ^ @include_no_metric_hosts@ - (Optional)
-    -- Include hosts without metrics in hostmap graphs
-    --
-    , _includeUngroupedHosts :: TF.Attr s P.Bool
-    -- ^ @include_ungrouped_hosts@ - (Optional)
-    -- Include ungrouped hosts in hostmap graphs
-    --
-    , _marker                :: TF.Attr s [TF.Attr s (MarkerSetting s)]
-    -- ^ @marker@ - (Optional)
-    --
-    , _precision             :: TF.Attr s P.Text
-    -- ^ @precision@ - (Optional)
-    -- How many digits to show
-    --
-    , _request               :: TF.Attr s [TF.Attr s (RequestSetting s)]
-    -- ^ @request@ - (Required)
-    --
-    , _scope                 :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @scope@ - (Optional)
-    -- A list of scope filters for hostmap type graphs.
-    --
-    , _style                 :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
-    -- ^ @style@ - (Optional)
-    --
-    , _textAlign             :: TF.Attr s P.Text
-    -- ^ @text_align@ - (Optional)
-    -- How to align text
-    --
-    , _title                 :: TF.Attr s P.Text
-    -- ^ @title@ - (Required)
-    -- The name of the graph.
-    --
-    , _viz                   :: TF.Attr s P.Text
-    -- ^ @viz@ - (Required)
-    --
-    , _yaxis                 :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
-    -- ^ @yaxis@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @graph@ settings value.
-newGraphSetting
-    :: TF.Attr s [TF.Attr s (RequestSetting s)] -- ^ 'P._request': @request@
-    -> TF.Attr s P.Text -- ^ 'P._title': @title@
-    -> TF.Attr s P.Text -- ^ 'P._viz': @viz@
-    -> GraphSetting s
-newGraphSetting _request _title _viz =
-    GraphSetting'
-        { _autoscale = TF.Nil
-        , _customUnit = TF.Nil
-        , _events = TF.Nil
-        , _group = TF.Nil
-        , _includeNoMetricHosts = TF.Nil
-        , _includeUngroupedHosts = TF.Nil
-        , _marker = TF.Nil
-        , _precision = TF.Nil
-        , _request = _request
-        , _scope = TF.Nil
-        , _style = TF.Nil
-        , _textAlign = TF.Nil
-        , _title = _title
-        , _viz = _viz
-        , _yaxis = TF.Nil
-        }
-
-instance TF.IsValue  (GraphSetting s)
-instance TF.IsObject (GraphSetting s) where
-    toObject GraphSetting'{..} = P.catMaybes
-        [ TF.assign "autoscale" <$> TF.attribute _autoscale
-        , TF.assign "custom_unit" <$> TF.attribute _customUnit
-        , TF.assign "events" <$> TF.attribute _events
-        , TF.assign "group" <$> TF.attribute _group
-        , TF.assign "include_no_metric_hosts" <$> TF.attribute _includeNoMetricHosts
-        , TF.assign "include_ungrouped_hosts" <$> TF.attribute _includeUngroupedHosts
-        , TF.assign "marker" <$> TF.attribute _marker
-        , TF.assign "precision" <$> TF.attribute _precision
-        , TF.assign "request" <$> TF.attribute _request
-        , TF.assign "scope" <$> TF.attribute _scope
-        , TF.assign "style" <$> TF.attribute _style
-        , TF.assign "text_align" <$> TF.attribute _textAlign
-        , TF.assign "title" <$> TF.attribute _title
-        , TF.assign "viz" <$> TF.attribute _viz
-        , TF.assign "yaxis" <$> TF.attribute _yaxis
-        ]
-
-instance TF.IsValid (GraphSetting s) where
-    validator = P.mempty
-
-instance P.HasAutoscale (GraphSetting s) (TF.Attr s P.Bool) where
-    autoscale =
-        P.lens (_autoscale :: GraphSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _autoscale = a } :: GraphSetting s)
-
-instance P.HasCustomUnit (GraphSetting s) (TF.Attr s P.Text) where
-    customUnit =
-        P.lens (_customUnit :: GraphSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _customUnit = a } :: GraphSetting s)
-
-instance P.HasEvents (GraphSetting s) (TF.Attr s [TF.Attr s P.Text]) where
-    events =
-        P.lens (_events :: GraphSetting s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _events = a } :: GraphSetting s)
-
-instance P.HasGroup (GraphSetting s) (TF.Attr s [TF.Attr s P.Text]) where
-    group =
-        P.lens (_group :: GraphSetting s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _group = a } :: GraphSetting s)
-
-instance P.HasIncludeNoMetricHosts (GraphSetting s) (TF.Attr s P.Bool) where
-    includeNoMetricHosts =
-        P.lens (_includeNoMetricHosts :: GraphSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _includeNoMetricHosts = a } :: GraphSetting s)
-
-instance P.HasIncludeUngroupedHosts (GraphSetting s) (TF.Attr s P.Bool) where
-    includeUngroupedHosts =
-        P.lens (_includeUngroupedHosts :: GraphSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _includeUngroupedHosts = a } :: GraphSetting s)
-
-instance P.HasMarker (GraphSetting s) (TF.Attr s [TF.Attr s (MarkerSetting s)]) where
-    marker =
-        P.lens (_marker :: GraphSetting s -> TF.Attr s [TF.Attr s (MarkerSetting s)])
-               (\s a -> s { _marker = a } :: GraphSetting s)
-
-instance P.HasPrecision (GraphSetting s) (TF.Attr s P.Text) where
-    precision =
-        P.lens (_precision :: GraphSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _precision = a } :: GraphSetting s)
-
-instance P.HasRequest (GraphSetting s) (TF.Attr s [TF.Attr s (RequestSetting s)]) where
-    request =
-        P.lens (_request :: GraphSetting s -> TF.Attr s [TF.Attr s (RequestSetting s)])
-               (\s a -> s { _request = a } :: GraphSetting s)
-
-instance P.HasScope (GraphSetting s) (TF.Attr s [TF.Attr s P.Text]) where
-    scope =
-        P.lens (_scope :: GraphSetting s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _scope = a } :: GraphSetting s)
-
-instance P.HasStyle (GraphSetting s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
-    style =
-        P.lens (_style :: GraphSetting s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _style = a } :: GraphSetting s)
-
-instance P.HasTextAlign (GraphSetting s) (TF.Attr s P.Text) where
-    textAlign =
-        P.lens (_textAlign :: GraphSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _textAlign = a } :: GraphSetting s)
-
-instance P.HasTitle (GraphSetting s) (TF.Attr s P.Text) where
-    title =
-        P.lens (_title :: GraphSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _title = a } :: GraphSetting s)
-
-instance P.HasViz (GraphSetting s) (TF.Attr s P.Text) where
-    viz =
-        P.lens (_viz :: GraphSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _viz = a } :: GraphSetting s)
-
-instance P.HasYaxis (GraphSetting s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
-    yaxis =
-        P.lens (_yaxis :: GraphSetting s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _yaxis = a } :: GraphSetting s)
-
--- | @marker@ nested settings.
-data MarkerSetting s = MarkerSetting'
-    { _label :: TF.Attr s P.Text
-    -- ^ @label@ - (Optional)
-    --
-    , _type' :: TF.Attr s P.Text
-    -- ^ @type@ - (Required)
-    --
-    , _value :: TF.Attr s P.Text
-    -- ^ @value@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @marker@ settings value.
-newMarkerSetting
-    :: TF.Attr s P.Text -- ^ 'P._type'': @type@
-    -> TF.Attr s P.Text -- ^ 'P._value': @value@
-    -> MarkerSetting s
-newMarkerSetting _type' _value =
-    MarkerSetting'
-        { _label = TF.Nil
-        , _type' = _type'
-        , _value = _value
-        }
-
-instance TF.IsValue  (MarkerSetting s)
-instance TF.IsObject (MarkerSetting s) where
-    toObject MarkerSetting'{..} = P.catMaybes
-        [ TF.assign "label" <$> TF.attribute _label
-        , TF.assign "type" <$> TF.attribute _type'
-        , TF.assign "value" <$> TF.attribute _value
-        ]
-
-instance TF.IsValid (MarkerSetting s) where
-    validator = P.mempty
-
-instance P.HasLabel (MarkerSetting s) (TF.Attr s P.Text) where
-    label =
-        P.lens (_label :: MarkerSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _label = a } :: MarkerSetting s)
-
-instance P.HasType' (MarkerSetting s) (TF.Attr s P.Text) where
-    type' =
-        P.lens (_type' :: MarkerSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a } :: MarkerSetting s)
-
-instance P.HasValue (MarkerSetting s) (TF.Attr s P.Text) where
-    value =
-        P.lens (_value :: MarkerSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _value = a } :: MarkerSetting s)
-
 -- | @recurrence@ nested settings.
-data RecurrenceSetting s = RecurrenceSetting'
+data DowntimeRecurrenceSetting s = DowntimeRecurrenceSetting'
     { _period           :: TF.Attr s P.Int
     -- ^ @period@ - (Required)
     --
@@ -549,12 +94,12 @@ data RecurrenceSetting s = RecurrenceSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @recurrence@ settings value.
-newRecurrenceSetting
+newDowntimeRecurrenceSetting
     :: TF.Attr s P.Int -- ^ 'P._period': @period@
     -> TF.Attr s P.Text -- ^ 'P._type'': @type@
-    -> RecurrenceSetting s
-newRecurrenceSetting _period _type' =
-    RecurrenceSetting'
+    -> DowntimeRecurrenceSetting s
+newDowntimeRecurrenceSetting _period _type' =
+    DowntimeRecurrenceSetting'
         { _period = _period
         , _type' = _type'
         , _untilDate = TF.Nil
@@ -562,9 +107,9 @@ newRecurrenceSetting _period _type' =
         , _weekDays = TF.Nil
         }
 
-instance TF.IsValue  (RecurrenceSetting s)
-instance TF.IsObject (RecurrenceSetting s) where
-    toObject RecurrenceSetting'{..} = P.catMaybes
+instance TF.IsValue  (DowntimeRecurrenceSetting s)
+instance TF.IsObject (DowntimeRecurrenceSetting s) where
+    toObject DowntimeRecurrenceSetting'{..} = P.catMaybes
         [ TF.assign "period" <$> TF.attribute _period
         , TF.assign "type" <$> TF.attribute _type'
         , TF.assign "until_date" <$> TF.attribute _untilDate
@@ -572,8 +117,8 @@ instance TF.IsObject (RecurrenceSetting s) where
         , TF.assign "week_days" <$> TF.attribute _weekDays
         ]
 
-instance TF.IsValid (RecurrenceSetting s) where
-    validator = TF.fieldsValidator (\RecurrenceSetting'{..} -> Map.fromList $ P.catMaybes
+instance TF.IsValid (DowntimeRecurrenceSetting s) where
+    validator = TF.fieldsValidator (\DowntimeRecurrenceSetting'{..} -> Map.fromList $ P.catMaybes
         [ if (_untilDate P.== TF.Nil)
               then P.Nothing
               else P.Just ("_untilDate",
@@ -586,87 +131,33 @@ instance TF.IsValid (RecurrenceSetting s) where
                             ])
         ])
 
-instance P.HasPeriod (RecurrenceSetting s) (TF.Attr s P.Int) where
+instance P.HasPeriod (DowntimeRecurrenceSetting s) (TF.Attr s P.Int) where
     period =
-        P.lens (_period :: RecurrenceSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _period = a } :: RecurrenceSetting s)
+        P.lens (_period :: DowntimeRecurrenceSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _period = a } :: DowntimeRecurrenceSetting s)
 
-instance P.HasType' (RecurrenceSetting s) (TF.Attr s P.Text) where
+instance P.HasType' (DowntimeRecurrenceSetting s) (TF.Attr s P.Text) where
     type' =
-        P.lens (_type' :: RecurrenceSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a } :: RecurrenceSetting s)
+        P.lens (_type' :: DowntimeRecurrenceSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _type' = a } :: DowntimeRecurrenceSetting s)
 
-instance P.HasUntilDate (RecurrenceSetting s) (TF.Attr s P.Int) where
+instance P.HasUntilDate (DowntimeRecurrenceSetting s) (TF.Attr s P.Int) where
     untilDate =
-        P.lens (_untilDate :: RecurrenceSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _untilDate = a } :: RecurrenceSetting s)
+        P.lens (_untilDate :: DowntimeRecurrenceSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _untilDate = a } :: DowntimeRecurrenceSetting s)
 
-instance P.HasUntilOccurrences (RecurrenceSetting s) (TF.Attr s P.Int) where
+instance P.HasUntilOccurrences (DowntimeRecurrenceSetting s) (TF.Attr s P.Int) where
     untilOccurrences =
-        P.lens (_untilOccurrences :: RecurrenceSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _untilOccurrences = a } :: RecurrenceSetting s)
+        P.lens (_untilOccurrences :: DowntimeRecurrenceSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _untilOccurrences = a } :: DowntimeRecurrenceSetting s)
 
-instance P.HasWeekDays (RecurrenceSetting s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasWeekDays (DowntimeRecurrenceSetting s) (TF.Attr s [TF.Attr s P.Text]) where
     weekDays =
-        P.lens (_weekDays :: RecurrenceSetting s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _weekDays = a } :: RecurrenceSetting s)
-
--- | @template_variable@ nested settings.
-data TemplateVariableSetting s = TemplateVariableSetting'
-    { _default' :: TF.Attr s P.Text
-    -- ^ @default@ - (Optional)
-    -- The default value for the template variable on dashboard load.
-    --
-    , _name     :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
-    -- The name of the variable.
-    --
-    , _prefix   :: TF.Attr s P.Text
-    -- ^ @prefix@ - (Optional)
-    -- The tag prefix associated with the variable. Only tags with this prefix will
-    -- appear in the variable dropdown.
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @template_variable@ settings value.
-newTemplateVariableSetting
-    :: TF.Attr s P.Text -- ^ 'P._name': @name@
-    -> TemplateVariableSetting s
-newTemplateVariableSetting _name =
-    TemplateVariableSetting'
-        { _default' = TF.Nil
-        , _name = _name
-        , _prefix = TF.Nil
-        }
-
-instance TF.IsValue  (TemplateVariableSetting s)
-instance TF.IsObject (TemplateVariableSetting s) where
-    toObject TemplateVariableSetting'{..} = P.catMaybes
-        [ TF.assign "default" <$> TF.attribute _default'
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "prefix" <$> TF.attribute _prefix
-        ]
-
-instance TF.IsValid (TemplateVariableSetting s) where
-    validator = P.mempty
-
-instance P.HasDefault' (TemplateVariableSetting s) (TF.Attr s P.Text) where
-    default' =
-        P.lens (_default' :: TemplateVariableSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _default' = a } :: TemplateVariableSetting s)
-
-instance P.HasName (TemplateVariableSetting s) (TF.Attr s P.Text) where
-    name =
-        P.lens (_name :: TemplateVariableSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: TemplateVariableSetting s)
-
-instance P.HasPrefix (TemplateVariableSetting s) (TF.Attr s P.Text) where
-    prefix =
-        P.lens (_prefix :: TemplateVariableSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _prefix = a } :: TemplateVariableSetting s)
+        P.lens (_weekDays :: DowntimeRecurrenceSetting s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _weekDays = a } :: DowntimeRecurrenceSetting s)
 
 -- | @thresholds@ nested settings.
-data ThresholdsSetting s = ThresholdsSetting'
+data MonitorThresholdsSetting s = MonitorThresholdsSetting'
     { _critical         :: TF.Attr s P.Double
     -- ^ @critical@ - (Optional)
     --
@@ -688,10 +179,10 @@ data ThresholdsSetting s = ThresholdsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @thresholds@ settings value.
-newThresholdsSetting
-    :: ThresholdsSetting s
-newThresholdsSetting =
-    ThresholdsSetting'
+newMonitorThresholdsSetting
+    :: MonitorThresholdsSetting s
+newMonitorThresholdsSetting =
+    MonitorThresholdsSetting'
         { _critical = TF.Nil
         , _criticalRecovery = TF.Nil
         , _ok = TF.Nil
@@ -700,9 +191,9 @@ newThresholdsSetting =
         , _warningRecovery = TF.Nil
         }
 
-instance TF.IsValue  (ThresholdsSetting s)
-instance TF.IsObject (ThresholdsSetting s) where
-    toObject ThresholdsSetting'{..} = P.catMaybes
+instance TF.IsValue  (MonitorThresholdsSetting s)
+instance TF.IsObject (MonitorThresholdsSetting s) where
+    toObject MonitorThresholdsSetting'{..} = P.catMaybes
         [ TF.assign "critical" <$> TF.attribute _critical
         , TF.assign "critical_recovery" <$> TF.attribute _criticalRecovery
         , TF.assign "ok" <$> TF.attribute _ok
@@ -711,35 +202,544 @@ instance TF.IsObject (ThresholdsSetting s) where
         , TF.assign "warning_recovery" <$> TF.attribute _warningRecovery
         ]
 
-instance TF.IsValid (ThresholdsSetting s) where
+instance TF.IsValid (MonitorThresholdsSetting s) where
     validator = P.mempty
 
-instance P.HasCritical (ThresholdsSetting s) (TF.Attr s P.Double) where
+instance P.HasCritical (MonitorThresholdsSetting s) (TF.Attr s P.Double) where
     critical =
-        P.lens (_critical :: ThresholdsSetting s -> TF.Attr s P.Double)
-               (\s a -> s { _critical = a } :: ThresholdsSetting s)
+        P.lens (_critical :: MonitorThresholdsSetting s -> TF.Attr s P.Double)
+               (\s a -> s { _critical = a } :: MonitorThresholdsSetting s)
 
-instance P.HasCriticalRecovery (ThresholdsSetting s) (TF.Attr s P.Double) where
+instance P.HasCriticalRecovery (MonitorThresholdsSetting s) (TF.Attr s P.Double) where
     criticalRecovery =
-        P.lens (_criticalRecovery :: ThresholdsSetting s -> TF.Attr s P.Double)
-               (\s a -> s { _criticalRecovery = a } :: ThresholdsSetting s)
+        P.lens (_criticalRecovery :: MonitorThresholdsSetting s -> TF.Attr s P.Double)
+               (\s a -> s { _criticalRecovery = a } :: MonitorThresholdsSetting s)
 
-instance P.HasOk (ThresholdsSetting s) (TF.Attr s P.Double) where
+instance P.HasOk (MonitorThresholdsSetting s) (TF.Attr s P.Double) where
     ok =
-        P.lens (_ok :: ThresholdsSetting s -> TF.Attr s P.Double)
-               (\s a -> s { _ok = a } :: ThresholdsSetting s)
+        P.lens (_ok :: MonitorThresholdsSetting s -> TF.Attr s P.Double)
+               (\s a -> s { _ok = a } :: MonitorThresholdsSetting s)
 
-instance P.HasUnknown (ThresholdsSetting s) (TF.Attr s P.Double) where
+instance P.HasUnknown (MonitorThresholdsSetting s) (TF.Attr s P.Double) where
     unknown =
-        P.lens (_unknown :: ThresholdsSetting s -> TF.Attr s P.Double)
-               (\s a -> s { _unknown = a } :: ThresholdsSetting s)
+        P.lens (_unknown :: MonitorThresholdsSetting s -> TF.Attr s P.Double)
+               (\s a -> s { _unknown = a } :: MonitorThresholdsSetting s)
 
-instance P.HasWarning (ThresholdsSetting s) (TF.Attr s P.Double) where
+instance P.HasWarning (MonitorThresholdsSetting s) (TF.Attr s P.Double) where
     warning =
-        P.lens (_warning :: ThresholdsSetting s -> TF.Attr s P.Double)
-               (\s a -> s { _warning = a } :: ThresholdsSetting s)
+        P.lens (_warning :: MonitorThresholdsSetting s -> TF.Attr s P.Double)
+               (\s a -> s { _warning = a } :: MonitorThresholdsSetting s)
 
-instance P.HasWarningRecovery (ThresholdsSetting s) (TF.Attr s P.Double) where
+instance P.HasWarningRecovery (MonitorThresholdsSetting s) (TF.Attr s P.Double) where
     warningRecovery =
-        P.lens (_warningRecovery :: ThresholdsSetting s -> TF.Attr s P.Double)
-               (\s a -> s { _warningRecovery = a } :: ThresholdsSetting s)
+        P.lens (_warningRecovery :: MonitorThresholdsSetting s -> TF.Attr s P.Double)
+               (\s a -> s { _warningRecovery = a } :: MonitorThresholdsSetting s)
+
+-- | @marker@ nested settings.
+data TimeboardGraphMarkerSetting s = TimeboardGraphMarkerSetting'
+    { _label :: TF.Attr s P.Text
+    -- ^ @label@ - (Optional)
+    --
+    , _type' :: TF.Attr s P.Text
+    -- ^ @type@ - (Required)
+    --
+    , _value :: TF.Attr s P.Text
+    -- ^ @value@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @marker@ settings value.
+newTimeboardGraphMarkerSetting
+    :: TF.Attr s P.Text -- ^ 'P._type'': @type@
+    -> TF.Attr s P.Text -- ^ 'P._value': @value@
+    -> TimeboardGraphMarkerSetting s
+newTimeboardGraphMarkerSetting _type' _value =
+    TimeboardGraphMarkerSetting'
+        { _label = TF.Nil
+        , _type' = _type'
+        , _value = _value
+        }
+
+instance TF.IsValue  (TimeboardGraphMarkerSetting s)
+instance TF.IsObject (TimeboardGraphMarkerSetting s) where
+    toObject TimeboardGraphMarkerSetting'{..} = P.catMaybes
+        [ TF.assign "label" <$> TF.attribute _label
+        , TF.assign "type" <$> TF.attribute _type'
+        , TF.assign "value" <$> TF.attribute _value
+        ]
+
+instance TF.IsValid (TimeboardGraphMarkerSetting s) where
+    validator = P.mempty
+
+instance P.HasLabel (TimeboardGraphMarkerSetting s) (TF.Attr s P.Text) where
+    label =
+        P.lens (_label :: TimeboardGraphMarkerSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _label = a } :: TimeboardGraphMarkerSetting s)
+
+instance P.HasType' (TimeboardGraphMarkerSetting s) (TF.Attr s P.Text) where
+    type' =
+        P.lens (_type' :: TimeboardGraphMarkerSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _type' = a } :: TimeboardGraphMarkerSetting s)
+
+instance P.HasValue (TimeboardGraphMarkerSetting s) (TF.Attr s P.Text) where
+    value =
+        P.lens (_value :: TimeboardGraphMarkerSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _value = a } :: TimeboardGraphMarkerSetting s)
+
+-- | @graph@ nested settings.
+data TimeboardGraphSetting s = TimeboardGraphSetting'
+    { _autoscale :: TF.Attr s P.Bool
+    -- ^ @autoscale@ - (Optional)
+    -- Automatically scale graphs
+    --
+    , _customUnit :: TF.Attr s P.Text
+    -- ^ @custom_unit@ - (Optional)
+    -- Use a custom unit (like 'users')
+    --
+    , _events :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @events@ - (Optional)
+    -- Filter for events to be overlayed on the graph.
+    --
+    , _group :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @group@ - (Optional)
+    -- A list of groupings for hostmap type graphs.
+    --
+    , _includeNoMetricHosts :: TF.Attr s P.Bool
+    -- ^ @include_no_metric_hosts@ - (Optional)
+    -- Include hosts without metrics in hostmap graphs
+    --
+    , _includeUngroupedHosts :: TF.Attr s P.Bool
+    -- ^ @include_ungrouped_hosts@ - (Optional)
+    -- Include ungrouped hosts in hostmap graphs
+    --
+    , _marker :: TF.Attr s [TF.Attr s (TimeboardGraphMarkerSetting s)]
+    -- ^ @marker@ - (Optional)
+    --
+    , _precision :: TF.Attr s P.Text
+    -- ^ @precision@ - (Optional)
+    -- How many digits to show
+    --
+    , _request :: TF.Attr s [TF.Attr s (TimeboardGraphRequestSetting s)]
+    -- ^ @request@ - (Required)
+    --
+    , _scope :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @scope@ - (Optional)
+    -- A list of scope filters for hostmap type graphs.
+    --
+    , _style :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @style@ - (Optional)
+    --
+    , _textAlign :: TF.Attr s P.Text
+    -- ^ @text_align@ - (Optional)
+    -- How to align text
+    --
+    , _title :: TF.Attr s P.Text
+    -- ^ @title@ - (Required)
+    -- The name of the graph.
+    --
+    , _viz :: TF.Attr s P.Text
+    -- ^ @viz@ - (Required)
+    --
+    , _yaxis :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @yaxis@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @graph@ settings value.
+newTimeboardGraphSetting
+    :: TF.Attr s [TF.Attr s (TimeboardGraphRequestSetting s)] -- ^ 'P._request': @request@
+    -> TF.Attr s P.Text -- ^ 'P._title': @title@
+    -> TF.Attr s P.Text -- ^ 'P._viz': @viz@
+    -> TimeboardGraphSetting s
+newTimeboardGraphSetting _request _title _viz =
+    TimeboardGraphSetting'
+        { _autoscale = TF.Nil
+        , _customUnit = TF.Nil
+        , _events = TF.Nil
+        , _group = TF.Nil
+        , _includeNoMetricHosts = TF.Nil
+        , _includeUngroupedHosts = TF.Nil
+        , _marker = TF.Nil
+        , _precision = TF.Nil
+        , _request = _request
+        , _scope = TF.Nil
+        , _style = TF.Nil
+        , _textAlign = TF.Nil
+        , _title = _title
+        , _viz = _viz
+        , _yaxis = TF.Nil
+        }
+
+instance TF.IsValue  (TimeboardGraphSetting s)
+instance TF.IsObject (TimeboardGraphSetting s) where
+    toObject TimeboardGraphSetting'{..} = P.catMaybes
+        [ TF.assign "autoscale" <$> TF.attribute _autoscale
+        , TF.assign "custom_unit" <$> TF.attribute _customUnit
+        , TF.assign "events" <$> TF.attribute _events
+        , TF.assign "group" <$> TF.attribute _group
+        , TF.assign "include_no_metric_hosts" <$> TF.attribute _includeNoMetricHosts
+        , TF.assign "include_ungrouped_hosts" <$> TF.attribute _includeUngroupedHosts
+        , TF.assign "marker" <$> TF.attribute _marker
+        , TF.assign "precision" <$> TF.attribute _precision
+        , TF.assign "request" <$> TF.attribute _request
+        , TF.assign "scope" <$> TF.attribute _scope
+        , TF.assign "style" <$> TF.attribute _style
+        , TF.assign "text_align" <$> TF.attribute _textAlign
+        , TF.assign "title" <$> TF.attribute _title
+        , TF.assign "viz" <$> TF.attribute _viz
+        , TF.assign "yaxis" <$> TF.attribute _yaxis
+        ]
+
+instance TF.IsValid (TimeboardGraphSetting s) where
+    validator = P.mempty
+
+instance P.HasAutoscale (TimeboardGraphSetting s) (TF.Attr s P.Bool) where
+    autoscale =
+        P.lens (_autoscale :: TimeboardGraphSetting s -> TF.Attr s P.Bool)
+               (\s a -> s { _autoscale = a } :: TimeboardGraphSetting s)
+
+instance P.HasCustomUnit (TimeboardGraphSetting s) (TF.Attr s P.Text) where
+    customUnit =
+        P.lens (_customUnit :: TimeboardGraphSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _customUnit = a } :: TimeboardGraphSetting s)
+
+instance P.HasEvents (TimeboardGraphSetting s) (TF.Attr s [TF.Attr s P.Text]) where
+    events =
+        P.lens (_events :: TimeboardGraphSetting s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _events = a } :: TimeboardGraphSetting s)
+
+instance P.HasGroup (TimeboardGraphSetting s) (TF.Attr s [TF.Attr s P.Text]) where
+    group =
+        P.lens (_group :: TimeboardGraphSetting s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _group = a } :: TimeboardGraphSetting s)
+
+instance P.HasIncludeNoMetricHosts (TimeboardGraphSetting s) (TF.Attr s P.Bool) where
+    includeNoMetricHosts =
+        P.lens (_includeNoMetricHosts :: TimeboardGraphSetting s -> TF.Attr s P.Bool)
+               (\s a -> s { _includeNoMetricHosts = a } :: TimeboardGraphSetting s)
+
+instance P.HasIncludeUngroupedHosts (TimeboardGraphSetting s) (TF.Attr s P.Bool) where
+    includeUngroupedHosts =
+        P.lens (_includeUngroupedHosts :: TimeboardGraphSetting s -> TF.Attr s P.Bool)
+               (\s a -> s { _includeUngroupedHosts = a } :: TimeboardGraphSetting s)
+
+instance P.HasMarker (TimeboardGraphSetting s) (TF.Attr s [TF.Attr s (TimeboardGraphMarkerSetting s)]) where
+    marker =
+        P.lens (_marker :: TimeboardGraphSetting s -> TF.Attr s [TF.Attr s (TimeboardGraphMarkerSetting s)])
+               (\s a -> s { _marker = a } :: TimeboardGraphSetting s)
+
+instance P.HasPrecision (TimeboardGraphSetting s) (TF.Attr s P.Text) where
+    precision =
+        P.lens (_precision :: TimeboardGraphSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _precision = a } :: TimeboardGraphSetting s)
+
+instance P.HasRequest (TimeboardGraphSetting s) (TF.Attr s [TF.Attr s (TimeboardGraphRequestSetting s)]) where
+    request =
+        P.lens (_request :: TimeboardGraphSetting s -> TF.Attr s [TF.Attr s (TimeboardGraphRequestSetting s)])
+               (\s a -> s { _request = a } :: TimeboardGraphSetting s)
+
+instance P.HasScope (TimeboardGraphSetting s) (TF.Attr s [TF.Attr s P.Text]) where
+    scope =
+        P.lens (_scope :: TimeboardGraphSetting s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _scope = a } :: TimeboardGraphSetting s)
+
+instance P.HasStyle (TimeboardGraphSetting s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    style =
+        P.lens (_style :: TimeboardGraphSetting s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _style = a } :: TimeboardGraphSetting s)
+
+instance P.HasTextAlign (TimeboardGraphSetting s) (TF.Attr s P.Text) where
+    textAlign =
+        P.lens (_textAlign :: TimeboardGraphSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _textAlign = a } :: TimeboardGraphSetting s)
+
+instance P.HasTitle (TimeboardGraphSetting s) (TF.Attr s P.Text) where
+    title =
+        P.lens (_title :: TimeboardGraphSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _title = a } :: TimeboardGraphSetting s)
+
+instance P.HasViz (TimeboardGraphSetting s) (TF.Attr s P.Text) where
+    viz =
+        P.lens (_viz :: TimeboardGraphSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _viz = a } :: TimeboardGraphSetting s)
+
+instance P.HasYaxis (TimeboardGraphSetting s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    yaxis =
+        P.lens (_yaxis :: TimeboardGraphSetting s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _yaxis = a } :: TimeboardGraphSetting s)
+
+-- | @request@ nested settings.
+data TimeboardGraphRequestSetting s = TimeboardGraphRequestSetting'
+    { _aggregator :: TF.Attr s P.Text
+    -- ^ @aggregator@ - (Optional)
+    --
+    , _changeType :: TF.Attr s P.Text
+    -- ^ @change_type@ - (Optional)
+    -- Type of change for change graphs.
+    --
+    , _compareTo :: TF.Attr s P.Text
+    -- ^ @compare_to@ - (Optional)
+    -- The time period to compare change against in change graphs.
+    --
+    , _conditionalFormat :: TF.Attr s [TF.Attr s (TimeboardGraphRequestConditionalFormatSetting s)]
+    -- ^ @conditional_format@ - (Optional)
+    -- A list of conditional formatting rules.
+    --
+    , _extraCol :: TF.Attr s P.Text
+    -- ^ @extra_col@ - (Optional)
+    -- If set to 'present', this will include the present values in change graphs.
+    --
+    , _increaseGood :: TF.Attr s P.Bool
+    -- ^ @increase_good@ - (Optional)
+    -- Decides whether to represent increases as good or bad in change graphs.
+    --
+    , _orderBy :: TF.Attr s P.Text
+    -- ^ @order_by@ - (Optional)
+    -- The field a change graph will be ordered by.
+    --
+    , _orderDirection :: TF.Attr s P.Text
+    -- ^ @order_direction@ - (Optional)
+    -- Sort change graph in ascending or descending order.
+    --
+    , _q :: TF.Attr s P.Text
+    -- ^ @q@ - (Required)
+    --
+    , _stacked :: TF.Attr s P.Bool
+    -- ^ @stacked@ - (Optional)
+    --
+    , _style :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @style@ - (Optional)
+    --
+    , _type' :: TF.Attr s P.Text
+    -- ^ @type@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @request@ settings value.
+newTimeboardGraphRequestSetting
+    :: TF.Attr s P.Text -- ^ 'P._q': @q@
+    -> TimeboardGraphRequestSetting s
+newTimeboardGraphRequestSetting _q =
+    TimeboardGraphRequestSetting'
+        { _aggregator = TF.Nil
+        , _changeType = TF.Nil
+        , _compareTo = TF.Nil
+        , _conditionalFormat = TF.Nil
+        , _extraCol = TF.Nil
+        , _increaseGood = TF.Nil
+        , _orderBy = TF.Nil
+        , _orderDirection = TF.Nil
+        , _q = _q
+        , _stacked = TF.value P.False
+        , _style = TF.Nil
+        , _type' = TF.value "line"
+        }
+
+instance TF.IsValue  (TimeboardGraphRequestSetting s)
+instance TF.IsObject (TimeboardGraphRequestSetting s) where
+    toObject TimeboardGraphRequestSetting'{..} = P.catMaybes
+        [ TF.assign "aggregator" <$> TF.attribute _aggregator
+        , TF.assign "change_type" <$> TF.attribute _changeType
+        , TF.assign "compare_to" <$> TF.attribute _compareTo
+        , TF.assign "conditional_format" <$> TF.attribute _conditionalFormat
+        , TF.assign "extra_col" <$> TF.attribute _extraCol
+        , TF.assign "increase_good" <$> TF.attribute _increaseGood
+        , TF.assign "order_by" <$> TF.attribute _orderBy
+        , TF.assign "order_direction" <$> TF.attribute _orderDirection
+        , TF.assign "q" <$> TF.attribute _q
+        , TF.assign "stacked" <$> TF.attribute _stacked
+        , TF.assign "style" <$> TF.attribute _style
+        , TF.assign "type" <$> TF.attribute _type'
+        ]
+
+instance TF.IsValid (TimeboardGraphRequestSetting s) where
+    validator = P.mempty
+
+instance P.HasAggregator (TimeboardGraphRequestSetting s) (TF.Attr s P.Text) where
+    aggregator =
+        P.lens (_aggregator :: TimeboardGraphRequestSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _aggregator = a } :: TimeboardGraphRequestSetting s)
+
+instance P.HasChangeType (TimeboardGraphRequestSetting s) (TF.Attr s P.Text) where
+    changeType =
+        P.lens (_changeType :: TimeboardGraphRequestSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _changeType = a } :: TimeboardGraphRequestSetting s)
+
+instance P.HasCompareTo (TimeboardGraphRequestSetting s) (TF.Attr s P.Text) where
+    compareTo =
+        P.lens (_compareTo :: TimeboardGraphRequestSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _compareTo = a } :: TimeboardGraphRequestSetting s)
+
+instance P.HasConditionalFormat (TimeboardGraphRequestSetting s) (TF.Attr s [TF.Attr s (TimeboardGraphRequestConditionalFormatSetting s)]) where
+    conditionalFormat =
+        P.lens (_conditionalFormat :: TimeboardGraphRequestSetting s -> TF.Attr s [TF.Attr s (TimeboardGraphRequestConditionalFormatSetting s)])
+               (\s a -> s { _conditionalFormat = a } :: TimeboardGraphRequestSetting s)
+
+instance P.HasExtraCol (TimeboardGraphRequestSetting s) (TF.Attr s P.Text) where
+    extraCol =
+        P.lens (_extraCol :: TimeboardGraphRequestSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _extraCol = a } :: TimeboardGraphRequestSetting s)
+
+instance P.HasIncreaseGood (TimeboardGraphRequestSetting s) (TF.Attr s P.Bool) where
+    increaseGood =
+        P.lens (_increaseGood :: TimeboardGraphRequestSetting s -> TF.Attr s P.Bool)
+               (\s a -> s { _increaseGood = a } :: TimeboardGraphRequestSetting s)
+
+instance P.HasOrderBy (TimeboardGraphRequestSetting s) (TF.Attr s P.Text) where
+    orderBy =
+        P.lens (_orderBy :: TimeboardGraphRequestSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _orderBy = a } :: TimeboardGraphRequestSetting s)
+
+instance P.HasOrderDirection (TimeboardGraphRequestSetting s) (TF.Attr s P.Text) where
+    orderDirection =
+        P.lens (_orderDirection :: TimeboardGraphRequestSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _orderDirection = a } :: TimeboardGraphRequestSetting s)
+
+instance P.HasQ (TimeboardGraphRequestSetting s) (TF.Attr s P.Text) where
+    q =
+        P.lens (_q :: TimeboardGraphRequestSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _q = a } :: TimeboardGraphRequestSetting s)
+
+instance P.HasStacked (TimeboardGraphRequestSetting s) (TF.Attr s P.Bool) where
+    stacked =
+        P.lens (_stacked :: TimeboardGraphRequestSetting s -> TF.Attr s P.Bool)
+               (\s a -> s { _stacked = a } :: TimeboardGraphRequestSetting s)
+
+instance P.HasStyle (TimeboardGraphRequestSetting s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    style =
+        P.lens (_style :: TimeboardGraphRequestSetting s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _style = a } :: TimeboardGraphRequestSetting s)
+
+instance P.HasType' (TimeboardGraphRequestSetting s) (TF.Attr s P.Text) where
+    type' =
+        P.lens (_type' :: TimeboardGraphRequestSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _type' = a } :: TimeboardGraphRequestSetting s)
+
+-- | @conditional_format@ nested settings.
+data TimeboardGraphRequestConditionalFormatSetting s = TimeboardGraphRequestConditionalFormatSetting'
+    { _comparator    :: TF.Attr s P.Text
+    -- ^ @comparator@ - (Required)
+    -- Comparator (<, >, etc)
+    --
+    , _customBgColor :: TF.Attr s P.Text
+    -- ^ @custom_bg_color@ - (Optional)
+    -- Custom background color (e.g., #205081)
+    --
+    , _customFgColor :: TF.Attr s P.Text
+    -- ^ @custom_fg_color@ - (Optional)
+    -- Custom foreground color (e.g., #59afe1)
+    --
+    , _palette       :: TF.Attr s P.Text
+    -- ^ @palette@ - (Optional)
+    -- The palette to use if this condition is met.
+    --
+    , _value         :: TF.Attr s P.Text
+    -- ^ @value@ - (Optional)
+    -- Value that is threshold for conditional format
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @conditional_format@ settings value.
+newTimeboardGraphRequestConditionalFormatSetting
+    :: TF.Attr s P.Text -- ^ 'P._comparator': @comparator@
+    -> TimeboardGraphRequestConditionalFormatSetting s
+newTimeboardGraphRequestConditionalFormatSetting _comparator =
+    TimeboardGraphRequestConditionalFormatSetting'
+        { _comparator = _comparator
+        , _customBgColor = TF.Nil
+        , _customFgColor = TF.Nil
+        , _palette = TF.Nil
+        , _value = TF.Nil
+        }
+
+instance TF.IsValue  (TimeboardGraphRequestConditionalFormatSetting s)
+instance TF.IsObject (TimeboardGraphRequestConditionalFormatSetting s) where
+    toObject TimeboardGraphRequestConditionalFormatSetting'{..} = P.catMaybes
+        [ TF.assign "comparator" <$> TF.attribute _comparator
+        , TF.assign "custom_bg_color" <$> TF.attribute _customBgColor
+        , TF.assign "custom_fg_color" <$> TF.attribute _customFgColor
+        , TF.assign "palette" <$> TF.attribute _palette
+        , TF.assign "value" <$> TF.attribute _value
+        ]
+
+instance TF.IsValid (TimeboardGraphRequestConditionalFormatSetting s) where
+    validator = P.mempty
+
+instance P.HasComparator (TimeboardGraphRequestConditionalFormatSetting s) (TF.Attr s P.Text) where
+    comparator =
+        P.lens (_comparator :: TimeboardGraphRequestConditionalFormatSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _comparator = a } :: TimeboardGraphRequestConditionalFormatSetting s)
+
+instance P.HasCustomBgColor (TimeboardGraphRequestConditionalFormatSetting s) (TF.Attr s P.Text) where
+    customBgColor =
+        P.lens (_customBgColor :: TimeboardGraphRequestConditionalFormatSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _customBgColor = a } :: TimeboardGraphRequestConditionalFormatSetting s)
+
+instance P.HasCustomFgColor (TimeboardGraphRequestConditionalFormatSetting s) (TF.Attr s P.Text) where
+    customFgColor =
+        P.lens (_customFgColor :: TimeboardGraphRequestConditionalFormatSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _customFgColor = a } :: TimeboardGraphRequestConditionalFormatSetting s)
+
+instance P.HasPalette (TimeboardGraphRequestConditionalFormatSetting s) (TF.Attr s P.Text) where
+    palette =
+        P.lens (_palette :: TimeboardGraphRequestConditionalFormatSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _palette = a } :: TimeboardGraphRequestConditionalFormatSetting s)
+
+instance P.HasValue (TimeboardGraphRequestConditionalFormatSetting s) (TF.Attr s P.Text) where
+    value =
+        P.lens (_value :: TimeboardGraphRequestConditionalFormatSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _value = a } :: TimeboardGraphRequestConditionalFormatSetting s)
+
+-- | @template_variable@ nested settings.
+data TimeboardTemplateVariableSetting s = TimeboardTemplateVariableSetting'
+    { _default' :: TF.Attr s P.Text
+    -- ^ @default@ - (Optional)
+    -- The default value for the template variable on dashboard load.
+    --
+    , _name     :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    -- The name of the variable.
+    --
+    , _prefix   :: TF.Attr s P.Text
+    -- ^ @prefix@ - (Optional)
+    -- The tag prefix associated with the variable. Only tags with this prefix will
+    -- appear in the variable dropdown.
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @template_variable@ settings value.
+newTimeboardTemplateVariableSetting
+    :: TF.Attr s P.Text -- ^ 'P._name': @name@
+    -> TimeboardTemplateVariableSetting s
+newTimeboardTemplateVariableSetting _name =
+    TimeboardTemplateVariableSetting'
+        { _default' = TF.Nil
+        , _name = _name
+        , _prefix = TF.Nil
+        }
+
+instance TF.IsValue  (TimeboardTemplateVariableSetting s)
+instance TF.IsObject (TimeboardTemplateVariableSetting s) where
+    toObject TimeboardTemplateVariableSetting'{..} = P.catMaybes
+        [ TF.assign "default" <$> TF.attribute _default'
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "prefix" <$> TF.attribute _prefix
+        ]
+
+instance TF.IsValid (TimeboardTemplateVariableSetting s) where
+    validator = P.mempty
+
+instance P.HasDefault' (TimeboardTemplateVariableSetting s) (TF.Attr s P.Text) where
+    default' =
+        P.lens (_default' :: TimeboardTemplateVariableSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _default' = a } :: TimeboardTemplateVariableSetting s)
+
+instance P.HasName (TimeboardTemplateVariableSetting s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: TimeboardTemplateVariableSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: TimeboardTemplateVariableSetting s)
+
+instance P.HasPrefix (TimeboardTemplateVariableSetting s) (TF.Attr s P.Text) where
+    prefix =
+        P.lens (_prefix :: TimeboardTemplateVariableSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _prefix = a } :: TimeboardTemplateVariableSetting s)

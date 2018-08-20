@@ -71,10 +71,10 @@ data AlertResource s = AlertResource'
     { _active       :: TF.Attr s P.Bool
     -- ^ @active@ - (Optional)
     --
-    , _attributes   :: TF.Attr s (AttributesSetting s)
+    , _attributes   :: TF.Attr s (AlertAttributesSetting s)
     -- ^ @attributes@ - (Optional)
     --
-    , _condition    :: TF.Attr s [TF.Attr s (ConditionSetting s)]
+    , _condition    :: TF.Attr s [TF.Attr s (AlertConditionSetting s)]
     -- ^ @condition@ - (Optional)
     --
     , _description  :: TF.Attr s P.Text
@@ -122,7 +122,7 @@ instance TF.IsValid (AlertResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_attributes"
                   (_attributes
-                      :: AlertResource s -> TF.Attr s (AttributesSetting s))
+                      :: AlertResource s -> TF.Attr s (AlertAttributesSetting s))
                   TF.validator
 
 instance P.HasActive (AlertResource s) (TF.Attr s P.Bool) where
@@ -130,14 +130,14 @@ instance P.HasActive (AlertResource s) (TF.Attr s P.Bool) where
         P.lens (_active :: AlertResource s -> TF.Attr s P.Bool)
                (\s a -> s { _active = a } :: AlertResource s)
 
-instance P.HasAttributes (AlertResource s) (TF.Attr s (AttributesSetting s)) where
+instance P.HasAttributes (AlertResource s) (TF.Attr s (AlertAttributesSetting s)) where
     attributes =
-        P.lens (_attributes :: AlertResource s -> TF.Attr s (AttributesSetting s))
+        P.lens (_attributes :: AlertResource s -> TF.Attr s (AlertAttributesSetting s))
                (\s a -> s { _attributes = a } :: AlertResource s)
 
-instance P.HasCondition (AlertResource s) (TF.Attr s [TF.Attr s (ConditionSetting s)]) where
+instance P.HasCondition (AlertResource s) (TF.Attr s [TF.Attr s (AlertConditionSetting s)]) where
     condition =
-        P.lens (_condition :: AlertResource s -> TF.Attr s [TF.Attr s (ConditionSetting s)])
+        P.lens (_condition :: AlertResource s -> TF.Attr s [TF.Attr s (AlertConditionSetting s)])
                (\s a -> s { _condition = a } :: AlertResource s)
 
 instance P.HasDescription (AlertResource s) (TF.Attr s P.Text) where
@@ -168,7 +168,7 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (AlertResource s)) (TF.Attr s P.Te
 -- See the <https://www.terraform.io/docs/providers/librato/r/metric.html terraform documentation>
 -- for more information.
 data MetricResource s = MetricResource'
-    { _attributes  :: TF.Attr s (AttributesSetting s)
+    { _attributes  :: TF.Attr s (MetricAttributesSetting s)
     -- ^ @attributes@ - (Optional)
     --
     , _composite   :: TF.Attr s P.Text
@@ -223,12 +223,12 @@ instance TF.IsValid (MetricResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_attributes"
                   (_attributes
-                      :: MetricResource s -> TF.Attr s (AttributesSetting s))
+                      :: MetricResource s -> TF.Attr s (MetricAttributesSetting s))
                   TF.validator
 
-instance P.HasAttributes (MetricResource s) (TF.Attr s (AttributesSetting s)) where
+instance P.HasAttributes (MetricResource s) (TF.Attr s (MetricAttributesSetting s)) where
     attributes =
-        P.lens (_attributes :: MetricResource s -> TF.Attr s (AttributesSetting s))
+        P.lens (_attributes :: MetricResource s -> TF.Attr s (MetricAttributesSetting s))
                (\s a -> s { _attributes = a } :: MetricResource s)
 
 instance P.HasComposite (MetricResource s) (TF.Attr s P.Text) where
@@ -345,7 +345,7 @@ data SpaceChartResource s = SpaceChartResource'
     , _spaceId      :: TF.Attr s P.Int
     -- ^ @space_id@ - (Required, Forces New)
     --
-    , _stream       :: TF.Attr s [TF.Attr s (StreamSetting s)]
+    , _stream       :: TF.Attr s [TF.Attr s (SpaceChartStreamSetting s)]
     -- ^ @stream@ - (Optional)
     --
     , _type'        :: TF.Attr s P.Text
@@ -417,9 +417,9 @@ instance P.HasSpaceId (SpaceChartResource s) (TF.Attr s P.Int) where
         P.lens (_spaceId :: SpaceChartResource s -> TF.Attr s P.Int)
                (\s a -> s { _spaceId = a } :: SpaceChartResource s)
 
-instance P.HasStream (SpaceChartResource s) (TF.Attr s [TF.Attr s (StreamSetting s)]) where
+instance P.HasStream (SpaceChartResource s) (TF.Attr s [TF.Attr s (SpaceChartStreamSetting s)]) where
     stream =
-        P.lens (_stream :: SpaceChartResource s -> TF.Attr s [TF.Attr s (StreamSetting s)])
+        P.lens (_stream :: SpaceChartResource s -> TF.Attr s [TF.Attr s (SpaceChartStreamSetting s)])
                (\s a -> s { _stream = a } :: SpaceChartResource s)
 
 instance P.HasType' (SpaceChartResource s) (TF.Attr s P.Text) where

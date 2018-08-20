@@ -324,13 +324,13 @@ import qualified Terrafomo.Validator         as TF
 -- See the <https://www.terraform.io/docs/providers/alicloud/r/cdn_domain.html terraform documentation>
 -- for more information.
 data CdnDomainResource s = CdnDomainResource'
-    { _authConfig :: TF.Attr s (AuthConfigSetting s)
+    { _authConfig :: TF.Attr s (CdnDomainAuthConfigSetting s)
     -- ^ @auth_config@ - (Optional)
     --
     , _blockIps :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @block_ips@ - (Optional)
     --
-    , _cacheConfig :: TF.Attr s [TF.Attr s (CacheConfigSetting s)]
+    , _cacheConfig :: TF.Attr s [TF.Attr s (CdnDomainCacheConfigSetting s)]
     -- ^ @cache_config@ - (Optional)
     --
     , _cdnType :: TF.Attr s P.Text
@@ -339,25 +339,25 @@ data CdnDomainResource s = CdnDomainResource'
     , _domainName :: TF.Attr s P.Text
     -- ^ @domain_name@ - (Required)
     --
-    , _httpHeaderConfig :: TF.Attr s [TF.Attr s (HttpHeaderConfigSetting s)]
+    , _httpHeaderConfig :: TF.Attr s [TF.Attr s (CdnDomainHttpHeaderConfigSetting s)]
     -- ^ @http_header_config@ - (Optional)
     --
     , _optimizeEnable :: TF.Attr s P.Text
     -- ^ @optimize_enable@ - (Optional)
     --
-    , _page404Config :: TF.Attr s (Page404ConfigSetting s)
+    , _page404Config :: TF.Attr s (CdnDomainPage404ConfigSetting s)
     -- ^ @page_404_config@ - (Optional)
     --
     , _pageCompressEnable :: TF.Attr s P.Text
     -- ^ @page_compress_enable@ - (Optional)
     --
-    , _parameterFilterConfig :: TF.Attr s (ParameterFilterConfigSetting s)
+    , _parameterFilterConfig :: TF.Attr s (CdnDomainParameterFilterConfigSetting s)
     -- ^ @parameter_filter_config@ - (Optional)
     --
     , _rangeEnable :: TF.Attr s P.Text
     -- ^ @range_enable@ - (Optional)
     --
-    , _referConfig :: TF.Attr s (ReferConfigSetting s)
+    , _referConfig :: TF.Attr s (CdnDomainReferConfigSetting s)
     -- ^ @refer_config@ - (Optional)
     --
     , _scope :: TF.Attr s P.Text
@@ -429,24 +429,24 @@ instance TF.IsValid (CdnDomainResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_authConfig"
                   (_authConfig
-                      :: CdnDomainResource s -> TF.Attr s (AuthConfigSetting s))
+                      :: CdnDomainResource s -> TF.Attr s (CdnDomainAuthConfigSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_page404Config"
                   (_page404Config
-                      :: CdnDomainResource s -> TF.Attr s (Page404ConfigSetting s))
+                      :: CdnDomainResource s -> TF.Attr s (CdnDomainPage404ConfigSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_parameterFilterConfig"
                   (_parameterFilterConfig
-                      :: CdnDomainResource s -> TF.Attr s (ParameterFilterConfigSetting s))
+                      :: CdnDomainResource s -> TF.Attr s (CdnDomainParameterFilterConfigSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_referConfig"
                   (_referConfig
-                      :: CdnDomainResource s -> TF.Attr s (ReferConfigSetting s))
+                      :: CdnDomainResource s -> TF.Attr s (CdnDomainReferConfigSetting s))
                   TF.validator
 
-instance P.HasAuthConfig (CdnDomainResource s) (TF.Attr s (AuthConfigSetting s)) where
+instance P.HasAuthConfig (CdnDomainResource s) (TF.Attr s (CdnDomainAuthConfigSetting s)) where
     authConfig =
-        P.lens (_authConfig :: CdnDomainResource s -> TF.Attr s (AuthConfigSetting s))
+        P.lens (_authConfig :: CdnDomainResource s -> TF.Attr s (CdnDomainAuthConfigSetting s))
                (\s a -> s { _authConfig = a } :: CdnDomainResource s)
 
 instance P.HasBlockIps (CdnDomainResource s) (TF.Attr s [TF.Attr s P.Text]) where
@@ -454,9 +454,9 @@ instance P.HasBlockIps (CdnDomainResource s) (TF.Attr s [TF.Attr s P.Text]) wher
         P.lens (_blockIps :: CdnDomainResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _blockIps = a } :: CdnDomainResource s)
 
-instance P.HasCacheConfig (CdnDomainResource s) (TF.Attr s [TF.Attr s (CacheConfigSetting s)]) where
+instance P.HasCacheConfig (CdnDomainResource s) (TF.Attr s [TF.Attr s (CdnDomainCacheConfigSetting s)]) where
     cacheConfig =
-        P.lens (_cacheConfig :: CdnDomainResource s -> TF.Attr s [TF.Attr s (CacheConfigSetting s)])
+        P.lens (_cacheConfig :: CdnDomainResource s -> TF.Attr s [TF.Attr s (CdnDomainCacheConfigSetting s)])
                (\s a -> s { _cacheConfig = a } :: CdnDomainResource s)
 
 instance P.HasCdnType (CdnDomainResource s) (TF.Attr s P.Text) where
@@ -469,9 +469,9 @@ instance P.HasDomainName (CdnDomainResource s) (TF.Attr s P.Text) where
         P.lens (_domainName :: CdnDomainResource s -> TF.Attr s P.Text)
                (\s a -> s { _domainName = a } :: CdnDomainResource s)
 
-instance P.HasHttpHeaderConfig (CdnDomainResource s) (TF.Attr s [TF.Attr s (HttpHeaderConfigSetting s)]) where
+instance P.HasHttpHeaderConfig (CdnDomainResource s) (TF.Attr s [TF.Attr s (CdnDomainHttpHeaderConfigSetting s)]) where
     httpHeaderConfig =
-        P.lens (_httpHeaderConfig :: CdnDomainResource s -> TF.Attr s [TF.Attr s (HttpHeaderConfigSetting s)])
+        P.lens (_httpHeaderConfig :: CdnDomainResource s -> TF.Attr s [TF.Attr s (CdnDomainHttpHeaderConfigSetting s)])
                (\s a -> s { _httpHeaderConfig = a } :: CdnDomainResource s)
 
 instance P.HasOptimizeEnable (CdnDomainResource s) (TF.Attr s P.Text) where
@@ -479,9 +479,9 @@ instance P.HasOptimizeEnable (CdnDomainResource s) (TF.Attr s P.Text) where
         P.lens (_optimizeEnable :: CdnDomainResource s -> TF.Attr s P.Text)
                (\s a -> s { _optimizeEnable = a } :: CdnDomainResource s)
 
-instance P.HasPage404Config (CdnDomainResource s) (TF.Attr s (Page404ConfigSetting s)) where
+instance P.HasPage404Config (CdnDomainResource s) (TF.Attr s (CdnDomainPage404ConfigSetting s)) where
     page404Config =
-        P.lens (_page404Config :: CdnDomainResource s -> TF.Attr s (Page404ConfigSetting s))
+        P.lens (_page404Config :: CdnDomainResource s -> TF.Attr s (CdnDomainPage404ConfigSetting s))
                (\s a -> s { _page404Config = a } :: CdnDomainResource s)
 
 instance P.HasPageCompressEnable (CdnDomainResource s) (TF.Attr s P.Text) where
@@ -489,9 +489,9 @@ instance P.HasPageCompressEnable (CdnDomainResource s) (TF.Attr s P.Text) where
         P.lens (_pageCompressEnable :: CdnDomainResource s -> TF.Attr s P.Text)
                (\s a -> s { _pageCompressEnable = a } :: CdnDomainResource s)
 
-instance P.HasParameterFilterConfig (CdnDomainResource s) (TF.Attr s (ParameterFilterConfigSetting s)) where
+instance P.HasParameterFilterConfig (CdnDomainResource s) (TF.Attr s (CdnDomainParameterFilterConfigSetting s)) where
     parameterFilterConfig =
-        P.lens (_parameterFilterConfig :: CdnDomainResource s -> TF.Attr s (ParameterFilterConfigSetting s))
+        P.lens (_parameterFilterConfig :: CdnDomainResource s -> TF.Attr s (CdnDomainParameterFilterConfigSetting s))
                (\s a -> s { _parameterFilterConfig = a } :: CdnDomainResource s)
 
 instance P.HasRangeEnable (CdnDomainResource s) (TF.Attr s P.Text) where
@@ -499,9 +499,9 @@ instance P.HasRangeEnable (CdnDomainResource s) (TF.Attr s P.Text) where
         P.lens (_rangeEnable :: CdnDomainResource s -> TF.Attr s P.Text)
                (\s a -> s { _rangeEnable = a } :: CdnDomainResource s)
 
-instance P.HasReferConfig (CdnDomainResource s) (TF.Attr s (ReferConfigSetting s)) where
+instance P.HasReferConfig (CdnDomainResource s) (TF.Attr s (CdnDomainReferConfigSetting s)) where
     referConfig =
-        P.lens (_referConfig :: CdnDomainResource s -> TF.Attr s (ReferConfigSetting s))
+        P.lens (_referConfig :: CdnDomainResource s -> TF.Attr s (CdnDomainReferConfigSetting s))
                (\s a -> s { _referConfig = a } :: CdnDomainResource s)
 
 instance P.HasScope (CdnDomainResource s) (TF.Attr s P.Text) where
@@ -891,7 +891,7 @@ instance s ~ s' => P.HasComputedAgentVersion (TF.Ref s' (ContainerClusterResourc
 instance s ~ s' => P.HasComputedName (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputedNodes (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s [TF.Attr s (NodesSetting s)]) where
+instance s ~ s' => P.HasComputedNodes (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s [TF.Attr s (ContainerClusterNodesSetting s)]) where
     computedNodes x = TF.compute (TF.refKey x) "nodes"
 
 instance s ~ s' => P.HasComputedSecurityGroupId (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
@@ -1024,7 +1024,7 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (CsApplicationResource s)) (TF.Att
 instance s ~ s' => P.HasComputedDefaultDomain (TF.Ref s' (CsApplicationResource s)) (TF.Attr s P.Text) where
     computedDefaultDomain x = TF.compute (TF.refKey x) "default_domain"
 
-instance s ~ s' => P.HasComputedServices (TF.Ref s' (CsApplicationResource s)) (TF.Attr s [TF.Attr s (ServicesSetting s)]) where
+instance s ~ s' => P.HasComputedServices (TF.Ref s' (CsApplicationResource s)) (TF.Attr s [TF.Attr s (CsApplicationServicesSetting s)]) where
     computedServices x = TF.compute (TF.refKey x) "services"
 
 -- | @alicloud_cs_kubernetes@ Resource.
@@ -1305,13 +1305,13 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (CsKubernetesResource s)) (TF.Attr
 instance s ~ s' => P.HasComputedAvailabilityZone (TF.Ref s' (CsKubernetesResource s)) (TF.Attr s P.Text) where
     computedAvailabilityZone x = TF.compute (TF.refKey x) "availability_zone"
 
-instance s ~ s' => P.HasComputedConnections (TF.Ref s' (CsKubernetesResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s (ConnectionsSetting s)))) where
+instance s ~ s' => P.HasComputedConnections (TF.Ref s' (CsKubernetesResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s (CsKubernetesConnectionsSetting s)))) where
     computedConnections x = TF.compute (TF.refKey x) "connections"
 
 instance s ~ s' => P.HasComputedImageId (TF.Ref s' (CsKubernetesResource s)) (TF.Attr s P.Text) where
     computedImageId x = TF.compute (TF.refKey x) "image_id"
 
-instance s ~ s' => P.HasComputedMasterNodes (TF.Ref s' (CsKubernetesResource s)) (TF.Attr s [TF.Attr s (MasterNodesSetting s)]) where
+instance s ~ s' => P.HasComputedMasterNodes (TF.Ref s' (CsKubernetesResource s)) (TF.Attr s [TF.Attr s (CsKubernetesMasterNodesSetting s)]) where
     computedMasterNodes x = TF.compute (TF.refKey x) "master_nodes"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (CsKubernetesResource s)) (TF.Attr s P.Text) where
@@ -1335,7 +1335,7 @@ instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (CsKubernetesResource s)) (TF.A
 instance s ~ s' => P.HasComputedVswitchId (TF.Ref s' (CsKubernetesResource s)) (TF.Attr s P.Text) where
     computedVswitchId x = TF.compute (TF.refKey x) "vswitch_id"
 
-instance s ~ s' => P.HasComputedWorkerNodes (TF.Ref s' (CsKubernetesResource s)) (TF.Attr s [TF.Attr s (WorkerNodesSetting s)]) where
+instance s ~ s' => P.HasComputedWorkerNodes (TF.Ref s' (CsKubernetesResource s)) (TF.Attr s [TF.Attr s (CsKubernetesWorkerNodesSetting s)]) where
     computedWorkerNodes x = TF.compute (TF.refKey x) "worker_nodes"
 
 -- | @alicloud_cs_swarm@ Resource.
@@ -1510,7 +1510,7 @@ instance s ~ s' => P.HasComputedAgentVersion (TF.Ref s' (CsSwarmResource s)) (TF
 instance s ~ s' => P.HasComputedName (TF.Ref s' (CsSwarmResource s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputedNodes (TF.Ref s' (CsSwarmResource s)) (TF.Attr s [TF.Attr s (NodesSetting s)]) where
+instance s ~ s' => P.HasComputedNodes (TF.Ref s' (CsSwarmResource s)) (TF.Attr s [TF.Attr s (CsSwarmNodesSetting s)]) where
     computedNodes x = TF.compute (TF.refKey x) "nodes"
 
 instance s ~ s' => P.HasComputedSecurityGroupId (TF.Ref s' (CsSwarmResource s)) (TF.Attr s P.Text) where
@@ -2591,64 +2591,64 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (EssAttachmentResource s)) (TF.Att
 -- See the <https://www.terraform.io/docs/providers/alicloud/r/ess_scaling_configuration.html terraform documentation>
 -- for more information.
 data EssScalingConfigurationResource s = EssScalingConfigurationResource'
-    { _active                   :: TF.Attr s P.Bool
+    { _active :: TF.Attr s P.Bool
     -- ^ @active@ - (Optional)
     --
-    , _dataDisk                 :: TF.Attr s [TF.Attr s (DataDiskSetting s)]
+    , _dataDisk :: TF.Attr s [TF.Attr s (EssScalingConfigurationDataDiskSetting s)]
     -- ^ @data_disk@ - (Optional, Forces New)
     --
-    , _enable                   :: TF.Attr s P.Bool
+    , _enable :: TF.Attr s P.Bool
     -- ^ @enable@ - (Optional)
     --
-    , _forceDelete              :: TF.Attr s P.Bool
+    , _forceDelete :: TF.Attr s P.Bool
     -- ^ @force_delete@ - (Optional)
     --
-    , _imageId                  :: TF.Attr s P.Text
+    , _imageId :: TF.Attr s P.Text
     -- ^ @image_id@ - (Required, Forces New)
     --
-    , _instanceName             :: TF.Attr s P.Text
+    , _instanceName :: TF.Attr s P.Text
     -- ^ @instance_name@ - (Optional)
     --
-    , _instanceType             :: TF.Attr s P.Text
+    , _instanceType :: TF.Attr s P.Text
     -- ^ @instance_type@ - (Required, Forces New)
     --
-    , _internetChargeType       :: TF.Attr s P.Text
+    , _internetChargeType :: TF.Attr s P.Text
     -- ^ @internet_charge_type@ - (Optional, Forces New)
     --
-    , _internetMaxBandwidthIn   :: TF.Attr s P.Int
+    , _internetMaxBandwidthIn :: TF.Attr s P.Int
     -- ^ @internet_max_bandwidth_in@ - (Optional, Forces New)
     --
-    , _internetMaxBandwidthOut  :: TF.Attr s P.Int
+    , _internetMaxBandwidthOut :: TF.Attr s P.Int
     -- ^ @internet_max_bandwidth_out@ - (Optional, Forces New)
     --
-    , _isOutdated               :: TF.Attr s P.Bool
+    , _isOutdated :: TF.Attr s P.Bool
     -- ^ @is_outdated@ - (Optional)
     --
-    , _keyName                  :: TF.Attr s P.Text
+    , _keyName :: TF.Attr s P.Text
     -- ^ @key_name@ - (Optional, Forces New)
     --
-    , _roleName                 :: TF.Attr s P.Text
+    , _roleName :: TF.Attr s P.Text
     -- ^ @role_name@ - (Optional, Forces New)
     --
     , _scalingConfigurationName :: TF.Attr s P.Text
     -- ^ @scaling_configuration_name@ - (Optional)
     --
-    , _scalingGroupId           :: TF.Attr s P.Text
+    , _scalingGroupId :: TF.Attr s P.Text
     -- ^ @scaling_group_id@ - (Required, Forces New)
     --
-    , _securityGroupId          :: TF.Attr s P.Text
+    , _securityGroupId :: TF.Attr s P.Text
     -- ^ @security_group_id@ - (Required, Forces New)
     --
-    , _substitute               :: TF.Attr s P.Text
+    , _substitute :: TF.Attr s P.Text
     -- ^ @substitute@ - (Optional)
     --
-    , _systemDiskCategory       :: TF.Attr s P.Text
+    , _systemDiskCategory :: TF.Attr s P.Text
     -- ^ @system_disk_category@ - (Optional, Forces New)
     --
-    , _tags                     :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _tags :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional, Forces New)
     --
-    , _userData                 :: TF.Attr s P.Text
+    , _userData :: TF.Attr s P.Text
     -- ^ @user_data@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -2717,9 +2717,9 @@ instance P.HasActive (EssScalingConfigurationResource s) (TF.Attr s P.Bool) wher
         P.lens (_active :: EssScalingConfigurationResource s -> TF.Attr s P.Bool)
                (\s a -> s { _active = a } :: EssScalingConfigurationResource s)
 
-instance P.HasDataDisk (EssScalingConfigurationResource s) (TF.Attr s [TF.Attr s (DataDiskSetting s)]) where
+instance P.HasDataDisk (EssScalingConfigurationResource s) (TF.Attr s [TF.Attr s (EssScalingConfigurationDataDiskSetting s)]) where
     dataDisk =
-        P.lens (_dataDisk :: EssScalingConfigurationResource s -> TF.Attr s [TF.Attr s (DataDiskSetting s)])
+        P.lens (_dataDisk :: EssScalingConfigurationResource s -> TF.Attr s [TF.Attr s (EssScalingConfigurationDataDiskSetting s)])
                (\s a -> s { _dataDisk = a } :: EssScalingConfigurationResource s)
 
 instance P.HasEnable (EssScalingConfigurationResource s) (TF.Attr s P.Bool) where
@@ -3344,7 +3344,7 @@ data FcServiceResource s = FcServiceResource'
     , _internetAccess :: TF.Attr s P.Bool
     -- ^ @internet_access@ - (Optional)
     --
-    , _logConfig      :: TF.Attr s (LogConfigSetting s)
+    , _logConfig      :: TF.Attr s (FcServiceLogConfigSetting s)
     -- ^ @log_config@ - (Optional)
     --
     , _name           :: TF.Attr s P.Text
@@ -3362,7 +3362,7 @@ data FcServiceResource s = FcServiceResource'
     , _role           :: TF.Attr s P.Text
     -- ^ @role@ - (Optional)
     --
-    , _vpcConfig      :: TF.Attr s (VpcConfigSetting s)
+    , _vpcConfig      :: TF.Attr s (FcServiceVpcConfigSetting s)
     -- ^ @vpc_config@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -3408,11 +3408,11 @@ instance TF.IsValid (FcServiceResource s) where
         ])
            P.<> TF.settingsValidator "_logConfig"
                   (_logConfig
-                      :: FcServiceResource s -> TF.Attr s (LogConfigSetting s))
+                      :: FcServiceResource s -> TF.Attr s (FcServiceLogConfigSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_vpcConfig"
                   (_vpcConfig
-                      :: FcServiceResource s -> TF.Attr s (VpcConfigSetting s))
+                      :: FcServiceResource s -> TF.Attr s (FcServiceVpcConfigSetting s))
                   TF.validator
 
 instance P.HasDescription (FcServiceResource s) (TF.Attr s P.Text) where
@@ -3425,9 +3425,9 @@ instance P.HasInternetAccess (FcServiceResource s) (TF.Attr s P.Bool) where
         P.lens (_internetAccess :: FcServiceResource s -> TF.Attr s P.Bool)
                (\s a -> s { _internetAccess = a } :: FcServiceResource s)
 
-instance P.HasLogConfig (FcServiceResource s) (TF.Attr s (LogConfigSetting s)) where
+instance P.HasLogConfig (FcServiceResource s) (TF.Attr s (FcServiceLogConfigSetting s)) where
     logConfig =
-        P.lens (_logConfig :: FcServiceResource s -> TF.Attr s (LogConfigSetting s))
+        P.lens (_logConfig :: FcServiceResource s -> TF.Attr s (FcServiceLogConfigSetting s))
                (\s a -> s { _logConfig = a } :: FcServiceResource s)
 
 instance P.HasName (FcServiceResource s) (TF.Attr s P.Text) where
@@ -3445,9 +3445,9 @@ instance P.HasRole (FcServiceResource s) (TF.Attr s P.Text) where
         P.lens (_role :: FcServiceResource s -> TF.Attr s P.Text)
                (\s a -> s { _role = a } :: FcServiceResource s)
 
-instance P.HasVpcConfig (FcServiceResource s) (TF.Attr s (VpcConfigSetting s)) where
+instance P.HasVpcConfig (FcServiceResource s) (TF.Attr s (FcServiceVpcConfigSetting s)) where
     vpcConfig =
-        P.lens (_vpcConfig :: FcServiceResource s -> TF.Attr s (VpcConfigSetting s))
+        P.lens (_vpcConfig :: FcServiceResource s -> TF.Attr s (FcServiceVpcConfigSetting s))
                (\s a -> s { _vpcConfig = a } :: FcServiceResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (FcServiceResource s)) (TF.Attr s P.Text) where
@@ -4386,16 +4386,16 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (LogProjectResource s)) (TF.Attr s
 -- See the <https://www.terraform.io/docs/providers/alicloud/r/log_store_index.html terraform documentation>
 -- for more information.
 data LogStoreIndexResource s = LogStoreIndexResource'
-    { _fieldSearch :: TF.Attr s (P.NonEmpty (TF.Attr s (FieldSearchSetting s)))
+    { _fieldSearch :: TF.Attr s (P.NonEmpty (TF.Attr s (LogStoreIndexFieldSearchSetting s)))
     -- ^ @field_search@ - (Optional)
     --
-    , _fullText    :: TF.Attr s (FullTextSetting s)
+    , _fullText :: TF.Attr s (LogStoreIndexFullTextSetting s)
     -- ^ @full_text@ - (Optional)
     --
-    , _logstore    :: TF.Attr s P.Text
+    , _logstore :: TF.Attr s P.Text
     -- ^ @logstore@ - (Required, Forces New)
     --
-    , _project     :: TF.Attr s P.Text
+    , _project :: TF.Attr s P.Text
     -- ^ @project@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -4426,17 +4426,17 @@ instance TF.IsValid (LogStoreIndexResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_fullText"
                   (_fullText
-                      :: LogStoreIndexResource s -> TF.Attr s (FullTextSetting s))
+                      :: LogStoreIndexResource s -> TF.Attr s (LogStoreIndexFullTextSetting s))
                   TF.validator
 
-instance P.HasFieldSearch (LogStoreIndexResource s) (TF.Attr s (P.NonEmpty (TF.Attr s (FieldSearchSetting s)))) where
+instance P.HasFieldSearch (LogStoreIndexResource s) (TF.Attr s (P.NonEmpty (TF.Attr s (LogStoreIndexFieldSearchSetting s)))) where
     fieldSearch =
-        P.lens (_fieldSearch :: LogStoreIndexResource s -> TF.Attr s (P.NonEmpty (TF.Attr s (FieldSearchSetting s))))
+        P.lens (_fieldSearch :: LogStoreIndexResource s -> TF.Attr s (P.NonEmpty (TF.Attr s (LogStoreIndexFieldSearchSetting s))))
                (\s a -> s { _fieldSearch = a } :: LogStoreIndexResource s)
 
-instance P.HasFullText (LogStoreIndexResource s) (TF.Attr s (FullTextSetting s)) where
+instance P.HasFullText (LogStoreIndexResource s) (TF.Attr s (LogStoreIndexFullTextSetting s)) where
     fullText =
-        P.lens (_fullText :: LogStoreIndexResource s -> TF.Attr s (FullTextSetting s))
+        P.lens (_fullText :: LogStoreIndexResource s -> TF.Attr s (LogStoreIndexFullTextSetting s))
                (\s a -> s { _fullText = a } :: LogStoreIndexResource s)
 
 instance P.HasLogstore (LogStoreIndexResource s) (TF.Attr s P.Text) where
@@ -4519,7 +4519,7 @@ instance P.HasShardCount (LogStoreResource s) (TF.Attr s P.Int) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (LogStoreResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedShards (TF.Ref s' (LogStoreResource s)) (TF.Attr s [TF.Attr s (ShardsSetting s)]) where
+instance s ~ s' => P.HasComputedShards (TF.Ref s' (LogStoreResource s)) (TF.Attr s [TF.Attr s (LogStoreShardsSetting s)]) where
     computedShards x = TF.compute (TF.refKey x) "shards"
 
 -- | @alicloud_nat_gateway@ Resource.
@@ -4781,28 +4781,28 @@ instance s ~ s' => P.HasComputedServerSideEncryption (TF.Ref s' (OssBucketObject
 -- See the <https://www.terraform.io/docs/providers/alicloud/r/oss_bucket.html terraform documentation>
 -- for more information.
 data OssBucketResource s = OssBucketResource'
-    { _acl             :: TF.Attr s P.Text
+    { _acl :: TF.Attr s P.Text
     -- ^ @acl@ - (Optional)
     --
-    , _bucket          :: TF.Attr s P.Text
+    , _bucket :: TF.Attr s P.Text
     -- ^ @bucket@ - (Optional, Forces New)
     --
-    , _corsRule        :: TF.Attr s [TF.Attr s (CorsRuleSetting s)]
+    , _corsRule :: TF.Attr s [TF.Attr s (OssBucketCorsRuleSetting s)]
     -- ^ @cors_rule@ - (Optional)
     --
-    , _lifecycleRule   :: TF.Attr s [TF.Attr s (LifecycleRuleSetting s)]
+    , _lifecycleRule :: TF.Attr s [TF.Attr s (OssBucketLifecycleRuleSetting s)]
     -- ^ @lifecycle_rule@ - (Optional)
     --
-    , _logging         :: TF.Attr s (LoggingSetting s)
+    , _logging :: TF.Attr s (OssBucketLoggingSetting s)
     -- ^ @logging@ - (Optional)
     --
     , _loggingIsenable :: TF.Attr s P.Bool
     -- ^ @logging_isenable@ - (Optional)
     --
-    , _refererConfig   :: TF.Attr s (RefererConfigSetting s)
+    , _refererConfig :: TF.Attr s (OssBucketRefererConfigSetting s)
     -- ^ @referer_config@ - (Optional)
     --
-    , _website         :: TF.Attr s (WebsiteSetting s)
+    , _website :: TF.Attr s (OssBucketWebsiteSetting s)
     -- ^ @website@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -4839,15 +4839,15 @@ instance TF.IsValid (OssBucketResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_logging"
                   (_logging
-                      :: OssBucketResource s -> TF.Attr s (LoggingSetting s))
+                      :: OssBucketResource s -> TF.Attr s (OssBucketLoggingSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_refererConfig"
                   (_refererConfig
-                      :: OssBucketResource s -> TF.Attr s (RefererConfigSetting s))
+                      :: OssBucketResource s -> TF.Attr s (OssBucketRefererConfigSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_website"
                   (_website
-                      :: OssBucketResource s -> TF.Attr s (WebsiteSetting s))
+                      :: OssBucketResource s -> TF.Attr s (OssBucketWebsiteSetting s))
                   TF.validator
 
 instance P.HasAcl (OssBucketResource s) (TF.Attr s P.Text) where
@@ -4860,19 +4860,19 @@ instance P.HasBucket (OssBucketResource s) (TF.Attr s P.Text) where
         P.lens (_bucket :: OssBucketResource s -> TF.Attr s P.Text)
                (\s a -> s { _bucket = a } :: OssBucketResource s)
 
-instance P.HasCorsRule (OssBucketResource s) (TF.Attr s [TF.Attr s (CorsRuleSetting s)]) where
+instance P.HasCorsRule (OssBucketResource s) (TF.Attr s [TF.Attr s (OssBucketCorsRuleSetting s)]) where
     corsRule =
-        P.lens (_corsRule :: OssBucketResource s -> TF.Attr s [TF.Attr s (CorsRuleSetting s)])
+        P.lens (_corsRule :: OssBucketResource s -> TF.Attr s [TF.Attr s (OssBucketCorsRuleSetting s)])
                (\s a -> s { _corsRule = a } :: OssBucketResource s)
 
-instance P.HasLifecycleRule (OssBucketResource s) (TF.Attr s [TF.Attr s (LifecycleRuleSetting s)]) where
+instance P.HasLifecycleRule (OssBucketResource s) (TF.Attr s [TF.Attr s (OssBucketLifecycleRuleSetting s)]) where
     lifecycleRule =
-        P.lens (_lifecycleRule :: OssBucketResource s -> TF.Attr s [TF.Attr s (LifecycleRuleSetting s)])
+        P.lens (_lifecycleRule :: OssBucketResource s -> TF.Attr s [TF.Attr s (OssBucketLifecycleRuleSetting s)])
                (\s a -> s { _lifecycleRule = a } :: OssBucketResource s)
 
-instance P.HasLogging (OssBucketResource s) (TF.Attr s (LoggingSetting s)) where
+instance P.HasLogging (OssBucketResource s) (TF.Attr s (OssBucketLoggingSetting s)) where
     logging =
-        P.lens (_logging :: OssBucketResource s -> TF.Attr s (LoggingSetting s))
+        P.lens (_logging :: OssBucketResource s -> TF.Attr s (OssBucketLoggingSetting s))
                (\s a -> s { _logging = a } :: OssBucketResource s)
 
 instance P.HasLoggingIsenable (OssBucketResource s) (TF.Attr s P.Bool) where
@@ -4880,14 +4880,14 @@ instance P.HasLoggingIsenable (OssBucketResource s) (TF.Attr s P.Bool) where
         P.lens (_loggingIsenable :: OssBucketResource s -> TF.Attr s P.Bool)
                (\s a -> s { _loggingIsenable = a } :: OssBucketResource s)
 
-instance P.HasRefererConfig (OssBucketResource s) (TF.Attr s (RefererConfigSetting s)) where
+instance P.HasRefererConfig (OssBucketResource s) (TF.Attr s (OssBucketRefererConfigSetting s)) where
     refererConfig =
-        P.lens (_refererConfig :: OssBucketResource s -> TF.Attr s (RefererConfigSetting s))
+        P.lens (_refererConfig :: OssBucketResource s -> TF.Attr s (OssBucketRefererConfigSetting s))
                (\s a -> s { _refererConfig = a } :: OssBucketResource s)
 
-instance P.HasWebsite (OssBucketResource s) (TF.Attr s (WebsiteSetting s)) where
+instance P.HasWebsite (OssBucketResource s) (TF.Attr s (OssBucketWebsiteSetting s)) where
     website =
-        P.lens (_website :: OssBucketResource s -> TF.Attr s (WebsiteSetting s))
+        P.lens (_website :: OssBucketResource s -> TF.Attr s (OssBucketWebsiteSetting s))
                (\s a -> s { _website = a } :: OssBucketResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (OssBucketResource s)) (TF.Attr s P.Text) where
@@ -4908,7 +4908,7 @@ instance s ~ s' => P.HasComputedLocation (TF.Ref s' (OssBucketResource s)) (TF.A
 instance s ~ s' => P.HasComputedOwner (TF.Ref s' (OssBucketResource s)) (TF.Attr s P.Text) where
     computedOwner x = TF.compute (TF.refKey x) "owner"
 
-instance s ~ s' => P.HasComputedRefererConfig (TF.Ref s' (OssBucketResource s)) (TF.Attr s (RefererConfigSetting s)) where
+instance s ~ s' => P.HasComputedRefererConfig (TF.Ref s' (OssBucketResource s)) (TF.Attr s (OssBucketRefererConfigSetting s)) where
     computedRefererConfig x = TF.compute (TF.refKey x) "referer_config"
 
 instance s ~ s' => P.HasComputedStorageClass (TF.Ref s' (OssBucketResource s)) (TF.Attr s P.Text) where
@@ -5063,7 +5063,7 @@ data OtsTableResource s = OtsTableResource'
     , _maxVersion   :: TF.Attr s P.Int
     -- ^ @max_version@ - (Required)
     --
-    , _primaryKey   :: TF.Attr s [TF.Attr s (PrimaryKeySetting s)]
+    , _primaryKey   :: TF.Attr s [TF.Attr s (OtsTablePrimaryKeySetting s)]
     -- ^ @primary_key@ - (Required)
     --
     , _tableName    :: TF.Attr s P.Text
@@ -5076,7 +5076,7 @@ data OtsTableResource s = OtsTableResource'
 
 -- | Define a new @alicloud_ots_table@ resource value.
 otsTableResource
-    :: TF.Attr s [TF.Attr s (PrimaryKeySetting s)] -- ^ @primary_key@ ('P._primaryKey', 'P.primaryKey')
+    :: TF.Attr s [TF.Attr s (OtsTablePrimaryKeySetting s)] -- ^ @primary_key@ ('P._primaryKey', 'P.primaryKey')
     -> TF.Attr s P.Int -- ^ @time_to_live@ ('P._timeToLive', 'P.timeToLive')
     -> TF.Attr s P.Text -- ^ @instance_name@ ('P._instanceName', 'P.instanceName')
     -> TF.Attr s P.Text -- ^ @table_name@ ('P._tableName', 'P.tableName')
@@ -5114,9 +5114,9 @@ instance P.HasMaxVersion (OtsTableResource s) (TF.Attr s P.Int) where
         P.lens (_maxVersion :: OtsTableResource s -> TF.Attr s P.Int)
                (\s a -> s { _maxVersion = a } :: OtsTableResource s)
 
-instance P.HasPrimaryKey (OtsTableResource s) (TF.Attr s [TF.Attr s (PrimaryKeySetting s)]) where
+instance P.HasPrimaryKey (OtsTableResource s) (TF.Attr s [TF.Attr s (OtsTablePrimaryKeySetting s)]) where
     primaryKey =
-        P.lens (_primaryKey :: OtsTableResource s -> TF.Attr s [TF.Attr s (PrimaryKeySetting s)])
+        P.lens (_primaryKey :: OtsTableResource s -> TF.Attr s [TF.Attr s (OtsTablePrimaryKeySetting s)])
                (\s a -> s { _primaryKey = a } :: OtsTableResource s)
 
 instance P.HasTableName (OtsTableResource s) (TF.Attr s P.Text) where
@@ -5508,7 +5508,7 @@ data RamPolicyResource s = RamPolicyResource'
     , _name        :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _statement   :: TF.Attr s [TF.Attr s (StatementSetting s)]
+    , _statement   :: TF.Attr s [TF.Attr s (RamPolicyStatementSetting s)]
     -- ^ @statement@ - (Optional)
     --
     -- Conflicts with:
@@ -5586,9 +5586,9 @@ instance P.HasName (RamPolicyResource s) (TF.Attr s P.Text) where
         P.lens (_name :: RamPolicyResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: RamPolicyResource s)
 
-instance P.HasStatement (RamPolicyResource s) (TF.Attr s [TF.Attr s (StatementSetting s)]) where
+instance P.HasStatement (RamPolicyResource s) (TF.Attr s [TF.Attr s (RamPolicyStatementSetting s)]) where
     statement =
-        P.lens (_statement :: RamPolicyResource s -> TF.Attr s [TF.Attr s (StatementSetting s)])
+        P.lens (_statement :: RamPolicyResource s -> TF.Attr s [TF.Attr s (RamPolicyStatementSetting s)])
                (\s a -> s { _statement = a } :: RamPolicyResource s)
 
 instance P.HasVersion (RamPolicyResource s) (TF.Attr s P.Text) where
@@ -5605,7 +5605,7 @@ instance s ~ s' => P.HasComputedAttachmentCount (TF.Ref s' (RamPolicyResource s)
 instance s ~ s' => P.HasComputedDocument (TF.Ref s' (RamPolicyResource s)) (TF.Attr s P.Text) where
     computedDocument x = TF.compute (TF.refKey x) "document"
 
-instance s ~ s' => P.HasComputedStatement (TF.Ref s' (RamPolicyResource s)) (TF.Attr s [TF.Attr s (StatementSetting s)]) where
+instance s ~ s' => P.HasComputedStatement (TF.Ref s' (RamPolicyResource s)) (TF.Attr s [TF.Attr s (RamPolicyStatementSetting s)]) where
     computedStatement x = TF.compute (TF.refKey x) "statement"
 
 instance s ~ s' => P.HasComputedType (TF.Ref s' (RamPolicyResource s)) (TF.Attr s P.Text) where
@@ -6852,7 +6852,7 @@ slbResource =
             { _bandwidth = TF.value 1
             , _internet = TF.value P.False
             , _internetChargeType = TF.Nil
-            , _name = TF.value "tf-lb-20180818133848976200000001"
+            , _name = TF.value "tf-lb-20180820093819961400000001"
             , _specification = TF.Nil
             , _vswitchId = TF.Nil
             }
@@ -7002,10 +7002,10 @@ data SlbServerGroupResource s = SlbServerGroupResource'
     { _loadBalancerId :: TF.Attr s P.Text
     -- ^ @load_balancer_id@ - (Required, Forces New)
     --
-    , _name           :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
     --
-    , _servers        :: TF.Attr s (P.NonEmpty (TF.Attr s (ServersSetting s)))
+    , _servers :: TF.Attr s (P.NonEmpty (TF.Attr s (SlbServerGroupServersSetting s)))
     -- ^ @servers@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -7013,7 +7013,7 @@ data SlbServerGroupResource s = SlbServerGroupResource'
 -- | Define a new @alicloud_slb_server_group@ resource value.
 slbServerGroupResource
     :: TF.Attr s P.Text -- ^ @load_balancer_id@ ('P._loadBalancerId', 'P.loadBalancerId')
-    -> TF.Attr s (P.NonEmpty (TF.Attr s (ServersSetting s))) -- ^ @servers@ ('P._servers', 'P.servers')
+    -> TF.Attr s (P.NonEmpty (TF.Attr s (SlbServerGroupServersSetting s))) -- ^ @servers@ ('P._servers', 'P.servers')
     -> P.Resource (SlbServerGroupResource s)
 slbServerGroupResource _loadBalancerId _servers =
     TF.unsafeResource "alicloud_slb_server_group" TF.validator $
@@ -7043,9 +7043,9 @@ instance P.HasName (SlbServerGroupResource s) (TF.Attr s P.Text) where
         P.lens (_name :: SlbServerGroupResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: SlbServerGroupResource s)
 
-instance P.HasServers (SlbServerGroupResource s) (TF.Attr s (P.NonEmpty (TF.Attr s (ServersSetting s)))) where
+instance P.HasServers (SlbServerGroupResource s) (TF.Attr s (P.NonEmpty (TF.Attr s (SlbServerGroupServersSetting s)))) where
     servers =
-        P.lens (_servers :: SlbServerGroupResource s -> TF.Attr s (P.NonEmpty (TF.Attr s (ServersSetting s))))
+        P.lens (_servers :: SlbServerGroupResource s -> TF.Attr s (P.NonEmpty (TF.Attr s (SlbServerGroupServersSetting s))))
                (\s a -> s { _servers = a } :: SlbServerGroupResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (SlbServerGroupResource s)) (TF.Attr s P.Text) where

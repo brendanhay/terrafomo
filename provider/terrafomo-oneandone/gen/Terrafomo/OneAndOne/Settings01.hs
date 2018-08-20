@@ -17,65 +17,101 @@
 --
 module Terrafomo.OneAndOne.Settings01
     (
-    -- ** cpu
-      CpuSetting (..)
-    , newCpuSetting
-
-    -- ** thresholds
-    , ThresholdsSetting (..)
-    , newThresholdsSetting
-
-    -- ** transfer
-    , TransferSetting (..)
-    , newTransferSetting
-
-    -- ** warning
-    , WarningSetting (..)
-    , newWarningSetting
-
-    -- ** ram
-    , RamSetting (..)
-    , newRamSetting
-
-    -- ** critical
-    , CriticalSetting (..)
-    , newCriticalSetting
-
-    -- ** internal_ping
-    , InternalPingSetting (..)
-    , newInternalPingSetting
-
-    -- ** disk
-    , DiskSetting (..)
-    , newDiskSetting
-
-    -- ** hdds
-    , HddsSetting (..)
-    , newHddsSetting
-
-    -- ** ips
-    , IpsSetting (..)
-    , newIpsSetting
-
-    -- ** ports
-    , PortsSetting (..)
-    , newPortsSetting
-
-    -- ** processes
-    , ProcessesSetting (..)
-    , newProcessesSetting
+    -- ** rules
+      FirewallPolicyRulesSetting (..)
+    , newFirewallPolicyRulesSetting
 
     -- ** rules
-    , RulesSetting (..)
-    , newRulesSetting
+    , LoadbalancerRulesSetting (..)
+    , newLoadbalancerRulesSetting
 
-    -- ** servers
-    , ServersSetting (..)
-    , newServersSetting
+    -- ** ports
+    , MonitoringPolicyPortsSetting (..)
+    , newMonitoringPolicyPortsSetting
+
+    -- ** processes
+    , MonitoringPolicyProcessesSetting (..)
+    , newMonitoringPolicyProcessesSetting
+
+    -- ** critical
+    , MonitoringPolicyThresholdsCpuCriticalSetting (..)
+    , newMonitoringPolicyThresholdsCpuCriticalSetting
+
+    -- ** cpu
+    , MonitoringPolicyThresholdsCpuSetting (..)
+    , newMonitoringPolicyThresholdsCpuSetting
+
+    -- ** thresholds
+    , MonitoringPolicyThresholdsSetting (..)
+    , newMonitoringPolicyThresholdsSetting
+
+    -- ** transfer
+    , MonitoringPolicyThresholdsTransferSetting (..)
+    , newMonitoringPolicyThresholdsTransferSetting
+
+    -- ** warning
+    , MonitoringPolicyThresholdsTransferWarningSetting (..)
+    , newMonitoringPolicyThresholdsTransferWarningSetting
+
+    -- ** critical
+    , MonitoringPolicyThresholdsTransferCriticalSetting (..)
+    , newMonitoringPolicyThresholdsTransferCriticalSetting
+
+    -- ** ram
+    , MonitoringPolicyThresholdsRamSetting (..)
+    , newMonitoringPolicyThresholdsRamSetting
+
+    -- ** warning
+    , MonitoringPolicyThresholdsRamWarningSetting (..)
+    , newMonitoringPolicyThresholdsRamWarningSetting
+
+    -- ** critical
+    , MonitoringPolicyThresholdsRamCriticalSetting (..)
+    , newMonitoringPolicyThresholdsRamCriticalSetting
+
+    -- ** internal_ping
+    , MonitoringPolicyThresholdsInternalPingSetting (..)
+    , newMonitoringPolicyThresholdsInternalPingSetting
+
+    -- ** warning
+    , MonitoringPolicyThresholdsInternalPingWarningSetting (..)
+    , newMonitoringPolicyThresholdsInternalPingWarningSetting
+
+    -- ** critical
+    , MonitoringPolicyThresholdsInternalPingCriticalSetting (..)
+    , newMonitoringPolicyThresholdsInternalPingCriticalSetting
+
+    -- ** disk
+    , MonitoringPolicyThresholdsDiskSetting (..)
+    , newMonitoringPolicyThresholdsDiskSetting
+
+    -- ** warning
+    , MonitoringPolicyThresholdsDiskWarningSetting (..)
+    , newMonitoringPolicyThresholdsDiskWarningSetting
+
+    -- ** critical
+    , MonitoringPolicyThresholdsDiskCriticalSetting (..)
+    , newMonitoringPolicyThresholdsDiskCriticalSetting
+
+    -- ** warning
+    , MonitoringPolicyThresholdsCpuWarningSetting (..)
+    , newMonitoringPolicyThresholdsCpuWarningSetting
+
+    -- ** hdds
+    , ServerHddsSetting (..)
+    , newServerHddsSetting
+
+    -- ** ips
+    , ServerIpsSetting (..)
+    , newServerIpsSetting
 
     -- ** storage_servers
-    , StorageServersSetting (..)
-    , newStorageServersSetting
+    , SharedStorageStorageServersSetting (..)
+    , newSharedStorageStorageServersSetting
+
+    -- ** servers
+    , SshKeyServersSetting (..)
+    , newSshKeyServersSetting
 
     ) where
 
@@ -100,447 +136,137 @@ import qualified Terrafomo.OneAndOne.Lens  as P
 import qualified Terrafomo.OneAndOne.Types as P
 import qualified Terrafomo.Validator       as TF
 
--- | @cpu@ nested settings.
-data CpuSetting s = CpuSetting'
-    { _critical :: TF.Attr s [TF.Attr s (CriticalSetting s)]
-    -- ^ @critical@ - (Required)
+-- | @rules@ nested settings.
+data FirewallPolicyRulesSetting s = FirewallPolicyRulesSetting'
+    { _portFrom :: TF.Attr s P.Int
+    -- ^ @port_from@ - (Optional)
     --
-    , _warning  :: TF.Attr s [TF.Attr s (WarningSetting s)]
-    -- ^ @warning@ - (Required)
+    , _portTo   :: TF.Attr s P.Int
+    -- ^ @port_to@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @cpu@ settings value.
-newCpuSetting
-    :: TF.Attr s [TF.Attr s (CriticalSetting s)] -- ^ 'P._critical': @critical@
-    -> TF.Attr s [TF.Attr s (WarningSetting s)] -- ^ 'P._warning': @warning@
-    -> CpuSetting s
-newCpuSetting _critical _warning =
-    CpuSetting'
-        { _critical = _critical
-        , _warning = _warning
-        }
-
-instance TF.IsValue  (CpuSetting s)
-instance TF.IsObject (CpuSetting s) where
-    toObject CpuSetting'{..} = P.catMaybes
-        [ TF.assign "critical" <$> TF.attribute _critical
-        , TF.assign "warning" <$> TF.attribute _warning
-        ]
-
-instance TF.IsValid (CpuSetting s) where
-    validator = P.mempty
-
-instance P.HasCritical (CpuSetting s) (TF.Attr s [TF.Attr s (CriticalSetting s)]) where
-    critical =
-        P.lens (_critical :: CpuSetting s -> TF.Attr s [TF.Attr s (CriticalSetting s)])
-               (\s a -> s { _critical = a } :: CpuSetting s)
-
-instance P.HasWarning (CpuSetting s) (TF.Attr s [TF.Attr s (WarningSetting s)]) where
-    warning =
-        P.lens (_warning :: CpuSetting s -> TF.Attr s [TF.Attr s (WarningSetting s)])
-               (\s a -> s { _warning = a } :: CpuSetting s)
-
--- | @thresholds@ nested settings.
-data ThresholdsSetting s = ThresholdsSetting'
-    { _cpu          :: TF.Attr s [TF.Attr s (CpuSetting s)]
-    -- ^ @cpu@ - (Required)
+    , _protocol :: TF.Attr s P.Text
+    -- ^ @protocol@ - (Required)
     --
-    , _disk         :: TF.Attr s [TF.Attr s (DiskSetting s)]
-    -- ^ @disk@ - (Required)
-    --
-    , _internalPing :: TF.Attr s [TF.Attr s (InternalPingSetting s)]
-    -- ^ @internal_ping@ - (Required)
-    --
-    , _ram          :: TF.Attr s [TF.Attr s (RamSetting s)]
-    -- ^ @ram@ - (Required)
-    --
-    , _transfer     :: TF.Attr s [TF.Attr s (TransferSetting s)]
-    -- ^ @transfer@ - (Required)
+    , _sourceIp :: TF.Attr s P.Text
+    -- ^ @source_ip@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
--- | Construct a new @thresholds@ settings value.
-newThresholdsSetting
-    :: TF.Attr s [TF.Attr s (CpuSetting s)] -- ^ 'P._cpu': @cpu@
-    -> TF.Attr s [TF.Attr s (DiskSetting s)] -- ^ 'P._disk': @disk@
-    -> TF.Attr s [TF.Attr s (InternalPingSetting s)] -- ^ 'P._internalPing': @internal_ping@
-    -> TF.Attr s [TF.Attr s (RamSetting s)] -- ^ 'P._ram': @ram@
-    -> TF.Attr s [TF.Attr s (TransferSetting s)] -- ^ 'P._transfer': @transfer@
-    -> ThresholdsSetting s
-newThresholdsSetting _cpu _disk _internalPing _ram _transfer =
-    ThresholdsSetting'
-        { _cpu = _cpu
-        , _disk = _disk
-        , _internalPing = _internalPing
-        , _ram = _ram
-        , _transfer = _transfer
+-- | Construct a new @rules@ settings value.
+newFirewallPolicyRulesSetting
+    :: TF.Attr s P.Text -- ^ 'P._protocol': @protocol@
+    -> FirewallPolicyRulesSetting s
+newFirewallPolicyRulesSetting _protocol =
+    FirewallPolicyRulesSetting'
+        { _portFrom = TF.Nil
+        , _portTo = TF.Nil
+        , _protocol = _protocol
+        , _sourceIp = TF.Nil
         }
 
-instance TF.IsValue  (ThresholdsSetting s)
-instance TF.IsObject (ThresholdsSetting s) where
-    toObject ThresholdsSetting'{..} = P.catMaybes
-        [ TF.assign "cpu" <$> TF.attribute _cpu
-        , TF.assign "disk" <$> TF.attribute _disk
-        , TF.assign "internal_ping" <$> TF.attribute _internalPing
-        , TF.assign "ram" <$> TF.attribute _ram
-        , TF.assign "transfer" <$> TF.attribute _transfer
+instance TF.IsValue  (FirewallPolicyRulesSetting s)
+instance TF.IsObject (FirewallPolicyRulesSetting s) where
+    toObject FirewallPolicyRulesSetting'{..} = P.catMaybes
+        [ TF.assign "port_from" <$> TF.attribute _portFrom
+        , TF.assign "port_to" <$> TF.attribute _portTo
+        , TF.assign "protocol" <$> TF.attribute _protocol
+        , TF.assign "source_ip" <$> TF.attribute _sourceIp
         ]
 
-instance TF.IsValid (ThresholdsSetting s) where
+instance TF.IsValid (FirewallPolicyRulesSetting s) where
     validator = P.mempty
 
-instance P.HasCpu (ThresholdsSetting s) (TF.Attr s [TF.Attr s (CpuSetting s)]) where
-    cpu =
-        P.lens (_cpu :: ThresholdsSetting s -> TF.Attr s [TF.Attr s (CpuSetting s)])
-               (\s a -> s { _cpu = a } :: ThresholdsSetting s)
+instance P.HasPortFrom (FirewallPolicyRulesSetting s) (TF.Attr s P.Int) where
+    portFrom =
+        P.lens (_portFrom :: FirewallPolicyRulesSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _portFrom = a } :: FirewallPolicyRulesSetting s)
 
-instance P.HasDisk (ThresholdsSetting s) (TF.Attr s [TF.Attr s (DiskSetting s)]) where
-    disk =
-        P.lens (_disk :: ThresholdsSetting s -> TF.Attr s [TF.Attr s (DiskSetting s)])
-               (\s a -> s { _disk = a } :: ThresholdsSetting s)
+instance P.HasPortTo (FirewallPolicyRulesSetting s) (TF.Attr s P.Int) where
+    portTo =
+        P.lens (_portTo :: FirewallPolicyRulesSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _portTo = a } :: FirewallPolicyRulesSetting s)
 
-instance P.HasInternalPing (ThresholdsSetting s) (TF.Attr s [TF.Attr s (InternalPingSetting s)]) where
-    internalPing =
-        P.lens (_internalPing :: ThresholdsSetting s -> TF.Attr s [TF.Attr s (InternalPingSetting s)])
-               (\s a -> s { _internalPing = a } :: ThresholdsSetting s)
+instance P.HasProtocol (FirewallPolicyRulesSetting s) (TF.Attr s P.Text) where
+    protocol =
+        P.lens (_protocol :: FirewallPolicyRulesSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _protocol = a } :: FirewallPolicyRulesSetting s)
 
-instance P.HasRam (ThresholdsSetting s) (TF.Attr s [TF.Attr s (RamSetting s)]) where
-    ram =
-        P.lens (_ram :: ThresholdsSetting s -> TF.Attr s [TF.Attr s (RamSetting s)])
-               (\s a -> s { _ram = a } :: ThresholdsSetting s)
+instance P.HasSourceIp (FirewallPolicyRulesSetting s) (TF.Attr s P.Text) where
+    sourceIp =
+        P.lens (_sourceIp :: FirewallPolicyRulesSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _sourceIp = a } :: FirewallPolicyRulesSetting s)
 
-instance P.HasTransfer (ThresholdsSetting s) (TF.Attr s [TF.Attr s (TransferSetting s)]) where
-    transfer =
-        P.lens (_transfer :: ThresholdsSetting s -> TF.Attr s [TF.Attr s (TransferSetting s)])
-               (\s a -> s { _transfer = a } :: ThresholdsSetting s)
-
--- | @transfer@ nested settings.
-data TransferSetting s = TransferSetting'
-    { _critical :: TF.Attr s [TF.Attr s (CriticalSetting s)]
-    -- ^ @critical@ - (Required)
-    --
-    , _warning  :: TF.Attr s [TF.Attr s (WarningSetting s)]
-    -- ^ @warning@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @transfer@ settings value.
-newTransferSetting
-    :: TF.Attr s [TF.Attr s (CriticalSetting s)] -- ^ 'P._critical': @critical@
-    -> TF.Attr s [TF.Attr s (WarningSetting s)] -- ^ 'P._warning': @warning@
-    -> TransferSetting s
-newTransferSetting _critical _warning =
-    TransferSetting'
-        { _critical = _critical
-        , _warning = _warning
-        }
-
-instance TF.IsValue  (TransferSetting s)
-instance TF.IsObject (TransferSetting s) where
-    toObject TransferSetting'{..} = P.catMaybes
-        [ TF.assign "critical" <$> TF.attribute _critical
-        , TF.assign "warning" <$> TF.attribute _warning
-        ]
-
-instance TF.IsValid (TransferSetting s) where
-    validator = P.mempty
-
-instance P.HasCritical (TransferSetting s) (TF.Attr s [TF.Attr s (CriticalSetting s)]) where
-    critical =
-        P.lens (_critical :: TransferSetting s -> TF.Attr s [TF.Attr s (CriticalSetting s)])
-               (\s a -> s { _critical = a } :: TransferSetting s)
-
-instance P.HasWarning (TransferSetting s) (TF.Attr s [TF.Attr s (WarningSetting s)]) where
-    warning =
-        P.lens (_warning :: TransferSetting s -> TF.Attr s [TF.Attr s (WarningSetting s)])
-               (\s a -> s { _warning = a } :: TransferSetting s)
-
--- | @warning@ nested settings.
-data WarningSetting s = WarningSetting'
-    { _alert :: TF.Attr s P.Bool
-    -- ^ @alert@ - (Required)
-    --
-    , _value :: TF.Attr s P.Int
-    -- ^ @value@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @warning@ settings value.
-newWarningSetting
-    :: TF.Attr s P.Bool -- ^ 'P._alert': @alert@
-    -> TF.Attr s P.Int -- ^ 'P._value': @value@
-    -> WarningSetting s
-newWarningSetting _alert _value =
-    WarningSetting'
-        { _alert = _alert
-        , _value = _value
-        }
-
-instance TF.IsValue  (WarningSetting s)
-instance TF.IsObject (WarningSetting s) where
-    toObject WarningSetting'{..} = P.catMaybes
-        [ TF.assign "alert" <$> TF.attribute _alert
-        , TF.assign "value" <$> TF.attribute _value
-        ]
-
-instance TF.IsValid (WarningSetting s) where
-    validator = P.mempty
-
-instance P.HasAlert (WarningSetting s) (TF.Attr s P.Bool) where
-    alert =
-        P.lens (_alert :: WarningSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _alert = a } :: WarningSetting s)
-
-instance P.HasValue (WarningSetting s) (TF.Attr s P.Int) where
-    value =
-        P.lens (_value :: WarningSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _value = a } :: WarningSetting s)
-
--- | @ram@ nested settings.
-data RamSetting s = RamSetting'
-    { _critical :: TF.Attr s [TF.Attr s (CriticalSetting s)]
-    -- ^ @critical@ - (Required)
-    --
-    , _warning  :: TF.Attr s [TF.Attr s (WarningSetting s)]
-    -- ^ @warning@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @ram@ settings value.
-newRamSetting
-    :: TF.Attr s [TF.Attr s (CriticalSetting s)] -- ^ 'P._critical': @critical@
-    -> TF.Attr s [TF.Attr s (WarningSetting s)] -- ^ 'P._warning': @warning@
-    -> RamSetting s
-newRamSetting _critical _warning =
-    RamSetting'
-        { _critical = _critical
-        , _warning = _warning
-        }
-
-instance TF.IsValue  (RamSetting s)
-instance TF.IsObject (RamSetting s) where
-    toObject RamSetting'{..} = P.catMaybes
-        [ TF.assign "critical" <$> TF.attribute _critical
-        , TF.assign "warning" <$> TF.attribute _warning
-        ]
-
-instance TF.IsValid (RamSetting s) where
-    validator = P.mempty
-
-instance P.HasCritical (RamSetting s) (TF.Attr s [TF.Attr s (CriticalSetting s)]) where
-    critical =
-        P.lens (_critical :: RamSetting s -> TF.Attr s [TF.Attr s (CriticalSetting s)])
-               (\s a -> s { _critical = a } :: RamSetting s)
-
-instance P.HasWarning (RamSetting s) (TF.Attr s [TF.Attr s (WarningSetting s)]) where
-    warning =
-        P.lens (_warning :: RamSetting s -> TF.Attr s [TF.Attr s (WarningSetting s)])
-               (\s a -> s { _warning = a } :: RamSetting s)
-
--- | @critical@ nested settings.
-data CriticalSetting s = CriticalSetting'
-    { _alert :: TF.Attr s P.Bool
-    -- ^ @alert@ - (Required)
-    --
-    , _value :: TF.Attr s P.Int
-    -- ^ @value@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @critical@ settings value.
-newCriticalSetting
-    :: TF.Attr s P.Bool -- ^ 'P._alert': @alert@
-    -> TF.Attr s P.Int -- ^ 'P._value': @value@
-    -> CriticalSetting s
-newCriticalSetting _alert _value =
-    CriticalSetting'
-        { _alert = _alert
-        , _value = _value
-        }
-
-instance TF.IsValue  (CriticalSetting s)
-instance TF.IsObject (CriticalSetting s) where
-    toObject CriticalSetting'{..} = P.catMaybes
-        [ TF.assign "alert" <$> TF.attribute _alert
-        , TF.assign "value" <$> TF.attribute _value
-        ]
-
-instance TF.IsValid (CriticalSetting s) where
-    validator = P.mempty
-
-instance P.HasAlert (CriticalSetting s) (TF.Attr s P.Bool) where
-    alert =
-        P.lens (_alert :: CriticalSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _alert = a } :: CriticalSetting s)
-
-instance P.HasValue (CriticalSetting s) (TF.Attr s P.Int) where
-    value =
-        P.lens (_value :: CriticalSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _value = a } :: CriticalSetting s)
-
--- | @internal_ping@ nested settings.
-data InternalPingSetting s = InternalPingSetting'
-    { _critical :: TF.Attr s [TF.Attr s (CriticalSetting s)]
-    -- ^ @critical@ - (Required)
-    --
-    , _warning  :: TF.Attr s [TF.Attr s (WarningSetting s)]
-    -- ^ @warning@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @internal_ping@ settings value.
-newInternalPingSetting
-    :: TF.Attr s [TF.Attr s (CriticalSetting s)] -- ^ 'P._critical': @critical@
-    -> TF.Attr s [TF.Attr s (WarningSetting s)] -- ^ 'P._warning': @warning@
-    -> InternalPingSetting s
-newInternalPingSetting _critical _warning =
-    InternalPingSetting'
-        { _critical = _critical
-        , _warning = _warning
-        }
-
-instance TF.IsValue  (InternalPingSetting s)
-instance TF.IsObject (InternalPingSetting s) where
-    toObject InternalPingSetting'{..} = P.catMaybes
-        [ TF.assign "critical" <$> TF.attribute _critical
-        , TF.assign "warning" <$> TF.attribute _warning
-        ]
-
-instance TF.IsValid (InternalPingSetting s) where
-    validator = P.mempty
-
-instance P.HasCritical (InternalPingSetting s) (TF.Attr s [TF.Attr s (CriticalSetting s)]) where
-    critical =
-        P.lens (_critical :: InternalPingSetting s -> TF.Attr s [TF.Attr s (CriticalSetting s)])
-               (\s a -> s { _critical = a } :: InternalPingSetting s)
-
-instance P.HasWarning (InternalPingSetting s) (TF.Attr s [TF.Attr s (WarningSetting s)]) where
-    warning =
-        P.lens (_warning :: InternalPingSetting s -> TF.Attr s [TF.Attr s (WarningSetting s)])
-               (\s a -> s { _warning = a } :: InternalPingSetting s)
-
--- | @disk@ nested settings.
-data DiskSetting s = DiskSetting'
-    { _critical :: TF.Attr s [TF.Attr s (CriticalSetting s)]
-    -- ^ @critical@ - (Required)
-    --
-    , _warning  :: TF.Attr s [TF.Attr s (WarningSetting s)]
-    -- ^ @warning@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @disk@ settings value.
-newDiskSetting
-    :: TF.Attr s [TF.Attr s (CriticalSetting s)] -- ^ 'P._critical': @critical@
-    -> TF.Attr s [TF.Attr s (WarningSetting s)] -- ^ 'P._warning': @warning@
-    -> DiskSetting s
-newDiskSetting _critical _warning =
-    DiskSetting'
-        { _critical = _critical
-        , _warning = _warning
-        }
-
-instance TF.IsValue  (DiskSetting s)
-instance TF.IsObject (DiskSetting s) where
-    toObject DiskSetting'{..} = P.catMaybes
-        [ TF.assign "critical" <$> TF.attribute _critical
-        , TF.assign "warning" <$> TF.attribute _warning
-        ]
-
-instance TF.IsValid (DiskSetting s) where
-    validator = P.mempty
-
-instance P.HasCritical (DiskSetting s) (TF.Attr s [TF.Attr s (CriticalSetting s)]) where
-    critical =
-        P.lens (_critical :: DiskSetting s -> TF.Attr s [TF.Attr s (CriticalSetting s)])
-               (\s a -> s { _critical = a } :: DiskSetting s)
-
-instance P.HasWarning (DiskSetting s) (TF.Attr s [TF.Attr s (WarningSetting s)]) where
-    warning =
-        P.lens (_warning :: DiskSetting s -> TF.Attr s [TF.Attr s (WarningSetting s)])
-               (\s a -> s { _warning = a } :: DiskSetting s)
-
--- | @hdds@ nested settings.
-data HddsSetting s = HddsSetting'
-    { _diskSize :: TF.Attr s P.Int
-    -- ^ @disk_size@ - (Required)
-    --
-    , _isMain   :: TF.Attr s P.Bool
-    -- ^ @is_main@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @hdds@ settings value.
-newHddsSetting
-    :: TF.Attr s P.Int -- ^ 'P._diskSize': @disk_size@
-    -> HddsSetting s
-newHddsSetting _diskSize =
-    HddsSetting'
-        { _diskSize = _diskSize
-        , _isMain = TF.Nil
-        }
-
-instance TF.IsValue  (HddsSetting s)
-instance TF.IsObject (HddsSetting s) where
-    toObject HddsSetting'{..} = P.catMaybes
-        [ TF.assign "disk_size" <$> TF.attribute _diskSize
-        , TF.assign "is_main" <$> TF.attribute _isMain
-        ]
-
-instance TF.IsValid (HddsSetting s) where
-    validator = P.mempty
-
-instance P.HasDiskSize (HddsSetting s) (TF.Attr s P.Int) where
-    diskSize =
-        P.lens (_diskSize :: HddsSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _diskSize = a } :: HddsSetting s)
-
-instance P.HasIsMain (HddsSetting s) (TF.Attr s P.Bool) where
-    isMain =
-        P.lens (_isMain :: HddsSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _isMain = a } :: HddsSetting s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (HddsSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (FirewallPolicyRulesSetting s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
--- | @ips@ nested settings.
-data IpsSetting s = IpsSetting'
-    { _firewallPolicyId :: TF.Attr s P.Text
-    -- ^ @firewall_policy_id@ - (Optional)
+-- | @rules@ nested settings.
+data LoadbalancerRulesSetting s = LoadbalancerRulesSetting'
+    { _portBalancer :: TF.Attr s P.Int
+    -- ^ @port_balancer@ - (Required)
+    --
+    , _portServer   :: TF.Attr s P.Int
+    -- ^ @port_server@ - (Required)
+    --
+    , _protocol     :: TF.Attr s P.Text
+    -- ^ @protocol@ - (Required)
+    --
+    , _sourceIp     :: TF.Attr s P.Text
+    -- ^ @source_ip@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
--- | Construct a new @ips@ settings value.
-newIpsSetting
-    :: IpsSetting s
-newIpsSetting =
-    IpsSetting'
-        { _firewallPolicyId = TF.Nil
+-- | Construct a new @rules@ settings value.
+newLoadbalancerRulesSetting
+    :: TF.Attr s P.Int -- ^ 'P._portBalancer': @port_balancer@
+    -> TF.Attr s P.Text -- ^ 'P._sourceIp': @source_ip@
+    -> TF.Attr s P.Text -- ^ 'P._protocol': @protocol@
+    -> TF.Attr s P.Int -- ^ 'P._portServer': @port_server@
+    -> LoadbalancerRulesSetting s
+newLoadbalancerRulesSetting _portBalancer _sourceIp _protocol _portServer =
+    LoadbalancerRulesSetting'
+        { _portBalancer = _portBalancer
+        , _portServer = _portServer
+        , _protocol = _protocol
+        , _sourceIp = _sourceIp
         }
 
-instance TF.IsValue  (IpsSetting s)
-instance TF.IsObject (IpsSetting s) where
-    toObject IpsSetting'{..} = P.catMaybes
-        [ TF.assign "firewall_policy_id" <$> TF.attribute _firewallPolicyId
+instance TF.IsValue  (LoadbalancerRulesSetting s)
+instance TF.IsObject (LoadbalancerRulesSetting s) where
+    toObject LoadbalancerRulesSetting'{..} = P.catMaybes
+        [ TF.assign "port_balancer" <$> TF.attribute _portBalancer
+        , TF.assign "port_server" <$> TF.attribute _portServer
+        , TF.assign "protocol" <$> TF.attribute _protocol
+        , TF.assign "source_ip" <$> TF.attribute _sourceIp
         ]
 
-instance TF.IsValid (IpsSetting s) where
+instance TF.IsValid (LoadbalancerRulesSetting s) where
     validator = P.mempty
 
-instance P.HasFirewallPolicyId (IpsSetting s) (TF.Attr s P.Text) where
-    firewallPolicyId =
-        P.lens (_firewallPolicyId :: IpsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _firewallPolicyId = a } :: IpsSetting s)
+instance P.HasPortBalancer (LoadbalancerRulesSetting s) (TF.Attr s P.Int) where
+    portBalancer =
+        P.lens (_portBalancer :: LoadbalancerRulesSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _portBalancer = a } :: LoadbalancerRulesSetting s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (IpsSetting s)) (TF.Attr s P.Text) where
+instance P.HasPortServer (LoadbalancerRulesSetting s) (TF.Attr s P.Int) where
+    portServer =
+        P.lens (_portServer :: LoadbalancerRulesSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _portServer = a } :: LoadbalancerRulesSetting s)
+
+instance P.HasProtocol (LoadbalancerRulesSetting s) (TF.Attr s P.Text) where
+    protocol =
+        P.lens (_protocol :: LoadbalancerRulesSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _protocol = a } :: LoadbalancerRulesSetting s)
+
+instance P.HasSourceIp (LoadbalancerRulesSetting s) (TF.Attr s P.Text) where
+    sourceIp =
+        P.lens (_sourceIp :: LoadbalancerRulesSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _sourceIp = a } :: LoadbalancerRulesSetting s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (LoadbalancerRulesSetting s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
-
-instance s ~ s' => P.HasComputedIp (TF.Ref s' (IpsSetting s)) (TF.Attr s P.Text) where
-    computedIp x = TF.compute (TF.refKey x) "ip"
 
 -- | @ports@ nested settings.
-data PortsSetting s = PortsSetting'
+data MonitoringPolicyPortsSetting s = MonitoringPolicyPortsSetting'
     { _alertIf           :: TF.Attr s P.Text
     -- ^ @alert_if@ - (Optional)
     --
@@ -556,55 +282,55 @@ data PortsSetting s = PortsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @ports@ settings value.
-newPortsSetting
+newMonitoringPolicyPortsSetting
     :: TF.Attr s P.Bool -- ^ 'P._emailNotification': @email_notification@
     -> TF.Attr s P.Int -- ^ 'P._port': @port@
-    -> PortsSetting s
-newPortsSetting _emailNotification _port =
-    PortsSetting'
+    -> MonitoringPolicyPortsSetting s
+newMonitoringPolicyPortsSetting _emailNotification _port =
+    MonitoringPolicyPortsSetting'
         { _alertIf = TF.Nil
         , _emailNotification = _emailNotification
         , _port = _port
         , _protocol = TF.Nil
         }
 
-instance TF.IsValue  (PortsSetting s)
-instance TF.IsObject (PortsSetting s) where
-    toObject PortsSetting'{..} = P.catMaybes
+instance TF.IsValue  (MonitoringPolicyPortsSetting s)
+instance TF.IsObject (MonitoringPolicyPortsSetting s) where
+    toObject MonitoringPolicyPortsSetting'{..} = P.catMaybes
         [ TF.assign "alert_if" <$> TF.attribute _alertIf
         , TF.assign "email_notification" <$> TF.attribute _emailNotification
         , TF.assign "port" <$> TF.attribute _port
         , TF.assign "protocol" <$> TF.attribute _protocol
         ]
 
-instance TF.IsValid (PortsSetting s) where
+instance TF.IsValid (MonitoringPolicyPortsSetting s) where
     validator = P.mempty
 
-instance P.HasAlertIf (PortsSetting s) (TF.Attr s P.Text) where
+instance P.HasAlertIf (MonitoringPolicyPortsSetting s) (TF.Attr s P.Text) where
     alertIf =
-        P.lens (_alertIf :: PortsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _alertIf = a } :: PortsSetting s)
+        P.lens (_alertIf :: MonitoringPolicyPortsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _alertIf = a } :: MonitoringPolicyPortsSetting s)
 
-instance P.HasEmailNotification (PortsSetting s) (TF.Attr s P.Bool) where
+instance P.HasEmailNotification (MonitoringPolicyPortsSetting s) (TF.Attr s P.Bool) where
     emailNotification =
-        P.lens (_emailNotification :: PortsSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _emailNotification = a } :: PortsSetting s)
+        P.lens (_emailNotification :: MonitoringPolicyPortsSetting s -> TF.Attr s P.Bool)
+               (\s a -> s { _emailNotification = a } :: MonitoringPolicyPortsSetting s)
 
-instance P.HasPort (PortsSetting s) (TF.Attr s P.Int) where
+instance P.HasPort (MonitoringPolicyPortsSetting s) (TF.Attr s P.Int) where
     port =
-        P.lens (_port :: PortsSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _port = a } :: PortsSetting s)
+        P.lens (_port :: MonitoringPolicyPortsSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _port = a } :: MonitoringPolicyPortsSetting s)
 
-instance P.HasProtocol (PortsSetting s) (TF.Attr s P.Text) where
+instance P.HasProtocol (MonitoringPolicyPortsSetting s) (TF.Attr s P.Text) where
     protocol =
-        P.lens (_protocol :: PortsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _protocol = a } :: PortsSetting s)
+        P.lens (_protocol :: MonitoringPolicyPortsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _protocol = a } :: MonitoringPolicyPortsSetting s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (PortsSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (MonitoringPolicyPortsSetting s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @processes@ nested settings.
-data ProcessesSetting s = ProcessesSetting'
+data MonitoringPolicyProcessesSetting s = MonitoringPolicyProcessesSetting'
     { _alertIf           :: TF.Attr s P.Text
     -- ^ @alert_if@ - (Optional)
     --
@@ -617,174 +343,815 @@ data ProcessesSetting s = ProcessesSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @processes@ settings value.
-newProcessesSetting
+newMonitoringPolicyProcessesSetting
     :: TF.Attr s P.Bool -- ^ 'P._emailNotification': @email_notification@
     -> TF.Attr s P.Text -- ^ 'P._process': @process@
-    -> ProcessesSetting s
-newProcessesSetting _emailNotification _process =
-    ProcessesSetting'
+    -> MonitoringPolicyProcessesSetting s
+newMonitoringPolicyProcessesSetting _emailNotification _process =
+    MonitoringPolicyProcessesSetting'
         { _alertIf = TF.Nil
         , _emailNotification = _emailNotification
         , _process = _process
         }
 
-instance TF.IsValue  (ProcessesSetting s)
-instance TF.IsObject (ProcessesSetting s) where
-    toObject ProcessesSetting'{..} = P.catMaybes
+instance TF.IsValue  (MonitoringPolicyProcessesSetting s)
+instance TF.IsObject (MonitoringPolicyProcessesSetting s) where
+    toObject MonitoringPolicyProcessesSetting'{..} = P.catMaybes
         [ TF.assign "alert_if" <$> TF.attribute _alertIf
         , TF.assign "email_notification" <$> TF.attribute _emailNotification
         , TF.assign "process" <$> TF.attribute _process
         ]
 
-instance TF.IsValid (ProcessesSetting s) where
+instance TF.IsValid (MonitoringPolicyProcessesSetting s) where
     validator = P.mempty
 
-instance P.HasAlertIf (ProcessesSetting s) (TF.Attr s P.Text) where
+instance P.HasAlertIf (MonitoringPolicyProcessesSetting s) (TF.Attr s P.Text) where
     alertIf =
-        P.lens (_alertIf :: ProcessesSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _alertIf = a } :: ProcessesSetting s)
+        P.lens (_alertIf :: MonitoringPolicyProcessesSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _alertIf = a } :: MonitoringPolicyProcessesSetting s)
 
-instance P.HasEmailNotification (ProcessesSetting s) (TF.Attr s P.Bool) where
+instance P.HasEmailNotification (MonitoringPolicyProcessesSetting s) (TF.Attr s P.Bool) where
     emailNotification =
-        P.lens (_emailNotification :: ProcessesSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _emailNotification = a } :: ProcessesSetting s)
+        P.lens (_emailNotification :: MonitoringPolicyProcessesSetting s -> TF.Attr s P.Bool)
+               (\s a -> s { _emailNotification = a } :: MonitoringPolicyProcessesSetting s)
 
-instance P.HasProcess (ProcessesSetting s) (TF.Attr s P.Text) where
+instance P.HasProcess (MonitoringPolicyProcessesSetting s) (TF.Attr s P.Text) where
     process =
-        P.lens (_process :: ProcessesSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _process = a } :: ProcessesSetting s)
+        P.lens (_process :: MonitoringPolicyProcessesSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _process = a } :: MonitoringPolicyProcessesSetting s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (ProcessesSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (MonitoringPolicyProcessesSetting s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
--- | @rules@ nested settings.
-data RulesSetting s = RulesSetting'
-    { _portFrom     :: TF.Attr s P.Int
-    -- ^ @port_from@ - (Optional)
+-- | @critical@ nested settings.
+data MonitoringPolicyThresholdsCpuCriticalSetting s = MonitoringPolicyThresholdsCpuCriticalSetting'
+    { _alert :: TF.Attr s P.Bool
+    -- ^ @alert@ - (Required)
     --
-    , _portTo       :: TF.Attr s P.Int
-    -- ^ @port_to@ - (Optional)
-    --
-    , _protocol     :: TF.Attr s P.Text
-    -- ^ @protocol@ - (Required)
-    --
-    , _sourceIp     :: TF.Attr s P.Text
-    -- ^ @source_ip@ - (Optional)
-    --
-    , _portBalancer :: TF.Attr s P.Int
-    -- ^ @port_balancer@ - (Required)
-    --
-    , _portServer   :: TF.Attr s P.Int
-    -- ^ @port_server@ - (Required)
+    , _value :: TF.Attr s P.Int
+    -- ^ @value@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
--- | Construct a new @rules@ settings value.
-newRulesSetting
-    :: TF.Attr s P.Int -- ^ 'P._portBalancer': @port_balancer@
-    -> TF.Attr s P.Text -- ^ 'P._protocol': @protocol@
-    -> TF.Attr s P.Int -- ^ 'P._portServer': @port_server@
-    -> RulesSetting s
-newRulesSetting _portBalancer _protocol _portServer =
-    RulesSetting'
-        { _portFrom = TF.Nil
-        , _portTo = TF.Nil
-        , _protocol = _protocol
-        , _sourceIp = TF.Nil
-        , _portBalancer = _portBalancer
-        , _portServer = _portServer
+-- | Construct a new @critical@ settings value.
+newMonitoringPolicyThresholdsCpuCriticalSetting
+    :: TF.Attr s P.Bool -- ^ 'P._alert': @alert@
+    -> TF.Attr s P.Int -- ^ 'P._value': @value@
+    -> MonitoringPolicyThresholdsCpuCriticalSetting s
+newMonitoringPolicyThresholdsCpuCriticalSetting _alert _value =
+    MonitoringPolicyThresholdsCpuCriticalSetting'
+        { _alert = _alert
+        , _value = _value
         }
 
-instance TF.IsValue  (RulesSetting s)
-instance TF.IsObject (RulesSetting s) where
-    toObject RulesSetting'{..} = P.catMaybes
-        [ TF.assign "port_from" <$> TF.attribute _portFrom
-        , TF.assign "port_to" <$> TF.attribute _portTo
-        , TF.assign "protocol" <$> TF.attribute _protocol
-        , TF.assign "source_ip" <$> TF.attribute _sourceIp
-        , TF.assign "port_balancer" <$> TF.attribute _portBalancer
-        , TF.assign "port_server" <$> TF.attribute _portServer
+instance TF.IsValue  (MonitoringPolicyThresholdsCpuCriticalSetting s)
+instance TF.IsObject (MonitoringPolicyThresholdsCpuCriticalSetting s) where
+    toObject MonitoringPolicyThresholdsCpuCriticalSetting'{..} = P.catMaybes
+        [ TF.assign "alert" <$> TF.attribute _alert
+        , TF.assign "value" <$> TF.attribute _value
         ]
 
-instance TF.IsValid (RulesSetting s) where
+instance TF.IsValid (MonitoringPolicyThresholdsCpuCriticalSetting s) where
     validator = P.mempty
 
-instance P.HasPortFrom (RulesSetting s) (TF.Attr s P.Int) where
-    portFrom =
-        P.lens (_portFrom :: RulesSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _portFrom = a } :: RulesSetting s)
+instance P.HasAlert (MonitoringPolicyThresholdsCpuCriticalSetting s) (TF.Attr s P.Bool) where
+    alert =
+        P.lens (_alert :: MonitoringPolicyThresholdsCpuCriticalSetting s -> TF.Attr s P.Bool)
+               (\s a -> s { _alert = a } :: MonitoringPolicyThresholdsCpuCriticalSetting s)
 
-instance P.HasPortTo (RulesSetting s) (TF.Attr s P.Int) where
-    portTo =
-        P.lens (_portTo :: RulesSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _portTo = a } :: RulesSetting s)
+instance P.HasValue (MonitoringPolicyThresholdsCpuCriticalSetting s) (TF.Attr s P.Int) where
+    value =
+        P.lens (_value :: MonitoringPolicyThresholdsCpuCriticalSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _value = a } :: MonitoringPolicyThresholdsCpuCriticalSetting s)
 
-instance P.HasProtocol (RulesSetting s) (TF.Attr s P.Text) where
-    protocol =
-        P.lens (_protocol :: RulesSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _protocol = a } :: RulesSetting s)
-
-instance P.HasSourceIp (RulesSetting s) (TF.Attr s P.Text) where
-    sourceIp =
-        P.lens (_sourceIp :: RulesSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _sourceIp = a } :: RulesSetting s)
-
-instance P.HasPortBalancer (RulesSetting s) (TF.Attr s P.Int) where
-    portBalancer =
-        P.lens (_portBalancer :: RulesSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _portBalancer = a } :: RulesSetting s)
-
-instance P.HasPortServer (RulesSetting s) (TF.Attr s P.Int) where
-    portServer =
-        P.lens (_portServer :: RulesSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _portServer = a } :: RulesSetting s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (RulesSetting s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
--- | @servers@ nested settings.
-data ServersSetting s = ServersSetting'
-    { _id   :: TF.Attr s P.Text
-    -- ^ @id@ - (Required)
+-- | @cpu@ nested settings.
+data MonitoringPolicyThresholdsCpuSetting s = MonitoringPolicyThresholdsCpuSetting'
+    { _critical :: TF.Attr s [TF.Attr s (MonitoringPolicyThresholdsCpuCriticalSetting s)]
+    -- ^ @critical@ - (Required)
     --
-    , _name :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
+    , _warning :: TF.Attr s [TF.Attr s (MonitoringPolicyThresholdsCpuWarningSetting s)]
+    -- ^ @warning@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
--- | Construct a new @servers@ settings value.
-newServersSetting
-    :: TF.Attr s P.Text -- ^ 'P._id': @id@
-    -> TF.Attr s P.Text -- ^ 'P._name': @name@
-    -> ServersSetting s
-newServersSetting _id _name =
-    ServersSetting'
-        { _id = _id
-        , _name = _name
+-- | Construct a new @cpu@ settings value.
+newMonitoringPolicyThresholdsCpuSetting
+    :: TF.Attr s [TF.Attr s (MonitoringPolicyThresholdsCpuCriticalSetting s)] -- ^ 'P._critical': @critical@
+    -> TF.Attr s [TF.Attr s (MonitoringPolicyThresholdsCpuWarningSetting s)] -- ^ 'P._warning': @warning@
+    -> MonitoringPolicyThresholdsCpuSetting s
+newMonitoringPolicyThresholdsCpuSetting _critical _warning =
+    MonitoringPolicyThresholdsCpuSetting'
+        { _critical = _critical
+        , _warning = _warning
         }
 
-instance TF.IsValue  (ServersSetting s)
-instance TF.IsObject (ServersSetting s) where
-    toObject ServersSetting'{..} = P.catMaybes
-        [ TF.assign "id" <$> TF.attribute _id
-        , TF.assign "name" <$> TF.attribute _name
+instance TF.IsValue  (MonitoringPolicyThresholdsCpuSetting s)
+instance TF.IsObject (MonitoringPolicyThresholdsCpuSetting s) where
+    toObject MonitoringPolicyThresholdsCpuSetting'{..} = P.catMaybes
+        [ TF.assign "critical" <$> TF.attribute _critical
+        , TF.assign "warning" <$> TF.attribute _warning
         ]
 
-instance TF.IsValid (ServersSetting s) where
+instance TF.IsValid (MonitoringPolicyThresholdsCpuSetting s) where
     validator = P.mempty
 
-instance P.HasId (ServersSetting s) (TF.Attr s P.Text) where
-    id =
-        P.lens (_id :: ServersSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _id = a } :: ServersSetting s)
+instance P.HasCritical (MonitoringPolicyThresholdsCpuSetting s) (TF.Attr s [TF.Attr s (MonitoringPolicyThresholdsCpuCriticalSetting s)]) where
+    critical =
+        P.lens (_critical :: MonitoringPolicyThresholdsCpuSetting s -> TF.Attr s [TF.Attr s (MonitoringPolicyThresholdsCpuCriticalSetting s)])
+               (\s a -> s { _critical = a } :: MonitoringPolicyThresholdsCpuSetting s)
 
-instance P.HasName (ServersSetting s) (TF.Attr s P.Text) where
-    name =
-        P.lens (_name :: ServersSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: ServersSetting s)
+instance P.HasWarning (MonitoringPolicyThresholdsCpuSetting s) (TF.Attr s [TF.Attr s (MonitoringPolicyThresholdsCpuWarningSetting s)]) where
+    warning =
+        P.lens (_warning :: MonitoringPolicyThresholdsCpuSetting s -> TF.Attr s [TF.Attr s (MonitoringPolicyThresholdsCpuWarningSetting s)])
+               (\s a -> s { _warning = a } :: MonitoringPolicyThresholdsCpuSetting s)
+
+-- | @thresholds@ nested settings.
+data MonitoringPolicyThresholdsSetting s = MonitoringPolicyThresholdsSetting'
+    { _cpu :: TF.Attr s [TF.Attr s (MonitoringPolicyThresholdsCpuSetting s)]
+    -- ^ @cpu@ - (Required)
+    --
+    , _disk :: TF.Attr s [TF.Attr s (MonitoringPolicyThresholdsDiskSetting s)]
+    -- ^ @disk@ - (Required)
+    --
+    , _internalPing :: TF.Attr s [TF.Attr s (MonitoringPolicyThresholdsInternalPingSetting s)]
+    -- ^ @internal_ping@ - (Required)
+    --
+    , _ram :: TF.Attr s [TF.Attr s (MonitoringPolicyThresholdsRamSetting s)]
+    -- ^ @ram@ - (Required)
+    --
+    , _transfer :: TF.Attr s [TF.Attr s (MonitoringPolicyThresholdsTransferSetting s)]
+    -- ^ @transfer@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @thresholds@ settings value.
+newMonitoringPolicyThresholdsSetting
+    :: TF.Attr s [TF.Attr s (MonitoringPolicyThresholdsCpuSetting s)] -- ^ 'P._cpu': @cpu@
+    -> TF.Attr s [TF.Attr s (MonitoringPolicyThresholdsDiskSetting s)] -- ^ 'P._disk': @disk@
+    -> TF.Attr s [TF.Attr s (MonitoringPolicyThresholdsInternalPingSetting s)] -- ^ 'P._internalPing': @internal_ping@
+    -> TF.Attr s [TF.Attr s (MonitoringPolicyThresholdsRamSetting s)] -- ^ 'P._ram': @ram@
+    -> TF.Attr s [TF.Attr s (MonitoringPolicyThresholdsTransferSetting s)] -- ^ 'P._transfer': @transfer@
+    -> MonitoringPolicyThresholdsSetting s
+newMonitoringPolicyThresholdsSetting _cpu _disk _internalPing _ram _transfer =
+    MonitoringPolicyThresholdsSetting'
+        { _cpu = _cpu
+        , _disk = _disk
+        , _internalPing = _internalPing
+        , _ram = _ram
+        , _transfer = _transfer
+        }
+
+instance TF.IsValue  (MonitoringPolicyThresholdsSetting s)
+instance TF.IsObject (MonitoringPolicyThresholdsSetting s) where
+    toObject MonitoringPolicyThresholdsSetting'{..} = P.catMaybes
+        [ TF.assign "cpu" <$> TF.attribute _cpu
+        , TF.assign "disk" <$> TF.attribute _disk
+        , TF.assign "internal_ping" <$> TF.attribute _internalPing
+        , TF.assign "ram" <$> TF.attribute _ram
+        , TF.assign "transfer" <$> TF.attribute _transfer
+        ]
+
+instance TF.IsValid (MonitoringPolicyThresholdsSetting s) where
+    validator = P.mempty
+
+instance P.HasCpu (MonitoringPolicyThresholdsSetting s) (TF.Attr s [TF.Attr s (MonitoringPolicyThresholdsCpuSetting s)]) where
+    cpu =
+        P.lens (_cpu :: MonitoringPolicyThresholdsSetting s -> TF.Attr s [TF.Attr s (MonitoringPolicyThresholdsCpuSetting s)])
+               (\s a -> s { _cpu = a } :: MonitoringPolicyThresholdsSetting s)
+
+instance P.HasDisk (MonitoringPolicyThresholdsSetting s) (TF.Attr s [TF.Attr s (MonitoringPolicyThresholdsDiskSetting s)]) where
+    disk =
+        P.lens (_disk :: MonitoringPolicyThresholdsSetting s -> TF.Attr s [TF.Attr s (MonitoringPolicyThresholdsDiskSetting s)])
+               (\s a -> s { _disk = a } :: MonitoringPolicyThresholdsSetting s)
+
+instance P.HasInternalPing (MonitoringPolicyThresholdsSetting s) (TF.Attr s [TF.Attr s (MonitoringPolicyThresholdsInternalPingSetting s)]) where
+    internalPing =
+        P.lens (_internalPing :: MonitoringPolicyThresholdsSetting s -> TF.Attr s [TF.Attr s (MonitoringPolicyThresholdsInternalPingSetting s)])
+               (\s a -> s { _internalPing = a } :: MonitoringPolicyThresholdsSetting s)
+
+instance P.HasRam (MonitoringPolicyThresholdsSetting s) (TF.Attr s [TF.Attr s (MonitoringPolicyThresholdsRamSetting s)]) where
+    ram =
+        P.lens (_ram :: MonitoringPolicyThresholdsSetting s -> TF.Attr s [TF.Attr s (MonitoringPolicyThresholdsRamSetting s)])
+               (\s a -> s { _ram = a } :: MonitoringPolicyThresholdsSetting s)
+
+instance P.HasTransfer (MonitoringPolicyThresholdsSetting s) (TF.Attr s [TF.Attr s (MonitoringPolicyThresholdsTransferSetting s)]) where
+    transfer =
+        P.lens (_transfer :: MonitoringPolicyThresholdsSetting s -> TF.Attr s [TF.Attr s (MonitoringPolicyThresholdsTransferSetting s)])
+               (\s a -> s { _transfer = a } :: MonitoringPolicyThresholdsSetting s)
+
+-- | @transfer@ nested settings.
+data MonitoringPolicyThresholdsTransferSetting s = MonitoringPolicyThresholdsTransferSetting'
+    { _critical :: TF.Attr s [TF.Attr s (MonitoringPolicyThresholdsTransferCriticalSetting s)]
+    -- ^ @critical@ - (Required)
+    --
+    , _warning :: TF.Attr s [TF.Attr s (MonitoringPolicyThresholdsTransferWarningSetting s)]
+    -- ^ @warning@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @transfer@ settings value.
+newMonitoringPolicyThresholdsTransferSetting
+    :: TF.Attr s [TF.Attr s (MonitoringPolicyThresholdsTransferCriticalSetting s)] -- ^ 'P._critical': @critical@
+    -> TF.Attr s [TF.Attr s (MonitoringPolicyThresholdsTransferWarningSetting s)] -- ^ 'P._warning': @warning@
+    -> MonitoringPolicyThresholdsTransferSetting s
+newMonitoringPolicyThresholdsTransferSetting _critical _warning =
+    MonitoringPolicyThresholdsTransferSetting'
+        { _critical = _critical
+        , _warning = _warning
+        }
+
+instance TF.IsValue  (MonitoringPolicyThresholdsTransferSetting s)
+instance TF.IsObject (MonitoringPolicyThresholdsTransferSetting s) where
+    toObject MonitoringPolicyThresholdsTransferSetting'{..} = P.catMaybes
+        [ TF.assign "critical" <$> TF.attribute _critical
+        , TF.assign "warning" <$> TF.attribute _warning
+        ]
+
+instance TF.IsValid (MonitoringPolicyThresholdsTransferSetting s) where
+    validator = P.mempty
+
+instance P.HasCritical (MonitoringPolicyThresholdsTransferSetting s) (TF.Attr s [TF.Attr s (MonitoringPolicyThresholdsTransferCriticalSetting s)]) where
+    critical =
+        P.lens (_critical :: MonitoringPolicyThresholdsTransferSetting s -> TF.Attr s [TF.Attr s (MonitoringPolicyThresholdsTransferCriticalSetting s)])
+               (\s a -> s { _critical = a } :: MonitoringPolicyThresholdsTransferSetting s)
+
+instance P.HasWarning (MonitoringPolicyThresholdsTransferSetting s) (TF.Attr s [TF.Attr s (MonitoringPolicyThresholdsTransferWarningSetting s)]) where
+    warning =
+        P.lens (_warning :: MonitoringPolicyThresholdsTransferSetting s -> TF.Attr s [TF.Attr s (MonitoringPolicyThresholdsTransferWarningSetting s)])
+               (\s a -> s { _warning = a } :: MonitoringPolicyThresholdsTransferSetting s)
+
+-- | @warning@ nested settings.
+data MonitoringPolicyThresholdsTransferWarningSetting s = MonitoringPolicyThresholdsTransferWarningSetting'
+    { _alert :: TF.Attr s P.Bool
+    -- ^ @alert@ - (Required)
+    --
+    , _value :: TF.Attr s P.Int
+    -- ^ @value@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @warning@ settings value.
+newMonitoringPolicyThresholdsTransferWarningSetting
+    :: TF.Attr s P.Bool -- ^ 'P._alert': @alert@
+    -> TF.Attr s P.Int -- ^ 'P._value': @value@
+    -> MonitoringPolicyThresholdsTransferWarningSetting s
+newMonitoringPolicyThresholdsTransferWarningSetting _alert _value =
+    MonitoringPolicyThresholdsTransferWarningSetting'
+        { _alert = _alert
+        , _value = _value
+        }
+
+instance TF.IsValue  (MonitoringPolicyThresholdsTransferWarningSetting s)
+instance TF.IsObject (MonitoringPolicyThresholdsTransferWarningSetting s) where
+    toObject MonitoringPolicyThresholdsTransferWarningSetting'{..} = P.catMaybes
+        [ TF.assign "alert" <$> TF.attribute _alert
+        , TF.assign "value" <$> TF.attribute _value
+        ]
+
+instance TF.IsValid (MonitoringPolicyThresholdsTransferWarningSetting s) where
+    validator = P.mempty
+
+instance P.HasAlert (MonitoringPolicyThresholdsTransferWarningSetting s) (TF.Attr s P.Bool) where
+    alert =
+        P.lens (_alert :: MonitoringPolicyThresholdsTransferWarningSetting s -> TF.Attr s P.Bool)
+               (\s a -> s { _alert = a } :: MonitoringPolicyThresholdsTransferWarningSetting s)
+
+instance P.HasValue (MonitoringPolicyThresholdsTransferWarningSetting s) (TF.Attr s P.Int) where
+    value =
+        P.lens (_value :: MonitoringPolicyThresholdsTransferWarningSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _value = a } :: MonitoringPolicyThresholdsTransferWarningSetting s)
+
+-- | @critical@ nested settings.
+data MonitoringPolicyThresholdsTransferCriticalSetting s = MonitoringPolicyThresholdsTransferCriticalSetting'
+    { _alert :: TF.Attr s P.Bool
+    -- ^ @alert@ - (Required)
+    --
+    , _value :: TF.Attr s P.Int
+    -- ^ @value@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @critical@ settings value.
+newMonitoringPolicyThresholdsTransferCriticalSetting
+    :: TF.Attr s P.Bool -- ^ 'P._alert': @alert@
+    -> TF.Attr s P.Int -- ^ 'P._value': @value@
+    -> MonitoringPolicyThresholdsTransferCriticalSetting s
+newMonitoringPolicyThresholdsTransferCriticalSetting _alert _value =
+    MonitoringPolicyThresholdsTransferCriticalSetting'
+        { _alert = _alert
+        , _value = _value
+        }
+
+instance TF.IsValue  (MonitoringPolicyThresholdsTransferCriticalSetting s)
+instance TF.IsObject (MonitoringPolicyThresholdsTransferCriticalSetting s) where
+    toObject MonitoringPolicyThresholdsTransferCriticalSetting'{..} = P.catMaybes
+        [ TF.assign "alert" <$> TF.attribute _alert
+        , TF.assign "value" <$> TF.attribute _value
+        ]
+
+instance TF.IsValid (MonitoringPolicyThresholdsTransferCriticalSetting s) where
+    validator = P.mempty
+
+instance P.HasAlert (MonitoringPolicyThresholdsTransferCriticalSetting s) (TF.Attr s P.Bool) where
+    alert =
+        P.lens (_alert :: MonitoringPolicyThresholdsTransferCriticalSetting s -> TF.Attr s P.Bool)
+               (\s a -> s { _alert = a } :: MonitoringPolicyThresholdsTransferCriticalSetting s)
+
+instance P.HasValue (MonitoringPolicyThresholdsTransferCriticalSetting s) (TF.Attr s P.Int) where
+    value =
+        P.lens (_value :: MonitoringPolicyThresholdsTransferCriticalSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _value = a } :: MonitoringPolicyThresholdsTransferCriticalSetting s)
+
+-- | @ram@ nested settings.
+data MonitoringPolicyThresholdsRamSetting s = MonitoringPolicyThresholdsRamSetting'
+    { _critical :: TF.Attr s [TF.Attr s (MonitoringPolicyThresholdsRamCriticalSetting s)]
+    -- ^ @critical@ - (Required)
+    --
+    , _warning :: TF.Attr s [TF.Attr s (MonitoringPolicyThresholdsRamWarningSetting s)]
+    -- ^ @warning@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @ram@ settings value.
+newMonitoringPolicyThresholdsRamSetting
+    :: TF.Attr s [TF.Attr s (MonitoringPolicyThresholdsRamCriticalSetting s)] -- ^ 'P._critical': @critical@
+    -> TF.Attr s [TF.Attr s (MonitoringPolicyThresholdsRamWarningSetting s)] -- ^ 'P._warning': @warning@
+    -> MonitoringPolicyThresholdsRamSetting s
+newMonitoringPolicyThresholdsRamSetting _critical _warning =
+    MonitoringPolicyThresholdsRamSetting'
+        { _critical = _critical
+        , _warning = _warning
+        }
+
+instance TF.IsValue  (MonitoringPolicyThresholdsRamSetting s)
+instance TF.IsObject (MonitoringPolicyThresholdsRamSetting s) where
+    toObject MonitoringPolicyThresholdsRamSetting'{..} = P.catMaybes
+        [ TF.assign "critical" <$> TF.attribute _critical
+        , TF.assign "warning" <$> TF.attribute _warning
+        ]
+
+instance TF.IsValid (MonitoringPolicyThresholdsRamSetting s) where
+    validator = P.mempty
+
+instance P.HasCritical (MonitoringPolicyThresholdsRamSetting s) (TF.Attr s [TF.Attr s (MonitoringPolicyThresholdsRamCriticalSetting s)]) where
+    critical =
+        P.lens (_critical :: MonitoringPolicyThresholdsRamSetting s -> TF.Attr s [TF.Attr s (MonitoringPolicyThresholdsRamCriticalSetting s)])
+               (\s a -> s { _critical = a } :: MonitoringPolicyThresholdsRamSetting s)
+
+instance P.HasWarning (MonitoringPolicyThresholdsRamSetting s) (TF.Attr s [TF.Attr s (MonitoringPolicyThresholdsRamWarningSetting s)]) where
+    warning =
+        P.lens (_warning :: MonitoringPolicyThresholdsRamSetting s -> TF.Attr s [TF.Attr s (MonitoringPolicyThresholdsRamWarningSetting s)])
+               (\s a -> s { _warning = a } :: MonitoringPolicyThresholdsRamSetting s)
+
+-- | @warning@ nested settings.
+data MonitoringPolicyThresholdsRamWarningSetting s = MonitoringPolicyThresholdsRamWarningSetting'
+    { _alert :: TF.Attr s P.Bool
+    -- ^ @alert@ - (Required)
+    --
+    , _value :: TF.Attr s P.Int
+    -- ^ @value@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @warning@ settings value.
+newMonitoringPolicyThresholdsRamWarningSetting
+    :: TF.Attr s P.Bool -- ^ 'P._alert': @alert@
+    -> TF.Attr s P.Int -- ^ 'P._value': @value@
+    -> MonitoringPolicyThresholdsRamWarningSetting s
+newMonitoringPolicyThresholdsRamWarningSetting _alert _value =
+    MonitoringPolicyThresholdsRamWarningSetting'
+        { _alert = _alert
+        , _value = _value
+        }
+
+instance TF.IsValue  (MonitoringPolicyThresholdsRamWarningSetting s)
+instance TF.IsObject (MonitoringPolicyThresholdsRamWarningSetting s) where
+    toObject MonitoringPolicyThresholdsRamWarningSetting'{..} = P.catMaybes
+        [ TF.assign "alert" <$> TF.attribute _alert
+        , TF.assign "value" <$> TF.attribute _value
+        ]
+
+instance TF.IsValid (MonitoringPolicyThresholdsRamWarningSetting s) where
+    validator = P.mempty
+
+instance P.HasAlert (MonitoringPolicyThresholdsRamWarningSetting s) (TF.Attr s P.Bool) where
+    alert =
+        P.lens (_alert :: MonitoringPolicyThresholdsRamWarningSetting s -> TF.Attr s P.Bool)
+               (\s a -> s { _alert = a } :: MonitoringPolicyThresholdsRamWarningSetting s)
+
+instance P.HasValue (MonitoringPolicyThresholdsRamWarningSetting s) (TF.Attr s P.Int) where
+    value =
+        P.lens (_value :: MonitoringPolicyThresholdsRamWarningSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _value = a } :: MonitoringPolicyThresholdsRamWarningSetting s)
+
+-- | @critical@ nested settings.
+data MonitoringPolicyThresholdsRamCriticalSetting s = MonitoringPolicyThresholdsRamCriticalSetting'
+    { _alert :: TF.Attr s P.Bool
+    -- ^ @alert@ - (Required)
+    --
+    , _value :: TF.Attr s P.Int
+    -- ^ @value@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @critical@ settings value.
+newMonitoringPolicyThresholdsRamCriticalSetting
+    :: TF.Attr s P.Bool -- ^ 'P._alert': @alert@
+    -> TF.Attr s P.Int -- ^ 'P._value': @value@
+    -> MonitoringPolicyThresholdsRamCriticalSetting s
+newMonitoringPolicyThresholdsRamCriticalSetting _alert _value =
+    MonitoringPolicyThresholdsRamCriticalSetting'
+        { _alert = _alert
+        , _value = _value
+        }
+
+instance TF.IsValue  (MonitoringPolicyThresholdsRamCriticalSetting s)
+instance TF.IsObject (MonitoringPolicyThresholdsRamCriticalSetting s) where
+    toObject MonitoringPolicyThresholdsRamCriticalSetting'{..} = P.catMaybes
+        [ TF.assign "alert" <$> TF.attribute _alert
+        , TF.assign "value" <$> TF.attribute _value
+        ]
+
+instance TF.IsValid (MonitoringPolicyThresholdsRamCriticalSetting s) where
+    validator = P.mempty
+
+instance P.HasAlert (MonitoringPolicyThresholdsRamCriticalSetting s) (TF.Attr s P.Bool) where
+    alert =
+        P.lens (_alert :: MonitoringPolicyThresholdsRamCriticalSetting s -> TF.Attr s P.Bool)
+               (\s a -> s { _alert = a } :: MonitoringPolicyThresholdsRamCriticalSetting s)
+
+instance P.HasValue (MonitoringPolicyThresholdsRamCriticalSetting s) (TF.Attr s P.Int) where
+    value =
+        P.lens (_value :: MonitoringPolicyThresholdsRamCriticalSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _value = a } :: MonitoringPolicyThresholdsRamCriticalSetting s)
+
+-- | @internal_ping@ nested settings.
+data MonitoringPolicyThresholdsInternalPingSetting s = MonitoringPolicyThresholdsInternalPingSetting'
+    { _critical :: TF.Attr s [TF.Attr s (MonitoringPolicyThresholdsInternalPingCriticalSetting s)]
+    -- ^ @critical@ - (Required)
+    --
+    , _warning :: TF.Attr s [TF.Attr s (MonitoringPolicyThresholdsInternalPingWarningSetting s)]
+    -- ^ @warning@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @internal_ping@ settings value.
+newMonitoringPolicyThresholdsInternalPingSetting
+    :: TF.Attr s [TF.Attr s (MonitoringPolicyThresholdsInternalPingCriticalSetting s)] -- ^ 'P._critical': @critical@
+    -> TF.Attr s [TF.Attr s (MonitoringPolicyThresholdsInternalPingWarningSetting s)] -- ^ 'P._warning': @warning@
+    -> MonitoringPolicyThresholdsInternalPingSetting s
+newMonitoringPolicyThresholdsInternalPingSetting _critical _warning =
+    MonitoringPolicyThresholdsInternalPingSetting'
+        { _critical = _critical
+        , _warning = _warning
+        }
+
+instance TF.IsValue  (MonitoringPolicyThresholdsInternalPingSetting s)
+instance TF.IsObject (MonitoringPolicyThresholdsInternalPingSetting s) where
+    toObject MonitoringPolicyThresholdsInternalPingSetting'{..} = P.catMaybes
+        [ TF.assign "critical" <$> TF.attribute _critical
+        , TF.assign "warning" <$> TF.attribute _warning
+        ]
+
+instance TF.IsValid (MonitoringPolicyThresholdsInternalPingSetting s) where
+    validator = P.mempty
+
+instance P.HasCritical (MonitoringPolicyThresholdsInternalPingSetting s) (TF.Attr s [TF.Attr s (MonitoringPolicyThresholdsInternalPingCriticalSetting s)]) where
+    critical =
+        P.lens (_critical :: MonitoringPolicyThresholdsInternalPingSetting s -> TF.Attr s [TF.Attr s (MonitoringPolicyThresholdsInternalPingCriticalSetting s)])
+               (\s a -> s { _critical = a } :: MonitoringPolicyThresholdsInternalPingSetting s)
+
+instance P.HasWarning (MonitoringPolicyThresholdsInternalPingSetting s) (TF.Attr s [TF.Attr s (MonitoringPolicyThresholdsInternalPingWarningSetting s)]) where
+    warning =
+        P.lens (_warning :: MonitoringPolicyThresholdsInternalPingSetting s -> TF.Attr s [TF.Attr s (MonitoringPolicyThresholdsInternalPingWarningSetting s)])
+               (\s a -> s { _warning = a } :: MonitoringPolicyThresholdsInternalPingSetting s)
+
+-- | @warning@ nested settings.
+data MonitoringPolicyThresholdsInternalPingWarningSetting s = MonitoringPolicyThresholdsInternalPingWarningSetting'
+    { _alert :: TF.Attr s P.Bool
+    -- ^ @alert@ - (Required)
+    --
+    , _value :: TF.Attr s P.Int
+    -- ^ @value@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @warning@ settings value.
+newMonitoringPolicyThresholdsInternalPingWarningSetting
+    :: TF.Attr s P.Bool -- ^ 'P._alert': @alert@
+    -> TF.Attr s P.Int -- ^ 'P._value': @value@
+    -> MonitoringPolicyThresholdsInternalPingWarningSetting s
+newMonitoringPolicyThresholdsInternalPingWarningSetting _alert _value =
+    MonitoringPolicyThresholdsInternalPingWarningSetting'
+        { _alert = _alert
+        , _value = _value
+        }
+
+instance TF.IsValue  (MonitoringPolicyThresholdsInternalPingWarningSetting s)
+instance TF.IsObject (MonitoringPolicyThresholdsInternalPingWarningSetting s) where
+    toObject MonitoringPolicyThresholdsInternalPingWarningSetting'{..} = P.catMaybes
+        [ TF.assign "alert" <$> TF.attribute _alert
+        , TF.assign "value" <$> TF.attribute _value
+        ]
+
+instance TF.IsValid (MonitoringPolicyThresholdsInternalPingWarningSetting s) where
+    validator = P.mempty
+
+instance P.HasAlert (MonitoringPolicyThresholdsInternalPingWarningSetting s) (TF.Attr s P.Bool) where
+    alert =
+        P.lens (_alert :: MonitoringPolicyThresholdsInternalPingWarningSetting s -> TF.Attr s P.Bool)
+               (\s a -> s { _alert = a } :: MonitoringPolicyThresholdsInternalPingWarningSetting s)
+
+instance P.HasValue (MonitoringPolicyThresholdsInternalPingWarningSetting s) (TF.Attr s P.Int) where
+    value =
+        P.lens (_value :: MonitoringPolicyThresholdsInternalPingWarningSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _value = a } :: MonitoringPolicyThresholdsInternalPingWarningSetting s)
+
+-- | @critical@ nested settings.
+data MonitoringPolicyThresholdsInternalPingCriticalSetting s = MonitoringPolicyThresholdsInternalPingCriticalSetting'
+    { _alert :: TF.Attr s P.Bool
+    -- ^ @alert@ - (Required)
+    --
+    , _value :: TF.Attr s P.Int
+    -- ^ @value@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @critical@ settings value.
+newMonitoringPolicyThresholdsInternalPingCriticalSetting
+    :: TF.Attr s P.Bool -- ^ 'P._alert': @alert@
+    -> TF.Attr s P.Int -- ^ 'P._value': @value@
+    -> MonitoringPolicyThresholdsInternalPingCriticalSetting s
+newMonitoringPolicyThresholdsInternalPingCriticalSetting _alert _value =
+    MonitoringPolicyThresholdsInternalPingCriticalSetting'
+        { _alert = _alert
+        , _value = _value
+        }
+
+instance TF.IsValue  (MonitoringPolicyThresholdsInternalPingCriticalSetting s)
+instance TF.IsObject (MonitoringPolicyThresholdsInternalPingCriticalSetting s) where
+    toObject MonitoringPolicyThresholdsInternalPingCriticalSetting'{..} = P.catMaybes
+        [ TF.assign "alert" <$> TF.attribute _alert
+        , TF.assign "value" <$> TF.attribute _value
+        ]
+
+instance TF.IsValid (MonitoringPolicyThresholdsInternalPingCriticalSetting s) where
+    validator = P.mempty
+
+instance P.HasAlert (MonitoringPolicyThresholdsInternalPingCriticalSetting s) (TF.Attr s P.Bool) where
+    alert =
+        P.lens (_alert :: MonitoringPolicyThresholdsInternalPingCriticalSetting s -> TF.Attr s P.Bool)
+               (\s a -> s { _alert = a } :: MonitoringPolicyThresholdsInternalPingCriticalSetting s)
+
+instance P.HasValue (MonitoringPolicyThresholdsInternalPingCriticalSetting s) (TF.Attr s P.Int) where
+    value =
+        P.lens (_value :: MonitoringPolicyThresholdsInternalPingCriticalSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _value = a } :: MonitoringPolicyThresholdsInternalPingCriticalSetting s)
+
+-- | @disk@ nested settings.
+data MonitoringPolicyThresholdsDiskSetting s = MonitoringPolicyThresholdsDiskSetting'
+    { _critical :: TF.Attr s [TF.Attr s (MonitoringPolicyThresholdsDiskCriticalSetting s)]
+    -- ^ @critical@ - (Required)
+    --
+    , _warning :: TF.Attr s [TF.Attr s (MonitoringPolicyThresholdsDiskWarningSetting s)]
+    -- ^ @warning@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @disk@ settings value.
+newMonitoringPolicyThresholdsDiskSetting
+    :: TF.Attr s [TF.Attr s (MonitoringPolicyThresholdsDiskCriticalSetting s)] -- ^ 'P._critical': @critical@
+    -> TF.Attr s [TF.Attr s (MonitoringPolicyThresholdsDiskWarningSetting s)] -- ^ 'P._warning': @warning@
+    -> MonitoringPolicyThresholdsDiskSetting s
+newMonitoringPolicyThresholdsDiskSetting _critical _warning =
+    MonitoringPolicyThresholdsDiskSetting'
+        { _critical = _critical
+        , _warning = _warning
+        }
+
+instance TF.IsValue  (MonitoringPolicyThresholdsDiskSetting s)
+instance TF.IsObject (MonitoringPolicyThresholdsDiskSetting s) where
+    toObject MonitoringPolicyThresholdsDiskSetting'{..} = P.catMaybes
+        [ TF.assign "critical" <$> TF.attribute _critical
+        , TF.assign "warning" <$> TF.attribute _warning
+        ]
+
+instance TF.IsValid (MonitoringPolicyThresholdsDiskSetting s) where
+    validator = P.mempty
+
+instance P.HasCritical (MonitoringPolicyThresholdsDiskSetting s) (TF.Attr s [TF.Attr s (MonitoringPolicyThresholdsDiskCriticalSetting s)]) where
+    critical =
+        P.lens (_critical :: MonitoringPolicyThresholdsDiskSetting s -> TF.Attr s [TF.Attr s (MonitoringPolicyThresholdsDiskCriticalSetting s)])
+               (\s a -> s { _critical = a } :: MonitoringPolicyThresholdsDiskSetting s)
+
+instance P.HasWarning (MonitoringPolicyThresholdsDiskSetting s) (TF.Attr s [TF.Attr s (MonitoringPolicyThresholdsDiskWarningSetting s)]) where
+    warning =
+        P.lens (_warning :: MonitoringPolicyThresholdsDiskSetting s -> TF.Attr s [TF.Attr s (MonitoringPolicyThresholdsDiskWarningSetting s)])
+               (\s a -> s { _warning = a } :: MonitoringPolicyThresholdsDiskSetting s)
+
+-- | @warning@ nested settings.
+data MonitoringPolicyThresholdsDiskWarningSetting s = MonitoringPolicyThresholdsDiskWarningSetting'
+    { _alert :: TF.Attr s P.Bool
+    -- ^ @alert@ - (Required)
+    --
+    , _value :: TF.Attr s P.Int
+    -- ^ @value@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @warning@ settings value.
+newMonitoringPolicyThresholdsDiskWarningSetting
+    :: TF.Attr s P.Bool -- ^ 'P._alert': @alert@
+    -> TF.Attr s P.Int -- ^ 'P._value': @value@
+    -> MonitoringPolicyThresholdsDiskWarningSetting s
+newMonitoringPolicyThresholdsDiskWarningSetting _alert _value =
+    MonitoringPolicyThresholdsDiskWarningSetting'
+        { _alert = _alert
+        , _value = _value
+        }
+
+instance TF.IsValue  (MonitoringPolicyThresholdsDiskWarningSetting s)
+instance TF.IsObject (MonitoringPolicyThresholdsDiskWarningSetting s) where
+    toObject MonitoringPolicyThresholdsDiskWarningSetting'{..} = P.catMaybes
+        [ TF.assign "alert" <$> TF.attribute _alert
+        , TF.assign "value" <$> TF.attribute _value
+        ]
+
+instance TF.IsValid (MonitoringPolicyThresholdsDiskWarningSetting s) where
+    validator = P.mempty
+
+instance P.HasAlert (MonitoringPolicyThresholdsDiskWarningSetting s) (TF.Attr s P.Bool) where
+    alert =
+        P.lens (_alert :: MonitoringPolicyThresholdsDiskWarningSetting s -> TF.Attr s P.Bool)
+               (\s a -> s { _alert = a } :: MonitoringPolicyThresholdsDiskWarningSetting s)
+
+instance P.HasValue (MonitoringPolicyThresholdsDiskWarningSetting s) (TF.Attr s P.Int) where
+    value =
+        P.lens (_value :: MonitoringPolicyThresholdsDiskWarningSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _value = a } :: MonitoringPolicyThresholdsDiskWarningSetting s)
+
+-- | @critical@ nested settings.
+data MonitoringPolicyThresholdsDiskCriticalSetting s = MonitoringPolicyThresholdsDiskCriticalSetting'
+    { _alert :: TF.Attr s P.Bool
+    -- ^ @alert@ - (Required)
+    --
+    , _value :: TF.Attr s P.Int
+    -- ^ @value@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @critical@ settings value.
+newMonitoringPolicyThresholdsDiskCriticalSetting
+    :: TF.Attr s P.Bool -- ^ 'P._alert': @alert@
+    -> TF.Attr s P.Int -- ^ 'P._value': @value@
+    -> MonitoringPolicyThresholdsDiskCriticalSetting s
+newMonitoringPolicyThresholdsDiskCriticalSetting _alert _value =
+    MonitoringPolicyThresholdsDiskCriticalSetting'
+        { _alert = _alert
+        , _value = _value
+        }
+
+instance TF.IsValue  (MonitoringPolicyThresholdsDiskCriticalSetting s)
+instance TF.IsObject (MonitoringPolicyThresholdsDiskCriticalSetting s) where
+    toObject MonitoringPolicyThresholdsDiskCriticalSetting'{..} = P.catMaybes
+        [ TF.assign "alert" <$> TF.attribute _alert
+        , TF.assign "value" <$> TF.attribute _value
+        ]
+
+instance TF.IsValid (MonitoringPolicyThresholdsDiskCriticalSetting s) where
+    validator = P.mempty
+
+instance P.HasAlert (MonitoringPolicyThresholdsDiskCriticalSetting s) (TF.Attr s P.Bool) where
+    alert =
+        P.lens (_alert :: MonitoringPolicyThresholdsDiskCriticalSetting s -> TF.Attr s P.Bool)
+               (\s a -> s { _alert = a } :: MonitoringPolicyThresholdsDiskCriticalSetting s)
+
+instance P.HasValue (MonitoringPolicyThresholdsDiskCriticalSetting s) (TF.Attr s P.Int) where
+    value =
+        P.lens (_value :: MonitoringPolicyThresholdsDiskCriticalSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _value = a } :: MonitoringPolicyThresholdsDiskCriticalSetting s)
+
+-- | @warning@ nested settings.
+data MonitoringPolicyThresholdsCpuWarningSetting s = MonitoringPolicyThresholdsCpuWarningSetting'
+    { _alert :: TF.Attr s P.Bool
+    -- ^ @alert@ - (Required)
+    --
+    , _value :: TF.Attr s P.Int
+    -- ^ @value@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @warning@ settings value.
+newMonitoringPolicyThresholdsCpuWarningSetting
+    :: TF.Attr s P.Bool -- ^ 'P._alert': @alert@
+    -> TF.Attr s P.Int -- ^ 'P._value': @value@
+    -> MonitoringPolicyThresholdsCpuWarningSetting s
+newMonitoringPolicyThresholdsCpuWarningSetting _alert _value =
+    MonitoringPolicyThresholdsCpuWarningSetting'
+        { _alert = _alert
+        , _value = _value
+        }
+
+instance TF.IsValue  (MonitoringPolicyThresholdsCpuWarningSetting s)
+instance TF.IsObject (MonitoringPolicyThresholdsCpuWarningSetting s) where
+    toObject MonitoringPolicyThresholdsCpuWarningSetting'{..} = P.catMaybes
+        [ TF.assign "alert" <$> TF.attribute _alert
+        , TF.assign "value" <$> TF.attribute _value
+        ]
+
+instance TF.IsValid (MonitoringPolicyThresholdsCpuWarningSetting s) where
+    validator = P.mempty
+
+instance P.HasAlert (MonitoringPolicyThresholdsCpuWarningSetting s) (TF.Attr s P.Bool) where
+    alert =
+        P.lens (_alert :: MonitoringPolicyThresholdsCpuWarningSetting s -> TF.Attr s P.Bool)
+               (\s a -> s { _alert = a } :: MonitoringPolicyThresholdsCpuWarningSetting s)
+
+instance P.HasValue (MonitoringPolicyThresholdsCpuWarningSetting s) (TF.Attr s P.Int) where
+    value =
+        P.lens (_value :: MonitoringPolicyThresholdsCpuWarningSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _value = a } :: MonitoringPolicyThresholdsCpuWarningSetting s)
+
+-- | @hdds@ nested settings.
+data ServerHddsSetting s = ServerHddsSetting'
+    { _diskSize :: TF.Attr s P.Int
+    -- ^ @disk_size@ - (Required)
+    --
+    , _isMain   :: TF.Attr s P.Bool
+    -- ^ @is_main@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @hdds@ settings value.
+newServerHddsSetting
+    :: TF.Attr s P.Int -- ^ 'P._diskSize': @disk_size@
+    -> ServerHddsSetting s
+newServerHddsSetting _diskSize =
+    ServerHddsSetting'
+        { _diskSize = _diskSize
+        , _isMain = TF.Nil
+        }
+
+instance TF.IsValue  (ServerHddsSetting s)
+instance TF.IsObject (ServerHddsSetting s) where
+    toObject ServerHddsSetting'{..} = P.catMaybes
+        [ TF.assign "disk_size" <$> TF.attribute _diskSize
+        , TF.assign "is_main" <$> TF.attribute _isMain
+        ]
+
+instance TF.IsValid (ServerHddsSetting s) where
+    validator = P.mempty
+
+instance P.HasDiskSize (ServerHddsSetting s) (TF.Attr s P.Int) where
+    diskSize =
+        P.lens (_diskSize :: ServerHddsSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _diskSize = a } :: ServerHddsSetting s)
+
+instance P.HasIsMain (ServerHddsSetting s) (TF.Attr s P.Bool) where
+    isMain =
+        P.lens (_isMain :: ServerHddsSetting s -> TF.Attr s P.Bool)
+               (\s a -> s { _isMain = a } :: ServerHddsSetting s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ServerHddsSetting s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+-- | @ips@ nested settings.
+data ServerIpsSetting s = ServerIpsSetting'
+    { _firewallPolicyId :: TF.Attr s P.Text
+    -- ^ @firewall_policy_id@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @ips@ settings value.
+newServerIpsSetting
+    :: ServerIpsSetting s
+newServerIpsSetting =
+    ServerIpsSetting'
+        { _firewallPolicyId = TF.Nil
+        }
+
+instance TF.IsValue  (ServerIpsSetting s)
+instance TF.IsObject (ServerIpsSetting s) where
+    toObject ServerIpsSetting'{..} = P.catMaybes
+        [ TF.assign "firewall_policy_id" <$> TF.attribute _firewallPolicyId
+        ]
+
+instance TF.IsValid (ServerIpsSetting s) where
+    validator = P.mempty
+
+instance P.HasFirewallPolicyId (ServerIpsSetting s) (TF.Attr s P.Text) where
+    firewallPolicyId =
+        P.lens (_firewallPolicyId :: ServerIpsSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _firewallPolicyId = a } :: ServerIpsSetting s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ServerIpsSetting s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedIp (TF.Ref s' (ServerIpsSetting s)) (TF.Attr s P.Text) where
+    computedIp x = TF.compute (TF.refKey x) "ip"
 
 -- | @storage_servers@ nested settings.
-data StorageServersSetting s = StorageServersSetting'
+data SharedStorageStorageServersSetting s = SharedStorageStorageServersSetting'
     { _id     :: TF.Attr s P.Text
     -- ^ @id@ - (Required)
     --
@@ -794,32 +1161,73 @@ data StorageServersSetting s = StorageServersSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @storage_servers@ settings value.
-newStorageServersSetting
+newSharedStorageStorageServersSetting
     :: TF.Attr s P.Text -- ^ 'P._id': @id@
     -> TF.Attr s P.Text -- ^ 'P._rights': @rights@
-    -> StorageServersSetting s
-newStorageServersSetting _id _rights =
-    StorageServersSetting'
+    -> SharedStorageStorageServersSetting s
+newSharedStorageStorageServersSetting _id _rights =
+    SharedStorageStorageServersSetting'
         { _id = _id
         , _rights = _rights
         }
 
-instance TF.IsValue  (StorageServersSetting s)
-instance TF.IsObject (StorageServersSetting s) where
-    toObject StorageServersSetting'{..} = P.catMaybes
+instance TF.IsValue  (SharedStorageStorageServersSetting s)
+instance TF.IsObject (SharedStorageStorageServersSetting s) where
+    toObject SharedStorageStorageServersSetting'{..} = P.catMaybes
         [ TF.assign "id" <$> TF.attribute _id
         , TF.assign "rights" <$> TF.attribute _rights
         ]
 
-instance TF.IsValid (StorageServersSetting s) where
+instance TF.IsValid (SharedStorageStorageServersSetting s) where
     validator = P.mempty
 
-instance P.HasId (StorageServersSetting s) (TF.Attr s P.Text) where
+instance P.HasId (SharedStorageStorageServersSetting s) (TF.Attr s P.Text) where
     id =
-        P.lens (_id :: StorageServersSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _id = a } :: StorageServersSetting s)
+        P.lens (_id :: SharedStorageStorageServersSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _id = a } :: SharedStorageStorageServersSetting s)
 
-instance P.HasRights (StorageServersSetting s) (TF.Attr s P.Text) where
+instance P.HasRights (SharedStorageStorageServersSetting s) (TF.Attr s P.Text) where
     rights =
-        P.lens (_rights :: StorageServersSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _rights = a } :: StorageServersSetting s)
+        P.lens (_rights :: SharedStorageStorageServersSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _rights = a } :: SharedStorageStorageServersSetting s)
+
+-- | @servers@ nested settings.
+data SshKeyServersSetting s = SshKeyServersSetting'
+    { _id   :: TF.Attr s P.Text
+    -- ^ @id@ - (Required)
+    --
+    , _name :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @servers@ settings value.
+newSshKeyServersSetting
+    :: TF.Attr s P.Text -- ^ 'P._id': @id@
+    -> TF.Attr s P.Text -- ^ 'P._name': @name@
+    -> SshKeyServersSetting s
+newSshKeyServersSetting _id _name =
+    SshKeyServersSetting'
+        { _id = _id
+        , _name = _name
+        }
+
+instance TF.IsValue  (SshKeyServersSetting s)
+instance TF.IsObject (SshKeyServersSetting s) where
+    toObject SshKeyServersSetting'{..} = P.catMaybes
+        [ TF.assign "id" <$> TF.attribute _id
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (SshKeyServersSetting s) where
+    validator = P.mempty
+
+instance P.HasId (SshKeyServersSetting s) (TF.Attr s P.Text) where
+    id =
+        P.lens (_id :: SshKeyServersSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _id = a } :: SshKeyServersSetting s)
+
+instance P.HasName (SshKeyServersSetting s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: SshKeyServersSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: SshKeyServersSetting s)

@@ -717,7 +717,7 @@ instance P.HasVolumeType (BlockstorageVolumeV1Resource s) (TF.Attr s P.Text) whe
 instance s ~ s' => P.HasComputedId (TF.Ref s' (BlockstorageVolumeV1Resource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedAttachment (TF.Ref s' (BlockstorageVolumeV1Resource s)) (TF.Attr s [TF.Attr s (AttachmentSetting s)]) where
+instance s ~ s' => P.HasComputedAttachment (TF.Ref s' (BlockstorageVolumeV1Resource s)) (TF.Attr s [TF.Attr s (BlockstorageVolumeV1AttachmentSetting s)]) where
     computedAttachment x = TF.compute (TF.refKey x) "attachment"
 
 instance s ~ s' => P.HasComputedAvailabilityZone (TF.Ref s' (BlockstorageVolumeV1Resource s)) (TF.Attr s P.Text) where
@@ -878,7 +878,7 @@ instance P.HasVolumeType (BlockstorageVolumeV2Resource s) (TF.Attr s P.Text) whe
 instance s ~ s' => P.HasComputedId (TF.Ref s' (BlockstorageVolumeV2Resource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedAttachment (TF.Ref s' (BlockstorageVolumeV2Resource s)) (TF.Attr s [TF.Attr s (AttachmentSetting s)]) where
+instance s ~ s' => P.HasComputedAttachment (TF.Ref s' (BlockstorageVolumeV2Resource s)) (TF.Attr s [TF.Attr s (BlockstorageVolumeV2AttachmentSetting s)]) where
     computedAttachment x = TF.compute (TF.refKey x) "attachment"
 
 instance s ~ s' => P.HasComputedAvailabilityZone (TF.Ref s' (BlockstorageVolumeV2Resource s)) (TF.Attr s P.Text) where
@@ -1049,7 +1049,7 @@ instance P.HasVolumeType (BlockstorageVolumeV3Resource s) (TF.Attr s P.Text) whe
 instance s ~ s' => P.HasComputedId (TF.Ref s' (BlockstorageVolumeV3Resource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedAttachment (TF.Ref s' (BlockstorageVolumeV3Resource s)) (TF.Attr s [TF.Attr s (AttachmentSetting s)]) where
+instance s ~ s' => P.HasComputedAttachment (TF.Ref s' (BlockstorageVolumeV3Resource s)) (TF.Attr s [TF.Attr s (BlockstorageVolumeV3AttachmentSetting s)]) where
     computedAttachment x = TF.compute (TF.refKey x) "attachment"
 
 instance s ~ s' => P.HasComputedAvailabilityZone (TF.Ref s' (BlockstorageVolumeV3Resource s)) (TF.Attr s P.Text) where
@@ -1342,76 +1342,76 @@ instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ComputeFloatingipV2Resource s
 -- See the <https://www.terraform.io/docs/providers/openstack/r/compute_instance_v2.html terraform documentation>
 -- for more information.
 data ComputeInstanceV2Resource s = ComputeInstanceV2Resource'
-    { _accessIpV4        :: TF.Attr s P.Text
+    { _accessIpV4 :: TF.Attr s P.Text
     -- ^ @access_ip_v4@ - (Optional)
     --
-    , _accessIpV6        :: TF.Attr s P.Text
+    , _accessIpV6 :: TF.Attr s P.Text
     -- ^ @access_ip_v6@ - (Optional)
     --
-    , _adminPass         :: TF.Attr s P.Text
+    , _adminPass :: TF.Attr s P.Text
     -- ^ @admin_pass@ - (Optional)
     --
-    , _availabilityZone  :: TF.Attr s P.Text
+    , _availabilityZone :: TF.Attr s P.Text
     -- ^ @availability_zone@ - (Optional, Forces New)
     --
-    , _blockDevice       :: TF.Attr s [TF.Attr s (BlockDeviceSetting s)]
+    , _blockDevice :: TF.Attr s [TF.Attr s (ComputeInstanceV2BlockDeviceSetting s)]
     -- ^ @block_device@ - (Optional)
     --
-    , _configDrive       :: TF.Attr s P.Bool
+    , _configDrive :: TF.Attr s P.Bool
     -- ^ @config_drive@ - (Optional, Forces New)
     --
-    , _flavorId          :: TF.Attr s P.Text
+    , _flavorId :: TF.Attr s P.Text
     -- ^ @flavor_id@ - (Optional)
     --
-    , _flavorName        :: TF.Attr s P.Text
+    , _flavorName :: TF.Attr s P.Text
     -- ^ @flavor_name@ - (Optional)
     --
-    , _floatingIp        :: TF.Attr s P.Text
+    , _floatingIp :: TF.Attr s P.Text
     -- ^ @floating_ip@ - (Optional)
     --
-    , _forceDelete       :: TF.Attr s P.Bool
+    , _forceDelete :: TF.Attr s P.Bool
     -- ^ @force_delete@ - (Optional)
     --
-    , _imageId           :: TF.Attr s P.Text
+    , _imageId :: TF.Attr s P.Text
     -- ^ @image_id@ - (Optional, Forces New)
     --
-    , _imageName         :: TF.Attr s P.Text
+    , _imageName :: TF.Attr s P.Text
     -- ^ @image_name@ - (Optional, Forces New)
     --
-    , _keyPair           :: TF.Attr s P.Text
+    , _keyPair :: TF.Attr s P.Text
     -- ^ @key_pair@ - (Optional, Forces New)
     --
-    , _metadata          :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _metadata :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @metadata@ - (Optional)
     --
-    , _name              :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _network           :: TF.Attr s [TF.Attr s (NetworkSetting s)]
+    , _network :: TF.Attr s [TF.Attr s (ComputeInstanceV2NetworkSetting s)]
     -- ^ @network@ - (Optional, Forces New)
     --
-    , _personality       :: TF.Attr s [TF.Attr s (PersonalitySetting s)]
+    , _personality :: TF.Attr s [TF.Attr s (ComputeInstanceV2PersonalitySetting s)]
     -- ^ @personality@ - (Optional, Forces New)
     --
-    , _powerState        :: TF.Attr s P.Text
+    , _powerState :: TF.Attr s P.Text
     -- ^ @power_state@ - (Optional)
     --
-    , _region            :: TF.Attr s P.Text
+    , _region :: TF.Attr s P.Text
     -- ^ @region@ - (Optional, Forces New)
     --
-    , _schedulerHints    :: TF.Attr s [TF.Attr s (SchedulerHintsSetting s)]
+    , _schedulerHints :: TF.Attr s [TF.Attr s (ComputeInstanceV2SchedulerHintsSetting s)]
     -- ^ @scheduler_hints@ - (Optional)
     --
-    , _securityGroups    :: TF.Attr s [TF.Attr s P.Text]
+    , _securityGroups :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @security_groups@ - (Optional)
     --
     , _stopBeforeDestroy :: TF.Attr s P.Bool
     -- ^ @stop_before_destroy@ - (Optional)
     --
-    , _userData          :: TF.Attr s P.Text
+    , _userData :: TF.Attr s P.Text
     -- ^ @user_data@ - (Optional, Forces New)
     --
-    , _volume            :: TF.Attr s [TF.Attr s (VolumeSetting s)]
+    , _volume :: TF.Attr s [TF.Attr s (ComputeInstanceV2VolumeSetting s)]
     -- ^ @volume@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -1500,9 +1500,9 @@ instance P.HasAvailabilityZone (ComputeInstanceV2Resource s) (TF.Attr s P.Text) 
         P.lens (_availabilityZone :: ComputeInstanceV2Resource s -> TF.Attr s P.Text)
                (\s a -> s { _availabilityZone = a } :: ComputeInstanceV2Resource s)
 
-instance P.HasBlockDevice (ComputeInstanceV2Resource s) (TF.Attr s [TF.Attr s (BlockDeviceSetting s)]) where
+instance P.HasBlockDevice (ComputeInstanceV2Resource s) (TF.Attr s [TF.Attr s (ComputeInstanceV2BlockDeviceSetting s)]) where
     blockDevice =
-        P.lens (_blockDevice :: ComputeInstanceV2Resource s -> TF.Attr s [TF.Attr s (BlockDeviceSetting s)])
+        P.lens (_blockDevice :: ComputeInstanceV2Resource s -> TF.Attr s [TF.Attr s (ComputeInstanceV2BlockDeviceSetting s)])
                (\s a -> s { _blockDevice = a } :: ComputeInstanceV2Resource s)
 
 instance P.HasConfigDrive (ComputeInstanceV2Resource s) (TF.Attr s P.Bool) where
@@ -1555,14 +1555,14 @@ instance P.HasName (ComputeInstanceV2Resource s) (TF.Attr s P.Text) where
         P.lens (_name :: ComputeInstanceV2Resource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeInstanceV2Resource s)
 
-instance P.HasNetwork (ComputeInstanceV2Resource s) (TF.Attr s [TF.Attr s (NetworkSetting s)]) where
+instance P.HasNetwork (ComputeInstanceV2Resource s) (TF.Attr s [TF.Attr s (ComputeInstanceV2NetworkSetting s)]) where
     network =
-        P.lens (_network :: ComputeInstanceV2Resource s -> TF.Attr s [TF.Attr s (NetworkSetting s)])
+        P.lens (_network :: ComputeInstanceV2Resource s -> TF.Attr s [TF.Attr s (ComputeInstanceV2NetworkSetting s)])
                (\s a -> s { _network = a } :: ComputeInstanceV2Resource s)
 
-instance P.HasPersonality (ComputeInstanceV2Resource s) (TF.Attr s [TF.Attr s (PersonalitySetting s)]) where
+instance P.HasPersonality (ComputeInstanceV2Resource s) (TF.Attr s [TF.Attr s (ComputeInstanceV2PersonalitySetting s)]) where
     personality =
-        P.lens (_personality :: ComputeInstanceV2Resource s -> TF.Attr s [TF.Attr s (PersonalitySetting s)])
+        P.lens (_personality :: ComputeInstanceV2Resource s -> TF.Attr s [TF.Attr s (ComputeInstanceV2PersonalitySetting s)])
                (\s a -> s { _personality = a } :: ComputeInstanceV2Resource s)
 
 instance P.HasPowerState (ComputeInstanceV2Resource s) (TF.Attr s P.Text) where
@@ -1575,9 +1575,9 @@ instance P.HasRegion (ComputeInstanceV2Resource s) (TF.Attr s P.Text) where
         P.lens (_region :: ComputeInstanceV2Resource s -> TF.Attr s P.Text)
                (\s a -> s { _region = a } :: ComputeInstanceV2Resource s)
 
-instance P.HasSchedulerHints (ComputeInstanceV2Resource s) (TF.Attr s [TF.Attr s (SchedulerHintsSetting s)]) where
+instance P.HasSchedulerHints (ComputeInstanceV2Resource s) (TF.Attr s [TF.Attr s (ComputeInstanceV2SchedulerHintsSetting s)]) where
     schedulerHints =
-        P.lens (_schedulerHints :: ComputeInstanceV2Resource s -> TF.Attr s [TF.Attr s (SchedulerHintsSetting s)])
+        P.lens (_schedulerHints :: ComputeInstanceV2Resource s -> TF.Attr s [TF.Attr s (ComputeInstanceV2SchedulerHintsSetting s)])
                (\s a -> s { _schedulerHints = a } :: ComputeInstanceV2Resource s)
 
 instance P.HasSecurityGroups (ComputeInstanceV2Resource s) (TF.Attr s [TF.Attr s P.Text]) where
@@ -1595,9 +1595,9 @@ instance P.HasUserData (ComputeInstanceV2Resource s) (TF.Attr s P.Text) where
         P.lens (_userData :: ComputeInstanceV2Resource s -> TF.Attr s P.Text)
                (\s a -> s { _userData = a } :: ComputeInstanceV2Resource s)
 
-instance P.HasVolume (ComputeInstanceV2Resource s) (TF.Attr s [TF.Attr s (VolumeSetting s)]) where
+instance P.HasVolume (ComputeInstanceV2Resource s) (TF.Attr s [TF.Attr s (ComputeInstanceV2VolumeSetting s)]) where
     volume =
-        P.lens (_volume :: ComputeInstanceV2Resource s -> TF.Attr s [TF.Attr s (VolumeSetting s)])
+        P.lens (_volume :: ComputeInstanceV2Resource s -> TF.Attr s [TF.Attr s (ComputeInstanceV2VolumeSetting s)])
                (\s a -> s { _volume = a } :: ComputeInstanceV2Resource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeInstanceV2Resource s)) (TF.Attr s P.Text) where
@@ -1627,7 +1627,7 @@ instance s ~ s' => P.HasComputedImageId (TF.Ref s' (ComputeInstanceV2Resource s)
 instance s ~ s' => P.HasComputedImageName (TF.Ref s' (ComputeInstanceV2Resource s)) (TF.Attr s P.Text) where
     computedImageName x = TF.compute (TF.refKey x) "image_name"
 
-instance s ~ s' => P.HasComputedNetwork (TF.Ref s' (ComputeInstanceV2Resource s)) (TF.Attr s [TF.Attr s (NetworkSetting s)]) where
+instance s ~ s' => P.HasComputedNetwork (TF.Ref s' (ComputeInstanceV2Resource s)) (TF.Attr s [TF.Attr s (ComputeInstanceV2NetworkSetting s)]) where
     computedNetwork x = TF.compute (TF.refKey x) "network"
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ComputeInstanceV2Resource s)) (TF.Attr s P.Text) where
@@ -1728,7 +1728,7 @@ data ComputeSecgroupV2Resource s = ComputeSecgroupV2Resource'
     , _region      :: TF.Attr s P.Text
     -- ^ @region@ - (Optional, Forces New)
     --
-    , _rule        :: TF.Attr s [TF.Attr s (RuleSetting s)]
+    , _rule        :: TF.Attr s [TF.Attr s (ComputeSecgroupV2RuleSetting s)]
     -- ^ @rule@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -1773,9 +1773,9 @@ instance P.HasRegion (ComputeSecgroupV2Resource s) (TF.Attr s P.Text) where
         P.lens (_region :: ComputeSecgroupV2Resource s -> TF.Attr s P.Text)
                (\s a -> s { _region = a } :: ComputeSecgroupV2Resource s)
 
-instance P.HasRule (ComputeSecgroupV2Resource s) (TF.Attr s [TF.Attr s (RuleSetting s)]) where
+instance P.HasRule (ComputeSecgroupV2Resource s) (TF.Attr s [TF.Attr s (ComputeSecgroupV2RuleSetting s)]) where
     rule =
-        P.lens (_rule :: ComputeSecgroupV2Resource s -> TF.Attr s [TF.Attr s (RuleSetting s)])
+        P.lens (_rule :: ComputeSecgroupV2Resource s -> TF.Attr s [TF.Attr s (ComputeSecgroupV2RuleSetting s)])
                (\s a -> s { _rule = a } :: ComputeSecgroupV2Resource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeSecgroupV2Resource s)) (TF.Attr s P.Text) where
@@ -1784,7 +1784,7 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeSecgroupV2Resource s)) (TF
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ComputeSecgroupV2Resource s)) (TF.Attr s P.Text) where
     computedRegion x = TF.compute (TF.refKey x) "region"
 
-instance s ~ s' => P.HasComputedRule (TF.Ref s' (ComputeSecgroupV2Resource s)) (TF.Attr s [TF.Attr s (RuleSetting s)]) where
+instance s ~ s' => P.HasComputedRule (TF.Ref s' (ComputeSecgroupV2Resource s)) (TF.Attr s [TF.Attr s (ComputeSecgroupV2RuleSetting s)]) where
     computedRule x = TF.compute (TF.refKey x) "rule"
 
 -- | @openstack_compute_servergroup_v2@ Resource.
@@ -1937,26 +1937,26 @@ instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ComputeVolumeAttachV2Resource
 -- See the <https://www.terraform.io/docs/providers/openstack/r/db_configuration_v1.html terraform documentation>
 -- for more information.
 data DbConfigurationV1Resource s = DbConfigurationV1Resource'
-    { _configuration :: TF.Attr s [TF.Attr s (ConfigurationSetting s)]
+    { _configuration :: TF.Attr s [TF.Attr s (DbConfigurationV1ConfigurationSetting s)]
     -- ^ @configuration@ - (Optional, Forces New)
     --
-    , _datastore     :: TF.Attr s (DatastoreSetting s)
+    , _datastore :: TF.Attr s (DbConfigurationV1DatastoreSetting s)
     -- ^ @datastore@ - (Required, Forces New)
     --
-    , _description   :: TF.Attr s P.Text
+    , _description :: TF.Attr s P.Text
     -- ^ @description@ - (Required, Forces New)
     --
-    , _name          :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _region        :: TF.Attr s P.Text
+    , _region :: TF.Attr s P.Text
     -- ^ @region@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @openstack_db_configuration_v1@ resource value.
 dbConfigurationV1Resource
-    :: TF.Attr s (DatastoreSetting s) -- ^ @datastore@ ('P._datastore', 'P.datastore')
+    :: TF.Attr s (DbConfigurationV1DatastoreSetting s) -- ^ @datastore@ ('P._datastore', 'P.datastore')
     -> TF.Attr s P.Text -- ^ @description@ ('P._description', 'P.description')
     -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> TF.Attr s P.Text -- ^ @region@ ('P._region', 'P.region')
@@ -1984,17 +1984,17 @@ instance TF.IsValid (DbConfigurationV1Resource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_datastore"
                   (_datastore
-                      :: DbConfigurationV1Resource s -> TF.Attr s (DatastoreSetting s))
+                      :: DbConfigurationV1Resource s -> TF.Attr s (DbConfigurationV1DatastoreSetting s))
                   TF.validator
 
-instance P.HasConfiguration (DbConfigurationV1Resource s) (TF.Attr s [TF.Attr s (ConfigurationSetting s)]) where
+instance P.HasConfiguration (DbConfigurationV1Resource s) (TF.Attr s [TF.Attr s (DbConfigurationV1ConfigurationSetting s)]) where
     configuration =
-        P.lens (_configuration :: DbConfigurationV1Resource s -> TF.Attr s [TF.Attr s (ConfigurationSetting s)])
+        P.lens (_configuration :: DbConfigurationV1Resource s -> TF.Attr s [TF.Attr s (DbConfigurationV1ConfigurationSetting s)])
                (\s a -> s { _configuration = a } :: DbConfigurationV1Resource s)
 
-instance P.HasDatastore (DbConfigurationV1Resource s) (TF.Attr s (DatastoreSetting s)) where
+instance P.HasDatastore (DbConfigurationV1Resource s) (TF.Attr s (DbConfigurationV1DatastoreSetting s)) where
     datastore =
-        P.lens (_datastore :: DbConfigurationV1Resource s -> TF.Attr s (DatastoreSetting s))
+        P.lens (_datastore :: DbConfigurationV1Resource s -> TF.Attr s (DbConfigurationV1DatastoreSetting s))
                (\s a -> s { _datastore = a } :: DbConfigurationV1Resource s)
 
 instance P.HasDescription (DbConfigurationV1Resource s) (TF.Attr s P.Text) where
@@ -2080,10 +2080,10 @@ data DbInstanceV1Resource s = DbInstanceV1Resource'
     { _configurationId :: TF.Attr s P.Text
     -- ^ @configuration_id@ - (Optional)
     --
-    , _database        :: TF.Attr s [TF.Attr s (DatabaseSetting s)]
+    , _database        :: TF.Attr s [TF.Attr s (DbInstanceV1DatabaseSetting s)]
     -- ^ @database@ - (Optional, Forces New)
     --
-    , _datastore       :: TF.Attr s (DatastoreSetting s)
+    , _datastore       :: TF.Attr s (DbInstanceV1DatastoreSetting s)
     -- ^ @datastore@ - (Required, Forces New)
     --
     , _flavorId        :: TF.Attr s P.Text
@@ -2092,7 +2092,7 @@ data DbInstanceV1Resource s = DbInstanceV1Resource'
     , _name            :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _network         :: TF.Attr s [TF.Attr s (NetworkSetting s)]
+    , _network         :: TF.Attr s [TF.Attr s (DbInstanceV1NetworkSetting s)]
     -- ^ @network@ - (Optional, Forces New)
     --
     , _region          :: TF.Attr s P.Text
@@ -2101,14 +2101,14 @@ data DbInstanceV1Resource s = DbInstanceV1Resource'
     , _size            :: TF.Attr s P.Int
     -- ^ @size@ - (Required, Forces New)
     --
-    , _user            :: TF.Attr s [TF.Attr s (UserSetting s)]
+    , _user            :: TF.Attr s [TF.Attr s (DbInstanceV1UserSetting s)]
     -- ^ @user@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @openstack_db_instance_v1@ resource value.
 dbInstanceV1Resource
-    :: TF.Attr s (DatastoreSetting s) -- ^ @datastore@ ('P._datastore', 'P.datastore')
+    :: TF.Attr s (DbInstanceV1DatastoreSetting s) -- ^ @datastore@ ('P._datastore', 'P.datastore')
     -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> TF.Attr s P.Text -- ^ @region@ ('P._region', 'P.region')
     -> TF.Attr s P.Int -- ^ @size@ ('P._size', 'P.size')
@@ -2144,7 +2144,7 @@ instance TF.IsValid (DbInstanceV1Resource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_datastore"
                   (_datastore
-                      :: DbInstanceV1Resource s -> TF.Attr s (DatastoreSetting s))
+                      :: DbInstanceV1Resource s -> TF.Attr s (DbInstanceV1DatastoreSetting s))
                   TF.validator
 
 instance P.HasConfigurationId (DbInstanceV1Resource s) (TF.Attr s P.Text) where
@@ -2152,14 +2152,14 @@ instance P.HasConfigurationId (DbInstanceV1Resource s) (TF.Attr s P.Text) where
         P.lens (_configurationId :: DbInstanceV1Resource s -> TF.Attr s P.Text)
                (\s a -> s { _configurationId = a } :: DbInstanceV1Resource s)
 
-instance P.HasDatabase (DbInstanceV1Resource s) (TF.Attr s [TF.Attr s (DatabaseSetting s)]) where
+instance P.HasDatabase (DbInstanceV1Resource s) (TF.Attr s [TF.Attr s (DbInstanceV1DatabaseSetting s)]) where
     database =
-        P.lens (_database :: DbInstanceV1Resource s -> TF.Attr s [TF.Attr s (DatabaseSetting s)])
+        P.lens (_database :: DbInstanceV1Resource s -> TF.Attr s [TF.Attr s (DbInstanceV1DatabaseSetting s)])
                (\s a -> s { _database = a } :: DbInstanceV1Resource s)
 
-instance P.HasDatastore (DbInstanceV1Resource s) (TF.Attr s (DatastoreSetting s)) where
+instance P.HasDatastore (DbInstanceV1Resource s) (TF.Attr s (DbInstanceV1DatastoreSetting s)) where
     datastore =
-        P.lens (_datastore :: DbInstanceV1Resource s -> TF.Attr s (DatastoreSetting s))
+        P.lens (_datastore :: DbInstanceV1Resource s -> TF.Attr s (DbInstanceV1DatastoreSetting s))
                (\s a -> s { _datastore = a } :: DbInstanceV1Resource s)
 
 instance P.HasFlavorId (DbInstanceV1Resource s) (TF.Attr s P.Text) where
@@ -2172,9 +2172,9 @@ instance P.HasName (DbInstanceV1Resource s) (TF.Attr s P.Text) where
         P.lens (_name :: DbInstanceV1Resource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: DbInstanceV1Resource s)
 
-instance P.HasNetwork (DbInstanceV1Resource s) (TF.Attr s [TF.Attr s (NetworkSetting s)]) where
+instance P.HasNetwork (DbInstanceV1Resource s) (TF.Attr s [TF.Attr s (DbInstanceV1NetworkSetting s)]) where
     network =
-        P.lens (_network :: DbInstanceV1Resource s -> TF.Attr s [TF.Attr s (NetworkSetting s)])
+        P.lens (_network :: DbInstanceV1Resource s -> TF.Attr s [TF.Attr s (DbInstanceV1NetworkSetting s)])
                (\s a -> s { _network = a } :: DbInstanceV1Resource s)
 
 instance P.HasRegion (DbInstanceV1Resource s) (TF.Attr s P.Text) where
@@ -2187,9 +2187,9 @@ instance P.HasSize (DbInstanceV1Resource s) (TF.Attr s P.Int) where
         P.lens (_size :: DbInstanceV1Resource s -> TF.Attr s P.Int)
                (\s a -> s { _size = a } :: DbInstanceV1Resource s)
 
-instance P.HasUser (DbInstanceV1Resource s) (TF.Attr s [TF.Attr s (UserSetting s)]) where
+instance P.HasUser (DbInstanceV1Resource s) (TF.Attr s [TF.Attr s (DbInstanceV1UserSetting s)]) where
     user =
-        P.lens (_user :: DbInstanceV1Resource s -> TF.Attr s [TF.Attr s (UserSetting s)])
+        P.lens (_user :: DbInstanceV1Resource s -> TF.Attr s [TF.Attr s (DbInstanceV1UserSetting s)])
                (\s a -> s { _user = a } :: DbInstanceV1Resource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (DbInstanceV1Resource s)) (TF.Attr s P.Text) where
@@ -3251,7 +3251,7 @@ data IdentityUserV3Resource s = IdentityUserV3Resource'
     , _multiFactorAuthEnabled :: TF.Attr s P.Bool
     -- ^ @multi_factor_auth_enabled@ - (Optional)
     --
-    , _multiFactorAuthRule :: TF.Attr s [TF.Attr s (MultiFactorAuthRuleSetting s)]
+    , _multiFactorAuthRule :: TF.Attr s [TF.Attr s (IdentityUserV3MultiFactorAuthRuleSetting s)]
     -- ^ @multi_factor_auth_rule@ - (Optional)
     --
     , _name :: TF.Attr s P.Text
@@ -3351,9 +3351,9 @@ instance P.HasMultiFactorAuthEnabled (IdentityUserV3Resource s) (TF.Attr s P.Boo
         P.lens (_multiFactorAuthEnabled :: IdentityUserV3Resource s -> TF.Attr s P.Bool)
                (\s a -> s { _multiFactorAuthEnabled = a } :: IdentityUserV3Resource s)
 
-instance P.HasMultiFactorAuthRule (IdentityUserV3Resource s) (TF.Attr s [TF.Attr s (MultiFactorAuthRuleSetting s)]) where
+instance P.HasMultiFactorAuthRule (IdentityUserV3Resource s) (TF.Attr s [TF.Attr s (IdentityUserV3MultiFactorAuthRuleSetting s)]) where
     multiFactorAuthRule =
-        P.lens (_multiFactorAuthRule :: IdentityUserV3Resource s -> TF.Attr s [TF.Attr s (MultiFactorAuthRuleSetting s)])
+        P.lens (_multiFactorAuthRule :: IdentityUserV3Resource s -> TF.Attr s [TF.Attr s (IdentityUserV3MultiFactorAuthRuleSetting s)])
                (\s a -> s { _multiFactorAuthRule = a } :: IdentityUserV3Resource s)
 
 instance P.HasName (IdentityUserV3Resource s) (TF.Attr s P.Text) where
@@ -4596,7 +4596,7 @@ data LbPoolV2Resource s = LbPoolV2Resource'
     , _name           :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
     --
-    , _persistence    :: TF.Attr s [TF.Attr s (PersistenceSetting s)]
+    , _persistence    :: TF.Attr s [TF.Attr s (LbPoolV2PersistenceSetting s)]
     -- ^ @persistence@ - (Optional, Forces New)
     --
     , _protocol       :: TF.Attr s P.Text
@@ -4677,9 +4677,9 @@ instance P.HasName (LbPoolV2Resource s) (TF.Attr s P.Text) where
         P.lens (_name :: LbPoolV2Resource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: LbPoolV2Resource s)
 
-instance P.HasPersistence (LbPoolV2Resource s) (TF.Attr s [TF.Attr s (PersistenceSetting s)]) where
+instance P.HasPersistence (LbPoolV2Resource s) (TF.Attr s [TF.Attr s (LbPoolV2PersistenceSetting s)]) where
     persistence =
-        P.lens (_persistence :: LbPoolV2Resource s -> TF.Attr s [TF.Attr s (PersistenceSetting s)])
+        P.lens (_persistence :: LbPoolV2Resource s -> TF.Attr s [TF.Attr s (LbPoolV2PersistenceSetting s)])
                (\s a -> s { _persistence = a } :: LbPoolV2Resource s)
 
 instance P.HasProtocol (LbPoolV2Resource s) (TF.Attr s P.Text) where
@@ -5073,31 +5073,31 @@ instance s ~ s' => P.HasComputedTenantId (TF.Ref s' (NetworkingFloatingipV2Resou
 -- See the <https://www.terraform.io/docs/providers/openstack/r/networking_network_v2.html terraform documentation>
 -- for more information.
 data NetworkingNetworkV2Resource s = NetworkingNetworkV2Resource'
-    { _adminStateUp          :: TF.Attr s P.Text
+    { _adminStateUp :: TF.Attr s P.Text
     -- ^ @admin_state_up@ - (Optional)
     --
     , _availabilityZoneHints :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @availability_zone_hints@ - (Optional, Forces New)
     --
-    , _external              :: TF.Attr s P.Bool
+    , _external :: TF.Attr s P.Bool
     -- ^ @external@ - (Optional)
     --
-    , _name                  :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
     --
-    , _region                :: TF.Attr s P.Text
+    , _region :: TF.Attr s P.Text
     -- ^ @region@ - (Optional, Forces New)
     --
-    , _segments              :: TF.Attr s [TF.Attr s (SegmentsSetting s)]
+    , _segments :: TF.Attr s [TF.Attr s (NetworkingNetworkV2SegmentsSetting s)]
     -- ^ @segments@ - (Optional, Forces New)
     --
-    , _shared                :: TF.Attr s P.Text
+    , _shared :: TF.Attr s P.Text
     -- ^ @shared@ - (Optional)
     --
-    , _tenantId              :: TF.Attr s P.Text
+    , _tenantId :: TF.Attr s P.Text
     -- ^ @tenant_id@ - (Optional, Forces New)
     --
-    , _valueSpecs            :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _valueSpecs :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @value_specs@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -5160,9 +5160,9 @@ instance P.HasRegion (NetworkingNetworkV2Resource s) (TF.Attr s P.Text) where
         P.lens (_region :: NetworkingNetworkV2Resource s -> TF.Attr s P.Text)
                (\s a -> s { _region = a } :: NetworkingNetworkV2Resource s)
 
-instance P.HasSegments (NetworkingNetworkV2Resource s) (TF.Attr s [TF.Attr s (SegmentsSetting s)]) where
+instance P.HasSegments (NetworkingNetworkV2Resource s) (TF.Attr s [TF.Attr s (NetworkingNetworkV2SegmentsSetting s)]) where
     segments =
-        P.lens (_segments :: NetworkingNetworkV2Resource s -> TF.Attr s [TF.Attr s (SegmentsSetting s)])
+        P.lens (_segments :: NetworkingNetworkV2Resource s -> TF.Attr s [TF.Attr s (NetworkingNetworkV2SegmentsSetting s)])
                (\s a -> s { _segments = a } :: NetworkingNetworkV2Resource s)
 
 instance P.HasShared (NetworkingNetworkV2Resource s) (TF.Attr s P.Text) where
@@ -5209,7 +5209,7 @@ data NetworkingPortV2Resource s = NetworkingPortV2Resource'
     { _adminStateUp :: TF.Attr s P.Bool
     -- ^ @admin_state_up@ - (Optional)
     --
-    , _allowedAddressPairs :: TF.Attr s [TF.Attr s (AllowedAddressPairsSetting s)]
+    , _allowedAddressPairs :: TF.Attr s [TF.Attr s (NetworkingPortV2AllowedAddressPairsSetting s)]
     -- ^ @allowed_address_pairs@ - (Optional)
     --
     , _deviceId :: TF.Attr s P.Text
@@ -5218,7 +5218,7 @@ data NetworkingPortV2Resource s = NetworkingPortV2Resource'
     , _deviceOwner :: TF.Attr s P.Text
     -- ^ @device_owner@ - (Optional, Forces New)
     --
-    , _fixedIp :: TF.Attr s [TF.Attr s (FixedIpSetting s)]
+    , _fixedIp :: TF.Attr s [TF.Attr s (NetworkingPortV2FixedIpSetting s)]
     -- ^ @fixed_ip@ - (Optional)
     --
     , _macAddress :: TF.Attr s P.Text
@@ -5294,9 +5294,9 @@ instance P.HasAdminStateUp (NetworkingPortV2Resource s) (TF.Attr s P.Bool) where
         P.lens (_adminStateUp :: NetworkingPortV2Resource s -> TF.Attr s P.Bool)
                (\s a -> s { _adminStateUp = a } :: NetworkingPortV2Resource s)
 
-instance P.HasAllowedAddressPairs (NetworkingPortV2Resource s) (TF.Attr s [TF.Attr s (AllowedAddressPairsSetting s)]) where
+instance P.HasAllowedAddressPairs (NetworkingPortV2Resource s) (TF.Attr s [TF.Attr s (NetworkingPortV2AllowedAddressPairsSetting s)]) where
     allowedAddressPairs =
-        P.lens (_allowedAddressPairs :: NetworkingPortV2Resource s -> TF.Attr s [TF.Attr s (AllowedAddressPairsSetting s)])
+        P.lens (_allowedAddressPairs :: NetworkingPortV2Resource s -> TF.Attr s [TF.Attr s (NetworkingPortV2AllowedAddressPairsSetting s)])
                (\s a -> s { _allowedAddressPairs = a } :: NetworkingPortV2Resource s)
 
 instance P.HasDeviceId (NetworkingPortV2Resource s) (TF.Attr s P.Text) where
@@ -5309,9 +5309,9 @@ instance P.HasDeviceOwner (NetworkingPortV2Resource s) (TF.Attr s P.Text) where
         P.lens (_deviceOwner :: NetworkingPortV2Resource s -> TF.Attr s P.Text)
                (\s a -> s { _deviceOwner = a } :: NetworkingPortV2Resource s)
 
-instance P.HasFixedIp (NetworkingPortV2Resource s) (TF.Attr s [TF.Attr s (FixedIpSetting s)]) where
+instance P.HasFixedIp (NetworkingPortV2Resource s) (TF.Attr s [TF.Attr s (NetworkingPortV2FixedIpSetting s)]) where
     fixedIp =
-        P.lens (_fixedIp :: NetworkingPortV2Resource s -> TF.Attr s [TF.Attr s (FixedIpSetting s)])
+        P.lens (_fixedIp :: NetworkingPortV2Resource s -> TF.Attr s [TF.Attr s (NetworkingPortV2FixedIpSetting s)])
                (\s a -> s { _fixedIp = a } :: NetworkingPortV2Resource s)
 
 instance P.HasMacAddress (NetworkingPortV2Resource s) (TF.Attr s P.Text) where
@@ -5532,37 +5532,37 @@ instance s ~ s' => P.HasComputedRegion (TF.Ref s' (NetworkingRouterRouteV2Resour
 -- See the <https://www.terraform.io/docs/providers/openstack/r/networking_router_v2.html terraform documentation>
 -- for more information.
 data NetworkingRouterV2Resource s = NetworkingRouterV2Resource'
-    { _adminStateUp          :: TF.Attr s P.Bool
+    { _adminStateUp :: TF.Attr s P.Bool
     -- ^ @admin_state_up@ - (Optional)
     --
     , _availabilityZoneHints :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @availability_zone_hints@ - (Optional, Forces New)
     --
-    , _distributed           :: TF.Attr s P.Bool
+    , _distributed :: TF.Attr s P.Bool
     -- ^ @distributed@ - (Optional, Forces New)
     --
-    , _enableSnat            :: TF.Attr s P.Bool
+    , _enableSnat :: TF.Attr s P.Bool
     -- ^ @enable_snat@ - (Optional)
     --
-    , _externalFixedIp       :: TF.Attr s [TF.Attr s (ExternalFixedIpSetting s)]
+    , _externalFixedIp :: TF.Attr s [TF.Attr s (NetworkingRouterV2ExternalFixedIpSetting s)]
     -- ^ @external_fixed_ip@ - (Optional)
     --
-    , _externalNetworkId     :: TF.Attr s P.Text
+    , _externalNetworkId :: TF.Attr s P.Text
     -- ^ @external_network_id@ - (Optional)
     --
-    , _name                  :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
     --
-    , _region                :: TF.Attr s P.Text
+    , _region :: TF.Attr s P.Text
     -- ^ @region@ - (Optional, Forces New)
     --
-    , _tenantId              :: TF.Attr s P.Text
+    , _tenantId :: TF.Attr s P.Text
     -- ^ @tenant_id@ - (Optional, Forces New)
     --
-    , _valueSpecs            :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _valueSpecs :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @value_specs@ - (Optional, Forces New)
     --
-    , _vendorOptions         :: TF.Attr s (VendorOptionsSetting s)
+    , _vendorOptions :: TF.Attr s (NetworkingRouterV2VendorOptionsSetting s)
     -- ^ @vendor_options@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -5605,7 +5605,7 @@ instance TF.IsValid (NetworkingRouterV2Resource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_vendorOptions"
                   (_vendorOptions
-                      :: NetworkingRouterV2Resource s -> TF.Attr s (VendorOptionsSetting s))
+                      :: NetworkingRouterV2Resource s -> TF.Attr s (NetworkingRouterV2VendorOptionsSetting s))
                   TF.validator
 
 instance P.HasAdminStateUp (NetworkingRouterV2Resource s) (TF.Attr s P.Bool) where
@@ -5628,9 +5628,9 @@ instance P.HasEnableSnat (NetworkingRouterV2Resource s) (TF.Attr s P.Bool) where
         P.lens (_enableSnat :: NetworkingRouterV2Resource s -> TF.Attr s P.Bool)
                (\s a -> s { _enableSnat = a } :: NetworkingRouterV2Resource s)
 
-instance P.HasExternalFixedIp (NetworkingRouterV2Resource s) (TF.Attr s [TF.Attr s (ExternalFixedIpSetting s)]) where
+instance P.HasExternalFixedIp (NetworkingRouterV2Resource s) (TF.Attr s [TF.Attr s (NetworkingRouterV2ExternalFixedIpSetting s)]) where
     externalFixedIp =
-        P.lens (_externalFixedIp :: NetworkingRouterV2Resource s -> TF.Attr s [TF.Attr s (ExternalFixedIpSetting s)])
+        P.lens (_externalFixedIp :: NetworkingRouterV2Resource s -> TF.Attr s [TF.Attr s (NetworkingRouterV2ExternalFixedIpSetting s)])
                (\s a -> s { _externalFixedIp = a } :: NetworkingRouterV2Resource s)
 
 instance P.HasExternalNetworkId (NetworkingRouterV2Resource s) (TF.Attr s P.Text) where
@@ -5658,9 +5658,9 @@ instance P.HasValueSpecs (NetworkingRouterV2Resource s) (TF.Attr s (P.Map P.Text
         P.lens (_valueSpecs :: NetworkingRouterV2Resource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _valueSpecs = a } :: NetworkingRouterV2Resource s)
 
-instance P.HasVendorOptions (NetworkingRouterV2Resource s) (TF.Attr s (VendorOptionsSetting s)) where
+instance P.HasVendorOptions (NetworkingRouterV2Resource s) (TF.Attr s (NetworkingRouterV2VendorOptionsSetting s)) where
     vendorOptions =
-        P.lens (_vendorOptions :: NetworkingRouterV2Resource s -> TF.Attr s (VendorOptionsSetting s))
+        P.lens (_vendorOptions :: NetworkingRouterV2Resource s -> TF.Attr s (NetworkingRouterV2VendorOptionsSetting s))
                (\s a -> s { _vendorOptions = a } :: NetworkingRouterV2Resource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (NetworkingRouterV2Resource s)) (TF.Attr s P.Text) where
@@ -5678,7 +5678,7 @@ instance s ~ s' => P.HasComputedDistributed (TF.Ref s' (NetworkingRouterV2Resour
 instance s ~ s' => P.HasComputedEnableSnat (TF.Ref s' (NetworkingRouterV2Resource s)) (TF.Attr s P.Bool) where
     computedEnableSnat x = TF.compute (TF.refKey x) "enable_snat"
 
-instance s ~ s' => P.HasComputedExternalFixedIp (TF.Ref s' (NetworkingRouterV2Resource s)) (TF.Attr s [TF.Attr s (ExternalFixedIpSetting s)]) where
+instance s ~ s' => P.HasComputedExternalFixedIp (TF.Ref s' (NetworkingRouterV2Resource s)) (TF.Attr s [TF.Attr s (NetworkingRouterV2ExternalFixedIpSetting s)]) where
     computedExternalFixedIp x = TF.compute (TF.refKey x) "external_fixed_ip"
 
 instance s ~ s' => P.HasComputedExternalNetworkId (TF.Ref s' (NetworkingRouterV2Resource s)) (TF.Attr s P.Text) where
@@ -6000,58 +6000,58 @@ instance s ~ s' => P.HasComputedRegion (TF.Ref s' (NetworkingSubnetRouteV2Resour
 -- See the <https://www.terraform.io/docs/providers/openstack/r/networking_subnet_v2.html terraform documentation>
 -- for more information.
 data NetworkingSubnetV2Resource s = NetworkingSubnetV2Resource'
-    { _allocationPools :: TF.Attr s [TF.Attr s (AllocationPoolsSetting s)]
+    { _allocationPools :: TF.Attr s [TF.Attr s (NetworkingSubnetV2AllocationPoolsSetting s)]
     -- ^ @allocation_pools@ - (Optional)
     --
-    , _cidr            :: TF.Attr s P.Text
+    , _cidr :: TF.Attr s P.Text
     -- ^ @cidr@ - (Optional, Forces New)
     --
-    , _dnsNameservers  :: TF.Attr s [TF.Attr s P.Text]
+    , _dnsNameservers :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @dns_nameservers@ - (Optional)
     --
-    , _enableDhcp      :: TF.Attr s P.Bool
+    , _enableDhcp :: TF.Attr s P.Bool
     -- ^ @enable_dhcp@ - (Optional)
     --
-    , _gatewayIp       :: TF.Attr s P.Text
+    , _gatewayIp :: TF.Attr s P.Text
     -- ^ @gateway_ip@ - (Optional)
     --
     -- Conflicts with:
     --
     -- * 'noGateway'
-    , _hostRoutes      :: TF.Attr s [TF.Attr s (HostRoutesSetting s)]
+    , _hostRoutes :: TF.Attr s [TF.Attr s (NetworkingSubnetV2HostRoutesSetting s)]
     -- ^ @host_routes@ - (Optional)
     --
-    , _ipVersion       :: TF.Attr s P.Int
+    , _ipVersion :: TF.Attr s P.Int
     -- ^ @ip_version@ - (Optional, Forces New)
     --
     , _ipv6AddressMode :: TF.Attr s P.Text
     -- ^ @ipv6_address_mode@ - (Optional, Forces New)
     --
-    , _ipv6RaMode      :: TF.Attr s P.Text
+    , _ipv6RaMode :: TF.Attr s P.Text
     -- ^ @ipv6_ra_mode@ - (Optional, Forces New)
     --
-    , _name            :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
     --
-    , _networkId       :: TF.Attr s P.Text
+    , _networkId :: TF.Attr s P.Text
     -- ^ @network_id@ - (Required, Forces New)
     --
-    , _noGateway       :: TF.Attr s P.Bool
+    , _noGateway :: TF.Attr s P.Bool
     -- ^ @no_gateway@ - (Optional)
     --
     -- Conflicts with:
     --
     -- * 'gatewayIp'
-    , _region          :: TF.Attr s P.Text
+    , _region :: TF.Attr s P.Text
     -- ^ @region@ - (Optional, Forces New)
     --
-    , _subnetpoolId    :: TF.Attr s P.Text
+    , _subnetpoolId :: TF.Attr s P.Text
     -- ^ @subnetpool_id@ - (Optional, Forces New)
     --
-    , _tenantId        :: TF.Attr s P.Text
+    , _tenantId :: TF.Attr s P.Text
     -- ^ @tenant_id@ - (Optional, Forces New)
     --
-    , _valueSpecs      :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _valueSpecs :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @value_specs@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -6115,9 +6115,9 @@ instance TF.IsValid (NetworkingSubnetV2Resource s) where
                             ])
         ])
 
-instance P.HasAllocationPools (NetworkingSubnetV2Resource s) (TF.Attr s [TF.Attr s (AllocationPoolsSetting s)]) where
+instance P.HasAllocationPools (NetworkingSubnetV2Resource s) (TF.Attr s [TF.Attr s (NetworkingSubnetV2AllocationPoolsSetting s)]) where
     allocationPools =
-        P.lens (_allocationPools :: NetworkingSubnetV2Resource s -> TF.Attr s [TF.Attr s (AllocationPoolsSetting s)])
+        P.lens (_allocationPools :: NetworkingSubnetV2Resource s -> TF.Attr s [TF.Attr s (NetworkingSubnetV2AllocationPoolsSetting s)])
                (\s a -> s { _allocationPools = a } :: NetworkingSubnetV2Resource s)
 
 instance P.HasCidr (NetworkingSubnetV2Resource s) (TF.Attr s P.Text) where
@@ -6140,9 +6140,9 @@ instance P.HasGatewayIp (NetworkingSubnetV2Resource s) (TF.Attr s P.Text) where
         P.lens (_gatewayIp :: NetworkingSubnetV2Resource s -> TF.Attr s P.Text)
                (\s a -> s { _gatewayIp = a } :: NetworkingSubnetV2Resource s)
 
-instance P.HasHostRoutes (NetworkingSubnetV2Resource s) (TF.Attr s [TF.Attr s (HostRoutesSetting s)]) where
+instance P.HasHostRoutes (NetworkingSubnetV2Resource s) (TF.Attr s [TF.Attr s (NetworkingSubnetV2HostRoutesSetting s)]) where
     hostRoutes =
-        P.lens (_hostRoutes :: NetworkingSubnetV2Resource s -> TF.Attr s [TF.Attr s (HostRoutesSetting s)])
+        P.lens (_hostRoutes :: NetworkingSubnetV2Resource s -> TF.Attr s [TF.Attr s (NetworkingSubnetV2HostRoutesSetting s)])
                (\s a -> s { _hostRoutes = a } :: NetworkingSubnetV2Resource s)
 
 instance P.HasIpVersion (NetworkingSubnetV2Resource s) (TF.Attr s P.Int) where
@@ -6198,7 +6198,7 @@ instance P.HasValueSpecs (NetworkingSubnetV2Resource s) (TF.Attr s (P.Map P.Text
 instance s ~ s' => P.HasComputedId (TF.Ref s' (NetworkingSubnetV2Resource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedAllocationPools (TF.Ref s' (NetworkingSubnetV2Resource s)) (TF.Attr s [TF.Attr s (AllocationPoolsSetting s)]) where
+instance s ~ s' => P.HasComputedAllocationPools (TF.Ref s' (NetworkingSubnetV2Resource s)) (TF.Attr s [TF.Attr s (NetworkingSubnetV2AllocationPoolsSetting s)]) where
     computedAllocationPools x = TF.compute (TF.refKey x) "allocation_pools"
 
 instance s ~ s' => P.HasComputedCidr (TF.Ref s' (NetworkingSubnetV2Resource s)) (TF.Attr s P.Text) where
@@ -6919,37 +6919,37 @@ instance s ~ s' => P.HasComputedType (TF.Ref s' (VpnaasEndpointGroupV2Resource s
 -- See the <https://www.terraform.io/docs/providers/openstack/r/vpnaas_ike_policy_v2.html terraform documentation>
 -- for more information.
 data VpnaasIkePolicyV2Resource s = VpnaasIkePolicyV2Resource'
-    { _authAlgorithm         :: TF.Attr s P.Text
+    { _authAlgorithm :: TF.Attr s P.Text
     -- ^ @auth_algorithm@ - (Optional)
     --
-    , _description           :: TF.Attr s P.Text
+    , _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _encryptionAlgorithm   :: TF.Attr s P.Text
+    , _encryptionAlgorithm :: TF.Attr s P.Text
     -- ^ @encryption_algorithm@ - (Optional)
     --
-    , _ikeVersion            :: TF.Attr s P.Text
+    , _ikeVersion :: TF.Attr s P.Text
     -- ^ @ike_version@ - (Optional)
     --
-    , _lifetime              :: TF.Attr s [TF.Attr s (LifetimeSetting s)]
+    , _lifetime :: TF.Attr s [TF.Attr s (VpnaasIkePolicyV2LifetimeSetting s)]
     -- ^ @lifetime@ - (Optional)
     --
-    , _name                  :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
     --
-    , _pfs                   :: TF.Attr s P.Text
+    , _pfs :: TF.Attr s P.Text
     -- ^ @pfs@ - (Optional)
     --
     , _phase1NegotiationMode :: TF.Attr s P.Text
     -- ^ @phase1_negotiation_mode@ - (Optional)
     --
-    , _region                :: TF.Attr s P.Text
+    , _region :: TF.Attr s P.Text
     -- ^ @region@ - (Optional, Forces New)
     --
-    , _tenantId              :: TF.Attr s P.Text
+    , _tenantId :: TF.Attr s P.Text
     -- ^ @tenant_id@ - (Optional, Forces New)
     --
-    , _valueSpecs            :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _valueSpecs :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @value_specs@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -7011,9 +7011,9 @@ instance P.HasIkeVersion (VpnaasIkePolicyV2Resource s) (TF.Attr s P.Text) where
         P.lens (_ikeVersion :: VpnaasIkePolicyV2Resource s -> TF.Attr s P.Text)
                (\s a -> s { _ikeVersion = a } :: VpnaasIkePolicyV2Resource s)
 
-instance P.HasLifetime (VpnaasIkePolicyV2Resource s) (TF.Attr s [TF.Attr s (LifetimeSetting s)]) where
+instance P.HasLifetime (VpnaasIkePolicyV2Resource s) (TF.Attr s [TF.Attr s (VpnaasIkePolicyV2LifetimeSetting s)]) where
     lifetime =
-        P.lens (_lifetime :: VpnaasIkePolicyV2Resource s -> TF.Attr s [TF.Attr s (LifetimeSetting s)])
+        P.lens (_lifetime :: VpnaasIkePolicyV2Resource s -> TF.Attr s [TF.Attr s (VpnaasIkePolicyV2LifetimeSetting s)])
                (\s a -> s { _lifetime = a } :: VpnaasIkePolicyV2Resource s)
 
 instance P.HasName (VpnaasIkePolicyV2Resource s) (TF.Attr s P.Text) where
@@ -7049,7 +7049,7 @@ instance P.HasValueSpecs (VpnaasIkePolicyV2Resource s) (TF.Attr s (P.Map P.Text 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (VpnaasIkePolicyV2Resource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedLifetime (TF.Ref s' (VpnaasIkePolicyV2Resource s)) (TF.Attr s [TF.Attr s (LifetimeSetting s)]) where
+instance s ~ s' => P.HasComputedLifetime (TF.Ref s' (VpnaasIkePolicyV2Resource s)) (TF.Attr s [TF.Attr s (VpnaasIkePolicyV2LifetimeSetting s)]) where
     computedLifetime x = TF.compute (TF.refKey x) "lifetime"
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (VpnaasIkePolicyV2Resource s)) (TF.Attr s P.Text) where
@@ -7063,37 +7063,37 @@ instance s ~ s' => P.HasComputedTenantId (TF.Ref s' (VpnaasIkePolicyV2Resource s
 -- See the <https://www.terraform.io/docs/providers/openstack/r/vpnaas_ipsec_policy_v2.html terraform documentation>
 -- for more information.
 data VpnaasIpsecPolicyV2Resource s = VpnaasIpsecPolicyV2Resource'
-    { _authAlgorithm       :: TF.Attr s P.Text
+    { _authAlgorithm :: TF.Attr s P.Text
     -- ^ @auth_algorithm@ - (Optional)
     --
-    , _description         :: TF.Attr s P.Text
+    , _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _encapsulationMode   :: TF.Attr s P.Text
+    , _encapsulationMode :: TF.Attr s P.Text
     -- ^ @encapsulation_mode@ - (Optional)
     --
     , _encryptionAlgorithm :: TF.Attr s P.Text
     -- ^ @encryption_algorithm@ - (Optional)
     --
-    , _lifetime            :: TF.Attr s [TF.Attr s (LifetimeSetting s)]
+    , _lifetime :: TF.Attr s [TF.Attr s (VpnaasIpsecPolicyV2LifetimeSetting s)]
     -- ^ @lifetime@ - (Optional)
     --
-    , _name                :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
     --
-    , _pfs                 :: TF.Attr s P.Text
+    , _pfs :: TF.Attr s P.Text
     -- ^ @pfs@ - (Optional)
     --
-    , _region              :: TF.Attr s P.Text
+    , _region :: TF.Attr s P.Text
     -- ^ @region@ - (Optional, Forces New)
     --
-    , _tenantId            :: TF.Attr s P.Text
+    , _tenantId :: TF.Attr s P.Text
     -- ^ @tenant_id@ - (Optional, Forces New)
     --
-    , _transformProtocol   :: TF.Attr s P.Text
+    , _transformProtocol :: TF.Attr s P.Text
     -- ^ @transform_protocol@ - (Optional)
     --
-    , _valueSpecs          :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _valueSpecs :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @value_specs@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -7155,9 +7155,9 @@ instance P.HasEncryptionAlgorithm (VpnaasIpsecPolicyV2Resource s) (TF.Attr s P.T
         P.lens (_encryptionAlgorithm :: VpnaasIpsecPolicyV2Resource s -> TF.Attr s P.Text)
                (\s a -> s { _encryptionAlgorithm = a } :: VpnaasIpsecPolicyV2Resource s)
 
-instance P.HasLifetime (VpnaasIpsecPolicyV2Resource s) (TF.Attr s [TF.Attr s (LifetimeSetting s)]) where
+instance P.HasLifetime (VpnaasIpsecPolicyV2Resource s) (TF.Attr s [TF.Attr s (VpnaasIpsecPolicyV2LifetimeSetting s)]) where
     lifetime =
-        P.lens (_lifetime :: VpnaasIpsecPolicyV2Resource s -> TF.Attr s [TF.Attr s (LifetimeSetting s)])
+        P.lens (_lifetime :: VpnaasIpsecPolicyV2Resource s -> TF.Attr s [TF.Attr s (VpnaasIpsecPolicyV2LifetimeSetting s)])
                (\s a -> s { _lifetime = a } :: VpnaasIpsecPolicyV2Resource s)
 
 instance P.HasName (VpnaasIpsecPolicyV2Resource s) (TF.Attr s P.Text) where
@@ -7202,7 +7202,7 @@ instance s ~ s' => P.HasComputedEncapsulationMode (TF.Ref s' (VpnaasIpsecPolicyV
 instance s ~ s' => P.HasComputedEncryptionAlgorithm (TF.Ref s' (VpnaasIpsecPolicyV2Resource s)) (TF.Attr s P.Text) where
     computedEncryptionAlgorithm x = TF.compute (TF.refKey x) "encryption_algorithm"
 
-instance s ~ s' => P.HasComputedLifetime (TF.Ref s' (VpnaasIpsecPolicyV2Resource s)) (TF.Attr s [TF.Attr s (LifetimeSetting s)]) where
+instance s ~ s' => P.HasComputedLifetime (TF.Ref s' (VpnaasIpsecPolicyV2Resource s)) (TF.Attr s [TF.Attr s (VpnaasIpsecPolicyV2LifetimeSetting s)]) where
     computedLifetime x = TF.compute (TF.refKey x) "lifetime"
 
 instance s ~ s' => P.HasComputedPfs (TF.Ref s' (VpnaasIpsecPolicyV2Resource s)) (TF.Attr s P.Text) where
@@ -7343,61 +7343,61 @@ instance s ~ s' => P.HasComputedTenantId (TF.Ref s' (VpnaasServiceV2Resource s))
 -- See the <https://www.terraform.io/docs/providers/openstack/r/vpnaas_site_connection_v2.html terraform documentation>
 -- for more information.
 data VpnaasSiteConnectionV2Resource s = VpnaasSiteConnectionV2Resource'
-    { _adminStateUp   :: TF.Attr s P.Bool
+    { _adminStateUp :: TF.Attr s P.Bool
     -- ^ @admin_state_up@ - (Optional)
     --
-    , _description    :: TF.Attr s P.Text
+    , _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _dpd            :: TF.Attr s [TF.Attr s (DpdSetting s)]
+    , _dpd :: TF.Attr s [TF.Attr s (VpnaasSiteConnectionV2DpdSetting s)]
     -- ^ @dpd@ - (Optional)
     --
-    , _ikepolicyId    :: TF.Attr s P.Text
+    , _ikepolicyId :: TF.Attr s P.Text
     -- ^ @ikepolicy_id@ - (Required, Forces New)
     --
-    , _initiator      :: TF.Attr s P.Text
+    , _initiator :: TF.Attr s P.Text
     -- ^ @initiator@ - (Optional)
     --
-    , _ipsecpolicyId  :: TF.Attr s P.Text
+    , _ipsecpolicyId :: TF.Attr s P.Text
     -- ^ @ipsecpolicy_id@ - (Required, Forces New)
     --
     , _localEpGroupId :: TF.Attr s P.Text
     -- ^ @local_ep_group_id@ - (Optional)
     --
-    , _localId        :: TF.Attr s P.Text
+    , _localId :: TF.Attr s P.Text
     -- ^ @local_id@ - (Optional)
     --
-    , _mtu            :: TF.Attr s P.Int
+    , _mtu :: TF.Attr s P.Int
     -- ^ @mtu@ - (Optional)
     --
-    , _name           :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
     --
-    , _peerAddress    :: TF.Attr s P.Text
+    , _peerAddress :: TF.Attr s P.Text
     -- ^ @peer_address@ - (Required)
     --
-    , _peerCidrs      :: TF.Attr s [TF.Attr s P.Text]
+    , _peerCidrs :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @peer_cidrs@ - (Optional)
     --
-    , _peerEpGroupId  :: TF.Attr s P.Text
+    , _peerEpGroupId :: TF.Attr s P.Text
     -- ^ @peer_ep_group_id@ - (Optional)
     --
-    , _peerId         :: TF.Attr s P.Text
+    , _peerId :: TF.Attr s P.Text
     -- ^ @peer_id@ - (Required)
     --
-    , _psk            :: TF.Attr s P.Text
+    , _psk :: TF.Attr s P.Text
     -- ^ @psk@ - (Required)
     --
-    , _region         :: TF.Attr s P.Text
+    , _region :: TF.Attr s P.Text
     -- ^ @region@ - (Optional, Forces New)
     --
-    , _tenantId       :: TF.Attr s P.Text
+    , _tenantId :: TF.Attr s P.Text
     -- ^ @tenant_id@ - (Optional, Forces New)
     --
-    , _valueSpecs     :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _valueSpecs :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @value_specs@ - (Optional, Forces New)
     --
-    , _vpnserviceId   :: TF.Attr s P.Text
+    , _vpnserviceId :: TF.Attr s P.Text
     -- ^ @vpnservice_id@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -7471,9 +7471,9 @@ instance P.HasDescription (VpnaasSiteConnectionV2Resource s) (TF.Attr s P.Text) 
         P.lens (_description :: VpnaasSiteConnectionV2Resource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: VpnaasSiteConnectionV2Resource s)
 
-instance P.HasDpd (VpnaasSiteConnectionV2Resource s) (TF.Attr s [TF.Attr s (DpdSetting s)]) where
+instance P.HasDpd (VpnaasSiteConnectionV2Resource s) (TF.Attr s [TF.Attr s (VpnaasSiteConnectionV2DpdSetting s)]) where
     dpd =
-        P.lens (_dpd :: VpnaasSiteConnectionV2Resource s -> TF.Attr s [TF.Attr s (DpdSetting s)])
+        P.lens (_dpd :: VpnaasSiteConnectionV2Resource s -> TF.Attr s [TF.Attr s (VpnaasSiteConnectionV2DpdSetting s)])
                (\s a -> s { _dpd = a } :: VpnaasSiteConnectionV2Resource s)
 
 instance P.HasIkepolicyId (VpnaasSiteConnectionV2Resource s) (TF.Attr s P.Text) where
@@ -7559,7 +7559,7 @@ instance P.HasVpnserviceId (VpnaasSiteConnectionV2Resource s) (TF.Attr s P.Text)
 instance s ~ s' => P.HasComputedId (TF.Ref s' (VpnaasSiteConnectionV2Resource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedDpd (TF.Ref s' (VpnaasSiteConnectionV2Resource s)) (TF.Attr s [TF.Attr s (DpdSetting s)]) where
+instance s ~ s' => P.HasComputedDpd (TF.Ref s' (VpnaasSiteConnectionV2Resource s)) (TF.Attr s [TF.Attr s (VpnaasSiteConnectionV2DpdSetting s)]) where
     computedDpd x = TF.compute (TF.refKey x) "dpd"
 
 instance s ~ s' => P.HasComputedInitiator (TF.Ref s' (VpnaasSiteConnectionV2Resource s)) (TF.Attr s P.Text) where

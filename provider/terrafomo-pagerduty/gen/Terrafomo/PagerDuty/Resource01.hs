@@ -148,7 +148,7 @@ data EscalationPolicyResource s = EscalationPolicyResource'
     , _numLoops    :: TF.Attr s P.Int
     -- ^ @num_loops@ - (Optional)
     --
-    , _rule        :: TF.Attr s [TF.Attr s (RuleSetting s)]
+    , _rule        :: TF.Attr s [TF.Attr s (EscalationPolicyRuleSetting s)]
     -- ^ @rule@ - (Required)
     --
     , _teams       :: TF.Attr s [TF.Attr s P.Text]
@@ -159,7 +159,7 @@ data EscalationPolicyResource s = EscalationPolicyResource'
 -- | Define a new @pagerduty_escalation_policy@ resource value.
 escalationPolicyResource
     :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
-    -> TF.Attr s [TF.Attr s (RuleSetting s)] -- ^ @rule@ ('P._rule', 'P.rule')
+    -> TF.Attr s [TF.Attr s (EscalationPolicyRuleSetting s)] -- ^ @rule@ ('P._rule', 'P.rule')
     -> P.Resource (EscalationPolicyResource s)
 escalationPolicyResource _name _rule =
     TF.unsafeResource "pagerduty_escalation_policy" TF.validator $
@@ -198,9 +198,9 @@ instance P.HasNumLoops (EscalationPolicyResource s) (TF.Attr s P.Int) where
         P.lens (_numLoops :: EscalationPolicyResource s -> TF.Attr s P.Int)
                (\s a -> s { _numLoops = a } :: EscalationPolicyResource s)
 
-instance P.HasRule (EscalationPolicyResource s) (TF.Attr s [TF.Attr s (RuleSetting s)]) where
+instance P.HasRule (EscalationPolicyResource s) (TF.Attr s [TF.Attr s (EscalationPolicyRuleSetting s)]) where
     rule =
-        P.lens (_rule :: EscalationPolicyResource s -> TF.Attr s [TF.Attr s (RuleSetting s)])
+        P.lens (_rule :: EscalationPolicyResource s -> TF.Attr s [TF.Attr s (EscalationPolicyRuleSetting s)])
                (\s a -> s { _rule = a } :: EscalationPolicyResource s)
 
 instance P.HasTeams (EscalationPolicyResource s) (TF.Attr s [TF.Attr s P.Text]) where
@@ -370,7 +370,7 @@ data ScheduleResource s = ScheduleResource'
     { _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _layer       :: TF.Attr s [TF.Attr s (LayerSetting s)]
+    , _layer       :: TF.Attr s [TF.Attr s (ScheduleLayerSetting s)]
     -- ^ @layer@ - (Required, Forces New)
     --
     , _name        :: TF.Attr s P.Text
@@ -386,7 +386,7 @@ data ScheduleResource s = ScheduleResource'
 
 -- | Define a new @pagerduty_schedule@ resource value.
 scheduleResource
-    :: TF.Attr s [TF.Attr s (LayerSetting s)] -- ^ @layer@ ('P._layer', 'P.layer')
+    :: TF.Attr s [TF.Attr s (ScheduleLayerSetting s)] -- ^ @layer@ ('P._layer', 'P.layer')
     -> TF.Attr s P.Text -- ^ @time_zone@ ('P._timeZone', 'P.timeZone')
     -> P.Resource (ScheduleResource s)
 scheduleResource _layer _timeZone =
@@ -416,9 +416,9 @@ instance P.HasDescription (ScheduleResource s) (TF.Attr s P.Text) where
         P.lens (_description :: ScheduleResource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: ScheduleResource s)
 
-instance P.HasLayer (ScheduleResource s) (TF.Attr s [TF.Attr s (LayerSetting s)]) where
+instance P.HasLayer (ScheduleResource s) (TF.Attr s [TF.Attr s (ScheduleLayerSetting s)]) where
     layer =
-        P.lens (_layer :: ScheduleResource s -> TF.Attr s [TF.Attr s (LayerSetting s)])
+        P.lens (_layer :: ScheduleResource s -> TF.Attr s [TF.Attr s (ScheduleLayerSetting s)])
                (\s a -> s { _layer = a } :: ScheduleResource s)
 
 instance P.HasName (ScheduleResource s) (TF.Attr s P.Text) where
@@ -577,16 +577,16 @@ data ServiceResource s = ServiceResource'
     , _escalationPolicy :: TF.Attr s P.Text
     -- ^ @escalation_policy@ - (Required)
     --
-    , _incidentUrgencyRule :: TF.Attr s (IncidentUrgencyRuleSetting s)
+    , _incidentUrgencyRule :: TF.Attr s (ServiceIncidentUrgencyRuleSetting s)
     -- ^ @incident_urgency_rule@ - (Optional)
     --
     , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
     --
-    , _scheduledActions :: TF.Attr s [TF.Attr s (ScheduledActionsSetting s)]
+    , _scheduledActions :: TF.Attr s [TF.Attr s (ServiceScheduledActionsSetting s)]
     -- ^ @scheduled_actions@ - (Optional)
     --
-    , _supportHours :: TF.Attr s (SupportHoursSetting s)
+    , _supportHours :: TF.Attr s (ServiceSupportHoursSetting s)
     -- ^ @support_hours@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -626,11 +626,11 @@ instance TF.IsValid (ServiceResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_incidentUrgencyRule"
                   (_incidentUrgencyRule
-                      :: ServiceResource s -> TF.Attr s (IncidentUrgencyRuleSetting s))
+                      :: ServiceResource s -> TF.Attr s (ServiceIncidentUrgencyRuleSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_supportHours"
                   (_supportHours
-                      :: ServiceResource s -> TF.Attr s (SupportHoursSetting s))
+                      :: ServiceResource s -> TF.Attr s (ServiceSupportHoursSetting s))
                   TF.validator
 
 instance P.HasAcknowledgementTimeout (ServiceResource s) (TF.Attr s P.Text) where
@@ -658,9 +658,9 @@ instance P.HasEscalationPolicy (ServiceResource s) (TF.Attr s P.Text) where
         P.lens (_escalationPolicy :: ServiceResource s -> TF.Attr s P.Text)
                (\s a -> s { _escalationPolicy = a } :: ServiceResource s)
 
-instance P.HasIncidentUrgencyRule (ServiceResource s) (TF.Attr s (IncidentUrgencyRuleSetting s)) where
+instance P.HasIncidentUrgencyRule (ServiceResource s) (TF.Attr s (ServiceIncidentUrgencyRuleSetting s)) where
     incidentUrgencyRule =
-        P.lens (_incidentUrgencyRule :: ServiceResource s -> TF.Attr s (IncidentUrgencyRuleSetting s))
+        P.lens (_incidentUrgencyRule :: ServiceResource s -> TF.Attr s (ServiceIncidentUrgencyRuleSetting s))
                (\s a -> s { _incidentUrgencyRule = a } :: ServiceResource s)
 
 instance P.HasName (ServiceResource s) (TF.Attr s P.Text) where
@@ -668,14 +668,14 @@ instance P.HasName (ServiceResource s) (TF.Attr s P.Text) where
         P.lens (_name :: ServiceResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ServiceResource s)
 
-instance P.HasScheduledActions (ServiceResource s) (TF.Attr s [TF.Attr s (ScheduledActionsSetting s)]) where
+instance P.HasScheduledActions (ServiceResource s) (TF.Attr s [TF.Attr s (ServiceScheduledActionsSetting s)]) where
     scheduledActions =
-        P.lens (_scheduledActions :: ServiceResource s -> TF.Attr s [TF.Attr s (ScheduledActionsSetting s)])
+        P.lens (_scheduledActions :: ServiceResource s -> TF.Attr s [TF.Attr s (ServiceScheduledActionsSetting s)])
                (\s a -> s { _scheduledActions = a } :: ServiceResource s)
 
-instance P.HasSupportHours (ServiceResource s) (TF.Attr s (SupportHoursSetting s)) where
+instance P.HasSupportHours (ServiceResource s) (TF.Attr s (ServiceSupportHoursSetting s)) where
     supportHours =
-        P.lens (_supportHours :: ServiceResource s -> TF.Attr s (SupportHoursSetting s))
+        P.lens (_supportHours :: ServiceResource s -> TF.Attr s (ServiceSupportHoursSetting s))
                (\s a -> s { _supportHours = a } :: ServiceResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ServiceResource s)) (TF.Attr s P.Text) where
@@ -684,7 +684,7 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (ServiceResource s)) (TF.Attr s P.
 instance s ~ s' => P.HasComputedCreatedAt (TF.Ref s' (ServiceResource s)) (TF.Attr s P.Text) where
     computedCreatedAt x = TF.compute (TF.refKey x) "created_at"
 
-instance s ~ s' => P.HasComputedIncidentUrgencyRule (TF.Ref s' (ServiceResource s)) (TF.Attr s (IncidentUrgencyRuleSetting s)) where
+instance s ~ s' => P.HasComputedIncidentUrgencyRule (TF.Ref s' (ServiceResource s)) (TF.Attr s (ServiceIncidentUrgencyRuleSetting s)) where
     computedIncidentUrgencyRule x = TF.compute (TF.refKey x) "incident_urgency_rule"
 
 instance s ~ s' => P.HasComputedLastIncidentTimestamp (TF.Ref s' (ServiceResource s)) (TF.Attr s P.Text) where

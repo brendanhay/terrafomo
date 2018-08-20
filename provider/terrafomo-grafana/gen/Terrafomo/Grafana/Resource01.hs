@@ -170,10 +170,10 @@ instance s ~ s' => P.HasComputedSlug (TF.Ref s' (DashboardResource s)) (TF.Attr 
 -- See the <https://www.terraform.io/docs/providers/grafana/r/data_source.html terraform documentation>
 -- for more information.
 data DataSourceResource s = DataSourceResource'
-    { _accessMode        :: TF.Attr s P.Text
+    { _accessMode :: TF.Attr s P.Text
     -- ^ @access_mode@ - (Optional)
     --
-    , _basicAuthEnabled  :: TF.Attr s P.Bool
+    , _basicAuthEnabled :: TF.Attr s P.Bool
     -- ^ @basic_auth_enabled@ - (Optional)
     --
     , _basicAuthPassword :: TF.Attr s P.Text
@@ -182,31 +182,31 @@ data DataSourceResource s = DataSourceResource'
     , _basicAuthUsername :: TF.Attr s P.Text
     -- ^ @basic_auth_username@ - (Optional)
     --
-    , _databaseName      :: TF.Attr s P.Text
+    , _databaseName :: TF.Attr s P.Text
     -- ^ @database_name@ - (Optional)
     --
-    , _isDefault         :: TF.Attr s P.Bool
+    , _isDefault :: TF.Attr s P.Bool
     -- ^ @is_default@ - (Optional)
     --
-    , _jsonData          :: TF.Attr s [TF.Attr s (JsonDataSetting s)]
+    , _jsonData :: TF.Attr s [TF.Attr s (DataSourceJsonDataSetting s)]
     -- ^ @json_data@ - (Optional)
     --
-    , _name              :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _password          :: TF.Attr s P.Text
+    , _password :: TF.Attr s P.Text
     -- ^ @password@ - (Optional)
     --
-    , _secureJsonData    :: TF.Attr s [TF.Attr s (SecureJsonDataSetting s)]
+    , _secureJsonData :: TF.Attr s [TF.Attr s (DataSourceSecureJsonDataSetting s)]
     -- ^ @secure_json_data@ - (Optional)
     --
-    , _type'             :: TF.Attr s P.Text
+    , _type' :: TF.Attr s P.Text
     -- ^ @type@ - (Required)
     --
-    , _url               :: TF.Attr s P.Text
+    , _url :: TF.Attr s P.Text
     -- ^ @url@ - (Optional)
     --
-    , _username          :: TF.Attr s P.Text
+    , _username :: TF.Attr s P.Text
     -- ^ @username@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -284,9 +284,9 @@ instance P.HasIsDefault (DataSourceResource s) (TF.Attr s P.Bool) where
         P.lens (_isDefault :: DataSourceResource s -> TF.Attr s P.Bool)
                (\s a -> s { _isDefault = a } :: DataSourceResource s)
 
-instance P.HasJsonData (DataSourceResource s) (TF.Attr s [TF.Attr s (JsonDataSetting s)]) where
+instance P.HasJsonData (DataSourceResource s) (TF.Attr s [TF.Attr s (DataSourceJsonDataSetting s)]) where
     jsonData =
-        P.lens (_jsonData :: DataSourceResource s -> TF.Attr s [TF.Attr s (JsonDataSetting s)])
+        P.lens (_jsonData :: DataSourceResource s -> TF.Attr s [TF.Attr s (DataSourceJsonDataSetting s)])
                (\s a -> s { _jsonData = a } :: DataSourceResource s)
 
 instance P.HasName (DataSourceResource s) (TF.Attr s P.Text) where
@@ -299,9 +299,9 @@ instance P.HasPassword (DataSourceResource s) (TF.Attr s P.Text) where
         P.lens (_password :: DataSourceResource s -> TF.Attr s P.Text)
                (\s a -> s { _password = a } :: DataSourceResource s)
 
-instance P.HasSecureJsonData (DataSourceResource s) (TF.Attr s [TF.Attr s (SecureJsonDataSetting s)]) where
+instance P.HasSecureJsonData (DataSourceResource s) (TF.Attr s [TF.Attr s (DataSourceSecureJsonDataSetting s)]) where
     secureJsonData =
-        P.lens (_secureJsonData :: DataSourceResource s -> TF.Attr s [TF.Attr s (SecureJsonDataSetting s)])
+        P.lens (_secureJsonData :: DataSourceResource s -> TF.Attr s [TF.Attr s (DataSourceSecureJsonDataSetting s)])
                (\s a -> s { _secureJsonData = a } :: DataSourceResource s)
 
 instance P.HasType' (DataSourceResource s) (TF.Attr s P.Text) where

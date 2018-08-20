@@ -17,13 +17,13 @@
 --
 module Terrafomo.InfluxDB.Settings01
     (
-    -- ** grant
-      GrantSetting (..)
-    , newGrantSetting
-
     -- ** retention_policies
-    , RetentionPoliciesSetting (..)
-    , newRetentionPoliciesSetting
+      DatabaseRetentionPoliciesSetting (..)
+    , newDatabaseRetentionPoliciesSetting
+
+    -- ** grant
+    , UserGrantSetting (..)
+    , newUserGrantSetting
 
     ) where
 
@@ -48,49 +48,8 @@ import qualified Terrafomo.InfluxDB.Types as P
 import qualified Terrafomo.Name           as TF
 import qualified Terrafomo.Validator      as TF
 
--- | @grant@ nested settings.
-data GrantSetting s = GrantSetting'
-    { _database  :: TF.Attr s P.Text
-    -- ^ @database@ - (Required)
-    --
-    , _privilege :: TF.Attr s P.Text
-    -- ^ @privilege@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @grant@ settings value.
-newGrantSetting
-    :: TF.Attr s P.Text -- ^ 'P._database': @database@
-    -> TF.Attr s P.Text -- ^ 'P._privilege': @privilege@
-    -> GrantSetting s
-newGrantSetting _database _privilege =
-    GrantSetting'
-        { _database = _database
-        , _privilege = _privilege
-        }
-
-instance TF.IsValue  (GrantSetting s)
-instance TF.IsObject (GrantSetting s) where
-    toObject GrantSetting'{..} = P.catMaybes
-        [ TF.assign "database" <$> TF.attribute _database
-        , TF.assign "privilege" <$> TF.attribute _privilege
-        ]
-
-instance TF.IsValid (GrantSetting s) where
-    validator = P.mempty
-
-instance P.HasDatabase (GrantSetting s) (TF.Attr s P.Text) where
-    database =
-        P.lens (_database :: GrantSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _database = a } :: GrantSetting s)
-
-instance P.HasPrivilege (GrantSetting s) (TF.Attr s P.Text) where
-    privilege =
-        P.lens (_privilege :: GrantSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _privilege = a } :: GrantSetting s)
-
 -- | @retention_policies@ nested settings.
-data RetentionPoliciesSetting s = RetentionPoliciesSetting'
+data DatabaseRetentionPoliciesSetting s = DatabaseRetentionPoliciesSetting'
     { _default'    :: TF.Attr s P.Bool
     -- ^ @default@ - (Optional)
     --
@@ -106,46 +65,87 @@ data RetentionPoliciesSetting s = RetentionPoliciesSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @retention_policies@ settings value.
-newRetentionPoliciesSetting
+newDatabaseRetentionPoliciesSetting
     :: TF.Attr s P.Text -- ^ 'P._duration': @duration@
     -> TF.Attr s P.Text -- ^ 'P._name': @name@
-    -> RetentionPoliciesSetting s
-newRetentionPoliciesSetting _duration _name =
-    RetentionPoliciesSetting'
+    -> DatabaseRetentionPoliciesSetting s
+newDatabaseRetentionPoliciesSetting _duration _name =
+    DatabaseRetentionPoliciesSetting'
         { _default' = TF.value P.False
         , _duration = _duration
         , _name = _name
         , _replication = TF.value 1
         }
 
-instance TF.IsValue  (RetentionPoliciesSetting s)
-instance TF.IsObject (RetentionPoliciesSetting s) where
-    toObject RetentionPoliciesSetting'{..} = P.catMaybes
+instance TF.IsValue  (DatabaseRetentionPoliciesSetting s)
+instance TF.IsObject (DatabaseRetentionPoliciesSetting s) where
+    toObject DatabaseRetentionPoliciesSetting'{..} = P.catMaybes
         [ TF.assign "default" <$> TF.attribute _default'
         , TF.assign "duration" <$> TF.attribute _duration
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "replication" <$> TF.attribute _replication
         ]
 
-instance TF.IsValid (RetentionPoliciesSetting s) where
+instance TF.IsValid (DatabaseRetentionPoliciesSetting s) where
     validator = P.mempty
 
-instance P.HasDefault' (RetentionPoliciesSetting s) (TF.Attr s P.Bool) where
+instance P.HasDefault' (DatabaseRetentionPoliciesSetting s) (TF.Attr s P.Bool) where
     default' =
-        P.lens (_default' :: RetentionPoliciesSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _default' = a } :: RetentionPoliciesSetting s)
+        P.lens (_default' :: DatabaseRetentionPoliciesSetting s -> TF.Attr s P.Bool)
+               (\s a -> s { _default' = a } :: DatabaseRetentionPoliciesSetting s)
 
-instance P.HasDuration (RetentionPoliciesSetting s) (TF.Attr s P.Text) where
+instance P.HasDuration (DatabaseRetentionPoliciesSetting s) (TF.Attr s P.Text) where
     duration =
-        P.lens (_duration :: RetentionPoliciesSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _duration = a } :: RetentionPoliciesSetting s)
+        P.lens (_duration :: DatabaseRetentionPoliciesSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _duration = a } :: DatabaseRetentionPoliciesSetting s)
 
-instance P.HasName (RetentionPoliciesSetting s) (TF.Attr s P.Text) where
+instance P.HasName (DatabaseRetentionPoliciesSetting s) (TF.Attr s P.Text) where
     name =
-        P.lens (_name :: RetentionPoliciesSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: RetentionPoliciesSetting s)
+        P.lens (_name :: DatabaseRetentionPoliciesSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: DatabaseRetentionPoliciesSetting s)
 
-instance P.HasReplication (RetentionPoliciesSetting s) (TF.Attr s P.Int) where
+instance P.HasReplication (DatabaseRetentionPoliciesSetting s) (TF.Attr s P.Int) where
     replication =
-        P.lens (_replication :: RetentionPoliciesSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _replication = a } :: RetentionPoliciesSetting s)
+        P.lens (_replication :: DatabaseRetentionPoliciesSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _replication = a } :: DatabaseRetentionPoliciesSetting s)
+
+-- | @grant@ nested settings.
+data UserGrantSetting s = UserGrantSetting'
+    { _database  :: TF.Attr s P.Text
+    -- ^ @database@ - (Required)
+    --
+    , _privilege :: TF.Attr s P.Text
+    -- ^ @privilege@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @grant@ settings value.
+newUserGrantSetting
+    :: TF.Attr s P.Text -- ^ 'P._database': @database@
+    -> TF.Attr s P.Text -- ^ 'P._privilege': @privilege@
+    -> UserGrantSetting s
+newUserGrantSetting _database _privilege =
+    UserGrantSetting'
+        { _database = _database
+        , _privilege = _privilege
+        }
+
+instance TF.IsValue  (UserGrantSetting s)
+instance TF.IsObject (UserGrantSetting s) where
+    toObject UserGrantSetting'{..} = P.catMaybes
+        [ TF.assign "database" <$> TF.attribute _database
+        , TF.assign "privilege" <$> TF.attribute _privilege
+        ]
+
+instance TF.IsValid (UserGrantSetting s) where
+    validator = P.mempty
+
+instance P.HasDatabase (UserGrantSetting s) (TF.Attr s P.Text) where
+    database =
+        P.lens (_database :: UserGrantSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _database = a } :: UserGrantSetting s)
+
+instance P.HasPrivilege (UserGrantSetting s) (TF.Attr s P.Text) where
+    privilege =
+        P.lens (_privilege :: UserGrantSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _privilege = a } :: UserGrantSetting s)

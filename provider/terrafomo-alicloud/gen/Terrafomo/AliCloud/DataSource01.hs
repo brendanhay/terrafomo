@@ -254,7 +254,7 @@ instance P.HasVswitchId (DbInstancesData s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (DbInstancesData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedInstances (TF.Ref s' (DbInstancesData s)) (TF.Attr s [TF.Attr s (InstancesSetting s)]) where
+instance s ~ s' => P.HasComputedInstances (TF.Ref s' (DbInstancesData s)) (TF.Attr s [TF.Attr s (DbInstancesInstancesSetting s)]) where
     computedInstances x = TF.compute (TF.refKey x) "instances"
 
 -- | @alicloud_dns_domain_groups@ DataSource.
@@ -302,7 +302,7 @@ instance P.HasOutputFile (DnsDomainGroupsData s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (DnsDomainGroupsData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedGroups (TF.Ref s' (DnsDomainGroupsData s)) (TF.Attr s [TF.Attr s (GroupsSetting s)]) where
+instance s ~ s' => P.HasComputedGroups (TF.Ref s' (DnsDomainGroupsData s)) (TF.Attr s [TF.Attr s (DnsDomainGroupsGroupsSetting s)]) where
     computedGroups x = TF.compute (TF.refKey x) "groups"
 
 -- | @alicloud_dns_domain_records@ DataSource.
@@ -411,7 +411,7 @@ instance P.HasValueRegex (DnsDomainRecordsData s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (DnsDomainRecordsData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedRecords (TF.Ref s' (DnsDomainRecordsData s)) (TF.Attr s [TF.Attr s (RecordsSetting s)]) where
+instance s ~ s' => P.HasComputedRecords (TF.Ref s' (DnsDomainRecordsData s)) (TF.Attr s [TF.Attr s (DnsDomainRecordsRecordsSetting s)]) where
     computedRecords x = TF.compute (TF.refKey x) "records"
 
 -- | @alicloud_dns_domains@ DataSource.
@@ -499,7 +499,7 @@ instance P.HasVersionCode (DnsDomainsData s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (DnsDomainsData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedDomains (TF.Ref s' (DnsDomainsData s)) (TF.Attr s [TF.Attr s (DomainsSetting s)]) where
+instance s ~ s' => P.HasComputedDomains (TF.Ref s' (DnsDomainsData s)) (TF.Attr s [TF.Attr s (DnsDomainsDomainsSetting s)]) where
     computedDomains x = TF.compute (TF.refKey x) "domains"
 
 -- | @alicloud_dns_groups@ DataSource.
@@ -547,7 +547,7 @@ instance P.HasOutputFile (DnsGroupsData s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (DnsGroupsData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedGroups (TF.Ref s' (DnsGroupsData s)) (TF.Attr s [TF.Attr s (GroupsSetting s)]) where
+instance s ~ s' => P.HasComputedGroups (TF.Ref s' (DnsGroupsData s)) (TF.Attr s [TF.Attr s (DnsGroupsGroupsSetting s)]) where
     computedGroups x = TF.compute (TF.refKey x) "groups"
 
 -- | @alicloud_dns_records@ DataSource.
@@ -656,7 +656,7 @@ instance P.HasValueRegex (DnsRecordsData s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (DnsRecordsData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedRecords (TF.Ref s' (DnsRecordsData s)) (TF.Attr s [TF.Attr s (RecordsSetting s)]) where
+instance s ~ s' => P.HasComputedRecords (TF.Ref s' (DnsRecordsData s)) (TF.Attr s [TF.Attr s (DnsRecordsRecordsSetting s)]) where
     computedRecords x = TF.compute (TF.refKey x) "records"
 
 -- | @alicloud_eips@ DataSource.
@@ -714,7 +714,7 @@ instance P.HasOutputFile (EipsData s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (EipsData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedEips (TF.Ref s' (EipsData s)) (TF.Attr s [TF.Attr s (EipsSetting s)]) where
+instance s ~ s' => P.HasComputedEips (TF.Ref s' (EipsData s)) (TF.Attr s [TF.Attr s (EipsEipsSetting s)]) where
     computedEips x = TF.compute (TF.refKey x) "eips"
 
 -- | @alicloud_images@ DataSource.
@@ -782,7 +782,7 @@ instance P.HasOwners (ImagesData s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ImagesData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedImages (TF.Ref s' (ImagesData s)) (TF.Attr s [TF.Attr s (ImagesSetting s)]) where
+instance s ~ s' => P.HasComputedImages (TF.Ref s' (ImagesData s)) (TF.Attr s [TF.Attr s (ImagesImagesSetting s)]) where
     computedImages x = TF.compute (TF.refKey x) "images"
 
 -- | @alicloud_instance_types@ DataSource.
@@ -900,7 +900,7 @@ instance P.HasSpotStrategy (InstanceTypesData s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (InstanceTypesData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedInstanceTypes (TF.Ref s' (InstanceTypesData s)) (TF.Attr s [TF.Attr s (InstanceTypesSetting s)]) where
+instance s ~ s' => P.HasComputedInstanceTypes (TF.Ref s' (InstanceTypesData s)) (TF.Attr s [TF.Attr s (InstanceTypesInstanceTypesSetting s)]) where
     computedInstanceTypes x = TF.compute (TF.refKey x) "instance_types"
 
 -- | @alicloud_instances@ DataSource.
@@ -1018,7 +1018,7 @@ instance P.HasVswitchId (InstancesData s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (InstancesData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedInstances (TF.Ref s' (InstancesData s)) (TF.Attr s [TF.Attr s (InstancesSetting s)]) where
+instance s ~ s' => P.HasComputedInstances (TF.Ref s' (InstancesData s)) (TF.Attr s [TF.Attr s (InstancesInstancesSetting s)]) where
     computedInstances x = TF.compute (TF.refKey x) "instances"
 
 -- | @alicloud_key_pairs@ DataSource.
@@ -1079,7 +1079,7 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (KeyPairsData s)) (TF.Attr s P.Tex
 instance s ~ s' => P.HasComputedFingerPrint (TF.Ref s' (KeyPairsData s)) (TF.Attr s P.Bool) where
     computedFingerPrint x = TF.compute (TF.refKey x) "finger_print"
 
-instance s ~ s' => P.HasComputedKeyPairs (TF.Ref s' (KeyPairsData s)) (TF.Attr s [TF.Attr s (KeyPairsSetting s)]) where
+instance s ~ s' => P.HasComputedKeyPairs (TF.Ref s' (KeyPairsData s)) (TF.Attr s [TF.Attr s (KeyPairsKeyPairsSetting s)]) where
     computedKeyPairs x = TF.compute (TF.refKey x) "key_pairs"
 
 -- | @alicloud_kms_keys@ DataSource.
@@ -1147,7 +1147,7 @@ instance P.HasStatus (KmsKeysData s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (KmsKeysData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedKeys (TF.Ref s' (KmsKeysData s)) (TF.Attr s [TF.Attr s (KeysSetting s)]) where
+instance s ~ s' => P.HasComputedKeys (TF.Ref s' (KmsKeysData s)) (TF.Attr s [TF.Attr s (KmsKeysKeysSetting s)]) where
     computedKeys x = TF.compute (TF.refKey x) "keys"
 
 -- | @alicloud_ram_account_alias@ DataSource.
@@ -1301,7 +1301,7 @@ instance P.HasUserName (RamGroupsData s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (RamGroupsData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedGroups (TF.Ref s' (RamGroupsData s)) (TF.Attr s [TF.Attr s (GroupsSetting s)]) where
+instance s ~ s' => P.HasComputedGroups (TF.Ref s' (RamGroupsData s)) (TF.Attr s [TF.Attr s (RamGroupsGroupsSetting s)]) where
     computedGroups x = TF.compute (TF.refKey x) "groups"
 
 -- | @alicloud_ram_policies@ DataSource.
@@ -1389,7 +1389,7 @@ instance P.HasUserName (RamPoliciesData s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (RamPoliciesData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedPolicies (TF.Ref s' (RamPoliciesData s)) (TF.Attr s [TF.Attr s (PoliciesSetting s)]) where
+instance s ~ s' => P.HasComputedPolicies (TF.Ref s' (RamPoliciesData s)) (TF.Attr s [TF.Attr s (RamPoliciesPoliciesSetting s)]) where
     computedPolicies x = TF.compute (TF.refKey x) "policies"
 
 -- | @alicloud_ram_roles@ DataSource.
@@ -1457,7 +1457,7 @@ instance P.HasPolicyType (RamRolesData s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (RamRolesData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedRoles (TF.Ref s' (RamRolesData s)) (TF.Attr s [TF.Attr s (RolesSetting s)]) where
+instance s ~ s' => P.HasComputedRoles (TF.Ref s' (RamRolesData s)) (TF.Attr s [TF.Attr s (RamRolesRolesSetting s)]) where
     computedRoles x = TF.compute (TF.refKey x) "roles"
 
 -- | @alicloud_ram_users@ DataSource.
@@ -1535,7 +1535,7 @@ instance P.HasPolicyType (RamUsersData s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (RamUsersData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedUsers (TF.Ref s' (RamUsersData s)) (TF.Attr s [TF.Attr s (UsersSetting s)]) where
+instance s ~ s' => P.HasComputedUsers (TF.Ref s' (RamUsersData s)) (TF.Attr s [TF.Attr s (RamUsersUsersSetting s)]) where
     computedUsers x = TF.compute (TF.refKey x) "users"
 
 -- | @alicloud_regions@ DataSource.
@@ -1599,7 +1599,7 @@ instance s ~ s' => P.HasComputedCurrent (TF.Ref s' (RegionsData s)) (TF.Attr s P
 instance s ~ s' => P.HasComputedName (TF.Ref s' (RegionsData s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputedRegions (TF.Ref s' (RegionsData s)) (TF.Attr s [TF.Attr s (RegionsSetting s)]) where
+instance s ~ s' => P.HasComputedRegions (TF.Ref s' (RegionsData s)) (TF.Attr s [TF.Attr s (RegionsRegionsSetting s)]) where
     computedRegions x = TF.compute (TF.refKey x) "regions"
 
 -- | @alicloud_security_group_rules@ DataSource.
@@ -1694,7 +1694,7 @@ instance s ~ s' => P.HasComputedGroupDesc (TF.Ref s' (SecurityGroupRulesData s))
 instance s ~ s' => P.HasComputedGroupName (TF.Ref s' (SecurityGroupRulesData s)) (TF.Attr s P.Text) where
     computedGroupName x = TF.compute (TF.refKey x) "group_name"
 
-instance s ~ s' => P.HasComputedRules (TF.Ref s' (SecurityGroupRulesData s)) (TF.Attr s [TF.Attr s (RulesSetting s)]) where
+instance s ~ s' => P.HasComputedRules (TF.Ref s' (SecurityGroupRulesData s)) (TF.Attr s [TF.Attr s (SecurityGroupRulesRulesSetting s)]) where
     computedRules x = TF.compute (TF.refKey x) "rules"
 
 -- | @alicloud_security_groups@ DataSource.
@@ -1752,7 +1752,7 @@ instance P.HasVpcId (SecurityGroupsData s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (SecurityGroupsData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedGroups (TF.Ref s' (SecurityGroupsData s)) (TF.Attr s [TF.Attr s (GroupsSetting s)]) where
+instance s ~ s' => P.HasComputedGroups (TF.Ref s' (SecurityGroupsData s)) (TF.Attr s [TF.Attr s (SecurityGroupsGroupsSetting s)]) where
     computedGroups x = TF.compute (TF.refKey x) "groups"
 
 -- | @alicloud_vpcs@ DataSource.
@@ -1840,7 +1840,7 @@ instance P.HasVswitchId (VpcsData s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (VpcsData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedVpcs (TF.Ref s' (VpcsData s)) (TF.Attr s [TF.Attr s (VpcsSetting s)]) where
+instance s ~ s' => P.HasComputedVpcs (TF.Ref s' (VpcsData s)) (TF.Attr s [TF.Attr s (VpcsVpcsSetting s)]) where
     computedVpcs x = TF.compute (TF.refKey x) "vpcs"
 
 -- | @alicloud_vswitches@ DataSource.
@@ -1928,7 +1928,7 @@ instance P.HasZoneId (VswitchesData s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (VswitchesData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedVswitches (TF.Ref s' (VswitchesData s)) (TF.Attr s [TF.Attr s (VswitchesSetting s)]) where
+instance s ~ s' => P.HasComputedVswitches (TF.Ref s' (VswitchesData s)) (TF.Attr s [TF.Attr s (VswitchesVswitchesSetting s)]) where
     computedVswitches x = TF.compute (TF.refKey x) "vswitches"
 
 -- | @alicloud_zones@ DataSource.
@@ -2036,5 +2036,5 @@ instance P.HasSpotStrategy (ZonesData s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ZonesData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedZones (TF.Ref s' (ZonesData s)) (TF.Attr s [TF.Attr s (ZonesSetting s)]) where
+instance s ~ s' => P.HasComputedZones (TF.Ref s' (ZonesData s)) (TF.Attr s [TF.Attr s (ZonesZonesSetting s)]) where
     computedZones x = TF.compute (TF.refKey x) "zones"

@@ -417,13 +417,13 @@ data AppServicePlanResource s = AppServicePlanResource'
     , _name              :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _properties        :: TF.Attr s (PropertiesSetting s)
+    , _properties        :: TF.Attr s (AppServicePlanPropertiesSetting s)
     -- ^ @properties@ - (Optional)
     --
     , _resourceGroupName :: TF.Attr s P.Text
     -- ^ @resource_group_name@ - (Required, Forces New)
     --
-    , _sku               :: TF.Attr s (SkuSetting s)
+    , _sku               :: TF.Attr s (AppServicePlanSkuSetting s)
     -- ^ @sku@ - (Required)
     --
     , _tags              :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
@@ -436,7 +436,7 @@ appServicePlanResource
     :: TF.Attr s P.Text -- ^ @location@ ('P._location', 'P.location')
     -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
-    -> TF.Attr s (SkuSetting s) -- ^ @sku@ ('P._sku', 'P.sku')
+    -> TF.Attr s (AppServicePlanSkuSetting s) -- ^ @sku@ ('P._sku', 'P.sku')
     -> P.Resource (AppServicePlanResource s)
 appServicePlanResource _location _name _resourceGroupName _sku =
     TF.unsafeResource "azurerm_app_service_plan" TF.validator $
@@ -465,11 +465,11 @@ instance TF.IsValid (AppServicePlanResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_properties"
                   (_properties
-                      :: AppServicePlanResource s -> TF.Attr s (PropertiesSetting s))
+                      :: AppServicePlanResource s -> TF.Attr s (AppServicePlanPropertiesSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_sku"
                   (_sku
-                      :: AppServicePlanResource s -> TF.Attr s (SkuSetting s))
+                      :: AppServicePlanResource s -> TF.Attr s (AppServicePlanSkuSetting s))
                   TF.validator
 
 instance P.HasKind (AppServicePlanResource s) (TF.Attr s P.Text) where
@@ -487,9 +487,9 @@ instance P.HasName (AppServicePlanResource s) (TF.Attr s P.Text) where
         P.lens (_name :: AppServicePlanResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: AppServicePlanResource s)
 
-instance P.HasProperties (AppServicePlanResource s) (TF.Attr s (PropertiesSetting s)) where
+instance P.HasProperties (AppServicePlanResource s) (TF.Attr s (AppServicePlanPropertiesSetting s)) where
     properties =
-        P.lens (_properties :: AppServicePlanResource s -> TF.Attr s (PropertiesSetting s))
+        P.lens (_properties :: AppServicePlanResource s -> TF.Attr s (AppServicePlanPropertiesSetting s))
                (\s a -> s { _properties = a } :: AppServicePlanResource s)
 
 instance P.HasResourceGroupName (AppServicePlanResource s) (TF.Attr s P.Text) where
@@ -497,9 +497,9 @@ instance P.HasResourceGroupName (AppServicePlanResource s) (TF.Attr s P.Text) wh
         P.lens (_resourceGroupName :: AppServicePlanResource s -> TF.Attr s P.Text)
                (\s a -> s { _resourceGroupName = a } :: AppServicePlanResource s)
 
-instance P.HasSku (AppServicePlanResource s) (TF.Attr s (SkuSetting s)) where
+instance P.HasSku (AppServicePlanResource s) (TF.Attr s (AppServicePlanSkuSetting s)) where
     sku =
-        P.lens (_sku :: AppServicePlanResource s -> TF.Attr s (SkuSetting s))
+        P.lens (_sku :: AppServicePlanResource s -> TF.Attr s (AppServicePlanSkuSetting s))
                (\s a -> s { _sku = a } :: AppServicePlanResource s)
 
 instance P.HasTags (AppServicePlanResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
@@ -513,7 +513,7 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (AppServicePlanResource s)) (TF.At
 instance s ~ s' => P.HasComputedMaximumNumberOfWorkers (TF.Ref s' (AppServicePlanResource s)) (TF.Attr s P.Int) where
     computedMaximumNumberOfWorkers x = TF.compute (TF.refKey x) "maximum_number_of_workers"
 
-instance s ~ s' => P.HasComputedProperties (TF.Ref s' (AppServicePlanResource s)) (TF.Attr s (PropertiesSetting s)) where
+instance s ~ s' => P.HasComputedProperties (TF.Ref s' (AppServicePlanResource s)) (TF.Attr s (AppServicePlanPropertiesSetting s)) where
     computedProperties x = TF.compute (TF.refKey x) "properties"
 
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (AppServicePlanResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
@@ -533,7 +533,7 @@ data AppServiceResource s = AppServiceResource'
     , _clientAffinityEnabled :: TF.Attr s P.Bool
     -- ^ @client_affinity_enabled@ - (Optional)
     --
-    , _connectionString :: TF.Attr s [TF.Attr s (ConnectionStringSetting s)]
+    , _connectionString :: TF.Attr s [TF.Attr s (AppServiceConnectionStringSetting s)]
     -- ^ @connection_string@ - (Optional)
     --
     , _enabled :: TF.Attr s P.Bool
@@ -542,7 +542,7 @@ data AppServiceResource s = AppServiceResource'
     , _httpsOnly :: TF.Attr s P.Bool
     -- ^ @https_only@ - (Optional)
     --
-    , _identity :: TF.Attr s (IdentitySetting s)
+    , _identity :: TF.Attr s (AppServiceIdentitySetting s)
     -- ^ @identity@ - (Optional)
     --
     , _location :: TF.Attr s P.Text
@@ -554,7 +554,7 @@ data AppServiceResource s = AppServiceResource'
     , _resourceGroupName :: TF.Attr s P.Text
     -- ^ @resource_group_name@ - (Required, Forces New)
     --
-    , _siteConfig :: TF.Attr s (SiteConfigSetting s)
+    , _siteConfig :: TF.Attr s (AppServiceSiteConfigSetting s)
     -- ^ @site_config@ - (Optional)
     --
     , _tags :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
@@ -606,11 +606,11 @@ instance TF.IsValid (AppServiceResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_identity"
                   (_identity
-                      :: AppServiceResource s -> TF.Attr s (IdentitySetting s))
+                      :: AppServiceResource s -> TF.Attr s (AppServiceIdentitySetting s))
                   TF.validator
            P.<> TF.settingsValidator "_siteConfig"
                   (_siteConfig
-                      :: AppServiceResource s -> TF.Attr s (SiteConfigSetting s))
+                      :: AppServiceResource s -> TF.Attr s (AppServiceSiteConfigSetting s))
                   TF.validator
 
 instance P.HasAppServicePlanId (AppServiceResource s) (TF.Attr s P.Text) where
@@ -628,9 +628,9 @@ instance P.HasClientAffinityEnabled (AppServiceResource s) (TF.Attr s P.Bool) wh
         P.lens (_clientAffinityEnabled :: AppServiceResource s -> TF.Attr s P.Bool)
                (\s a -> s { _clientAffinityEnabled = a } :: AppServiceResource s)
 
-instance P.HasConnectionString (AppServiceResource s) (TF.Attr s [TF.Attr s (ConnectionStringSetting s)]) where
+instance P.HasConnectionString (AppServiceResource s) (TF.Attr s [TF.Attr s (AppServiceConnectionStringSetting s)]) where
     connectionString =
-        P.lens (_connectionString :: AppServiceResource s -> TF.Attr s [TF.Attr s (ConnectionStringSetting s)])
+        P.lens (_connectionString :: AppServiceResource s -> TF.Attr s [TF.Attr s (AppServiceConnectionStringSetting s)])
                (\s a -> s { _connectionString = a } :: AppServiceResource s)
 
 instance P.HasEnabled (AppServiceResource s) (TF.Attr s P.Bool) where
@@ -643,9 +643,9 @@ instance P.HasHttpsOnly (AppServiceResource s) (TF.Attr s P.Bool) where
         P.lens (_httpsOnly :: AppServiceResource s -> TF.Attr s P.Bool)
                (\s a -> s { _httpsOnly = a } :: AppServiceResource s)
 
-instance P.HasIdentity (AppServiceResource s) (TF.Attr s (IdentitySetting s)) where
+instance P.HasIdentity (AppServiceResource s) (TF.Attr s (AppServiceIdentitySetting s)) where
     identity =
-        P.lens (_identity :: AppServiceResource s -> TF.Attr s (IdentitySetting s))
+        P.lens (_identity :: AppServiceResource s -> TF.Attr s (AppServiceIdentitySetting s))
                (\s a -> s { _identity = a } :: AppServiceResource s)
 
 instance P.HasLocation (AppServiceResource s) (TF.Attr s P.Text) where
@@ -663,9 +663,9 @@ instance P.HasResourceGroupName (AppServiceResource s) (TF.Attr s P.Text) where
         P.lens (_resourceGroupName :: AppServiceResource s -> TF.Attr s P.Text)
                (\s a -> s { _resourceGroupName = a } :: AppServiceResource s)
 
-instance P.HasSiteConfig (AppServiceResource s) (TF.Attr s (SiteConfigSetting s)) where
+instance P.HasSiteConfig (AppServiceResource s) (TF.Attr s (AppServiceSiteConfigSetting s)) where
     siteConfig =
-        P.lens (_siteConfig :: AppServiceResource s -> TF.Attr s (SiteConfigSetting s))
+        P.lens (_siteConfig :: AppServiceResource s -> TF.Attr s (AppServiceSiteConfigSetting s))
                (\s a -> s { _siteConfig = a } :: AppServiceResource s)
 
 instance P.HasTags (AppServiceResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
@@ -682,25 +682,25 @@ instance s ~ s' => P.HasComputedAppSettings (TF.Ref s' (AppServiceResource s)) (
 instance s ~ s' => P.HasComputedClientAffinityEnabled (TF.Ref s' (AppServiceResource s)) (TF.Attr s P.Bool) where
     computedClientAffinityEnabled x = TF.compute (TF.refKey x) "client_affinity_enabled"
 
-instance s ~ s' => P.HasComputedConnectionString (TF.Ref s' (AppServiceResource s)) (TF.Attr s [TF.Attr s (ConnectionStringSetting s)]) where
+instance s ~ s' => P.HasComputedConnectionString (TF.Ref s' (AppServiceResource s)) (TF.Attr s [TF.Attr s (AppServiceConnectionStringSetting s)]) where
     computedConnectionString x = TF.compute (TF.refKey x) "connection_string"
 
 instance s ~ s' => P.HasComputedDefaultSiteHostname (TF.Ref s' (AppServiceResource s)) (TF.Attr s P.Text) where
     computedDefaultSiteHostname x = TF.compute (TF.refKey x) "default_site_hostname"
 
-instance s ~ s' => P.HasComputedIdentity (TF.Ref s' (AppServiceResource s)) (TF.Attr s (IdentitySetting s)) where
+instance s ~ s' => P.HasComputedIdentity (TF.Ref s' (AppServiceResource s)) (TF.Attr s (AppServiceIdentitySetting s)) where
     computedIdentity x = TF.compute (TF.refKey x) "identity"
 
 instance s ~ s' => P.HasComputedOutboundIpAddresses (TF.Ref s' (AppServiceResource s)) (TF.Attr s P.Text) where
     computedOutboundIpAddresses x = TF.compute (TF.refKey x) "outbound_ip_addresses"
 
-instance s ~ s' => P.HasComputedSiteConfig (TF.Ref s' (AppServiceResource s)) (TF.Attr s (SiteConfigSetting s)) where
+instance s ~ s' => P.HasComputedSiteConfig (TF.Ref s' (AppServiceResource s)) (TF.Attr s (AppServiceSiteConfigSetting s)) where
     computedSiteConfig x = TF.compute (TF.refKey x) "site_config"
 
-instance s ~ s' => P.HasComputedSiteCredential (TF.Ref s' (AppServiceResource s)) (TF.Attr s (SiteCredentialSetting s)) where
+instance s ~ s' => P.HasComputedSiteCredential (TF.Ref s' (AppServiceResource s)) (TF.Attr s (AppServiceSiteCredentialSetting s)) where
     computedSiteCredential x = TF.compute (TF.refKey x) "site_credential"
 
-instance s ~ s' => P.HasComputedSourceControl (TF.Ref s' (AppServiceResource s)) (TF.Attr s (SourceControlSetting s)) where
+instance s ~ s' => P.HasComputedSourceControl (TF.Ref s' (AppServiceResource s)) (TF.Attr s (AppServiceSourceControlSetting s)) where
     computedSourceControl x = TF.compute (TF.refKey x) "source_control"
 
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (AppServiceResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
@@ -723,7 +723,7 @@ data AppServiceSlotResource s = AppServiceSlotResource'
     , _clientAffinityEnabled :: TF.Attr s P.Bool
     -- ^ @client_affinity_enabled@ - (Optional)
     --
-    , _connectionString :: TF.Attr s [TF.Attr s (ConnectionStringSetting s)]
+    , _connectionString :: TF.Attr s [TF.Attr s (AppServiceSlotConnectionStringSetting s)]
     -- ^ @connection_string@ - (Optional)
     --
     , _enabled :: TF.Attr s P.Bool
@@ -732,7 +732,7 @@ data AppServiceSlotResource s = AppServiceSlotResource'
     , _httpsOnly :: TF.Attr s P.Bool
     -- ^ @https_only@ - (Optional)
     --
-    , _identity :: TF.Attr s (IdentitySetting s)
+    , _identity :: TF.Attr s (AppServiceSlotIdentitySetting s)
     -- ^ @identity@ - (Optional, Forces New)
     --
     , _location :: TF.Attr s P.Text
@@ -744,7 +744,7 @@ data AppServiceSlotResource s = AppServiceSlotResource'
     , _resourceGroupName :: TF.Attr s P.Text
     -- ^ @resource_group_name@ - (Required, Forces New)
     --
-    , _siteConfig :: TF.Attr s (SiteConfigSetting s)
+    , _siteConfig :: TF.Attr s (AppServiceSlotSiteConfigSetting s)
     -- ^ @site_config@ - (Optional)
     --
     , _tags :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
@@ -799,11 +799,11 @@ instance TF.IsValid (AppServiceSlotResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_identity"
                   (_identity
-                      :: AppServiceSlotResource s -> TF.Attr s (IdentitySetting s))
+                      :: AppServiceSlotResource s -> TF.Attr s (AppServiceSlotIdentitySetting s))
                   TF.validator
            P.<> TF.settingsValidator "_siteConfig"
                   (_siteConfig
-                      :: AppServiceSlotResource s -> TF.Attr s (SiteConfigSetting s))
+                      :: AppServiceSlotResource s -> TF.Attr s (AppServiceSlotSiteConfigSetting s))
                   TF.validator
 
 instance P.HasAppServiceName (AppServiceSlotResource s) (TF.Attr s P.Text) where
@@ -826,9 +826,9 @@ instance P.HasClientAffinityEnabled (AppServiceSlotResource s) (TF.Attr s P.Bool
         P.lens (_clientAffinityEnabled :: AppServiceSlotResource s -> TF.Attr s P.Bool)
                (\s a -> s { _clientAffinityEnabled = a } :: AppServiceSlotResource s)
 
-instance P.HasConnectionString (AppServiceSlotResource s) (TF.Attr s [TF.Attr s (ConnectionStringSetting s)]) where
+instance P.HasConnectionString (AppServiceSlotResource s) (TF.Attr s [TF.Attr s (AppServiceSlotConnectionStringSetting s)]) where
     connectionString =
-        P.lens (_connectionString :: AppServiceSlotResource s -> TF.Attr s [TF.Attr s (ConnectionStringSetting s)])
+        P.lens (_connectionString :: AppServiceSlotResource s -> TF.Attr s [TF.Attr s (AppServiceSlotConnectionStringSetting s)])
                (\s a -> s { _connectionString = a } :: AppServiceSlotResource s)
 
 instance P.HasEnabled (AppServiceSlotResource s) (TF.Attr s P.Bool) where
@@ -841,9 +841,9 @@ instance P.HasHttpsOnly (AppServiceSlotResource s) (TF.Attr s P.Bool) where
         P.lens (_httpsOnly :: AppServiceSlotResource s -> TF.Attr s P.Bool)
                (\s a -> s { _httpsOnly = a } :: AppServiceSlotResource s)
 
-instance P.HasIdentity (AppServiceSlotResource s) (TF.Attr s (IdentitySetting s)) where
+instance P.HasIdentity (AppServiceSlotResource s) (TF.Attr s (AppServiceSlotIdentitySetting s)) where
     identity =
-        P.lens (_identity :: AppServiceSlotResource s -> TF.Attr s (IdentitySetting s))
+        P.lens (_identity :: AppServiceSlotResource s -> TF.Attr s (AppServiceSlotIdentitySetting s))
                (\s a -> s { _identity = a } :: AppServiceSlotResource s)
 
 instance P.HasLocation (AppServiceSlotResource s) (TF.Attr s P.Text) where
@@ -861,9 +861,9 @@ instance P.HasResourceGroupName (AppServiceSlotResource s) (TF.Attr s P.Text) wh
         P.lens (_resourceGroupName :: AppServiceSlotResource s -> TF.Attr s P.Text)
                (\s a -> s { _resourceGroupName = a } :: AppServiceSlotResource s)
 
-instance P.HasSiteConfig (AppServiceSlotResource s) (TF.Attr s (SiteConfigSetting s)) where
+instance P.HasSiteConfig (AppServiceSlotResource s) (TF.Attr s (AppServiceSlotSiteConfigSetting s)) where
     siteConfig =
-        P.lens (_siteConfig :: AppServiceSlotResource s -> TF.Attr s (SiteConfigSetting s))
+        P.lens (_siteConfig :: AppServiceSlotResource s -> TF.Attr s (AppServiceSlotSiteConfigSetting s))
                (\s a -> s { _siteConfig = a } :: AppServiceSlotResource s)
 
 instance P.HasTags (AppServiceSlotResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
@@ -880,13 +880,13 @@ instance s ~ s' => P.HasComputedAppSettings (TF.Ref s' (AppServiceSlotResource s
 instance s ~ s' => P.HasComputedClientAffinityEnabled (TF.Ref s' (AppServiceSlotResource s)) (TF.Attr s P.Bool) where
     computedClientAffinityEnabled x = TF.compute (TF.refKey x) "client_affinity_enabled"
 
-instance s ~ s' => P.HasComputedConnectionString (TF.Ref s' (AppServiceSlotResource s)) (TF.Attr s [TF.Attr s (ConnectionStringSetting s)]) where
+instance s ~ s' => P.HasComputedConnectionString (TF.Ref s' (AppServiceSlotResource s)) (TF.Attr s [TF.Attr s (AppServiceSlotConnectionStringSetting s)]) where
     computedConnectionString x = TF.compute (TF.refKey x) "connection_string"
 
 instance s ~ s' => P.HasComputedDefaultSiteHostname (TF.Ref s' (AppServiceSlotResource s)) (TF.Attr s P.Text) where
     computedDefaultSiteHostname x = TF.compute (TF.refKey x) "default_site_hostname"
 
-instance s ~ s' => P.HasComputedSiteConfig (TF.Ref s' (AppServiceSlotResource s)) (TF.Attr s (SiteConfigSetting s)) where
+instance s ~ s' => P.HasComputedSiteConfig (TF.Ref s' (AppServiceSlotResource s)) (TF.Attr s (AppServiceSlotSiteConfigSetting s)) where
     computedSiteConfig x = TF.compute (TF.refKey x) "site_config"
 
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (AppServiceSlotResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
@@ -897,28 +897,28 @@ instance s ~ s' => P.HasComputedTags (TF.Ref s' (AppServiceSlotResource s)) (TF.
 -- See the <https://www.terraform.io/docs/providers/azurerm/r/application_gateway.html terraform documentation>
 -- for more information.
 data ApplicationGatewayResource s = ApplicationGatewayResource'
-    { _authenticationCertificate :: TF.Attr s [TF.Attr s (AuthenticationCertificateSetting s)]
+    { _authenticationCertificate :: TF.Attr s [TF.Attr s (ApplicationGatewayAuthenticationCertificateSetting s)]
     -- ^ @authentication_certificate@ - (Optional)
     --
-    , _backendAddressPool :: TF.Attr s [TF.Attr s (BackendAddressPoolSetting s)]
+    , _backendAddressPool :: TF.Attr s [TF.Attr s (ApplicationGatewayBackendAddressPoolSetting s)]
     -- ^ @backend_address_pool@ - (Required)
     --
-    , _backendHttpSettings :: TF.Attr s (P.NonEmpty (TF.Attr s (BackendHttpSettings s)))
+    , _backendHttpSettings :: TF.Attr s (P.NonEmpty (TF.Attr s (ApplicationGatewayBackendHttpSettingsSetting s)))
     -- ^ @backend_http_settings@ - (Required)
     --
     , _disabledSslProtocols :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @disabled_ssl_protocols@ - (Optional)
     --
-    , _frontendIpConfiguration :: TF.Attr s (P.NonEmpty (TF.Attr s (FrontendIpConfigurationSetting s)))
+    , _frontendIpConfiguration :: TF.Attr s (P.NonEmpty (TF.Attr s (ApplicationGatewayFrontendIpConfigurationSetting s)))
     -- ^ @frontend_ip_configuration@ - (Required)
     --
-    , _frontendPort :: TF.Attr s [TF.Attr s (FrontendPortSetting s)]
+    , _frontendPort :: TF.Attr s [TF.Attr s (ApplicationGatewayFrontendPortSetting s)]
     -- ^ @frontend_port@ - (Required)
     --
-    , _gatewayIpConfiguration :: TF.Attr s [TF.Attr s (GatewayIpConfigurationSetting s)]
+    , _gatewayIpConfiguration :: TF.Attr s [TF.Attr s (ApplicationGatewayGatewayIpConfigurationSetting s)]
     -- ^ @gateway_ip_configuration@ - (Required)
     --
-    , _httpListener :: TF.Attr s [TF.Attr s (HttpListenerSetting s)]
+    , _httpListener :: TF.Attr s [TF.Attr s (ApplicationGatewayHttpListenerSetting s)]
     -- ^ @http_listener@ - (Required)
     --
     , _location :: TF.Attr s P.Text
@@ -927,45 +927,45 @@ data ApplicationGatewayResource s = ApplicationGatewayResource'
     , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _probe :: TF.Attr s [TF.Attr s (ProbeSetting s)]
+    , _probe :: TF.Attr s [TF.Attr s (ApplicationGatewayProbeSetting s)]
     -- ^ @probe@ - (Optional)
     --
-    , _requestRoutingRule :: TF.Attr s (P.NonEmpty (TF.Attr s (RequestRoutingRuleSetting s)))
+    , _requestRoutingRule :: TF.Attr s (P.NonEmpty (TF.Attr s (ApplicationGatewayRequestRoutingRuleSetting s)))
     -- ^ @request_routing_rule@ - (Required)
     --
     , _resourceGroupName :: TF.Attr s P.Text
     -- ^ @resource_group_name@ - (Required, Forces New)
     --
-    , _sku :: TF.Attr s (SkuSetting s)
+    , _sku :: TF.Attr s (ApplicationGatewaySkuSetting s)
     -- ^ @sku@ - (Required)
     --
-    , _sslCertificate :: TF.Attr s [TF.Attr s (SslCertificateSetting s)]
+    , _sslCertificate :: TF.Attr s [TF.Attr s (ApplicationGatewaySslCertificateSetting s)]
     -- ^ @ssl_certificate@ - (Optional)
     --
     , _tags :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
-    , _urlPathMap :: TF.Attr s [TF.Attr s (UrlPathMapSetting s)]
+    , _urlPathMap :: TF.Attr s [TF.Attr s (ApplicationGatewayUrlPathMapSetting s)]
     -- ^ @url_path_map@ - (Optional)
     --
-    , _wafConfiguration :: TF.Attr s (WafConfigurationSetting s)
+    , _wafConfiguration :: TF.Attr s (ApplicationGatewayWafConfigurationSetting s)
     -- ^ @waf_configuration@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @azurerm_application_gateway@ resource value.
 applicationGatewayResource
-    :: TF.Attr s (P.NonEmpty (TF.Attr s (FrontendIpConfigurationSetting s))) -- ^ @frontend_ip_configuration@ ('P._frontendIpConfiguration', 'P.frontendIpConfiguration')
-    -> TF.Attr s [TF.Attr s (GatewayIpConfigurationSetting s)] -- ^ @gateway_ip_configuration@ ('P._gatewayIpConfiguration', 'P.gatewayIpConfiguration')
-    -> TF.Attr s [TF.Attr s (HttpListenerSetting s)] -- ^ @http_listener@ ('P._httpListener', 'P.httpListener')
+    :: TF.Attr s (P.NonEmpty (TF.Attr s (ApplicationGatewayFrontendIpConfigurationSetting s))) -- ^ @frontend_ip_configuration@ ('P._frontendIpConfiguration', 'P.frontendIpConfiguration')
+    -> TF.Attr s [TF.Attr s (ApplicationGatewayGatewayIpConfigurationSetting s)] -- ^ @gateway_ip_configuration@ ('P._gatewayIpConfiguration', 'P.gatewayIpConfiguration')
+    -> TF.Attr s [TF.Attr s (ApplicationGatewayHttpListenerSetting s)] -- ^ @http_listener@ ('P._httpListener', 'P.httpListener')
     -> TF.Attr s P.Text -- ^ @location@ ('P._location', 'P.location')
     -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
-    -> TF.Attr s [TF.Attr s (BackendAddressPoolSetting s)] -- ^ @backend_address_pool@ ('P._backendAddressPool', 'P.backendAddressPool')
-    -> TF.Attr s [TF.Attr s (FrontendPortSetting s)] -- ^ @frontend_port@ ('P._frontendPort', 'P.frontendPort')
-    -> TF.Attr s (P.NonEmpty (TF.Attr s (RequestRoutingRuleSetting s))) -- ^ @request_routing_rule@ ('P._requestRoutingRule', 'P.requestRoutingRule')
-    -> TF.Attr s (P.NonEmpty (TF.Attr s (BackendHttpSettings s))) -- ^ @backend_http_settings@ ('P._backendHttpSettings', 'P.backendHttpSettings')
-    -> TF.Attr s (SkuSetting s) -- ^ @sku@ ('P._sku', 'P.sku')
+    -> TF.Attr s [TF.Attr s (ApplicationGatewayBackendAddressPoolSetting s)] -- ^ @backend_address_pool@ ('P._backendAddressPool', 'P.backendAddressPool')
+    -> TF.Attr s [TF.Attr s (ApplicationGatewayFrontendPortSetting s)] -- ^ @frontend_port@ ('P._frontendPort', 'P.frontendPort')
+    -> TF.Attr s (P.NonEmpty (TF.Attr s (ApplicationGatewayRequestRoutingRuleSetting s))) -- ^ @request_routing_rule@ ('P._requestRoutingRule', 'P.requestRoutingRule')
+    -> TF.Attr s (P.NonEmpty (TF.Attr s (ApplicationGatewayBackendHttpSettingsSetting s))) -- ^ @backend_http_settings@ ('P._backendHttpSettings', 'P.backendHttpSettings')
+    -> TF.Attr s (ApplicationGatewaySkuSetting s) -- ^ @sku@ ('P._sku', 'P.sku')
     -> P.Resource (ApplicationGatewayResource s)
 applicationGatewayResource _frontendIpConfiguration _gatewayIpConfiguration _httpListener _location _name _resourceGroupName _backendAddressPool _frontendPort _requestRoutingRule _backendHttpSettings _sku =
     TF.unsafeResource "azurerm_application_gateway" TF.validator $
@@ -1016,26 +1016,26 @@ instance TF.IsValid (ApplicationGatewayResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_sku"
                   (_sku
-                      :: ApplicationGatewayResource s -> TF.Attr s (SkuSetting s))
+                      :: ApplicationGatewayResource s -> TF.Attr s (ApplicationGatewaySkuSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_wafConfiguration"
                   (_wafConfiguration
-                      :: ApplicationGatewayResource s -> TF.Attr s (WafConfigurationSetting s))
+                      :: ApplicationGatewayResource s -> TF.Attr s (ApplicationGatewayWafConfigurationSetting s))
                   TF.validator
 
-instance P.HasAuthenticationCertificate (ApplicationGatewayResource s) (TF.Attr s [TF.Attr s (AuthenticationCertificateSetting s)]) where
+instance P.HasAuthenticationCertificate (ApplicationGatewayResource s) (TF.Attr s [TF.Attr s (ApplicationGatewayAuthenticationCertificateSetting s)]) where
     authenticationCertificate =
-        P.lens (_authenticationCertificate :: ApplicationGatewayResource s -> TF.Attr s [TF.Attr s (AuthenticationCertificateSetting s)])
+        P.lens (_authenticationCertificate :: ApplicationGatewayResource s -> TF.Attr s [TF.Attr s (ApplicationGatewayAuthenticationCertificateSetting s)])
                (\s a -> s { _authenticationCertificate = a } :: ApplicationGatewayResource s)
 
-instance P.HasBackendAddressPool (ApplicationGatewayResource s) (TF.Attr s [TF.Attr s (BackendAddressPoolSetting s)]) where
+instance P.HasBackendAddressPool (ApplicationGatewayResource s) (TF.Attr s [TF.Attr s (ApplicationGatewayBackendAddressPoolSetting s)]) where
     backendAddressPool =
-        P.lens (_backendAddressPool :: ApplicationGatewayResource s -> TF.Attr s [TF.Attr s (BackendAddressPoolSetting s)])
+        P.lens (_backendAddressPool :: ApplicationGatewayResource s -> TF.Attr s [TF.Attr s (ApplicationGatewayBackendAddressPoolSetting s)])
                (\s a -> s { _backendAddressPool = a } :: ApplicationGatewayResource s)
 
-instance P.HasBackendHttpSettings (ApplicationGatewayResource s) (TF.Attr s (P.NonEmpty (TF.Attr s (BackendHttpSettings s)))) where
+instance P.HasBackendHttpSettings (ApplicationGatewayResource s) (TF.Attr s (P.NonEmpty (TF.Attr s (ApplicationGatewayBackendHttpSettingsSetting s)))) where
     backendHttpSettings =
-        P.lens (_backendHttpSettings :: ApplicationGatewayResource s -> TF.Attr s (P.NonEmpty (TF.Attr s (BackendHttpSettings s))))
+        P.lens (_backendHttpSettings :: ApplicationGatewayResource s -> TF.Attr s (P.NonEmpty (TF.Attr s (ApplicationGatewayBackendHttpSettingsSetting s))))
                (\s a -> s { _backendHttpSettings = a } :: ApplicationGatewayResource s)
 
 instance P.HasDisabledSslProtocols (ApplicationGatewayResource s) (TF.Attr s [TF.Attr s P.Text]) where
@@ -1043,24 +1043,24 @@ instance P.HasDisabledSslProtocols (ApplicationGatewayResource s) (TF.Attr s [TF
         P.lens (_disabledSslProtocols :: ApplicationGatewayResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _disabledSslProtocols = a } :: ApplicationGatewayResource s)
 
-instance P.HasFrontendIpConfiguration (ApplicationGatewayResource s) (TF.Attr s (P.NonEmpty (TF.Attr s (FrontendIpConfigurationSetting s)))) where
+instance P.HasFrontendIpConfiguration (ApplicationGatewayResource s) (TF.Attr s (P.NonEmpty (TF.Attr s (ApplicationGatewayFrontendIpConfigurationSetting s)))) where
     frontendIpConfiguration =
-        P.lens (_frontendIpConfiguration :: ApplicationGatewayResource s -> TF.Attr s (P.NonEmpty (TF.Attr s (FrontendIpConfigurationSetting s))))
+        P.lens (_frontendIpConfiguration :: ApplicationGatewayResource s -> TF.Attr s (P.NonEmpty (TF.Attr s (ApplicationGatewayFrontendIpConfigurationSetting s))))
                (\s a -> s { _frontendIpConfiguration = a } :: ApplicationGatewayResource s)
 
-instance P.HasFrontendPort (ApplicationGatewayResource s) (TF.Attr s [TF.Attr s (FrontendPortSetting s)]) where
+instance P.HasFrontendPort (ApplicationGatewayResource s) (TF.Attr s [TF.Attr s (ApplicationGatewayFrontendPortSetting s)]) where
     frontendPort =
-        P.lens (_frontendPort :: ApplicationGatewayResource s -> TF.Attr s [TF.Attr s (FrontendPortSetting s)])
+        P.lens (_frontendPort :: ApplicationGatewayResource s -> TF.Attr s [TF.Attr s (ApplicationGatewayFrontendPortSetting s)])
                (\s a -> s { _frontendPort = a } :: ApplicationGatewayResource s)
 
-instance P.HasGatewayIpConfiguration (ApplicationGatewayResource s) (TF.Attr s [TF.Attr s (GatewayIpConfigurationSetting s)]) where
+instance P.HasGatewayIpConfiguration (ApplicationGatewayResource s) (TF.Attr s [TF.Attr s (ApplicationGatewayGatewayIpConfigurationSetting s)]) where
     gatewayIpConfiguration =
-        P.lens (_gatewayIpConfiguration :: ApplicationGatewayResource s -> TF.Attr s [TF.Attr s (GatewayIpConfigurationSetting s)])
+        P.lens (_gatewayIpConfiguration :: ApplicationGatewayResource s -> TF.Attr s [TF.Attr s (ApplicationGatewayGatewayIpConfigurationSetting s)])
                (\s a -> s { _gatewayIpConfiguration = a } :: ApplicationGatewayResource s)
 
-instance P.HasHttpListener (ApplicationGatewayResource s) (TF.Attr s [TF.Attr s (HttpListenerSetting s)]) where
+instance P.HasHttpListener (ApplicationGatewayResource s) (TF.Attr s [TF.Attr s (ApplicationGatewayHttpListenerSetting s)]) where
     httpListener =
-        P.lens (_httpListener :: ApplicationGatewayResource s -> TF.Attr s [TF.Attr s (HttpListenerSetting s)])
+        P.lens (_httpListener :: ApplicationGatewayResource s -> TF.Attr s [TF.Attr s (ApplicationGatewayHttpListenerSetting s)])
                (\s a -> s { _httpListener = a } :: ApplicationGatewayResource s)
 
 instance P.HasLocation (ApplicationGatewayResource s) (TF.Attr s P.Text) where
@@ -1073,14 +1073,14 @@ instance P.HasName (ApplicationGatewayResource s) (TF.Attr s P.Text) where
         P.lens (_name :: ApplicationGatewayResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ApplicationGatewayResource s)
 
-instance P.HasProbe (ApplicationGatewayResource s) (TF.Attr s [TF.Attr s (ProbeSetting s)]) where
+instance P.HasProbe (ApplicationGatewayResource s) (TF.Attr s [TF.Attr s (ApplicationGatewayProbeSetting s)]) where
     probe =
-        P.lens (_probe :: ApplicationGatewayResource s -> TF.Attr s [TF.Attr s (ProbeSetting s)])
+        P.lens (_probe :: ApplicationGatewayResource s -> TF.Attr s [TF.Attr s (ApplicationGatewayProbeSetting s)])
                (\s a -> s { _probe = a } :: ApplicationGatewayResource s)
 
-instance P.HasRequestRoutingRule (ApplicationGatewayResource s) (TF.Attr s (P.NonEmpty (TF.Attr s (RequestRoutingRuleSetting s)))) where
+instance P.HasRequestRoutingRule (ApplicationGatewayResource s) (TF.Attr s (P.NonEmpty (TF.Attr s (ApplicationGatewayRequestRoutingRuleSetting s)))) where
     requestRoutingRule =
-        P.lens (_requestRoutingRule :: ApplicationGatewayResource s -> TF.Attr s (P.NonEmpty (TF.Attr s (RequestRoutingRuleSetting s))))
+        P.lens (_requestRoutingRule :: ApplicationGatewayResource s -> TF.Attr s (P.NonEmpty (TF.Attr s (ApplicationGatewayRequestRoutingRuleSetting s))))
                (\s a -> s { _requestRoutingRule = a } :: ApplicationGatewayResource s)
 
 instance P.HasResourceGroupName (ApplicationGatewayResource s) (TF.Attr s P.Text) where
@@ -1088,14 +1088,14 @@ instance P.HasResourceGroupName (ApplicationGatewayResource s) (TF.Attr s P.Text
         P.lens (_resourceGroupName :: ApplicationGatewayResource s -> TF.Attr s P.Text)
                (\s a -> s { _resourceGroupName = a } :: ApplicationGatewayResource s)
 
-instance P.HasSku (ApplicationGatewayResource s) (TF.Attr s (SkuSetting s)) where
+instance P.HasSku (ApplicationGatewayResource s) (TF.Attr s (ApplicationGatewaySkuSetting s)) where
     sku =
-        P.lens (_sku :: ApplicationGatewayResource s -> TF.Attr s (SkuSetting s))
+        P.lens (_sku :: ApplicationGatewayResource s -> TF.Attr s (ApplicationGatewaySkuSetting s))
                (\s a -> s { _sku = a } :: ApplicationGatewayResource s)
 
-instance P.HasSslCertificate (ApplicationGatewayResource s) (TF.Attr s [TF.Attr s (SslCertificateSetting s)]) where
+instance P.HasSslCertificate (ApplicationGatewayResource s) (TF.Attr s [TF.Attr s (ApplicationGatewaySslCertificateSetting s)]) where
     sslCertificate =
-        P.lens (_sslCertificate :: ApplicationGatewayResource s -> TF.Attr s [TF.Attr s (SslCertificateSetting s)])
+        P.lens (_sslCertificate :: ApplicationGatewayResource s -> TF.Attr s [TF.Attr s (ApplicationGatewaySslCertificateSetting s)])
                (\s a -> s { _sslCertificate = a } :: ApplicationGatewayResource s)
 
 instance P.HasTags (ApplicationGatewayResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
@@ -1103,14 +1103,14 @@ instance P.HasTags (ApplicationGatewayResource s) (TF.Attr s (P.Map P.Text (TF.A
         P.lens (_tags :: ApplicationGatewayResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _tags = a } :: ApplicationGatewayResource s)
 
-instance P.HasUrlPathMap (ApplicationGatewayResource s) (TF.Attr s [TF.Attr s (UrlPathMapSetting s)]) where
+instance P.HasUrlPathMap (ApplicationGatewayResource s) (TF.Attr s [TF.Attr s (ApplicationGatewayUrlPathMapSetting s)]) where
     urlPathMap =
-        P.lens (_urlPathMap :: ApplicationGatewayResource s -> TF.Attr s [TF.Attr s (UrlPathMapSetting s)])
+        P.lens (_urlPathMap :: ApplicationGatewayResource s -> TF.Attr s [TF.Attr s (ApplicationGatewayUrlPathMapSetting s)])
                (\s a -> s { _urlPathMap = a } :: ApplicationGatewayResource s)
 
-instance P.HasWafConfiguration (ApplicationGatewayResource s) (TF.Attr s (WafConfigurationSetting s)) where
+instance P.HasWafConfiguration (ApplicationGatewayResource s) (TF.Attr s (ApplicationGatewayWafConfigurationSetting s)) where
     wafConfiguration =
-        P.lens (_wafConfiguration :: ApplicationGatewayResource s -> TF.Attr s (WafConfigurationSetting s))
+        P.lens (_wafConfiguration :: ApplicationGatewayResource s -> TF.Attr s (ApplicationGatewayWafConfigurationSetting s))
                (\s a -> s { _wafConfiguration = a } :: ApplicationGatewayResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ApplicationGatewayResource s)) (TF.Attr s P.Text) where
@@ -1292,7 +1292,7 @@ data AutomationAccountResource s = AutomationAccountResource'
     , _resourceGroupName :: TF.Attr s P.Text
     -- ^ @resource_group_name@ - (Required, Forces New)
     --
-    , _sku               :: TF.Attr s (SkuSetting s)
+    , _sku               :: TF.Attr s (AutomationAccountSkuSetting s)
     -- ^ @sku@ - (Required)
     --
     , _tags              :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
@@ -1305,7 +1305,7 @@ automationAccountResource
     :: TF.Attr s P.Text -- ^ @location@ ('P._location', 'P.location')
     -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
-    -> TF.Attr s (SkuSetting s) -- ^ @sku@ ('P._sku', 'P.sku')
+    -> TF.Attr s (AutomationAccountSkuSetting s) -- ^ @sku@ ('P._sku', 'P.sku')
     -> P.Resource (AutomationAccountResource s)
 automationAccountResource _location _name _resourceGroupName _sku =
     TF.unsafeResource "azurerm_automation_account" TF.validator $
@@ -1330,7 +1330,7 @@ instance TF.IsValid (AutomationAccountResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_sku"
                   (_sku
-                      :: AutomationAccountResource s -> TF.Attr s (SkuSetting s))
+                      :: AutomationAccountResource s -> TF.Attr s (AutomationAccountSkuSetting s))
                   TF.validator
 
 instance P.HasLocation (AutomationAccountResource s) (TF.Attr s P.Text) where
@@ -1348,9 +1348,9 @@ instance P.HasResourceGroupName (AutomationAccountResource s) (TF.Attr s P.Text)
         P.lens (_resourceGroupName :: AutomationAccountResource s -> TF.Attr s P.Text)
                (\s a -> s { _resourceGroupName = a } :: AutomationAccountResource s)
 
-instance P.HasSku (AutomationAccountResource s) (TF.Attr s (SkuSetting s)) where
+instance P.HasSku (AutomationAccountResource s) (TF.Attr s (AutomationAccountSkuSetting s)) where
     sku =
-        P.lens (_sku :: AutomationAccountResource s -> TF.Attr s (SkuSetting s))
+        P.lens (_sku :: AutomationAccountResource s -> TF.Attr s (AutomationAccountSkuSetting s))
                (\s a -> s { _sku = a } :: AutomationAccountResource s)
 
 instance P.HasTags (AutomationAccountResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
@@ -1459,41 +1459,41 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (AutomationCredentialResource s)) 
 -- See the <https://www.terraform.io/docs/providers/azurerm/r/automation_runbook.html terraform documentation>
 -- for more information.
 data AutomationRunbookResource s = AutomationRunbookResource'
-    { _accountName        :: TF.Attr s P.Text
+    { _accountName :: TF.Attr s P.Text
     -- ^ @account_name@ - (Required, Forces New)
     --
-    , _description        :: TF.Attr s P.Text
+    , _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _location           :: TF.Attr s P.Text
+    , _location :: TF.Attr s P.Text
     -- ^ @location@ - (Required, Forces New)
     --
-    , _logProgress        :: TF.Attr s P.Bool
+    , _logProgress :: TF.Attr s P.Bool
     -- ^ @log_progress@ - (Required)
     --
-    , _logVerbose         :: TF.Attr s P.Bool
+    , _logVerbose :: TF.Attr s P.Bool
     -- ^ @log_verbose@ - (Required)
     --
-    , _name               :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _publishContentLink :: TF.Attr s (PublishContentLinkSetting s)
+    , _publishContentLink :: TF.Attr s (AutomationRunbookPublishContentLinkSetting s)
     -- ^ @publish_content_link@ - (Required)
     --
-    , _resourceGroupName  :: TF.Attr s P.Text
+    , _resourceGroupName :: TF.Attr s P.Text
     -- ^ @resource_group_name@ - (Required, Forces New)
     --
-    , _runbookType        :: TF.Attr s P.Text
+    , _runbookType :: TF.Attr s P.Text
     -- ^ @runbook_type@ - (Required, Forces New)
     --
-    , _tags               :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _tags :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @azurerm_automation_runbook@ resource value.
 automationRunbookResource
-    :: TF.Attr s (PublishContentLinkSetting s) -- ^ @publish_content_link@ ('P._publishContentLink', 'P.publishContentLink')
+    :: TF.Attr s (AutomationRunbookPublishContentLinkSetting s) -- ^ @publish_content_link@ ('P._publishContentLink', 'P.publishContentLink')
     -> TF.Attr s P.Text -- ^ @location@ ('P._location', 'P.location')
     -> TF.Attr s P.Text -- ^ @account_name@ ('P._accountName', 'P.accountName')
     -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
@@ -1535,7 +1535,7 @@ instance TF.IsValid (AutomationRunbookResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_publishContentLink"
                   (_publishContentLink
-                      :: AutomationRunbookResource s -> TF.Attr s (PublishContentLinkSetting s))
+                      :: AutomationRunbookResource s -> TF.Attr s (AutomationRunbookPublishContentLinkSetting s))
                   TF.validator
 
 instance P.HasAccountName (AutomationRunbookResource s) (TF.Attr s P.Text) where
@@ -1568,9 +1568,9 @@ instance P.HasName (AutomationRunbookResource s) (TF.Attr s P.Text) where
         P.lens (_name :: AutomationRunbookResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: AutomationRunbookResource s)
 
-instance P.HasPublishContentLink (AutomationRunbookResource s) (TF.Attr s (PublishContentLinkSetting s)) where
+instance P.HasPublishContentLink (AutomationRunbookResource s) (TF.Attr s (AutomationRunbookPublishContentLinkSetting s)) where
     publishContentLink =
-        P.lens (_publishContentLink :: AutomationRunbookResource s -> TF.Attr s (PublishContentLinkSetting s))
+        P.lens (_publishContentLink :: AutomationRunbookResource s -> TF.Attr s (AutomationRunbookPublishContentLinkSetting s))
                (\s a -> s { _publishContentLink = a } :: AutomationRunbookResource s)
 
 instance P.HasResourceGroupName (AutomationRunbookResource s) (TF.Attr s P.Text) where
@@ -1729,28 +1729,28 @@ instance s ~ s' => P.HasComputedStartTime (TF.Ref s' (AutomationScheduleResource
 -- See the <https://www.terraform.io/docs/providers/azurerm/r/autoscale_setting.html terraform documentation>
 -- for more information.
 data AutoscaleSettingResource s = AutoscaleSettingResource'
-    { _enabled           :: TF.Attr s P.Bool
+    { _enabled :: TF.Attr s P.Bool
     -- ^ @enabled@ - (Optional)
     --
-    , _location          :: TF.Attr s P.Text
+    , _location :: TF.Attr s P.Text
     -- ^ @location@ - (Required, Forces New)
     --
-    , _name              :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _notification      :: TF.Attr s (NotificationSetting s)
+    , _notification :: TF.Attr s (AutoscaleSettingNotificationSetting s)
     -- ^ @notification@ - (Optional)
     --
-    , _profile           :: TF.Attr s [TF.Attr s (ProfileSetting s)]
+    , _profile :: TF.Attr s [TF.Attr s (AutoscaleSettingProfileSetting s)]
     -- ^ @profile@ - (Required)
     --
     , _resourceGroupName :: TF.Attr s P.Text
     -- ^ @resource_group_name@ - (Required, Forces New)
     --
-    , _tags              :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _tags :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
-    , _targetResourceId  :: TF.Attr s P.Text
+    , _targetResourceId :: TF.Attr s P.Text
     -- ^ @target_resource_id@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -1761,7 +1761,7 @@ autoscaleSettingResource
     -> TF.Attr s P.Text -- ^ @location@ ('P._location', 'P.location')
     -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
-    -> TF.Attr s [TF.Attr s (ProfileSetting s)] -- ^ @profile@ ('P._profile', 'P.profile')
+    -> TF.Attr s [TF.Attr s (AutoscaleSettingProfileSetting s)] -- ^ @profile@ ('P._profile', 'P.profile')
     -> P.Resource (AutoscaleSettingResource s)
 autoscaleSettingResource _targetResourceId _location _name _resourceGroupName _profile =
     TF.unsafeResource "azurerm_autoscale_setting" TF.validator $
@@ -1792,7 +1792,7 @@ instance TF.IsValid (AutoscaleSettingResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_notification"
                   (_notification
-                      :: AutoscaleSettingResource s -> TF.Attr s (NotificationSetting s))
+                      :: AutoscaleSettingResource s -> TF.Attr s (AutoscaleSettingNotificationSetting s))
                   TF.validator
 
 instance P.HasEnabled (AutoscaleSettingResource s) (TF.Attr s P.Bool) where
@@ -1810,14 +1810,14 @@ instance P.HasName (AutoscaleSettingResource s) (TF.Attr s P.Text) where
         P.lens (_name :: AutoscaleSettingResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: AutoscaleSettingResource s)
 
-instance P.HasNotification (AutoscaleSettingResource s) (TF.Attr s (NotificationSetting s)) where
+instance P.HasNotification (AutoscaleSettingResource s) (TF.Attr s (AutoscaleSettingNotificationSetting s)) where
     notification =
-        P.lens (_notification :: AutoscaleSettingResource s -> TF.Attr s (NotificationSetting s))
+        P.lens (_notification :: AutoscaleSettingResource s -> TF.Attr s (AutoscaleSettingNotificationSetting s))
                (\s a -> s { _notification = a } :: AutoscaleSettingResource s)
 
-instance P.HasProfile (AutoscaleSettingResource s) (TF.Attr s [TF.Attr s (ProfileSetting s)]) where
+instance P.HasProfile (AutoscaleSettingResource s) (TF.Attr s [TF.Attr s (AutoscaleSettingProfileSetting s)]) where
     profile =
-        P.lens (_profile :: AutoscaleSettingResource s -> TF.Attr s [TF.Attr s (ProfileSetting s)])
+        P.lens (_profile :: AutoscaleSettingResource s -> TF.Attr s [TF.Attr s (AutoscaleSettingProfileSetting s)])
                (\s a -> s { _profile = a } :: AutoscaleSettingResource s)
 
 instance P.HasResourceGroupName (AutoscaleSettingResource s) (TF.Attr s P.Text) where
@@ -2171,7 +2171,7 @@ data CdnEndpointResource s = CdnEndpointResource'
     { _contentTypesToCompress :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @content_types_to_compress@ - (Optional)
     --
-    , _geoFilter :: TF.Attr s [TF.Attr s (GeoFilterSetting s)]
+    , _geoFilter :: TF.Attr s [TF.Attr s (CdnEndpointGeoFilterSetting s)]
     -- ^ @geo_filter@ - (Optional)
     --
     , _isCompressionEnabled :: TF.Attr s P.Bool
@@ -2192,7 +2192,7 @@ data CdnEndpointResource s = CdnEndpointResource'
     , _optimizationType :: TF.Attr s P.Text
     -- ^ @optimization_type@ - (Optional)
     --
-    , _origin :: TF.Attr s [TF.Attr s (OriginSetting s)]
+    , _origin :: TF.Attr s [TF.Attr s (CdnEndpointOriginSetting s)]
     -- ^ @origin@ - (Required, Forces New)
     --
     , _originHostHeader :: TF.Attr s P.Text
@@ -2224,7 +2224,7 @@ cdnEndpointResource
     -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> TF.Attr s P.Text -- ^ @profile_name@ ('P._profileName', 'P.profileName')
     -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
-    -> TF.Attr s [TF.Attr s (OriginSetting s)] -- ^ @origin@ ('P._origin', 'P.origin')
+    -> TF.Attr s [TF.Attr s (CdnEndpointOriginSetting s)] -- ^ @origin@ ('P._origin', 'P.origin')
     -> P.Resource (CdnEndpointResource s)
 cdnEndpointResource _location _name _profileName _resourceGroupName _origin =
     TF.unsafeResource "azurerm_cdn_endpoint" TF.validator $
@@ -2275,9 +2275,9 @@ instance P.HasContentTypesToCompress (CdnEndpointResource s) (TF.Attr s [TF.Attr
         P.lens (_contentTypesToCompress :: CdnEndpointResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _contentTypesToCompress = a } :: CdnEndpointResource s)
 
-instance P.HasGeoFilter (CdnEndpointResource s) (TF.Attr s [TF.Attr s (GeoFilterSetting s)]) where
+instance P.HasGeoFilter (CdnEndpointResource s) (TF.Attr s [TF.Attr s (CdnEndpointGeoFilterSetting s)]) where
     geoFilter =
-        P.lens (_geoFilter :: CdnEndpointResource s -> TF.Attr s [TF.Attr s (GeoFilterSetting s)])
+        P.lens (_geoFilter :: CdnEndpointResource s -> TF.Attr s [TF.Attr s (CdnEndpointGeoFilterSetting s)])
                (\s a -> s { _geoFilter = a } :: CdnEndpointResource s)
 
 instance P.HasIsCompressionEnabled (CdnEndpointResource s) (TF.Attr s P.Bool) where
@@ -2310,9 +2310,9 @@ instance P.HasOptimizationType (CdnEndpointResource s) (TF.Attr s P.Text) where
         P.lens (_optimizationType :: CdnEndpointResource s -> TF.Attr s P.Text)
                (\s a -> s { _optimizationType = a } :: CdnEndpointResource s)
 
-instance P.HasOrigin (CdnEndpointResource s) (TF.Attr s [TF.Attr s (OriginSetting s)]) where
+instance P.HasOrigin (CdnEndpointResource s) (TF.Attr s [TF.Attr s (CdnEndpointOriginSetting s)]) where
     origin =
-        P.lens (_origin :: CdnEndpointResource s -> TF.Attr s [TF.Attr s (OriginSetting s)])
+        P.lens (_origin :: CdnEndpointResource s -> TF.Attr s [TF.Attr s (CdnEndpointOriginSetting s)])
                (\s a -> s { _origin = a } :: CdnEndpointResource s)
 
 instance P.HasOriginHostHeader (CdnEndpointResource s) (TF.Attr s P.Text) where
@@ -2458,13 +2458,13 @@ instance s ~ s' => P.HasComputedTags (TF.Ref s' (CdnProfileResource s)) (TF.Attr
 -- See the <https://www.terraform.io/docs/providers/azurerm/r/container_group.html terraform documentation>
 -- for more information.
 data ContainerGroupResource s = ContainerGroupResource'
-    { _container :: TF.Attr s [TF.Attr s (ContainerSetting s)]
+    { _container :: TF.Attr s [TF.Attr s (ContainerGroupContainerSetting s)]
     -- ^ @container@ - (Required, Forces New)
     --
     , _dnsNameLabel :: TF.Attr s P.Text
     -- ^ @dns_name_label@ - (Optional, Forces New)
     --
-    , _imageRegistryCredential :: TF.Attr s [TF.Attr s (ImageRegistryCredentialSetting s)]
+    , _imageRegistryCredential :: TF.Attr s [TF.Attr s (ContainerGroupImageRegistryCredentialSetting s)]
     -- ^ @image_registry_credential@ - (Optional, Forces New)
     --
     , _ipAddressType :: TF.Attr s P.Text
@@ -2492,7 +2492,7 @@ data ContainerGroupResource s = ContainerGroupResource'
 
 -- | Define a new @azurerm_container_group@ resource value.
 containerGroupResource
-    :: TF.Attr s [TF.Attr s (ContainerSetting s)] -- ^ @container@ ('P._container', 'P.container')
+    :: TF.Attr s [TF.Attr s (ContainerGroupContainerSetting s)] -- ^ @container@ ('P._container', 'P.container')
     -> TF.Attr s P.Text -- ^ @location@ ('P._location', 'P.location')
     -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
@@ -2530,9 +2530,9 @@ instance TF.IsObject (ContainerGroupResource s) where
 instance TF.IsValid (ContainerGroupResource s) where
     validator = P.mempty
 
-instance P.HasContainer (ContainerGroupResource s) (TF.Attr s [TF.Attr s (ContainerSetting s)]) where
+instance P.HasContainer (ContainerGroupResource s) (TF.Attr s [TF.Attr s (ContainerGroupContainerSetting s)]) where
     container =
-        P.lens (_container :: ContainerGroupResource s -> TF.Attr s [TF.Attr s (ContainerSetting s)])
+        P.lens (_container :: ContainerGroupResource s -> TF.Attr s [TF.Attr s (ContainerGroupContainerSetting s)])
                (\s a -> s { _container = a } :: ContainerGroupResource s)
 
 instance P.HasDnsNameLabel (ContainerGroupResource s) (TF.Attr s P.Text) where
@@ -2540,9 +2540,9 @@ instance P.HasDnsNameLabel (ContainerGroupResource s) (TF.Attr s P.Text) where
         P.lens (_dnsNameLabel :: ContainerGroupResource s -> TF.Attr s P.Text)
                (\s a -> s { _dnsNameLabel = a } :: ContainerGroupResource s)
 
-instance P.HasImageRegistryCredential (ContainerGroupResource s) (TF.Attr s [TF.Attr s (ImageRegistryCredentialSetting s)]) where
+instance P.HasImageRegistryCredential (ContainerGroupResource s) (TF.Attr s [TF.Attr s (ContainerGroupImageRegistryCredentialSetting s)]) where
     imageRegistryCredential =
-        P.lens (_imageRegistryCredential :: ContainerGroupResource s -> TF.Attr s [TF.Attr s (ImageRegistryCredentialSetting s)])
+        P.lens (_imageRegistryCredential :: ContainerGroupResource s -> TF.Attr s [TF.Attr s (ContainerGroupImageRegistryCredentialSetting s)])
                (\s a -> s { _imageRegistryCredential = a } :: ContainerGroupResource s)
 
 instance P.HasIpAddressType (ContainerGroupResource s) (TF.Attr s P.Text) where
@@ -2707,34 +2707,34 @@ instance s ~ s' => P.HasComputedTags (TF.Ref s' (ContainerRegistryResource s)) (
 -- See the <https://www.terraform.io/docs/providers/azurerm/r/container_service.html terraform documentation>
 -- for more information.
 data ContainerServiceResource s = ContainerServiceResource'
-    { _agentPoolProfile      :: TF.Attr s (AgentPoolProfileSetting s)
+    { _agentPoolProfile :: TF.Attr s (ContainerServiceAgentPoolProfileSetting s)
     -- ^ @agent_pool_profile@ - (Required)
     --
-    , _diagnosticsProfile    :: TF.Attr s (DiagnosticsProfileSetting s)
+    , _diagnosticsProfile :: TF.Attr s (ContainerServiceDiagnosticsProfileSetting s)
     -- ^ @diagnostics_profile@ - (Required)
     --
-    , _linuxProfile          :: TF.Attr s (LinuxProfileSetting s)
+    , _linuxProfile :: TF.Attr s (ContainerServiceLinuxProfileSetting s)
     -- ^ @linux_profile@ - (Required)
     --
-    , _location              :: TF.Attr s P.Text
+    , _location :: TF.Attr s P.Text
     -- ^ @location@ - (Required, Forces New)
     --
-    , _masterProfile         :: TF.Attr s (MasterProfileSetting s)
+    , _masterProfile :: TF.Attr s (ContainerServiceMasterProfileSetting s)
     -- ^ @master_profile@ - (Required)
     --
-    , _name                  :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
     , _orchestrationPlatform :: TF.Attr s P.Text
     -- ^ @orchestration_platform@ - (Required, Forces New)
     --
-    , _resourceGroupName     :: TF.Attr s P.Text
+    , _resourceGroupName :: TF.Attr s P.Text
     -- ^ @resource_group_name@ - (Required, Forces New)
     --
-    , _servicePrincipal      :: TF.Attr s (ServicePrincipalSetting s)
+    , _servicePrincipal :: TF.Attr s (ContainerServiceServicePrincipalSetting s)
     -- ^ @service_principal@ - (Optional)
     --
-    , _tags                  :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _tags :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -2745,10 +2745,10 @@ containerServiceResource
     -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
     -> TF.Attr s P.Text -- ^ @orchestration_platform@ ('P._orchestrationPlatform', 'P.orchestrationPlatform')
-    -> TF.Attr s (AgentPoolProfileSetting s) -- ^ @agent_pool_profile@ ('P._agentPoolProfile', 'P.agentPoolProfile')
-    -> TF.Attr s (DiagnosticsProfileSetting s) -- ^ @diagnostics_profile@ ('P._diagnosticsProfile', 'P.diagnosticsProfile')
-    -> TF.Attr s (LinuxProfileSetting s) -- ^ @linux_profile@ ('P._linuxProfile', 'P.linuxProfile')
-    -> TF.Attr s (MasterProfileSetting s) -- ^ @master_profile@ ('P._masterProfile', 'P.masterProfile')
+    -> TF.Attr s (ContainerServiceAgentPoolProfileSetting s) -- ^ @agent_pool_profile@ ('P._agentPoolProfile', 'P.agentPoolProfile')
+    -> TF.Attr s (ContainerServiceDiagnosticsProfileSetting s) -- ^ @diagnostics_profile@ ('P._diagnosticsProfile', 'P.diagnosticsProfile')
+    -> TF.Attr s (ContainerServiceLinuxProfileSetting s) -- ^ @linux_profile@ ('P._linuxProfile', 'P.linuxProfile')
+    -> TF.Attr s (ContainerServiceMasterProfileSetting s) -- ^ @master_profile@ ('P._masterProfile', 'P.masterProfile')
     -> P.Resource (ContainerServiceResource s)
 containerServiceResource _location _name _resourceGroupName _orchestrationPlatform _agentPoolProfile _diagnosticsProfile _linuxProfile _masterProfile =
     TF.unsafeResource "azurerm_container_service" TF.validator $
@@ -2783,38 +2783,38 @@ instance TF.IsValid (ContainerServiceResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_agentPoolProfile"
                   (_agentPoolProfile
-                      :: ContainerServiceResource s -> TF.Attr s (AgentPoolProfileSetting s))
+                      :: ContainerServiceResource s -> TF.Attr s (ContainerServiceAgentPoolProfileSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_diagnosticsProfile"
                   (_diagnosticsProfile
-                      :: ContainerServiceResource s -> TF.Attr s (DiagnosticsProfileSetting s))
+                      :: ContainerServiceResource s -> TF.Attr s (ContainerServiceDiagnosticsProfileSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_linuxProfile"
                   (_linuxProfile
-                      :: ContainerServiceResource s -> TF.Attr s (LinuxProfileSetting s))
+                      :: ContainerServiceResource s -> TF.Attr s (ContainerServiceLinuxProfileSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_masterProfile"
                   (_masterProfile
-                      :: ContainerServiceResource s -> TF.Attr s (MasterProfileSetting s))
+                      :: ContainerServiceResource s -> TF.Attr s (ContainerServiceMasterProfileSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_servicePrincipal"
                   (_servicePrincipal
-                      :: ContainerServiceResource s -> TF.Attr s (ServicePrincipalSetting s))
+                      :: ContainerServiceResource s -> TF.Attr s (ContainerServiceServicePrincipalSetting s))
                   TF.validator
 
-instance P.HasAgentPoolProfile (ContainerServiceResource s) (TF.Attr s (AgentPoolProfileSetting s)) where
+instance P.HasAgentPoolProfile (ContainerServiceResource s) (TF.Attr s (ContainerServiceAgentPoolProfileSetting s)) where
     agentPoolProfile =
-        P.lens (_agentPoolProfile :: ContainerServiceResource s -> TF.Attr s (AgentPoolProfileSetting s))
+        P.lens (_agentPoolProfile :: ContainerServiceResource s -> TF.Attr s (ContainerServiceAgentPoolProfileSetting s))
                (\s a -> s { _agentPoolProfile = a } :: ContainerServiceResource s)
 
-instance P.HasDiagnosticsProfile (ContainerServiceResource s) (TF.Attr s (DiagnosticsProfileSetting s)) where
+instance P.HasDiagnosticsProfile (ContainerServiceResource s) (TF.Attr s (ContainerServiceDiagnosticsProfileSetting s)) where
     diagnosticsProfile =
-        P.lens (_diagnosticsProfile :: ContainerServiceResource s -> TF.Attr s (DiagnosticsProfileSetting s))
+        P.lens (_diagnosticsProfile :: ContainerServiceResource s -> TF.Attr s (ContainerServiceDiagnosticsProfileSetting s))
                (\s a -> s { _diagnosticsProfile = a } :: ContainerServiceResource s)
 
-instance P.HasLinuxProfile (ContainerServiceResource s) (TF.Attr s (LinuxProfileSetting s)) where
+instance P.HasLinuxProfile (ContainerServiceResource s) (TF.Attr s (ContainerServiceLinuxProfileSetting s)) where
     linuxProfile =
-        P.lens (_linuxProfile :: ContainerServiceResource s -> TF.Attr s (LinuxProfileSetting s))
+        P.lens (_linuxProfile :: ContainerServiceResource s -> TF.Attr s (ContainerServiceLinuxProfileSetting s))
                (\s a -> s { _linuxProfile = a } :: ContainerServiceResource s)
 
 instance P.HasLocation (ContainerServiceResource s) (TF.Attr s P.Text) where
@@ -2822,9 +2822,9 @@ instance P.HasLocation (ContainerServiceResource s) (TF.Attr s P.Text) where
         P.lens (_location :: ContainerServiceResource s -> TF.Attr s P.Text)
                (\s a -> s { _location = a } :: ContainerServiceResource s)
 
-instance P.HasMasterProfile (ContainerServiceResource s) (TF.Attr s (MasterProfileSetting s)) where
+instance P.HasMasterProfile (ContainerServiceResource s) (TF.Attr s (ContainerServiceMasterProfileSetting s)) where
     masterProfile =
-        P.lens (_masterProfile :: ContainerServiceResource s -> TF.Attr s (MasterProfileSetting s))
+        P.lens (_masterProfile :: ContainerServiceResource s -> TF.Attr s (ContainerServiceMasterProfileSetting s))
                (\s a -> s { _masterProfile = a } :: ContainerServiceResource s)
 
 instance P.HasName (ContainerServiceResource s) (TF.Attr s P.Text) where
@@ -2842,9 +2842,9 @@ instance P.HasResourceGroupName (ContainerServiceResource s) (TF.Attr s P.Text) 
         P.lens (_resourceGroupName :: ContainerServiceResource s -> TF.Attr s P.Text)
                (\s a -> s { _resourceGroupName = a } :: ContainerServiceResource s)
 
-instance P.HasServicePrincipal (ContainerServiceResource s) (TF.Attr s (ServicePrincipalSetting s)) where
+instance P.HasServicePrincipal (ContainerServiceResource s) (TF.Attr s (ContainerServiceServicePrincipalSetting s)) where
     servicePrincipal =
-        P.lens (_servicePrincipal :: ContainerServiceResource s -> TF.Attr s (ServicePrincipalSetting s))
+        P.lens (_servicePrincipal :: ContainerServiceResource s -> TF.Attr s (ContainerServiceServicePrincipalSetting s))
                (\s a -> s { _servicePrincipal = a } :: ContainerServiceResource s)
 
 instance P.HasTags (ContainerServiceResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
@@ -2863,37 +2863,37 @@ instance s ~ s' => P.HasComputedTags (TF.Ref s' (ContainerServiceResource s)) (T
 -- See the <https://www.terraform.io/docs/providers/azurerm/r/cosmosdb_account.html terraform documentation>
 -- for more information.
 data CosmosdbAccountResource s = CosmosdbAccountResource'
-    { _capabilities            :: TF.Attr s [TF.Attr s (CapabilitiesSetting s)]
+    { _capabilities :: TF.Attr s [TF.Attr s (CosmosdbAccountCapabilitiesSetting s)]
     -- ^ @capabilities@ - (Optional)
     --
-    , _consistencyPolicy       :: TF.Attr s (ConsistencyPolicySetting s)
+    , _consistencyPolicy :: TF.Attr s (CosmosdbAccountConsistencyPolicySetting s)
     -- ^ @consistency_policy@ - (Required)
     --
     , _enableAutomaticFailover :: TF.Attr s P.Bool
     -- ^ @enable_automatic_failover@ - (Optional)
     --
-    , _geoLocation             :: TF.Attr s [TF.Attr s (GeoLocationSetting s)]
+    , _geoLocation :: TF.Attr s [TF.Attr s (CosmosdbAccountGeoLocationSetting s)]
     -- ^ @geo_location@ - (Optional)
     --
-    , _ipRangeFilter           :: TF.Attr s P.Text
+    , _ipRangeFilter :: TF.Attr s P.Text
     -- ^ @ip_range_filter@ - (Optional)
     --
-    , _kind                    :: TF.Attr s P.Text
+    , _kind :: TF.Attr s P.Text
     -- ^ @kind@ - (Optional, Forces New)
     --
-    , _location                :: TF.Attr s P.Text
+    , _location :: TF.Attr s P.Text
     -- ^ @location@ - (Required, Forces New)
     --
-    , _name                    :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _offerType               :: TF.Attr s P.Text
+    , _offerType :: TF.Attr s P.Text
     -- ^ @offer_type@ - (Required)
     --
-    , _resourceGroupName       :: TF.Attr s P.Text
+    , _resourceGroupName :: TF.Attr s P.Text
     -- ^ @resource_group_name@ - (Required, Forces New)
     --
-    , _tags                    :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _tags :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -2903,7 +2903,7 @@ cosmosdbAccountResource
     :: TF.Attr s P.Text -- ^ @location@ ('P._location', 'P.location')
     -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
-    -> TF.Attr s (ConsistencyPolicySetting s) -- ^ @consistency_policy@ ('P._consistencyPolicy', 'P.consistencyPolicy')
+    -> TF.Attr s (CosmosdbAccountConsistencyPolicySetting s) -- ^ @consistency_policy@ ('P._consistencyPolicy', 'P.consistencyPolicy')
     -> TF.Attr s P.Text -- ^ @offer_type@ ('P._offerType', 'P.offerType')
     -> P.Resource (CosmosdbAccountResource s)
 cosmosdbAccountResource _location _name _resourceGroupName _consistencyPolicy _offerType =
@@ -2941,17 +2941,17 @@ instance TF.IsValid (CosmosdbAccountResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_consistencyPolicy"
                   (_consistencyPolicy
-                      :: CosmosdbAccountResource s -> TF.Attr s (ConsistencyPolicySetting s))
+                      :: CosmosdbAccountResource s -> TF.Attr s (CosmosdbAccountConsistencyPolicySetting s))
                   TF.validator
 
-instance P.HasCapabilities (CosmosdbAccountResource s) (TF.Attr s [TF.Attr s (CapabilitiesSetting s)]) where
+instance P.HasCapabilities (CosmosdbAccountResource s) (TF.Attr s [TF.Attr s (CosmosdbAccountCapabilitiesSetting s)]) where
     capabilities =
-        P.lens (_capabilities :: CosmosdbAccountResource s -> TF.Attr s [TF.Attr s (CapabilitiesSetting s)])
+        P.lens (_capabilities :: CosmosdbAccountResource s -> TF.Attr s [TF.Attr s (CosmosdbAccountCapabilitiesSetting s)])
                (\s a -> s { _capabilities = a } :: CosmosdbAccountResource s)
 
-instance P.HasConsistencyPolicy (CosmosdbAccountResource s) (TF.Attr s (ConsistencyPolicySetting s)) where
+instance P.HasConsistencyPolicy (CosmosdbAccountResource s) (TF.Attr s (CosmosdbAccountConsistencyPolicySetting s)) where
     consistencyPolicy =
-        P.lens (_consistencyPolicy :: CosmosdbAccountResource s -> TF.Attr s (ConsistencyPolicySetting s))
+        P.lens (_consistencyPolicy :: CosmosdbAccountResource s -> TF.Attr s (CosmosdbAccountConsistencyPolicySetting s))
                (\s a -> s { _consistencyPolicy = a } :: CosmosdbAccountResource s)
 
 instance P.HasEnableAutomaticFailover (CosmosdbAccountResource s) (TF.Attr s P.Bool) where
@@ -2959,9 +2959,9 @@ instance P.HasEnableAutomaticFailover (CosmosdbAccountResource s) (TF.Attr s P.B
         P.lens (_enableAutomaticFailover :: CosmosdbAccountResource s -> TF.Attr s P.Bool)
                (\s a -> s { _enableAutomaticFailover = a } :: CosmosdbAccountResource s)
 
-instance P.HasGeoLocation (CosmosdbAccountResource s) (TF.Attr s [TF.Attr s (GeoLocationSetting s)]) where
+instance P.HasGeoLocation (CosmosdbAccountResource s) (TF.Attr s [TF.Attr s (CosmosdbAccountGeoLocationSetting s)]) where
     geoLocation =
-        P.lens (_geoLocation :: CosmosdbAccountResource s -> TF.Attr s [TF.Attr s (GeoLocationSetting s)])
+        P.lens (_geoLocation :: CosmosdbAccountResource s -> TF.Attr s [TF.Attr s (CosmosdbAccountGeoLocationSetting s)])
                (\s a -> s { _geoLocation = a } :: CosmosdbAccountResource s)
 
 instance P.HasIpRangeFilter (CosmosdbAccountResource s) (TF.Attr s P.Text) where
@@ -3008,7 +3008,7 @@ instance s ~ s' => P.HasComputedConnectionStrings (TF.Ref s' (CosmosdbAccountRes
 instance s ~ s' => P.HasComputedEndpoint (TF.Ref s' (CosmosdbAccountResource s)) (TF.Attr s P.Text) where
     computedEndpoint x = TF.compute (TF.refKey x) "endpoint"
 
-instance s ~ s' => P.HasComputedGeoLocation (TF.Ref s' (CosmosdbAccountResource s)) (TF.Attr s [TF.Attr s (GeoLocationSetting s)]) where
+instance s ~ s' => P.HasComputedGeoLocation (TF.Ref s' (CosmosdbAccountResource s)) (TF.Attr s [TF.Attr s (CosmosdbAccountGeoLocationSetting s)]) where
     computedGeoLocation x = TF.compute (TF.refKey x) "geo_location"
 
 instance s ~ s' => P.HasComputedPrimaryMasterKey (TF.Ref s' (CosmosdbAccountResource s)) (TF.Attr s P.Text) where
@@ -3660,7 +3660,7 @@ data DnsCaaRecordResource s = DnsCaaRecordResource'
     { _name              :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _record            :: TF.Attr s [TF.Attr s (RecordSetting s)]
+    , _record            :: TF.Attr s [TF.Attr s (DnsCaaRecordRecordSetting s)]
     -- ^ @record@ - (Required)
     --
     , _resourceGroupName :: TF.Attr s P.Text
@@ -3682,7 +3682,7 @@ dnsCaaRecordResource
     :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
     -> TF.Attr s P.Text -- ^ @zone_name@ ('P._zoneName', 'P.zoneName')
-    -> TF.Attr s [TF.Attr s (RecordSetting s)] -- ^ @record@ ('P._record', 'P.record')
+    -> TF.Attr s [TF.Attr s (DnsCaaRecordRecordSetting s)] -- ^ @record@ ('P._record', 'P.record')
     -> TF.Attr s P.Int -- ^ @ttl@ ('P._ttl', 'P.ttl')
     -> P.Resource (DnsCaaRecordResource s)
 dnsCaaRecordResource _name _resourceGroupName _zoneName _record _ttl =
@@ -3714,9 +3714,9 @@ instance P.HasName (DnsCaaRecordResource s) (TF.Attr s P.Text) where
         P.lens (_name :: DnsCaaRecordResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: DnsCaaRecordResource s)
 
-instance P.HasRecord (DnsCaaRecordResource s) (TF.Attr s [TF.Attr s (RecordSetting s)]) where
+instance P.HasRecord (DnsCaaRecordResource s) (TF.Attr s [TF.Attr s (DnsCaaRecordRecordSetting s)]) where
     record =
-        P.lens (_record :: DnsCaaRecordResource s -> TF.Attr s [TF.Attr s (RecordSetting s)])
+        P.lens (_record :: DnsCaaRecordResource s -> TF.Attr s [TF.Attr s (DnsCaaRecordRecordSetting s)])
                (\s a -> s { _record = a } :: DnsCaaRecordResource s)
 
 instance P.HasResourceGroupName (DnsCaaRecordResource s) (TF.Attr s P.Text) where
@@ -3856,7 +3856,7 @@ data DnsMxRecordResource s = DnsMxRecordResource'
     { _name              :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _record            :: TF.Attr s [TF.Attr s (RecordSetting s)]
+    , _record            :: TF.Attr s [TF.Attr s (DnsMxRecordRecordSetting s)]
     -- ^ @record@ - (Required)
     --
     , _resourceGroupName :: TF.Attr s P.Text
@@ -3878,7 +3878,7 @@ dnsMxRecordResource
     :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
     -> TF.Attr s P.Text -- ^ @zone_name@ ('P._zoneName', 'P.zoneName')
-    -> TF.Attr s [TF.Attr s (RecordSetting s)] -- ^ @record@ ('P._record', 'P.record')
+    -> TF.Attr s [TF.Attr s (DnsMxRecordRecordSetting s)] -- ^ @record@ ('P._record', 'P.record')
     -> TF.Attr s P.Int -- ^ @ttl@ ('P._ttl', 'P.ttl')
     -> P.Resource (DnsMxRecordResource s)
 dnsMxRecordResource _name _resourceGroupName _zoneName _record _ttl =
@@ -3910,9 +3910,9 @@ instance P.HasName (DnsMxRecordResource s) (TF.Attr s P.Text) where
         P.lens (_name :: DnsMxRecordResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: DnsMxRecordResource s)
 
-instance P.HasRecord (DnsMxRecordResource s) (TF.Attr s [TF.Attr s (RecordSetting s)]) where
+instance P.HasRecord (DnsMxRecordResource s) (TF.Attr s [TF.Attr s (DnsMxRecordRecordSetting s)]) where
     record =
-        P.lens (_record :: DnsMxRecordResource s -> TF.Attr s [TF.Attr s (RecordSetting s)])
+        P.lens (_record :: DnsMxRecordResource s -> TF.Attr s [TF.Attr s (DnsMxRecordRecordSetting s)])
                (\s a -> s { _record = a } :: DnsMxRecordResource s)
 
 instance P.HasResourceGroupName (DnsMxRecordResource s) (TF.Attr s P.Text) where
@@ -4137,7 +4137,7 @@ data DnsSrvRecordResource s = DnsSrvRecordResource'
     { _name              :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _record            :: TF.Attr s [TF.Attr s (RecordSetting s)]
+    , _record            :: TF.Attr s [TF.Attr s (DnsSrvRecordRecordSetting s)]
     -- ^ @record@ - (Required)
     --
     , _resourceGroupName :: TF.Attr s P.Text
@@ -4159,7 +4159,7 @@ dnsSrvRecordResource
     :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
     -> TF.Attr s P.Text -- ^ @zone_name@ ('P._zoneName', 'P.zoneName')
-    -> TF.Attr s [TF.Attr s (RecordSetting s)] -- ^ @record@ ('P._record', 'P.record')
+    -> TF.Attr s [TF.Attr s (DnsSrvRecordRecordSetting s)] -- ^ @record@ ('P._record', 'P.record')
     -> TF.Attr s P.Int -- ^ @ttl@ ('P._ttl', 'P.ttl')
     -> P.Resource (DnsSrvRecordResource s)
 dnsSrvRecordResource _name _resourceGroupName _zoneName _record _ttl =
@@ -4191,9 +4191,9 @@ instance P.HasName (DnsSrvRecordResource s) (TF.Attr s P.Text) where
         P.lens (_name :: DnsSrvRecordResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: DnsSrvRecordResource s)
 
-instance P.HasRecord (DnsSrvRecordResource s) (TF.Attr s [TF.Attr s (RecordSetting s)]) where
+instance P.HasRecord (DnsSrvRecordResource s) (TF.Attr s [TF.Attr s (DnsSrvRecordRecordSetting s)]) where
     record =
-        P.lens (_record :: DnsSrvRecordResource s -> TF.Attr s [TF.Attr s (RecordSetting s)])
+        P.lens (_record :: DnsSrvRecordResource s -> TF.Attr s [TF.Attr s (DnsSrvRecordRecordSetting s)])
                (\s a -> s { _record = a } :: DnsSrvRecordResource s)
 
 instance P.HasResourceGroupName (DnsSrvRecordResource s) (TF.Attr s P.Text) where
@@ -4230,7 +4230,7 @@ data DnsTxtRecordResource s = DnsTxtRecordResource'
     { _name              :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _record            :: TF.Attr s [TF.Attr s (RecordSetting s)]
+    , _record            :: TF.Attr s [TF.Attr s (DnsTxtRecordRecordSetting s)]
     -- ^ @record@ - (Required)
     --
     , _resourceGroupName :: TF.Attr s P.Text
@@ -4252,7 +4252,7 @@ dnsTxtRecordResource
     :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
     -> TF.Attr s P.Text -- ^ @zone_name@ ('P._zoneName', 'P.zoneName')
-    -> TF.Attr s [TF.Attr s (RecordSetting s)] -- ^ @record@ ('P._record', 'P.record')
+    -> TF.Attr s [TF.Attr s (DnsTxtRecordRecordSetting s)] -- ^ @record@ ('P._record', 'P.record')
     -> TF.Attr s P.Int -- ^ @ttl@ ('P._ttl', 'P.ttl')
     -> P.Resource (DnsTxtRecordResource s)
 dnsTxtRecordResource _name _resourceGroupName _zoneName _record _ttl =
@@ -4284,9 +4284,9 @@ instance P.HasName (DnsTxtRecordResource s) (TF.Attr s P.Text) where
         P.lens (_name :: DnsTxtRecordResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: DnsTxtRecordResource s)
 
-instance P.HasRecord (DnsTxtRecordResource s) (TF.Attr s [TF.Attr s (RecordSetting s)]) where
+instance P.HasRecord (DnsTxtRecordResource s) (TF.Attr s [TF.Attr s (DnsTxtRecordRecordSetting s)]) where
     record =
-        P.lens (_record :: DnsTxtRecordResource s -> TF.Attr s [TF.Attr s (RecordSetting s)])
+        P.lens (_record :: DnsTxtRecordResource s -> TF.Attr s [TF.Attr s (DnsTxtRecordRecordSetting s)])
                (\s a -> s { _record = a } :: DnsTxtRecordResource s)
 
 instance P.HasResourceGroupName (DnsTxtRecordResource s) (TF.Attr s P.Text) where
@@ -4916,7 +4916,7 @@ instance s ~ s' => P.HasComputedTags (TF.Ref s' (EventhubNamespaceResource s)) (
 -- See the <https://www.terraform.io/docs/providers/azurerm/r/eventhub.html terraform documentation>
 -- for more information.
 data EventhubResource s = EventhubResource'
-    { _captureDescription :: TF.Attr s (CaptureDescriptionSetting s)
+    { _captureDescription :: TF.Attr s (EventhubCaptureDescriptionSetting s)
     -- ^ @capture_description@ - (Optional)
     --
     , _messageRetention   :: TF.Attr s P.Int
@@ -4969,12 +4969,12 @@ instance TF.IsValid (EventhubResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_captureDescription"
                   (_captureDescription
-                      :: EventhubResource s -> TF.Attr s (CaptureDescriptionSetting s))
+                      :: EventhubResource s -> TF.Attr s (EventhubCaptureDescriptionSetting s))
                   TF.validator
 
-instance P.HasCaptureDescription (EventhubResource s) (TF.Attr s (CaptureDescriptionSetting s)) where
+instance P.HasCaptureDescription (EventhubResource s) (TF.Attr s (EventhubCaptureDescriptionSetting s)) where
     captureDescription =
-        P.lens (_captureDescription :: EventhubResource s -> TF.Attr s (CaptureDescriptionSetting s))
+        P.lens (_captureDescription :: EventhubResource s -> TF.Attr s (EventhubCaptureDescriptionSetting s))
                (\s a -> s { _captureDescription = a } :: EventhubResource s)
 
 instance P.HasMessageRetention (EventhubResource s) (TF.Attr s P.Int) where
@@ -5077,31 +5077,31 @@ instance s ~ s' => P.HasComputedAuthorizationUseStatus (TF.Ref s' (ExpressRouteC
 -- See the <https://www.terraform.io/docs/providers/azurerm/r/express_route_circuit_peering.html terraform documentation>
 -- for more information.
 data ExpressRouteCircuitPeeringResource s = ExpressRouteCircuitPeeringResource'
-    { _expressRouteCircuitName    :: TF.Attr s P.Text
+    { _expressRouteCircuitName :: TF.Attr s P.Text
     -- ^ @express_route_circuit_name@ - (Required, Forces New)
     --
-    , _microsoftPeeringConfig     :: TF.Attr s (MicrosoftPeeringConfigSetting s)
+    , _microsoftPeeringConfig :: TF.Attr s (ExpressRouteCircuitPeeringMicrosoftPeeringConfigSetting s)
     -- ^ @microsoft_peering_config@ - (Optional)
     --
-    , _peerAsn                    :: TF.Attr s P.Int
+    , _peerAsn :: TF.Attr s P.Int
     -- ^ @peer_asn@ - (Optional)
     --
-    , _peeringType                :: TF.Attr s P.Text
+    , _peeringType :: TF.Attr s P.Text
     -- ^ @peering_type@ - (Required)
     --
-    , _primaryPeerAddressPrefix   :: TF.Attr s P.Text
+    , _primaryPeerAddressPrefix :: TF.Attr s P.Text
     -- ^ @primary_peer_address_prefix@ - (Required)
     --
-    , _resourceGroupName          :: TF.Attr s P.Text
+    , _resourceGroupName :: TF.Attr s P.Text
     -- ^ @resource_group_name@ - (Required, Forces New)
     --
     , _secondaryPeerAddressPrefix :: TF.Attr s P.Text
     -- ^ @secondary_peer_address_prefix@ - (Required)
     --
-    , _sharedKey                  :: TF.Attr s P.Text
+    , _sharedKey :: TF.Attr s P.Text
     -- ^ @shared_key@ - (Optional)
     --
-    , _vlanId                     :: TF.Attr s P.Int
+    , _vlanId :: TF.Attr s P.Int
     -- ^ @vlan_id@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -5146,7 +5146,7 @@ instance TF.IsValid (ExpressRouteCircuitPeeringResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_microsoftPeeringConfig"
                   (_microsoftPeeringConfig
-                      :: ExpressRouteCircuitPeeringResource s -> TF.Attr s (MicrosoftPeeringConfigSetting s))
+                      :: ExpressRouteCircuitPeeringResource s -> TF.Attr s (ExpressRouteCircuitPeeringMicrosoftPeeringConfigSetting s))
                   TF.validator
 
 instance P.HasExpressRouteCircuitName (ExpressRouteCircuitPeeringResource s) (TF.Attr s P.Text) where
@@ -5154,9 +5154,9 @@ instance P.HasExpressRouteCircuitName (ExpressRouteCircuitPeeringResource s) (TF
         P.lens (_expressRouteCircuitName :: ExpressRouteCircuitPeeringResource s -> TF.Attr s P.Text)
                (\s a -> s { _expressRouteCircuitName = a } :: ExpressRouteCircuitPeeringResource s)
 
-instance P.HasMicrosoftPeeringConfig (ExpressRouteCircuitPeeringResource s) (TF.Attr s (MicrosoftPeeringConfigSetting s)) where
+instance P.HasMicrosoftPeeringConfig (ExpressRouteCircuitPeeringResource s) (TF.Attr s (ExpressRouteCircuitPeeringMicrosoftPeeringConfigSetting s)) where
     microsoftPeeringConfig =
-        P.lens (_microsoftPeeringConfig :: ExpressRouteCircuitPeeringResource s -> TF.Attr s (MicrosoftPeeringConfigSetting s))
+        P.lens (_microsoftPeeringConfig :: ExpressRouteCircuitPeeringResource s -> TF.Attr s (ExpressRouteCircuitPeeringMicrosoftPeeringConfigSetting s))
                (\s a -> s { _microsoftPeeringConfig = a } :: ExpressRouteCircuitPeeringResource s)
 
 instance P.HasPeerAsn (ExpressRouteCircuitPeeringResource s) (TF.Attr s P.Int) where
@@ -5235,7 +5235,7 @@ data ExpressRouteCircuitResource s = ExpressRouteCircuitResource'
     , _serviceProviderName    :: TF.Attr s P.Text
     -- ^ @service_provider_name@ - (Required, Forces New)
     --
-    , _sku                    :: TF.Attr s (SkuSetting s)
+    , _sku                    :: TF.Attr s (ExpressRouteCircuitSkuSetting s)
     -- ^ @sku@ - (Required)
     --
     , _tags                   :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
@@ -5251,7 +5251,7 @@ expressRouteCircuitResource
     -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
     -> TF.Attr s P.Text -- ^ @service_provider_name@ ('P._serviceProviderName', 'P.serviceProviderName')
-    -> TF.Attr s (SkuSetting s) -- ^ @sku@ ('P._sku', 'P.sku')
+    -> TF.Attr s (ExpressRouteCircuitSkuSetting s) -- ^ @sku@ ('P._sku', 'P.sku')
     -> P.Resource (ExpressRouteCircuitResource s)
 expressRouteCircuitResource _location _peeringLocation _bandwidthInMbps _name _resourceGroupName _serviceProviderName _sku =
     TF.unsafeResource "azurerm_express_route_circuit" TF.validator $
@@ -5284,7 +5284,7 @@ instance TF.IsValid (ExpressRouteCircuitResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_sku"
                   (_sku
-                      :: ExpressRouteCircuitResource s -> TF.Attr s (SkuSetting s))
+                      :: ExpressRouteCircuitResource s -> TF.Attr s (ExpressRouteCircuitSkuSetting s))
                   TF.validator
 
 instance P.HasAllowClassicOperations (ExpressRouteCircuitResource s) (TF.Attr s P.Bool) where
@@ -5322,9 +5322,9 @@ instance P.HasServiceProviderName (ExpressRouteCircuitResource s) (TF.Attr s P.T
         P.lens (_serviceProviderName :: ExpressRouteCircuitResource s -> TF.Attr s P.Text)
                (\s a -> s { _serviceProviderName = a } :: ExpressRouteCircuitResource s)
 
-instance P.HasSku (ExpressRouteCircuitResource s) (TF.Attr s (SkuSetting s)) where
+instance P.HasSku (ExpressRouteCircuitResource s) (TF.Attr s (ExpressRouteCircuitSkuSetting s)) where
     sku =
-        P.lens (_sku :: ExpressRouteCircuitResource s -> TF.Attr s (SkuSetting s))
+        P.lens (_sku :: ExpressRouteCircuitResource s -> TF.Attr s (ExpressRouteCircuitSkuSetting s))
                (\s a -> s { _sku = a } :: ExpressRouteCircuitResource s)
 
 instance P.HasTags (ExpressRouteCircuitResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
@@ -5358,7 +5358,7 @@ data FunctionAppResource s = FunctionAppResource'
     , _clientAffinityEnabled :: TF.Attr s P.Bool
     -- ^ @client_affinity_enabled@ - (Optional)
     --
-    , _connectionString :: TF.Attr s [TF.Attr s (ConnectionStringSetting s)]
+    , _connectionString :: TF.Attr s [TF.Attr s (FunctionAppConnectionStringSetting s)]
     -- ^ @connection_string@ - (Optional)
     --
     , _enabled :: TF.Attr s P.Bool
@@ -5367,7 +5367,7 @@ data FunctionAppResource s = FunctionAppResource'
     , _httpsOnly :: TF.Attr s P.Bool
     -- ^ @https_only@ - (Optional)
     --
-    , _identity :: TF.Attr s (IdentitySetting s)
+    , _identity :: TF.Attr s (FunctionAppIdentitySetting s)
     -- ^ @identity@ - (Optional)
     --
     , _location :: TF.Attr s P.Text
@@ -5379,7 +5379,7 @@ data FunctionAppResource s = FunctionAppResource'
     , _resourceGroupName :: TF.Attr s P.Text
     -- ^ @resource_group_name@ - (Required, Forces New)
     --
-    , _siteConfig :: TF.Attr s (SiteConfigSetting s)
+    , _siteConfig :: TF.Attr s (FunctionAppSiteConfigSetting s)
     -- ^ @site_config@ - (Optional)
     --
     , _storageConnectionString :: TF.Attr s P.Text
@@ -5442,11 +5442,11 @@ instance TF.IsValid (FunctionAppResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_identity"
                   (_identity
-                      :: FunctionAppResource s -> TF.Attr s (IdentitySetting s))
+                      :: FunctionAppResource s -> TF.Attr s (FunctionAppIdentitySetting s))
                   TF.validator
            P.<> TF.settingsValidator "_siteConfig"
                   (_siteConfig
-                      :: FunctionAppResource s -> TF.Attr s (SiteConfigSetting s))
+                      :: FunctionAppResource s -> TF.Attr s (FunctionAppSiteConfigSetting s))
                   TF.validator
 
 instance P.HasAppServicePlanId (FunctionAppResource s) (TF.Attr s P.Text) where
@@ -5464,9 +5464,9 @@ instance P.HasClientAffinityEnabled (FunctionAppResource s) (TF.Attr s P.Bool) w
         P.lens (_clientAffinityEnabled :: FunctionAppResource s -> TF.Attr s P.Bool)
                (\s a -> s { _clientAffinityEnabled = a } :: FunctionAppResource s)
 
-instance P.HasConnectionString (FunctionAppResource s) (TF.Attr s [TF.Attr s (ConnectionStringSetting s)]) where
+instance P.HasConnectionString (FunctionAppResource s) (TF.Attr s [TF.Attr s (FunctionAppConnectionStringSetting s)]) where
     connectionString =
-        P.lens (_connectionString :: FunctionAppResource s -> TF.Attr s [TF.Attr s (ConnectionStringSetting s)])
+        P.lens (_connectionString :: FunctionAppResource s -> TF.Attr s [TF.Attr s (FunctionAppConnectionStringSetting s)])
                (\s a -> s { _connectionString = a } :: FunctionAppResource s)
 
 instance P.HasEnabled (FunctionAppResource s) (TF.Attr s P.Bool) where
@@ -5479,9 +5479,9 @@ instance P.HasHttpsOnly (FunctionAppResource s) (TF.Attr s P.Bool) where
         P.lens (_httpsOnly :: FunctionAppResource s -> TF.Attr s P.Bool)
                (\s a -> s { _httpsOnly = a } :: FunctionAppResource s)
 
-instance P.HasIdentity (FunctionAppResource s) (TF.Attr s (IdentitySetting s)) where
+instance P.HasIdentity (FunctionAppResource s) (TF.Attr s (FunctionAppIdentitySetting s)) where
     identity =
-        P.lens (_identity :: FunctionAppResource s -> TF.Attr s (IdentitySetting s))
+        P.lens (_identity :: FunctionAppResource s -> TF.Attr s (FunctionAppIdentitySetting s))
                (\s a -> s { _identity = a } :: FunctionAppResource s)
 
 instance P.HasLocation (FunctionAppResource s) (TF.Attr s P.Text) where
@@ -5499,9 +5499,9 @@ instance P.HasResourceGroupName (FunctionAppResource s) (TF.Attr s P.Text) where
         P.lens (_resourceGroupName :: FunctionAppResource s -> TF.Attr s P.Text)
                (\s a -> s { _resourceGroupName = a } :: FunctionAppResource s)
 
-instance P.HasSiteConfig (FunctionAppResource s) (TF.Attr s (SiteConfigSetting s)) where
+instance P.HasSiteConfig (FunctionAppResource s) (TF.Attr s (FunctionAppSiteConfigSetting s)) where
     siteConfig =
-        P.lens (_siteConfig :: FunctionAppResource s -> TF.Attr s (SiteConfigSetting s))
+        P.lens (_siteConfig :: FunctionAppResource s -> TF.Attr s (FunctionAppSiteConfigSetting s))
                (\s a -> s { _siteConfig = a } :: FunctionAppResource s)
 
 instance P.HasStorageConnectionString (FunctionAppResource s) (TF.Attr s P.Text) where
@@ -5525,22 +5525,22 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (FunctionAppResource s)) (TF.Attr 
 instance s ~ s' => P.HasComputedClientAffinityEnabled (TF.Ref s' (FunctionAppResource s)) (TF.Attr s P.Bool) where
     computedClientAffinityEnabled x = TF.compute (TF.refKey x) "client_affinity_enabled"
 
-instance s ~ s' => P.HasComputedConnectionString (TF.Ref s' (FunctionAppResource s)) (TF.Attr s [TF.Attr s (ConnectionStringSetting s)]) where
+instance s ~ s' => P.HasComputedConnectionString (TF.Ref s' (FunctionAppResource s)) (TF.Attr s [TF.Attr s (FunctionAppConnectionStringSetting s)]) where
     computedConnectionString x = TF.compute (TF.refKey x) "connection_string"
 
 instance s ~ s' => P.HasComputedDefaultHostname (TF.Ref s' (FunctionAppResource s)) (TF.Attr s P.Text) where
     computedDefaultHostname x = TF.compute (TF.refKey x) "default_hostname"
 
-instance s ~ s' => P.HasComputedIdentity (TF.Ref s' (FunctionAppResource s)) (TF.Attr s (IdentitySetting s)) where
+instance s ~ s' => P.HasComputedIdentity (TF.Ref s' (FunctionAppResource s)) (TF.Attr s (FunctionAppIdentitySetting s)) where
     computedIdentity x = TF.compute (TF.refKey x) "identity"
 
 instance s ~ s' => P.HasComputedOutboundIpAddresses (TF.Ref s' (FunctionAppResource s)) (TF.Attr s P.Text) where
     computedOutboundIpAddresses x = TF.compute (TF.refKey x) "outbound_ip_addresses"
 
-instance s ~ s' => P.HasComputedSiteConfig (TF.Ref s' (FunctionAppResource s)) (TF.Attr s (SiteConfigSetting s)) where
+instance s ~ s' => P.HasComputedSiteConfig (TF.Ref s' (FunctionAppResource s)) (TF.Attr s (FunctionAppSiteConfigSetting s)) where
     computedSiteConfig x = TF.compute (TF.refKey x) "site_config"
 
-instance s ~ s' => P.HasComputedSiteCredential (TF.Ref s' (FunctionAppResource s)) (TF.Attr s (SiteCredentialSetting s)) where
+instance s ~ s' => P.HasComputedSiteCredential (TF.Ref s' (FunctionAppResource s)) (TF.Attr s (FunctionAppSiteCredentialSetting s)) where
     computedSiteCredential x = TF.compute (TF.refKey x) "site_credential"
 
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (FunctionAppResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
@@ -5551,7 +5551,7 @@ instance s ~ s' => P.HasComputedTags (TF.Ref s' (FunctionAppResource s)) (TF.Att
 -- See the <https://www.terraform.io/docs/providers/azurerm/r/image.html terraform documentation>
 -- for more information.
 data ImageResource s = ImageResource'
-    { _dataDisk               :: TF.Attr s [TF.Attr s (DataDiskSetting s)]
+    { _dataDisk               :: TF.Attr s [TF.Attr s (ImageDataDiskSetting s)]
     -- ^ @data_disk@ - (Optional)
     --
     , _location               :: TF.Attr s P.Text
@@ -5560,7 +5560,7 @@ data ImageResource s = ImageResource'
     , _name                   :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _osDisk                 :: TF.Attr s (OsDiskSetting s)
+    , _osDisk                 :: TF.Attr s (ImageOsDiskSetting s)
     -- ^ @os_disk@ - (Optional, Forces New)
     --
     , _resourceGroupName      :: TF.Attr s P.Text
@@ -5607,12 +5607,12 @@ instance TF.IsValid (ImageResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_osDisk"
                   (_osDisk
-                      :: ImageResource s -> TF.Attr s (OsDiskSetting s))
+                      :: ImageResource s -> TF.Attr s (ImageOsDiskSetting s))
                   TF.validator
 
-instance P.HasDataDisk (ImageResource s) (TF.Attr s [TF.Attr s (DataDiskSetting s)]) where
+instance P.HasDataDisk (ImageResource s) (TF.Attr s [TF.Attr s (ImageDataDiskSetting s)]) where
     dataDisk =
-        P.lens (_dataDisk :: ImageResource s -> TF.Attr s [TF.Attr s (DataDiskSetting s)])
+        P.lens (_dataDisk :: ImageResource s -> TF.Attr s [TF.Attr s (ImageDataDiskSetting s)])
                (\s a -> s { _dataDisk = a } :: ImageResource s)
 
 instance P.HasLocation (ImageResource s) (TF.Attr s P.Text) where
@@ -5625,9 +5625,9 @@ instance P.HasName (ImageResource s) (TF.Attr s P.Text) where
         P.lens (_name :: ImageResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ImageResource s)
 
-instance P.HasOsDisk (ImageResource s) (TF.Attr s (OsDiskSetting s)) where
+instance P.HasOsDisk (ImageResource s) (TF.Attr s (ImageOsDiskSetting s)) where
     osDisk =
-        P.lens (_osDisk :: ImageResource s -> TF.Attr s (OsDiskSetting s))
+        P.lens (_osDisk :: ImageResource s -> TF.Attr s (ImageOsDiskSetting s))
                (\s a -> s { _osDisk = a } :: ImageResource s)
 
 instance P.HasResourceGroupName (ImageResource s) (TF.Attr s P.Text) where
@@ -5665,7 +5665,7 @@ data IothubResource s = IothubResource'
     , _resourceGroupName :: TF.Attr s P.Text
     -- ^ @resource_group_name@ - (Required, Forces New)
     --
-    , _sku               :: TF.Attr s (SkuSetting s)
+    , _sku               :: TF.Attr s (IothubSkuSetting s)
     -- ^ @sku@ - (Required)
     --
     , _tags              :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
@@ -5678,7 +5678,7 @@ iothubResource
     :: TF.Attr s P.Text -- ^ @location@ ('P._location', 'P.location')
     -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
-    -> TF.Attr s (SkuSetting s) -- ^ @sku@ ('P._sku', 'P.sku')
+    -> TF.Attr s (IothubSkuSetting s) -- ^ @sku@ ('P._sku', 'P.sku')
     -> P.Resource (IothubResource s)
 iothubResource _location _name _resourceGroupName _sku =
     TF.unsafeResource "azurerm_iothub" TF.validator $
@@ -5703,7 +5703,7 @@ instance TF.IsValid (IothubResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_sku"
                   (_sku
-                      :: IothubResource s -> TF.Attr s (SkuSetting s))
+                      :: IothubResource s -> TF.Attr s (IothubSkuSetting s))
                   TF.validator
 
 instance P.HasLocation (IothubResource s) (TF.Attr s P.Text) where
@@ -5721,9 +5721,9 @@ instance P.HasResourceGroupName (IothubResource s) (TF.Attr s P.Text) where
         P.lens (_resourceGroupName :: IothubResource s -> TF.Attr s P.Text)
                (\s a -> s { _resourceGroupName = a } :: IothubResource s)
 
-instance P.HasSku (IothubResource s) (TF.Attr s (SkuSetting s)) where
+instance P.HasSku (IothubResource s) (TF.Attr s (IothubSkuSetting s)) where
     sku =
-        P.lens (_sku :: IothubResource s -> TF.Attr s (SkuSetting s))
+        P.lens (_sku :: IothubResource s -> TF.Attr s (IothubSkuSetting s))
                (\s a -> s { _sku = a } :: IothubResource s)
 
 instance P.HasTags (IothubResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
@@ -5737,7 +5737,7 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (IothubResource s)) (TF.Attr s P.T
 instance s ~ s' => P.HasComputedHostname (TF.Ref s' (IothubResource s)) (TF.Attr s P.Text) where
     computedHostname x = TF.compute (TF.refKey x) "hostname"
 
-instance s ~ s' => P.HasComputedSharedAccessPolicy (TF.Ref s' (IothubResource s)) (TF.Attr s [TF.Attr s (SharedAccessPolicySetting s)]) where
+instance s ~ s' => P.HasComputedSharedAccessPolicy (TF.Ref s' (IothubResource s)) (TF.Attr s [TF.Attr s (IothubSharedAccessPolicySetting s)]) where
     computedSharedAccessPolicy x = TF.compute (TF.refKey x) "shared_access_policy"
 
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (IothubResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
@@ -5862,19 +5862,19 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (KeyVaultAccessPolicyResource s)) 
 -- See the <https://www.terraform.io/docs/providers/azurerm/r/key_vault_certificate.html terraform documentation>
 -- for more information.
 data KeyVaultCertificateResource s = KeyVaultCertificateResource'
-    { _certificate       :: TF.Attr s (CertificateSetting s)
+    { _certificate :: TF.Attr s (KeyVaultCertificateCertificateSetting s)
     -- ^ @certificate@ - (Optional, Forces New)
     --
-    , _certificatePolicy :: TF.Attr s (CertificatePolicySetting s)
+    , _certificatePolicy :: TF.Attr s (KeyVaultCertificateCertificatePolicySetting s)
     -- ^ @certificate_policy@ - (Required, Forces New)
     --
-    , _name              :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _tags              :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _tags :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
-    , _vaultUri          :: TF.Attr s P.Text
+    , _vaultUri :: TF.Attr s P.Text
     -- ^ @vault_uri@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -5882,7 +5882,7 @@ data KeyVaultCertificateResource s = KeyVaultCertificateResource'
 -- | Define a new @azurerm_key_vault_certificate@ resource value.
 keyVaultCertificateResource
     :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
-    -> TF.Attr s (CertificatePolicySetting s) -- ^ @certificate_policy@ ('P._certificatePolicy', 'P.certificatePolicy')
+    -> TF.Attr s (KeyVaultCertificateCertificatePolicySetting s) -- ^ @certificate_policy@ ('P._certificatePolicy', 'P.certificatePolicy')
     -> TF.Attr s P.Text -- ^ @vault_uri@ ('P._vaultUri', 'P.vaultUri')
     -> P.Resource (KeyVaultCertificateResource s)
 keyVaultCertificateResource _name _certificatePolicy _vaultUri =
@@ -5908,21 +5908,21 @@ instance TF.IsValid (KeyVaultCertificateResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_certificate"
                   (_certificate
-                      :: KeyVaultCertificateResource s -> TF.Attr s (CertificateSetting s))
+                      :: KeyVaultCertificateResource s -> TF.Attr s (KeyVaultCertificateCertificateSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_certificatePolicy"
                   (_certificatePolicy
-                      :: KeyVaultCertificateResource s -> TF.Attr s (CertificatePolicySetting s))
+                      :: KeyVaultCertificateResource s -> TF.Attr s (KeyVaultCertificateCertificatePolicySetting s))
                   TF.validator
 
-instance P.HasCertificate (KeyVaultCertificateResource s) (TF.Attr s (CertificateSetting s)) where
+instance P.HasCertificate (KeyVaultCertificateResource s) (TF.Attr s (KeyVaultCertificateCertificateSetting s)) where
     certificate =
-        P.lens (_certificate :: KeyVaultCertificateResource s -> TF.Attr s (CertificateSetting s))
+        P.lens (_certificate :: KeyVaultCertificateResource s -> TF.Attr s (KeyVaultCertificateCertificateSetting s))
                (\s a -> s { _certificate = a } :: KeyVaultCertificateResource s)
 
-instance P.HasCertificatePolicy (KeyVaultCertificateResource s) (TF.Attr s (CertificatePolicySetting s)) where
+instance P.HasCertificatePolicy (KeyVaultCertificateResource s) (TF.Attr s (KeyVaultCertificateCertificatePolicySetting s)) where
     certificatePolicy =
-        P.lens (_certificatePolicy :: KeyVaultCertificateResource s -> TF.Attr s (CertificatePolicySetting s))
+        P.lens (_certificatePolicy :: KeyVaultCertificateResource s -> TF.Attr s (KeyVaultCertificateCertificatePolicySetting s))
                (\s a -> s { _certificatePolicy = a } :: KeyVaultCertificateResource s)
 
 instance P.HasName (KeyVaultCertificateResource s) (TF.Attr s P.Text) where
@@ -6062,7 +6062,7 @@ instance s ~ s' => P.HasComputedVersion (TF.Ref s' (KeyVaultKeyResource s)) (TF.
 -- See the <https://www.terraform.io/docs/providers/azurerm/r/key_vault.html terraform documentation>
 -- for more information.
 data KeyVaultResource s = KeyVaultResource'
-    { _accessPolicy :: TF.Attr s [TF.Attr s (AccessPolicySetting s)]
+    { _accessPolicy :: TF.Attr s [TF.Attr s (KeyVaultAccessPolicySetting s)]
     -- ^ @access_policy@ - (Optional)
     --
     , _enabledForDeployment :: TF.Attr s P.Bool
@@ -6083,7 +6083,7 @@ data KeyVaultResource s = KeyVaultResource'
     , _resourceGroupName :: TF.Attr s P.Text
     -- ^ @resource_group_name@ - (Required, Forces New)
     --
-    , _sku :: TF.Attr s [TF.Attr s (SkuSetting s)]
+    , _sku :: TF.Attr s [TF.Attr s (KeyVaultSkuSetting s)]
     -- ^ @sku@ - (Required)
     --
     , _tags :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
@@ -6100,7 +6100,7 @@ keyVaultResource
     -> TF.Attr s P.Text -- ^ @location@ ('P._location', 'P.location')
     -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
-    -> TF.Attr s [TF.Attr s (SkuSetting s)] -- ^ @sku@ ('P._sku', 'P.sku')
+    -> TF.Attr s [TF.Attr s (KeyVaultSkuSetting s)] -- ^ @sku@ ('P._sku', 'P.sku')
     -> P.Resource (KeyVaultResource s)
 keyVaultResource _tenantId _location _name _resourceGroupName _sku =
     TF.unsafeResource "azurerm_key_vault" TF.validator $
@@ -6134,9 +6134,9 @@ instance TF.IsObject (KeyVaultResource s) where
 instance TF.IsValid (KeyVaultResource s) where
     validator = P.mempty
 
-instance P.HasAccessPolicy (KeyVaultResource s) (TF.Attr s [TF.Attr s (AccessPolicySetting s)]) where
+instance P.HasAccessPolicy (KeyVaultResource s) (TF.Attr s [TF.Attr s (KeyVaultAccessPolicySetting s)]) where
     accessPolicy =
-        P.lens (_accessPolicy :: KeyVaultResource s -> TF.Attr s [TF.Attr s (AccessPolicySetting s)])
+        P.lens (_accessPolicy :: KeyVaultResource s -> TF.Attr s [TF.Attr s (KeyVaultAccessPolicySetting s)])
                (\s a -> s { _accessPolicy = a } :: KeyVaultResource s)
 
 instance P.HasEnabledForDeployment (KeyVaultResource s) (TF.Attr s P.Bool) where
@@ -6169,9 +6169,9 @@ instance P.HasResourceGroupName (KeyVaultResource s) (TF.Attr s P.Text) where
         P.lens (_resourceGroupName :: KeyVaultResource s -> TF.Attr s P.Text)
                (\s a -> s { _resourceGroupName = a } :: KeyVaultResource s)
 
-instance P.HasSku (KeyVaultResource s) (TF.Attr s [TF.Attr s (SkuSetting s)]) where
+instance P.HasSku (KeyVaultResource s) (TF.Attr s [TF.Attr s (KeyVaultSkuSetting s)]) where
     sku =
-        P.lens (_sku :: KeyVaultResource s -> TF.Attr s [TF.Attr s (SkuSetting s)])
+        P.lens (_sku :: KeyVaultResource s -> TF.Attr s [TF.Attr s (KeyVaultSkuSetting s)])
                (\s a -> s { _sku = a } :: KeyVaultResource s)
 
 instance P.HasTags (KeyVaultResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
@@ -6187,7 +6187,7 @@ instance P.HasTenantId (KeyVaultResource s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (KeyVaultResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedAccessPolicy (TF.Ref s' (KeyVaultResource s)) (TF.Attr s [TF.Attr s (AccessPolicySetting s)]) where
+instance s ~ s' => P.HasComputedAccessPolicy (TF.Ref s' (KeyVaultResource s)) (TF.Attr s [TF.Attr s (KeyVaultAccessPolicySetting s)]) where
     computedAccessPolicy x = TF.compute (TF.refKey x) "access_policy"
 
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (KeyVaultResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
@@ -6285,34 +6285,34 @@ instance s ~ s' => P.HasComputedVersion (TF.Ref s' (KeyVaultSecretResource s)) (
 -- See the <https://www.terraform.io/docs/providers/azurerm/r/kubernetes_cluster.html terraform documentation>
 -- for more information.
 data KubernetesClusterResource s = KubernetesClusterResource'
-    { _agentPoolProfile  :: TF.Attr s (AgentPoolProfileSetting s)
+    { _agentPoolProfile :: TF.Attr s (KubernetesClusterAgentPoolProfileSetting s)
     -- ^ @agent_pool_profile@ - (Required)
     --
-    , _dnsPrefix         :: TF.Attr s P.Text
+    , _dnsPrefix :: TF.Attr s P.Text
     -- ^ @dns_prefix@ - (Required)
     --
     , _kubernetesVersion :: TF.Attr s P.Text
     -- ^ @kubernetes_version@ - (Optional)
     --
-    , _linuxProfile      :: TF.Attr s (LinuxProfileSetting s)
+    , _linuxProfile :: TF.Attr s (KubernetesClusterLinuxProfileSetting s)
     -- ^ @linux_profile@ - (Required)
     --
-    , _location          :: TF.Attr s P.Text
+    , _location :: TF.Attr s P.Text
     -- ^ @location@ - (Required, Forces New)
     --
-    , _name              :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _networkProfile    :: TF.Attr s (NetworkProfileSetting s)
+    , _networkProfile :: TF.Attr s (KubernetesClusterNetworkProfileSetting s)
     -- ^ @network_profile@ - (Optional, Forces New)
     --
     , _resourceGroupName :: TF.Attr s P.Text
     -- ^ @resource_group_name@ - (Required, Forces New)
     --
-    , _servicePrincipal  :: TF.Attr s (ServicePrincipalSetting s)
+    , _servicePrincipal :: TF.Attr s (KubernetesClusterServicePrincipalSetting s)
     -- ^ @service_principal@ - (Required)
     --
-    , _tags              :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _tags :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -6323,9 +6323,9 @@ kubernetesClusterResource
     -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
     -> TF.Attr s P.Text -- ^ @dns_prefix@ ('P._dnsPrefix', 'P.dnsPrefix')
-    -> TF.Attr s (ServicePrincipalSetting s) -- ^ @service_principal@ ('P._servicePrincipal', 'P.servicePrincipal')
-    -> TF.Attr s (AgentPoolProfileSetting s) -- ^ @agent_pool_profile@ ('P._agentPoolProfile', 'P.agentPoolProfile')
-    -> TF.Attr s (LinuxProfileSetting s) -- ^ @linux_profile@ ('P._linuxProfile', 'P.linuxProfile')
+    -> TF.Attr s (KubernetesClusterServicePrincipalSetting s) -- ^ @service_principal@ ('P._servicePrincipal', 'P.servicePrincipal')
+    -> TF.Attr s (KubernetesClusterAgentPoolProfileSetting s) -- ^ @agent_pool_profile@ ('P._agentPoolProfile', 'P.agentPoolProfile')
+    -> TF.Attr s (KubernetesClusterLinuxProfileSetting s) -- ^ @linux_profile@ ('P._linuxProfile', 'P.linuxProfile')
     -> P.Resource (KubernetesClusterResource s)
 kubernetesClusterResource _location _name _resourceGroupName _dnsPrefix _servicePrincipal _agentPoolProfile _linuxProfile =
     TF.unsafeResource "azurerm_kubernetes_cluster" TF.validator $
@@ -6360,24 +6360,24 @@ instance TF.IsValid (KubernetesClusterResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_agentPoolProfile"
                   (_agentPoolProfile
-                      :: KubernetesClusterResource s -> TF.Attr s (AgentPoolProfileSetting s))
+                      :: KubernetesClusterResource s -> TF.Attr s (KubernetesClusterAgentPoolProfileSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_linuxProfile"
                   (_linuxProfile
-                      :: KubernetesClusterResource s -> TF.Attr s (LinuxProfileSetting s))
+                      :: KubernetesClusterResource s -> TF.Attr s (KubernetesClusterLinuxProfileSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_networkProfile"
                   (_networkProfile
-                      :: KubernetesClusterResource s -> TF.Attr s (NetworkProfileSetting s))
+                      :: KubernetesClusterResource s -> TF.Attr s (KubernetesClusterNetworkProfileSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_servicePrincipal"
                   (_servicePrincipal
-                      :: KubernetesClusterResource s -> TF.Attr s (ServicePrincipalSetting s))
+                      :: KubernetesClusterResource s -> TF.Attr s (KubernetesClusterServicePrincipalSetting s))
                   TF.validator
 
-instance P.HasAgentPoolProfile (KubernetesClusterResource s) (TF.Attr s (AgentPoolProfileSetting s)) where
+instance P.HasAgentPoolProfile (KubernetesClusterResource s) (TF.Attr s (KubernetesClusterAgentPoolProfileSetting s)) where
     agentPoolProfile =
-        P.lens (_agentPoolProfile :: KubernetesClusterResource s -> TF.Attr s (AgentPoolProfileSetting s))
+        P.lens (_agentPoolProfile :: KubernetesClusterResource s -> TF.Attr s (KubernetesClusterAgentPoolProfileSetting s))
                (\s a -> s { _agentPoolProfile = a } :: KubernetesClusterResource s)
 
 instance P.HasDnsPrefix (KubernetesClusterResource s) (TF.Attr s P.Text) where
@@ -6390,9 +6390,9 @@ instance P.HasKubernetesVersion (KubernetesClusterResource s) (TF.Attr s P.Text)
         P.lens (_kubernetesVersion :: KubernetesClusterResource s -> TF.Attr s P.Text)
                (\s a -> s { _kubernetesVersion = a } :: KubernetesClusterResource s)
 
-instance P.HasLinuxProfile (KubernetesClusterResource s) (TF.Attr s (LinuxProfileSetting s)) where
+instance P.HasLinuxProfile (KubernetesClusterResource s) (TF.Attr s (KubernetesClusterLinuxProfileSetting s)) where
     linuxProfile =
-        P.lens (_linuxProfile :: KubernetesClusterResource s -> TF.Attr s (LinuxProfileSetting s))
+        P.lens (_linuxProfile :: KubernetesClusterResource s -> TF.Attr s (KubernetesClusterLinuxProfileSetting s))
                (\s a -> s { _linuxProfile = a } :: KubernetesClusterResource s)
 
 instance P.HasLocation (KubernetesClusterResource s) (TF.Attr s P.Text) where
@@ -6405,9 +6405,9 @@ instance P.HasName (KubernetesClusterResource s) (TF.Attr s P.Text) where
         P.lens (_name :: KubernetesClusterResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: KubernetesClusterResource s)
 
-instance P.HasNetworkProfile (KubernetesClusterResource s) (TF.Attr s (NetworkProfileSetting s)) where
+instance P.HasNetworkProfile (KubernetesClusterResource s) (TF.Attr s (KubernetesClusterNetworkProfileSetting s)) where
     networkProfile =
-        P.lens (_networkProfile :: KubernetesClusterResource s -> TF.Attr s (NetworkProfileSetting s))
+        P.lens (_networkProfile :: KubernetesClusterResource s -> TF.Attr s (KubernetesClusterNetworkProfileSetting s))
                (\s a -> s { _networkProfile = a } :: KubernetesClusterResource s)
 
 instance P.HasResourceGroupName (KubernetesClusterResource s) (TF.Attr s P.Text) where
@@ -6415,9 +6415,9 @@ instance P.HasResourceGroupName (KubernetesClusterResource s) (TF.Attr s P.Text)
         P.lens (_resourceGroupName :: KubernetesClusterResource s -> TF.Attr s P.Text)
                (\s a -> s { _resourceGroupName = a } :: KubernetesClusterResource s)
 
-instance P.HasServicePrincipal (KubernetesClusterResource s) (TF.Attr s (ServicePrincipalSetting s)) where
+instance P.HasServicePrincipal (KubernetesClusterResource s) (TF.Attr s (KubernetesClusterServicePrincipalSetting s)) where
     servicePrincipal =
-        P.lens (_servicePrincipal :: KubernetesClusterResource s -> TF.Attr s (ServicePrincipalSetting s))
+        P.lens (_servicePrincipal :: KubernetesClusterResource s -> TF.Attr s (KubernetesClusterServicePrincipalSetting s))
                (\s a -> s { _servicePrincipal = a } :: KubernetesClusterResource s)
 
 instance P.HasTags (KubernetesClusterResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
@@ -6431,7 +6431,7 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (KubernetesClusterResource s)) (TF
 instance s ~ s' => P.HasComputedFqdn (TF.Ref s' (KubernetesClusterResource s)) (TF.Attr s P.Text) where
     computedFqdn x = TF.compute (TF.refKey x) "fqdn"
 
-instance s ~ s' => P.HasComputedKubeConfig (TF.Ref s' (KubernetesClusterResource s)) (TF.Attr s (KubeConfigSetting s)) where
+instance s ~ s' => P.HasComputedKubeConfig (TF.Ref s' (KubernetesClusterResource s)) (TF.Attr s (KubernetesClusterKubeConfigSetting s)) where
     computedKubeConfig x = TF.compute (TF.refKey x) "kube_config"
 
 instance s ~ s' => P.HasComputedKubeConfigRaw (TF.Ref s' (KubernetesClusterResource s)) (TF.Attr s P.Text) where
@@ -6440,7 +6440,7 @@ instance s ~ s' => P.HasComputedKubeConfigRaw (TF.Ref s' (KubernetesClusterResou
 instance s ~ s' => P.HasComputedKubernetesVersion (TF.Ref s' (KubernetesClusterResource s)) (TF.Attr s P.Text) where
     computedKubernetesVersion x = TF.compute (TF.refKey x) "kubernetes_version"
 
-instance s ~ s' => P.HasComputedNetworkProfile (TF.Ref s' (KubernetesClusterResource s)) (TF.Attr s (NetworkProfileSetting s)) where
+instance s ~ s' => P.HasComputedNetworkProfile (TF.Ref s' (KubernetesClusterResource s)) (TF.Attr s (KubernetesClusterNetworkProfileSetting s)) where
     computedNetworkProfile x = TF.compute (TF.refKey x) "network_profile"
 
 instance s ~ s' => P.HasComputedNodeResourceGroup (TF.Ref s' (KubernetesClusterResource s)) (TF.Attr s P.Text) where
@@ -6870,7 +6870,7 @@ instance s ~ s' => P.HasComputedProtocol (TF.Ref s' (LbProbeResource s)) (TF.Att
 -- See the <https://www.terraform.io/docs/providers/azurerm/r/lb.html terraform documentation>
 -- for more information.
 data LbResource s = LbResource'
-    { _frontendIpConfiguration :: TF.Attr s (P.NonEmpty (TF.Attr s (FrontendIpConfigurationSetting s)))
+    { _frontendIpConfiguration :: TF.Attr s (P.NonEmpty (TF.Attr s (LbFrontendIpConfigurationSetting s)))
     -- ^ @frontend_ip_configuration@ - (Optional)
     --
     , _location :: TF.Attr s P.Text
@@ -6920,9 +6920,9 @@ instance TF.IsObject (LbResource s) where
 instance TF.IsValid (LbResource s) where
     validator = P.mempty
 
-instance P.HasFrontendIpConfiguration (LbResource s) (TF.Attr s (P.NonEmpty (TF.Attr s (FrontendIpConfigurationSetting s)))) where
+instance P.HasFrontendIpConfiguration (LbResource s) (TF.Attr s (P.NonEmpty (TF.Attr s (LbFrontendIpConfigurationSetting s)))) where
     frontendIpConfiguration =
-        P.lens (_frontendIpConfiguration :: LbResource s -> TF.Attr s (P.NonEmpty (TF.Attr s (FrontendIpConfigurationSetting s))))
+        P.lens (_frontendIpConfiguration :: LbResource s -> TF.Attr s (P.NonEmpty (TF.Attr s (LbFrontendIpConfigurationSetting s))))
                (\s a -> s { _frontendIpConfiguration = a } :: LbResource s)
 
 instance P.HasLocation (LbResource s) (TF.Attr s P.Text) where

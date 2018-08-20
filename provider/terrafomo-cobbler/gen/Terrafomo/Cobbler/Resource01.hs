@@ -1027,133 +1027,133 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (SnippetResource s)) (TF.Attr s P.
 -- See the <https://www.terraform.io/docs/providers/cobbler/r/system.html terraform documentation>
 -- for more information.
 data SystemResource s = SystemResource'
-    { _bootFiles                :: TF.Attr s P.Text
+    { _bootFiles :: TF.Attr s P.Text
     -- ^ @boot_files@ - (Optional)
     --
-    , _comment                  :: TF.Attr s P.Text
+    , _comment :: TF.Attr s P.Text
     -- ^ @comment@ - (Optional)
     --
-    , _enableGpxe               :: TF.Attr s P.Bool
+    , _enableGpxe :: TF.Attr s P.Bool
     -- ^ @enable_gpxe@ - (Optional)
     --
-    , _fetchableFiles           :: TF.Attr s P.Text
+    , _fetchableFiles :: TF.Attr s P.Text
     -- ^ @fetchable_files@ - (Optional)
     --
-    , _gateway                  :: TF.Attr s P.Text
+    , _gateway :: TF.Attr s P.Text
     -- ^ @gateway@ - (Optional)
     --
-    , _hostname                 :: TF.Attr s P.Text
+    , _hostname :: TF.Attr s P.Text
     -- ^ @hostname@ - (Optional)
     --
-    , _image                    :: TF.Attr s P.Text
+    , _image :: TF.Attr s P.Text
     -- ^ @image@ - (Optional)
     --
-    , _interface                :: TF.Attr s [TF.Attr s (InterfaceSetting s)]
+    , _interface :: TF.Attr s [TF.Attr s (SystemInterfaceSetting s)]
     -- ^ @interface@ - (Optional)
     --
-    , _ipv6DefaultDevice        :: TF.Attr s P.Text
+    , _ipv6DefaultDevice :: TF.Attr s P.Text
     -- ^ @ipv6_default_device@ - (Optional)
     --
-    , _kernelOptions            :: TF.Attr s P.Text
+    , _kernelOptions :: TF.Attr s P.Text
     -- ^ @kernel_options@ - (Optional)
     --
-    , _kernelOptionsPost        :: TF.Attr s P.Text
+    , _kernelOptionsPost :: TF.Attr s P.Text
     -- ^ @kernel_options_post@ - (Optional)
     --
-    , _kickstart                :: TF.Attr s P.Text
+    , _kickstart :: TF.Attr s P.Text
     -- ^ @kickstart@ - (Optional)
     --
-    , _ksMeta                   :: TF.Attr s P.Text
+    , _ksMeta :: TF.Attr s P.Text
     -- ^ @ks_meta@ - (Optional)
     --
-    , _ldapEnabled              :: TF.Attr s P.Bool
+    , _ldapEnabled :: TF.Attr s P.Bool
     -- ^ @ldap_enabled@ - (Optional)
     --
-    , _ldapType                 :: TF.Attr s P.Text
+    , _ldapType :: TF.Attr s P.Text
     -- ^ @ldap_type@ - (Optional)
     --
-    , _mgmtClasses              :: TF.Attr s [TF.Attr s P.Text]
+    , _mgmtClasses :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @mgmt_classes@ - (Optional)
     --
-    , _mgmtParameters           :: TF.Attr s P.Text
+    , _mgmtParameters :: TF.Attr s P.Text
     -- ^ @mgmt_parameters@ - (Optional)
     --
-    , _monitEnabled             :: TF.Attr s P.Bool
+    , _monitEnabled :: TF.Attr s P.Bool
     -- ^ @monit_enabled@ - (Optional)
     --
-    , _name                     :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _nameServers              :: TF.Attr s [TF.Attr s P.Text]
+    , _nameServers :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @name_servers@ - (Optional)
     --
-    , _nameServersSearch        :: TF.Attr s [TF.Attr s P.Text]
+    , _nameServersSearch :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @name_servers_search@ - (Optional)
     --
-    , _netbootEnabled           :: TF.Attr s P.Bool
+    , _netbootEnabled :: TF.Attr s P.Bool
     -- ^ @netboot_enabled@ - (Optional)
     --
-    , _owners                   :: TF.Attr s [TF.Attr s P.Text]
+    , _owners :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @owners@ - (Optional)
     --
-    , _powerAddress             :: TF.Attr s P.Text
+    , _powerAddress :: TF.Attr s P.Text
     -- ^ @power_address@ - (Optional)
     --
-    , _powerId                  :: TF.Attr s P.Text
+    , _powerId :: TF.Attr s P.Text
     -- ^ @power_id@ - (Optional)
     --
-    , _powerPass                :: TF.Attr s P.Text
+    , _powerPass :: TF.Attr s P.Text
     -- ^ @power_pass@ - (Optional)
     --
-    , _powerType                :: TF.Attr s P.Text
+    , _powerType :: TF.Attr s P.Text
     -- ^ @power_type@ - (Optional)
     --
-    , _powerUser                :: TF.Attr s P.Text
+    , _powerUser :: TF.Attr s P.Text
     -- ^ @power_user@ - (Optional)
     --
-    , _profile                  :: TF.Attr s P.Text
+    , _profile :: TF.Attr s P.Text
     -- ^ @profile@ - (Required)
     --
-    , _proxy                    :: TF.Attr s P.Text
+    , _proxy :: TF.Attr s P.Text
     -- ^ @proxy@ - (Optional)
     --
-    , _redhatManagementKey      :: TF.Attr s P.Text
+    , _redhatManagementKey :: TF.Attr s P.Text
     -- ^ @redhat_management_key@ - (Optional)
     --
-    , _redhatManagementServer   :: TF.Attr s P.Text
+    , _redhatManagementServer :: TF.Attr s P.Text
     -- ^ @redhat_management_server@ - (Optional)
     --
-    , _status                   :: TF.Attr s P.Text
+    , _status :: TF.Attr s P.Text
     -- ^ @status@ - (Optional)
     --
-    , _templateFiles            :: TF.Attr s P.Text
+    , _templateFiles :: TF.Attr s P.Text
     -- ^ @template_files@ - (Optional)
     --
     , _templateRemoteKickstarts :: TF.Attr s P.Int
     -- ^ @template_remote_kickstarts@ - (Optional)
     --
-    , _virtAutoBoot             :: TF.Attr s P.Text
+    , _virtAutoBoot :: TF.Attr s P.Text
     -- ^ @virt_auto_boot@ - (Optional)
     --
-    , _virtCpus                 :: TF.Attr s P.Text
+    , _virtCpus :: TF.Attr s P.Text
     -- ^ @virt_cpus@ - (Optional)
     --
-    , _virtDiskDriver           :: TF.Attr s P.Text
+    , _virtDiskDriver :: TF.Attr s P.Text
     -- ^ @virt_disk_driver@ - (Optional)
     --
-    , _virtFileSize             :: TF.Attr s P.Text
+    , _virtFileSize :: TF.Attr s P.Text
     -- ^ @virt_file_size@ - (Optional)
     --
-    , _virtPath                 :: TF.Attr s P.Text
+    , _virtPath :: TF.Attr s P.Text
     -- ^ @virt_path@ - (Optional)
     --
-    , _virtPxeBoot              :: TF.Attr s P.Int
+    , _virtPxeBoot :: TF.Attr s P.Int
     -- ^ @virt_pxe_boot@ - (Optional)
     --
-    , _virtRam                  :: TF.Attr s P.Text
+    , _virtRam :: TF.Attr s P.Text
     -- ^ @virt_ram@ - (Optional)
     --
-    , _virtType                 :: TF.Attr s P.Text
+    , _virtType :: TF.Attr s P.Text
     -- ^ @virt_type@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -1296,9 +1296,9 @@ instance P.HasImage (SystemResource s) (TF.Attr s P.Text) where
         P.lens (_image :: SystemResource s -> TF.Attr s P.Text)
                (\s a -> s { _image = a } :: SystemResource s)
 
-instance P.HasInterface (SystemResource s) (TF.Attr s [TF.Attr s (InterfaceSetting s)]) where
+instance P.HasInterface (SystemResource s) (TF.Attr s [TF.Attr s (SystemInterfaceSetting s)]) where
     interface =
-        P.lens (_interface :: SystemResource s -> TF.Attr s [TF.Attr s (InterfaceSetting s)])
+        P.lens (_interface :: SystemResource s -> TF.Attr s [TF.Attr s (SystemInterfaceSetting s)])
                (\s a -> s { _interface = a } :: SystemResource s)
 
 instance P.HasIpv6DefaultDevice (SystemResource s) (TF.Attr s P.Text) where
@@ -1500,7 +1500,7 @@ instance s ~ s' => P.HasComputedHostname (TF.Ref s' (SystemResource s)) (TF.Attr
 instance s ~ s' => P.HasComputedImage (TF.Ref s' (SystemResource s)) (TF.Attr s P.Text) where
     computedImage x = TF.compute (TF.refKey x) "image"
 
-instance s ~ s' => P.HasComputedInterface (TF.Ref s' (SystemResource s)) (TF.Attr s [TF.Attr s (InterfaceSetting s)]) where
+instance s ~ s' => P.HasComputedInterface (TF.Ref s' (SystemResource s)) (TF.Attr s [TF.Attr s (SystemInterfaceSetting s)]) where
     computedInterface x = TF.compute (TF.refKey x) "interface"
 
 instance s ~ s' => P.HasComputedIpv6DefaultDevice (TF.Ref s' (SystemResource s)) (TF.Attr s P.Text) where

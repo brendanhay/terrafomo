@@ -693,7 +693,7 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (VirtualMachineData s)) (TF.Attr s
 instance s ~ s' => P.HasComputedAlternateGuestName (TF.Ref s' (VirtualMachineData s)) (TF.Attr s P.Text) where
     computedAlternateGuestName x = TF.compute (TF.refKey x) "alternate_guest_name"
 
-instance s ~ s' => P.HasComputedDisks (TF.Ref s' (VirtualMachineData s)) (TF.Attr s [TF.Attr s (DisksSetting s)]) where
+instance s ~ s' => P.HasComputedDisks (TF.Ref s' (VirtualMachineData s)) (TF.Attr s [TF.Attr s (VirtualMachineDisksSetting s)]) where
     computedDisks x = TF.compute (TF.refKey x) "disks"
 
 instance s ~ s' => P.HasComputedFirmware (TF.Ref s' (VirtualMachineData s)) (TF.Attr s P.Text) where

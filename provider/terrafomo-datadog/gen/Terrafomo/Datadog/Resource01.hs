@@ -83,7 +83,7 @@ data DowntimeResource s = DowntimeResource'
     , _monitorId  :: TF.Attr s P.Int
     -- ^ @monitor_id@ - (Optional)
     --
-    , _recurrence :: TF.Attr s (RecurrenceSetting s)
+    , _recurrence :: TF.Attr s (DowntimeRecurrenceSetting s)
     -- ^ @recurrence@ - (Optional)
     --
     , _scope      :: TF.Attr s [TF.Attr s P.Text]
@@ -127,7 +127,7 @@ instance TF.IsValid (DowntimeResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_recurrence"
                   (_recurrence
-                      :: DowntimeResource s -> TF.Attr s (RecurrenceSetting s))
+                      :: DowntimeResource s -> TF.Attr s (DowntimeRecurrenceSetting s))
                   TF.validator
 
 instance P.HasActive (DowntimeResource s) (TF.Attr s P.Bool) where
@@ -155,9 +155,9 @@ instance P.HasMonitorId (DowntimeResource s) (TF.Attr s P.Int) where
         P.lens (_monitorId :: DowntimeResource s -> TF.Attr s P.Int)
                (\s a -> s { _monitorId = a } :: DowntimeResource s)
 
-instance P.HasRecurrence (DowntimeResource s) (TF.Attr s (RecurrenceSetting s)) where
+instance P.HasRecurrence (DowntimeResource s) (TF.Attr s (DowntimeRecurrenceSetting s)) where
     recurrence =
-        P.lens (_recurrence :: DowntimeResource s -> TF.Attr s (RecurrenceSetting s))
+        P.lens (_recurrence :: DowntimeResource s -> TF.Attr s (DowntimeRecurrenceSetting s))
                (\s a -> s { _recurrence = a } :: DowntimeResource s)
 
 instance P.HasScope (DowntimeResource s) (TF.Attr s [TF.Attr s P.Text]) where
@@ -319,7 +319,7 @@ data MonitorResource s = MonitorResource'
     , _tags :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @tags@ - (Optional)
     --
-    , _thresholds :: TF.Attr s (P.Map P.Text (TF.Attr s (ThresholdsSetting s)))
+    , _thresholds :: TF.Attr s (P.Map P.Text (TF.Attr s (MonitorThresholdsSetting s)))
     -- ^ @thresholds@ - (Optional)
     --
     , _timeoutH :: TF.Attr s P.Int
@@ -460,9 +460,9 @@ instance P.HasTags (MonitorResource s) (TF.Attr s [TF.Attr s P.Text]) where
         P.lens (_tags :: MonitorResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _tags = a } :: MonitorResource s)
 
-instance P.HasThresholds (MonitorResource s) (TF.Attr s (P.Map P.Text (TF.Attr s (ThresholdsSetting s)))) where
+instance P.HasThresholds (MonitorResource s) (TF.Attr s (P.Map P.Text (TF.Attr s (MonitorThresholdsSetting s)))) where
     thresholds =
-        P.lens (_thresholds :: MonitorResource s -> TF.Attr s (P.Map P.Text (TF.Attr s (ThresholdsSetting s))))
+        P.lens (_thresholds :: MonitorResource s -> TF.Attr s (P.Map P.Text (TF.Attr s (MonitorThresholdsSetting s))))
                (\s a -> s { _thresholds = a } :: MonitorResource s)
 
 instance P.HasTimeoutH (MonitorResource s) (TF.Attr s P.Int) where
@@ -489,22 +489,22 @@ instance s ~ s' => P.HasComputedNewHostDelay (TF.Ref s' (MonitorResource s)) (TF
 -- See the <https://www.terraform.io/docs/providers/datadog/r/timeboard.html terraform documentation>
 -- for more information.
 data TimeboardResource s = TimeboardResource'
-    { _description      :: TF.Attr s P.Text
+    { _description :: TF.Attr s P.Text
     -- ^ @description@ - (Required)
     -- A description of the dashboard's content.
     --
-    , _graph            :: TF.Attr s [TF.Attr s (GraphSetting s)]
+    , _graph :: TF.Attr s [TF.Attr s (TimeboardGraphSetting s)]
     -- ^ @graph@ - (Required)
     -- A list of graph definitions.
     --
-    , _readOnly         :: TF.Attr s P.Bool
+    , _readOnly :: TF.Attr s P.Bool
     -- ^ @read_only@ - (Optional)
     --
-    , _templateVariable :: TF.Attr s [TF.Attr s (TemplateVariableSetting s)]
+    , _templateVariable :: TF.Attr s [TF.Attr s (TimeboardTemplateVariableSetting s)]
     -- ^ @template_variable@ - (Optional)
     -- A list of template variables for using Dashboard templating.
     --
-    , _title            :: TF.Attr s P.Text
+    , _title :: TF.Attr s P.Text
     -- ^ @title@ - (Required)
     -- The name of the dashboard.
     --
@@ -513,7 +513,7 @@ data TimeboardResource s = TimeboardResource'
 -- | Define a new @datadog_timeboard@ resource value.
 timeboardResource
     :: TF.Attr s P.Text -- ^ @description@ ('P._description', 'P.description')
-    -> TF.Attr s [TF.Attr s (GraphSetting s)] -- ^ @graph@ ('P._graph', 'P.graph')
+    -> TF.Attr s [TF.Attr s (TimeboardGraphSetting s)] -- ^ @graph@ ('P._graph', 'P.graph')
     -> TF.Attr s P.Text -- ^ @title@ ('P._title', 'P.title')
     -> P.Resource (TimeboardResource s)
 timeboardResource _description _graph _title =
@@ -543,9 +543,9 @@ instance P.HasDescription (TimeboardResource s) (TF.Attr s P.Text) where
         P.lens (_description :: TimeboardResource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: TimeboardResource s)
 
-instance P.HasGraph (TimeboardResource s) (TF.Attr s [TF.Attr s (GraphSetting s)]) where
+instance P.HasGraph (TimeboardResource s) (TF.Attr s [TF.Attr s (TimeboardGraphSetting s)]) where
     graph =
-        P.lens (_graph :: TimeboardResource s -> TF.Attr s [TF.Attr s (GraphSetting s)])
+        P.lens (_graph :: TimeboardResource s -> TF.Attr s [TF.Attr s (TimeboardGraphSetting s)])
                (\s a -> s { _graph = a } :: TimeboardResource s)
 
 instance P.HasReadOnly (TimeboardResource s) (TF.Attr s P.Bool) where
@@ -553,9 +553,9 @@ instance P.HasReadOnly (TimeboardResource s) (TF.Attr s P.Bool) where
         P.lens (_readOnly :: TimeboardResource s -> TF.Attr s P.Bool)
                (\s a -> s { _readOnly = a } :: TimeboardResource s)
 
-instance P.HasTemplateVariable (TimeboardResource s) (TF.Attr s [TF.Attr s (TemplateVariableSetting s)]) where
+instance P.HasTemplateVariable (TimeboardResource s) (TF.Attr s [TF.Attr s (TimeboardTemplateVariableSetting s)]) where
     templateVariable =
-        P.lens (_templateVariable :: TimeboardResource s -> TF.Attr s [TF.Attr s (TemplateVariableSetting s)])
+        P.lens (_templateVariable :: TimeboardResource s -> TF.Attr s [TF.Attr s (TimeboardTemplateVariableSetting s)])
                (\s a -> s { _templateVariable = a } :: TimeboardResource s)
 
 instance P.HasTitle (TimeboardResource s) (TF.Attr s P.Text) where

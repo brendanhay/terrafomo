@@ -63,7 +63,7 @@ data FileData s = FileData'
     , _outputPath            :: TF.Attr s P.Text
     -- ^ @output_path@ - (Required)
     --
-    , _source                :: TF.Attr s [TF.Attr s (SourceSetting s)]
+    , _source                :: TF.Attr s [TF.Attr s (FileSourceSetting s)]
     -- ^ @source@ - (Optional)
     --
     -- Conflicts with:
@@ -188,9 +188,9 @@ instance P.HasOutputPath (FileData s) (TF.Attr s P.Text) where
         P.lens (_outputPath :: FileData s -> TF.Attr s P.Text)
                (\s a -> s { _outputPath = a } :: FileData s)
 
-instance P.HasSource (FileData s) (TF.Attr s [TF.Attr s (SourceSetting s)]) where
+instance P.HasSource (FileData s) (TF.Attr s [TF.Attr s (FileSourceSetting s)]) where
     source =
-        P.lens (_source :: FileData s -> TF.Attr s [TF.Attr s (SourceSetting s)])
+        P.lens (_source :: FileData s -> TF.Attr s [TF.Attr s (FileSourceSetting s)])
                (\s a -> s { _source = a } :: FileData s)
 
 instance P.HasSourceContent (FileData s) (TF.Attr s P.Text) where
@@ -233,5 +233,5 @@ instance s ~ s' => P.HasComputedOutputSha (TF.Ref s' (FileData s)) (TF.Attr s P.
 instance s ~ s' => P.HasComputedOutputSize (TF.Ref s' (FileData s)) (TF.Attr s P.Int) where
     computedOutputSize x = TF.compute (TF.refKey x) "output_size"
 
-instance s ~ s' => P.HasComputedSource (TF.Ref s' (FileData s)) (TF.Attr s [TF.Attr s (SourceSetting s)]) where
+instance s ~ s' => P.HasComputedSource (TF.Ref s' (FileData s)) (TF.Attr s [TF.Attr s (FileSourceSetting s)]) where
     computedSource x = TF.compute (TF.refKey x) "source"

@@ -485,7 +485,7 @@ data SchemaResource s = SchemaResource'
     -- ^ @owner@ - (Optional)
     -- The ROLE name who owns the schema
     --
-    , _policy      :: TF.Attr s [TF.Attr s (PolicySetting s)]
+    , _policy      :: TF.Attr s [TF.Attr s (SchemaPolicySetting s)]
     -- ^ @policy@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -529,9 +529,9 @@ instance P.HasOwner (SchemaResource s) (TF.Attr s P.Text) where
         P.lens (_owner :: SchemaResource s -> TF.Attr s P.Text)
                (\s a -> s { _owner = a } :: SchemaResource s)
 
-instance P.HasPolicy (SchemaResource s) (TF.Attr s [TF.Attr s (PolicySetting s)]) where
+instance P.HasPolicy (SchemaResource s) (TF.Attr s [TF.Attr s (SchemaPolicySetting s)]) where
     policy =
-        P.lens (_policy :: SchemaResource s -> TF.Attr s [TF.Attr s (PolicySetting s)])
+        P.lens (_policy :: SchemaResource s -> TF.Attr s [TF.Attr s (SchemaPolicySetting s)])
                (\s a -> s { _policy = a } :: SchemaResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (SchemaResource s)) (TF.Attr s P.Text) where
@@ -540,5 +540,5 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (SchemaResource s)) (TF.Attr s P.T
 instance s ~ s' => P.HasComputedOwner (TF.Ref s' (SchemaResource s)) (TF.Attr s P.Text) where
     computedOwner x = TF.compute (TF.refKey x) "owner"
 
-instance s ~ s' => P.HasComputedPolicy (TF.Ref s' (SchemaResource s)) (TF.Attr s [TF.Attr s (PolicySetting s)]) where
+instance s ~ s' => P.HasComputedPolicy (TF.Ref s' (SchemaResource s)) (TF.Attr s [TF.Attr s (SchemaPolicySetting s)]) where
     computedPolicy x = TF.compute (TF.refKey x) "policy"

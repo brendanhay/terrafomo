@@ -338,7 +338,7 @@ data ServerResource s = ServerResource'
     -- ^ @type@ - (Required, Forces New)
     -- The instance type of the server
     --
-    , _volume            :: TF.Attr s [TF.Attr s (VolumeSetting s)]
+    , _volume            :: TF.Attr s [TF.Attr s (ServerVolumeSetting s)]
     -- ^ @volume@ - (Optional, Forces New)
     -- Volumes attached to the server on creation
     --
@@ -441,9 +441,9 @@ instance P.HasType' (ServerResource s) (TF.Attr s P.Text) where
         P.lens (_type' :: ServerResource s -> TF.Attr s P.Text)
                (\s a -> s { _type' = a } :: ServerResource s)
 
-instance P.HasVolume (ServerResource s) (TF.Attr s [TF.Attr s (VolumeSetting s)]) where
+instance P.HasVolume (ServerResource s) (TF.Attr s [TF.Attr s (ServerVolumeSetting s)]) where
     volume =
-        P.lens (_volume :: ServerResource s -> TF.Attr s [TF.Attr s (VolumeSetting s)])
+        P.lens (_volume :: ServerResource s -> TF.Attr s [TF.Attr s (ServerVolumeSetting s)])
                (\s a -> s { _volume = a } :: ServerResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where

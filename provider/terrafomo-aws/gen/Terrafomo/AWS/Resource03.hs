@@ -463,7 +463,7 @@ data CognitoResourceServerResource s = CognitoResourceServerResource'
     , _name       :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _scope      :: TF.Attr s [TF.Attr s (ScopeSetting s)]
+    , _scope      :: TF.Attr s [TF.Attr s (CognitoResourceServerScopeSetting s)]
     -- ^ @scope@ - (Optional)
     --
     , _userPoolId :: TF.Attr s P.Text
@@ -507,9 +507,9 @@ instance P.HasName (CognitoResourceServerResource s) (TF.Attr s P.Text) where
         P.lens (_name :: CognitoResourceServerResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: CognitoResourceServerResource s)
 
-instance P.HasScope (CognitoResourceServerResource s) (TF.Attr s [TF.Attr s (ScopeSetting s)]) where
+instance P.HasScope (CognitoResourceServerResource s) (TF.Attr s [TF.Attr s (CognitoResourceServerScopeSetting s)]) where
     scope =
-        P.lens (_scope :: CognitoResourceServerResource s -> TF.Attr s [TF.Attr s (ScopeSetting s)])
+        P.lens (_scope :: CognitoResourceServerResource s -> TF.Attr s [TF.Attr s (CognitoResourceServerScopeSetting s)])
                (\s a -> s { _scope = a } :: CognitoResourceServerResource s)
 
 instance P.HasUserPoolId (CognitoResourceServerResource s) (TF.Attr s P.Text) where
@@ -834,7 +834,7 @@ instance s ~ s' => P.HasComputedVersion (TF.Ref s' (CognitoUserPoolDomainResourc
 -- See the <https://www.terraform.io/docs/providers/aws/r/cognito_user_pool.html terraform documentation>
 -- for more information.
 data CognitoUserPoolResource s = CognitoUserPoolResource'
-    { _adminCreateUserConfig :: TF.Attr s (AdminCreateUserConfigSetting s)
+    { _adminCreateUserConfig :: TF.Attr s (CognitoUserPoolAdminCreateUserConfigSetting s)
     -- ^ @admin_create_user_config@ - (Optional)
     --
     , _aliasAttributes :: TF.Attr s [TF.Attr s P.Text]
@@ -846,10 +846,10 @@ data CognitoUserPoolResource s = CognitoUserPoolResource'
     , _autoVerifiedAttributes :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @auto_verified_attributes@ - (Optional)
     --
-    , _deviceConfiguration :: TF.Attr s (DeviceConfigurationSetting s)
+    , _deviceConfiguration :: TF.Attr s (CognitoUserPoolDeviceConfigurationSetting s)
     -- ^ @device_configuration@ - (Optional)
     --
-    , _emailConfiguration :: TF.Attr s (EmailConfigurationSetting s)
+    , _emailConfiguration :: TF.Attr s (CognitoUserPoolEmailConfigurationSetting s)
     -- ^ @email_configuration@ - (Optional)
     --
     , _emailVerificationMessage :: TF.Attr s P.Text
@@ -858,7 +858,7 @@ data CognitoUserPoolResource s = CognitoUserPoolResource'
     , _emailVerificationSubject :: TF.Attr s P.Text
     -- ^ @email_verification_subject@ - (Optional)
     --
-    , _lambdaConfig :: TF.Attr s (LambdaConfigSetting s)
+    , _lambdaConfig :: TF.Attr s (CognitoUserPoolLambdaConfigSetting s)
     -- ^ @lambda_config@ - (Optional)
     --
     , _mfaConfiguration :: TF.Attr s P.Text
@@ -867,16 +867,16 @@ data CognitoUserPoolResource s = CognitoUserPoolResource'
     , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _passwordPolicy :: TF.Attr s (PasswordPolicySetting s)
+    , _passwordPolicy :: TF.Attr s (CognitoUserPoolPasswordPolicySetting s)
     -- ^ @password_policy@ - (Optional)
     --
-    , _schema :: TF.Attr s (P.NonEmpty (TF.Attr s (SchemaSetting s)))
+    , _schema :: TF.Attr s (P.NonEmpty (TF.Attr s (CognitoUserPoolSchemaSetting s)))
     -- ^ @schema@ - (Optional, Forces New)
     --
     , _smsAuthenticationMessage :: TF.Attr s P.Text
     -- ^ @sms_authentication_message@ - (Optional)
     --
-    , _smsConfiguration :: TF.Attr s (SmsConfigurationSetting s)
+    , _smsConfiguration :: TF.Attr s (CognitoUserPoolSmsConfigurationSetting s)
     -- ^ @sms_configuration@ - (Optional)
     --
     , _smsVerificationMessage :: TF.Attr s P.Text
@@ -891,7 +891,7 @@ data CognitoUserPoolResource s = CognitoUserPoolResource'
     -- Conflicts with:
     --
     -- * 'aliasAttributes'
-    , _verificationMessageTemplate :: TF.Attr s (VerificationMessageTemplateSetting s)
+    , _verificationMessageTemplate :: TF.Attr s (CognitoUserPoolVerificationMessageTemplateSetting s)
     -- ^ @verification_message_template@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -960,36 +960,36 @@ instance TF.IsValid (CognitoUserPoolResource s) where
         ])
            P.<> TF.settingsValidator "_adminCreateUserConfig"
                   (_adminCreateUserConfig
-                      :: CognitoUserPoolResource s -> TF.Attr s (AdminCreateUserConfigSetting s))
+                      :: CognitoUserPoolResource s -> TF.Attr s (CognitoUserPoolAdminCreateUserConfigSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_deviceConfiguration"
                   (_deviceConfiguration
-                      :: CognitoUserPoolResource s -> TF.Attr s (DeviceConfigurationSetting s))
+                      :: CognitoUserPoolResource s -> TF.Attr s (CognitoUserPoolDeviceConfigurationSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_emailConfiguration"
                   (_emailConfiguration
-                      :: CognitoUserPoolResource s -> TF.Attr s (EmailConfigurationSetting s))
+                      :: CognitoUserPoolResource s -> TF.Attr s (CognitoUserPoolEmailConfigurationSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_lambdaConfig"
                   (_lambdaConfig
-                      :: CognitoUserPoolResource s -> TF.Attr s (LambdaConfigSetting s))
+                      :: CognitoUserPoolResource s -> TF.Attr s (CognitoUserPoolLambdaConfigSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_passwordPolicy"
                   (_passwordPolicy
-                      :: CognitoUserPoolResource s -> TF.Attr s (PasswordPolicySetting s))
+                      :: CognitoUserPoolResource s -> TF.Attr s (CognitoUserPoolPasswordPolicySetting s))
                   TF.validator
            P.<> TF.settingsValidator "_smsConfiguration"
                   (_smsConfiguration
-                      :: CognitoUserPoolResource s -> TF.Attr s (SmsConfigurationSetting s))
+                      :: CognitoUserPoolResource s -> TF.Attr s (CognitoUserPoolSmsConfigurationSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_verificationMessageTemplate"
                   (_verificationMessageTemplate
-                      :: CognitoUserPoolResource s -> TF.Attr s (VerificationMessageTemplateSetting s))
+                      :: CognitoUserPoolResource s -> TF.Attr s (CognitoUserPoolVerificationMessageTemplateSetting s))
                   TF.validator
 
-instance P.HasAdminCreateUserConfig (CognitoUserPoolResource s) (TF.Attr s (AdminCreateUserConfigSetting s)) where
+instance P.HasAdminCreateUserConfig (CognitoUserPoolResource s) (TF.Attr s (CognitoUserPoolAdminCreateUserConfigSetting s)) where
     adminCreateUserConfig =
-        P.lens (_adminCreateUserConfig :: CognitoUserPoolResource s -> TF.Attr s (AdminCreateUserConfigSetting s))
+        P.lens (_adminCreateUserConfig :: CognitoUserPoolResource s -> TF.Attr s (CognitoUserPoolAdminCreateUserConfigSetting s))
                (\s a -> s { _adminCreateUserConfig = a } :: CognitoUserPoolResource s)
 
 instance P.HasAliasAttributes (CognitoUserPoolResource s) (TF.Attr s [TF.Attr s P.Text]) where
@@ -1002,14 +1002,14 @@ instance P.HasAutoVerifiedAttributes (CognitoUserPoolResource s) (TF.Attr s [TF.
         P.lens (_autoVerifiedAttributes :: CognitoUserPoolResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _autoVerifiedAttributes = a } :: CognitoUserPoolResource s)
 
-instance P.HasDeviceConfiguration (CognitoUserPoolResource s) (TF.Attr s (DeviceConfigurationSetting s)) where
+instance P.HasDeviceConfiguration (CognitoUserPoolResource s) (TF.Attr s (CognitoUserPoolDeviceConfigurationSetting s)) where
     deviceConfiguration =
-        P.lens (_deviceConfiguration :: CognitoUserPoolResource s -> TF.Attr s (DeviceConfigurationSetting s))
+        P.lens (_deviceConfiguration :: CognitoUserPoolResource s -> TF.Attr s (CognitoUserPoolDeviceConfigurationSetting s))
                (\s a -> s { _deviceConfiguration = a } :: CognitoUserPoolResource s)
 
-instance P.HasEmailConfiguration (CognitoUserPoolResource s) (TF.Attr s (EmailConfigurationSetting s)) where
+instance P.HasEmailConfiguration (CognitoUserPoolResource s) (TF.Attr s (CognitoUserPoolEmailConfigurationSetting s)) where
     emailConfiguration =
-        P.lens (_emailConfiguration :: CognitoUserPoolResource s -> TF.Attr s (EmailConfigurationSetting s))
+        P.lens (_emailConfiguration :: CognitoUserPoolResource s -> TF.Attr s (CognitoUserPoolEmailConfigurationSetting s))
                (\s a -> s { _emailConfiguration = a } :: CognitoUserPoolResource s)
 
 instance P.HasEmailVerificationMessage (CognitoUserPoolResource s) (TF.Attr s P.Text) where
@@ -1022,9 +1022,9 @@ instance P.HasEmailVerificationSubject (CognitoUserPoolResource s) (TF.Attr s P.
         P.lens (_emailVerificationSubject :: CognitoUserPoolResource s -> TF.Attr s P.Text)
                (\s a -> s { _emailVerificationSubject = a } :: CognitoUserPoolResource s)
 
-instance P.HasLambdaConfig (CognitoUserPoolResource s) (TF.Attr s (LambdaConfigSetting s)) where
+instance P.HasLambdaConfig (CognitoUserPoolResource s) (TF.Attr s (CognitoUserPoolLambdaConfigSetting s)) where
     lambdaConfig =
-        P.lens (_lambdaConfig :: CognitoUserPoolResource s -> TF.Attr s (LambdaConfigSetting s))
+        P.lens (_lambdaConfig :: CognitoUserPoolResource s -> TF.Attr s (CognitoUserPoolLambdaConfigSetting s))
                (\s a -> s { _lambdaConfig = a } :: CognitoUserPoolResource s)
 
 instance P.HasMfaConfiguration (CognitoUserPoolResource s) (TF.Attr s P.Text) where
@@ -1037,14 +1037,14 @@ instance P.HasName (CognitoUserPoolResource s) (TF.Attr s P.Text) where
         P.lens (_name :: CognitoUserPoolResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: CognitoUserPoolResource s)
 
-instance P.HasPasswordPolicy (CognitoUserPoolResource s) (TF.Attr s (PasswordPolicySetting s)) where
+instance P.HasPasswordPolicy (CognitoUserPoolResource s) (TF.Attr s (CognitoUserPoolPasswordPolicySetting s)) where
     passwordPolicy =
-        P.lens (_passwordPolicy :: CognitoUserPoolResource s -> TF.Attr s (PasswordPolicySetting s))
+        P.lens (_passwordPolicy :: CognitoUserPoolResource s -> TF.Attr s (CognitoUserPoolPasswordPolicySetting s))
                (\s a -> s { _passwordPolicy = a } :: CognitoUserPoolResource s)
 
-instance P.HasSchema (CognitoUserPoolResource s) (TF.Attr s (P.NonEmpty (TF.Attr s (SchemaSetting s)))) where
+instance P.HasSchema (CognitoUserPoolResource s) (TF.Attr s (P.NonEmpty (TF.Attr s (CognitoUserPoolSchemaSetting s)))) where
     schema =
-        P.lens (_schema :: CognitoUserPoolResource s -> TF.Attr s (P.NonEmpty (TF.Attr s (SchemaSetting s))))
+        P.lens (_schema :: CognitoUserPoolResource s -> TF.Attr s (P.NonEmpty (TF.Attr s (CognitoUserPoolSchemaSetting s))))
                (\s a -> s { _schema = a } :: CognitoUserPoolResource s)
 
 instance P.HasSmsAuthenticationMessage (CognitoUserPoolResource s) (TF.Attr s P.Text) where
@@ -1052,9 +1052,9 @@ instance P.HasSmsAuthenticationMessage (CognitoUserPoolResource s) (TF.Attr s P.
         P.lens (_smsAuthenticationMessage :: CognitoUserPoolResource s -> TF.Attr s P.Text)
                (\s a -> s { _smsAuthenticationMessage = a } :: CognitoUserPoolResource s)
 
-instance P.HasSmsConfiguration (CognitoUserPoolResource s) (TF.Attr s (SmsConfigurationSetting s)) where
+instance P.HasSmsConfiguration (CognitoUserPoolResource s) (TF.Attr s (CognitoUserPoolSmsConfigurationSetting s)) where
     smsConfiguration =
-        P.lens (_smsConfiguration :: CognitoUserPoolResource s -> TF.Attr s (SmsConfigurationSetting s))
+        P.lens (_smsConfiguration :: CognitoUserPoolResource s -> TF.Attr s (CognitoUserPoolSmsConfigurationSetting s))
                (\s a -> s { _smsConfiguration = a } :: CognitoUserPoolResource s)
 
 instance P.HasSmsVerificationMessage (CognitoUserPoolResource s) (TF.Attr s P.Text) where
@@ -1072,15 +1072,15 @@ instance P.HasUsernameAttributes (CognitoUserPoolResource s) (TF.Attr s [TF.Attr
         P.lens (_usernameAttributes :: CognitoUserPoolResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _usernameAttributes = a } :: CognitoUserPoolResource s)
 
-instance P.HasVerificationMessageTemplate (CognitoUserPoolResource s) (TF.Attr s (VerificationMessageTemplateSetting s)) where
+instance P.HasVerificationMessageTemplate (CognitoUserPoolResource s) (TF.Attr s (CognitoUserPoolVerificationMessageTemplateSetting s)) where
     verificationMessageTemplate =
-        P.lens (_verificationMessageTemplate :: CognitoUserPoolResource s -> TF.Attr s (VerificationMessageTemplateSetting s))
+        P.lens (_verificationMessageTemplate :: CognitoUserPoolResource s -> TF.Attr s (CognitoUserPoolVerificationMessageTemplateSetting s))
                (\s a -> s { _verificationMessageTemplate = a } :: CognitoUserPoolResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (CognitoUserPoolResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedAdminCreateUserConfig (TF.Ref s' (CognitoUserPoolResource s)) (TF.Attr s (AdminCreateUserConfigSetting s)) where
+instance s ~ s' => P.HasComputedAdminCreateUserConfig (TF.Ref s' (CognitoUserPoolResource s)) (TF.Attr s (CognitoUserPoolAdminCreateUserConfigSetting s)) where
     computedAdminCreateUserConfig x = TF.compute (TF.refKey x) "admin_create_user_config"
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (CognitoUserPoolResource s)) (TF.Attr s P.Text) where
@@ -1098,16 +1098,16 @@ instance s ~ s' => P.HasComputedEmailVerificationSubject (TF.Ref s' (CognitoUser
 instance s ~ s' => P.HasComputedEndpoint (TF.Ref s' (CognitoUserPoolResource s)) (TF.Attr s P.Text) where
     computedEndpoint x = TF.compute (TF.refKey x) "endpoint"
 
-instance s ~ s' => P.HasComputedLambdaConfig (TF.Ref s' (CognitoUserPoolResource s)) (TF.Attr s (LambdaConfigSetting s)) where
+instance s ~ s' => P.HasComputedLambdaConfig (TF.Ref s' (CognitoUserPoolResource s)) (TF.Attr s (CognitoUserPoolLambdaConfigSetting s)) where
     computedLambdaConfig x = TF.compute (TF.refKey x) "lambda_config"
 
 instance s ~ s' => P.HasComputedLastModifiedDate (TF.Ref s' (CognitoUserPoolResource s)) (TF.Attr s P.Text) where
     computedLastModifiedDate x = TF.compute (TF.refKey x) "last_modified_date"
 
-instance s ~ s' => P.HasComputedPasswordPolicy (TF.Ref s' (CognitoUserPoolResource s)) (TF.Attr s (PasswordPolicySetting s)) where
+instance s ~ s' => P.HasComputedPasswordPolicy (TF.Ref s' (CognitoUserPoolResource s)) (TF.Attr s (CognitoUserPoolPasswordPolicySetting s)) where
     computedPasswordPolicy x = TF.compute (TF.refKey x) "password_policy"
 
-instance s ~ s' => P.HasComputedVerificationMessageTemplate (TF.Ref s' (CognitoUserPoolResource s)) (TF.Attr s (VerificationMessageTemplateSetting s)) where
+instance s ~ s' => P.HasComputedVerificationMessageTemplate (TF.Ref s' (CognitoUserPoolResource s)) (TF.Attr s (CognitoUserPoolVerificationMessageTemplateSetting s)) where
     computedVerificationMessageTemplate x = TF.compute (TF.refKey x) "verification_message_template"
 
 -- | @aws_config_aggregate_authorization@ Resource.
@@ -1177,10 +1177,10 @@ data ConfigConfigRuleResource s = ConfigConfigRuleResource'
     , _name                      :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _scope                     :: TF.Attr s (ScopeSetting s)
+    , _scope                     :: TF.Attr s (ConfigConfigRuleScopeSetting s)
     -- ^ @scope@ - (Optional)
     --
-    , _source                    :: TF.Attr s (SourceSetting s)
+    , _source                    :: TF.Attr s (ConfigConfigRuleSourceSetting s)
     -- ^ @source@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -1188,7 +1188,7 @@ data ConfigConfigRuleResource s = ConfigConfigRuleResource'
 -- | Define a new @aws_config_config_rule@ resource value.
 configConfigRuleResource
     :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
-    -> TF.Attr s (SourceSetting s) -- ^ @source@ ('P._source', 'P.source')
+    -> TF.Attr s (ConfigConfigRuleSourceSetting s) -- ^ @source@ ('P._source', 'P.source')
     -> P.Resource (ConfigConfigRuleResource s)
 configConfigRuleResource _name _source =
     TF.unsafeResource "aws_config_config_rule" TF.validator $
@@ -1215,11 +1215,11 @@ instance TF.IsValid (ConfigConfigRuleResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_scope"
                   (_scope
-                      :: ConfigConfigRuleResource s -> TF.Attr s (ScopeSetting s))
+                      :: ConfigConfigRuleResource s -> TF.Attr s (ConfigConfigRuleScopeSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_source"
                   (_source
-                      :: ConfigConfigRuleResource s -> TF.Attr s (SourceSetting s))
+                      :: ConfigConfigRuleResource s -> TF.Attr s (ConfigConfigRuleSourceSetting s))
                   TF.validator
 
 instance P.HasDescription (ConfigConfigRuleResource s) (TF.Attr s P.Text) where
@@ -1242,14 +1242,14 @@ instance P.HasName (ConfigConfigRuleResource s) (TF.Attr s P.Text) where
         P.lens (_name :: ConfigConfigRuleResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ConfigConfigRuleResource s)
 
-instance P.HasScope (ConfigConfigRuleResource s) (TF.Attr s (ScopeSetting s)) where
+instance P.HasScope (ConfigConfigRuleResource s) (TF.Attr s (ConfigConfigRuleScopeSetting s)) where
     scope =
-        P.lens (_scope :: ConfigConfigRuleResource s -> TF.Attr s (ScopeSetting s))
+        P.lens (_scope :: ConfigConfigRuleResource s -> TF.Attr s (ConfigConfigRuleScopeSetting s))
                (\s a -> s { _scope = a } :: ConfigConfigRuleResource s)
 
-instance P.HasSource (ConfigConfigRuleResource s) (TF.Attr s (SourceSetting s)) where
+instance P.HasSource (ConfigConfigRuleResource s) (TF.Attr s (ConfigConfigRuleSourceSetting s)) where
     source =
-        P.lens (_source :: ConfigConfigRuleResource s -> TF.Attr s (SourceSetting s))
+        P.lens (_source :: ConfigConfigRuleResource s -> TF.Attr s (ConfigConfigRuleSourceSetting s))
                (\s a -> s { _source = a } :: ConfigConfigRuleResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ConfigConfigRuleResource s)) (TF.Attr s P.Text) where
@@ -1266,7 +1266,7 @@ instance s ~ s' => P.HasComputedRuleId (TF.Ref s' (ConfigConfigRuleResource s)) 
 -- See the <https://www.terraform.io/docs/providers/aws/r/config_configuration_aggregator.html terraform documentation>
 -- for more information.
 data ConfigConfigurationAggregatorResource s = ConfigConfigurationAggregatorResource'
-    { _accountAggregationSource :: TF.Attr s (AccountAggregationSourceSetting s)
+    { _accountAggregationSource :: TF.Attr s (ConfigConfigurationAggregatorAccountAggregationSourceSetting s)
     -- ^ @account_aggregation_source@ - (Optional)
     --
     -- Conflicts with:
@@ -1275,7 +1275,7 @@ data ConfigConfigurationAggregatorResource s = ConfigConfigurationAggregatorReso
     , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _organizationAggregationSource :: TF.Attr s (OrganizationAggregationSourceSetting s)
+    , _organizationAggregationSource :: TF.Attr s (ConfigConfigurationAggregatorOrganizationAggregationSourceSetting s)
     -- ^ @organization_aggregation_source@ - (Optional)
     --
     -- Conflicts with:
@@ -1317,16 +1317,16 @@ instance TF.IsValid (ConfigConfigurationAggregatorResource s) where
         ])
            P.<> TF.settingsValidator "_accountAggregationSource"
                   (_accountAggregationSource
-                      :: ConfigConfigurationAggregatorResource s -> TF.Attr s (AccountAggregationSourceSetting s))
+                      :: ConfigConfigurationAggregatorResource s -> TF.Attr s (ConfigConfigurationAggregatorAccountAggregationSourceSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_organizationAggregationSource"
                   (_organizationAggregationSource
-                      :: ConfigConfigurationAggregatorResource s -> TF.Attr s (OrganizationAggregationSourceSetting s))
+                      :: ConfigConfigurationAggregatorResource s -> TF.Attr s (ConfigConfigurationAggregatorOrganizationAggregationSourceSetting s))
                   TF.validator
 
-instance P.HasAccountAggregationSource (ConfigConfigurationAggregatorResource s) (TF.Attr s (AccountAggregationSourceSetting s)) where
+instance P.HasAccountAggregationSource (ConfigConfigurationAggregatorResource s) (TF.Attr s (ConfigConfigurationAggregatorAccountAggregationSourceSetting s)) where
     accountAggregationSource =
-        P.lens (_accountAggregationSource :: ConfigConfigurationAggregatorResource s -> TF.Attr s (AccountAggregationSourceSetting s))
+        P.lens (_accountAggregationSource :: ConfigConfigurationAggregatorResource s -> TF.Attr s (ConfigConfigurationAggregatorAccountAggregationSourceSetting s))
                (\s a -> s { _accountAggregationSource = a } :: ConfigConfigurationAggregatorResource s)
 
 instance P.HasName (ConfigConfigurationAggregatorResource s) (TF.Attr s P.Text) where
@@ -1334,9 +1334,9 @@ instance P.HasName (ConfigConfigurationAggregatorResource s) (TF.Attr s P.Text) 
         P.lens (_name :: ConfigConfigurationAggregatorResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ConfigConfigurationAggregatorResource s)
 
-instance P.HasOrganizationAggregationSource (ConfigConfigurationAggregatorResource s) (TF.Attr s (OrganizationAggregationSourceSetting s)) where
+instance P.HasOrganizationAggregationSource (ConfigConfigurationAggregatorResource s) (TF.Attr s (ConfigConfigurationAggregatorOrganizationAggregationSourceSetting s)) where
     organizationAggregationSource =
-        P.lens (_organizationAggregationSource :: ConfigConfigurationAggregatorResource s -> TF.Attr s (OrganizationAggregationSourceSetting s))
+        P.lens (_organizationAggregationSource :: ConfigConfigurationAggregatorResource s -> TF.Attr s (ConfigConfigurationAggregatorOrganizationAggregationSourceSetting s))
                (\s a -> s { _organizationAggregationSource = a } :: ConfigConfigurationAggregatorResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ConfigConfigurationAggregatorResource s)) (TF.Attr s P.Text) where
@@ -1350,13 +1350,13 @@ instance s ~ s' => P.HasComputedArn (TF.Ref s' (ConfigConfigurationAggregatorRes
 -- See the <https://www.terraform.io/docs/providers/aws/r/config_configuration_recorder.html terraform documentation>
 -- for more information.
 data ConfigConfigurationRecorderResource s = ConfigConfigurationRecorderResource'
-    { _name           :: TF.Attr s P.Text
+    { _name :: TF.Attr s P.Text
     -- ^ @name@ - (Optional, Forces New)
     --
-    , _recordingGroup :: TF.Attr s (RecordingGroupSetting s)
+    , _recordingGroup :: TF.Attr s (ConfigConfigurationRecorderRecordingGroupSetting s)
     -- ^ @recording_group@ - (Optional)
     --
-    , _roleArn        :: TF.Attr s P.Text
+    , _roleArn :: TF.Attr s P.Text
     -- ^ @role_arn@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -1384,7 +1384,7 @@ instance TF.IsValid (ConfigConfigurationRecorderResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_recordingGroup"
                   (_recordingGroup
-                      :: ConfigConfigurationRecorderResource s -> TF.Attr s (RecordingGroupSetting s))
+                      :: ConfigConfigurationRecorderResource s -> TF.Attr s (ConfigConfigurationRecorderRecordingGroupSetting s))
                   TF.validator
 
 instance P.HasName (ConfigConfigurationRecorderResource s) (TF.Attr s P.Text) where
@@ -1392,9 +1392,9 @@ instance P.HasName (ConfigConfigurationRecorderResource s) (TF.Attr s P.Text) wh
         P.lens (_name :: ConfigConfigurationRecorderResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ConfigConfigurationRecorderResource s)
 
-instance P.HasRecordingGroup (ConfigConfigurationRecorderResource s) (TF.Attr s (RecordingGroupSetting s)) where
+instance P.HasRecordingGroup (ConfigConfigurationRecorderResource s) (TF.Attr s (ConfigConfigurationRecorderRecordingGroupSetting s)) where
     recordingGroup =
-        P.lens (_recordingGroup :: ConfigConfigurationRecorderResource s -> TF.Attr s (RecordingGroupSetting s))
+        P.lens (_recordingGroup :: ConfigConfigurationRecorderResource s -> TF.Attr s (ConfigConfigurationRecorderRecordingGroupSetting s))
                (\s a -> s { _recordingGroup = a } :: ConfigConfigurationRecorderResource s)
 
 instance P.HasRoleArn (ConfigConfigurationRecorderResource s) (TF.Attr s P.Text) where
@@ -1405,7 +1405,7 @@ instance P.HasRoleArn (ConfigConfigurationRecorderResource s) (TF.Attr s P.Text)
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ConfigConfigurationRecorderResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedRecordingGroup (TF.Ref s' (ConfigConfigurationRecorderResource s)) (TF.Attr s (RecordingGroupSetting s)) where
+instance s ~ s' => P.HasComputedRecordingGroup (TF.Ref s' (ConfigConfigurationRecorderResource s)) (TF.Attr s (ConfigConfigurationRecorderRecordingGroupSetting s)) where
     computedRecordingGroup x = TF.compute (TF.refKey x) "recording_group"
 
 -- | @aws_config_configuration_recorder_status@ Resource.
@@ -1469,7 +1469,7 @@ data ConfigDeliveryChannelResource s = ConfigDeliveryChannelResource'
     , _s3KeyPrefix :: TF.Attr s P.Text
     -- ^ @s3_key_prefix@ - (Optional)
     --
-    , _snapshotDeliveryProperties :: TF.Attr s (SnapshotDeliveryPropertiesSetting s)
+    , _snapshotDeliveryProperties :: TF.Attr s (ConfigDeliveryChannelSnapshotDeliveryPropertiesSetting s)
     -- ^ @snapshot_delivery_properties@ - (Optional)
     --
     , _snsTopicArn :: TF.Attr s P.Text
@@ -1504,7 +1504,7 @@ instance TF.IsValid (ConfigDeliveryChannelResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_snapshotDeliveryProperties"
                   (_snapshotDeliveryProperties
-                      :: ConfigDeliveryChannelResource s -> TF.Attr s (SnapshotDeliveryPropertiesSetting s))
+                      :: ConfigDeliveryChannelResource s -> TF.Attr s (ConfigDeliveryChannelSnapshotDeliveryPropertiesSetting s))
                   TF.validator
 
 instance P.HasName (ConfigDeliveryChannelResource s) (TF.Attr s P.Text) where
@@ -1522,9 +1522,9 @@ instance P.HasS3KeyPrefix (ConfigDeliveryChannelResource s) (TF.Attr s P.Text) w
         P.lens (_s3KeyPrefix :: ConfigDeliveryChannelResource s -> TF.Attr s P.Text)
                (\s a -> s { _s3KeyPrefix = a } :: ConfigDeliveryChannelResource s)
 
-instance P.HasSnapshotDeliveryProperties (ConfigDeliveryChannelResource s) (TF.Attr s (SnapshotDeliveryPropertiesSetting s)) where
+instance P.HasSnapshotDeliveryProperties (ConfigDeliveryChannelResource s) (TF.Attr s (ConfigDeliveryChannelSnapshotDeliveryPropertiesSetting s)) where
     snapshotDeliveryProperties =
-        P.lens (_snapshotDeliveryProperties :: ConfigDeliveryChannelResource s -> TF.Attr s (SnapshotDeliveryPropertiesSetting s))
+        P.lens (_snapshotDeliveryProperties :: ConfigDeliveryChannelResource s -> TF.Attr s (ConfigDeliveryChannelSnapshotDeliveryPropertiesSetting s))
                (\s a -> s { _snapshotDeliveryProperties = a } :: ConfigDeliveryChannelResource s)
 
 instance P.HasSnsTopicArn (ConfigDeliveryChannelResource s) (TF.Attr s P.Text) where
@@ -1764,7 +1764,7 @@ instance s ~ s' => P.HasComputedConfigurationEndpoint (TF.Ref s' (DaxClusterReso
 instance s ~ s' => P.HasComputedMaintenanceWindow (TF.Ref s' (DaxClusterResource s)) (TF.Attr s P.Text) where
     computedMaintenanceWindow x = TF.compute (TF.refKey x) "maintenance_window"
 
-instance s ~ s' => P.HasComputedNodes (TF.Ref s' (DaxClusterResource s)) (TF.Attr s [TF.Attr s (NodesSetting s)]) where
+instance s ~ s' => P.HasComputedNodes (TF.Ref s' (DaxClusterResource s)) (TF.Attr s [TF.Attr s (DaxClusterNodesSetting s)]) where
     computedNodes x = TF.compute (TF.refKey x) "nodes"
 
 instance s ~ s' => P.HasComputedParameterGroupName (TF.Ref s' (DaxClusterResource s)) (TF.Attr s P.Text) where
@@ -1787,10 +1787,10 @@ data DaxParameterGroupResource s = DaxParameterGroupResource'
     { _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional, Forces New)
     --
-    , _name        :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _parameters  :: TF.Attr s [TF.Attr s (ParametersSetting s)]
+    , _parameters :: TF.Attr s [TF.Attr s (DaxParameterGroupParametersSetting s)]
     -- ^ @parameters@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -1827,15 +1827,15 @@ instance P.HasName (DaxParameterGroupResource s) (TF.Attr s P.Text) where
         P.lens (_name :: DaxParameterGroupResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: DaxParameterGroupResource s)
 
-instance P.HasParameters (DaxParameterGroupResource s) (TF.Attr s [TF.Attr s (ParametersSetting s)]) where
+instance P.HasParameters (DaxParameterGroupResource s) (TF.Attr s [TF.Attr s (DaxParameterGroupParametersSetting s)]) where
     parameters =
-        P.lens (_parameters :: DaxParameterGroupResource s -> TF.Attr s [TF.Attr s (ParametersSetting s)])
+        P.lens (_parameters :: DaxParameterGroupResource s -> TF.Attr s [TF.Attr s (DaxParameterGroupParametersSetting s)])
                (\s a -> s { _parameters = a } :: DaxParameterGroupResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (DaxParameterGroupResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedParameters (TF.Ref s' (DaxParameterGroupResource s)) (TF.Attr s [TF.Attr s (ParametersSetting s)]) where
+instance s ~ s' => P.HasComputedParameters (TF.Ref s' (DaxParameterGroupResource s)) (TF.Attr s [TF.Attr s (DaxParameterGroupParametersSetting s)]) where
     computedParameters x = TF.compute (TF.refKey x) "parameters"
 
 -- | @aws_dax_subnet_group@ Resource.
@@ -2226,7 +2226,7 @@ data DbInstanceResource s = DbInstanceResource'
     -- Conflicts with:
     --
     -- * 's3Import'
-    , _s3Import :: TF.Attr s (S3ImportSetting s)
+    , _s3Import :: TF.Attr s (DbInstanceS3ImportSetting s)
     -- ^ @s3_import@ - (Optional)
     --
     -- Conflicts with:
@@ -2392,7 +2392,7 @@ instance TF.IsValid (DbInstanceResource s) where
         ])
            P.<> TF.settingsValidator "_s3Import"
                   (_s3Import
-                      :: DbInstanceResource s -> TF.Attr s (S3ImportSetting s))
+                      :: DbInstanceResource s -> TF.Attr s (DbInstanceS3ImportSetting s))
                   TF.validator
 
 instance P.HasAllocatedStorage (DbInstanceResource s) (TF.Attr s P.Int) where
@@ -2555,9 +2555,9 @@ instance P.HasReplicateSourceDb (DbInstanceResource s) (TF.Attr s P.Text) where
         P.lens (_replicateSourceDb :: DbInstanceResource s -> TF.Attr s P.Text)
                (\s a -> s { _replicateSourceDb = a } :: DbInstanceResource s)
 
-instance P.HasS3Import (DbInstanceResource s) (TF.Attr s (S3ImportSetting s)) where
+instance P.HasS3Import (DbInstanceResource s) (TF.Attr s (DbInstanceS3ImportSetting s)) where
     s3Import =
-        P.lens (_s3Import :: DbInstanceResource s -> TF.Attr s (S3ImportSetting s))
+        P.lens (_s3Import :: DbInstanceResource s -> TF.Attr s (DbInstanceS3ImportSetting s))
                (\s a -> s { _s3Import = a } :: DbInstanceResource s)
 
 instance P.HasSecurityGroupNames (DbInstanceResource s) (TF.Attr s [TF.Attr s P.Text]) where
@@ -2709,31 +2709,31 @@ instance s ~ s' => P.HasComputedVpcSecurityGroupIds (TF.Ref s' (DbInstanceResour
 -- See the <https://www.terraform.io/docs/providers/aws/r/db_option_group.html terraform documentation>
 -- for more information.
 data DbOptionGroupResource s = DbOptionGroupResource'
-    { _engineName             :: TF.Attr s P.Text
+    { _engineName :: TF.Attr s P.Text
     -- ^ @engine_name@ - (Required, Forces New)
     --
-    , _majorEngineVersion     :: TF.Attr s P.Text
+    , _majorEngineVersion :: TF.Attr s P.Text
     -- ^ @major_engine_version@ - (Required, Forces New)
     --
-    , _name                   :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
     -- * 'namePrefix'
-    , _namePrefix             :: TF.Attr s P.Text
+    , _namePrefix :: TF.Attr s P.Text
     -- ^ @name_prefix@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
     -- * 'name'
-    , _option                 :: TF.Attr s [TF.Attr s (OptionSetting s)]
+    , _option :: TF.Attr s [TF.Attr s (DbOptionGroupOptionSetting s)]
     -- ^ @option@ - (Optional)
     --
     , _optionGroupDescription :: TF.Attr s P.Text
     -- ^ @option_group_description@ - (Optional, Forces New)
     --
-    , _tags                   :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _tags :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -2800,9 +2800,9 @@ instance P.HasNamePrefix (DbOptionGroupResource s) (TF.Attr s P.Text) where
         P.lens (_namePrefix :: DbOptionGroupResource s -> TF.Attr s P.Text)
                (\s a -> s { _namePrefix = a } :: DbOptionGroupResource s)
 
-instance P.HasOption (DbOptionGroupResource s) (TF.Attr s [TF.Attr s (OptionSetting s)]) where
+instance P.HasOption (DbOptionGroupResource s) (TF.Attr s [TF.Attr s (DbOptionGroupOptionSetting s)]) where
     option =
-        P.lens (_option :: DbOptionGroupResource s -> TF.Attr s [TF.Attr s (OptionSetting s)])
+        P.lens (_option :: DbOptionGroupResource s -> TF.Attr s [TF.Attr s (DbOptionGroupOptionSetting s)])
                (\s a -> s { _option = a } :: DbOptionGroupResource s)
 
 instance P.HasOptionGroupDescription (DbOptionGroupResource s) (TF.Attr s P.Text) where
@@ -2850,7 +2850,7 @@ data DbParameterGroupResource s = DbParameterGroupResource'
     -- Conflicts with:
     --
     -- * 'name'
-    , _parameter   :: TF.Attr s [TF.Attr s (ParameterSetting s)]
+    , _parameter   :: TF.Attr s [TF.Attr s (DbParameterGroupParameterSetting s)]
     -- ^ @parameter@ - (Optional)
     --
     , _tags        :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
@@ -2917,9 +2917,9 @@ instance P.HasNamePrefix (DbParameterGroupResource s) (TF.Attr s P.Text) where
         P.lens (_namePrefix :: DbParameterGroupResource s -> TF.Attr s P.Text)
                (\s a -> s { _namePrefix = a } :: DbParameterGroupResource s)
 
-instance P.HasParameter (DbParameterGroupResource s) (TF.Attr s [TF.Attr s (ParameterSetting s)]) where
+instance P.HasParameter (DbParameterGroupResource s) (TF.Attr s [TF.Attr s (DbParameterGroupParameterSetting s)]) where
     parameter =
-        P.lens (_parameter :: DbParameterGroupResource s -> TF.Attr s [TF.Attr s (ParameterSetting s)])
+        P.lens (_parameter :: DbParameterGroupResource s -> TF.Attr s [TF.Attr s (DbParameterGroupParameterSetting s)])
                (\s a -> s { _parameter = a } :: DbParameterGroupResource s)
 
 instance P.HasTags (DbParameterGroupResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
@@ -2947,7 +2947,7 @@ data DbSecurityGroupResource s = DbSecurityGroupResource'
     { _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional, Forces New)
     --
-    , _ingress     :: TF.Attr s [TF.Attr s (IngressSetting s)]
+    , _ingress     :: TF.Attr s [TF.Attr s (DbSecurityGroupIngressSetting s)]
     -- ^ @ingress@ - (Required)
     --
     , _name        :: TF.Attr s P.Text
@@ -2960,7 +2960,7 @@ data DbSecurityGroupResource s = DbSecurityGroupResource'
 
 -- | Define a new @aws_db_security_group@ resource value.
 dbSecurityGroupResource
-    :: TF.Attr s [TF.Attr s (IngressSetting s)] -- ^ @ingress@ ('P._ingress', 'P.ingress')
+    :: TF.Attr s [TF.Attr s (DbSecurityGroupIngressSetting s)] -- ^ @ingress@ ('P._ingress', 'P.ingress')
     -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (DbSecurityGroupResource s)
 dbSecurityGroupResource _ingress _name =
@@ -2988,9 +2988,9 @@ instance P.HasDescription (DbSecurityGroupResource s) (TF.Attr s P.Text) where
         P.lens (_description :: DbSecurityGroupResource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: DbSecurityGroupResource s)
 
-instance P.HasIngress (DbSecurityGroupResource s) (TF.Attr s [TF.Attr s (IngressSetting s)]) where
+instance P.HasIngress (DbSecurityGroupResource s) (TF.Attr s [TF.Attr s (DbSecurityGroupIngressSetting s)]) where
     ingress =
-        P.lens (_ingress :: DbSecurityGroupResource s -> TF.Attr s [TF.Attr s (IngressSetting s)])
+        P.lens (_ingress :: DbSecurityGroupResource s -> TF.Attr s [TF.Attr s (DbSecurityGroupIngressSetting s)])
                (\s a -> s { _ingress = a } :: DbSecurityGroupResource s)
 
 instance P.HasName (DbSecurityGroupResource s) (TF.Attr s P.Text) where
@@ -3217,16 +3217,16 @@ data DefaultNetworkAclResource s = DefaultNetworkAclResource'
     { _defaultNetworkAclId :: TF.Attr s P.Text
     -- ^ @default_network_acl_id@ - (Required, Forces New)
     --
-    , _egress              :: TF.Attr s [TF.Attr s (EgressSetting s)]
+    , _egress :: TF.Attr s [TF.Attr s (DefaultNetworkAclEgressSetting s)]
     -- ^ @egress@ - (Optional)
     --
-    , _ingress             :: TF.Attr s [TF.Attr s (IngressSetting s)]
+    , _ingress :: TF.Attr s [TF.Attr s (DefaultNetworkAclIngressSetting s)]
     -- ^ @ingress@ - (Optional)
     --
-    , _subnetIds           :: TF.Attr s [TF.Attr s P.Text]
+    , _subnetIds :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @subnet_ids@ - (Optional)
     --
-    , _tags                :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _tags :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -3262,14 +3262,14 @@ instance P.HasDefaultNetworkAclId (DefaultNetworkAclResource s) (TF.Attr s P.Tex
         P.lens (_defaultNetworkAclId :: DefaultNetworkAclResource s -> TF.Attr s P.Text)
                (\s a -> s { _defaultNetworkAclId = a } :: DefaultNetworkAclResource s)
 
-instance P.HasEgress (DefaultNetworkAclResource s) (TF.Attr s [TF.Attr s (EgressSetting s)]) where
+instance P.HasEgress (DefaultNetworkAclResource s) (TF.Attr s [TF.Attr s (DefaultNetworkAclEgressSetting s)]) where
     egress =
-        P.lens (_egress :: DefaultNetworkAclResource s -> TF.Attr s [TF.Attr s (EgressSetting s)])
+        P.lens (_egress :: DefaultNetworkAclResource s -> TF.Attr s [TF.Attr s (DefaultNetworkAclEgressSetting s)])
                (\s a -> s { _egress = a } :: DefaultNetworkAclResource s)
 
-instance P.HasIngress (DefaultNetworkAclResource s) (TF.Attr s [TF.Attr s (IngressSetting s)]) where
+instance P.HasIngress (DefaultNetworkAclResource s) (TF.Attr s [TF.Attr s (DefaultNetworkAclIngressSetting s)]) where
     ingress =
-        P.lens (_ingress :: DefaultNetworkAclResource s -> TF.Attr s [TF.Attr s (IngressSetting s)])
+        P.lens (_ingress :: DefaultNetworkAclResource s -> TF.Attr s [TF.Attr s (DefaultNetworkAclIngressSetting s)])
                (\s a -> s { _ingress = a } :: DefaultNetworkAclResource s)
 
 instance P.HasSubnetIds (DefaultNetworkAclResource s) (TF.Attr s [TF.Attr s P.Text]) where
@@ -3296,13 +3296,13 @@ data DefaultRouteTableResource s = DefaultRouteTableResource'
     { _defaultRouteTableId :: TF.Attr s P.Text
     -- ^ @default_route_table_id@ - (Required, Forces New)
     --
-    , _propagatingVgws     :: TF.Attr s [TF.Attr s P.Text]
+    , _propagatingVgws :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @propagating_vgws@ - (Optional)
     --
-    , _route               :: TF.Attr s [TF.Attr s (RouteSetting s)]
+    , _route :: TF.Attr s [TF.Attr s (DefaultRouteTableRouteSetting s)]
     -- ^ @route@ - (Optional)
     --
-    , _tags                :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _tags :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -3341,9 +3341,9 @@ instance P.HasPropagatingVgws (DefaultRouteTableResource s) (TF.Attr s [TF.Attr 
         P.lens (_propagatingVgws :: DefaultRouteTableResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _propagatingVgws = a } :: DefaultRouteTableResource s)
 
-instance P.HasRoute (DefaultRouteTableResource s) (TF.Attr s [TF.Attr s (RouteSetting s)]) where
+instance P.HasRoute (DefaultRouteTableResource s) (TF.Attr s [TF.Attr s (DefaultRouteTableRouteSetting s)]) where
     route =
-        P.lens (_route :: DefaultRouteTableResource s -> TF.Attr s [TF.Attr s (RouteSetting s)])
+        P.lens (_route :: DefaultRouteTableResource s -> TF.Attr s [TF.Attr s (DefaultRouteTableRouteSetting s)])
                (\s a -> s { _route = a } :: DefaultRouteTableResource s)
 
 instance P.HasTags (DefaultRouteTableResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
@@ -3354,7 +3354,7 @@ instance P.HasTags (DefaultRouteTableResource s) (TF.Attr s (P.Map P.Text (TF.At
 instance s ~ s' => P.HasComputedId (TF.Ref s' (DefaultRouteTableResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedRoute (TF.Ref s' (DefaultRouteTableResource s)) (TF.Attr s [TF.Attr s (RouteSetting s)]) where
+instance s ~ s' => P.HasComputedRoute (TF.Ref s' (DefaultRouteTableResource s)) (TF.Attr s [TF.Attr s (DefaultRouteTableRouteSetting s)]) where
     computedRoute x = TF.compute (TF.refKey x) "route"
 
 instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (DefaultRouteTableResource s)) (TF.Attr s P.Text) where
@@ -3365,19 +3365,19 @@ instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (DefaultRouteTableResource s)) 
 -- See the <https://www.terraform.io/docs/providers/aws/r/default_security_group.html terraform documentation>
 -- for more information.
 data DefaultSecurityGroupResource s = DefaultSecurityGroupResource'
-    { _egress              :: TF.Attr s [TF.Attr s (EgressSetting s)]
+    { _egress :: TF.Attr s [TF.Attr s (DefaultSecurityGroupEgressSetting s)]
     -- ^ @egress@ - (Optional)
     --
-    , _ingress             :: TF.Attr s [TF.Attr s (IngressSetting s)]
+    , _ingress :: TF.Attr s [TF.Attr s (DefaultSecurityGroupIngressSetting s)]
     -- ^ @ingress@ - (Optional)
     --
     , _revokeRulesOnDelete :: TF.Attr s P.Bool
     -- ^ @revoke_rules_on_delete@ - (Optional)
     --
-    , _tags                :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _tags :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
-    , _vpcId               :: TF.Attr s P.Text
+    , _vpcId :: TF.Attr s P.Text
     -- ^ @vpc_id@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -3407,14 +3407,14 @@ instance TF.IsObject (DefaultSecurityGroupResource s) where
 instance TF.IsValid (DefaultSecurityGroupResource s) where
     validator = P.mempty
 
-instance P.HasEgress (DefaultSecurityGroupResource s) (TF.Attr s [TF.Attr s (EgressSetting s)]) where
+instance P.HasEgress (DefaultSecurityGroupResource s) (TF.Attr s [TF.Attr s (DefaultSecurityGroupEgressSetting s)]) where
     egress =
-        P.lens (_egress :: DefaultSecurityGroupResource s -> TF.Attr s [TF.Attr s (EgressSetting s)])
+        P.lens (_egress :: DefaultSecurityGroupResource s -> TF.Attr s [TF.Attr s (DefaultSecurityGroupEgressSetting s)])
                (\s a -> s { _egress = a } :: DefaultSecurityGroupResource s)
 
-instance P.HasIngress (DefaultSecurityGroupResource s) (TF.Attr s [TF.Attr s (IngressSetting s)]) where
+instance P.HasIngress (DefaultSecurityGroupResource s) (TF.Attr s [TF.Attr s (DefaultSecurityGroupIngressSetting s)]) where
     ingress =
-        P.lens (_ingress :: DefaultSecurityGroupResource s -> TF.Attr s [TF.Attr s (IngressSetting s)])
+        P.lens (_ingress :: DefaultSecurityGroupResource s -> TF.Attr s [TF.Attr s (DefaultSecurityGroupIngressSetting s)])
                (\s a -> s { _ingress = a } :: DefaultSecurityGroupResource s)
 
 instance P.HasRevokeRulesOnDelete (DefaultSecurityGroupResource s) (TF.Attr s P.Bool) where
@@ -3804,40 +3804,40 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (DirectoryServiceConditionalForwar
 -- See the <https://www.terraform.io/docs/providers/aws/r/directory_service_directory.html terraform documentation>
 -- for more information.
 data DirectoryServiceDirectoryResource s = DirectoryServiceDirectoryResource'
-    { _alias           :: TF.Attr s P.Text
+    { _alias :: TF.Attr s P.Text
     -- ^ @alias@ - (Optional, Forces New)
     --
-    , _connectSettings :: TF.Attr s (ConnectSettings s)
+    , _connectSettings :: TF.Attr s (DirectoryServiceDirectoryConnectSettingsSetting s)
     -- ^ @connect_settings@ - (Optional, Forces New)
     --
-    , _description     :: TF.Attr s P.Text
+    , _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional, Forces New)
     --
-    , _edition         :: TF.Attr s P.Text
+    , _edition :: TF.Attr s P.Text
     -- ^ @edition@ - (Optional, Forces New)
     --
-    , _enableSso       :: TF.Attr s P.Bool
+    , _enableSso :: TF.Attr s P.Bool
     -- ^ @enable_sso@ - (Optional)
     --
-    , _name            :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _password        :: TF.Attr s P.Text
+    , _password :: TF.Attr s P.Text
     -- ^ @password@ - (Required, Forces New)
     --
-    , _shortName       :: TF.Attr s P.Text
+    , _shortName :: TF.Attr s P.Text
     -- ^ @short_name@ - (Optional, Forces New)
     --
-    , _size            :: TF.Attr s P.Text
+    , _size :: TF.Attr s P.Text
     -- ^ @size@ - (Optional, Forces New)
     --
-    , _tags            :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _tags :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
-    , _type'           :: TF.Attr s P.Text
+    , _type' :: TF.Attr s P.Text
     -- ^ @type@ - (Optional, Forces New)
     --
-    , _vpcSettings     :: TF.Attr s (VpcSettings s)
+    , _vpcSettings :: TF.Attr s (DirectoryServiceDirectoryVpcSettingsSetting s)
     -- ^ @vpc_settings@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -3884,11 +3884,11 @@ instance TF.IsValid (DirectoryServiceDirectoryResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_connectSettings"
                   (_connectSettings
-                      :: DirectoryServiceDirectoryResource s -> TF.Attr s (ConnectSettings s))
+                      :: DirectoryServiceDirectoryResource s -> TF.Attr s (DirectoryServiceDirectoryConnectSettingsSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_vpcSettings"
                   (_vpcSettings
-                      :: DirectoryServiceDirectoryResource s -> TF.Attr s (VpcSettings s))
+                      :: DirectoryServiceDirectoryResource s -> TF.Attr s (DirectoryServiceDirectoryVpcSettingsSetting s))
                   TF.validator
 
 instance P.HasAlias (DirectoryServiceDirectoryResource s) (TF.Attr s P.Text) where
@@ -3896,9 +3896,9 @@ instance P.HasAlias (DirectoryServiceDirectoryResource s) (TF.Attr s P.Text) whe
         P.lens (_alias :: DirectoryServiceDirectoryResource s -> TF.Attr s P.Text)
                (\s a -> s { _alias = a } :: DirectoryServiceDirectoryResource s)
 
-instance P.HasConnectSettings (DirectoryServiceDirectoryResource s) (TF.Attr s (ConnectSettings s)) where
+instance P.HasConnectSettings (DirectoryServiceDirectoryResource s) (TF.Attr s (DirectoryServiceDirectoryConnectSettingsSetting s)) where
     connectSettings =
-        P.lens (_connectSettings :: DirectoryServiceDirectoryResource s -> TF.Attr s (ConnectSettings s))
+        P.lens (_connectSettings :: DirectoryServiceDirectoryResource s -> TF.Attr s (DirectoryServiceDirectoryConnectSettingsSetting s))
                (\s a -> s { _connectSettings = a } :: DirectoryServiceDirectoryResource s)
 
 instance P.HasDescription (DirectoryServiceDirectoryResource s) (TF.Attr s P.Text) where
@@ -3946,9 +3946,9 @@ instance P.HasType' (DirectoryServiceDirectoryResource s) (TF.Attr s P.Text) whe
         P.lens (_type' :: DirectoryServiceDirectoryResource s -> TF.Attr s P.Text)
                (\s a -> s { _type' = a } :: DirectoryServiceDirectoryResource s)
 
-instance P.HasVpcSettings (DirectoryServiceDirectoryResource s) (TF.Attr s (VpcSettings s)) where
+instance P.HasVpcSettings (DirectoryServiceDirectoryResource s) (TF.Attr s (DirectoryServiceDirectoryVpcSettingsSetting s)) where
     vpcSettings =
-        P.lens (_vpcSettings :: DirectoryServiceDirectoryResource s -> TF.Attr s (VpcSettings s))
+        P.lens (_vpcSettings :: DirectoryServiceDirectoryResource s -> TF.Attr s (DirectoryServiceDirectoryVpcSettingsSetting s))
                (\s a -> s { _vpcSettings = a } :: DirectoryServiceDirectoryResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (DirectoryServiceDirectoryResource s)) (TF.Attr s P.Text) where
@@ -4039,52 +4039,52 @@ instance s ~ s' => P.HasComputedCertificateArn (TF.Ref s' (DmsCertificateResourc
 -- See the <https://www.terraform.io/docs/providers/aws/r/dms_endpoint.html terraform documentation>
 -- for more information.
 data DmsEndpointResource s = DmsEndpointResource'
-    { _certificateArn            :: TF.Attr s P.Text
+    { _certificateArn :: TF.Attr s P.Text
     -- ^ @certificate_arn@ - (Optional)
     --
-    , _databaseName              :: TF.Attr s P.Text
+    , _databaseName :: TF.Attr s P.Text
     -- ^ @database_name@ - (Optional)
     --
-    , _endpointId                :: TF.Attr s P.Text
+    , _endpointId :: TF.Attr s P.Text
     -- ^ @endpoint_id@ - (Required, Forces New)
     --
-    , _endpointType              :: TF.Attr s P.Text
+    , _endpointType :: TF.Attr s P.Text
     -- ^ @endpoint_type@ - (Required)
     --
-    , _engineName                :: TF.Attr s P.Text
+    , _engineName :: TF.Attr s P.Text
     -- ^ @engine_name@ - (Required)
     --
     , _extraConnectionAttributes :: TF.Attr s P.Text
     -- ^ @extra_connection_attributes@ - (Optional)
     --
-    , _kmsKeyArn                 :: TF.Attr s P.Text
+    , _kmsKeyArn :: TF.Attr s P.Text
     -- ^ @kms_key_arn@ - (Optional, Forces New)
     --
-    , _mongodbSettings           :: TF.Attr s (MongodbSettings s)
+    , _mongodbSettings :: TF.Attr s (DmsEndpointMongodbSettingsSetting s)
     -- ^ @mongodb_settings@ - (Optional)
     --
-    , _password                  :: TF.Attr s P.Text
+    , _password :: TF.Attr s P.Text
     -- ^ @password@ - (Optional)
     --
-    , _port                      :: TF.Attr s P.Int
+    , _port :: TF.Attr s P.Int
     -- ^ @port@ - (Optional)
     --
-    , _s3Settings                :: TF.Attr s (S3Settings s)
+    , _s3Settings :: TF.Attr s (DmsEndpointS3SettingsSetting s)
     -- ^ @s3_settings@ - (Optional)
     --
-    , _serverName                :: TF.Attr s P.Text
+    , _serverName :: TF.Attr s P.Text
     -- ^ @server_name@ - (Optional)
     --
-    , _serviceAccessRole         :: TF.Attr s P.Text
+    , _serviceAccessRole :: TF.Attr s P.Text
     -- ^ @service_access_role@ - (Optional)
     --
-    , _sslMode                   :: TF.Attr s P.Text
+    , _sslMode :: TF.Attr s P.Text
     -- ^ @ssl_mode@ - (Optional)
     --
-    , _tags                      :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _tags :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
-    , _username                  :: TF.Attr s P.Text
+    , _username :: TF.Attr s P.Text
     -- ^ @username@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -4140,11 +4140,11 @@ instance TF.IsValid (DmsEndpointResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_mongodbSettings"
                   (_mongodbSettings
-                      :: DmsEndpointResource s -> TF.Attr s (MongodbSettings s))
+                      :: DmsEndpointResource s -> TF.Attr s (DmsEndpointMongodbSettingsSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_s3Settings"
                   (_s3Settings
-                      :: DmsEndpointResource s -> TF.Attr s (S3Settings s))
+                      :: DmsEndpointResource s -> TF.Attr s (DmsEndpointS3SettingsSetting s))
                   TF.validator
 
 instance P.HasCertificateArn (DmsEndpointResource s) (TF.Attr s P.Text) where
@@ -4182,9 +4182,9 @@ instance P.HasKmsKeyArn (DmsEndpointResource s) (TF.Attr s P.Text) where
         P.lens (_kmsKeyArn :: DmsEndpointResource s -> TF.Attr s P.Text)
                (\s a -> s { _kmsKeyArn = a } :: DmsEndpointResource s)
 
-instance P.HasMongodbSettings (DmsEndpointResource s) (TF.Attr s (MongodbSettings s)) where
+instance P.HasMongodbSettings (DmsEndpointResource s) (TF.Attr s (DmsEndpointMongodbSettingsSetting s)) where
     mongodbSettings =
-        P.lens (_mongodbSettings :: DmsEndpointResource s -> TF.Attr s (MongodbSettings s))
+        P.lens (_mongodbSettings :: DmsEndpointResource s -> TF.Attr s (DmsEndpointMongodbSettingsSetting s))
                (\s a -> s { _mongodbSettings = a } :: DmsEndpointResource s)
 
 instance P.HasPassword (DmsEndpointResource s) (TF.Attr s P.Text) where
@@ -4197,9 +4197,9 @@ instance P.HasPort (DmsEndpointResource s) (TF.Attr s P.Int) where
         P.lens (_port :: DmsEndpointResource s -> TF.Attr s P.Int)
                (\s a -> s { _port = a } :: DmsEndpointResource s)
 
-instance P.HasS3Settings (DmsEndpointResource s) (TF.Attr s (S3Settings s)) where
+instance P.HasS3Settings (DmsEndpointResource s) (TF.Attr s (DmsEndpointS3SettingsSetting s)) where
     s3Settings =
-        P.lens (_s3Settings :: DmsEndpointResource s -> TF.Attr s (S3Settings s))
+        P.lens (_s3Settings :: DmsEndpointResource s -> TF.Attr s (DmsEndpointS3SettingsSetting s))
                (\s a -> s { _s3Settings = a } :: DmsEndpointResource s)
 
 instance P.HasServerName (DmsEndpointResource s) (TF.Attr s P.Text) where
@@ -5674,7 +5674,7 @@ data DynamodbGlobalTableResource s = DynamodbGlobalTableResource'
     { _name    :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _replica :: TF.Attr s [TF.Attr s (ReplicaSetting s)]
+    , _replica :: TF.Attr s [TF.Attr s (DynamodbGlobalTableReplicaSetting s)]
     -- ^ @replica@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -5682,7 +5682,7 @@ data DynamodbGlobalTableResource s = DynamodbGlobalTableResource'
 -- | Define a new @aws_dynamodb_global_table@ resource value.
 dynamodbGlobalTableResource
     :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
-    -> TF.Attr s [TF.Attr s (ReplicaSetting s)] -- ^ @replica@ ('P._replica', 'P.replica')
+    -> TF.Attr s [TF.Attr s (DynamodbGlobalTableReplicaSetting s)] -- ^ @replica@ ('P._replica', 'P.replica')
     -> P.Resource (DynamodbGlobalTableResource s)
 dynamodbGlobalTableResource _name _replica =
     TF.unsafeResource "aws_dynamodb_global_table" TF.validator $
@@ -5705,9 +5705,9 @@ instance P.HasName (DynamodbGlobalTableResource s) (TF.Attr s P.Text) where
         P.lens (_name :: DynamodbGlobalTableResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: DynamodbGlobalTableResource s)
 
-instance P.HasReplica (DynamodbGlobalTableResource s) (TF.Attr s [TF.Attr s (ReplicaSetting s)]) where
+instance P.HasReplica (DynamodbGlobalTableResource s) (TF.Attr s [TF.Attr s (DynamodbGlobalTableReplicaSetting s)]) where
     replica =
-        P.lens (_replica :: DynamodbGlobalTableResource s -> TF.Attr s [TF.Attr s (ReplicaSetting s)])
+        P.lens (_replica :: DynamodbGlobalTableResource s -> TF.Attr s [TF.Attr s (DynamodbGlobalTableReplicaSetting s)])
                (\s a -> s { _replica = a } :: DynamodbGlobalTableResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (DynamodbGlobalTableResource s)) (TF.Attr s P.Text) where
@@ -5789,22 +5789,22 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (DynamodbTableItemResource s)) (TF
 -- See the <https://www.terraform.io/docs/providers/aws/r/dynamodb_table.html terraform documentation>
 -- for more information.
 data DynamodbTableResource s = DynamodbTableResource'
-    { _attribute :: TF.Attr s [TF.Attr s (AttributeSetting s)]
+    { _attribute :: TF.Attr s [TF.Attr s (DynamodbTableAttributeSetting s)]
     -- ^ @attribute@ - (Required)
     --
-    , _globalSecondaryIndex :: TF.Attr s [TF.Attr s (GlobalSecondaryIndexSetting s)]
+    , _globalSecondaryIndex :: TF.Attr s [TF.Attr s (DynamodbTableGlobalSecondaryIndexSetting s)]
     -- ^ @global_secondary_index@ - (Optional)
     --
     , _hashKey :: TF.Attr s P.Text
     -- ^ @hash_key@ - (Required, Forces New)
     --
-    , _localSecondaryIndex :: TF.Attr s [TF.Attr s (LocalSecondaryIndexSetting s)]
+    , _localSecondaryIndex :: TF.Attr s [TF.Attr s (DynamodbTableLocalSecondaryIndexSetting s)]
     -- ^ @local_secondary_index@ - (Optional, Forces New)
     --
     , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _pointInTimeRecovery :: TF.Attr s (PointInTimeRecoverySetting s)
+    , _pointInTimeRecovery :: TF.Attr s (DynamodbTablePointInTimeRecoverySetting s)
     -- ^ @point_in_time_recovery@ - (Optional)
     --
     , _rangeKey :: TF.Attr s P.Text
@@ -5813,7 +5813,7 @@ data DynamodbTableResource s = DynamodbTableResource'
     , _readCapacity :: TF.Attr s P.Int
     -- ^ @read_capacity@ - (Required)
     --
-    , _serverSideEncryption :: TF.Attr s (ServerSideEncryptionSetting s)
+    , _serverSideEncryption :: TF.Attr s (DynamodbTableServerSideEncryptionSetting s)
     -- ^ @server_side_encryption@ - (Optional)
     --
     , _streamEnabled :: TF.Attr s P.Bool
@@ -5825,7 +5825,7 @@ data DynamodbTableResource s = DynamodbTableResource'
     , _tags :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
-    , _ttl :: TF.Attr s (TtlSetting s)
+    , _ttl :: TF.Attr s (DynamodbTableTtlSetting s)
     -- ^ @ttl@ - (Optional)
     --
     , _writeCapacity :: TF.Attr s P.Int
@@ -5835,7 +5835,7 @@ data DynamodbTableResource s = DynamodbTableResource'
 
 -- | Define a new @aws_dynamodb_table@ resource value.
 dynamodbTableResource
-    :: TF.Attr s [TF.Attr s (AttributeSetting s)] -- ^ @attribute@ ('P._attribute', 'P.attribute')
+    :: TF.Attr s [TF.Attr s (DynamodbTableAttributeSetting s)] -- ^ @attribute@ ('P._attribute', 'P.attribute')
     -> TF.Attr s P.Int -- ^ @read_capacity@ ('P._readCapacity', 'P.readCapacity')
     -> TF.Attr s P.Int -- ^ @write_capacity@ ('P._writeCapacity', 'P.writeCapacity')
     -> TF.Attr s P.Text -- ^ @hash_key@ ('P._hashKey', 'P.hashKey')
@@ -5882,25 +5882,25 @@ instance TF.IsValid (DynamodbTableResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_pointInTimeRecovery"
                   (_pointInTimeRecovery
-                      :: DynamodbTableResource s -> TF.Attr s (PointInTimeRecoverySetting s))
+                      :: DynamodbTableResource s -> TF.Attr s (DynamodbTablePointInTimeRecoverySetting s))
                   TF.validator
            P.<> TF.settingsValidator "_serverSideEncryption"
                   (_serverSideEncryption
-                      :: DynamodbTableResource s -> TF.Attr s (ServerSideEncryptionSetting s))
+                      :: DynamodbTableResource s -> TF.Attr s (DynamodbTableServerSideEncryptionSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_ttl"
                   (_ttl
-                      :: DynamodbTableResource s -> TF.Attr s (TtlSetting s))
+                      :: DynamodbTableResource s -> TF.Attr s (DynamodbTableTtlSetting s))
                   TF.validator
 
-instance P.HasAttribute (DynamodbTableResource s) (TF.Attr s [TF.Attr s (AttributeSetting s)]) where
+instance P.HasAttribute (DynamodbTableResource s) (TF.Attr s [TF.Attr s (DynamodbTableAttributeSetting s)]) where
     attribute =
-        P.lens (_attribute :: DynamodbTableResource s -> TF.Attr s [TF.Attr s (AttributeSetting s)])
+        P.lens (_attribute :: DynamodbTableResource s -> TF.Attr s [TF.Attr s (DynamodbTableAttributeSetting s)])
                (\s a -> s { _attribute = a } :: DynamodbTableResource s)
 
-instance P.HasGlobalSecondaryIndex (DynamodbTableResource s) (TF.Attr s [TF.Attr s (GlobalSecondaryIndexSetting s)]) where
+instance P.HasGlobalSecondaryIndex (DynamodbTableResource s) (TF.Attr s [TF.Attr s (DynamodbTableGlobalSecondaryIndexSetting s)]) where
     globalSecondaryIndex =
-        P.lens (_globalSecondaryIndex :: DynamodbTableResource s -> TF.Attr s [TF.Attr s (GlobalSecondaryIndexSetting s)])
+        P.lens (_globalSecondaryIndex :: DynamodbTableResource s -> TF.Attr s [TF.Attr s (DynamodbTableGlobalSecondaryIndexSetting s)])
                (\s a -> s { _globalSecondaryIndex = a } :: DynamodbTableResource s)
 
 instance P.HasHashKey (DynamodbTableResource s) (TF.Attr s P.Text) where
@@ -5908,9 +5908,9 @@ instance P.HasHashKey (DynamodbTableResource s) (TF.Attr s P.Text) where
         P.lens (_hashKey :: DynamodbTableResource s -> TF.Attr s P.Text)
                (\s a -> s { _hashKey = a } :: DynamodbTableResource s)
 
-instance P.HasLocalSecondaryIndex (DynamodbTableResource s) (TF.Attr s [TF.Attr s (LocalSecondaryIndexSetting s)]) where
+instance P.HasLocalSecondaryIndex (DynamodbTableResource s) (TF.Attr s [TF.Attr s (DynamodbTableLocalSecondaryIndexSetting s)]) where
     localSecondaryIndex =
-        P.lens (_localSecondaryIndex :: DynamodbTableResource s -> TF.Attr s [TF.Attr s (LocalSecondaryIndexSetting s)])
+        P.lens (_localSecondaryIndex :: DynamodbTableResource s -> TF.Attr s [TF.Attr s (DynamodbTableLocalSecondaryIndexSetting s)])
                (\s a -> s { _localSecondaryIndex = a } :: DynamodbTableResource s)
 
 instance P.HasName (DynamodbTableResource s) (TF.Attr s P.Text) where
@@ -5918,9 +5918,9 @@ instance P.HasName (DynamodbTableResource s) (TF.Attr s P.Text) where
         P.lens (_name :: DynamodbTableResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: DynamodbTableResource s)
 
-instance P.HasPointInTimeRecovery (DynamodbTableResource s) (TF.Attr s (PointInTimeRecoverySetting s)) where
+instance P.HasPointInTimeRecovery (DynamodbTableResource s) (TF.Attr s (DynamodbTablePointInTimeRecoverySetting s)) where
     pointInTimeRecovery =
-        P.lens (_pointInTimeRecovery :: DynamodbTableResource s -> TF.Attr s (PointInTimeRecoverySetting s))
+        P.lens (_pointInTimeRecovery :: DynamodbTableResource s -> TF.Attr s (DynamodbTablePointInTimeRecoverySetting s))
                (\s a -> s { _pointInTimeRecovery = a } :: DynamodbTableResource s)
 
 instance P.HasRangeKey (DynamodbTableResource s) (TF.Attr s P.Text) where
@@ -5933,9 +5933,9 @@ instance P.HasReadCapacity (DynamodbTableResource s) (TF.Attr s P.Int) where
         P.lens (_readCapacity :: DynamodbTableResource s -> TF.Attr s P.Int)
                (\s a -> s { _readCapacity = a } :: DynamodbTableResource s)
 
-instance P.HasServerSideEncryption (DynamodbTableResource s) (TF.Attr s (ServerSideEncryptionSetting s)) where
+instance P.HasServerSideEncryption (DynamodbTableResource s) (TF.Attr s (DynamodbTableServerSideEncryptionSetting s)) where
     serverSideEncryption =
-        P.lens (_serverSideEncryption :: DynamodbTableResource s -> TF.Attr s (ServerSideEncryptionSetting s))
+        P.lens (_serverSideEncryption :: DynamodbTableResource s -> TF.Attr s (DynamodbTableServerSideEncryptionSetting s))
                (\s a -> s { _serverSideEncryption = a } :: DynamodbTableResource s)
 
 instance P.HasStreamEnabled (DynamodbTableResource s) (TF.Attr s P.Bool) where
@@ -5953,9 +5953,9 @@ instance P.HasTags (DynamodbTableResource s) (TF.Attr s (P.Map P.Text (TF.Attr s
         P.lens (_tags :: DynamodbTableResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _tags = a } :: DynamodbTableResource s)
 
-instance P.HasTtl (DynamodbTableResource s) (TF.Attr s (TtlSetting s)) where
+instance P.HasTtl (DynamodbTableResource s) (TF.Attr s (DynamodbTableTtlSetting s)) where
     ttl =
-        P.lens (_ttl :: DynamodbTableResource s -> TF.Attr s (TtlSetting s))
+        P.lens (_ttl :: DynamodbTableResource s -> TF.Attr s (DynamodbTableTtlSetting s))
                (\s a -> s { _ttl = a } :: DynamodbTableResource s)
 
 instance P.HasWriteCapacity (DynamodbTableResource s) (TF.Attr s P.Int) where
@@ -5969,10 +5969,10 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (DynamodbTableResource s)) (TF.Att
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (DynamodbTableResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
 
-instance s ~ s' => P.HasComputedPointInTimeRecovery (TF.Ref s' (DynamodbTableResource s)) (TF.Attr s (PointInTimeRecoverySetting s)) where
+instance s ~ s' => P.HasComputedPointInTimeRecovery (TF.Ref s' (DynamodbTableResource s)) (TF.Attr s (DynamodbTablePointInTimeRecoverySetting s)) where
     computedPointInTimeRecovery x = TF.compute (TF.refKey x) "point_in_time_recovery"
 
-instance s ~ s' => P.HasComputedServerSideEncryption (TF.Ref s' (DynamodbTableResource s)) (TF.Attr s (ServerSideEncryptionSetting s)) where
+instance s ~ s' => P.HasComputedServerSideEncryption (TF.Ref s' (DynamodbTableResource s)) (TF.Attr s (DynamodbTableServerSideEncryptionSetting s)) where
     computedServerSideEncryption x = TF.compute (TF.refKey x) "server_side_encryption"
 
 instance s ~ s' => P.HasComputedStreamArn (TF.Ref s' (DynamodbTableResource s)) (TF.Attr s P.Text) where
@@ -6395,25 +6395,25 @@ data EcsServiceResource s = EcsServiceResource'
     , _launchType :: TF.Attr s P.Text
     -- ^ @launch_type@ - (Optional, Forces New)
     --
-    , _loadBalancer :: TF.Attr s (LoadBalancerSetting s)
+    , _loadBalancer :: TF.Attr s (EcsServiceLoadBalancerSetting s)
     -- ^ @load_balancer@ - (Optional, Forces New)
     --
     , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _networkConfiguration :: TF.Attr s (NetworkConfigurationSetting s)
+    , _networkConfiguration :: TF.Attr s (EcsServiceNetworkConfigurationSetting s)
     -- ^ @network_configuration@ - (Optional)
     --
-    , _orderedPlacementStrategy :: TF.Attr s [TF.Attr s (OrderedPlacementStrategySetting s)]
+    , _orderedPlacementStrategy :: TF.Attr s [TF.Attr s (EcsServiceOrderedPlacementStrategySetting s)]
     -- ^ @ordered_placement_strategy@ - (Optional, Forces New)
     --
-    , _placementConstraints :: TF.Attr s [TF.Attr s (PlacementConstraintsSetting s)]
+    , _placementConstraints :: TF.Attr s [TF.Attr s (EcsServicePlacementConstraintsSetting s)]
     -- ^ @placement_constraints@ - (Optional, Forces New)
     --
     , _schedulingStrategy :: TF.Attr s P.Text
     -- ^ @scheduling_strategy@ - (Optional, Forces New)
     --
-    , _serviceRegistries :: TF.Attr s (ServiceRegistriesSetting s)
+    , _serviceRegistries :: TF.Attr s (EcsServiceServiceRegistriesSetting s)
     -- ^ @service_registries@ - (Optional, Forces New)
     --
     , _taskDefinition :: TF.Attr s P.Text
@@ -6469,15 +6469,15 @@ instance TF.IsValid (EcsServiceResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_loadBalancer"
                   (_loadBalancer
-                      :: EcsServiceResource s -> TF.Attr s (LoadBalancerSetting s))
+                      :: EcsServiceResource s -> TF.Attr s (EcsServiceLoadBalancerSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_networkConfiguration"
                   (_networkConfiguration
-                      :: EcsServiceResource s -> TF.Attr s (NetworkConfigurationSetting s))
+                      :: EcsServiceResource s -> TF.Attr s (EcsServiceNetworkConfigurationSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_serviceRegistries"
                   (_serviceRegistries
-                      :: EcsServiceResource s -> TF.Attr s (ServiceRegistriesSetting s))
+                      :: EcsServiceResource s -> TF.Attr s (EcsServiceServiceRegistriesSetting s))
                   TF.validator
 
 instance P.HasCluster (EcsServiceResource s) (TF.Attr s P.Text) where
@@ -6515,9 +6515,9 @@ instance P.HasLaunchType (EcsServiceResource s) (TF.Attr s P.Text) where
         P.lens (_launchType :: EcsServiceResource s -> TF.Attr s P.Text)
                (\s a -> s { _launchType = a } :: EcsServiceResource s)
 
-instance P.HasLoadBalancer (EcsServiceResource s) (TF.Attr s (LoadBalancerSetting s)) where
+instance P.HasLoadBalancer (EcsServiceResource s) (TF.Attr s (EcsServiceLoadBalancerSetting s)) where
     loadBalancer =
-        P.lens (_loadBalancer :: EcsServiceResource s -> TF.Attr s (LoadBalancerSetting s))
+        P.lens (_loadBalancer :: EcsServiceResource s -> TF.Attr s (EcsServiceLoadBalancerSetting s))
                (\s a -> s { _loadBalancer = a } :: EcsServiceResource s)
 
 instance P.HasName (EcsServiceResource s) (TF.Attr s P.Text) where
@@ -6525,19 +6525,19 @@ instance P.HasName (EcsServiceResource s) (TF.Attr s P.Text) where
         P.lens (_name :: EcsServiceResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: EcsServiceResource s)
 
-instance P.HasNetworkConfiguration (EcsServiceResource s) (TF.Attr s (NetworkConfigurationSetting s)) where
+instance P.HasNetworkConfiguration (EcsServiceResource s) (TF.Attr s (EcsServiceNetworkConfigurationSetting s)) where
     networkConfiguration =
-        P.lens (_networkConfiguration :: EcsServiceResource s -> TF.Attr s (NetworkConfigurationSetting s))
+        P.lens (_networkConfiguration :: EcsServiceResource s -> TF.Attr s (EcsServiceNetworkConfigurationSetting s))
                (\s a -> s { _networkConfiguration = a } :: EcsServiceResource s)
 
-instance P.HasOrderedPlacementStrategy (EcsServiceResource s) (TF.Attr s [TF.Attr s (OrderedPlacementStrategySetting s)]) where
+instance P.HasOrderedPlacementStrategy (EcsServiceResource s) (TF.Attr s [TF.Attr s (EcsServiceOrderedPlacementStrategySetting s)]) where
     orderedPlacementStrategy =
-        P.lens (_orderedPlacementStrategy :: EcsServiceResource s -> TF.Attr s [TF.Attr s (OrderedPlacementStrategySetting s)])
+        P.lens (_orderedPlacementStrategy :: EcsServiceResource s -> TF.Attr s [TF.Attr s (EcsServiceOrderedPlacementStrategySetting s)])
                (\s a -> s { _orderedPlacementStrategy = a } :: EcsServiceResource s)
 
-instance P.HasPlacementConstraints (EcsServiceResource s) (TF.Attr s [TF.Attr s (PlacementConstraintsSetting s)]) where
+instance P.HasPlacementConstraints (EcsServiceResource s) (TF.Attr s [TF.Attr s (EcsServicePlacementConstraintsSetting s)]) where
     placementConstraints =
-        P.lens (_placementConstraints :: EcsServiceResource s -> TF.Attr s [TF.Attr s (PlacementConstraintsSetting s)])
+        P.lens (_placementConstraints :: EcsServiceResource s -> TF.Attr s [TF.Attr s (EcsServicePlacementConstraintsSetting s)])
                (\s a -> s { _placementConstraints = a } :: EcsServiceResource s)
 
 instance P.HasSchedulingStrategy (EcsServiceResource s) (TF.Attr s P.Text) where
@@ -6545,9 +6545,9 @@ instance P.HasSchedulingStrategy (EcsServiceResource s) (TF.Attr s P.Text) where
         P.lens (_schedulingStrategy :: EcsServiceResource s -> TF.Attr s P.Text)
                (\s a -> s { _schedulingStrategy = a } :: EcsServiceResource s)
 
-instance P.HasServiceRegistries (EcsServiceResource s) (TF.Attr s (ServiceRegistriesSetting s)) where
+instance P.HasServiceRegistries (EcsServiceResource s) (TF.Attr s (EcsServiceServiceRegistriesSetting s)) where
     serviceRegistries =
-        P.lens (_serviceRegistries :: EcsServiceResource s -> TF.Attr s (ServiceRegistriesSetting s))
+        P.lens (_serviceRegistries :: EcsServiceResource s -> TF.Attr s (EcsServiceServiceRegistriesSetting s))
                (\s a -> s { _serviceRegistries = a } :: EcsServiceResource s)
 
 instance P.HasTaskDefinition (EcsServiceResource s) (TF.Attr s P.Text) where
@@ -6587,7 +6587,7 @@ data EcsTaskDefinitionResource s = EcsTaskDefinitionResource'
     , _networkMode :: TF.Attr s P.Text
     -- ^ @network_mode@ - (Optional, Forces New)
     --
-    , _placementConstraints :: TF.Attr s [TF.Attr s (PlacementConstraintsSetting s)]
+    , _placementConstraints :: TF.Attr s [TF.Attr s (EcsTaskDefinitionPlacementConstraintsSetting s)]
     -- ^ @placement_constraints@ - (Optional, Forces New)
     --
     , _requiresCompatibilities :: TF.Attr s [TF.Attr s P.Text]
@@ -6596,7 +6596,7 @@ data EcsTaskDefinitionResource s = EcsTaskDefinitionResource'
     , _taskRoleArn :: TF.Attr s P.Text
     -- ^ @task_role_arn@ - (Optional, Forces New)
     --
-    , _volume :: TF.Attr s [TF.Attr s (VolumeSetting s)]
+    , _volume :: TF.Attr s [TF.Attr s (EcsTaskDefinitionVolumeSetting s)]
     -- ^ @volume@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -6668,9 +6668,9 @@ instance P.HasNetworkMode (EcsTaskDefinitionResource s) (TF.Attr s P.Text) where
         P.lens (_networkMode :: EcsTaskDefinitionResource s -> TF.Attr s P.Text)
                (\s a -> s { _networkMode = a } :: EcsTaskDefinitionResource s)
 
-instance P.HasPlacementConstraints (EcsTaskDefinitionResource s) (TF.Attr s [TF.Attr s (PlacementConstraintsSetting s)]) where
+instance P.HasPlacementConstraints (EcsTaskDefinitionResource s) (TF.Attr s [TF.Attr s (EcsTaskDefinitionPlacementConstraintsSetting s)]) where
     placementConstraints =
-        P.lens (_placementConstraints :: EcsTaskDefinitionResource s -> TF.Attr s [TF.Attr s (PlacementConstraintsSetting s)])
+        P.lens (_placementConstraints :: EcsTaskDefinitionResource s -> TF.Attr s [TF.Attr s (EcsTaskDefinitionPlacementConstraintsSetting s)])
                (\s a -> s { _placementConstraints = a } :: EcsTaskDefinitionResource s)
 
 instance P.HasRequiresCompatibilities (EcsTaskDefinitionResource s) (TF.Attr s [TF.Attr s P.Text]) where
@@ -6683,9 +6683,9 @@ instance P.HasTaskRoleArn (EcsTaskDefinitionResource s) (TF.Attr s P.Text) where
         P.lens (_taskRoleArn :: EcsTaskDefinitionResource s -> TF.Attr s P.Text)
                (\s a -> s { _taskRoleArn = a } :: EcsTaskDefinitionResource s)
 
-instance P.HasVolume (EcsTaskDefinitionResource s) (TF.Attr s [TF.Attr s (VolumeSetting s)]) where
+instance P.HasVolume (EcsTaskDefinitionResource s) (TF.Attr s [TF.Attr s (EcsTaskDefinitionVolumeSetting s)]) where
     volume =
-        P.lens (_volume :: EcsTaskDefinitionResource s -> TF.Attr s [TF.Attr s (VolumeSetting s)])
+        P.lens (_volume :: EcsTaskDefinitionResource s -> TF.Attr s [TF.Attr s (EcsTaskDefinitionVolumeSetting s)])
                (\s a -> s { _volume = a } :: EcsTaskDefinitionResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (EcsTaskDefinitionResource s)) (TF.Attr s P.Text) where
@@ -7138,7 +7138,7 @@ data EksClusterResource s = EksClusterResource'
     , _version   :: TF.Attr s P.Text
     -- ^ @version@ - (Optional, Forces New)
     --
-    , _vpcConfig :: TF.Attr s (VpcConfigSetting s)
+    , _vpcConfig :: TF.Attr s (EksClusterVpcConfigSetting s)
     -- ^ @vpc_config@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -7146,7 +7146,7 @@ data EksClusterResource s = EksClusterResource'
 -- | Define a new @aws_eks_cluster@ resource value.
 eksClusterResource
     :: TF.Attr s P.Text -- ^ @role_arn@ ('P._roleArn', 'P.roleArn')
-    -> TF.Attr s (VpcConfigSetting s) -- ^ @vpc_config@ ('P._vpcConfig', 'P.vpcConfig')
+    -> TF.Attr s (EksClusterVpcConfigSetting s) -- ^ @vpc_config@ ('P._vpcConfig', 'P.vpcConfig')
     -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (EksClusterResource s)
 eksClusterResource _roleArn _vpcConfig _name =
@@ -7170,7 +7170,7 @@ instance TF.IsValid (EksClusterResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_vpcConfig"
                   (_vpcConfig
-                      :: EksClusterResource s -> TF.Attr s (VpcConfigSetting s))
+                      :: EksClusterResource s -> TF.Attr s (EksClusterVpcConfigSetting s))
                   TF.validator
 
 instance P.HasName (EksClusterResource s) (TF.Attr s P.Text) where
@@ -7188,9 +7188,9 @@ instance P.HasVersion (EksClusterResource s) (TF.Attr s P.Text) where
         P.lens (_version :: EksClusterResource s -> TF.Attr s P.Text)
                (\s a -> s { _version = a } :: EksClusterResource s)
 
-instance P.HasVpcConfig (EksClusterResource s) (TF.Attr s (VpcConfigSetting s)) where
+instance P.HasVpcConfig (EksClusterResource s) (TF.Attr s (EksClusterVpcConfigSetting s)) where
     vpcConfig =
-        P.lens (_vpcConfig :: EksClusterResource s -> TF.Attr s (VpcConfigSetting s))
+        P.lens (_vpcConfig :: EksClusterResource s -> TF.Attr s (EksClusterVpcConfigSetting s))
                (\s a -> s { _vpcConfig = a } :: EksClusterResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (EksClusterResource s)) (TF.Attr s P.Text) where
@@ -7199,7 +7199,7 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (EksClusterResource s)) (TF.Attr s
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (EksClusterResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
 
-instance s ~ s' => P.HasComputedCertificateAuthority (TF.Ref s' (EksClusterResource s)) (TF.Attr s (CertificateAuthoritySetting s)) where
+instance s ~ s' => P.HasComputedCertificateAuthority (TF.Ref s' (EksClusterResource s)) (TF.Attr s (EksClusterCertificateAuthoritySetting s)) where
     computedCertificateAuthority x = TF.compute (TF.refKey x) "certificate_authority"
 
 instance s ~ s' => P.HasComputedCreatedAt (TF.Ref s' (EksClusterResource s)) (TF.Attr s P.Text) where
@@ -7216,13 +7216,13 @@ instance s ~ s' => P.HasComputedVersion (TF.Ref s' (EksClusterResource s)) (TF.A
 -- See the <https://www.terraform.io/docs/providers/aws/r/elastic_beanstalk_application.html terraform documentation>
 -- for more information.
 data ElasticBeanstalkApplicationResource s = ElasticBeanstalkApplicationResource'
-    { _appversionLifecycle :: TF.Attr s (AppversionLifecycleSetting s)
+    { _appversionLifecycle :: TF.Attr s (ElasticBeanstalkApplicationAppversionLifecycleSetting s)
     -- ^ @appversion_lifecycle@ - (Optional)
     --
-    , _description         :: TF.Attr s P.Text
+    , _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _name                :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -7250,12 +7250,12 @@ instance TF.IsValid (ElasticBeanstalkApplicationResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_appversionLifecycle"
                   (_appversionLifecycle
-                      :: ElasticBeanstalkApplicationResource s -> TF.Attr s (AppversionLifecycleSetting s))
+                      :: ElasticBeanstalkApplicationResource s -> TF.Attr s (ElasticBeanstalkApplicationAppversionLifecycleSetting s))
                   TF.validator
 
-instance P.HasAppversionLifecycle (ElasticBeanstalkApplicationResource s) (TF.Attr s (AppversionLifecycleSetting s)) where
+instance P.HasAppversionLifecycle (ElasticBeanstalkApplicationResource s) (TF.Attr s (ElasticBeanstalkApplicationAppversionLifecycleSetting s)) where
     appversionLifecycle =
-        P.lens (_appversionLifecycle :: ElasticBeanstalkApplicationResource s -> TF.Attr s (AppversionLifecycleSetting s))
+        P.lens (_appversionLifecycle :: ElasticBeanstalkApplicationResource s -> TF.Attr s (ElasticBeanstalkApplicationAppversionLifecycleSetting s))
                (\s a -> s { _appversionLifecycle = a } :: ElasticBeanstalkApplicationResource s)
 
 instance P.HasDescription (ElasticBeanstalkApplicationResource s) (TF.Attr s P.Text) where
@@ -7365,19 +7365,19 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (ElasticBeanstalkApplicationVersio
 -- See the <https://www.terraform.io/docs/providers/aws/r/elastic_beanstalk_configuration_template.html terraform documentation>
 -- for more information.
 data ElasticBeanstalkConfigurationTemplateResource s = ElasticBeanstalkConfigurationTemplateResource'
-    { _application       :: TF.Attr s P.Text
+    { _application :: TF.Attr s P.Text
     -- ^ @application@ - (Required, Forces New)
     --
-    , _description       :: TF.Attr s P.Text
+    , _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _environmentId     :: TF.Attr s P.Text
+    , _environmentId :: TF.Attr s P.Text
     -- ^ @environment_id@ - (Optional, Forces New)
     --
-    , _name              :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _setting           :: TF.Attr s [TF.Attr s (Setting s)]
+    , _setting :: TF.Attr s [TF.Attr s (ElasticBeanstalkConfigurationTemplateSettingSetting s)]
     -- ^ @setting@ - (Optional)
     --
     , _solutionStackName :: TF.Attr s P.Text
@@ -7434,9 +7434,9 @@ instance P.HasName (ElasticBeanstalkConfigurationTemplateResource s) (TF.Attr s 
         P.lens (_name :: ElasticBeanstalkConfigurationTemplateResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ElasticBeanstalkConfigurationTemplateResource s)
 
-instance P.HasSetting (ElasticBeanstalkConfigurationTemplateResource s) (TF.Attr s [TF.Attr s (Setting s)]) where
+instance P.HasSetting (ElasticBeanstalkConfigurationTemplateResource s) (TF.Attr s [TF.Attr s (ElasticBeanstalkConfigurationTemplateSettingSetting s)]) where
     setting =
-        P.lens (_setting :: ElasticBeanstalkConfigurationTemplateResource s -> TF.Attr s [TF.Attr s (Setting s)])
+        P.lens (_setting :: ElasticBeanstalkConfigurationTemplateResource s -> TF.Attr s [TF.Attr s (ElasticBeanstalkConfigurationTemplateSettingSetting s)])
                (\s a -> s { _setting = a } :: ElasticBeanstalkConfigurationTemplateResource s)
 
 instance P.HasSolutionStackName (ElasticBeanstalkConfigurationTemplateResource s) (TF.Attr s P.Text) where
@@ -7447,7 +7447,7 @@ instance P.HasSolutionStackName (ElasticBeanstalkConfigurationTemplateResource s
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ElasticBeanstalkConfigurationTemplateResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedSetting (TF.Ref s' (ElasticBeanstalkConfigurationTemplateResource s)) (TF.Attr s [TF.Attr s (Setting s)]) where
+instance s ~ s' => P.HasComputedSetting (TF.Ref s' (ElasticBeanstalkConfigurationTemplateResource s)) (TF.Attr s [TF.Attr s (ElasticBeanstalkConfigurationTemplateSettingSetting s)]) where
     computedSetting x = TF.compute (TF.refKey x) "setting"
 
 -- | @aws_elastic_beanstalk_environment@ Resource.
@@ -7455,43 +7455,43 @@ instance s ~ s' => P.HasComputedSetting (TF.Ref s' (ElasticBeanstalkConfiguratio
 -- See the <https://www.terraform.io/docs/providers/aws/r/elastic_beanstalk_environment.html terraform documentation>
 -- for more information.
 data ElasticBeanstalkEnvironmentResource s = ElasticBeanstalkEnvironmentResource'
-    { _application         :: TF.Attr s P.Text
+    { _application :: TF.Attr s P.Text
     -- ^ @application@ - (Required)
     --
-    , _cnamePrefix         :: TF.Attr s P.Text
+    , _cnamePrefix :: TF.Attr s P.Text
     -- ^ @cname_prefix@ - (Optional, Forces New)
     --
-    , _description         :: TF.Attr s P.Text
+    , _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _name                :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _pollInterval        :: TF.Attr s P.Text
+    , _pollInterval :: TF.Attr s P.Text
     -- ^ @poll_interval@ - (Optional)
     --
-    , _setting             :: TF.Attr s [TF.Attr s (Setting s)]
+    , _setting :: TF.Attr s [TF.Attr s (ElasticBeanstalkEnvironmentSettingSetting s)]
     -- ^ @setting@ - (Optional)
     --
-    , _solutionStackName   :: TF.Attr s P.Text
+    , _solutionStackName :: TF.Attr s P.Text
     -- ^ @solution_stack_name@ - (Optional)
     --
     -- Conflicts with:
     --
     -- * 'templateName'
-    , _tags                :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _tags :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
-    , _templateName        :: TF.Attr s P.Text
+    , _templateName :: TF.Attr s P.Text
     -- ^ @template_name@ - (Optional)
     --
     -- Conflicts with:
     --
     -- * 'solutionStackName'
-    , _tier                :: TF.Attr s P.Text
+    , _tier :: TF.Attr s P.Text
     -- ^ @tier@ - (Optional, Forces New)
     --
-    , _versionLabel        :: TF.Attr s P.Text
+    , _versionLabel :: TF.Attr s P.Text
     -- ^ @version_label@ - (Optional)
     --
     , _waitForReadyTimeout :: TF.Attr s P.Text
@@ -7576,9 +7576,9 @@ instance P.HasPollInterval (ElasticBeanstalkEnvironmentResource s) (TF.Attr s P.
         P.lens (_pollInterval :: ElasticBeanstalkEnvironmentResource s -> TF.Attr s P.Text)
                (\s a -> s { _pollInterval = a } :: ElasticBeanstalkEnvironmentResource s)
 
-instance P.HasSetting (ElasticBeanstalkEnvironmentResource s) (TF.Attr s [TF.Attr s (Setting s)]) where
+instance P.HasSetting (ElasticBeanstalkEnvironmentResource s) (TF.Attr s [TF.Attr s (ElasticBeanstalkEnvironmentSettingSetting s)]) where
     setting =
-        P.lens (_setting :: ElasticBeanstalkEnvironmentResource s -> TF.Attr s [TF.Attr s (Setting s)])
+        P.lens (_setting :: ElasticBeanstalkEnvironmentResource s -> TF.Attr s [TF.Attr s (ElasticBeanstalkEnvironmentSettingSetting s)])
                (\s a -> s { _setting = a } :: ElasticBeanstalkEnvironmentResource s)
 
 instance P.HasSolutionStackName (ElasticBeanstalkEnvironmentResource s) (TF.Attr s P.Text) where
@@ -7614,7 +7614,7 @@ instance P.HasWaitForReadyTimeout (ElasticBeanstalkEnvironmentResource s) (TF.At
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ElasticBeanstalkEnvironmentResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedAllSettings (TF.Ref s' (ElasticBeanstalkEnvironmentResource s)) (TF.Attr s [TF.Attr s (AllSettings s)]) where
+instance s ~ s' => P.HasComputedAllSettings (TF.Ref s' (ElasticBeanstalkEnvironmentResource s)) (TF.Attr s [TF.Attr s (ElasticBeanstalkEnvironmentAllSettingsSetting s)]) where
     computedAllSettings x = TF.compute (TF.refKey x) "all_settings"
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (ElasticBeanstalkEnvironmentResource s)) (TF.Attr s P.Text) where
@@ -8066,7 +8066,7 @@ instance s ~ s' => P.HasComputedAvailabilityZone (TF.Ref s' (ElasticacheClusterR
 instance s ~ s' => P.HasComputedAzMode (TF.Ref s' (ElasticacheClusterResource s)) (TF.Attr s P.Text) where
     computedAzMode x = TF.compute (TF.refKey x) "az_mode"
 
-instance s ~ s' => P.HasComputedCacheNodes (TF.Ref s' (ElasticacheClusterResource s)) (TF.Attr s [TF.Attr s (CacheNodesSetting s)]) where
+instance s ~ s' => P.HasComputedCacheNodes (TF.Ref s' (ElasticacheClusterResource s)) (TF.Attr s [TF.Attr s (ElasticacheClusterCacheNodesSetting s)]) where
     computedCacheNodes x = TF.compute (TF.refKey x) "cache_nodes"
 
 instance s ~ s' => P.HasComputedClusterAddress (TF.Ref s' (ElasticacheClusterResource s)) (TF.Attr s P.Text) where
@@ -8116,13 +8116,13 @@ data ElasticacheParameterGroupResource s = ElasticacheParameterGroupResource'
     { _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional, Forces New)
     --
-    , _family'     :: TF.Attr s P.Text
+    , _family' :: TF.Attr s P.Text
     -- ^ @family@ - (Required, Forces New)
     --
-    , _name        :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _parameter   :: TF.Attr s [TF.Attr s (ParameterSetting s)]
+    , _parameter :: TF.Attr s [TF.Attr s (ElasticacheParameterGroupParameterSetting s)]
     -- ^ @parameter@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -8167,9 +8167,9 @@ instance P.HasName (ElasticacheParameterGroupResource s) (TF.Attr s P.Text) wher
         P.lens (_name :: ElasticacheParameterGroupResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ElasticacheParameterGroupResource s)
 
-instance P.HasParameter (ElasticacheParameterGroupResource s) (TF.Attr s [TF.Attr s (ParameterSetting s)]) where
+instance P.HasParameter (ElasticacheParameterGroupResource s) (TF.Attr s [TF.Attr s (ElasticacheParameterGroupParameterSetting s)]) where
     parameter =
-        P.lens (_parameter :: ElasticacheParameterGroupResource s -> TF.Attr s [TF.Attr s (ParameterSetting s)])
+        P.lens (_parameter :: ElasticacheParameterGroupResource s -> TF.Attr s [TF.Attr s (ElasticacheParameterGroupParameterSetting s)])
                (\s a -> s { _parameter = a } :: ElasticacheParameterGroupResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ElasticacheParameterGroupResource s)) (TF.Attr s P.Text) where
@@ -8198,7 +8198,7 @@ data ElasticacheReplicationGroupResource s = ElasticacheReplicationGroupResource
     , _availabilityZones :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @availability_zones@ - (Optional, Forces New)
     --
-    , _clusterMode :: TF.Attr s (ClusterModeSetting s)
+    , _clusterMode :: TF.Attr s (ElasticacheReplicationGroupClusterModeSetting s)
     -- ^ @cluster_mode@ - (Optional)
     --
     , _engine :: TF.Attr s P.Text
@@ -8330,7 +8330,7 @@ instance TF.IsValid (ElasticacheReplicationGroupResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_clusterMode"
                   (_clusterMode
-                      :: ElasticacheReplicationGroupResource s -> TF.Attr s (ClusterModeSetting s))
+                      :: ElasticacheReplicationGroupResource s -> TF.Attr s (ElasticacheReplicationGroupClusterModeSetting s))
                   TF.validator
 
 instance P.HasApplyImmediately (ElasticacheReplicationGroupResource s) (TF.Attr s P.Bool) where
@@ -8363,9 +8363,9 @@ instance P.HasAvailabilityZones (ElasticacheReplicationGroupResource s) (TF.Attr
         P.lens (_availabilityZones :: ElasticacheReplicationGroupResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _availabilityZones = a } :: ElasticacheReplicationGroupResource s)
 
-instance P.HasClusterMode (ElasticacheReplicationGroupResource s) (TF.Attr s (ClusterModeSetting s)) where
+instance P.HasClusterMode (ElasticacheReplicationGroupResource s) (TF.Attr s (ElasticacheReplicationGroupClusterModeSetting s)) where
     clusterMode =
-        P.lens (_clusterMode :: ElasticacheReplicationGroupResource s -> TF.Attr s (ClusterModeSetting s))
+        P.lens (_clusterMode :: ElasticacheReplicationGroupResource s -> TF.Attr s (ElasticacheReplicationGroupClusterModeSetting s))
                (\s a -> s { _clusterMode = a } :: ElasticacheReplicationGroupResource s)
 
 instance P.HasEngine (ElasticacheReplicationGroupResource s) (TF.Attr s P.Text) where
@@ -8469,7 +8469,7 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (ElasticacheReplicationGroupResour
 instance s ~ s' => P.HasComputedApplyImmediately (TF.Ref s' (ElasticacheReplicationGroupResource s)) (TF.Attr s P.Bool) where
     computedApplyImmediately x = TF.compute (TF.refKey x) "apply_immediately"
 
-instance s ~ s' => P.HasComputedClusterMode (TF.Ref s' (ElasticacheReplicationGroupResource s)) (TF.Attr s (ClusterModeSetting s)) where
+instance s ~ s' => P.HasComputedClusterMode (TF.Ref s' (ElasticacheReplicationGroupResource s)) (TF.Attr s (ElasticacheReplicationGroupClusterModeSetting s)) where
     computedClusterMode x = TF.compute (TF.refKey x) "cluster_mode"
 
 instance s ~ s' => P.HasComputedConfigurationEndpointAddress (TF.Ref s' (ElasticacheReplicationGroupResource s)) (TF.Attr s P.Text) where
@@ -8680,34 +8680,34 @@ data ElasticsearchDomainResource s = ElasticsearchDomainResource'
     , _advancedOptions :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @advanced_options@ - (Optional)
     --
-    , _clusterConfig :: TF.Attr s [TF.Attr s (ClusterConfigSetting s)]
+    , _clusterConfig :: TF.Attr s [TF.Attr s (ElasticsearchDomainClusterConfigSetting s)]
     -- ^ @cluster_config@ - (Optional)
     --
-    , _cognitoOptions :: TF.Attr s (CognitoOptionsSetting s)
+    , _cognitoOptions :: TF.Attr s (ElasticsearchDomainCognitoOptionsSetting s)
     -- ^ @cognito_options@ - (Optional)
     --
     , _domainName :: TF.Attr s P.Text
     -- ^ @domain_name@ - (Required, Forces New)
     --
-    , _ebsOptions :: TF.Attr s [TF.Attr s (EbsOptionsSetting s)]
+    , _ebsOptions :: TF.Attr s [TF.Attr s (ElasticsearchDomainEbsOptionsSetting s)]
     -- ^ @ebs_options@ - (Optional)
     --
     , _elasticsearchVersion :: TF.Attr s P.Text
     -- ^ @elasticsearch_version@ - (Optional, Forces New)
     --
-    , _encryptAtRest :: TF.Attr s (EncryptAtRestSetting s)
+    , _encryptAtRest :: TF.Attr s (ElasticsearchDomainEncryptAtRestSetting s)
     -- ^ @encrypt_at_rest@ - (Optional)
     --
-    , _logPublishingOptions :: TF.Attr s [TF.Attr s (LogPublishingOptionsSetting s)]
+    , _logPublishingOptions :: TF.Attr s [TF.Attr s (ElasticsearchDomainLogPublishingOptionsSetting s)]
     -- ^ @log_publishing_options@ - (Optional)
     --
-    , _snapshotOptions :: TF.Attr s [TF.Attr s (SnapshotOptionsSetting s)]
+    , _snapshotOptions :: TF.Attr s [TF.Attr s (ElasticsearchDomainSnapshotOptionsSetting s)]
     -- ^ @snapshot_options@ - (Optional)
     --
     , _tags :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
-    , _vpcOptions :: TF.Attr s (VpcOptionsSetting s)
+    , _vpcOptions :: TF.Attr s (ElasticsearchDomainVpcOptionsSetting s)
     -- ^ @vpc_options@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -8753,15 +8753,15 @@ instance TF.IsValid (ElasticsearchDomainResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_cognitoOptions"
                   (_cognitoOptions
-                      :: ElasticsearchDomainResource s -> TF.Attr s (CognitoOptionsSetting s))
+                      :: ElasticsearchDomainResource s -> TF.Attr s (ElasticsearchDomainCognitoOptionsSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_encryptAtRest"
                   (_encryptAtRest
-                      :: ElasticsearchDomainResource s -> TF.Attr s (EncryptAtRestSetting s))
+                      :: ElasticsearchDomainResource s -> TF.Attr s (ElasticsearchDomainEncryptAtRestSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_vpcOptions"
                   (_vpcOptions
-                      :: ElasticsearchDomainResource s -> TF.Attr s (VpcOptionsSetting s))
+                      :: ElasticsearchDomainResource s -> TF.Attr s (ElasticsearchDomainVpcOptionsSetting s))
                   TF.validator
 
 instance P.HasAccessPolicies (ElasticsearchDomainResource s) (TF.Attr s P.Text) where
@@ -8774,14 +8774,14 @@ instance P.HasAdvancedOptions (ElasticsearchDomainResource s) (TF.Attr s (P.Map 
         P.lens (_advancedOptions :: ElasticsearchDomainResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _advancedOptions = a } :: ElasticsearchDomainResource s)
 
-instance P.HasClusterConfig (ElasticsearchDomainResource s) (TF.Attr s [TF.Attr s (ClusterConfigSetting s)]) where
+instance P.HasClusterConfig (ElasticsearchDomainResource s) (TF.Attr s [TF.Attr s (ElasticsearchDomainClusterConfigSetting s)]) where
     clusterConfig =
-        P.lens (_clusterConfig :: ElasticsearchDomainResource s -> TF.Attr s [TF.Attr s (ClusterConfigSetting s)])
+        P.lens (_clusterConfig :: ElasticsearchDomainResource s -> TF.Attr s [TF.Attr s (ElasticsearchDomainClusterConfigSetting s)])
                (\s a -> s { _clusterConfig = a } :: ElasticsearchDomainResource s)
 
-instance P.HasCognitoOptions (ElasticsearchDomainResource s) (TF.Attr s (CognitoOptionsSetting s)) where
+instance P.HasCognitoOptions (ElasticsearchDomainResource s) (TF.Attr s (ElasticsearchDomainCognitoOptionsSetting s)) where
     cognitoOptions =
-        P.lens (_cognitoOptions :: ElasticsearchDomainResource s -> TF.Attr s (CognitoOptionsSetting s))
+        P.lens (_cognitoOptions :: ElasticsearchDomainResource s -> TF.Attr s (ElasticsearchDomainCognitoOptionsSetting s))
                (\s a -> s { _cognitoOptions = a } :: ElasticsearchDomainResource s)
 
 instance P.HasDomainName (ElasticsearchDomainResource s) (TF.Attr s P.Text) where
@@ -8789,9 +8789,9 @@ instance P.HasDomainName (ElasticsearchDomainResource s) (TF.Attr s P.Text) wher
         P.lens (_domainName :: ElasticsearchDomainResource s -> TF.Attr s P.Text)
                (\s a -> s { _domainName = a } :: ElasticsearchDomainResource s)
 
-instance P.HasEbsOptions (ElasticsearchDomainResource s) (TF.Attr s [TF.Attr s (EbsOptionsSetting s)]) where
+instance P.HasEbsOptions (ElasticsearchDomainResource s) (TF.Attr s [TF.Attr s (ElasticsearchDomainEbsOptionsSetting s)]) where
     ebsOptions =
-        P.lens (_ebsOptions :: ElasticsearchDomainResource s -> TF.Attr s [TF.Attr s (EbsOptionsSetting s)])
+        P.lens (_ebsOptions :: ElasticsearchDomainResource s -> TF.Attr s [TF.Attr s (ElasticsearchDomainEbsOptionsSetting s)])
                (\s a -> s { _ebsOptions = a } :: ElasticsearchDomainResource s)
 
 instance P.HasElasticsearchVersion (ElasticsearchDomainResource s) (TF.Attr s P.Text) where
@@ -8799,19 +8799,19 @@ instance P.HasElasticsearchVersion (ElasticsearchDomainResource s) (TF.Attr s P.
         P.lens (_elasticsearchVersion :: ElasticsearchDomainResource s -> TF.Attr s P.Text)
                (\s a -> s { _elasticsearchVersion = a } :: ElasticsearchDomainResource s)
 
-instance P.HasEncryptAtRest (ElasticsearchDomainResource s) (TF.Attr s (EncryptAtRestSetting s)) where
+instance P.HasEncryptAtRest (ElasticsearchDomainResource s) (TF.Attr s (ElasticsearchDomainEncryptAtRestSetting s)) where
     encryptAtRest =
-        P.lens (_encryptAtRest :: ElasticsearchDomainResource s -> TF.Attr s (EncryptAtRestSetting s))
+        P.lens (_encryptAtRest :: ElasticsearchDomainResource s -> TF.Attr s (ElasticsearchDomainEncryptAtRestSetting s))
                (\s a -> s { _encryptAtRest = a } :: ElasticsearchDomainResource s)
 
-instance P.HasLogPublishingOptions (ElasticsearchDomainResource s) (TF.Attr s [TF.Attr s (LogPublishingOptionsSetting s)]) where
+instance P.HasLogPublishingOptions (ElasticsearchDomainResource s) (TF.Attr s [TF.Attr s (ElasticsearchDomainLogPublishingOptionsSetting s)]) where
     logPublishingOptions =
-        P.lens (_logPublishingOptions :: ElasticsearchDomainResource s -> TF.Attr s [TF.Attr s (LogPublishingOptionsSetting s)])
+        P.lens (_logPublishingOptions :: ElasticsearchDomainResource s -> TF.Attr s [TF.Attr s (ElasticsearchDomainLogPublishingOptionsSetting s)])
                (\s a -> s { _logPublishingOptions = a } :: ElasticsearchDomainResource s)
 
-instance P.HasSnapshotOptions (ElasticsearchDomainResource s) (TF.Attr s [TF.Attr s (SnapshotOptionsSetting s)]) where
+instance P.HasSnapshotOptions (ElasticsearchDomainResource s) (TF.Attr s [TF.Attr s (ElasticsearchDomainSnapshotOptionsSetting s)]) where
     snapshotOptions =
-        P.lens (_snapshotOptions :: ElasticsearchDomainResource s -> TF.Attr s [TF.Attr s (SnapshotOptionsSetting s)])
+        P.lens (_snapshotOptions :: ElasticsearchDomainResource s -> TF.Attr s [TF.Attr s (ElasticsearchDomainSnapshotOptionsSetting s)])
                (\s a -> s { _snapshotOptions = a } :: ElasticsearchDomainResource s)
 
 instance P.HasTags (ElasticsearchDomainResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
@@ -8819,9 +8819,9 @@ instance P.HasTags (ElasticsearchDomainResource s) (TF.Attr s (P.Map P.Text (TF.
         P.lens (_tags :: ElasticsearchDomainResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _tags = a } :: ElasticsearchDomainResource s)
 
-instance P.HasVpcOptions (ElasticsearchDomainResource s) (TF.Attr s (VpcOptionsSetting s)) where
+instance P.HasVpcOptions (ElasticsearchDomainResource s) (TF.Attr s (ElasticsearchDomainVpcOptionsSetting s)) where
     vpcOptions =
-        P.lens (_vpcOptions :: ElasticsearchDomainResource s -> TF.Attr s (VpcOptionsSetting s))
+        P.lens (_vpcOptions :: ElasticsearchDomainResource s -> TF.Attr s (ElasticsearchDomainVpcOptionsSetting s))
                (\s a -> s { _vpcOptions = a } :: ElasticsearchDomainResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ElasticsearchDomainResource s)) (TF.Attr s P.Text) where
@@ -8836,16 +8836,16 @@ instance s ~ s' => P.HasComputedAdvancedOptions (TF.Ref s' (ElasticsearchDomainR
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (ElasticsearchDomainResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
 
-instance s ~ s' => P.HasComputedClusterConfig (TF.Ref s' (ElasticsearchDomainResource s)) (TF.Attr s [TF.Attr s (ClusterConfigSetting s)]) where
+instance s ~ s' => P.HasComputedClusterConfig (TF.Ref s' (ElasticsearchDomainResource s)) (TF.Attr s [TF.Attr s (ElasticsearchDomainClusterConfigSetting s)]) where
     computedClusterConfig x = TF.compute (TF.refKey x) "cluster_config"
 
 instance s ~ s' => P.HasComputedDomainId (TF.Ref s' (ElasticsearchDomainResource s)) (TF.Attr s P.Text) where
     computedDomainId x = TF.compute (TF.refKey x) "domain_id"
 
-instance s ~ s' => P.HasComputedEbsOptions (TF.Ref s' (ElasticsearchDomainResource s)) (TF.Attr s [TF.Attr s (EbsOptionsSetting s)]) where
+instance s ~ s' => P.HasComputedEbsOptions (TF.Ref s' (ElasticsearchDomainResource s)) (TF.Attr s [TF.Attr s (ElasticsearchDomainEbsOptionsSetting s)]) where
     computedEbsOptions x = TF.compute (TF.refKey x) "ebs_options"
 
-instance s ~ s' => P.HasComputedEncryptAtRest (TF.Ref s' (ElasticsearchDomainResource s)) (TF.Attr s (EncryptAtRestSetting s)) where
+instance s ~ s' => P.HasComputedEncryptAtRest (TF.Ref s' (ElasticsearchDomainResource s)) (TF.Attr s (ElasticsearchDomainEncryptAtRestSetting s)) where
     computedEncryptAtRest x = TF.compute (TF.refKey x) "encrypt_at_rest"
 
 instance s ~ s' => P.HasComputedEndpoint (TF.Ref s' (ElasticsearchDomainResource s)) (TF.Attr s P.Text) where
@@ -8862,10 +8862,10 @@ data ElastictranscoderPipelineResource s = ElastictranscoderPipelineResource'
     { _awsKmsKeyArn :: TF.Attr s P.Text
     -- ^ @aws_kms_key_arn@ - (Optional)
     --
-    , _contentConfig :: TF.Attr s (ContentConfigSetting s)
+    , _contentConfig :: TF.Attr s (ElastictranscoderPipelineContentConfigSetting s)
     -- ^ @content_config@ - (Optional)
     --
-    , _contentConfigPermissions :: TF.Attr s [TF.Attr s (ContentConfigPermissionsSetting s)]
+    , _contentConfigPermissions :: TF.Attr s [TF.Attr s (ElastictranscoderPipelineContentConfigPermissionsSetting s)]
     -- ^ @content_config_permissions@ - (Optional)
     --
     , _inputBucket :: TF.Attr s P.Text
@@ -8874,7 +8874,7 @@ data ElastictranscoderPipelineResource s = ElastictranscoderPipelineResource'
     , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Optional, Forces New)
     --
-    , _notifications :: TF.Attr s (NotificationsSetting s)
+    , _notifications :: TF.Attr s (ElastictranscoderPipelineNotificationsSetting s)
     -- ^ @notifications@ - (Optional)
     --
     , _outputBucket :: TF.Attr s P.Text
@@ -8883,10 +8883,10 @@ data ElastictranscoderPipelineResource s = ElastictranscoderPipelineResource'
     , _role :: TF.Attr s P.Text
     -- ^ @role@ - (Required)
     --
-    , _thumbnailConfig :: TF.Attr s (ThumbnailConfigSetting s)
+    , _thumbnailConfig :: TF.Attr s (ElastictranscoderPipelineThumbnailConfigSetting s)
     -- ^ @thumbnail_config@ - (Optional)
     --
-    , _thumbnailConfigPermissions :: TF.Attr s [TF.Attr s (ThumbnailConfigPermissionsSetting s)]
+    , _thumbnailConfigPermissions :: TF.Attr s [TF.Attr s (ElastictranscoderPipelineThumbnailConfigPermissionsSetting s)]
     -- ^ @thumbnail_config_permissions@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -8929,15 +8929,15 @@ instance TF.IsValid (ElastictranscoderPipelineResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_contentConfig"
                   (_contentConfig
-                      :: ElastictranscoderPipelineResource s -> TF.Attr s (ContentConfigSetting s))
+                      :: ElastictranscoderPipelineResource s -> TF.Attr s (ElastictranscoderPipelineContentConfigSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_notifications"
                   (_notifications
-                      :: ElastictranscoderPipelineResource s -> TF.Attr s (NotificationsSetting s))
+                      :: ElastictranscoderPipelineResource s -> TF.Attr s (ElastictranscoderPipelineNotificationsSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_thumbnailConfig"
                   (_thumbnailConfig
-                      :: ElastictranscoderPipelineResource s -> TF.Attr s (ThumbnailConfigSetting s))
+                      :: ElastictranscoderPipelineResource s -> TF.Attr s (ElastictranscoderPipelineThumbnailConfigSetting s))
                   TF.validator
 
 instance P.HasAwsKmsKeyArn (ElastictranscoderPipelineResource s) (TF.Attr s P.Text) where
@@ -8945,14 +8945,14 @@ instance P.HasAwsKmsKeyArn (ElastictranscoderPipelineResource s) (TF.Attr s P.Te
         P.lens (_awsKmsKeyArn :: ElastictranscoderPipelineResource s -> TF.Attr s P.Text)
                (\s a -> s { _awsKmsKeyArn = a } :: ElastictranscoderPipelineResource s)
 
-instance P.HasContentConfig (ElastictranscoderPipelineResource s) (TF.Attr s (ContentConfigSetting s)) where
+instance P.HasContentConfig (ElastictranscoderPipelineResource s) (TF.Attr s (ElastictranscoderPipelineContentConfigSetting s)) where
     contentConfig =
-        P.lens (_contentConfig :: ElastictranscoderPipelineResource s -> TF.Attr s (ContentConfigSetting s))
+        P.lens (_contentConfig :: ElastictranscoderPipelineResource s -> TF.Attr s (ElastictranscoderPipelineContentConfigSetting s))
                (\s a -> s { _contentConfig = a } :: ElastictranscoderPipelineResource s)
 
-instance P.HasContentConfigPermissions (ElastictranscoderPipelineResource s) (TF.Attr s [TF.Attr s (ContentConfigPermissionsSetting s)]) where
+instance P.HasContentConfigPermissions (ElastictranscoderPipelineResource s) (TF.Attr s [TF.Attr s (ElastictranscoderPipelineContentConfigPermissionsSetting s)]) where
     contentConfigPermissions =
-        P.lens (_contentConfigPermissions :: ElastictranscoderPipelineResource s -> TF.Attr s [TF.Attr s (ContentConfigPermissionsSetting s)])
+        P.lens (_contentConfigPermissions :: ElastictranscoderPipelineResource s -> TF.Attr s [TF.Attr s (ElastictranscoderPipelineContentConfigPermissionsSetting s)])
                (\s a -> s { _contentConfigPermissions = a } :: ElastictranscoderPipelineResource s)
 
 instance P.HasInputBucket (ElastictranscoderPipelineResource s) (TF.Attr s P.Text) where
@@ -8965,9 +8965,9 @@ instance P.HasName (ElastictranscoderPipelineResource s) (TF.Attr s P.Text) wher
         P.lens (_name :: ElastictranscoderPipelineResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ElastictranscoderPipelineResource s)
 
-instance P.HasNotifications (ElastictranscoderPipelineResource s) (TF.Attr s (NotificationsSetting s)) where
+instance P.HasNotifications (ElastictranscoderPipelineResource s) (TF.Attr s (ElastictranscoderPipelineNotificationsSetting s)) where
     notifications =
-        P.lens (_notifications :: ElastictranscoderPipelineResource s -> TF.Attr s (NotificationsSetting s))
+        P.lens (_notifications :: ElastictranscoderPipelineResource s -> TF.Attr s (ElastictranscoderPipelineNotificationsSetting s))
                (\s a -> s { _notifications = a } :: ElastictranscoderPipelineResource s)
 
 instance P.HasOutputBucket (ElastictranscoderPipelineResource s) (TF.Attr s P.Text) where
@@ -8980,14 +8980,14 @@ instance P.HasRole (ElastictranscoderPipelineResource s) (TF.Attr s P.Text) wher
         P.lens (_role :: ElastictranscoderPipelineResource s -> TF.Attr s P.Text)
                (\s a -> s { _role = a } :: ElastictranscoderPipelineResource s)
 
-instance P.HasThumbnailConfig (ElastictranscoderPipelineResource s) (TF.Attr s (ThumbnailConfigSetting s)) where
+instance P.HasThumbnailConfig (ElastictranscoderPipelineResource s) (TF.Attr s (ElastictranscoderPipelineThumbnailConfigSetting s)) where
     thumbnailConfig =
-        P.lens (_thumbnailConfig :: ElastictranscoderPipelineResource s -> TF.Attr s (ThumbnailConfigSetting s))
+        P.lens (_thumbnailConfig :: ElastictranscoderPipelineResource s -> TF.Attr s (ElastictranscoderPipelineThumbnailConfigSetting s))
                (\s a -> s { _thumbnailConfig = a } :: ElastictranscoderPipelineResource s)
 
-instance P.HasThumbnailConfigPermissions (ElastictranscoderPipelineResource s) (TF.Attr s [TF.Attr s (ThumbnailConfigPermissionsSetting s)]) where
+instance P.HasThumbnailConfigPermissions (ElastictranscoderPipelineResource s) (TF.Attr s [TF.Attr s (ElastictranscoderPipelineThumbnailConfigPermissionsSetting s)]) where
     thumbnailConfigPermissions =
-        P.lens (_thumbnailConfigPermissions :: ElastictranscoderPipelineResource s -> TF.Attr s [TF.Attr s (ThumbnailConfigPermissionsSetting s)])
+        P.lens (_thumbnailConfigPermissions :: ElastictranscoderPipelineResource s -> TF.Attr s [TF.Attr s (ElastictranscoderPipelineThumbnailConfigPermissionsSetting s)])
                (\s a -> s { _thumbnailConfigPermissions = a } :: ElastictranscoderPipelineResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ElastictranscoderPipelineResource s)) (TF.Attr s P.Text) where
@@ -8996,7 +8996,7 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (ElastictranscoderPipelineResource
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (ElastictranscoderPipelineResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
 
-instance s ~ s' => P.HasComputedContentConfig (TF.Ref s' (ElastictranscoderPipelineResource s)) (TF.Attr s (ContentConfigSetting s)) where
+instance s ~ s' => P.HasComputedContentConfig (TF.Ref s' (ElastictranscoderPipelineResource s)) (TF.Attr s (ElastictranscoderPipelineContentConfigSetting s)) where
     computedContentConfig x = TF.compute (TF.refKey x) "content_config"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (ElastictranscoderPipelineResource s)) (TF.Attr s P.Text) where
@@ -9005,7 +9005,7 @@ instance s ~ s' => P.HasComputedName (TF.Ref s' (ElastictranscoderPipelineResour
 instance s ~ s' => P.HasComputedOutputBucket (TF.Ref s' (ElastictranscoderPipelineResource s)) (TF.Attr s P.Text) where
     computedOutputBucket x = TF.compute (TF.refKey x) "output_bucket"
 
-instance s ~ s' => P.HasComputedThumbnailConfig (TF.Ref s' (ElastictranscoderPipelineResource s)) (TF.Attr s (ThumbnailConfigSetting s)) where
+instance s ~ s' => P.HasComputedThumbnailConfig (TF.Ref s' (ElastictranscoderPipelineResource s)) (TF.Attr s (ElastictranscoderPipelineThumbnailConfigSetting s)) where
     computedThumbnailConfig x = TF.compute (TF.refKey x) "thumbnail_config"
 
 -- | @aws_elastictranscoder_preset@ Resource.
@@ -9013,34 +9013,34 @@ instance s ~ s' => P.HasComputedThumbnailConfig (TF.Ref s' (ElastictranscoderPip
 -- See the <https://www.terraform.io/docs/providers/aws/r/elastictranscoder_preset.html terraform documentation>
 -- for more information.
 data ElastictranscoderPresetResource s = ElastictranscoderPresetResource'
-    { _audio             :: TF.Attr s (AudioSetting s)
+    { _audio :: TF.Attr s (ElastictranscoderPresetAudioSetting s)
     -- ^ @audio@ - (Optional, Forces New)
     --
-    , _audioCodecOptions :: TF.Attr s (AudioCodecOptionsSetting s)
+    , _audioCodecOptions :: TF.Attr s (ElastictranscoderPresetAudioCodecOptionsSetting s)
     -- ^ @audio_codec_options@ - (Optional, Forces New)
     --
-    , _container         :: TF.Attr s P.Text
+    , _container :: TF.Attr s P.Text
     -- ^ @container@ - (Required, Forces New)
     --
-    , _description       :: TF.Attr s P.Text
+    , _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional, Forces New)
     --
-    , _name              :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Optional, Forces New)
     --
-    , _thumbnails        :: TF.Attr s (ThumbnailsSetting s)
+    , _thumbnails :: TF.Attr s (ElastictranscoderPresetThumbnailsSetting s)
     -- ^ @thumbnails@ - (Optional, Forces New)
     --
-    , _type'             :: TF.Attr s P.Text
+    , _type' :: TF.Attr s P.Text
     -- ^ @type@ - (Optional)
     --
-    , _video             :: TF.Attr s (VideoSetting s)
+    , _video :: TF.Attr s (ElastictranscoderPresetVideoSetting s)
     -- ^ @video@ - (Optional, Forces New)
     --
     , _videoCodecOptions :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @video_codec_options@ - (Optional, Forces New)
     --
-    , _videoWatermarks   :: TF.Attr s [TF.Attr s (VideoWatermarksSetting s)]
+    , _videoWatermarks :: TF.Attr s [TF.Attr s (ElastictranscoderPresetVideoWatermarksSetting s)]
     -- ^ @video_watermarks@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -9082,29 +9082,29 @@ instance TF.IsValid (ElastictranscoderPresetResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_audio"
                   (_audio
-                      :: ElastictranscoderPresetResource s -> TF.Attr s (AudioSetting s))
+                      :: ElastictranscoderPresetResource s -> TF.Attr s (ElastictranscoderPresetAudioSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_audioCodecOptions"
                   (_audioCodecOptions
-                      :: ElastictranscoderPresetResource s -> TF.Attr s (AudioCodecOptionsSetting s))
+                      :: ElastictranscoderPresetResource s -> TF.Attr s (ElastictranscoderPresetAudioCodecOptionsSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_thumbnails"
                   (_thumbnails
-                      :: ElastictranscoderPresetResource s -> TF.Attr s (ThumbnailsSetting s))
+                      :: ElastictranscoderPresetResource s -> TF.Attr s (ElastictranscoderPresetThumbnailsSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_video"
                   (_video
-                      :: ElastictranscoderPresetResource s -> TF.Attr s (VideoSetting s))
+                      :: ElastictranscoderPresetResource s -> TF.Attr s (ElastictranscoderPresetVideoSetting s))
                   TF.validator
 
-instance P.HasAudio (ElastictranscoderPresetResource s) (TF.Attr s (AudioSetting s)) where
+instance P.HasAudio (ElastictranscoderPresetResource s) (TF.Attr s (ElastictranscoderPresetAudioSetting s)) where
     audio =
-        P.lens (_audio :: ElastictranscoderPresetResource s -> TF.Attr s (AudioSetting s))
+        P.lens (_audio :: ElastictranscoderPresetResource s -> TF.Attr s (ElastictranscoderPresetAudioSetting s))
                (\s a -> s { _audio = a } :: ElastictranscoderPresetResource s)
 
-instance P.HasAudioCodecOptions (ElastictranscoderPresetResource s) (TF.Attr s (AudioCodecOptionsSetting s)) where
+instance P.HasAudioCodecOptions (ElastictranscoderPresetResource s) (TF.Attr s (ElastictranscoderPresetAudioCodecOptionsSetting s)) where
     audioCodecOptions =
-        P.lens (_audioCodecOptions :: ElastictranscoderPresetResource s -> TF.Attr s (AudioCodecOptionsSetting s))
+        P.lens (_audioCodecOptions :: ElastictranscoderPresetResource s -> TF.Attr s (ElastictranscoderPresetAudioCodecOptionsSetting s))
                (\s a -> s { _audioCodecOptions = a } :: ElastictranscoderPresetResource s)
 
 instance P.HasContainer (ElastictranscoderPresetResource s) (TF.Attr s P.Text) where
@@ -9122,9 +9122,9 @@ instance P.HasName (ElastictranscoderPresetResource s) (TF.Attr s P.Text) where
         P.lens (_name :: ElastictranscoderPresetResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ElastictranscoderPresetResource s)
 
-instance P.HasThumbnails (ElastictranscoderPresetResource s) (TF.Attr s (ThumbnailsSetting s)) where
+instance P.HasThumbnails (ElastictranscoderPresetResource s) (TF.Attr s (ElastictranscoderPresetThumbnailsSetting s)) where
     thumbnails =
-        P.lens (_thumbnails :: ElastictranscoderPresetResource s -> TF.Attr s (ThumbnailsSetting s))
+        P.lens (_thumbnails :: ElastictranscoderPresetResource s -> TF.Attr s (ElastictranscoderPresetThumbnailsSetting s))
                (\s a -> s { _thumbnails = a } :: ElastictranscoderPresetResource s)
 
 instance P.HasType' (ElastictranscoderPresetResource s) (TF.Attr s P.Text) where
@@ -9132,9 +9132,9 @@ instance P.HasType' (ElastictranscoderPresetResource s) (TF.Attr s P.Text) where
         P.lens (_type' :: ElastictranscoderPresetResource s -> TF.Attr s P.Text)
                (\s a -> s { _type' = a } :: ElastictranscoderPresetResource s)
 
-instance P.HasVideo (ElastictranscoderPresetResource s) (TF.Attr s (VideoSetting s)) where
+instance P.HasVideo (ElastictranscoderPresetResource s) (TF.Attr s (ElastictranscoderPresetVideoSetting s)) where
     video =
-        P.lens (_video :: ElastictranscoderPresetResource s -> TF.Attr s (VideoSetting s))
+        P.lens (_video :: ElastictranscoderPresetResource s -> TF.Attr s (ElastictranscoderPresetVideoSetting s))
                (\s a -> s { _video = a } :: ElastictranscoderPresetResource s)
 
 instance P.HasVideoCodecOptions (ElastictranscoderPresetResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
@@ -9142,9 +9142,9 @@ instance P.HasVideoCodecOptions (ElastictranscoderPresetResource s) (TF.Attr s (
         P.lens (_videoCodecOptions :: ElastictranscoderPresetResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _videoCodecOptions = a } :: ElastictranscoderPresetResource s)
 
-instance P.HasVideoWatermarks (ElastictranscoderPresetResource s) (TF.Attr s [TF.Attr s (VideoWatermarksSetting s)]) where
+instance P.HasVideoWatermarks (ElastictranscoderPresetResource s) (TF.Attr s [TF.Attr s (ElastictranscoderPresetVideoWatermarksSetting s)]) where
     videoWatermarks =
-        P.lens (_videoWatermarks :: ElastictranscoderPresetResource s -> TF.Attr s [TF.Attr s (VideoWatermarksSetting s)])
+        P.lens (_videoWatermarks :: ElastictranscoderPresetResource s -> TF.Attr s [TF.Attr s (ElastictranscoderPresetVideoWatermarksSetting s)])
                (\s a -> s { _videoWatermarks = a } :: ElastictranscoderPresetResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ElastictranscoderPresetResource s)) (TF.Attr s P.Text) where

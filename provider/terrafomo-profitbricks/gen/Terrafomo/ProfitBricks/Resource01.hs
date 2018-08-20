@@ -390,7 +390,7 @@ instance P.HasUserId (GroupResource s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (GroupResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedUsers (TF.Ref s' (GroupResource s)) (TF.Attr s [TF.Attr s (UsersSetting s)]) where
+instance s ~ s' => P.HasComputedUsers (TF.Ref s' (GroupResource s)) (TF.Attr s [TF.Attr s (GroupUsersSetting s)]) where
     computedUsers x = TF.compute (TF.refKey x) "users"
 
 -- | @profitbricks_ipblock@ Resource.
@@ -791,13 +791,13 @@ data ServerResource s = ServerResource'
     , _name             :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _nic              :: TF.Attr s [TF.Attr s (NicSetting s)]
+    , _nic              :: TF.Attr s [TF.Attr s (ServerNicSetting s)]
     -- ^ @nic@ - (Required)
     --
     , _ram              :: TF.Attr s P.Int
     -- ^ @ram@ - (Required)
     --
-    , _volume           :: TF.Attr s [TF.Attr s (VolumeSetting s)]
+    , _volume           :: TF.Attr s [TF.Attr s (ServerVolumeSetting s)]
     -- ^ @volume@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -807,9 +807,9 @@ serverResource
     :: TF.Attr s P.Int -- ^ @cores@ ('P._cores', 'P.cores')
     -> TF.Attr s P.Text -- ^ @datacenter_id@ ('P._datacenterId', 'P.datacenterId')
     -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
-    -> TF.Attr s [TF.Attr s (NicSetting s)] -- ^ @nic@ ('P._nic', 'P.nic')
+    -> TF.Attr s [TF.Attr s (ServerNicSetting s)] -- ^ @nic@ ('P._nic', 'P.nic')
     -> TF.Attr s P.Int -- ^ @ram@ ('P._ram', 'P.ram')
-    -> TF.Attr s [TF.Attr s (VolumeSetting s)] -- ^ @volume@ ('P._volume', 'P.volume')
+    -> TF.Attr s [TF.Attr s (ServerVolumeSetting s)] -- ^ @volume@ ('P._volume', 'P.volume')
     -> P.Resource (ServerResource s)
 serverResource _cores _datacenterId _name _nic _ram _volume =
     TF.unsafeResource "profitbricks_server" TF.validator $
@@ -871,9 +871,9 @@ instance P.HasName (ServerResource s) (TF.Attr s P.Text) where
         P.lens (_name :: ServerResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ServerResource s)
 
-instance P.HasNic (ServerResource s) (TF.Attr s [TF.Attr s (NicSetting s)]) where
+instance P.HasNic (ServerResource s) (TF.Attr s [TF.Attr s (ServerNicSetting s)]) where
     nic =
-        P.lens (_nic :: ServerResource s -> TF.Attr s [TF.Attr s (NicSetting s)])
+        P.lens (_nic :: ServerResource s -> TF.Attr s [TF.Attr s (ServerNicSetting s)])
                (\s a -> s { _nic = a } :: ServerResource s)
 
 instance P.HasRam (ServerResource s) (TF.Attr s P.Int) where
@@ -881,9 +881,9 @@ instance P.HasRam (ServerResource s) (TF.Attr s P.Int) where
         P.lens (_ram :: ServerResource s -> TF.Attr s P.Int)
                (\s a -> s { _ram = a } :: ServerResource s)
 
-instance P.HasVolume (ServerResource s) (TF.Attr s [TF.Attr s (VolumeSetting s)]) where
+instance P.HasVolume (ServerResource s) (TF.Attr s [TF.Attr s (ServerVolumeSetting s)]) where
     volume =
-        P.lens (_volume :: ServerResource s -> TF.Attr s [TF.Attr s (VolumeSetting s)])
+        P.lens (_volume :: ServerResource s -> TF.Attr s [TF.Attr s (ServerVolumeSetting s)])
                (\s a -> s { _volume = a } :: ServerResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where

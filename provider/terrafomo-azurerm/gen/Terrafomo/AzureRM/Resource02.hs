@@ -538,7 +538,7 @@ data LocalNetworkGatewayResource s = LocalNetworkGatewayResource'
     { _addressSpace      :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @address_space@ - (Required)
     --
-    , _bgpSettings       :: TF.Attr s (BgpSettings s)
+    , _bgpSettings       :: TF.Attr s (LocalNetworkGatewayBgpSettingsSetting s)
     -- ^ @bgp_settings@ - (Optional)
     --
     , _gatewayAddress    :: TF.Attr s P.Text
@@ -593,7 +593,7 @@ instance TF.IsValid (LocalNetworkGatewayResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_bgpSettings"
                   (_bgpSettings
-                      :: LocalNetworkGatewayResource s -> TF.Attr s (BgpSettings s))
+                      :: LocalNetworkGatewayResource s -> TF.Attr s (LocalNetworkGatewayBgpSettingsSetting s))
                   TF.validator
 
 instance P.HasAddressSpace (LocalNetworkGatewayResource s) (TF.Attr s [TF.Attr s P.Text]) where
@@ -601,9 +601,9 @@ instance P.HasAddressSpace (LocalNetworkGatewayResource s) (TF.Attr s [TF.Attr s
         P.lens (_addressSpace :: LocalNetworkGatewayResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _addressSpace = a } :: LocalNetworkGatewayResource s)
 
-instance P.HasBgpSettings (LocalNetworkGatewayResource s) (TF.Attr s (BgpSettings s)) where
+instance P.HasBgpSettings (LocalNetworkGatewayResource s) (TF.Attr s (LocalNetworkGatewayBgpSettingsSetting s)) where
     bgpSettings =
-        P.lens (_bgpSettings :: LocalNetworkGatewayResource s -> TF.Attr s (BgpSettings s))
+        P.lens (_bgpSettings :: LocalNetworkGatewayResource s -> TF.Attr s (LocalNetworkGatewayBgpSettingsSetting s))
                (\s a -> s { _bgpSettings = a } :: LocalNetworkGatewayResource s)
 
 instance P.HasGatewayAddress (LocalNetworkGatewayResource s) (TF.Attr s P.Text) where
@@ -645,7 +645,7 @@ data LogAnalyticsSolutionResource s = LogAnalyticsSolutionResource'
     { _location            :: TF.Attr s P.Text
     -- ^ @location@ - (Required, Forces New)
     --
-    , _plan                :: TF.Attr s (PlanSetting s)
+    , _plan                :: TF.Attr s (LogAnalyticsSolutionPlanSetting s)
     -- ^ @plan@ - (Required)
     --
     , _resourceGroupName   :: TF.Attr s P.Text
@@ -669,7 +669,7 @@ logAnalyticsSolutionResource
     -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
     -> TF.Attr s P.Text -- ^ @solution_name@ ('P._solutionName', 'P.solutionName')
     -> TF.Attr s P.Text -- ^ @workspace_name@ ('P._workspaceName', 'P.workspaceName')
-    -> TF.Attr s (PlanSetting s) -- ^ @plan@ ('P._plan', 'P.plan')
+    -> TF.Attr s (LogAnalyticsSolutionPlanSetting s) -- ^ @plan@ ('P._plan', 'P.plan')
     -> P.Resource (LogAnalyticsSolutionResource s)
 logAnalyticsSolutionResource _workspaceResourceId _location _resourceGroupName _solutionName _workspaceName _plan =
     TF.unsafeResource "azurerm_log_analytics_solution" TF.validator $
@@ -696,7 +696,7 @@ instance TF.IsValid (LogAnalyticsSolutionResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_plan"
                   (_plan
-                      :: LogAnalyticsSolutionResource s -> TF.Attr s (PlanSetting s))
+                      :: LogAnalyticsSolutionResource s -> TF.Attr s (LogAnalyticsSolutionPlanSetting s))
                   TF.validator
 
 instance P.HasLocation (LogAnalyticsSolutionResource s) (TF.Attr s P.Text) where
@@ -704,9 +704,9 @@ instance P.HasLocation (LogAnalyticsSolutionResource s) (TF.Attr s P.Text) where
         P.lens (_location :: LogAnalyticsSolutionResource s -> TF.Attr s P.Text)
                (\s a -> s { _location = a } :: LogAnalyticsSolutionResource s)
 
-instance P.HasPlan (LogAnalyticsSolutionResource s) (TF.Attr s (PlanSetting s)) where
+instance P.HasPlan (LogAnalyticsSolutionResource s) (TF.Attr s (LogAnalyticsSolutionPlanSetting s)) where
     plan =
-        P.lens (_plan :: LogAnalyticsSolutionResource s -> TF.Attr s (PlanSetting s))
+        P.lens (_plan :: LogAnalyticsSolutionResource s -> TF.Attr s (LogAnalyticsSolutionPlanSetting s))
                (\s a -> s { _plan = a } :: LogAnalyticsSolutionResource s)
 
 instance P.HasResourceGroupName (LogAnalyticsSolutionResource s) (TF.Attr s P.Text) where
@@ -1306,7 +1306,7 @@ data ManagedDiskResource s = ManagedDiskResource'
     , _diskSizeGb         :: TF.Attr s P.Int
     -- ^ @disk_size_gb@ - (Optional)
     --
-    , _encryptionSettings :: TF.Attr s (EncryptionSettings s)
+    , _encryptionSettings :: TF.Attr s (ManagedDiskEncryptionSettingsSetting s)
     -- ^ @encryption_settings@ - (Optional)
     --
     , _imageReferenceId   :: TF.Attr s P.Text
@@ -1388,7 +1388,7 @@ instance TF.IsValid (ManagedDiskResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_encryptionSettings"
                   (_encryptionSettings
-                      :: ManagedDiskResource s -> TF.Attr s (EncryptionSettings s))
+                      :: ManagedDiskResource s -> TF.Attr s (ManagedDiskEncryptionSettingsSetting s))
                   TF.validator
 
 instance P.HasCreateOption (ManagedDiskResource s) (TF.Attr s P.Text) where
@@ -1401,9 +1401,9 @@ instance P.HasDiskSizeGb (ManagedDiskResource s) (TF.Attr s P.Int) where
         P.lens (_diskSizeGb :: ManagedDiskResource s -> TF.Attr s P.Int)
                (\s a -> s { _diskSizeGb = a } :: ManagedDiskResource s)
 
-instance P.HasEncryptionSettings (ManagedDiskResource s) (TF.Attr s (EncryptionSettings s)) where
+instance P.HasEncryptionSettings (ManagedDiskResource s) (TF.Attr s (ManagedDiskEncryptionSettingsSetting s)) where
     encryptionSettings =
-        P.lens (_encryptionSettings :: ManagedDiskResource s -> TF.Attr s (EncryptionSettings s))
+        P.lens (_encryptionSettings :: ManagedDiskResource s -> TF.Attr s (ManagedDiskEncryptionSettingsSetting s))
                (\s a -> s { _encryptionSettings = a } :: ManagedDiskResource s)
 
 instance P.HasImageReferenceId (ManagedDiskResource s) (TF.Attr s P.Text) where
@@ -1547,7 +1547,7 @@ data MetricAlertruleResource s = MetricAlertruleResource'
     , _description       :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _emailAction       :: TF.Attr s (EmailActionSetting s)
+    , _emailAction       :: TF.Attr s (MetricAlertruleEmailActionSetting s)
     -- ^ @email_action@ - (Optional)
     --
     , _enabled           :: TF.Attr s P.Bool
@@ -1580,7 +1580,7 @@ data MetricAlertruleResource s = MetricAlertruleResource'
     , _threshold         :: TF.Attr s P.Double
     -- ^ @threshold@ - (Required)
     --
-    , _webhookAction     :: TF.Attr s (WebhookActionSetting s)
+    , _webhookAction     :: TF.Attr s (MetricAlertruleWebhookActionSetting s)
     -- ^ @webhook_action@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -1638,11 +1638,11 @@ instance TF.IsValid (MetricAlertruleResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_emailAction"
                   (_emailAction
-                      :: MetricAlertruleResource s -> TF.Attr s (EmailActionSetting s))
+                      :: MetricAlertruleResource s -> TF.Attr s (MetricAlertruleEmailActionSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_webhookAction"
                   (_webhookAction
-                      :: MetricAlertruleResource s -> TF.Attr s (WebhookActionSetting s))
+                      :: MetricAlertruleResource s -> TF.Attr s (MetricAlertruleWebhookActionSetting s))
                   TF.validator
 
 instance P.HasAggregation (MetricAlertruleResource s) (TF.Attr s P.Text) where
@@ -1655,9 +1655,9 @@ instance P.HasDescription (MetricAlertruleResource s) (TF.Attr s P.Text) where
         P.lens (_description :: MetricAlertruleResource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: MetricAlertruleResource s)
 
-instance P.HasEmailAction (MetricAlertruleResource s) (TF.Attr s (EmailActionSetting s)) where
+instance P.HasEmailAction (MetricAlertruleResource s) (TF.Attr s (MetricAlertruleEmailActionSetting s)) where
     emailAction =
-        P.lens (_emailAction :: MetricAlertruleResource s -> TF.Attr s (EmailActionSetting s))
+        P.lens (_emailAction :: MetricAlertruleResource s -> TF.Attr s (MetricAlertruleEmailActionSetting s))
                (\s a -> s { _emailAction = a } :: MetricAlertruleResource s)
 
 instance P.HasEnabled (MetricAlertruleResource s) (TF.Attr s P.Bool) where
@@ -1710,9 +1710,9 @@ instance P.HasThreshold (MetricAlertruleResource s) (TF.Attr s P.Double) where
         P.lens (_threshold :: MetricAlertruleResource s -> TF.Attr s P.Double)
                (\s a -> s { _threshold = a } :: MetricAlertruleResource s)
 
-instance P.HasWebhookAction (MetricAlertruleResource s) (TF.Attr s (WebhookActionSetting s)) where
+instance P.HasWebhookAction (MetricAlertruleResource s) (TF.Attr s (MetricAlertruleWebhookActionSetting s)) where
     webhookAction =
-        P.lens (_webhookAction :: MetricAlertruleResource s -> TF.Attr s (WebhookActionSetting s))
+        P.lens (_webhookAction :: MetricAlertruleResource s -> TF.Attr s (MetricAlertruleWebhookActionSetting s))
                (\s a -> s { _webhookAction = a } :: MetricAlertruleResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (MetricAlertruleResource s)) (TF.Attr s P.Text) where
@@ -1721,13 +1721,13 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (MetricAlertruleResource s)) (TF.A
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (MetricAlertruleResource s)) (TF.Attr s P.Text) where
     computedDescription x = TF.compute (TF.refKey x) "description"
 
-instance s ~ s' => P.HasComputedEmailAction (TF.Ref s' (MetricAlertruleResource s)) (TF.Attr s (EmailActionSetting s)) where
+instance s ~ s' => P.HasComputedEmailAction (TF.Ref s' (MetricAlertruleResource s)) (TF.Attr s (MetricAlertruleEmailActionSetting s)) where
     computedEmailAction x = TF.compute (TF.refKey x) "email_action"
 
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (MetricAlertruleResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     computedTags x = TF.compute (TF.refKey x) "tags"
 
-instance s ~ s' => P.HasComputedWebhookAction (TF.Ref s' (MetricAlertruleResource s)) (TF.Attr s (WebhookActionSetting s)) where
+instance s ~ s' => P.HasComputedWebhookAction (TF.Ref s' (MetricAlertruleResource s)) (TF.Attr s (MetricAlertruleWebhookActionSetting s)) where
     computedWebhookAction x = TF.compute (TF.refKey x) "webhook_action"
 
 -- | @azurerm_monitor_action_group@ Resource.
@@ -1735,28 +1735,28 @@ instance s ~ s' => P.HasComputedWebhookAction (TF.Ref s' (MetricAlertruleResourc
 -- See the <https://www.terraform.io/docs/providers/azurerm/r/monitor_action_group.html terraform documentation>
 -- for more information.
 data MonitorActionGroupResource s = MonitorActionGroupResource'
-    { _emailReceiver     :: TF.Attr s [TF.Attr s (EmailReceiverSetting s)]
+    { _emailReceiver :: TF.Attr s [TF.Attr s (MonitorActionGroupEmailReceiverSetting s)]
     -- ^ @email_receiver@ - (Optional)
     --
-    , _enabled           :: TF.Attr s P.Bool
+    , _enabled :: TF.Attr s P.Bool
     -- ^ @enabled@ - (Optional)
     --
-    , _name              :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
     , _resourceGroupName :: TF.Attr s P.Text
     -- ^ @resource_group_name@ - (Required, Forces New)
     --
-    , _shortName         :: TF.Attr s P.Text
+    , _shortName :: TF.Attr s P.Text
     -- ^ @short_name@ - (Required)
     --
-    , _smsReceiver       :: TF.Attr s [TF.Attr s (SmsReceiverSetting s)]
+    , _smsReceiver :: TF.Attr s [TF.Attr s (MonitorActionGroupSmsReceiverSetting s)]
     -- ^ @sms_receiver@ - (Optional)
     --
-    , _tags              :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _tags :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
-    , _webhookReceiver   :: TF.Attr s [TF.Attr s (WebhookReceiverSetting s)]
+    , _webhookReceiver :: TF.Attr s [TF.Attr s (MonitorActionGroupWebhookReceiverSetting s)]
     -- ^ @webhook_receiver@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -1795,9 +1795,9 @@ instance TF.IsObject (MonitorActionGroupResource s) where
 instance TF.IsValid (MonitorActionGroupResource s) where
     validator = P.mempty
 
-instance P.HasEmailReceiver (MonitorActionGroupResource s) (TF.Attr s [TF.Attr s (EmailReceiverSetting s)]) where
+instance P.HasEmailReceiver (MonitorActionGroupResource s) (TF.Attr s [TF.Attr s (MonitorActionGroupEmailReceiverSetting s)]) where
     emailReceiver =
-        P.lens (_emailReceiver :: MonitorActionGroupResource s -> TF.Attr s [TF.Attr s (EmailReceiverSetting s)])
+        P.lens (_emailReceiver :: MonitorActionGroupResource s -> TF.Attr s [TF.Attr s (MonitorActionGroupEmailReceiverSetting s)])
                (\s a -> s { _emailReceiver = a } :: MonitorActionGroupResource s)
 
 instance P.HasEnabled (MonitorActionGroupResource s) (TF.Attr s P.Bool) where
@@ -1820,9 +1820,9 @@ instance P.HasShortName (MonitorActionGroupResource s) (TF.Attr s P.Text) where
         P.lens (_shortName :: MonitorActionGroupResource s -> TF.Attr s P.Text)
                (\s a -> s { _shortName = a } :: MonitorActionGroupResource s)
 
-instance P.HasSmsReceiver (MonitorActionGroupResource s) (TF.Attr s [TF.Attr s (SmsReceiverSetting s)]) where
+instance P.HasSmsReceiver (MonitorActionGroupResource s) (TF.Attr s [TF.Attr s (MonitorActionGroupSmsReceiverSetting s)]) where
     smsReceiver =
-        P.lens (_smsReceiver :: MonitorActionGroupResource s -> TF.Attr s [TF.Attr s (SmsReceiverSetting s)])
+        P.lens (_smsReceiver :: MonitorActionGroupResource s -> TF.Attr s [TF.Attr s (MonitorActionGroupSmsReceiverSetting s)])
                (\s a -> s { _smsReceiver = a } :: MonitorActionGroupResource s)
 
 instance P.HasTags (MonitorActionGroupResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
@@ -1830,9 +1830,9 @@ instance P.HasTags (MonitorActionGroupResource s) (TF.Attr s (P.Map P.Text (TF.A
         P.lens (_tags :: MonitorActionGroupResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _tags = a } :: MonitorActionGroupResource s)
 
-instance P.HasWebhookReceiver (MonitorActionGroupResource s) (TF.Attr s [TF.Attr s (WebhookReceiverSetting s)]) where
+instance P.HasWebhookReceiver (MonitorActionGroupResource s) (TF.Attr s [TF.Attr s (MonitorActionGroupWebhookReceiverSetting s)]) where
     webhookReceiver =
-        P.lens (_webhookReceiver :: MonitorActionGroupResource s -> TF.Attr s [TF.Attr s (WebhookReceiverSetting s)])
+        P.lens (_webhookReceiver :: MonitorActionGroupResource s -> TF.Attr s [TF.Attr s (MonitorActionGroupWebhookReceiverSetting s)])
                (\s a -> s { _webhookReceiver = a } :: MonitorActionGroupResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (MonitorActionGroupResource s)) (TF.Attr s P.Text) where
@@ -2075,34 +2075,34 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (MysqlFirewallRuleResource s)) (TF
 -- See the <https://www.terraform.io/docs/providers/azurerm/r/mysql_server.html terraform documentation>
 -- for more information.
 data MysqlServerResource s = MysqlServerResource'
-    { _administratorLogin         :: TF.Attr s P.Text
+    { _administratorLogin :: TF.Attr s P.Text
     -- ^ @administrator_login@ - (Required, Forces New)
     --
     , _administratorLoginPassword :: TF.Attr s P.Text
     -- ^ @administrator_login_password@ - (Required)
     --
-    , _location                   :: TF.Attr s P.Text
+    , _location :: TF.Attr s P.Text
     -- ^ @location@ - (Required, Forces New)
     --
-    , _name                       :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _resourceGroupName          :: TF.Attr s P.Text
+    , _resourceGroupName :: TF.Attr s P.Text
     -- ^ @resource_group_name@ - (Required, Forces New)
     --
-    , _sku                        :: TF.Attr s (SkuSetting s)
+    , _sku :: TF.Attr s (MysqlServerSkuSetting s)
     -- ^ @sku@ - (Required)
     --
-    , _sslEnforcement             :: TF.Attr s P.Text
+    , _sslEnforcement :: TF.Attr s P.Text
     -- ^ @ssl_enforcement@ - (Required)
     --
-    , _storageProfile             :: TF.Attr s (StorageProfileSetting s)
+    , _storageProfile :: TF.Attr s (MysqlServerStorageProfileSetting s)
     -- ^ @storage_profile@ - (Required)
     --
-    , _tags                       :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _tags :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
-    , _version                    :: TF.Attr s P.Text
+    , _version :: TF.Attr s P.Text
     -- ^ @version@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -2115,8 +2115,8 @@ mysqlServerResource
     -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
     -> TF.Attr s P.Text -- ^ @administrator_login_password@ ('P._administratorLoginPassword', 'P.administratorLoginPassword')
-    -> TF.Attr s (StorageProfileSetting s) -- ^ @storage_profile@ ('P._storageProfile', 'P.storageProfile')
-    -> TF.Attr s (SkuSetting s) -- ^ @sku@ ('P._sku', 'P.sku')
+    -> TF.Attr s (MysqlServerStorageProfileSetting s) -- ^ @storage_profile@ ('P._storageProfile', 'P.storageProfile')
+    -> TF.Attr s (MysqlServerSkuSetting s) -- ^ @sku@ ('P._sku', 'P.sku')
     -> TF.Attr s P.Text -- ^ @version@ ('P._version', 'P.version')
     -> P.Resource (MysqlServerResource s)
 mysqlServerResource _sslEnforcement _location _administratorLogin _name _resourceGroupName _administratorLoginPassword _storageProfile _sku _version =
@@ -2152,11 +2152,11 @@ instance TF.IsValid (MysqlServerResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_sku"
                   (_sku
-                      :: MysqlServerResource s -> TF.Attr s (SkuSetting s))
+                      :: MysqlServerResource s -> TF.Attr s (MysqlServerSkuSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_storageProfile"
                   (_storageProfile
-                      :: MysqlServerResource s -> TF.Attr s (StorageProfileSetting s))
+                      :: MysqlServerResource s -> TF.Attr s (MysqlServerStorageProfileSetting s))
                   TF.validator
 
 instance P.HasAdministratorLogin (MysqlServerResource s) (TF.Attr s P.Text) where
@@ -2184,9 +2184,9 @@ instance P.HasResourceGroupName (MysqlServerResource s) (TF.Attr s P.Text) where
         P.lens (_resourceGroupName :: MysqlServerResource s -> TF.Attr s P.Text)
                (\s a -> s { _resourceGroupName = a } :: MysqlServerResource s)
 
-instance P.HasSku (MysqlServerResource s) (TF.Attr s (SkuSetting s)) where
+instance P.HasSku (MysqlServerResource s) (TF.Attr s (MysqlServerSkuSetting s)) where
     sku =
-        P.lens (_sku :: MysqlServerResource s -> TF.Attr s (SkuSetting s))
+        P.lens (_sku :: MysqlServerResource s -> TF.Attr s (MysqlServerSkuSetting s))
                (\s a -> s { _sku = a } :: MysqlServerResource s)
 
 instance P.HasSslEnforcement (MysqlServerResource s) (TF.Attr s P.Text) where
@@ -2194,9 +2194,9 @@ instance P.HasSslEnforcement (MysqlServerResource s) (TF.Attr s P.Text) where
         P.lens (_sslEnforcement :: MysqlServerResource s -> TF.Attr s P.Text)
                (\s a -> s { _sslEnforcement = a } :: MysqlServerResource s)
 
-instance P.HasStorageProfile (MysqlServerResource s) (TF.Attr s (StorageProfileSetting s)) where
+instance P.HasStorageProfile (MysqlServerResource s) (TF.Attr s (MysqlServerStorageProfileSetting s)) where
     storageProfile =
-        P.lens (_storageProfile :: MysqlServerResource s -> TF.Attr s (StorageProfileSetting s))
+        P.lens (_storageProfile :: MysqlServerResource s -> TF.Attr s (MysqlServerStorageProfileSetting s))
                (\s a -> s { _storageProfile = a } :: MysqlServerResource s)
 
 instance P.HasTags (MysqlServerResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
@@ -2241,7 +2241,7 @@ data NetworkInterfaceResource s = NetworkInterfaceResource'
     , _internalFqdn :: TF.Attr s P.Text
     -- ^ @internal_fqdn@ - (Optional)
     --
-    , _ipConfiguration :: TF.Attr s [TF.Attr s (IpConfigurationSetting s)]
+    , _ipConfiguration :: TF.Attr s [TF.Attr s (NetworkInterfaceIpConfigurationSetting s)]
     -- ^ @ip_configuration@ - (Required)
     --
     , _location :: TF.Attr s P.Text
@@ -2269,7 +2269,7 @@ data NetworkInterfaceResource s = NetworkInterfaceResource'
 
 -- | Define a new @azurerm_network_interface@ resource value.
 networkInterfaceResource
-    :: TF.Attr s [TF.Attr s (IpConfigurationSetting s)] -- ^ @ip_configuration@ ('P._ipConfiguration', 'P.ipConfiguration')
+    :: TF.Attr s [TF.Attr s (NetworkInterfaceIpConfigurationSetting s)] -- ^ @ip_configuration@ ('P._ipConfiguration', 'P.ipConfiguration')
     -> TF.Attr s P.Text -- ^ @location@ ('P._location', 'P.location')
     -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
@@ -2344,9 +2344,9 @@ instance P.HasInternalFqdn (NetworkInterfaceResource s) (TF.Attr s P.Text) where
         P.lens (_internalFqdn :: NetworkInterfaceResource s -> TF.Attr s P.Text)
                (\s a -> s { _internalFqdn = a } :: NetworkInterfaceResource s)
 
-instance P.HasIpConfiguration (NetworkInterfaceResource s) (TF.Attr s [TF.Attr s (IpConfigurationSetting s)]) where
+instance P.HasIpConfiguration (NetworkInterfaceResource s) (TF.Attr s [TF.Attr s (NetworkInterfaceIpConfigurationSetting s)]) where
     ipConfiguration =
-        P.lens (_ipConfiguration :: NetworkInterfaceResource s -> TF.Attr s [TF.Attr s (IpConfigurationSetting s)])
+        P.lens (_ipConfiguration :: NetworkInterfaceResource s -> TF.Attr s [TF.Attr s (NetworkInterfaceIpConfigurationSetting s)])
                (\s a -> s { _ipConfiguration = a } :: NetworkInterfaceResource s)
 
 instance P.HasLocation (NetworkInterfaceResource s) (TF.Attr s P.Text) where
@@ -2419,19 +2419,19 @@ instance s ~ s' => P.HasComputedVirtualMachineId (TF.Ref s' (NetworkInterfaceRes
 -- See the <https://www.terraform.io/docs/providers/azurerm/r/network_security_group.html terraform documentation>
 -- for more information.
 data NetworkSecurityGroupResource s = NetworkSecurityGroupResource'
-    { _location          :: TF.Attr s P.Text
+    { _location :: TF.Attr s P.Text
     -- ^ @location@ - (Required, Forces New)
     --
-    , _name              :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
     , _resourceGroupName :: TF.Attr s P.Text
     -- ^ @resource_group_name@ - (Required, Forces New)
     --
-    , _securityRule      :: TF.Attr s [TF.Attr s (SecurityRuleSetting s)]
+    , _securityRule :: TF.Attr s [TF.Attr s (NetworkSecurityGroupSecurityRuleSetting s)]
     -- ^ @security_rule@ - (Optional)
     --
-    , _tags              :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _tags :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -2479,9 +2479,9 @@ instance P.HasResourceGroupName (NetworkSecurityGroupResource s) (TF.Attr s P.Te
         P.lens (_resourceGroupName :: NetworkSecurityGroupResource s -> TF.Attr s P.Text)
                (\s a -> s { _resourceGroupName = a } :: NetworkSecurityGroupResource s)
 
-instance P.HasSecurityRule (NetworkSecurityGroupResource s) (TF.Attr s [TF.Attr s (SecurityRuleSetting s)]) where
+instance P.HasSecurityRule (NetworkSecurityGroupResource s) (TF.Attr s [TF.Attr s (NetworkSecurityGroupSecurityRuleSetting s)]) where
     securityRule =
-        P.lens (_securityRule :: NetworkSecurityGroupResource s -> TF.Attr s [TF.Attr s (SecurityRuleSetting s)])
+        P.lens (_securityRule :: NetworkSecurityGroupResource s -> TF.Attr s [TF.Attr s (NetworkSecurityGroupSecurityRuleSetting s)])
                (\s a -> s { _securityRule = a } :: NetworkSecurityGroupResource s)
 
 instance P.HasTags (NetworkSecurityGroupResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
@@ -2492,7 +2492,7 @@ instance P.HasTags (NetworkSecurityGroupResource s) (TF.Attr s (P.Map P.Text (TF
 instance s ~ s' => P.HasComputedId (TF.Ref s' (NetworkSecurityGroupResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedSecurityRule (TF.Ref s' (NetworkSecurityGroupResource s)) (TF.Attr s [TF.Attr s (SecurityRuleSetting s)]) where
+instance s ~ s' => P.HasComputedSecurityRule (TF.Ref s' (NetworkSecurityGroupResource s)) (TF.Attr s [TF.Attr s (NetworkSecurityGroupSecurityRuleSetting s)]) where
     computedSecurityRule x = TF.compute (TF.refKey x) "security_rule"
 
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (NetworkSecurityGroupResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
@@ -2971,7 +2971,7 @@ data NotificationHubNamespaceResource s = NotificationHubNamespaceResource'
     , _resourceGroupName :: TF.Attr s P.Text
     -- ^ @resource_group_name@ - (Required, Forces New)
     --
-    , _sku               :: TF.Attr s (SkuSetting s)
+    , _sku               :: TF.Attr s (NotificationHubNamespaceSkuSetting s)
     -- ^ @sku@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -2981,7 +2981,7 @@ notificationHubNamespaceResource
     :: TF.Attr s P.Text -- ^ @location@ ('P._location', 'P.location')
     -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
-    -> TF.Attr s (SkuSetting s) -- ^ @sku@ ('P._sku', 'P.sku')
+    -> TF.Attr s (NotificationHubNamespaceSkuSetting s) -- ^ @sku@ ('P._sku', 'P.sku')
     -> TF.Attr s P.Text -- ^ @namespace_type@ ('P._namespaceType', 'P.namespaceType')
     -> P.Resource (NotificationHubNamespaceResource s)
 notificationHubNamespaceResource _location _name _resourceGroupName _sku _namespaceType =
@@ -3009,7 +3009,7 @@ instance TF.IsValid (NotificationHubNamespaceResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_sku"
                   (_sku
-                      :: NotificationHubNamespaceResource s -> TF.Attr s (SkuSetting s))
+                      :: NotificationHubNamespaceResource s -> TF.Attr s (NotificationHubNamespaceSkuSetting s))
                   TF.validator
 
 instance P.HasEnabled (NotificationHubNamespaceResource s) (TF.Attr s P.Bool) where
@@ -3037,9 +3037,9 @@ instance P.HasResourceGroupName (NotificationHubNamespaceResource s) (TF.Attr s 
         P.lens (_resourceGroupName :: NotificationHubNamespaceResource s -> TF.Attr s P.Text)
                (\s a -> s { _resourceGroupName = a } :: NotificationHubNamespaceResource s)
 
-instance P.HasSku (NotificationHubNamespaceResource s) (TF.Attr s (SkuSetting s)) where
+instance P.HasSku (NotificationHubNamespaceResource s) (TF.Attr s (NotificationHubNamespaceSkuSetting s)) where
     sku =
-        P.lens (_sku :: NotificationHubNamespaceResource s -> TF.Attr s (SkuSetting s))
+        P.lens (_sku :: NotificationHubNamespaceResource s -> TF.Attr s (NotificationHubNamespaceSkuSetting s))
                (\s a -> s { _sku = a } :: NotificationHubNamespaceResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (NotificationHubNamespaceResource s)) (TF.Attr s P.Text) where
@@ -3053,10 +3053,10 @@ instance s ~ s' => P.HasComputedServicebusEndpoint (TF.Ref s' (NotificationHubNa
 -- See the <https://www.terraform.io/docs/providers/azurerm/r/notification_hub.html terraform documentation>
 -- for more information.
 data NotificationHubResource s = NotificationHubResource'
-    { _apnsCredential    :: TF.Attr s (ApnsCredentialSetting s)
+    { _apnsCredential    :: TF.Attr s (NotificationHubApnsCredentialSetting s)
     -- ^ @apns_credential@ - (Optional)
     --
-    , _gcmCredential     :: TF.Attr s (GcmCredentialSetting s)
+    , _gcmCredential     :: TF.Attr s (NotificationHubGcmCredentialSetting s)
     -- ^ @gcm_credential@ - (Optional)
     --
     , _location          :: TF.Attr s P.Text
@@ -3105,21 +3105,21 @@ instance TF.IsValid (NotificationHubResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_apnsCredential"
                   (_apnsCredential
-                      :: NotificationHubResource s -> TF.Attr s (ApnsCredentialSetting s))
+                      :: NotificationHubResource s -> TF.Attr s (NotificationHubApnsCredentialSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_gcmCredential"
                   (_gcmCredential
-                      :: NotificationHubResource s -> TF.Attr s (GcmCredentialSetting s))
+                      :: NotificationHubResource s -> TF.Attr s (NotificationHubGcmCredentialSetting s))
                   TF.validator
 
-instance P.HasApnsCredential (NotificationHubResource s) (TF.Attr s (ApnsCredentialSetting s)) where
+instance P.HasApnsCredential (NotificationHubResource s) (TF.Attr s (NotificationHubApnsCredentialSetting s)) where
     apnsCredential =
-        P.lens (_apnsCredential :: NotificationHubResource s -> TF.Attr s (ApnsCredentialSetting s))
+        P.lens (_apnsCredential :: NotificationHubResource s -> TF.Attr s (NotificationHubApnsCredentialSetting s))
                (\s a -> s { _apnsCredential = a } :: NotificationHubResource s)
 
-instance P.HasGcmCredential (NotificationHubResource s) (TF.Attr s (GcmCredentialSetting s)) where
+instance P.HasGcmCredential (NotificationHubResource s) (TF.Attr s (NotificationHubGcmCredentialSetting s)) where
     gcmCredential =
-        P.lens (_gcmCredential :: NotificationHubResource s -> TF.Attr s (GcmCredentialSetting s))
+        P.lens (_gcmCredential :: NotificationHubResource s -> TF.Attr s (NotificationHubGcmCredentialSetting s))
                (\s a -> s { _gcmCredential = a } :: NotificationHubResource s)
 
 instance P.HasLocation (NotificationHubResource s) (TF.Attr s P.Text) where
@@ -3150,10 +3150,10 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (NotificationHubResource s)) (TF.A
 -- See the <https://www.terraform.io/docs/providers/azurerm/r/packet_capture.html terraform documentation>
 -- for more information.
 data PacketCaptureResource s = PacketCaptureResource'
-    { _filter                 :: TF.Attr s [TF.Attr s (FilterSetting s)]
+    { _filter :: TF.Attr s [TF.Attr s (PacketCaptureFilterSetting s)]
     -- ^ @filter@ - (Optional, Forces New)
     --
-    , _maximumBytesPerPacket  :: TF.Attr s P.Int
+    , _maximumBytesPerPacket :: TF.Attr s P.Int
     -- ^ @maximum_bytes_per_packet@ - (Optional, Forces New)
     --
     , _maximumBytesPerSession :: TF.Attr s P.Int
@@ -3162,19 +3162,19 @@ data PacketCaptureResource s = PacketCaptureResource'
     , _maximumCaptureDuration :: TF.Attr s P.Int
     -- ^ @maximum_capture_duration@ - (Optional, Forces New)
     --
-    , _name                   :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _networkWatcherName     :: TF.Attr s P.Text
+    , _networkWatcherName :: TF.Attr s P.Text
     -- ^ @network_watcher_name@ - (Required, Forces New)
     --
-    , _resourceGroupName      :: TF.Attr s P.Text
+    , _resourceGroupName :: TF.Attr s P.Text
     -- ^ @resource_group_name@ - (Required, Forces New)
     --
-    , _storageLocation        :: TF.Attr s (StorageLocationSetting s)
+    , _storageLocation :: TF.Attr s (PacketCaptureStorageLocationSetting s)
     -- ^ @storage_location@ - (Required, Forces New)
     --
-    , _targetResourceId       :: TF.Attr s P.Text
+    , _targetResourceId :: TF.Attr s P.Text
     -- ^ @target_resource_id@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -3182,7 +3182,7 @@ data PacketCaptureResource s = PacketCaptureResource'
 -- | Define a new @azurerm_packet_capture@ resource value.
 packetCaptureResource
     :: TF.Attr s P.Text -- ^ @target_resource_id@ ('P._targetResourceId', 'P.targetResourceId')
-    -> TF.Attr s (StorageLocationSetting s) -- ^ @storage_location@ ('P._storageLocation', 'P.storageLocation')
+    -> TF.Attr s (PacketCaptureStorageLocationSetting s) -- ^ @storage_location@ ('P._storageLocation', 'P.storageLocation')
     -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> TF.Attr s P.Text -- ^ @network_watcher_name@ ('P._networkWatcherName', 'P.networkWatcherName')
     -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
@@ -3218,12 +3218,12 @@ instance TF.IsValid (PacketCaptureResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_storageLocation"
                   (_storageLocation
-                      :: PacketCaptureResource s -> TF.Attr s (StorageLocationSetting s))
+                      :: PacketCaptureResource s -> TF.Attr s (PacketCaptureStorageLocationSetting s))
                   TF.validator
 
-instance P.HasFilter (PacketCaptureResource s) (TF.Attr s [TF.Attr s (FilterSetting s)]) where
+instance P.HasFilter (PacketCaptureResource s) (TF.Attr s [TF.Attr s (PacketCaptureFilterSetting s)]) where
     filter =
-        P.lens (_filter :: PacketCaptureResource s -> TF.Attr s [TF.Attr s (FilterSetting s)])
+        P.lens (_filter :: PacketCaptureResource s -> TF.Attr s [TF.Attr s (PacketCaptureFilterSetting s)])
                (\s a -> s { _filter = a } :: PacketCaptureResource s)
 
 instance P.HasMaximumBytesPerPacket (PacketCaptureResource s) (TF.Attr s P.Int) where
@@ -3256,9 +3256,9 @@ instance P.HasResourceGroupName (PacketCaptureResource s) (TF.Attr s P.Text) whe
         P.lens (_resourceGroupName :: PacketCaptureResource s -> TF.Attr s P.Text)
                (\s a -> s { _resourceGroupName = a } :: PacketCaptureResource s)
 
-instance P.HasStorageLocation (PacketCaptureResource s) (TF.Attr s (StorageLocationSetting s)) where
+instance P.HasStorageLocation (PacketCaptureResource s) (TF.Attr s (PacketCaptureStorageLocationSetting s)) where
     storageLocation =
-        P.lens (_storageLocation :: PacketCaptureResource s -> TF.Attr s (StorageLocationSetting s))
+        P.lens (_storageLocation :: PacketCaptureResource s -> TF.Attr s (PacketCaptureStorageLocationSetting s))
                (\s a -> s { _storageLocation = a } :: PacketCaptureResource s)
 
 instance P.HasTargetResourceId (PacketCaptureResource s) (TF.Attr s P.Text) where
@@ -3700,34 +3700,34 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (PostgresqlFirewallRuleResource s)
 -- See the <https://www.terraform.io/docs/providers/azurerm/r/postgresql_server.html terraform documentation>
 -- for more information.
 data PostgresqlServerResource s = PostgresqlServerResource'
-    { _administratorLogin         :: TF.Attr s P.Text
+    { _administratorLogin :: TF.Attr s P.Text
     -- ^ @administrator_login@ - (Required, Forces New)
     --
     , _administratorLoginPassword :: TF.Attr s P.Text
     -- ^ @administrator_login_password@ - (Required)
     --
-    , _location                   :: TF.Attr s P.Text
+    , _location :: TF.Attr s P.Text
     -- ^ @location@ - (Required, Forces New)
     --
-    , _name                       :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _resourceGroupName          :: TF.Attr s P.Text
+    , _resourceGroupName :: TF.Attr s P.Text
     -- ^ @resource_group_name@ - (Required, Forces New)
     --
-    , _sku                        :: TF.Attr s (SkuSetting s)
+    , _sku :: TF.Attr s (PostgresqlServerSkuSetting s)
     -- ^ @sku@ - (Required)
     --
-    , _sslEnforcement             :: TF.Attr s P.Text
+    , _sslEnforcement :: TF.Attr s P.Text
     -- ^ @ssl_enforcement@ - (Required)
     --
-    , _storageProfile             :: TF.Attr s (StorageProfileSetting s)
+    , _storageProfile :: TF.Attr s (PostgresqlServerStorageProfileSetting s)
     -- ^ @storage_profile@ - (Required)
     --
-    , _tags                       :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _tags :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
-    , _version                    :: TF.Attr s P.Text
+    , _version :: TF.Attr s P.Text
     -- ^ @version@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -3740,8 +3740,8 @@ postgresqlServerResource
     -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
     -> TF.Attr s P.Text -- ^ @administrator_login_password@ ('P._administratorLoginPassword', 'P.administratorLoginPassword')
-    -> TF.Attr s (StorageProfileSetting s) -- ^ @storage_profile@ ('P._storageProfile', 'P.storageProfile')
-    -> TF.Attr s (SkuSetting s) -- ^ @sku@ ('P._sku', 'P.sku')
+    -> TF.Attr s (PostgresqlServerStorageProfileSetting s) -- ^ @storage_profile@ ('P._storageProfile', 'P.storageProfile')
+    -> TF.Attr s (PostgresqlServerSkuSetting s) -- ^ @sku@ ('P._sku', 'P.sku')
     -> TF.Attr s P.Text -- ^ @version@ ('P._version', 'P.version')
     -> P.Resource (PostgresqlServerResource s)
 postgresqlServerResource _sslEnforcement _location _administratorLogin _name _resourceGroupName _administratorLoginPassword _storageProfile _sku _version =
@@ -3777,11 +3777,11 @@ instance TF.IsValid (PostgresqlServerResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_sku"
                   (_sku
-                      :: PostgresqlServerResource s -> TF.Attr s (SkuSetting s))
+                      :: PostgresqlServerResource s -> TF.Attr s (PostgresqlServerSkuSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_storageProfile"
                   (_storageProfile
-                      :: PostgresqlServerResource s -> TF.Attr s (StorageProfileSetting s))
+                      :: PostgresqlServerResource s -> TF.Attr s (PostgresqlServerStorageProfileSetting s))
                   TF.validator
 
 instance P.HasAdministratorLogin (PostgresqlServerResource s) (TF.Attr s P.Text) where
@@ -3809,9 +3809,9 @@ instance P.HasResourceGroupName (PostgresqlServerResource s) (TF.Attr s P.Text) 
         P.lens (_resourceGroupName :: PostgresqlServerResource s -> TF.Attr s P.Text)
                (\s a -> s { _resourceGroupName = a } :: PostgresqlServerResource s)
 
-instance P.HasSku (PostgresqlServerResource s) (TF.Attr s (SkuSetting s)) where
+instance P.HasSku (PostgresqlServerResource s) (TF.Attr s (PostgresqlServerSkuSetting s)) where
     sku =
-        P.lens (_sku :: PostgresqlServerResource s -> TF.Attr s (SkuSetting s))
+        P.lens (_sku :: PostgresqlServerResource s -> TF.Attr s (PostgresqlServerSkuSetting s))
                (\s a -> s { _sku = a } :: PostgresqlServerResource s)
 
 instance P.HasSslEnforcement (PostgresqlServerResource s) (TF.Attr s P.Text) where
@@ -3819,9 +3819,9 @@ instance P.HasSslEnforcement (PostgresqlServerResource s) (TF.Attr s P.Text) whe
         P.lens (_sslEnforcement :: PostgresqlServerResource s -> TF.Attr s P.Text)
                (\s a -> s { _sslEnforcement = a } :: PostgresqlServerResource s)
 
-instance P.HasStorageProfile (PostgresqlServerResource s) (TF.Attr s (StorageProfileSetting s)) where
+instance P.HasStorageProfile (PostgresqlServerResource s) (TF.Attr s (PostgresqlServerStorageProfileSetting s)) where
     storageProfile =
-        P.lens (_storageProfile :: PostgresqlServerResource s -> TF.Attr s (StorageProfileSetting s))
+        P.lens (_storageProfile :: PostgresqlServerResource s -> TF.Attr s (PostgresqlServerStorageProfileSetting s))
                (\s a -> s { _storageProfile = a } :: PostgresqlServerResource s)
 
 instance P.HasTags (PostgresqlServerResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
@@ -4068,43 +4068,43 @@ instance s ~ s' => P.HasComputedTags (TF.Ref s' (RecoveryServicesVaultResource s
 -- See the <https://www.terraform.io/docs/providers/azurerm/r/redis_cache.html terraform documentation>
 -- for more information.
 data RedisCacheResource s = RedisCacheResource'
-    { _capacity               :: TF.Attr s P.Int
+    { _capacity :: TF.Attr s P.Int
     -- ^ @capacity@ - (Required)
     --
-    , _enableNonSslPort       :: TF.Attr s P.Bool
+    , _enableNonSslPort :: TF.Attr s P.Bool
     -- ^ @enable_non_ssl_port@ - (Optional)
     --
-    , _family'                :: TF.Attr s P.Text
+    , _family' :: TF.Attr s P.Text
     -- ^ @family@ - (Required)
     --
-    , _location               :: TF.Attr s P.Text
+    , _location :: TF.Attr s P.Text
     -- ^ @location@ - (Required, Forces New)
     --
-    , _name                   :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _patchSchedule          :: TF.Attr s [TF.Attr s (PatchScheduleSetting s)]
+    , _patchSchedule :: TF.Attr s [TF.Attr s (RedisCachePatchScheduleSetting s)]
     -- ^ @patch_schedule@ - (Optional)
     --
     , _privateStaticIpAddress :: TF.Attr s P.Text
     -- ^ @private_static_ip_address@ - (Optional, Forces New)
     --
-    , _redisConfiguration     :: TF.Attr s (RedisConfigurationSetting s)
+    , _redisConfiguration :: TF.Attr s (RedisCacheRedisConfigurationSetting s)
     -- ^ @redis_configuration@ - (Required)
     --
-    , _resourceGroupName      :: TF.Attr s P.Text
+    , _resourceGroupName :: TF.Attr s P.Text
     -- ^ @resource_group_name@ - (Required, Forces New)
     --
-    , _shardCount             :: TF.Attr s P.Int
+    , _shardCount :: TF.Attr s P.Int
     -- ^ @shard_count@ - (Optional)
     --
-    , _skuName                :: TF.Attr s P.Text
+    , _skuName :: TF.Attr s P.Text
     -- ^ @sku_name@ - (Required)
     --
-    , _subnetId               :: TF.Attr s P.Text
+    , _subnetId :: TF.Attr s P.Text
     -- ^ @subnet_id@ - (Optional, Forces New)
     --
-    , _tags                   :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _tags :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -4112,7 +4112,7 @@ data RedisCacheResource s = RedisCacheResource'
 -- | Define a new @azurerm_redis_cache@ resource value.
 redisCacheResource
     :: TF.Attr s P.Int -- ^ @capacity@ ('P._capacity', 'P.capacity')
-    -> TF.Attr s (RedisConfigurationSetting s) -- ^ @redis_configuration@ ('P._redisConfiguration', 'P.redisConfiguration')
+    -> TF.Attr s (RedisCacheRedisConfigurationSetting s) -- ^ @redis_configuration@ ('P._redisConfiguration', 'P.redisConfiguration')
     -> TF.Attr s P.Text -- ^ @family@ ('P._family'', 'P.family'')
     -> TF.Attr s P.Text -- ^ @location@ ('P._location', 'P.location')
     -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
@@ -4158,7 +4158,7 @@ instance TF.IsValid (RedisCacheResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_redisConfiguration"
                   (_redisConfiguration
-                      :: RedisCacheResource s -> TF.Attr s (RedisConfigurationSetting s))
+                      :: RedisCacheResource s -> TF.Attr s (RedisCacheRedisConfigurationSetting s))
                   TF.validator
 
 instance P.HasCapacity (RedisCacheResource s) (TF.Attr s P.Int) where
@@ -4186,9 +4186,9 @@ instance P.HasName (RedisCacheResource s) (TF.Attr s P.Text) where
         P.lens (_name :: RedisCacheResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: RedisCacheResource s)
 
-instance P.HasPatchSchedule (RedisCacheResource s) (TF.Attr s [TF.Attr s (PatchScheduleSetting s)]) where
+instance P.HasPatchSchedule (RedisCacheResource s) (TF.Attr s [TF.Attr s (RedisCachePatchScheduleSetting s)]) where
     patchSchedule =
-        P.lens (_patchSchedule :: RedisCacheResource s -> TF.Attr s [TF.Attr s (PatchScheduleSetting s)])
+        P.lens (_patchSchedule :: RedisCacheResource s -> TF.Attr s [TF.Attr s (RedisCachePatchScheduleSetting s)])
                (\s a -> s { _patchSchedule = a } :: RedisCacheResource s)
 
 instance P.HasPrivateStaticIpAddress (RedisCacheResource s) (TF.Attr s P.Text) where
@@ -4196,9 +4196,9 @@ instance P.HasPrivateStaticIpAddress (RedisCacheResource s) (TF.Attr s P.Text) w
         P.lens (_privateStaticIpAddress :: RedisCacheResource s -> TF.Attr s P.Text)
                (\s a -> s { _privateStaticIpAddress = a } :: RedisCacheResource s)
 
-instance P.HasRedisConfiguration (RedisCacheResource s) (TF.Attr s (RedisConfigurationSetting s)) where
+instance P.HasRedisConfiguration (RedisCacheResource s) (TF.Attr s (RedisCacheRedisConfigurationSetting s)) where
     redisConfiguration =
-        P.lens (_redisConfiguration :: RedisCacheResource s -> TF.Attr s (RedisConfigurationSetting s))
+        P.lens (_redisConfiguration :: RedisCacheResource s -> TF.Attr s (RedisCacheRedisConfigurationSetting s))
                (\s a -> s { _redisConfiguration = a } :: RedisCacheResource s)
 
 instance P.HasResourceGroupName (RedisCacheResource s) (TF.Attr s P.Text) where
@@ -4344,7 +4344,7 @@ data RelayNamespaceResource s = RelayNamespaceResource'
     , _resourceGroupName :: TF.Attr s P.Text
     -- ^ @resource_group_name@ - (Required, Forces New)
     --
-    , _sku               :: TF.Attr s (SkuSetting s)
+    , _sku               :: TF.Attr s (RelayNamespaceSkuSetting s)
     -- ^ @sku@ - (Required)
     --
     , _tags              :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
@@ -4357,7 +4357,7 @@ relayNamespaceResource
     :: TF.Attr s P.Text -- ^ @location@ ('P._location', 'P.location')
     -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
-    -> TF.Attr s (SkuSetting s) -- ^ @sku@ ('P._sku', 'P.sku')
+    -> TF.Attr s (RelayNamespaceSkuSetting s) -- ^ @sku@ ('P._sku', 'P.sku')
     -> P.Resource (RelayNamespaceResource s)
 relayNamespaceResource _location _name _resourceGroupName _sku =
     TF.unsafeResource "azurerm_relay_namespace" TF.validator $
@@ -4382,7 +4382,7 @@ instance TF.IsValid (RelayNamespaceResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_sku"
                   (_sku
-                      :: RelayNamespaceResource s -> TF.Attr s (SkuSetting s))
+                      :: RelayNamespaceResource s -> TF.Attr s (RelayNamespaceSkuSetting s))
                   TF.validator
 
 instance P.HasLocation (RelayNamespaceResource s) (TF.Attr s P.Text) where
@@ -4400,9 +4400,9 @@ instance P.HasResourceGroupName (RelayNamespaceResource s) (TF.Attr s P.Text) wh
         P.lens (_resourceGroupName :: RelayNamespaceResource s -> TF.Attr s P.Text)
                (\s a -> s { _resourceGroupName = a } :: RelayNamespaceResource s)
 
-instance P.HasSku (RelayNamespaceResource s) (TF.Attr s (SkuSetting s)) where
+instance P.HasSku (RelayNamespaceResource s) (TF.Attr s (RelayNamespaceSkuSetting s)) where
     sku =
-        P.lens (_sku :: RelayNamespaceResource s -> TF.Attr s (SkuSetting s))
+        P.lens (_sku :: RelayNamespaceResource s -> TF.Attr s (RelayNamespaceSkuSetting s))
                (\s a -> s { _sku = a } :: RelayNamespaceResource s)
 
 instance P.HasTags (RelayNamespaceResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
@@ -4599,19 +4599,19 @@ data RoleDefinitionResource s = RoleDefinitionResource'
     { _assignableScopes :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @assignable_scopes@ - (Required)
     --
-    , _description      :: TF.Attr s P.Text
+    , _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _name             :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _permissions      :: TF.Attr s [TF.Attr s (PermissionsSetting s)]
+    , _permissions :: TF.Attr s [TF.Attr s (RoleDefinitionPermissionsSetting s)]
     -- ^ @permissions@ - (Required)
     --
     , _roleDefinitionId :: TF.Attr s P.Text
     -- ^ @role_definition_id@ - (Optional, Forces New)
     --
-    , _scope            :: TF.Attr s P.Text
+    , _scope :: TF.Attr s P.Text
     -- ^ @scope@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -4619,7 +4619,7 @@ data RoleDefinitionResource s = RoleDefinitionResource'
 -- | Define a new @azurerm_role_definition@ resource value.
 roleDefinitionResource
     :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
-    -> TF.Attr s [TF.Attr s (PermissionsSetting s)] -- ^ @permissions@ ('P._permissions', 'P.permissions')
+    -> TF.Attr s [TF.Attr s (RoleDefinitionPermissionsSetting s)] -- ^ @permissions@ ('P._permissions', 'P.permissions')
     -> TF.Attr s P.Text -- ^ @scope@ ('P._scope', 'P.scope')
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @assignable_scopes@ ('P._assignableScopes', 'P.assignableScopes')
     -> P.Resource (RoleDefinitionResource s)
@@ -4662,9 +4662,9 @@ instance P.HasName (RoleDefinitionResource s) (TF.Attr s P.Text) where
         P.lens (_name :: RoleDefinitionResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: RoleDefinitionResource s)
 
-instance P.HasPermissions (RoleDefinitionResource s) (TF.Attr s [TF.Attr s (PermissionsSetting s)]) where
+instance P.HasPermissions (RoleDefinitionResource s) (TF.Attr s [TF.Attr s (RoleDefinitionPermissionsSetting s)]) where
     permissions =
-        P.lens (_permissions :: RoleDefinitionResource s -> TF.Attr s [TF.Attr s (PermissionsSetting s)])
+        P.lens (_permissions :: RoleDefinitionResource s -> TF.Attr s [TF.Attr s (RoleDefinitionPermissionsSetting s)])
                (\s a -> s { _permissions = a } :: RoleDefinitionResource s)
 
 instance P.HasRoleDefinitionId (RoleDefinitionResource s) (TF.Attr s P.Text) where
@@ -4784,19 +4784,19 @@ data RouteTableResource s = RouteTableResource'
     { _disableBgpRoutePropagation :: TF.Attr s P.Bool
     -- ^ @disable_bgp_route_propagation@ - (Optional)
     --
-    , _location                   :: TF.Attr s P.Text
+    , _location :: TF.Attr s P.Text
     -- ^ @location@ - (Required, Forces New)
     --
-    , _name                       :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _resourceGroupName          :: TF.Attr s P.Text
+    , _resourceGroupName :: TF.Attr s P.Text
     -- ^ @resource_group_name@ - (Required, Forces New)
     --
-    , _route                      :: TF.Attr s [TF.Attr s (RouteSetting s)]
+    , _route :: TF.Attr s [TF.Attr s (RouteTableRouteSetting s)]
     -- ^ @route@ - (Optional)
     --
-    , _tags                       :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _tags :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -4851,9 +4851,9 @@ instance P.HasResourceGroupName (RouteTableResource s) (TF.Attr s P.Text) where
         P.lens (_resourceGroupName :: RouteTableResource s -> TF.Attr s P.Text)
                (\s a -> s { _resourceGroupName = a } :: RouteTableResource s)
 
-instance P.HasRoute (RouteTableResource s) (TF.Attr s [TF.Attr s (RouteSetting s)]) where
+instance P.HasRoute (RouteTableResource s) (TF.Attr s [TF.Attr s (RouteTableRouteSetting s)]) where
     route =
-        P.lens (_route :: RouteTableResource s -> TF.Attr s [TF.Attr s (RouteSetting s)])
+        P.lens (_route :: RouteTableResource s -> TF.Attr s [TF.Attr s (RouteTableRouteSetting s)])
                (\s a -> s { _route = a } :: RouteTableResource s)
 
 instance P.HasTags (RouteTableResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
@@ -4864,7 +4864,7 @@ instance P.HasTags (RouteTableResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.
 instance s ~ s' => P.HasComputedId (TF.Ref s' (RouteTableResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedRoute (TF.Ref s' (RouteTableResource s)) (TF.Attr s [TF.Attr s (RouteSetting s)]) where
+instance s ~ s' => P.HasComputedRoute (TF.Ref s' (RouteTableResource s)) (TF.Attr s [TF.Attr s (RouteTableRouteSetting s)]) where
     computedRoute x = TF.compute (TF.refKey x) "route"
 
 instance s ~ s' => P.HasComputedSubnets (TF.Ref s' (RouteTableResource s)) (TF.Attr s [TF.Attr s P.Text]) where
@@ -4884,7 +4884,7 @@ data SchedulerJobCollectionResource s = SchedulerJobCollectionResource'
     , _name              :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _quota             :: TF.Attr s (QuotaSetting s)
+    , _quota             :: TF.Attr s (SchedulerJobCollectionQuotaSetting s)
     -- ^ @quota@ - (Optional)
     --
     , _resourceGroupName :: TF.Attr s P.Text
@@ -4935,7 +4935,7 @@ instance TF.IsValid (SchedulerJobCollectionResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_quota"
                   (_quota
-                      :: SchedulerJobCollectionResource s -> TF.Attr s (QuotaSetting s))
+                      :: SchedulerJobCollectionResource s -> TF.Attr s (SchedulerJobCollectionQuotaSetting s))
                   TF.validator
 
 instance P.HasLocation (SchedulerJobCollectionResource s) (TF.Attr s P.Text) where
@@ -4948,9 +4948,9 @@ instance P.HasName (SchedulerJobCollectionResource s) (TF.Attr s P.Text) where
         P.lens (_name :: SchedulerJobCollectionResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: SchedulerJobCollectionResource s)
 
-instance P.HasQuota (SchedulerJobCollectionResource s) (TF.Attr s (QuotaSetting s)) where
+instance P.HasQuota (SchedulerJobCollectionResource s) (TF.Attr s (SchedulerJobCollectionQuotaSetting s)) where
     quota =
-        P.lens (_quota :: SchedulerJobCollectionResource s -> TF.Attr s (QuotaSetting s))
+        P.lens (_quota :: SchedulerJobCollectionResource s -> TF.Attr s (SchedulerJobCollectionQuotaSetting s))
                (\s a -> s { _quota = a } :: SchedulerJobCollectionResource s)
 
 instance P.HasResourceGroupName (SchedulerJobCollectionResource s) (TF.Attr s P.Text) where
@@ -4984,49 +4984,49 @@ instance s ~ s' => P.HasComputedTags (TF.Ref s' (SchedulerJobCollectionResource 
 -- See the <https://www.terraform.io/docs/providers/azurerm/r/scheduler_job.html terraform documentation>
 -- for more information.
 data SchedulerJobResource s = SchedulerJobResource'
-    { _actionStorageQueue      :: TF.Attr s (ActionStorageQueueSetting s)
+    { _actionStorageQueue :: TF.Attr s (SchedulerJobActionStorageQueueSetting s)
     -- ^ @action_storage_queue@ - (Optional)
     --
     -- Conflicts with:
     --
     -- * 'actionWeb'
-    , _actionWeb               :: TF.Attr s (ActionWebSetting s)
+    , _actionWeb :: TF.Attr s (SchedulerJobActionWebSetting s)
     -- ^ @action_web@ - (Optional)
     --
     -- Conflicts with:
     --
     -- * 'actionStorageQueue'
-    , _errorActionStorageQueue :: TF.Attr s (ErrorActionStorageQueueSetting s)
+    , _errorActionStorageQueue :: TF.Attr s (SchedulerJobErrorActionStorageQueueSetting s)
     -- ^ @error_action_storage_queue@ - (Optional)
     --
     -- Conflicts with:
     --
     -- * 'errorActionWeb'
-    , _errorActionWeb          :: TF.Attr s (ErrorActionWebSetting s)
+    , _errorActionWeb :: TF.Attr s (SchedulerJobErrorActionWebSetting s)
     -- ^ @error_action_web@ - (Optional)
     --
     -- Conflicts with:
     --
     -- * 'errorActionStorageQueue'
-    , _jobCollectionName       :: TF.Attr s P.Text
+    , _jobCollectionName :: TF.Attr s P.Text
     -- ^ @job_collection_name@ - (Required, Forces New)
     --
-    , _name                    :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _recurrence              :: TF.Attr s (RecurrenceSetting s)
+    , _recurrence :: TF.Attr s (SchedulerJobRecurrenceSetting s)
     -- ^ @recurrence@ - (Optional)
     --
-    , _resourceGroupName       :: TF.Attr s P.Text
+    , _resourceGroupName :: TF.Attr s P.Text
     -- ^ @resource_group_name@ - (Required, Forces New)
     --
-    , _retry                   :: TF.Attr s (RetrySetting s)
+    , _retry :: TF.Attr s (SchedulerJobRetrySetting s)
     -- ^ @retry@ - (Optional)
     --
-    , _startTime               :: TF.Attr s P.Text
+    , _startTime :: TF.Attr s P.Text
     -- ^ @start_time@ - (Optional)
     --
-    , _state                   :: TF.Attr s P.Text
+    , _state :: TF.Attr s P.Text
     -- ^ @state@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -5093,47 +5093,47 @@ instance TF.IsValid (SchedulerJobResource s) where
         ])
            P.<> TF.settingsValidator "_actionStorageQueue"
                   (_actionStorageQueue
-                      :: SchedulerJobResource s -> TF.Attr s (ActionStorageQueueSetting s))
+                      :: SchedulerJobResource s -> TF.Attr s (SchedulerJobActionStorageQueueSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_actionWeb"
                   (_actionWeb
-                      :: SchedulerJobResource s -> TF.Attr s (ActionWebSetting s))
+                      :: SchedulerJobResource s -> TF.Attr s (SchedulerJobActionWebSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_errorActionStorageQueue"
                   (_errorActionStorageQueue
-                      :: SchedulerJobResource s -> TF.Attr s (ErrorActionStorageQueueSetting s))
+                      :: SchedulerJobResource s -> TF.Attr s (SchedulerJobErrorActionStorageQueueSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_errorActionWeb"
                   (_errorActionWeb
-                      :: SchedulerJobResource s -> TF.Attr s (ErrorActionWebSetting s))
+                      :: SchedulerJobResource s -> TF.Attr s (SchedulerJobErrorActionWebSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_recurrence"
                   (_recurrence
-                      :: SchedulerJobResource s -> TF.Attr s (RecurrenceSetting s))
+                      :: SchedulerJobResource s -> TF.Attr s (SchedulerJobRecurrenceSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_retry"
                   (_retry
-                      :: SchedulerJobResource s -> TF.Attr s (RetrySetting s))
+                      :: SchedulerJobResource s -> TF.Attr s (SchedulerJobRetrySetting s))
                   TF.validator
 
-instance P.HasActionStorageQueue (SchedulerJobResource s) (TF.Attr s (ActionStorageQueueSetting s)) where
+instance P.HasActionStorageQueue (SchedulerJobResource s) (TF.Attr s (SchedulerJobActionStorageQueueSetting s)) where
     actionStorageQueue =
-        P.lens (_actionStorageQueue :: SchedulerJobResource s -> TF.Attr s (ActionStorageQueueSetting s))
+        P.lens (_actionStorageQueue :: SchedulerJobResource s -> TF.Attr s (SchedulerJobActionStorageQueueSetting s))
                (\s a -> s { _actionStorageQueue = a } :: SchedulerJobResource s)
 
-instance P.HasActionWeb (SchedulerJobResource s) (TF.Attr s (ActionWebSetting s)) where
+instance P.HasActionWeb (SchedulerJobResource s) (TF.Attr s (SchedulerJobActionWebSetting s)) where
     actionWeb =
-        P.lens (_actionWeb :: SchedulerJobResource s -> TF.Attr s (ActionWebSetting s))
+        P.lens (_actionWeb :: SchedulerJobResource s -> TF.Attr s (SchedulerJobActionWebSetting s))
                (\s a -> s { _actionWeb = a } :: SchedulerJobResource s)
 
-instance P.HasErrorActionStorageQueue (SchedulerJobResource s) (TF.Attr s (ErrorActionStorageQueueSetting s)) where
+instance P.HasErrorActionStorageQueue (SchedulerJobResource s) (TF.Attr s (SchedulerJobErrorActionStorageQueueSetting s)) where
     errorActionStorageQueue =
-        P.lens (_errorActionStorageQueue :: SchedulerJobResource s -> TF.Attr s (ErrorActionStorageQueueSetting s))
+        P.lens (_errorActionStorageQueue :: SchedulerJobResource s -> TF.Attr s (SchedulerJobErrorActionStorageQueueSetting s))
                (\s a -> s { _errorActionStorageQueue = a } :: SchedulerJobResource s)
 
-instance P.HasErrorActionWeb (SchedulerJobResource s) (TF.Attr s (ErrorActionWebSetting s)) where
+instance P.HasErrorActionWeb (SchedulerJobResource s) (TF.Attr s (SchedulerJobErrorActionWebSetting s)) where
     errorActionWeb =
-        P.lens (_errorActionWeb :: SchedulerJobResource s -> TF.Attr s (ErrorActionWebSetting s))
+        P.lens (_errorActionWeb :: SchedulerJobResource s -> TF.Attr s (SchedulerJobErrorActionWebSetting s))
                (\s a -> s { _errorActionWeb = a } :: SchedulerJobResource s)
 
 instance P.HasJobCollectionName (SchedulerJobResource s) (TF.Attr s P.Text) where
@@ -5146,9 +5146,9 @@ instance P.HasName (SchedulerJobResource s) (TF.Attr s P.Text) where
         P.lens (_name :: SchedulerJobResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: SchedulerJobResource s)
 
-instance P.HasRecurrence (SchedulerJobResource s) (TF.Attr s (RecurrenceSetting s)) where
+instance P.HasRecurrence (SchedulerJobResource s) (TF.Attr s (SchedulerJobRecurrenceSetting s)) where
     recurrence =
-        P.lens (_recurrence :: SchedulerJobResource s -> TF.Attr s (RecurrenceSetting s))
+        P.lens (_recurrence :: SchedulerJobResource s -> TF.Attr s (SchedulerJobRecurrenceSetting s))
                (\s a -> s { _recurrence = a } :: SchedulerJobResource s)
 
 instance P.HasResourceGroupName (SchedulerJobResource s) (TF.Attr s P.Text) where
@@ -5156,9 +5156,9 @@ instance P.HasResourceGroupName (SchedulerJobResource s) (TF.Attr s P.Text) wher
         P.lens (_resourceGroupName :: SchedulerJobResource s -> TF.Attr s P.Text)
                (\s a -> s { _resourceGroupName = a } :: SchedulerJobResource s)
 
-instance P.HasRetry (SchedulerJobResource s) (TF.Attr s (RetrySetting s)) where
+instance P.HasRetry (SchedulerJobResource s) (TF.Attr s (SchedulerJobRetrySetting s)) where
     retry =
-        P.lens (_retry :: SchedulerJobResource s -> TF.Attr s (RetrySetting s))
+        P.lens (_retry :: SchedulerJobResource s -> TF.Attr s (SchedulerJobRetrySetting s))
                (\s a -> s { _retry = a } :: SchedulerJobResource s)
 
 instance P.HasStartTime (SchedulerJobResource s) (TF.Attr s P.Text) where
@@ -5296,16 +5296,16 @@ data ServiceFabricClusterResource s = ServiceFabricClusterResource'
     { _addOnFeatures :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @add_on_features@ - (Optional)
     --
-    , _certificate :: TF.Attr s (CertificateSetting s)
+    , _certificate :: TF.Attr s (ServiceFabricClusterCertificateSetting s)
     -- ^ @certificate@ - (Optional)
     --
-    , _clientCertificateThumbprint :: TF.Attr s (ClientCertificateThumbprintSetting s)
+    , _clientCertificateThumbprint :: TF.Attr s (ServiceFabricClusterClientCertificateThumbprintSetting s)
     -- ^ @client_certificate_thumbprint@ - (Optional)
     --
-    , _diagnosticsConfig :: TF.Attr s (DiagnosticsConfigSetting s)
+    , _diagnosticsConfig :: TF.Attr s (ServiceFabricClusterDiagnosticsConfigSetting s)
     -- ^ @diagnostics_config@ - (Optional, Forces New)
     --
-    , _fabricSettings :: TF.Attr s [TF.Attr s (FabricSettings s)]
+    , _fabricSettings :: TF.Attr s [TF.Attr s (ServiceFabricClusterFabricSettingsSetting s)]
     -- ^ @fabric_settings@ - (Optional)
     --
     , _location :: TF.Attr s P.Text
@@ -5317,7 +5317,7 @@ data ServiceFabricClusterResource s = ServiceFabricClusterResource'
     , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _nodeType :: TF.Attr s [TF.Attr s (NodeTypeSetting s)]
+    , _nodeType :: TF.Attr s [TF.Attr s (ServiceFabricClusterNodeTypeSetting s)]
     -- ^ @node_type@ - (Required)
     --
     , _reliabilityLevel :: TF.Attr s P.Text
@@ -5346,7 +5346,7 @@ serviceFabricClusterResource
     -> TF.Attr s P.Text -- ^ @upgrade_mode@ ('P._upgradeMode', 'P.upgradeMode')
     -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
-    -> TF.Attr s [TF.Attr s (NodeTypeSetting s)] -- ^ @node_type@ ('P._nodeType', 'P.nodeType')
+    -> TF.Attr s [TF.Attr s (ServiceFabricClusterNodeTypeSetting s)] -- ^ @node_type@ ('P._nodeType', 'P.nodeType')
     -> P.Resource (ServiceFabricClusterResource s)
 serviceFabricClusterResource _managementEndpoint _vmImage _reliabilityLevel _location _upgradeMode _name _resourceGroupName _nodeType =
     TF.unsafeResource "azurerm_service_fabric_cluster" TF.validator $
@@ -5389,15 +5389,15 @@ instance TF.IsValid (ServiceFabricClusterResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_certificate"
                   (_certificate
-                      :: ServiceFabricClusterResource s -> TF.Attr s (CertificateSetting s))
+                      :: ServiceFabricClusterResource s -> TF.Attr s (ServiceFabricClusterCertificateSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_clientCertificateThumbprint"
                   (_clientCertificateThumbprint
-                      :: ServiceFabricClusterResource s -> TF.Attr s (ClientCertificateThumbprintSetting s))
+                      :: ServiceFabricClusterResource s -> TF.Attr s (ServiceFabricClusterClientCertificateThumbprintSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_diagnosticsConfig"
                   (_diagnosticsConfig
-                      :: ServiceFabricClusterResource s -> TF.Attr s (DiagnosticsConfigSetting s))
+                      :: ServiceFabricClusterResource s -> TF.Attr s (ServiceFabricClusterDiagnosticsConfigSetting s))
                   TF.validator
 
 instance P.HasAddOnFeatures (ServiceFabricClusterResource s) (TF.Attr s [TF.Attr s P.Text]) where
@@ -5405,24 +5405,24 @@ instance P.HasAddOnFeatures (ServiceFabricClusterResource s) (TF.Attr s [TF.Attr
         P.lens (_addOnFeatures :: ServiceFabricClusterResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _addOnFeatures = a } :: ServiceFabricClusterResource s)
 
-instance P.HasCertificate (ServiceFabricClusterResource s) (TF.Attr s (CertificateSetting s)) where
+instance P.HasCertificate (ServiceFabricClusterResource s) (TF.Attr s (ServiceFabricClusterCertificateSetting s)) where
     certificate =
-        P.lens (_certificate :: ServiceFabricClusterResource s -> TF.Attr s (CertificateSetting s))
+        P.lens (_certificate :: ServiceFabricClusterResource s -> TF.Attr s (ServiceFabricClusterCertificateSetting s))
                (\s a -> s { _certificate = a } :: ServiceFabricClusterResource s)
 
-instance P.HasClientCertificateThumbprint (ServiceFabricClusterResource s) (TF.Attr s (ClientCertificateThumbprintSetting s)) where
+instance P.HasClientCertificateThumbprint (ServiceFabricClusterResource s) (TF.Attr s (ServiceFabricClusterClientCertificateThumbprintSetting s)) where
     clientCertificateThumbprint =
-        P.lens (_clientCertificateThumbprint :: ServiceFabricClusterResource s -> TF.Attr s (ClientCertificateThumbprintSetting s))
+        P.lens (_clientCertificateThumbprint :: ServiceFabricClusterResource s -> TF.Attr s (ServiceFabricClusterClientCertificateThumbprintSetting s))
                (\s a -> s { _clientCertificateThumbprint = a } :: ServiceFabricClusterResource s)
 
-instance P.HasDiagnosticsConfig (ServiceFabricClusterResource s) (TF.Attr s (DiagnosticsConfigSetting s)) where
+instance P.HasDiagnosticsConfig (ServiceFabricClusterResource s) (TF.Attr s (ServiceFabricClusterDiagnosticsConfigSetting s)) where
     diagnosticsConfig =
-        P.lens (_diagnosticsConfig :: ServiceFabricClusterResource s -> TF.Attr s (DiagnosticsConfigSetting s))
+        P.lens (_diagnosticsConfig :: ServiceFabricClusterResource s -> TF.Attr s (ServiceFabricClusterDiagnosticsConfigSetting s))
                (\s a -> s { _diagnosticsConfig = a } :: ServiceFabricClusterResource s)
 
-instance P.HasFabricSettings (ServiceFabricClusterResource s) (TF.Attr s [TF.Attr s (FabricSettings s)]) where
+instance P.HasFabricSettings (ServiceFabricClusterResource s) (TF.Attr s [TF.Attr s (ServiceFabricClusterFabricSettingsSetting s)]) where
     fabricSettings =
-        P.lens (_fabricSettings :: ServiceFabricClusterResource s -> TF.Attr s [TF.Attr s (FabricSettings s)])
+        P.lens (_fabricSettings :: ServiceFabricClusterResource s -> TF.Attr s [TF.Attr s (ServiceFabricClusterFabricSettingsSetting s)])
                (\s a -> s { _fabricSettings = a } :: ServiceFabricClusterResource s)
 
 instance P.HasLocation (ServiceFabricClusterResource s) (TF.Attr s P.Text) where
@@ -5440,9 +5440,9 @@ instance P.HasName (ServiceFabricClusterResource s) (TF.Attr s P.Text) where
         P.lens (_name :: ServiceFabricClusterResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ServiceFabricClusterResource s)
 
-instance P.HasNodeType (ServiceFabricClusterResource s) (TF.Attr s [TF.Attr s (NodeTypeSetting s)]) where
+instance P.HasNodeType (ServiceFabricClusterResource s) (TF.Attr s [TF.Attr s (ServiceFabricClusterNodeTypeSetting s)]) where
     nodeType =
-        P.lens (_nodeType :: ServiceFabricClusterResource s -> TF.Attr s [TF.Attr s (NodeTypeSetting s)])
+        P.lens (_nodeType :: ServiceFabricClusterResource s -> TF.Attr s [TF.Attr s (ServiceFabricClusterNodeTypeSetting s)])
                (\s a -> s { _nodeType = a } :: ServiceFabricClusterResource s)
 
 instance P.HasReliabilityLevel (ServiceFabricClusterResource s) (TF.Attr s P.Text) where
@@ -6131,37 +6131,37 @@ instance s ~ s' => P.HasComputedLockDuration (TF.Ref s' (ServicebusSubscriptionR
 -- See the <https://www.terraform.io/docs/providers/azurerm/r/servicebus_subscription_rule.html terraform documentation>
 -- for more information.
 data ServicebusSubscriptionRuleResource s = ServicebusSubscriptionRuleResource'
-    { _action            :: TF.Attr s P.Text
+    { _action :: TF.Attr s P.Text
     -- ^ @action@ - (Optional)
     --
-    , _correlationFilter :: TF.Attr s (CorrelationFilterSetting s)
+    , _correlationFilter :: TF.Attr s (ServicebusSubscriptionRuleCorrelationFilterSetting s)
     -- ^ @correlation_filter@ - (Optional)
     --
     -- Conflicts with:
     --
     -- * 'sqlFilter'
-    , _filterType        :: TF.Attr s P.Text
+    , _filterType :: TF.Attr s P.Text
     -- ^ @filter_type@ - (Required)
     --
-    , _name              :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _namespaceName     :: TF.Attr s P.Text
+    , _namespaceName :: TF.Attr s P.Text
     -- ^ @namespace_name@ - (Required, Forces New)
     --
     , _resourceGroupName :: TF.Attr s P.Text
     -- ^ @resource_group_name@ - (Required, Forces New)
     --
-    , _sqlFilter         :: TF.Attr s P.Text
+    , _sqlFilter :: TF.Attr s P.Text
     -- ^ @sql_filter@ - (Optional)
     --
     -- Conflicts with:
     --
     -- * 'correlationFilter'
-    , _subscriptionName  :: TF.Attr s P.Text
+    , _subscriptionName :: TF.Attr s P.Text
     -- ^ @subscription_name@ - (Required, Forces New)
     --
-    , _topicName         :: TF.Attr s P.Text
+    , _topicName :: TF.Attr s P.Text
     -- ^ @topic_name@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -6217,7 +6217,7 @@ instance TF.IsValid (ServicebusSubscriptionRuleResource s) where
         ])
            P.<> TF.settingsValidator "_correlationFilter"
                   (_correlationFilter
-                      :: ServicebusSubscriptionRuleResource s -> TF.Attr s (CorrelationFilterSetting s))
+                      :: ServicebusSubscriptionRuleResource s -> TF.Attr s (ServicebusSubscriptionRuleCorrelationFilterSetting s))
                   TF.validator
 
 instance P.HasAction (ServicebusSubscriptionRuleResource s) (TF.Attr s P.Text) where
@@ -6225,9 +6225,9 @@ instance P.HasAction (ServicebusSubscriptionRuleResource s) (TF.Attr s P.Text) w
         P.lens (_action :: ServicebusSubscriptionRuleResource s -> TF.Attr s P.Text)
                (\s a -> s { _action = a } :: ServicebusSubscriptionRuleResource s)
 
-instance P.HasCorrelationFilter (ServicebusSubscriptionRuleResource s) (TF.Attr s (CorrelationFilterSetting s)) where
+instance P.HasCorrelationFilter (ServicebusSubscriptionRuleResource s) (TF.Attr s (ServicebusSubscriptionRuleCorrelationFilterSetting s)) where
     correlationFilter =
-        P.lens (_correlationFilter :: ServicebusSubscriptionRuleResource s -> TF.Attr s (CorrelationFilterSetting s))
+        P.lens (_correlationFilter :: ServicebusSubscriptionRuleResource s -> TF.Attr s (ServicebusSubscriptionRuleCorrelationFilterSetting s))
                (\s a -> s { _correlationFilter = a } :: ServicebusSubscriptionRuleResource s)
 
 instance P.HasFilterType (ServicebusSubscriptionRuleResource s) (TF.Attr s P.Text) where
@@ -6560,7 +6560,7 @@ data SnapshotResource s = SnapshotResource'
     , _diskSizeGb         :: TF.Attr s P.Int
     -- ^ @disk_size_gb@ - (Optional)
     --
-    , _encryptionSettings :: TF.Attr s (EncryptionSettings s)
+    , _encryptionSettings :: TF.Attr s (SnapshotEncryptionSettingsSetting s)
     -- ^ @encryption_settings@ - (Optional)
     --
     , _location           :: TF.Attr s P.Text
@@ -6626,7 +6626,7 @@ instance TF.IsValid (SnapshotResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_encryptionSettings"
                   (_encryptionSettings
-                      :: SnapshotResource s -> TF.Attr s (EncryptionSettings s))
+                      :: SnapshotResource s -> TF.Attr s (SnapshotEncryptionSettingsSetting s))
                   TF.validator
 
 instance P.HasCreateOption (SnapshotResource s) (TF.Attr s P.Text) where
@@ -6639,9 +6639,9 @@ instance P.HasDiskSizeGb (SnapshotResource s) (TF.Attr s P.Int) where
         P.lens (_diskSizeGb :: SnapshotResource s -> TF.Attr s P.Int)
                (\s a -> s { _diskSizeGb = a } :: SnapshotResource s)
 
-instance P.HasEncryptionSettings (SnapshotResource s) (TF.Attr s (EncryptionSettings s)) where
+instance P.HasEncryptionSettings (SnapshotResource s) (TF.Attr s (SnapshotEncryptionSettingsSetting s)) where
     encryptionSettings =
-        P.lens (_encryptionSettings :: SnapshotResource s -> TF.Attr s (EncryptionSettings s))
+        P.lens (_encryptionSettings :: SnapshotResource s -> TF.Attr s (SnapshotEncryptionSettingsSetting s))
                (\s a -> s { _encryptionSettings = a } :: SnapshotResource s)
 
 instance P.HasLocation (SnapshotResource s) (TF.Attr s P.Text) where
@@ -6785,7 +6785,7 @@ data SqlDatabaseResource s = SqlDatabaseResource'
     , _elasticPoolName :: TF.Attr s P.Text
     -- ^ @elastic_pool_name@ - (Optional)
     --
-    , _import' :: TF.Attr s (Import'Setting s)
+    , _import' :: TF.Attr s (SqlDatabaseImportSetting s)
     -- ^ @import@ - (Optional)
     --
     , _location :: TF.Attr s P.Text
@@ -6875,7 +6875,7 @@ instance TF.IsValid (SqlDatabaseResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_import'"
                   (_import'
-                      :: SqlDatabaseResource s -> TF.Attr s (Import'Setting s))
+                      :: SqlDatabaseResource s -> TF.Attr s (SqlDatabaseImportSetting s))
                   TF.validator
 
 instance P.HasCollation (SqlDatabaseResource s) (TF.Attr s P.Text) where
@@ -6898,9 +6898,9 @@ instance P.HasElasticPoolName (SqlDatabaseResource s) (TF.Attr s P.Text) where
         P.lens (_elasticPoolName :: SqlDatabaseResource s -> TF.Attr s P.Text)
                (\s a -> s { _elasticPoolName = a } :: SqlDatabaseResource s)
 
-instance P.HasImport' (SqlDatabaseResource s) (TF.Attr s (Import'Setting s)) where
+instance P.HasImport' (SqlDatabaseResource s) (TF.Attr s (SqlDatabaseImportSetting s)) where
     import' =
-        P.lens (_import' :: SqlDatabaseResource s -> TF.Attr s (Import'Setting s))
+        P.lens (_import' :: SqlDatabaseResource s -> TF.Attr s (SqlDatabaseImportSetting s))
                (\s a -> s { _import' = a } :: SqlDatabaseResource s)
 
 instance P.HasLocation (SqlDatabaseResource s) (TF.Attr s P.Text) where
@@ -7417,49 +7417,49 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (SqlVirtualNetworkRuleResource s))
 -- See the <https://www.terraform.io/docs/providers/azurerm/r/storage_account.html terraform documentation>
 -- for more information.
 data StorageAccountResource s = StorageAccountResource'
-    { _accessTier              :: TF.Attr s P.Text
+    { _accessTier :: TF.Attr s P.Text
     -- ^ @access_tier@ - (Optional)
     --
     , _accountEncryptionSource :: TF.Attr s P.Text
     -- ^ @account_encryption_source@ - (Optional)
     --
-    , _accountKind             :: TF.Attr s P.Text
+    , _accountKind :: TF.Attr s P.Text
     -- ^ @account_kind@ - (Optional, Forces New)
     --
-    , _accountReplicationType  :: TF.Attr s P.Text
+    , _accountReplicationType :: TF.Attr s P.Text
     -- ^ @account_replication_type@ - (Required)
     --
-    , _accountTier             :: TF.Attr s P.Text
+    , _accountTier :: TF.Attr s P.Text
     -- ^ @account_tier@ - (Required, Forces New)
     --
-    , _customDomain            :: TF.Attr s (CustomDomainSetting s)
+    , _customDomain :: TF.Attr s (StorageAccountCustomDomainSetting s)
     -- ^ @custom_domain@ - (Optional)
     --
-    , _enableBlobEncryption    :: TF.Attr s P.Bool
+    , _enableBlobEncryption :: TF.Attr s P.Bool
     -- ^ @enable_blob_encryption@ - (Optional)
     --
-    , _enableFileEncryption    :: TF.Attr s P.Bool
+    , _enableFileEncryption :: TF.Attr s P.Bool
     -- ^ @enable_file_encryption@ - (Optional)
     --
-    , _enableHttpsTrafficOnly  :: TF.Attr s P.Bool
+    , _enableHttpsTrafficOnly :: TF.Attr s P.Bool
     -- ^ @enable_https_traffic_only@ - (Optional)
     --
-    , _identity                :: TF.Attr s (IdentitySetting s)
+    , _identity :: TF.Attr s (StorageAccountIdentitySetting s)
     -- ^ @identity@ - (Optional)
     --
-    , _location                :: TF.Attr s P.Text
+    , _location :: TF.Attr s P.Text
     -- ^ @location@ - (Required, Forces New)
     --
-    , _name                    :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _networkRules            :: TF.Attr s (NetworkRulesSetting s)
+    , _networkRules :: TF.Attr s (StorageAccountNetworkRulesSetting s)
     -- ^ @network_rules@ - (Optional)
     --
-    , _resourceGroupName       :: TF.Attr s P.Text
+    , _resourceGroupName :: TF.Attr s P.Text
     -- ^ @resource_group_name@ - (Required, Forces New)
     --
-    , _tags                    :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _tags :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -7515,15 +7515,15 @@ instance TF.IsValid (StorageAccountResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_customDomain"
                   (_customDomain
-                      :: StorageAccountResource s -> TF.Attr s (CustomDomainSetting s))
+                      :: StorageAccountResource s -> TF.Attr s (StorageAccountCustomDomainSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_identity"
                   (_identity
-                      :: StorageAccountResource s -> TF.Attr s (IdentitySetting s))
+                      :: StorageAccountResource s -> TF.Attr s (StorageAccountIdentitySetting s))
                   TF.validator
            P.<> TF.settingsValidator "_networkRules"
                   (_networkRules
-                      :: StorageAccountResource s -> TF.Attr s (NetworkRulesSetting s))
+                      :: StorageAccountResource s -> TF.Attr s (StorageAccountNetworkRulesSetting s))
                   TF.validator
 
 instance P.HasAccessTier (StorageAccountResource s) (TF.Attr s P.Text) where
@@ -7551,9 +7551,9 @@ instance P.HasAccountTier (StorageAccountResource s) (TF.Attr s P.Text) where
         P.lens (_accountTier :: StorageAccountResource s -> TF.Attr s P.Text)
                (\s a -> s { _accountTier = a } :: StorageAccountResource s)
 
-instance P.HasCustomDomain (StorageAccountResource s) (TF.Attr s (CustomDomainSetting s)) where
+instance P.HasCustomDomain (StorageAccountResource s) (TF.Attr s (StorageAccountCustomDomainSetting s)) where
     customDomain =
-        P.lens (_customDomain :: StorageAccountResource s -> TF.Attr s (CustomDomainSetting s))
+        P.lens (_customDomain :: StorageAccountResource s -> TF.Attr s (StorageAccountCustomDomainSetting s))
                (\s a -> s { _customDomain = a } :: StorageAccountResource s)
 
 instance P.HasEnableBlobEncryption (StorageAccountResource s) (TF.Attr s P.Bool) where
@@ -7571,9 +7571,9 @@ instance P.HasEnableHttpsTrafficOnly (StorageAccountResource s) (TF.Attr s P.Boo
         P.lens (_enableHttpsTrafficOnly :: StorageAccountResource s -> TF.Attr s P.Bool)
                (\s a -> s { _enableHttpsTrafficOnly = a } :: StorageAccountResource s)
 
-instance P.HasIdentity (StorageAccountResource s) (TF.Attr s (IdentitySetting s)) where
+instance P.HasIdentity (StorageAccountResource s) (TF.Attr s (StorageAccountIdentitySetting s)) where
     identity =
-        P.lens (_identity :: StorageAccountResource s -> TF.Attr s (IdentitySetting s))
+        P.lens (_identity :: StorageAccountResource s -> TF.Attr s (StorageAccountIdentitySetting s))
                (\s a -> s { _identity = a } :: StorageAccountResource s)
 
 instance P.HasLocation (StorageAccountResource s) (TF.Attr s P.Text) where
@@ -7586,9 +7586,9 @@ instance P.HasName (StorageAccountResource s) (TF.Attr s P.Text) where
         P.lens (_name :: StorageAccountResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: StorageAccountResource s)
 
-instance P.HasNetworkRules (StorageAccountResource s) (TF.Attr s (NetworkRulesSetting s)) where
+instance P.HasNetworkRules (StorageAccountResource s) (TF.Attr s (StorageAccountNetworkRulesSetting s)) where
     networkRules =
-        P.lens (_networkRules :: StorageAccountResource s -> TF.Attr s (NetworkRulesSetting s))
+        P.lens (_networkRules :: StorageAccountResource s -> TF.Attr s (StorageAccountNetworkRulesSetting s))
                (\s a -> s { _networkRules = a } :: StorageAccountResource s)
 
 instance P.HasResourceGroupName (StorageAccountResource s) (TF.Attr s P.Text) where
@@ -7607,7 +7607,7 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (StorageAccountResource s)) (TF.At
 instance s ~ s' => P.HasComputedAccessTier (TF.Ref s' (StorageAccountResource s)) (TF.Attr s P.Text) where
     computedAccessTier x = TF.compute (TF.refKey x) "access_tier"
 
-instance s ~ s' => P.HasComputedIdentity (TF.Ref s' (StorageAccountResource s)) (TF.Attr s (IdentitySetting s)) where
+instance s ~ s' => P.HasComputedIdentity (TF.Ref s' (StorageAccountResource s)) (TF.Attr s (StorageAccountIdentitySetting s)) where
     computedIdentity x = TF.compute (TF.refKey x) "identity"
 
 instance s ~ s' => P.HasComputedPrimaryAccessKey (TF.Ref s' (StorageAccountResource s)) (TF.Attr s P.Text) where
@@ -8479,22 +8479,22 @@ instance s ~ s' => P.HasComputedWeight (TF.Ref s' (TrafficManagerEndpointResourc
 -- See the <https://www.terraform.io/docs/providers/azurerm/r/traffic_manager_profile.html terraform documentation>
 -- for more information.
 data TrafficManagerProfileResource s = TrafficManagerProfileResource'
-    { _dnsConfig            :: TF.Attr s [TF.Attr s (DnsConfigSetting s)]
+    { _dnsConfig :: TF.Attr s [TF.Attr s (TrafficManagerProfileDnsConfigSetting s)]
     -- ^ @dns_config@ - (Required)
     --
-    , _monitorConfig        :: TF.Attr s [TF.Attr s (MonitorConfigSetting s)]
+    , _monitorConfig :: TF.Attr s [TF.Attr s (TrafficManagerProfileMonitorConfigSetting s)]
     -- ^ @monitor_config@ - (Required)
     --
-    , _name                 :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _profileStatus        :: TF.Attr s P.Text
+    , _profileStatus :: TF.Attr s P.Text
     -- ^ @profile_status@ - (Optional)
     --
-    , _resourceGroupName    :: TF.Attr s P.Text
+    , _resourceGroupName :: TF.Attr s P.Text
     -- ^ @resource_group_name@ - (Required, Forces New)
     --
-    , _tags                 :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _tags :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
     , _trafficRoutingMethod :: TF.Attr s P.Text
@@ -8504,8 +8504,8 @@ data TrafficManagerProfileResource s = TrafficManagerProfileResource'
 
 -- | Define a new @azurerm_traffic_manager_profile@ resource value.
 trafficManagerProfileResource
-    :: TF.Attr s [TF.Attr s (DnsConfigSetting s)] -- ^ @dns_config@ ('P._dnsConfig', 'P.dnsConfig')
-    -> TF.Attr s [TF.Attr s (MonitorConfigSetting s)] -- ^ @monitor_config@ ('P._monitorConfig', 'P.monitorConfig')
+    :: TF.Attr s [TF.Attr s (TrafficManagerProfileDnsConfigSetting s)] -- ^ @dns_config@ ('P._dnsConfig', 'P.dnsConfig')
+    -> TF.Attr s [TF.Attr s (TrafficManagerProfileMonitorConfigSetting s)] -- ^ @monitor_config@ ('P._monitorConfig', 'P.monitorConfig')
     -> TF.Attr s P.Text -- ^ @traffic_routing_method@ ('P._trafficRoutingMethod', 'P.trafficRoutingMethod')
     -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
@@ -8536,14 +8536,14 @@ instance TF.IsObject (TrafficManagerProfileResource s) where
 instance TF.IsValid (TrafficManagerProfileResource s) where
     validator = P.mempty
 
-instance P.HasDnsConfig (TrafficManagerProfileResource s) (TF.Attr s [TF.Attr s (DnsConfigSetting s)]) where
+instance P.HasDnsConfig (TrafficManagerProfileResource s) (TF.Attr s [TF.Attr s (TrafficManagerProfileDnsConfigSetting s)]) where
     dnsConfig =
-        P.lens (_dnsConfig :: TrafficManagerProfileResource s -> TF.Attr s [TF.Attr s (DnsConfigSetting s)])
+        P.lens (_dnsConfig :: TrafficManagerProfileResource s -> TF.Attr s [TF.Attr s (TrafficManagerProfileDnsConfigSetting s)])
                (\s a -> s { _dnsConfig = a } :: TrafficManagerProfileResource s)
 
-instance P.HasMonitorConfig (TrafficManagerProfileResource s) (TF.Attr s [TF.Attr s (MonitorConfigSetting s)]) where
+instance P.HasMonitorConfig (TrafficManagerProfileResource s) (TF.Attr s [TF.Attr s (TrafficManagerProfileMonitorConfigSetting s)]) where
     monitorConfig =
-        P.lens (_monitorConfig :: TrafficManagerProfileResource s -> TF.Attr s [TF.Attr s (MonitorConfigSetting s)])
+        P.lens (_monitorConfig :: TrafficManagerProfileResource s -> TF.Attr s [TF.Attr s (TrafficManagerProfileMonitorConfigSetting s)])
                (\s a -> s { _monitorConfig = a } :: TrafficManagerProfileResource s)
 
 instance P.HasName (TrafficManagerProfileResource s) (TF.Attr s P.Text) where
@@ -8899,7 +8899,7 @@ data VirtualMachineResource s = VirtualMachineResource'
     { _availabilitySetId :: TF.Attr s P.Text
     -- ^ @availability_set_id@ - (Optional, Forces New)
     --
-    , _bootDiagnostics :: TF.Attr s (BootDiagnosticsSetting s)
+    , _bootDiagnostics :: TF.Attr s (VirtualMachineBootDiagnosticsSetting s)
     -- ^ @boot_diagnostics@ - (Optional)
     --
     , _deleteDataDisksOnTermination :: TF.Attr s P.Bool
@@ -8908,7 +8908,7 @@ data VirtualMachineResource s = VirtualMachineResource'
     , _deleteOsDiskOnTermination :: TF.Attr s P.Bool
     -- ^ @delete_os_disk_on_termination@ - (Optional)
     --
-    , _identity :: TF.Attr s (IdentitySetting s)
+    , _identity :: TF.Attr s (VirtualMachineIdentitySetting s)
     -- ^ @identity@ - (Optional)
     --
     , _licenseType :: TF.Attr s P.Text
@@ -8923,25 +8923,25 @@ data VirtualMachineResource s = VirtualMachineResource'
     , _networkInterfaceIds :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @network_interface_ids@ - (Required)
     --
-    , _osProfile :: TF.Attr s (OsProfileSetting s)
+    , _osProfile :: TF.Attr s (VirtualMachineOsProfileSetting s)
     -- ^ @os_profile@ - (Optional)
     --
-    , _osProfileLinuxConfig :: TF.Attr s (OsProfileLinuxConfigSetting s)
+    , _osProfileLinuxConfig :: TF.Attr s (VirtualMachineOsProfileLinuxConfigSetting s)
     -- ^ @os_profile_linux_config@ - (Optional)
     --
     -- Conflicts with:
     --
     -- * 'osProfileWindowsConfig'
-    , _osProfileSecrets :: TF.Attr s [TF.Attr s (OsProfileSecretsSetting s)]
+    , _osProfileSecrets :: TF.Attr s [TF.Attr s (VirtualMachineOsProfileSecretsSetting s)]
     -- ^ @os_profile_secrets@ - (Optional)
     --
-    , _osProfileWindowsConfig :: TF.Attr s (OsProfileWindowsConfigSetting s)
+    , _osProfileWindowsConfig :: TF.Attr s (VirtualMachineOsProfileWindowsConfigSetting s)
     -- ^ @os_profile_windows_config@ - (Optional)
     --
     -- Conflicts with:
     --
     -- * 'osProfileLinuxConfig'
-    , _plan :: TF.Attr s (PlanSetting s)
+    , _plan :: TF.Attr s (VirtualMachinePlanSetting s)
     -- ^ @plan@ - (Optional)
     --
     , _primaryNetworkInterfaceId :: TF.Attr s P.Text
@@ -8950,13 +8950,13 @@ data VirtualMachineResource s = VirtualMachineResource'
     , _resourceGroupName :: TF.Attr s P.Text
     -- ^ @resource_group_name@ - (Required, Forces New)
     --
-    , _storageDataDisk :: TF.Attr s [TF.Attr s (StorageDataDiskSetting s)]
+    , _storageDataDisk :: TF.Attr s [TF.Attr s (VirtualMachineStorageDataDiskSetting s)]
     -- ^ @storage_data_disk@ - (Optional)
     --
-    , _storageImageReference :: TF.Attr s (StorageImageReferenceSetting s)
+    , _storageImageReference :: TF.Attr s (VirtualMachineStorageImageReferenceSetting s)
     -- ^ @storage_image_reference@ - (Optional, Forces New)
     --
-    , _storageOsDisk :: TF.Attr s (StorageOsDiskSetting s)
+    , _storageOsDisk :: TF.Attr s (VirtualMachineStorageOsDiskSetting s)
     -- ^ @storage_os_disk@ - (Required)
     --
     , _tags :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
@@ -8972,7 +8972,7 @@ data VirtualMachineResource s = VirtualMachineResource'
 
 -- | Define a new @azurerm_virtual_machine@ resource value.
 virtualMachineResource
-    :: TF.Attr s (StorageOsDiskSetting s) -- ^ @storage_os_disk@ ('P._storageOsDisk', 'P.storageOsDisk')
+    :: TF.Attr s (VirtualMachineStorageOsDiskSetting s) -- ^ @storage_os_disk@ ('P._storageOsDisk', 'P.storageOsDisk')
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @network_interface_ids@ ('P._networkInterfaceIds', 'P.networkInterfaceIds')
     -> TF.Attr s P.Text -- ^ @location@ ('P._location', 'P.location')
     -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
@@ -9047,35 +9047,35 @@ instance TF.IsValid (VirtualMachineResource s) where
         ])
            P.<> TF.settingsValidator "_bootDiagnostics"
                   (_bootDiagnostics
-                      :: VirtualMachineResource s -> TF.Attr s (BootDiagnosticsSetting s))
+                      :: VirtualMachineResource s -> TF.Attr s (VirtualMachineBootDiagnosticsSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_identity"
                   (_identity
-                      :: VirtualMachineResource s -> TF.Attr s (IdentitySetting s))
+                      :: VirtualMachineResource s -> TF.Attr s (VirtualMachineIdentitySetting s))
                   TF.validator
            P.<> TF.settingsValidator "_osProfile"
                   (_osProfile
-                      :: VirtualMachineResource s -> TF.Attr s (OsProfileSetting s))
+                      :: VirtualMachineResource s -> TF.Attr s (VirtualMachineOsProfileSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_osProfileLinuxConfig"
                   (_osProfileLinuxConfig
-                      :: VirtualMachineResource s -> TF.Attr s (OsProfileLinuxConfigSetting s))
+                      :: VirtualMachineResource s -> TF.Attr s (VirtualMachineOsProfileLinuxConfigSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_osProfileWindowsConfig"
                   (_osProfileWindowsConfig
-                      :: VirtualMachineResource s -> TF.Attr s (OsProfileWindowsConfigSetting s))
+                      :: VirtualMachineResource s -> TF.Attr s (VirtualMachineOsProfileWindowsConfigSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_plan"
                   (_plan
-                      :: VirtualMachineResource s -> TF.Attr s (PlanSetting s))
+                      :: VirtualMachineResource s -> TF.Attr s (VirtualMachinePlanSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_storageImageReference"
                   (_storageImageReference
-                      :: VirtualMachineResource s -> TF.Attr s (StorageImageReferenceSetting s))
+                      :: VirtualMachineResource s -> TF.Attr s (VirtualMachineStorageImageReferenceSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_storageOsDisk"
                   (_storageOsDisk
-                      :: VirtualMachineResource s -> TF.Attr s (StorageOsDiskSetting s))
+                      :: VirtualMachineResource s -> TF.Attr s (VirtualMachineStorageOsDiskSetting s))
                   TF.validator
 
 instance P.HasAvailabilitySetId (VirtualMachineResource s) (TF.Attr s P.Text) where
@@ -9083,9 +9083,9 @@ instance P.HasAvailabilitySetId (VirtualMachineResource s) (TF.Attr s P.Text) wh
         P.lens (_availabilitySetId :: VirtualMachineResource s -> TF.Attr s P.Text)
                (\s a -> s { _availabilitySetId = a } :: VirtualMachineResource s)
 
-instance P.HasBootDiagnostics (VirtualMachineResource s) (TF.Attr s (BootDiagnosticsSetting s)) where
+instance P.HasBootDiagnostics (VirtualMachineResource s) (TF.Attr s (VirtualMachineBootDiagnosticsSetting s)) where
     bootDiagnostics =
-        P.lens (_bootDiagnostics :: VirtualMachineResource s -> TF.Attr s (BootDiagnosticsSetting s))
+        P.lens (_bootDiagnostics :: VirtualMachineResource s -> TF.Attr s (VirtualMachineBootDiagnosticsSetting s))
                (\s a -> s { _bootDiagnostics = a } :: VirtualMachineResource s)
 
 instance P.HasDeleteDataDisksOnTermination (VirtualMachineResource s) (TF.Attr s P.Bool) where
@@ -9098,9 +9098,9 @@ instance P.HasDeleteOsDiskOnTermination (VirtualMachineResource s) (TF.Attr s P.
         P.lens (_deleteOsDiskOnTermination :: VirtualMachineResource s -> TF.Attr s P.Bool)
                (\s a -> s { _deleteOsDiskOnTermination = a } :: VirtualMachineResource s)
 
-instance P.HasIdentity (VirtualMachineResource s) (TF.Attr s (IdentitySetting s)) where
+instance P.HasIdentity (VirtualMachineResource s) (TF.Attr s (VirtualMachineIdentitySetting s)) where
     identity =
-        P.lens (_identity :: VirtualMachineResource s -> TF.Attr s (IdentitySetting s))
+        P.lens (_identity :: VirtualMachineResource s -> TF.Attr s (VirtualMachineIdentitySetting s))
                (\s a -> s { _identity = a } :: VirtualMachineResource s)
 
 instance P.HasLicenseType (VirtualMachineResource s) (TF.Attr s P.Text) where
@@ -9123,29 +9123,29 @@ instance P.HasNetworkInterfaceIds (VirtualMachineResource s) (TF.Attr s [TF.Attr
         P.lens (_networkInterfaceIds :: VirtualMachineResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _networkInterfaceIds = a } :: VirtualMachineResource s)
 
-instance P.HasOsProfile (VirtualMachineResource s) (TF.Attr s (OsProfileSetting s)) where
+instance P.HasOsProfile (VirtualMachineResource s) (TF.Attr s (VirtualMachineOsProfileSetting s)) where
     osProfile =
-        P.lens (_osProfile :: VirtualMachineResource s -> TF.Attr s (OsProfileSetting s))
+        P.lens (_osProfile :: VirtualMachineResource s -> TF.Attr s (VirtualMachineOsProfileSetting s))
                (\s a -> s { _osProfile = a } :: VirtualMachineResource s)
 
-instance P.HasOsProfileLinuxConfig (VirtualMachineResource s) (TF.Attr s (OsProfileLinuxConfigSetting s)) where
+instance P.HasOsProfileLinuxConfig (VirtualMachineResource s) (TF.Attr s (VirtualMachineOsProfileLinuxConfigSetting s)) where
     osProfileLinuxConfig =
-        P.lens (_osProfileLinuxConfig :: VirtualMachineResource s -> TF.Attr s (OsProfileLinuxConfigSetting s))
+        P.lens (_osProfileLinuxConfig :: VirtualMachineResource s -> TF.Attr s (VirtualMachineOsProfileLinuxConfigSetting s))
                (\s a -> s { _osProfileLinuxConfig = a } :: VirtualMachineResource s)
 
-instance P.HasOsProfileSecrets (VirtualMachineResource s) (TF.Attr s [TF.Attr s (OsProfileSecretsSetting s)]) where
+instance P.HasOsProfileSecrets (VirtualMachineResource s) (TF.Attr s [TF.Attr s (VirtualMachineOsProfileSecretsSetting s)]) where
     osProfileSecrets =
-        P.lens (_osProfileSecrets :: VirtualMachineResource s -> TF.Attr s [TF.Attr s (OsProfileSecretsSetting s)])
+        P.lens (_osProfileSecrets :: VirtualMachineResource s -> TF.Attr s [TF.Attr s (VirtualMachineOsProfileSecretsSetting s)])
                (\s a -> s { _osProfileSecrets = a } :: VirtualMachineResource s)
 
-instance P.HasOsProfileWindowsConfig (VirtualMachineResource s) (TF.Attr s (OsProfileWindowsConfigSetting s)) where
+instance P.HasOsProfileWindowsConfig (VirtualMachineResource s) (TF.Attr s (VirtualMachineOsProfileWindowsConfigSetting s)) where
     osProfileWindowsConfig =
-        P.lens (_osProfileWindowsConfig :: VirtualMachineResource s -> TF.Attr s (OsProfileWindowsConfigSetting s))
+        P.lens (_osProfileWindowsConfig :: VirtualMachineResource s -> TF.Attr s (VirtualMachineOsProfileWindowsConfigSetting s))
                (\s a -> s { _osProfileWindowsConfig = a } :: VirtualMachineResource s)
 
-instance P.HasPlan (VirtualMachineResource s) (TF.Attr s (PlanSetting s)) where
+instance P.HasPlan (VirtualMachineResource s) (TF.Attr s (VirtualMachinePlanSetting s)) where
     plan =
-        P.lens (_plan :: VirtualMachineResource s -> TF.Attr s (PlanSetting s))
+        P.lens (_plan :: VirtualMachineResource s -> TF.Attr s (VirtualMachinePlanSetting s))
                (\s a -> s { _plan = a } :: VirtualMachineResource s)
 
 instance P.HasPrimaryNetworkInterfaceId (VirtualMachineResource s) (TF.Attr s P.Text) where
@@ -9158,19 +9158,19 @@ instance P.HasResourceGroupName (VirtualMachineResource s) (TF.Attr s P.Text) wh
         P.lens (_resourceGroupName :: VirtualMachineResource s -> TF.Attr s P.Text)
                (\s a -> s { _resourceGroupName = a } :: VirtualMachineResource s)
 
-instance P.HasStorageDataDisk (VirtualMachineResource s) (TF.Attr s [TF.Attr s (StorageDataDiskSetting s)]) where
+instance P.HasStorageDataDisk (VirtualMachineResource s) (TF.Attr s [TF.Attr s (VirtualMachineStorageDataDiskSetting s)]) where
     storageDataDisk =
-        P.lens (_storageDataDisk :: VirtualMachineResource s -> TF.Attr s [TF.Attr s (StorageDataDiskSetting s)])
+        P.lens (_storageDataDisk :: VirtualMachineResource s -> TF.Attr s [TF.Attr s (VirtualMachineStorageDataDiskSetting s)])
                (\s a -> s { _storageDataDisk = a } :: VirtualMachineResource s)
 
-instance P.HasStorageImageReference (VirtualMachineResource s) (TF.Attr s (StorageImageReferenceSetting s)) where
+instance P.HasStorageImageReference (VirtualMachineResource s) (TF.Attr s (VirtualMachineStorageImageReferenceSetting s)) where
     storageImageReference =
-        P.lens (_storageImageReference :: VirtualMachineResource s -> TF.Attr s (StorageImageReferenceSetting s))
+        P.lens (_storageImageReference :: VirtualMachineResource s -> TF.Attr s (VirtualMachineStorageImageReferenceSetting s))
                (\s a -> s { _storageImageReference = a } :: VirtualMachineResource s)
 
-instance P.HasStorageOsDisk (VirtualMachineResource s) (TF.Attr s (StorageOsDiskSetting s)) where
+instance P.HasStorageOsDisk (VirtualMachineResource s) (TF.Attr s (VirtualMachineStorageOsDiskSetting s)) where
     storageOsDisk =
-        P.lens (_storageOsDisk :: VirtualMachineResource s -> TF.Attr s (StorageOsDiskSetting s))
+        P.lens (_storageOsDisk :: VirtualMachineResource s -> TF.Attr s (VirtualMachineStorageOsDiskSetting s))
                (\s a -> s { _storageOsDisk = a } :: VirtualMachineResource s)
 
 instance P.HasTags (VirtualMachineResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
@@ -9194,16 +9194,16 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (VirtualMachineResource s)) (TF.At
 instance s ~ s' => P.HasComputedAvailabilitySetId (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s P.Text) where
     computedAvailabilitySetId x = TF.compute (TF.refKey x) "availability_set_id"
 
-instance s ~ s' => P.HasComputedIdentity (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s (IdentitySetting s)) where
+instance s ~ s' => P.HasComputedIdentity (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s (VirtualMachineIdentitySetting s)) where
     computedIdentity x = TF.compute (TF.refKey x) "identity"
 
 instance s ~ s' => P.HasComputedLicenseType (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s P.Text) where
     computedLicenseType x = TF.compute (TF.refKey x) "license_type"
 
-instance s ~ s' => P.HasComputedStorageDataDisk (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s [TF.Attr s (StorageDataDiskSetting s)]) where
+instance s ~ s' => P.HasComputedStorageDataDisk (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s [TF.Attr s (VirtualMachineStorageDataDiskSetting s)]) where
     computedStorageDataDisk x = TF.compute (TF.refKey x) "storage_data_disk"
 
-instance s ~ s' => P.HasComputedStorageImageReference (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s (StorageImageReferenceSetting s)) where
+instance s ~ s' => P.HasComputedStorageImageReference (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s (VirtualMachineStorageImageReferenceSetting s)) where
     computedStorageImageReference x = TF.compute (TF.refKey x) "storage_image_reference"
 
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
@@ -9214,13 +9214,13 @@ instance s ~ s' => P.HasComputedTags (TF.Ref s' (VirtualMachineResource s)) (TF.
 -- See the <https://www.terraform.io/docs/providers/azurerm/r/virtual_machine_scale_set.html terraform documentation>
 -- for more information.
 data VirtualMachineScaleSetResource s = VirtualMachineScaleSetResource'
-    { _bootDiagnostics :: TF.Attr s (BootDiagnosticsSetting s)
+    { _bootDiagnostics :: TF.Attr s (VirtualMachineScaleSetBootDiagnosticsSetting s)
     -- ^ @boot_diagnostics@ - (Optional)
     --
-    , _extension :: TF.Attr s [TF.Attr s (ExtensionSetting s)]
+    , _extension :: TF.Attr s [TF.Attr s (VirtualMachineScaleSetExtensionSetting s)]
     -- ^ @extension@ - (Optional)
     --
-    , _identity :: TF.Attr s (IdentitySetting s)
+    , _identity :: TF.Attr s (VirtualMachineScaleSetIdentitySetting s)
     -- ^ @identity@ - (Optional)
     --
     , _licenseType :: TF.Attr s P.Text
@@ -9232,25 +9232,25 @@ data VirtualMachineScaleSetResource s = VirtualMachineScaleSetResource'
     , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _networkProfile :: TF.Attr s [TF.Attr s (NetworkProfileSetting s)]
+    , _networkProfile :: TF.Attr s [TF.Attr s (VirtualMachineScaleSetNetworkProfileSetting s)]
     -- ^ @network_profile@ - (Required)
     --
-    , _osProfile :: TF.Attr s (OsProfileSetting s)
+    , _osProfile :: TF.Attr s (VirtualMachineScaleSetOsProfileSetting s)
     -- ^ @os_profile@ - (Required)
     --
-    , _osProfileLinuxConfig :: TF.Attr s (OsProfileLinuxConfigSetting s)
+    , _osProfileLinuxConfig :: TF.Attr s (VirtualMachineScaleSetOsProfileLinuxConfigSetting s)
     -- ^ @os_profile_linux_config@ - (Optional)
     --
-    , _osProfileSecrets :: TF.Attr s [TF.Attr s (OsProfileSecretsSetting s)]
+    , _osProfileSecrets :: TF.Attr s [TF.Attr s (VirtualMachineScaleSetOsProfileSecretsSetting s)]
     -- ^ @os_profile_secrets@ - (Optional)
     --
-    , _osProfileWindowsConfig :: TF.Attr s (OsProfileWindowsConfigSetting s)
+    , _osProfileWindowsConfig :: TF.Attr s (VirtualMachineScaleSetOsProfileWindowsConfigSetting s)
     -- ^ @os_profile_windows_config@ - (Optional)
     --
     , _overprovision :: TF.Attr s P.Bool
     -- ^ @overprovision@ - (Optional)
     --
-    , _plan :: TF.Attr s (PlanSetting s)
+    , _plan :: TF.Attr s (VirtualMachineScaleSetPlanSetting s)
     -- ^ @plan@ - (Optional)
     --
     , _priority :: TF.Attr s P.Text
@@ -9262,16 +9262,16 @@ data VirtualMachineScaleSetResource s = VirtualMachineScaleSetResource'
     , _singlePlacementGroup :: TF.Attr s P.Bool
     -- ^ @single_placement_group@ - (Optional, Forces New)
     --
-    , _sku :: TF.Attr s (SkuSetting s)
+    , _sku :: TF.Attr s (VirtualMachineScaleSetSkuSetting s)
     -- ^ @sku@ - (Required)
     --
-    , _storageProfileDataDisk :: TF.Attr s [TF.Attr s (StorageProfileDataDiskSetting s)]
+    , _storageProfileDataDisk :: TF.Attr s [TF.Attr s (VirtualMachineScaleSetStorageProfileDataDiskSetting s)]
     -- ^ @storage_profile_data_disk@ - (Optional)
     --
-    , _storageProfileImageReference :: TF.Attr s (StorageProfileImageReferenceSetting s)
+    , _storageProfileImageReference :: TF.Attr s (VirtualMachineScaleSetStorageProfileImageReferenceSetting s)
     -- ^ @storage_profile_image_reference@ - (Optional)
     --
-    , _storageProfileOsDisk :: TF.Attr s (StorageProfileOsDiskSetting s)
+    , _storageProfileOsDisk :: TF.Attr s (VirtualMachineScaleSetStorageProfileOsDiskSetting s)
     -- ^ @storage_profile_os_disk@ - (Required)
     --
     , _tags :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
@@ -9287,14 +9287,14 @@ data VirtualMachineScaleSetResource s = VirtualMachineScaleSetResource'
 
 -- | Define a new @azurerm_virtual_machine_scale_set@ resource value.
 virtualMachineScaleSetResource
-    :: TF.Attr s (StorageProfileOsDiskSetting s) -- ^ @storage_profile_os_disk@ ('P._storageProfileOsDisk', 'P.storageProfileOsDisk')
+    :: TF.Attr s (VirtualMachineScaleSetStorageProfileOsDiskSetting s) -- ^ @storage_profile_os_disk@ ('P._storageProfileOsDisk', 'P.storageProfileOsDisk')
     -> TF.Attr s P.Text -- ^ @location@ ('P._location', 'P.location')
     -> TF.Attr s P.Text -- ^ @upgrade_policy_mode@ ('P._upgradePolicyMode', 'P.upgradePolicyMode')
     -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
-    -> TF.Attr s [TF.Attr s (NetworkProfileSetting s)] -- ^ @network_profile@ ('P._networkProfile', 'P.networkProfile')
-    -> TF.Attr s (OsProfileSetting s) -- ^ @os_profile@ ('P._osProfile', 'P.osProfile')
-    -> TF.Attr s (SkuSetting s) -- ^ @sku@ ('P._sku', 'P.sku')
+    -> TF.Attr s [TF.Attr s (VirtualMachineScaleSetNetworkProfileSetting s)] -- ^ @network_profile@ ('P._networkProfile', 'P.networkProfile')
+    -> TF.Attr s (VirtualMachineScaleSetOsProfileSetting s) -- ^ @os_profile@ ('P._osProfile', 'P.osProfile')
+    -> TF.Attr s (VirtualMachineScaleSetSkuSetting s) -- ^ @sku@ ('P._sku', 'P.sku')
     -> P.Resource (VirtualMachineScaleSetResource s)
 virtualMachineScaleSetResource _storageProfileOsDisk _location _upgradePolicyMode _name _resourceGroupName _networkProfile _osProfile _sku =
     TF.unsafeResource "azurerm_virtual_machine_scale_set" TF.validator $
@@ -9355,54 +9355,54 @@ instance TF.IsValid (VirtualMachineScaleSetResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_bootDiagnostics"
                   (_bootDiagnostics
-                      :: VirtualMachineScaleSetResource s -> TF.Attr s (BootDiagnosticsSetting s))
+                      :: VirtualMachineScaleSetResource s -> TF.Attr s (VirtualMachineScaleSetBootDiagnosticsSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_identity"
                   (_identity
-                      :: VirtualMachineScaleSetResource s -> TF.Attr s (IdentitySetting s))
+                      :: VirtualMachineScaleSetResource s -> TF.Attr s (VirtualMachineScaleSetIdentitySetting s))
                   TF.validator
            P.<> TF.settingsValidator "_osProfile"
                   (_osProfile
-                      :: VirtualMachineScaleSetResource s -> TF.Attr s (OsProfileSetting s))
+                      :: VirtualMachineScaleSetResource s -> TF.Attr s (VirtualMachineScaleSetOsProfileSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_osProfileLinuxConfig"
                   (_osProfileLinuxConfig
-                      :: VirtualMachineScaleSetResource s -> TF.Attr s (OsProfileLinuxConfigSetting s))
+                      :: VirtualMachineScaleSetResource s -> TF.Attr s (VirtualMachineScaleSetOsProfileLinuxConfigSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_osProfileWindowsConfig"
                   (_osProfileWindowsConfig
-                      :: VirtualMachineScaleSetResource s -> TF.Attr s (OsProfileWindowsConfigSetting s))
+                      :: VirtualMachineScaleSetResource s -> TF.Attr s (VirtualMachineScaleSetOsProfileWindowsConfigSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_plan"
                   (_plan
-                      :: VirtualMachineScaleSetResource s -> TF.Attr s (PlanSetting s))
+                      :: VirtualMachineScaleSetResource s -> TF.Attr s (VirtualMachineScaleSetPlanSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_sku"
                   (_sku
-                      :: VirtualMachineScaleSetResource s -> TF.Attr s (SkuSetting s))
+                      :: VirtualMachineScaleSetResource s -> TF.Attr s (VirtualMachineScaleSetSkuSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_storageProfileImageReference"
                   (_storageProfileImageReference
-                      :: VirtualMachineScaleSetResource s -> TF.Attr s (StorageProfileImageReferenceSetting s))
+                      :: VirtualMachineScaleSetResource s -> TF.Attr s (VirtualMachineScaleSetStorageProfileImageReferenceSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_storageProfileOsDisk"
                   (_storageProfileOsDisk
-                      :: VirtualMachineScaleSetResource s -> TF.Attr s (StorageProfileOsDiskSetting s))
+                      :: VirtualMachineScaleSetResource s -> TF.Attr s (VirtualMachineScaleSetStorageProfileOsDiskSetting s))
                   TF.validator
 
-instance P.HasBootDiagnostics (VirtualMachineScaleSetResource s) (TF.Attr s (BootDiagnosticsSetting s)) where
+instance P.HasBootDiagnostics (VirtualMachineScaleSetResource s) (TF.Attr s (VirtualMachineScaleSetBootDiagnosticsSetting s)) where
     bootDiagnostics =
-        P.lens (_bootDiagnostics :: VirtualMachineScaleSetResource s -> TF.Attr s (BootDiagnosticsSetting s))
+        P.lens (_bootDiagnostics :: VirtualMachineScaleSetResource s -> TF.Attr s (VirtualMachineScaleSetBootDiagnosticsSetting s))
                (\s a -> s { _bootDiagnostics = a } :: VirtualMachineScaleSetResource s)
 
-instance P.HasExtension (VirtualMachineScaleSetResource s) (TF.Attr s [TF.Attr s (ExtensionSetting s)]) where
+instance P.HasExtension (VirtualMachineScaleSetResource s) (TF.Attr s [TF.Attr s (VirtualMachineScaleSetExtensionSetting s)]) where
     extension =
-        P.lens (_extension :: VirtualMachineScaleSetResource s -> TF.Attr s [TF.Attr s (ExtensionSetting s)])
+        P.lens (_extension :: VirtualMachineScaleSetResource s -> TF.Attr s [TF.Attr s (VirtualMachineScaleSetExtensionSetting s)])
                (\s a -> s { _extension = a } :: VirtualMachineScaleSetResource s)
 
-instance P.HasIdentity (VirtualMachineScaleSetResource s) (TF.Attr s (IdentitySetting s)) where
+instance P.HasIdentity (VirtualMachineScaleSetResource s) (TF.Attr s (VirtualMachineScaleSetIdentitySetting s)) where
     identity =
-        P.lens (_identity :: VirtualMachineScaleSetResource s -> TF.Attr s (IdentitySetting s))
+        P.lens (_identity :: VirtualMachineScaleSetResource s -> TF.Attr s (VirtualMachineScaleSetIdentitySetting s))
                (\s a -> s { _identity = a } :: VirtualMachineScaleSetResource s)
 
 instance P.HasLicenseType (VirtualMachineScaleSetResource s) (TF.Attr s P.Text) where
@@ -9420,29 +9420,29 @@ instance P.HasName (VirtualMachineScaleSetResource s) (TF.Attr s P.Text) where
         P.lens (_name :: VirtualMachineScaleSetResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: VirtualMachineScaleSetResource s)
 
-instance P.HasNetworkProfile (VirtualMachineScaleSetResource s) (TF.Attr s [TF.Attr s (NetworkProfileSetting s)]) where
+instance P.HasNetworkProfile (VirtualMachineScaleSetResource s) (TF.Attr s [TF.Attr s (VirtualMachineScaleSetNetworkProfileSetting s)]) where
     networkProfile =
-        P.lens (_networkProfile :: VirtualMachineScaleSetResource s -> TF.Attr s [TF.Attr s (NetworkProfileSetting s)])
+        P.lens (_networkProfile :: VirtualMachineScaleSetResource s -> TF.Attr s [TF.Attr s (VirtualMachineScaleSetNetworkProfileSetting s)])
                (\s a -> s { _networkProfile = a } :: VirtualMachineScaleSetResource s)
 
-instance P.HasOsProfile (VirtualMachineScaleSetResource s) (TF.Attr s (OsProfileSetting s)) where
+instance P.HasOsProfile (VirtualMachineScaleSetResource s) (TF.Attr s (VirtualMachineScaleSetOsProfileSetting s)) where
     osProfile =
-        P.lens (_osProfile :: VirtualMachineScaleSetResource s -> TF.Attr s (OsProfileSetting s))
+        P.lens (_osProfile :: VirtualMachineScaleSetResource s -> TF.Attr s (VirtualMachineScaleSetOsProfileSetting s))
                (\s a -> s { _osProfile = a } :: VirtualMachineScaleSetResource s)
 
-instance P.HasOsProfileLinuxConfig (VirtualMachineScaleSetResource s) (TF.Attr s (OsProfileLinuxConfigSetting s)) where
+instance P.HasOsProfileLinuxConfig (VirtualMachineScaleSetResource s) (TF.Attr s (VirtualMachineScaleSetOsProfileLinuxConfigSetting s)) where
     osProfileLinuxConfig =
-        P.lens (_osProfileLinuxConfig :: VirtualMachineScaleSetResource s -> TF.Attr s (OsProfileLinuxConfigSetting s))
+        P.lens (_osProfileLinuxConfig :: VirtualMachineScaleSetResource s -> TF.Attr s (VirtualMachineScaleSetOsProfileLinuxConfigSetting s))
                (\s a -> s { _osProfileLinuxConfig = a } :: VirtualMachineScaleSetResource s)
 
-instance P.HasOsProfileSecrets (VirtualMachineScaleSetResource s) (TF.Attr s [TF.Attr s (OsProfileSecretsSetting s)]) where
+instance P.HasOsProfileSecrets (VirtualMachineScaleSetResource s) (TF.Attr s [TF.Attr s (VirtualMachineScaleSetOsProfileSecretsSetting s)]) where
     osProfileSecrets =
-        P.lens (_osProfileSecrets :: VirtualMachineScaleSetResource s -> TF.Attr s [TF.Attr s (OsProfileSecretsSetting s)])
+        P.lens (_osProfileSecrets :: VirtualMachineScaleSetResource s -> TF.Attr s [TF.Attr s (VirtualMachineScaleSetOsProfileSecretsSetting s)])
                (\s a -> s { _osProfileSecrets = a } :: VirtualMachineScaleSetResource s)
 
-instance P.HasOsProfileWindowsConfig (VirtualMachineScaleSetResource s) (TF.Attr s (OsProfileWindowsConfigSetting s)) where
+instance P.HasOsProfileWindowsConfig (VirtualMachineScaleSetResource s) (TF.Attr s (VirtualMachineScaleSetOsProfileWindowsConfigSetting s)) where
     osProfileWindowsConfig =
-        P.lens (_osProfileWindowsConfig :: VirtualMachineScaleSetResource s -> TF.Attr s (OsProfileWindowsConfigSetting s))
+        P.lens (_osProfileWindowsConfig :: VirtualMachineScaleSetResource s -> TF.Attr s (VirtualMachineScaleSetOsProfileWindowsConfigSetting s))
                (\s a -> s { _osProfileWindowsConfig = a } :: VirtualMachineScaleSetResource s)
 
 instance P.HasOverprovision (VirtualMachineScaleSetResource s) (TF.Attr s P.Bool) where
@@ -9450,9 +9450,9 @@ instance P.HasOverprovision (VirtualMachineScaleSetResource s) (TF.Attr s P.Bool
         P.lens (_overprovision :: VirtualMachineScaleSetResource s -> TF.Attr s P.Bool)
                (\s a -> s { _overprovision = a } :: VirtualMachineScaleSetResource s)
 
-instance P.HasPlan (VirtualMachineScaleSetResource s) (TF.Attr s (PlanSetting s)) where
+instance P.HasPlan (VirtualMachineScaleSetResource s) (TF.Attr s (VirtualMachineScaleSetPlanSetting s)) where
     plan =
-        P.lens (_plan :: VirtualMachineScaleSetResource s -> TF.Attr s (PlanSetting s))
+        P.lens (_plan :: VirtualMachineScaleSetResource s -> TF.Attr s (VirtualMachineScaleSetPlanSetting s))
                (\s a -> s { _plan = a } :: VirtualMachineScaleSetResource s)
 
 instance P.HasPriority (VirtualMachineScaleSetResource s) (TF.Attr s P.Text) where
@@ -9470,24 +9470,24 @@ instance P.HasSinglePlacementGroup (VirtualMachineScaleSetResource s) (TF.Attr s
         P.lens (_singlePlacementGroup :: VirtualMachineScaleSetResource s -> TF.Attr s P.Bool)
                (\s a -> s { _singlePlacementGroup = a } :: VirtualMachineScaleSetResource s)
 
-instance P.HasSku (VirtualMachineScaleSetResource s) (TF.Attr s (SkuSetting s)) where
+instance P.HasSku (VirtualMachineScaleSetResource s) (TF.Attr s (VirtualMachineScaleSetSkuSetting s)) where
     sku =
-        P.lens (_sku :: VirtualMachineScaleSetResource s -> TF.Attr s (SkuSetting s))
+        P.lens (_sku :: VirtualMachineScaleSetResource s -> TF.Attr s (VirtualMachineScaleSetSkuSetting s))
                (\s a -> s { _sku = a } :: VirtualMachineScaleSetResource s)
 
-instance P.HasStorageProfileDataDisk (VirtualMachineScaleSetResource s) (TF.Attr s [TF.Attr s (StorageProfileDataDiskSetting s)]) where
+instance P.HasStorageProfileDataDisk (VirtualMachineScaleSetResource s) (TF.Attr s [TF.Attr s (VirtualMachineScaleSetStorageProfileDataDiskSetting s)]) where
     storageProfileDataDisk =
-        P.lens (_storageProfileDataDisk :: VirtualMachineScaleSetResource s -> TF.Attr s [TF.Attr s (StorageProfileDataDiskSetting s)])
+        P.lens (_storageProfileDataDisk :: VirtualMachineScaleSetResource s -> TF.Attr s [TF.Attr s (VirtualMachineScaleSetStorageProfileDataDiskSetting s)])
                (\s a -> s { _storageProfileDataDisk = a } :: VirtualMachineScaleSetResource s)
 
-instance P.HasStorageProfileImageReference (VirtualMachineScaleSetResource s) (TF.Attr s (StorageProfileImageReferenceSetting s)) where
+instance P.HasStorageProfileImageReference (VirtualMachineScaleSetResource s) (TF.Attr s (VirtualMachineScaleSetStorageProfileImageReferenceSetting s)) where
     storageProfileImageReference =
-        P.lens (_storageProfileImageReference :: VirtualMachineScaleSetResource s -> TF.Attr s (StorageProfileImageReferenceSetting s))
+        P.lens (_storageProfileImageReference :: VirtualMachineScaleSetResource s -> TF.Attr s (VirtualMachineScaleSetStorageProfileImageReferenceSetting s))
                (\s a -> s { _storageProfileImageReference = a } :: VirtualMachineScaleSetResource s)
 
-instance P.HasStorageProfileOsDisk (VirtualMachineScaleSetResource s) (TF.Attr s (StorageProfileOsDiskSetting s)) where
+instance P.HasStorageProfileOsDisk (VirtualMachineScaleSetResource s) (TF.Attr s (VirtualMachineScaleSetStorageProfileOsDiskSetting s)) where
     storageProfileOsDisk =
-        P.lens (_storageProfileOsDisk :: VirtualMachineScaleSetResource s -> TF.Attr s (StorageProfileOsDiskSetting s))
+        P.lens (_storageProfileOsDisk :: VirtualMachineScaleSetResource s -> TF.Attr s (VirtualMachineScaleSetStorageProfileOsDiskSetting s))
                (\s a -> s { _storageProfileOsDisk = a } :: VirtualMachineScaleSetResource s)
 
 instance P.HasTags (VirtualMachineScaleSetResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
@@ -9508,16 +9508,16 @@ instance P.HasZones (VirtualMachineScaleSetResource s) (TF.Attr s (P.NonEmpty (T
 instance s ~ s' => P.HasComputedId (TF.Ref s' (VirtualMachineScaleSetResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedIdentity (TF.Ref s' (VirtualMachineScaleSetResource s)) (TF.Attr s (IdentitySetting s)) where
+instance s ~ s' => P.HasComputedIdentity (TF.Ref s' (VirtualMachineScaleSetResource s)) (TF.Attr s (VirtualMachineScaleSetIdentitySetting s)) where
     computedIdentity x = TF.compute (TF.refKey x) "identity"
 
 instance s ~ s' => P.HasComputedLicenseType (TF.Ref s' (VirtualMachineScaleSetResource s)) (TF.Attr s P.Text) where
     computedLicenseType x = TF.compute (TF.refKey x) "license_type"
 
-instance s ~ s' => P.HasComputedOsProfileLinuxConfig (TF.Ref s' (VirtualMachineScaleSetResource s)) (TF.Attr s (OsProfileLinuxConfigSetting s)) where
+instance s ~ s' => P.HasComputedOsProfileLinuxConfig (TF.Ref s' (VirtualMachineScaleSetResource s)) (TF.Attr s (VirtualMachineScaleSetOsProfileLinuxConfigSetting s)) where
     computedOsProfileLinuxConfig x = TF.compute (TF.refKey x) "os_profile_linux_config"
 
-instance s ~ s' => P.HasComputedStorageProfileImageReference (TF.Ref s' (VirtualMachineScaleSetResource s)) (TF.Attr s (StorageProfileImageReferenceSetting s)) where
+instance s ~ s' => P.HasComputedStorageProfileImageReference (TF.Ref s' (VirtualMachineScaleSetResource s)) (TF.Attr s (VirtualMachineScaleSetStorageProfileImageReferenceSetting s)) where
     computedStorageProfileImageReference x = TF.compute (TF.refKey x) "storage_profile_image_reference"
 
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (VirtualMachineScaleSetResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
@@ -9537,7 +9537,7 @@ data VirtualNetworkGatewayConnectionResource s = VirtualNetworkGatewayConnection
     , _expressRouteCircuitId :: TF.Attr s P.Text
     -- ^ @express_route_circuit_id@ - (Optional, Forces New)
     --
-    , _ipsecPolicy :: TF.Attr s (IpsecPolicySetting s)
+    , _ipsecPolicy :: TF.Attr s (VirtualNetworkGatewayConnectionIpsecPolicySetting s)
     -- ^ @ipsec_policy@ - (Optional)
     --
     , _localNetworkGatewayId :: TF.Attr s P.Text
@@ -9626,7 +9626,7 @@ instance TF.IsValid (VirtualNetworkGatewayConnectionResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_ipsecPolicy"
                   (_ipsecPolicy
-                      :: VirtualNetworkGatewayConnectionResource s -> TF.Attr s (IpsecPolicySetting s))
+                      :: VirtualNetworkGatewayConnectionResource s -> TF.Attr s (VirtualNetworkGatewayConnectionIpsecPolicySetting s))
                   TF.validator
 
 instance P.HasAuthorizationKey (VirtualNetworkGatewayConnectionResource s) (TF.Attr s P.Text) where
@@ -9644,9 +9644,9 @@ instance P.HasExpressRouteCircuitId (VirtualNetworkGatewayConnectionResource s) 
         P.lens (_expressRouteCircuitId :: VirtualNetworkGatewayConnectionResource s -> TF.Attr s P.Text)
                (\s a -> s { _expressRouteCircuitId = a } :: VirtualNetworkGatewayConnectionResource s)
 
-instance P.HasIpsecPolicy (VirtualNetworkGatewayConnectionResource s) (TF.Attr s (IpsecPolicySetting s)) where
+instance P.HasIpsecPolicy (VirtualNetworkGatewayConnectionResource s) (TF.Attr s (VirtualNetworkGatewayConnectionIpsecPolicySetting s)) where
     ipsecPolicy =
-        P.lens (_ipsecPolicy :: VirtualNetworkGatewayConnectionResource s -> TF.Attr s (IpsecPolicySetting s))
+        P.lens (_ipsecPolicy :: VirtualNetworkGatewayConnectionResource s -> TF.Attr s (VirtualNetworkGatewayConnectionIpsecPolicySetting s))
                (\s a -> s { _ipsecPolicy = a } :: VirtualNetworkGatewayConnectionResource s)
 
 instance P.HasLocalNetworkGatewayId (VirtualNetworkGatewayConnectionResource s) (TF.Attr s P.Text) where
@@ -9727,7 +9727,7 @@ data VirtualNetworkGatewayResource s = VirtualNetworkGatewayResource'
     { _activeActive :: TF.Attr s P.Bool
     -- ^ @active_active@ - (Optional)
     --
-    , _bgpSettings :: TF.Attr s (BgpSettings s)
+    , _bgpSettings :: TF.Attr s (VirtualNetworkGatewayBgpSettingsSetting s)
     -- ^ @bgp_settings@ - (Optional)
     --
     , _defaultLocalNetworkGatewayId :: TF.Attr s P.Text
@@ -9736,7 +9736,7 @@ data VirtualNetworkGatewayResource s = VirtualNetworkGatewayResource'
     , _enableBgp :: TF.Attr s P.Bool
     -- ^ @enable_bgp@ - (Optional)
     --
-    , _ipConfiguration :: TF.Attr s [TF.Attr s (IpConfigurationSetting s)]
+    , _ipConfiguration :: TF.Attr s [TF.Attr s (VirtualNetworkGatewayIpConfigurationSetting s)]
     -- ^ @ip_configuration@ - (Required)
     --
     , _location :: TF.Attr s P.Text
@@ -9757,7 +9757,7 @@ data VirtualNetworkGatewayResource s = VirtualNetworkGatewayResource'
     , _type' :: TF.Attr s P.Text
     -- ^ @type@ - (Required, Forces New)
     --
-    , _vpnClientConfiguration :: TF.Attr s (VpnClientConfigurationSetting s)
+    , _vpnClientConfiguration :: TF.Attr s (VirtualNetworkGatewayVpnClientConfigurationSetting s)
     -- ^ @vpn_client_configuration@ - (Optional)
     --
     , _vpnType :: TF.Attr s P.Text
@@ -9767,7 +9767,7 @@ data VirtualNetworkGatewayResource s = VirtualNetworkGatewayResource'
 
 -- | Define a new @azurerm_virtual_network_gateway@ resource value.
 virtualNetworkGatewayResource
-    :: TF.Attr s [TF.Attr s (IpConfigurationSetting s)] -- ^ @ip_configuration@ ('P._ipConfiguration', 'P.ipConfiguration')
+    :: TF.Attr s [TF.Attr s (VirtualNetworkGatewayIpConfigurationSetting s)] -- ^ @ip_configuration@ ('P._ipConfiguration', 'P.ipConfiguration')
     -> TF.Attr s P.Text -- ^ @location@ ('P._location', 'P.location')
     -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> TF.Attr s P.Text -- ^ @resource_group_name@ ('P._resourceGroupName', 'P.resourceGroupName')
@@ -9813,11 +9813,11 @@ instance TF.IsValid (VirtualNetworkGatewayResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_bgpSettings"
                   (_bgpSettings
-                      :: VirtualNetworkGatewayResource s -> TF.Attr s (BgpSettings s))
+                      :: VirtualNetworkGatewayResource s -> TF.Attr s (VirtualNetworkGatewayBgpSettingsSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_vpnClientConfiguration"
                   (_vpnClientConfiguration
-                      :: VirtualNetworkGatewayResource s -> TF.Attr s (VpnClientConfigurationSetting s))
+                      :: VirtualNetworkGatewayResource s -> TF.Attr s (VirtualNetworkGatewayVpnClientConfigurationSetting s))
                   TF.validator
 
 instance P.HasActiveActive (VirtualNetworkGatewayResource s) (TF.Attr s P.Bool) where
@@ -9825,9 +9825,9 @@ instance P.HasActiveActive (VirtualNetworkGatewayResource s) (TF.Attr s P.Bool) 
         P.lens (_activeActive :: VirtualNetworkGatewayResource s -> TF.Attr s P.Bool)
                (\s a -> s { _activeActive = a } :: VirtualNetworkGatewayResource s)
 
-instance P.HasBgpSettings (VirtualNetworkGatewayResource s) (TF.Attr s (BgpSettings s)) where
+instance P.HasBgpSettings (VirtualNetworkGatewayResource s) (TF.Attr s (VirtualNetworkGatewayBgpSettingsSetting s)) where
     bgpSettings =
-        P.lens (_bgpSettings :: VirtualNetworkGatewayResource s -> TF.Attr s (BgpSettings s))
+        P.lens (_bgpSettings :: VirtualNetworkGatewayResource s -> TF.Attr s (VirtualNetworkGatewayBgpSettingsSetting s))
                (\s a -> s { _bgpSettings = a } :: VirtualNetworkGatewayResource s)
 
 instance P.HasDefaultLocalNetworkGatewayId (VirtualNetworkGatewayResource s) (TF.Attr s P.Text) where
@@ -9840,9 +9840,9 @@ instance P.HasEnableBgp (VirtualNetworkGatewayResource s) (TF.Attr s P.Bool) whe
         P.lens (_enableBgp :: VirtualNetworkGatewayResource s -> TF.Attr s P.Bool)
                (\s a -> s { _enableBgp = a } :: VirtualNetworkGatewayResource s)
 
-instance P.HasIpConfiguration (VirtualNetworkGatewayResource s) (TF.Attr s [TF.Attr s (IpConfigurationSetting s)]) where
+instance P.HasIpConfiguration (VirtualNetworkGatewayResource s) (TF.Attr s [TF.Attr s (VirtualNetworkGatewayIpConfigurationSetting s)]) where
     ipConfiguration =
-        P.lens (_ipConfiguration :: VirtualNetworkGatewayResource s -> TF.Attr s [TF.Attr s (IpConfigurationSetting s)])
+        P.lens (_ipConfiguration :: VirtualNetworkGatewayResource s -> TF.Attr s [TF.Attr s (VirtualNetworkGatewayIpConfigurationSetting s)])
                (\s a -> s { _ipConfiguration = a } :: VirtualNetworkGatewayResource s)
 
 instance P.HasLocation (VirtualNetworkGatewayResource s) (TF.Attr s P.Text) where
@@ -9875,9 +9875,9 @@ instance P.HasType' (VirtualNetworkGatewayResource s) (TF.Attr s P.Text) where
         P.lens (_type' :: VirtualNetworkGatewayResource s -> TF.Attr s P.Text)
                (\s a -> s { _type' = a } :: VirtualNetworkGatewayResource s)
 
-instance P.HasVpnClientConfiguration (VirtualNetworkGatewayResource s) (TF.Attr s (VpnClientConfigurationSetting s)) where
+instance P.HasVpnClientConfiguration (VirtualNetworkGatewayResource s) (TF.Attr s (VirtualNetworkGatewayVpnClientConfigurationSetting s)) where
     vpnClientConfiguration =
-        P.lens (_vpnClientConfiguration :: VirtualNetworkGatewayResource s -> TF.Attr s (VpnClientConfigurationSetting s))
+        P.lens (_vpnClientConfiguration :: VirtualNetworkGatewayResource s -> TF.Attr s (VirtualNetworkGatewayVpnClientConfigurationSetting s))
                (\s a -> s { _vpnClientConfiguration = a } :: VirtualNetworkGatewayResource s)
 
 instance P.HasVpnType (VirtualNetworkGatewayResource s) (TF.Attr s P.Text) where
@@ -9891,7 +9891,7 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (VirtualNetworkGatewayResource s))
 instance s ~ s' => P.HasComputedActiveActive (TF.Ref s' (VirtualNetworkGatewayResource s)) (TF.Attr s P.Bool) where
     computedActiveActive x = TF.compute (TF.refKey x) "active_active"
 
-instance s ~ s' => P.HasComputedBgpSettings (TF.Ref s' (VirtualNetworkGatewayResource s)) (TF.Attr s (BgpSettings s)) where
+instance s ~ s' => P.HasComputedBgpSettings (TF.Ref s' (VirtualNetworkGatewayResource s)) (TF.Attr s (VirtualNetworkGatewayBgpSettingsSetting s)) where
     computedBgpSettings x = TF.compute (TF.refKey x) "bgp_settings"
 
 instance s ~ s' => P.HasComputedEnableBgp (TF.Ref s' (VirtualNetworkGatewayResource s)) (TF.Attr s P.Bool) where
@@ -10026,25 +10026,25 @@ instance s ~ s' => P.HasComputedUseRemoteGateways (TF.Ref s' (VirtualNetworkPeer
 -- See the <https://www.terraform.io/docs/providers/azurerm/r/virtual_network.html terraform documentation>
 -- for more information.
 data VirtualNetworkResource s = VirtualNetworkResource'
-    { _addressSpace      :: TF.Attr s [TF.Attr s P.Text]
+    { _addressSpace :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @address_space@ - (Required)
     --
-    , _dnsServers        :: TF.Attr s [TF.Attr s P.Text]
+    , _dnsServers :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @dns_servers@ - (Optional)
     --
-    , _location          :: TF.Attr s P.Text
+    , _location :: TF.Attr s P.Text
     -- ^ @location@ - (Required, Forces New)
     --
-    , _name              :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
     , _resourceGroupName :: TF.Attr s P.Text
     -- ^ @resource_group_name@ - (Required, Forces New)
     --
-    , _subnet            :: TF.Attr s [TF.Attr s (SubnetSetting s)]
+    , _subnet :: TF.Attr s [TF.Attr s (VirtualNetworkSubnetSetting s)]
     -- ^ @subnet@ - (Optional)
     --
-    , _tags              :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _tags :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -10107,9 +10107,9 @@ instance P.HasResourceGroupName (VirtualNetworkResource s) (TF.Attr s P.Text) wh
         P.lens (_resourceGroupName :: VirtualNetworkResource s -> TF.Attr s P.Text)
                (\s a -> s { _resourceGroupName = a } :: VirtualNetworkResource s)
 
-instance P.HasSubnet (VirtualNetworkResource s) (TF.Attr s [TF.Attr s (SubnetSetting s)]) where
+instance P.HasSubnet (VirtualNetworkResource s) (TF.Attr s [TF.Attr s (VirtualNetworkSubnetSetting s)]) where
     subnet =
-        P.lens (_subnet :: VirtualNetworkResource s -> TF.Attr s [TF.Attr s (SubnetSetting s)])
+        P.lens (_subnet :: VirtualNetworkResource s -> TF.Attr s [TF.Attr s (VirtualNetworkSubnetSetting s)])
                (\s a -> s { _subnet = a } :: VirtualNetworkResource s)
 
 instance P.HasTags (VirtualNetworkResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
@@ -10120,7 +10120,7 @@ instance P.HasTags (VirtualNetworkResource s) (TF.Attr s (P.Map P.Text (TF.Attr 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (VirtualNetworkResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedSubnet (TF.Ref s' (VirtualNetworkResource s)) (TF.Attr s [TF.Attr s (SubnetSetting s)]) where
+instance s ~ s' => P.HasComputedSubnet (TF.Ref s' (VirtualNetworkResource s)) (TF.Attr s [TF.Attr s (VirtualNetworkSubnetSetting s)]) where
     computedSubnet x = TF.compute (TF.refKey x) "subnet"
 
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (VirtualNetworkResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where

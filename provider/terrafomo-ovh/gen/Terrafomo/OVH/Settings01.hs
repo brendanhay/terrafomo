@@ -17,29 +17,41 @@
 --
 module Terrafomo.OVH.Settings01
     (
-    -- ** action
-      ActionSetting (..)
-    , newActionSetting
+    -- ** regions_status
+      CloudNetworkPrivateRegionsStatusSetting (..)
+    , newCloudNetworkPrivateRegionsStatusSetting
 
     -- ** ip_pools
-    , IpPoolsSetting (..)
-    , newIpPoolsSetting
-
-    -- ** orderable_zone
-    , OrderableZoneSetting (..)
-    , newOrderableZoneSetting
-
-    -- ** probe
-    , ProbeSetting (..)
-    , newProbeSetting
-
-    -- ** regions_status
-    , RegionsStatusSetting (..)
-    , newRegionsStatusSetting
+    , CloudNetworkPrivateSubnetIpPoolsSetting (..)
+    , newCloudNetworkPrivateSubnetIpPoolsSetting
 
     -- ** services
-    , ServicesSetting (..)
-    , newServicesSetting
+    , CloudRegionServicesSetting (..)
+    , newCloudRegionServicesSetting
+
+    -- ** action
+    , IploadbalancingHttpRouteActionSetting (..)
+    , newIploadbalancingHttpRouteActionSetting
+
+    -- ** orderable_zone
+    , IploadbalancingOrderableZoneSetting (..)
+    , newIploadbalancingOrderableZoneSetting
+
+    -- ** probe
+    , IploadbalancingTcpFarmProbeSetting (..)
+    , newIploadbalancingTcpFarmProbeSetting
+
+    -- ** regions_status
+    , PubliccloudPrivateNetworkRegionsStatusSetting (..)
+    , newPubliccloudPrivateNetworkRegionsStatusSetting
+
+    -- ** ip_pools
+    , PubliccloudPrivateNetworkSubnetIpPoolsSetting (..)
+    , newPubliccloudPrivateNetworkSubnetIpPoolsSetting
+
+    -- ** services
+    , PubliccloudRegionServicesSetting (..)
+    , newPubliccloudRegionServicesSetting
 
     ) where
 
@@ -64,8 +76,96 @@ import qualified Terrafomo.OVH.Lens  as P
 import qualified Terrafomo.OVH.Types as P
 import qualified Terrafomo.Validator as TF
 
+-- | @regions_status@ nested settings.
+data CloudNetworkPrivateRegionsStatusSetting s = CloudNetworkPrivateRegionsStatusSetting'
+    { _status :: TF.Attr s P.Text
+    -- ^ @status@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @regions_status@ settings value.
+newCloudNetworkPrivateRegionsStatusSetting
+    :: TF.Attr s P.Text -- ^ 'P._status': @status@
+    -> CloudNetworkPrivateRegionsStatusSetting s
+newCloudNetworkPrivateRegionsStatusSetting _status =
+    CloudNetworkPrivateRegionsStatusSetting'
+        { _status = _status
+        }
+
+instance TF.IsValue  (CloudNetworkPrivateRegionsStatusSetting s)
+instance TF.IsObject (CloudNetworkPrivateRegionsStatusSetting s) where
+    toObject CloudNetworkPrivateRegionsStatusSetting'{..} = P.catMaybes
+        [ TF.assign "status" <$> TF.attribute _status
+        ]
+
+instance TF.IsValid (CloudNetworkPrivateRegionsStatusSetting s) where
+    validator = P.mempty
+
+instance P.HasStatus (CloudNetworkPrivateRegionsStatusSetting s) (TF.Attr s P.Text) where
+    status =
+        P.lens (_status :: CloudNetworkPrivateRegionsStatusSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _status = a } :: CloudNetworkPrivateRegionsStatusSetting s)
+
+instance s ~ s' => P.HasComputedRegion (TF.Ref s' (CloudNetworkPrivateRegionsStatusSetting s)) (TF.Attr s P.Text) where
+    computedRegion x = TF.compute (TF.refKey x) "region"
+
+-- | @ip_pools@ nested settings.
+data CloudNetworkPrivateSubnetIpPoolsSetting s = CloudNetworkPrivateSubnetIpPoolsSetting'
+    deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @ip_pools@ settings value.
+newCloudNetworkPrivateSubnetIpPoolsSetting
+    :: CloudNetworkPrivateSubnetIpPoolsSetting s
+newCloudNetworkPrivateSubnetIpPoolsSetting =
+    CloudNetworkPrivateSubnetIpPoolsSetting'
+
+instance TF.IsValue  (CloudNetworkPrivateSubnetIpPoolsSetting s)
+instance TF.IsObject (CloudNetworkPrivateSubnetIpPoolsSetting s) where
+    toObject CloudNetworkPrivateSubnetIpPoolsSetting' = []
+
+instance TF.IsValid (CloudNetworkPrivateSubnetIpPoolsSetting s) where
+    validator = P.mempty
+
+instance s ~ s' => P.HasComputedDhcp (TF.Ref s' (CloudNetworkPrivateSubnetIpPoolsSetting s)) (TF.Attr s P.Bool) where
+    computedDhcp x = TF.compute (TF.refKey x) "dhcp"
+
+instance s ~ s' => P.HasComputedEnd (TF.Ref s' (CloudNetworkPrivateSubnetIpPoolsSetting s)) (TF.Attr s P.Text) where
+    computedEnd x = TF.compute (TF.refKey x) "end"
+
+instance s ~ s' => P.HasComputedNetwork (TF.Ref s' (CloudNetworkPrivateSubnetIpPoolsSetting s)) (TF.Attr s P.Text) where
+    computedNetwork x = TF.compute (TF.refKey x) "network"
+
+instance s ~ s' => P.HasComputedRegion (TF.Ref s' (CloudNetworkPrivateSubnetIpPoolsSetting s)) (TF.Attr s P.Text) where
+    computedRegion x = TF.compute (TF.refKey x) "region"
+
+instance s ~ s' => P.HasComputedStart (TF.Ref s' (CloudNetworkPrivateSubnetIpPoolsSetting s)) (TF.Attr s P.Text) where
+    computedStart x = TF.compute (TF.refKey x) "start"
+
+-- | @services@ nested settings.
+data CloudRegionServicesSetting s = CloudRegionServicesSetting'
+    deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @services@ settings value.
+newCloudRegionServicesSetting
+    :: CloudRegionServicesSetting s
+newCloudRegionServicesSetting =
+    CloudRegionServicesSetting'
+
+instance TF.IsValue  (CloudRegionServicesSetting s)
+instance TF.IsObject (CloudRegionServicesSetting s) where
+    toObject CloudRegionServicesSetting' = []
+
+instance TF.IsValid (CloudRegionServicesSetting s) where
+    validator = P.mempty
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (CloudRegionServicesSetting s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+instance s ~ s' => P.HasComputedStatus (TF.Ref s' (CloudRegionServicesSetting s)) (TF.Attr s P.Text) where
+    computedStatus x = TF.compute (TF.refKey x) "status"
+
 -- | @action@ nested settings.
-data ActionSetting s = ActionSetting'
+data IploadbalancingHttpRouteActionSetting s = IploadbalancingHttpRouteActionSetting'
     { _status :: TF.Attr s P.Int
     -- ^ @status@ - (Optional)
     --
@@ -78,99 +178,67 @@ data ActionSetting s = ActionSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @action@ settings value.
-newActionSetting
+newIploadbalancingHttpRouteActionSetting
     :: TF.Attr s P.Text -- ^ 'P._type'': @type@
-    -> ActionSetting s
-newActionSetting _type' =
-    ActionSetting'
+    -> IploadbalancingHttpRouteActionSetting s
+newIploadbalancingHttpRouteActionSetting _type' =
+    IploadbalancingHttpRouteActionSetting'
         { _status = TF.Nil
         , _target = TF.Nil
         , _type' = _type'
         }
 
-instance TF.IsValue  (ActionSetting s)
-instance TF.IsObject (ActionSetting s) where
-    toObject ActionSetting'{..} = P.catMaybes
+instance TF.IsValue  (IploadbalancingHttpRouteActionSetting s)
+instance TF.IsObject (IploadbalancingHttpRouteActionSetting s) where
+    toObject IploadbalancingHttpRouteActionSetting'{..} = P.catMaybes
         [ TF.assign "status" <$> TF.attribute _status
         , TF.assign "target" <$> TF.attribute _target
         , TF.assign "type" <$> TF.attribute _type'
         ]
 
-instance TF.IsValid (ActionSetting s) where
+instance TF.IsValid (IploadbalancingHttpRouteActionSetting s) where
     validator = P.mempty
 
-instance P.HasStatus (ActionSetting s) (TF.Attr s P.Int) where
+instance P.HasStatus (IploadbalancingHttpRouteActionSetting s) (TF.Attr s P.Int) where
     status =
-        P.lens (_status :: ActionSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _status = a } :: ActionSetting s)
+        P.lens (_status :: IploadbalancingHttpRouteActionSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _status = a } :: IploadbalancingHttpRouteActionSetting s)
 
-instance P.HasTarget (ActionSetting s) (TF.Attr s P.Text) where
+instance P.HasTarget (IploadbalancingHttpRouteActionSetting s) (TF.Attr s P.Text) where
     target =
-        P.lens (_target :: ActionSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _target = a } :: ActionSetting s)
+        P.lens (_target :: IploadbalancingHttpRouteActionSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _target = a } :: IploadbalancingHttpRouteActionSetting s)
 
-instance P.HasType' (ActionSetting s) (TF.Attr s P.Text) where
+instance P.HasType' (IploadbalancingHttpRouteActionSetting s) (TF.Attr s P.Text) where
     type' =
-        P.lens (_type' :: ActionSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a } :: ActionSetting s)
-
--- | @ip_pools@ nested settings.
-data IpPoolsSetting s = IpPoolsSetting'
-    deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @ip_pools@ settings value.
-newIpPoolsSetting
-    :: IpPoolsSetting s
-newIpPoolsSetting =
-    IpPoolsSetting'
-
-instance TF.IsValue  (IpPoolsSetting s)
-instance TF.IsObject (IpPoolsSetting s) where
-    toObject IpPoolsSetting' = []
-
-instance TF.IsValid (IpPoolsSetting s) where
-    validator = P.mempty
-
-instance s ~ s' => P.HasComputedDhcp (TF.Ref s' (IpPoolsSetting s)) (TF.Attr s P.Bool) where
-    computedDhcp x = TF.compute (TF.refKey x) "dhcp"
-
-instance s ~ s' => P.HasComputedEnd (TF.Ref s' (IpPoolsSetting s)) (TF.Attr s P.Text) where
-    computedEnd x = TF.compute (TF.refKey x) "end"
-
-instance s ~ s' => P.HasComputedNetwork (TF.Ref s' (IpPoolsSetting s)) (TF.Attr s P.Text) where
-    computedNetwork x = TF.compute (TF.refKey x) "network"
-
-instance s ~ s' => P.HasComputedRegion (TF.Ref s' (IpPoolsSetting s)) (TF.Attr s P.Text) where
-    computedRegion x = TF.compute (TF.refKey x) "region"
-
-instance s ~ s' => P.HasComputedStart (TF.Ref s' (IpPoolsSetting s)) (TF.Attr s P.Text) where
-    computedStart x = TF.compute (TF.refKey x) "start"
+        P.lens (_type' :: IploadbalancingHttpRouteActionSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _type' = a } :: IploadbalancingHttpRouteActionSetting s)
 
 -- | @orderable_zone@ nested settings.
-data OrderableZoneSetting s = OrderableZoneSetting'
+data IploadbalancingOrderableZoneSetting s = IploadbalancingOrderableZoneSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @orderable_zone@ settings value.
-newOrderableZoneSetting
-    :: OrderableZoneSetting s
-newOrderableZoneSetting =
-    OrderableZoneSetting'
+newIploadbalancingOrderableZoneSetting
+    :: IploadbalancingOrderableZoneSetting s
+newIploadbalancingOrderableZoneSetting =
+    IploadbalancingOrderableZoneSetting'
 
-instance TF.IsValue  (OrderableZoneSetting s)
-instance TF.IsObject (OrderableZoneSetting s) where
-    toObject OrderableZoneSetting' = []
+instance TF.IsValue  (IploadbalancingOrderableZoneSetting s)
+instance TF.IsObject (IploadbalancingOrderableZoneSetting s) where
+    toObject IploadbalancingOrderableZoneSetting' = []
 
-instance TF.IsValid (OrderableZoneSetting s) where
+instance TF.IsValid (IploadbalancingOrderableZoneSetting s) where
     validator = P.mempty
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (OrderableZoneSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (IploadbalancingOrderableZoneSetting s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputedPlanCode (TF.Ref s' (OrderableZoneSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPlanCode (TF.Ref s' (IploadbalancingOrderableZoneSetting s)) (TF.Attr s P.Text) where
     computedPlanCode x = TF.compute (TF.refKey x) "plan_code"
 
 -- | @probe@ nested settings.
-data ProbeSetting s = ProbeSetting'
+data IploadbalancingTcpFarmProbeSetting s = IploadbalancingTcpFarmProbeSetting'
     { _forceSsl :: TF.Attr s P.Bool
     -- ^ @force_ssl@ - (Optional)
     --
@@ -201,11 +269,11 @@ data ProbeSetting s = ProbeSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @probe@ settings value.
-newProbeSetting
+newIploadbalancingTcpFarmProbeSetting
     :: TF.Attr s P.Text -- ^ 'P._type'': @type@
-    -> ProbeSetting s
-newProbeSetting _type' =
-    ProbeSetting'
+    -> IploadbalancingTcpFarmProbeSetting s
+newIploadbalancingTcpFarmProbeSetting _type' =
+    IploadbalancingTcpFarmProbeSetting'
         { _forceSsl = TF.Nil
         , _interval = TF.value 30
         , _match = TF.Nil
@@ -217,9 +285,9 @@ newProbeSetting _type' =
         , _url = TF.Nil
         }
 
-instance TF.IsValue  (ProbeSetting s)
-instance TF.IsObject (ProbeSetting s) where
-    toObject ProbeSetting'{..} = P.catMaybes
+instance TF.IsValue  (IploadbalancingTcpFarmProbeSetting s)
+instance TF.IsObject (IploadbalancingTcpFarmProbeSetting s) where
+    toObject IploadbalancingTcpFarmProbeSetting'{..} = P.catMaybes
         [ TF.assign "force_ssl" <$> TF.attribute _forceSsl
         , TF.assign "interval" <$> TF.attribute _interval
         , TF.assign "match" <$> TF.attribute _match
@@ -231,106 +299,138 @@ instance TF.IsObject (ProbeSetting s) where
         , TF.assign "url" <$> TF.attribute _url
         ]
 
-instance TF.IsValid (ProbeSetting s) where
+instance TF.IsValid (IploadbalancingTcpFarmProbeSetting s) where
     validator = P.mempty
 
-instance P.HasForceSsl (ProbeSetting s) (TF.Attr s P.Bool) where
+instance P.HasForceSsl (IploadbalancingTcpFarmProbeSetting s) (TF.Attr s P.Bool) where
     forceSsl =
-        P.lens (_forceSsl :: ProbeSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _forceSsl = a } :: ProbeSetting s)
+        P.lens (_forceSsl :: IploadbalancingTcpFarmProbeSetting s -> TF.Attr s P.Bool)
+               (\s a -> s { _forceSsl = a } :: IploadbalancingTcpFarmProbeSetting s)
 
-instance P.HasInterval (ProbeSetting s) (TF.Attr s P.Int) where
+instance P.HasInterval (IploadbalancingTcpFarmProbeSetting s) (TF.Attr s P.Int) where
     interval =
-        P.lens (_interval :: ProbeSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _interval = a } :: ProbeSetting s)
+        P.lens (_interval :: IploadbalancingTcpFarmProbeSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _interval = a } :: IploadbalancingTcpFarmProbeSetting s)
 
-instance P.HasMatch (ProbeSetting s) (TF.Attr s P.Text) where
+instance P.HasMatch (IploadbalancingTcpFarmProbeSetting s) (TF.Attr s P.Text) where
     match =
-        P.lens (_match :: ProbeSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _match = a } :: ProbeSetting s)
+        P.lens (_match :: IploadbalancingTcpFarmProbeSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _match = a } :: IploadbalancingTcpFarmProbeSetting s)
 
-instance P.HasMethod (ProbeSetting s) (TF.Attr s P.Text) where
+instance P.HasMethod (IploadbalancingTcpFarmProbeSetting s) (TF.Attr s P.Text) where
     method =
-        P.lens (_method :: ProbeSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _method = a } :: ProbeSetting s)
+        P.lens (_method :: IploadbalancingTcpFarmProbeSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _method = a } :: IploadbalancingTcpFarmProbeSetting s)
 
-instance P.HasNegate (ProbeSetting s) (TF.Attr s P.Bool) where
+instance P.HasNegate (IploadbalancingTcpFarmProbeSetting s) (TF.Attr s P.Bool) where
     negate =
-        P.lens (_negate :: ProbeSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _negate = a } :: ProbeSetting s)
+        P.lens (_negate :: IploadbalancingTcpFarmProbeSetting s -> TF.Attr s P.Bool)
+               (\s a -> s { _negate = a } :: IploadbalancingTcpFarmProbeSetting s)
 
-instance P.HasPattern' (ProbeSetting s) (TF.Attr s P.Text) where
+instance P.HasPattern' (IploadbalancingTcpFarmProbeSetting s) (TF.Attr s P.Text) where
     pattern' =
-        P.lens (_pattern' :: ProbeSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _pattern' = a } :: ProbeSetting s)
+        P.lens (_pattern' :: IploadbalancingTcpFarmProbeSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _pattern' = a } :: IploadbalancingTcpFarmProbeSetting s)
 
-instance P.HasPort (ProbeSetting s) (TF.Attr s P.Int) where
+instance P.HasPort (IploadbalancingTcpFarmProbeSetting s) (TF.Attr s P.Int) where
     port =
-        P.lens (_port :: ProbeSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _port = a } :: ProbeSetting s)
+        P.lens (_port :: IploadbalancingTcpFarmProbeSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _port = a } :: IploadbalancingTcpFarmProbeSetting s)
 
-instance P.HasType' (ProbeSetting s) (TF.Attr s P.Text) where
+instance P.HasType' (IploadbalancingTcpFarmProbeSetting s) (TF.Attr s P.Text) where
     type' =
-        P.lens (_type' :: ProbeSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a } :: ProbeSetting s)
+        P.lens (_type' :: IploadbalancingTcpFarmProbeSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _type' = a } :: IploadbalancingTcpFarmProbeSetting s)
 
-instance P.HasUrl (ProbeSetting s) (TF.Attr s P.Text) where
+instance P.HasUrl (IploadbalancingTcpFarmProbeSetting s) (TF.Attr s P.Text) where
     url =
-        P.lens (_url :: ProbeSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _url = a } :: ProbeSetting s)
+        P.lens (_url :: IploadbalancingTcpFarmProbeSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _url = a } :: IploadbalancingTcpFarmProbeSetting s)
 
 -- | @regions_status@ nested settings.
-data RegionsStatusSetting s = RegionsStatusSetting'
+data PubliccloudPrivateNetworkRegionsStatusSetting s = PubliccloudPrivateNetworkRegionsStatusSetting'
     { _status :: TF.Attr s P.Text
     -- ^ @status@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @regions_status@ settings value.
-newRegionsStatusSetting
+newPubliccloudPrivateNetworkRegionsStatusSetting
     :: TF.Attr s P.Text -- ^ 'P._status': @status@
-    -> RegionsStatusSetting s
-newRegionsStatusSetting _status =
-    RegionsStatusSetting'
+    -> PubliccloudPrivateNetworkRegionsStatusSetting s
+newPubliccloudPrivateNetworkRegionsStatusSetting _status =
+    PubliccloudPrivateNetworkRegionsStatusSetting'
         { _status = _status
         }
 
-instance TF.IsValue  (RegionsStatusSetting s)
-instance TF.IsObject (RegionsStatusSetting s) where
-    toObject RegionsStatusSetting'{..} = P.catMaybes
+instance TF.IsValue  (PubliccloudPrivateNetworkRegionsStatusSetting s)
+instance TF.IsObject (PubliccloudPrivateNetworkRegionsStatusSetting s) where
+    toObject PubliccloudPrivateNetworkRegionsStatusSetting'{..} = P.catMaybes
         [ TF.assign "status" <$> TF.attribute _status
         ]
 
-instance TF.IsValid (RegionsStatusSetting s) where
+instance TF.IsValid (PubliccloudPrivateNetworkRegionsStatusSetting s) where
     validator = P.mempty
 
-instance P.HasStatus (RegionsStatusSetting s) (TF.Attr s P.Text) where
+instance P.HasStatus (PubliccloudPrivateNetworkRegionsStatusSetting s) (TF.Attr s P.Text) where
     status =
-        P.lens (_status :: RegionsStatusSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _status = a } :: RegionsStatusSetting s)
+        P.lens (_status :: PubliccloudPrivateNetworkRegionsStatusSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _status = a } :: PubliccloudPrivateNetworkRegionsStatusSetting s)
 
-instance s ~ s' => P.HasComputedRegion (TF.Ref s' (RegionsStatusSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRegion (TF.Ref s' (PubliccloudPrivateNetworkRegionsStatusSetting s)) (TF.Attr s P.Text) where
     computedRegion x = TF.compute (TF.refKey x) "region"
 
+-- | @ip_pools@ nested settings.
+data PubliccloudPrivateNetworkSubnetIpPoolsSetting s = PubliccloudPrivateNetworkSubnetIpPoolsSetting'
+    deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @ip_pools@ settings value.
+newPubliccloudPrivateNetworkSubnetIpPoolsSetting
+    :: PubliccloudPrivateNetworkSubnetIpPoolsSetting s
+newPubliccloudPrivateNetworkSubnetIpPoolsSetting =
+    PubliccloudPrivateNetworkSubnetIpPoolsSetting'
+
+instance TF.IsValue  (PubliccloudPrivateNetworkSubnetIpPoolsSetting s)
+instance TF.IsObject (PubliccloudPrivateNetworkSubnetIpPoolsSetting s) where
+    toObject PubliccloudPrivateNetworkSubnetIpPoolsSetting' = []
+
+instance TF.IsValid (PubliccloudPrivateNetworkSubnetIpPoolsSetting s) where
+    validator = P.mempty
+
+instance s ~ s' => P.HasComputedDhcp (TF.Ref s' (PubliccloudPrivateNetworkSubnetIpPoolsSetting s)) (TF.Attr s P.Bool) where
+    computedDhcp x = TF.compute (TF.refKey x) "dhcp"
+
+instance s ~ s' => P.HasComputedEnd (TF.Ref s' (PubliccloudPrivateNetworkSubnetIpPoolsSetting s)) (TF.Attr s P.Text) where
+    computedEnd x = TF.compute (TF.refKey x) "end"
+
+instance s ~ s' => P.HasComputedNetwork (TF.Ref s' (PubliccloudPrivateNetworkSubnetIpPoolsSetting s)) (TF.Attr s P.Text) where
+    computedNetwork x = TF.compute (TF.refKey x) "network"
+
+instance s ~ s' => P.HasComputedRegion (TF.Ref s' (PubliccloudPrivateNetworkSubnetIpPoolsSetting s)) (TF.Attr s P.Text) where
+    computedRegion x = TF.compute (TF.refKey x) "region"
+
+instance s ~ s' => P.HasComputedStart (TF.Ref s' (PubliccloudPrivateNetworkSubnetIpPoolsSetting s)) (TF.Attr s P.Text) where
+    computedStart x = TF.compute (TF.refKey x) "start"
+
 -- | @services@ nested settings.
-data ServicesSetting s = ServicesSetting'
+data PubliccloudRegionServicesSetting s = PubliccloudRegionServicesSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @services@ settings value.
-newServicesSetting
-    :: ServicesSetting s
-newServicesSetting =
-    ServicesSetting'
+newPubliccloudRegionServicesSetting
+    :: PubliccloudRegionServicesSetting s
+newPubliccloudRegionServicesSetting =
+    PubliccloudRegionServicesSetting'
 
-instance TF.IsValue  (ServicesSetting s)
-instance TF.IsObject (ServicesSetting s) where
-    toObject ServicesSetting' = []
+instance TF.IsValue  (PubliccloudRegionServicesSetting s)
+instance TF.IsObject (PubliccloudRegionServicesSetting s) where
+    toObject PubliccloudRegionServicesSetting' = []
 
-instance TF.IsValid (ServicesSetting s) where
+instance TF.IsValid (PubliccloudRegionServicesSetting s) where
     validator = P.mempty
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ServicesSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (PubliccloudRegionServicesSetting s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputedStatus (TF.Ref s' (ServicesSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedStatus (TF.Ref s' (PubliccloudRegionServicesSetting s)) (TF.Attr s P.Text) where
     computedStatus x = TF.compute (TF.refKey x) "status"

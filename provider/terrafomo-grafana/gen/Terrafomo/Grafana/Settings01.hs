@@ -18,12 +18,12 @@
 module Terrafomo.Grafana.Settings01
     (
     -- ** json_data
-      JsonDataSetting (..)
-    , newJsonDataSetting
+      DataSourceJsonDataSetting (..)
+    , newDataSourceJsonDataSetting
 
     -- ** secure_json_data
-    , SecureJsonDataSetting (..)
-    , newSecureJsonDataSetting
+    , DataSourceSecureJsonDataSetting (..)
+    , newDataSourceSecureJsonDataSetting
 
     ) where
 
@@ -49,7 +49,7 @@ import qualified Terrafomo.Name          as TF
 import qualified Terrafomo.Validator     as TF
 
 -- | @json_data@ nested settings.
-data JsonDataSetting s = JsonDataSetting'
+data DataSourceJsonDataSetting s = DataSourceJsonDataSetting'
     { _assumeRoleArn           :: TF.Attr s P.Text
     -- ^ @assume_role_arn@ - (Optional)
     --
@@ -65,52 +65,52 @@ data JsonDataSetting s = JsonDataSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @json_data@ settings value.
-newJsonDataSetting
+newDataSourceJsonDataSetting
     :: TF.Attr s P.Text -- ^ 'P._defaultRegion': @default_region@
     -> TF.Attr s P.Text -- ^ 'P._authType': @auth_type@
-    -> JsonDataSetting s
-newJsonDataSetting _defaultRegion _authType =
-    JsonDataSetting'
+    -> DataSourceJsonDataSetting s
+newDataSourceJsonDataSetting _defaultRegion _authType =
+    DataSourceJsonDataSetting'
         { _assumeRoleArn = TF.Nil
         , _authType = _authType
         , _customMetricsNamespaces = TF.Nil
         , _defaultRegion = _defaultRegion
         }
 
-instance TF.IsValue  (JsonDataSetting s)
-instance TF.IsObject (JsonDataSetting s) where
-    toObject JsonDataSetting'{..} = P.catMaybes
+instance TF.IsValue  (DataSourceJsonDataSetting s)
+instance TF.IsObject (DataSourceJsonDataSetting s) where
+    toObject DataSourceJsonDataSetting'{..} = P.catMaybes
         [ TF.assign "assume_role_arn" <$> TF.attribute _assumeRoleArn
         , TF.assign "auth_type" <$> TF.attribute _authType
         , TF.assign "custom_metrics_namespaces" <$> TF.attribute _customMetricsNamespaces
         , TF.assign "default_region" <$> TF.attribute _defaultRegion
         ]
 
-instance TF.IsValid (JsonDataSetting s) where
+instance TF.IsValid (DataSourceJsonDataSetting s) where
     validator = P.mempty
 
-instance P.HasAssumeRoleArn (JsonDataSetting s) (TF.Attr s P.Text) where
+instance P.HasAssumeRoleArn (DataSourceJsonDataSetting s) (TF.Attr s P.Text) where
     assumeRoleArn =
-        P.lens (_assumeRoleArn :: JsonDataSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _assumeRoleArn = a } :: JsonDataSetting s)
+        P.lens (_assumeRoleArn :: DataSourceJsonDataSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _assumeRoleArn = a } :: DataSourceJsonDataSetting s)
 
-instance P.HasAuthType (JsonDataSetting s) (TF.Attr s P.Text) where
+instance P.HasAuthType (DataSourceJsonDataSetting s) (TF.Attr s P.Text) where
     authType =
-        P.lens (_authType :: JsonDataSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _authType = a } :: JsonDataSetting s)
+        P.lens (_authType :: DataSourceJsonDataSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _authType = a } :: DataSourceJsonDataSetting s)
 
-instance P.HasCustomMetricsNamespaces (JsonDataSetting s) (TF.Attr s P.Text) where
+instance P.HasCustomMetricsNamespaces (DataSourceJsonDataSetting s) (TF.Attr s P.Text) where
     customMetricsNamespaces =
-        P.lens (_customMetricsNamespaces :: JsonDataSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _customMetricsNamespaces = a } :: JsonDataSetting s)
+        P.lens (_customMetricsNamespaces :: DataSourceJsonDataSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _customMetricsNamespaces = a } :: DataSourceJsonDataSetting s)
 
-instance P.HasDefaultRegion (JsonDataSetting s) (TF.Attr s P.Text) where
+instance P.HasDefaultRegion (DataSourceJsonDataSetting s) (TF.Attr s P.Text) where
     defaultRegion =
-        P.lens (_defaultRegion :: JsonDataSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _defaultRegion = a } :: JsonDataSetting s)
+        P.lens (_defaultRegion :: DataSourceJsonDataSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _defaultRegion = a } :: DataSourceJsonDataSetting s)
 
 -- | @secure_json_data@ nested settings.
-data SecureJsonDataSetting s = SecureJsonDataSetting'
+data DataSourceSecureJsonDataSetting s = DataSourceSecureJsonDataSetting'
     { _accessKey :: TF.Attr s P.Text
     -- ^ @access_key@ - (Required)
     --
@@ -120,32 +120,32 @@ data SecureJsonDataSetting s = SecureJsonDataSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @secure_json_data@ settings value.
-newSecureJsonDataSetting
+newDataSourceSecureJsonDataSetting
     :: TF.Attr s P.Text -- ^ 'P._accessKey': @access_key@
     -> TF.Attr s P.Text -- ^ 'P._secretKey': @secret_key@
-    -> SecureJsonDataSetting s
-newSecureJsonDataSetting _accessKey _secretKey =
-    SecureJsonDataSetting'
+    -> DataSourceSecureJsonDataSetting s
+newDataSourceSecureJsonDataSetting _accessKey _secretKey =
+    DataSourceSecureJsonDataSetting'
         { _accessKey = _accessKey
         , _secretKey = _secretKey
         }
 
-instance TF.IsValue  (SecureJsonDataSetting s)
-instance TF.IsObject (SecureJsonDataSetting s) where
-    toObject SecureJsonDataSetting'{..} = P.catMaybes
+instance TF.IsValue  (DataSourceSecureJsonDataSetting s)
+instance TF.IsObject (DataSourceSecureJsonDataSetting s) where
+    toObject DataSourceSecureJsonDataSetting'{..} = P.catMaybes
         [ TF.assign "access_key" <$> TF.attribute _accessKey
         , TF.assign "secret_key" <$> TF.attribute _secretKey
         ]
 
-instance TF.IsValid (SecureJsonDataSetting s) where
+instance TF.IsValid (DataSourceSecureJsonDataSetting s) where
     validator = P.mempty
 
-instance P.HasAccessKey (SecureJsonDataSetting s) (TF.Attr s P.Text) where
+instance P.HasAccessKey (DataSourceSecureJsonDataSetting s) (TF.Attr s P.Text) where
     accessKey =
-        P.lens (_accessKey :: SecureJsonDataSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _accessKey = a } :: SecureJsonDataSetting s)
+        P.lens (_accessKey :: DataSourceSecureJsonDataSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _accessKey = a } :: DataSourceSecureJsonDataSetting s)
 
-instance P.HasSecretKey (SecureJsonDataSetting s) (TF.Attr s P.Text) where
+instance P.HasSecretKey (DataSourceSecureJsonDataSetting s) (TF.Attr s P.Text) where
     secretKey =
-        P.lens (_secretKey :: SecureJsonDataSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _secretKey = a } :: SecureJsonDataSetting s)
+        P.lens (_secretKey :: DataSourceSecureJsonDataSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _secretKey = a } :: DataSourceSecureJsonDataSetting s)

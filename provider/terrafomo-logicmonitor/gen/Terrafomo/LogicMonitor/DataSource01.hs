@@ -56,7 +56,7 @@ import qualified Terrafomo.Validator             as TF
 -- See the <https://www.terraform.io/docs/providers/logicmonitor/d/collectors.html terraform documentation>
 -- for more information.
 data CollectorsData s = CollectorsData'
-    { _filters    :: TF.Attr s [TF.Attr s (FiltersSetting s)]
+    { _filters    :: TF.Attr s [TF.Attr s (CollectorsFiltersSetting s)]
     -- ^ @filters@ - (Optional, Forces New)
     --
     , _mostRecent :: TF.Attr s P.Bool
@@ -93,9 +93,9 @@ instance TF.IsObject (CollectorsData s) where
 instance TF.IsValid (CollectorsData s) where
     validator = P.mempty
 
-instance P.HasFilters (CollectorsData s) (TF.Attr s [TF.Attr s (FiltersSetting s)]) where
+instance P.HasFilters (CollectorsData s) (TF.Attr s [TF.Attr s (CollectorsFiltersSetting s)]) where
     filters =
-        P.lens (_filters :: CollectorsData s -> TF.Attr s [TF.Attr s (FiltersSetting s)])
+        P.lens (_filters :: CollectorsData s -> TF.Attr s [TF.Attr s (CollectorsFiltersSetting s)])
                (\s a -> s { _filters = a } :: CollectorsData s)
 
 instance P.HasMostRecent (CollectorsData s) (TF.Attr s P.Bool) where
@@ -121,7 +121,7 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (CollectorsData s)) (TF.Attr s P.T
 -- See the <https://www.terraform.io/docs/providers/logicmonitor/d/device_group.html terraform documentation>
 -- for more information.
 data DeviceGroupData s = DeviceGroupData'
-    { _filters :: TF.Attr s [TF.Attr s (FiltersSetting s)]
+    { _filters :: TF.Attr s [TF.Attr s (DeviceGroupFiltersSetting s)]
     -- ^ @filters@ - (Optional, Forces New)
     --
     , _offset  :: TF.Attr s P.Int
@@ -153,9 +153,9 @@ instance TF.IsObject (DeviceGroupData s) where
 instance TF.IsValid (DeviceGroupData s) where
     validator = P.mempty
 
-instance P.HasFilters (DeviceGroupData s) (TF.Attr s [TF.Attr s (FiltersSetting s)]) where
+instance P.HasFilters (DeviceGroupData s) (TF.Attr s [TF.Attr s (DeviceGroupFiltersSetting s)]) where
     filters =
-        P.lens (_filters :: DeviceGroupData s -> TF.Attr s [TF.Attr s (FiltersSetting s)])
+        P.lens (_filters :: DeviceGroupData s -> TF.Attr s [TF.Attr s (DeviceGroupFiltersSetting s)])
                (\s a -> s { _filters = a } :: DeviceGroupData s)
 
 instance P.HasOffset (DeviceGroupData s) (TF.Attr s P.Int) where

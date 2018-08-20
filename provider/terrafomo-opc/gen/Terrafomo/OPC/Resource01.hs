@@ -381,43 +381,43 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeImageListResource s)) (TF.
 -- See the <https://www.terraform.io/docs/providers/opc/r/compute_instance.html terraform documentation>
 -- for more information.
 data ComputeInstanceResource s = ComputeInstanceResource'
-    { _bootOrder          :: TF.Attr s [TF.Attr s P.Int]
+    { _bootOrder :: TF.Attr s [TF.Attr s P.Int]
     -- ^ @boot_order@ - (Optional, Forces New)
     --
-    , _desiredState       :: TF.Attr s P.Text
+    , _desiredState :: TF.Attr s P.Text
     -- ^ @desired_state@ - (Optional)
     --
-    , _hostname           :: TF.Attr s P.Text
+    , _hostname :: TF.Attr s P.Text
     -- ^ @hostname@ - (Optional, Forces New)
     --
-    , _imageList          :: TF.Attr s P.Text
+    , _imageList :: TF.Attr s P.Text
     -- ^ @image_list@ - (Optional, Forces New)
     --
     , _instanceAttributes :: TF.Attr s P.Text
     -- ^ @instance_attributes@ - (Optional, Forces New)
     --
-    , _label              :: TF.Attr s P.Text
+    , _label :: TF.Attr s P.Text
     -- ^ @label@ - (Optional, Forces New)
     --
-    , _name               :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _networkingInfo     :: TF.Attr s [TF.Attr s (NetworkingInfoSetting s)]
+    , _networkingInfo :: TF.Attr s [TF.Attr s (ComputeInstanceNetworkingInfoSetting s)]
     -- ^ @networking_info@ - (Optional, Forces New)
     --
-    , _reverseDns         :: TF.Attr s P.Bool
+    , _reverseDns :: TF.Attr s P.Bool
     -- ^ @reverse_dns@ - (Optional, Forces New)
     --
-    , _shape              :: TF.Attr s P.Text
+    , _shape :: TF.Attr s P.Text
     -- ^ @shape@ - (Required, Forces New)
     --
-    , _sshKeys            :: TF.Attr s [TF.Attr s P.Text]
+    , _sshKeys :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @ssh_keys@ - (Optional, Forces New)
     --
-    , _storage            :: TF.Attr s [TF.Attr s (StorageSetting s)]
+    , _storage :: TF.Attr s [TF.Attr s (ComputeInstanceStorageSetting s)]
     -- ^ @storage@ - (Optional, Forces New)
     --
-    , _tags               :: TF.Attr s [TF.Attr s P.Text]
+    , _tags :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @tags@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -500,9 +500,9 @@ instance P.HasName (ComputeInstanceResource s) (TF.Attr s P.Text) where
         P.lens (_name :: ComputeInstanceResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ComputeInstanceResource s)
 
-instance P.HasNetworkingInfo (ComputeInstanceResource s) (TF.Attr s [TF.Attr s (NetworkingInfoSetting s)]) where
+instance P.HasNetworkingInfo (ComputeInstanceResource s) (TF.Attr s [TF.Attr s (ComputeInstanceNetworkingInfoSetting s)]) where
     networkingInfo =
-        P.lens (_networkingInfo :: ComputeInstanceResource s -> TF.Attr s [TF.Attr s (NetworkingInfoSetting s)])
+        P.lens (_networkingInfo :: ComputeInstanceResource s -> TF.Attr s [TF.Attr s (ComputeInstanceNetworkingInfoSetting s)])
                (\s a -> s { _networkingInfo = a } :: ComputeInstanceResource s)
 
 instance P.HasReverseDns (ComputeInstanceResource s) (TF.Attr s P.Bool) where
@@ -520,9 +520,9 @@ instance P.HasSshKeys (ComputeInstanceResource s) (TF.Attr s [TF.Attr s P.Text])
         P.lens (_sshKeys :: ComputeInstanceResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _sshKeys = a } :: ComputeInstanceResource s)
 
-instance P.HasStorage (ComputeInstanceResource s) (TF.Attr s [TF.Attr s (StorageSetting s)]) where
+instance P.HasStorage (ComputeInstanceResource s) (TF.Attr s [TF.Attr s (ComputeInstanceStorageSetting s)]) where
     storage =
-        P.lens (_storage :: ComputeInstanceResource s -> TF.Attr s [TF.Attr s (StorageSetting s)])
+        P.lens (_storage :: ComputeInstanceResource s -> TF.Attr s [TF.Attr s (ComputeInstanceStorageSetting s)])
                (\s a -> s { _storage = a } :: ComputeInstanceResource s)
 
 instance P.HasTags (ComputeInstanceResource s) (TF.Attr s [TF.Attr s P.Text]) where
@@ -563,7 +563,7 @@ instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (ComputeInstanceResource s)
 instance s ~ s' => P.HasComputedLabel (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s P.Text) where
     computedLabel x = TF.compute (TF.refKey x) "label"
 
-instance s ~ s' => P.HasComputedNetworkingInfo (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s [TF.Attr s (NetworkingInfoSetting s)]) where
+instance s ~ s' => P.HasComputedNetworkingInfo (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s [TF.Attr s (ComputeInstanceNetworkingInfoSetting s)]) where
     computedNetworkingInfo x = TF.compute (TF.refKey x) "networking_info"
 
 instance s ~ s' => P.HasComputedPlacementRequirements (TF.Ref s' (ComputeInstanceResource s)) (TF.Attr s [TF.Attr s P.Text]) where
@@ -1211,26 +1211,26 @@ instance s ~ s' => P.HasComputedUri (TF.Ref s' (ComputeMachineImageResource s)) 
 -- See the <https://www.terraform.io/docs/providers/opc/r/compute_orchestrated_instance.html terraform documentation>
 -- for more information.
 data ComputeOrchestratedInstanceResource s = ComputeOrchestratedInstanceResource'
-    { _description  :: TF.Attr s P.Text
+    { _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
     , _desiredState :: TF.Attr s P.Text
     -- ^ @desired_state@ - (Required)
     --
-    , _instance'    :: TF.Attr s [TF.Attr s (Instance'Setting s)]
+    , _instance' :: TF.Attr s [TF.Attr s (ComputeOrchestratedInstanceInstanceSetting s)]
     -- ^ @instance@ - (Required)
     --
-    , _name         :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _tags         :: TF.Attr s [TF.Attr s P.Text]
+    , _tags :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @tags@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @opc_compute_orchestrated_instance@ resource value.
 computeOrchestratedInstanceResource
-    :: TF.Attr s [TF.Attr s (Instance'Setting s)] -- ^ @instance@ ('P._instance'', 'P.instance'')
+    :: TF.Attr s [TF.Attr s (ComputeOrchestratedInstanceInstanceSetting s)] -- ^ @instance@ ('P._instance'', 'P.instance'')
     -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> TF.Attr s P.Text -- ^ @desired_state@ ('P._desiredState', 'P.desiredState')
     -> P.Resource (ComputeOrchestratedInstanceResource s)
@@ -1266,9 +1266,9 @@ instance P.HasDesiredState (ComputeOrchestratedInstanceResource s) (TF.Attr s P.
         P.lens (_desiredState :: ComputeOrchestratedInstanceResource s -> TF.Attr s P.Text)
                (\s a -> s { _desiredState = a } :: ComputeOrchestratedInstanceResource s)
 
-instance P.HasInstance' (ComputeOrchestratedInstanceResource s) (TF.Attr s [TF.Attr s (Instance'Setting s)]) where
+instance P.HasInstance' (ComputeOrchestratedInstanceResource s) (TF.Attr s [TF.Attr s (ComputeOrchestratedInstanceInstanceSetting s)]) where
     instance' =
-        P.lens (_instance' :: ComputeOrchestratedInstanceResource s -> TF.Attr s [TF.Attr s (Instance'Setting s)])
+        P.lens (_instance' :: ComputeOrchestratedInstanceResource s -> TF.Attr s [TF.Attr s (ComputeOrchestratedInstanceInstanceSetting s)])
                (\s a -> s { _instance' = a } :: ComputeOrchestratedInstanceResource s)
 
 instance P.HasName (ComputeOrchestratedInstanceResource s) (TF.Attr s P.Text) where
@@ -3025,7 +3025,7 @@ instance s ~ s' => P.HasComputedUri (TF.Ref s' (LbaasLoadBalancerResource s)) (T
 -- See the <https://www.terraform.io/docs/providers/opc/r/lbaas_policy.html terraform documentation>
 -- for more information.
 data LbaasPolicyResource s = LbaasPolicyResource'
-    { _applicationCookieStickinessPolicy :: TF.Attr s (ApplicationCookieStickinessPolicySetting s)
+    { _applicationCookieStickinessPolicy :: TF.Attr s (LbaasPolicyApplicationCookieStickinessPolicySetting s)
     -- ^ @application_cookie_stickiness_policy@ - (Optional, Forces New)
     --
     -- Conflicts with:
@@ -3039,7 +3039,7 @@ data LbaasPolicyResource s = LbaasPolicyResource'
     -- * 'setRequestHeaderPolicy'
     -- * 'sslNegotiationPolicy'
     -- * 'trustedCertificatePolicy'
-    , _cloudgatePolicy :: TF.Attr s (CloudgatePolicySetting s)
+    , _cloudgatePolicy :: TF.Attr s (LbaasPolicyCloudgatePolicySetting s)
     -- ^ @cloudgate_policy@ - (Optional, Forces New)
     --
     -- Conflicts with:
@@ -3056,7 +3056,7 @@ data LbaasPolicyResource s = LbaasPolicyResource'
     , _loadBalancer :: TF.Attr s P.Text
     -- ^ @load_balancer@ - (Required)
     --
-    , _loadBalancerCookieStickinessPolicy :: TF.Attr s (LoadBalancerCookieStickinessPolicySetting s)
+    , _loadBalancerCookieStickinessPolicy :: TF.Attr s (LbaasPolicyLoadBalancerCookieStickinessPolicySetting s)
     -- ^ @load_balancer_cookie_stickiness_policy@ - (Optional, Forces New)
     --
     -- Conflicts with:
@@ -3070,7 +3070,7 @@ data LbaasPolicyResource s = LbaasPolicyResource'
     -- * 'setRequestHeaderPolicy'
     -- * 'sslNegotiationPolicy'
     -- * 'trustedCertificatePolicy'
-    , _loadBalancingMechanismPolicy :: TF.Attr s (LoadBalancingMechanismPolicySetting s)
+    , _loadBalancingMechanismPolicy :: TF.Attr s (LbaasPolicyLoadBalancingMechanismPolicySetting s)
     -- ^ @load_balancing_mechanism_policy@ - (Optional, Forces New)
     --
     -- Conflicts with:
@@ -3087,7 +3087,7 @@ data LbaasPolicyResource s = LbaasPolicyResource'
     , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _rateLimitingRequestPolicy :: TF.Attr s (RateLimitingRequestPolicySetting s)
+    , _rateLimitingRequestPolicy :: TF.Attr s (LbaasPolicyRateLimitingRequestPolicySetting s)
     -- ^ @rate_limiting_request_policy@ - (Optional, Forces New)
     --
     -- Conflicts with:
@@ -3101,7 +3101,7 @@ data LbaasPolicyResource s = LbaasPolicyResource'
     -- * 'setRequestHeaderPolicy'
     -- * 'sslNegotiationPolicy'
     -- * 'trustedCertificatePolicy'
-    , _redirectPolicy :: TF.Attr s (RedirectPolicySetting s)
+    , _redirectPolicy :: TF.Attr s (LbaasPolicyRedirectPolicySetting s)
     -- ^ @redirect_policy@ - (Optional, Forces New)
     --
     -- Conflicts with:
@@ -3115,7 +3115,7 @@ data LbaasPolicyResource s = LbaasPolicyResource'
     -- * 'setRequestHeaderPolicy'
     -- * 'sslNegotiationPolicy'
     -- * 'trustedCertificatePolicy'
-    , _resourceAccessControlPolicy :: TF.Attr s (ResourceAccessControlPolicySetting s)
+    , _resourceAccessControlPolicy :: TF.Attr s (LbaasPolicyResourceAccessControlPolicySetting s)
     -- ^ @resource_access_control_policy@ - (Optional, Forces New)
     --
     -- Conflicts with:
@@ -3129,7 +3129,7 @@ data LbaasPolicyResource s = LbaasPolicyResource'
     -- * 'setRequestHeaderPolicy'
     -- * 'sslNegotiationPolicy'
     -- * 'trustedCertificatePolicy'
-    , _setRequestHeaderPolicy :: TF.Attr s (SetRequestHeaderPolicySetting s)
+    , _setRequestHeaderPolicy :: TF.Attr s (LbaasPolicySetRequestHeaderPolicySetting s)
     -- ^ @set_request_header_policy@ - (Optional, Forces New)
     --
     -- Conflicts with:
@@ -3143,7 +3143,7 @@ data LbaasPolicyResource s = LbaasPolicyResource'
     -- * 'resourceAccessControlPolicy'
     -- * 'sslNegotiationPolicy'
     -- * 'trustedCertificatePolicy'
-    , _sslNegotiationPolicy :: TF.Attr s (SslNegotiationPolicySetting s)
+    , _sslNegotiationPolicy :: TF.Attr s (LbaasPolicySslNegotiationPolicySetting s)
     -- ^ @ssl_negotiation_policy@ - (Optional, Forces New)
     --
     -- Conflicts with:
@@ -3157,7 +3157,7 @@ data LbaasPolicyResource s = LbaasPolicyResource'
     -- * 'resourceAccessControlPolicy'
     -- * 'setRequestHeaderPolicy'
     -- * 'trustedCertificatePolicy'
-    , _trustedCertificatePolicy :: TF.Attr s (TrustedCertificatePolicySetting s)
+    , _trustedCertificatePolicy :: TF.Attr s (LbaasPolicyTrustedCertificatePolicySetting s)
     -- ^ @trusted_certificate_policy@ - (Optional, Forces New)
     --
     -- Conflicts with:
@@ -3266,53 +3266,53 @@ instance TF.IsValid (LbaasPolicyResource s) where
         ])
            P.<> TF.settingsValidator "_applicationCookieStickinessPolicy"
                   (_applicationCookieStickinessPolicy
-                      :: LbaasPolicyResource s -> TF.Attr s (ApplicationCookieStickinessPolicySetting s))
+                      :: LbaasPolicyResource s -> TF.Attr s (LbaasPolicyApplicationCookieStickinessPolicySetting s))
                   TF.validator
            P.<> TF.settingsValidator "_cloudgatePolicy"
                   (_cloudgatePolicy
-                      :: LbaasPolicyResource s -> TF.Attr s (CloudgatePolicySetting s))
+                      :: LbaasPolicyResource s -> TF.Attr s (LbaasPolicyCloudgatePolicySetting s))
                   TF.validator
            P.<> TF.settingsValidator "_loadBalancerCookieStickinessPolicy"
                   (_loadBalancerCookieStickinessPolicy
-                      :: LbaasPolicyResource s -> TF.Attr s (LoadBalancerCookieStickinessPolicySetting s))
+                      :: LbaasPolicyResource s -> TF.Attr s (LbaasPolicyLoadBalancerCookieStickinessPolicySetting s))
                   TF.validator
            P.<> TF.settingsValidator "_loadBalancingMechanismPolicy"
                   (_loadBalancingMechanismPolicy
-                      :: LbaasPolicyResource s -> TF.Attr s (LoadBalancingMechanismPolicySetting s))
+                      :: LbaasPolicyResource s -> TF.Attr s (LbaasPolicyLoadBalancingMechanismPolicySetting s))
                   TF.validator
            P.<> TF.settingsValidator "_rateLimitingRequestPolicy"
                   (_rateLimitingRequestPolicy
-                      :: LbaasPolicyResource s -> TF.Attr s (RateLimitingRequestPolicySetting s))
+                      :: LbaasPolicyResource s -> TF.Attr s (LbaasPolicyRateLimitingRequestPolicySetting s))
                   TF.validator
            P.<> TF.settingsValidator "_redirectPolicy"
                   (_redirectPolicy
-                      :: LbaasPolicyResource s -> TF.Attr s (RedirectPolicySetting s))
+                      :: LbaasPolicyResource s -> TF.Attr s (LbaasPolicyRedirectPolicySetting s))
                   TF.validator
            P.<> TF.settingsValidator "_resourceAccessControlPolicy"
                   (_resourceAccessControlPolicy
-                      :: LbaasPolicyResource s -> TF.Attr s (ResourceAccessControlPolicySetting s))
+                      :: LbaasPolicyResource s -> TF.Attr s (LbaasPolicyResourceAccessControlPolicySetting s))
                   TF.validator
            P.<> TF.settingsValidator "_setRequestHeaderPolicy"
                   (_setRequestHeaderPolicy
-                      :: LbaasPolicyResource s -> TF.Attr s (SetRequestHeaderPolicySetting s))
+                      :: LbaasPolicyResource s -> TF.Attr s (LbaasPolicySetRequestHeaderPolicySetting s))
                   TF.validator
            P.<> TF.settingsValidator "_sslNegotiationPolicy"
                   (_sslNegotiationPolicy
-                      :: LbaasPolicyResource s -> TF.Attr s (SslNegotiationPolicySetting s))
+                      :: LbaasPolicyResource s -> TF.Attr s (LbaasPolicySslNegotiationPolicySetting s))
                   TF.validator
            P.<> TF.settingsValidator "_trustedCertificatePolicy"
                   (_trustedCertificatePolicy
-                      :: LbaasPolicyResource s -> TF.Attr s (TrustedCertificatePolicySetting s))
+                      :: LbaasPolicyResource s -> TF.Attr s (LbaasPolicyTrustedCertificatePolicySetting s))
                   TF.validator
 
-instance P.HasApplicationCookieStickinessPolicy (LbaasPolicyResource s) (TF.Attr s (ApplicationCookieStickinessPolicySetting s)) where
+instance P.HasApplicationCookieStickinessPolicy (LbaasPolicyResource s) (TF.Attr s (LbaasPolicyApplicationCookieStickinessPolicySetting s)) where
     applicationCookieStickinessPolicy =
-        P.lens (_applicationCookieStickinessPolicy :: LbaasPolicyResource s -> TF.Attr s (ApplicationCookieStickinessPolicySetting s))
+        P.lens (_applicationCookieStickinessPolicy :: LbaasPolicyResource s -> TF.Attr s (LbaasPolicyApplicationCookieStickinessPolicySetting s))
                (\s a -> s { _applicationCookieStickinessPolicy = a } :: LbaasPolicyResource s)
 
-instance P.HasCloudgatePolicy (LbaasPolicyResource s) (TF.Attr s (CloudgatePolicySetting s)) where
+instance P.HasCloudgatePolicy (LbaasPolicyResource s) (TF.Attr s (LbaasPolicyCloudgatePolicySetting s)) where
     cloudgatePolicy =
-        P.lens (_cloudgatePolicy :: LbaasPolicyResource s -> TF.Attr s (CloudgatePolicySetting s))
+        P.lens (_cloudgatePolicy :: LbaasPolicyResource s -> TF.Attr s (LbaasPolicyCloudgatePolicySetting s))
                (\s a -> s { _cloudgatePolicy = a } :: LbaasPolicyResource s)
 
 instance P.HasLoadBalancer (LbaasPolicyResource s) (TF.Attr s P.Text) where
@@ -3320,14 +3320,14 @@ instance P.HasLoadBalancer (LbaasPolicyResource s) (TF.Attr s P.Text) where
         P.lens (_loadBalancer :: LbaasPolicyResource s -> TF.Attr s P.Text)
                (\s a -> s { _loadBalancer = a } :: LbaasPolicyResource s)
 
-instance P.HasLoadBalancerCookieStickinessPolicy (LbaasPolicyResource s) (TF.Attr s (LoadBalancerCookieStickinessPolicySetting s)) where
+instance P.HasLoadBalancerCookieStickinessPolicy (LbaasPolicyResource s) (TF.Attr s (LbaasPolicyLoadBalancerCookieStickinessPolicySetting s)) where
     loadBalancerCookieStickinessPolicy =
-        P.lens (_loadBalancerCookieStickinessPolicy :: LbaasPolicyResource s -> TF.Attr s (LoadBalancerCookieStickinessPolicySetting s))
+        P.lens (_loadBalancerCookieStickinessPolicy :: LbaasPolicyResource s -> TF.Attr s (LbaasPolicyLoadBalancerCookieStickinessPolicySetting s))
                (\s a -> s { _loadBalancerCookieStickinessPolicy = a } :: LbaasPolicyResource s)
 
-instance P.HasLoadBalancingMechanismPolicy (LbaasPolicyResource s) (TF.Attr s (LoadBalancingMechanismPolicySetting s)) where
+instance P.HasLoadBalancingMechanismPolicy (LbaasPolicyResource s) (TF.Attr s (LbaasPolicyLoadBalancingMechanismPolicySetting s)) where
     loadBalancingMechanismPolicy =
-        P.lens (_loadBalancingMechanismPolicy :: LbaasPolicyResource s -> TF.Attr s (LoadBalancingMechanismPolicySetting s))
+        P.lens (_loadBalancingMechanismPolicy :: LbaasPolicyResource s -> TF.Attr s (LbaasPolicyLoadBalancingMechanismPolicySetting s))
                (\s a -> s { _loadBalancingMechanismPolicy = a } :: LbaasPolicyResource s)
 
 instance P.HasName (LbaasPolicyResource s) (TF.Attr s P.Text) where
@@ -3335,34 +3335,34 @@ instance P.HasName (LbaasPolicyResource s) (TF.Attr s P.Text) where
         P.lens (_name :: LbaasPolicyResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: LbaasPolicyResource s)
 
-instance P.HasRateLimitingRequestPolicy (LbaasPolicyResource s) (TF.Attr s (RateLimitingRequestPolicySetting s)) where
+instance P.HasRateLimitingRequestPolicy (LbaasPolicyResource s) (TF.Attr s (LbaasPolicyRateLimitingRequestPolicySetting s)) where
     rateLimitingRequestPolicy =
-        P.lens (_rateLimitingRequestPolicy :: LbaasPolicyResource s -> TF.Attr s (RateLimitingRequestPolicySetting s))
+        P.lens (_rateLimitingRequestPolicy :: LbaasPolicyResource s -> TF.Attr s (LbaasPolicyRateLimitingRequestPolicySetting s))
                (\s a -> s { _rateLimitingRequestPolicy = a } :: LbaasPolicyResource s)
 
-instance P.HasRedirectPolicy (LbaasPolicyResource s) (TF.Attr s (RedirectPolicySetting s)) where
+instance P.HasRedirectPolicy (LbaasPolicyResource s) (TF.Attr s (LbaasPolicyRedirectPolicySetting s)) where
     redirectPolicy =
-        P.lens (_redirectPolicy :: LbaasPolicyResource s -> TF.Attr s (RedirectPolicySetting s))
+        P.lens (_redirectPolicy :: LbaasPolicyResource s -> TF.Attr s (LbaasPolicyRedirectPolicySetting s))
                (\s a -> s { _redirectPolicy = a } :: LbaasPolicyResource s)
 
-instance P.HasResourceAccessControlPolicy (LbaasPolicyResource s) (TF.Attr s (ResourceAccessControlPolicySetting s)) where
+instance P.HasResourceAccessControlPolicy (LbaasPolicyResource s) (TF.Attr s (LbaasPolicyResourceAccessControlPolicySetting s)) where
     resourceAccessControlPolicy =
-        P.lens (_resourceAccessControlPolicy :: LbaasPolicyResource s -> TF.Attr s (ResourceAccessControlPolicySetting s))
+        P.lens (_resourceAccessControlPolicy :: LbaasPolicyResource s -> TF.Attr s (LbaasPolicyResourceAccessControlPolicySetting s))
                (\s a -> s { _resourceAccessControlPolicy = a } :: LbaasPolicyResource s)
 
-instance P.HasSetRequestHeaderPolicy (LbaasPolicyResource s) (TF.Attr s (SetRequestHeaderPolicySetting s)) where
+instance P.HasSetRequestHeaderPolicy (LbaasPolicyResource s) (TF.Attr s (LbaasPolicySetRequestHeaderPolicySetting s)) where
     setRequestHeaderPolicy =
-        P.lens (_setRequestHeaderPolicy :: LbaasPolicyResource s -> TF.Attr s (SetRequestHeaderPolicySetting s))
+        P.lens (_setRequestHeaderPolicy :: LbaasPolicyResource s -> TF.Attr s (LbaasPolicySetRequestHeaderPolicySetting s))
                (\s a -> s { _setRequestHeaderPolicy = a } :: LbaasPolicyResource s)
 
-instance P.HasSslNegotiationPolicy (LbaasPolicyResource s) (TF.Attr s (SslNegotiationPolicySetting s)) where
+instance P.HasSslNegotiationPolicy (LbaasPolicyResource s) (TF.Attr s (LbaasPolicySslNegotiationPolicySetting s)) where
     sslNegotiationPolicy =
-        P.lens (_sslNegotiationPolicy :: LbaasPolicyResource s -> TF.Attr s (SslNegotiationPolicySetting s))
+        P.lens (_sslNegotiationPolicy :: LbaasPolicyResource s -> TF.Attr s (LbaasPolicySslNegotiationPolicySetting s))
                (\s a -> s { _sslNegotiationPolicy = a } :: LbaasPolicyResource s)
 
-instance P.HasTrustedCertificatePolicy (LbaasPolicyResource s) (TF.Attr s (TrustedCertificatePolicySetting s)) where
+instance P.HasTrustedCertificatePolicy (LbaasPolicyResource s) (TF.Attr s (LbaasPolicyTrustedCertificatePolicySetting s)) where
     trustedCertificatePolicy =
-        P.lens (_trustedCertificatePolicy :: LbaasPolicyResource s -> TF.Attr s (TrustedCertificatePolicySetting s))
+        P.lens (_trustedCertificatePolicy :: LbaasPolicyResource s -> TF.Attr s (LbaasPolicyTrustedCertificatePolicySetting s))
                (\s a -> s { _trustedCertificatePolicy = a } :: LbaasPolicyResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (LbaasPolicyResource s)) (TF.Attr s P.Text) where
@@ -3385,7 +3385,7 @@ data LbaasServerPoolResource s = LbaasServerPoolResource'
     { _enabled      :: TF.Attr s P.Bool
     -- ^ @enabled@ - (Optional)
     --
-    , _healthCheck  :: TF.Attr s (HealthCheckSetting s)
+    , _healthCheck  :: TF.Attr s (LbaasServerPoolHealthCheckSetting s)
     -- ^ @health_check@ - (Optional)
     --
     , _loadBalancer :: TF.Attr s P.Text
@@ -3438,7 +3438,7 @@ instance TF.IsValid (LbaasServerPoolResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_healthCheck"
                   (_healthCheck
-                      :: LbaasServerPoolResource s -> TF.Attr s (HealthCheckSetting s))
+                      :: LbaasServerPoolResource s -> TF.Attr s (LbaasServerPoolHealthCheckSetting s))
                   TF.validator
 
 instance P.HasEnabled (LbaasServerPoolResource s) (TF.Attr s P.Bool) where
@@ -3446,9 +3446,9 @@ instance P.HasEnabled (LbaasServerPoolResource s) (TF.Attr s P.Bool) where
         P.lens (_enabled :: LbaasServerPoolResource s -> TF.Attr s P.Bool)
                (\s a -> s { _enabled = a } :: LbaasServerPoolResource s)
 
-instance P.HasHealthCheck (LbaasServerPoolResource s) (TF.Attr s (HealthCheckSetting s)) where
+instance P.HasHealthCheck (LbaasServerPoolResource s) (TF.Attr s (LbaasServerPoolHealthCheckSetting s)) where
     healthCheck =
-        P.lens (_healthCheck :: LbaasServerPoolResource s -> TF.Attr s (HealthCheckSetting s))
+        P.lens (_healthCheck :: LbaasServerPoolResource s -> TF.Attr s (LbaasServerPoolHealthCheckSetting s))
                (\s a -> s { _healthCheck = a } :: LbaasServerPoolResource s)
 
 instance P.HasLoadBalancer (LbaasServerPoolResource s) (TF.Attr s P.Text) where

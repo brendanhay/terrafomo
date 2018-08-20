@@ -18,8 +18,8 @@
 module Terrafomo.Template.Settings01
     (
     -- ** part
-      PartSetting (..)
-    , newPartSetting
+      CloudinitConfigPartSetting (..)
+    , newCloudinitConfigPartSetting
 
     ) where
 
@@ -45,61 +45,61 @@ import qualified Terrafomo.Template.Types as P
 import qualified Terrafomo.Validator      as TF
 
 -- | @part@ nested settings.
-data PartSetting s = PartSetting'
+data CloudinitConfigPartSetting s = CloudinitConfigPartSetting'
     { _content     :: TF.Attr s P.Text
-    -- ^ @content@ - (Required, Forces New)
+    -- ^ @content@ - (Required)
     --
     , _contentType :: TF.Attr s P.Text
-    -- ^ @content_type@ - (Optional, Forces New)
+    -- ^ @content_type@ - (Optional)
     --
     , _filename    :: TF.Attr s P.Text
-    -- ^ @filename@ - (Optional, Forces New)
+    -- ^ @filename@ - (Optional)
     --
     , _mergeType   :: TF.Attr s P.Text
-    -- ^ @merge_type@ - (Optional, Forces New)
+    -- ^ @merge_type@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @part@ settings value.
-newPartSetting
+newCloudinitConfigPartSetting
     :: TF.Attr s P.Text -- ^ 'P._content': @content@
-    -> PartSetting s
-newPartSetting _content =
-    PartSetting'
+    -> CloudinitConfigPartSetting s
+newCloudinitConfigPartSetting _content =
+    CloudinitConfigPartSetting'
         { _content = _content
         , _contentType = TF.Nil
         , _filename = TF.Nil
         , _mergeType = TF.Nil
         }
 
-instance TF.IsValue  (PartSetting s)
-instance TF.IsObject (PartSetting s) where
-    toObject PartSetting'{..} = P.catMaybes
+instance TF.IsValue  (CloudinitConfigPartSetting s)
+instance TF.IsObject (CloudinitConfigPartSetting s) where
+    toObject CloudinitConfigPartSetting'{..} = P.catMaybes
         [ TF.assign "content" <$> TF.attribute _content
         , TF.assign "content_type" <$> TF.attribute _contentType
         , TF.assign "filename" <$> TF.attribute _filename
         , TF.assign "merge_type" <$> TF.attribute _mergeType
         ]
 
-instance TF.IsValid (PartSetting s) where
+instance TF.IsValid (CloudinitConfigPartSetting s) where
     validator = P.mempty
 
-instance P.HasContent (PartSetting s) (TF.Attr s P.Text) where
+instance P.HasContent (CloudinitConfigPartSetting s) (TF.Attr s P.Text) where
     content =
-        P.lens (_content :: PartSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _content = a } :: PartSetting s)
+        P.lens (_content :: CloudinitConfigPartSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _content = a } :: CloudinitConfigPartSetting s)
 
-instance P.HasContentType (PartSetting s) (TF.Attr s P.Text) where
+instance P.HasContentType (CloudinitConfigPartSetting s) (TF.Attr s P.Text) where
     contentType =
-        P.lens (_contentType :: PartSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _contentType = a } :: PartSetting s)
+        P.lens (_contentType :: CloudinitConfigPartSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _contentType = a } :: CloudinitConfigPartSetting s)
 
-instance P.HasFilename (PartSetting s) (TF.Attr s P.Text) where
+instance P.HasFilename (CloudinitConfigPartSetting s) (TF.Attr s P.Text) where
     filename =
-        P.lens (_filename :: PartSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _filename = a } :: PartSetting s)
+        P.lens (_filename :: CloudinitConfigPartSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _filename = a } :: CloudinitConfigPartSetting s)
 
-instance P.HasMergeType (PartSetting s) (TF.Attr s P.Text) where
+instance P.HasMergeType (CloudinitConfigPartSetting s) (TF.Attr s P.Text) where
     mergeType =
-        P.lens (_mergeType :: PartSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _mergeType = a } :: PartSetting s)
+        P.lens (_mergeType :: CloudinitConfigPartSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _mergeType = a } :: CloudinitConfigPartSetting s)

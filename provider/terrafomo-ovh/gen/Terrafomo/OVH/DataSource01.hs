@@ -128,7 +128,7 @@ instance s ~ s' => P.HasComputedContinentCode (TF.Ref s' (CloudRegionData s)) (T
 instance s ~ s' => P.HasComputedDatacenterLocation (TF.Ref s' (CloudRegionData s)) (TF.Attr s P.Text) where
     computedDatacenterLocation x = TF.compute (TF.refKey x) "datacenter_location"
 
-instance s ~ s' => P.HasComputedServices (TF.Ref s' (CloudRegionData s)) (TF.Attr s [TF.Attr s (ServicesSetting s)]) where
+instance s ~ s' => P.HasComputedServices (TF.Ref s' (CloudRegionData s)) (TF.Attr s [TF.Attr s (CloudRegionServicesSetting s)]) where
     computedServices x = TF.compute (TF.refKey x) "services"
 
 -- | @ovh_cloud_regions@ DataSource.
@@ -371,7 +371,7 @@ instance s ~ s' => P.HasComputedMetricsToken (TF.Ref s' (IploadbalancingData s))
 instance s ~ s' => P.HasComputedOffer (TF.Ref s' (IploadbalancingData s)) (TF.Attr s P.Text) where
     computedOffer x = TF.compute (TF.refKey x) "offer"
 
-instance s ~ s' => P.HasComputedOrderableZone (TF.Ref s' (IploadbalancingData s)) (TF.Attr s [TF.Attr s (OrderableZoneSetting s)]) where
+instance s ~ s' => P.HasComputedOrderableZone (TF.Ref s' (IploadbalancingData s)) (TF.Attr s [TF.Attr s (IploadbalancingOrderableZoneSetting s)]) where
     computedOrderableZone x = TF.compute (TF.refKey x) "orderable_zone"
 
 instance s ~ s' => P.HasComputedServiceName (TF.Ref s' (IploadbalancingData s)) (TF.Attr s P.Text) where
@@ -593,7 +593,7 @@ instance s ~ s' => P.HasComputedContinentCode (TF.Ref s' (PubliccloudRegionData 
 instance s ~ s' => P.HasComputedDatacenterLocation (TF.Ref s' (PubliccloudRegionData s)) (TF.Attr s P.Text) where
     computedDatacenterLocation x = TF.compute (TF.refKey x) "datacenter_location"
 
-instance s ~ s' => P.HasComputedServices (TF.Ref s' (PubliccloudRegionData s)) (TF.Attr s [TF.Attr s (ServicesSetting s)]) where
+instance s ~ s' => P.HasComputedServices (TF.Ref s' (PubliccloudRegionData s)) (TF.Attr s [TF.Attr s (PubliccloudRegionServicesSetting s)]) where
     computedServices x = TF.compute (TF.refKey x) "services"
 
 -- | @ovh_publiccloud_regions@ DataSource.

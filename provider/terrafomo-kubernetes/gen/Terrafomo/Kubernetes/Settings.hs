@@ -12,6 +12,14 @@ module Terrafomo.Kubernetes.Settings
     (
     -- * Settings
       module Terrafomo.Kubernetes.Settings01
+    , module Terrafomo.Kubernetes.Settings02
+    , module Terrafomo.Kubernetes.Settings03
+    , module Terrafomo.Kubernetes.Settings04
+    , module Terrafomo.Kubernetes.Settings05
     ) where
 
 import Terrafomo.Kubernetes.Settings01
+import Terrafomo.Kubernetes.Settings02
+import Terrafomo.Kubernetes.Settings03
+import Terrafomo.Kubernetes.Settings04
+import Terrafomo.Kubernetes.Settings05

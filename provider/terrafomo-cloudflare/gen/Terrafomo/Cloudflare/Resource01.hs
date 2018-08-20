@@ -80,34 +80,34 @@ import qualified Terrafomo.Validator           as TF
 -- See the <https://www.terraform.io/docs/providers/cloudflare/r/load_balancer_monitor.html terraform documentation>
 -- for more information.
 data LoadBalancerMonitorResource s = LoadBalancerMonitorResource'
-    { _description   :: TF.Attr s P.Text
+    { _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _expectedBody  :: TF.Attr s P.Text
+    , _expectedBody :: TF.Attr s P.Text
     -- ^ @expected_body@ - (Required)
     --
     , _expectedCodes :: TF.Attr s P.Text
     -- ^ @expected_codes@ - (Required)
     --
-    , _header        :: TF.Attr s [TF.Attr s (HeaderSetting s)]
+    , _header :: TF.Attr s [TF.Attr s (LoadBalancerMonitorHeaderSetting s)]
     -- ^ @header@ - (Optional)
     --
-    , _interval      :: TF.Attr s P.Int
+    , _interval :: TF.Attr s P.Int
     -- ^ @interval@ - (Optional)
     --
-    , _method        :: TF.Attr s P.Text
+    , _method :: TF.Attr s P.Text
     -- ^ @method@ - (Optional)
     --
-    , _path          :: TF.Attr s P.Text
+    , _path :: TF.Attr s P.Text
     -- ^ @path@ - (Optional)
     --
-    , _retries       :: TF.Attr s P.Int
+    , _retries :: TF.Attr s P.Int
     -- ^ @retries@ - (Optional)
     --
-    , _timeout       :: TF.Attr s P.Int
+    , _timeout :: TF.Attr s P.Int
     -- ^ @timeout@ - (Optional)
     --
-    , _type'         :: TF.Attr s P.Text
+    , _type' :: TF.Attr s P.Text
     -- ^ @type@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -164,9 +164,9 @@ instance P.HasExpectedCodes (LoadBalancerMonitorResource s) (TF.Attr s P.Text) w
         P.lens (_expectedCodes :: LoadBalancerMonitorResource s -> TF.Attr s P.Text)
                (\s a -> s { _expectedCodes = a } :: LoadBalancerMonitorResource s)
 
-instance P.HasHeader (LoadBalancerMonitorResource s) (TF.Attr s [TF.Attr s (HeaderSetting s)]) where
+instance P.HasHeader (LoadBalancerMonitorResource s) (TF.Attr s [TF.Attr s (LoadBalancerMonitorHeaderSetting s)]) where
     header =
-        P.lens (_header :: LoadBalancerMonitorResource s -> TF.Attr s [TF.Attr s (HeaderSetting s)])
+        P.lens (_header :: LoadBalancerMonitorResource s -> TF.Attr s [TF.Attr s (LoadBalancerMonitorHeaderSetting s)])
                (\s a -> s { _header = a } :: LoadBalancerMonitorResource s)
 
 instance P.HasInterval (LoadBalancerMonitorResource s) (TF.Attr s P.Int) where
@@ -213,28 +213,28 @@ instance s ~ s' => P.HasComputedModifiedOn (TF.Ref s' (LoadBalancerMonitorResour
 -- See the <https://www.terraform.io/docs/providers/cloudflare/r/load_balancer_pool.html terraform documentation>
 -- for more information.
 data LoadBalancerPoolResource s = LoadBalancerPoolResource'
-    { _checkRegions      :: TF.Attr s [TF.Attr s P.Text]
+    { _checkRegions :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @check_regions@ - (Optional, Forces New)
     --
-    , _description       :: TF.Attr s P.Text
+    , _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional, Forces New)
     --
-    , _enabled           :: TF.Attr s P.Bool
+    , _enabled :: TF.Attr s P.Bool
     -- ^ @enabled@ - (Optional, Forces New)
     --
-    , _minimumOrigins    :: TF.Attr s P.Int
+    , _minimumOrigins :: TF.Attr s P.Int
     -- ^ @minimum_origins@ - (Optional, Forces New)
     --
-    , _monitor           :: TF.Attr s P.Text
+    , _monitor :: TF.Attr s P.Text
     -- ^ @monitor@ - (Optional, Forces New)
     --
-    , _name              :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
     , _notificationEmail :: TF.Attr s P.Text
     -- ^ @notification_email@ - (Optional, Forces New)
     --
-    , _origins           :: TF.Attr s [TF.Attr s (OriginsSetting s)]
+    , _origins :: TF.Attr s [TF.Attr s (LoadBalancerPoolOriginsSetting s)]
     -- ^ @origins@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -242,7 +242,7 @@ data LoadBalancerPoolResource s = LoadBalancerPoolResource'
 -- | Define a new @cloudflare_load_balancer_pool@ resource value.
 loadBalancerPoolResource
     :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
-    -> TF.Attr s [TF.Attr s (OriginsSetting s)] -- ^ @origins@ ('P._origins', 'P.origins')
+    -> TF.Attr s [TF.Attr s (LoadBalancerPoolOriginsSetting s)] -- ^ @origins@ ('P._origins', 'P.origins')
     -> P.Resource (LoadBalancerPoolResource s)
 loadBalancerPoolResource _name _origins =
     TF.unsafeResource "cloudflare_load_balancer_pool" TF.validator $
@@ -307,9 +307,9 @@ instance P.HasNotificationEmail (LoadBalancerPoolResource s) (TF.Attr s P.Text) 
         P.lens (_notificationEmail :: LoadBalancerPoolResource s -> TF.Attr s P.Text)
                (\s a -> s { _notificationEmail = a } :: LoadBalancerPoolResource s)
 
-instance P.HasOrigins (LoadBalancerPoolResource s) (TF.Attr s [TF.Attr s (OriginsSetting s)]) where
+instance P.HasOrigins (LoadBalancerPoolResource s) (TF.Attr s [TF.Attr s (LoadBalancerPoolOriginsSetting s)]) where
     origins =
-        P.lens (_origins :: LoadBalancerPoolResource s -> TF.Attr s [TF.Attr s (OriginsSetting s)])
+        P.lens (_origins :: LoadBalancerPoolResource s -> TF.Attr s [TF.Attr s (LoadBalancerPoolOriginsSetting s)])
                (\s a -> s { _origins = a } :: LoadBalancerPoolResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (LoadBalancerPoolResource s)) (TF.Attr s P.Text) where
@@ -332,34 +332,34 @@ data LoadBalancerResource s = LoadBalancerResource'
     { _defaultPoolIds :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text))
     -- ^ @default_pool_ids@ - (Required)
     --
-    , _description    :: TF.Attr s P.Text
+    , _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
     , _fallbackPoolId :: TF.Attr s P.Text
     -- ^ @fallback_pool_id@ - (Required)
     --
-    , _name           :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _popPools       :: TF.Attr s [TF.Attr s (PopPoolsSetting s)]
+    , _popPools :: TF.Attr s [TF.Attr s (LoadBalancerPopPoolsSetting s)]
     -- ^ @pop_pools@ - (Optional)
     --
-    , _proxied        :: TF.Attr s P.Bool
+    , _proxied :: TF.Attr s P.Bool
     -- ^ @proxied@ - (Optional)
     --
     -- Conflicts with:
     --
     -- * 'ttl'
-    , _regionPools    :: TF.Attr s [TF.Attr s (RegionPoolsSetting s)]
+    , _regionPools :: TF.Attr s [TF.Attr s (LoadBalancerRegionPoolsSetting s)]
     -- ^ @region_pools@ - (Optional)
     --
-    , _ttl            :: TF.Attr s P.Int
+    , _ttl :: TF.Attr s P.Int
     -- ^ @ttl@ - (Optional)
     --
     -- Conflicts with:
     --
     -- * 'proxied'
-    , _zone           :: TF.Attr s P.Text
+    , _zone :: TF.Attr s P.Text
     -- ^ @zone@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -432,9 +432,9 @@ instance P.HasName (LoadBalancerResource s) (TF.Attr s P.Text) where
         P.lens (_name :: LoadBalancerResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: LoadBalancerResource s)
 
-instance P.HasPopPools (LoadBalancerResource s) (TF.Attr s [TF.Attr s (PopPoolsSetting s)]) where
+instance P.HasPopPools (LoadBalancerResource s) (TF.Attr s [TF.Attr s (LoadBalancerPopPoolsSetting s)]) where
     popPools =
-        P.lens (_popPools :: LoadBalancerResource s -> TF.Attr s [TF.Attr s (PopPoolsSetting s)])
+        P.lens (_popPools :: LoadBalancerResource s -> TF.Attr s [TF.Attr s (LoadBalancerPopPoolsSetting s)])
                (\s a -> s { _popPools = a } :: LoadBalancerResource s)
 
 instance P.HasProxied (LoadBalancerResource s) (TF.Attr s P.Bool) where
@@ -442,9 +442,9 @@ instance P.HasProxied (LoadBalancerResource s) (TF.Attr s P.Bool) where
         P.lens (_proxied :: LoadBalancerResource s -> TF.Attr s P.Bool)
                (\s a -> s { _proxied = a } :: LoadBalancerResource s)
 
-instance P.HasRegionPools (LoadBalancerResource s) (TF.Attr s [TF.Attr s (RegionPoolsSetting s)]) where
+instance P.HasRegionPools (LoadBalancerResource s) (TF.Attr s [TF.Attr s (LoadBalancerRegionPoolsSetting s)]) where
     regionPools =
-        P.lens (_regionPools :: LoadBalancerResource s -> TF.Attr s [TF.Attr s (RegionPoolsSetting s)])
+        P.lens (_regionPools :: LoadBalancerResource s -> TF.Attr s [TF.Attr s (LoadBalancerRegionPoolsSetting s)])
                (\s a -> s { _regionPools = a } :: LoadBalancerResource s)
 
 instance P.HasTtl (LoadBalancerResource s) (TF.Attr s P.Int) where
@@ -466,10 +466,10 @@ instance s ~ s' => P.HasComputedCreatedOn (TF.Ref s' (LoadBalancerResource s)) (
 instance s ~ s' => P.HasComputedModifiedOn (TF.Ref s' (LoadBalancerResource s)) (TF.Attr s P.Text) where
     computedModifiedOn x = TF.compute (TF.refKey x) "modified_on"
 
-instance s ~ s' => P.HasComputedPopPools (TF.Ref s' (LoadBalancerResource s)) (TF.Attr s [TF.Attr s (PopPoolsSetting s)]) where
+instance s ~ s' => P.HasComputedPopPools (TF.Ref s' (LoadBalancerResource s)) (TF.Attr s [TF.Attr s (LoadBalancerPopPoolsSetting s)]) where
     computedPopPools x = TF.compute (TF.refKey x) "pop_pools"
 
-instance s ~ s' => P.HasComputedRegionPools (TF.Ref s' (LoadBalancerResource s)) (TF.Attr s [TF.Attr s (RegionPoolsSetting s)]) where
+instance s ~ s' => P.HasComputedRegionPools (TF.Ref s' (LoadBalancerResource s)) (TF.Attr s [TF.Attr s (LoadBalancerRegionPoolsSetting s)]) where
     computedRegionPools x = TF.compute (TF.refKey x) "region_pools"
 
 instance s ~ s' => P.HasComputedTtl (TF.Ref s' (LoadBalancerResource s)) (TF.Attr s P.Int) where
@@ -483,7 +483,7 @@ instance s ~ s' => P.HasComputedZoneId (TF.Ref s' (LoadBalancerResource s)) (TF.
 -- See the <https://www.terraform.io/docs/providers/cloudflare/r/page_rule.html terraform documentation>
 -- for more information.
 data PageRuleResource s = PageRuleResource'
-    { _actions  :: TF.Attr s (ActionsSetting s)
+    { _actions  :: TF.Attr s (PageRuleActionsSetting s)
     -- ^ @actions@ - (Required)
     --
     , _priority :: TF.Attr s P.Int
@@ -502,7 +502,7 @@ data PageRuleResource s = PageRuleResource'
 
 -- | Define a new @cloudflare_page_rule@ resource value.
 pageRuleResource
-    :: TF.Attr s (ActionsSetting s) -- ^ @actions@ ('P._actions', 'P.actions')
+    :: TF.Attr s (PageRuleActionsSetting s) -- ^ @actions@ ('P._actions', 'P.actions')
     -> TF.Attr s P.Text -- ^ @target@ ('P._target', 'P.target')
     -> TF.Attr s P.Text -- ^ @zone@ ('P._zone', 'P.zone')
     -> P.Resource (PageRuleResource s)
@@ -529,12 +529,12 @@ instance TF.IsValid (PageRuleResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_actions"
                   (_actions
-                      :: PageRuleResource s -> TF.Attr s (ActionsSetting s))
+                      :: PageRuleResource s -> TF.Attr s (PageRuleActionsSetting s))
                   TF.validator
 
-instance P.HasActions (PageRuleResource s) (TF.Attr s (ActionsSetting s)) where
+instance P.HasActions (PageRuleResource s) (TF.Attr s (PageRuleActionsSetting s)) where
     actions =
-        P.lens (_actions :: PageRuleResource s -> TF.Attr s (ActionsSetting s))
+        P.lens (_actions :: PageRuleResource s -> TF.Attr s (PageRuleActionsSetting s))
                (\s a -> s { _actions = a } :: PageRuleResource s)
 
 instance P.HasPriority (PageRuleResource s) (TF.Attr s P.Int) where
@@ -568,13 +568,13 @@ instance s ~ s' => P.HasComputedZoneId (TF.Ref s' (PageRuleResource s)) (TF.Attr
 -- See the <https://www.terraform.io/docs/providers/cloudflare/r/rate_limit.html terraform documentation>
 -- for more information.
 data RateLimitResource s = RateLimitResource'
-    { _action            :: TF.Attr s (ActionSetting s)
+    { _action            :: TF.Attr s (RateLimitActionSetting s)
     -- ^ @action@ - (Required)
     --
     , _bypassUrlPatterns :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @bypass_url_patterns@ - (Optional)
     --
-    , _correlate         :: TF.Attr s (CorrelateSetting s)
+    , _correlate         :: TF.Attr s (RateLimitCorrelateSetting s)
     -- ^ @correlate@ - (Optional)
     --
     , _description       :: TF.Attr s P.Text
@@ -583,7 +583,7 @@ data RateLimitResource s = RateLimitResource'
     , _disabled          :: TF.Attr s P.Bool
     -- ^ @disabled@ - (Optional)
     --
-    , _match             :: TF.Attr s (MatchSetting s)
+    , _match             :: TF.Attr s (RateLimitMatchSetting s)
     -- ^ @match@ - (Optional)
     --
     , _period            :: TF.Attr s P.Int
@@ -599,7 +599,7 @@ data RateLimitResource s = RateLimitResource'
 
 -- | Define a new @cloudflare_rate_limit@ resource value.
 rateLimitResource
-    :: TF.Attr s (ActionSetting s) -- ^ @action@ ('P._action', 'P.action')
+    :: TF.Attr s (RateLimitActionSetting s) -- ^ @action@ ('P._action', 'P.action')
     -> TF.Attr s P.Int -- ^ @period@ ('P._period', 'P.period')
     -> TF.Attr s P.Int -- ^ @threshold@ ('P._threshold', 'P.threshold')
     -> TF.Attr s P.Text -- ^ @zone@ ('P._zone', 'P.zone')
@@ -635,20 +635,20 @@ instance TF.IsValid (RateLimitResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_action"
                   (_action
-                      :: RateLimitResource s -> TF.Attr s (ActionSetting s))
+                      :: RateLimitResource s -> TF.Attr s (RateLimitActionSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_correlate"
                   (_correlate
-                      :: RateLimitResource s -> TF.Attr s (CorrelateSetting s))
+                      :: RateLimitResource s -> TF.Attr s (RateLimitCorrelateSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_match"
                   (_match
-                      :: RateLimitResource s -> TF.Attr s (MatchSetting s))
+                      :: RateLimitResource s -> TF.Attr s (RateLimitMatchSetting s))
                   TF.validator
 
-instance P.HasAction (RateLimitResource s) (TF.Attr s (ActionSetting s)) where
+instance P.HasAction (RateLimitResource s) (TF.Attr s (RateLimitActionSetting s)) where
     action =
-        P.lens (_action :: RateLimitResource s -> TF.Attr s (ActionSetting s))
+        P.lens (_action :: RateLimitResource s -> TF.Attr s (RateLimitActionSetting s))
                (\s a -> s { _action = a } :: RateLimitResource s)
 
 instance P.HasBypassUrlPatterns (RateLimitResource s) (TF.Attr s [TF.Attr s P.Text]) where
@@ -656,9 +656,9 @@ instance P.HasBypassUrlPatterns (RateLimitResource s) (TF.Attr s [TF.Attr s P.Te
         P.lens (_bypassUrlPatterns :: RateLimitResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _bypassUrlPatterns = a } :: RateLimitResource s)
 
-instance P.HasCorrelate (RateLimitResource s) (TF.Attr s (CorrelateSetting s)) where
+instance P.HasCorrelate (RateLimitResource s) (TF.Attr s (RateLimitCorrelateSetting s)) where
     correlate =
-        P.lens (_correlate :: RateLimitResource s -> TF.Attr s (CorrelateSetting s))
+        P.lens (_correlate :: RateLimitResource s -> TF.Attr s (RateLimitCorrelateSetting s))
                (\s a -> s { _correlate = a } :: RateLimitResource s)
 
 instance P.HasDescription (RateLimitResource s) (TF.Attr s P.Text) where
@@ -671,9 +671,9 @@ instance P.HasDisabled (RateLimitResource s) (TF.Attr s P.Bool) where
         P.lens (_disabled :: RateLimitResource s -> TF.Attr s P.Bool)
                (\s a -> s { _disabled = a } :: RateLimitResource s)
 
-instance P.HasMatch (RateLimitResource s) (TF.Attr s (MatchSetting s)) where
+instance P.HasMatch (RateLimitResource s) (TF.Attr s (RateLimitMatchSetting s)) where
     match =
-        P.lens (_match :: RateLimitResource s -> TF.Attr s (MatchSetting s))
+        P.lens (_match :: RateLimitResource s -> TF.Attr s (RateLimitMatchSetting s))
                (\s a -> s { _match = a } :: RateLimitResource s)
 
 instance P.HasPeriod (RateLimitResource s) (TF.Attr s P.Int) where
@@ -694,7 +694,7 @@ instance P.HasZone (RateLimitResource s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (RateLimitResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedMatch (TF.Ref s' (RateLimitResource s)) (TF.Attr s (MatchSetting s)) where
+instance s ~ s' => P.HasComputedMatch (TF.Ref s' (RateLimitResource s)) (TF.Attr s (RateLimitMatchSetting s)) where
     computedMatch x = TF.compute (TF.refKey x) "match"
 
 instance s ~ s' => P.HasComputedZoneId (TF.Ref s' (RateLimitResource s)) (TF.Attr s P.Text) where
@@ -705,7 +705,7 @@ instance s ~ s' => P.HasComputedZoneId (TF.Ref s' (RateLimitResource s)) (TF.Att
 -- See the <https://www.terraform.io/docs/providers/cloudflare/r/record.html terraform documentation>
 -- for more information.
 data RecordResource s = RecordResource'
-    { _data'    :: TF.Attr s (P.Map P.Text (TF.Attr s (Data'Setting s)))
+    { _data'    :: TF.Attr s (P.Map P.Text (TF.Attr s (RecordDataSetting s)))
     -- ^ @data@ - (Optional)
     --
     -- Conflicts with:
@@ -782,9 +782,9 @@ instance TF.IsValid (RecordResource s) where
                             ])
         ])
 
-instance P.HasData' (RecordResource s) (TF.Attr s (P.Map P.Text (TF.Attr s (Data'Setting s)))) where
+instance P.HasData' (RecordResource s) (TF.Attr s (P.Map P.Text (TF.Attr s (RecordDataSetting s)))) where
     data' =
-        P.lens (_data' :: RecordResource s -> TF.Attr s (P.Map P.Text (TF.Attr s (Data'Setting s))))
+        P.lens (_data' :: RecordResource s -> TF.Attr s (P.Map P.Text (TF.Attr s (RecordDataSetting s))))
                (\s a -> s { _data' = a } :: RecordResource s)
 
 instance P.HasDomain (RecordResource s) (TF.Attr s P.Text) where
@@ -921,7 +921,7 @@ data ZoneSettingsOverrideResource s = ZoneSettingsOverrideResource'
     { _name     :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _settings :: TF.Attr s (Settings s)
+    , _settings :: TF.Attr s (ZoneSettingsOverrideSettingsSetting s)
     -- ^ @settings@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -947,7 +947,7 @@ instance TF.IsValid (ZoneSettingsOverrideResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_settings"
                   (_settings
-                      :: ZoneSettingsOverrideResource s -> TF.Attr s (Settings s))
+                      :: ZoneSettingsOverrideResource s -> TF.Attr s (ZoneSettingsOverrideSettingsSetting s))
                   TF.validator
 
 instance P.HasName (ZoneSettingsOverrideResource s) (TF.Attr s P.Text) where
@@ -955,15 +955,15 @@ instance P.HasName (ZoneSettingsOverrideResource s) (TF.Attr s P.Text) where
         P.lens (_name :: ZoneSettingsOverrideResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ZoneSettingsOverrideResource s)
 
-instance P.HasSettings (ZoneSettingsOverrideResource s) (TF.Attr s (Settings s)) where
+instance P.HasSettings (ZoneSettingsOverrideResource s) (TF.Attr s (ZoneSettingsOverrideSettingsSetting s)) where
     settings =
-        P.lens (_settings :: ZoneSettingsOverrideResource s -> TF.Attr s (Settings s))
+        P.lens (_settings :: ZoneSettingsOverrideResource s -> TF.Attr s (ZoneSettingsOverrideSettingsSetting s))
                (\s a -> s { _settings = a } :: ZoneSettingsOverrideResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ZoneSettingsOverrideResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedInitialSettings (TF.Ref s' (ZoneSettingsOverrideResource s)) (TF.Attr s (InitialSettings s)) where
+instance s ~ s' => P.HasComputedInitialSettings (TF.Ref s' (ZoneSettingsOverrideResource s)) (TF.Attr s (ZoneSettingsOverrideInitialSettingsSetting s)) where
     computedInitialSettings x = TF.compute (TF.refKey x) "initial_settings"
 
 instance s ~ s' => P.HasComputedInitialSettingsReadAt (TF.Ref s' (ZoneSettingsOverrideResource s)) (TF.Attr s P.Text) where
@@ -972,7 +972,7 @@ instance s ~ s' => P.HasComputedInitialSettingsReadAt (TF.Ref s' (ZoneSettingsOv
 instance s ~ s' => P.HasComputedReadonlySettings (TF.Ref s' (ZoneSettingsOverrideResource s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedReadonlySettings x = TF.compute (TF.refKey x) "readonly_settings"
 
-instance s ~ s' => P.HasComputedSettings (TF.Ref s' (ZoneSettingsOverrideResource s)) (TF.Attr s (Settings s)) where
+instance s ~ s' => P.HasComputedSettings (TF.Ref s' (ZoneSettingsOverrideResource s)) (TF.Attr s (ZoneSettingsOverrideSettingsSetting s)) where
     computedSettings x = TF.compute (TF.refKey x) "settings"
 
 instance s ~ s' => P.HasComputedZoneStatus (TF.Ref s' (ZoneSettingsOverrideResource s)) (TF.Attr s P.Text) where

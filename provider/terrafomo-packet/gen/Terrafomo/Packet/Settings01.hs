@@ -17,17 +17,17 @@
 --
 module Terrafomo.Packet.Settings01
     (
-    -- ** attachments
-      AttachmentsSetting (..)
-    , newAttachmentsSetting
-
     -- ** network
-    , NetworkSetting (..)
-    , newNetworkSetting
+      DeviceNetworkSetting (..)
+    , newDeviceNetworkSetting
+
+    -- ** attachments
+    , VolumeAttachmentsSetting (..)
+    , newVolumeAttachmentsSetting
 
     -- ** snapshot_policies
-    , SnapshotPoliciesSetting (..)
-    , newSnapshotPoliciesSetting
+    , VolumeSnapshotPoliciesSetting (..)
+    , newVolumeSnapshotPoliciesSetting
 
     ) where
 
@@ -52,60 +52,60 @@ import qualified Terrafomo.Packet.Lens  as P
 import qualified Terrafomo.Packet.Types as P
 import qualified Terrafomo.Validator    as TF
 
--- | @attachments@ nested settings.
-data AttachmentsSetting s = AttachmentsSetting'
-    deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @attachments@ settings value.
-newAttachmentsSetting
-    :: AttachmentsSetting s
-newAttachmentsSetting =
-    AttachmentsSetting'
-
-instance TF.IsValue  (AttachmentsSetting s)
-instance TF.IsObject (AttachmentsSetting s) where
-    toObject AttachmentsSetting' = []
-
-instance TF.IsValid (AttachmentsSetting s) where
-    validator = P.mempty
-
-instance s ~ s' => P.HasComputedHref (TF.Ref s' (AttachmentsSetting s)) (TF.Attr s P.Text) where
-    computedHref x = TF.compute (TF.refKey x) "href"
-
 -- | @network@ nested settings.
-data NetworkSetting s = NetworkSetting'
+data DeviceNetworkSetting s = DeviceNetworkSetting'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @network@ settings value.
-newNetworkSetting
-    :: NetworkSetting s
-newNetworkSetting =
-    NetworkSetting'
+newDeviceNetworkSetting
+    :: DeviceNetworkSetting s
+newDeviceNetworkSetting =
+    DeviceNetworkSetting'
 
-instance TF.IsValue  (NetworkSetting s)
-instance TF.IsObject (NetworkSetting s) where
-    toObject NetworkSetting' = []
+instance TF.IsValue  (DeviceNetworkSetting s)
+instance TF.IsObject (DeviceNetworkSetting s) where
+    toObject DeviceNetworkSetting' = []
 
-instance TF.IsValid (NetworkSetting s) where
+instance TF.IsValid (DeviceNetworkSetting s) where
     validator = P.mempty
 
-instance s ~ s' => P.HasComputedAddress (TF.Ref s' (NetworkSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedAddress (TF.Ref s' (DeviceNetworkSetting s)) (TF.Attr s P.Text) where
     computedAddress x = TF.compute (TF.refKey x) "address"
 
-instance s ~ s' => P.HasComputedCidr (TF.Ref s' (NetworkSetting s)) (TF.Attr s P.Int) where
+instance s ~ s' => P.HasComputedCidr (TF.Ref s' (DeviceNetworkSetting s)) (TF.Attr s P.Int) where
     computedCidr x = TF.compute (TF.refKey x) "cidr"
 
-instance s ~ s' => P.HasComputedFamily (TF.Ref s' (NetworkSetting s)) (TF.Attr s P.Int) where
+instance s ~ s' => P.HasComputedFamily (TF.Ref s' (DeviceNetworkSetting s)) (TF.Attr s P.Int) where
     computedFamily x = TF.compute (TF.refKey x) "family"
 
-instance s ~ s' => P.HasComputedGateway (TF.Ref s' (NetworkSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedGateway (TF.Ref s' (DeviceNetworkSetting s)) (TF.Attr s P.Text) where
     computedGateway x = TF.compute (TF.refKey x) "gateway"
 
-instance s ~ s' => P.HasComputedPublic (TF.Ref s' (NetworkSetting s)) (TF.Attr s P.Bool) where
+instance s ~ s' => P.HasComputedPublic (TF.Ref s' (DeviceNetworkSetting s)) (TF.Attr s P.Bool) where
     computedPublic x = TF.compute (TF.refKey x) "public"
 
+-- | @attachments@ nested settings.
+data VolumeAttachmentsSetting s = VolumeAttachmentsSetting'
+    deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @attachments@ settings value.
+newVolumeAttachmentsSetting
+    :: VolumeAttachmentsSetting s
+newVolumeAttachmentsSetting =
+    VolumeAttachmentsSetting'
+
+instance TF.IsValue  (VolumeAttachmentsSetting s)
+instance TF.IsObject (VolumeAttachmentsSetting s) where
+    toObject VolumeAttachmentsSetting' = []
+
+instance TF.IsValid (VolumeAttachmentsSetting s) where
+    validator = P.mempty
+
+instance s ~ s' => P.HasComputedHref (TF.Ref s' (VolumeAttachmentsSetting s)) (TF.Attr s P.Text) where
+    computedHref x = TF.compute (TF.refKey x) "href"
+
 -- | @snapshot_policies@ nested settings.
-data SnapshotPoliciesSetting s = SnapshotPoliciesSetting'
+data VolumeSnapshotPoliciesSetting s = VolumeSnapshotPoliciesSetting'
     { _snapshotCount     :: TF.Attr s P.Int
     -- ^ @snapshot_count@ - (Required, Forces New)
     --
@@ -115,32 +115,32 @@ data SnapshotPoliciesSetting s = SnapshotPoliciesSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @snapshot_policies@ settings value.
-newSnapshotPoliciesSetting
+newVolumeSnapshotPoliciesSetting
     :: TF.Attr s P.Int -- ^ 'P._snapshotCount': @snapshot_count@
     -> TF.Attr s P.Text -- ^ 'P._snapshotFrequency': @snapshot_frequency@
-    -> SnapshotPoliciesSetting s
-newSnapshotPoliciesSetting _snapshotCount _snapshotFrequency =
-    SnapshotPoliciesSetting'
+    -> VolumeSnapshotPoliciesSetting s
+newVolumeSnapshotPoliciesSetting _snapshotCount _snapshotFrequency =
+    VolumeSnapshotPoliciesSetting'
         { _snapshotCount = _snapshotCount
         , _snapshotFrequency = _snapshotFrequency
         }
 
-instance TF.IsValue  (SnapshotPoliciesSetting s)
-instance TF.IsObject (SnapshotPoliciesSetting s) where
-    toObject SnapshotPoliciesSetting'{..} = P.catMaybes
+instance TF.IsValue  (VolumeSnapshotPoliciesSetting s)
+instance TF.IsObject (VolumeSnapshotPoliciesSetting s) where
+    toObject VolumeSnapshotPoliciesSetting'{..} = P.catMaybes
         [ TF.assign "snapshot_count" <$> TF.attribute _snapshotCount
         , TF.assign "snapshot_frequency" <$> TF.attribute _snapshotFrequency
         ]
 
-instance TF.IsValid (SnapshotPoliciesSetting s) where
+instance TF.IsValid (VolumeSnapshotPoliciesSetting s) where
     validator = P.mempty
 
-instance P.HasSnapshotCount (SnapshotPoliciesSetting s) (TF.Attr s P.Int) where
+instance P.HasSnapshotCount (VolumeSnapshotPoliciesSetting s) (TF.Attr s P.Int) where
     snapshotCount =
-        P.lens (_snapshotCount :: SnapshotPoliciesSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _snapshotCount = a } :: SnapshotPoliciesSetting s)
+        P.lens (_snapshotCount :: VolumeSnapshotPoliciesSetting s -> TF.Attr s P.Int)
+               (\s a -> s { _snapshotCount = a } :: VolumeSnapshotPoliciesSetting s)
 
-instance P.HasSnapshotFrequency (SnapshotPoliciesSetting s) (TF.Attr s P.Text) where
+instance P.HasSnapshotFrequency (VolumeSnapshotPoliciesSetting s) (TF.Attr s P.Text) where
     snapshotFrequency =
-        P.lens (_snapshotFrequency :: SnapshotPoliciesSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _snapshotFrequency = a } :: SnapshotPoliciesSetting s)
+        P.lens (_snapshotFrequency :: VolumeSnapshotPoliciesSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _snapshotFrequency = a } :: VolumeSnapshotPoliciesSetting s)

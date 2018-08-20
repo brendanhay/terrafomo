@@ -125,7 +125,7 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (ConfigResource s)) (TF.Attr s P.T
 -- See the <https://www.terraform.io/docs/providers/docker/r/container.html terraform documentation>
 -- for more information.
 data ContainerResource s = ContainerResource'
-    { _capabilities        :: TF.Attr s (CapabilitiesSetting s)
+    { _capabilities        :: TF.Attr s (ContainerCapabilitiesSetting s)
     -- ^ @capabilities@ - (Optional, Forces New)
     --
     , _command             :: TF.Attr s [TF.Attr s P.Text]
@@ -137,7 +137,7 @@ data ContainerResource s = ContainerResource'
     , _destroyGraceSeconds :: TF.Attr s P.Int
     -- ^ @destroy_grace_seconds@ - (Optional)
     --
-    , _devices             :: TF.Attr s [TF.Attr s (DevicesSetting s)]
+    , _devices             :: TF.Attr s [TF.Attr s (ContainerDevicesSetting s)]
     -- ^ @devices@ - (Optional, Forces New)
     --
     , _dns                 :: TF.Attr s [TF.Attr s P.Text]
@@ -158,7 +158,7 @@ data ContainerResource s = ContainerResource'
     , _env                 :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @env@ - (Optional, Forces New)
     --
-    , _host                :: TF.Attr s [TF.Attr s (HostSetting s)]
+    , _host                :: TF.Attr s [TF.Attr s (ContainerHostSetting s)]
     -- ^ @host@ - (Optional, Forces New)
     --
     , _hostname            :: TF.Attr s P.Text
@@ -200,7 +200,7 @@ data ContainerResource s = ContainerResource'
     , _networks            :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @networks@ - (Optional, Forces New)
     --
-    , _ports               :: TF.Attr s [TF.Attr s (PortsSetting s)]
+    , _ports               :: TF.Attr s [TF.Attr s (ContainerPortsSetting s)]
     -- ^ @ports@ - (Optional, Forces New)
     --
     , _privileged          :: TF.Attr s P.Bool
@@ -212,16 +212,16 @@ data ContainerResource s = ContainerResource'
     , _restart             :: TF.Attr s P.Text
     -- ^ @restart@ - (Optional, Forces New)
     --
-    , _ulimit              :: TF.Attr s [TF.Attr s (UlimitSetting s)]
+    , _ulimit              :: TF.Attr s [TF.Attr s (ContainerUlimitSetting s)]
     -- ^ @ulimit@ - (Optional, Forces New)
     --
-    , _upload              :: TF.Attr s [TF.Attr s (UploadSetting s)]
+    , _upload              :: TF.Attr s [TF.Attr s (ContainerUploadSetting s)]
     -- ^ @upload@ - (Optional, Forces New)
     --
     , _user                :: TF.Attr s P.Text
     -- ^ @user@ - (Optional, Forces New)
     --
-    , _volumes             :: TF.Attr s [TF.Attr s (VolumesSetting s)]
+    , _volumes             :: TF.Attr s [TF.Attr s (ContainerVolumesSetting s)]
     -- ^ @volumes@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -310,12 +310,12 @@ instance TF.IsValid (ContainerResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_capabilities"
                   (_capabilities
-                      :: ContainerResource s -> TF.Attr s (CapabilitiesSetting s))
+                      :: ContainerResource s -> TF.Attr s (ContainerCapabilitiesSetting s))
                   TF.validator
 
-instance P.HasCapabilities (ContainerResource s) (TF.Attr s (CapabilitiesSetting s)) where
+instance P.HasCapabilities (ContainerResource s) (TF.Attr s (ContainerCapabilitiesSetting s)) where
     capabilities =
-        P.lens (_capabilities :: ContainerResource s -> TF.Attr s (CapabilitiesSetting s))
+        P.lens (_capabilities :: ContainerResource s -> TF.Attr s (ContainerCapabilitiesSetting s))
                (\s a -> s { _capabilities = a } :: ContainerResource s)
 
 instance P.HasCommand (ContainerResource s) (TF.Attr s [TF.Attr s P.Text]) where
@@ -333,9 +333,9 @@ instance P.HasDestroyGraceSeconds (ContainerResource s) (TF.Attr s P.Int) where
         P.lens (_destroyGraceSeconds :: ContainerResource s -> TF.Attr s P.Int)
                (\s a -> s { _destroyGraceSeconds = a } :: ContainerResource s)
 
-instance P.HasDevices (ContainerResource s) (TF.Attr s [TF.Attr s (DevicesSetting s)]) where
+instance P.HasDevices (ContainerResource s) (TF.Attr s [TF.Attr s (ContainerDevicesSetting s)]) where
     devices =
-        P.lens (_devices :: ContainerResource s -> TF.Attr s [TF.Attr s (DevicesSetting s)])
+        P.lens (_devices :: ContainerResource s -> TF.Attr s [TF.Attr s (ContainerDevicesSetting s)])
                (\s a -> s { _devices = a } :: ContainerResource s)
 
 instance P.HasDns (ContainerResource s) (TF.Attr s [TF.Attr s P.Text]) where
@@ -368,9 +368,9 @@ instance P.HasEnv (ContainerResource s) (TF.Attr s [TF.Attr s P.Text]) where
         P.lens (_env :: ContainerResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _env = a } :: ContainerResource s)
 
-instance P.HasHost (ContainerResource s) (TF.Attr s [TF.Attr s (HostSetting s)]) where
+instance P.HasHost (ContainerResource s) (TF.Attr s [TF.Attr s (ContainerHostSetting s)]) where
     host =
-        P.lens (_host :: ContainerResource s -> TF.Attr s [TF.Attr s (HostSetting s)])
+        P.lens (_host :: ContainerResource s -> TF.Attr s [TF.Attr s (ContainerHostSetting s)])
                (\s a -> s { _host = a } :: ContainerResource s)
 
 instance P.HasHostname (ContainerResource s) (TF.Attr s P.Text) where
@@ -438,9 +438,9 @@ instance P.HasNetworks (ContainerResource s) (TF.Attr s [TF.Attr s P.Text]) wher
         P.lens (_networks :: ContainerResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _networks = a } :: ContainerResource s)
 
-instance P.HasPorts (ContainerResource s) (TF.Attr s [TF.Attr s (PortsSetting s)]) where
+instance P.HasPorts (ContainerResource s) (TF.Attr s [TF.Attr s (ContainerPortsSetting s)]) where
     ports =
-        P.lens (_ports :: ContainerResource s -> TF.Attr s [TF.Attr s (PortsSetting s)])
+        P.lens (_ports :: ContainerResource s -> TF.Attr s [TF.Attr s (ContainerPortsSetting s)])
                (\s a -> s { _ports = a } :: ContainerResource s)
 
 instance P.HasPrivileged (ContainerResource s) (TF.Attr s P.Bool) where
@@ -458,14 +458,14 @@ instance P.HasRestart (ContainerResource s) (TF.Attr s P.Text) where
         P.lens (_restart :: ContainerResource s -> TF.Attr s P.Text)
                (\s a -> s { _restart = a } :: ContainerResource s)
 
-instance P.HasUlimit (ContainerResource s) (TF.Attr s [TF.Attr s (UlimitSetting s)]) where
+instance P.HasUlimit (ContainerResource s) (TF.Attr s [TF.Attr s (ContainerUlimitSetting s)]) where
     ulimit =
-        P.lens (_ulimit :: ContainerResource s -> TF.Attr s [TF.Attr s (UlimitSetting s)])
+        P.lens (_ulimit :: ContainerResource s -> TF.Attr s [TF.Attr s (ContainerUlimitSetting s)])
                (\s a -> s { _ulimit = a } :: ContainerResource s)
 
-instance P.HasUpload (ContainerResource s) (TF.Attr s [TF.Attr s (UploadSetting s)]) where
+instance P.HasUpload (ContainerResource s) (TF.Attr s [TF.Attr s (ContainerUploadSetting s)]) where
     upload =
-        P.lens (_upload :: ContainerResource s -> TF.Attr s [TF.Attr s (UploadSetting s)])
+        P.lens (_upload :: ContainerResource s -> TF.Attr s [TF.Attr s (ContainerUploadSetting s)])
                (\s a -> s { _upload = a } :: ContainerResource s)
 
 instance P.HasUser (ContainerResource s) (TF.Attr s P.Text) where
@@ -473,9 +473,9 @@ instance P.HasUser (ContainerResource s) (TF.Attr s P.Text) where
         P.lens (_user :: ContainerResource s -> TF.Attr s P.Text)
                (\s a -> s { _user = a } :: ContainerResource s)
 
-instance P.HasVolumes (ContainerResource s) (TF.Attr s [TF.Attr s (VolumesSetting s)]) where
+instance P.HasVolumes (ContainerResource s) (TF.Attr s [TF.Attr s (ContainerVolumesSetting s)]) where
     volumes =
-        P.lens (_volumes :: ContainerResource s -> TF.Attr s [TF.Attr s (VolumesSetting s)])
+        P.lens (_volumes :: ContainerResource s -> TF.Attr s [TF.Attr s (ContainerVolumesSetting s)])
                (\s a -> s { _volumes = a } :: ContainerResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ContainerResource s)) (TF.Attr s P.Text) where
@@ -566,7 +566,7 @@ data NetworkResource s = NetworkResource'
     , _internal       :: TF.Attr s P.Bool
     -- ^ @internal@ - (Optional, Forces New)
     --
-    , _ipamConfig     :: TF.Attr s [TF.Attr s (IpamConfigSetting s)]
+    , _ipamConfig     :: TF.Attr s [TF.Attr s (NetworkIpamConfigSetting s)]
     -- ^ @ipam_config@ - (Optional, Forces New)
     --
     , _ipamDriver     :: TF.Attr s P.Text
@@ -625,9 +625,9 @@ instance P.HasInternal (NetworkResource s) (TF.Attr s P.Bool) where
         P.lens (_internal :: NetworkResource s -> TF.Attr s P.Bool)
                (\s a -> s { _internal = a } :: NetworkResource s)
 
-instance P.HasIpamConfig (NetworkResource s) (TF.Attr s [TF.Attr s (IpamConfigSetting s)]) where
+instance P.HasIpamConfig (NetworkResource s) (TF.Attr s [TF.Attr s (NetworkIpamConfigSetting s)]) where
     ipamConfig =
-        P.lens (_ipamConfig :: NetworkResource s -> TF.Attr s [TF.Attr s (IpamConfigSetting s)])
+        P.lens (_ipamConfig :: NetworkResource s -> TF.Attr s [TF.Attr s (NetworkIpamConfigSetting s)])
                (\s a -> s { _ipamConfig = a } :: NetworkResource s)
 
 instance P.HasIpamDriver (NetworkResource s) (TF.Attr s P.Text) where
@@ -714,39 +714,39 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (SecretResource s)) (TF.Attr s P.T
 -- See the <https://www.terraform.io/docs/providers/docker/r/service.html terraform documentation>
 -- for more information.
 data ServiceResource s = ServiceResource'
-    { _auth           :: TF.Attr s (P.Map P.Text (TF.Attr s (AuthSetting s)))
+    { _auth :: TF.Attr s (P.Map P.Text (TF.Attr s (ServiceAuthSetting s)))
     -- ^ @auth@ - (Optional, Forces New)
     --
-    , _convergeConfig :: TF.Attr s (ConvergeConfigSetting s)
+    , _convergeConfig :: TF.Attr s (ServiceConvergeConfigSetting s)
     -- ^ @converge_config@ - (Optional)
     -- A configuration to ensure that a service converges aka reaches the desired
     -- that of all task up and running
     --
-    , _endpointSpec   :: TF.Attr s (EndpointSpecSetting s)
+    , _endpointSpec :: TF.Attr s (ServiceEndpointSpecSetting s)
     -- ^ @endpoint_spec@ - (Optional)
     -- Properties that can be configured to access and load balance a service
     --
-    , _labels         :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _labels :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @labels@ - (Optional)
     -- User-defined key/value metadata
     --
-    , _mode           :: TF.Attr s (ModeSetting s)
+    , _mode :: TF.Attr s (ServiceModeSetting s)
     -- ^ @mode@ - (Optional, Forces New)
     -- Scheduling mode for the service
     --
-    , _name           :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     -- Name of the service
     --
-    , _rollbackConfig :: TF.Attr s (RollbackConfigSetting s)
+    , _rollbackConfig :: TF.Attr s (ServiceRollbackConfigSetting s)
     -- ^ @rollback_config@ - (Optional)
     -- Specification for the rollback strategy of the service
     --
-    , _taskSpec       :: TF.Attr s (TaskSpecSetting s)
+    , _taskSpec :: TF.Attr s (ServiceTaskSpecSetting s)
     -- ^ @task_spec@ - (Required)
     -- User modifiable task configuration
     --
-    , _updateConfig   :: TF.Attr s (UpdateConfigSetting s)
+    , _updateConfig :: TF.Attr s (ServiceUpdateConfigSetting s)
     -- ^ @update_config@ - (Optional)
     -- Specification for the update strategy of the service
     --
@@ -755,7 +755,7 @@ data ServiceResource s = ServiceResource'
 -- | Define a new @docker_service@ resource value.
 serviceResource
     :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
-    -> TF.Attr s (TaskSpecSetting s) -- ^ @task_spec@ ('P._taskSpec', 'P.taskSpec')
+    -> TF.Attr s (ServiceTaskSpecSetting s) -- ^ @task_spec@ ('P._taskSpec', 'P.taskSpec')
     -> P.Resource (ServiceResource s)
 serviceResource _name _taskSpec =
     TF.unsafeResource "docker_service" TF.validator $
@@ -788,42 +788,42 @@ instance TF.IsValid (ServiceResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_convergeConfig"
                   (_convergeConfig
-                      :: ServiceResource s -> TF.Attr s (ConvergeConfigSetting s))
+                      :: ServiceResource s -> TF.Attr s (ServiceConvergeConfigSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_endpointSpec"
                   (_endpointSpec
-                      :: ServiceResource s -> TF.Attr s (EndpointSpecSetting s))
+                      :: ServiceResource s -> TF.Attr s (ServiceEndpointSpecSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_mode"
                   (_mode
-                      :: ServiceResource s -> TF.Attr s (ModeSetting s))
+                      :: ServiceResource s -> TF.Attr s (ServiceModeSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_rollbackConfig"
                   (_rollbackConfig
-                      :: ServiceResource s -> TF.Attr s (RollbackConfigSetting s))
+                      :: ServiceResource s -> TF.Attr s (ServiceRollbackConfigSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_taskSpec"
                   (_taskSpec
-                      :: ServiceResource s -> TF.Attr s (TaskSpecSetting s))
+                      :: ServiceResource s -> TF.Attr s (ServiceTaskSpecSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_updateConfig"
                   (_updateConfig
-                      :: ServiceResource s -> TF.Attr s (UpdateConfigSetting s))
+                      :: ServiceResource s -> TF.Attr s (ServiceUpdateConfigSetting s))
                   TF.validator
 
-instance P.HasAuth (ServiceResource s) (TF.Attr s (P.Map P.Text (TF.Attr s (AuthSetting s)))) where
+instance P.HasAuth (ServiceResource s) (TF.Attr s (P.Map P.Text (TF.Attr s (ServiceAuthSetting s)))) where
     auth =
-        P.lens (_auth :: ServiceResource s -> TF.Attr s (P.Map P.Text (TF.Attr s (AuthSetting s))))
+        P.lens (_auth :: ServiceResource s -> TF.Attr s (P.Map P.Text (TF.Attr s (ServiceAuthSetting s))))
                (\s a -> s { _auth = a } :: ServiceResource s)
 
-instance P.HasConvergeConfig (ServiceResource s) (TF.Attr s (ConvergeConfigSetting s)) where
+instance P.HasConvergeConfig (ServiceResource s) (TF.Attr s (ServiceConvergeConfigSetting s)) where
     convergeConfig =
-        P.lens (_convergeConfig :: ServiceResource s -> TF.Attr s (ConvergeConfigSetting s))
+        P.lens (_convergeConfig :: ServiceResource s -> TF.Attr s (ServiceConvergeConfigSetting s))
                (\s a -> s { _convergeConfig = a } :: ServiceResource s)
 
-instance P.HasEndpointSpec (ServiceResource s) (TF.Attr s (EndpointSpecSetting s)) where
+instance P.HasEndpointSpec (ServiceResource s) (TF.Attr s (ServiceEndpointSpecSetting s)) where
     endpointSpec =
-        P.lens (_endpointSpec :: ServiceResource s -> TF.Attr s (EndpointSpecSetting s))
+        P.lens (_endpointSpec :: ServiceResource s -> TF.Attr s (ServiceEndpointSpecSetting s))
                (\s a -> s { _endpointSpec = a } :: ServiceResource s)
 
 instance P.HasLabels (ServiceResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
@@ -831,9 +831,9 @@ instance P.HasLabels (ServiceResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.T
         P.lens (_labels :: ServiceResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _labels = a } :: ServiceResource s)
 
-instance P.HasMode (ServiceResource s) (TF.Attr s (ModeSetting s)) where
+instance P.HasMode (ServiceResource s) (TF.Attr s (ServiceModeSetting s)) where
     mode =
-        P.lens (_mode :: ServiceResource s -> TF.Attr s (ModeSetting s))
+        P.lens (_mode :: ServiceResource s -> TF.Attr s (ServiceModeSetting s))
                (\s a -> s { _mode = a } :: ServiceResource s)
 
 instance P.HasName (ServiceResource s) (TF.Attr s P.Text) where
@@ -841,31 +841,31 @@ instance P.HasName (ServiceResource s) (TF.Attr s P.Text) where
         P.lens (_name :: ServiceResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ServiceResource s)
 
-instance P.HasRollbackConfig (ServiceResource s) (TF.Attr s (RollbackConfigSetting s)) where
+instance P.HasRollbackConfig (ServiceResource s) (TF.Attr s (ServiceRollbackConfigSetting s)) where
     rollbackConfig =
-        P.lens (_rollbackConfig :: ServiceResource s -> TF.Attr s (RollbackConfigSetting s))
+        P.lens (_rollbackConfig :: ServiceResource s -> TF.Attr s (ServiceRollbackConfigSetting s))
                (\s a -> s { _rollbackConfig = a } :: ServiceResource s)
 
-instance P.HasTaskSpec (ServiceResource s) (TF.Attr s (TaskSpecSetting s)) where
+instance P.HasTaskSpec (ServiceResource s) (TF.Attr s (ServiceTaskSpecSetting s)) where
     taskSpec =
-        P.lens (_taskSpec :: ServiceResource s -> TF.Attr s (TaskSpecSetting s))
+        P.lens (_taskSpec :: ServiceResource s -> TF.Attr s (ServiceTaskSpecSetting s))
                (\s a -> s { _taskSpec = a } :: ServiceResource s)
 
-instance P.HasUpdateConfig (ServiceResource s) (TF.Attr s (UpdateConfigSetting s)) where
+instance P.HasUpdateConfig (ServiceResource s) (TF.Attr s (ServiceUpdateConfigSetting s)) where
     updateConfig =
-        P.lens (_updateConfig :: ServiceResource s -> TF.Attr s (UpdateConfigSetting s))
+        P.lens (_updateConfig :: ServiceResource s -> TF.Attr s (ServiceUpdateConfigSetting s))
                (\s a -> s { _updateConfig = a } :: ServiceResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ServiceResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedEndpointSpec (TF.Ref s' (ServiceResource s)) (TF.Attr s (EndpointSpecSetting s)) where
+instance s ~ s' => P.HasComputedEndpointSpec (TF.Ref s' (ServiceResource s)) (TF.Attr s (ServiceEndpointSpecSetting s)) where
     computedEndpointSpec x = TF.compute (TF.refKey x) "endpoint_spec"
 
 instance s ~ s' => P.HasComputedLabels (TF.Ref s' (ServiceResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     computedLabels x = TF.compute (TF.refKey x) "labels"
 
-instance s ~ s' => P.HasComputedMode (TF.Ref s' (ServiceResource s)) (TF.Attr s (ModeSetting s)) where
+instance s ~ s' => P.HasComputedMode (TF.Ref s' (ServiceResource s)) (TF.Attr s (ServiceModeSetting s)) where
     computedMode x = TF.compute (TF.refKey x) "mode"
 
 -- | @docker_volume@ Resource.

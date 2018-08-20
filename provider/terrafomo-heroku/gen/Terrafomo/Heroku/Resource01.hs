@@ -374,7 +374,7 @@ data AppResource s = AppResource'
     , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _organization :: TF.Attr s [TF.Attr s (OrganizationSetting s)]
+    , _organization :: TF.Attr s [TF.Attr s (AppOrganizationSetting s)]
     -- ^ @organization@ - (Optional, Forces New)
     --
     , _region :: TF.Attr s P.Text
@@ -448,9 +448,9 @@ instance P.HasName (AppResource s) (TF.Attr s P.Text) where
         P.lens (_name :: AppResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: AppResource s)
 
-instance P.HasOrganization (AppResource s) (TF.Attr s [TF.Attr s (OrganizationSetting s)]) where
+instance P.HasOrganization (AppResource s) (TF.Attr s [TF.Attr s (AppOrganizationSetting s)]) where
     organization =
-        P.lens (_organization :: AppResource s -> TF.Attr s [TF.Attr s (OrganizationSetting s)])
+        P.lens (_organization :: AppResource s -> TF.Attr s [TF.Attr s (AppOrganizationSetting s)])
                (\s a -> s { _organization = a } :: AppResource s)
 
 instance P.HasRegion (AppResource s) (TF.Attr s P.Text) where
@@ -885,7 +885,7 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (SpaceAppAccessResource s)) (TF.At
 -- See the <https://www.terraform.io/docs/providers/heroku/r/space_inbound_ruleset.html terraform documentation>
 -- for more information.
 data SpaceInboundRulesetResource s = SpaceInboundRulesetResource'
-    { _rule  :: TF.Attr s (P.NonEmpty (TF.Attr s (RuleSetting s)))
+    { _rule :: TF.Attr s (P.NonEmpty (TF.Attr s (SpaceInboundRulesetRuleSetting s)))
     -- ^ @rule@ - (Required)
     --
     , _space :: TF.Attr s P.Text
@@ -895,7 +895,7 @@ data SpaceInboundRulesetResource s = SpaceInboundRulesetResource'
 
 -- | Define a new @heroku_space_inbound_ruleset@ resource value.
 spaceInboundRulesetResource
-    :: TF.Attr s (P.NonEmpty (TF.Attr s (RuleSetting s))) -- ^ @rule@ ('P._rule', 'P.rule')
+    :: TF.Attr s (P.NonEmpty (TF.Attr s (SpaceInboundRulesetRuleSetting s))) -- ^ @rule@ ('P._rule', 'P.rule')
     -> TF.Attr s P.Text -- ^ @space@ ('P._space', 'P.space')
     -> P.Resource (SpaceInboundRulesetResource s)
 spaceInboundRulesetResource _rule _space =
@@ -914,9 +914,9 @@ instance TF.IsObject (SpaceInboundRulesetResource s) where
 instance TF.IsValid (SpaceInboundRulesetResource s) where
     validator = P.mempty
 
-instance P.HasRule (SpaceInboundRulesetResource s) (TF.Attr s (P.NonEmpty (TF.Attr s (RuleSetting s)))) where
+instance P.HasRule (SpaceInboundRulesetResource s) (TF.Attr s (P.NonEmpty (TF.Attr s (SpaceInboundRulesetRuleSetting s)))) where
     rule =
-        P.lens (_rule :: SpaceInboundRulesetResource s -> TF.Attr s (P.NonEmpty (TF.Attr s (RuleSetting s))))
+        P.lens (_rule :: SpaceInboundRulesetResource s -> TF.Attr s (P.NonEmpty (TF.Attr s (SpaceInboundRulesetRuleSetting s))))
                (\s a -> s { _rule = a } :: SpaceInboundRulesetResource s)
 
 instance P.HasSpace (SpaceInboundRulesetResource s) (TF.Attr s P.Text) where
@@ -1055,19 +1055,19 @@ instance s ~ s' => P.HasComputedOutboundIps (TF.Ref s' (SpaceResource s)) (TF.At
 -- See the <https://www.terraform.io/docs/providers/heroku/r/space_vpn_connection.html terraform documentation>
 -- for more information.
 data SpaceVpnConnectionResource s = SpaceVpnConnectionResource'
-    { _name          :: TF.Attr s P.Text
+    { _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _publicIp      :: TF.Attr s P.Text
+    , _publicIp :: TF.Attr s P.Text
     -- ^ @public_ip@ - (Required, Forces New)
     --
     , _routableCidrs :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @routable_cidrs@ - (Required, Forces New)
     --
-    , _space         :: TF.Attr s P.Text
+    , _space :: TF.Attr s P.Text
     -- ^ @space@ - (Required, Forces New)
     --
-    , _tunnels       :: TF.Attr s [TF.Attr s (TunnelsSetting s)]
+    , _tunnels :: TF.Attr s [TF.Attr s (SpaceVpnConnectionTunnelsSetting s)]
     -- ^ @tunnels@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -1121,9 +1121,9 @@ instance P.HasSpace (SpaceVpnConnectionResource s) (TF.Attr s P.Text) where
         P.lens (_space :: SpaceVpnConnectionResource s -> TF.Attr s P.Text)
                (\s a -> s { _space = a } :: SpaceVpnConnectionResource s)
 
-instance P.HasTunnels (SpaceVpnConnectionResource s) (TF.Attr s [TF.Attr s (TunnelsSetting s)]) where
+instance P.HasTunnels (SpaceVpnConnectionResource s) (TF.Attr s [TF.Attr s (SpaceVpnConnectionTunnelsSetting s)]) where
     tunnels =
-        P.lens (_tunnels :: SpaceVpnConnectionResource s -> TF.Attr s [TF.Attr s (TunnelsSetting s)])
+        P.lens (_tunnels :: SpaceVpnConnectionResource s -> TF.Attr s [TF.Attr s (SpaceVpnConnectionTunnelsSetting s)])
                (\s a -> s { _tunnels = a } :: SpaceVpnConnectionResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (SpaceVpnConnectionResource s)) (TF.Attr s P.Text) where
@@ -1135,7 +1135,7 @@ instance s ~ s' => P.HasComputedIkeVersion (TF.Ref s' (SpaceVpnConnectionResourc
 instance s ~ s' => P.HasComputedSpaceCidrBlock (TF.Ref s' (SpaceVpnConnectionResource s)) (TF.Attr s P.Text) where
     computedSpaceCidrBlock x = TF.compute (TF.refKey x) "space_cidr_block"
 
-instance s ~ s' => P.HasComputedTunnels (TF.Ref s' (SpaceVpnConnectionResource s)) (TF.Attr s [TF.Attr s (TunnelsSetting s)]) where
+instance s ~ s' => P.HasComputedTunnels (TF.Ref s' (SpaceVpnConnectionResource s)) (TF.Attr s [TF.Attr s (SpaceVpnConnectionTunnelsSetting s)]) where
     computedTunnels x = TF.compute (TF.refKey x) "tunnels"
 
 -- | @heroku_team_collaborator@ Resource.

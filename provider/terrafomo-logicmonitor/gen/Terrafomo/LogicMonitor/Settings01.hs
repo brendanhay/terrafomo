@@ -18,8 +18,12 @@
 module Terrafomo.LogicMonitor.Settings01
     (
     -- ** filters
-      FiltersSetting (..)
-    , newFiltersSetting
+      CollectorsFiltersSetting (..)
+    , newCollectorsFiltersSetting
+
+    -- ** filters
+    , DeviceGroupFiltersSetting (..)
+    , newDeviceGroupFiltersSetting
 
     ) where
 
@@ -45,8 +49,63 @@ import qualified Terrafomo.Name               as TF
 import qualified Terrafomo.Validator          as TF
 
 -- | @filters@ nested settings.
-data FiltersSetting s = FiltersSetting'
-    { _operator            :: TF.Attr s P.Text
+data CollectorsFiltersSetting s = CollectorsFiltersSetting'
+    { _operator :: TF.Attr s P.Text
+    -- ^ @operator@ - (Optional)
+    --
+    , _property :: TF.Attr s P.Text
+    -- ^ @property@ - (Optional)
+    --
+    , _value    :: TF.Attr s P.Text
+    -- ^ @value@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @filters@ settings value.
+newCollectorsFiltersSetting
+    :: CollectorsFiltersSetting s
+newCollectorsFiltersSetting =
+    CollectorsFiltersSetting'
+        { _operator = TF.Nil
+        , _property = TF.Nil
+        , _value = TF.Nil
+        }
+
+instance TF.IsValue  (CollectorsFiltersSetting s)
+instance TF.IsObject (CollectorsFiltersSetting s) where
+    toObject CollectorsFiltersSetting'{..} = P.catMaybes
+        [ TF.assign "operator" <$> TF.attribute _operator
+        , TF.assign "property" <$> TF.attribute _property
+        , TF.assign "value" <$> TF.attribute _value
+        ]
+
+instance TF.IsValid (CollectorsFiltersSetting s) where
+    validator = P.mempty
+
+instance P.HasOperator (CollectorsFiltersSetting s) (TF.Attr s P.Text) where
+    operator =
+        P.lens (_operator :: CollectorsFiltersSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _operator = a } :: CollectorsFiltersSetting s)
+
+instance P.HasProperty (CollectorsFiltersSetting s) (TF.Attr s P.Text) where
+    property =
+        P.lens (_property :: CollectorsFiltersSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _property = a } :: CollectorsFiltersSetting s)
+
+instance P.HasValue (CollectorsFiltersSetting s) (TF.Attr s P.Text) where
+    value =
+        P.lens (_value :: CollectorsFiltersSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _value = a } :: CollectorsFiltersSetting s)
+
+-- | @filters@ nested settings.
+data DeviceGroupFiltersSetting s = DeviceGroupFiltersSetting'
+    { _customPropertyName  :: TF.Attr s P.Text
+    -- ^ @custom_property_name@ - (Optional)
+    --
+    , _customPropertyValue :: TF.Attr s P.Text
+    -- ^ @custom_property_value@ - (Optional)
+    --
+    , _operator            :: TF.Attr s P.Text
     -- ^ @operator@ - (Optional)
     --
     , _property            :: TF.Attr s P.Text
@@ -55,60 +114,54 @@ data FiltersSetting s = FiltersSetting'
     , _value               :: TF.Attr s P.Text
     -- ^ @value@ - (Optional)
     --
-    , _customPropertyName  :: TF.Attr s P.Text
-    -- ^ @custom_property_name@ - (Optional)
-    --
-    , _customPropertyValue :: TF.Attr s P.Text
-    -- ^ @custom_property_value@ - (Optional)
-    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @filters@ settings value.
-newFiltersSetting
-    :: FiltersSetting s
-newFiltersSetting =
-    FiltersSetting'
-        { _operator = TF.Nil
+newDeviceGroupFiltersSetting
+    :: DeviceGroupFiltersSetting s
+newDeviceGroupFiltersSetting =
+    DeviceGroupFiltersSetting'
+        { _customPropertyName = TF.Nil
+        , _customPropertyValue = TF.Nil
+        , _operator = TF.Nil
         , _property = TF.Nil
         , _value = TF.Nil
-        , _customPropertyName = TF.Nil
-        , _customPropertyValue = TF.Nil
         }
 
-instance TF.IsValue  (FiltersSetting s)
-instance TF.IsObject (FiltersSetting s) where
-    toObject FiltersSetting'{..} = P.catMaybes
-        [ TF.assign "operator" <$> TF.attribute _operator
+instance TF.IsValue  (DeviceGroupFiltersSetting s)
+instance TF.IsObject (DeviceGroupFiltersSetting s) where
+    toObject DeviceGroupFiltersSetting'{..} = P.catMaybes
+        [ TF.assign "custom_property_name" <$> TF.attribute _customPropertyName
+        , TF.assign "custom_property_value" <$> TF.attribute _customPropertyValue
+        , TF.assign "operator" <$> TF.attribute _operator
         , TF.assign "property" <$> TF.attribute _property
         , TF.assign "value" <$> TF.attribute _value
-        , TF.assign "custom_property_name" <$> TF.attribute _customPropertyName
-        , TF.assign "custom_property_value" <$> TF.attribute _customPropertyValue
         ]
 
-instance TF.IsValid (FiltersSetting s) where
+instance TF.IsValid (DeviceGroupFiltersSetting s) where
     validator = P.mempty
 
-instance P.HasOperator (FiltersSetting s) (TF.Attr s P.Text) where
-    operator =
-        P.lens (_operator :: FiltersSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _operator = a } :: FiltersSetting s)
-
-instance P.HasProperty (FiltersSetting s) (TF.Attr s P.Text) where
-    property =
-        P.lens (_property :: FiltersSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _property = a } :: FiltersSetting s)
-
-instance P.HasValue (FiltersSetting s) (TF.Attr s P.Text) where
-    value =
-        P.lens (_value :: FiltersSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _value = a } :: FiltersSetting s)
-
-instance P.HasCustomPropertyName (FiltersSetting s) (TF.Attr s P.Text) where
+instance P.HasCustomPropertyName (DeviceGroupFiltersSetting s) (TF.Attr s P.Text) where
     customPropertyName =
-        P.lens (_customPropertyName :: FiltersSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _customPropertyName = a } :: FiltersSetting s)
+        P.lens (_customPropertyName :: DeviceGroupFiltersSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _customPropertyName = a } :: DeviceGroupFiltersSetting s)
 
-instance P.HasCustomPropertyValue (FiltersSetting s) (TF.Attr s P.Text) where
+instance P.HasCustomPropertyValue (DeviceGroupFiltersSetting s) (TF.Attr s P.Text) where
     customPropertyValue =
-        P.lens (_customPropertyValue :: FiltersSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _customPropertyValue = a } :: FiltersSetting s)
+        P.lens (_customPropertyValue :: DeviceGroupFiltersSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _customPropertyValue = a } :: DeviceGroupFiltersSetting s)
+
+instance P.HasOperator (DeviceGroupFiltersSetting s) (TF.Attr s P.Text) where
+    operator =
+        P.lens (_operator :: DeviceGroupFiltersSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _operator = a } :: DeviceGroupFiltersSetting s)
+
+instance P.HasProperty (DeviceGroupFiltersSetting s) (TF.Attr s P.Text) where
+    property =
+        P.lens (_property :: DeviceGroupFiltersSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _property = a } :: DeviceGroupFiltersSetting s)
+
+instance P.HasValue (DeviceGroupFiltersSetting s) (TF.Attr s P.Text) where
+    value =
+        P.lens (_value :: DeviceGroupFiltersSetting s -> TF.Attr s P.Text)
+               (\s a -> s { _value = a } :: DeviceGroupFiltersSetting s)

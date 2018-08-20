@@ -485,7 +485,7 @@ data MachineResource s = MachineResource'
     -- ^ @cloud_config@ - (Optional, Forces New)
     -- Copied to machine on boot
     --
-    , _cns                       :: TF.Attr s (CnsSetting s)
+    , _cns                       :: TF.Attr s (MachineCnsSetting s)
     -- ^ @cns@ - (Optional)
     -- Container Name Service
     --
@@ -513,7 +513,7 @@ data MachineResource s = MachineResource'
     -- ^ @networks@ - (Optional)
     -- Desired network IDs
     --
-    , _nic                       :: TF.Attr s [TF.Attr s (NicSetting s)]
+    , _nic                       :: TF.Attr s [TF.Attr s (MachineNicSetting s)]
     -- ^ @nic@ - (Optional)
     -- Network interface
     --
@@ -589,7 +589,7 @@ instance TF.IsValid (MachineResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_cns"
                   (_cns
-                      :: MachineResource s -> TF.Attr s (CnsSetting s))
+                      :: MachineResource s -> TF.Attr s (MachineCnsSetting s))
                   TF.validator
 
 instance P.HasAdministratorPw (MachineResource s) (TF.Attr s P.Text) where
@@ -607,9 +607,9 @@ instance P.HasCloudConfig (MachineResource s) (TF.Attr s P.Text) where
         P.lens (_cloudConfig :: MachineResource s -> TF.Attr s P.Text)
                (\s a -> s { _cloudConfig = a } :: MachineResource s)
 
-instance P.HasCns (MachineResource s) (TF.Attr s (CnsSetting s)) where
+instance P.HasCns (MachineResource s) (TF.Attr s (MachineCnsSetting s)) where
     cns =
-        P.lens (_cns :: MachineResource s -> TF.Attr s (CnsSetting s))
+        P.lens (_cns :: MachineResource s -> TF.Attr s (MachineCnsSetting s))
                (\s a -> s { _cns = a } :: MachineResource s)
 
 instance P.HasDeletionProtectionEnabled (MachineResource s) (TF.Attr s P.Bool) where
@@ -642,9 +642,9 @@ instance P.HasNetworks (MachineResource s) (TF.Attr s [TF.Attr s P.Text]) where
         P.lens (_networks :: MachineResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _networks = a } :: MachineResource s)
 
-instance P.HasNic (MachineResource s) (TF.Attr s [TF.Attr s (NicSetting s)]) where
+instance P.HasNic (MachineResource s) (TF.Attr s [TF.Attr s (MachineNicSetting s)]) where
     nic =
-        P.lens (_nic :: MachineResource s -> TF.Attr s [TF.Attr s (NicSetting s)])
+        P.lens (_nic :: MachineResource s -> TF.Attr s [TF.Attr s (MachineNicSetting s)])
                (\s a -> s { _nic = a } :: MachineResource s)
 
 instance P.HasPackage (MachineResource s) (TF.Attr s P.Text) where
@@ -699,7 +699,7 @@ instance s ~ s' => P.HasComputedMemory (TF.Ref s' (MachineResource s)) (TF.Attr 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (MachineResource s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputedNic (TF.Ref s' (MachineResource s)) (TF.Attr s [TF.Attr s (NicSetting s)]) where
+instance s ~ s' => P.HasComputedNic (TF.Ref s' (MachineResource s)) (TF.Attr s [TF.Attr s (MachineNicSetting s)]) where
     computedNic x = TF.compute (TF.refKey x) "nic"
 
 instance s ~ s' => P.HasComputedPrimaryip (TF.Ref s' (MachineResource s)) (TF.Attr s P.Text) where

@@ -554,10 +554,10 @@ instance P.HasProject (ComputeBackendServiceData s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedBackend (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s [TF.Attr s (BackendSetting s)]) where
+instance s ~ s' => P.HasComputedBackend (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s [TF.Attr s (ComputeBackendServiceBackendSetting s)]) where
     computedBackend x = TF.compute (TF.refKey x) "backend"
 
-instance s ~ s' => P.HasComputedCdnPolicy (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s [TF.Attr s (CdnPolicySetting s)]) where
+instance s ~ s' => P.HasComputedCdnPolicy (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s [TF.Attr s (ComputeBackendServiceCdnPolicySetting s)]) where
     computedCdnPolicy x = TF.compute (TF.refKey x) "cdn_policy"
 
 instance s ~ s' => P.HasComputedConnectionDrainingTimeoutSec (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s P.Int) where
@@ -578,7 +578,7 @@ instance s ~ s' => P.HasComputedFingerprint (TF.Ref s' (ComputeBackendServiceDat
 instance s ~ s' => P.HasComputedHealthChecks (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedHealthChecks x = TF.compute (TF.refKey x) "health_checks"
 
-instance s ~ s' => P.HasComputedIap (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s [TF.Attr s (IapSetting s)]) where
+instance s ~ s' => P.HasComputedIap (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s [TF.Attr s (ComputeBackendServiceIapSetting s)]) where
     computedIap x = TF.compute (TF.refKey x) "iap"
 
 instance s ~ s' => P.HasComputedPortName (TF.Ref s' (ComputeBackendServiceData s)) (TF.Attr s P.Text) where
@@ -1019,7 +1019,7 @@ instance s ~ s' => P.HasComputedDescription (TF.Ref s' (ComputeInstanceGroupData
 instance s ~ s' => P.HasComputedInstances (TF.Ref s' (ComputeInstanceGroupData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedInstances x = TF.compute (TF.refKey x) "instances"
 
-instance s ~ s' => P.HasComputedNamedPort (TF.Ref s' (ComputeInstanceGroupData s)) (TF.Attr s [TF.Attr s (NamedPortSetting s)]) where
+instance s ~ s' => P.HasComputedNamedPort (TF.Ref s' (ComputeInstanceGroupData s)) (TF.Attr s [TF.Attr s (ComputeInstanceGroupNamedPortSetting s)]) where
     computedNamedPort x = TF.compute (TF.refKey x) "named_port"
 
 instance s ~ s' => P.HasComputedNetwork (TF.Ref s' (ComputeInstanceGroupData s)) (TF.Attr s P.Text) where
@@ -1189,7 +1189,7 @@ instance P.HasSelfLink (ComputeRegionInstanceGroupData s) (TF.Attr s P.Text) whe
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeRegionInstanceGroupData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedInstances (TF.Ref s' (ComputeRegionInstanceGroupData s)) (TF.Attr s [TF.Attr s (InstancesSetting s)]) where
+instance s ~ s' => P.HasComputedInstances (TF.Ref s' (ComputeRegionInstanceGroupData s)) (TF.Attr s [TF.Attr s (ComputeRegionInstanceGroupInstancesSetting s)]) where
     computedInstances x = TF.compute (TF.refKey x) "instances"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeRegionInstanceGroupData s)) (TF.Attr s P.Text) where
@@ -1405,7 +1405,7 @@ instance s ~ s' => P.HasComputedProject (TF.Ref s' (ComputeSubnetworkData s)) (T
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (ComputeSubnetworkData s)) (TF.Attr s P.Text) where
     computedRegion x = TF.compute (TF.refKey x) "region"
 
-instance s ~ s' => P.HasComputedSecondaryIpRange (TF.Ref s' (ComputeSubnetworkData s)) (TF.Attr s [TF.Attr s (SecondaryIpRangeSetting s)]) where
+instance s ~ s' => P.HasComputedSecondaryIpRange (TF.Ref s' (ComputeSubnetworkData s)) (TF.Attr s [TF.Attr s (ComputeSubnetworkSecondaryIpRangeSetting s)]) where
     computedSecondaryIpRange x = TF.compute (TF.refKey x) "secondary_ip_range"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (ComputeSubnetworkData s)) (TF.Attr s P.Text) where
@@ -1612,7 +1612,7 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (ContainerClusterData s)) (TF.Attr
 instance s ~ s' => P.HasComputedAdditionalZones (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedAdditionalZones x = TF.compute (TF.refKey x) "additional_zones"
 
-instance s ~ s' => P.HasComputedAddonsConfig (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [TF.Attr s (AddonsConfigSetting s)]) where
+instance s ~ s' => P.HasComputedAddonsConfig (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [TF.Attr s (ContainerClusterAddonsConfigSetting s)]) where
     computedAddonsConfig x = TF.compute (TF.refKey x) "addons_config"
 
 instance s ~ s' => P.HasComputedClusterIpv4Cidr (TF.Ref s' (ContainerClusterData s)) (TF.Attr s P.Text) where
@@ -1636,19 +1636,19 @@ instance s ~ s' => P.HasComputedInitialNodeCount (TF.Ref s' (ContainerClusterDat
 instance s ~ s' => P.HasComputedInstanceGroupUrls (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedInstanceGroupUrls x = TF.compute (TF.refKey x) "instance_group_urls"
 
-instance s ~ s' => P.HasComputedIpAllocationPolicy (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [TF.Attr s (IpAllocationPolicySetting s)]) where
+instance s ~ s' => P.HasComputedIpAllocationPolicy (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [TF.Attr s (ContainerClusterIpAllocationPolicySetting s)]) where
     computedIpAllocationPolicy x = TF.compute (TF.refKey x) "ip_allocation_policy"
 
 instance s ~ s' => P.HasComputedLoggingService (TF.Ref s' (ContainerClusterData s)) (TF.Attr s P.Text) where
     computedLoggingService x = TF.compute (TF.refKey x) "logging_service"
 
-instance s ~ s' => P.HasComputedMaintenancePolicy (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [TF.Attr s (MaintenancePolicySetting s)]) where
+instance s ~ s' => P.HasComputedMaintenancePolicy (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [TF.Attr s (ContainerClusterMaintenancePolicySetting s)]) where
     computedMaintenancePolicy x = TF.compute (TF.refKey x) "maintenance_policy"
 
-instance s ~ s' => P.HasComputedMasterAuth (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [TF.Attr s (MasterAuthSetting s)]) where
+instance s ~ s' => P.HasComputedMasterAuth (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [TF.Attr s (ContainerClusterMasterAuthSetting s)]) where
     computedMasterAuth x = TF.compute (TF.refKey x) "master_auth"
 
-instance s ~ s' => P.HasComputedMasterAuthorizedNetworksConfig (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [TF.Attr s (MasterAuthorizedNetworksConfigSetting s)]) where
+instance s ~ s' => P.HasComputedMasterAuthorizedNetworksConfig (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [TF.Attr s (ContainerClusterMasterAuthorizedNetworksConfigSetting s)]) where
     computedMasterAuthorizedNetworksConfig x = TF.compute (TF.refKey x) "master_authorized_networks_config"
 
 instance s ~ s' => P.HasComputedMasterIpv4CidrBlock (TF.Ref s' (ContainerClusterData s)) (TF.Attr s P.Text) where
@@ -1666,19 +1666,19 @@ instance s ~ s' => P.HasComputedMonitoringService (TF.Ref s' (ContainerClusterDa
 instance s ~ s' => P.HasComputedNetwork (TF.Ref s' (ContainerClusterData s)) (TF.Attr s P.Text) where
     computedNetwork x = TF.compute (TF.refKey x) "network"
 
-instance s ~ s' => P.HasComputedNetworkPolicy (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [TF.Attr s (NetworkPolicySetting s)]) where
+instance s ~ s' => P.HasComputedNetworkPolicy (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [TF.Attr s (ContainerClusterNetworkPolicySetting s)]) where
     computedNetworkPolicy x = TF.compute (TF.refKey x) "network_policy"
 
-instance s ~ s' => P.HasComputedNodeConfig (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [TF.Attr s (NodeConfigSetting s)]) where
+instance s ~ s' => P.HasComputedNodeConfig (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [TF.Attr s (ContainerClusterNodeConfigSetting s)]) where
     computedNodeConfig x = TF.compute (TF.refKey x) "node_config"
 
-instance s ~ s' => P.HasComputedNodePool (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [TF.Attr s (NodePoolSetting s)]) where
+instance s ~ s' => P.HasComputedNodePool (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [TF.Attr s (ContainerClusterNodePoolSetting s)]) where
     computedNodePool x = TF.compute (TF.refKey x) "node_pool"
 
 instance s ~ s' => P.HasComputedNodeVersion (TF.Ref s' (ContainerClusterData s)) (TF.Attr s P.Text) where
     computedNodeVersion x = TF.compute (TF.refKey x) "node_version"
 
-instance s ~ s' => P.HasComputedPodSecurityPolicyConfig (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [TF.Attr s (PodSecurityPolicyConfigSetting s)]) where
+instance s ~ s' => P.HasComputedPodSecurityPolicyConfig (TF.Ref s' (ContainerClusterData s)) (TF.Attr s [TF.Attr s (ContainerClusterPodSecurityPolicyConfigSetting s)]) where
     computedPodSecurityPolicyConfig x = TF.compute (TF.refKey x) "pod_security_policy_config"
 
 instance s ~ s' => P.HasComputedPrivateCluster (TF.Ref s' (ContainerClusterData s)) (TF.Attr s P.Bool) where
@@ -2010,14 +2010,14 @@ instance s ~ s' => P.HasComputedParent (TF.Ref s' (FolderData s)) (TF.Attr s P.T
 -- See the <https://www.terraform.io/docs/providers/google/d/iam_policy.html terraform documentation>
 -- for more information.
 data IamPolicyData s = IamPolicyData'
-    { _binding :: TF.Attr s [TF.Attr s (BindingSetting s)]
+    { _binding :: TF.Attr s [TF.Attr s (IamPolicyBindingSetting s)]
     -- ^ @binding@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @google_iam_policy@ datasource value.
 iamPolicyData
-    :: TF.Attr s [TF.Attr s (BindingSetting s)] -- ^ @binding@ ('P._binding', 'P.binding')
+    :: TF.Attr s [TF.Attr s (IamPolicyBindingSetting s)] -- ^ @binding@ ('P._binding', 'P.binding')
     -> P.DataSource (IamPolicyData s)
 iamPolicyData _binding =
     TF.unsafeDataSource "google_iam_policy" TF.validator $
@@ -2033,9 +2033,9 @@ instance TF.IsObject (IamPolicyData s) where
 instance TF.IsValid (IamPolicyData s) where
     validator = P.mempty
 
-instance P.HasBinding (IamPolicyData s) (TF.Attr s [TF.Attr s (BindingSetting s)]) where
+instance P.HasBinding (IamPolicyData s) (TF.Attr s [TF.Attr s (IamPolicyBindingSetting s)]) where
     binding =
-        P.lens (_binding :: IamPolicyData s -> TF.Attr s [TF.Attr s (BindingSetting s)])
+        P.lens (_binding :: IamPolicyData s -> TF.Attr s [TF.Attr s (IamPolicyBindingSetting s)])
                (\s a -> s { _binding = a } :: IamPolicyData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (IamPolicyData s)) (TF.Attr s P.Text) where
@@ -2238,7 +2238,7 @@ instance P.HasProjectId (ProjectData s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ProjectData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedAppEngine (TF.Ref s' (ProjectData s)) (TF.Attr s [TF.Attr s (AppEngineSetting s)]) where
+instance s ~ s' => P.HasComputedAppEngine (TF.Ref s' (ProjectData s)) (TF.Attr s [TF.Attr s (ProjectAppEngineSetting s)]) where
     computedAppEngine x = TF.compute (TF.refKey x) "app_engine"
 
 instance s ~ s' => P.HasComputedAutoCreateNetwork (TF.Ref s' (ProjectData s)) (TF.Attr s P.Bool) where

@@ -92,7 +92,7 @@ import qualified Terrafomo.Validator         as TF
 -- See the <https://www.terraform.io/docs/providers/ignition/d/config.html terraform documentation>
 -- for more information.
 data ConfigData s = ConfigData'
-    { _append      :: TF.Attr s [TF.Attr s (AppendSetting s)]
+    { _append      :: TF.Attr s [TF.Attr s (ConfigAppendSetting s)]
     -- ^ @append@ - (Optional, Forces New)
     --
     , _arrays      :: TF.Attr s [TF.Attr s P.Text]
@@ -119,7 +119,7 @@ data ConfigData s = ConfigData'
     , _networkd    :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @networkd@ - (Optional)
     --
-    , _replace     :: TF.Attr s (ReplaceSetting s)
+    , _replace     :: TF.Attr s (ConfigReplaceSetting s)
     -- ^ @replace@ - (Optional, Forces New)
     --
     , _systemd     :: TF.Attr s [TF.Attr s P.Text]
@@ -170,12 +170,12 @@ instance TF.IsValid (ConfigData s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_replace"
                   (_replace
-                      :: ConfigData s -> TF.Attr s (ReplaceSetting s))
+                      :: ConfigData s -> TF.Attr s (ConfigReplaceSetting s))
                   TF.validator
 
-instance P.HasAppend (ConfigData s) (TF.Attr s [TF.Attr s (AppendSetting s)]) where
+instance P.HasAppend (ConfigData s) (TF.Attr s [TF.Attr s (ConfigAppendSetting s)]) where
     append =
-        P.lens (_append :: ConfigData s -> TF.Attr s [TF.Attr s (AppendSetting s)])
+        P.lens (_append :: ConfigData s -> TF.Attr s [TF.Attr s (ConfigAppendSetting s)])
                (\s a -> s { _append = a } :: ConfigData s)
 
 instance P.HasArrays (ConfigData s) (TF.Attr s [TF.Attr s P.Text]) where
@@ -218,9 +218,9 @@ instance P.HasNetworkd (ConfigData s) (TF.Attr s [TF.Attr s P.Text]) where
         P.lens (_networkd :: ConfigData s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _networkd = a } :: ConfigData s)
 
-instance P.HasReplace (ConfigData s) (TF.Attr s (ReplaceSetting s)) where
+instance P.HasReplace (ConfigData s) (TF.Attr s (ConfigReplaceSetting s)) where
     replace =
-        P.lens (_replace :: ConfigData s -> TF.Attr s (ReplaceSetting s))
+        P.lens (_replace :: ConfigData s -> TF.Attr s (ConfigReplaceSetting s))
                (\s a -> s { _replace = a } :: ConfigData s)
 
 instance P.HasSystemd (ConfigData s) (TF.Attr s [TF.Attr s P.Text]) where
@@ -324,7 +324,7 @@ data DiskData s = DiskData'
     { _device    :: TF.Attr s P.Text
     -- ^ @device@ - (Required, Forces New)
     --
-    , _partition :: TF.Attr s [TF.Attr s (PartitionSetting s)]
+    , _partition :: TF.Attr s [TF.Attr s (DiskPartitionSetting s)]
     -- ^ @partition@ - (Optional, Forces New)
     --
     , _wipeTable :: TF.Attr s P.Bool
@@ -359,9 +359,9 @@ instance P.HasDevice (DiskData s) (TF.Attr s P.Text) where
         P.lens (_device :: DiskData s -> TF.Attr s P.Text)
                (\s a -> s { _device = a } :: DiskData s)
 
-instance P.HasPartition (DiskData s) (TF.Attr s [TF.Attr s (PartitionSetting s)]) where
+instance P.HasPartition (DiskData s) (TF.Attr s [TF.Attr s (DiskPartitionSetting s)]) where
     partition =
-        P.lens (_partition :: DiskData s -> TF.Attr s [TF.Attr s (PartitionSetting s)])
+        P.lens (_partition :: DiskData s -> TF.Attr s [TF.Attr s (DiskPartitionSetting s)])
                (\s a -> s { _partition = a } :: DiskData s)
 
 instance P.HasWipeTable (DiskData s) (TF.Attr s P.Bool) where
@@ -377,7 +377,7 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (DiskData s)) (TF.Attr s P.Text) w
 -- See the <https://www.terraform.io/docs/providers/ignition/d/file.html terraform documentation>
 -- for more information.
 data FileData s = FileData'
-    { _content    :: TF.Attr s (ContentSetting s)
+    { _content    :: TF.Attr s (FileContentSetting s)
     -- ^ @content@ - (Optional, Forces New)
     --
     , _filesystem :: TF.Attr s P.Text
@@ -392,7 +392,7 @@ data FileData s = FileData'
     , _path       :: TF.Attr s P.Text
     -- ^ @path@ - (Required, Forces New)
     --
-    , _source     :: TF.Attr s (SourceSetting s)
+    , _source     :: TF.Attr s (FileSourceSetting s)
     -- ^ @source@ - (Optional, Forces New)
     --
     , _uid        :: TF.Attr s P.Int
@@ -432,16 +432,16 @@ instance TF.IsValid (FileData s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_content"
                   (_content
-                      :: FileData s -> TF.Attr s (ContentSetting s))
+                      :: FileData s -> TF.Attr s (FileContentSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_source"
                   (_source
-                      :: FileData s -> TF.Attr s (SourceSetting s))
+                      :: FileData s -> TF.Attr s (FileSourceSetting s))
                   TF.validator
 
-instance P.HasContent (FileData s) (TF.Attr s (ContentSetting s)) where
+instance P.HasContent (FileData s) (TF.Attr s (FileContentSetting s)) where
     content =
-        P.lens (_content :: FileData s -> TF.Attr s (ContentSetting s))
+        P.lens (_content :: FileData s -> TF.Attr s (FileContentSetting s))
                (\s a -> s { _content = a } :: FileData s)
 
 instance P.HasFilesystem (FileData s) (TF.Attr s P.Text) where
@@ -464,9 +464,9 @@ instance P.HasPath (FileData s) (TF.Attr s P.Text) where
         P.lens (_path :: FileData s -> TF.Attr s P.Text)
                (\s a -> s { _path = a } :: FileData s)
 
-instance P.HasSource (FileData s) (TF.Attr s (SourceSetting s)) where
+instance P.HasSource (FileData s) (TF.Attr s (FileSourceSetting s)) where
     source =
-        P.lens (_source :: FileData s -> TF.Attr s (SourceSetting s))
+        P.lens (_source :: FileData s -> TF.Attr s (FileSourceSetting s))
                (\s a -> s { _source = a } :: FileData s)
 
 instance P.HasUid (FileData s) (TF.Attr s P.Int) where
@@ -482,7 +482,7 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (FileData s)) (TF.Attr s P.Text) w
 -- See the <https://www.terraform.io/docs/providers/ignition/d/filesystem.html terraform documentation>
 -- for more information.
 data FilesystemData s = FilesystemData'
-    { _mount :: TF.Attr s (MountSetting s)
+    { _mount :: TF.Attr s (FilesystemMountSetting s)
     -- ^ @mount@ - (Optional, Forces New)
     --
     , _name  :: TF.Attr s P.Text
@@ -515,12 +515,12 @@ instance TF.IsValid (FilesystemData s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_mount"
                   (_mount
-                      :: FilesystemData s -> TF.Attr s (MountSetting s))
+                      :: FilesystemData s -> TF.Attr s (FilesystemMountSetting s))
                   TF.validator
 
-instance P.HasMount (FilesystemData s) (TF.Attr s (MountSetting s)) where
+instance P.HasMount (FilesystemData s) (TF.Attr s (FilesystemMountSetting s)) where
     mount =
-        P.lens (_mount :: FilesystemData s -> TF.Attr s (MountSetting s))
+        P.lens (_mount :: FilesystemData s -> TF.Attr s (FilesystemMountSetting s))
                (\s a -> s { _mount = a } :: FilesystemData s)
 
 instance P.HasName (FilesystemData s) (TF.Attr s P.Text) where
@@ -801,7 +801,7 @@ data SystemdUnitData s = SystemdUnitData'
     { _content :: TF.Attr s P.Text
     -- ^ @content@ - (Optional, Forces New)
     --
-    , _dropin  :: TF.Attr s [TF.Attr s (DropinSetting s)]
+    , _dropin  :: TF.Attr s [TF.Attr s (SystemdUnitDropinSetting s)]
     -- ^ @dropin@ - (Optional, Forces New)
     --
     , _enabled :: TF.Attr s P.Bool
@@ -846,9 +846,9 @@ instance P.HasContent (SystemdUnitData s) (TF.Attr s P.Text) where
         P.lens (_content :: SystemdUnitData s -> TF.Attr s P.Text)
                (\s a -> s { _content = a } :: SystemdUnitData s)
 
-instance P.HasDropin (SystemdUnitData s) (TF.Attr s [TF.Attr s (DropinSetting s)]) where
+instance P.HasDropin (SystemdUnitData s) (TF.Attr s [TF.Attr s (SystemdUnitDropinSetting s)]) where
     dropin =
-        P.lens (_dropin :: SystemdUnitData s -> TF.Attr s [TF.Attr s (DropinSetting s)])
+        P.lens (_dropin :: SystemdUnitData s -> TF.Attr s [TF.Attr s (SystemdUnitDropinSetting s)])
                (\s a -> s { _dropin = a } :: SystemdUnitData s)
 
 instance P.HasEnabled (SystemdUnitData s) (TF.Attr s P.Bool) where

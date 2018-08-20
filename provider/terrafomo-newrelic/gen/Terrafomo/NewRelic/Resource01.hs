@@ -155,7 +155,7 @@ data AlertConditionResource s = AlertConditionResource'
     , _runbookUrl :: TF.Attr s P.Text
     -- ^ @runbook_url@ - (Optional)
     --
-    , _term :: TF.Attr s (P.NonEmpty (TF.Attr s (TermSetting s)))
+    , _term :: TF.Attr s (P.NonEmpty (TF.Attr s (AlertConditionTermSetting s)))
     -- ^ @term@ - (Required)
     --
     , _type' :: TF.Attr s P.Text
@@ -178,7 +178,7 @@ alertConditionResource
     -> TF.Attr s P.Int -- ^ @policy_id@ ('P._policyId', 'P.policyId')
     -> TF.Attr s P.Text -- ^ @metric@ ('P._metric', 'P.metric')
     -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
-    -> TF.Attr s (P.NonEmpty (TF.Attr s (TermSetting s))) -- ^ @term@ ('P._term', 'P.term')
+    -> TF.Attr s (P.NonEmpty (TF.Attr s (AlertConditionTermSetting s))) -- ^ @term@ ('P._term', 'P.term')
     -> TF.Attr s P.Text -- ^ @type@ ('P._type'', 'P.type'')
     -> P.Resource (AlertConditionResource s)
 alertConditionResource _entities _policyId _metric _name _term _type' =
@@ -252,9 +252,9 @@ instance P.HasRunbookUrl (AlertConditionResource s) (TF.Attr s P.Text) where
         P.lens (_runbookUrl :: AlertConditionResource s -> TF.Attr s P.Text)
                (\s a -> s { _runbookUrl = a } :: AlertConditionResource s)
 
-instance P.HasTerm (AlertConditionResource s) (TF.Attr s (P.NonEmpty (TF.Attr s (TermSetting s)))) where
+instance P.HasTerm (AlertConditionResource s) (TF.Attr s (P.NonEmpty (TF.Attr s (AlertConditionTermSetting s)))) where
     term =
-        P.lens (_term :: AlertConditionResource s -> TF.Attr s (P.NonEmpty (TF.Attr s (TermSetting s))))
+        P.lens (_term :: AlertConditionResource s -> TF.Attr s (P.NonEmpty (TF.Attr s (AlertConditionTermSetting s))))
                (\s a -> s { _term = a } :: AlertConditionResource s)
 
 instance P.HasType' (AlertConditionResource s) (TF.Attr s P.Text) where
@@ -396,7 +396,7 @@ data DashboardResource s = DashboardResource'
     , _visibility :: TF.Attr s P.Text
     -- ^ @visibility@ - (Optional)
     --
-    , _widget     :: TF.Attr s [TF.Attr s (WidgetSetting s)]
+    , _widget     :: TF.Attr s [TF.Attr s (DashboardWidgetSetting s)]
     -- ^ @widget@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -447,9 +447,9 @@ instance P.HasVisibility (DashboardResource s) (TF.Attr s P.Text) where
         P.lens (_visibility :: DashboardResource s -> TF.Attr s P.Text)
                (\s a -> s { _visibility = a } :: DashboardResource s)
 
-instance P.HasWidget (DashboardResource s) (TF.Attr s [TF.Attr s (WidgetSetting s)]) where
+instance P.HasWidget (DashboardResource s) (TF.Attr s [TF.Attr s (DashboardWidgetSetting s)]) where
     widget =
-        P.lens (_widget :: DashboardResource s -> TF.Attr s [TF.Attr s (WidgetSetting s)])
+        P.lens (_widget :: DashboardResource s -> TF.Attr s [TF.Attr s (DashboardWidgetSetting s)])
                (\s a -> s { _widget = a } :: DashboardResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (DashboardResource s)) (TF.Attr s P.Text) where
@@ -466,7 +466,7 @@ data InfraAlertConditionResource s = InfraAlertConditionResource'
     { _comparison   :: TF.Attr s P.Text
     -- ^ @comparison@ - (Optional)
     --
-    , _critical     :: TF.Attr s (CriticalSetting s)
+    , _critical     :: TF.Attr s (InfraAlertConditionCriticalSetting s)
     -- ^ @critical@ - (Optional)
     --
     , _enabled      :: TF.Attr s P.Bool
@@ -490,7 +490,7 @@ data InfraAlertConditionResource s = InfraAlertConditionResource'
     , _type'        :: TF.Attr s P.Text
     -- ^ @type@ - (Required, Forces New)
     --
-    , _warning      :: TF.Attr s (WarningSetting s)
+    , _warning      :: TF.Attr s (InfraAlertConditionWarningSetting s)
     -- ^ @warning@ - (Optional, Forces New)
     --
     , _where'       :: TF.Attr s P.Text
@@ -539,11 +539,11 @@ instance TF.IsValid (InfraAlertConditionResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_critical"
                   (_critical
-                      :: InfraAlertConditionResource s -> TF.Attr s (CriticalSetting s))
+                      :: InfraAlertConditionResource s -> TF.Attr s (InfraAlertConditionCriticalSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_warning"
                   (_warning
-                      :: InfraAlertConditionResource s -> TF.Attr s (WarningSetting s))
+                      :: InfraAlertConditionResource s -> TF.Attr s (InfraAlertConditionWarningSetting s))
                   TF.validator
 
 instance P.HasComparison (InfraAlertConditionResource s) (TF.Attr s P.Text) where
@@ -551,9 +551,9 @@ instance P.HasComparison (InfraAlertConditionResource s) (TF.Attr s P.Text) wher
         P.lens (_comparison :: InfraAlertConditionResource s -> TF.Attr s P.Text)
                (\s a -> s { _comparison = a } :: InfraAlertConditionResource s)
 
-instance P.HasCritical (InfraAlertConditionResource s) (TF.Attr s (CriticalSetting s)) where
+instance P.HasCritical (InfraAlertConditionResource s) (TF.Attr s (InfraAlertConditionCriticalSetting s)) where
     critical =
-        P.lens (_critical :: InfraAlertConditionResource s -> TF.Attr s (CriticalSetting s))
+        P.lens (_critical :: InfraAlertConditionResource s -> TF.Attr s (InfraAlertConditionCriticalSetting s))
                (\s a -> s { _critical = a } :: InfraAlertConditionResource s)
 
 instance P.HasEnabled (InfraAlertConditionResource s) (TF.Attr s P.Bool) where
@@ -591,9 +591,9 @@ instance P.HasType' (InfraAlertConditionResource s) (TF.Attr s P.Text) where
         P.lens (_type' :: InfraAlertConditionResource s -> TF.Attr s P.Text)
                (\s a -> s { _type' = a } :: InfraAlertConditionResource s)
 
-instance P.HasWarning (InfraAlertConditionResource s) (TF.Attr s (WarningSetting s)) where
+instance P.HasWarning (InfraAlertConditionResource s) (TF.Attr s (InfraAlertConditionWarningSetting s)) where
     warning =
-        P.lens (_warning :: InfraAlertConditionResource s -> TF.Attr s (WarningSetting s))
+        P.lens (_warning :: InfraAlertConditionResource s -> TF.Attr s (InfraAlertConditionWarningSetting s))
                (\s a -> s { _warning = a } :: InfraAlertConditionResource s)
 
 instance P.HasWhere' (InfraAlertConditionResource s) (TF.Attr s P.Text) where
@@ -615,22 +615,22 @@ instance s ~ s' => P.HasComputedUpdatedAt (TF.Ref s' (InfraAlertConditionResourc
 -- See the <https://www.terraform.io/docs/providers/newrelic/r/nrql_alert_condition.html terraform documentation>
 -- for more information.
 data NrqlAlertConditionResource s = NrqlAlertConditionResource'
-    { _enabled       :: TF.Attr s P.Bool
+    { _enabled :: TF.Attr s P.Bool
     -- ^ @enabled@ - (Optional)
     --
-    , _name          :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _nrql          :: TF.Attr s (NrqlSetting s)
+    , _nrql :: TF.Attr s (NrqlAlertConditionNrqlSetting s)
     -- ^ @nrql@ - (Required)
     --
-    , _policyId      :: TF.Attr s P.Int
+    , _policyId :: TF.Attr s P.Int
     -- ^ @policy_id@ - (Required, Forces New)
     --
-    , _runbookUrl    :: TF.Attr s P.Text
+    , _runbookUrl :: TF.Attr s P.Text
     -- ^ @runbook_url@ - (Optional)
     --
-    , _term          :: TF.Attr s (P.NonEmpty (TF.Attr s (TermSetting s)))
+    , _term :: TF.Attr s (P.NonEmpty (TF.Attr s (NrqlAlertConditionTermSetting s)))
     -- ^ @term@ - (Required)
     --
     , _valueFunction :: TF.Attr s P.Text
@@ -642,8 +642,8 @@ data NrqlAlertConditionResource s = NrqlAlertConditionResource'
 nrqlAlertConditionResource
     :: TF.Attr s P.Int -- ^ @policy_id@ ('P._policyId', 'P.policyId')
     -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
-    -> TF.Attr s (NrqlSetting s) -- ^ @nrql@ ('P._nrql', 'P.nrql')
-    -> TF.Attr s (P.NonEmpty (TF.Attr s (TermSetting s))) -- ^ @term@ ('P._term', 'P.term')
+    -> TF.Attr s (NrqlAlertConditionNrqlSetting s) -- ^ @nrql@ ('P._nrql', 'P.nrql')
+    -> TF.Attr s (P.NonEmpty (TF.Attr s (NrqlAlertConditionTermSetting s))) -- ^ @term@ ('P._term', 'P.term')
     -> P.Resource (NrqlAlertConditionResource s)
 nrqlAlertConditionResource _policyId _name _nrql _term =
     TF.unsafeResource "newrelic_nrql_alert_condition" TF.validator $
@@ -672,7 +672,7 @@ instance TF.IsValid (NrqlAlertConditionResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_nrql"
                   (_nrql
-                      :: NrqlAlertConditionResource s -> TF.Attr s (NrqlSetting s))
+                      :: NrqlAlertConditionResource s -> TF.Attr s (NrqlAlertConditionNrqlSetting s))
                   TF.validator
 
 instance P.HasEnabled (NrqlAlertConditionResource s) (TF.Attr s P.Bool) where
@@ -685,9 +685,9 @@ instance P.HasName (NrqlAlertConditionResource s) (TF.Attr s P.Text) where
         P.lens (_name :: NrqlAlertConditionResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: NrqlAlertConditionResource s)
 
-instance P.HasNrql (NrqlAlertConditionResource s) (TF.Attr s (NrqlSetting s)) where
+instance P.HasNrql (NrqlAlertConditionResource s) (TF.Attr s (NrqlAlertConditionNrqlSetting s)) where
     nrql =
-        P.lens (_nrql :: NrqlAlertConditionResource s -> TF.Attr s (NrqlSetting s))
+        P.lens (_nrql :: NrqlAlertConditionResource s -> TF.Attr s (NrqlAlertConditionNrqlSetting s))
                (\s a -> s { _nrql = a } :: NrqlAlertConditionResource s)
 
 instance P.HasPolicyId (NrqlAlertConditionResource s) (TF.Attr s P.Int) where
@@ -700,9 +700,9 @@ instance P.HasRunbookUrl (NrqlAlertConditionResource s) (TF.Attr s P.Text) where
         P.lens (_runbookUrl :: NrqlAlertConditionResource s -> TF.Attr s P.Text)
                (\s a -> s { _runbookUrl = a } :: NrqlAlertConditionResource s)
 
-instance P.HasTerm (NrqlAlertConditionResource s) (TF.Attr s (P.NonEmpty (TF.Attr s (TermSetting s)))) where
+instance P.HasTerm (NrqlAlertConditionResource s) (TF.Attr s (P.NonEmpty (TF.Attr s (NrqlAlertConditionTermSetting s)))) where
     term =
-        P.lens (_term :: NrqlAlertConditionResource s -> TF.Attr s (P.NonEmpty (TF.Attr s (TermSetting s))))
+        P.lens (_term :: NrqlAlertConditionResource s -> TF.Attr s (P.NonEmpty (TF.Attr s (NrqlAlertConditionTermSetting s))))
                (\s a -> s { _term = a } :: NrqlAlertConditionResource s)
 
 instance P.HasValueFunction (NrqlAlertConditionResource s) (TF.Attr s P.Text) where

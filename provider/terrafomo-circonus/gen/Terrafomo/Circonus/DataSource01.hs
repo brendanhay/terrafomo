@@ -137,7 +137,7 @@ instance s ~ s' => P.HasComputedDescription (TF.Ref s' (AccountData s)) (TF.Attr
 instance s ~ s' => P.HasComputedId (TF.Ref s' (AccountData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedInvites (TF.Ref s' (AccountData s)) (TF.Attr s [TF.Attr s (InvitesSetting s)]) where
+instance s ~ s' => P.HasComputedInvites (TF.Ref s' (AccountData s)) (TF.Attr s [TF.Attr s (AccountInvitesSetting s)]) where
     computedInvites x = TF.compute (TF.refKey x) "invites"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (AccountData s)) (TF.Attr s P.Text) where
@@ -155,10 +155,10 @@ instance s ~ s' => P.HasComputedTimezone (TF.Ref s' (AccountData s)) (TF.Attr s 
 instance s ~ s' => P.HasComputedUiBaseUrl (TF.Ref s' (AccountData s)) (TF.Attr s P.Text) where
     computedUiBaseUrl x = TF.compute (TF.refKey x) "ui_base_url"
 
-instance s ~ s' => P.HasComputedUsage (TF.Ref s' (AccountData s)) (TF.Attr s [TF.Attr s (UsageSetting s)]) where
+instance s ~ s' => P.HasComputedUsage (TF.Ref s' (AccountData s)) (TF.Attr s [TF.Attr s (AccountUsageSetting s)]) where
     computedUsage x = TF.compute (TF.refKey x) "usage"
 
-instance s ~ s' => P.HasComputedUsers (TF.Ref s' (AccountData s)) (TF.Attr s [TF.Attr s (UsersSetting s)]) where
+instance s ~ s' => P.HasComputedUsers (TF.Ref s' (AccountData s)) (TF.Attr s [TF.Attr s (AccountUsersSetting s)]) where
     computedUsers x = TF.compute (TF.refKey x) "users"
 
 -- | @circonus_collector@ DataSource.
@@ -203,7 +203,7 @@ instance P.HasTags (CollectorData s) (TF.Attr s [TF.Attr s P.Text]) where
         P.lens (_tags :: CollectorData s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _tags = a } :: CollectorData s)
 
-instance s ~ s' => P.HasComputedDetails (TF.Ref s' (CollectorData s)) (TF.Attr s [TF.Attr s (DetailsSetting s)]) where
+instance s ~ s' => P.HasComputedDetails (TF.Ref s' (CollectorData s)) (TF.Attr s [TF.Attr s (CollectorDetailsSetting s)]) where
     computedDetails x = TF.compute (TF.refKey x) "details"
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (CollectorData s)) (TF.Attr s P.Text) where

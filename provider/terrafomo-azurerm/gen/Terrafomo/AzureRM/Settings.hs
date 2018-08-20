@@ -13,7 +13,9 @@ module Terrafomo.AzureRM.Settings
     -- * Settings
       module Terrafomo.AzureRM.Settings01
     , module Terrafomo.AzureRM.Settings02
+    , module Terrafomo.AzureRM.Settings03
     ) where
 
 import Terrafomo.AzureRM.Settings01
 import Terrafomo.AzureRM.Settings02
+import Terrafomo.AzureRM.Settings03

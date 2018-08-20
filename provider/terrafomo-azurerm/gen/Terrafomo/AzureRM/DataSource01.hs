@@ -218,7 +218,7 @@ data AppServiceData s = AppServiceData'
     , _resourceGroupName :: TF.Attr s P.Text
     -- ^ @resource_group_name@ - (Required, Forces New)
     --
-    , _siteConfig        :: TF.Attr s (SiteConfigSetting s)
+    , _siteConfig        :: TF.Attr s (AppServiceSiteConfigSetting s)
     -- ^ @site_config@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -247,7 +247,7 @@ instance TF.IsValid (AppServiceData s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_siteConfig"
                   (_siteConfig
-                      :: AppServiceData s -> TF.Attr s (SiteConfigSetting s))
+                      :: AppServiceData s -> TF.Attr s (AppServiceSiteConfigSetting s))
                   TF.validator
 
 instance P.HasName (AppServiceData s) (TF.Attr s P.Text) where
@@ -260,9 +260,9 @@ instance P.HasResourceGroupName (AppServiceData s) (TF.Attr s P.Text) where
         P.lens (_resourceGroupName :: AppServiceData s -> TF.Attr s P.Text)
                (\s a -> s { _resourceGroupName = a } :: AppServiceData s)
 
-instance P.HasSiteConfig (AppServiceData s) (TF.Attr s (SiteConfigSetting s)) where
+instance P.HasSiteConfig (AppServiceData s) (TF.Attr s (AppServiceSiteConfigSetting s)) where
     siteConfig =
-        P.lens (_siteConfig :: AppServiceData s -> TF.Attr s (SiteConfigSetting s))
+        P.lens (_siteConfig :: AppServiceData s -> TF.Attr s (AppServiceSiteConfigSetting s))
                (\s a -> s { _siteConfig = a } :: AppServiceData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (AppServiceData s)) (TF.Attr s P.Text) where
@@ -277,7 +277,7 @@ instance s ~ s' => P.HasComputedAppSettings (TF.Ref s' (AppServiceData s)) (TF.A
 instance s ~ s' => P.HasComputedClientAffinityEnabled (TF.Ref s' (AppServiceData s)) (TF.Attr s P.Bool) where
     computedClientAffinityEnabled x = TF.compute (TF.refKey x) "client_affinity_enabled"
 
-instance s ~ s' => P.HasComputedConnectionString (TF.Ref s' (AppServiceData s)) (TF.Attr s [TF.Attr s (ConnectionStringSetting s)]) where
+instance s ~ s' => P.HasComputedConnectionString (TF.Ref s' (AppServiceData s)) (TF.Attr s [TF.Attr s (AppServiceConnectionStringSetting s)]) where
     computedConnectionString x = TF.compute (TF.refKey x) "connection_string"
 
 instance s ~ s' => P.HasComputedDefaultSiteHostname (TF.Ref s' (AppServiceData s)) (TF.Attr s P.Text) where
@@ -295,13 +295,13 @@ instance s ~ s' => P.HasComputedLocation (TF.Ref s' (AppServiceData s)) (TF.Attr
 instance s ~ s' => P.HasComputedOutboundIpAddresses (TF.Ref s' (AppServiceData s)) (TF.Attr s P.Text) where
     computedOutboundIpAddresses x = TF.compute (TF.refKey x) "outbound_ip_addresses"
 
-instance s ~ s' => P.HasComputedSiteConfig (TF.Ref s' (AppServiceData s)) (TF.Attr s (SiteConfigSetting s)) where
+instance s ~ s' => P.HasComputedSiteConfig (TF.Ref s' (AppServiceData s)) (TF.Attr s (AppServiceSiteConfigSetting s)) where
     computedSiteConfig x = TF.compute (TF.refKey x) "site_config"
 
-instance s ~ s' => P.HasComputedSiteCredential (TF.Ref s' (AppServiceData s)) (TF.Attr s [TF.Attr s (SiteCredentialSetting s)]) where
+instance s ~ s' => P.HasComputedSiteCredential (TF.Ref s' (AppServiceData s)) (TF.Attr s [TF.Attr s (AppServiceSiteCredentialSetting s)]) where
     computedSiteCredential x = TF.compute (TF.refKey x) "site_credential"
 
-instance s ~ s' => P.HasComputedSourceControl (TF.Ref s' (AppServiceData s)) (TF.Attr s [TF.Attr s (SourceControlSetting s)]) where
+instance s ~ s' => P.HasComputedSourceControl (TF.Ref s' (AppServiceData s)) (TF.Attr s [TF.Attr s (AppServiceSourceControlSetting s)]) where
     computedSourceControl x = TF.compute (TF.refKey x) "source_control"
 
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (AppServiceData s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
@@ -363,10 +363,10 @@ instance s ~ s' => P.HasComputedLocation (TF.Ref s' (AppServicePlanData s)) (TF.
 instance s ~ s' => P.HasComputedMaximumNumberOfWorkers (TF.Ref s' (AppServicePlanData s)) (TF.Attr s P.Int) where
     computedMaximumNumberOfWorkers x = TF.compute (TF.refKey x) "maximum_number_of_workers"
 
-instance s ~ s' => P.HasComputedProperties (TF.Ref s' (AppServicePlanData s)) (TF.Attr s [TF.Attr s (PropertiesSetting s)]) where
+instance s ~ s' => P.HasComputedProperties (TF.Ref s' (AppServicePlanData s)) (TF.Attr s [TF.Attr s (AppServicePlanPropertiesSetting s)]) where
     computedProperties x = TF.compute (TF.refKey x) "properties"
 
-instance s ~ s' => P.HasComputedSku (TF.Ref s' (AppServicePlanData s)) (TF.Attr s [TF.Attr s (SkuSetting s)]) where
+instance s ~ s' => P.HasComputedSku (TF.Ref s' (AppServicePlanData s)) (TF.Attr s [TF.Attr s (AppServicePlanSkuSetting s)]) where
     computedSku x = TF.compute (TF.refKey x) "sku"
 
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (AppServicePlanData s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
@@ -645,7 +645,7 @@ instance s ~ s' => P.HasComputedAssignableScopes (TF.Ref s' (BuiltinRoleDefiniti
 instance s ~ s' => P.HasComputedDescription (TF.Ref s' (BuiltinRoleDefinitionData s)) (TF.Attr s P.Text) where
     computedDescription x = TF.compute (TF.refKey x) "description"
 
-instance s ~ s' => P.HasComputedPermissions (TF.Ref s' (BuiltinRoleDefinitionData s)) (TF.Attr s [TF.Attr s (PermissionsSetting s)]) where
+instance s ~ s' => P.HasComputedPermissions (TF.Ref s' (BuiltinRoleDefinitionData s)) (TF.Attr s [TF.Attr s (BuiltinRoleDefinitionPermissionsSetting s)]) where
     computedPermissions x = TF.compute (TF.refKey x) "permissions"
 
 instance s ~ s' => P.HasComputedType (TF.Ref s' (BuiltinRoleDefinitionData s)) (TF.Attr s P.Text) where
@@ -860,10 +860,10 @@ instance P.HasResourceGroupName (CosmosdbAccountData s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (CosmosdbAccountData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedCapabilities (TF.Ref s' (CosmosdbAccountData s)) (TF.Attr s [TF.Attr s (CapabilitiesSetting s)]) where
+instance s ~ s' => P.HasComputedCapabilities (TF.Ref s' (CosmosdbAccountData s)) (TF.Attr s [TF.Attr s (CosmosdbAccountCapabilitiesSetting s)]) where
     computedCapabilities x = TF.compute (TF.refKey x) "capabilities"
 
-instance s ~ s' => P.HasComputedConsistencyPolicy (TF.Ref s' (CosmosdbAccountData s)) (TF.Attr s [TF.Attr s (ConsistencyPolicySetting s)]) where
+instance s ~ s' => P.HasComputedConsistencyPolicy (TF.Ref s' (CosmosdbAccountData s)) (TF.Attr s [TF.Attr s (CosmosdbAccountConsistencyPolicySetting s)]) where
     computedConsistencyPolicy x = TF.compute (TF.refKey x) "consistency_policy"
 
 instance s ~ s' => P.HasComputedEnableAutomaticFailover (TF.Ref s' (CosmosdbAccountData s)) (TF.Attr s P.Bool) where
@@ -872,7 +872,7 @@ instance s ~ s' => P.HasComputedEnableAutomaticFailover (TF.Ref s' (CosmosdbAcco
 instance s ~ s' => P.HasComputedEndpoint (TF.Ref s' (CosmosdbAccountData s)) (TF.Attr s P.Text) where
     computedEndpoint x = TF.compute (TF.refKey x) "endpoint"
 
-instance s ~ s' => P.HasComputedGeoLocation (TF.Ref s' (CosmosdbAccountData s)) (TF.Attr s [TF.Attr s (GeoLocationSetting s)]) where
+instance s ~ s' => P.HasComputedGeoLocation (TF.Ref s' (CosmosdbAccountData s)) (TF.Attr s [TF.Attr s (CosmosdbAccountGeoLocationSetting s)]) where
     computedGeoLocation x = TF.compute (TF.refKey x) "geo_location"
 
 instance s ~ s' => P.HasComputedIpRangeFilter (TF.Ref s' (CosmosdbAccountData s)) (TF.Attr s P.Text) where
@@ -1206,13 +1206,13 @@ instance P.HasSortDescending (ImageData s) (TF.Attr s P.Bool) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ImageData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedDataDisk (TF.Ref s' (ImageData s)) (TF.Attr s [TF.Attr s (DataDiskSetting s)]) where
+instance s ~ s' => P.HasComputedDataDisk (TF.Ref s' (ImageData s)) (TF.Attr s [TF.Attr s (ImageDataDiskSetting s)]) where
     computedDataDisk x = TF.compute (TF.refKey x) "data_disk"
 
 instance s ~ s' => P.HasComputedLocation (TF.Ref s' (ImageData s)) (TF.Attr s P.Text) where
     computedLocation x = TF.compute (TF.refKey x) "location"
 
-instance s ~ s' => P.HasComputedOsDisk (TF.Ref s' (ImageData s)) (TF.Attr s [TF.Attr s (OsDiskSetting s)]) where
+instance s ~ s' => P.HasComputedOsDisk (TF.Ref s' (ImageData s)) (TF.Attr s [TF.Attr s (ImageOsDiskSetting s)]) where
     computedOsDisk x = TF.compute (TF.refKey x) "os_disk"
 
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (ImageData s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
@@ -1310,7 +1310,7 @@ instance P.HasResourceGroupName (KeyVaultData s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (KeyVaultData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedAccessPolicy (TF.Ref s' (KeyVaultData s)) (TF.Attr s [TF.Attr s (AccessPolicySetting s)]) where
+instance s ~ s' => P.HasComputedAccessPolicy (TF.Ref s' (KeyVaultData s)) (TF.Attr s [TF.Attr s (KeyVaultAccessPolicySetting s)]) where
     computedAccessPolicy x = TF.compute (TF.refKey x) "access_policy"
 
 instance s ~ s' => P.HasComputedEnabledForDeployment (TF.Ref s' (KeyVaultData s)) (TF.Attr s P.Bool) where
@@ -1325,7 +1325,7 @@ instance s ~ s' => P.HasComputedEnabledForTemplateDeployment (TF.Ref s' (KeyVaul
 instance s ~ s' => P.HasComputedLocation (TF.Ref s' (KeyVaultData s)) (TF.Attr s P.Text) where
     computedLocation x = TF.compute (TF.refKey x) "location"
 
-instance s ~ s' => P.HasComputedSku (TF.Ref s' (KeyVaultData s)) (TF.Attr s [TF.Attr s (SkuSetting s)]) where
+instance s ~ s' => P.HasComputedSku (TF.Ref s' (KeyVaultData s)) (TF.Attr s [TF.Attr s (KeyVaultSkuSetting s)]) where
     computedSku x = TF.compute (TF.refKey x) "sku"
 
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (KeyVaultData s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
@@ -1443,7 +1443,7 @@ instance P.HasResourceGroupName (KubernetesClusterData s) (TF.Attr s P.Text) whe
 instance s ~ s' => P.HasComputedId (TF.Ref s' (KubernetesClusterData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedAgentPoolProfile (TF.Ref s' (KubernetesClusterData s)) (TF.Attr s [TF.Attr s (AgentPoolProfileSetting s)]) where
+instance s ~ s' => P.HasComputedAgentPoolProfile (TF.Ref s' (KubernetesClusterData s)) (TF.Attr s [TF.Attr s (KubernetesClusterAgentPoolProfileSetting s)]) where
     computedAgentPoolProfile x = TF.compute (TF.refKey x) "agent_pool_profile"
 
 instance s ~ s' => P.HasComputedDnsPrefix (TF.Ref s' (KubernetesClusterData s)) (TF.Attr s P.Text) where
@@ -1452,7 +1452,7 @@ instance s ~ s' => P.HasComputedDnsPrefix (TF.Ref s' (KubernetesClusterData s)) 
 instance s ~ s' => P.HasComputedFqdn (TF.Ref s' (KubernetesClusterData s)) (TF.Attr s P.Text) where
     computedFqdn x = TF.compute (TF.refKey x) "fqdn"
 
-instance s ~ s' => P.HasComputedKubeConfig (TF.Ref s' (KubernetesClusterData s)) (TF.Attr s [TF.Attr s (KubeConfigSetting s)]) where
+instance s ~ s' => P.HasComputedKubeConfig (TF.Ref s' (KubernetesClusterData s)) (TF.Attr s [TF.Attr s (KubernetesClusterKubeConfigSetting s)]) where
     computedKubeConfig x = TF.compute (TF.refKey x) "kube_config"
 
 instance s ~ s' => P.HasComputedKubeConfigRaw (TF.Ref s' (KubernetesClusterData s)) (TF.Attr s P.Text) where
@@ -1461,19 +1461,19 @@ instance s ~ s' => P.HasComputedKubeConfigRaw (TF.Ref s' (KubernetesClusterData 
 instance s ~ s' => P.HasComputedKubernetesVersion (TF.Ref s' (KubernetesClusterData s)) (TF.Attr s P.Text) where
     computedKubernetesVersion x = TF.compute (TF.refKey x) "kubernetes_version"
 
-instance s ~ s' => P.HasComputedLinuxProfile (TF.Ref s' (KubernetesClusterData s)) (TF.Attr s [TF.Attr s (LinuxProfileSetting s)]) where
+instance s ~ s' => P.HasComputedLinuxProfile (TF.Ref s' (KubernetesClusterData s)) (TF.Attr s [TF.Attr s (KubernetesClusterLinuxProfileSetting s)]) where
     computedLinuxProfile x = TF.compute (TF.refKey x) "linux_profile"
 
 instance s ~ s' => P.HasComputedLocation (TF.Ref s' (KubernetesClusterData s)) (TF.Attr s P.Text) where
     computedLocation x = TF.compute (TF.refKey x) "location"
 
-instance s ~ s' => P.HasComputedNetworkProfile (TF.Ref s' (KubernetesClusterData s)) (TF.Attr s [TF.Attr s (NetworkProfileSetting s)]) where
+instance s ~ s' => P.HasComputedNetworkProfile (TF.Ref s' (KubernetesClusterData s)) (TF.Attr s [TF.Attr s (KubernetesClusterNetworkProfileSetting s)]) where
     computedNetworkProfile x = TF.compute (TF.refKey x) "network_profile"
 
 instance s ~ s' => P.HasComputedNodeResourceGroup (TF.Ref s' (KubernetesClusterData s)) (TF.Attr s P.Text) where
     computedNodeResourceGroup x = TF.compute (TF.refKey x) "node_resource_group"
 
-instance s ~ s' => P.HasComputedServicePrincipal (TF.Ref s' (KubernetesClusterData s)) (TF.Attr s [TF.Attr s (ServicePrincipalSetting s)]) where
+instance s ~ s' => P.HasComputedServicePrincipal (TF.Ref s' (KubernetesClusterData s)) (TF.Attr s [TF.Attr s (KubernetesClusterServicePrincipalSetting s)]) where
     computedServicePrincipal x = TF.compute (TF.refKey x) "service_principal"
 
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (KubernetesClusterData s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
@@ -1697,7 +1697,7 @@ instance s ~ s' => P.HasComputedInternalDnsNameLabel (TF.Ref s' (NetworkInterfac
 instance s ~ s' => P.HasComputedInternalFqdn (TF.Ref s' (NetworkInterfaceData s)) (TF.Attr s P.Text) where
     computedInternalFqdn x = TF.compute (TF.refKey x) "internal_fqdn"
 
-instance s ~ s' => P.HasComputedIpConfiguration (TF.Ref s' (NetworkInterfaceData s)) (TF.Attr s [TF.Attr s (IpConfigurationSetting s)]) where
+instance s ~ s' => P.HasComputedIpConfiguration (TF.Ref s' (NetworkInterfaceData s)) (TF.Attr s [TF.Attr s (NetworkInterfaceIpConfigurationSetting s)]) where
     computedIpConfiguration x = TF.compute (TF.refKey x) "ip_configuration"
 
 instance s ~ s' => P.HasComputedLocation (TF.Ref s' (NetworkInterfaceData s)) (TF.Attr s P.Text) where
@@ -1771,7 +1771,7 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (NetworkSecurityGroupData s)) (TF.
 instance s ~ s' => P.HasComputedLocation (TF.Ref s' (NetworkSecurityGroupData s)) (TF.Attr s P.Text) where
     computedLocation x = TF.compute (TF.refKey x) "location"
 
-instance s ~ s' => P.HasComputedSecurityRule (TF.Ref s' (NetworkSecurityGroupData s)) (TF.Attr s [TF.Attr s (SecurityRuleSetting s)]) where
+instance s ~ s' => P.HasComputedSecurityRule (TF.Ref s' (NetworkSecurityGroupData s)) (TF.Attr s [TF.Attr s (NetworkSecurityGroupSecurityRuleSetting s)]) where
     computedSecurityRule x = TF.compute (TF.refKey x) "security_rule"
 
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (NetworkSecurityGroupData s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
@@ -1835,10 +1835,10 @@ instance P.HasResourceGroupName (NotificationHubData s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (NotificationHubData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedApnsCredential (TF.Ref s' (NotificationHubData s)) (TF.Attr s [TF.Attr s (ApnsCredentialSetting s)]) where
+instance s ~ s' => P.HasComputedApnsCredential (TF.Ref s' (NotificationHubData s)) (TF.Attr s [TF.Attr s (NotificationHubApnsCredentialSetting s)]) where
     computedApnsCredential x = TF.compute (TF.refKey x) "apns_credential"
 
-instance s ~ s' => P.HasComputedGcmCredential (TF.Ref s' (NotificationHubData s)) (TF.Attr s [TF.Attr s (GcmCredentialSetting s)]) where
+instance s ~ s' => P.HasComputedGcmCredential (TF.Ref s' (NotificationHubData s)) (TF.Attr s [TF.Attr s (NotificationHubGcmCredentialSetting s)]) where
     computedGcmCredential x = TF.compute (TF.refKey x) "gcm_credential"
 
 instance s ~ s' => P.HasComputedLocation (TF.Ref s' (NotificationHubData s)) (TF.Attr s P.Text) where
@@ -1903,7 +1903,7 @@ instance s ~ s' => P.HasComputedNamespaceType (TF.Ref s' (NotificationHubNamespa
 instance s ~ s' => P.HasComputedServicebusEndpoint (TF.Ref s' (NotificationHubNamespaceData s)) (TF.Attr s P.Text) where
     computedServicebusEndpoint x = TF.compute (TF.refKey x) "servicebus_endpoint"
 
-instance s ~ s' => P.HasComputedSku (TF.Ref s' (NotificationHubNamespaceData s)) (TF.Attr s [TF.Attr s (SkuSetting s)]) where
+instance s ~ s' => P.HasComputedSku (TF.Ref s' (NotificationHubNamespaceData s)) (TF.Attr s [TF.Attr s (NotificationHubNamespaceSkuSetting s)]) where
     computedSku x = TF.compute (TF.refKey x) "sku"
 
 -- | @azurerm_platform_image@ DataSource.
@@ -2116,7 +2116,7 @@ instance P.HasResourceGroupName (PublicIpsData s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (PublicIpsData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedPublicIps (TF.Ref s' (PublicIpsData s)) (TF.Attr s [TF.Attr s (PublicIpsSetting s)]) where
+instance s ~ s' => P.HasComputedPublicIps (TF.Ref s' (PublicIpsData s)) (TF.Attr s [TF.Attr s (PublicIpsPublicIpsSetting s)]) where
     computedPublicIps x = TF.compute (TF.refKey x) "public_ips"
 
 -- | @azurerm_recovery_services_vault@ DataSource.
@@ -2273,7 +2273,7 @@ instance s ~ s' => P.HasComputedDescription (TF.Ref s' (RoleDefinitionData s)) (
 instance s ~ s' => P.HasComputedName (TF.Ref s' (RoleDefinitionData s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputedPermissions (TF.Ref s' (RoleDefinitionData s)) (TF.Attr s [TF.Attr s (PermissionsSetting s)]) where
+instance s ~ s' => P.HasComputedPermissions (TF.Ref s' (RoleDefinitionData s)) (TF.Attr s [TF.Attr s (RoleDefinitionPermissionsSetting s)]) where
     computedPermissions x = TF.compute (TF.refKey x) "permissions"
 
 instance s ~ s' => P.HasComputedType (TF.Ref s' (RoleDefinitionData s)) (TF.Attr s P.Text) where
@@ -2329,7 +2329,7 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (RouteTableData s)) (TF.Attr s P.T
 instance s ~ s' => P.HasComputedLocation (TF.Ref s' (RouteTableData s)) (TF.Attr s P.Text) where
     computedLocation x = TF.compute (TF.refKey x) "location"
 
-instance s ~ s' => P.HasComputedRoute (TF.Ref s' (RouteTableData s)) (TF.Attr s [TF.Attr s (RouteSetting s)]) where
+instance s ~ s' => P.HasComputedRoute (TF.Ref s' (RouteTableData s)) (TF.Attr s [TF.Attr s (RouteTableRouteSetting s)]) where
     computedRoute x = TF.compute (TF.refKey x) "route"
 
 instance s ~ s' => P.HasComputedSubnets (TF.Ref s' (RouteTableData s)) (TF.Attr s [TF.Attr s P.Text]) where
@@ -2388,7 +2388,7 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (SchedulerJobCollectionData s)) (T
 instance s ~ s' => P.HasComputedLocation (TF.Ref s' (SchedulerJobCollectionData s)) (TF.Attr s P.Text) where
     computedLocation x = TF.compute (TF.refKey x) "location"
 
-instance s ~ s' => P.HasComputedQuota (TF.Ref s' (SchedulerJobCollectionData s)) (TF.Attr s [TF.Attr s (QuotaSetting s)]) where
+instance s ~ s' => P.HasComputedQuota (TF.Ref s' (SchedulerJobCollectionData s)) (TF.Attr s [TF.Attr s (SchedulerJobCollectionQuotaSetting s)]) where
     computedQuota x = TF.compute (TF.refKey x) "quota"
 
 instance s ~ s' => P.HasComputedSku (TF.Ref s' (SchedulerJobCollectionData s)) (TF.Attr s P.Text) where
@@ -2453,7 +2453,7 @@ instance s ~ s' => P.HasComputedCreationOption (TF.Ref s' (SnapshotData s)) (TF.
 instance s ~ s' => P.HasComputedDiskSizeGb (TF.Ref s' (SnapshotData s)) (TF.Attr s P.Text) where
     computedDiskSizeGb x = TF.compute (TF.refKey x) "disk_size_gb"
 
-instance s ~ s' => P.HasComputedEncryptionSettings (TF.Ref s' (SnapshotData s)) (TF.Attr s [TF.Attr s (EncryptionSettings s)]) where
+instance s ~ s' => P.HasComputedEncryptionSettings (TF.Ref s' (SnapshotData s)) (TF.Attr s [TF.Attr s (SnapshotEncryptionSettingsSetting s)]) where
     computedEncryptionSettings x = TF.compute (TF.refKey x) "encryption_settings"
 
 instance s ~ s' => P.HasComputedOsType (TF.Ref s' (SnapshotData s)) (TF.Attr s P.Text) where
@@ -2533,7 +2533,7 @@ instance s ~ s' => P.HasComputedAccountReplicationType (TF.Ref s' (StorageAccoun
 instance s ~ s' => P.HasComputedAccountTier (TF.Ref s' (StorageAccountData s)) (TF.Attr s P.Text) where
     computedAccountTier x = TF.compute (TF.refKey x) "account_tier"
 
-instance s ~ s' => P.HasComputedCustomDomain (TF.Ref s' (StorageAccountData s)) (TF.Attr s (CustomDomainSetting s)) where
+instance s ~ s' => P.HasComputedCustomDomain (TF.Ref s' (StorageAccountData s)) (TF.Attr s (StorageAccountCustomDomainSetting s)) where
     computedCustomDomain x = TF.compute (TF.refKey x) "custom_domain"
 
 instance s ~ s' => P.HasComputedEnableBlobEncryption (TF.Ref s' (StorageAccountData s)) (TF.Attr s P.Bool) where
@@ -2610,13 +2610,13 @@ data StorageAccountSasData s = StorageAccountSasData'
     , _httpsOnly        :: TF.Attr s P.Bool
     -- ^ @https_only@ - (Optional, Forces New)
     --
-    , _permissions      :: TF.Attr s (PermissionsSetting s)
+    , _permissions      :: TF.Attr s (StorageAccountSasPermissionsSetting s)
     -- ^ @permissions@ - (Required, Forces New)
     --
-    , _resourceTypes    :: TF.Attr s (ResourceTypesSetting s)
+    , _resourceTypes    :: TF.Attr s (StorageAccountSasResourceTypesSetting s)
     -- ^ @resource_types@ - (Required, Forces New)
     --
-    , _services         :: TF.Attr s (ServicesSetting s)
+    , _services         :: TF.Attr s (StorageAccountSasServicesSetting s)
     -- ^ @services@ - (Required, Forces New)
     --
     , _start            :: TF.Attr s P.Text
@@ -2627,11 +2627,11 @@ data StorageAccountSasData s = StorageAccountSasData'
 -- | Define a new @azurerm_storage_account_sas@ datasource value.
 storageAccountSasData
     :: TF.Attr s P.Text -- ^ @expiry@ ('P._expiry', 'P.expiry')
-    -> TF.Attr s (PermissionsSetting s) -- ^ @permissions@ ('P._permissions', 'P.permissions')
-    -> TF.Attr s (ServicesSetting s) -- ^ @services@ ('P._services', 'P.services')
+    -> TF.Attr s (StorageAccountSasPermissionsSetting s) -- ^ @permissions@ ('P._permissions', 'P.permissions')
+    -> TF.Attr s (StorageAccountSasServicesSetting s) -- ^ @services@ ('P._services', 'P.services')
     -> TF.Attr s P.Text -- ^ @start@ ('P._start', 'P.start')
     -> TF.Attr s P.Text -- ^ @connection_string@ ('P._connectionString', 'P.connectionString')
-    -> TF.Attr s (ResourceTypesSetting s) -- ^ @resource_types@ ('P._resourceTypes', 'P.resourceTypes')
+    -> TF.Attr s (StorageAccountSasResourceTypesSetting s) -- ^ @resource_types@ ('P._resourceTypes', 'P.resourceTypes')
     -> P.DataSource (StorageAccountSasData s)
 storageAccountSasData _expiry _permissions _services _start _connectionString _resourceTypes =
     TF.unsafeDataSource "azurerm_storage_account_sas" TF.validator $
@@ -2660,15 +2660,15 @@ instance TF.IsValid (StorageAccountSasData s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_permissions"
                   (_permissions
-                      :: StorageAccountSasData s -> TF.Attr s (PermissionsSetting s))
+                      :: StorageAccountSasData s -> TF.Attr s (StorageAccountSasPermissionsSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_resourceTypes"
                   (_resourceTypes
-                      :: StorageAccountSasData s -> TF.Attr s (ResourceTypesSetting s))
+                      :: StorageAccountSasData s -> TF.Attr s (StorageAccountSasResourceTypesSetting s))
                   TF.validator
            P.<> TF.settingsValidator "_services"
                   (_services
-                      :: StorageAccountSasData s -> TF.Attr s (ServicesSetting s))
+                      :: StorageAccountSasData s -> TF.Attr s (StorageAccountSasServicesSetting s))
                   TF.validator
 
 instance P.HasConnectionString (StorageAccountSasData s) (TF.Attr s P.Text) where
@@ -2686,19 +2686,19 @@ instance P.HasHttpsOnly (StorageAccountSasData s) (TF.Attr s P.Bool) where
         P.lens (_httpsOnly :: StorageAccountSasData s -> TF.Attr s P.Bool)
                (\s a -> s { _httpsOnly = a } :: StorageAccountSasData s)
 
-instance P.HasPermissions (StorageAccountSasData s) (TF.Attr s (PermissionsSetting s)) where
+instance P.HasPermissions (StorageAccountSasData s) (TF.Attr s (StorageAccountSasPermissionsSetting s)) where
     permissions =
-        P.lens (_permissions :: StorageAccountSasData s -> TF.Attr s (PermissionsSetting s))
+        P.lens (_permissions :: StorageAccountSasData s -> TF.Attr s (StorageAccountSasPermissionsSetting s))
                (\s a -> s { _permissions = a } :: StorageAccountSasData s)
 
-instance P.HasResourceTypes (StorageAccountSasData s) (TF.Attr s (ResourceTypesSetting s)) where
+instance P.HasResourceTypes (StorageAccountSasData s) (TF.Attr s (StorageAccountSasResourceTypesSetting s)) where
     resourceTypes =
-        P.lens (_resourceTypes :: StorageAccountSasData s -> TF.Attr s (ResourceTypesSetting s))
+        P.lens (_resourceTypes :: StorageAccountSasData s -> TF.Attr s (StorageAccountSasResourceTypesSetting s))
                (\s a -> s { _resourceTypes = a } :: StorageAccountSasData s)
 
-instance P.HasServices (StorageAccountSasData s) (TF.Attr s (ServicesSetting s)) where
+instance P.HasServices (StorageAccountSasData s) (TF.Attr s (StorageAccountSasServicesSetting s)) where
     services =
-        P.lens (_services :: StorageAccountSasData s -> TF.Attr s (ServicesSetting s))
+        P.lens (_services :: StorageAccountSasData s -> TF.Attr s (StorageAccountSasServicesSetting s))
                (\s a -> s { _services = a } :: StorageAccountSasData s)
 
 instance P.HasStart (StorageAccountSasData s) (TF.Attr s P.Text) where
@@ -2858,7 +2858,7 @@ instance TF.IsValid (SubscriptionsData s) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (SubscriptionsData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedSubscriptions (TF.Ref s' (SubscriptionsData s)) (TF.Attr s [TF.Attr s (SubscriptionsSetting s)]) where
+instance s ~ s' => P.HasComputedSubscriptions (TF.Ref s' (SubscriptionsData s)) (TF.Attr s [TF.Attr s (SubscriptionsSubscriptionsSetting s)]) where
     computedSubscriptions x = TF.compute (TF.refKey x) "subscriptions"
 
 -- | @azurerm_traffic_manager_geographical_location@ DataSource.
@@ -3006,7 +3006,7 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (VirtualNetworkGatewayData s)) (TF
 instance s ~ s' => P.HasComputedActiveActive (TF.Ref s' (VirtualNetworkGatewayData s)) (TF.Attr s P.Bool) where
     computedActiveActive x = TF.compute (TF.refKey x) "active_active"
 
-instance s ~ s' => P.HasComputedBgpSettings (TF.Ref s' (VirtualNetworkGatewayData s)) (TF.Attr s [TF.Attr s (BgpSettings s)]) where
+instance s ~ s' => P.HasComputedBgpSettings (TF.Ref s' (VirtualNetworkGatewayData s)) (TF.Attr s [TF.Attr s (VirtualNetworkGatewayBgpSettingsSetting s)]) where
     computedBgpSettings x = TF.compute (TF.refKey x) "bgp_settings"
 
 instance s ~ s' => P.HasComputedDefaultLocalNetworkGatewayId (TF.Ref s' (VirtualNetworkGatewayData s)) (TF.Attr s P.Text) where
@@ -3015,7 +3015,7 @@ instance s ~ s' => P.HasComputedDefaultLocalNetworkGatewayId (TF.Ref s' (Virtual
 instance s ~ s' => P.HasComputedEnableBgp (TF.Ref s' (VirtualNetworkGatewayData s)) (TF.Attr s P.Bool) where
     computedEnableBgp x = TF.compute (TF.refKey x) "enable_bgp"
 
-instance s ~ s' => P.HasComputedIpConfiguration (TF.Ref s' (VirtualNetworkGatewayData s)) (TF.Attr s [TF.Attr s (IpConfigurationSetting s)]) where
+instance s ~ s' => P.HasComputedIpConfiguration (TF.Ref s' (VirtualNetworkGatewayData s)) (TF.Attr s [TF.Attr s (VirtualNetworkGatewayIpConfigurationSetting s)]) where
     computedIpConfiguration x = TF.compute (TF.refKey x) "ip_configuration"
 
 instance s ~ s' => P.HasComputedLocation (TF.Ref s' (VirtualNetworkGatewayData s)) (TF.Attr s P.Text) where
@@ -3030,7 +3030,7 @@ instance s ~ s' => P.HasComputedTags (TF.Ref s' (VirtualNetworkGatewayData s)) (
 instance s ~ s' => P.HasComputedType (TF.Ref s' (VirtualNetworkGatewayData s)) (TF.Attr s P.Text) where
     computedType x = TF.compute (TF.refKey x) "type"
 
-instance s ~ s' => P.HasComputedVpnClientConfiguration (TF.Ref s' (VirtualNetworkGatewayData s)) (TF.Attr s [TF.Attr s (VpnClientConfigurationSetting s)]) where
+instance s ~ s' => P.HasComputedVpnClientConfiguration (TF.Ref s' (VirtualNetworkGatewayData s)) (TF.Attr s [TF.Attr s (VirtualNetworkGatewayVpnClientConfigurationSetting s)]) where
     computedVpnClientConfiguration x = TF.compute (TF.refKey x) "vpn_client_configuration"
 
 instance s ~ s' => P.HasComputedVpnType (TF.Ref s' (VirtualNetworkGatewayData s)) (TF.Attr s P.Text) where

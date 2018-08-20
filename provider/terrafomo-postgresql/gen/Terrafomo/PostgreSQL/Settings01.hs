@@ -18,8 +18,8 @@
 module Terrafomo.PostgreSQL.Settings01
     (
     -- ** policy
-      PolicySetting (..)
-    , newPolicySetting
+      SchemaPolicySetting (..)
+    , newSchemaPolicySetting
 
     ) where
 
@@ -45,7 +45,7 @@ import qualified Terrafomo.PostgreSQL.Types as P
 import qualified Terrafomo.Validator        as TF
 
 -- | @policy@ nested settings.
-data PolicySetting s = PolicySetting'
+data SchemaPolicySetting s = SchemaPolicySetting'
     { _create          :: TF.Attr s P.Bool
     -- ^ @create@ - (Optional)
     -- If true, allow the specified ROLEs to CREATE new objects within the
@@ -84,10 +84,10 @@ data PolicySetting s = PolicySetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @policy@ settings value.
-newPolicySetting
-    :: PolicySetting s
-newPolicySetting =
-    PolicySetting'
+newSchemaPolicySetting
+    :: SchemaPolicySetting s
+newSchemaPolicySetting =
+    SchemaPolicySetting'
         { _create = TF.value P.False
         , _createWithGrant = TF.value P.False
         , _role = TF.Nil
@@ -95,9 +95,9 @@ newPolicySetting =
         , _usageWithGrant = TF.value P.False
         }
 
-instance TF.IsValue  (PolicySetting s)
-instance TF.IsObject (PolicySetting s) where
-    toObject PolicySetting'{..} = P.catMaybes
+instance TF.IsValue  (SchemaPolicySetting s)
+instance TF.IsObject (SchemaPolicySetting s) where
+    toObject SchemaPolicySetting'{..} = P.catMaybes
         [ TF.assign "create" <$> TF.attribute _create
         , TF.assign "create_with_grant" <$> TF.attribute _createWithGrant
         , TF.assign "role" <$> TF.attribute _role
@@ -105,8 +105,8 @@ instance TF.IsObject (PolicySetting s) where
         , TF.assign "usage_with_grant" <$> TF.attribute _usageWithGrant
         ]
 
-instance TF.IsValid (PolicySetting s) where
-    validator = TF.fieldsValidator (\PolicySetting'{..} -> Map.fromList $ P.catMaybes
+instance TF.IsValid (SchemaPolicySetting s) where
+    validator = TF.fieldsValidator (\SchemaPolicySetting'{..} -> Map.fromList $ P.catMaybes
         [ if (_create P.== TF.value P.False)
               then P.Nothing
               else P.Just ("_create",
@@ -129,27 +129,27 @@ instance TF.IsValid (PolicySetting s) where
                             ])
         ])
 
-instance P.HasCreate (PolicySetting s) (TF.Attr s P.Bool) where
+instance P.HasCreate (SchemaPolicySetting s) (TF.Attr s P.Bool) where
     create =
-        P.lens (_create :: PolicySetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _create = a } :: PolicySetting s)
+        P.lens (_create :: SchemaPolicySetting s -> TF.Attr s P.Bool)
+               (\s a -> s { _create = a } :: SchemaPolicySetting s)
 
-instance P.HasCreateWithGrant (PolicySetting s) (TF.Attr s P.Bool) where
+instance P.HasCreateWithGrant (SchemaPolicySetting s) (TF.Attr s P.Bool) where
     createWithGrant =
-        P.lens (_createWithGrant :: PolicySetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _createWithGrant = a } :: PolicySetting s)
+        P.lens (_createWithGrant :: SchemaPolicySetting s -> TF.Attr s P.Bool)
+               (\s a -> s { _createWithGrant = a } :: SchemaPolicySetting s)
 
-instance P.HasRole (PolicySetting s) (TF.Attr s P.Text) where
+instance P.HasRole (SchemaPolicySetting s) (TF.Attr s P.Text) where
     role =
-        P.lens (_role :: PolicySetting s -> TF.Attr s P.Text)
-               (\s a -> s { _role = a } :: PolicySetting s)
+        P.lens (_role :: SchemaPolicySetting s -> TF.Attr s P.Text)
+               (\s a -> s { _role = a } :: SchemaPolicySetting s)
 
-instance P.HasUsage (PolicySetting s) (TF.Attr s P.Bool) where
+instance P.HasUsage (SchemaPolicySetting s) (TF.Attr s P.Bool) where
     usage =
-        P.lens (_usage :: PolicySetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _usage = a } :: PolicySetting s)
+        P.lens (_usage :: SchemaPolicySetting s -> TF.Attr s P.Bool)
+               (\s a -> s { _usage = a } :: SchemaPolicySetting s)
 
-instance P.HasUsageWithGrant (PolicySetting s) (TF.Attr s P.Bool) where
+instance P.HasUsageWithGrant (SchemaPolicySetting s) (TF.Attr s P.Bool) where
     usageWithGrant =
-        P.lens (_usageWithGrant :: PolicySetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _usageWithGrant = a } :: PolicySetting s)
+        P.lens (_usageWithGrant :: SchemaPolicySetting s -> TF.Attr s P.Bool)
+               (\s a -> s { _usageWithGrant = a } :: SchemaPolicySetting s)
