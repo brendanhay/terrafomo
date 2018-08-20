@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -euo pipefail
+set -uo pipefail
 
 dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
@@ -11,17 +11,18 @@ git_reset() {
     git reset >/dev/null
 }
 
-trap git_reset ERR
-
 git_reset
 
-git add -A terrafomo-gen/config/*.yaml
-git commit -m "Updating provider generator configuration"
+git add -A terrafomo-gen/config                 \
+    && ! git diff --cached --quiet              \
+    && git commit -m "Updating provider generator configuration"
 
-git add -A terrafomo-gen/model/*.json terrafomo-gen/ir/*.json
-git commit -m "Updating provider models and intermediate representation"
+git add -A terrafomo-gen/model terrafomo-gen/ir \
+    && ! git diff --cached --quiet              \
+    && git commit -m "Updating provider models and intermediate representation"
 
-git add -A provider/terrafomo-*
-git commit -m "Regenerating provider packages"
+git add -A provider                             \
+    && ! git diff --cached --quiet              \
+    && git commit -m "Regenerating provider packages"
 
 echo "Done."
