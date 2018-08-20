@@ -5,7 +5,7 @@ module Terrafomo.Gen.Elab
     ) where
 
 import Control.Applicative        ((<|>))
-import Control.Monad              (unless)
+import Control.Monad              (unless, (>=>))
 import Control.Monad.Except       (Except)
 import Control.Monad.Reader       (ReaderT)
 import Control.Monad.State.Strict (StateT)
@@ -20,7 +20,7 @@ import Data.Traversable (for)
 
 import Terrafomo.Gen.Config
 import Terrafomo.Gen.Haskell
-import Terrafomo.Gen.Name    (ConName, DataName, Key (Key), LabelName, VarName)
+import Terrafomo.Gen.Name    (ConName, DataName, Key, LabelName, VarName)
 import Terrafomo.Gen.Type    (Type)
 
 import Text.Show.Pretty (ppShow)
@@ -34,6 +34,7 @@ import qualified Data.Map.Strict            as Map
 import qualified Data.Set                   as Set
 import qualified Data.Text                  as Text
 import qualified Data.Text.Read             as Text
+import qualified Terrafomo.Gen.Diff         as Diff
 import qualified Terrafomo.Gen.Go           as Go
 import qualified Terrafomo.Gen.Name         as Name
 import qualified Terrafomo.Gen.Type         as Type
@@ -48,7 +49,7 @@ data Env = Env
     }
 
 data Result = Result
-    { _settings   :: !(Map Text     Settings)
+    { _settings   :: !(Map DataName Settings)
     , _primitives :: !(Map DataName (Primitive, Go.Type))
     }
 
@@ -81,6 +82,9 @@ run cfg provider =
                    , _primitives
                    } <- State.get
 
+               let settings =
+                       Map.elems (Map.delete (schemaName (fromSettings schema)) _settings)
+
                validate provider $ Provider'
                    { providerName         = configProviderName cfg
                    , providerPackage      = configPackage      cfg
@@ -89,7 +93,7 @@ run cfg provider =
                    , providerUrl          = URL.provider original
                    , providerResources    = resources
                    , providerDataSources  = datasources
-                   , providerSettings     = Map.elems (Map.delete "provider" _settings)
+                   , providerSettings     = settings
                    , providerPrimitives   = map fst (Map.elems _primitives)
                    , providerSchema       = schema
                    }
@@ -126,80 +130,108 @@ validate a b = do
 elabResource :: Text -> Text -> [Go.Schema] -> Elab Resource
 elabResource provider original schemas =
     withThreaded $ do
-        x <- elabSchema original (Name.resourceNames original) schemas Nothing
+        x <- elabSchema original (Name.resourceNames original) schemas
         Resource' (URL.resource provider original)
             <$> elabIdAttribute x
 
 elabDataSource :: Text -> Text -> [Go.Schema] -> Elab Resource
 elabDataSource provider original schemas =
     withThreaded $ do
-        x <- elabSchema original (Name.dataSourceNames original) schemas Nothing
+        x <- elabSchema original (Name.dataSourceNames original) schemas
         Resource' (URL.datasource provider original)
             <$> elabIdAttribute x
 
 elabSettings :: Text -> [Go.Schema] -> Elab Settings
 elabSettings original schemas = do
-    old <- State.gets (fmap fromSettings . Map.lookup original . _settings)
-    new <-
-        Settings'
-            <$> elabSchema original (Name.settingsNames original) schemas old
+    k <- getCurrentKey
+    x <- Settings' <$> elabSchema original (Name.settingsNames original k) schemas
+    insertSettings x
+    pure x
+
+insertSettings :: Settings -> Elab ()
+insertSettings s@(Settings' x) = do
+    let name = schemaName x
+
+    merged <-
+        State.gets (Map.lookup name . _settings >=> Diff.settings s) >>= \case
+            Nothing   -> pure s
+            Just diff -> do
+                -- If the schema keys are the same - we need to perform a merge
+                unless (Diff.schemaA diff == Diff.schemaB diff) $
+                    Except.throwError $
+                        "Unable to merge differing settings types:\n"
+                            ++ unlines [ "New => "  ++ ppShow x
+                                       , "Diff => " ++ ppShow diff
+                                       ]
+
+                pure $! Settings' $ x
+                    -- FIXME: The nub here is unsafe. Currently
+                    -- A/LbSubnetMapping returns two _subnetId fields which are
+                    -- identical except for forceNew=true.
+                    { schemaArguments  =
+                        List.nubBy (on (==) fieldName)
+                            . Diff.patch
+                            $ Diff.schemaArguments diff
+
+                    , schemaAttributes =
+                        List.nubBy (on (==) fieldName)
+                            . Diff.patch
+                            $ Diff.schemaAttributes diff
+                    }
 
     State.modify' $ \r ->
-        r { _settings = Map.insert original new (_settings r)
+        r { _settings = Map.insert name merged (_settings r)
           }
 
-    pure new
+-- elabPrim :: Go.Schema -> Elab Primitive
+-- elabPrim schema = do
+--     let name                = Go.schemaName schema
+--         (data_, con, smart) = Name.primitiveNames name
+--         gtype               = Go.schemaType schema
+--         derive              = Type.derive gtype
 
-elabPrim :: Go.Schema -> Elab Primitive
-elabPrim schema = do
-    let name                = Go.schemaName schema
-        (data_, con, smart) = Name.primitiveNames name
-        gtype               = Go.schemaType schema
-        derive              = Type.derive gtype
+--     State.gets (Map.lookup data_ . _primitives) >>= \case
+--         Just (prim, gtype')
+--             | gtype == gtype' -> pure prim
+--             | otherwise       ->
+--                 elabPrim $
+--                     schema { Go.schemaName = name <> "_" <> Go.hungarian gtype
+--                            }
 
-    State.gets (Map.lookup data_ . _primitives) >>= \case
-        Just (prim, gtype')
-            | gtype == gtype' -> pure prim
-            | otherwise       ->
-                elabPrim $
-                    schema { Go.schemaName = name <> "_" <> Go.hungarian gtype
-                           }
+--         Nothing ->
+--             withoutThreaded $ do
+--                 key  <- getCurrentKey
+--                 typ  <- elabData data_
+--                 args <- elabArguments
+--                             [ schema { Go.schemaPrimitive = Just True }
+--                             ]
 
-        Nothing ->
-            withoutThreaded $ do
-                key  <- getCurrentKey
-                typ  <- elabData data_
-                args <- elabArguments
-                            [ schema { Go.schemaPrimitive = Just True }
-                            ]
+--                 let prim =
+--                         Primitive' derive $
+--                             Schema'
+--                              { schemaName       = data_
+--                              , schemaOriginal   = name
+--                              , schemaKey        = key
+--                              , schemaType       = typ
+--                              , schemaCon        = Con con smart
+--                              , schemaThreaded   = False
+--                              , schemaArguments  = args
+--                              , schemaAttributes = []
+--                              }
 
-                let prim =
-                        Primitive' derive $
-                            Schema'
-                             { schemaName       = data_
-                             , schemaOriginal   = name
-                             , schemaKey        = key
-                             , schemaType       = typ
-                             , schemaCon        = Con con smart
-                             , schemaThreaded   = False
-                             , schemaArguments  = args
-                             , schemaAttributes = []
-                             }
+--                 State.modify' $ \r ->
+--                     r { _primitives =
+--                           Map.insert data_ (prim, gtype) (_primitives r)
+--                       }
 
-                State.modify' $ \r ->
-                    r { _primitives =
-                          Map.insert data_ (prim, gtype) (_primitives r)
-                      }
-
-                pure prim
+--                 pure prim
 
 elabSchema
     :: Text
     -> (DataName, ConName, VarName)
     -> [Go.Schema]
-    -> Maybe (Schema Conflict)
     -> Elab (Schema Conflict)
-elabSchema original (data_, con, smart) schemas existing =
+elabSchema original (data_, con, smart) schemas =
     descend original $ do
         key    <- getCurrentKey
         thread <- isThreaded
@@ -209,7 +241,6 @@ elabSchema original (data_, con, smart) schemas existing =
         cfg    <- Reader.asks _config
 
         pure $! overrideSchema (configOverrides cfg)
-              $ mergeSchema existing
               $ Schema'
                 { schemaName       = data_
                 , schemaOriginal   = original
@@ -220,48 +251,6 @@ elabSchema original (data_, con, smart) schemas existing =
                 , schemaArguments  = args
                 , schemaAttributes = attrs
                 }
-
-mergeSchema
-    :: Maybe (Schema Conflict)
-    -> Schema Conflict
-    -> Schema Conflict
-mergeSchema Nothing  a = a
-mergeSchema (Just b) a
-    | a == b    = a
-    | otherwise = merge b a
-  where
-    merge old new =
-        let args    =
-                List.nubBy (on (==) fieldOriginal)
-                    ( schemaArguments old
-                   ++ schemaArguments new
-                    )
-
-            attrs   =
-                List.nubBy (on (==) fieldOriginal)
-                    ( schemaAttributes old
-                   ++ schemaAttributes new
-                    )
-
-         in old { schemaArguments  = args
-                , schemaAttributes = attrs
-                }
-
-            -- FIXME: revisit safe/saner merging strategies
-            --
-            -- if | null (schemaArguments old) && null (schemaAttributes new) ->
-            --        pure $! old { schemaArguments = schemaArguments new }
-
-            --    | null (schemaArguments new) && null (schemaAttributes old) ->
-            --        pure $! old { schemaAttributes = schemaAttributes new }
-
-            --    | otherwise ->
-            --        Except.throwError $
-            --            "Error merging settings types for key "
-            --                 ++ unlines [ show original
-            --                            , "Old => " ++ ppShow old
-            --                            , "New => " ++ ppShow new
-            --                            ]
 
 elabArguments :: [Go.Schema] -> Elab [Field Conflict]
 elabArguments =
@@ -550,10 +539,6 @@ isThreaded :: Elab Bool
 isThreaded =
     Reader.asks _thread
 
-withoutThreaded :: Elab a -> Elab a
-withoutThreaded =
-    Reader.local (\env -> env { _thread = False })
-
 withThreaded :: Elab a -> Elab a
 withThreaded =
     Reader.local (\env -> env { _thread = True })
@@ -566,4 +551,4 @@ descend path =
 
 getCurrentKey :: Elab Key
 getCurrentKey =
-    Reader.asks (Key . reverse . _key)
+    Reader.asks (Name.resourceKey . reverse . _key)

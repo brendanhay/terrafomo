@@ -18,6 +18,14 @@ fromKey sep (Key xs) = Text.intercalate (Text.singleton sep) xs
 toKey :: Char -> Text -> Key
 toKey sep = Key . Text.split (== sep)
 
+resourceKey :: [Text] -> Key
+resourceKey = \case
+    []   -> Key []
+    x:xs -> Key
+          . filter (not . Text.null)
+          $ (Text.dropWhile (== '_') (Text.dropWhile (/= '_') x))
+          : xs
+
 instance JSON.ToJSONKey Key where
     toJSONKey = JSON.toJSONKeyText (fromKey '.')
 
@@ -56,32 +64,54 @@ dataSourceNames x = datatypeNames (Name (resourceName x <> "Data"))
 resourceNames   x = datatypeNames (Name (resourceName x <> "Resource"))
 
 -- FIXME: avoid special casing provider
-settingsNames :: Text -> (DataName, ConName, VarName)
-settingsNames = \case
-    "provider" -> (Name "Provider", Name "Provider'", Name "newProvider")
-    x          ->
-        let name = rename x
-         in ( name
-            , unsafeRename (`Text.snoc` '\'') name
-            , unsafeRename (mappend "new")    name
-            )
+settingsNames :: Text -> Key -> (DataName, ConName, VarName)
+settingsNames x (Key xs) =
+    case x of
+        "provider" -> (Name "Provider", Name "Provider'", Name "newProvider")
+        _          -> names joined
   where
-    rename =
-        unsafeRename suffix . dataName
+    joined =
+        Text.upperHead . originalName
+            $ Text.intercalate "_" (xs ++ [suffix x])
 
-    -- FIXME: Revisit use of keys to guide disambiguation. Elab needs to
-    -- support retrying via (<|>) to try to first insert with no key,
-    -- then by taking a prefix from the key if the schemas aren't equivalent.
+    suffix txt
+        | Just n <- Text.stripSuffix "Settings" txt = n <> "Setting"
+        | Text.isSuffixOf "Setting"             txt = txt
+        | otherwise                           = txt <> "Setting"
 
-    -- prefix x =
-    --     case xs of
-    --         y:_ -> resourceName y <> x
-    --         []  -> x
+    names txt =
+        ( Name txt
+        , Name (txt `Text.snoc` '\'')
+        , Name ("new" <> txt)
+        )
 
-    suffix x
-        | Text.isSuffixOf "Settings" x = x
-        | Text.isSuffixOf "Setting"  x = x
-        | otherwise                    = x <> "Setting"
+-- -- FIXME: avoid special casing provider
+-- settingsNames :: Text -> (DataName, ConName, VarName)
+-- settingsNames = \case
+--     "provider" -> (Name "Provider", Name "Provider'", Name "newProvider")
+--     x          ->
+--         let name = rename x
+--          in ( name
+--             , unsafeRename (`Text.snoc` '\'') name
+--             , unsafeRename (mappend "new")    name
+--             )
+--   where
+--     rename =
+--         unsafeRename suffix . dataName
+
+--     -- FIXME: Revisit use of keys to guide disambiguation. Elab needs to
+--     -- support retrying via (<|>) to try to first insert with no key,
+--     -- then by taking a prefix from the key if the schemas aren't equivalent.
+
+--     -- prefix x =
+--     --     case xs of
+--     --         y:_ -> resourceName y <> x
+--     --         []  -> x
+
+--     suffix x
+--         | Text.isSuffixOf "Settings" x = x
+--         | Text.isSuffixOf "Setting"  x = x
+--         | otherwise                    = x <> "Setting"
 
 -- FIXME: replace provider case with overrides
 primitiveNames :: Text -> (DataName, ConName, VarName)
