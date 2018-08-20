@@ -80,7 +80,7 @@ data Provider = Provider'
     -- ^ @key_material@ - (Optional)
     -- PEM-encoded content of Docker client private key
     --
-    , _registryAuth :: P.Maybe [RegistryAuthSetting]
+    , _registryAuth :: P.Maybe [RegistryAuth]
     -- ^ @registry_auth@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -140,7 +140,7 @@ instance P.HasKeyMaterial (Provider) (P.Maybe P.Text) where
         P.lens (_keyMaterial :: Provider -> P.Maybe P.Text)
                (\s a -> s { _keyMaterial = a } :: Provider)
 
-instance P.HasRegistryAuth (Provider) (P.Maybe [RegistryAuthSetting]) where
+instance P.HasRegistryAuth (Provider) (P.Maybe [RegistryAuth]) where
     registryAuth =
-        P.lens (_registryAuth :: Provider -> P.Maybe [RegistryAuthSetting])
+        P.lens (_registryAuth :: Provider -> P.Maybe [RegistryAuth])
                (\s a -> s { _registryAuth = a } :: Provider)

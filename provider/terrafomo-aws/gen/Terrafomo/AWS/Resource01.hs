@@ -121,7 +121,7 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (AcmCertificateResource s)) (TF.At
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (AcmCertificateResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
 
-instance s ~ s' => P.HasComputedDomainValidationOptions (TF.Ref s' (AcmCertificateResource s)) (TF.Attr s [TF.Attr s (DomainValidationOptionsSetting s)]) where
+instance s ~ s' => P.HasComputedDomainValidationOptions (TF.Ref s' (AcmCertificateResource s)) (TF.Attr s [TF.Attr s (AcmCertificateDomainValidationOptions s)]) where
     computedDomainValidationOptions x = TF.compute (TF.refKey x) "domain_validation_options"
 
 instance s ~ s' => P.HasComputedValidationEmails (TF.Ref s' (AcmCertificateResource s)) (TF.Attr s [TF.Attr s P.Text]) where

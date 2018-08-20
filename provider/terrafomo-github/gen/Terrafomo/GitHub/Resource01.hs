@@ -117,13 +117,13 @@ data BranchProtectionResource s = BranchProtectionResource'
     , _repository :: TF.Attr s P.Text
     -- ^ @repository@ - (Required, Forces New)
     --
-    , _requiredPullRequestReviews :: TF.Attr s (RequiredPullRequestReviewsSetting s)
+    , _requiredPullRequestReviews :: TF.Attr s (BranchProtectionRequiredPullRequestReviews s)
     -- ^ @required_pull_request_reviews@ - (Optional)
     --
-    , _requiredStatusChecks :: TF.Attr s (RequiredStatusChecksSetting s)
+    , _requiredStatusChecks :: TF.Attr s (BranchProtectionRequiredStatusChecks s)
     -- ^ @required_status_checks@ - (Optional)
     --
-    , _restrictions :: TF.Attr s (RestrictionsSetting s)
+    , _restrictions :: TF.Attr s (BranchProtectionRestrictions s)
     -- ^ @restrictions@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -158,15 +158,15 @@ instance TF.IsValid (BranchProtectionResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_requiredPullRequestReviews"
                   (_requiredPullRequestReviews
-                      :: BranchProtectionResource s -> TF.Attr s (RequiredPullRequestReviewsSetting s))
+                      :: BranchProtectionResource s -> TF.Attr s (BranchProtectionRequiredPullRequestReviews s))
                   TF.validator
            P.<> TF.settingsValidator "_requiredStatusChecks"
                   (_requiredStatusChecks
-                      :: BranchProtectionResource s -> TF.Attr s (RequiredStatusChecksSetting s))
+                      :: BranchProtectionResource s -> TF.Attr s (BranchProtectionRequiredStatusChecks s))
                   TF.validator
            P.<> TF.settingsValidator "_restrictions"
                   (_restrictions
-                      :: BranchProtectionResource s -> TF.Attr s (RestrictionsSetting s))
+                      :: BranchProtectionResource s -> TF.Attr s (BranchProtectionRestrictions s))
                   TF.validator
 
 instance P.HasBranch (BranchProtectionResource s) (TF.Attr s P.Text) where
@@ -184,19 +184,19 @@ instance P.HasRepository (BranchProtectionResource s) (TF.Attr s P.Text) where
         P.lens (_repository :: BranchProtectionResource s -> TF.Attr s P.Text)
                (\s a -> s { _repository = a } :: BranchProtectionResource s)
 
-instance P.HasRequiredPullRequestReviews (BranchProtectionResource s) (TF.Attr s (RequiredPullRequestReviewsSetting s)) where
+instance P.HasRequiredPullRequestReviews (BranchProtectionResource s) (TF.Attr s (BranchProtectionRequiredPullRequestReviews s)) where
     requiredPullRequestReviews =
-        P.lens (_requiredPullRequestReviews :: BranchProtectionResource s -> TF.Attr s (RequiredPullRequestReviewsSetting s))
+        P.lens (_requiredPullRequestReviews :: BranchProtectionResource s -> TF.Attr s (BranchProtectionRequiredPullRequestReviews s))
                (\s a -> s { _requiredPullRequestReviews = a } :: BranchProtectionResource s)
 
-instance P.HasRequiredStatusChecks (BranchProtectionResource s) (TF.Attr s (RequiredStatusChecksSetting s)) where
+instance P.HasRequiredStatusChecks (BranchProtectionResource s) (TF.Attr s (BranchProtectionRequiredStatusChecks s)) where
     requiredStatusChecks =
-        P.lens (_requiredStatusChecks :: BranchProtectionResource s -> TF.Attr s (RequiredStatusChecksSetting s))
+        P.lens (_requiredStatusChecks :: BranchProtectionResource s -> TF.Attr s (BranchProtectionRequiredStatusChecks s))
                (\s a -> s { _requiredStatusChecks = a } :: BranchProtectionResource s)
 
-instance P.HasRestrictions (BranchProtectionResource s) (TF.Attr s (RestrictionsSetting s)) where
+instance P.HasRestrictions (BranchProtectionResource s) (TF.Attr s (BranchProtectionRestrictions s)) where
     restrictions =
-        P.lens (_restrictions :: BranchProtectionResource s -> TF.Attr s (RestrictionsSetting s))
+        P.lens (_restrictions :: BranchProtectionResource s -> TF.Attr s (BranchProtectionRestrictions s))
                (\s a -> s { _restrictions = a } :: BranchProtectionResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (BranchProtectionResource s)) (TF.Attr s P.Text) where

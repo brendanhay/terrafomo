@@ -52,7 +52,7 @@ import qualified Terrafomo.Validator           as TF
 -- See the <https://www.terraform.io/docs/providers/cloudstack/d/template.html terraform documentation>
 -- for more information.
 data TemplateData s = TemplateData'
-    { _filter         :: TF.Attr s [TF.Attr s (FilterSetting s)]
+    { _filter         :: TF.Attr s [TF.Attr s (TemplateFilter s)]
     -- ^ @filter@ - (Required, Forces New)
     --
     , _tags           :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
@@ -65,7 +65,7 @@ data TemplateData s = TemplateData'
 
 -- | Define a new @cloudstack_template@ datasource value.
 templateData
-    :: TF.Attr s [TF.Attr s (FilterSetting s)] -- ^ @filter@ ('P._filter', 'P.filter')
+    :: TF.Attr s [TF.Attr s (TemplateFilter s)] -- ^ @filter@ ('P._filter', 'P.filter')
     -> TF.Attr s P.Text -- ^ @template_filter@ ('P._templateFilter', 'P.templateFilter')
     -> P.DataSource (TemplateData s)
 templateData _filter _templateFilter =
@@ -86,9 +86,9 @@ instance TF.IsObject (TemplateData s) where
 instance TF.IsValid (TemplateData s) where
     validator = P.mempty
 
-instance P.HasFilter (TemplateData s) (TF.Attr s [TF.Attr s (FilterSetting s)]) where
+instance P.HasFilter (TemplateData s) (TF.Attr s [TF.Attr s (TemplateFilter s)]) where
     filter =
-        P.lens (_filter :: TemplateData s -> TF.Attr s [TF.Attr s (FilterSetting s)])
+        P.lens (_filter :: TemplateData s -> TF.Attr s [TF.Attr s (TemplateFilter s)])
                (\s a -> s { _filter = a } :: TemplateData s)
 
 instance P.HasTags (TemplateData s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where

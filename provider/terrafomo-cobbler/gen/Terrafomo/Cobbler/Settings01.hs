@@ -18,8 +18,8 @@
 module Terrafomo.Cobbler.Settings01
     (
     -- ** interface
-      InterfaceSetting (..)
-    , newInterfaceSetting
+      SystemInterface (..)
+    , newSystemInterface
 
     ) where
 
@@ -45,7 +45,7 @@ import qualified Terrafomo.Name          as TF
 import qualified Terrafomo.Validator     as TF
 
 -- | @interface@ nested settings.
-data InterfaceSetting s = InterfaceSetting'
+data SystemInterface s = SystemInterface'
     { _bondingOpts        :: TF.Attr s P.Text
     -- ^ @bonding_opts@ - (Optional)
     --
@@ -112,11 +112,11 @@ data InterfaceSetting s = InterfaceSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @interface@ settings value.
-newInterfaceSetting
+newSystemInterface
     :: TF.Attr s P.Text -- ^ 'P._name': @name@
-    -> InterfaceSetting s
-newInterfaceSetting _name =
-    InterfaceSetting'
+    -> SystemInterface s
+newSystemInterface _name =
+    SystemInterface'
         { _bondingOpts = TF.Nil
         , _bridgeOpts = TF.Nil
         , _cnames = TF.Nil
@@ -140,9 +140,9 @@ newInterfaceSetting _name =
         , _virtBridge = TF.Nil
         }
 
-instance TF.IsValue  (InterfaceSetting s)
-instance TF.IsObject (InterfaceSetting s) where
-    toObject InterfaceSetting'{..} = P.catMaybes
+instance TF.IsValue  (SystemInterface s)
+instance TF.IsObject (SystemInterface s) where
+    toObject SystemInterface'{..} = P.catMaybes
         [ TF.assign "bonding_opts" <$> TF.attribute _bondingOpts
         , TF.assign "bridge_opts" <$> TF.attribute _bridgeOpts
         , TF.assign "cnames" <$> TF.attribute _cnames
@@ -166,170 +166,170 @@ instance TF.IsObject (InterfaceSetting s) where
         , TF.assign "virt_bridge" <$> TF.attribute _virtBridge
         ]
 
-instance TF.IsValid (InterfaceSetting s) where
+instance TF.IsValid (SystemInterface s) where
     validator = P.mempty
 
-instance P.HasBondingOpts (InterfaceSetting s) (TF.Attr s P.Text) where
+instance P.HasBondingOpts (SystemInterface s) (TF.Attr s P.Text) where
     bondingOpts =
-        P.lens (_bondingOpts :: InterfaceSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _bondingOpts = a } :: InterfaceSetting s)
+        P.lens (_bondingOpts :: SystemInterface s -> TF.Attr s P.Text)
+               (\s a -> s { _bondingOpts = a } :: SystemInterface s)
 
-instance P.HasBridgeOpts (InterfaceSetting s) (TF.Attr s P.Text) where
+instance P.HasBridgeOpts (SystemInterface s) (TF.Attr s P.Text) where
     bridgeOpts =
-        P.lens (_bridgeOpts :: InterfaceSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _bridgeOpts = a } :: InterfaceSetting s)
+        P.lens (_bridgeOpts :: SystemInterface s -> TF.Attr s P.Text)
+               (\s a -> s { _bridgeOpts = a } :: SystemInterface s)
 
-instance P.HasCnames (InterfaceSetting s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasCnames (SystemInterface s) (TF.Attr s [TF.Attr s P.Text]) where
     cnames =
-        P.lens (_cnames :: InterfaceSetting s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _cnames = a } :: InterfaceSetting s)
+        P.lens (_cnames :: SystemInterface s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _cnames = a } :: SystemInterface s)
 
-instance P.HasDhcpTag (InterfaceSetting s) (TF.Attr s P.Text) where
+instance P.HasDhcpTag (SystemInterface s) (TF.Attr s P.Text) where
     dhcpTag =
-        P.lens (_dhcpTag :: InterfaceSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _dhcpTag = a } :: InterfaceSetting s)
+        P.lens (_dhcpTag :: SystemInterface s -> TF.Attr s P.Text)
+               (\s a -> s { _dhcpTag = a } :: SystemInterface s)
 
-instance P.HasDnsName (InterfaceSetting s) (TF.Attr s P.Text) where
+instance P.HasDnsName (SystemInterface s) (TF.Attr s P.Text) where
     dnsName =
-        P.lens (_dnsName :: InterfaceSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _dnsName = a } :: InterfaceSetting s)
+        P.lens (_dnsName :: SystemInterface s -> TF.Attr s P.Text)
+               (\s a -> s { _dnsName = a } :: SystemInterface s)
 
-instance P.HasGateway (InterfaceSetting s) (TF.Attr s P.Text) where
+instance P.HasGateway (SystemInterface s) (TF.Attr s P.Text) where
     gateway =
-        P.lens (_gateway :: InterfaceSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _gateway = a } :: InterfaceSetting s)
+        P.lens (_gateway :: SystemInterface s -> TF.Attr s P.Text)
+               (\s a -> s { _gateway = a } :: SystemInterface s)
 
-instance P.HasInterfaceMaster (InterfaceSetting s) (TF.Attr s P.Text) where
+instance P.HasInterfaceMaster (SystemInterface s) (TF.Attr s P.Text) where
     interfaceMaster =
-        P.lens (_interfaceMaster :: InterfaceSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _interfaceMaster = a } :: InterfaceSetting s)
+        P.lens (_interfaceMaster :: SystemInterface s -> TF.Attr s P.Text)
+               (\s a -> s { _interfaceMaster = a } :: SystemInterface s)
 
-instance P.HasInterfaceType (InterfaceSetting s) (TF.Attr s P.Text) where
+instance P.HasInterfaceType (SystemInterface s) (TF.Attr s P.Text) where
     interfaceType =
-        P.lens (_interfaceType :: InterfaceSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _interfaceType = a } :: InterfaceSetting s)
+        P.lens (_interfaceType :: SystemInterface s -> TF.Attr s P.Text)
+               (\s a -> s { _interfaceType = a } :: SystemInterface s)
 
-instance P.HasIpAddress (InterfaceSetting s) (TF.Attr s P.Text) where
+instance P.HasIpAddress (SystemInterface s) (TF.Attr s P.Text) where
     ipAddress =
-        P.lens (_ipAddress :: InterfaceSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _ipAddress = a } :: InterfaceSetting s)
+        P.lens (_ipAddress :: SystemInterface s -> TF.Attr s P.Text)
+               (\s a -> s { _ipAddress = a } :: SystemInterface s)
 
-instance P.HasIpv6Address (InterfaceSetting s) (TF.Attr s P.Text) where
+instance P.HasIpv6Address (SystemInterface s) (TF.Attr s P.Text) where
     ipv6Address =
-        P.lens (_ipv6Address :: InterfaceSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _ipv6Address = a } :: InterfaceSetting s)
+        P.lens (_ipv6Address :: SystemInterface s -> TF.Attr s P.Text)
+               (\s a -> s { _ipv6Address = a } :: SystemInterface s)
 
-instance P.HasIpv6DefaultGateway (InterfaceSetting s) (TF.Attr s P.Text) where
+instance P.HasIpv6DefaultGateway (SystemInterface s) (TF.Attr s P.Text) where
     ipv6DefaultGateway =
-        P.lens (_ipv6DefaultGateway :: InterfaceSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _ipv6DefaultGateway = a } :: InterfaceSetting s)
+        P.lens (_ipv6DefaultGateway :: SystemInterface s -> TF.Attr s P.Text)
+               (\s a -> s { _ipv6DefaultGateway = a } :: SystemInterface s)
 
-instance P.HasIpv6Mtu (InterfaceSetting s) (TF.Attr s P.Text) where
+instance P.HasIpv6Mtu (SystemInterface s) (TF.Attr s P.Text) where
     ipv6Mtu =
-        P.lens (_ipv6Mtu :: InterfaceSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _ipv6Mtu = a } :: InterfaceSetting s)
+        P.lens (_ipv6Mtu :: SystemInterface s -> TF.Attr s P.Text)
+               (\s a -> s { _ipv6Mtu = a } :: SystemInterface s)
 
-instance P.HasIpv6Secondaries (InterfaceSetting s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasIpv6Secondaries (SystemInterface s) (TF.Attr s [TF.Attr s P.Text]) where
     ipv6Secondaries =
-        P.lens (_ipv6Secondaries :: InterfaceSetting s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _ipv6Secondaries = a } :: InterfaceSetting s)
+        P.lens (_ipv6Secondaries :: SystemInterface s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _ipv6Secondaries = a } :: SystemInterface s)
 
-instance P.HasIpv6StaticRoutes (InterfaceSetting s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasIpv6StaticRoutes (SystemInterface s) (TF.Attr s [TF.Attr s P.Text]) where
     ipv6StaticRoutes =
-        P.lens (_ipv6StaticRoutes :: InterfaceSetting s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _ipv6StaticRoutes = a } :: InterfaceSetting s)
+        P.lens (_ipv6StaticRoutes :: SystemInterface s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _ipv6StaticRoutes = a } :: SystemInterface s)
 
-instance P.HasMacAddress (InterfaceSetting s) (TF.Attr s P.Text) where
+instance P.HasMacAddress (SystemInterface s) (TF.Attr s P.Text) where
     macAddress =
-        P.lens (_macAddress :: InterfaceSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _macAddress = a } :: InterfaceSetting s)
+        P.lens (_macAddress :: SystemInterface s -> TF.Attr s P.Text)
+               (\s a -> s { _macAddress = a } :: SystemInterface s)
 
-instance P.HasManagement (InterfaceSetting s) (TF.Attr s P.Bool) where
+instance P.HasManagement (SystemInterface s) (TF.Attr s P.Bool) where
     management =
-        P.lens (_management :: InterfaceSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _management = a } :: InterfaceSetting s)
+        P.lens (_management :: SystemInterface s -> TF.Attr s P.Bool)
+               (\s a -> s { _management = a } :: SystemInterface s)
 
-instance P.HasName (InterfaceSetting s) (TF.Attr s P.Text) where
+instance P.HasName (SystemInterface s) (TF.Attr s P.Text) where
     name =
-        P.lens (_name :: InterfaceSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: InterfaceSetting s)
+        P.lens (_name :: SystemInterface s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: SystemInterface s)
 
-instance P.HasNetmask (InterfaceSetting s) (TF.Attr s P.Text) where
+instance P.HasNetmask (SystemInterface s) (TF.Attr s P.Text) where
     netmask =
-        P.lens (_netmask :: InterfaceSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _netmask = a } :: InterfaceSetting s)
+        P.lens (_netmask :: SystemInterface s -> TF.Attr s P.Text)
+               (\s a -> s { _netmask = a } :: SystemInterface s)
 
-instance P.HasStatic (InterfaceSetting s) (TF.Attr s P.Bool) where
+instance P.HasStatic (SystemInterface s) (TF.Attr s P.Bool) where
     static =
-        P.lens (_static :: InterfaceSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _static = a } :: InterfaceSetting s)
+        P.lens (_static :: SystemInterface s -> TF.Attr s P.Bool)
+               (\s a -> s { _static = a } :: SystemInterface s)
 
-instance P.HasStaticRoutes (InterfaceSetting s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasStaticRoutes (SystemInterface s) (TF.Attr s [TF.Attr s P.Text]) where
     staticRoutes =
-        P.lens (_staticRoutes :: InterfaceSetting s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _staticRoutes = a } :: InterfaceSetting s)
+        P.lens (_staticRoutes :: SystemInterface s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _staticRoutes = a } :: SystemInterface s)
 
-instance P.HasVirtBridge (InterfaceSetting s) (TF.Attr s P.Text) where
+instance P.HasVirtBridge (SystemInterface s) (TF.Attr s P.Text) where
     virtBridge =
-        P.lens (_virtBridge :: InterfaceSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _virtBridge = a } :: InterfaceSetting s)
+        P.lens (_virtBridge :: SystemInterface s -> TF.Attr s P.Text)
+               (\s a -> s { _virtBridge = a } :: SystemInterface s)
 
-instance s ~ s' => P.HasComputedBondingOpts (TF.Ref s' (InterfaceSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedBondingOpts (TF.Ref s' (SystemInterface s)) (TF.Attr s P.Text) where
     computedBondingOpts x = TF.compute (TF.refKey x) "bonding_opts"
 
-instance s ~ s' => P.HasComputedBridgeOpts (TF.Ref s' (InterfaceSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedBridgeOpts (TF.Ref s' (SystemInterface s)) (TF.Attr s P.Text) where
     computedBridgeOpts x = TF.compute (TF.refKey x) "bridge_opts"
 
-instance s ~ s' => P.HasComputedCnames (TF.Ref s' (InterfaceSetting s)) (TF.Attr s [TF.Attr s P.Text]) where
+instance s ~ s' => P.HasComputedCnames (TF.Ref s' (SystemInterface s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedCnames x = TF.compute (TF.refKey x) "cnames"
 
-instance s ~ s' => P.HasComputedDhcpTag (TF.Ref s' (InterfaceSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDhcpTag (TF.Ref s' (SystemInterface s)) (TF.Attr s P.Text) where
     computedDhcpTag x = TF.compute (TF.refKey x) "dhcp_tag"
 
-instance s ~ s' => P.HasComputedDnsName (TF.Ref s' (InterfaceSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDnsName (TF.Ref s' (SystemInterface s)) (TF.Attr s P.Text) where
     computedDnsName x = TF.compute (TF.refKey x) "dns_name"
 
-instance s ~ s' => P.HasComputedGateway (TF.Ref s' (InterfaceSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedGateway (TF.Ref s' (SystemInterface s)) (TF.Attr s P.Text) where
     computedGateway x = TF.compute (TF.refKey x) "gateway"
 
-instance s ~ s' => P.HasComputedInterfaceMaster (TF.Ref s' (InterfaceSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedInterfaceMaster (TF.Ref s' (SystemInterface s)) (TF.Attr s P.Text) where
     computedInterfaceMaster x = TF.compute (TF.refKey x) "interface_master"
 
-instance s ~ s' => P.HasComputedInterfaceType (TF.Ref s' (InterfaceSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedInterfaceType (TF.Ref s' (SystemInterface s)) (TF.Attr s P.Text) where
     computedInterfaceType x = TF.compute (TF.refKey x) "interface_type"
 
-instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (InterfaceSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (SystemInterface s)) (TF.Attr s P.Text) where
     computedIpAddress x = TF.compute (TF.refKey x) "ip_address"
 
-instance s ~ s' => P.HasComputedIpv6Address (TF.Ref s' (InterfaceSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedIpv6Address (TF.Ref s' (SystemInterface s)) (TF.Attr s P.Text) where
     computedIpv6Address x = TF.compute (TF.refKey x) "ipv6_address"
 
-instance s ~ s' => P.HasComputedIpv6DefaultGateway (TF.Ref s' (InterfaceSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedIpv6DefaultGateway (TF.Ref s' (SystemInterface s)) (TF.Attr s P.Text) where
     computedIpv6DefaultGateway x = TF.compute (TF.refKey x) "ipv6_default_gateway"
 
-instance s ~ s' => P.HasComputedIpv6Mtu (TF.Ref s' (InterfaceSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedIpv6Mtu (TF.Ref s' (SystemInterface s)) (TF.Attr s P.Text) where
     computedIpv6Mtu x = TF.compute (TF.refKey x) "ipv6_mtu"
 
-instance s ~ s' => P.HasComputedIpv6Secondaries (TF.Ref s' (InterfaceSetting s)) (TF.Attr s [TF.Attr s P.Text]) where
+instance s ~ s' => P.HasComputedIpv6Secondaries (TF.Ref s' (SystemInterface s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedIpv6Secondaries x = TF.compute (TF.refKey x) "ipv6_secondaries"
 
-instance s ~ s' => P.HasComputedIpv6StaticRoutes (TF.Ref s' (InterfaceSetting s)) (TF.Attr s [TF.Attr s P.Text]) where
+instance s ~ s' => P.HasComputedIpv6StaticRoutes (TF.Ref s' (SystemInterface s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedIpv6StaticRoutes x = TF.compute (TF.refKey x) "ipv6_static_routes"
 
-instance s ~ s' => P.HasComputedMacAddress (TF.Ref s' (InterfaceSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedMacAddress (TF.Ref s' (SystemInterface s)) (TF.Attr s P.Text) where
     computedMacAddress x = TF.compute (TF.refKey x) "mac_address"
 
-instance s ~ s' => P.HasComputedManagement (TF.Ref s' (InterfaceSetting s)) (TF.Attr s P.Bool) where
+instance s ~ s' => P.HasComputedManagement (TF.Ref s' (SystemInterface s)) (TF.Attr s P.Bool) where
     computedManagement x = TF.compute (TF.refKey x) "management"
 
-instance s ~ s' => P.HasComputedNetmask (TF.Ref s' (InterfaceSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedNetmask (TF.Ref s' (SystemInterface s)) (TF.Attr s P.Text) where
     computedNetmask x = TF.compute (TF.refKey x) "netmask"
 
-instance s ~ s' => P.HasComputedStatic (TF.Ref s' (InterfaceSetting s)) (TF.Attr s P.Bool) where
+instance s ~ s' => P.HasComputedStatic (TF.Ref s' (SystemInterface s)) (TF.Attr s P.Bool) where
     computedStatic x = TF.compute (TF.refKey x) "static"
 
-instance s ~ s' => P.HasComputedStaticRoutes (TF.Ref s' (InterfaceSetting s)) (TF.Attr s [TF.Attr s P.Text]) where
+instance s ~ s' => P.HasComputedStaticRoutes (TF.Ref s' (SystemInterface s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedStaticRoutes x = TF.compute (TF.refKey x) "static_routes"
 
-instance s ~ s' => P.HasComputedVirtBridge (TF.Ref s' (InterfaceSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedVirtBridge (TF.Ref s' (SystemInterface s)) (TF.Attr s P.Text) where
     computedVirtBridge x = TF.compute (TF.refKey x) "virt_bridge"

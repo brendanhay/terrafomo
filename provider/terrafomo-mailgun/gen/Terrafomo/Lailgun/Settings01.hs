@@ -18,12 +18,12 @@
 module Terrafomo.Lailgun.Settings01
     (
     -- ** receiving_records
-      ReceivingRecordsSetting (..)
-    , newReceivingRecordsSetting
+      DomainReceivingRecords (..)
+    , newDomainReceivingRecords
 
     -- ** sending_records
-    , SendingRecordsSetting (..)
-    , newSendingRecordsSetting
+    , DomainSendingRecords (..)
+    , newDomainSendingRecords
 
     ) where
 
@@ -49,59 +49,59 @@ import qualified Terrafomo.Name          as TF
 import qualified Terrafomo.Validator     as TF
 
 -- | @receiving_records@ nested settings.
-data ReceivingRecordsSetting s = ReceivingRecordsSetting'
+data DomainReceivingRecords s = DomainReceivingRecords'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @receiving_records@ settings value.
-newReceivingRecordsSetting
-    :: ReceivingRecordsSetting s
-newReceivingRecordsSetting =
-    ReceivingRecordsSetting'
+newDomainReceivingRecords
+    :: DomainReceivingRecords s
+newDomainReceivingRecords =
+    DomainReceivingRecords'
 
-instance TF.IsValue  (ReceivingRecordsSetting s)
-instance TF.IsObject (ReceivingRecordsSetting s) where
-    toObject ReceivingRecordsSetting' = []
+instance TF.IsValue  (DomainReceivingRecords s)
+instance TF.IsObject (DomainReceivingRecords s) where
+    toObject DomainReceivingRecords' = []
 
-instance TF.IsValid (ReceivingRecordsSetting s) where
+instance TF.IsValid (DomainReceivingRecords s) where
     validator = P.mempty
 
-instance s ~ s' => P.HasComputedPriority (TF.Ref s' (ReceivingRecordsSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPriority (TF.Ref s' (DomainReceivingRecords s)) (TF.Attr s P.Text) where
     computedPriority x = TF.compute (TF.refKey x) "priority"
 
-instance s ~ s' => P.HasComputedRecordType (TF.Ref s' (ReceivingRecordsSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRecordType (TF.Ref s' (DomainReceivingRecords s)) (TF.Attr s P.Text) where
     computedRecordType x = TF.compute (TF.refKey x) "record_type"
 
-instance s ~ s' => P.HasComputedValid (TF.Ref s' (ReceivingRecordsSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedValid (TF.Ref s' (DomainReceivingRecords s)) (TF.Attr s P.Text) where
     computedValid x = TF.compute (TF.refKey x) "valid"
 
-instance s ~ s' => P.HasComputedValue (TF.Ref s' (ReceivingRecordsSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedValue (TF.Ref s' (DomainReceivingRecords s)) (TF.Attr s P.Text) where
     computedValue x = TF.compute (TF.refKey x) "value"
 
 -- | @sending_records@ nested settings.
-data SendingRecordsSetting s = SendingRecordsSetting'
+data DomainSendingRecords s = DomainSendingRecords'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @sending_records@ settings value.
-newSendingRecordsSetting
-    :: SendingRecordsSetting s
-newSendingRecordsSetting =
-    SendingRecordsSetting'
+newDomainSendingRecords
+    :: DomainSendingRecords s
+newDomainSendingRecords =
+    DomainSendingRecords'
 
-instance TF.IsValue  (SendingRecordsSetting s)
-instance TF.IsObject (SendingRecordsSetting s) where
-    toObject SendingRecordsSetting' = []
+instance TF.IsValue  (DomainSendingRecords s)
+instance TF.IsObject (DomainSendingRecords s) where
+    toObject DomainSendingRecords' = []
 
-instance TF.IsValid (SendingRecordsSetting s) where
+instance TF.IsValid (DomainSendingRecords s) where
     validator = P.mempty
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (SendingRecordsSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DomainSendingRecords s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputedRecordType (TF.Ref s' (SendingRecordsSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRecordType (TF.Ref s' (DomainSendingRecords s)) (TF.Attr s P.Text) where
     computedRecordType x = TF.compute (TF.refKey x) "record_type"
 
-instance s ~ s' => P.HasComputedValid (TF.Ref s' (SendingRecordsSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedValid (TF.Ref s' (DomainSendingRecords s)) (TF.Attr s P.Text) where
     computedValid x = TF.compute (TF.refKey x) "valid"
 
-instance s ~ s' => P.HasComputedValue (TF.Ref s' (SendingRecordsSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedValue (TF.Ref s' (DomainSendingRecords s)) (TF.Attr s P.Text) where
     computedValue x = TF.compute (TF.refKey x) "value"

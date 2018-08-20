@@ -13,7 +13,9 @@ module Terrafomo.Google.Settings
     -- * Settings
       module Terrafomo.Google.Settings01
     , module Terrafomo.Google.Settings02
+    , module Terrafomo.Google.Settings03
     ) where
 
 import Terrafomo.Google.Settings01
 import Terrafomo.Google.Settings02
+import Terrafomo.Google.Settings03

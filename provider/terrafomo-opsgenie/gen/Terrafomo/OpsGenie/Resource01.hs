@@ -59,7 +59,7 @@ data TeamResource s = TeamResource'
     { _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _member      :: TF.Attr s [TF.Attr s (MemberSetting s)]
+    , _member      :: TF.Attr s [TF.Attr s (TeamMember s)]
     -- ^ @member@ - (Optional)
     --
     , _name        :: TF.Attr s P.Text
@@ -94,9 +94,9 @@ instance P.HasDescription (TeamResource s) (TF.Attr s P.Text) where
         P.lens (_description :: TeamResource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: TeamResource s)
 
-instance P.HasMember (TeamResource s) (TF.Attr s [TF.Attr s (MemberSetting s)]) where
+instance P.HasMember (TeamResource s) (TF.Attr s [TF.Attr s (TeamMember s)]) where
     member =
-        P.lens (_member :: TeamResource s -> TF.Attr s [TF.Attr s (MemberSetting s)])
+        P.lens (_member :: TeamResource s -> TF.Attr s [TF.Attr s (TeamMember s)])
                (\s a -> s { _member = a } :: TeamResource s)
 
 instance P.HasName (TeamResource s) (TF.Attr s P.Text) where

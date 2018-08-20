@@ -155,40 +155,40 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (DnatResource s)) (TF.Attr s P.Tex
 -- See the <https://www.terraform.io/docs/providers/vcd/r/edgegateway_vpn.html terraform documentation>
 -- for more information.
 data EdgegatewayVpnResource s = EdgegatewayVpnResource'
-    { _description        :: TF.Attr s P.Text
+    { _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional, Forces New)
     --
-    , _edgeGateway        :: TF.Attr s P.Text
+    , _edgeGateway :: TF.Attr s P.Text
     -- ^ @edge_gateway@ - (Required, Forces New)
     --
     , _encryptionProtocol :: TF.Attr s P.Text
     -- ^ @encryption_protocol@ - (Required, Forces New)
     --
-    , _localId            :: TF.Attr s P.Text
+    , _localId :: TF.Attr s P.Text
     -- ^ @local_id@ - (Required, Forces New)
     --
-    , _localIpAddress     :: TF.Attr s P.Text
+    , _localIpAddress :: TF.Attr s P.Text
     -- ^ @local_ip_address@ - (Required, Forces New)
     --
-    , _localSubnets       :: TF.Attr s [TF.Attr s (LocalSubnetsSetting s)]
+    , _localSubnets :: TF.Attr s [TF.Attr s (EdgegatewayVpnLocalSubnets s)]
     -- ^ @local_subnets@ - (Optional, Forces New)
     --
-    , _mtu                :: TF.Attr s P.Int
+    , _mtu :: TF.Attr s P.Int
     -- ^ @mtu@ - (Required, Forces New)
     --
-    , _name               :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _peerId             :: TF.Attr s P.Text
+    , _peerId :: TF.Attr s P.Text
     -- ^ @peer_id@ - (Required, Forces New)
     --
-    , _peerIpAddress      :: TF.Attr s P.Text
+    , _peerIpAddress :: TF.Attr s P.Text
     -- ^ @peer_ip_address@ - (Required, Forces New)
     --
-    , _peerSubnets        :: TF.Attr s [TF.Attr s (PeerSubnetsSetting s)]
+    , _peerSubnets :: TF.Attr s [TF.Attr s (EdgegatewayVpnPeerSubnets s)]
     -- ^ @peer_subnets@ - (Optional, Forces New)
     --
-    , _sharedSecret       :: TF.Attr s P.Text
+    , _sharedSecret :: TF.Attr s P.Text
     -- ^ @shared_secret@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -266,9 +266,9 @@ instance P.HasLocalIpAddress (EdgegatewayVpnResource s) (TF.Attr s P.Text) where
         P.lens (_localIpAddress :: EdgegatewayVpnResource s -> TF.Attr s P.Text)
                (\s a -> s { _localIpAddress = a } :: EdgegatewayVpnResource s)
 
-instance P.HasLocalSubnets (EdgegatewayVpnResource s) (TF.Attr s [TF.Attr s (LocalSubnetsSetting s)]) where
+instance P.HasLocalSubnets (EdgegatewayVpnResource s) (TF.Attr s [TF.Attr s (EdgegatewayVpnLocalSubnets s)]) where
     localSubnets =
-        P.lens (_localSubnets :: EdgegatewayVpnResource s -> TF.Attr s [TF.Attr s (LocalSubnetsSetting s)])
+        P.lens (_localSubnets :: EdgegatewayVpnResource s -> TF.Attr s [TF.Attr s (EdgegatewayVpnLocalSubnets s)])
                (\s a -> s { _localSubnets = a } :: EdgegatewayVpnResource s)
 
 instance P.HasMtu (EdgegatewayVpnResource s) (TF.Attr s P.Int) where
@@ -291,9 +291,9 @@ instance P.HasPeerIpAddress (EdgegatewayVpnResource s) (TF.Attr s P.Text) where
         P.lens (_peerIpAddress :: EdgegatewayVpnResource s -> TF.Attr s P.Text)
                (\s a -> s { _peerIpAddress = a } :: EdgegatewayVpnResource s)
 
-instance P.HasPeerSubnets (EdgegatewayVpnResource s) (TF.Attr s [TF.Attr s (PeerSubnetsSetting s)]) where
+instance P.HasPeerSubnets (EdgegatewayVpnResource s) (TF.Attr s [TF.Attr s (EdgegatewayVpnPeerSubnets s)]) where
     peerSubnets =
-        P.lens (_peerSubnets :: EdgegatewayVpnResource s -> TF.Attr s [TF.Attr s (PeerSubnetsSetting s)])
+        P.lens (_peerSubnets :: EdgegatewayVpnResource s -> TF.Attr s [TF.Attr s (EdgegatewayVpnPeerSubnets s)])
                (\s a -> s { _peerSubnets = a } :: EdgegatewayVpnResource s)
 
 instance P.HasSharedSecret (EdgegatewayVpnResource s) (TF.Attr s P.Text) where
@@ -315,7 +315,7 @@ data FirewallRulesResource s = FirewallRulesResource'
     , _edgeGateway   :: TF.Attr s P.Text
     -- ^ @edge_gateway@ - (Required, Forces New)
     --
-    , _rule          :: TF.Attr s [TF.Attr s (RuleSetting s)]
+    , _rule          :: TF.Attr s [TF.Attr s (FirewallRulesRule s)]
     -- ^ @rule@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -353,9 +353,9 @@ instance P.HasEdgeGateway (FirewallRulesResource s) (TF.Attr s P.Text) where
         P.lens (_edgeGateway :: FirewallRulesResource s -> TF.Attr s P.Text)
                (\s a -> s { _edgeGateway = a } :: FirewallRulesResource s)
 
-instance P.HasRule (FirewallRulesResource s) (TF.Attr s [TF.Attr s (RuleSetting s)]) where
+instance P.HasRule (FirewallRulesResource s) (TF.Attr s [TF.Attr s (FirewallRulesRule s)]) where
     rule =
-        P.lens (_rule :: FirewallRulesResource s -> TF.Attr s [TF.Attr s (RuleSetting s)])
+        P.lens (_rule :: FirewallRulesResource s -> TF.Attr s [TF.Attr s (FirewallRulesRule s)])
                (\s a -> s { _rule = a } :: FirewallRulesResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (FirewallRulesResource s)) (TF.Attr s P.Text) where
@@ -366,7 +366,7 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (FirewallRulesResource s)) (TF.Att
 -- See the <https://www.terraform.io/docs/providers/vcd/r/network.html terraform documentation>
 -- for more information.
 data NetworkResource s = NetworkResource'
-    { _dhcpPool     :: TF.Attr s [TF.Attr s (DhcpPoolSetting s)]
+    { _dhcpPool     :: TF.Attr s [TF.Attr s (NetworkDhcpPool s)]
     -- ^ @dhcp_pool@ - (Optional, Forces New)
     --
     , _dns1         :: TF.Attr s P.Text
@@ -399,7 +399,7 @@ data NetworkResource s = NetworkResource'
     , _shared       :: TF.Attr s P.Bool
     -- ^ @shared@ - (Optional, Forces New)
     --
-    , _staticIpPool :: TF.Attr s [TF.Attr s (StaticIpPoolSetting s)]
+    , _staticIpPool :: TF.Attr s [TF.Attr s (NetworkStaticIpPool s)]
     -- ^ @static_ip_pool@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -446,9 +446,9 @@ instance TF.IsObject (NetworkResource s) where
 instance TF.IsValid (NetworkResource s) where
     validator = P.mempty
 
-instance P.HasDhcpPool (NetworkResource s) (TF.Attr s [TF.Attr s (DhcpPoolSetting s)]) where
+instance P.HasDhcpPool (NetworkResource s) (TF.Attr s [TF.Attr s (NetworkDhcpPool s)]) where
     dhcpPool =
-        P.lens (_dhcpPool :: NetworkResource s -> TF.Attr s [TF.Attr s (DhcpPoolSetting s)])
+        P.lens (_dhcpPool :: NetworkResource s -> TF.Attr s [TF.Attr s (NetworkDhcpPool s)])
                (\s a -> s { _dhcpPool = a } :: NetworkResource s)
 
 instance P.HasDns1 (NetworkResource s) (TF.Attr s P.Text) where
@@ -501,9 +501,9 @@ instance P.HasShared (NetworkResource s) (TF.Attr s P.Bool) where
         P.lens (_shared :: NetworkResource s -> TF.Attr s P.Bool)
                (\s a -> s { _shared = a } :: NetworkResource s)
 
-instance P.HasStaticIpPool (NetworkResource s) (TF.Attr s [TF.Attr s (StaticIpPoolSetting s)]) where
+instance P.HasStaticIpPool (NetworkResource s) (TF.Attr s [TF.Attr s (NetworkStaticIpPool s)]) where
     staticIpPool =
-        P.lens (_staticIpPool :: NetworkResource s -> TF.Attr s [TF.Attr s (StaticIpPoolSetting s)])
+        P.lens (_staticIpPool :: NetworkResource s -> TF.Attr s [TF.Attr s (NetworkStaticIpPool s)])
                (\s a -> s { _staticIpPool = a } :: NetworkResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (NetworkResource s)) (TF.Attr s P.Text) where

@@ -17,29 +17,29 @@
 --
 module Terrafomo.DigitalOcean.Settings01
     (
-    -- ** forwarding_rule
-      ForwardingRuleSetting (..)
-    , newForwardingRuleSetting
-
-    -- ** healthcheck
-    , HealthcheckSetting (..)
-    , newHealthcheckSetting
-
     -- ** inbound_rule
-    , InboundRuleSetting (..)
-    , newInboundRuleSetting
+      FirewallInboundRule (..)
+    , newFirewallInboundRule
 
     -- ** outbound_rule
-    , OutboundRuleSetting (..)
-    , newOutboundRuleSetting
+    , FirewallOutboundRule (..)
+    , newFirewallOutboundRule
 
     -- ** pending_changes
-    , PendingChangesSetting (..)
-    , newPendingChangesSetting
+    , FirewallPendingChanges (..)
+    , newFirewallPendingChanges
+
+    -- ** forwarding_rule
+    , LoadbalancerForwardingRule (..)
+    , newLoadbalancerForwardingRule
+
+    -- ** healthcheck
+    , LoadbalancerHealthcheck (..)
+    , newLoadbalancerHealthcheck
 
     -- ** sticky_sessions
-    , StickySessionsSetting (..)
-    , newStickySessionsSetting
+    , LoadbalancerStickySessions (..)
+    , newLoadbalancerStickySessions
 
     ) where
 
@@ -64,8 +64,215 @@ import qualified Terrafomo.HCL                as TF
 import qualified Terrafomo.Name               as TF
 import qualified Terrafomo.Validator          as TF
 
+-- | @inbound_rule@ nested settings.
+data FirewallInboundRule s = FirewallInboundRule'
+    { _portRange              :: TF.Attr s P.Text
+    -- ^ @port_range@ - (Optional)
+    --
+    , _protocol               :: TF.Attr s P.Text
+    -- ^ @protocol@ - (Optional)
+    --
+    , _sourceAddresses        :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @source_addresses@ - (Optional)
+    --
+    , _sourceDropletIds       :: TF.Attr s [TF.Attr s P.Int]
+    -- ^ @source_droplet_ids@ - (Optional)
+    --
+    , _sourceLoadBalancerUids :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @source_load_balancer_uids@ - (Optional)
+    --
+    , _sourceTags             :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @source_tags@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @inbound_rule@ settings value.
+newFirewallInboundRule
+    :: FirewallInboundRule s
+newFirewallInboundRule =
+    FirewallInboundRule'
+        { _portRange = TF.Nil
+        , _protocol = TF.Nil
+        , _sourceAddresses = TF.Nil
+        , _sourceDropletIds = TF.Nil
+        , _sourceLoadBalancerUids = TF.Nil
+        , _sourceTags = TF.Nil
+        }
+
+instance TF.IsValue  (FirewallInboundRule s)
+instance TF.IsObject (FirewallInboundRule s) where
+    toObject FirewallInboundRule'{..} = P.catMaybes
+        [ TF.assign "port_range" <$> TF.attribute _portRange
+        , TF.assign "protocol" <$> TF.attribute _protocol
+        , TF.assign "source_addresses" <$> TF.attribute _sourceAddresses
+        , TF.assign "source_droplet_ids" <$> TF.attribute _sourceDropletIds
+        , TF.assign "source_load_balancer_uids" <$> TF.attribute _sourceLoadBalancerUids
+        , TF.assign "source_tags" <$> TF.attribute _sourceTags
+        ]
+
+instance TF.IsValid (FirewallInboundRule s) where
+    validator = P.mempty
+
+instance P.HasPortRange (FirewallInboundRule s) (TF.Attr s P.Text) where
+    portRange =
+        P.lens (_portRange :: FirewallInboundRule s -> TF.Attr s P.Text)
+               (\s a -> s { _portRange = a } :: FirewallInboundRule s)
+
+instance P.HasProtocol (FirewallInboundRule s) (TF.Attr s P.Text) where
+    protocol =
+        P.lens (_protocol :: FirewallInboundRule s -> TF.Attr s P.Text)
+               (\s a -> s { _protocol = a } :: FirewallInboundRule s)
+
+instance P.HasSourceAddresses (FirewallInboundRule s) (TF.Attr s [TF.Attr s P.Text]) where
+    sourceAddresses =
+        P.lens (_sourceAddresses :: FirewallInboundRule s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _sourceAddresses = a } :: FirewallInboundRule s)
+
+instance P.HasSourceDropletIds (FirewallInboundRule s) (TF.Attr s [TF.Attr s P.Int]) where
+    sourceDropletIds =
+        P.lens (_sourceDropletIds :: FirewallInboundRule s -> TF.Attr s [TF.Attr s P.Int])
+               (\s a -> s { _sourceDropletIds = a } :: FirewallInboundRule s)
+
+instance P.HasSourceLoadBalancerUids (FirewallInboundRule s) (TF.Attr s [TF.Attr s P.Text]) where
+    sourceLoadBalancerUids =
+        P.lens (_sourceLoadBalancerUids :: FirewallInboundRule s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _sourceLoadBalancerUids = a } :: FirewallInboundRule s)
+
+instance P.HasSourceTags (FirewallInboundRule s) (TF.Attr s [TF.Attr s P.Text]) where
+    sourceTags =
+        P.lens (_sourceTags :: FirewallInboundRule s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _sourceTags = a } :: FirewallInboundRule s)
+
+-- | @outbound_rule@ nested settings.
+data FirewallOutboundRule s = FirewallOutboundRule'
+    { _destinationAddresses        :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @destination_addresses@ - (Optional)
+    --
+    , _destinationDropletIds       :: TF.Attr s [TF.Attr s P.Int]
+    -- ^ @destination_droplet_ids@ - (Optional)
+    --
+    , _destinationLoadBalancerUids :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @destination_load_balancer_uids@ - (Optional)
+    --
+    , _destinationTags             :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @destination_tags@ - (Optional)
+    --
+    , _portRange                   :: TF.Attr s P.Text
+    -- ^ @port_range@ - (Optional)
+    --
+    , _protocol                    :: TF.Attr s P.Text
+    -- ^ @protocol@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @outbound_rule@ settings value.
+newFirewallOutboundRule
+    :: FirewallOutboundRule s
+newFirewallOutboundRule =
+    FirewallOutboundRule'
+        { _destinationAddresses = TF.Nil
+        , _destinationDropletIds = TF.Nil
+        , _destinationLoadBalancerUids = TF.Nil
+        , _destinationTags = TF.Nil
+        , _portRange = TF.Nil
+        , _protocol = TF.Nil
+        }
+
+instance TF.IsValue  (FirewallOutboundRule s)
+instance TF.IsObject (FirewallOutboundRule s) where
+    toObject FirewallOutboundRule'{..} = P.catMaybes
+        [ TF.assign "destination_addresses" <$> TF.attribute _destinationAddresses
+        , TF.assign "destination_droplet_ids" <$> TF.attribute _destinationDropletIds
+        , TF.assign "destination_load_balancer_uids" <$> TF.attribute _destinationLoadBalancerUids
+        , TF.assign "destination_tags" <$> TF.attribute _destinationTags
+        , TF.assign "port_range" <$> TF.attribute _portRange
+        , TF.assign "protocol" <$> TF.attribute _protocol
+        ]
+
+instance TF.IsValid (FirewallOutboundRule s) where
+    validator = P.mempty
+
+instance P.HasDestinationAddresses (FirewallOutboundRule s) (TF.Attr s [TF.Attr s P.Text]) where
+    destinationAddresses =
+        P.lens (_destinationAddresses :: FirewallOutboundRule s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _destinationAddresses = a } :: FirewallOutboundRule s)
+
+instance P.HasDestinationDropletIds (FirewallOutboundRule s) (TF.Attr s [TF.Attr s P.Int]) where
+    destinationDropletIds =
+        P.lens (_destinationDropletIds :: FirewallOutboundRule s -> TF.Attr s [TF.Attr s P.Int])
+               (\s a -> s { _destinationDropletIds = a } :: FirewallOutboundRule s)
+
+instance P.HasDestinationLoadBalancerUids (FirewallOutboundRule s) (TF.Attr s [TF.Attr s P.Text]) where
+    destinationLoadBalancerUids =
+        P.lens (_destinationLoadBalancerUids :: FirewallOutboundRule s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _destinationLoadBalancerUids = a } :: FirewallOutboundRule s)
+
+instance P.HasDestinationTags (FirewallOutboundRule s) (TF.Attr s [TF.Attr s P.Text]) where
+    destinationTags =
+        P.lens (_destinationTags :: FirewallOutboundRule s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _destinationTags = a } :: FirewallOutboundRule s)
+
+instance P.HasPortRange (FirewallOutboundRule s) (TF.Attr s P.Text) where
+    portRange =
+        P.lens (_portRange :: FirewallOutboundRule s -> TF.Attr s P.Text)
+               (\s a -> s { _portRange = a } :: FirewallOutboundRule s)
+
+instance P.HasProtocol (FirewallOutboundRule s) (TF.Attr s P.Text) where
+    protocol =
+        P.lens (_protocol :: FirewallOutboundRule s -> TF.Attr s P.Text)
+               (\s a -> s { _protocol = a } :: FirewallOutboundRule s)
+
+-- | @pending_changes@ nested settings.
+data FirewallPendingChanges s = FirewallPendingChanges'
+    { _dropletId :: TF.Attr s P.Int
+    -- ^ @droplet_id@ - (Optional)
+    --
+    , _removing  :: TF.Attr s P.Bool
+    -- ^ @removing@ - (Optional)
+    --
+    , _status    :: TF.Attr s P.Text
+    -- ^ @status@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @pending_changes@ settings value.
+newFirewallPendingChanges
+    :: FirewallPendingChanges s
+newFirewallPendingChanges =
+    FirewallPendingChanges'
+        { _dropletId = TF.Nil
+        , _removing = TF.Nil
+        , _status = TF.Nil
+        }
+
+instance TF.IsValue  (FirewallPendingChanges s)
+instance TF.IsObject (FirewallPendingChanges s) where
+    toObject FirewallPendingChanges'{..} = P.catMaybes
+        [ TF.assign "droplet_id" <$> TF.attribute _dropletId
+        , TF.assign "removing" <$> TF.attribute _removing
+        , TF.assign "status" <$> TF.attribute _status
+        ]
+
+instance TF.IsValid (FirewallPendingChanges s) where
+    validator = P.mempty
+
+instance P.HasDropletId (FirewallPendingChanges s) (TF.Attr s P.Int) where
+    dropletId =
+        P.lens (_dropletId :: FirewallPendingChanges s -> TF.Attr s P.Int)
+               (\s a -> s { _dropletId = a } :: FirewallPendingChanges s)
+
+instance P.HasRemoving (FirewallPendingChanges s) (TF.Attr s P.Bool) where
+    removing =
+        P.lens (_removing :: FirewallPendingChanges s -> TF.Attr s P.Bool)
+               (\s a -> s { _removing = a } :: FirewallPendingChanges s)
+
+instance P.HasStatus (FirewallPendingChanges s) (TF.Attr s P.Text) where
+    status =
+        P.lens (_status :: FirewallPendingChanges s -> TF.Attr s P.Text)
+               (\s a -> s { _status = a } :: FirewallPendingChanges s)
+
 -- | @forwarding_rule@ nested settings.
-data ForwardingRuleSetting s = ForwardingRuleSetting'
+data LoadbalancerForwardingRule s = LoadbalancerForwardingRule'
     { _certificateId  :: TF.Attr s P.Text
     -- ^ @certificate_id@ - (Optional)
     --
@@ -87,14 +294,14 @@ data ForwardingRuleSetting s = ForwardingRuleSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @forwarding_rule@ settings value.
-newForwardingRuleSetting
+newLoadbalancerForwardingRule
     :: TF.Attr s P.Int -- ^ 'P._entryPort': @entry_port@
     -> TF.Attr s P.Int -- ^ 'P._targetPort': @target_port@
     -> TF.Attr s P.Text -- ^ 'P._entryProtocol': @entry_protocol@
     -> TF.Attr s P.Text -- ^ 'P._targetProtocol': @target_protocol@
-    -> ForwardingRuleSetting s
-newForwardingRuleSetting _entryPort _targetPort _entryProtocol _targetProtocol =
-    ForwardingRuleSetting'
+    -> LoadbalancerForwardingRule s
+newLoadbalancerForwardingRule _entryPort _targetPort _entryProtocol _targetProtocol =
+    LoadbalancerForwardingRule'
         { _certificateId = TF.Nil
         , _entryPort = _entryPort
         , _entryProtocol = _entryProtocol
@@ -103,9 +310,9 @@ newForwardingRuleSetting _entryPort _targetPort _entryProtocol _targetProtocol =
         , _tlsPassthrough = TF.value P.False
         }
 
-instance TF.IsValue  (ForwardingRuleSetting s)
-instance TF.IsObject (ForwardingRuleSetting s) where
-    toObject ForwardingRuleSetting'{..} = P.catMaybes
+instance TF.IsValue  (LoadbalancerForwardingRule s)
+instance TF.IsObject (LoadbalancerForwardingRule s) where
+    toObject LoadbalancerForwardingRule'{..} = P.catMaybes
         [ TF.assign "certificate_id" <$> TF.attribute _certificateId
         , TF.assign "entry_port" <$> TF.attribute _entryPort
         , TF.assign "entry_protocol" <$> TF.attribute _entryProtocol
@@ -114,41 +321,41 @@ instance TF.IsObject (ForwardingRuleSetting s) where
         , TF.assign "tls_passthrough" <$> TF.attribute _tlsPassthrough
         ]
 
-instance TF.IsValid (ForwardingRuleSetting s) where
+instance TF.IsValid (LoadbalancerForwardingRule s) where
     validator = P.mempty
 
-instance P.HasCertificateId (ForwardingRuleSetting s) (TF.Attr s P.Text) where
+instance P.HasCertificateId (LoadbalancerForwardingRule s) (TF.Attr s P.Text) where
     certificateId =
-        P.lens (_certificateId :: ForwardingRuleSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _certificateId = a } :: ForwardingRuleSetting s)
+        P.lens (_certificateId :: LoadbalancerForwardingRule s -> TF.Attr s P.Text)
+               (\s a -> s { _certificateId = a } :: LoadbalancerForwardingRule s)
 
-instance P.HasEntryPort (ForwardingRuleSetting s) (TF.Attr s P.Int) where
+instance P.HasEntryPort (LoadbalancerForwardingRule s) (TF.Attr s P.Int) where
     entryPort =
-        P.lens (_entryPort :: ForwardingRuleSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _entryPort = a } :: ForwardingRuleSetting s)
+        P.lens (_entryPort :: LoadbalancerForwardingRule s -> TF.Attr s P.Int)
+               (\s a -> s { _entryPort = a } :: LoadbalancerForwardingRule s)
 
-instance P.HasEntryProtocol (ForwardingRuleSetting s) (TF.Attr s P.Text) where
+instance P.HasEntryProtocol (LoadbalancerForwardingRule s) (TF.Attr s P.Text) where
     entryProtocol =
-        P.lens (_entryProtocol :: ForwardingRuleSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _entryProtocol = a } :: ForwardingRuleSetting s)
+        P.lens (_entryProtocol :: LoadbalancerForwardingRule s -> TF.Attr s P.Text)
+               (\s a -> s { _entryProtocol = a } :: LoadbalancerForwardingRule s)
 
-instance P.HasTargetPort (ForwardingRuleSetting s) (TF.Attr s P.Int) where
+instance P.HasTargetPort (LoadbalancerForwardingRule s) (TF.Attr s P.Int) where
     targetPort =
-        P.lens (_targetPort :: ForwardingRuleSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _targetPort = a } :: ForwardingRuleSetting s)
+        P.lens (_targetPort :: LoadbalancerForwardingRule s -> TF.Attr s P.Int)
+               (\s a -> s { _targetPort = a } :: LoadbalancerForwardingRule s)
 
-instance P.HasTargetProtocol (ForwardingRuleSetting s) (TF.Attr s P.Text) where
+instance P.HasTargetProtocol (LoadbalancerForwardingRule s) (TF.Attr s P.Text) where
     targetProtocol =
-        P.lens (_targetProtocol :: ForwardingRuleSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _targetProtocol = a } :: ForwardingRuleSetting s)
+        P.lens (_targetProtocol :: LoadbalancerForwardingRule s -> TF.Attr s P.Text)
+               (\s a -> s { _targetProtocol = a } :: LoadbalancerForwardingRule s)
 
-instance P.HasTlsPassthrough (ForwardingRuleSetting s) (TF.Attr s P.Bool) where
+instance P.HasTlsPassthrough (LoadbalancerForwardingRule s) (TF.Attr s P.Bool) where
     tlsPassthrough =
-        P.lens (_tlsPassthrough :: ForwardingRuleSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _tlsPassthrough = a } :: ForwardingRuleSetting s)
+        P.lens (_tlsPassthrough :: LoadbalancerForwardingRule s -> TF.Attr s P.Bool)
+               (\s a -> s { _tlsPassthrough = a } :: LoadbalancerForwardingRule s)
 
 -- | @healthcheck@ nested settings.
-data HealthcheckSetting s = HealthcheckSetting'
+data LoadbalancerHealthcheck s = LoadbalancerHealthcheck'
     { _checkIntervalSeconds   :: TF.Attr s P.Int
     -- ^ @check_interval_seconds@ - (Optional)
     --
@@ -173,12 +380,12 @@ data HealthcheckSetting s = HealthcheckSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @healthcheck@ settings value.
-newHealthcheckSetting
+newLoadbalancerHealthcheck
     :: TF.Attr s P.Int -- ^ 'P._port': @port@
     -> TF.Attr s P.Text -- ^ 'P._protocol': @protocol@
-    -> HealthcheckSetting s
-newHealthcheckSetting _port _protocol =
-    HealthcheckSetting'
+    -> LoadbalancerHealthcheck s
+newLoadbalancerHealthcheck _port _protocol =
+    LoadbalancerHealthcheck'
         { _checkIntervalSeconds = TF.value 10
         , _healthyThreshold = TF.value 5
         , _path = TF.Nil
@@ -188,9 +395,9 @@ newHealthcheckSetting _port _protocol =
         , _unhealthyThreshold = TF.value 3
         }
 
-instance TF.IsValue  (HealthcheckSetting s)
-instance TF.IsObject (HealthcheckSetting s) where
-    toObject HealthcheckSetting'{..} = P.catMaybes
+instance TF.IsValue  (LoadbalancerHealthcheck s)
+instance TF.IsObject (LoadbalancerHealthcheck s) where
+    toObject LoadbalancerHealthcheck'{..} = P.catMaybes
         [ TF.assign "check_interval_seconds" <$> TF.attribute _checkIntervalSeconds
         , TF.assign "healthy_threshold" <$> TF.attribute _healthyThreshold
         , TF.assign "path" <$> TF.attribute _path
@@ -200,253 +407,46 @@ instance TF.IsObject (HealthcheckSetting s) where
         , TF.assign "unhealthy_threshold" <$> TF.attribute _unhealthyThreshold
         ]
 
-instance TF.IsValid (HealthcheckSetting s) where
+instance TF.IsValid (LoadbalancerHealthcheck s) where
     validator = P.mempty
 
-instance P.HasCheckIntervalSeconds (HealthcheckSetting s) (TF.Attr s P.Int) where
+instance P.HasCheckIntervalSeconds (LoadbalancerHealthcheck s) (TF.Attr s P.Int) where
     checkIntervalSeconds =
-        P.lens (_checkIntervalSeconds :: HealthcheckSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _checkIntervalSeconds = a } :: HealthcheckSetting s)
+        P.lens (_checkIntervalSeconds :: LoadbalancerHealthcheck s -> TF.Attr s P.Int)
+               (\s a -> s { _checkIntervalSeconds = a } :: LoadbalancerHealthcheck s)
 
-instance P.HasHealthyThreshold (HealthcheckSetting s) (TF.Attr s P.Int) where
+instance P.HasHealthyThreshold (LoadbalancerHealthcheck s) (TF.Attr s P.Int) where
     healthyThreshold =
-        P.lens (_healthyThreshold :: HealthcheckSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _healthyThreshold = a } :: HealthcheckSetting s)
+        P.lens (_healthyThreshold :: LoadbalancerHealthcheck s -> TF.Attr s P.Int)
+               (\s a -> s { _healthyThreshold = a } :: LoadbalancerHealthcheck s)
 
-instance P.HasPath (HealthcheckSetting s) (TF.Attr s P.Text) where
+instance P.HasPath (LoadbalancerHealthcheck s) (TF.Attr s P.Text) where
     path =
-        P.lens (_path :: HealthcheckSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _path = a } :: HealthcheckSetting s)
+        P.lens (_path :: LoadbalancerHealthcheck s -> TF.Attr s P.Text)
+               (\s a -> s { _path = a } :: LoadbalancerHealthcheck s)
 
-instance P.HasPort (HealthcheckSetting s) (TF.Attr s P.Int) where
+instance P.HasPort (LoadbalancerHealthcheck s) (TF.Attr s P.Int) where
     port =
-        P.lens (_port :: HealthcheckSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _port = a } :: HealthcheckSetting s)
+        P.lens (_port :: LoadbalancerHealthcheck s -> TF.Attr s P.Int)
+               (\s a -> s { _port = a } :: LoadbalancerHealthcheck s)
 
-instance P.HasProtocol (HealthcheckSetting s) (TF.Attr s P.Text) where
+instance P.HasProtocol (LoadbalancerHealthcheck s) (TF.Attr s P.Text) where
     protocol =
-        P.lens (_protocol :: HealthcheckSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _protocol = a } :: HealthcheckSetting s)
+        P.lens (_protocol :: LoadbalancerHealthcheck s -> TF.Attr s P.Text)
+               (\s a -> s { _protocol = a } :: LoadbalancerHealthcheck s)
 
-instance P.HasResponseTimeoutSeconds (HealthcheckSetting s) (TF.Attr s P.Int) where
+instance P.HasResponseTimeoutSeconds (LoadbalancerHealthcheck s) (TF.Attr s P.Int) where
     responseTimeoutSeconds =
-        P.lens (_responseTimeoutSeconds :: HealthcheckSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _responseTimeoutSeconds = a } :: HealthcheckSetting s)
+        P.lens (_responseTimeoutSeconds :: LoadbalancerHealthcheck s -> TF.Attr s P.Int)
+               (\s a -> s { _responseTimeoutSeconds = a } :: LoadbalancerHealthcheck s)
 
-instance P.HasUnhealthyThreshold (HealthcheckSetting s) (TF.Attr s P.Int) where
+instance P.HasUnhealthyThreshold (LoadbalancerHealthcheck s) (TF.Attr s P.Int) where
     unhealthyThreshold =
-        P.lens (_unhealthyThreshold :: HealthcheckSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _unhealthyThreshold = a } :: HealthcheckSetting s)
-
--- | @inbound_rule@ nested settings.
-data InboundRuleSetting s = InboundRuleSetting'
-    { _portRange              :: TF.Attr s P.Text
-    -- ^ @port_range@ - (Optional)
-    --
-    , _protocol               :: TF.Attr s P.Text
-    -- ^ @protocol@ - (Optional)
-    --
-    , _sourceAddresses        :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @source_addresses@ - (Optional)
-    --
-    , _sourceDropletIds       :: TF.Attr s [TF.Attr s P.Int]
-    -- ^ @source_droplet_ids@ - (Optional)
-    --
-    , _sourceLoadBalancerUids :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @source_load_balancer_uids@ - (Optional)
-    --
-    , _sourceTags             :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @source_tags@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @inbound_rule@ settings value.
-newInboundRuleSetting
-    :: InboundRuleSetting s
-newInboundRuleSetting =
-    InboundRuleSetting'
-        { _portRange = TF.Nil
-        , _protocol = TF.Nil
-        , _sourceAddresses = TF.Nil
-        , _sourceDropletIds = TF.Nil
-        , _sourceLoadBalancerUids = TF.Nil
-        , _sourceTags = TF.Nil
-        }
-
-instance TF.IsValue  (InboundRuleSetting s)
-instance TF.IsObject (InboundRuleSetting s) where
-    toObject InboundRuleSetting'{..} = P.catMaybes
-        [ TF.assign "port_range" <$> TF.attribute _portRange
-        , TF.assign "protocol" <$> TF.attribute _protocol
-        , TF.assign "source_addresses" <$> TF.attribute _sourceAddresses
-        , TF.assign "source_droplet_ids" <$> TF.attribute _sourceDropletIds
-        , TF.assign "source_load_balancer_uids" <$> TF.attribute _sourceLoadBalancerUids
-        , TF.assign "source_tags" <$> TF.attribute _sourceTags
-        ]
-
-instance TF.IsValid (InboundRuleSetting s) where
-    validator = P.mempty
-
-instance P.HasPortRange (InboundRuleSetting s) (TF.Attr s P.Text) where
-    portRange =
-        P.lens (_portRange :: InboundRuleSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _portRange = a } :: InboundRuleSetting s)
-
-instance P.HasProtocol (InboundRuleSetting s) (TF.Attr s P.Text) where
-    protocol =
-        P.lens (_protocol :: InboundRuleSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _protocol = a } :: InboundRuleSetting s)
-
-instance P.HasSourceAddresses (InboundRuleSetting s) (TF.Attr s [TF.Attr s P.Text]) where
-    sourceAddresses =
-        P.lens (_sourceAddresses :: InboundRuleSetting s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _sourceAddresses = a } :: InboundRuleSetting s)
-
-instance P.HasSourceDropletIds (InboundRuleSetting s) (TF.Attr s [TF.Attr s P.Int]) where
-    sourceDropletIds =
-        P.lens (_sourceDropletIds :: InboundRuleSetting s -> TF.Attr s [TF.Attr s P.Int])
-               (\s a -> s { _sourceDropletIds = a } :: InboundRuleSetting s)
-
-instance P.HasSourceLoadBalancerUids (InboundRuleSetting s) (TF.Attr s [TF.Attr s P.Text]) where
-    sourceLoadBalancerUids =
-        P.lens (_sourceLoadBalancerUids :: InboundRuleSetting s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _sourceLoadBalancerUids = a } :: InboundRuleSetting s)
-
-instance P.HasSourceTags (InboundRuleSetting s) (TF.Attr s [TF.Attr s P.Text]) where
-    sourceTags =
-        P.lens (_sourceTags :: InboundRuleSetting s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _sourceTags = a } :: InboundRuleSetting s)
-
--- | @outbound_rule@ nested settings.
-data OutboundRuleSetting s = OutboundRuleSetting'
-    { _destinationAddresses        :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @destination_addresses@ - (Optional)
-    --
-    , _destinationDropletIds       :: TF.Attr s [TF.Attr s P.Int]
-    -- ^ @destination_droplet_ids@ - (Optional)
-    --
-    , _destinationLoadBalancerUids :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @destination_load_balancer_uids@ - (Optional)
-    --
-    , _destinationTags             :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @destination_tags@ - (Optional)
-    --
-    , _portRange                   :: TF.Attr s P.Text
-    -- ^ @port_range@ - (Optional)
-    --
-    , _protocol                    :: TF.Attr s P.Text
-    -- ^ @protocol@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @outbound_rule@ settings value.
-newOutboundRuleSetting
-    :: OutboundRuleSetting s
-newOutboundRuleSetting =
-    OutboundRuleSetting'
-        { _destinationAddresses = TF.Nil
-        , _destinationDropletIds = TF.Nil
-        , _destinationLoadBalancerUids = TF.Nil
-        , _destinationTags = TF.Nil
-        , _portRange = TF.Nil
-        , _protocol = TF.Nil
-        }
-
-instance TF.IsValue  (OutboundRuleSetting s)
-instance TF.IsObject (OutboundRuleSetting s) where
-    toObject OutboundRuleSetting'{..} = P.catMaybes
-        [ TF.assign "destination_addresses" <$> TF.attribute _destinationAddresses
-        , TF.assign "destination_droplet_ids" <$> TF.attribute _destinationDropletIds
-        , TF.assign "destination_load_balancer_uids" <$> TF.attribute _destinationLoadBalancerUids
-        , TF.assign "destination_tags" <$> TF.attribute _destinationTags
-        , TF.assign "port_range" <$> TF.attribute _portRange
-        , TF.assign "protocol" <$> TF.attribute _protocol
-        ]
-
-instance TF.IsValid (OutboundRuleSetting s) where
-    validator = P.mempty
-
-instance P.HasDestinationAddresses (OutboundRuleSetting s) (TF.Attr s [TF.Attr s P.Text]) where
-    destinationAddresses =
-        P.lens (_destinationAddresses :: OutboundRuleSetting s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _destinationAddresses = a } :: OutboundRuleSetting s)
-
-instance P.HasDestinationDropletIds (OutboundRuleSetting s) (TF.Attr s [TF.Attr s P.Int]) where
-    destinationDropletIds =
-        P.lens (_destinationDropletIds :: OutboundRuleSetting s -> TF.Attr s [TF.Attr s P.Int])
-               (\s a -> s { _destinationDropletIds = a } :: OutboundRuleSetting s)
-
-instance P.HasDestinationLoadBalancerUids (OutboundRuleSetting s) (TF.Attr s [TF.Attr s P.Text]) where
-    destinationLoadBalancerUids =
-        P.lens (_destinationLoadBalancerUids :: OutboundRuleSetting s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _destinationLoadBalancerUids = a } :: OutboundRuleSetting s)
-
-instance P.HasDestinationTags (OutboundRuleSetting s) (TF.Attr s [TF.Attr s P.Text]) where
-    destinationTags =
-        P.lens (_destinationTags :: OutboundRuleSetting s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _destinationTags = a } :: OutboundRuleSetting s)
-
-instance P.HasPortRange (OutboundRuleSetting s) (TF.Attr s P.Text) where
-    portRange =
-        P.lens (_portRange :: OutboundRuleSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _portRange = a } :: OutboundRuleSetting s)
-
-instance P.HasProtocol (OutboundRuleSetting s) (TF.Attr s P.Text) where
-    protocol =
-        P.lens (_protocol :: OutboundRuleSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _protocol = a } :: OutboundRuleSetting s)
-
--- | @pending_changes@ nested settings.
-data PendingChangesSetting s = PendingChangesSetting'
-    { _dropletId :: TF.Attr s P.Int
-    -- ^ @droplet_id@ - (Optional)
-    --
-    , _removing  :: TF.Attr s P.Bool
-    -- ^ @removing@ - (Optional)
-    --
-    , _status    :: TF.Attr s P.Text
-    -- ^ @status@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @pending_changes@ settings value.
-newPendingChangesSetting
-    :: PendingChangesSetting s
-newPendingChangesSetting =
-    PendingChangesSetting'
-        { _dropletId = TF.Nil
-        , _removing = TF.Nil
-        , _status = TF.Nil
-        }
-
-instance TF.IsValue  (PendingChangesSetting s)
-instance TF.IsObject (PendingChangesSetting s) where
-    toObject PendingChangesSetting'{..} = P.catMaybes
-        [ TF.assign "droplet_id" <$> TF.attribute _dropletId
-        , TF.assign "removing" <$> TF.attribute _removing
-        , TF.assign "status" <$> TF.attribute _status
-        ]
-
-instance TF.IsValid (PendingChangesSetting s) where
-    validator = P.mempty
-
-instance P.HasDropletId (PendingChangesSetting s) (TF.Attr s P.Int) where
-    dropletId =
-        P.lens (_dropletId :: PendingChangesSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _dropletId = a } :: PendingChangesSetting s)
-
-instance P.HasRemoving (PendingChangesSetting s) (TF.Attr s P.Bool) where
-    removing =
-        P.lens (_removing :: PendingChangesSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _removing = a } :: PendingChangesSetting s)
-
-instance P.HasStatus (PendingChangesSetting s) (TF.Attr s P.Text) where
-    status =
-        P.lens (_status :: PendingChangesSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _status = a } :: PendingChangesSetting s)
+        P.lens (_unhealthyThreshold :: LoadbalancerHealthcheck s -> TF.Attr s P.Int)
+               (\s a -> s { _unhealthyThreshold = a } :: LoadbalancerHealthcheck s)
 
 -- | @sticky_sessions@ nested settings.
-data StickySessionsSetting s = StickySessionsSetting'
+data LoadbalancerStickySessions s = LoadbalancerStickySessions'
     { _cookieName       :: TF.Attr s P.Text
     -- ^ @cookie_name@ - (Optional)
     --
@@ -459,37 +459,37 @@ data StickySessionsSetting s = StickySessionsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @sticky_sessions@ settings value.
-newStickySessionsSetting
-    :: StickySessionsSetting s
-newStickySessionsSetting =
-    StickySessionsSetting'
+newLoadbalancerStickySessions
+    :: LoadbalancerStickySessions s
+newLoadbalancerStickySessions =
+    LoadbalancerStickySessions'
         { _cookieName = TF.Nil
         , _cookieTtlSeconds = TF.Nil
         , _type' = TF.value "none"
         }
 
-instance TF.IsValue  (StickySessionsSetting s)
-instance TF.IsObject (StickySessionsSetting s) where
-    toObject StickySessionsSetting'{..} = P.catMaybes
+instance TF.IsValue  (LoadbalancerStickySessions s)
+instance TF.IsObject (LoadbalancerStickySessions s) where
+    toObject LoadbalancerStickySessions'{..} = P.catMaybes
         [ TF.assign "cookie_name" <$> TF.attribute _cookieName
         , TF.assign "cookie_ttl_seconds" <$> TF.attribute _cookieTtlSeconds
         , TF.assign "type" <$> TF.attribute _type'
         ]
 
-instance TF.IsValid (StickySessionsSetting s) where
+instance TF.IsValid (LoadbalancerStickySessions s) where
     validator = P.mempty
 
-instance P.HasCookieName (StickySessionsSetting s) (TF.Attr s P.Text) where
+instance P.HasCookieName (LoadbalancerStickySessions s) (TF.Attr s P.Text) where
     cookieName =
-        P.lens (_cookieName :: StickySessionsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _cookieName = a } :: StickySessionsSetting s)
+        P.lens (_cookieName :: LoadbalancerStickySessions s -> TF.Attr s P.Text)
+               (\s a -> s { _cookieName = a } :: LoadbalancerStickySessions s)
 
-instance P.HasCookieTtlSeconds (StickySessionsSetting s) (TF.Attr s P.Int) where
+instance P.HasCookieTtlSeconds (LoadbalancerStickySessions s) (TF.Attr s P.Int) where
     cookieTtlSeconds =
-        P.lens (_cookieTtlSeconds :: StickySessionsSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _cookieTtlSeconds = a } :: StickySessionsSetting s)
+        P.lens (_cookieTtlSeconds :: LoadbalancerStickySessions s -> TF.Attr s P.Int)
+               (\s a -> s { _cookieTtlSeconds = a } :: LoadbalancerStickySessions s)
 
-instance P.HasType' (StickySessionsSetting s) (TF.Attr s P.Text) where
+instance P.HasType' (LoadbalancerStickySessions s) (TF.Attr s P.Text) where
     type' =
-        P.lens (_type' :: StickySessionsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a } :: StickySessionsSetting s)
+        P.lens (_type' :: LoadbalancerStickySessions s -> TF.Attr s P.Text)
+               (\s a -> s { _type' = a } :: LoadbalancerStickySessions s)

@@ -18,8 +18,8 @@
 module Terrafomo.OpsGenie.Settings01
     (
     -- ** member
-      MemberSetting (..)
-    , newMemberSetting
+      TeamMember (..)
+    , newTeamMember
 
     ) where
 
@@ -45,7 +45,7 @@ import qualified Terrafomo.OpsGenie.Types as P
 import qualified Terrafomo.Validator      as TF
 
 -- | @member@ nested settings.
-data MemberSetting s = MemberSetting'
+data TeamMember s = TeamMember'
     { _role     :: TF.Attr s P.Text
     -- ^ @role@ - (Optional)
     --
@@ -55,31 +55,31 @@ data MemberSetting s = MemberSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @member@ settings value.
-newMemberSetting
+newTeamMember
     :: TF.Attr s P.Text -- ^ 'P._username': @username@
-    -> MemberSetting s
-newMemberSetting _username =
-    MemberSetting'
+    -> TeamMember s
+newTeamMember _username =
+    TeamMember'
         { _role = TF.value "user"
         , _username = _username
         }
 
-instance TF.IsValue  (MemberSetting s)
-instance TF.IsObject (MemberSetting s) where
-    toObject MemberSetting'{..} = P.catMaybes
+instance TF.IsValue  (TeamMember s)
+instance TF.IsObject (TeamMember s) where
+    toObject TeamMember'{..} = P.catMaybes
         [ TF.assign "role" <$> TF.attribute _role
         , TF.assign "username" <$> TF.attribute _username
         ]
 
-instance TF.IsValid (MemberSetting s) where
+instance TF.IsValid (TeamMember s) where
     validator = P.mempty
 
-instance P.HasRole (MemberSetting s) (TF.Attr s P.Text) where
+instance P.HasRole (TeamMember s) (TF.Attr s P.Text) where
     role =
-        P.lens (_role :: MemberSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _role = a } :: MemberSetting s)
+        P.lens (_role :: TeamMember s -> TF.Attr s P.Text)
+               (\s a -> s { _role = a } :: TeamMember s)
 
-instance P.HasUsername (MemberSetting s) (TF.Attr s P.Text) where
+instance P.HasUsername (TeamMember s) (TF.Attr s P.Text) where
     username =
-        P.lens (_username :: MemberSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _username = a } :: MemberSetting s)
+        P.lens (_username :: TeamMember s -> TF.Attr s P.Text)
+               (\s a -> s { _username = a } :: TeamMember s)

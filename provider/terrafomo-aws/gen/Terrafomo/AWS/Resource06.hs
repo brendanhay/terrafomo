@@ -426,46 +426,46 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (SesReceiptFilterResource s)) (TF.
 -- See the <https://www.terraform.io/docs/providers/aws/r/ses_receipt_rule.html terraform documentation>
 -- for more information.
 data SesReceiptRuleResource s = SesReceiptRuleResource'
-    { _addHeaderAction :: TF.Attr s [TF.Attr s (AddHeaderActionSetting s)]
+    { _addHeaderAction :: TF.Attr s [TF.Attr s (SesReceiptRuleAddHeaderAction s)]
     -- ^ @add_header_action@ - (Optional)
     --
-    , _after           :: TF.Attr s P.Text
+    , _after :: TF.Attr s P.Text
     -- ^ @after@ - (Optional)
     --
-    , _bounceAction    :: TF.Attr s [TF.Attr s (BounceActionSetting s)]
+    , _bounceAction :: TF.Attr s [TF.Attr s (SesReceiptRuleBounceAction s)]
     -- ^ @bounce_action@ - (Optional)
     --
-    , _enabled         :: TF.Attr s P.Bool
+    , _enabled :: TF.Attr s P.Bool
     -- ^ @enabled@ - (Optional)
     --
-    , _lambdaAction    :: TF.Attr s [TF.Attr s (LambdaActionSetting s)]
+    , _lambdaAction :: TF.Attr s [TF.Attr s (SesReceiptRuleLambdaAction s)]
     -- ^ @lambda_action@ - (Optional)
     --
-    , _name            :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _recipients      :: TF.Attr s [TF.Attr s P.Text]
+    , _recipients :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @recipients@ - (Optional)
     --
-    , _ruleSetName     :: TF.Attr s P.Text
+    , _ruleSetName :: TF.Attr s P.Text
     -- ^ @rule_set_name@ - (Required, Forces New)
     --
-    , _s3Action        :: TF.Attr s [TF.Attr s (S3ActionSetting s)]
+    , _s3Action :: TF.Attr s [TF.Attr s (SesReceiptRuleS3Action s)]
     -- ^ @s3_action@ - (Optional)
     --
-    , _scanEnabled     :: TF.Attr s P.Bool
+    , _scanEnabled :: TF.Attr s P.Bool
     -- ^ @scan_enabled@ - (Optional)
     --
-    , _snsAction       :: TF.Attr s [TF.Attr s (SnsActionSetting s)]
+    , _snsAction :: TF.Attr s [TF.Attr s (SesReceiptRuleSnsAction s)]
     -- ^ @sns_action@ - (Optional)
     --
-    , _stopAction      :: TF.Attr s [TF.Attr s (StopActionSetting s)]
+    , _stopAction :: TF.Attr s [TF.Attr s (SesReceiptRuleStopAction s)]
     -- ^ @stop_action@ - (Optional)
     --
-    , _tlsPolicy       :: TF.Attr s P.Text
+    , _tlsPolicy :: TF.Attr s P.Text
     -- ^ @tls_policy@ - (Optional)
     --
-    , _workmailAction  :: TF.Attr s [TF.Attr s (WorkmailActionSetting s)]
+    , _workmailAction :: TF.Attr s [TF.Attr s (SesReceiptRuleWorkmailAction s)]
     -- ^ @workmail_action@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -515,9 +515,9 @@ instance TF.IsObject (SesReceiptRuleResource s) where
 instance TF.IsValid (SesReceiptRuleResource s) where
     validator = P.mempty
 
-instance P.HasAddHeaderAction (SesReceiptRuleResource s) (TF.Attr s [TF.Attr s (AddHeaderActionSetting s)]) where
+instance P.HasAddHeaderAction (SesReceiptRuleResource s) (TF.Attr s [TF.Attr s (SesReceiptRuleAddHeaderAction s)]) where
     addHeaderAction =
-        P.lens (_addHeaderAction :: SesReceiptRuleResource s -> TF.Attr s [TF.Attr s (AddHeaderActionSetting s)])
+        P.lens (_addHeaderAction :: SesReceiptRuleResource s -> TF.Attr s [TF.Attr s (SesReceiptRuleAddHeaderAction s)])
                (\s a -> s { _addHeaderAction = a } :: SesReceiptRuleResource s)
 
 instance P.HasAfter (SesReceiptRuleResource s) (TF.Attr s P.Text) where
@@ -525,9 +525,9 @@ instance P.HasAfter (SesReceiptRuleResource s) (TF.Attr s P.Text) where
         P.lens (_after :: SesReceiptRuleResource s -> TF.Attr s P.Text)
                (\s a -> s { _after = a } :: SesReceiptRuleResource s)
 
-instance P.HasBounceAction (SesReceiptRuleResource s) (TF.Attr s [TF.Attr s (BounceActionSetting s)]) where
+instance P.HasBounceAction (SesReceiptRuleResource s) (TF.Attr s [TF.Attr s (SesReceiptRuleBounceAction s)]) where
     bounceAction =
-        P.lens (_bounceAction :: SesReceiptRuleResource s -> TF.Attr s [TF.Attr s (BounceActionSetting s)])
+        P.lens (_bounceAction :: SesReceiptRuleResource s -> TF.Attr s [TF.Attr s (SesReceiptRuleBounceAction s)])
                (\s a -> s { _bounceAction = a } :: SesReceiptRuleResource s)
 
 instance P.HasEnabled (SesReceiptRuleResource s) (TF.Attr s P.Bool) where
@@ -535,9 +535,9 @@ instance P.HasEnabled (SesReceiptRuleResource s) (TF.Attr s P.Bool) where
         P.lens (_enabled :: SesReceiptRuleResource s -> TF.Attr s P.Bool)
                (\s a -> s { _enabled = a } :: SesReceiptRuleResource s)
 
-instance P.HasLambdaAction (SesReceiptRuleResource s) (TF.Attr s [TF.Attr s (LambdaActionSetting s)]) where
+instance P.HasLambdaAction (SesReceiptRuleResource s) (TF.Attr s [TF.Attr s (SesReceiptRuleLambdaAction s)]) where
     lambdaAction =
-        P.lens (_lambdaAction :: SesReceiptRuleResource s -> TF.Attr s [TF.Attr s (LambdaActionSetting s)])
+        P.lens (_lambdaAction :: SesReceiptRuleResource s -> TF.Attr s [TF.Attr s (SesReceiptRuleLambdaAction s)])
                (\s a -> s { _lambdaAction = a } :: SesReceiptRuleResource s)
 
 instance P.HasName (SesReceiptRuleResource s) (TF.Attr s P.Text) where
@@ -555,9 +555,9 @@ instance P.HasRuleSetName (SesReceiptRuleResource s) (TF.Attr s P.Text) where
         P.lens (_ruleSetName :: SesReceiptRuleResource s -> TF.Attr s P.Text)
                (\s a -> s { _ruleSetName = a } :: SesReceiptRuleResource s)
 
-instance P.HasS3Action (SesReceiptRuleResource s) (TF.Attr s [TF.Attr s (S3ActionSetting s)]) where
+instance P.HasS3Action (SesReceiptRuleResource s) (TF.Attr s [TF.Attr s (SesReceiptRuleS3Action s)]) where
     s3Action =
-        P.lens (_s3Action :: SesReceiptRuleResource s -> TF.Attr s [TF.Attr s (S3ActionSetting s)])
+        P.lens (_s3Action :: SesReceiptRuleResource s -> TF.Attr s [TF.Attr s (SesReceiptRuleS3Action s)])
                (\s a -> s { _s3Action = a } :: SesReceiptRuleResource s)
 
 instance P.HasScanEnabled (SesReceiptRuleResource s) (TF.Attr s P.Bool) where
@@ -565,14 +565,14 @@ instance P.HasScanEnabled (SesReceiptRuleResource s) (TF.Attr s P.Bool) where
         P.lens (_scanEnabled :: SesReceiptRuleResource s -> TF.Attr s P.Bool)
                (\s a -> s { _scanEnabled = a } :: SesReceiptRuleResource s)
 
-instance P.HasSnsAction (SesReceiptRuleResource s) (TF.Attr s [TF.Attr s (SnsActionSetting s)]) where
+instance P.HasSnsAction (SesReceiptRuleResource s) (TF.Attr s [TF.Attr s (SesReceiptRuleSnsAction s)]) where
     snsAction =
-        P.lens (_snsAction :: SesReceiptRuleResource s -> TF.Attr s [TF.Attr s (SnsActionSetting s)])
+        P.lens (_snsAction :: SesReceiptRuleResource s -> TF.Attr s [TF.Attr s (SesReceiptRuleSnsAction s)])
                (\s a -> s { _snsAction = a } :: SesReceiptRuleResource s)
 
-instance P.HasStopAction (SesReceiptRuleResource s) (TF.Attr s [TF.Attr s (StopActionSetting s)]) where
+instance P.HasStopAction (SesReceiptRuleResource s) (TF.Attr s [TF.Attr s (SesReceiptRuleStopAction s)]) where
     stopAction =
-        P.lens (_stopAction :: SesReceiptRuleResource s -> TF.Attr s [TF.Attr s (StopActionSetting s)])
+        P.lens (_stopAction :: SesReceiptRuleResource s -> TF.Attr s [TF.Attr s (SesReceiptRuleStopAction s)])
                (\s a -> s { _stopAction = a } :: SesReceiptRuleResource s)
 
 instance P.HasTlsPolicy (SesReceiptRuleResource s) (TF.Attr s P.Text) where
@@ -580,9 +580,9 @@ instance P.HasTlsPolicy (SesReceiptRuleResource s) (TF.Attr s P.Text) where
         P.lens (_tlsPolicy :: SesReceiptRuleResource s -> TF.Attr s P.Text)
                (\s a -> s { _tlsPolicy = a } :: SesReceiptRuleResource s)
 
-instance P.HasWorkmailAction (SesReceiptRuleResource s) (TF.Attr s [TF.Attr s (WorkmailActionSetting s)]) where
+instance P.HasWorkmailAction (SesReceiptRuleResource s) (TF.Attr s [TF.Attr s (SesReceiptRuleWorkmailAction s)]) where
     workmailAction =
-        P.lens (_workmailAction :: SesReceiptRuleResource s -> TF.Attr s [TF.Attr s (WorkmailActionSetting s)])
+        P.lens (_workmailAction :: SesReceiptRuleResource s -> TF.Attr s [TF.Attr s (SesReceiptRuleWorkmailAction s)])
                (\s a -> s { _workmailAction = a } :: SesReceiptRuleResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (SesReceiptRuleResource s)) (TF.Attr s P.Text) where
@@ -1556,7 +1556,7 @@ data SpotFleetRequestResource s = SpotFleetRequestResource'
     , _instanceInterruptionBehaviour :: TF.Attr s P.Text
     -- ^ @instance_interruption_behaviour@ - (Optional, Forces New)
     --
-    , _launchSpecification :: TF.Attr s [TF.Attr s (LaunchSpecificationSetting s)]
+    , _launchSpecification :: TF.Attr s [TF.Attr s (SpotFleetRequestLaunchSpecification s)]
     -- ^ @launch_specification@ - (Required, Forces New)
     --
     , _loadBalancers :: TF.Attr s [TF.Attr s P.Text]
@@ -1592,7 +1592,7 @@ data SpotFleetRequestResource s = SpotFleetRequestResource'
 spotFleetRequestResource
     :: TF.Attr s P.Int -- ^ @target_capacity@ ('P._targetCapacity', 'P.targetCapacity')
     -> TF.Attr s P.Text -- ^ @iam_fleet_role@ ('P._iamFleetRole', 'P.iamFleetRole')
-    -> TF.Attr s [TF.Attr s (LaunchSpecificationSetting s)] -- ^ @launch_specification@ ('P._launchSpecification', 'P.launchSpecification')
+    -> TF.Attr s [TF.Attr s (SpotFleetRequestLaunchSpecification s)] -- ^ @launch_specification@ ('P._launchSpecification', 'P.launchSpecification')
     -> P.Resource (SpotFleetRequestResource s)
 spotFleetRequestResource _targetCapacity _iamFleetRole _launchSpecification =
     TF.unsafeResource "aws_spot_fleet_request" TF.validator $
@@ -1661,9 +1661,9 @@ instance P.HasInstanceInterruptionBehaviour (SpotFleetRequestResource s) (TF.Att
         P.lens (_instanceInterruptionBehaviour :: SpotFleetRequestResource s -> TF.Attr s P.Text)
                (\s a -> s { _instanceInterruptionBehaviour = a } :: SpotFleetRequestResource s)
 
-instance P.HasLaunchSpecification (SpotFleetRequestResource s) (TF.Attr s [TF.Attr s (LaunchSpecificationSetting s)]) where
+instance P.HasLaunchSpecification (SpotFleetRequestResource s) (TF.Attr s [TF.Attr s (SpotFleetRequestLaunchSpecification s)]) where
     launchSpecification =
-        P.lens (_launchSpecification :: SpotFleetRequestResource s -> TF.Attr s [TF.Attr s (LaunchSpecificationSetting s)])
+        P.lens (_launchSpecification :: SpotFleetRequestResource s -> TF.Attr s [TF.Attr s (SpotFleetRequestLaunchSpecification s)])
                (\s a -> s { _launchSpecification = a } :: SpotFleetRequestResource s)
 
 instance P.HasLoadBalancers (SpotFleetRequestResource s) (TF.Attr s [TF.Attr s P.Text]) where
@@ -1755,19 +1755,19 @@ data SpotInstanceRequestResource s = SpotInstanceRequestResource'
     , _cpuThreadsPerCore :: TF.Attr s P.Int
     -- ^ @cpu_threads_per_core@ - (Optional, Forces New)
     --
-    , _creditSpecification :: TF.Attr s (CreditSpecificationSetting s)
+    , _creditSpecification :: TF.Attr s (SpotInstanceRequestCreditSpecification s)
     -- ^ @credit_specification@ - (Optional, Forces New)
     --
     , _disableApiTermination :: TF.Attr s P.Bool
     -- ^ @disable_api_termination@ - (Optional, Forces New)
     --
-    , _ebsBlockDevice :: TF.Attr s [TF.Attr s (EbsBlockDeviceSetting s)]
+    , _ebsBlockDevice :: TF.Attr s [TF.Attr s (SpotInstanceRequestEbsBlockDevice s)]
     -- ^ @ebs_block_device@ - (Optional, Forces New)
     --
     , _ebsOptimized :: TF.Attr s P.Bool
     -- ^ @ebs_optimized@ - (Optional, Forces New)
     --
-    , _ephemeralBlockDevice :: TF.Attr s [TF.Attr s (EphemeralBlockDeviceSetting s)]
+    , _ephemeralBlockDevice :: TF.Attr s [TF.Attr s (SpotInstanceRequestEphemeralBlockDevice s)]
     -- ^ @ephemeral_block_device@ - (Optional, Forces New)
     --
     , _getPasswordData :: TF.Attr s P.Bool
@@ -1806,7 +1806,7 @@ data SpotInstanceRequestResource s = SpotInstanceRequestResource'
     , _monitoring :: TF.Attr s P.Bool
     -- ^ @monitoring@ - (Optional, Forces New)
     --
-    , _networkInterface :: TF.Attr s [TF.Attr s (NetworkInterfaceSetting s)]
+    , _networkInterface :: TF.Attr s [TF.Attr s (SpotInstanceRequestNetworkInterface s)]
     -- ^ @network_interface@ - (Optional, Forces New)
     --
     -- Conflicts with:
@@ -1828,7 +1828,7 @@ data SpotInstanceRequestResource s = SpotInstanceRequestResource'
     -- Conflicts with:
     --
     -- * 'networkInterface'
-    , _rootBlockDevice :: TF.Attr s (RootBlockDeviceSetting s)
+    , _rootBlockDevice :: TF.Attr s (SpotInstanceRequestRootBlockDevice s)
     -- ^ @root_block_device@ - (Optional, Forces New)
     --
     , _securityGroups :: TF.Attr s [TF.Attr s P.Text]
@@ -2047,11 +2047,11 @@ instance TF.IsValid (SpotInstanceRequestResource s) where
         ])
            P.<> TF.settingsValidator "_creditSpecification"
                   (_creditSpecification
-                      :: SpotInstanceRequestResource s -> TF.Attr s (CreditSpecificationSetting s))
+                      :: SpotInstanceRequestResource s -> TF.Attr s (SpotInstanceRequestCreditSpecification s))
                   TF.validator
            P.<> TF.settingsValidator "_rootBlockDevice"
                   (_rootBlockDevice
-                      :: SpotInstanceRequestResource s -> TF.Attr s (RootBlockDeviceSetting s))
+                      :: SpotInstanceRequestResource s -> TF.Attr s (SpotInstanceRequestRootBlockDevice s))
                   TF.validator
 
 instance P.HasAmi (SpotInstanceRequestResource s) (TF.Attr s P.Text) where
@@ -2089,9 +2089,9 @@ instance P.HasCpuThreadsPerCore (SpotInstanceRequestResource s) (TF.Attr s P.Int
         P.lens (_cpuThreadsPerCore :: SpotInstanceRequestResource s -> TF.Attr s P.Int)
                (\s a -> s { _cpuThreadsPerCore = a } :: SpotInstanceRequestResource s)
 
-instance P.HasCreditSpecification (SpotInstanceRequestResource s) (TF.Attr s (CreditSpecificationSetting s)) where
+instance P.HasCreditSpecification (SpotInstanceRequestResource s) (TF.Attr s (SpotInstanceRequestCreditSpecification s)) where
     creditSpecification =
-        P.lens (_creditSpecification :: SpotInstanceRequestResource s -> TF.Attr s (CreditSpecificationSetting s))
+        P.lens (_creditSpecification :: SpotInstanceRequestResource s -> TF.Attr s (SpotInstanceRequestCreditSpecification s))
                (\s a -> s { _creditSpecification = a } :: SpotInstanceRequestResource s)
 
 instance P.HasDisableApiTermination (SpotInstanceRequestResource s) (TF.Attr s P.Bool) where
@@ -2099,9 +2099,9 @@ instance P.HasDisableApiTermination (SpotInstanceRequestResource s) (TF.Attr s P
         P.lens (_disableApiTermination :: SpotInstanceRequestResource s -> TF.Attr s P.Bool)
                (\s a -> s { _disableApiTermination = a } :: SpotInstanceRequestResource s)
 
-instance P.HasEbsBlockDevice (SpotInstanceRequestResource s) (TF.Attr s [TF.Attr s (EbsBlockDeviceSetting s)]) where
+instance P.HasEbsBlockDevice (SpotInstanceRequestResource s) (TF.Attr s [TF.Attr s (SpotInstanceRequestEbsBlockDevice s)]) where
     ebsBlockDevice =
-        P.lens (_ebsBlockDevice :: SpotInstanceRequestResource s -> TF.Attr s [TF.Attr s (EbsBlockDeviceSetting s)])
+        P.lens (_ebsBlockDevice :: SpotInstanceRequestResource s -> TF.Attr s [TF.Attr s (SpotInstanceRequestEbsBlockDevice s)])
                (\s a -> s { _ebsBlockDevice = a } :: SpotInstanceRequestResource s)
 
 instance P.HasEbsOptimized (SpotInstanceRequestResource s) (TF.Attr s P.Bool) where
@@ -2109,9 +2109,9 @@ instance P.HasEbsOptimized (SpotInstanceRequestResource s) (TF.Attr s P.Bool) wh
         P.lens (_ebsOptimized :: SpotInstanceRequestResource s -> TF.Attr s P.Bool)
                (\s a -> s { _ebsOptimized = a } :: SpotInstanceRequestResource s)
 
-instance P.HasEphemeralBlockDevice (SpotInstanceRequestResource s) (TF.Attr s [TF.Attr s (EphemeralBlockDeviceSetting s)]) where
+instance P.HasEphemeralBlockDevice (SpotInstanceRequestResource s) (TF.Attr s [TF.Attr s (SpotInstanceRequestEphemeralBlockDevice s)]) where
     ephemeralBlockDevice =
-        P.lens (_ephemeralBlockDevice :: SpotInstanceRequestResource s -> TF.Attr s [TF.Attr s (EphemeralBlockDeviceSetting s)])
+        P.lens (_ephemeralBlockDevice :: SpotInstanceRequestResource s -> TF.Attr s [TF.Attr s (SpotInstanceRequestEphemeralBlockDevice s)])
                (\s a -> s { _ephemeralBlockDevice = a } :: SpotInstanceRequestResource s)
 
 instance P.HasGetPasswordData (SpotInstanceRequestResource s) (TF.Attr s P.Bool) where
@@ -2164,9 +2164,9 @@ instance P.HasMonitoring (SpotInstanceRequestResource s) (TF.Attr s P.Bool) wher
         P.lens (_monitoring :: SpotInstanceRequestResource s -> TF.Attr s P.Bool)
                (\s a -> s { _monitoring = a } :: SpotInstanceRequestResource s)
 
-instance P.HasNetworkInterface (SpotInstanceRequestResource s) (TF.Attr s [TF.Attr s (NetworkInterfaceSetting s)]) where
+instance P.HasNetworkInterface (SpotInstanceRequestResource s) (TF.Attr s [TF.Attr s (SpotInstanceRequestNetworkInterface s)]) where
     networkInterface =
-        P.lens (_networkInterface :: SpotInstanceRequestResource s -> TF.Attr s [TF.Attr s (NetworkInterfaceSetting s)])
+        P.lens (_networkInterface :: SpotInstanceRequestResource s -> TF.Attr s [TF.Attr s (SpotInstanceRequestNetworkInterface s)])
                (\s a -> s { _networkInterface = a } :: SpotInstanceRequestResource s)
 
 instance P.HasPlacementGroup (SpotInstanceRequestResource s) (TF.Attr s P.Text) where
@@ -2179,9 +2179,9 @@ instance P.HasPrivateIp (SpotInstanceRequestResource s) (TF.Attr s P.Text) where
         P.lens (_privateIp :: SpotInstanceRequestResource s -> TF.Attr s P.Text)
                (\s a -> s { _privateIp = a } :: SpotInstanceRequestResource s)
 
-instance P.HasRootBlockDevice (SpotInstanceRequestResource s) (TF.Attr s (RootBlockDeviceSetting s)) where
+instance P.HasRootBlockDevice (SpotInstanceRequestResource s) (TF.Attr s (SpotInstanceRequestRootBlockDevice s)) where
     rootBlockDevice =
-        P.lens (_rootBlockDevice :: SpotInstanceRequestResource s -> TF.Attr s (RootBlockDeviceSetting s))
+        P.lens (_rootBlockDevice :: SpotInstanceRequestResource s -> TF.Attr s (SpotInstanceRequestRootBlockDevice s))
                (\s a -> s { _rootBlockDevice = a } :: SpotInstanceRequestResource s)
 
 instance P.HasSecurityGroups (SpotInstanceRequestResource s) (TF.Attr s [TF.Attr s P.Text]) where
@@ -2272,10 +2272,10 @@ instance s ~ s' => P.HasComputedCpuCoreCount (TF.Ref s' (SpotInstanceRequestReso
 instance s ~ s' => P.HasComputedCpuThreadsPerCore (TF.Ref s' (SpotInstanceRequestResource s)) (TF.Attr s P.Int) where
     computedCpuThreadsPerCore x = TF.compute (TF.refKey x) "cpu_threads_per_core"
 
-instance s ~ s' => P.HasComputedEbsBlockDevice (TF.Ref s' (SpotInstanceRequestResource s)) (TF.Attr s [TF.Attr s (EbsBlockDeviceSetting s)]) where
+instance s ~ s' => P.HasComputedEbsBlockDevice (TF.Ref s' (SpotInstanceRequestResource s)) (TF.Attr s [TF.Attr s (SpotInstanceRequestEbsBlockDevice s)]) where
     computedEbsBlockDevice x = TF.compute (TF.refKey x) "ebs_block_device"
 
-instance s ~ s' => P.HasComputedEphemeralBlockDevice (TF.Ref s' (SpotInstanceRequestResource s)) (TF.Attr s [TF.Attr s (EphemeralBlockDeviceSetting s)]) where
+instance s ~ s' => P.HasComputedEphemeralBlockDevice (TF.Ref s' (SpotInstanceRequestResource s)) (TF.Attr s [TF.Attr s (SpotInstanceRequestEphemeralBlockDevice s)]) where
     computedEphemeralBlockDevice x = TF.compute (TF.refKey x) "ephemeral_block_device"
 
 instance s ~ s' => P.HasComputedInstanceState (TF.Ref s' (SpotInstanceRequestResource s)) (TF.Attr s P.Text) where
@@ -2290,7 +2290,7 @@ instance s ~ s' => P.HasComputedIpv6Addresses (TF.Ref s' (SpotInstanceRequestRes
 instance s ~ s' => P.HasComputedKeyName (TF.Ref s' (SpotInstanceRequestResource s)) (TF.Attr s P.Text) where
     computedKeyName x = TF.compute (TF.refKey x) "key_name"
 
-instance s ~ s' => P.HasComputedNetworkInterface (TF.Ref s' (SpotInstanceRequestResource s)) (TF.Attr s [TF.Attr s (NetworkInterfaceSetting s)]) where
+instance s ~ s' => P.HasComputedNetworkInterface (TF.Ref s' (SpotInstanceRequestResource s)) (TF.Attr s [TF.Attr s (SpotInstanceRequestNetworkInterface s)]) where
     computedNetworkInterface x = TF.compute (TF.refKey x) "network_interface"
 
 instance s ~ s' => P.HasComputedPasswordData (TF.Ref s' (SpotInstanceRequestResource s)) (TF.Attr s P.Text) where
@@ -2314,7 +2314,7 @@ instance s ~ s' => P.HasComputedPublicDns (TF.Ref s' (SpotInstanceRequestResourc
 instance s ~ s' => P.HasComputedPublicIp (TF.Ref s' (SpotInstanceRequestResource s)) (TF.Attr s P.Text) where
     computedPublicIp x = TF.compute (TF.refKey x) "public_ip"
 
-instance s ~ s' => P.HasComputedRootBlockDevice (TF.Ref s' (SpotInstanceRequestResource s)) (TF.Attr s (RootBlockDeviceSetting s)) where
+instance s ~ s' => P.HasComputedRootBlockDevice (TF.Ref s' (SpotInstanceRequestResource s)) (TF.Attr s (SpotInstanceRequestRootBlockDevice s)) where
     computedRootBlockDevice x = TF.compute (TF.refKey x) "root_block_device"
 
 instance s ~ s' => P.HasComputedSecurityGroups (TF.Ref s' (SpotInstanceRequestResource s)) (TF.Attr s [TF.Attr s P.Text]) where
@@ -2687,7 +2687,7 @@ data SsmAssociationResource s = SsmAssociationResource'
     , _name               :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _outputLocation     :: TF.Attr s (OutputLocationSetting s)
+    , _outputLocation     :: TF.Attr s (SsmAssociationOutputLocation s)
     -- ^ @output_location@ - (Optional)
     --
     , _parameters         :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
@@ -2696,7 +2696,7 @@ data SsmAssociationResource s = SsmAssociationResource'
     , _scheduleExpression :: TF.Attr s P.Text
     -- ^ @schedule_expression@ - (Optional)
     --
-    , _targets            :: TF.Attr s [TF.Attr s (TargetsSetting s)]
+    , _targets            :: TF.Attr s [TF.Attr s (SsmAssociationTargets s)]
     -- ^ @targets@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -2734,7 +2734,7 @@ instance TF.IsValid (SsmAssociationResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_outputLocation"
                   (_outputLocation
-                      :: SsmAssociationResource s -> TF.Attr s (OutputLocationSetting s))
+                      :: SsmAssociationResource s -> TF.Attr s (SsmAssociationOutputLocation s))
                   TF.validator
 
 instance P.HasAssociationName (SsmAssociationResource s) (TF.Attr s P.Text) where
@@ -2757,9 +2757,9 @@ instance P.HasName (SsmAssociationResource s) (TF.Attr s P.Text) where
         P.lens (_name :: SsmAssociationResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: SsmAssociationResource s)
 
-instance P.HasOutputLocation (SsmAssociationResource s) (TF.Attr s (OutputLocationSetting s)) where
+instance P.HasOutputLocation (SsmAssociationResource s) (TF.Attr s (SsmAssociationOutputLocation s)) where
     outputLocation =
-        P.lens (_outputLocation :: SsmAssociationResource s -> TF.Attr s (OutputLocationSetting s))
+        P.lens (_outputLocation :: SsmAssociationResource s -> TF.Attr s (SsmAssociationOutputLocation s))
                (\s a -> s { _outputLocation = a } :: SsmAssociationResource s)
 
 instance P.HasParameters (SsmAssociationResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
@@ -2772,9 +2772,9 @@ instance P.HasScheduleExpression (SsmAssociationResource s) (TF.Attr s P.Text) w
         P.lens (_scheduleExpression :: SsmAssociationResource s -> TF.Attr s P.Text)
                (\s a -> s { _scheduleExpression = a } :: SsmAssociationResource s)
 
-instance P.HasTargets (SsmAssociationResource s) (TF.Attr s [TF.Attr s (TargetsSetting s)]) where
+instance P.HasTargets (SsmAssociationResource s) (TF.Attr s [TF.Attr s (SsmAssociationTargets s)]) where
     targets =
-        P.lens (_targets :: SsmAssociationResource s -> TF.Attr s [TF.Attr s (TargetsSetting s)])
+        P.lens (_targets :: SsmAssociationResource s -> TF.Attr s [TF.Attr s (SsmAssociationTargets s)])
                (\s a -> s { _targets = a } :: SsmAssociationResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (SsmAssociationResource s)) (TF.Attr s P.Text) where
@@ -2789,7 +2789,7 @@ instance s ~ s' => P.HasComputedDocumentVersion (TF.Ref s' (SsmAssociationResour
 instance s ~ s' => P.HasComputedParameters (TF.Ref s' (SsmAssociationResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     computedParameters x = TF.compute (TF.refKey x) "parameters"
 
-instance s ~ s' => P.HasComputedTargets (TF.Ref s' (SsmAssociationResource s)) (TF.Attr s [TF.Attr s (TargetsSetting s)]) where
+instance s ~ s' => P.HasComputedTargets (TF.Ref s' (SsmAssociationResource s)) (TF.Attr s [TF.Attr s (SsmAssociationTargets s)]) where
     computedTargets x = TF.compute (TF.refKey x) "targets"
 
 -- | @aws_ssm_document@ Resource.
@@ -2809,7 +2809,7 @@ data SsmDocumentResource s = SsmDocumentResource'
     , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _permissions :: TF.Attr s (P.Map P.Text (TF.Attr s (PermissionsSetting s)))
+    , _permissions :: TF.Attr s (P.Map P.Text (TF.Attr s (SsmDocumentPermissions s)))
     -- ^ @permissions@ - (Optional)
     --
     , _tags :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
@@ -2867,9 +2867,9 @@ instance P.HasName (SsmDocumentResource s) (TF.Attr s P.Text) where
         P.lens (_name :: SsmDocumentResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: SsmDocumentResource s)
 
-instance P.HasPermissions (SsmDocumentResource s) (TF.Attr s (P.Map P.Text (TF.Attr s (PermissionsSetting s)))) where
+instance P.HasPermissions (SsmDocumentResource s) (TF.Attr s (P.Map P.Text (TF.Attr s (SsmDocumentPermissions s)))) where
     permissions =
-        P.lens (_permissions :: SsmDocumentResource s -> TF.Attr s (P.Map P.Text (TF.Attr s (PermissionsSetting s))))
+        P.lens (_permissions :: SsmDocumentResource s -> TF.Attr s (P.Map P.Text (TF.Attr s (SsmDocumentPermissions s))))
                (\s a -> s { _permissions = a } :: SsmDocumentResource s)
 
 instance P.HasTags (SsmDocumentResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
@@ -2904,7 +2904,7 @@ instance s ~ s' => P.HasComputedLatestVersion (TF.Ref s' (SsmDocumentResource s)
 instance s ~ s' => P.HasComputedOwner (TF.Ref s' (SsmDocumentResource s)) (TF.Attr s P.Text) where
     computedOwner x = TF.compute (TF.refKey x) "owner"
 
-instance s ~ s' => P.HasComputedParameter (TF.Ref s' (SsmDocumentResource s)) (TF.Attr s [TF.Attr s (ParameterSetting s)]) where
+instance s ~ s' => P.HasComputedParameter (TF.Ref s' (SsmDocumentResource s)) (TF.Attr s [TF.Attr s (SsmDocumentParameter s)]) where
     computedParameter x = TF.compute (TF.refKey x) "parameter"
 
 instance s ~ s' => P.HasComputedPlatformTypes (TF.Ref s' (SsmDocumentResource s)) (TF.Attr s [TF.Attr s P.Text]) where
@@ -3013,13 +3013,13 @@ data SsmMaintenanceWindowTargetResource s = SsmMaintenanceWindowTargetResource'
     { _ownerInformation :: TF.Attr s P.Text
     -- ^ @owner_information@ - (Optional)
     --
-    , _resourceType     :: TF.Attr s P.Text
+    , _resourceType :: TF.Attr s P.Text
     -- ^ @resource_type@ - (Required, Forces New)
     --
-    , _targets          :: TF.Attr s [TF.Attr s (TargetsSetting s)]
+    , _targets :: TF.Attr s [TF.Attr s (SsmMaintenanceWindowTargetTargets s)]
     -- ^ @targets@ - (Required)
     --
-    , _windowId         :: TF.Attr s P.Text
+    , _windowId :: TF.Attr s P.Text
     -- ^ @window_id@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -3027,7 +3027,7 @@ data SsmMaintenanceWindowTargetResource s = SsmMaintenanceWindowTargetResource'
 -- | Define a new @aws_ssm_maintenance_window_target@ resource value.
 ssmMaintenanceWindowTargetResource
     :: TF.Attr s P.Text -- ^ @window_id@ ('P._windowId', 'P.windowId')
-    -> TF.Attr s [TF.Attr s (TargetsSetting s)] -- ^ @targets@ ('P._targets', 'P.targets')
+    -> TF.Attr s [TF.Attr s (SsmMaintenanceWindowTargetTargets s)] -- ^ @targets@ ('P._targets', 'P.targets')
     -> TF.Attr s P.Text -- ^ @resource_type@ ('P._resourceType', 'P.resourceType')
     -> P.Resource (SsmMaintenanceWindowTargetResource s)
 ssmMaintenanceWindowTargetResource _windowId _targets _resourceType =
@@ -3060,9 +3060,9 @@ instance P.HasResourceType (SsmMaintenanceWindowTargetResource s) (TF.Attr s P.T
         P.lens (_resourceType :: SsmMaintenanceWindowTargetResource s -> TF.Attr s P.Text)
                (\s a -> s { _resourceType = a } :: SsmMaintenanceWindowTargetResource s)
 
-instance P.HasTargets (SsmMaintenanceWindowTargetResource s) (TF.Attr s [TF.Attr s (TargetsSetting s)]) where
+instance P.HasTargets (SsmMaintenanceWindowTargetResource s) (TF.Attr s [TF.Attr s (SsmMaintenanceWindowTargetTargets s)]) where
     targets =
-        P.lens (_targets :: SsmMaintenanceWindowTargetResource s -> TF.Attr s [TF.Attr s (TargetsSetting s)])
+        P.lens (_targets :: SsmMaintenanceWindowTargetResource s -> TF.Attr s [TF.Attr s (SsmMaintenanceWindowTargetTargets s)])
                (\s a -> s { _targets = a } :: SsmMaintenanceWindowTargetResource s)
 
 instance P.HasWindowId (SsmMaintenanceWindowTargetResource s) (TF.Attr s P.Text) where
@@ -3078,34 +3078,34 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (SsmMaintenanceWindowTargetResourc
 -- See the <https://www.terraform.io/docs/providers/aws/r/ssm_maintenance_window_task.html terraform documentation>
 -- for more information.
 data SsmMaintenanceWindowTaskResource s = SsmMaintenanceWindowTaskResource'
-    { _loggingInfo    :: TF.Attr s (LoggingInfoSetting s)
+    { _loggingInfo :: TF.Attr s (SsmMaintenanceWindowTaskLoggingInfo s)
     -- ^ @logging_info@ - (Optional, Forces New)
     --
     , _maxConcurrency :: TF.Attr s P.Text
     -- ^ @max_concurrency@ - (Required, Forces New)
     --
-    , _maxErrors      :: TF.Attr s P.Text
+    , _maxErrors :: TF.Attr s P.Text
     -- ^ @max_errors@ - (Required, Forces New)
     --
-    , _priority       :: TF.Attr s P.Int
+    , _priority :: TF.Attr s P.Int
     -- ^ @priority@ - (Optional, Forces New)
     --
     , _serviceRoleArn :: TF.Attr s P.Text
     -- ^ @service_role_arn@ - (Required, Forces New)
     --
-    , _targets        :: TF.Attr s [TF.Attr s (TargetsSetting s)]
+    , _targets :: TF.Attr s [TF.Attr s (SsmMaintenanceWindowTaskTargets s)]
     -- ^ @targets@ - (Required, Forces New)
     --
-    , _taskArn        :: TF.Attr s P.Text
+    , _taskArn :: TF.Attr s P.Text
     -- ^ @task_arn@ - (Required, Forces New)
     --
-    , _taskParameters :: TF.Attr s [TF.Attr s (TaskParametersSetting s)]
+    , _taskParameters :: TF.Attr s [TF.Attr s (SsmMaintenanceWindowTaskTaskParameters s)]
     -- ^ @task_parameters@ - (Optional, Forces New)
     --
-    , _taskType       :: TF.Attr s P.Text
+    , _taskType :: TF.Attr s P.Text
     -- ^ @task_type@ - (Required, Forces New)
     --
-    , _windowId       :: TF.Attr s P.Text
+    , _windowId :: TF.Attr s P.Text
     -- ^ @window_id@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -3117,7 +3117,7 @@ ssmMaintenanceWindowTaskResource
     -> TF.Attr s P.Text -- ^ @max_concurrency@ ('P._maxConcurrency', 'P.maxConcurrency')
     -> TF.Attr s P.Text -- ^ @max_errors@ ('P._maxErrors', 'P.maxErrors')
     -> TF.Attr s P.Text -- ^ @window_id@ ('P._windowId', 'P.windowId')
-    -> TF.Attr s [TF.Attr s (TargetsSetting s)] -- ^ @targets@ ('P._targets', 'P.targets')
+    -> TF.Attr s [TF.Attr s (SsmMaintenanceWindowTaskTargets s)] -- ^ @targets@ ('P._targets', 'P.targets')
     -> TF.Attr s P.Text -- ^ @task_type@ ('P._taskType', 'P.taskType')
     -> P.Resource (SsmMaintenanceWindowTaskResource s)
 ssmMaintenanceWindowTaskResource _serviceRoleArn _taskArn _maxConcurrency _maxErrors _windowId _targets _taskType =
@@ -3153,12 +3153,12 @@ instance TF.IsValid (SsmMaintenanceWindowTaskResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_loggingInfo"
                   (_loggingInfo
-                      :: SsmMaintenanceWindowTaskResource s -> TF.Attr s (LoggingInfoSetting s))
+                      :: SsmMaintenanceWindowTaskResource s -> TF.Attr s (SsmMaintenanceWindowTaskLoggingInfo s))
                   TF.validator
 
-instance P.HasLoggingInfo (SsmMaintenanceWindowTaskResource s) (TF.Attr s (LoggingInfoSetting s)) where
+instance P.HasLoggingInfo (SsmMaintenanceWindowTaskResource s) (TF.Attr s (SsmMaintenanceWindowTaskLoggingInfo s)) where
     loggingInfo =
-        P.lens (_loggingInfo :: SsmMaintenanceWindowTaskResource s -> TF.Attr s (LoggingInfoSetting s))
+        P.lens (_loggingInfo :: SsmMaintenanceWindowTaskResource s -> TF.Attr s (SsmMaintenanceWindowTaskLoggingInfo s))
                (\s a -> s { _loggingInfo = a } :: SsmMaintenanceWindowTaskResource s)
 
 instance P.HasMaxConcurrency (SsmMaintenanceWindowTaskResource s) (TF.Attr s P.Text) where
@@ -3181,9 +3181,9 @@ instance P.HasServiceRoleArn (SsmMaintenanceWindowTaskResource s) (TF.Attr s P.T
         P.lens (_serviceRoleArn :: SsmMaintenanceWindowTaskResource s -> TF.Attr s P.Text)
                (\s a -> s { _serviceRoleArn = a } :: SsmMaintenanceWindowTaskResource s)
 
-instance P.HasTargets (SsmMaintenanceWindowTaskResource s) (TF.Attr s [TF.Attr s (TargetsSetting s)]) where
+instance P.HasTargets (SsmMaintenanceWindowTaskResource s) (TF.Attr s [TF.Attr s (SsmMaintenanceWindowTaskTargets s)]) where
     targets =
-        P.lens (_targets :: SsmMaintenanceWindowTaskResource s -> TF.Attr s [TF.Attr s (TargetsSetting s)])
+        P.lens (_targets :: SsmMaintenanceWindowTaskResource s -> TF.Attr s [TF.Attr s (SsmMaintenanceWindowTaskTargets s)])
                (\s a -> s { _targets = a } :: SsmMaintenanceWindowTaskResource s)
 
 instance P.HasTaskArn (SsmMaintenanceWindowTaskResource s) (TF.Attr s P.Text) where
@@ -3191,9 +3191,9 @@ instance P.HasTaskArn (SsmMaintenanceWindowTaskResource s) (TF.Attr s P.Text) wh
         P.lens (_taskArn :: SsmMaintenanceWindowTaskResource s -> TF.Attr s P.Text)
                (\s a -> s { _taskArn = a } :: SsmMaintenanceWindowTaskResource s)
 
-instance P.HasTaskParameters (SsmMaintenanceWindowTaskResource s) (TF.Attr s [TF.Attr s (TaskParametersSetting s)]) where
+instance P.HasTaskParameters (SsmMaintenanceWindowTaskResource s) (TF.Attr s [TF.Attr s (SsmMaintenanceWindowTaskTaskParameters s)]) where
     taskParameters =
-        P.lens (_taskParameters :: SsmMaintenanceWindowTaskResource s -> TF.Attr s [TF.Attr s (TaskParametersSetting s)])
+        P.lens (_taskParameters :: SsmMaintenanceWindowTaskResource s -> TF.Attr s [TF.Attr s (SsmMaintenanceWindowTaskTaskParameters s)])
                (\s a -> s { _taskParameters = a } :: SsmMaintenanceWindowTaskResource s)
 
 instance P.HasTaskType (SsmMaintenanceWindowTaskResource s) (TF.Attr s P.Text) where
@@ -3338,7 +3338,7 @@ instance s ~ s' => P.HasComputedKeyId (TF.Ref s' (SsmParameterResource s)) (TF.A
 -- See the <https://www.terraform.io/docs/providers/aws/r/ssm_patch_baseline.html terraform documentation>
 -- for more information.
 data SsmPatchBaselineResource s = SsmPatchBaselineResource'
-    { _approvalRule :: TF.Attr s [TF.Attr s (ApprovalRuleSetting s)]
+    { _approvalRule :: TF.Attr s [TF.Attr s (SsmPatchBaselineApprovalRule s)]
     -- ^ @approval_rule@ - (Optional)
     --
     , _approvedPatches :: TF.Attr s [TF.Attr s P.Text]
@@ -3350,7 +3350,7 @@ data SsmPatchBaselineResource s = SsmPatchBaselineResource'
     , _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _globalFilter :: TF.Attr s [TF.Attr s (GlobalFilterSetting s)]
+    , _globalFilter :: TF.Attr s [TF.Attr s (SsmPatchBaselineGlobalFilter s)]
     -- ^ @global_filter@ - (Optional)
     --
     , _name :: TF.Attr s P.Text
@@ -3396,9 +3396,9 @@ instance TF.IsObject (SsmPatchBaselineResource s) where
 instance TF.IsValid (SsmPatchBaselineResource s) where
     validator = P.mempty
 
-instance P.HasApprovalRule (SsmPatchBaselineResource s) (TF.Attr s [TF.Attr s (ApprovalRuleSetting s)]) where
+instance P.HasApprovalRule (SsmPatchBaselineResource s) (TF.Attr s [TF.Attr s (SsmPatchBaselineApprovalRule s)]) where
     approvalRule =
-        P.lens (_approvalRule :: SsmPatchBaselineResource s -> TF.Attr s [TF.Attr s (ApprovalRuleSetting s)])
+        P.lens (_approvalRule :: SsmPatchBaselineResource s -> TF.Attr s [TF.Attr s (SsmPatchBaselineApprovalRule s)])
                (\s a -> s { _approvalRule = a } :: SsmPatchBaselineResource s)
 
 instance P.HasApprovedPatches (SsmPatchBaselineResource s) (TF.Attr s [TF.Attr s P.Text]) where
@@ -3416,9 +3416,9 @@ instance P.HasDescription (SsmPatchBaselineResource s) (TF.Attr s P.Text) where
         P.lens (_description :: SsmPatchBaselineResource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: SsmPatchBaselineResource s)
 
-instance P.HasGlobalFilter (SsmPatchBaselineResource s) (TF.Attr s [TF.Attr s (GlobalFilterSetting s)]) where
+instance P.HasGlobalFilter (SsmPatchBaselineResource s) (TF.Attr s [TF.Attr s (SsmPatchBaselineGlobalFilter s)]) where
     globalFilter =
-        P.lens (_globalFilter :: SsmPatchBaselineResource s -> TF.Attr s [TF.Attr s (GlobalFilterSetting s)])
+        P.lens (_globalFilter :: SsmPatchBaselineResource s -> TF.Attr s [TF.Attr s (SsmPatchBaselineGlobalFilter s)])
                (\s a -> s { _globalFilter = a } :: SsmPatchBaselineResource s)
 
 instance P.HasName (SsmPatchBaselineResource s) (TF.Attr s P.Text) where
@@ -3494,14 +3494,14 @@ data SsmResourceDataSyncResource s = SsmResourceDataSyncResource'
     { _name          :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _s3Destination :: TF.Attr s (S3DestinationSetting s)
+    , _s3Destination :: TF.Attr s (SsmResourceDataSyncS3Destination s)
     -- ^ @s3_destination@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @aws_ssm_resource_data_sync@ resource value.
 ssmResourceDataSyncResource
-    :: TF.Attr s (S3DestinationSetting s) -- ^ @s3_destination@ ('P._s3Destination', 'P.s3Destination')
+    :: TF.Attr s (SsmResourceDataSyncS3Destination s) -- ^ @s3_destination@ ('P._s3Destination', 'P.s3Destination')
     -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (SsmResourceDataSyncResource s)
 ssmResourceDataSyncResource _s3Destination _name =
@@ -3521,7 +3521,7 @@ instance TF.IsValid (SsmResourceDataSyncResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_s3Destination"
                   (_s3Destination
-                      :: SsmResourceDataSyncResource s -> TF.Attr s (S3DestinationSetting s))
+                      :: SsmResourceDataSyncResource s -> TF.Attr s (SsmResourceDataSyncS3Destination s))
                   TF.validator
 
 instance P.HasName (SsmResourceDataSyncResource s) (TF.Attr s P.Text) where
@@ -3529,9 +3529,9 @@ instance P.HasName (SsmResourceDataSyncResource s) (TF.Attr s P.Text) where
         P.lens (_name :: SsmResourceDataSyncResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: SsmResourceDataSyncResource s)
 
-instance P.HasS3Destination (SsmResourceDataSyncResource s) (TF.Attr s (S3DestinationSetting s)) where
+instance P.HasS3Destination (SsmResourceDataSyncResource s) (TF.Attr s (SsmResourceDataSyncS3Destination s)) where
     s3Destination =
-        P.lens (_s3Destination :: SsmResourceDataSyncResource s -> TF.Attr s (S3DestinationSetting s))
+        P.lens (_s3Destination :: SsmResourceDataSyncResource s -> TF.Attr s (SsmResourceDataSyncS3Destination s))
                (\s a -> s { _s3Destination = a } :: SsmResourceDataSyncResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (SsmResourceDataSyncResource s)) (TF.Attr s P.Text) where
@@ -3589,37 +3589,37 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (StoragegatewayCacheResource s)) (
 -- See the <https://www.terraform.io/docs/providers/aws/r/storagegateway_gateway.html terraform documentation>
 -- for more information.
 data StoragegatewayGatewayResource s = StoragegatewayGatewayResource'
-    { _activationKey              :: TF.Attr s P.Text
+    { _activationKey :: TF.Attr s P.Text
     -- ^ @activation_key@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
     -- * 'gatewayIpAddress'
-    , _gatewayIpAddress           :: TF.Attr s P.Text
+    , _gatewayIpAddress :: TF.Attr s P.Text
     -- ^ @gateway_ip_address@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
     -- * 'activationKey'
-    , _gatewayName                :: TF.Attr s P.Text
+    , _gatewayName :: TF.Attr s P.Text
     -- ^ @gateway_name@ - (Required)
     --
-    , _gatewayTimezone            :: TF.Attr s P.Text
+    , _gatewayTimezone :: TF.Attr s P.Text
     -- ^ @gateway_timezone@ - (Required)
     --
-    , _gatewayType                :: TF.Attr s P.Text
+    , _gatewayType :: TF.Attr s P.Text
     -- ^ @gateway_type@ - (Optional, Forces New)
     --
-    , _mediumChangerType          :: TF.Attr s P.Text
+    , _mediumChangerType :: TF.Attr s P.Text
     -- ^ @medium_changer_type@ - (Optional, Forces New)
     --
-    , _smbActiveDirectorySettings :: TF.Attr s (SmbActiveDirectorySettings s)
+    , _smbActiveDirectorySettings :: TF.Attr s (StoragegatewayGatewaySmbActiveDirectorySettings s)
     -- ^ @smb_active_directory_settings@ - (Optional)
     --
-    , _smbGuestPassword           :: TF.Attr s P.Text
+    , _smbGuestPassword :: TF.Attr s P.Text
     -- ^ @smb_guest_password@ - (Optional)
     --
-    , _tapeDriveType              :: TF.Attr s P.Text
+    , _tapeDriveType :: TF.Attr s P.Text
     -- ^ @tape_drive_type@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -3671,7 +3671,7 @@ instance TF.IsValid (StoragegatewayGatewayResource s) where
         ])
            P.<> TF.settingsValidator "_smbActiveDirectorySettings"
                   (_smbActiveDirectorySettings
-                      :: StoragegatewayGatewayResource s -> TF.Attr s (SmbActiveDirectorySettings s))
+                      :: StoragegatewayGatewayResource s -> TF.Attr s (StoragegatewayGatewaySmbActiveDirectorySettings s))
                   TF.validator
 
 instance P.HasActivationKey (StoragegatewayGatewayResource s) (TF.Attr s P.Text) where
@@ -3704,9 +3704,9 @@ instance P.HasMediumChangerType (StoragegatewayGatewayResource s) (TF.Attr s P.T
         P.lens (_mediumChangerType :: StoragegatewayGatewayResource s -> TF.Attr s P.Text)
                (\s a -> s { _mediumChangerType = a } :: StoragegatewayGatewayResource s)
 
-instance P.HasSmbActiveDirectorySettings (StoragegatewayGatewayResource s) (TF.Attr s (SmbActiveDirectorySettings s)) where
+instance P.HasSmbActiveDirectorySettings (StoragegatewayGatewayResource s) (TF.Attr s (StoragegatewayGatewaySmbActiveDirectorySettings s)) where
     smbActiveDirectorySettings =
-        P.lens (_smbActiveDirectorySettings :: StoragegatewayGatewayResource s -> TF.Attr s (SmbActiveDirectorySettings s))
+        P.lens (_smbActiveDirectorySettings :: StoragegatewayGatewayResource s -> TF.Attr s (StoragegatewayGatewaySmbActiveDirectorySettings s))
                (\s a -> s { _smbActiveDirectorySettings = a } :: StoragegatewayGatewayResource s)
 
 instance P.HasSmbGuestPassword (StoragegatewayGatewayResource s) (TF.Attr s P.Text) where
@@ -3739,43 +3739,43 @@ instance s ~ s' => P.HasComputedGatewayIpAddress (TF.Ref s' (StoragegatewayGatew
 -- See the <https://www.terraform.io/docs/providers/aws/r/storagegateway_nfs_file_share.html terraform documentation>
 -- for more information.
 data StoragegatewayNfsFileShareResource s = StoragegatewayNfsFileShareResource'
-    { _clientList           :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text))
+    { _clientList :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text))
     -- ^ @client_list@ - (Required)
     --
-    , _defaultStorageClass  :: TF.Attr s P.Text
+    , _defaultStorageClass :: TF.Attr s P.Text
     -- ^ @default_storage_class@ - (Optional)
     --
-    , _gatewayArn           :: TF.Attr s P.Text
+    , _gatewayArn :: TF.Attr s P.Text
     -- ^ @gateway_arn@ - (Required, Forces New)
     --
     , _guessMimeTypeEnabled :: TF.Attr s P.Bool
     -- ^ @guess_mime_type_enabled@ - (Optional)
     --
-    , _kmsEncrypted         :: TF.Attr s P.Bool
+    , _kmsEncrypted :: TF.Attr s P.Bool
     -- ^ @kms_encrypted@ - (Optional)
     --
-    , _kmsKeyArn            :: TF.Attr s P.Text
+    , _kmsKeyArn :: TF.Attr s P.Text
     -- ^ @kms_key_arn@ - (Optional)
     --
-    , _locationArn          :: TF.Attr s P.Text
+    , _locationArn :: TF.Attr s P.Text
     -- ^ @location_arn@ - (Required, Forces New)
     --
-    , _nfsFileShareDefaults :: TF.Attr s (NfsFileShareDefaultsSetting s)
+    , _nfsFileShareDefaults :: TF.Attr s (StoragegatewayNfsFileShareNfsFileShareDefaults s)
     -- ^ @nfs_file_share_defaults@ - (Optional)
     --
-    , _objectAcl            :: TF.Attr s P.Text
+    , _objectAcl :: TF.Attr s P.Text
     -- ^ @object_acl@ - (Optional)
     --
-    , _readOnly             :: TF.Attr s P.Bool
+    , _readOnly :: TF.Attr s P.Bool
     -- ^ @read_only@ - (Optional)
     --
-    , _requesterPays        :: TF.Attr s P.Bool
+    , _requesterPays :: TF.Attr s P.Bool
     -- ^ @requester_pays@ - (Optional)
     --
-    , _roleArn              :: TF.Attr s P.Text
+    , _roleArn :: TF.Attr s P.Text
     -- ^ @role_arn@ - (Required, Forces New)
     --
-    , _squash               :: TF.Attr s P.Text
+    , _squash :: TF.Attr s P.Text
     -- ^ @squash@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -3826,7 +3826,7 @@ instance TF.IsValid (StoragegatewayNfsFileShareResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_nfsFileShareDefaults"
                   (_nfsFileShareDefaults
-                      :: StoragegatewayNfsFileShareResource s -> TF.Attr s (NfsFileShareDefaultsSetting s))
+                      :: StoragegatewayNfsFileShareResource s -> TF.Attr s (StoragegatewayNfsFileShareNfsFileShareDefaults s))
                   TF.validator
 
 instance P.HasClientList (StoragegatewayNfsFileShareResource s) (TF.Attr s (P.NonEmpty (TF.Attr s P.Text))) where
@@ -3864,9 +3864,9 @@ instance P.HasLocationArn (StoragegatewayNfsFileShareResource s) (TF.Attr s P.Te
         P.lens (_locationArn :: StoragegatewayNfsFileShareResource s -> TF.Attr s P.Text)
                (\s a -> s { _locationArn = a } :: StoragegatewayNfsFileShareResource s)
 
-instance P.HasNfsFileShareDefaults (StoragegatewayNfsFileShareResource s) (TF.Attr s (NfsFileShareDefaultsSetting s)) where
+instance P.HasNfsFileShareDefaults (StoragegatewayNfsFileShareResource s) (TF.Attr s (StoragegatewayNfsFileShareNfsFileShareDefaults s)) where
     nfsFileShareDefaults =
-        P.lens (_nfsFileShareDefaults :: StoragegatewayNfsFileShareResource s -> TF.Attr s (NfsFileShareDefaultsSetting s))
+        P.lens (_nfsFileShareDefaults :: StoragegatewayNfsFileShareResource s -> TF.Attr s (StoragegatewayNfsFileShareNfsFileShareDefaults s))
                (\s a -> s { _nfsFileShareDefaults = a } :: StoragegatewayNfsFileShareResource s)
 
 instance P.HasObjectAcl (StoragegatewayNfsFileShareResource s) (TF.Attr s P.Text) where
@@ -4773,7 +4773,7 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (VpcEndpointResource s)) (TF.Attr 
 instance s ~ s' => P.HasComputedCidrBlocks (TF.Ref s' (VpcEndpointResource s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedCidrBlocks x = TF.compute (TF.refKey x) "cidr_blocks"
 
-instance s ~ s' => P.HasComputedDnsEntry (TF.Ref s' (VpcEndpointResource s)) (TF.Attr s [TF.Attr s (DnsEntrySetting s)]) where
+instance s ~ s' => P.HasComputedDnsEntry (TF.Ref s' (VpcEndpointResource s)) (TF.Attr s [TF.Attr s (VpcEndpointDnsEntry s)]) where
     computedDnsEntry x = TF.compute (TF.refKey x) "dns_entry"
 
 instance s ~ s' => P.HasComputedNetworkInterfaceIds (TF.Ref s' (VpcEndpointResource s)) (TF.Attr s [TF.Attr s P.Text]) where
@@ -5068,16 +5068,16 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (VpcIpv4CidrBlockAssociationResour
 -- See the <https://www.terraform.io/docs/providers/aws/r/vpc_peering_connection_accepter.html terraform documentation>
 -- for more information.
 data VpcPeeringConnectionAccepterResource s = VpcPeeringConnectionAccepterResource'
-    { _accepter               :: TF.Attr s (AccepterSetting s)
+    { _accepter :: TF.Attr s (VpcPeeringConnectionAccepterAccepter s)
     -- ^ @accepter@ - (Optional)
     --
-    , _autoAccept             :: TF.Attr s P.Bool
+    , _autoAccept :: TF.Attr s P.Bool
     -- ^ @auto_accept@ - (Optional)
     --
-    , _requester              :: TF.Attr s (RequesterSetting s)
+    , _requester :: TF.Attr s (VpcPeeringConnectionAccepterRequester s)
     -- ^ @requester@ - (Optional)
     --
-    , _tags                   :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _tags :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
     , _vpcPeeringConnectionId :: TF.Attr s P.Text
@@ -5112,16 +5112,16 @@ instance TF.IsValid (VpcPeeringConnectionAccepterResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_accepter"
                   (_accepter
-                      :: VpcPeeringConnectionAccepterResource s -> TF.Attr s (AccepterSetting s))
+                      :: VpcPeeringConnectionAccepterResource s -> TF.Attr s (VpcPeeringConnectionAccepterAccepter s))
                   TF.validator
            P.<> TF.settingsValidator "_requester"
                   (_requester
-                      :: VpcPeeringConnectionAccepterResource s -> TF.Attr s (RequesterSetting s))
+                      :: VpcPeeringConnectionAccepterResource s -> TF.Attr s (VpcPeeringConnectionAccepterRequester s))
                   TF.validator
 
-instance P.HasAccepter (VpcPeeringConnectionAccepterResource s) (TF.Attr s (AccepterSetting s)) where
+instance P.HasAccepter (VpcPeeringConnectionAccepterResource s) (TF.Attr s (VpcPeeringConnectionAccepterAccepter s)) where
     accepter =
-        P.lens (_accepter :: VpcPeeringConnectionAccepterResource s -> TF.Attr s (AccepterSetting s))
+        P.lens (_accepter :: VpcPeeringConnectionAccepterResource s -> TF.Attr s (VpcPeeringConnectionAccepterAccepter s))
                (\s a -> s { _accepter = a } :: VpcPeeringConnectionAccepterResource s)
 
 instance P.HasAutoAccept (VpcPeeringConnectionAccepterResource s) (TF.Attr s P.Bool) where
@@ -5129,9 +5129,9 @@ instance P.HasAutoAccept (VpcPeeringConnectionAccepterResource s) (TF.Attr s P.B
         P.lens (_autoAccept :: VpcPeeringConnectionAccepterResource s -> TF.Attr s P.Bool)
                (\s a -> s { _autoAccept = a } :: VpcPeeringConnectionAccepterResource s)
 
-instance P.HasRequester (VpcPeeringConnectionAccepterResource s) (TF.Attr s (RequesterSetting s)) where
+instance P.HasRequester (VpcPeeringConnectionAccepterResource s) (TF.Attr s (VpcPeeringConnectionAccepterRequester s)) where
     requester =
-        P.lens (_requester :: VpcPeeringConnectionAccepterResource s -> TF.Attr s (RequesterSetting s))
+        P.lens (_requester :: VpcPeeringConnectionAccepterResource s -> TF.Attr s (VpcPeeringConnectionAccepterRequester s))
                (\s a -> s { _requester = a } :: VpcPeeringConnectionAccepterResource s)
 
 instance P.HasTags (VpcPeeringConnectionAccepterResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
@@ -5150,7 +5150,7 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (VpcPeeringConnectionAccepterResou
 instance s ~ s' => P.HasComputedAcceptStatus (TF.Ref s' (VpcPeeringConnectionAccepterResource s)) (TF.Attr s P.Text) where
     computedAcceptStatus x = TF.compute (TF.refKey x) "accept_status"
 
-instance s ~ s' => P.HasComputedAccepter (TF.Ref s' (VpcPeeringConnectionAccepterResource s)) (TF.Attr s (AccepterSetting s)) where
+instance s ~ s' => P.HasComputedAccepter (TF.Ref s' (VpcPeeringConnectionAccepterResource s)) (TF.Attr s (VpcPeeringConnectionAccepterAccepter s)) where
     computedAccepter x = TF.compute (TF.refKey x) "accepter"
 
 instance s ~ s' => P.HasComputedPeerOwnerId (TF.Ref s' (VpcPeeringConnectionAccepterResource s)) (TF.Attr s P.Text) where
@@ -5162,7 +5162,7 @@ instance s ~ s' => P.HasComputedPeerRegion (TF.Ref s' (VpcPeeringConnectionAccep
 instance s ~ s' => P.HasComputedPeerVpcId (TF.Ref s' (VpcPeeringConnectionAccepterResource s)) (TF.Attr s P.Text) where
     computedPeerVpcId x = TF.compute (TF.refKey x) "peer_vpc_id"
 
-instance s ~ s' => P.HasComputedRequester (TF.Ref s' (VpcPeeringConnectionAccepterResource s)) (TF.Attr s (RequesterSetting s)) where
+instance s ~ s' => P.HasComputedRequester (TF.Ref s' (VpcPeeringConnectionAccepterResource s)) (TF.Attr s (VpcPeeringConnectionAccepterRequester s)) where
     computedRequester x = TF.compute (TF.refKey x) "requester"
 
 instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (VpcPeeringConnectionAccepterResource s)) (TF.Attr s P.Text) where
@@ -5173,10 +5173,10 @@ instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (VpcPeeringConnectionAccepterRe
 -- See the <https://www.terraform.io/docs/providers/aws/r/vpc_peering_connection_options.html terraform documentation>
 -- for more information.
 data VpcPeeringConnectionOptionsResource s = VpcPeeringConnectionOptionsResource'
-    { _accepter               :: TF.Attr s (AccepterSetting s)
+    { _accepter :: TF.Attr s (VpcPeeringConnectionOptionsAccepter s)
     -- ^ @accepter@ - (Optional)
     --
-    , _requester              :: TF.Attr s (RequesterSetting s)
+    , _requester :: TF.Attr s (VpcPeeringConnectionOptionsRequester s)
     -- ^ @requester@ - (Optional)
     --
     , _vpcPeeringConnectionId :: TF.Attr s P.Text
@@ -5207,21 +5207,21 @@ instance TF.IsValid (VpcPeeringConnectionOptionsResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_accepter"
                   (_accepter
-                      :: VpcPeeringConnectionOptionsResource s -> TF.Attr s (AccepterSetting s))
+                      :: VpcPeeringConnectionOptionsResource s -> TF.Attr s (VpcPeeringConnectionOptionsAccepter s))
                   TF.validator
            P.<> TF.settingsValidator "_requester"
                   (_requester
-                      :: VpcPeeringConnectionOptionsResource s -> TF.Attr s (RequesterSetting s))
+                      :: VpcPeeringConnectionOptionsResource s -> TF.Attr s (VpcPeeringConnectionOptionsRequester s))
                   TF.validator
 
-instance P.HasAccepter (VpcPeeringConnectionOptionsResource s) (TF.Attr s (AccepterSetting s)) where
+instance P.HasAccepter (VpcPeeringConnectionOptionsResource s) (TF.Attr s (VpcPeeringConnectionOptionsAccepter s)) where
     accepter =
-        P.lens (_accepter :: VpcPeeringConnectionOptionsResource s -> TF.Attr s (AccepterSetting s))
+        P.lens (_accepter :: VpcPeeringConnectionOptionsResource s -> TF.Attr s (VpcPeeringConnectionOptionsAccepter s))
                (\s a -> s { _accepter = a } :: VpcPeeringConnectionOptionsResource s)
 
-instance P.HasRequester (VpcPeeringConnectionOptionsResource s) (TF.Attr s (RequesterSetting s)) where
+instance P.HasRequester (VpcPeeringConnectionOptionsResource s) (TF.Attr s (VpcPeeringConnectionOptionsRequester s)) where
     requester =
-        P.lens (_requester :: VpcPeeringConnectionOptionsResource s -> TF.Attr s (RequesterSetting s))
+        P.lens (_requester :: VpcPeeringConnectionOptionsResource s -> TF.Attr s (VpcPeeringConnectionOptionsRequester s))
                (\s a -> s { _requester = a } :: VpcPeeringConnectionOptionsResource s)
 
 instance P.HasVpcPeeringConnectionId (VpcPeeringConnectionOptionsResource s) (TF.Attr s P.Text) where
@@ -5232,10 +5232,10 @@ instance P.HasVpcPeeringConnectionId (VpcPeeringConnectionOptionsResource s) (TF
 instance s ~ s' => P.HasComputedId (TF.Ref s' (VpcPeeringConnectionOptionsResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedAccepter (TF.Ref s' (VpcPeeringConnectionOptionsResource s)) (TF.Attr s (AccepterSetting s)) where
+instance s ~ s' => P.HasComputedAccepter (TF.Ref s' (VpcPeeringConnectionOptionsResource s)) (TF.Attr s (VpcPeeringConnectionOptionsAccepter s)) where
     computedAccepter x = TF.compute (TF.refKey x) "accepter"
 
-instance s ~ s' => P.HasComputedRequester (TF.Ref s' (VpcPeeringConnectionOptionsResource s)) (TF.Attr s (RequesterSetting s)) where
+instance s ~ s' => P.HasComputedRequester (TF.Ref s' (VpcPeeringConnectionOptionsResource s)) (TF.Attr s (VpcPeeringConnectionOptionsRequester s)) where
     computedRequester x = TF.compute (TF.refKey x) "requester"
 
 -- | @aws_vpc_peering_connection@ Resource.
@@ -5243,7 +5243,7 @@ instance s ~ s' => P.HasComputedRequester (TF.Ref s' (VpcPeeringConnectionOption
 -- See the <https://www.terraform.io/docs/providers/aws/r/vpc_peering_connection.html terraform documentation>
 -- for more information.
 data VpcPeeringConnectionResource s = VpcPeeringConnectionResource'
-    { _accepter    :: TF.Attr s (AccepterSetting s)
+    { _accepter    :: TF.Attr s (VpcPeeringConnectionAccepter s)
     -- ^ @accepter@ - (Optional)
     --
     , _autoAccept  :: TF.Attr s P.Bool
@@ -5258,7 +5258,7 @@ data VpcPeeringConnectionResource s = VpcPeeringConnectionResource'
     , _peerVpcId   :: TF.Attr s P.Text
     -- ^ @peer_vpc_id@ - (Required, Forces New)
     --
-    , _requester   :: TF.Attr s (RequesterSetting s)
+    , _requester   :: TF.Attr s (VpcPeeringConnectionRequester s)
     -- ^ @requester@ - (Optional)
     --
     , _tags        :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
@@ -5303,16 +5303,16 @@ instance TF.IsValid (VpcPeeringConnectionResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_accepter"
                   (_accepter
-                      :: VpcPeeringConnectionResource s -> TF.Attr s (AccepterSetting s))
+                      :: VpcPeeringConnectionResource s -> TF.Attr s (VpcPeeringConnectionAccepter s))
                   TF.validator
            P.<> TF.settingsValidator "_requester"
                   (_requester
-                      :: VpcPeeringConnectionResource s -> TF.Attr s (RequesterSetting s))
+                      :: VpcPeeringConnectionResource s -> TF.Attr s (VpcPeeringConnectionRequester s))
                   TF.validator
 
-instance P.HasAccepter (VpcPeeringConnectionResource s) (TF.Attr s (AccepterSetting s)) where
+instance P.HasAccepter (VpcPeeringConnectionResource s) (TF.Attr s (VpcPeeringConnectionAccepter s)) where
     accepter =
-        P.lens (_accepter :: VpcPeeringConnectionResource s -> TF.Attr s (AccepterSetting s))
+        P.lens (_accepter :: VpcPeeringConnectionResource s -> TF.Attr s (VpcPeeringConnectionAccepter s))
                (\s a -> s { _accepter = a } :: VpcPeeringConnectionResource s)
 
 instance P.HasAutoAccept (VpcPeeringConnectionResource s) (TF.Attr s P.Bool) where
@@ -5335,9 +5335,9 @@ instance P.HasPeerVpcId (VpcPeeringConnectionResource s) (TF.Attr s P.Text) wher
         P.lens (_peerVpcId :: VpcPeeringConnectionResource s -> TF.Attr s P.Text)
                (\s a -> s { _peerVpcId = a } :: VpcPeeringConnectionResource s)
 
-instance P.HasRequester (VpcPeeringConnectionResource s) (TF.Attr s (RequesterSetting s)) where
+instance P.HasRequester (VpcPeeringConnectionResource s) (TF.Attr s (VpcPeeringConnectionRequester s)) where
     requester =
-        P.lens (_requester :: VpcPeeringConnectionResource s -> TF.Attr s (RequesterSetting s))
+        P.lens (_requester :: VpcPeeringConnectionResource s -> TF.Attr s (VpcPeeringConnectionRequester s))
                (\s a -> s { _requester = a } :: VpcPeeringConnectionResource s)
 
 instance P.HasTags (VpcPeeringConnectionResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
@@ -5356,7 +5356,7 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (VpcPeeringConnectionResource s)) 
 instance s ~ s' => P.HasComputedAcceptStatus (TF.Ref s' (VpcPeeringConnectionResource s)) (TF.Attr s P.Text) where
     computedAcceptStatus x = TF.compute (TF.refKey x) "accept_status"
 
-instance s ~ s' => P.HasComputedAccepter (TF.Ref s' (VpcPeeringConnectionResource s)) (TF.Attr s (AccepterSetting s)) where
+instance s ~ s' => P.HasComputedAccepter (TF.Ref s' (VpcPeeringConnectionResource s)) (TF.Attr s (VpcPeeringConnectionAccepter s)) where
     computedAccepter x = TF.compute (TF.refKey x) "accepter"
 
 instance s ~ s' => P.HasComputedPeerOwnerId (TF.Ref s' (VpcPeeringConnectionResource s)) (TF.Attr s P.Text) where
@@ -5365,7 +5365,7 @@ instance s ~ s' => P.HasComputedPeerOwnerId (TF.Ref s' (VpcPeeringConnectionReso
 instance s ~ s' => P.HasComputedPeerRegion (TF.Ref s' (VpcPeeringConnectionResource s)) (TF.Attr s P.Text) where
     computedPeerRegion x = TF.compute (TF.refKey x) "peer_region"
 
-instance s ~ s' => P.HasComputedRequester (TF.Ref s' (VpcPeeringConnectionResource s)) (TF.Attr s (RequesterSetting s)) where
+instance s ~ s' => P.HasComputedRequester (TF.Ref s' (VpcPeeringConnectionResource s)) (TF.Attr s (VpcPeeringConnectionRequester s)) where
     computedRequester x = TF.compute (TF.refKey x) "requester"
 
 -- | @aws_vpc@ Resource.
@@ -5518,7 +5518,7 @@ data VpnConnectionResource s = VpnConnectionResource'
     , _customerGatewayId :: TF.Attr s P.Text
     -- ^ @customer_gateway_id@ - (Required, Forces New)
     --
-    , _routes :: TF.Attr s [TF.Attr s (RoutesSetting s)]
+    , _routes :: TF.Attr s [TF.Attr s (VpnConnectionRoutes s)]
     -- ^ @routes@ - (Optional)
     --
     , _staticRoutesOnly :: TF.Attr s P.Bool
@@ -5542,7 +5542,7 @@ data VpnConnectionResource s = VpnConnectionResource'
     , _type' :: TF.Attr s P.Text
     -- ^ @type@ - (Required, Forces New)
     --
-    , _vgwTelemetry :: TF.Attr s [TF.Attr s (VgwTelemetrySetting s)]
+    , _vgwTelemetry :: TF.Attr s [TF.Attr s (VpnConnectionVgwTelemetry s)]
     -- ^ @vgw_telemetry@ - (Optional)
     --
     , _vpnGatewayId :: TF.Attr s P.Text
@@ -5602,9 +5602,9 @@ instance P.HasCustomerGatewayId (VpnConnectionResource s) (TF.Attr s P.Text) whe
         P.lens (_customerGatewayId :: VpnConnectionResource s -> TF.Attr s P.Text)
                (\s a -> s { _customerGatewayId = a } :: VpnConnectionResource s)
 
-instance P.HasRoutes (VpnConnectionResource s) (TF.Attr s [TF.Attr s (RoutesSetting s)]) where
+instance P.HasRoutes (VpnConnectionResource s) (TF.Attr s [TF.Attr s (VpnConnectionRoutes s)]) where
     routes =
-        P.lens (_routes :: VpnConnectionResource s -> TF.Attr s [TF.Attr s (RoutesSetting s)])
+        P.lens (_routes :: VpnConnectionResource s -> TF.Attr s [TF.Attr s (VpnConnectionRoutes s)])
                (\s a -> s { _routes = a } :: VpnConnectionResource s)
 
 instance P.HasStaticRoutesOnly (VpnConnectionResource s) (TF.Attr s P.Bool) where
@@ -5642,9 +5642,9 @@ instance P.HasType' (VpnConnectionResource s) (TF.Attr s P.Text) where
         P.lens (_type' :: VpnConnectionResource s -> TF.Attr s P.Text)
                (\s a -> s { _type' = a } :: VpnConnectionResource s)
 
-instance P.HasVgwTelemetry (VpnConnectionResource s) (TF.Attr s [TF.Attr s (VgwTelemetrySetting s)]) where
+instance P.HasVgwTelemetry (VpnConnectionResource s) (TF.Attr s [TF.Attr s (VpnConnectionVgwTelemetry s)]) where
     vgwTelemetry =
-        P.lens (_vgwTelemetry :: VpnConnectionResource s -> TF.Attr s [TF.Attr s (VgwTelemetrySetting s)])
+        P.lens (_vgwTelemetry :: VpnConnectionResource s -> TF.Attr s [TF.Attr s (VpnConnectionVgwTelemetry s)])
                (\s a -> s { _vgwTelemetry = a } :: VpnConnectionResource s)
 
 instance P.HasVpnGatewayId (VpnConnectionResource s) (TF.Attr s P.Text) where
@@ -5658,7 +5658,7 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (VpnConnectionResource s)) (TF.Att
 instance s ~ s' => P.HasComputedCustomerGatewayConfiguration (TF.Ref s' (VpnConnectionResource s)) (TF.Attr s P.Text) where
     computedCustomerGatewayConfiguration x = TF.compute (TF.refKey x) "customer_gateway_configuration"
 
-instance s ~ s' => P.HasComputedRoutes (TF.Ref s' (VpnConnectionResource s)) (TF.Attr s [TF.Attr s (RoutesSetting s)]) where
+instance s ~ s' => P.HasComputedRoutes (TF.Ref s' (VpnConnectionResource s)) (TF.Attr s [TF.Attr s (VpnConnectionRoutes s)]) where
     computedRoutes x = TF.compute (TF.refKey x) "routes"
 
 instance s ~ s' => P.HasComputedStaticRoutesOnly (TF.Ref s' (VpnConnectionResource s)) (TF.Attr s P.Bool) where
@@ -5706,7 +5706,7 @@ instance s ~ s' => P.HasComputedTunnel2PresharedKey (TF.Ref s' (VpnConnectionRes
 instance s ~ s' => P.HasComputedTunnel2VgwInsideAddress (TF.Ref s' (VpnConnectionResource s)) (TF.Attr s P.Text) where
     computedTunnel2VgwInsideAddress x = TF.compute (TF.refKey x) "tunnel2_vgw_inside_address"
 
-instance s ~ s' => P.HasComputedVgwTelemetry (TF.Ref s' (VpnConnectionResource s)) (TF.Attr s [TF.Attr s (VgwTelemetrySetting s)]) where
+instance s ~ s' => P.HasComputedVgwTelemetry (TF.Ref s' (VpnConnectionResource s)) (TF.Attr s [TF.Attr s (VpnConnectionVgwTelemetry s)]) where
     computedVgwTelemetry x = TF.compute (TF.refKey x) "vgw_telemetry"
 
 -- | @aws_vpn_connection_route@ Resource.
@@ -5926,10 +5926,10 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (VpnGatewayRoutePropagationResourc
 -- See the <https://www.terraform.io/docs/providers/aws/r/waf_byte_match_set.html terraform documentation>
 -- for more information.
 data WafByteMatchSetResource s = WafByteMatchSetResource'
-    { _byteMatchTuples :: TF.Attr s [TF.Attr s (ByteMatchTuplesSetting s)]
+    { _byteMatchTuples :: TF.Attr s [TF.Attr s (WafByteMatchSetByteMatchTuples s)]
     -- ^ @byte_match_tuples@ - (Optional)
     --
-    , _name            :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -5954,9 +5954,9 @@ instance TF.IsObject (WafByteMatchSetResource s) where
 instance TF.IsValid (WafByteMatchSetResource s) where
     validator = P.mempty
 
-instance P.HasByteMatchTuples (WafByteMatchSetResource s) (TF.Attr s [TF.Attr s (ByteMatchTuplesSetting s)]) where
+instance P.HasByteMatchTuples (WafByteMatchSetResource s) (TF.Attr s [TF.Attr s (WafByteMatchSetByteMatchTuples s)]) where
     byteMatchTuples =
-        P.lens (_byteMatchTuples :: WafByteMatchSetResource s -> TF.Attr s [TF.Attr s (ByteMatchTuplesSetting s)])
+        P.lens (_byteMatchTuples :: WafByteMatchSetResource s -> TF.Attr s [TF.Attr s (WafByteMatchSetByteMatchTuples s)])
                (\s a -> s { _byteMatchTuples = a } :: WafByteMatchSetResource s)
 
 instance P.HasName (WafByteMatchSetResource s) (TF.Attr s P.Text) where
@@ -5972,10 +5972,10 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (WafByteMatchSetResource s)) (TF.A
 -- See the <https://www.terraform.io/docs/providers/aws/r/waf_geo_match_set.html terraform documentation>
 -- for more information.
 data WafGeoMatchSetResource s = WafGeoMatchSetResource'
-    { _geoMatchConstraint :: TF.Attr s [TF.Attr s (GeoMatchConstraintSetting s)]
+    { _geoMatchConstraint :: TF.Attr s [TF.Attr s (WafGeoMatchSetGeoMatchConstraint s)]
     -- ^ @geo_match_constraint@ - (Optional)
     --
-    , _name               :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -6000,9 +6000,9 @@ instance TF.IsObject (WafGeoMatchSetResource s) where
 instance TF.IsValid (WafGeoMatchSetResource s) where
     validator = P.mempty
 
-instance P.HasGeoMatchConstraint (WafGeoMatchSetResource s) (TF.Attr s [TF.Attr s (GeoMatchConstraintSetting s)]) where
+instance P.HasGeoMatchConstraint (WafGeoMatchSetResource s) (TF.Attr s [TF.Attr s (WafGeoMatchSetGeoMatchConstraint s)]) where
     geoMatchConstraint =
-        P.lens (_geoMatchConstraint :: WafGeoMatchSetResource s -> TF.Attr s [TF.Attr s (GeoMatchConstraintSetting s)])
+        P.lens (_geoMatchConstraint :: WafGeoMatchSetResource s -> TF.Attr s [TF.Attr s (WafGeoMatchSetGeoMatchConstraint s)])
                (\s a -> s { _geoMatchConstraint = a } :: WafGeoMatchSetResource s)
 
 instance P.HasName (WafGeoMatchSetResource s) (TF.Attr s P.Text) where
@@ -6018,7 +6018,7 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (WafGeoMatchSetResource s)) (TF.At
 -- See the <https://www.terraform.io/docs/providers/aws/r/waf_ipset.html terraform documentation>
 -- for more information.
 data WafIpsetResource s = WafIpsetResource'
-    { _ipSetDescriptors :: TF.Attr s [TF.Attr s (IpSetDescriptorsSetting s)]
+    { _ipSetDescriptors :: TF.Attr s [TF.Attr s (WafIpsetIpSetDescriptors s)]
     -- ^ @ip_set_descriptors@ - (Optional)
     --
     , _name             :: TF.Attr s P.Text
@@ -6046,9 +6046,9 @@ instance TF.IsObject (WafIpsetResource s) where
 instance TF.IsValid (WafIpsetResource s) where
     validator = P.mempty
 
-instance P.HasIpSetDescriptors (WafIpsetResource s) (TF.Attr s [TF.Attr s (IpSetDescriptorsSetting s)]) where
+instance P.HasIpSetDescriptors (WafIpsetResource s) (TF.Attr s [TF.Attr s (WafIpsetIpSetDescriptors s)]) where
     ipSetDescriptors =
-        P.lens (_ipSetDescriptors :: WafIpsetResource s -> TF.Attr s [TF.Attr s (IpSetDescriptorsSetting s)])
+        P.lens (_ipSetDescriptors :: WafIpsetResource s -> TF.Attr s [TF.Attr s (WafIpsetIpSetDescriptors s)])
                (\s a -> s { _ipSetDescriptors = a } :: WafIpsetResource s)
 
 instance P.HasName (WafIpsetResource s) (TF.Attr s P.Text) where
@@ -6073,7 +6073,7 @@ data WafRateBasedRuleResource s = WafRateBasedRuleResource'
     , _name       :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _predicates :: TF.Attr s [TF.Attr s (PredicatesSetting s)]
+    , _predicates :: TF.Attr s [TF.Attr s (WafRateBasedRulePredicates s)]
     -- ^ @predicates@ - (Optional)
     --
     , _rateKey    :: TF.Attr s P.Text
@@ -6123,9 +6123,9 @@ instance P.HasName (WafRateBasedRuleResource s) (TF.Attr s P.Text) where
         P.lens (_name :: WafRateBasedRuleResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: WafRateBasedRuleResource s)
 
-instance P.HasPredicates (WafRateBasedRuleResource s) (TF.Attr s [TF.Attr s (PredicatesSetting s)]) where
+instance P.HasPredicates (WafRateBasedRuleResource s) (TF.Attr s [TF.Attr s (WafRateBasedRulePredicates s)]) where
     predicates =
-        P.lens (_predicates :: WafRateBasedRuleResource s -> TF.Attr s [TF.Attr s (PredicatesSetting s)])
+        P.lens (_predicates :: WafRateBasedRuleResource s -> TF.Attr s [TF.Attr s (WafRateBasedRulePredicates s)])
                (\s a -> s { _predicates = a } :: WafRateBasedRuleResource s)
 
 instance P.HasRateKey (WafRateBasedRuleResource s) (TF.Attr s P.Text) where
@@ -6146,10 +6146,10 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (WafRateBasedRuleResource s)) (TF.
 -- See the <https://www.terraform.io/docs/providers/aws/r/waf_regex_match_set.html terraform documentation>
 -- for more information.
 data WafRegexMatchSetResource s = WafRegexMatchSetResource'
-    { _name            :: TF.Attr s P.Text
+    { _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _regexMatchTuple :: TF.Attr s [TF.Attr s (RegexMatchTupleSetting s)]
+    , _regexMatchTuple :: TF.Attr s [TF.Attr s (WafRegexMatchSetRegexMatchTuple s)]
     -- ^ @regex_match_tuple@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -6179,9 +6179,9 @@ instance P.HasName (WafRegexMatchSetResource s) (TF.Attr s P.Text) where
         P.lens (_name :: WafRegexMatchSetResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: WafRegexMatchSetResource s)
 
-instance P.HasRegexMatchTuple (WafRegexMatchSetResource s) (TF.Attr s [TF.Attr s (RegexMatchTupleSetting s)]) where
+instance P.HasRegexMatchTuple (WafRegexMatchSetResource s) (TF.Attr s [TF.Attr s (WafRegexMatchSetRegexMatchTuple s)]) where
     regexMatchTuple =
-        P.lens (_regexMatchTuple :: WafRegexMatchSetResource s -> TF.Attr s [TF.Attr s (RegexMatchTupleSetting s)])
+        P.lens (_regexMatchTuple :: WafRegexMatchSetResource s -> TF.Attr s [TF.Attr s (WafRegexMatchSetRegexMatchTuple s)])
                (\s a -> s { _regexMatchTuple = a } :: WafRegexMatchSetResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (WafRegexMatchSetResource s)) (TF.Attr s P.Text) where
@@ -6238,7 +6238,7 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (WafRegexPatternSetResource s)) (T
 -- See the <https://www.terraform.io/docs/providers/aws/r/waf_rule_group.html terraform documentation>
 -- for more information.
 data WafRuleGroupResource s = WafRuleGroupResource'
-    { _activatedRule :: TF.Attr s [TF.Attr s (ActivatedRuleSetting s)]
+    { _activatedRule :: TF.Attr s [TF.Attr s (WafRuleGroupActivatedRule s)]
     -- ^ @activated_rule@ - (Optional)
     --
     , _metricName    :: TF.Attr s P.Text
@@ -6272,9 +6272,9 @@ instance TF.IsObject (WafRuleGroupResource s) where
 instance TF.IsValid (WafRuleGroupResource s) where
     validator = P.mempty
 
-instance P.HasActivatedRule (WafRuleGroupResource s) (TF.Attr s [TF.Attr s (ActivatedRuleSetting s)]) where
+instance P.HasActivatedRule (WafRuleGroupResource s) (TF.Attr s [TF.Attr s (WafRuleGroupActivatedRule s)]) where
     activatedRule =
-        P.lens (_activatedRule :: WafRuleGroupResource s -> TF.Attr s [TF.Attr s (ActivatedRuleSetting s)])
+        P.lens (_activatedRule :: WafRuleGroupResource s -> TF.Attr s [TF.Attr s (WafRuleGroupActivatedRule s)])
                (\s a -> s { _activatedRule = a } :: WafRuleGroupResource s)
 
 instance P.HasMetricName (WafRuleGroupResource s) (TF.Attr s P.Text) where
@@ -6301,7 +6301,7 @@ data WafRuleResource s = WafRuleResource'
     , _name       :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _predicates :: TF.Attr s [TF.Attr s (PredicatesSetting s)]
+    , _predicates :: TF.Attr s [TF.Attr s (WafRulePredicates s)]
     -- ^ @predicates@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -6339,9 +6339,9 @@ instance P.HasName (WafRuleResource s) (TF.Attr s P.Text) where
         P.lens (_name :: WafRuleResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: WafRuleResource s)
 
-instance P.HasPredicates (WafRuleResource s) (TF.Attr s [TF.Attr s (PredicatesSetting s)]) where
+instance P.HasPredicates (WafRuleResource s) (TF.Attr s [TF.Attr s (WafRulePredicates s)]) where
     predicates =
-        P.lens (_predicates :: WafRuleResource s -> TF.Attr s [TF.Attr s (PredicatesSetting s)])
+        P.lens (_predicates :: WafRuleResource s -> TF.Attr s [TF.Attr s (WafRulePredicates s)])
                (\s a -> s { _predicates = a } :: WafRuleResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (WafRuleResource s)) (TF.Attr s P.Text) where
@@ -6352,10 +6352,10 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (WafRuleResource s)) (TF.Attr s P.
 -- See the <https://www.terraform.io/docs/providers/aws/r/waf_size_constraint_set.html terraform documentation>
 -- for more information.
 data WafSizeConstraintSetResource s = WafSizeConstraintSetResource'
-    { _name            :: TF.Attr s P.Text
+    { _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _sizeConstraints :: TF.Attr s [TF.Attr s (SizeConstraintsSetting s)]
+    , _sizeConstraints :: TF.Attr s [TF.Attr s (WafSizeConstraintSetSizeConstraints s)]
     -- ^ @size_constraints@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -6385,9 +6385,9 @@ instance P.HasName (WafSizeConstraintSetResource s) (TF.Attr s P.Text) where
         P.lens (_name :: WafSizeConstraintSetResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: WafSizeConstraintSetResource s)
 
-instance P.HasSizeConstraints (WafSizeConstraintSetResource s) (TF.Attr s [TF.Attr s (SizeConstraintsSetting s)]) where
+instance P.HasSizeConstraints (WafSizeConstraintSetResource s) (TF.Attr s [TF.Attr s (WafSizeConstraintSetSizeConstraints s)]) where
     sizeConstraints =
-        P.lens (_sizeConstraints :: WafSizeConstraintSetResource s -> TF.Attr s [TF.Attr s (SizeConstraintsSetting s)])
+        P.lens (_sizeConstraints :: WafSizeConstraintSetResource s -> TF.Attr s [TF.Attr s (WafSizeConstraintSetSizeConstraints s)])
                (\s a -> s { _sizeConstraints = a } :: WafSizeConstraintSetResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (WafSizeConstraintSetResource s)) (TF.Attr s P.Text) where
@@ -6401,7 +6401,7 @@ data WafSqlInjectionMatchSetResource s = WafSqlInjectionMatchSetResource'
     { _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _sqlInjectionMatchTuples :: TF.Attr s [TF.Attr s (SqlInjectionMatchTuplesSetting s)]
+    , _sqlInjectionMatchTuples :: TF.Attr s [TF.Attr s (WafSqlInjectionMatchSetSqlInjectionMatchTuples s)]
     -- ^ @sql_injection_match_tuples@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -6431,9 +6431,9 @@ instance P.HasName (WafSqlInjectionMatchSetResource s) (TF.Attr s P.Text) where
         P.lens (_name :: WafSqlInjectionMatchSetResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: WafSqlInjectionMatchSetResource s)
 
-instance P.HasSqlInjectionMatchTuples (WafSqlInjectionMatchSetResource s) (TF.Attr s [TF.Attr s (SqlInjectionMatchTuplesSetting s)]) where
+instance P.HasSqlInjectionMatchTuples (WafSqlInjectionMatchSetResource s) (TF.Attr s [TF.Attr s (WafSqlInjectionMatchSetSqlInjectionMatchTuples s)]) where
     sqlInjectionMatchTuples =
-        P.lens (_sqlInjectionMatchTuples :: WafSqlInjectionMatchSetResource s -> TF.Attr s [TF.Attr s (SqlInjectionMatchTuplesSetting s)])
+        P.lens (_sqlInjectionMatchTuples :: WafSqlInjectionMatchSetResource s -> TF.Attr s [TF.Attr s (WafSqlInjectionMatchSetSqlInjectionMatchTuples s)])
                (\s a -> s { _sqlInjectionMatchTuples = a } :: WafSqlInjectionMatchSetResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (WafSqlInjectionMatchSetResource s)) (TF.Attr s P.Text) where
@@ -6444,7 +6444,7 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (WafSqlInjectionMatchSetResource s
 -- See the <https://www.terraform.io/docs/providers/aws/r/waf_web_acl.html terraform documentation>
 -- for more information.
 data WafWebAclResource s = WafWebAclResource'
-    { _defaultAction :: TF.Attr s (DefaultActionSetting s)
+    { _defaultAction :: TF.Attr s (WafWebAclDefaultAction s)
     -- ^ @default_action@ - (Required)
     --
     , _metricName    :: TF.Attr s P.Text
@@ -6453,14 +6453,14 @@ data WafWebAclResource s = WafWebAclResource'
     , _name          :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _rules         :: TF.Attr s [TF.Attr s (RulesSetting s)]
+    , _rules         :: TF.Attr s [TF.Attr s (WafWebAclRules s)]
     -- ^ @rules@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @aws_waf_web_acl@ resource value.
 wafWebAclResource
-    :: TF.Attr s (DefaultActionSetting s) -- ^ @default_action@ ('P._defaultAction', 'P.defaultAction')
+    :: TF.Attr s (WafWebAclDefaultAction s) -- ^ @default_action@ ('P._defaultAction', 'P.defaultAction')
     -> TF.Attr s P.Text -- ^ @metric_name@ ('P._metricName', 'P.metricName')
     -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (WafWebAclResource s)
@@ -6485,12 +6485,12 @@ instance TF.IsValid (WafWebAclResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_defaultAction"
                   (_defaultAction
-                      :: WafWebAclResource s -> TF.Attr s (DefaultActionSetting s))
+                      :: WafWebAclResource s -> TF.Attr s (WafWebAclDefaultAction s))
                   TF.validator
 
-instance P.HasDefaultAction (WafWebAclResource s) (TF.Attr s (DefaultActionSetting s)) where
+instance P.HasDefaultAction (WafWebAclResource s) (TF.Attr s (WafWebAclDefaultAction s)) where
     defaultAction =
-        P.lens (_defaultAction :: WafWebAclResource s -> TF.Attr s (DefaultActionSetting s))
+        P.lens (_defaultAction :: WafWebAclResource s -> TF.Attr s (WafWebAclDefaultAction s))
                (\s a -> s { _defaultAction = a } :: WafWebAclResource s)
 
 instance P.HasMetricName (WafWebAclResource s) (TF.Attr s P.Text) where
@@ -6503,9 +6503,9 @@ instance P.HasName (WafWebAclResource s) (TF.Attr s P.Text) where
         P.lens (_name :: WafWebAclResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: WafWebAclResource s)
 
-instance P.HasRules (WafWebAclResource s) (TF.Attr s [TF.Attr s (RulesSetting s)]) where
+instance P.HasRules (WafWebAclResource s) (TF.Attr s [TF.Attr s (WafWebAclRules s)]) where
     rules =
-        P.lens (_rules :: WafWebAclResource s -> TF.Attr s [TF.Attr s (RulesSetting s)])
+        P.lens (_rules :: WafWebAclResource s -> TF.Attr s [TF.Attr s (WafWebAclRules s)])
                (\s a -> s { _rules = a } :: WafWebAclResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (WafWebAclResource s)) (TF.Attr s P.Text) where
@@ -6519,7 +6519,7 @@ data WafXssMatchSetResource s = WafXssMatchSetResource'
     { _name           :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _xssMatchTuples :: TF.Attr s [TF.Attr s (XssMatchTuplesSetting s)]
+    , _xssMatchTuples :: TF.Attr s [TF.Attr s (WafXssMatchSetXssMatchTuples s)]
     -- ^ @xss_match_tuples@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -6549,9 +6549,9 @@ instance P.HasName (WafXssMatchSetResource s) (TF.Attr s P.Text) where
         P.lens (_name :: WafXssMatchSetResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: WafXssMatchSetResource s)
 
-instance P.HasXssMatchTuples (WafXssMatchSetResource s) (TF.Attr s [TF.Attr s (XssMatchTuplesSetting s)]) where
+instance P.HasXssMatchTuples (WafXssMatchSetResource s) (TF.Attr s [TF.Attr s (WafXssMatchSetXssMatchTuples s)]) where
     xssMatchTuples =
-        P.lens (_xssMatchTuples :: WafXssMatchSetResource s -> TF.Attr s [TF.Attr s (XssMatchTuplesSetting s)])
+        P.lens (_xssMatchTuples :: WafXssMatchSetResource s -> TF.Attr s [TF.Attr s (WafXssMatchSetXssMatchTuples s)])
                (\s a -> s { _xssMatchTuples = a } :: WafXssMatchSetResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (WafXssMatchSetResource s)) (TF.Attr s P.Text) where
@@ -6562,10 +6562,10 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (WafXssMatchSetResource s)) (TF.At
 -- See the <https://www.terraform.io/docs/providers/aws/r/wafregional_byte_match_set.html terraform documentation>
 -- for more information.
 data WafregionalByteMatchSetResource s = WafregionalByteMatchSetResource'
-    { _byteMatchTuples :: TF.Attr s [TF.Attr s (ByteMatchTuplesSetting s)]
+    { _byteMatchTuples :: TF.Attr s [TF.Attr s (WafregionalByteMatchSetByteMatchTuples s)]
     -- ^ @byte_match_tuples@ - (Optional)
     --
-    , _name            :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -6590,9 +6590,9 @@ instance TF.IsObject (WafregionalByteMatchSetResource s) where
 instance TF.IsValid (WafregionalByteMatchSetResource s) where
     validator = P.mempty
 
-instance P.HasByteMatchTuples (WafregionalByteMatchSetResource s) (TF.Attr s [TF.Attr s (ByteMatchTuplesSetting s)]) where
+instance P.HasByteMatchTuples (WafregionalByteMatchSetResource s) (TF.Attr s [TF.Attr s (WafregionalByteMatchSetByteMatchTuples s)]) where
     byteMatchTuples =
-        P.lens (_byteMatchTuples :: WafregionalByteMatchSetResource s -> TF.Attr s [TF.Attr s (ByteMatchTuplesSetting s)])
+        P.lens (_byteMatchTuples :: WafregionalByteMatchSetResource s -> TF.Attr s [TF.Attr s (WafregionalByteMatchSetByteMatchTuples s)])
                (\s a -> s { _byteMatchTuples = a } :: WafregionalByteMatchSetResource s)
 
 instance P.HasName (WafregionalByteMatchSetResource s) (TF.Attr s P.Text) where
@@ -6608,10 +6608,10 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (WafregionalByteMatchSetResource s
 -- See the <https://www.terraform.io/docs/providers/aws/r/wafregional_geo_match_set.html terraform documentation>
 -- for more information.
 data WafregionalGeoMatchSetResource s = WafregionalGeoMatchSetResource'
-    { _geoMatchConstraint :: TF.Attr s [TF.Attr s (GeoMatchConstraintSetting s)]
+    { _geoMatchConstraint :: TF.Attr s [TF.Attr s (WafregionalGeoMatchSetGeoMatchConstraint s)]
     -- ^ @geo_match_constraint@ - (Optional)
     --
-    , _name               :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -6636,9 +6636,9 @@ instance TF.IsObject (WafregionalGeoMatchSetResource s) where
 instance TF.IsValid (WafregionalGeoMatchSetResource s) where
     validator = P.mempty
 
-instance P.HasGeoMatchConstraint (WafregionalGeoMatchSetResource s) (TF.Attr s [TF.Attr s (GeoMatchConstraintSetting s)]) where
+instance P.HasGeoMatchConstraint (WafregionalGeoMatchSetResource s) (TF.Attr s [TF.Attr s (WafregionalGeoMatchSetGeoMatchConstraint s)]) where
     geoMatchConstraint =
-        P.lens (_geoMatchConstraint :: WafregionalGeoMatchSetResource s -> TF.Attr s [TF.Attr s (GeoMatchConstraintSetting s)])
+        P.lens (_geoMatchConstraint :: WafregionalGeoMatchSetResource s -> TF.Attr s [TF.Attr s (WafregionalGeoMatchSetGeoMatchConstraint s)])
                (\s a -> s { _geoMatchConstraint = a } :: WafregionalGeoMatchSetResource s)
 
 instance P.HasName (WafregionalGeoMatchSetResource s) (TF.Attr s P.Text) where
@@ -6654,10 +6654,10 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (WafregionalGeoMatchSetResource s)
 -- See the <https://www.terraform.io/docs/providers/aws/r/wafregional_ipset.html terraform documentation>
 -- for more information.
 data WafregionalIpsetResource s = WafregionalIpsetResource'
-    { _ipSetDescriptor :: TF.Attr s [TF.Attr s (IpSetDescriptorSetting s)]
+    { _ipSetDescriptor :: TF.Attr s [TF.Attr s (WafregionalIpsetIpSetDescriptor s)]
     -- ^ @ip_set_descriptor@ - (Optional)
     --
-    , _name            :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -6682,9 +6682,9 @@ instance TF.IsObject (WafregionalIpsetResource s) where
 instance TF.IsValid (WafregionalIpsetResource s) where
     validator = P.mempty
 
-instance P.HasIpSetDescriptor (WafregionalIpsetResource s) (TF.Attr s [TF.Attr s (IpSetDescriptorSetting s)]) where
+instance P.HasIpSetDescriptor (WafregionalIpsetResource s) (TF.Attr s [TF.Attr s (WafregionalIpsetIpSetDescriptor s)]) where
     ipSetDescriptor =
-        P.lens (_ipSetDescriptor :: WafregionalIpsetResource s -> TF.Attr s [TF.Attr s (IpSetDescriptorSetting s)])
+        P.lens (_ipSetDescriptor :: WafregionalIpsetResource s -> TF.Attr s [TF.Attr s (WafregionalIpsetIpSetDescriptor s)])
                (\s a -> s { _ipSetDescriptor = a } :: WafregionalIpsetResource s)
 
 instance P.HasName (WafregionalIpsetResource s) (TF.Attr s P.Text) where
@@ -6709,7 +6709,7 @@ data WafregionalRateBasedRuleResource s = WafregionalRateBasedRuleResource'
     , _name       :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _predicate  :: TF.Attr s [TF.Attr s (PredicateSetting s)]
+    , _predicate  :: TF.Attr s [TF.Attr s (WafregionalRateBasedRulePredicate s)]
     -- ^ @predicate@ - (Optional)
     --
     , _rateKey    :: TF.Attr s P.Text
@@ -6759,9 +6759,9 @@ instance P.HasName (WafregionalRateBasedRuleResource s) (TF.Attr s P.Text) where
         P.lens (_name :: WafregionalRateBasedRuleResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: WafregionalRateBasedRuleResource s)
 
-instance P.HasPredicate (WafregionalRateBasedRuleResource s) (TF.Attr s [TF.Attr s (PredicateSetting s)]) where
+instance P.HasPredicate (WafregionalRateBasedRuleResource s) (TF.Attr s [TF.Attr s (WafregionalRateBasedRulePredicate s)]) where
     predicate =
-        P.lens (_predicate :: WafregionalRateBasedRuleResource s -> TF.Attr s [TF.Attr s (PredicateSetting s)])
+        P.lens (_predicate :: WafregionalRateBasedRuleResource s -> TF.Attr s [TF.Attr s (WafregionalRateBasedRulePredicate s)])
                (\s a -> s { _predicate = a } :: WafregionalRateBasedRuleResource s)
 
 instance P.HasRateKey (WafregionalRateBasedRuleResource s) (TF.Attr s P.Text) where
@@ -6782,10 +6782,10 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (WafregionalRateBasedRuleResource 
 -- See the <https://www.terraform.io/docs/providers/aws/r/wafregional_regex_match_set.html terraform documentation>
 -- for more information.
 data WafregionalRegexMatchSetResource s = WafregionalRegexMatchSetResource'
-    { _name            :: TF.Attr s P.Text
+    { _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _regexMatchTuple :: TF.Attr s [TF.Attr s (RegexMatchTupleSetting s)]
+    , _regexMatchTuple :: TF.Attr s [TF.Attr s (WafregionalRegexMatchSetRegexMatchTuple s)]
     -- ^ @regex_match_tuple@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -6815,9 +6815,9 @@ instance P.HasName (WafregionalRegexMatchSetResource s) (TF.Attr s P.Text) where
         P.lens (_name :: WafregionalRegexMatchSetResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: WafregionalRegexMatchSetResource s)
 
-instance P.HasRegexMatchTuple (WafregionalRegexMatchSetResource s) (TF.Attr s [TF.Attr s (RegexMatchTupleSetting s)]) where
+instance P.HasRegexMatchTuple (WafregionalRegexMatchSetResource s) (TF.Attr s [TF.Attr s (WafregionalRegexMatchSetRegexMatchTuple s)]) where
     regexMatchTuple =
-        P.lens (_regexMatchTuple :: WafregionalRegexMatchSetResource s -> TF.Attr s [TF.Attr s (RegexMatchTupleSetting s)])
+        P.lens (_regexMatchTuple :: WafregionalRegexMatchSetResource s -> TF.Attr s [TF.Attr s (WafregionalRegexMatchSetRegexMatchTuple s)])
                (\s a -> s { _regexMatchTuple = a } :: WafregionalRegexMatchSetResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (WafregionalRegexMatchSetResource s)) (TF.Attr s P.Text) where
@@ -6874,13 +6874,13 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (WafregionalRegexPatternSetResourc
 -- See the <https://www.terraform.io/docs/providers/aws/r/wafregional_rule_group.html terraform documentation>
 -- for more information.
 data WafregionalRuleGroupResource s = WafregionalRuleGroupResource'
-    { _activatedRule :: TF.Attr s [TF.Attr s (ActivatedRuleSetting s)]
+    { _activatedRule :: TF.Attr s [TF.Attr s (WafregionalRuleGroupActivatedRule s)]
     -- ^ @activated_rule@ - (Optional)
     --
-    , _metricName    :: TF.Attr s P.Text
+    , _metricName :: TF.Attr s P.Text
     -- ^ @metric_name@ - (Required, Forces New)
     --
-    , _name          :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -6908,9 +6908,9 @@ instance TF.IsObject (WafregionalRuleGroupResource s) where
 instance TF.IsValid (WafregionalRuleGroupResource s) where
     validator = P.mempty
 
-instance P.HasActivatedRule (WafregionalRuleGroupResource s) (TF.Attr s [TF.Attr s (ActivatedRuleSetting s)]) where
+instance P.HasActivatedRule (WafregionalRuleGroupResource s) (TF.Attr s [TF.Attr s (WafregionalRuleGroupActivatedRule s)]) where
     activatedRule =
-        P.lens (_activatedRule :: WafregionalRuleGroupResource s -> TF.Attr s [TF.Attr s (ActivatedRuleSetting s)])
+        P.lens (_activatedRule :: WafregionalRuleGroupResource s -> TF.Attr s [TF.Attr s (WafregionalRuleGroupActivatedRule s)])
                (\s a -> s { _activatedRule = a } :: WafregionalRuleGroupResource s)
 
 instance P.HasMetricName (WafregionalRuleGroupResource s) (TF.Attr s P.Text) where
@@ -6937,7 +6937,7 @@ data WafregionalRuleResource s = WafregionalRuleResource'
     , _name       :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _predicate  :: TF.Attr s [TF.Attr s (PredicateSetting s)]
+    , _predicate  :: TF.Attr s [TF.Attr s (WafregionalRulePredicate s)]
     -- ^ @predicate@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -6975,9 +6975,9 @@ instance P.HasName (WafregionalRuleResource s) (TF.Attr s P.Text) where
         P.lens (_name :: WafregionalRuleResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: WafregionalRuleResource s)
 
-instance P.HasPredicate (WafregionalRuleResource s) (TF.Attr s [TF.Attr s (PredicateSetting s)]) where
+instance P.HasPredicate (WafregionalRuleResource s) (TF.Attr s [TF.Attr s (WafregionalRulePredicate s)]) where
     predicate =
-        P.lens (_predicate :: WafregionalRuleResource s -> TF.Attr s [TF.Attr s (PredicateSetting s)])
+        P.lens (_predicate :: WafregionalRuleResource s -> TF.Attr s [TF.Attr s (WafregionalRulePredicate s)])
                (\s a -> s { _predicate = a } :: WafregionalRuleResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (WafregionalRuleResource s)) (TF.Attr s P.Text) where
@@ -6988,10 +6988,10 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (WafregionalRuleResource s)) (TF.A
 -- See the <https://www.terraform.io/docs/providers/aws/r/wafregional_size_constraint_set.html terraform documentation>
 -- for more information.
 data WafregionalSizeConstraintSetResource s = WafregionalSizeConstraintSetResource'
-    { _name            :: TF.Attr s P.Text
+    { _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _sizeConstraints :: TF.Attr s [TF.Attr s (SizeConstraintsSetting s)]
+    , _sizeConstraints :: TF.Attr s [TF.Attr s (WafregionalSizeConstraintSetSizeConstraints s)]
     -- ^ @size_constraints@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -7021,9 +7021,9 @@ instance P.HasName (WafregionalSizeConstraintSetResource s) (TF.Attr s P.Text) w
         P.lens (_name :: WafregionalSizeConstraintSetResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: WafregionalSizeConstraintSetResource s)
 
-instance P.HasSizeConstraints (WafregionalSizeConstraintSetResource s) (TF.Attr s [TF.Attr s (SizeConstraintsSetting s)]) where
+instance P.HasSizeConstraints (WafregionalSizeConstraintSetResource s) (TF.Attr s [TF.Attr s (WafregionalSizeConstraintSetSizeConstraints s)]) where
     sizeConstraints =
-        P.lens (_sizeConstraints :: WafregionalSizeConstraintSetResource s -> TF.Attr s [TF.Attr s (SizeConstraintsSetting s)])
+        P.lens (_sizeConstraints :: WafregionalSizeConstraintSetResource s -> TF.Attr s [TF.Attr s (WafregionalSizeConstraintSetSizeConstraints s)])
                (\s a -> s { _sizeConstraints = a } :: WafregionalSizeConstraintSetResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (WafregionalSizeConstraintSetResource s)) (TF.Attr s P.Text) where
@@ -7037,7 +7037,7 @@ data WafregionalSqlInjectionMatchSetResource s = WafregionalSqlInjectionMatchSet
     { _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _sqlInjectionMatchTuple :: TF.Attr s [TF.Attr s (SqlInjectionMatchTupleSetting s)]
+    , _sqlInjectionMatchTuple :: TF.Attr s [TF.Attr s (WafregionalSqlInjectionMatchSetSqlInjectionMatchTuple s)]
     -- ^ @sql_injection_match_tuple@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -7067,9 +7067,9 @@ instance P.HasName (WafregionalSqlInjectionMatchSetResource s) (TF.Attr s P.Text
         P.lens (_name :: WafregionalSqlInjectionMatchSetResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: WafregionalSqlInjectionMatchSetResource s)
 
-instance P.HasSqlInjectionMatchTuple (WafregionalSqlInjectionMatchSetResource s) (TF.Attr s [TF.Attr s (SqlInjectionMatchTupleSetting s)]) where
+instance P.HasSqlInjectionMatchTuple (WafregionalSqlInjectionMatchSetResource s) (TF.Attr s [TF.Attr s (WafregionalSqlInjectionMatchSetSqlInjectionMatchTuple s)]) where
     sqlInjectionMatchTuple =
-        P.lens (_sqlInjectionMatchTuple :: WafregionalSqlInjectionMatchSetResource s -> TF.Attr s [TF.Attr s (SqlInjectionMatchTupleSetting s)])
+        P.lens (_sqlInjectionMatchTuple :: WafregionalSqlInjectionMatchSetResource s -> TF.Attr s [TF.Attr s (WafregionalSqlInjectionMatchSetSqlInjectionMatchTuple s)])
                (\s a -> s { _sqlInjectionMatchTuple = a } :: WafregionalSqlInjectionMatchSetResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (WafregionalSqlInjectionMatchSetResource s)) (TF.Attr s P.Text) where
@@ -7127,7 +7127,7 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (WafregionalWebAclAssociationResou
 -- See the <https://www.terraform.io/docs/providers/aws/r/wafregional_web_acl.html terraform documentation>
 -- for more information.
 data WafregionalWebAclResource s = WafregionalWebAclResource'
-    { _defaultAction :: TF.Attr s (DefaultActionSetting s)
+    { _defaultAction :: TF.Attr s (WafregionalWebAclDefaultAction s)
     -- ^ @default_action@ - (Required)
     --
     , _metricName    :: TF.Attr s P.Text
@@ -7136,14 +7136,14 @@ data WafregionalWebAclResource s = WafregionalWebAclResource'
     , _name          :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _rule          :: TF.Attr s [TF.Attr s (RuleSetting s)]
+    , _rule          :: TF.Attr s [TF.Attr s (WafregionalWebAclRule s)]
     -- ^ @rule@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @aws_wafregional_web_acl@ resource value.
 wafregionalWebAclResource
-    :: TF.Attr s (DefaultActionSetting s) -- ^ @default_action@ ('P._defaultAction', 'P.defaultAction')
+    :: TF.Attr s (WafregionalWebAclDefaultAction s) -- ^ @default_action@ ('P._defaultAction', 'P.defaultAction')
     -> TF.Attr s P.Text -- ^ @metric_name@ ('P._metricName', 'P.metricName')
     -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (WafregionalWebAclResource s)
@@ -7168,12 +7168,12 @@ instance TF.IsValid (WafregionalWebAclResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_defaultAction"
                   (_defaultAction
-                      :: WafregionalWebAclResource s -> TF.Attr s (DefaultActionSetting s))
+                      :: WafregionalWebAclResource s -> TF.Attr s (WafregionalWebAclDefaultAction s))
                   TF.validator
 
-instance P.HasDefaultAction (WafregionalWebAclResource s) (TF.Attr s (DefaultActionSetting s)) where
+instance P.HasDefaultAction (WafregionalWebAclResource s) (TF.Attr s (WafregionalWebAclDefaultAction s)) where
     defaultAction =
-        P.lens (_defaultAction :: WafregionalWebAclResource s -> TF.Attr s (DefaultActionSetting s))
+        P.lens (_defaultAction :: WafregionalWebAclResource s -> TF.Attr s (WafregionalWebAclDefaultAction s))
                (\s a -> s { _defaultAction = a } :: WafregionalWebAclResource s)
 
 instance P.HasMetricName (WafregionalWebAclResource s) (TF.Attr s P.Text) where
@@ -7186,9 +7186,9 @@ instance P.HasName (WafregionalWebAclResource s) (TF.Attr s P.Text) where
         P.lens (_name :: WafregionalWebAclResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: WafregionalWebAclResource s)
 
-instance P.HasRule (WafregionalWebAclResource s) (TF.Attr s [TF.Attr s (RuleSetting s)]) where
+instance P.HasRule (WafregionalWebAclResource s) (TF.Attr s [TF.Attr s (WafregionalWebAclRule s)]) where
     rule =
-        P.lens (_rule :: WafregionalWebAclResource s -> TF.Attr s [TF.Attr s (RuleSetting s)])
+        P.lens (_rule :: WafregionalWebAclResource s -> TF.Attr s [TF.Attr s (WafregionalWebAclRule s)])
                (\s a -> s { _rule = a } :: WafregionalWebAclResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (WafregionalWebAclResource s)) (TF.Attr s P.Text) where
@@ -7199,10 +7199,10 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (WafregionalWebAclResource s)) (TF
 -- See the <https://www.terraform.io/docs/providers/aws/r/wafregional_xss_match_set.html terraform documentation>
 -- for more information.
 data WafregionalXssMatchSetResource s = WafregionalXssMatchSetResource'
-    { _name          :: TF.Attr s P.Text
+    { _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _xssMatchTuple :: TF.Attr s [TF.Attr s (XssMatchTupleSetting s)]
+    , _xssMatchTuple :: TF.Attr s [TF.Attr s (WafregionalXssMatchSetXssMatchTuple s)]
     -- ^ @xss_match_tuple@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -7232,9 +7232,9 @@ instance P.HasName (WafregionalXssMatchSetResource s) (TF.Attr s P.Text) where
         P.lens (_name :: WafregionalXssMatchSetResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: WafregionalXssMatchSetResource s)
 
-instance P.HasXssMatchTuple (WafregionalXssMatchSetResource s) (TF.Attr s [TF.Attr s (XssMatchTupleSetting s)]) where
+instance P.HasXssMatchTuple (WafregionalXssMatchSetResource s) (TF.Attr s [TF.Attr s (WafregionalXssMatchSetXssMatchTuple s)]) where
     xssMatchTuple =
-        P.lens (_xssMatchTuple :: WafregionalXssMatchSetResource s -> TF.Attr s [TF.Attr s (XssMatchTupleSetting s)])
+        P.lens (_xssMatchTuple :: WafregionalXssMatchSetResource s -> TF.Attr s [TF.Attr s (WafregionalXssMatchSetXssMatchTuple s)])
                (\s a -> s { _xssMatchTuple = a } :: WafregionalXssMatchSetResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (WafregionalXssMatchSetResource s)) (TF.Attr s P.Text) where

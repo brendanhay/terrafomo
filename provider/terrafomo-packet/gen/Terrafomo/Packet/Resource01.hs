@@ -264,7 +264,7 @@ instance s ~ s' => P.HasComputedHardwareReservationId (TF.Ref s' (DeviceResource
 instance s ~ s' => P.HasComputedLocked (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Bool) where
     computedLocked x = TF.compute (TF.refKey x) "locked"
 
-instance s ~ s' => P.HasComputedNetwork (TF.Ref s' (DeviceResource s)) (TF.Attr s [TF.Attr s (NetworkSetting s)]) where
+instance s ~ s' => P.HasComputedNetwork (TF.Ref s' (DeviceResource s)) (TF.Attr s [TF.Attr s (DeviceNetwork s)]) where
     computedNetwork x = TF.compute (TF.refKey x) "network"
 
 instance s ~ s' => P.HasComputedPublicIpv4SubnetSize (TF.Ref s' (DeviceResource s)) (TF.Attr s P.Int) where
@@ -720,7 +720,7 @@ data VolumeResource s = VolumeResource'
     , _size             :: TF.Attr s P.Int
     -- ^ @size@ - (Required)
     --
-    , _snapshotPolicies :: TF.Attr s [TF.Attr s (SnapshotPoliciesSetting s)]
+    , _snapshotPolicies :: TF.Attr s [TF.Attr s (VolumeSnapshotPolicies s)]
     -- ^ @snapshot_policies@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -795,15 +795,15 @@ instance P.HasSize (VolumeResource s) (TF.Attr s P.Int) where
         P.lens (_size :: VolumeResource s -> TF.Attr s P.Int)
                (\s a -> s { _size = a } :: VolumeResource s)
 
-instance P.HasSnapshotPolicies (VolumeResource s) (TF.Attr s [TF.Attr s (SnapshotPoliciesSetting s)]) where
+instance P.HasSnapshotPolicies (VolumeResource s) (TF.Attr s [TF.Attr s (VolumeSnapshotPolicies s)]) where
     snapshotPolicies =
-        P.lens (_snapshotPolicies :: VolumeResource s -> TF.Attr s [TF.Attr s (SnapshotPoliciesSetting s)])
+        P.lens (_snapshotPolicies :: VolumeResource s -> TF.Attr s [TF.Attr s (VolumeSnapshotPolicies s)])
                (\s a -> s { _snapshotPolicies = a } :: VolumeResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (VolumeResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedAttachments (TF.Ref s' (VolumeResource s)) (TF.Attr s [TF.Attr s (AttachmentsSetting s)]) where
+instance s ~ s' => P.HasComputedAttachments (TF.Ref s' (VolumeResource s)) (TF.Attr s [TF.Attr s (VolumeAttachments s)]) where
     computedAttachments x = TF.compute (TF.refKey x) "attachments"
 
 instance s ~ s' => P.HasComputedBillingCycle (TF.Ref s' (VolumeResource s)) (TF.Attr s P.Text) where

@@ -1576,15 +1576,15 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (AwsSecretBackendRoleResource s)) 
 -- See the <https://www.terraform.io/docs/providers/vault/r/database_secret_backend_connection.html terraform documentation>
 -- for more information.
 data DatabaseSecretBackendConnectionResource s = DatabaseSecretBackendConnectionResource'
-    { _allowedRoles     :: TF.Attr s [TF.Attr s P.Text]
+    { _allowedRoles :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @allowed_roles@ - (Optional)
     -- A list of roles that are allowed to use this connection.
     --
-    , _backend          :: TF.Attr s P.Text
+    , _backend :: TF.Attr s P.Text
     -- ^ @backend@ - (Required, Forces New)
     -- Unique name of the Vault mount to configure.
     --
-    , _cassandra        :: TF.Attr s (CassandraSetting s)
+    , _cassandra :: TF.Attr s (DatabaseSecretBackendConnectionCassandra s)
     -- ^ @cassandra@ - (Optional)
     -- Connection parameters for the cassandra-database-plugin plugin.
     --
@@ -1596,7 +1596,7 @@ data DatabaseSecretBackendConnectionResource s = DatabaseSecretBackendConnection
     -- * 'mysql'
     -- * 'oracle'
     -- * 'postgresql'
-    , _hana             :: TF.Attr s (HanaSetting s)
+    , _hana :: TF.Attr s (DatabaseSecretBackendConnectionHana s)
     -- ^ @hana@ - (Optional)
     -- Connection parameters for the hana-database-plugin plugin.
     --
@@ -1608,7 +1608,7 @@ data DatabaseSecretBackendConnectionResource s = DatabaseSecretBackendConnection
     -- * 'mysql'
     -- * 'oracle'
     -- * 'postgresql'
-    , _mongodb          :: TF.Attr s (MongodbSetting s)
+    , _mongodb :: TF.Attr s (DatabaseSecretBackendConnectionMongodb s)
     -- ^ @mongodb@ - (Optional)
     -- Connection parameters for the mongodb-database-plugin plugin.
     --
@@ -1620,7 +1620,7 @@ data DatabaseSecretBackendConnectionResource s = DatabaseSecretBackendConnection
     -- * 'mysql'
     -- * 'oracle'
     -- * 'postgresql'
-    , _mssql            :: TF.Attr s (MssqlSetting s)
+    , _mssql :: TF.Attr s (DatabaseSecretBackendConnectionMssql s)
     -- ^ @mssql@ - (Optional)
     -- Connection parameters for the mssql-database-plugin plugin.
     --
@@ -1632,7 +1632,7 @@ data DatabaseSecretBackendConnectionResource s = DatabaseSecretBackendConnection
     -- * 'mysql'
     -- * 'oracle'
     -- * 'postgresql'
-    , _mysql            :: TF.Attr s (MysqlSetting s)
+    , _mysql :: TF.Attr s (DatabaseSecretBackendConnectionMysql s)
     -- ^ @mysql@ - (Optional)
     -- Connection parameters for the mysql-database-plugin plugin.
     --
@@ -1644,11 +1644,11 @@ data DatabaseSecretBackendConnectionResource s = DatabaseSecretBackendConnection
     -- * 'mssql'
     -- * 'oracle'
     -- * 'postgresql'
-    , _name             :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     -- Name of the database connection.
     --
-    , _oracle           :: TF.Attr s (OracleSetting s)
+    , _oracle :: TF.Attr s (DatabaseSecretBackendConnectionOracle s)
     -- ^ @oracle@ - (Optional)
     -- Connection parameters for the oracle-database-plugin plugin.
     --
@@ -1660,7 +1660,7 @@ data DatabaseSecretBackendConnectionResource s = DatabaseSecretBackendConnection
     -- * 'mssql'
     -- * 'mysql'
     -- * 'postgresql'
-    , _postgresql       :: TF.Attr s (PostgresqlSetting s)
+    , _postgresql :: TF.Attr s (DatabaseSecretBackendConnectionPostgresql s)
     -- ^ @postgresql@ - (Optional)
     -- Connection parameters for the postgresql-database-plugin plugin.
     --
@@ -1754,31 +1754,31 @@ instance TF.IsValid (DatabaseSecretBackendConnectionResource s) where
         ])
            P.<> TF.settingsValidator "_cassandra"
                   (_cassandra
-                      :: DatabaseSecretBackendConnectionResource s -> TF.Attr s (CassandraSetting s))
+                      :: DatabaseSecretBackendConnectionResource s -> TF.Attr s (DatabaseSecretBackendConnectionCassandra s))
                   TF.validator
            P.<> TF.settingsValidator "_hana"
                   (_hana
-                      :: DatabaseSecretBackendConnectionResource s -> TF.Attr s (HanaSetting s))
+                      :: DatabaseSecretBackendConnectionResource s -> TF.Attr s (DatabaseSecretBackendConnectionHana s))
                   TF.validator
            P.<> TF.settingsValidator "_mongodb"
                   (_mongodb
-                      :: DatabaseSecretBackendConnectionResource s -> TF.Attr s (MongodbSetting s))
+                      :: DatabaseSecretBackendConnectionResource s -> TF.Attr s (DatabaseSecretBackendConnectionMongodb s))
                   TF.validator
            P.<> TF.settingsValidator "_mssql"
                   (_mssql
-                      :: DatabaseSecretBackendConnectionResource s -> TF.Attr s (MssqlSetting s))
+                      :: DatabaseSecretBackendConnectionResource s -> TF.Attr s (DatabaseSecretBackendConnectionMssql s))
                   TF.validator
            P.<> TF.settingsValidator "_mysql"
                   (_mysql
-                      :: DatabaseSecretBackendConnectionResource s -> TF.Attr s (MysqlSetting s))
+                      :: DatabaseSecretBackendConnectionResource s -> TF.Attr s (DatabaseSecretBackendConnectionMysql s))
                   TF.validator
            P.<> TF.settingsValidator "_oracle"
                   (_oracle
-                      :: DatabaseSecretBackendConnectionResource s -> TF.Attr s (OracleSetting s))
+                      :: DatabaseSecretBackendConnectionResource s -> TF.Attr s (DatabaseSecretBackendConnectionOracle s))
                   TF.validator
            P.<> TF.settingsValidator "_postgresql"
                   (_postgresql
-                      :: DatabaseSecretBackendConnectionResource s -> TF.Attr s (PostgresqlSetting s))
+                      :: DatabaseSecretBackendConnectionResource s -> TF.Attr s (DatabaseSecretBackendConnectionPostgresql s))
                   TF.validator
 
 instance P.HasAllowedRoles (DatabaseSecretBackendConnectionResource s) (TF.Attr s [TF.Attr s P.Text]) where
@@ -1791,29 +1791,29 @@ instance P.HasBackend (DatabaseSecretBackendConnectionResource s) (TF.Attr s P.T
         P.lens (_backend :: DatabaseSecretBackendConnectionResource s -> TF.Attr s P.Text)
                (\s a -> s { _backend = a } :: DatabaseSecretBackendConnectionResource s)
 
-instance P.HasCassandra (DatabaseSecretBackendConnectionResource s) (TF.Attr s (CassandraSetting s)) where
+instance P.HasCassandra (DatabaseSecretBackendConnectionResource s) (TF.Attr s (DatabaseSecretBackendConnectionCassandra s)) where
     cassandra =
-        P.lens (_cassandra :: DatabaseSecretBackendConnectionResource s -> TF.Attr s (CassandraSetting s))
+        P.lens (_cassandra :: DatabaseSecretBackendConnectionResource s -> TF.Attr s (DatabaseSecretBackendConnectionCassandra s))
                (\s a -> s { _cassandra = a } :: DatabaseSecretBackendConnectionResource s)
 
-instance P.HasHana (DatabaseSecretBackendConnectionResource s) (TF.Attr s (HanaSetting s)) where
+instance P.HasHana (DatabaseSecretBackendConnectionResource s) (TF.Attr s (DatabaseSecretBackendConnectionHana s)) where
     hana =
-        P.lens (_hana :: DatabaseSecretBackendConnectionResource s -> TF.Attr s (HanaSetting s))
+        P.lens (_hana :: DatabaseSecretBackendConnectionResource s -> TF.Attr s (DatabaseSecretBackendConnectionHana s))
                (\s a -> s { _hana = a } :: DatabaseSecretBackendConnectionResource s)
 
-instance P.HasMongodb (DatabaseSecretBackendConnectionResource s) (TF.Attr s (MongodbSetting s)) where
+instance P.HasMongodb (DatabaseSecretBackendConnectionResource s) (TF.Attr s (DatabaseSecretBackendConnectionMongodb s)) where
     mongodb =
-        P.lens (_mongodb :: DatabaseSecretBackendConnectionResource s -> TF.Attr s (MongodbSetting s))
+        P.lens (_mongodb :: DatabaseSecretBackendConnectionResource s -> TF.Attr s (DatabaseSecretBackendConnectionMongodb s))
                (\s a -> s { _mongodb = a } :: DatabaseSecretBackendConnectionResource s)
 
-instance P.HasMssql (DatabaseSecretBackendConnectionResource s) (TF.Attr s (MssqlSetting s)) where
+instance P.HasMssql (DatabaseSecretBackendConnectionResource s) (TF.Attr s (DatabaseSecretBackendConnectionMssql s)) where
     mssql =
-        P.lens (_mssql :: DatabaseSecretBackendConnectionResource s -> TF.Attr s (MssqlSetting s))
+        P.lens (_mssql :: DatabaseSecretBackendConnectionResource s -> TF.Attr s (DatabaseSecretBackendConnectionMssql s))
                (\s a -> s { _mssql = a } :: DatabaseSecretBackendConnectionResource s)
 
-instance P.HasMysql (DatabaseSecretBackendConnectionResource s) (TF.Attr s (MysqlSetting s)) where
+instance P.HasMysql (DatabaseSecretBackendConnectionResource s) (TF.Attr s (DatabaseSecretBackendConnectionMysql s)) where
     mysql =
-        P.lens (_mysql :: DatabaseSecretBackendConnectionResource s -> TF.Attr s (MysqlSetting s))
+        P.lens (_mysql :: DatabaseSecretBackendConnectionResource s -> TF.Attr s (DatabaseSecretBackendConnectionMysql s))
                (\s a -> s { _mysql = a } :: DatabaseSecretBackendConnectionResource s)
 
 instance P.HasName (DatabaseSecretBackendConnectionResource s) (TF.Attr s P.Text) where
@@ -1821,14 +1821,14 @@ instance P.HasName (DatabaseSecretBackendConnectionResource s) (TF.Attr s P.Text
         P.lens (_name :: DatabaseSecretBackendConnectionResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: DatabaseSecretBackendConnectionResource s)
 
-instance P.HasOracle (DatabaseSecretBackendConnectionResource s) (TF.Attr s (OracleSetting s)) where
+instance P.HasOracle (DatabaseSecretBackendConnectionResource s) (TF.Attr s (DatabaseSecretBackendConnectionOracle s)) where
     oracle =
-        P.lens (_oracle :: DatabaseSecretBackendConnectionResource s -> TF.Attr s (OracleSetting s))
+        P.lens (_oracle :: DatabaseSecretBackendConnectionResource s -> TF.Attr s (DatabaseSecretBackendConnectionOracle s))
                (\s a -> s { _oracle = a } :: DatabaseSecretBackendConnectionResource s)
 
-instance P.HasPostgresql (DatabaseSecretBackendConnectionResource s) (TF.Attr s (PostgresqlSetting s)) where
+instance P.HasPostgresql (DatabaseSecretBackendConnectionResource s) (TF.Attr s (DatabaseSecretBackendConnectionPostgresql s)) where
     postgresql =
-        P.lens (_postgresql :: DatabaseSecretBackendConnectionResource s -> TF.Attr s (PostgresqlSetting s))
+        P.lens (_postgresql :: DatabaseSecretBackendConnectionResource s -> TF.Attr s (DatabaseSecretBackendConnectionPostgresql s))
                (\s a -> s { _postgresql = a } :: DatabaseSecretBackendConnectionResource s)
 
 instance P.HasVerifyConnection (DatabaseSecretBackendConnectionResource s) (TF.Attr s P.Bool) where
@@ -2189,7 +2189,7 @@ data OktaAuthBackendResource s = OktaAuthBackendResource'
     -- ^ @description@ - (Optional, Forces New)
     -- The description of the auth backend
     --
-    , _group        :: TF.Attr s [TF.Attr s (GroupSetting s)]
+    , _group        :: TF.Attr s [TF.Attr s (OktaAuthBackendGroup s)]
     -- ^ @group@ - (Optional)
     --
     , _maxTtl       :: TF.Attr s P.Text
@@ -2215,7 +2215,7 @@ data OktaAuthBackendResource s = OktaAuthBackendResource'
     -- ^ @ttl@ - (Optional)
     -- Duration after which authentication will be expired
     --
-    , _user         :: TF.Attr s [TF.Attr s (UserSetting s)]
+    , _user         :: TF.Attr s [TF.Attr s (OktaAuthBackendUser s)]
     -- ^ @user@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -2264,9 +2264,9 @@ instance P.HasDescription (OktaAuthBackendResource s) (TF.Attr s P.Text) where
         P.lens (_description :: OktaAuthBackendResource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: OktaAuthBackendResource s)
 
-instance P.HasGroup (OktaAuthBackendResource s) (TF.Attr s [TF.Attr s (GroupSetting s)]) where
+instance P.HasGroup (OktaAuthBackendResource s) (TF.Attr s [TF.Attr s (OktaAuthBackendGroup s)]) where
     group =
-        P.lens (_group :: OktaAuthBackendResource s -> TF.Attr s [TF.Attr s (GroupSetting s)])
+        P.lens (_group :: OktaAuthBackendResource s -> TF.Attr s [TF.Attr s (OktaAuthBackendGroup s)])
                (\s a -> s { _group = a } :: OktaAuthBackendResource s)
 
 instance P.HasMaxTtl (OktaAuthBackendResource s) (TF.Attr s P.Text) where
@@ -2294,18 +2294,18 @@ instance P.HasTtl (OktaAuthBackendResource s) (TF.Attr s P.Text) where
         P.lens (_ttl :: OktaAuthBackendResource s -> TF.Attr s P.Text)
                (\s a -> s { _ttl = a } :: OktaAuthBackendResource s)
 
-instance P.HasUser (OktaAuthBackendResource s) (TF.Attr s [TF.Attr s (UserSetting s)]) where
+instance P.HasUser (OktaAuthBackendResource s) (TF.Attr s [TF.Attr s (OktaAuthBackendUser s)]) where
     user =
-        P.lens (_user :: OktaAuthBackendResource s -> TF.Attr s [TF.Attr s (UserSetting s)])
+        P.lens (_user :: OktaAuthBackendResource s -> TF.Attr s [TF.Attr s (OktaAuthBackendUser s)])
                (\s a -> s { _user = a } :: OktaAuthBackendResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (OktaAuthBackendResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedGroup (TF.Ref s' (OktaAuthBackendResource s)) (TF.Attr s [TF.Attr s (GroupSetting s)]) where
+instance s ~ s' => P.HasComputedGroup (TF.Ref s' (OktaAuthBackendResource s)) (TF.Attr s [TF.Attr s (OktaAuthBackendGroup s)]) where
     computedGroup x = TF.compute (TF.refKey x) "group"
 
-instance s ~ s' => P.HasComputedUser (TF.Ref s' (OktaAuthBackendResource s)) (TF.Attr s [TF.Attr s (UserSetting s)]) where
+instance s ~ s' => P.HasComputedUser (TF.Ref s' (OktaAuthBackendResource s)) (TF.Attr s [TF.Attr s (OktaAuthBackendUser s)]) where
     computedUser x = TF.compute (TF.refKey x) "user"
 
 -- | @vault_okta_auth_backend_user@ Resource.

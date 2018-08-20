@@ -80,7 +80,7 @@ data CertRequestResource s = CertRequestResource'
     -- ^ @private_key_pem@ - (Required, Forces New)
     -- PEM-encoded private key that the certificate will belong to
     --
-    , _subject       :: TF.Attr s [TF.Attr s (SubjectSetting s)]
+    , _subject       :: TF.Attr s [TF.Attr s (CertRequestSubject s)]
     -- ^ @subject@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -89,7 +89,7 @@ data CertRequestResource s = CertRequestResource'
 certRequestResource
     :: TF.Attr s P.Text -- ^ @key_algorithm@ ('P._keyAlgorithm', 'P.keyAlgorithm')
     -> TF.Attr s P.Text -- ^ @private_key_pem@ ('P._privateKeyPem', 'P.privateKeyPem')
-    -> TF.Attr s [TF.Attr s (SubjectSetting s)] -- ^ @subject@ ('P._subject', 'P.subject')
+    -> TF.Attr s [TF.Attr s (CertRequestSubject s)] -- ^ @subject@ ('P._subject', 'P.subject')
     -> P.Resource (CertRequestResource s)
 certRequestResource _keyAlgorithm _privateKeyPem _subject =
     TF.unsafeResource "tls_cert_request" TF.validator $
@@ -133,9 +133,9 @@ instance P.HasPrivateKeyPem (CertRequestResource s) (TF.Attr s P.Text) where
         P.lens (_privateKeyPem :: CertRequestResource s -> TF.Attr s P.Text)
                (\s a -> s { _privateKeyPem = a } :: CertRequestResource s)
 
-instance P.HasSubject (CertRequestResource s) (TF.Attr s [TF.Attr s (SubjectSetting s)]) where
+instance P.HasSubject (CertRequestResource s) (TF.Attr s [TF.Attr s (CertRequestSubject s)]) where
     subject =
-        P.lens (_subject :: CertRequestResource s -> TF.Attr s [TF.Attr s (SubjectSetting s)])
+        P.lens (_subject :: CertRequestResource s -> TF.Attr s [TF.Attr s (CertRequestSubject s)])
                (\s a -> s { _subject = a } :: CertRequestResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (CertRequestResource s)) (TF.Attr s P.Text) where
@@ -375,7 +375,7 @@ data SelfSignedCertResource s = SelfSignedCertResource'
     -- ^ @private_key_pem@ - (Required, Forces New)
     -- PEM-encoded private key that the certificate will belong to
     --
-    , _subject             :: TF.Attr s [TF.Attr s (SubjectSetting s)]
+    , _subject             :: TF.Attr s [TF.Attr s (SelfSignedCertSubject s)]
     -- ^ @subject@ - (Required, Forces New)
     --
     , _validityPeriodHours :: TF.Attr s P.Int
@@ -389,7 +389,7 @@ selfSignedCertResource
     :: TF.Attr s P.Text -- ^ @key_algorithm@ ('P._keyAlgorithm', 'P.keyAlgorithm')
     -> TF.Attr s P.Int -- ^ @validity_period_hours@ ('P._validityPeriodHours', 'P.validityPeriodHours')
     -> TF.Attr s P.Text -- ^ @private_key_pem@ ('P._privateKeyPem', 'P.privateKeyPem')
-    -> TF.Attr s [TF.Attr s (SubjectSetting s)] -- ^ @subject@ ('P._subject', 'P.subject')
+    -> TF.Attr s [TF.Attr s (SelfSignedCertSubject s)] -- ^ @subject@ ('P._subject', 'P.subject')
     -> TF.Attr s [TF.Attr s P.Text] -- ^ @allowed_uses@ ('P._allowedUses', 'P.allowedUses')
     -> P.Resource (SelfSignedCertResource s)
 selfSignedCertResource _keyAlgorithm _validityPeriodHours _privateKeyPem _subject _allowedUses =
@@ -457,9 +457,9 @@ instance P.HasPrivateKeyPem (SelfSignedCertResource s) (TF.Attr s P.Text) where
         P.lens (_privateKeyPem :: SelfSignedCertResource s -> TF.Attr s P.Text)
                (\s a -> s { _privateKeyPem = a } :: SelfSignedCertResource s)
 
-instance P.HasSubject (SelfSignedCertResource s) (TF.Attr s [TF.Attr s (SubjectSetting s)]) where
+instance P.HasSubject (SelfSignedCertResource s) (TF.Attr s [TF.Attr s (SelfSignedCertSubject s)]) where
     subject =
-        P.lens (_subject :: SelfSignedCertResource s -> TF.Attr s [TF.Attr s (SubjectSetting s)])
+        P.lens (_subject :: SelfSignedCertResource s -> TF.Attr s [TF.Attr s (SelfSignedCertSubject s)])
                (\s a -> s { _subject = a } :: SelfSignedCertResource s)
 
 instance P.HasValidityPeriodHours (SelfSignedCertResource s) (TF.Attr s P.Int) where

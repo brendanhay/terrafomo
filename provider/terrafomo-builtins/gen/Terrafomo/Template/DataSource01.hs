@@ -62,14 +62,14 @@ data CloudinitConfigData s = CloudinitConfigData'
     , _gzip         :: TF.Attr s P.Bool
     -- ^ @gzip@ - (Optional)
     --
-    , _part         :: TF.Attr s [TF.Attr s (PartSetting s)]
+    , _part         :: TF.Attr s [TF.Attr s (CloudinitConfigPart s)]
     -- ^ @part@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @template_cloudinit_config@ datasource value.
 cloudinitConfigData
-    :: TF.Attr s [TF.Attr s (PartSetting s)] -- ^ @part@ ('P._part', 'P.part')
+    :: TF.Attr s [TF.Attr s (CloudinitConfigPart s)] -- ^ @part@ ('P._part', 'P.part')
     -> P.DataSource (CloudinitConfigData s)
 cloudinitConfigData _part =
     TF.unsafeDataSource "template_cloudinit_config" TF.validator $
@@ -99,9 +99,9 @@ instance P.HasGzip (CloudinitConfigData s) (TF.Attr s P.Bool) where
         P.lens (_gzip :: CloudinitConfigData s -> TF.Attr s P.Bool)
                (\s a -> s { _gzip = a } :: CloudinitConfigData s)
 
-instance P.HasPart (CloudinitConfigData s) (TF.Attr s [TF.Attr s (PartSetting s)]) where
+instance P.HasPart (CloudinitConfigData s) (TF.Attr s [TF.Attr s (CloudinitConfigPart s)]) where
     part =
-        P.lens (_part :: CloudinitConfigData s -> TF.Attr s [TF.Attr s (PartSetting s)])
+        P.lens (_part :: CloudinitConfigData s -> TF.Attr s [TF.Attr s (CloudinitConfigPart s)])
                (\s a -> s { _part = a } :: CloudinitConfigData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (CloudinitConfigData s)) (TF.Attr s P.Text) where

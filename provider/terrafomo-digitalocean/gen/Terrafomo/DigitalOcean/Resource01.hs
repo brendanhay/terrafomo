@@ -401,13 +401,13 @@ data FirewallResource s = FirewallResource'
     { _dropletIds   :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @droplet_ids@ - (Optional)
     --
-    , _inboundRule  :: TF.Attr s [TF.Attr s (InboundRuleSetting s)]
+    , _inboundRule  :: TF.Attr s [TF.Attr s (FirewallInboundRule s)]
     -- ^ @inbound_rule@ - (Optional)
     --
     , _name         :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _outboundRule :: TF.Attr s [TF.Attr s (OutboundRuleSetting s)]
+    , _outboundRule :: TF.Attr s [TF.Attr s (FirewallOutboundRule s)]
     -- ^ @outbound_rule@ - (Optional)
     --
     , _tags         :: TF.Attr s [TF.Attr s P.Text]
@@ -446,9 +446,9 @@ instance P.HasDropletIds (FirewallResource s) (TF.Attr s [TF.Attr s P.Text]) whe
         P.lens (_dropletIds :: FirewallResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _dropletIds = a } :: FirewallResource s)
 
-instance P.HasInboundRule (FirewallResource s) (TF.Attr s [TF.Attr s (InboundRuleSetting s)]) where
+instance P.HasInboundRule (FirewallResource s) (TF.Attr s [TF.Attr s (FirewallInboundRule s)]) where
     inboundRule =
-        P.lens (_inboundRule :: FirewallResource s -> TF.Attr s [TF.Attr s (InboundRuleSetting s)])
+        P.lens (_inboundRule :: FirewallResource s -> TF.Attr s [TF.Attr s (FirewallInboundRule s)])
                (\s a -> s { _inboundRule = a } :: FirewallResource s)
 
 instance P.HasName (FirewallResource s) (TF.Attr s P.Text) where
@@ -456,9 +456,9 @@ instance P.HasName (FirewallResource s) (TF.Attr s P.Text) where
         P.lens (_name :: FirewallResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: FirewallResource s)
 
-instance P.HasOutboundRule (FirewallResource s) (TF.Attr s [TF.Attr s (OutboundRuleSetting s)]) where
+instance P.HasOutboundRule (FirewallResource s) (TF.Attr s [TF.Attr s (FirewallOutboundRule s)]) where
     outboundRule =
-        P.lens (_outboundRule :: FirewallResource s -> TF.Attr s [TF.Attr s (OutboundRuleSetting s)])
+        P.lens (_outboundRule :: FirewallResource s -> TF.Attr s [TF.Attr s (FirewallOutboundRule s)])
                (\s a -> s { _outboundRule = a } :: FirewallResource s)
 
 instance P.HasTags (FirewallResource s) (TF.Attr s [TF.Attr s P.Text]) where
@@ -472,7 +472,7 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (FirewallResource s)) (TF.Attr s P
 instance s ~ s' => P.HasComputedCreatedAt (TF.Ref s' (FirewallResource s)) (TF.Attr s P.Text) where
     computedCreatedAt x = TF.compute (TF.refKey x) "created_at"
 
-instance s ~ s' => P.HasComputedPendingChanges (TF.Ref s' (FirewallResource s)) (TF.Attr s [TF.Attr s (PendingChangesSetting s)]) where
+instance s ~ s' => P.HasComputedPendingChanges (TF.Ref s' (FirewallResource s)) (TF.Attr s [TF.Attr s (FirewallPendingChanges s)]) where
     computedPendingChanges x = TF.compute (TF.refKey x) "pending_changes"
 
 instance s ~ s' => P.HasComputedStatus (TF.Ref s' (FirewallResource s)) (TF.Attr s P.Text) where
@@ -551,10 +551,10 @@ data LoadbalancerResource s = LoadbalancerResource'
     , _dropletTag :: TF.Attr s P.Text
     -- ^ @droplet_tag@ - (Optional)
     --
-    , _forwardingRule :: TF.Attr s (P.NonEmpty (TF.Attr s (ForwardingRuleSetting s)))
+    , _forwardingRule :: TF.Attr s (P.NonEmpty (TF.Attr s (LoadbalancerForwardingRule s)))
     -- ^ @forwarding_rule@ - (Required)
     --
-    , _healthcheck :: TF.Attr s (HealthcheckSetting s)
+    , _healthcheck :: TF.Attr s (LoadbalancerHealthcheck s)
     -- ^ @healthcheck@ - (Optional)
     --
     , _name :: TF.Attr s P.Text
@@ -566,7 +566,7 @@ data LoadbalancerResource s = LoadbalancerResource'
     , _region :: TF.Attr s P.Text
     -- ^ @region@ - (Required, Forces New)
     --
-    , _stickySessions :: TF.Attr s (StickySessionsSetting s)
+    , _stickySessions :: TF.Attr s (LoadbalancerStickySessions s)
     -- ^ @sticky_sessions@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -575,7 +575,7 @@ data LoadbalancerResource s = LoadbalancerResource'
 loadbalancerResource
     :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> TF.Attr s P.Text -- ^ @region@ ('P._region', 'P.region')
-    -> TF.Attr s (P.NonEmpty (TF.Attr s (ForwardingRuleSetting s))) -- ^ @forwarding_rule@ ('P._forwardingRule', 'P.forwardingRule')
+    -> TF.Attr s (P.NonEmpty (TF.Attr s (LoadbalancerForwardingRule s))) -- ^ @forwarding_rule@ ('P._forwardingRule', 'P.forwardingRule')
     -> P.Resource (LoadbalancerResource s)
 loadbalancerResource _name _region _forwardingRule =
     TF.unsafeResource "digitalocean_loadbalancer" TF.validator $
@@ -608,11 +608,11 @@ instance TF.IsValid (LoadbalancerResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_healthcheck"
                   (_healthcheck
-                      :: LoadbalancerResource s -> TF.Attr s (HealthcheckSetting s))
+                      :: LoadbalancerResource s -> TF.Attr s (LoadbalancerHealthcheck s))
                   TF.validator
            P.<> TF.settingsValidator "_stickySessions"
                   (_stickySessions
-                      :: LoadbalancerResource s -> TF.Attr s (StickySessionsSetting s))
+                      :: LoadbalancerResource s -> TF.Attr s (LoadbalancerStickySessions s))
                   TF.validator
 
 instance P.HasAlgorithm (LoadbalancerResource s) (TF.Attr s P.Text) where
@@ -630,14 +630,14 @@ instance P.HasDropletTag (LoadbalancerResource s) (TF.Attr s P.Text) where
         P.lens (_dropletTag :: LoadbalancerResource s -> TF.Attr s P.Text)
                (\s a -> s { _dropletTag = a } :: LoadbalancerResource s)
 
-instance P.HasForwardingRule (LoadbalancerResource s) (TF.Attr s (P.NonEmpty (TF.Attr s (ForwardingRuleSetting s)))) where
+instance P.HasForwardingRule (LoadbalancerResource s) (TF.Attr s (P.NonEmpty (TF.Attr s (LoadbalancerForwardingRule s)))) where
     forwardingRule =
-        P.lens (_forwardingRule :: LoadbalancerResource s -> TF.Attr s (P.NonEmpty (TF.Attr s (ForwardingRuleSetting s))))
+        P.lens (_forwardingRule :: LoadbalancerResource s -> TF.Attr s (P.NonEmpty (TF.Attr s (LoadbalancerForwardingRule s))))
                (\s a -> s { _forwardingRule = a } :: LoadbalancerResource s)
 
-instance P.HasHealthcheck (LoadbalancerResource s) (TF.Attr s (HealthcheckSetting s)) where
+instance P.HasHealthcheck (LoadbalancerResource s) (TF.Attr s (LoadbalancerHealthcheck s)) where
     healthcheck =
-        P.lens (_healthcheck :: LoadbalancerResource s -> TF.Attr s (HealthcheckSetting s))
+        P.lens (_healthcheck :: LoadbalancerResource s -> TF.Attr s (LoadbalancerHealthcheck s))
                (\s a -> s { _healthcheck = a } :: LoadbalancerResource s)
 
 instance P.HasName (LoadbalancerResource s) (TF.Attr s P.Text) where
@@ -655,9 +655,9 @@ instance P.HasRegion (LoadbalancerResource s) (TF.Attr s P.Text) where
         P.lens (_region :: LoadbalancerResource s -> TF.Attr s P.Text)
                (\s a -> s { _region = a } :: LoadbalancerResource s)
 
-instance P.HasStickySessions (LoadbalancerResource s) (TF.Attr s (StickySessionsSetting s)) where
+instance P.HasStickySessions (LoadbalancerResource s) (TF.Attr s (LoadbalancerStickySessions s)) where
     stickySessions =
-        P.lens (_stickySessions :: LoadbalancerResource s -> TF.Attr s (StickySessionsSetting s))
+        P.lens (_stickySessions :: LoadbalancerResource s -> TF.Attr s (LoadbalancerStickySessions s))
                (\s a -> s { _stickySessions = a } :: LoadbalancerResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (LoadbalancerResource s)) (TF.Attr s P.Text) where
@@ -666,7 +666,7 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (LoadbalancerResource s)) (TF.Attr
 instance s ~ s' => P.HasComputedIp (TF.Ref s' (LoadbalancerResource s)) (TF.Attr s P.Text) where
     computedIp x = TF.compute (TF.refKey x) "ip"
 
-instance s ~ s' => P.HasComputedStickySessions (TF.Ref s' (LoadbalancerResource s)) (TF.Attr s (StickySessionsSetting s)) where
+instance s ~ s' => P.HasComputedStickySessions (TF.Ref s' (LoadbalancerResource s)) (TF.Attr s (LoadbalancerStickySessions s)) where
     computedStickySessions x = TF.compute (TF.refKey x) "sticky_sessions"
 
 -- | @digitalocean_record@ Resource.

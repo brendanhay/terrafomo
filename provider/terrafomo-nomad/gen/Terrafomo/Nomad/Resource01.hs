@@ -342,7 +342,7 @@ data QuotaSpecificationResource s = QuotaSpecificationResource'
     -- ^ @description@ - (Optional)
     -- Description for this quota specification.
     --
-    , _limits      :: TF.Attr s [TF.Attr s (LimitsSetting s)]
+    , _limits      :: TF.Attr s [TF.Attr s (QuotaSpecificationLimits s)]
     -- ^ @limits@ - (Required)
     -- Limits encapsulated by this quota specification.
     --
@@ -354,7 +354,7 @@ data QuotaSpecificationResource s = QuotaSpecificationResource'
 
 -- | Define a new @nomad_quota_specification@ resource value.
 quotaSpecificationResource
-    :: TF.Attr s [TF.Attr s (LimitsSetting s)] -- ^ @limits@ ('P._limits', 'P.limits')
+    :: TF.Attr s [TF.Attr s (QuotaSpecificationLimits s)] -- ^ @limits@ ('P._limits', 'P.limits')
     -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (QuotaSpecificationResource s)
 quotaSpecificationResource _limits _name =
@@ -380,9 +380,9 @@ instance P.HasDescription (QuotaSpecificationResource s) (TF.Attr s P.Text) wher
         P.lens (_description :: QuotaSpecificationResource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: QuotaSpecificationResource s)
 
-instance P.HasLimits (QuotaSpecificationResource s) (TF.Attr s [TF.Attr s (LimitsSetting s)]) where
+instance P.HasLimits (QuotaSpecificationResource s) (TF.Attr s [TF.Attr s (QuotaSpecificationLimits s)]) where
     limits =
-        P.lens (_limits :: QuotaSpecificationResource s -> TF.Attr s [TF.Attr s (LimitsSetting s)])
+        P.lens (_limits :: QuotaSpecificationResource s -> TF.Attr s [TF.Attr s (QuotaSpecificationLimits s)])
                (\s a -> s { _limits = a } :: QuotaSpecificationResource s)
 
 instance P.HasName (QuotaSpecificationResource s) (TF.Attr s P.Text) where

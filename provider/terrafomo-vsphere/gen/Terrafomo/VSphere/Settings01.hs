@@ -17,53 +17,57 @@
 --
 module Terrafomo.VSphere.Settings01
     (
-    -- ** cdrom
-      CdromSetting (..)
-    , newCdromSetting
-
-    -- ** clone
-    , CloneSetting (..)
-    , newCloneSetting
-
-    -- ** customize
-    , CustomizeSetting (..)
-    , newCustomizeSetting
-
-    -- ** windows_options
-    , WindowsOptionsSetting (..)
-    , newWindowsOptionsSetting
-
-    -- ** network_interface
-    , NetworkInterfaceSetting (..)
-    , newNetworkInterfaceSetting
-
-    -- ** linux_options
-    , LinuxOptionsSetting (..)
-    , newLinuxOptionsSetting
-
-    -- ** disk
-    , DiskSetting (..)
-    , newDiskSetting
-
-    -- ** disks
-    , DisksSetting (..)
-    , newDisksSetting
+    -- ** vlan_range
+      DistributedPortGroupVlanRange (..)
+    , newDistributedPortGroupVlanRange
 
     -- ** host
-    , HostSetting (..)
-    , newHostSetting
-
-    -- ** ports
-    , PortsSetting (..)
-    , newPortsSetting
-
-    -- ** vapp
-    , VappSetting (..)
-    , newVappSetting
+    , DistributedVirtualSwitchHost (..)
+    , newDistributedVirtualSwitchHost
 
     -- ** vlan_range
-    , VlanRangeSetting (..)
-    , newVlanRangeSetting
+    , DistributedVirtualSwitchVlanRange (..)
+    , newDistributedVirtualSwitchVlanRange
+
+    -- ** ports
+    , HostPortGroupPorts (..)
+    , newHostPortGroupPorts
+
+    -- ** cdrom
+    , VirtualMachineCdrom (..)
+    , newVirtualMachineCdrom
+
+    -- ** clone
+    , VirtualMachineClone (..)
+    , newVirtualMachineClone
+
+    -- ** customize
+    , VirtualMachineCustomize (..)
+    , newVirtualMachineCustomize
+
+    -- ** windows_options
+    , VirtualMachineWindowsOptions (..)
+    , newVirtualMachineWindowsOptions
+
+    -- ** network_interface
+    , VirtualMachineNetworkInterface (..)
+    , newVirtualMachineNetworkInterface
+
+    -- ** linux_options
+    , VirtualMachineLinuxOptions (..)
+    , newVirtualMachineLinuxOptions
+
+    -- ** disk
+    , VirtualMachineDisk (..)
+    , newVirtualMachineDisk
+
+    -- ** disks
+    , VirtualMachineDisks (..)
+    , newVirtualMachineDisks
+
+    -- ** vapp
+    , VirtualMachineVapp (..)
+    , newVirtualMachineVapp
 
     ) where
 
@@ -88,8 +92,163 @@ import qualified Terrafomo.Validator     as TF
 import qualified Terrafomo.VSphere.Lens  as P
 import qualified Terrafomo.VSphere.Types as P
 
+-- | @vlan_range@ nested settings.
+data DistributedPortGroupVlanRange s = DistributedPortGroupVlanRange'
+    { _maxVlan :: TF.Attr s P.Int
+    -- ^ @max_vlan@ - (Required)
+    -- The minimum VLAN to use in the range.
+    --
+    , _minVlan :: TF.Attr s P.Int
+    -- ^ @min_vlan@ - (Required)
+    -- The minimum VLAN to use in the range.
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @vlan_range@ settings value.
+newDistributedPortGroupVlanRange
+    :: TF.Attr s P.Int -- ^ 'P._maxVlan': @max_vlan@
+    -> TF.Attr s P.Int -- ^ 'P._minVlan': @min_vlan@
+    -> DistributedPortGroupVlanRange s
+newDistributedPortGroupVlanRange _maxVlan _minVlan =
+    DistributedPortGroupVlanRange'
+        { _maxVlan = _maxVlan
+        , _minVlan = _minVlan
+        }
+
+instance TF.IsValue  (DistributedPortGroupVlanRange s)
+instance TF.IsObject (DistributedPortGroupVlanRange s) where
+    toObject DistributedPortGroupVlanRange'{..} = P.catMaybes
+        [ TF.assign "max_vlan" <$> TF.attribute _maxVlan
+        , TF.assign "min_vlan" <$> TF.attribute _minVlan
+        ]
+
+instance TF.IsValid (DistributedPortGroupVlanRange s) where
+    validator = P.mempty
+
+instance P.HasMaxVlan (DistributedPortGroupVlanRange s) (TF.Attr s P.Int) where
+    maxVlan =
+        P.lens (_maxVlan :: DistributedPortGroupVlanRange s -> TF.Attr s P.Int)
+               (\s a -> s { _maxVlan = a } :: DistributedPortGroupVlanRange s)
+
+instance P.HasMinVlan (DistributedPortGroupVlanRange s) (TF.Attr s P.Int) where
+    minVlan =
+        P.lens (_minVlan :: DistributedPortGroupVlanRange s -> TF.Attr s P.Int)
+               (\s a -> s { _minVlan = a } :: DistributedPortGroupVlanRange s)
+
+-- | @host@ nested settings.
+data DistributedVirtualSwitchHost s = DistributedVirtualSwitchHost'
+    { _devices      :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text))
+    -- ^ @devices@ - (Required)
+    -- Name of the physical NIC to be added to the proxy switch.
+    --
+    , _hostSystemId :: TF.Attr s P.Text
+    -- ^ @host_system_id@ - (Required)
+    -- The managed object ID of the host this specification applies to.
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @host@ settings value.
+newDistributedVirtualSwitchHost
+    :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ 'P._devices': @devices@
+    -> TF.Attr s P.Text -- ^ 'P._hostSystemId': @host_system_id@
+    -> DistributedVirtualSwitchHost s
+newDistributedVirtualSwitchHost _devices _hostSystemId =
+    DistributedVirtualSwitchHost'
+        { _devices = _devices
+        , _hostSystemId = _hostSystemId
+        }
+
+instance TF.IsValue  (DistributedVirtualSwitchHost s)
+instance TF.IsObject (DistributedVirtualSwitchHost s) where
+    toObject DistributedVirtualSwitchHost'{..} = P.catMaybes
+        [ TF.assign "devices" <$> TF.attribute _devices
+        , TF.assign "host_system_id" <$> TF.attribute _hostSystemId
+        ]
+
+instance TF.IsValid (DistributedVirtualSwitchHost s) where
+    validator = P.mempty
+
+instance P.HasDevices (DistributedVirtualSwitchHost s) (TF.Attr s (P.NonEmpty (TF.Attr s P.Text))) where
+    devices =
+        P.lens (_devices :: DistributedVirtualSwitchHost s -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)))
+               (\s a -> s { _devices = a } :: DistributedVirtualSwitchHost s)
+
+instance P.HasHostSystemId (DistributedVirtualSwitchHost s) (TF.Attr s P.Text) where
+    hostSystemId =
+        P.lens (_hostSystemId :: DistributedVirtualSwitchHost s -> TF.Attr s P.Text)
+               (\s a -> s { _hostSystemId = a } :: DistributedVirtualSwitchHost s)
+
+-- | @vlan_range@ nested settings.
+data DistributedVirtualSwitchVlanRange s = DistributedVirtualSwitchVlanRange'
+    { _maxVlan :: TF.Attr s P.Int
+    -- ^ @max_vlan@ - (Required)
+    -- The minimum VLAN to use in the range.
+    --
+    , _minVlan :: TF.Attr s P.Int
+    -- ^ @min_vlan@ - (Required)
+    -- The minimum VLAN to use in the range.
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @vlan_range@ settings value.
+newDistributedVirtualSwitchVlanRange
+    :: TF.Attr s P.Int -- ^ 'P._maxVlan': @max_vlan@
+    -> TF.Attr s P.Int -- ^ 'P._minVlan': @min_vlan@
+    -> DistributedVirtualSwitchVlanRange s
+newDistributedVirtualSwitchVlanRange _maxVlan _minVlan =
+    DistributedVirtualSwitchVlanRange'
+        { _maxVlan = _maxVlan
+        , _minVlan = _minVlan
+        }
+
+instance TF.IsValue  (DistributedVirtualSwitchVlanRange s)
+instance TF.IsObject (DistributedVirtualSwitchVlanRange s) where
+    toObject DistributedVirtualSwitchVlanRange'{..} = P.catMaybes
+        [ TF.assign "max_vlan" <$> TF.attribute _maxVlan
+        , TF.assign "min_vlan" <$> TF.attribute _minVlan
+        ]
+
+instance TF.IsValid (DistributedVirtualSwitchVlanRange s) where
+    validator = P.mempty
+
+instance P.HasMaxVlan (DistributedVirtualSwitchVlanRange s) (TF.Attr s P.Int) where
+    maxVlan =
+        P.lens (_maxVlan :: DistributedVirtualSwitchVlanRange s -> TF.Attr s P.Int)
+               (\s a -> s { _maxVlan = a } :: DistributedVirtualSwitchVlanRange s)
+
+instance P.HasMinVlan (DistributedVirtualSwitchVlanRange s) (TF.Attr s P.Int) where
+    minVlan =
+        P.lens (_minVlan :: DistributedVirtualSwitchVlanRange s -> TF.Attr s P.Int)
+               (\s a -> s { _minVlan = a } :: DistributedVirtualSwitchVlanRange s)
+
+-- | @ports@ nested settings.
+data HostPortGroupPorts s = HostPortGroupPorts'
+    deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @ports@ settings value.
+newHostPortGroupPorts
+    :: HostPortGroupPorts s
+newHostPortGroupPorts =
+    HostPortGroupPorts'
+
+instance TF.IsValue  (HostPortGroupPorts s)
+instance TF.IsObject (HostPortGroupPorts s) where
+    toObject HostPortGroupPorts' = []
+
+instance TF.IsValid (HostPortGroupPorts s) where
+    validator = P.mempty
+
+instance s ~ s' => P.HasComputedKey (TF.Ref s' (HostPortGroupPorts s)) (TF.Attr s P.Text) where
+    computedKey x = TF.compute (TF.refKey x) "key"
+
+instance s ~ s' => P.HasComputedMacAddresses (TF.Ref s' (HostPortGroupPorts s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedMacAddresses x = TF.compute (TF.refKey x) "mac_addresses"
+
+instance s ~ s' => P.HasComputedType (TF.Ref s' (HostPortGroupPorts s)) (TF.Attr s P.Text) where
+    computedType x = TF.compute (TF.refKey x) "type"
+
 -- | @cdrom@ nested settings.
-data CdromSetting s = CdromSetting'
+data VirtualMachineCdrom s = VirtualMachineCdrom'
     { _clientDevice :: TF.Attr s P.Bool
     -- ^ @client_device@ - (Optional)
     -- Indicates whether the device should be mapped to a remote client device
@@ -105,50 +264,50 @@ data CdromSetting s = CdromSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @cdrom@ settings value.
-newCdromSetting
-    :: CdromSetting s
-newCdromSetting =
-    CdromSetting'
+newVirtualMachineCdrom
+    :: VirtualMachineCdrom s
+newVirtualMachineCdrom =
+    VirtualMachineCdrom'
         { _clientDevice = TF.Nil
         , _datastoreId = TF.Nil
         , _path = TF.Nil
         }
 
-instance TF.IsValue  (CdromSetting s)
-instance TF.IsObject (CdromSetting s) where
-    toObject CdromSetting'{..} = P.catMaybes
+instance TF.IsValue  (VirtualMachineCdrom s)
+instance TF.IsObject (VirtualMachineCdrom s) where
+    toObject VirtualMachineCdrom'{..} = P.catMaybes
         [ TF.assign "client_device" <$> TF.attribute _clientDevice
         , TF.assign "datastore_id" <$> TF.attribute _datastoreId
         , TF.assign "path" <$> TF.attribute _path
         ]
 
-instance TF.IsValid (CdromSetting s) where
+instance TF.IsValid (VirtualMachineCdrom s) where
     validator = P.mempty
 
-instance P.HasClientDevice (CdromSetting s) (TF.Attr s P.Bool) where
+instance P.HasClientDevice (VirtualMachineCdrom s) (TF.Attr s P.Bool) where
     clientDevice =
-        P.lens (_clientDevice :: CdromSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _clientDevice = a } :: CdromSetting s)
+        P.lens (_clientDevice :: VirtualMachineCdrom s -> TF.Attr s P.Bool)
+               (\s a -> s { _clientDevice = a } :: VirtualMachineCdrom s)
 
-instance P.HasDatastoreId (CdromSetting s) (TF.Attr s P.Text) where
+instance P.HasDatastoreId (VirtualMachineCdrom s) (TF.Attr s P.Text) where
     datastoreId =
-        P.lens (_datastoreId :: CdromSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _datastoreId = a } :: CdromSetting s)
+        P.lens (_datastoreId :: VirtualMachineCdrom s -> TF.Attr s P.Text)
+               (\s a -> s { _datastoreId = a } :: VirtualMachineCdrom s)
 
-instance P.HasPath (CdromSetting s) (TF.Attr s P.Text) where
+instance P.HasPath (VirtualMachineCdrom s) (TF.Attr s P.Text) where
     path =
-        P.lens (_path :: CdromSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _path = a } :: CdromSetting s)
+        P.lens (_path :: VirtualMachineCdrom s -> TF.Attr s P.Text)
+               (\s a -> s { _path = a } :: VirtualMachineCdrom s)
 
-instance s ~ s' => P.HasComputedDeviceAddress (TF.Ref s' (CdromSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDeviceAddress (TF.Ref s' (VirtualMachineCdrom s)) (TF.Attr s P.Text) where
     computedDeviceAddress x = TF.compute (TF.refKey x) "device_address"
 
-instance s ~ s' => P.HasComputedKey (TF.Ref s' (CdromSetting s)) (TF.Attr s P.Int) where
+instance s ~ s' => P.HasComputedKey (TF.Ref s' (VirtualMachineCdrom s)) (TF.Attr s P.Int) where
     computedKey x = TF.compute (TF.refKey x) "key"
 
 -- | @clone@ nested settings.
-data CloneSetting s = CloneSetting'
-    { _customize    :: TF.Attr s (CustomizeSetting s)
+data VirtualMachineClone s = VirtualMachineClone'
+    { _customize    :: TF.Attr s (VirtualMachineCustomize s)
     -- ^ @customize@ - (Optional)
     -- The customization spec for this clone. This allows the user to configure the
     -- virtual machine post-clone.
@@ -169,78 +328,78 @@ data CloneSetting s = CloneSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @clone@ settings value.
-newCloneSetting
+newVirtualMachineClone
     :: TF.Attr s P.Text -- ^ 'P._templateUuid': @template_uuid@
-    -> CloneSetting s
-newCloneSetting _templateUuid =
-    CloneSetting'
+    -> VirtualMachineClone s
+newVirtualMachineClone _templateUuid =
+    VirtualMachineClone'
         { _customize = TF.Nil
         , _linkedClone = TF.Nil
         , _templateUuid = _templateUuid
         , _timeout = TF.value 30
         }
 
-instance TF.IsValue  (CloneSetting s)
-instance TF.IsObject (CloneSetting s) where
-    toObject CloneSetting'{..} = P.catMaybes
+instance TF.IsValue  (VirtualMachineClone s)
+instance TF.IsObject (VirtualMachineClone s) where
+    toObject VirtualMachineClone'{..} = P.catMaybes
         [ TF.assign "customize" <$> TF.attribute _customize
         , TF.assign "linked_clone" <$> TF.attribute _linkedClone
         , TF.assign "template_uuid" <$> TF.attribute _templateUuid
         , TF.assign "timeout" <$> TF.attribute _timeout
         ]
 
-instance TF.IsValid (CloneSetting s) where
+instance TF.IsValid (VirtualMachineClone s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_customize"
                   (_customize
-                      :: CloneSetting s -> TF.Attr s (CustomizeSetting s))
+                      :: VirtualMachineClone s -> TF.Attr s (VirtualMachineCustomize s))
                   TF.validator
 
-instance P.HasCustomize (CloneSetting s) (TF.Attr s (CustomizeSetting s)) where
+instance P.HasCustomize (VirtualMachineClone s) (TF.Attr s (VirtualMachineCustomize s)) where
     customize =
-        P.lens (_customize :: CloneSetting s -> TF.Attr s (CustomizeSetting s))
-               (\s a -> s { _customize = a } :: CloneSetting s)
+        P.lens (_customize :: VirtualMachineClone s -> TF.Attr s (VirtualMachineCustomize s))
+               (\s a -> s { _customize = a } :: VirtualMachineClone s)
 
-instance P.HasLinkedClone (CloneSetting s) (TF.Attr s P.Bool) where
+instance P.HasLinkedClone (VirtualMachineClone s) (TF.Attr s P.Bool) where
     linkedClone =
-        P.lens (_linkedClone :: CloneSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _linkedClone = a } :: CloneSetting s)
+        P.lens (_linkedClone :: VirtualMachineClone s -> TF.Attr s P.Bool)
+               (\s a -> s { _linkedClone = a } :: VirtualMachineClone s)
 
-instance P.HasTemplateUuid (CloneSetting s) (TF.Attr s P.Text) where
+instance P.HasTemplateUuid (VirtualMachineClone s) (TF.Attr s P.Text) where
     templateUuid =
-        P.lens (_templateUuid :: CloneSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _templateUuid = a } :: CloneSetting s)
+        P.lens (_templateUuid :: VirtualMachineClone s -> TF.Attr s P.Text)
+               (\s a -> s { _templateUuid = a } :: VirtualMachineClone s)
 
-instance P.HasTimeout (CloneSetting s) (TF.Attr s P.Int) where
+instance P.HasTimeout (VirtualMachineClone s) (TF.Attr s P.Int) where
     timeout =
-        P.lens (_timeout :: CloneSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _timeout = a } :: CloneSetting s)
+        P.lens (_timeout :: VirtualMachineClone s -> TF.Attr s P.Int)
+               (\s a -> s { _timeout = a } :: VirtualMachineClone s)
 
 -- | @customize@ nested settings.
-data CustomizeSetting s = CustomizeSetting'
-    { _dnsServerList      :: TF.Attr s [TF.Attr s P.Text]
+data VirtualMachineCustomize s = VirtualMachineCustomize'
+    { _dnsServerList :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @dns_server_list@ - (Optional)
     -- The list of DNS servers for a virtual network adapter with a static IP
     -- address.
     --
-    , _dnsSuffixList      :: TF.Attr s [TF.Attr s P.Text]
+    , _dnsSuffixList :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @dns_suffix_list@ - (Optional)
     -- A list of DNS search domains to add to the DNS configuration on the virtual
     -- machine.
     --
-    , _ipv4Gateway        :: TF.Attr s P.Text
+    , _ipv4Gateway :: TF.Attr s P.Text
     -- ^ @ipv4_gateway@ - (Optional)
     -- The IPv4 default gateway when using network_interface customization on the
     -- virtual machine. This address must be local to a static IPv4 address
     -- configured in an interface sub-resource.
     --
-    , _ipv6Gateway        :: TF.Attr s P.Text
+    , _ipv6Gateway :: TF.Attr s P.Text
     -- ^ @ipv6_gateway@ - (Optional)
     -- The IPv6 default gateway when using network_interface customization on the
     -- virtual machine. This address must be local to a static IPv4 address
     -- configured in an interface sub-resource.
     --
-    , _linuxOptions       :: TF.Attr s (LinuxOptionsSetting s)
+    , _linuxOptions :: TF.Attr s (VirtualMachineLinuxOptions s)
     -- ^ @linux_options@ - (Optional)
     -- A list of configuration options specific to Linux virtual machines.
     --
@@ -248,17 +407,17 @@ data CustomizeSetting s = CustomizeSetting'
     --
     -- * 'windowsOptions'
     -- * 'windowsSysprepText'
-    , _networkInterface   :: TF.Attr s [TF.Attr s (NetworkInterfaceSetting s)]
+    , _networkInterface :: TF.Attr s [TF.Attr s (VirtualMachineNetworkInterface s)]
     -- ^ @network_interface@ - (Optional)
     -- A specification of network interface configuration options.
     --
-    , _timeout            :: TF.Attr s P.Int
+    , _timeout :: TF.Attr s P.Int
     -- ^ @timeout@ - (Optional)
     -- The amount of time, in minutes, to wait for guest OS customization to
     -- complete before returning with an error. Setting this value to 0 or a
     -- negative value skips the waiter.
     --
-    , _windowsOptions     :: TF.Attr s (WindowsOptionsSetting s)
+    , _windowsOptions :: TF.Attr s (VirtualMachineWindowsOptions s)
     -- ^ @windows_options@ - (Optional)
     -- A list of configuration options specific to Windows virtual machines.
     --
@@ -277,10 +436,10 @@ data CustomizeSetting s = CustomizeSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @customize@ settings value.
-newCustomizeSetting
-    :: CustomizeSetting s
-newCustomizeSetting =
-    CustomizeSetting'
+newVirtualMachineCustomize
+    :: VirtualMachineCustomize s
+newVirtualMachineCustomize =
+    VirtualMachineCustomize'
         { _dnsServerList = TF.Nil
         , _dnsSuffixList = TF.Nil
         , _ipv4Gateway = TF.Nil
@@ -292,9 +451,9 @@ newCustomizeSetting =
         , _windowsSysprepText = TF.Nil
         }
 
-instance TF.IsValue  (CustomizeSetting s)
-instance TF.IsObject (CustomizeSetting s) where
-    toObject CustomizeSetting'{..} = P.catMaybes
+instance TF.IsValue  (VirtualMachineCustomize s)
+instance TF.IsObject (VirtualMachineCustomize s) where
+    toObject VirtualMachineCustomize'{..} = P.catMaybes
         [ TF.assign "dns_server_list" <$> TF.attribute _dnsServerList
         , TF.assign "dns_suffix_list" <$> TF.attribute _dnsSuffixList
         , TF.assign "ipv4_gateway" <$> TF.attribute _ipv4Gateway
@@ -306,8 +465,8 @@ instance TF.IsObject (CustomizeSetting s) where
         , TF.assign "windows_sysprep_text" <$> TF.attribute _windowsSysprepText
         ]
 
-instance TF.IsValid (CustomizeSetting s) where
-    validator = TF.fieldsValidator (\CustomizeSetting'{..} -> Map.fromList $ P.catMaybes
+instance TF.IsValid (VirtualMachineCustomize s) where
+    validator = TF.fieldsValidator (\VirtualMachineCustomize'{..} -> Map.fromList $ P.catMaybes
         [ if (_linuxOptions P.== TF.Nil)
               then P.Nothing
               else P.Just ("_linuxOptions",
@@ -326,60 +485,60 @@ instance TF.IsValid (CustomizeSetting s) where
         ])
            P.<> TF.settingsValidator "_linuxOptions"
                   (_linuxOptions
-                      :: CustomizeSetting s -> TF.Attr s (LinuxOptionsSetting s))
+                      :: VirtualMachineCustomize s -> TF.Attr s (VirtualMachineLinuxOptions s))
                   TF.validator
            P.<> TF.settingsValidator "_windowsOptions"
                   (_windowsOptions
-                      :: CustomizeSetting s -> TF.Attr s (WindowsOptionsSetting s))
+                      :: VirtualMachineCustomize s -> TF.Attr s (VirtualMachineWindowsOptions s))
                   TF.validator
 
-instance P.HasDnsServerList (CustomizeSetting s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasDnsServerList (VirtualMachineCustomize s) (TF.Attr s [TF.Attr s P.Text]) where
     dnsServerList =
-        P.lens (_dnsServerList :: CustomizeSetting s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _dnsServerList = a } :: CustomizeSetting s)
+        P.lens (_dnsServerList :: VirtualMachineCustomize s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _dnsServerList = a } :: VirtualMachineCustomize s)
 
-instance P.HasDnsSuffixList (CustomizeSetting s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasDnsSuffixList (VirtualMachineCustomize s) (TF.Attr s [TF.Attr s P.Text]) where
     dnsSuffixList =
-        P.lens (_dnsSuffixList :: CustomizeSetting s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _dnsSuffixList = a } :: CustomizeSetting s)
+        P.lens (_dnsSuffixList :: VirtualMachineCustomize s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _dnsSuffixList = a } :: VirtualMachineCustomize s)
 
-instance P.HasIpv4Gateway (CustomizeSetting s) (TF.Attr s P.Text) where
+instance P.HasIpv4Gateway (VirtualMachineCustomize s) (TF.Attr s P.Text) where
     ipv4Gateway =
-        P.lens (_ipv4Gateway :: CustomizeSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _ipv4Gateway = a } :: CustomizeSetting s)
+        P.lens (_ipv4Gateway :: VirtualMachineCustomize s -> TF.Attr s P.Text)
+               (\s a -> s { _ipv4Gateway = a } :: VirtualMachineCustomize s)
 
-instance P.HasIpv6Gateway (CustomizeSetting s) (TF.Attr s P.Text) where
+instance P.HasIpv6Gateway (VirtualMachineCustomize s) (TF.Attr s P.Text) where
     ipv6Gateway =
-        P.lens (_ipv6Gateway :: CustomizeSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _ipv6Gateway = a } :: CustomizeSetting s)
+        P.lens (_ipv6Gateway :: VirtualMachineCustomize s -> TF.Attr s P.Text)
+               (\s a -> s { _ipv6Gateway = a } :: VirtualMachineCustomize s)
 
-instance P.HasLinuxOptions (CustomizeSetting s) (TF.Attr s (LinuxOptionsSetting s)) where
+instance P.HasLinuxOptions (VirtualMachineCustomize s) (TF.Attr s (VirtualMachineLinuxOptions s)) where
     linuxOptions =
-        P.lens (_linuxOptions :: CustomizeSetting s -> TF.Attr s (LinuxOptionsSetting s))
-               (\s a -> s { _linuxOptions = a } :: CustomizeSetting s)
+        P.lens (_linuxOptions :: VirtualMachineCustomize s -> TF.Attr s (VirtualMachineLinuxOptions s))
+               (\s a -> s { _linuxOptions = a } :: VirtualMachineCustomize s)
 
-instance P.HasNetworkInterface (CustomizeSetting s) (TF.Attr s [TF.Attr s (NetworkInterfaceSetting s)]) where
+instance P.HasNetworkInterface (VirtualMachineCustomize s) (TF.Attr s [TF.Attr s (VirtualMachineNetworkInterface s)]) where
     networkInterface =
-        P.lens (_networkInterface :: CustomizeSetting s -> TF.Attr s [TF.Attr s (NetworkInterfaceSetting s)])
-               (\s a -> s { _networkInterface = a } :: CustomizeSetting s)
+        P.lens (_networkInterface :: VirtualMachineCustomize s -> TF.Attr s [TF.Attr s (VirtualMachineNetworkInterface s)])
+               (\s a -> s { _networkInterface = a } :: VirtualMachineCustomize s)
 
-instance P.HasTimeout (CustomizeSetting s) (TF.Attr s P.Int) where
+instance P.HasTimeout (VirtualMachineCustomize s) (TF.Attr s P.Int) where
     timeout =
-        P.lens (_timeout :: CustomizeSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _timeout = a } :: CustomizeSetting s)
+        P.lens (_timeout :: VirtualMachineCustomize s -> TF.Attr s P.Int)
+               (\s a -> s { _timeout = a } :: VirtualMachineCustomize s)
 
-instance P.HasWindowsOptions (CustomizeSetting s) (TF.Attr s (WindowsOptionsSetting s)) where
+instance P.HasWindowsOptions (VirtualMachineCustomize s) (TF.Attr s (VirtualMachineWindowsOptions s)) where
     windowsOptions =
-        P.lens (_windowsOptions :: CustomizeSetting s -> TF.Attr s (WindowsOptionsSetting s))
-               (\s a -> s { _windowsOptions = a } :: CustomizeSetting s)
+        P.lens (_windowsOptions :: VirtualMachineCustomize s -> TF.Attr s (VirtualMachineWindowsOptions s))
+               (\s a -> s { _windowsOptions = a } :: VirtualMachineCustomize s)
 
-instance P.HasWindowsSysprepText (CustomizeSetting s) (TF.Attr s P.Text) where
+instance P.HasWindowsSysprepText (VirtualMachineCustomize s) (TF.Attr s P.Text) where
     windowsSysprepText =
-        P.lens (_windowsSysprepText :: CustomizeSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _windowsSysprepText = a } :: CustomizeSetting s)
+        P.lens (_windowsSysprepText :: VirtualMachineCustomize s -> TF.Attr s P.Text)
+               (\s a -> s { _windowsSysprepText = a } :: VirtualMachineCustomize s)
 
 -- | @windows_options@ nested settings.
-data WindowsOptionsSetting s = WindowsOptionsSetting'
+data VirtualMachineWindowsOptions s = VirtualMachineWindowsOptions'
     { _adminPassword       :: TF.Attr s P.Text
     -- ^ @admin_password@ - (Optional)
     -- The new administrator password for this virtual machine.
@@ -453,11 +612,11 @@ data WindowsOptionsSetting s = WindowsOptionsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @windows_options@ settings value.
-newWindowsOptionsSetting
+newVirtualMachineWindowsOptions
     :: TF.Attr s P.Text -- ^ 'P._computerName': @computer_name@
-    -> WindowsOptionsSetting s
-newWindowsOptionsSetting _computerName =
-    WindowsOptionsSetting'
+    -> VirtualMachineWindowsOptions s
+newVirtualMachineWindowsOptions _computerName =
+    VirtualMachineWindowsOptions'
         { _adminPassword = TF.Nil
         , _autoLogon = TF.Nil
         , _autoLogonCount = TF.value 1
@@ -473,9 +632,9 @@ newWindowsOptionsSetting _computerName =
         , _workgroup = TF.Nil
         }
 
-instance TF.IsValue  (WindowsOptionsSetting s)
-instance TF.IsObject (WindowsOptionsSetting s) where
-    toObject WindowsOptionsSetting'{..} = P.catMaybes
+instance TF.IsValue  (VirtualMachineWindowsOptions s)
+instance TF.IsObject (VirtualMachineWindowsOptions s) where
+    toObject VirtualMachineWindowsOptions'{..} = P.catMaybes
         [ TF.assign "admin_password" <$> TF.attribute _adminPassword
         , TF.assign "auto_logon" <$> TF.attribute _autoLogon
         , TF.assign "auto_logon_count" <$> TF.attribute _autoLogonCount
@@ -491,8 +650,8 @@ instance TF.IsObject (WindowsOptionsSetting s) where
         , TF.assign "workgroup" <$> TF.attribute _workgroup
         ]
 
-instance TF.IsValid (WindowsOptionsSetting s) where
-    validator = TF.fieldsValidator (\WindowsOptionsSetting'{..} -> Map.fromList $ P.catMaybes
+instance TF.IsValid (VirtualMachineWindowsOptions s) where
+    validator = TF.fieldsValidator (\VirtualMachineWindowsOptions'{..} -> Map.fromList $ P.catMaybes
         [ if (_domainAdminPassword P.== TF.Nil)
               then P.Nothing
               else P.Just ("_domainAdminPassword",
@@ -515,103 +674,74 @@ instance TF.IsValid (WindowsOptionsSetting s) where
                             ])
         ])
 
-instance P.HasAdminPassword (WindowsOptionsSetting s) (TF.Attr s P.Text) where
+instance P.HasAdminPassword (VirtualMachineWindowsOptions s) (TF.Attr s P.Text) where
     adminPassword =
-        P.lens (_adminPassword :: WindowsOptionsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _adminPassword = a } :: WindowsOptionsSetting s)
+        P.lens (_adminPassword :: VirtualMachineWindowsOptions s -> TF.Attr s P.Text)
+               (\s a -> s { _adminPassword = a } :: VirtualMachineWindowsOptions s)
 
-instance P.HasAutoLogon (WindowsOptionsSetting s) (TF.Attr s P.Bool) where
+instance P.HasAutoLogon (VirtualMachineWindowsOptions s) (TF.Attr s P.Bool) where
     autoLogon =
-        P.lens (_autoLogon :: WindowsOptionsSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _autoLogon = a } :: WindowsOptionsSetting s)
+        P.lens (_autoLogon :: VirtualMachineWindowsOptions s -> TF.Attr s P.Bool)
+               (\s a -> s { _autoLogon = a } :: VirtualMachineWindowsOptions s)
 
-instance P.HasAutoLogonCount (WindowsOptionsSetting s) (TF.Attr s P.Int) where
+instance P.HasAutoLogonCount (VirtualMachineWindowsOptions s) (TF.Attr s P.Int) where
     autoLogonCount =
-        P.lens (_autoLogonCount :: WindowsOptionsSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _autoLogonCount = a } :: WindowsOptionsSetting s)
+        P.lens (_autoLogonCount :: VirtualMachineWindowsOptions s -> TF.Attr s P.Int)
+               (\s a -> s { _autoLogonCount = a } :: VirtualMachineWindowsOptions s)
 
-instance P.HasComputerName (WindowsOptionsSetting s) (TF.Attr s P.Text) where
+instance P.HasComputerName (VirtualMachineWindowsOptions s) (TF.Attr s P.Text) where
     computerName =
-        P.lens (_computerName :: WindowsOptionsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _computerName = a } :: WindowsOptionsSetting s)
+        P.lens (_computerName :: VirtualMachineWindowsOptions s -> TF.Attr s P.Text)
+               (\s a -> s { _computerName = a } :: VirtualMachineWindowsOptions s)
 
-instance P.HasDomainAdminPassword (WindowsOptionsSetting s) (TF.Attr s P.Text) where
+instance P.HasDomainAdminPassword (VirtualMachineWindowsOptions s) (TF.Attr s P.Text) where
     domainAdminPassword =
-        P.lens (_domainAdminPassword :: WindowsOptionsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _domainAdminPassword = a } :: WindowsOptionsSetting s)
+        P.lens (_domainAdminPassword :: VirtualMachineWindowsOptions s -> TF.Attr s P.Text)
+               (\s a -> s { _domainAdminPassword = a } :: VirtualMachineWindowsOptions s)
 
-instance P.HasDomainAdminUser (WindowsOptionsSetting s) (TF.Attr s P.Text) where
+instance P.HasDomainAdminUser (VirtualMachineWindowsOptions s) (TF.Attr s P.Text) where
     domainAdminUser =
-        P.lens (_domainAdminUser :: WindowsOptionsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _domainAdminUser = a } :: WindowsOptionsSetting s)
+        P.lens (_domainAdminUser :: VirtualMachineWindowsOptions s -> TF.Attr s P.Text)
+               (\s a -> s { _domainAdminUser = a } :: VirtualMachineWindowsOptions s)
 
-instance P.HasFullName (WindowsOptionsSetting s) (TF.Attr s P.Text) where
+instance P.HasFullName (VirtualMachineWindowsOptions s) (TF.Attr s P.Text) where
     fullName =
-        P.lens (_fullName :: WindowsOptionsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _fullName = a } :: WindowsOptionsSetting s)
+        P.lens (_fullName :: VirtualMachineWindowsOptions s -> TF.Attr s P.Text)
+               (\s a -> s { _fullName = a } :: VirtualMachineWindowsOptions s)
 
-instance P.HasJoinDomain (WindowsOptionsSetting s) (TF.Attr s P.Text) where
+instance P.HasJoinDomain (VirtualMachineWindowsOptions s) (TF.Attr s P.Text) where
     joinDomain =
-        P.lens (_joinDomain :: WindowsOptionsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _joinDomain = a } :: WindowsOptionsSetting s)
+        P.lens (_joinDomain :: VirtualMachineWindowsOptions s -> TF.Attr s P.Text)
+               (\s a -> s { _joinDomain = a } :: VirtualMachineWindowsOptions s)
 
-instance P.HasOrganizationName (WindowsOptionsSetting s) (TF.Attr s P.Text) where
+instance P.HasOrganizationName (VirtualMachineWindowsOptions s) (TF.Attr s P.Text) where
     organizationName =
-        P.lens (_organizationName :: WindowsOptionsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _organizationName = a } :: WindowsOptionsSetting s)
+        P.lens (_organizationName :: VirtualMachineWindowsOptions s -> TF.Attr s P.Text)
+               (\s a -> s { _organizationName = a } :: VirtualMachineWindowsOptions s)
 
-instance P.HasProductKey (WindowsOptionsSetting s) (TF.Attr s P.Text) where
+instance P.HasProductKey (VirtualMachineWindowsOptions s) (TF.Attr s P.Text) where
     productKey =
-        P.lens (_productKey :: WindowsOptionsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _productKey = a } :: WindowsOptionsSetting s)
+        P.lens (_productKey :: VirtualMachineWindowsOptions s -> TF.Attr s P.Text)
+               (\s a -> s { _productKey = a } :: VirtualMachineWindowsOptions s)
 
-instance P.HasRunOnceCommandList (WindowsOptionsSetting s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasRunOnceCommandList (VirtualMachineWindowsOptions s) (TF.Attr s [TF.Attr s P.Text]) where
     runOnceCommandList =
-        P.lens (_runOnceCommandList :: WindowsOptionsSetting s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _runOnceCommandList = a } :: WindowsOptionsSetting s)
+        P.lens (_runOnceCommandList :: VirtualMachineWindowsOptions s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _runOnceCommandList = a } :: VirtualMachineWindowsOptions s)
 
-instance P.HasTimeZone (WindowsOptionsSetting s) (TF.Attr s P.Int) where
+instance P.HasTimeZone (VirtualMachineWindowsOptions s) (TF.Attr s P.Int) where
     timeZone =
-        P.lens (_timeZone :: WindowsOptionsSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _timeZone = a } :: WindowsOptionsSetting s)
+        P.lens (_timeZone :: VirtualMachineWindowsOptions s -> TF.Attr s P.Int)
+               (\s a -> s { _timeZone = a } :: VirtualMachineWindowsOptions s)
 
-instance P.HasWorkgroup (WindowsOptionsSetting s) (TF.Attr s P.Text) where
+instance P.HasWorkgroup (VirtualMachineWindowsOptions s) (TF.Attr s P.Text) where
     workgroup =
-        P.lens (_workgroup :: WindowsOptionsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _workgroup = a } :: WindowsOptionsSetting s)
+        P.lens (_workgroup :: VirtualMachineWindowsOptions s -> TF.Attr s P.Text)
+               (\s a -> s { _workgroup = a } :: VirtualMachineWindowsOptions s)
 
 -- | @network_interface@ nested settings.
-data NetworkInterfaceSetting s = NetworkInterfaceSetting'
-    { _dnsDomain            :: TF.Attr s P.Text
-    -- ^ @dns_domain@ - (Optional)
-    -- A DNS search domain to add to the DNS configuration on the virtual machine.
-    --
-    , _dnsServerList        :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @dns_server_list@ - (Optional)
-    -- Network-interface specific DNS settings for Windows operating systems.
-    -- Ignored on Linux.
-    --
-    , _ipv4Address          :: TF.Attr s P.Text
-    -- ^ @ipv4_address@ - (Optional)
-    -- The IPv4 address assigned to this network adapter. If left blank, DHCP is
-    -- used.
-    --
-    , _ipv4Netmask          :: TF.Attr s P.Int
-    -- ^ @ipv4_netmask@ - (Optional)
-    -- The IPv4 CIDR netmask for the supplied IP address. Ignored if DHCP is
-    -- selected.
-    --
-    , _ipv6Address          :: TF.Attr s P.Text
-    -- ^ @ipv6_address@ - (Optional)
-    -- The IPv6 address assigned to this network adapter. If left blank, default
-    -- auto-configuration is used.
-    --
-    , _ipv6Netmask          :: TF.Attr s P.Int
-    -- ^ @ipv6_netmask@ - (Optional)
-    -- The IPv6 CIDR netmask for the supplied IP address. Ignored if
-    -- auto-configuration is selected.
-    --
-    , _adapterType          :: TF.Attr s P.Text
+data VirtualMachineNetworkInterface s = VirtualMachineNetworkInterface'
+    { _adapterType          :: TF.Attr s P.Text
     -- ^ @adapter_type@ - (Optional)
     -- The controller type. Can be one of e1000, e1000e, or vmxnet3.
     --
@@ -646,21 +776,44 @@ data NetworkInterfaceSetting s = NetworkInterfaceSetting'
     -- If true, the mac_address field is treated as a static MAC address and set
     -- accordingly.
     --
+    , _dnsDomain            :: TF.Attr s P.Text
+    -- ^ @dns_domain@ - (Optional)
+    -- A DNS search domain to add to the DNS configuration on the virtual machine.
+    --
+    , _dnsServerList        :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @dns_server_list@ - (Optional)
+    -- Network-interface specific DNS settings for Windows operating systems.
+    -- Ignored on Linux.
+    --
+    , _ipv4Address          :: TF.Attr s P.Text
+    -- ^ @ipv4_address@ - (Optional)
+    -- The IPv4 address assigned to this network adapter. If left blank, DHCP is
+    -- used.
+    --
+    , _ipv4Netmask          :: TF.Attr s P.Int
+    -- ^ @ipv4_netmask@ - (Optional)
+    -- The IPv4 CIDR netmask for the supplied IP address. Ignored if DHCP is
+    -- selected.
+    --
+    , _ipv6Address          :: TF.Attr s P.Text
+    -- ^ @ipv6_address@ - (Optional)
+    -- The IPv6 address assigned to this network adapter. If left blank, default
+    -- auto-configuration is used.
+    --
+    , _ipv6Netmask          :: TF.Attr s P.Int
+    -- ^ @ipv6_netmask@ - (Optional)
+    -- The IPv6 CIDR netmask for the supplied IP address. Ignored if
+    -- auto-configuration is selected.
+    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @network_interface@ settings value.
-newNetworkInterfaceSetting
+newVirtualMachineNetworkInterface
     :: TF.Attr s P.Text -- ^ 'P._networkId': @network_id@
-    -> NetworkInterfaceSetting s
-newNetworkInterfaceSetting _networkId =
-    NetworkInterfaceSetting'
-        { _dnsDomain = TF.Nil
-        , _dnsServerList = TF.Nil
-        , _ipv4Address = TF.Nil
-        , _ipv4Netmask = TF.Nil
-        , _ipv6Address = TF.Nil
-        , _ipv6Netmask = TF.Nil
-        , _adapterType = TF.value "vmxnet3"
+    -> VirtualMachineNetworkInterface s
+newVirtualMachineNetworkInterface _networkId =
+    VirtualMachineNetworkInterface'
+        { _adapterType = TF.value "vmxnet3"
         , _bandwidthLimit = TF.value (-1)
         , _bandwidthReservation = TF.value 0
         , _bandwidthShareCount = TF.Nil
@@ -668,18 +821,18 @@ newNetworkInterfaceSetting _networkId =
         , _macAddress = TF.Nil
         , _networkId = _networkId
         , _useStaticMac = TF.Nil
+        , _dnsDomain = TF.Nil
+        , _dnsServerList = TF.Nil
+        , _ipv4Address = TF.Nil
+        , _ipv4Netmask = TF.Nil
+        , _ipv6Address = TF.Nil
+        , _ipv6Netmask = TF.Nil
         }
 
-instance TF.IsValue  (NetworkInterfaceSetting s)
-instance TF.IsObject (NetworkInterfaceSetting s) where
-    toObject NetworkInterfaceSetting'{..} = P.catMaybes
-        [ TF.assign "dns_domain" <$> TF.attribute _dnsDomain
-        , TF.assign "dns_server_list" <$> TF.attribute _dnsServerList
-        , TF.assign "ipv4_address" <$> TF.attribute _ipv4Address
-        , TF.assign "ipv4_netmask" <$> TF.attribute _ipv4Netmask
-        , TF.assign "ipv6_address" <$> TF.attribute _ipv6Address
-        , TF.assign "ipv6_netmask" <$> TF.attribute _ipv6Netmask
-        , TF.assign "adapter_type" <$> TF.attribute _adapterType
+instance TF.IsValue  (VirtualMachineNetworkInterface s)
+instance TF.IsObject (VirtualMachineNetworkInterface s) where
+    toObject VirtualMachineNetworkInterface'{..} = P.catMaybes
+        [ TF.assign "adapter_type" <$> TF.attribute _adapterType
         , TF.assign "bandwidth_limit" <$> TF.attribute _bandwidthLimit
         , TF.assign "bandwidth_reservation" <$> TF.attribute _bandwidthReservation
         , TF.assign "bandwidth_share_count" <$> TF.attribute _bandwidthShareCount
@@ -687,95 +840,101 @@ instance TF.IsObject (NetworkInterfaceSetting s) where
         , TF.assign "mac_address" <$> TF.attribute _macAddress
         , TF.assign "network_id" <$> TF.attribute _networkId
         , TF.assign "use_static_mac" <$> TF.attribute _useStaticMac
+        , TF.assign "dns_domain" <$> TF.attribute _dnsDomain
+        , TF.assign "dns_server_list" <$> TF.attribute _dnsServerList
+        , TF.assign "ipv4_address" <$> TF.attribute _ipv4Address
+        , TF.assign "ipv4_netmask" <$> TF.attribute _ipv4Netmask
+        , TF.assign "ipv6_address" <$> TF.attribute _ipv6Address
+        , TF.assign "ipv6_netmask" <$> TF.attribute _ipv6Netmask
         ]
 
-instance TF.IsValid (NetworkInterfaceSetting s) where
+instance TF.IsValid (VirtualMachineNetworkInterface s) where
     validator = P.mempty
 
-instance P.HasDnsDomain (NetworkInterfaceSetting s) (TF.Attr s P.Text) where
-    dnsDomain =
-        P.lens (_dnsDomain :: NetworkInterfaceSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _dnsDomain = a } :: NetworkInterfaceSetting s)
-
-instance P.HasDnsServerList (NetworkInterfaceSetting s) (TF.Attr s [TF.Attr s P.Text]) where
-    dnsServerList =
-        P.lens (_dnsServerList :: NetworkInterfaceSetting s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _dnsServerList = a } :: NetworkInterfaceSetting s)
-
-instance P.HasIpv4Address (NetworkInterfaceSetting s) (TF.Attr s P.Text) where
-    ipv4Address =
-        P.lens (_ipv4Address :: NetworkInterfaceSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _ipv4Address = a } :: NetworkInterfaceSetting s)
-
-instance P.HasIpv4Netmask (NetworkInterfaceSetting s) (TF.Attr s P.Int) where
-    ipv4Netmask =
-        P.lens (_ipv4Netmask :: NetworkInterfaceSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _ipv4Netmask = a } :: NetworkInterfaceSetting s)
-
-instance P.HasIpv6Address (NetworkInterfaceSetting s) (TF.Attr s P.Text) where
-    ipv6Address =
-        P.lens (_ipv6Address :: NetworkInterfaceSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _ipv6Address = a } :: NetworkInterfaceSetting s)
-
-instance P.HasIpv6Netmask (NetworkInterfaceSetting s) (TF.Attr s P.Int) where
-    ipv6Netmask =
-        P.lens (_ipv6Netmask :: NetworkInterfaceSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _ipv6Netmask = a } :: NetworkInterfaceSetting s)
-
-instance P.HasAdapterType (NetworkInterfaceSetting s) (TF.Attr s P.Text) where
+instance P.HasAdapterType (VirtualMachineNetworkInterface s) (TF.Attr s P.Text) where
     adapterType =
-        P.lens (_adapterType :: NetworkInterfaceSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _adapterType = a } :: NetworkInterfaceSetting s)
+        P.lens (_adapterType :: VirtualMachineNetworkInterface s -> TF.Attr s P.Text)
+               (\s a -> s { _adapterType = a } :: VirtualMachineNetworkInterface s)
 
-instance P.HasBandwidthLimit (NetworkInterfaceSetting s) (TF.Attr s P.Int) where
+instance P.HasBandwidthLimit (VirtualMachineNetworkInterface s) (TF.Attr s P.Int) where
     bandwidthLimit =
-        P.lens (_bandwidthLimit :: NetworkInterfaceSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _bandwidthLimit = a } :: NetworkInterfaceSetting s)
+        P.lens (_bandwidthLimit :: VirtualMachineNetworkInterface s -> TF.Attr s P.Int)
+               (\s a -> s { _bandwidthLimit = a } :: VirtualMachineNetworkInterface s)
 
-instance P.HasBandwidthReservation (NetworkInterfaceSetting s) (TF.Attr s P.Int) where
+instance P.HasBandwidthReservation (VirtualMachineNetworkInterface s) (TF.Attr s P.Int) where
     bandwidthReservation =
-        P.lens (_bandwidthReservation :: NetworkInterfaceSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _bandwidthReservation = a } :: NetworkInterfaceSetting s)
+        P.lens (_bandwidthReservation :: VirtualMachineNetworkInterface s -> TF.Attr s P.Int)
+               (\s a -> s { _bandwidthReservation = a } :: VirtualMachineNetworkInterface s)
 
-instance P.HasBandwidthShareCount (NetworkInterfaceSetting s) (TF.Attr s P.Int) where
+instance P.HasBandwidthShareCount (VirtualMachineNetworkInterface s) (TF.Attr s P.Int) where
     bandwidthShareCount =
-        P.lens (_bandwidthShareCount :: NetworkInterfaceSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _bandwidthShareCount = a } :: NetworkInterfaceSetting s)
+        P.lens (_bandwidthShareCount :: VirtualMachineNetworkInterface s -> TF.Attr s P.Int)
+               (\s a -> s { _bandwidthShareCount = a } :: VirtualMachineNetworkInterface s)
 
-instance P.HasBandwidthShareLevel (NetworkInterfaceSetting s) (TF.Attr s P.Text) where
+instance P.HasBandwidthShareLevel (VirtualMachineNetworkInterface s) (TF.Attr s P.Text) where
     bandwidthShareLevel =
-        P.lens (_bandwidthShareLevel :: NetworkInterfaceSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _bandwidthShareLevel = a } :: NetworkInterfaceSetting s)
+        P.lens (_bandwidthShareLevel :: VirtualMachineNetworkInterface s -> TF.Attr s P.Text)
+               (\s a -> s { _bandwidthShareLevel = a } :: VirtualMachineNetworkInterface s)
 
-instance P.HasMacAddress (NetworkInterfaceSetting s) (TF.Attr s P.Text) where
+instance P.HasMacAddress (VirtualMachineNetworkInterface s) (TF.Attr s P.Text) where
     macAddress =
-        P.lens (_macAddress :: NetworkInterfaceSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _macAddress = a } :: NetworkInterfaceSetting s)
+        P.lens (_macAddress :: VirtualMachineNetworkInterface s -> TF.Attr s P.Text)
+               (\s a -> s { _macAddress = a } :: VirtualMachineNetworkInterface s)
 
-instance P.HasNetworkId (NetworkInterfaceSetting s) (TF.Attr s P.Text) where
+instance P.HasNetworkId (VirtualMachineNetworkInterface s) (TF.Attr s P.Text) where
     networkId =
-        P.lens (_networkId :: NetworkInterfaceSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _networkId = a } :: NetworkInterfaceSetting s)
+        P.lens (_networkId :: VirtualMachineNetworkInterface s -> TF.Attr s P.Text)
+               (\s a -> s { _networkId = a } :: VirtualMachineNetworkInterface s)
 
-instance P.HasUseStaticMac (NetworkInterfaceSetting s) (TF.Attr s P.Bool) where
+instance P.HasUseStaticMac (VirtualMachineNetworkInterface s) (TF.Attr s P.Bool) where
     useStaticMac =
-        P.lens (_useStaticMac :: NetworkInterfaceSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _useStaticMac = a } :: NetworkInterfaceSetting s)
+        P.lens (_useStaticMac :: VirtualMachineNetworkInterface s -> TF.Attr s P.Bool)
+               (\s a -> s { _useStaticMac = a } :: VirtualMachineNetworkInterface s)
 
-instance s ~ s' => P.HasComputedBandwidthShareCount (TF.Ref s' (NetworkInterfaceSetting s)) (TF.Attr s P.Int) where
+instance P.HasDnsDomain (VirtualMachineNetworkInterface s) (TF.Attr s P.Text) where
+    dnsDomain =
+        P.lens (_dnsDomain :: VirtualMachineNetworkInterface s -> TF.Attr s P.Text)
+               (\s a -> s { _dnsDomain = a } :: VirtualMachineNetworkInterface s)
+
+instance P.HasDnsServerList (VirtualMachineNetworkInterface s) (TF.Attr s [TF.Attr s P.Text]) where
+    dnsServerList =
+        P.lens (_dnsServerList :: VirtualMachineNetworkInterface s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _dnsServerList = a } :: VirtualMachineNetworkInterface s)
+
+instance P.HasIpv4Address (VirtualMachineNetworkInterface s) (TF.Attr s P.Text) where
+    ipv4Address =
+        P.lens (_ipv4Address :: VirtualMachineNetworkInterface s -> TF.Attr s P.Text)
+               (\s a -> s { _ipv4Address = a } :: VirtualMachineNetworkInterface s)
+
+instance P.HasIpv4Netmask (VirtualMachineNetworkInterface s) (TF.Attr s P.Int) where
+    ipv4Netmask =
+        P.lens (_ipv4Netmask :: VirtualMachineNetworkInterface s -> TF.Attr s P.Int)
+               (\s a -> s { _ipv4Netmask = a } :: VirtualMachineNetworkInterface s)
+
+instance P.HasIpv6Address (VirtualMachineNetworkInterface s) (TF.Attr s P.Text) where
+    ipv6Address =
+        P.lens (_ipv6Address :: VirtualMachineNetworkInterface s -> TF.Attr s P.Text)
+               (\s a -> s { _ipv6Address = a } :: VirtualMachineNetworkInterface s)
+
+instance P.HasIpv6Netmask (VirtualMachineNetworkInterface s) (TF.Attr s P.Int) where
+    ipv6Netmask =
+        P.lens (_ipv6Netmask :: VirtualMachineNetworkInterface s -> TF.Attr s P.Int)
+               (\s a -> s { _ipv6Netmask = a } :: VirtualMachineNetworkInterface s)
+
+instance s ~ s' => P.HasComputedBandwidthShareCount (TF.Ref s' (VirtualMachineNetworkInterface s)) (TF.Attr s P.Int) where
     computedBandwidthShareCount x = TF.compute (TF.refKey x) "bandwidth_share_count"
 
-instance s ~ s' => P.HasComputedDeviceAddress (TF.Ref s' (NetworkInterfaceSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDeviceAddress (TF.Ref s' (VirtualMachineNetworkInterface s)) (TF.Attr s P.Text) where
     computedDeviceAddress x = TF.compute (TF.refKey x) "device_address"
 
-instance s ~ s' => P.HasComputedKey (TF.Ref s' (NetworkInterfaceSetting s)) (TF.Attr s P.Int) where
+instance s ~ s' => P.HasComputedKey (TF.Ref s' (VirtualMachineNetworkInterface s)) (TF.Attr s P.Int) where
     computedKey x = TF.compute (TF.refKey x) "key"
 
-instance s ~ s' => P.HasComputedMacAddress (TF.Ref s' (NetworkInterfaceSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedMacAddress (TF.Ref s' (VirtualMachineNetworkInterface s)) (TF.Attr s P.Text) where
     computedMacAddress x = TF.compute (TF.refKey x) "mac_address"
 
 -- | @linux_options@ nested settings.
-data LinuxOptionsSetting s = LinuxOptionsSetting'
+data VirtualMachineLinuxOptions s = VirtualMachineLinuxOptions'
     { _domain     :: TF.Attr s P.Text
     -- ^ @domain@ - (Required)
     -- The FQDN for this virtual machine.
@@ -796,52 +955,52 @@ data LinuxOptionsSetting s = LinuxOptionsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @linux_options@ settings value.
-newLinuxOptionsSetting
+newVirtualMachineLinuxOptions
     :: TF.Attr s P.Text -- ^ 'P._domain': @domain@
     -> TF.Attr s P.Text -- ^ 'P._hostName': @host_name@
-    -> LinuxOptionsSetting s
-newLinuxOptionsSetting _domain _hostName =
-    LinuxOptionsSetting'
+    -> VirtualMachineLinuxOptions s
+newVirtualMachineLinuxOptions _domain _hostName =
+    VirtualMachineLinuxOptions'
         { _domain = _domain
         , _hostName = _hostName
         , _hwClockUtc = TF.value P.True
         , _timeZone = TF.Nil
         }
 
-instance TF.IsValue  (LinuxOptionsSetting s)
-instance TF.IsObject (LinuxOptionsSetting s) where
-    toObject LinuxOptionsSetting'{..} = P.catMaybes
+instance TF.IsValue  (VirtualMachineLinuxOptions s)
+instance TF.IsObject (VirtualMachineLinuxOptions s) where
+    toObject VirtualMachineLinuxOptions'{..} = P.catMaybes
         [ TF.assign "domain" <$> TF.attribute _domain
         , TF.assign "host_name" <$> TF.attribute _hostName
         , TF.assign "hw_clock_utc" <$> TF.attribute _hwClockUtc
         , TF.assign "time_zone" <$> TF.attribute _timeZone
         ]
 
-instance TF.IsValid (LinuxOptionsSetting s) where
+instance TF.IsValid (VirtualMachineLinuxOptions s) where
     validator = P.mempty
 
-instance P.HasDomain (LinuxOptionsSetting s) (TF.Attr s P.Text) where
+instance P.HasDomain (VirtualMachineLinuxOptions s) (TF.Attr s P.Text) where
     domain =
-        P.lens (_domain :: LinuxOptionsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _domain = a } :: LinuxOptionsSetting s)
+        P.lens (_domain :: VirtualMachineLinuxOptions s -> TF.Attr s P.Text)
+               (\s a -> s { _domain = a } :: VirtualMachineLinuxOptions s)
 
-instance P.HasHostName (LinuxOptionsSetting s) (TF.Attr s P.Text) where
+instance P.HasHostName (VirtualMachineLinuxOptions s) (TF.Attr s P.Text) where
     hostName =
-        P.lens (_hostName :: LinuxOptionsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _hostName = a } :: LinuxOptionsSetting s)
+        P.lens (_hostName :: VirtualMachineLinuxOptions s -> TF.Attr s P.Text)
+               (\s a -> s { _hostName = a } :: VirtualMachineLinuxOptions s)
 
-instance P.HasHwClockUtc (LinuxOptionsSetting s) (TF.Attr s P.Bool) where
+instance P.HasHwClockUtc (VirtualMachineLinuxOptions s) (TF.Attr s P.Bool) where
     hwClockUtc =
-        P.lens (_hwClockUtc :: LinuxOptionsSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _hwClockUtc = a } :: LinuxOptionsSetting s)
+        P.lens (_hwClockUtc :: VirtualMachineLinuxOptions s -> TF.Attr s P.Bool)
+               (\s a -> s { _hwClockUtc = a } :: VirtualMachineLinuxOptions s)
 
-instance P.HasTimeZone (LinuxOptionsSetting s) (TF.Attr s P.Text) where
+instance P.HasTimeZone (VirtualMachineLinuxOptions s) (TF.Attr s P.Text) where
     timeZone =
-        P.lens (_timeZone :: LinuxOptionsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _timeZone = a } :: LinuxOptionsSetting s)
+        P.lens (_timeZone :: VirtualMachineLinuxOptions s -> TF.Attr s P.Text)
+               (\s a -> s { _timeZone = a } :: VirtualMachineLinuxOptions s)
 
 -- | @disk@ nested settings.
-data DiskSetting s = DiskSetting'
+data VirtualMachineDisk s = VirtualMachineDisk'
     { _attach          :: TF.Attr s P.Bool
     -- ^ @attach@ - (Optional)
     -- If this is true, the disk is attached instead of created. Implies
@@ -922,10 +1081,10 @@ data DiskSetting s = DiskSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @disk@ settings value.
-newDiskSetting
-    :: DiskSetting s
-newDiskSetting =
-    DiskSetting'
+newVirtualMachineDisk
+    :: VirtualMachineDisk s
+newVirtualMachineDisk =
+    VirtualMachineDisk'
         { _attach = TF.value P.False
         , _datastoreId = TF.Nil
         , _diskMode = TF.value "persistent"
@@ -944,9 +1103,9 @@ newDiskSetting =
         , _writeThrough = TF.value P.False
         }
 
-instance TF.IsValue  (DiskSetting s)
-instance TF.IsObject (DiskSetting s) where
-    toObject DiskSetting'{..} = P.catMaybes
+instance TF.IsValue  (VirtualMachineDisk s)
+instance TF.IsObject (VirtualMachineDisk s) where
+    toObject VirtualMachineDisk'{..} = P.catMaybes
         [ TF.assign "attach" <$> TF.attribute _attach
         , TF.assign "datastore_id" <$> TF.attribute _datastoreId
         , TF.assign "disk_mode" <$> TF.attribute _diskMode
@@ -965,198 +1124,129 @@ instance TF.IsObject (DiskSetting s) where
         , TF.assign "write_through" <$> TF.attribute _writeThrough
         ]
 
-instance TF.IsValid (DiskSetting s) where
+instance TF.IsValid (VirtualMachineDisk s) where
     validator = P.mempty
 
-instance P.HasAttach (DiskSetting s) (TF.Attr s P.Bool) where
+instance P.HasAttach (VirtualMachineDisk s) (TF.Attr s P.Bool) where
     attach =
-        P.lens (_attach :: DiskSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _attach = a } :: DiskSetting s)
+        P.lens (_attach :: VirtualMachineDisk s -> TF.Attr s P.Bool)
+               (\s a -> s { _attach = a } :: VirtualMachineDisk s)
 
-instance P.HasDatastoreId (DiskSetting s) (TF.Attr s P.Text) where
+instance P.HasDatastoreId (VirtualMachineDisk s) (TF.Attr s P.Text) where
     datastoreId =
-        P.lens (_datastoreId :: DiskSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _datastoreId = a } :: DiskSetting s)
+        P.lens (_datastoreId :: VirtualMachineDisk s -> TF.Attr s P.Text)
+               (\s a -> s { _datastoreId = a } :: VirtualMachineDisk s)
 
-instance P.HasDiskMode (DiskSetting s) (TF.Attr s P.Text) where
+instance P.HasDiskMode (VirtualMachineDisk s) (TF.Attr s P.Text) where
     diskMode =
-        P.lens (_diskMode :: DiskSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _diskMode = a } :: DiskSetting s)
+        P.lens (_diskMode :: VirtualMachineDisk s -> TF.Attr s P.Text)
+               (\s a -> s { _diskMode = a } :: VirtualMachineDisk s)
 
-instance P.HasDiskSharing (DiskSetting s) (TF.Attr s P.Text) where
+instance P.HasDiskSharing (VirtualMachineDisk s) (TF.Attr s P.Text) where
     diskSharing =
-        P.lens (_diskSharing :: DiskSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _diskSharing = a } :: DiskSetting s)
+        P.lens (_diskSharing :: VirtualMachineDisk s -> TF.Attr s P.Text)
+               (\s a -> s { _diskSharing = a } :: VirtualMachineDisk s)
 
-instance P.HasEagerlyScrub (DiskSetting s) (TF.Attr s P.Bool) where
+instance P.HasEagerlyScrub (VirtualMachineDisk s) (TF.Attr s P.Bool) where
     eagerlyScrub =
-        P.lens (_eagerlyScrub :: DiskSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _eagerlyScrub = a } :: DiskSetting s)
+        P.lens (_eagerlyScrub :: VirtualMachineDisk s -> TF.Attr s P.Bool)
+               (\s a -> s { _eagerlyScrub = a } :: VirtualMachineDisk s)
 
-instance P.HasIoLimit (DiskSetting s) (TF.Attr s P.Int) where
+instance P.HasIoLimit (VirtualMachineDisk s) (TF.Attr s P.Int) where
     ioLimit =
-        P.lens (_ioLimit :: DiskSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _ioLimit = a } :: DiskSetting s)
+        P.lens (_ioLimit :: VirtualMachineDisk s -> TF.Attr s P.Int)
+               (\s a -> s { _ioLimit = a } :: VirtualMachineDisk s)
 
-instance P.HasIoReservation (DiskSetting s) (TF.Attr s P.Int) where
+instance P.HasIoReservation (VirtualMachineDisk s) (TF.Attr s P.Int) where
     ioReservation =
-        P.lens (_ioReservation :: DiskSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _ioReservation = a } :: DiskSetting s)
+        P.lens (_ioReservation :: VirtualMachineDisk s -> TF.Attr s P.Int)
+               (\s a -> s { _ioReservation = a } :: VirtualMachineDisk s)
 
-instance P.HasIoShareCount (DiskSetting s) (TF.Attr s P.Int) where
+instance P.HasIoShareCount (VirtualMachineDisk s) (TF.Attr s P.Int) where
     ioShareCount =
-        P.lens (_ioShareCount :: DiskSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _ioShareCount = a } :: DiskSetting s)
+        P.lens (_ioShareCount :: VirtualMachineDisk s -> TF.Attr s P.Int)
+               (\s a -> s { _ioShareCount = a } :: VirtualMachineDisk s)
 
-instance P.HasIoShareLevel (DiskSetting s) (TF.Attr s P.Text) where
+instance P.HasIoShareLevel (VirtualMachineDisk s) (TF.Attr s P.Text) where
     ioShareLevel =
-        P.lens (_ioShareLevel :: DiskSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _ioShareLevel = a } :: DiskSetting s)
+        P.lens (_ioShareLevel :: VirtualMachineDisk s -> TF.Attr s P.Text)
+               (\s a -> s { _ioShareLevel = a } :: VirtualMachineDisk s)
 
-instance P.HasKeepOnRemove (DiskSetting s) (TF.Attr s P.Bool) where
+instance P.HasKeepOnRemove (VirtualMachineDisk s) (TF.Attr s P.Bool) where
     keepOnRemove =
-        P.lens (_keepOnRemove :: DiskSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _keepOnRemove = a } :: DiskSetting s)
+        P.lens (_keepOnRemove :: VirtualMachineDisk s -> TF.Attr s P.Bool)
+               (\s a -> s { _keepOnRemove = a } :: VirtualMachineDisk s)
 
-instance P.HasLabel (DiskSetting s) (TF.Attr s P.Text) where
+instance P.HasLabel (VirtualMachineDisk s) (TF.Attr s P.Text) where
     label =
-        P.lens (_label :: DiskSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _label = a } :: DiskSetting s)
+        P.lens (_label :: VirtualMachineDisk s -> TF.Attr s P.Text)
+               (\s a -> s { _label = a } :: VirtualMachineDisk s)
 
-instance P.HasPath (DiskSetting s) (TF.Attr s P.Text) where
+instance P.HasPath (VirtualMachineDisk s) (TF.Attr s P.Text) where
     path =
-        P.lens (_path :: DiskSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _path = a } :: DiskSetting s)
+        P.lens (_path :: VirtualMachineDisk s -> TF.Attr s P.Text)
+               (\s a -> s { _path = a } :: VirtualMachineDisk s)
 
-instance P.HasSize (DiskSetting s) (TF.Attr s P.Int) where
+instance P.HasSize (VirtualMachineDisk s) (TF.Attr s P.Int) where
     size =
-        P.lens (_size :: DiskSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _size = a } :: DiskSetting s)
+        P.lens (_size :: VirtualMachineDisk s -> TF.Attr s P.Int)
+               (\s a -> s { _size = a } :: VirtualMachineDisk s)
 
-instance P.HasThinProvisioned (DiskSetting s) (TF.Attr s P.Bool) where
+instance P.HasThinProvisioned (VirtualMachineDisk s) (TF.Attr s P.Bool) where
     thinProvisioned =
-        P.lens (_thinProvisioned :: DiskSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _thinProvisioned = a } :: DiskSetting s)
+        P.lens (_thinProvisioned :: VirtualMachineDisk s -> TF.Attr s P.Bool)
+               (\s a -> s { _thinProvisioned = a } :: VirtualMachineDisk s)
 
-instance P.HasUnitNumber (DiskSetting s) (TF.Attr s P.Int) where
+instance P.HasUnitNumber (VirtualMachineDisk s) (TF.Attr s P.Int) where
     unitNumber =
-        P.lens (_unitNumber :: DiskSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _unitNumber = a } :: DiskSetting s)
+        P.lens (_unitNumber :: VirtualMachineDisk s -> TF.Attr s P.Int)
+               (\s a -> s { _unitNumber = a } :: VirtualMachineDisk s)
 
-instance P.HasWriteThrough (DiskSetting s) (TF.Attr s P.Bool) where
+instance P.HasWriteThrough (VirtualMachineDisk s) (TF.Attr s P.Bool) where
     writeThrough =
-        P.lens (_writeThrough :: DiskSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _writeThrough = a } :: DiskSetting s)
+        P.lens (_writeThrough :: VirtualMachineDisk s -> TF.Attr s P.Bool)
+               (\s a -> s { _writeThrough = a } :: VirtualMachineDisk s)
 
-instance s ~ s' => P.HasComputedDeviceAddress (TF.Ref s' (DiskSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDeviceAddress (TF.Ref s' (VirtualMachineDisk s)) (TF.Attr s P.Text) where
     computedDeviceAddress x = TF.compute (TF.refKey x) "device_address"
 
-instance s ~ s' => P.HasComputedKey (TF.Ref s' (DiskSetting s)) (TF.Attr s P.Int) where
+instance s ~ s' => P.HasComputedKey (TF.Ref s' (VirtualMachineDisk s)) (TF.Attr s P.Int) where
     computedKey x = TF.compute (TF.refKey x) "key"
 
-instance s ~ s' => P.HasComputedPath (TF.Ref s' (DiskSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPath (TF.Ref s' (VirtualMachineDisk s)) (TF.Attr s P.Text) where
     computedPath x = TF.compute (TF.refKey x) "path"
 
-instance s ~ s' => P.HasComputedUuid (TF.Ref s' (DiskSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedUuid (TF.Ref s' (VirtualMachineDisk s)) (TF.Attr s P.Text) where
     computedUuid x = TF.compute (TF.refKey x) "uuid"
 
 -- | @disks@ nested settings.
-data DisksSetting s = DisksSetting'
+data VirtualMachineDisks s = VirtualMachineDisks'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @disks@ settings value.
-newDisksSetting
-    :: DisksSetting s
-newDisksSetting =
-    DisksSetting'
+newVirtualMachineDisks
+    :: VirtualMachineDisks s
+newVirtualMachineDisks =
+    VirtualMachineDisks'
 
-instance TF.IsValue  (DisksSetting s)
-instance TF.IsObject (DisksSetting s) where
-    toObject DisksSetting' = []
+instance TF.IsValue  (VirtualMachineDisks s)
+instance TF.IsObject (VirtualMachineDisks s) where
+    toObject VirtualMachineDisks' = []
 
-instance TF.IsValid (DisksSetting s) where
+instance TF.IsValid (VirtualMachineDisks s) where
     validator = P.mempty
 
-instance s ~ s' => P.HasComputedEagerlyScrub (TF.Ref s' (DisksSetting s)) (TF.Attr s P.Bool) where
+instance s ~ s' => P.HasComputedEagerlyScrub (TF.Ref s' (VirtualMachineDisks s)) (TF.Attr s P.Bool) where
     computedEagerlyScrub x = TF.compute (TF.refKey x) "eagerly_scrub"
 
-instance s ~ s' => P.HasComputedSize (TF.Ref s' (DisksSetting s)) (TF.Attr s P.Int) where
+instance s ~ s' => P.HasComputedSize (TF.Ref s' (VirtualMachineDisks s)) (TF.Attr s P.Int) where
     computedSize x = TF.compute (TF.refKey x) "size"
 
-instance s ~ s' => P.HasComputedThinProvisioned (TF.Ref s' (DisksSetting s)) (TF.Attr s P.Bool) where
+instance s ~ s' => P.HasComputedThinProvisioned (TF.Ref s' (VirtualMachineDisks s)) (TF.Attr s P.Bool) where
     computedThinProvisioned x = TF.compute (TF.refKey x) "thin_provisioned"
 
--- | @host@ nested settings.
-data HostSetting s = HostSetting'
-    { _devices      :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text))
-    -- ^ @devices@ - (Required)
-    -- Name of the physical NIC to be added to the proxy switch.
-    --
-    , _hostSystemId :: TF.Attr s P.Text
-    -- ^ @host_system_id@ - (Required)
-    -- The managed object ID of the host this specification applies to.
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @host@ settings value.
-newHostSetting
-    :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ 'P._devices': @devices@
-    -> TF.Attr s P.Text -- ^ 'P._hostSystemId': @host_system_id@
-    -> HostSetting s
-newHostSetting _devices _hostSystemId =
-    HostSetting'
-        { _devices = _devices
-        , _hostSystemId = _hostSystemId
-        }
-
-instance TF.IsValue  (HostSetting s)
-instance TF.IsObject (HostSetting s) where
-    toObject HostSetting'{..} = P.catMaybes
-        [ TF.assign "devices" <$> TF.attribute _devices
-        , TF.assign "host_system_id" <$> TF.attribute _hostSystemId
-        ]
-
-instance TF.IsValid (HostSetting s) where
-    validator = P.mempty
-
-instance P.HasDevices (HostSetting s) (TF.Attr s (P.NonEmpty (TF.Attr s P.Text))) where
-    devices =
-        P.lens (_devices :: HostSetting s -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)))
-               (\s a -> s { _devices = a } :: HostSetting s)
-
-instance P.HasHostSystemId (HostSetting s) (TF.Attr s P.Text) where
-    hostSystemId =
-        P.lens (_hostSystemId :: HostSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _hostSystemId = a } :: HostSetting s)
-
--- | @ports@ nested settings.
-data PortsSetting s = PortsSetting'
-    deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @ports@ settings value.
-newPortsSetting
-    :: PortsSetting s
-newPortsSetting =
-    PortsSetting'
-
-instance TF.IsValue  (PortsSetting s)
-instance TF.IsObject (PortsSetting s) where
-    toObject PortsSetting' = []
-
-instance TF.IsValid (PortsSetting s) where
-    validator = P.mempty
-
-instance s ~ s' => P.HasComputedKey (TF.Ref s' (PortsSetting s)) (TF.Attr s P.Text) where
-    computedKey x = TF.compute (TF.refKey x) "key"
-
-instance s ~ s' => P.HasComputedMacAddresses (TF.Ref s' (PortsSetting s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedMacAddresses x = TF.compute (TF.refKey x) "mac_addresses"
-
-instance s ~ s' => P.HasComputedType (TF.Ref s' (PortsSetting s)) (TF.Attr s P.Text) where
-    computedType x = TF.compute (TF.refKey x) "type"
-
 -- | @vapp@ nested settings.
-data VappSetting s = VappSetting'
+data VirtualMachineVapp s = VirtualMachineVapp'
     { _properties :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @properties@ - (Optional)
     -- A map of customizable vApp properties and their values. Allows customization
@@ -1165,66 +1255,23 @@ data VappSetting s = VappSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @vapp@ settings value.
-newVappSetting
-    :: VappSetting s
-newVappSetting =
-    VappSetting'
+newVirtualMachineVapp
+    :: VirtualMachineVapp s
+newVirtualMachineVapp =
+    VirtualMachineVapp'
         { _properties = TF.Nil
         }
 
-instance TF.IsValue  (VappSetting s)
-instance TF.IsObject (VappSetting s) where
-    toObject VappSetting'{..} = P.catMaybes
+instance TF.IsValue  (VirtualMachineVapp s)
+instance TF.IsObject (VirtualMachineVapp s) where
+    toObject VirtualMachineVapp'{..} = P.catMaybes
         [ TF.assign "properties" <$> TF.attribute _properties
         ]
 
-instance TF.IsValid (VappSetting s) where
+instance TF.IsValid (VirtualMachineVapp s) where
     validator = P.mempty
 
-instance P.HasProperties (VappSetting s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+instance P.HasProperties (VirtualMachineVapp s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     properties =
-        P.lens (_properties :: VappSetting s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _properties = a } :: VappSetting s)
-
--- | @vlan_range@ nested settings.
-data VlanRangeSetting s = VlanRangeSetting'
-    { _maxVlan :: TF.Attr s P.Int
-    -- ^ @max_vlan@ - (Required)
-    -- The minimum VLAN to use in the range.
-    --
-    , _minVlan :: TF.Attr s P.Int
-    -- ^ @min_vlan@ - (Required)
-    -- The minimum VLAN to use in the range.
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @vlan_range@ settings value.
-newVlanRangeSetting
-    :: TF.Attr s P.Int -- ^ 'P._maxVlan': @max_vlan@
-    -> TF.Attr s P.Int -- ^ 'P._minVlan': @min_vlan@
-    -> VlanRangeSetting s
-newVlanRangeSetting _maxVlan _minVlan =
-    VlanRangeSetting'
-        { _maxVlan = _maxVlan
-        , _minVlan = _minVlan
-        }
-
-instance TF.IsValue  (VlanRangeSetting s)
-instance TF.IsObject (VlanRangeSetting s) where
-    toObject VlanRangeSetting'{..} = P.catMaybes
-        [ TF.assign "max_vlan" <$> TF.attribute _maxVlan
-        , TF.assign "min_vlan" <$> TF.attribute _minVlan
-        ]
-
-instance TF.IsValid (VlanRangeSetting s) where
-    validator = P.mempty
-
-instance P.HasMaxVlan (VlanRangeSetting s) (TF.Attr s P.Int) where
-    maxVlan =
-        P.lens (_maxVlan :: VlanRangeSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _maxVlan = a } :: VlanRangeSetting s)
-
-instance P.HasMinVlan (VlanRangeSetting s) (TF.Attr s P.Int) where
-    minVlan =
-        P.lens (_minVlan :: VlanRangeSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _minVlan = a } :: VlanRangeSetting s)
+        P.lens (_properties :: VirtualMachineVapp s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _properties = a } :: VirtualMachineVapp s)

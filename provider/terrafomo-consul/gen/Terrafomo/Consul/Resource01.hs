@@ -158,7 +158,7 @@ data CatalogEntryResource s = CatalogEntryResource'
     , _node       :: TF.Attr s P.Text
     -- ^ @node@ - (Required, Forces New)
     --
-    , _service    :: TF.Attr s [TF.Attr s (ServiceSetting s)]
+    , _service    :: TF.Attr s [TF.Attr s (CatalogEntryService s)]
     -- ^ @service@ - (Optional, Forces New)
     --
     , _token      :: TF.Attr s P.Text
@@ -208,9 +208,9 @@ instance P.HasNode (CatalogEntryResource s) (TF.Attr s P.Text) where
         P.lens (_node :: CatalogEntryResource s -> TF.Attr s P.Text)
                (\s a -> s { _node = a } :: CatalogEntryResource s)
 
-instance P.HasService (CatalogEntryResource s) (TF.Attr s [TF.Attr s (ServiceSetting s)]) where
+instance P.HasService (CatalogEntryResource s) (TF.Attr s [TF.Attr s (CatalogEntryService s)]) where
     service =
-        P.lens (_service :: CatalogEntryResource s -> TF.Attr s [TF.Attr s (ServiceSetting s)])
+        P.lens (_service :: CatalogEntryResource s -> TF.Attr s [TF.Attr s (CatalogEntryService s)])
                (\s a -> s { _service = a } :: CatalogEntryResource s)
 
 instance P.HasToken (CatalogEntryResource s) (TF.Attr s P.Text) where
@@ -380,7 +380,7 @@ data KeysResource s = KeysResource'
     { _datacenter :: TF.Attr s P.Text
     -- ^ @datacenter@ - (Optional, Forces New)
     --
-    , _key        :: TF.Attr s [TF.Attr s (KeySetting s)]
+    , _key        :: TF.Attr s [TF.Attr s (KeysKey s)]
     -- ^ @key@ - (Optional)
     --
     , _token      :: TF.Attr s P.Text
@@ -414,9 +414,9 @@ instance P.HasDatacenter (KeysResource s) (TF.Attr s P.Text) where
         P.lens (_datacenter :: KeysResource s -> TF.Attr s P.Text)
                (\s a -> s { _datacenter = a } :: KeysResource s)
 
-instance P.HasKey (KeysResource s) (TF.Attr s [TF.Attr s (KeySetting s)]) where
+instance P.HasKey (KeysResource s) (TF.Attr s [TF.Attr s (KeysKey s)]) where
     key =
-        P.lens (_key :: KeysResource s -> TF.Attr s [TF.Attr s (KeySetting s)])
+        P.lens (_key :: KeysResource s -> TF.Attr s [TF.Attr s (KeysKey s)])
                (\s a -> s { _key = a } :: KeysResource s)
 
 instance P.HasToken (KeysResource s) (TF.Attr s P.Text) where
@@ -511,10 +511,10 @@ data PreparedQueryResource s = PreparedQueryResource'
     { _datacenter  :: TF.Attr s P.Text
     -- ^ @datacenter@ - (Optional)
     --
-    , _dns         :: TF.Attr s (DnsSetting s)
+    , _dns         :: TF.Attr s (PreparedQueryDns s)
     -- ^ @dns@ - (Optional)
     --
-    , _failover    :: TF.Attr s (FailoverSetting s)
+    , _failover    :: TF.Attr s (PreparedQueryFailover s)
     -- ^ @failover@ - (Optional)
     --
     , _name        :: TF.Attr s P.Text
@@ -538,7 +538,7 @@ data PreparedQueryResource s = PreparedQueryResource'
     , _tags        :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @tags@ - (Optional)
     --
-    , _template    :: TF.Attr s (TemplateSetting s)
+    , _template    :: TF.Attr s (PreparedQueryTemplate s)
     -- ^ @template@ - (Optional)
     --
     , _token       :: TF.Attr s P.Text
@@ -588,15 +588,15 @@ instance TF.IsValid (PreparedQueryResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_dns"
                   (_dns
-                      :: PreparedQueryResource s -> TF.Attr s (DnsSetting s))
+                      :: PreparedQueryResource s -> TF.Attr s (PreparedQueryDns s))
                   TF.validator
            P.<> TF.settingsValidator "_failover"
                   (_failover
-                      :: PreparedQueryResource s -> TF.Attr s (FailoverSetting s))
+                      :: PreparedQueryResource s -> TF.Attr s (PreparedQueryFailover s))
                   TF.validator
            P.<> TF.settingsValidator "_template"
                   (_template
-                      :: PreparedQueryResource s -> TF.Attr s (TemplateSetting s))
+                      :: PreparedQueryResource s -> TF.Attr s (PreparedQueryTemplate s))
                   TF.validator
 
 instance P.HasDatacenter (PreparedQueryResource s) (TF.Attr s P.Text) where
@@ -604,14 +604,14 @@ instance P.HasDatacenter (PreparedQueryResource s) (TF.Attr s P.Text) where
         P.lens (_datacenter :: PreparedQueryResource s -> TF.Attr s P.Text)
                (\s a -> s { _datacenter = a } :: PreparedQueryResource s)
 
-instance P.HasDns (PreparedQueryResource s) (TF.Attr s (DnsSetting s)) where
+instance P.HasDns (PreparedQueryResource s) (TF.Attr s (PreparedQueryDns s)) where
     dns =
-        P.lens (_dns :: PreparedQueryResource s -> TF.Attr s (DnsSetting s))
+        P.lens (_dns :: PreparedQueryResource s -> TF.Attr s (PreparedQueryDns s))
                (\s a -> s { _dns = a } :: PreparedQueryResource s)
 
-instance P.HasFailover (PreparedQueryResource s) (TF.Attr s (FailoverSetting s)) where
+instance P.HasFailover (PreparedQueryResource s) (TF.Attr s (PreparedQueryFailover s)) where
     failover =
-        P.lens (_failover :: PreparedQueryResource s -> TF.Attr s (FailoverSetting s))
+        P.lens (_failover :: PreparedQueryResource s -> TF.Attr s (PreparedQueryFailover s))
                (\s a -> s { _failover = a } :: PreparedQueryResource s)
 
 instance P.HasName (PreparedQueryResource s) (TF.Attr s P.Text) where
@@ -649,9 +649,9 @@ instance P.HasTags (PreparedQueryResource s) (TF.Attr s [TF.Attr s P.Text]) wher
         P.lens (_tags :: PreparedQueryResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _tags = a } :: PreparedQueryResource s)
 
-instance P.HasTemplate (PreparedQueryResource s) (TF.Attr s (TemplateSetting s)) where
+instance P.HasTemplate (PreparedQueryResource s) (TF.Attr s (PreparedQueryTemplate s)) where
     template =
-        P.lens (_template :: PreparedQueryResource s -> TF.Attr s (TemplateSetting s))
+        P.lens (_template :: PreparedQueryResource s -> TF.Attr s (PreparedQueryTemplate s))
                (\s a -> s { _template = a } :: PreparedQueryResource s)
 
 instance P.HasToken (PreparedQueryResource s) (TF.Attr s P.Text) where

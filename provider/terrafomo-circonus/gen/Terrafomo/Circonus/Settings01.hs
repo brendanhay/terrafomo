@@ -17,129 +17,137 @@
 --
 module Terrafomo.Circonus.Settings01
     (
-    -- ** alert_option
-      AlertOptionSetting (..)
-    , newAlertOptionSetting
-
-    -- ** caql
-    , CaqlSetting (..)
-    , newCaqlSetting
-
-    -- ** cloudwatch
-    , CloudwatchSetting (..)
-    , newCloudwatchSetting
-
-    -- ** collector
-    , CollectorSetting (..)
-    , newCollectorSetting
-
-    -- ** consul
-    , ConsulSetting (..)
-    , newConsulSetting
-
-    -- ** details
-    , DetailsSetting (..)
-    , newDetailsSetting
-
-    -- ** email
-    , EmailSetting (..)
-    , newEmailSetting
-
-    -- ** http
-    , HttpSetting (..)
-    , newHttpSetting
-
-    -- ** httptrap
-    , HttptrapSetting (..)
-    , newHttptrapSetting
-
-    -- ** icmp_ping
-    , IcmpPingSetting (..)
-    , newIcmpPingSetting
-
-    -- ** if
-    , If'Setting (..)
-    , newIf'Setting
-
-    -- ** value
-    , ValueSetting (..)
-    , newValueSetting
-
-    -- ** over
-    , OverSetting (..)
-    , newOverSetting
-
-    -- ** then
-    , Then'Setting (..)
-    , newThen'Setting
-
     -- ** invites
-    , InvitesSetting (..)
-    , newInvitesSetting
-
-    -- ** irc
-    , IrcSetting (..)
-    , newIrcSetting
-
-    -- ** json
-    , JsonSetting (..)
-    , newJsonSetting
-
-    -- ** metric_cluster
-    , MetricClusterSetting (..)
-    , newMetricClusterSetting
-
-    -- ** metric
-    , MetricSetting (..)
-    , newMetricSetting
-
-    -- ** mysql
-    , MysqlSetting (..)
-    , newMysqlSetting
-
-    -- ** pager_duty
-    , PagerDutySetting (..)
-    , newPagerDutySetting
-
-    -- ** postgresql
-    , PostgresqlSetting (..)
-    , newPostgresqlSetting
-
-    -- ** query
-    , QuerySetting (..)
-    , newQuerySetting
-
-    -- ** slack
-    , SlackSetting (..)
-    , newSlackSetting
-
-    -- ** sms
-    , SmsSetting (..)
-    , newSmsSetting
-
-    -- ** statsd
-    , StatsdSetting (..)
-    , newStatsdSetting
-
-    -- ** tcp
-    , TcpSetting (..)
-    , newTcpSetting
+      AccountInvites (..)
+    , newAccountInvites
 
     -- ** usage
-    , UsageSetting (..)
-    , newUsageSetting
+    , AccountUsage (..)
+    , newAccountUsage
 
     -- ** users
-    , UsersSetting (..)
-    , newUsersSetting
+    , AccountUsers (..)
+    , newAccountUsers
+
+    -- ** caql
+    , CheckCaql (..)
+    , newCheckCaql
+
+    -- ** cloudwatch
+    , CheckCloudwatch (..)
+    , newCheckCloudwatch
+
+    -- ** collector
+    , CheckCollector (..)
+    , newCheckCollector
+
+    -- ** consul
+    , CheckConsul (..)
+    , newCheckConsul
+
+    -- ** http
+    , CheckHttp (..)
+    , newCheckHttp
+
+    -- ** httptrap
+    , CheckHttptrap (..)
+    , newCheckHttptrap
+
+    -- ** icmp_ping
+    , CheckIcmpPing (..)
+    , newCheckIcmpPing
+
+    -- ** json
+    , CheckJson (..)
+    , newCheckJson
+
+    -- ** metric
+    , CheckMetric (..)
+    , newCheckMetric
+
+    -- ** mysql
+    , CheckMysql (..)
+    , newCheckMysql
+
+    -- ** postgresql
+    , CheckPostgresql (..)
+    , newCheckPostgresql
+
+    -- ** statsd
+    , CheckStatsd (..)
+    , newCheckStatsd
+
+    -- ** tcp
+    , CheckTcp (..)
+    , newCheckTcp
+
+    -- ** details
+    , CollectorDetails (..)
+    , newCollectorDetails
+
+    -- ** alert_option
+    , ContactGroupAlertOption (..)
+    , newContactGroupAlertOption
+
+    -- ** email
+    , ContactGroupEmail (..)
+    , newContactGroupEmail
+
+    -- ** http
+    , ContactGroupHttp (..)
+    , newContactGroupHttp
+
+    -- ** irc
+    , ContactGroupIrc (..)
+    , newContactGroupIrc
+
+    -- ** pager_duty
+    , ContactGroupPagerDuty (..)
+    , newContactGroupPagerDuty
+
+    -- ** slack
+    , ContactGroupSlack (..)
+    , newContactGroupSlack
+
+    -- ** sms
+    , ContactGroupSms (..)
+    , newContactGroupSms
 
     -- ** victorops
-    , VictoropsSetting (..)
-    , newVictoropsSetting
+    , ContactGroupVictorops (..)
+    , newContactGroupVictorops
 
     -- ** xmpp
-    , XmppSetting (..)
-    , newXmppSetting
+    , ContactGroupXmpp (..)
+    , newContactGroupXmpp
+
+    -- ** metric
+    , GraphMetric (..)
+    , newGraphMetric
+
+    -- ** metric_cluster
+    , GraphMetricCluster (..)
+    , newGraphMetricCluster
+
+    -- ** query
+    , MetricClusterQuery (..)
+    , newMetricClusterQuery
+
+    -- ** if
+    , RuleSetIf (..)
+    , newRuleSetIf
+
+    -- ** value
+    , RuleSetValue (..)
+    , newRuleSetValue
+
+    -- ** over
+    , RuleSetOver (..)
+    , newRuleSetOver
+
+    -- ** then
+    , RuleSetThen (..)
+    , newRuleSetThen
 
     ) where
 
@@ -164,68 +172,80 @@ import qualified Terrafomo.HCL            as TF
 import qualified Terrafomo.Name           as TF
 import qualified Terrafomo.Validator      as TF
 
--- | @alert_option@ nested settings.
-data AlertOptionSetting s = AlertOptionSetting'
-    { _escalateAfter :: TF.Attr s P.Text
-    -- ^ @escalate_after@ - (Optional)
-    --
-    , _escalateTo    :: TF.Attr s P.Text
-    -- ^ @escalate_to@ - (Optional)
-    --
-    , _reminder      :: TF.Attr s P.Text
-    -- ^ @reminder@ - (Optional)
-    --
-    , _severity      :: TF.Attr s P.Int
-    -- ^ @severity@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
+-- | @invites@ nested settings.
+data AccountInvites s = AccountInvites'
+    deriving (P.Show, P.Eq, P.Ord)
 
--- | Construct a new @alert_option@ settings value.
-newAlertOptionSetting
-    :: TF.Attr s P.Int -- ^ 'P._severity': @severity@
-    -> AlertOptionSetting s
-newAlertOptionSetting _severity =
-    AlertOptionSetting'
-        { _escalateAfter = TF.Nil
-        , _escalateTo = TF.Nil
-        , _reminder = TF.Nil
-        , _severity = _severity
-        }
+-- | Construct a new @invites@ settings value.
+newAccountInvites
+    :: AccountInvites s
+newAccountInvites =
+    AccountInvites'
 
-instance TF.IsValue  (AlertOptionSetting s)
-instance TF.IsObject (AlertOptionSetting s) where
-    toObject AlertOptionSetting'{..} = P.catMaybes
-        [ TF.assign "escalate_after" <$> TF.attribute _escalateAfter
-        , TF.assign "escalate_to" <$> TF.attribute _escalateTo
-        , TF.assign "reminder" <$> TF.attribute _reminder
-        , TF.assign "severity" <$> TF.attribute _severity
-        ]
+instance TF.IsValue  (AccountInvites s)
+instance TF.IsObject (AccountInvites s) where
+    toObject AccountInvites' = []
 
-instance TF.IsValid (AlertOptionSetting s) where
+instance TF.IsValid (AccountInvites s) where
     validator = P.mempty
 
-instance P.HasEscalateAfter (AlertOptionSetting s) (TF.Attr s P.Text) where
-    escalateAfter =
-        P.lens (_escalateAfter :: AlertOptionSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _escalateAfter = a } :: AlertOptionSetting s)
+instance s ~ s' => P.HasComputedEmail (TF.Ref s' (AccountInvites s)) (TF.Attr s P.Text) where
+    computedEmail x = TF.compute (TF.refKey x) "email"
 
-instance P.HasEscalateTo (AlertOptionSetting s) (TF.Attr s P.Text) where
-    escalateTo =
-        P.lens (_escalateTo :: AlertOptionSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _escalateTo = a } :: AlertOptionSetting s)
+instance s ~ s' => P.HasComputedRole (TF.Ref s' (AccountInvites s)) (TF.Attr s P.Text) where
+    computedRole x = TF.compute (TF.refKey x) "role"
 
-instance P.HasReminder (AlertOptionSetting s) (TF.Attr s P.Text) where
-    reminder =
-        P.lens (_reminder :: AlertOptionSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _reminder = a } :: AlertOptionSetting s)
+-- | @usage@ nested settings.
+data AccountUsage s = AccountUsage'
+    deriving (P.Show, P.Eq, P.Ord)
 
-instance P.HasSeverity (AlertOptionSetting s) (TF.Attr s P.Int) where
-    severity =
-        P.lens (_severity :: AlertOptionSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _severity = a } :: AlertOptionSetting s)
+-- | Construct a new @usage@ settings value.
+newAccountUsage
+    :: AccountUsage s
+newAccountUsage =
+    AccountUsage'
+
+instance TF.IsValue  (AccountUsage s)
+instance TF.IsObject (AccountUsage s) where
+    toObject AccountUsage' = []
+
+instance TF.IsValid (AccountUsage s) where
+    validator = P.mempty
+
+instance s ~ s' => P.HasComputedLimit (TF.Ref s' (AccountUsage s)) (TF.Attr s P.Int) where
+    computedLimit x = TF.compute (TF.refKey x) "limit"
+
+instance s ~ s' => P.HasComputedType (TF.Ref s' (AccountUsage s)) (TF.Attr s P.Text) where
+    computedType x = TF.compute (TF.refKey x) "type"
+
+instance s ~ s' => P.HasComputedUsed (TF.Ref s' (AccountUsage s)) (TF.Attr s P.Int) where
+    computedUsed x = TF.compute (TF.refKey x) "used"
+
+-- | @users@ nested settings.
+data AccountUsers s = AccountUsers'
+    deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @users@ settings value.
+newAccountUsers
+    :: AccountUsers s
+newAccountUsers =
+    AccountUsers'
+
+instance TF.IsValue  (AccountUsers s)
+instance TF.IsObject (AccountUsers s) where
+    toObject AccountUsers' = []
+
+instance TF.IsValid (AccountUsers s) where
+    validator = P.mempty
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (AccountUsers s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedRole (TF.Ref s' (AccountUsers s)) (TF.Attr s P.Text) where
+    computedRole x = TF.compute (TF.refKey x) "role"
 
 -- | @caql@ nested settings.
-data CaqlSetting s = CaqlSetting'
+data CheckCaql s = CheckCaql'
     { _query :: TF.Attr s P.Text
     -- ^ @query@ - (Required)
     -- The query definition
@@ -233,30 +253,30 @@ data CaqlSetting s = CaqlSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @caql@ settings value.
-newCaqlSetting
+newCheckCaql
     :: TF.Attr s P.Text -- ^ 'P._query': @query@
-    -> CaqlSetting s
-newCaqlSetting _query =
-    CaqlSetting'
+    -> CheckCaql s
+newCheckCaql _query =
+    CheckCaql'
         { _query = _query
         }
 
-instance TF.IsValue  (CaqlSetting s)
-instance TF.IsObject (CaqlSetting s) where
-    toObject CaqlSetting'{..} = P.catMaybes
+instance TF.IsValue  (CheckCaql s)
+instance TF.IsObject (CheckCaql s) where
+    toObject CheckCaql'{..} = P.catMaybes
         [ TF.assign "query" <$> TF.attribute _query
         ]
 
-instance TF.IsValid (CaqlSetting s) where
+instance TF.IsValid (CheckCaql s) where
     validator = P.mempty
 
-instance P.HasQuery (CaqlSetting s) (TF.Attr s P.Text) where
+instance P.HasQuery (CheckCaql s) (TF.Attr s P.Text) where
     query =
-        P.lens (_query :: CaqlSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _query = a } :: CaqlSetting s)
+        P.lens (_query :: CheckCaql s -> TF.Attr s P.Text)
+               (\s a -> s { _query = a } :: CheckCaql s)
 
 -- | @cloudwatch@ nested settings.
-data CloudwatchSetting s = CloudwatchSetting'
+data CheckCloudwatch s = CheckCloudwatch'
     { _apiKey      :: TF.Attr s P.Text
     -- ^ @api_key@ - (Required)
     -- The AWS API Key
@@ -290,16 +310,16 @@ data CloudwatchSetting s = CloudwatchSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @cloudwatch@ settings value.
-newCloudwatchSetting
+newCheckCloudwatch
     :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text)) -- ^ 'P._dimmensions': @dimmensions@
     -> TF.Attr s P.Text -- ^ 'P._apiKey': @api_key@
     -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ 'P._metric': @metric@
     -> TF.Attr s P.Text -- ^ 'P._namespace': @namespace@
     -> TF.Attr s P.Text -- ^ 'P._apiSecret': @api_secret@
     -> TF.Attr s P.Text -- ^ 'P._url': @url@
-    -> CloudwatchSetting s
-newCloudwatchSetting _dimmensions _apiKey _metric _namespace _apiSecret _url =
-    CloudwatchSetting'
+    -> CheckCloudwatch s
+newCheckCloudwatch _dimmensions _apiKey _metric _namespace _apiSecret _url =
+    CheckCloudwatch'
         { _apiKey = _apiKey
         , _apiSecret = _apiSecret
         , _dimmensions = _dimmensions
@@ -309,9 +329,9 @@ newCloudwatchSetting _dimmensions _apiKey _metric _namespace _apiSecret _url =
         , _version = TF.value "2010-08-01"
         }
 
-instance TF.IsValue  (CloudwatchSetting s)
-instance TF.IsObject (CloudwatchSetting s) where
-    toObject CloudwatchSetting'{..} = P.catMaybes
+instance TF.IsValue  (CheckCloudwatch s)
+instance TF.IsObject (CheckCloudwatch s) where
+    toObject CheckCloudwatch'{..} = P.catMaybes
         [ TF.assign "api_key" <$> TF.attribute _apiKey
         , TF.assign "api_secret" <$> TF.attribute _apiSecret
         , TF.assign "dimmensions" <$> TF.attribute _dimmensions
@@ -321,46 +341,46 @@ instance TF.IsObject (CloudwatchSetting s) where
         , TF.assign "version" <$> TF.attribute _version
         ]
 
-instance TF.IsValid (CloudwatchSetting s) where
+instance TF.IsValid (CheckCloudwatch s) where
     validator = P.mempty
 
-instance P.HasApiKey (CloudwatchSetting s) (TF.Attr s P.Text) where
+instance P.HasApiKey (CheckCloudwatch s) (TF.Attr s P.Text) where
     apiKey =
-        P.lens (_apiKey :: CloudwatchSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _apiKey = a } :: CloudwatchSetting s)
+        P.lens (_apiKey :: CheckCloudwatch s -> TF.Attr s P.Text)
+               (\s a -> s { _apiKey = a } :: CheckCloudwatch s)
 
-instance P.HasApiSecret (CloudwatchSetting s) (TF.Attr s P.Text) where
+instance P.HasApiSecret (CheckCloudwatch s) (TF.Attr s P.Text) where
     apiSecret =
-        P.lens (_apiSecret :: CloudwatchSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _apiSecret = a } :: CloudwatchSetting s)
+        P.lens (_apiSecret :: CheckCloudwatch s -> TF.Attr s P.Text)
+               (\s a -> s { _apiSecret = a } :: CheckCloudwatch s)
 
-instance P.HasDimmensions (CloudwatchSetting s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+instance P.HasDimmensions (CheckCloudwatch s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     dimmensions =
-        P.lens (_dimmensions :: CloudwatchSetting s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _dimmensions = a } :: CloudwatchSetting s)
+        P.lens (_dimmensions :: CheckCloudwatch s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _dimmensions = a } :: CheckCloudwatch s)
 
-instance P.HasMetric (CloudwatchSetting s) (TF.Attr s (P.NonEmpty (TF.Attr s P.Text))) where
+instance P.HasMetric (CheckCloudwatch s) (TF.Attr s (P.NonEmpty (TF.Attr s P.Text))) where
     metric =
-        P.lens (_metric :: CloudwatchSetting s -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)))
-               (\s a -> s { _metric = a } :: CloudwatchSetting s)
+        P.lens (_metric :: CheckCloudwatch s -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)))
+               (\s a -> s { _metric = a } :: CheckCloudwatch s)
 
-instance P.HasNamespace (CloudwatchSetting s) (TF.Attr s P.Text) where
+instance P.HasNamespace (CheckCloudwatch s) (TF.Attr s P.Text) where
     namespace =
-        P.lens (_namespace :: CloudwatchSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _namespace = a } :: CloudwatchSetting s)
+        P.lens (_namespace :: CheckCloudwatch s -> TF.Attr s P.Text)
+               (\s a -> s { _namespace = a } :: CheckCloudwatch s)
 
-instance P.HasUrl (CloudwatchSetting s) (TF.Attr s P.Text) where
+instance P.HasUrl (CheckCloudwatch s) (TF.Attr s P.Text) where
     url =
-        P.lens (_url :: CloudwatchSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _url = a } :: CloudwatchSetting s)
+        P.lens (_url :: CheckCloudwatch s -> TF.Attr s P.Text)
+               (\s a -> s { _url = a } :: CheckCloudwatch s)
 
-instance P.HasVersion (CloudwatchSetting s) (TF.Attr s P.Text) where
+instance P.HasVersion (CheckCloudwatch s) (TF.Attr s P.Text) where
     version =
-        P.lens (_version :: CloudwatchSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _version = a } :: CloudwatchSetting s)
+        P.lens (_version :: CheckCloudwatch s -> TF.Attr s P.Text)
+               (\s a -> s { _version = a } :: CheckCloudwatch s)
 
 -- | @collector@ nested settings.
-data CollectorSetting s = CollectorSetting'
+data CheckCollector s = CheckCollector'
     { _id :: TF.Attr s P.Text
     -- ^ @id@ - (Required)
     -- The ID of the collector
@@ -368,30 +388,30 @@ data CollectorSetting s = CollectorSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @collector@ settings value.
-newCollectorSetting
+newCheckCollector
     :: TF.Attr s P.Text -- ^ 'P._id': @id@
-    -> CollectorSetting s
-newCollectorSetting _id =
-    CollectorSetting'
+    -> CheckCollector s
+newCheckCollector _id =
+    CheckCollector'
         { _id = _id
         }
 
-instance TF.IsValue  (CollectorSetting s)
-instance TF.IsObject (CollectorSetting s) where
-    toObject CollectorSetting'{..} = P.catMaybes
+instance TF.IsValue  (CheckCollector s)
+instance TF.IsObject (CheckCollector s) where
+    toObject CheckCollector'{..} = P.catMaybes
         [ TF.assign "id" <$> TF.attribute _id
         ]
 
-instance TF.IsValid (CollectorSetting s) where
+instance TF.IsValid (CheckCollector s) where
     validator = P.mempty
 
-instance P.HasId (CollectorSetting s) (TF.Attr s P.Text) where
+instance P.HasId (CheckCollector s) (TF.Attr s P.Text) where
     id =
-        P.lens (_id :: CollectorSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _id = a } :: CollectorSetting s)
+        P.lens (_id :: CheckCollector s -> TF.Attr s P.Text)
+               (\s a -> s { _id = a } :: CheckCollector s)
 
 -- | @consul@ nested settings.
-data ConsulSetting s = ConsulSetting'
+data CheckConsul s = CheckConsul'
     { _aclToken         :: TF.Attr s P.Text
     -- ^ @acl_token@ - (Optional)
     -- A Consul ACL token
@@ -470,10 +490,10 @@ data ConsulSetting s = ConsulSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @consul@ settings value.
-newConsulSetting
-    :: ConsulSetting s
-newConsulSetting =
-    ConsulSetting'
+newCheckConsul
+    :: CheckConsul s
+newCheckConsul =
+    CheckConsul'
         { _aclToken = TF.Nil
         , _allowStale = TF.value P.True
         , _caChain = TF.Nil
@@ -491,9 +511,9 @@ newConsulSetting =
         , _state = TF.Nil
         }
 
-instance TF.IsValue  (ConsulSetting s)
-instance TF.IsObject (ConsulSetting s) where
-    toObject ConsulSetting'{..} = P.catMaybes
+instance TF.IsValue  (CheckConsul s)
+instance TF.IsObject (CheckConsul s) where
+    toObject CheckConsul'{..} = P.catMaybes
         [ TF.assign "acl_token" <$> TF.attribute _aclToken
         , TF.assign "allow_stale" <$> TF.attribute _allowStale
         , TF.assign "ca_chain" <$> TF.attribute _caChain
@@ -511,8 +531,8 @@ instance TF.IsObject (ConsulSetting s) where
         , TF.assign "state" <$> TF.attribute _state
         ]
 
-instance TF.IsValid (ConsulSetting s) where
-    validator = TF.fieldsValidator (\ConsulSetting'{..} -> Map.fromList $ P.catMaybes
+instance TF.IsValid (CheckConsul s) where
+    validator = TF.fieldsValidator (\CheckConsul'{..} -> Map.fromList $ P.catMaybes
         [ if (_node P.== TF.Nil)
               then P.Nothing
               else P.Just ("_node",
@@ -530,186 +550,83 @@ instance TF.IsValid (ConsulSetting s) where
                             ])
         ])
 
-instance P.HasAclToken (ConsulSetting s) (TF.Attr s P.Text) where
+instance P.HasAclToken (CheckConsul s) (TF.Attr s P.Text) where
     aclToken =
-        P.lens (_aclToken :: ConsulSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _aclToken = a } :: ConsulSetting s)
+        P.lens (_aclToken :: CheckConsul s -> TF.Attr s P.Text)
+               (\s a -> s { _aclToken = a } :: CheckConsul s)
 
-instance P.HasAllowStale (ConsulSetting s) (TF.Attr s P.Bool) where
+instance P.HasAllowStale (CheckConsul s) (TF.Attr s P.Bool) where
     allowStale =
-        P.lens (_allowStale :: ConsulSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _allowStale = a } :: ConsulSetting s)
+        P.lens (_allowStale :: CheckConsul s -> TF.Attr s P.Bool)
+               (\s a -> s { _allowStale = a } :: CheckConsul s)
 
-instance P.HasCaChain (ConsulSetting s) (TF.Attr s P.Text) where
+instance P.HasCaChain (CheckConsul s) (TF.Attr s P.Text) where
     caChain =
-        P.lens (_caChain :: ConsulSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _caChain = a } :: ConsulSetting s)
+        P.lens (_caChain :: CheckConsul s -> TF.Attr s P.Text)
+               (\s a -> s { _caChain = a } :: CheckConsul s)
 
-instance P.HasCertificateFile (ConsulSetting s) (TF.Attr s P.Text) where
+instance P.HasCertificateFile (CheckConsul s) (TF.Attr s P.Text) where
     certificateFile =
-        P.lens (_certificateFile :: ConsulSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _certificateFile = a } :: ConsulSetting s)
+        P.lens (_certificateFile :: CheckConsul s -> TF.Attr s P.Text)
+               (\s a -> s { _certificateFile = a } :: CheckConsul s)
 
-instance P.HasCheckBlacklist (ConsulSetting s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasCheckBlacklist (CheckConsul s) (TF.Attr s [TF.Attr s P.Text]) where
     checkBlacklist =
-        P.lens (_checkBlacklist :: ConsulSetting s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _checkBlacklist = a } :: ConsulSetting s)
+        P.lens (_checkBlacklist :: CheckConsul s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _checkBlacklist = a } :: CheckConsul s)
 
-instance P.HasCiphers (ConsulSetting s) (TF.Attr s P.Text) where
+instance P.HasCiphers (CheckConsul s) (TF.Attr s P.Text) where
     ciphers =
-        P.lens (_ciphers :: ConsulSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _ciphers = a } :: ConsulSetting s)
+        P.lens (_ciphers :: CheckConsul s -> TF.Attr s P.Text)
+               (\s a -> s { _ciphers = a } :: CheckConsul s)
 
-instance P.HasDc (ConsulSetting s) (TF.Attr s P.Text) where
+instance P.HasDc (CheckConsul s) (TF.Attr s P.Text) where
     dc =
-        P.lens (_dc :: ConsulSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _dc = a } :: ConsulSetting s)
+        P.lens (_dc :: CheckConsul s -> TF.Attr s P.Text)
+               (\s a -> s { _dc = a } :: CheckConsul s)
 
-instance P.HasHeaders (ConsulSetting s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+instance P.HasHeaders (CheckConsul s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     headers =
-        P.lens (_headers :: ConsulSetting s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _headers = a } :: ConsulSetting s)
+        P.lens (_headers :: CheckConsul s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _headers = a } :: CheckConsul s)
 
-instance P.HasHttpAddr (ConsulSetting s) (TF.Attr s P.Text) where
+instance P.HasHttpAddr (CheckConsul s) (TF.Attr s P.Text) where
     httpAddr =
-        P.lens (_httpAddr :: ConsulSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _httpAddr = a } :: ConsulSetting s)
+        P.lens (_httpAddr :: CheckConsul s -> TF.Attr s P.Text)
+               (\s a -> s { _httpAddr = a } :: CheckConsul s)
 
-instance P.HasKeyFile (ConsulSetting s) (TF.Attr s P.Text) where
+instance P.HasKeyFile (CheckConsul s) (TF.Attr s P.Text) where
     keyFile =
-        P.lens (_keyFile :: ConsulSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _keyFile = a } :: ConsulSetting s)
+        P.lens (_keyFile :: CheckConsul s -> TF.Attr s P.Text)
+               (\s a -> s { _keyFile = a } :: CheckConsul s)
 
-instance P.HasNode (ConsulSetting s) (TF.Attr s P.Text) where
+instance P.HasNode (CheckConsul s) (TF.Attr s P.Text) where
     node =
-        P.lens (_node :: ConsulSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _node = a } :: ConsulSetting s)
+        P.lens (_node :: CheckConsul s -> TF.Attr s P.Text)
+               (\s a -> s { _node = a } :: CheckConsul s)
 
-instance P.HasNodeBlacklist (ConsulSetting s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasNodeBlacklist (CheckConsul s) (TF.Attr s [TF.Attr s P.Text]) where
     nodeBlacklist =
-        P.lens (_nodeBlacklist :: ConsulSetting s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _nodeBlacklist = a } :: ConsulSetting s)
+        P.lens (_nodeBlacklist :: CheckConsul s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _nodeBlacklist = a } :: CheckConsul s)
 
-instance P.HasService (ConsulSetting s) (TF.Attr s P.Text) where
+instance P.HasService (CheckConsul s) (TF.Attr s P.Text) where
     service =
-        P.lens (_service :: ConsulSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _service = a } :: ConsulSetting s)
+        P.lens (_service :: CheckConsul s -> TF.Attr s P.Text)
+               (\s a -> s { _service = a } :: CheckConsul s)
 
-instance P.HasServiceBlacklist (ConsulSetting s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasServiceBlacklist (CheckConsul s) (TF.Attr s [TF.Attr s P.Text]) where
     serviceBlacklist =
-        P.lens (_serviceBlacklist :: ConsulSetting s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _serviceBlacklist = a } :: ConsulSetting s)
+        P.lens (_serviceBlacklist :: CheckConsul s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _serviceBlacklist = a } :: CheckConsul s)
 
-instance P.HasState (ConsulSetting s) (TF.Attr s P.Text) where
+instance P.HasState (CheckConsul s) (TF.Attr s P.Text) where
     state =
-        P.lens (_state :: ConsulSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _state = a } :: ConsulSetting s)
-
--- | @details@ nested settings.
-data DetailsSetting s = DetailsSetting'
-    deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @details@ settings value.
-newDetailsSetting
-    :: DetailsSetting s
-newDetailsSetting =
-    DetailsSetting'
-
-instance TF.IsValue  (DetailsSetting s)
-instance TF.IsObject (DetailsSetting s) where
-    toObject DetailsSetting' = []
-
-instance TF.IsValid (DetailsSetting s) where
-    validator = P.mempty
-
-instance s ~ s' => P.HasComputedCn (TF.Ref s' (DetailsSetting s)) (TF.Attr s P.Text) where
-    computedCn x = TF.compute (TF.refKey x) "cn"
-
-instance s ~ s' => P.HasComputedExternalHost (TF.Ref s' (DetailsSetting s)) (TF.Attr s P.Text) where
-    computedExternalHost x = TF.compute (TF.refKey x) "external_host"
-
-instance s ~ s' => P.HasComputedExternalPort (TF.Ref s' (DetailsSetting s)) (TF.Attr s P.Int) where
-    computedExternalPort x = TF.compute (TF.refKey x) "external_port"
-
-instance s ~ s' => P.HasComputedIp (TF.Ref s' (DetailsSetting s)) (TF.Attr s P.Text) where
-    computedIp x = TF.compute (TF.refKey x) "ip"
-
-instance s ~ s' => P.HasComputedMinVersion (TF.Ref s' (DetailsSetting s)) (TF.Attr s P.Int) where
-    computedMinVersion x = TF.compute (TF.refKey x) "min_version"
-
-instance s ~ s' => P.HasComputedModules (TF.Ref s' (DetailsSetting s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedModules x = TF.compute (TF.refKey x) "modules"
-
-instance s ~ s' => P.HasComputedPort (TF.Ref s' (DetailsSetting s)) (TF.Attr s P.Int) where
-    computedPort x = TF.compute (TF.refKey x) "port"
-
-instance s ~ s' => P.HasComputedSkew (TF.Ref s' (DetailsSetting s)) (TF.Attr s P.Text) where
-    computedSkew x = TF.compute (TF.refKey x) "skew"
-
-instance s ~ s' => P.HasComputedStatus (TF.Ref s' (DetailsSetting s)) (TF.Attr s P.Text) where
-    computedStatus x = TF.compute (TF.refKey x) "status"
-
-instance s ~ s' => P.HasComputedVersion (TF.Ref s' (DetailsSetting s)) (TF.Attr s P.Int) where
-    computedVersion x = TF.compute (TF.refKey x) "version"
-
--- | @email@ nested settings.
-data EmailSetting s = EmailSetting'
-    { _address :: TF.Attr s P.Text
-    -- ^ @address@ - (Optional)
-    --
-    -- Conflicts with:
-    --
-    -- * 'user'
-    , _user    :: TF.Attr s P.Text
-    -- ^ @user@ - (Optional)
-    --
-    -- Conflicts with:
-    --
-    -- * 'address'
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @email@ settings value.
-newEmailSetting
-    :: EmailSetting s
-newEmailSetting =
-    EmailSetting'
-        { _address = TF.Nil
-        , _user = TF.Nil
-        }
-
-instance TF.IsValue  (EmailSetting s)
-instance TF.IsObject (EmailSetting s) where
-    toObject EmailSetting'{..} = P.catMaybes
-        [ TF.assign "address" <$> TF.attribute _address
-        , TF.assign "user" <$> TF.attribute _user
-        ]
-
-instance TF.IsValid (EmailSetting s) where
-    validator = TF.fieldsValidator (\EmailSetting'{..} -> Map.fromList $ P.catMaybes
-        [ if (_address P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_address",
-                            [ "_user"
-                            ])
-        , if (_user P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_user",
-                            [ "_address"
-                            ])
-        ])
-
-instance P.HasAddress (EmailSetting s) (TF.Attr s P.Text) where
-    address =
-        P.lens (_address :: EmailSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _address = a } :: EmailSetting s)
-
-instance P.HasUser (EmailSetting s) (TF.Attr s P.Text) where
-    user =
-        P.lens (_user :: EmailSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _user = a } :: EmailSetting s)
+        P.lens (_state :: CheckConsul s -> TF.Attr s P.Text)
+               (\s a -> s { _state = a } :: CheckConsul s)
 
 -- | @http@ nested settings.
-data HttpSetting s = HttpSetting'
+data CheckHttp s = CheckHttp'
     { _authMethod      :: TF.Attr s P.Text
     -- ^ @auth_method@ - (Optional)
     -- The HTTP Authentication method
@@ -782,21 +699,14 @@ data HttpSetting s = HttpSetting'
     -- ^ @version@ - (Optional)
     -- Sets the HTTP version for the check to use
     --
-    , _address         :: TF.Attr s P.Text
-    -- ^ @address@ - (Required)
-    --
-    , _format          :: TF.Attr s P.Text
-    -- ^ @format@ - (Optional)
-    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @http@ settings value.
-newHttpSetting
-    :: TF.Attr s P.Text -- ^ 'P._address': @address@
-    -> TF.Attr s P.Text -- ^ 'P._url': @url@
-    -> HttpSetting s
-newHttpSetting _address _url =
-    HttpSetting'
+newCheckHttp
+    :: TF.Attr s P.Text -- ^ 'P._url': @url@
+    -> CheckHttp s
+newCheckHttp _url =
+    CheckHttp'
         { _authMethod = TF.Nil
         , _authPassword = TF.Nil
         , _authUser = TF.Nil
@@ -813,13 +723,11 @@ newHttpSetting _address _url =
         , _readLimit = TF.Nil
         , _url = _url
         , _version = TF.value "1.1"
-        , _address = _address
-        , _format = TF.value "json"
         }
 
-instance TF.IsValue  (HttpSetting s)
-instance TF.IsObject (HttpSetting s) where
-    toObject HttpSetting'{..} = P.catMaybes
+instance TF.IsValue  (CheckHttp s)
+instance TF.IsObject (CheckHttp s) where
+    toObject CheckHttp'{..} = P.catMaybes
         [ TF.assign "auth_method" <$> TF.attribute _authMethod
         , TF.assign "auth_password" <$> TF.attribute _authPassword
         , TF.assign "auth_user" <$> TF.attribute _authUser
@@ -836,105 +744,93 @@ instance TF.IsObject (HttpSetting s) where
         , TF.assign "read_limit" <$> TF.attribute _readLimit
         , TF.assign "url" <$> TF.attribute _url
         , TF.assign "version" <$> TF.attribute _version
-        , TF.assign "address" <$> TF.attribute _address
-        , TF.assign "format" <$> TF.attribute _format
         ]
 
-instance TF.IsValid (HttpSetting s) where
+instance TF.IsValid (CheckHttp s) where
     validator = P.mempty
 
-instance P.HasAuthMethod (HttpSetting s) (TF.Attr s P.Text) where
+instance P.HasAuthMethod (CheckHttp s) (TF.Attr s P.Text) where
     authMethod =
-        P.lens (_authMethod :: HttpSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _authMethod = a } :: HttpSetting s)
+        P.lens (_authMethod :: CheckHttp s -> TF.Attr s P.Text)
+               (\s a -> s { _authMethod = a } :: CheckHttp s)
 
-instance P.HasAuthPassword (HttpSetting s) (TF.Attr s P.Text) where
+instance P.HasAuthPassword (CheckHttp s) (TF.Attr s P.Text) where
     authPassword =
-        P.lens (_authPassword :: HttpSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _authPassword = a } :: HttpSetting s)
+        P.lens (_authPassword :: CheckHttp s -> TF.Attr s P.Text)
+               (\s a -> s { _authPassword = a } :: CheckHttp s)
 
-instance P.HasAuthUser (HttpSetting s) (TF.Attr s P.Text) where
+instance P.HasAuthUser (CheckHttp s) (TF.Attr s P.Text) where
     authUser =
-        P.lens (_authUser :: HttpSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _authUser = a } :: HttpSetting s)
+        P.lens (_authUser :: CheckHttp s -> TF.Attr s P.Text)
+               (\s a -> s { _authUser = a } :: CheckHttp s)
 
-instance P.HasBodyRegexp (HttpSetting s) (TF.Attr s P.Text) where
+instance P.HasBodyRegexp (CheckHttp s) (TF.Attr s P.Text) where
     bodyRegexp =
-        P.lens (_bodyRegexp :: HttpSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _bodyRegexp = a } :: HttpSetting s)
+        P.lens (_bodyRegexp :: CheckHttp s -> TF.Attr s P.Text)
+               (\s a -> s { _bodyRegexp = a } :: CheckHttp s)
 
-instance P.HasCaChain (HttpSetting s) (TF.Attr s P.Text) where
+instance P.HasCaChain (CheckHttp s) (TF.Attr s P.Text) where
     caChain =
-        P.lens (_caChain :: HttpSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _caChain = a } :: HttpSetting s)
+        P.lens (_caChain :: CheckHttp s -> TF.Attr s P.Text)
+               (\s a -> s { _caChain = a } :: CheckHttp s)
 
-instance P.HasCertificateFile (HttpSetting s) (TF.Attr s P.Text) where
+instance P.HasCertificateFile (CheckHttp s) (TF.Attr s P.Text) where
     certificateFile =
-        P.lens (_certificateFile :: HttpSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _certificateFile = a } :: HttpSetting s)
+        P.lens (_certificateFile :: CheckHttp s -> TF.Attr s P.Text)
+               (\s a -> s { _certificateFile = a } :: CheckHttp s)
 
-instance P.HasCiphers (HttpSetting s) (TF.Attr s P.Text) where
+instance P.HasCiphers (CheckHttp s) (TF.Attr s P.Text) where
     ciphers =
-        P.lens (_ciphers :: HttpSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _ciphers = a } :: HttpSetting s)
+        P.lens (_ciphers :: CheckHttp s -> TF.Attr s P.Text)
+               (\s a -> s { _ciphers = a } :: CheckHttp s)
 
-instance P.HasCode (HttpSetting s) (TF.Attr s P.Text) where
+instance P.HasCode (CheckHttp s) (TF.Attr s P.Text) where
     code =
-        P.lens (_code :: HttpSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _code = a } :: HttpSetting s)
+        P.lens (_code :: CheckHttp s -> TF.Attr s P.Text)
+               (\s a -> s { _code = a } :: CheckHttp s)
 
-instance P.HasExtract (HttpSetting s) (TF.Attr s P.Text) where
+instance P.HasExtract (CheckHttp s) (TF.Attr s P.Text) where
     extract =
-        P.lens (_extract :: HttpSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _extract = a } :: HttpSetting s)
+        P.lens (_extract :: CheckHttp s -> TF.Attr s P.Text)
+               (\s a -> s { _extract = a } :: CheckHttp s)
 
-instance P.HasHeaders (HttpSetting s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+instance P.HasHeaders (CheckHttp s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     headers =
-        P.lens (_headers :: HttpSetting s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _headers = a } :: HttpSetting s)
+        P.lens (_headers :: CheckHttp s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _headers = a } :: CheckHttp s)
 
-instance P.HasKeyFile (HttpSetting s) (TF.Attr s P.Text) where
+instance P.HasKeyFile (CheckHttp s) (TF.Attr s P.Text) where
     keyFile =
-        P.lens (_keyFile :: HttpSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _keyFile = a } :: HttpSetting s)
+        P.lens (_keyFile :: CheckHttp s -> TF.Attr s P.Text)
+               (\s a -> s { _keyFile = a } :: CheckHttp s)
 
-instance P.HasMethod (HttpSetting s) (TF.Attr s P.Text) where
+instance P.HasMethod (CheckHttp s) (TF.Attr s P.Text) where
     method =
-        P.lens (_method :: HttpSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _method = a } :: HttpSetting s)
+        P.lens (_method :: CheckHttp s -> TF.Attr s P.Text)
+               (\s a -> s { _method = a } :: CheckHttp s)
 
-instance P.HasPayload (HttpSetting s) (TF.Attr s P.Text) where
+instance P.HasPayload (CheckHttp s) (TF.Attr s P.Text) where
     payload =
-        P.lens (_payload :: HttpSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _payload = a } :: HttpSetting s)
+        P.lens (_payload :: CheckHttp s -> TF.Attr s P.Text)
+               (\s a -> s { _payload = a } :: CheckHttp s)
 
-instance P.HasReadLimit (HttpSetting s) (TF.Attr s P.Int) where
+instance P.HasReadLimit (CheckHttp s) (TF.Attr s P.Int) where
     readLimit =
-        P.lens (_readLimit :: HttpSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _readLimit = a } :: HttpSetting s)
+        P.lens (_readLimit :: CheckHttp s -> TF.Attr s P.Int)
+               (\s a -> s { _readLimit = a } :: CheckHttp s)
 
-instance P.HasUrl (HttpSetting s) (TF.Attr s P.Text) where
+instance P.HasUrl (CheckHttp s) (TF.Attr s P.Text) where
     url =
-        P.lens (_url :: HttpSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _url = a } :: HttpSetting s)
+        P.lens (_url :: CheckHttp s -> TF.Attr s P.Text)
+               (\s a -> s { _url = a } :: CheckHttp s)
 
-instance P.HasVersion (HttpSetting s) (TF.Attr s P.Text) where
+instance P.HasVersion (CheckHttp s) (TF.Attr s P.Text) where
     version =
-        P.lens (_version :: HttpSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _version = a } :: HttpSetting s)
-
-instance P.HasAddress (HttpSetting s) (TF.Attr s P.Text) where
-    address =
-        P.lens (_address :: HttpSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _address = a } :: HttpSetting s)
-
-instance P.HasFormat (HttpSetting s) (TF.Attr s P.Text) where
-    format =
-        P.lens (_format :: HttpSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _format = a } :: HttpSetting s)
+        P.lens (_version :: CheckHttp s -> TF.Attr s P.Text)
+               (\s a -> s { _version = a } :: CheckHttp s)
 
 -- | @httptrap@ nested settings.
-data HttptrapSetting s = HttptrapSetting'
+data CheckHttptrap s = CheckHttptrap'
     { _asyncMetrics :: TF.Attr s P.Bool
     -- ^ @async_metrics@ - (Optional)
     -- Specify whether httptrap metrics are logged immediately or held until the
@@ -946,36 +842,36 @@ data HttptrapSetting s = HttptrapSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @httptrap@ settings value.
-newHttptrapSetting
-    :: HttptrapSetting s
-newHttptrapSetting =
-    HttptrapSetting'
+newCheckHttptrap
+    :: CheckHttptrap s
+newCheckHttptrap =
+    CheckHttptrap'
         { _asyncMetrics = TF.value P.False
         , _secret = TF.Nil
         }
 
-instance TF.IsValue  (HttptrapSetting s)
-instance TF.IsObject (HttptrapSetting s) where
-    toObject HttptrapSetting'{..} = P.catMaybes
+instance TF.IsValue  (CheckHttptrap s)
+instance TF.IsObject (CheckHttptrap s) where
+    toObject CheckHttptrap'{..} = P.catMaybes
         [ TF.assign "async_metrics" <$> TF.attribute _asyncMetrics
         , TF.assign "secret" <$> TF.attribute _secret
         ]
 
-instance TF.IsValid (HttptrapSetting s) where
+instance TF.IsValid (CheckHttptrap s) where
     validator = P.mempty
 
-instance P.HasAsyncMetrics (HttptrapSetting s) (TF.Attr s P.Bool) where
+instance P.HasAsyncMetrics (CheckHttptrap s) (TF.Attr s P.Bool) where
     asyncMetrics =
-        P.lens (_asyncMetrics :: HttptrapSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _asyncMetrics = a } :: HttptrapSetting s)
+        P.lens (_asyncMetrics :: CheckHttptrap s -> TF.Attr s P.Bool)
+               (\s a -> s { _asyncMetrics = a } :: CheckHttptrap s)
 
-instance P.HasSecret (HttptrapSetting s) (TF.Attr s P.Text) where
+instance P.HasSecret (CheckHttptrap s) (TF.Attr s P.Text) where
     secret =
-        P.lens (_secret :: HttptrapSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _secret = a } :: HttptrapSetting s)
+        P.lens (_secret :: CheckHttptrap s -> TF.Attr s P.Text)
+               (\s a -> s { _secret = a } :: CheckHttptrap s)
 
 -- | @icmp_ping@ nested settings.
-data IcmpPingSetting s = IcmpPingSetting'
+data CheckIcmpPing s = CheckIcmpPing'
     { _availability :: TF.Attr s P.Double
     -- ^ @availability@ - (Optional)
     -- The percentage of ICMP available required for the check to be considered
@@ -992,92 +888,1439 @@ data IcmpPingSetting s = IcmpPingSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @icmp_ping@ settings value.
-newIcmpPingSetting
-    :: IcmpPingSetting s
-newIcmpPingSetting =
-    IcmpPingSetting'
+newCheckIcmpPing
+    :: CheckIcmpPing s
+newCheckIcmpPing =
+    CheckIcmpPing'
         { _availability = TF.value 100.0
         , _count = TF.value 5
         , _interval = TF.value "2s"
         }
 
-instance TF.IsValue  (IcmpPingSetting s)
-instance TF.IsObject (IcmpPingSetting s) where
-    toObject IcmpPingSetting'{..} = P.catMaybes
+instance TF.IsValue  (CheckIcmpPing s)
+instance TF.IsObject (CheckIcmpPing s) where
+    toObject CheckIcmpPing'{..} = P.catMaybes
         [ TF.assign "availability" <$> TF.attribute _availability
         , TF.assign "count" <$> TF.attribute _count
         , TF.assign "interval" <$> TF.attribute _interval
         ]
 
-instance TF.IsValid (IcmpPingSetting s) where
+instance TF.IsValid (CheckIcmpPing s) where
     validator = P.mempty
 
-instance P.HasAvailability (IcmpPingSetting s) (TF.Attr s P.Double) where
+instance P.HasAvailability (CheckIcmpPing s) (TF.Attr s P.Double) where
     availability =
-        P.lens (_availability :: IcmpPingSetting s -> TF.Attr s P.Double)
-               (\s a -> s { _availability = a } :: IcmpPingSetting s)
+        P.lens (_availability :: CheckIcmpPing s -> TF.Attr s P.Double)
+               (\s a -> s { _availability = a } :: CheckIcmpPing s)
 
-instance P.HasCount (IcmpPingSetting s) (TF.Attr s P.Int) where
+instance P.HasCount (CheckIcmpPing s) (TF.Attr s P.Int) where
     count =
-        P.lens (_count :: IcmpPingSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _count = a } :: IcmpPingSetting s)
+        P.lens (_count :: CheckIcmpPing s -> TF.Attr s P.Int)
+               (\s a -> s { _count = a } :: CheckIcmpPing s)
 
-instance P.HasInterval (IcmpPingSetting s) (TF.Attr s P.Text) where
+instance P.HasInterval (CheckIcmpPing s) (TF.Attr s P.Text) where
     interval =
-        P.lens (_interval :: IcmpPingSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _interval = a } :: IcmpPingSetting s)
+        P.lens (_interval :: CheckIcmpPing s -> TF.Attr s P.Text)
+               (\s a -> s { _interval = a } :: CheckIcmpPing s)
+
+-- | @json@ nested settings.
+data CheckJson s = CheckJson'
+    { _authMethod      :: TF.Attr s P.Text
+    -- ^ @auth_method@ - (Optional)
+    -- The HTTP Authentication method
+    --
+    , _authPassword    :: TF.Attr s P.Text
+    -- ^ @auth_password@ - (Optional)
+    -- The HTTP Authentication user password
+    --
+    , _authUser        :: TF.Attr s P.Text
+    -- ^ @auth_user@ - (Optional)
+    -- The HTTP Authentication user name
+    --
+    , _caChain         :: TF.Attr s P.Text
+    -- ^ @ca_chain@ - (Optional)
+    -- A path to a file containing all the certificate authorities that should be
+    -- loaded to validate the remote certificate (for TLS checks)
+    --
+    , _certificateFile :: TF.Attr s P.Text
+    -- ^ @certificate_file@ - (Optional)
+    -- A path to a file containing the client certificate that will be presented to
+    -- the remote server (for TLS-enabled checks)
+    --
+    , _ciphers         :: TF.Attr s P.Text
+    -- ^ @ciphers@ - (Optional)
+    -- A list of ciphers to be used in the TLS protocol (for HTTPS checks)
+    --
+    , _headers         :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @headers@ - (Optional)
+    -- Map of HTTP Headers to send along with HTTP Requests
+    --
+    , _keyFile         :: TF.Attr s P.Text
+    -- ^ @key_file@ - (Optional)
+    -- A path to a file containing key to be used in conjunction with the cilent
+    -- certificate (for TLS checks)
+    --
+    , _method          :: TF.Attr s P.Text
+    -- ^ @method@ - (Optional)
+    -- The HTTP method to use
+    --
+    , _payload         :: TF.Attr s P.Text
+    -- ^ @payload@ - (Optional)
+    -- The information transferred as the payload of an HTTP request
+    --
+    , _port            :: TF.Attr s P.Int
+    -- ^ @port@ - (Optional)
+    -- Specifies the port on which the management interface can be reached
+    --
+    , _readLimit       :: TF.Attr s P.Int
+    -- ^ @read_limit@ - (Optional)
+    -- Sets an approximate limit on the data read (0 means no limit)
+    --
+    , _url             :: TF.Attr s P.Text
+    -- ^ @url@ - (Required)
+    -- The URL to use as the target of the check
+    --
+    , _version         :: TF.Attr s P.Text
+    -- ^ @version@ - (Optional)
+    -- Sets the HTTP version for the check to use
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @json@ settings value.
+newCheckJson
+    :: TF.Attr s P.Text -- ^ 'P._url': @url@
+    -> CheckJson s
+newCheckJson _url =
+    CheckJson'
+        { _authMethod = TF.Nil
+        , _authPassword = TF.Nil
+        , _authUser = TF.Nil
+        , _caChain = TF.Nil
+        , _certificateFile = TF.Nil
+        , _ciphers = TF.Nil
+        , _headers = TF.Nil
+        , _keyFile = TF.Nil
+        , _method = TF.value "GET"
+        , _payload = TF.Nil
+        , _port = TF.value 443
+        , _readLimit = TF.Nil
+        , _url = _url
+        , _version = TF.value "1.1"
+        }
+
+instance TF.IsValue  (CheckJson s)
+instance TF.IsObject (CheckJson s) where
+    toObject CheckJson'{..} = P.catMaybes
+        [ TF.assign "auth_method" <$> TF.attribute _authMethod
+        , TF.assign "auth_password" <$> TF.attribute _authPassword
+        , TF.assign "auth_user" <$> TF.attribute _authUser
+        , TF.assign "ca_chain" <$> TF.attribute _caChain
+        , TF.assign "certificate_file" <$> TF.attribute _certificateFile
+        , TF.assign "ciphers" <$> TF.attribute _ciphers
+        , TF.assign "headers" <$> TF.attribute _headers
+        , TF.assign "key_file" <$> TF.attribute _keyFile
+        , TF.assign "method" <$> TF.attribute _method
+        , TF.assign "payload" <$> TF.attribute _payload
+        , TF.assign "port" <$> TF.attribute _port
+        , TF.assign "read_limit" <$> TF.attribute _readLimit
+        , TF.assign "url" <$> TF.attribute _url
+        , TF.assign "version" <$> TF.attribute _version
+        ]
+
+instance TF.IsValid (CheckJson s) where
+    validator = P.mempty
+
+instance P.HasAuthMethod (CheckJson s) (TF.Attr s P.Text) where
+    authMethod =
+        P.lens (_authMethod :: CheckJson s -> TF.Attr s P.Text)
+               (\s a -> s { _authMethod = a } :: CheckJson s)
+
+instance P.HasAuthPassword (CheckJson s) (TF.Attr s P.Text) where
+    authPassword =
+        P.lens (_authPassword :: CheckJson s -> TF.Attr s P.Text)
+               (\s a -> s { _authPassword = a } :: CheckJson s)
+
+instance P.HasAuthUser (CheckJson s) (TF.Attr s P.Text) where
+    authUser =
+        P.lens (_authUser :: CheckJson s -> TF.Attr s P.Text)
+               (\s a -> s { _authUser = a } :: CheckJson s)
+
+instance P.HasCaChain (CheckJson s) (TF.Attr s P.Text) where
+    caChain =
+        P.lens (_caChain :: CheckJson s -> TF.Attr s P.Text)
+               (\s a -> s { _caChain = a } :: CheckJson s)
+
+instance P.HasCertificateFile (CheckJson s) (TF.Attr s P.Text) where
+    certificateFile =
+        P.lens (_certificateFile :: CheckJson s -> TF.Attr s P.Text)
+               (\s a -> s { _certificateFile = a } :: CheckJson s)
+
+instance P.HasCiphers (CheckJson s) (TF.Attr s P.Text) where
+    ciphers =
+        P.lens (_ciphers :: CheckJson s -> TF.Attr s P.Text)
+               (\s a -> s { _ciphers = a } :: CheckJson s)
+
+instance P.HasHeaders (CheckJson s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    headers =
+        P.lens (_headers :: CheckJson s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _headers = a } :: CheckJson s)
+
+instance P.HasKeyFile (CheckJson s) (TF.Attr s P.Text) where
+    keyFile =
+        P.lens (_keyFile :: CheckJson s -> TF.Attr s P.Text)
+               (\s a -> s { _keyFile = a } :: CheckJson s)
+
+instance P.HasMethod (CheckJson s) (TF.Attr s P.Text) where
+    method =
+        P.lens (_method :: CheckJson s -> TF.Attr s P.Text)
+               (\s a -> s { _method = a } :: CheckJson s)
+
+instance P.HasPayload (CheckJson s) (TF.Attr s P.Text) where
+    payload =
+        P.lens (_payload :: CheckJson s -> TF.Attr s P.Text)
+               (\s a -> s { _payload = a } :: CheckJson s)
+
+instance P.HasPort (CheckJson s) (TF.Attr s P.Int) where
+    port =
+        P.lens (_port :: CheckJson s -> TF.Attr s P.Int)
+               (\s a -> s { _port = a } :: CheckJson s)
+
+instance P.HasReadLimit (CheckJson s) (TF.Attr s P.Int) where
+    readLimit =
+        P.lens (_readLimit :: CheckJson s -> TF.Attr s P.Int)
+               (\s a -> s { _readLimit = a } :: CheckJson s)
+
+instance P.HasUrl (CheckJson s) (TF.Attr s P.Text) where
+    url =
+        P.lens (_url :: CheckJson s -> TF.Attr s P.Text)
+               (\s a -> s { _url = a } :: CheckJson s)
+
+instance P.HasVersion (CheckJson s) (TF.Attr s P.Text) where
+    version =
+        P.lens (_version :: CheckJson s -> TF.Attr s P.Text)
+               (\s a -> s { _version = a } :: CheckJson s)
+
+-- | @metric@ nested settings.
+data CheckMetric s = CheckMetric'
+    { _active :: TF.Attr s P.Bool
+    -- ^ @active@ - (Optional)
+    -- Enables or disables the metric
+    --
+    , _name   :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    -- Name of the metric
+    --
+    , _tags   :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @tags@ - (Optional)
+    -- Tags assigned to the metric
+    --
+    , _type'  :: TF.Attr s P.Text
+    -- ^ @type@ - (Required)
+    -- Type of metric (e.g. numeric, histogram, text)
+    --
+    , _unit   :: TF.Attr s P.Text
+    -- ^ @unit@ - (Optional)
+    -- The unit of measurement for a metric
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @metric@ settings value.
+newCheckMetric
+    :: TF.Attr s P.Text -- ^ 'P._name': @name@
+    -> TF.Attr s P.Text -- ^ 'P._type'': @type@
+    -> CheckMetric s
+newCheckMetric _name _type' =
+    CheckMetric'
+        { _active = TF.value P.True
+        , _name = _name
+        , _tags = TF.Nil
+        , _type' = _type'
+        , _unit = TF.Nil
+        }
+
+instance TF.IsValue  (CheckMetric s)
+instance TF.IsObject (CheckMetric s) where
+    toObject CheckMetric'{..} = P.catMaybes
+        [ TF.assign "active" <$> TF.attribute _active
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "tags" <$> TF.attribute _tags
+        , TF.assign "type" <$> TF.attribute _type'
+        , TF.assign "unit" <$> TF.attribute _unit
+        ]
+
+instance TF.IsValid (CheckMetric s) where
+    validator = P.mempty
+
+instance P.HasActive (CheckMetric s) (TF.Attr s P.Bool) where
+    active =
+        P.lens (_active :: CheckMetric s -> TF.Attr s P.Bool)
+               (\s a -> s { _active = a } :: CheckMetric s)
+
+instance P.HasName (CheckMetric s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: CheckMetric s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: CheckMetric s)
+
+instance P.HasTags (CheckMetric s) (TF.Attr s [TF.Attr s P.Text]) where
+    tags =
+        P.lens (_tags :: CheckMetric s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _tags = a } :: CheckMetric s)
+
+instance P.HasType' (CheckMetric s) (TF.Attr s P.Text) where
+    type' =
+        P.lens (_type' :: CheckMetric s -> TF.Attr s P.Text)
+               (\s a -> s { _type' = a } :: CheckMetric s)
+
+instance P.HasUnit (CheckMetric s) (TF.Attr s P.Text) where
+    unit =
+        P.lens (_unit :: CheckMetric s -> TF.Attr s P.Text)
+               (\s a -> s { _unit = a } :: CheckMetric s)
+
+-- | @mysql@ nested settings.
+data CheckMysql s = CheckMysql'
+    { _dsn   :: TF.Attr s P.Text
+    -- ^ @dsn@ - (Required)
+    -- The connect DSN for the MySQL instance
+    --
+    , _query :: TF.Attr s P.Text
+    -- ^ @query@ - (Required)
+    -- The SQL to use as the query
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @mysql@ settings value.
+newCheckMysql
+    :: TF.Attr s P.Text -- ^ 'P._dsn': @dsn@
+    -> TF.Attr s P.Text -- ^ 'P._query': @query@
+    -> CheckMysql s
+newCheckMysql _dsn _query =
+    CheckMysql'
+        { _dsn = _dsn
+        , _query = _query
+        }
+
+instance TF.IsValue  (CheckMysql s)
+instance TF.IsObject (CheckMysql s) where
+    toObject CheckMysql'{..} = P.catMaybes
+        [ TF.assign "dsn" <$> TF.attribute _dsn
+        , TF.assign "query" <$> TF.attribute _query
+        ]
+
+instance TF.IsValid (CheckMysql s) where
+    validator = P.mempty
+
+instance P.HasDsn (CheckMysql s) (TF.Attr s P.Text) where
+    dsn =
+        P.lens (_dsn :: CheckMysql s -> TF.Attr s P.Text)
+               (\s a -> s { _dsn = a } :: CheckMysql s)
+
+instance P.HasQuery (CheckMysql s) (TF.Attr s P.Text) where
+    query =
+        P.lens (_query :: CheckMysql s -> TF.Attr s P.Text)
+               (\s a -> s { _query = a } :: CheckMysql s)
+
+-- | @postgresql@ nested settings.
+data CheckPostgresql s = CheckPostgresql'
+    { _dsn   :: TF.Attr s P.Text
+    -- ^ @dsn@ - (Required)
+    -- The connect DSN for the PostgreSQL instance
+    --
+    , _query :: TF.Attr s P.Text
+    -- ^ @query@ - (Required)
+    -- The SQL to use as the query
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @postgresql@ settings value.
+newCheckPostgresql
+    :: TF.Attr s P.Text -- ^ 'P._dsn': @dsn@
+    -> TF.Attr s P.Text -- ^ 'P._query': @query@
+    -> CheckPostgresql s
+newCheckPostgresql _dsn _query =
+    CheckPostgresql'
+        { _dsn = _dsn
+        , _query = _query
+        }
+
+instance TF.IsValue  (CheckPostgresql s)
+instance TF.IsObject (CheckPostgresql s) where
+    toObject CheckPostgresql'{..} = P.catMaybes
+        [ TF.assign "dsn" <$> TF.attribute _dsn
+        , TF.assign "query" <$> TF.attribute _query
+        ]
+
+instance TF.IsValid (CheckPostgresql s) where
+    validator = P.mempty
+
+instance P.HasDsn (CheckPostgresql s) (TF.Attr s P.Text) where
+    dsn =
+        P.lens (_dsn :: CheckPostgresql s -> TF.Attr s P.Text)
+               (\s a -> s { _dsn = a } :: CheckPostgresql s)
+
+instance P.HasQuery (CheckPostgresql s) (TF.Attr s P.Text) where
+    query =
+        P.lens (_query :: CheckPostgresql s -> TF.Attr s P.Text)
+               (\s a -> s { _query = a } :: CheckPostgresql s)
+
+-- | @statsd@ nested settings.
+data CheckStatsd s = CheckStatsd'
+    { _sourceIp :: TF.Attr s P.Text
+    -- ^ @source_ip@ - (Required)
+    -- The source IP of the statsd metrics stream
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @statsd@ settings value.
+newCheckStatsd
+    :: TF.Attr s P.Text -- ^ 'P._sourceIp': @source_ip@
+    -> CheckStatsd s
+newCheckStatsd _sourceIp =
+    CheckStatsd'
+        { _sourceIp = _sourceIp
+        }
+
+instance TF.IsValue  (CheckStatsd s)
+instance TF.IsObject (CheckStatsd s) where
+    toObject CheckStatsd'{..} = P.catMaybes
+        [ TF.assign "source_ip" <$> TF.attribute _sourceIp
+        ]
+
+instance TF.IsValid (CheckStatsd s) where
+    validator = P.mempty
+
+instance P.HasSourceIp (CheckStatsd s) (TF.Attr s P.Text) where
+    sourceIp =
+        P.lens (_sourceIp :: CheckStatsd s -> TF.Attr s P.Text)
+               (\s a -> s { _sourceIp = a } :: CheckStatsd s)
+
+-- | @tcp@ nested settings.
+data CheckTcp s = CheckTcp'
+    { _bannerRegexp    :: TF.Attr s P.Text
+    -- ^ @banner_regexp@ - (Optional)
+    -- This regular expression is matched against the response banner. If a match
+    -- is not found, the check will be marked as bad.
+    --
+    , _caChain         :: TF.Attr s P.Text
+    -- ^ @ca_chain@ - (Optional)
+    -- A path to a file containing all the certificate authorities that should be
+    -- loaded to validate the remote certificate (for TLS checks).
+    --
+    , _certificateFile :: TF.Attr s P.Text
+    -- ^ @certificate_file@ - (Optional)
+    -- A path to a file containing the client certificate that will be presented to
+    -- the remote server (for TLS checks).
+    --
+    , _ciphers         :: TF.Attr s P.Text
+    -- ^ @ciphers@ - (Optional)
+    -- A list of ciphers to be used when establishing a TLS connection
+    --
+    , _host            :: TF.Attr s P.Text
+    -- ^ @host@ - (Required)
+    -- Specifies the host name or IP address to connect to for this TCP check
+    --
+    , _keyFile         :: TF.Attr s P.Text
+    -- ^ @key_file@ - (Optional)
+    -- A path to a file containing key to be used in conjunction with the cilent
+    -- certificate (for TLS checks)
+    --
+    , _port            :: TF.Attr s P.Int
+    -- ^ @port@ - (Required)
+    -- Specifies the port on which the management interface can be reached.
+    --
+    , _tls             :: TF.Attr s P.Bool
+    -- ^ @tls@ - (Optional)
+    -- Upgrade TCP connection to use TLS.
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @tcp@ settings value.
+newCheckTcp
+    :: TF.Attr s P.Text -- ^ 'P._host': @host@
+    -> TF.Attr s P.Int -- ^ 'P._port': @port@
+    -> CheckTcp s
+newCheckTcp _host _port =
+    CheckTcp'
+        { _bannerRegexp = TF.Nil
+        , _caChain = TF.Nil
+        , _certificateFile = TF.Nil
+        , _ciphers = TF.Nil
+        , _host = _host
+        , _keyFile = TF.Nil
+        , _port = _port
+        , _tls = TF.value P.False
+        }
+
+instance TF.IsValue  (CheckTcp s)
+instance TF.IsObject (CheckTcp s) where
+    toObject CheckTcp'{..} = P.catMaybes
+        [ TF.assign "banner_regexp" <$> TF.attribute _bannerRegexp
+        , TF.assign "ca_chain" <$> TF.attribute _caChain
+        , TF.assign "certificate_file" <$> TF.attribute _certificateFile
+        , TF.assign "ciphers" <$> TF.attribute _ciphers
+        , TF.assign "host" <$> TF.attribute _host
+        , TF.assign "key_file" <$> TF.attribute _keyFile
+        , TF.assign "port" <$> TF.attribute _port
+        , TF.assign "tls" <$> TF.attribute _tls
+        ]
+
+instance TF.IsValid (CheckTcp s) where
+    validator = P.mempty
+
+instance P.HasBannerRegexp (CheckTcp s) (TF.Attr s P.Text) where
+    bannerRegexp =
+        P.lens (_bannerRegexp :: CheckTcp s -> TF.Attr s P.Text)
+               (\s a -> s { _bannerRegexp = a } :: CheckTcp s)
+
+instance P.HasCaChain (CheckTcp s) (TF.Attr s P.Text) where
+    caChain =
+        P.lens (_caChain :: CheckTcp s -> TF.Attr s P.Text)
+               (\s a -> s { _caChain = a } :: CheckTcp s)
+
+instance P.HasCertificateFile (CheckTcp s) (TF.Attr s P.Text) where
+    certificateFile =
+        P.lens (_certificateFile :: CheckTcp s -> TF.Attr s P.Text)
+               (\s a -> s { _certificateFile = a } :: CheckTcp s)
+
+instance P.HasCiphers (CheckTcp s) (TF.Attr s P.Text) where
+    ciphers =
+        P.lens (_ciphers :: CheckTcp s -> TF.Attr s P.Text)
+               (\s a -> s { _ciphers = a } :: CheckTcp s)
+
+instance P.HasHost (CheckTcp s) (TF.Attr s P.Text) where
+    host =
+        P.lens (_host :: CheckTcp s -> TF.Attr s P.Text)
+               (\s a -> s { _host = a } :: CheckTcp s)
+
+instance P.HasKeyFile (CheckTcp s) (TF.Attr s P.Text) where
+    keyFile =
+        P.lens (_keyFile :: CheckTcp s -> TF.Attr s P.Text)
+               (\s a -> s { _keyFile = a } :: CheckTcp s)
+
+instance P.HasPort (CheckTcp s) (TF.Attr s P.Int) where
+    port =
+        P.lens (_port :: CheckTcp s -> TF.Attr s P.Int)
+               (\s a -> s { _port = a } :: CheckTcp s)
+
+instance P.HasTls (CheckTcp s) (TF.Attr s P.Bool) where
+    tls =
+        P.lens (_tls :: CheckTcp s -> TF.Attr s P.Bool)
+               (\s a -> s { _tls = a } :: CheckTcp s)
+
+-- | @details@ nested settings.
+data CollectorDetails s = CollectorDetails'
+    deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @details@ settings value.
+newCollectorDetails
+    :: CollectorDetails s
+newCollectorDetails =
+    CollectorDetails'
+
+instance TF.IsValue  (CollectorDetails s)
+instance TF.IsObject (CollectorDetails s) where
+    toObject CollectorDetails' = []
+
+instance TF.IsValid (CollectorDetails s) where
+    validator = P.mempty
+
+instance s ~ s' => P.HasComputedCn (TF.Ref s' (CollectorDetails s)) (TF.Attr s P.Text) where
+    computedCn x = TF.compute (TF.refKey x) "cn"
+
+instance s ~ s' => P.HasComputedExternalHost (TF.Ref s' (CollectorDetails s)) (TF.Attr s P.Text) where
+    computedExternalHost x = TF.compute (TF.refKey x) "external_host"
+
+instance s ~ s' => P.HasComputedExternalPort (TF.Ref s' (CollectorDetails s)) (TF.Attr s P.Int) where
+    computedExternalPort x = TF.compute (TF.refKey x) "external_port"
+
+instance s ~ s' => P.HasComputedIp (TF.Ref s' (CollectorDetails s)) (TF.Attr s P.Text) where
+    computedIp x = TF.compute (TF.refKey x) "ip"
+
+instance s ~ s' => P.HasComputedMinVersion (TF.Ref s' (CollectorDetails s)) (TF.Attr s P.Int) where
+    computedMinVersion x = TF.compute (TF.refKey x) "min_version"
+
+instance s ~ s' => P.HasComputedModules (TF.Ref s' (CollectorDetails s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedModules x = TF.compute (TF.refKey x) "modules"
+
+instance s ~ s' => P.HasComputedPort (TF.Ref s' (CollectorDetails s)) (TF.Attr s P.Int) where
+    computedPort x = TF.compute (TF.refKey x) "port"
+
+instance s ~ s' => P.HasComputedSkew (TF.Ref s' (CollectorDetails s)) (TF.Attr s P.Text) where
+    computedSkew x = TF.compute (TF.refKey x) "skew"
+
+instance s ~ s' => P.HasComputedStatus (TF.Ref s' (CollectorDetails s)) (TF.Attr s P.Text) where
+    computedStatus x = TF.compute (TF.refKey x) "status"
+
+instance s ~ s' => P.HasComputedVersion (TF.Ref s' (CollectorDetails s)) (TF.Attr s P.Int) where
+    computedVersion x = TF.compute (TF.refKey x) "version"
+
+-- | @alert_option@ nested settings.
+data ContactGroupAlertOption s = ContactGroupAlertOption'
+    { _escalateAfter :: TF.Attr s P.Text
+    -- ^ @escalate_after@ - (Optional)
+    --
+    , _escalateTo    :: TF.Attr s P.Text
+    -- ^ @escalate_to@ - (Optional)
+    --
+    , _reminder      :: TF.Attr s P.Text
+    -- ^ @reminder@ - (Optional)
+    --
+    , _severity      :: TF.Attr s P.Int
+    -- ^ @severity@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @alert_option@ settings value.
+newContactGroupAlertOption
+    :: TF.Attr s P.Int -- ^ 'P._severity': @severity@
+    -> ContactGroupAlertOption s
+newContactGroupAlertOption _severity =
+    ContactGroupAlertOption'
+        { _escalateAfter = TF.Nil
+        , _escalateTo = TF.Nil
+        , _reminder = TF.Nil
+        , _severity = _severity
+        }
+
+instance TF.IsValue  (ContactGroupAlertOption s)
+instance TF.IsObject (ContactGroupAlertOption s) where
+    toObject ContactGroupAlertOption'{..} = P.catMaybes
+        [ TF.assign "escalate_after" <$> TF.attribute _escalateAfter
+        , TF.assign "escalate_to" <$> TF.attribute _escalateTo
+        , TF.assign "reminder" <$> TF.attribute _reminder
+        , TF.assign "severity" <$> TF.attribute _severity
+        ]
+
+instance TF.IsValid (ContactGroupAlertOption s) where
+    validator = P.mempty
+
+instance P.HasEscalateAfter (ContactGroupAlertOption s) (TF.Attr s P.Text) where
+    escalateAfter =
+        P.lens (_escalateAfter :: ContactGroupAlertOption s -> TF.Attr s P.Text)
+               (\s a -> s { _escalateAfter = a } :: ContactGroupAlertOption s)
+
+instance P.HasEscalateTo (ContactGroupAlertOption s) (TF.Attr s P.Text) where
+    escalateTo =
+        P.lens (_escalateTo :: ContactGroupAlertOption s -> TF.Attr s P.Text)
+               (\s a -> s { _escalateTo = a } :: ContactGroupAlertOption s)
+
+instance P.HasReminder (ContactGroupAlertOption s) (TF.Attr s P.Text) where
+    reminder =
+        P.lens (_reminder :: ContactGroupAlertOption s -> TF.Attr s P.Text)
+               (\s a -> s { _reminder = a } :: ContactGroupAlertOption s)
+
+instance P.HasSeverity (ContactGroupAlertOption s) (TF.Attr s P.Int) where
+    severity =
+        P.lens (_severity :: ContactGroupAlertOption s -> TF.Attr s P.Int)
+               (\s a -> s { _severity = a } :: ContactGroupAlertOption s)
+
+-- | @email@ nested settings.
+data ContactGroupEmail s = ContactGroupEmail'
+    { _address :: TF.Attr s P.Text
+    -- ^ @address@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'user'
+    , _user    :: TF.Attr s P.Text
+    -- ^ @user@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'address'
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @email@ settings value.
+newContactGroupEmail
+    :: ContactGroupEmail s
+newContactGroupEmail =
+    ContactGroupEmail'
+        { _address = TF.Nil
+        , _user = TF.Nil
+        }
+
+instance TF.IsValue  (ContactGroupEmail s)
+instance TF.IsObject (ContactGroupEmail s) where
+    toObject ContactGroupEmail'{..} = P.catMaybes
+        [ TF.assign "address" <$> TF.attribute _address
+        , TF.assign "user" <$> TF.attribute _user
+        ]
+
+instance TF.IsValid (ContactGroupEmail s) where
+    validator = TF.fieldsValidator (\ContactGroupEmail'{..} -> Map.fromList $ P.catMaybes
+        [ if (_address P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_address",
+                            [ "_user"
+                            ])
+        , if (_user P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_user",
+                            [ "_address"
+                            ])
+        ])
+
+instance P.HasAddress (ContactGroupEmail s) (TF.Attr s P.Text) where
+    address =
+        P.lens (_address :: ContactGroupEmail s -> TF.Attr s P.Text)
+               (\s a -> s { _address = a } :: ContactGroupEmail s)
+
+instance P.HasUser (ContactGroupEmail s) (TF.Attr s P.Text) where
+    user =
+        P.lens (_user :: ContactGroupEmail s -> TF.Attr s P.Text)
+               (\s a -> s { _user = a } :: ContactGroupEmail s)
+
+-- | @http@ nested settings.
+data ContactGroupHttp s = ContactGroupHttp'
+    { _address :: TF.Attr s P.Text
+    -- ^ @address@ - (Required)
+    --
+    , _format  :: TF.Attr s P.Text
+    -- ^ @format@ - (Optional)
+    --
+    , _method  :: TF.Attr s P.Text
+    -- ^ @method@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @http@ settings value.
+newContactGroupHttp
+    :: TF.Attr s P.Text -- ^ 'P._address': @address@
+    -> ContactGroupHttp s
+newContactGroupHttp _address =
+    ContactGroupHttp'
+        { _address = _address
+        , _format = TF.value "json"
+        , _method = TF.value "POST"
+        }
+
+instance TF.IsValue  (ContactGroupHttp s)
+instance TF.IsObject (ContactGroupHttp s) where
+    toObject ContactGroupHttp'{..} = P.catMaybes
+        [ TF.assign "address" <$> TF.attribute _address
+        , TF.assign "format" <$> TF.attribute _format
+        , TF.assign "method" <$> TF.attribute _method
+        ]
+
+instance TF.IsValid (ContactGroupHttp s) where
+    validator = P.mempty
+
+instance P.HasAddress (ContactGroupHttp s) (TF.Attr s P.Text) where
+    address =
+        P.lens (_address :: ContactGroupHttp s -> TF.Attr s P.Text)
+               (\s a -> s { _address = a } :: ContactGroupHttp s)
+
+instance P.HasFormat (ContactGroupHttp s) (TF.Attr s P.Text) where
+    format =
+        P.lens (_format :: ContactGroupHttp s -> TF.Attr s P.Text)
+               (\s a -> s { _format = a } :: ContactGroupHttp s)
+
+instance P.HasMethod (ContactGroupHttp s) (TF.Attr s P.Text) where
+    method =
+        P.lens (_method :: ContactGroupHttp s -> TF.Attr s P.Text)
+               (\s a -> s { _method = a } :: ContactGroupHttp s)
+
+-- | @irc@ nested settings.
+data ContactGroupIrc s = ContactGroupIrc'
+    { _user :: TF.Attr s P.Text
+    -- ^ @user@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @irc@ settings value.
+newContactGroupIrc
+    :: TF.Attr s P.Text -- ^ 'P._user': @user@
+    -> ContactGroupIrc s
+newContactGroupIrc _user =
+    ContactGroupIrc'
+        { _user = _user
+        }
+
+instance TF.IsValue  (ContactGroupIrc s)
+instance TF.IsObject (ContactGroupIrc s) where
+    toObject ContactGroupIrc'{..} = P.catMaybes
+        [ TF.assign "user" <$> TF.attribute _user
+        ]
+
+instance TF.IsValid (ContactGroupIrc s) where
+    validator = P.mempty
+
+instance P.HasUser (ContactGroupIrc s) (TF.Attr s P.Text) where
+    user =
+        P.lens (_user :: ContactGroupIrc s -> TF.Attr s P.Text)
+               (\s a -> s { _user = a } :: ContactGroupIrc s)
+
+-- | @pager_duty@ nested settings.
+data ContactGroupPagerDuty s = ContactGroupPagerDuty'
+    { _contactGroupFallback :: TF.Attr s P.Text
+    -- ^ @contact_group_fallback@ - (Optional)
+    --
+    , _serviceKey           :: TF.Attr s P.Text
+    -- ^ @service_key@ - (Required)
+    --
+    , _webhookUrl           :: TF.Attr s P.Text
+    -- ^ @webhook_url@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @pager_duty@ settings value.
+newContactGroupPagerDuty
+    :: TF.Attr s P.Text -- ^ 'P._serviceKey': @service_key@
+    -> TF.Attr s P.Text -- ^ 'P._webhookUrl': @webhook_url@
+    -> ContactGroupPagerDuty s
+newContactGroupPagerDuty _serviceKey _webhookUrl =
+    ContactGroupPagerDuty'
+        { _contactGroupFallback = TF.Nil
+        , _serviceKey = _serviceKey
+        , _webhookUrl = _webhookUrl
+        }
+
+instance TF.IsValue  (ContactGroupPagerDuty s)
+instance TF.IsObject (ContactGroupPagerDuty s) where
+    toObject ContactGroupPagerDuty'{..} = P.catMaybes
+        [ TF.assign "contact_group_fallback" <$> TF.attribute _contactGroupFallback
+        , TF.assign "service_key" <$> TF.attribute _serviceKey
+        , TF.assign "webhook_url" <$> TF.attribute _webhookUrl
+        ]
+
+instance TF.IsValid (ContactGroupPagerDuty s) where
+    validator = P.mempty
+
+instance P.HasContactGroupFallback (ContactGroupPagerDuty s) (TF.Attr s P.Text) where
+    contactGroupFallback =
+        P.lens (_contactGroupFallback :: ContactGroupPagerDuty s -> TF.Attr s P.Text)
+               (\s a -> s { _contactGroupFallback = a } :: ContactGroupPagerDuty s)
+
+instance P.HasServiceKey (ContactGroupPagerDuty s) (TF.Attr s P.Text) where
+    serviceKey =
+        P.lens (_serviceKey :: ContactGroupPagerDuty s -> TF.Attr s P.Text)
+               (\s a -> s { _serviceKey = a } :: ContactGroupPagerDuty s)
+
+instance P.HasWebhookUrl (ContactGroupPagerDuty s) (TF.Attr s P.Text) where
+    webhookUrl =
+        P.lens (_webhookUrl :: ContactGroupPagerDuty s -> TF.Attr s P.Text)
+               (\s a -> s { _webhookUrl = a } :: ContactGroupPagerDuty s)
+
+-- | @slack@ nested settings.
+data ContactGroupSlack s = ContactGroupSlack'
+    { _buttons              :: TF.Attr s P.Bool
+    -- ^ @buttons@ - (Optional)
+    --
+    , _channel              :: TF.Attr s P.Text
+    -- ^ @channel@ - (Required)
+    --
+    , _contactGroupFallback :: TF.Attr s P.Text
+    -- ^ @contact_group_fallback@ - (Optional)
+    --
+    , _team                 :: TF.Attr s P.Text
+    -- ^ @team@ - (Required)
+    --
+    , _username             :: TF.Attr s P.Text
+    -- ^ @username@ - (Optional)
+    -- Username Slackbot uses in Slack to deliver a notification
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @slack@ settings value.
+newContactGroupSlack
+    :: TF.Attr s P.Text -- ^ 'P._channel': @channel@
+    -> TF.Attr s P.Text -- ^ 'P._team': @team@
+    -> ContactGroupSlack s
+newContactGroupSlack _channel _team =
+    ContactGroupSlack'
+        { _buttons = TF.value P.True
+        , _channel = _channel
+        , _contactGroupFallback = TF.Nil
+        , _team = _team
+        , _username = TF.value "Circonus"
+        }
+
+instance TF.IsValue  (ContactGroupSlack s)
+instance TF.IsObject (ContactGroupSlack s) where
+    toObject ContactGroupSlack'{..} = P.catMaybes
+        [ TF.assign "buttons" <$> TF.attribute _buttons
+        , TF.assign "channel" <$> TF.attribute _channel
+        , TF.assign "contact_group_fallback" <$> TF.attribute _contactGroupFallback
+        , TF.assign "team" <$> TF.attribute _team
+        , TF.assign "username" <$> TF.attribute _username
+        ]
+
+instance TF.IsValid (ContactGroupSlack s) where
+    validator = P.mempty
+
+instance P.HasButtons (ContactGroupSlack s) (TF.Attr s P.Bool) where
+    buttons =
+        P.lens (_buttons :: ContactGroupSlack s -> TF.Attr s P.Bool)
+               (\s a -> s { _buttons = a } :: ContactGroupSlack s)
+
+instance P.HasChannel (ContactGroupSlack s) (TF.Attr s P.Text) where
+    channel =
+        P.lens (_channel :: ContactGroupSlack s -> TF.Attr s P.Text)
+               (\s a -> s { _channel = a } :: ContactGroupSlack s)
+
+instance P.HasContactGroupFallback (ContactGroupSlack s) (TF.Attr s P.Text) where
+    contactGroupFallback =
+        P.lens (_contactGroupFallback :: ContactGroupSlack s -> TF.Attr s P.Text)
+               (\s a -> s { _contactGroupFallback = a } :: ContactGroupSlack s)
+
+instance P.HasTeam (ContactGroupSlack s) (TF.Attr s P.Text) where
+    team =
+        P.lens (_team :: ContactGroupSlack s -> TF.Attr s P.Text)
+               (\s a -> s { _team = a } :: ContactGroupSlack s)
+
+instance P.HasUsername (ContactGroupSlack s) (TF.Attr s P.Text) where
+    username =
+        P.lens (_username :: ContactGroupSlack s -> TF.Attr s P.Text)
+               (\s a -> s { _username = a } :: ContactGroupSlack s)
+
+-- | @sms@ nested settings.
+data ContactGroupSms s = ContactGroupSms'
+    { _address :: TF.Attr s P.Text
+    -- ^ @address@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'user'
+    , _user    :: TF.Attr s P.Text
+    -- ^ @user@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'address'
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @sms@ settings value.
+newContactGroupSms
+    :: ContactGroupSms s
+newContactGroupSms =
+    ContactGroupSms'
+        { _address = TF.Nil
+        , _user = TF.Nil
+        }
+
+instance TF.IsValue  (ContactGroupSms s)
+instance TF.IsObject (ContactGroupSms s) where
+    toObject ContactGroupSms'{..} = P.catMaybes
+        [ TF.assign "address" <$> TF.attribute _address
+        , TF.assign "user" <$> TF.attribute _user
+        ]
+
+instance TF.IsValid (ContactGroupSms s) where
+    validator = TF.fieldsValidator (\ContactGroupSms'{..} -> Map.fromList $ P.catMaybes
+        [ if (_address P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_address",
+                            [ "_user"
+                            ])
+        , if (_user P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_user",
+                            [ "_address"
+                            ])
+        ])
+
+instance P.HasAddress (ContactGroupSms s) (TF.Attr s P.Text) where
+    address =
+        P.lens (_address :: ContactGroupSms s -> TF.Attr s P.Text)
+               (\s a -> s { _address = a } :: ContactGroupSms s)
+
+instance P.HasUser (ContactGroupSms s) (TF.Attr s P.Text) where
+    user =
+        P.lens (_user :: ContactGroupSms s -> TF.Attr s P.Text)
+               (\s a -> s { _user = a } :: ContactGroupSms s)
+
+-- | @victorops@ nested settings.
+data ContactGroupVictorops s = ContactGroupVictorops'
+    { _apiKey               :: TF.Attr s P.Text
+    -- ^ @api_key@ - (Required)
+    --
+    , _contactGroupFallback :: TF.Attr s P.Text
+    -- ^ @contact_group_fallback@ - (Optional)
+    --
+    , _critical             :: TF.Attr s P.Int
+    -- ^ @critical@ - (Required)
+    --
+    , _info                 :: TF.Attr s P.Int
+    -- ^ @info@ - (Required)
+    --
+    , _team                 :: TF.Attr s P.Text
+    -- ^ @team@ - (Required)
+    --
+    , _warning              :: TF.Attr s P.Int
+    -- ^ @warning@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @victorops@ settings value.
+newContactGroupVictorops
+    :: TF.Attr s P.Int -- ^ 'P._critical': @critical@
+    -> TF.Attr s P.Int -- ^ 'P._info': @info@
+    -> TF.Attr s P.Text -- ^ 'P._apiKey': @api_key@
+    -> TF.Attr s P.Text -- ^ 'P._team': @team@
+    -> TF.Attr s P.Int -- ^ 'P._warning': @warning@
+    -> ContactGroupVictorops s
+newContactGroupVictorops _critical _info _apiKey _team _warning =
+    ContactGroupVictorops'
+        { _apiKey = _apiKey
+        , _contactGroupFallback = TF.Nil
+        , _critical = _critical
+        , _info = _info
+        , _team = _team
+        , _warning = _warning
+        }
+
+instance TF.IsValue  (ContactGroupVictorops s)
+instance TF.IsObject (ContactGroupVictorops s) where
+    toObject ContactGroupVictorops'{..} = P.catMaybes
+        [ TF.assign "api_key" <$> TF.attribute _apiKey
+        , TF.assign "contact_group_fallback" <$> TF.attribute _contactGroupFallback
+        , TF.assign "critical" <$> TF.attribute _critical
+        , TF.assign "info" <$> TF.attribute _info
+        , TF.assign "team" <$> TF.attribute _team
+        , TF.assign "warning" <$> TF.attribute _warning
+        ]
+
+instance TF.IsValid (ContactGroupVictorops s) where
+    validator = P.mempty
+
+instance P.HasApiKey (ContactGroupVictorops s) (TF.Attr s P.Text) where
+    apiKey =
+        P.lens (_apiKey :: ContactGroupVictorops s -> TF.Attr s P.Text)
+               (\s a -> s { _apiKey = a } :: ContactGroupVictorops s)
+
+instance P.HasContactGroupFallback (ContactGroupVictorops s) (TF.Attr s P.Text) where
+    contactGroupFallback =
+        P.lens (_contactGroupFallback :: ContactGroupVictorops s -> TF.Attr s P.Text)
+               (\s a -> s { _contactGroupFallback = a } :: ContactGroupVictorops s)
+
+instance P.HasCritical (ContactGroupVictorops s) (TF.Attr s P.Int) where
+    critical =
+        P.lens (_critical :: ContactGroupVictorops s -> TF.Attr s P.Int)
+               (\s a -> s { _critical = a } :: ContactGroupVictorops s)
+
+instance P.HasInfo (ContactGroupVictorops s) (TF.Attr s P.Int) where
+    info =
+        P.lens (_info :: ContactGroupVictorops s -> TF.Attr s P.Int)
+               (\s a -> s { _info = a } :: ContactGroupVictorops s)
+
+instance P.HasTeam (ContactGroupVictorops s) (TF.Attr s P.Text) where
+    team =
+        P.lens (_team :: ContactGroupVictorops s -> TF.Attr s P.Text)
+               (\s a -> s { _team = a } :: ContactGroupVictorops s)
+
+instance P.HasWarning (ContactGroupVictorops s) (TF.Attr s P.Int) where
+    warning =
+        P.lens (_warning :: ContactGroupVictorops s -> TF.Attr s P.Int)
+               (\s a -> s { _warning = a } :: ContactGroupVictorops s)
+
+-- | @xmpp@ nested settings.
+data ContactGroupXmpp s = ContactGroupXmpp'
+    { _address :: TF.Attr s P.Text
+    -- ^ @address@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'user'
+    , _user    :: TF.Attr s P.Text
+    -- ^ @user@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'address'
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @xmpp@ settings value.
+newContactGroupXmpp
+    :: ContactGroupXmpp s
+newContactGroupXmpp =
+    ContactGroupXmpp'
+        { _address = TF.Nil
+        , _user = TF.Nil
+        }
+
+instance TF.IsValue  (ContactGroupXmpp s)
+instance TF.IsObject (ContactGroupXmpp s) where
+    toObject ContactGroupXmpp'{..} = P.catMaybes
+        [ TF.assign "address" <$> TF.attribute _address
+        , TF.assign "user" <$> TF.attribute _user
+        ]
+
+instance TF.IsValid (ContactGroupXmpp s) where
+    validator = TF.fieldsValidator (\ContactGroupXmpp'{..} -> Map.fromList $ P.catMaybes
+        [ if (_address P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_address",
+                            [ "_user"
+                            ])
+        , if (_user P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_user",
+                            [ "_address"
+                            ])
+        ])
+
+instance P.HasAddress (ContactGroupXmpp s) (TF.Attr s P.Text) where
+    address =
+        P.lens (_address :: ContactGroupXmpp s -> TF.Attr s P.Text)
+               (\s a -> s { _address = a } :: ContactGroupXmpp s)
+
+instance P.HasUser (ContactGroupXmpp s) (TF.Attr s P.Text) where
+    user =
+        P.lens (_user :: ContactGroupXmpp s -> TF.Attr s P.Text)
+               (\s a -> s { _user = a } :: ContactGroupXmpp s)
+
+-- | @metric@ nested settings.
+data GraphMetric s = GraphMetric'
+    { _active        :: TF.Attr s P.Bool
+    -- ^ @active@ - (Optional)
+    --
+    , _alpha         :: TF.Attr s P.Double
+    -- ^ @alpha@ - (Optional)
+    --
+    , _axis          :: TF.Attr s P.Text
+    -- ^ @axis@ - (Optional)
+    --
+    , _caql          :: TF.Attr s P.Text
+    -- ^ @caql@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'check'
+    -- * 'metricName'
+    , _check         :: TF.Attr s P.Text
+    -- ^ @check@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'caql'
+    , _color         :: TF.Attr s P.Text
+    -- ^ @color@ - (Optional)
+    --
+    , _formula       :: TF.Attr s P.Text
+    -- ^ @formula@ - (Optional)
+    --
+    , _function      :: TF.Attr s P.Text
+    -- ^ @function@ - (Optional)
+    --
+    , _legendFormula :: TF.Attr s P.Text
+    -- ^ @legend_formula@ - (Optional)
+    --
+    , _metricName    :: TF.Attr s P.Text
+    -- ^ @metric_name@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'caql'
+    , _metricType    :: TF.Attr s P.Text
+    -- ^ @metric_type@ - (Required)
+    --
+    , _name          :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional)
+    --
+    , _stack         :: TF.Attr s P.Text
+    -- ^ @stack@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @metric@ settings value.
+newGraphMetric
+    :: TF.Attr s P.Text -- ^ 'P._metricType': @metric_type@
+    -> GraphMetric s
+newGraphMetric _metricType =
+    GraphMetric'
+        { _active = TF.value P.True
+        , _alpha = TF.Nil
+        , _axis = TF.value "left"
+        , _caql = TF.Nil
+        , _check = TF.Nil
+        , _color = TF.Nil
+        , _formula = TF.Nil
+        , _function = TF.Nil
+        , _legendFormula = TF.Nil
+        , _metricName = TF.Nil
+        , _metricType = _metricType
+        , _name = TF.Nil
+        , _stack = TF.Nil
+        }
+
+instance TF.IsValue  (GraphMetric s)
+instance TF.IsObject (GraphMetric s) where
+    toObject GraphMetric'{..} = P.catMaybes
+        [ TF.assign "active" <$> TF.attribute _active
+        , TF.assign "alpha" <$> TF.attribute _alpha
+        , TF.assign "axis" <$> TF.attribute _axis
+        , TF.assign "caql" <$> TF.attribute _caql
+        , TF.assign "check" <$> TF.attribute _check
+        , TF.assign "color" <$> TF.attribute _color
+        , TF.assign "formula" <$> TF.attribute _formula
+        , TF.assign "function" <$> TF.attribute _function
+        , TF.assign "legend_formula" <$> TF.attribute _legendFormula
+        , TF.assign "metric_name" <$> TF.attribute _metricName
+        , TF.assign "metric_type" <$> TF.attribute _metricType
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "stack" <$> TF.attribute _stack
+        ]
+
+instance TF.IsValid (GraphMetric s) where
+    validator = TF.fieldsValidator (\GraphMetric'{..} -> Map.fromList $ P.catMaybes
+        [ if (_caql P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_caql",
+                            [ "_check"                            , "_metricName"
+                            ])
+        , if (_check P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_check",
+                            [ "_caql"
+                            ])
+        , if (_metricName P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_metricName",
+                            [ "_caql"
+                            ])
+        ])
+
+instance P.HasActive (GraphMetric s) (TF.Attr s P.Bool) where
+    active =
+        P.lens (_active :: GraphMetric s -> TF.Attr s P.Bool)
+               (\s a -> s { _active = a } :: GraphMetric s)
+
+instance P.HasAlpha (GraphMetric s) (TF.Attr s P.Double) where
+    alpha =
+        P.lens (_alpha :: GraphMetric s -> TF.Attr s P.Double)
+               (\s a -> s { _alpha = a } :: GraphMetric s)
+
+instance P.HasAxis (GraphMetric s) (TF.Attr s P.Text) where
+    axis =
+        P.lens (_axis :: GraphMetric s -> TF.Attr s P.Text)
+               (\s a -> s { _axis = a } :: GraphMetric s)
+
+instance P.HasCaql (GraphMetric s) (TF.Attr s P.Text) where
+    caql =
+        P.lens (_caql :: GraphMetric s -> TF.Attr s P.Text)
+               (\s a -> s { _caql = a } :: GraphMetric s)
+
+instance P.HasCheck (GraphMetric s) (TF.Attr s P.Text) where
+    check =
+        P.lens (_check :: GraphMetric s -> TF.Attr s P.Text)
+               (\s a -> s { _check = a } :: GraphMetric s)
+
+instance P.HasColor (GraphMetric s) (TF.Attr s P.Text) where
+    color =
+        P.lens (_color :: GraphMetric s -> TF.Attr s P.Text)
+               (\s a -> s { _color = a } :: GraphMetric s)
+
+instance P.HasFormula (GraphMetric s) (TF.Attr s P.Text) where
+    formula =
+        P.lens (_formula :: GraphMetric s -> TF.Attr s P.Text)
+               (\s a -> s { _formula = a } :: GraphMetric s)
+
+instance P.HasFunction (GraphMetric s) (TF.Attr s P.Text) where
+    function =
+        P.lens (_function :: GraphMetric s -> TF.Attr s P.Text)
+               (\s a -> s { _function = a } :: GraphMetric s)
+
+instance P.HasLegendFormula (GraphMetric s) (TF.Attr s P.Text) where
+    legendFormula =
+        P.lens (_legendFormula :: GraphMetric s -> TF.Attr s P.Text)
+               (\s a -> s { _legendFormula = a } :: GraphMetric s)
+
+instance P.HasMetricName (GraphMetric s) (TF.Attr s P.Text) where
+    metricName =
+        P.lens (_metricName :: GraphMetric s -> TF.Attr s P.Text)
+               (\s a -> s { _metricName = a } :: GraphMetric s)
+
+instance P.HasMetricType (GraphMetric s) (TF.Attr s P.Text) where
+    metricType =
+        P.lens (_metricType :: GraphMetric s -> TF.Attr s P.Text)
+               (\s a -> s { _metricType = a } :: GraphMetric s)
+
+instance P.HasName (GraphMetric s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: GraphMetric s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: GraphMetric s)
+
+instance P.HasStack (GraphMetric s) (TF.Attr s P.Text) where
+    stack =
+        P.lens (_stack :: GraphMetric s -> TF.Attr s P.Text)
+               (\s a -> s { _stack = a } :: GraphMetric s)
+
+instance s ~ s' => P.HasComputedFunction (TF.Ref s' (GraphMetric s)) (TF.Attr s P.Text) where
+    computedFunction x = TF.compute (TF.refKey x) "function"
+
+-- | @metric_cluster@ nested settings.
+data GraphMetricCluster s = GraphMetricCluster'
+    { _active    :: TF.Attr s P.Bool
+    -- ^ @active@ - (Optional)
+    --
+    , _aggregate :: TF.Attr s P.Text
+    -- ^ @aggregate@ - (Optional)
+    --
+    , _axis      :: TF.Attr s P.Text
+    -- ^ @axis@ - (Optional)
+    --
+    , _color     :: TF.Attr s P.Text
+    -- ^ @color@ - (Optional)
+    --
+    , _name      :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    , _query     :: TF.Attr s P.Text
+    -- ^ @query@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @metric_cluster@ settings value.
+newGraphMetricCluster
+    :: TF.Attr s P.Text -- ^ 'P._name': @name@
+    -> GraphMetricCluster s
+newGraphMetricCluster _name =
+    GraphMetricCluster'
+        { _active = TF.value P.True
+        , _aggregate = TF.value "none"
+        , _axis = TF.value "left"
+        , _color = TF.Nil
+        , _name = _name
+        , _query = TF.Nil
+        }
+
+instance TF.IsValue  (GraphMetricCluster s)
+instance TF.IsObject (GraphMetricCluster s) where
+    toObject GraphMetricCluster'{..} = P.catMaybes
+        [ TF.assign "active" <$> TF.attribute _active
+        , TF.assign "aggregate" <$> TF.attribute _aggregate
+        , TF.assign "axis" <$> TF.attribute _axis
+        , TF.assign "color" <$> TF.attribute _color
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "query" <$> TF.attribute _query
+        ]
+
+instance TF.IsValid (GraphMetricCluster s) where
+    validator = P.mempty
+
+instance P.HasActive (GraphMetricCluster s) (TF.Attr s P.Bool) where
+    active =
+        P.lens (_active :: GraphMetricCluster s -> TF.Attr s P.Bool)
+               (\s a -> s { _active = a } :: GraphMetricCluster s)
+
+instance P.HasAggregate (GraphMetricCluster s) (TF.Attr s P.Text) where
+    aggregate =
+        P.lens (_aggregate :: GraphMetricCluster s -> TF.Attr s P.Text)
+               (\s a -> s { _aggregate = a } :: GraphMetricCluster s)
+
+instance P.HasAxis (GraphMetricCluster s) (TF.Attr s P.Text) where
+    axis =
+        P.lens (_axis :: GraphMetricCluster s -> TF.Attr s P.Text)
+               (\s a -> s { _axis = a } :: GraphMetricCluster s)
+
+instance P.HasColor (GraphMetricCluster s) (TF.Attr s P.Text) where
+    color =
+        P.lens (_color :: GraphMetricCluster s -> TF.Attr s P.Text)
+               (\s a -> s { _color = a } :: GraphMetricCluster s)
+
+instance P.HasName (GraphMetricCluster s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: GraphMetricCluster s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: GraphMetricCluster s)
+
+instance P.HasQuery (GraphMetricCluster s) (TF.Attr s P.Text) where
+    query =
+        P.lens (_query :: GraphMetricCluster s -> TF.Attr s P.Text)
+               (\s a -> s { _query = a } :: GraphMetricCluster s)
+
+-- | @query@ nested settings.
+data MetricClusterQuery s = MetricClusterQuery'
+    { _definition :: TF.Attr s P.Text
+    -- ^ @definition@ - (Required)
+    -- A query to select a collection of metric streams
+    --
+    , _type'      :: TF.Attr s P.Text
+    -- ^ @type@ - (Required)
+    -- The operation to perform on the matching metric streams
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @query@ settings value.
+newMetricClusterQuery
+    :: TF.Attr s P.Text -- ^ 'P._definition': @definition@
+    -> TF.Attr s P.Text -- ^ 'P._type'': @type@
+    -> MetricClusterQuery s
+newMetricClusterQuery _definition _type' =
+    MetricClusterQuery'
+        { _definition = _definition
+        , _type' = _type'
+        }
+
+instance TF.IsValue  (MetricClusterQuery s)
+instance TF.IsObject (MetricClusterQuery s) where
+    toObject MetricClusterQuery'{..} = P.catMaybes
+        [ TF.assign "definition" <$> TF.attribute _definition
+        , TF.assign "type" <$> TF.attribute _type'
+        ]
+
+instance TF.IsValid (MetricClusterQuery s) where
+    validator = P.mempty
+
+instance P.HasDefinition (MetricClusterQuery s) (TF.Attr s P.Text) where
+    definition =
+        P.lens (_definition :: MetricClusterQuery s -> TF.Attr s P.Text)
+               (\s a -> s { _definition = a } :: MetricClusterQuery s)
+
+instance P.HasType' (MetricClusterQuery s) (TF.Attr s P.Text) where
+    type' =
+        P.lens (_type' :: MetricClusterQuery s -> TF.Attr s P.Text)
+               (\s a -> s { _type' = a } :: MetricClusterQuery s)
 
 -- | @if@ nested settings.
-data If'Setting s = If'Setting'
-    { _then' :: TF.Attr s (Then'Setting s)
+data RuleSetIf s = RuleSetIf'
+    { _then' :: TF.Attr s (RuleSetThen s)
     -- ^ @then@ - (Optional)
     -- Description of the action(s) to take when this rule set is active
     --
-    , _value :: TF.Attr s (ValueSetting s)
+    , _value :: TF.Attr s (RuleSetValue s)
     -- ^ @value@ - (Optional)
     -- Predicate that the rule set uses to evaluate a stream of metrics
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @if@ settings value.
-newIf'Setting
-    :: If'Setting s
-newIf'Setting =
-    If'Setting'
+newRuleSetIf
+    :: RuleSetIf s
+newRuleSetIf =
+    RuleSetIf'
         { _then' = TF.Nil
         , _value = TF.Nil
         }
 
-instance TF.IsValue  (If'Setting s)
-instance TF.IsObject (If'Setting s) where
-    toObject If'Setting'{..} = P.catMaybes
+instance TF.IsValue  (RuleSetIf s)
+instance TF.IsObject (RuleSetIf s) where
+    toObject RuleSetIf'{..} = P.catMaybes
         [ TF.assign "then" <$> TF.attribute _then'
         , TF.assign "value" <$> TF.attribute _value
         ]
 
-instance TF.IsValid (If'Setting s) where
+instance TF.IsValid (RuleSetIf s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_then'"
                   (_then'
-                      :: If'Setting s -> TF.Attr s (Then'Setting s))
+                      :: RuleSetIf s -> TF.Attr s (RuleSetThen s))
                   TF.validator
            P.<> TF.settingsValidator "_value"
                   (_value
-                      :: If'Setting s -> TF.Attr s (ValueSetting s))
+                      :: RuleSetIf s -> TF.Attr s (RuleSetValue s))
                   TF.validator
 
-instance P.HasThen' (If'Setting s) (TF.Attr s (Then'Setting s)) where
+instance P.HasThen' (RuleSetIf s) (TF.Attr s (RuleSetThen s)) where
     then' =
-        P.lens (_then' :: If'Setting s -> TF.Attr s (Then'Setting s))
-               (\s a -> s { _then' = a } :: If'Setting s)
+        P.lens (_then' :: RuleSetIf s -> TF.Attr s (RuleSetThen s))
+               (\s a -> s { _then' = a } :: RuleSetIf s)
 
-instance P.HasValue (If'Setting s) (TF.Attr s (ValueSetting s)) where
+instance P.HasValue (RuleSetIf s) (TF.Attr s (RuleSetValue s)) where
     value =
-        P.lens (_value :: If'Setting s -> TF.Attr s (ValueSetting s))
-               (\s a -> s { _value = a } :: If'Setting s)
+        P.lens (_value :: RuleSetIf s -> TF.Attr s (RuleSetValue s))
+               (\s a -> s { _value = a } :: RuleSetIf s)
 
 -- | @value@ nested settings.
-data ValueSetting s = ValueSetting'
+data RuleSetValue s = RuleSetValue'
     { _absent     :: TF.Attr s P.Text
     -- ^ @absent@ - (Optional)
     -- Fire the rule set if there has been no data for the given metric stream over
@@ -1189,7 +2432,7 @@ data ValueSetting s = ValueSetting'
     -- * 'minValue'
     -- * 'notContain'
     -- * 'over'
-    , _over       :: TF.Attr s (OverSetting s)
+    , _over       :: TF.Attr s (RuleSetOver s)
     -- ^ @over@ - (Optional)
     -- Use a derived value using a window
     --
@@ -1204,10 +2447,10 @@ data ValueSetting s = ValueSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @value@ settings value.
-newValueSetting
-    :: ValueSetting s
-newValueSetting =
-    ValueSetting'
+newRuleSetValue
+    :: RuleSetValue s
+newRuleSetValue =
+    RuleSetValue'
         { _absent = TF.Nil
         , _changed = TF.Nil
         , _contains = TF.Nil
@@ -1219,9 +2462,9 @@ newValueSetting =
         , _over = TF.Nil
         }
 
-instance TF.IsValue  (ValueSetting s)
-instance TF.IsObject (ValueSetting s) where
-    toObject ValueSetting'{..} = P.catMaybes
+instance TF.IsValue  (RuleSetValue s)
+instance TF.IsObject (RuleSetValue s) where
+    toObject RuleSetValue'{..} = P.catMaybes
         [ TF.assign "absent" <$> TF.attribute _absent
         , TF.assign "changed" <$> TF.attribute _changed
         , TF.assign "contains" <$> TF.attribute _contains
@@ -1233,8 +2476,8 @@ instance TF.IsObject (ValueSetting s) where
         , TF.assign "over" <$> TF.attribute _over
         ]
 
-instance TF.IsValid (ValueSetting s) where
-    validator = TF.fieldsValidator (\ValueSetting'{..} -> Map.fromList $ P.catMaybes
+instance TF.IsValid (RuleSetValue s) where
+    validator = TF.fieldsValidator (\RuleSetValue'{..} -> Map.fromList $ P.catMaybes
         [ if (_absent P.== TF.Nil)
               then P.Nothing
               else P.Just ("_absent",
@@ -1283,56 +2526,56 @@ instance TF.IsValid (ValueSetting s) where
         ])
            P.<> TF.settingsValidator "_over"
                   (_over
-                      :: ValueSetting s -> TF.Attr s (OverSetting s))
+                      :: RuleSetValue s -> TF.Attr s (RuleSetOver s))
                   TF.validator
 
-instance P.HasAbsent (ValueSetting s) (TF.Attr s P.Text) where
+instance P.HasAbsent (RuleSetValue s) (TF.Attr s P.Text) where
     absent =
-        P.lens (_absent :: ValueSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _absent = a } :: ValueSetting s)
+        P.lens (_absent :: RuleSetValue s -> TF.Attr s P.Text)
+               (\s a -> s { _absent = a } :: RuleSetValue s)
 
-instance P.HasChanged (ValueSetting s) (TF.Attr s P.Bool) where
+instance P.HasChanged (RuleSetValue s) (TF.Attr s P.Bool) where
     changed =
-        P.lens (_changed :: ValueSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _changed = a } :: ValueSetting s)
+        P.lens (_changed :: RuleSetValue s -> TF.Attr s P.Bool)
+               (\s a -> s { _changed = a } :: RuleSetValue s)
 
-instance P.HasContains (ValueSetting s) (TF.Attr s P.Text) where
+instance P.HasContains (RuleSetValue s) (TF.Attr s P.Text) where
     contains =
-        P.lens (_contains :: ValueSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _contains = a } :: ValueSetting s)
+        P.lens (_contains :: RuleSetValue s -> TF.Attr s P.Text)
+               (\s a -> s { _contains = a } :: RuleSetValue s)
 
-instance P.HasMatch (ValueSetting s) (TF.Attr s P.Text) where
+instance P.HasMatch (RuleSetValue s) (TF.Attr s P.Text) where
     match =
-        P.lens (_match :: ValueSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _match = a } :: ValueSetting s)
+        P.lens (_match :: RuleSetValue s -> TF.Attr s P.Text)
+               (\s a -> s { _match = a } :: RuleSetValue s)
 
-instance P.HasMaxValue (ValueSetting s) (TF.Attr s P.Text) where
+instance P.HasMaxValue (RuleSetValue s) (TF.Attr s P.Text) where
     maxValue =
-        P.lens (_maxValue :: ValueSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _maxValue = a } :: ValueSetting s)
+        P.lens (_maxValue :: RuleSetValue s -> TF.Attr s P.Text)
+               (\s a -> s { _maxValue = a } :: RuleSetValue s)
 
-instance P.HasMinValue (ValueSetting s) (TF.Attr s P.Text) where
+instance P.HasMinValue (RuleSetValue s) (TF.Attr s P.Text) where
     minValue =
-        P.lens (_minValue :: ValueSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _minValue = a } :: ValueSetting s)
+        P.lens (_minValue :: RuleSetValue s -> TF.Attr s P.Text)
+               (\s a -> s { _minValue = a } :: RuleSetValue s)
 
-instance P.HasNotContain (ValueSetting s) (TF.Attr s P.Text) where
+instance P.HasNotContain (RuleSetValue s) (TF.Attr s P.Text) where
     notContain =
-        P.lens (_notContain :: ValueSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _notContain = a } :: ValueSetting s)
+        P.lens (_notContain :: RuleSetValue s -> TF.Attr s P.Text)
+               (\s a -> s { _notContain = a } :: RuleSetValue s)
 
-instance P.HasNotMatch (ValueSetting s) (TF.Attr s P.Text) where
+instance P.HasNotMatch (RuleSetValue s) (TF.Attr s P.Text) where
     notMatch =
-        P.lens (_notMatch :: ValueSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _notMatch = a } :: ValueSetting s)
+        P.lens (_notMatch :: RuleSetValue s -> TF.Attr s P.Text)
+               (\s a -> s { _notMatch = a } :: RuleSetValue s)
 
-instance P.HasOver (ValueSetting s) (TF.Attr s (OverSetting s)) where
+instance P.HasOver (RuleSetValue s) (TF.Attr s (RuleSetOver s)) where
     over =
-        P.lens (_over :: ValueSetting s -> TF.Attr s (OverSetting s))
-               (\s a -> s { _over = a } :: ValueSetting s)
+        P.lens (_over :: RuleSetValue s -> TF.Attr s (RuleSetOver s))
+               (\s a -> s { _over = a } :: RuleSetValue s)
 
 -- | @over@ nested settings.
-data OverSetting s = OverSetting'
+data RuleSetOver s = RuleSetOver'
     { _last  :: TF.Attr s P.Text
     -- ^ @last@ - (Optional)
     -- Duration over which data from the last interval is examined
@@ -1344,36 +2587,36 @@ data OverSetting s = OverSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @over@ settings value.
-newOverSetting
-    :: OverSetting s
-newOverSetting =
-    OverSetting'
+newRuleSetOver
+    :: RuleSetOver s
+newRuleSetOver =
+    RuleSetOver'
         { _last = TF.value "300s"
         , _using = TF.value "average"
         }
 
-instance TF.IsValue  (OverSetting s)
-instance TF.IsObject (OverSetting s) where
-    toObject OverSetting'{..} = P.catMaybes
+instance TF.IsValue  (RuleSetOver s)
+instance TF.IsObject (RuleSetOver s) where
+    toObject RuleSetOver'{..} = P.catMaybes
         [ TF.assign "last" <$> TF.attribute _last
         , TF.assign "using" <$> TF.attribute _using
         ]
 
-instance TF.IsValid (OverSetting s) where
+instance TF.IsValid (RuleSetOver s) where
     validator = P.mempty
 
-instance P.HasLast (OverSetting s) (TF.Attr s P.Text) where
+instance P.HasLast (RuleSetOver s) (TF.Attr s P.Text) where
     last =
-        P.lens (_last :: OverSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _last = a } :: OverSetting s)
+        P.lens (_last :: RuleSetOver s -> TF.Attr s P.Text)
+               (\s a -> s { _last = a } :: RuleSetOver s)
 
-instance P.HasUsing (OverSetting s) (TF.Attr s P.Text) where
+instance P.HasUsing (RuleSetOver s) (TF.Attr s P.Text) where
     using =
-        P.lens (_using :: OverSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _using = a } :: OverSetting s)
+        P.lens (_using :: RuleSetOver s -> TF.Attr s P.Text)
+               (\s a -> s { _using = a } :: RuleSetOver s)
 
 -- | @then@ nested settings.
-data Then'Setting s = Then'Setting'
+data RuleSetThen s = RuleSetThen'
     { _after    :: TF.Attr s P.Text
     -- ^ @after@ - (Optional)
     -- The length of time we should wait before contacting the contact groups after
@@ -1391,1204 +2634,37 @@ data Then'Setting s = Then'Setting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @then@ settings value.
-newThen'Setting
-    :: Then'Setting s
-newThen'Setting =
-    Then'Setting'
+newRuleSetThen
+    :: RuleSetThen s
+newRuleSetThen =
+    RuleSetThen'
         { _after = TF.Nil
         , _notify = TF.Nil
         , _severity = TF.value 1
         }
 
-instance TF.IsValue  (Then'Setting s)
-instance TF.IsObject (Then'Setting s) where
-    toObject Then'Setting'{..} = P.catMaybes
+instance TF.IsValue  (RuleSetThen s)
+instance TF.IsObject (RuleSetThen s) where
+    toObject RuleSetThen'{..} = P.catMaybes
         [ TF.assign "after" <$> TF.attribute _after
         , TF.assign "notify" <$> TF.attribute _notify
         , TF.assign "severity" <$> TF.attribute _severity
         ]
 
-instance TF.IsValid (Then'Setting s) where
+instance TF.IsValid (RuleSetThen s) where
     validator = P.mempty
 
-instance P.HasAfter (Then'Setting s) (TF.Attr s P.Text) where
+instance P.HasAfter (RuleSetThen s) (TF.Attr s P.Text) where
     after =
-        P.lens (_after :: Then'Setting s -> TF.Attr s P.Text)
-               (\s a -> s { _after = a } :: Then'Setting s)
+        P.lens (_after :: RuleSetThen s -> TF.Attr s P.Text)
+               (\s a -> s { _after = a } :: RuleSetThen s)
 
-instance P.HasNotify (Then'Setting s) (TF.Attr s (P.NonEmpty (TF.Attr s P.Text))) where
+instance P.HasNotify (RuleSetThen s) (TF.Attr s (P.NonEmpty (TF.Attr s P.Text))) where
     notify =
-        P.lens (_notify :: Then'Setting s -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)))
-               (\s a -> s { _notify = a } :: Then'Setting s)
+        P.lens (_notify :: RuleSetThen s -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)))
+               (\s a -> s { _notify = a } :: RuleSetThen s)
 
-instance P.HasSeverity (Then'Setting s) (TF.Attr s P.Int) where
+instance P.HasSeverity (RuleSetThen s) (TF.Attr s P.Int) where
     severity =
-        P.lens (_severity :: Then'Setting s -> TF.Attr s P.Int)
-               (\s a -> s { _severity = a } :: Then'Setting s)
-
--- | @invites@ nested settings.
-data InvitesSetting s = InvitesSetting'
-    deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @invites@ settings value.
-newInvitesSetting
-    :: InvitesSetting s
-newInvitesSetting =
-    InvitesSetting'
-
-instance TF.IsValue  (InvitesSetting s)
-instance TF.IsObject (InvitesSetting s) where
-    toObject InvitesSetting' = []
-
-instance TF.IsValid (InvitesSetting s) where
-    validator = P.mempty
-
-instance s ~ s' => P.HasComputedEmail (TF.Ref s' (InvitesSetting s)) (TF.Attr s P.Text) where
-    computedEmail x = TF.compute (TF.refKey x) "email"
-
-instance s ~ s' => P.HasComputedRole (TF.Ref s' (InvitesSetting s)) (TF.Attr s P.Text) where
-    computedRole x = TF.compute (TF.refKey x) "role"
-
--- | @irc@ nested settings.
-data IrcSetting s = IrcSetting'
-    { _user :: TF.Attr s P.Text
-    -- ^ @user@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @irc@ settings value.
-newIrcSetting
-    :: TF.Attr s P.Text -- ^ 'P._user': @user@
-    -> IrcSetting s
-newIrcSetting _user =
-    IrcSetting'
-        { _user = _user
-        }
-
-instance TF.IsValue  (IrcSetting s)
-instance TF.IsObject (IrcSetting s) where
-    toObject IrcSetting'{..} = P.catMaybes
-        [ TF.assign "user" <$> TF.attribute _user
-        ]
-
-instance TF.IsValid (IrcSetting s) where
-    validator = P.mempty
-
-instance P.HasUser (IrcSetting s) (TF.Attr s P.Text) where
-    user =
-        P.lens (_user :: IrcSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _user = a } :: IrcSetting s)
-
--- | @json@ nested settings.
-data JsonSetting s = JsonSetting'
-    { _authMethod      :: TF.Attr s P.Text
-    -- ^ @auth_method@ - (Optional)
-    -- The HTTP Authentication method
-    --
-    , _authPassword    :: TF.Attr s P.Text
-    -- ^ @auth_password@ - (Optional)
-    -- The HTTP Authentication user password
-    --
-    , _authUser        :: TF.Attr s P.Text
-    -- ^ @auth_user@ - (Optional)
-    -- The HTTP Authentication user name
-    --
-    , _caChain         :: TF.Attr s P.Text
-    -- ^ @ca_chain@ - (Optional)
-    -- A path to a file containing all the certificate authorities that should be
-    -- loaded to validate the remote certificate (for TLS checks)
-    --
-    , _certificateFile :: TF.Attr s P.Text
-    -- ^ @certificate_file@ - (Optional)
-    -- A path to a file containing the client certificate that will be presented to
-    -- the remote server (for TLS-enabled checks)
-    --
-    , _ciphers         :: TF.Attr s P.Text
-    -- ^ @ciphers@ - (Optional)
-    -- A list of ciphers to be used in the TLS protocol (for HTTPS checks)
-    --
-    , _headers         :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
-    -- ^ @headers@ - (Optional)
-    -- Map of HTTP Headers to send along with HTTP Requests
-    --
-    , _keyFile         :: TF.Attr s P.Text
-    -- ^ @key_file@ - (Optional)
-    -- A path to a file containing key to be used in conjunction with the cilent
-    -- certificate (for TLS checks)
-    --
-    , _method          :: TF.Attr s P.Text
-    -- ^ @method@ - (Optional)
-    -- The HTTP method to use
-    --
-    , _payload         :: TF.Attr s P.Text
-    -- ^ @payload@ - (Optional)
-    -- The information transferred as the payload of an HTTP request
-    --
-    , _port            :: TF.Attr s P.Int
-    -- ^ @port@ - (Optional)
-    -- Specifies the port on which the management interface can be reached
-    --
-    , _readLimit       :: TF.Attr s P.Int
-    -- ^ @read_limit@ - (Optional)
-    -- Sets an approximate limit on the data read (0 means no limit)
-    --
-    , _url             :: TF.Attr s P.Text
-    -- ^ @url@ - (Required)
-    -- The URL to use as the target of the check
-    --
-    , _version         :: TF.Attr s P.Text
-    -- ^ @version@ - (Optional)
-    -- Sets the HTTP version for the check to use
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @json@ settings value.
-newJsonSetting
-    :: TF.Attr s P.Text -- ^ 'P._url': @url@
-    -> JsonSetting s
-newJsonSetting _url =
-    JsonSetting'
-        { _authMethod = TF.Nil
-        , _authPassword = TF.Nil
-        , _authUser = TF.Nil
-        , _caChain = TF.Nil
-        , _certificateFile = TF.Nil
-        , _ciphers = TF.Nil
-        , _headers = TF.Nil
-        , _keyFile = TF.Nil
-        , _method = TF.value "GET"
-        , _payload = TF.Nil
-        , _port = TF.value 443
-        , _readLimit = TF.Nil
-        , _url = _url
-        , _version = TF.value "1.1"
-        }
-
-instance TF.IsValue  (JsonSetting s)
-instance TF.IsObject (JsonSetting s) where
-    toObject JsonSetting'{..} = P.catMaybes
-        [ TF.assign "auth_method" <$> TF.attribute _authMethod
-        , TF.assign "auth_password" <$> TF.attribute _authPassword
-        , TF.assign "auth_user" <$> TF.attribute _authUser
-        , TF.assign "ca_chain" <$> TF.attribute _caChain
-        , TF.assign "certificate_file" <$> TF.attribute _certificateFile
-        , TF.assign "ciphers" <$> TF.attribute _ciphers
-        , TF.assign "headers" <$> TF.attribute _headers
-        , TF.assign "key_file" <$> TF.attribute _keyFile
-        , TF.assign "method" <$> TF.attribute _method
-        , TF.assign "payload" <$> TF.attribute _payload
-        , TF.assign "port" <$> TF.attribute _port
-        , TF.assign "read_limit" <$> TF.attribute _readLimit
-        , TF.assign "url" <$> TF.attribute _url
-        , TF.assign "version" <$> TF.attribute _version
-        ]
-
-instance TF.IsValid (JsonSetting s) where
-    validator = P.mempty
-
-instance P.HasAuthMethod (JsonSetting s) (TF.Attr s P.Text) where
-    authMethod =
-        P.lens (_authMethod :: JsonSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _authMethod = a } :: JsonSetting s)
-
-instance P.HasAuthPassword (JsonSetting s) (TF.Attr s P.Text) where
-    authPassword =
-        P.lens (_authPassword :: JsonSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _authPassword = a } :: JsonSetting s)
-
-instance P.HasAuthUser (JsonSetting s) (TF.Attr s P.Text) where
-    authUser =
-        P.lens (_authUser :: JsonSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _authUser = a } :: JsonSetting s)
-
-instance P.HasCaChain (JsonSetting s) (TF.Attr s P.Text) where
-    caChain =
-        P.lens (_caChain :: JsonSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _caChain = a } :: JsonSetting s)
-
-instance P.HasCertificateFile (JsonSetting s) (TF.Attr s P.Text) where
-    certificateFile =
-        P.lens (_certificateFile :: JsonSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _certificateFile = a } :: JsonSetting s)
-
-instance P.HasCiphers (JsonSetting s) (TF.Attr s P.Text) where
-    ciphers =
-        P.lens (_ciphers :: JsonSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _ciphers = a } :: JsonSetting s)
-
-instance P.HasHeaders (JsonSetting s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
-    headers =
-        P.lens (_headers :: JsonSetting s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _headers = a } :: JsonSetting s)
-
-instance P.HasKeyFile (JsonSetting s) (TF.Attr s P.Text) where
-    keyFile =
-        P.lens (_keyFile :: JsonSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _keyFile = a } :: JsonSetting s)
-
-instance P.HasMethod (JsonSetting s) (TF.Attr s P.Text) where
-    method =
-        P.lens (_method :: JsonSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _method = a } :: JsonSetting s)
-
-instance P.HasPayload (JsonSetting s) (TF.Attr s P.Text) where
-    payload =
-        P.lens (_payload :: JsonSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _payload = a } :: JsonSetting s)
-
-instance P.HasPort (JsonSetting s) (TF.Attr s P.Int) where
-    port =
-        P.lens (_port :: JsonSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _port = a } :: JsonSetting s)
-
-instance P.HasReadLimit (JsonSetting s) (TF.Attr s P.Int) where
-    readLimit =
-        P.lens (_readLimit :: JsonSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _readLimit = a } :: JsonSetting s)
-
-instance P.HasUrl (JsonSetting s) (TF.Attr s P.Text) where
-    url =
-        P.lens (_url :: JsonSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _url = a } :: JsonSetting s)
-
-instance P.HasVersion (JsonSetting s) (TF.Attr s P.Text) where
-    version =
-        P.lens (_version :: JsonSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _version = a } :: JsonSetting s)
-
--- | @metric_cluster@ nested settings.
-data MetricClusterSetting s = MetricClusterSetting'
-    { _active    :: TF.Attr s P.Bool
-    -- ^ @active@ - (Optional)
-    --
-    , _aggregate :: TF.Attr s P.Text
-    -- ^ @aggregate@ - (Optional)
-    --
-    , _axis      :: TF.Attr s P.Text
-    -- ^ @axis@ - (Optional)
-    --
-    , _color     :: TF.Attr s P.Text
-    -- ^ @color@ - (Optional)
-    --
-    , _name      :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
-    --
-    , _query     :: TF.Attr s P.Text
-    -- ^ @query@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @metric_cluster@ settings value.
-newMetricClusterSetting
-    :: TF.Attr s P.Text -- ^ 'P._name': @name@
-    -> MetricClusterSetting s
-newMetricClusterSetting _name =
-    MetricClusterSetting'
-        { _active = TF.value P.True
-        , _aggregate = TF.value "none"
-        , _axis = TF.value "left"
-        , _color = TF.Nil
-        , _name = _name
-        , _query = TF.Nil
-        }
-
-instance TF.IsValue  (MetricClusterSetting s)
-instance TF.IsObject (MetricClusterSetting s) where
-    toObject MetricClusterSetting'{..} = P.catMaybes
-        [ TF.assign "active" <$> TF.attribute _active
-        , TF.assign "aggregate" <$> TF.attribute _aggregate
-        , TF.assign "axis" <$> TF.attribute _axis
-        , TF.assign "color" <$> TF.attribute _color
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "query" <$> TF.attribute _query
-        ]
-
-instance TF.IsValid (MetricClusterSetting s) where
-    validator = P.mempty
-
-instance P.HasActive (MetricClusterSetting s) (TF.Attr s P.Bool) where
-    active =
-        P.lens (_active :: MetricClusterSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _active = a } :: MetricClusterSetting s)
-
-instance P.HasAggregate (MetricClusterSetting s) (TF.Attr s P.Text) where
-    aggregate =
-        P.lens (_aggregate :: MetricClusterSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _aggregate = a } :: MetricClusterSetting s)
-
-instance P.HasAxis (MetricClusterSetting s) (TF.Attr s P.Text) where
-    axis =
-        P.lens (_axis :: MetricClusterSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _axis = a } :: MetricClusterSetting s)
-
-instance P.HasColor (MetricClusterSetting s) (TF.Attr s P.Text) where
-    color =
-        P.lens (_color :: MetricClusterSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _color = a } :: MetricClusterSetting s)
-
-instance P.HasName (MetricClusterSetting s) (TF.Attr s P.Text) where
-    name =
-        P.lens (_name :: MetricClusterSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: MetricClusterSetting s)
-
-instance P.HasQuery (MetricClusterSetting s) (TF.Attr s P.Text) where
-    query =
-        P.lens (_query :: MetricClusterSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _query = a } :: MetricClusterSetting s)
-
--- | @metric@ nested settings.
-data MetricSetting s = MetricSetting'
-    { _active        :: TF.Attr s P.Bool
-    -- ^ @active@ - (Optional)
-    -- Enables or disables the metric
-    --
-    , _name          :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
-    -- Name of the metric
-    --
-    , _tags          :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @tags@ - (Optional)
-    -- Tags assigned to the metric
-    --
-    , _type'         :: TF.Attr s P.Text
-    -- ^ @type@ - (Required)
-    -- Type of metric (e.g. numeric, histogram, text)
-    --
-    , _unit          :: TF.Attr s P.Text
-    -- ^ @unit@ - (Optional)
-    -- The unit of measurement for a metric
-    --
-    , _alpha         :: TF.Attr s P.Double
-    -- ^ @alpha@ - (Optional)
-    --
-    , _axis          :: TF.Attr s P.Text
-    -- ^ @axis@ - (Optional)
-    --
-    , _caql          :: TF.Attr s P.Text
-    -- ^ @caql@ - (Optional)
-    --
-    -- Conflicts with:
-    --
-    -- * 'check'
-    -- * 'metricName'
-    , _check         :: TF.Attr s P.Text
-    -- ^ @check@ - (Optional)
-    --
-    -- Conflicts with:
-    --
-    -- * 'caql'
-    , _color         :: TF.Attr s P.Text
-    -- ^ @color@ - (Optional)
-    --
-    , _formula       :: TF.Attr s P.Text
-    -- ^ @formula@ - (Optional)
-    --
-    , _function      :: TF.Attr s P.Text
-    -- ^ @function@ - (Optional)
-    --
-    , _legendFormula :: TF.Attr s P.Text
-    -- ^ @legend_formula@ - (Optional)
-    --
-    , _metricName    :: TF.Attr s P.Text
-    -- ^ @metric_name@ - (Optional)
-    --
-    -- Conflicts with:
-    --
-    -- * 'caql'
-    , _metricType    :: TF.Attr s P.Text
-    -- ^ @metric_type@ - (Required)
-    --
-    , _stack         :: TF.Attr s P.Text
-    -- ^ @stack@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @metric@ settings value.
-newMetricSetting
-    :: TF.Attr s P.Text -- ^ 'P._name': @name@
-    -> TF.Attr s P.Text -- ^ 'P._metricType': @metric_type@
-    -> TF.Attr s P.Text -- ^ 'P._type'': @type@
-    -> MetricSetting s
-newMetricSetting _name _metricType _type' =
-    MetricSetting'
-        { _active = TF.value P.True
-        , _name = _name
-        , _tags = TF.Nil
-        , _type' = _type'
-        , _unit = TF.Nil
-        , _alpha = TF.Nil
-        , _axis = TF.value "left"
-        , _caql = TF.Nil
-        , _check = TF.Nil
-        , _color = TF.Nil
-        , _formula = TF.Nil
-        , _function = TF.Nil
-        , _legendFormula = TF.Nil
-        , _metricName = TF.Nil
-        , _metricType = _metricType
-        , _stack = TF.Nil
-        }
-
-instance TF.IsValue  (MetricSetting s)
-instance TF.IsObject (MetricSetting s) where
-    toObject MetricSetting'{..} = P.catMaybes
-        [ TF.assign "active" <$> TF.attribute _active
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "tags" <$> TF.attribute _tags
-        , TF.assign "type" <$> TF.attribute _type'
-        , TF.assign "unit" <$> TF.attribute _unit
-        , TF.assign "alpha" <$> TF.attribute _alpha
-        , TF.assign "axis" <$> TF.attribute _axis
-        , TF.assign "caql" <$> TF.attribute _caql
-        , TF.assign "check" <$> TF.attribute _check
-        , TF.assign "color" <$> TF.attribute _color
-        , TF.assign "formula" <$> TF.attribute _formula
-        , TF.assign "function" <$> TF.attribute _function
-        , TF.assign "legend_formula" <$> TF.attribute _legendFormula
-        , TF.assign "metric_name" <$> TF.attribute _metricName
-        , TF.assign "metric_type" <$> TF.attribute _metricType
-        , TF.assign "stack" <$> TF.attribute _stack
-        ]
-
-instance TF.IsValid (MetricSetting s) where
-    validator = TF.fieldsValidator (\MetricSetting'{..} -> Map.fromList $ P.catMaybes
-        [ if (_caql P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_caql",
-                            [ "_check"                            , "_metricName"
-                            ])
-        , if (_check P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_check",
-                            [ "_caql"
-                            ])
-        , if (_metricName P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_metricName",
-                            [ "_caql"
-                            ])
-        ])
-
-instance P.HasActive (MetricSetting s) (TF.Attr s P.Bool) where
-    active =
-        P.lens (_active :: MetricSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _active = a } :: MetricSetting s)
-
-instance P.HasName (MetricSetting s) (TF.Attr s P.Text) where
-    name =
-        P.lens (_name :: MetricSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: MetricSetting s)
-
-instance P.HasTags (MetricSetting s) (TF.Attr s [TF.Attr s P.Text]) where
-    tags =
-        P.lens (_tags :: MetricSetting s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _tags = a } :: MetricSetting s)
-
-instance P.HasType' (MetricSetting s) (TF.Attr s P.Text) where
-    type' =
-        P.lens (_type' :: MetricSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a } :: MetricSetting s)
-
-instance P.HasUnit (MetricSetting s) (TF.Attr s P.Text) where
-    unit =
-        P.lens (_unit :: MetricSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _unit = a } :: MetricSetting s)
-
-instance P.HasAlpha (MetricSetting s) (TF.Attr s P.Double) where
-    alpha =
-        P.lens (_alpha :: MetricSetting s -> TF.Attr s P.Double)
-               (\s a -> s { _alpha = a } :: MetricSetting s)
-
-instance P.HasAxis (MetricSetting s) (TF.Attr s P.Text) where
-    axis =
-        P.lens (_axis :: MetricSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _axis = a } :: MetricSetting s)
-
-instance P.HasCaql (MetricSetting s) (TF.Attr s P.Text) where
-    caql =
-        P.lens (_caql :: MetricSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _caql = a } :: MetricSetting s)
-
-instance P.HasCheck (MetricSetting s) (TF.Attr s P.Text) where
-    check =
-        P.lens (_check :: MetricSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _check = a } :: MetricSetting s)
-
-instance P.HasColor (MetricSetting s) (TF.Attr s P.Text) where
-    color =
-        P.lens (_color :: MetricSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _color = a } :: MetricSetting s)
-
-instance P.HasFormula (MetricSetting s) (TF.Attr s P.Text) where
-    formula =
-        P.lens (_formula :: MetricSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _formula = a } :: MetricSetting s)
-
-instance P.HasFunction (MetricSetting s) (TF.Attr s P.Text) where
-    function =
-        P.lens (_function :: MetricSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _function = a } :: MetricSetting s)
-
-instance P.HasLegendFormula (MetricSetting s) (TF.Attr s P.Text) where
-    legendFormula =
-        P.lens (_legendFormula :: MetricSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _legendFormula = a } :: MetricSetting s)
-
-instance P.HasMetricName (MetricSetting s) (TF.Attr s P.Text) where
-    metricName =
-        P.lens (_metricName :: MetricSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _metricName = a } :: MetricSetting s)
-
-instance P.HasMetricType (MetricSetting s) (TF.Attr s P.Text) where
-    metricType =
-        P.lens (_metricType :: MetricSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _metricType = a } :: MetricSetting s)
-
-instance P.HasStack (MetricSetting s) (TF.Attr s P.Text) where
-    stack =
-        P.lens (_stack :: MetricSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _stack = a } :: MetricSetting s)
-
-instance s ~ s' => P.HasComputedFunction (TF.Ref s' (MetricSetting s)) (TF.Attr s P.Text) where
-    computedFunction x = TF.compute (TF.refKey x) "function"
-
--- | @mysql@ nested settings.
-data MysqlSetting s = MysqlSetting'
-    { _dsn   :: TF.Attr s P.Text
-    -- ^ @dsn@ - (Required)
-    -- The connect DSN for the MySQL instance
-    --
-    , _query :: TF.Attr s P.Text
-    -- ^ @query@ - (Required)
-    -- The SQL to use as the query
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @mysql@ settings value.
-newMysqlSetting
-    :: TF.Attr s P.Text -- ^ 'P._dsn': @dsn@
-    -> TF.Attr s P.Text -- ^ 'P._query': @query@
-    -> MysqlSetting s
-newMysqlSetting _dsn _query =
-    MysqlSetting'
-        { _dsn = _dsn
-        , _query = _query
-        }
-
-instance TF.IsValue  (MysqlSetting s)
-instance TF.IsObject (MysqlSetting s) where
-    toObject MysqlSetting'{..} = P.catMaybes
-        [ TF.assign "dsn" <$> TF.attribute _dsn
-        , TF.assign "query" <$> TF.attribute _query
-        ]
-
-instance TF.IsValid (MysqlSetting s) where
-    validator = P.mempty
-
-instance P.HasDsn (MysqlSetting s) (TF.Attr s P.Text) where
-    dsn =
-        P.lens (_dsn :: MysqlSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _dsn = a } :: MysqlSetting s)
-
-instance P.HasQuery (MysqlSetting s) (TF.Attr s P.Text) where
-    query =
-        P.lens (_query :: MysqlSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _query = a } :: MysqlSetting s)
-
--- | @pager_duty@ nested settings.
-data PagerDutySetting s = PagerDutySetting'
-    { _contactGroupFallback :: TF.Attr s P.Text
-    -- ^ @contact_group_fallback@ - (Optional)
-    --
-    , _serviceKey           :: TF.Attr s P.Text
-    -- ^ @service_key@ - (Required)
-    --
-    , _webhookUrl           :: TF.Attr s P.Text
-    -- ^ @webhook_url@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @pager_duty@ settings value.
-newPagerDutySetting
-    :: TF.Attr s P.Text -- ^ 'P._serviceKey': @service_key@
-    -> TF.Attr s P.Text -- ^ 'P._webhookUrl': @webhook_url@
-    -> PagerDutySetting s
-newPagerDutySetting _serviceKey _webhookUrl =
-    PagerDutySetting'
-        { _contactGroupFallback = TF.Nil
-        , _serviceKey = _serviceKey
-        , _webhookUrl = _webhookUrl
-        }
-
-instance TF.IsValue  (PagerDutySetting s)
-instance TF.IsObject (PagerDutySetting s) where
-    toObject PagerDutySetting'{..} = P.catMaybes
-        [ TF.assign "contact_group_fallback" <$> TF.attribute _contactGroupFallback
-        , TF.assign "service_key" <$> TF.attribute _serviceKey
-        , TF.assign "webhook_url" <$> TF.attribute _webhookUrl
-        ]
-
-instance TF.IsValid (PagerDutySetting s) where
-    validator = P.mempty
-
-instance P.HasContactGroupFallback (PagerDutySetting s) (TF.Attr s P.Text) where
-    contactGroupFallback =
-        P.lens (_contactGroupFallback :: PagerDutySetting s -> TF.Attr s P.Text)
-               (\s a -> s { _contactGroupFallback = a } :: PagerDutySetting s)
-
-instance P.HasServiceKey (PagerDutySetting s) (TF.Attr s P.Text) where
-    serviceKey =
-        P.lens (_serviceKey :: PagerDutySetting s -> TF.Attr s P.Text)
-               (\s a -> s { _serviceKey = a } :: PagerDutySetting s)
-
-instance P.HasWebhookUrl (PagerDutySetting s) (TF.Attr s P.Text) where
-    webhookUrl =
-        P.lens (_webhookUrl :: PagerDutySetting s -> TF.Attr s P.Text)
-               (\s a -> s { _webhookUrl = a } :: PagerDutySetting s)
-
--- | @postgresql@ nested settings.
-data PostgresqlSetting s = PostgresqlSetting'
-    { _dsn   :: TF.Attr s P.Text
-    -- ^ @dsn@ - (Required)
-    -- The connect DSN for the PostgreSQL instance
-    --
-    , _query :: TF.Attr s P.Text
-    -- ^ @query@ - (Required)
-    -- The SQL to use as the query
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @postgresql@ settings value.
-newPostgresqlSetting
-    :: TF.Attr s P.Text -- ^ 'P._dsn': @dsn@
-    -> TF.Attr s P.Text -- ^ 'P._query': @query@
-    -> PostgresqlSetting s
-newPostgresqlSetting _dsn _query =
-    PostgresqlSetting'
-        { _dsn = _dsn
-        , _query = _query
-        }
-
-instance TF.IsValue  (PostgresqlSetting s)
-instance TF.IsObject (PostgresqlSetting s) where
-    toObject PostgresqlSetting'{..} = P.catMaybes
-        [ TF.assign "dsn" <$> TF.attribute _dsn
-        , TF.assign "query" <$> TF.attribute _query
-        ]
-
-instance TF.IsValid (PostgresqlSetting s) where
-    validator = P.mempty
-
-instance P.HasDsn (PostgresqlSetting s) (TF.Attr s P.Text) where
-    dsn =
-        P.lens (_dsn :: PostgresqlSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _dsn = a } :: PostgresqlSetting s)
-
-instance P.HasQuery (PostgresqlSetting s) (TF.Attr s P.Text) where
-    query =
-        P.lens (_query :: PostgresqlSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _query = a } :: PostgresqlSetting s)
-
--- | @query@ nested settings.
-data QuerySetting s = QuerySetting'
-    { _definition :: TF.Attr s P.Text
-    -- ^ @definition@ - (Required)
-    -- A query to select a collection of metric streams
-    --
-    , _type'      :: TF.Attr s P.Text
-    -- ^ @type@ - (Required)
-    -- The operation to perform on the matching metric streams
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @query@ settings value.
-newQuerySetting
-    :: TF.Attr s P.Text -- ^ 'P._definition': @definition@
-    -> TF.Attr s P.Text -- ^ 'P._type'': @type@
-    -> QuerySetting s
-newQuerySetting _definition _type' =
-    QuerySetting'
-        { _definition = _definition
-        , _type' = _type'
-        }
-
-instance TF.IsValue  (QuerySetting s)
-instance TF.IsObject (QuerySetting s) where
-    toObject QuerySetting'{..} = P.catMaybes
-        [ TF.assign "definition" <$> TF.attribute _definition
-        , TF.assign "type" <$> TF.attribute _type'
-        ]
-
-instance TF.IsValid (QuerySetting s) where
-    validator = P.mempty
-
-instance P.HasDefinition (QuerySetting s) (TF.Attr s P.Text) where
-    definition =
-        P.lens (_definition :: QuerySetting s -> TF.Attr s P.Text)
-               (\s a -> s { _definition = a } :: QuerySetting s)
-
-instance P.HasType' (QuerySetting s) (TF.Attr s P.Text) where
-    type' =
-        P.lens (_type' :: QuerySetting s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a } :: QuerySetting s)
-
--- | @slack@ nested settings.
-data SlackSetting s = SlackSetting'
-    { _buttons              :: TF.Attr s P.Bool
-    -- ^ @buttons@ - (Optional)
-    --
-    , _channel              :: TF.Attr s P.Text
-    -- ^ @channel@ - (Required)
-    --
-    , _contactGroupFallback :: TF.Attr s P.Text
-    -- ^ @contact_group_fallback@ - (Optional)
-    --
-    , _team                 :: TF.Attr s P.Text
-    -- ^ @team@ - (Required)
-    --
-    , _username             :: TF.Attr s P.Text
-    -- ^ @username@ - (Optional)
-    -- Username Slackbot uses in Slack to deliver a notification
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @slack@ settings value.
-newSlackSetting
-    :: TF.Attr s P.Text -- ^ 'P._channel': @channel@
-    -> TF.Attr s P.Text -- ^ 'P._team': @team@
-    -> SlackSetting s
-newSlackSetting _channel _team =
-    SlackSetting'
-        { _buttons = TF.value P.True
-        , _channel = _channel
-        , _contactGroupFallback = TF.Nil
-        , _team = _team
-        , _username = TF.value "Circonus"
-        }
-
-instance TF.IsValue  (SlackSetting s)
-instance TF.IsObject (SlackSetting s) where
-    toObject SlackSetting'{..} = P.catMaybes
-        [ TF.assign "buttons" <$> TF.attribute _buttons
-        , TF.assign "channel" <$> TF.attribute _channel
-        , TF.assign "contact_group_fallback" <$> TF.attribute _contactGroupFallback
-        , TF.assign "team" <$> TF.attribute _team
-        , TF.assign "username" <$> TF.attribute _username
-        ]
-
-instance TF.IsValid (SlackSetting s) where
-    validator = P.mempty
-
-instance P.HasButtons (SlackSetting s) (TF.Attr s P.Bool) where
-    buttons =
-        P.lens (_buttons :: SlackSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _buttons = a } :: SlackSetting s)
-
-instance P.HasChannel (SlackSetting s) (TF.Attr s P.Text) where
-    channel =
-        P.lens (_channel :: SlackSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _channel = a } :: SlackSetting s)
-
-instance P.HasContactGroupFallback (SlackSetting s) (TF.Attr s P.Text) where
-    contactGroupFallback =
-        P.lens (_contactGroupFallback :: SlackSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _contactGroupFallback = a } :: SlackSetting s)
-
-instance P.HasTeam (SlackSetting s) (TF.Attr s P.Text) where
-    team =
-        P.lens (_team :: SlackSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _team = a } :: SlackSetting s)
-
-instance P.HasUsername (SlackSetting s) (TF.Attr s P.Text) where
-    username =
-        P.lens (_username :: SlackSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _username = a } :: SlackSetting s)
-
--- | @sms@ nested settings.
-data SmsSetting s = SmsSetting'
-    { _address :: TF.Attr s P.Text
-    -- ^ @address@ - (Optional)
-    --
-    -- Conflicts with:
-    --
-    -- * 'user'
-    , _user    :: TF.Attr s P.Text
-    -- ^ @user@ - (Optional)
-    --
-    -- Conflicts with:
-    --
-    -- * 'address'
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @sms@ settings value.
-newSmsSetting
-    :: SmsSetting s
-newSmsSetting =
-    SmsSetting'
-        { _address = TF.Nil
-        , _user = TF.Nil
-        }
-
-instance TF.IsValue  (SmsSetting s)
-instance TF.IsObject (SmsSetting s) where
-    toObject SmsSetting'{..} = P.catMaybes
-        [ TF.assign "address" <$> TF.attribute _address
-        , TF.assign "user" <$> TF.attribute _user
-        ]
-
-instance TF.IsValid (SmsSetting s) where
-    validator = TF.fieldsValidator (\SmsSetting'{..} -> Map.fromList $ P.catMaybes
-        [ if (_address P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_address",
-                            [ "_user"
-                            ])
-        , if (_user P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_user",
-                            [ "_address"
-                            ])
-        ])
-
-instance P.HasAddress (SmsSetting s) (TF.Attr s P.Text) where
-    address =
-        P.lens (_address :: SmsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _address = a } :: SmsSetting s)
-
-instance P.HasUser (SmsSetting s) (TF.Attr s P.Text) where
-    user =
-        P.lens (_user :: SmsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _user = a } :: SmsSetting s)
-
--- | @statsd@ nested settings.
-data StatsdSetting s = StatsdSetting'
-    { _sourceIp :: TF.Attr s P.Text
-    -- ^ @source_ip@ - (Required)
-    -- The source IP of the statsd metrics stream
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @statsd@ settings value.
-newStatsdSetting
-    :: TF.Attr s P.Text -- ^ 'P._sourceIp': @source_ip@
-    -> StatsdSetting s
-newStatsdSetting _sourceIp =
-    StatsdSetting'
-        { _sourceIp = _sourceIp
-        }
-
-instance TF.IsValue  (StatsdSetting s)
-instance TF.IsObject (StatsdSetting s) where
-    toObject StatsdSetting'{..} = P.catMaybes
-        [ TF.assign "source_ip" <$> TF.attribute _sourceIp
-        ]
-
-instance TF.IsValid (StatsdSetting s) where
-    validator = P.mempty
-
-instance P.HasSourceIp (StatsdSetting s) (TF.Attr s P.Text) where
-    sourceIp =
-        P.lens (_sourceIp :: StatsdSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _sourceIp = a } :: StatsdSetting s)
-
--- | @tcp@ nested settings.
-data TcpSetting s = TcpSetting'
-    { _bannerRegexp    :: TF.Attr s P.Text
-    -- ^ @banner_regexp@ - (Optional)
-    -- This regular expression is matched against the response banner. If a match
-    -- is not found, the check will be marked as bad.
-    --
-    , _caChain         :: TF.Attr s P.Text
-    -- ^ @ca_chain@ - (Optional)
-    -- A path to a file containing all the certificate authorities that should be
-    -- loaded to validate the remote certificate (for TLS checks).
-    --
-    , _certificateFile :: TF.Attr s P.Text
-    -- ^ @certificate_file@ - (Optional)
-    -- A path to a file containing the client certificate that will be presented to
-    -- the remote server (for TLS checks).
-    --
-    , _ciphers         :: TF.Attr s P.Text
-    -- ^ @ciphers@ - (Optional)
-    -- A list of ciphers to be used when establishing a TLS connection
-    --
-    , _host            :: TF.Attr s P.Text
-    -- ^ @host@ - (Required)
-    -- Specifies the host name or IP address to connect to for this TCP check
-    --
-    , _keyFile         :: TF.Attr s P.Text
-    -- ^ @key_file@ - (Optional)
-    -- A path to a file containing key to be used in conjunction with the cilent
-    -- certificate (for TLS checks)
-    --
-    , _port            :: TF.Attr s P.Int
-    -- ^ @port@ - (Required)
-    -- Specifies the port on which the management interface can be reached.
-    --
-    , _tls             :: TF.Attr s P.Bool
-    -- ^ @tls@ - (Optional)
-    -- Upgrade TCP connection to use TLS.
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @tcp@ settings value.
-newTcpSetting
-    :: TF.Attr s P.Text -- ^ 'P._host': @host@
-    -> TF.Attr s P.Int -- ^ 'P._port': @port@
-    -> TcpSetting s
-newTcpSetting _host _port =
-    TcpSetting'
-        { _bannerRegexp = TF.Nil
-        , _caChain = TF.Nil
-        , _certificateFile = TF.Nil
-        , _ciphers = TF.Nil
-        , _host = _host
-        , _keyFile = TF.Nil
-        , _port = _port
-        , _tls = TF.value P.False
-        }
-
-instance TF.IsValue  (TcpSetting s)
-instance TF.IsObject (TcpSetting s) where
-    toObject TcpSetting'{..} = P.catMaybes
-        [ TF.assign "banner_regexp" <$> TF.attribute _bannerRegexp
-        , TF.assign "ca_chain" <$> TF.attribute _caChain
-        , TF.assign "certificate_file" <$> TF.attribute _certificateFile
-        , TF.assign "ciphers" <$> TF.attribute _ciphers
-        , TF.assign "host" <$> TF.attribute _host
-        , TF.assign "key_file" <$> TF.attribute _keyFile
-        , TF.assign "port" <$> TF.attribute _port
-        , TF.assign "tls" <$> TF.attribute _tls
-        ]
-
-instance TF.IsValid (TcpSetting s) where
-    validator = P.mempty
-
-instance P.HasBannerRegexp (TcpSetting s) (TF.Attr s P.Text) where
-    bannerRegexp =
-        P.lens (_bannerRegexp :: TcpSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _bannerRegexp = a } :: TcpSetting s)
-
-instance P.HasCaChain (TcpSetting s) (TF.Attr s P.Text) where
-    caChain =
-        P.lens (_caChain :: TcpSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _caChain = a } :: TcpSetting s)
-
-instance P.HasCertificateFile (TcpSetting s) (TF.Attr s P.Text) where
-    certificateFile =
-        P.lens (_certificateFile :: TcpSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _certificateFile = a } :: TcpSetting s)
-
-instance P.HasCiphers (TcpSetting s) (TF.Attr s P.Text) where
-    ciphers =
-        P.lens (_ciphers :: TcpSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _ciphers = a } :: TcpSetting s)
-
-instance P.HasHost (TcpSetting s) (TF.Attr s P.Text) where
-    host =
-        P.lens (_host :: TcpSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _host = a } :: TcpSetting s)
-
-instance P.HasKeyFile (TcpSetting s) (TF.Attr s P.Text) where
-    keyFile =
-        P.lens (_keyFile :: TcpSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _keyFile = a } :: TcpSetting s)
-
-instance P.HasPort (TcpSetting s) (TF.Attr s P.Int) where
-    port =
-        P.lens (_port :: TcpSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _port = a } :: TcpSetting s)
-
-instance P.HasTls (TcpSetting s) (TF.Attr s P.Bool) where
-    tls =
-        P.lens (_tls :: TcpSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _tls = a } :: TcpSetting s)
-
--- | @usage@ nested settings.
-data UsageSetting s = UsageSetting'
-    deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @usage@ settings value.
-newUsageSetting
-    :: UsageSetting s
-newUsageSetting =
-    UsageSetting'
-
-instance TF.IsValue  (UsageSetting s)
-instance TF.IsObject (UsageSetting s) where
-    toObject UsageSetting' = []
-
-instance TF.IsValid (UsageSetting s) where
-    validator = P.mempty
-
-instance s ~ s' => P.HasComputedLimit (TF.Ref s' (UsageSetting s)) (TF.Attr s P.Int) where
-    computedLimit x = TF.compute (TF.refKey x) "limit"
-
-instance s ~ s' => P.HasComputedType (TF.Ref s' (UsageSetting s)) (TF.Attr s P.Text) where
-    computedType x = TF.compute (TF.refKey x) "type"
-
-instance s ~ s' => P.HasComputedUsed (TF.Ref s' (UsageSetting s)) (TF.Attr s P.Int) where
-    computedUsed x = TF.compute (TF.refKey x) "used"
-
--- | @users@ nested settings.
-data UsersSetting s = UsersSetting'
-    deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @users@ settings value.
-newUsersSetting
-    :: UsersSetting s
-newUsersSetting =
-    UsersSetting'
-
-instance TF.IsValue  (UsersSetting s)
-instance TF.IsObject (UsersSetting s) where
-    toObject UsersSetting' = []
-
-instance TF.IsValid (UsersSetting s) where
-    validator = P.mempty
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (UsersSetting s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
-instance s ~ s' => P.HasComputedRole (TF.Ref s' (UsersSetting s)) (TF.Attr s P.Text) where
-    computedRole x = TF.compute (TF.refKey x) "role"
-
--- | @victorops@ nested settings.
-data VictoropsSetting s = VictoropsSetting'
-    { _apiKey               :: TF.Attr s P.Text
-    -- ^ @api_key@ - (Required)
-    --
-    , _contactGroupFallback :: TF.Attr s P.Text
-    -- ^ @contact_group_fallback@ - (Optional)
-    --
-    , _critical             :: TF.Attr s P.Int
-    -- ^ @critical@ - (Required)
-    --
-    , _info                 :: TF.Attr s P.Int
-    -- ^ @info@ - (Required)
-    --
-    , _team                 :: TF.Attr s P.Text
-    -- ^ @team@ - (Required)
-    --
-    , _warning              :: TF.Attr s P.Int
-    -- ^ @warning@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @victorops@ settings value.
-newVictoropsSetting
-    :: TF.Attr s P.Int -- ^ 'P._critical': @critical@
-    -> TF.Attr s P.Int -- ^ 'P._info': @info@
-    -> TF.Attr s P.Text -- ^ 'P._apiKey': @api_key@
-    -> TF.Attr s P.Text -- ^ 'P._team': @team@
-    -> TF.Attr s P.Int -- ^ 'P._warning': @warning@
-    -> VictoropsSetting s
-newVictoropsSetting _critical _info _apiKey _team _warning =
-    VictoropsSetting'
-        { _apiKey = _apiKey
-        , _contactGroupFallback = TF.Nil
-        , _critical = _critical
-        , _info = _info
-        , _team = _team
-        , _warning = _warning
-        }
-
-instance TF.IsValue  (VictoropsSetting s)
-instance TF.IsObject (VictoropsSetting s) where
-    toObject VictoropsSetting'{..} = P.catMaybes
-        [ TF.assign "api_key" <$> TF.attribute _apiKey
-        , TF.assign "contact_group_fallback" <$> TF.attribute _contactGroupFallback
-        , TF.assign "critical" <$> TF.attribute _critical
-        , TF.assign "info" <$> TF.attribute _info
-        , TF.assign "team" <$> TF.attribute _team
-        , TF.assign "warning" <$> TF.attribute _warning
-        ]
-
-instance TF.IsValid (VictoropsSetting s) where
-    validator = P.mempty
-
-instance P.HasApiKey (VictoropsSetting s) (TF.Attr s P.Text) where
-    apiKey =
-        P.lens (_apiKey :: VictoropsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _apiKey = a } :: VictoropsSetting s)
-
-instance P.HasContactGroupFallback (VictoropsSetting s) (TF.Attr s P.Text) where
-    contactGroupFallback =
-        P.lens (_contactGroupFallback :: VictoropsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _contactGroupFallback = a } :: VictoropsSetting s)
-
-instance P.HasCritical (VictoropsSetting s) (TF.Attr s P.Int) where
-    critical =
-        P.lens (_critical :: VictoropsSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _critical = a } :: VictoropsSetting s)
-
-instance P.HasInfo (VictoropsSetting s) (TF.Attr s P.Int) where
-    info =
-        P.lens (_info :: VictoropsSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _info = a } :: VictoropsSetting s)
-
-instance P.HasTeam (VictoropsSetting s) (TF.Attr s P.Text) where
-    team =
-        P.lens (_team :: VictoropsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _team = a } :: VictoropsSetting s)
-
-instance P.HasWarning (VictoropsSetting s) (TF.Attr s P.Int) where
-    warning =
-        P.lens (_warning :: VictoropsSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _warning = a } :: VictoropsSetting s)
-
--- | @xmpp@ nested settings.
-data XmppSetting s = XmppSetting'
-    { _address :: TF.Attr s P.Text
-    -- ^ @address@ - (Optional)
-    --
-    -- Conflicts with:
-    --
-    -- * 'user'
-    , _user    :: TF.Attr s P.Text
-    -- ^ @user@ - (Optional)
-    --
-    -- Conflicts with:
-    --
-    -- * 'address'
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @xmpp@ settings value.
-newXmppSetting
-    :: XmppSetting s
-newXmppSetting =
-    XmppSetting'
-        { _address = TF.Nil
-        , _user = TF.Nil
-        }
-
-instance TF.IsValue  (XmppSetting s)
-instance TF.IsObject (XmppSetting s) where
-    toObject XmppSetting'{..} = P.catMaybes
-        [ TF.assign "address" <$> TF.attribute _address
-        , TF.assign "user" <$> TF.attribute _user
-        ]
-
-instance TF.IsValid (XmppSetting s) where
-    validator = TF.fieldsValidator (\XmppSetting'{..} -> Map.fromList $ P.catMaybes
-        [ if (_address P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_address",
-                            [ "_user"
-                            ])
-        , if (_user P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_user",
-                            [ "_address"
-                            ])
-        ])
-
-instance P.HasAddress (XmppSetting s) (TF.Attr s P.Text) where
-    address =
-        P.lens (_address :: XmppSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _address = a } :: XmppSetting s)
-
-instance P.HasUser (XmppSetting s) (TF.Attr s P.Text) where
-    user =
-        P.lens (_user :: XmppSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _user = a } :: XmppSetting s)
+        P.lens (_severity :: RuleSetThen s -> TF.Attr s P.Int)
+               (\s a -> s { _severity = a } :: RuleSetThen s)

@@ -71,7 +71,7 @@ data Provider = Provider'
     -- Conflicts with:
     --
     -- * 'forbiddenAccountIds'
-    , _assumeRole                :: P.Maybe AssumeRoleSetting
+    , _assumeRole                :: P.Maybe AssumeRole
     -- ^ @assume_role@ - (Optional)
     --
     , _dynamodbEndpoint          :: P.Maybe P.Text
@@ -79,7 +79,7 @@ data Provider = Provider'
     -- Use this to override the default endpoint URL constructed from the `region`.
     -- It's typically used to connect to dynamodb-local.
     --
-    , _endpoints                 :: P.Maybe [EndpointsSetting]
+    , _endpoints                 :: P.Maybe [Endpoints]
     -- ^ @endpoints@ - (Optional)
     --
     , _forbiddenAccountIds       :: P.Maybe [P.Text]
@@ -239,9 +239,9 @@ instance P.HasAllowedAccountIds (Provider) (P.Maybe [P.Text]) where
         P.lens (_allowedAccountIds :: Provider -> P.Maybe [P.Text])
                (\s a -> s { _allowedAccountIds = a } :: Provider)
 
-instance P.HasAssumeRole (Provider) (P.Maybe AssumeRoleSetting) where
+instance P.HasAssumeRole (Provider) (P.Maybe AssumeRole) where
     assumeRole =
-        P.lens (_assumeRole :: Provider -> P.Maybe AssumeRoleSetting)
+        P.lens (_assumeRole :: Provider -> P.Maybe AssumeRole)
                (\s a -> s { _assumeRole = a } :: Provider)
 
 instance P.HasDynamodbEndpoint (Provider) (P.Maybe P.Text) where
@@ -249,9 +249,9 @@ instance P.HasDynamodbEndpoint (Provider) (P.Maybe P.Text) where
         P.lens (_dynamodbEndpoint :: Provider -> P.Maybe P.Text)
                (\s a -> s { _dynamodbEndpoint = a } :: Provider)
 
-instance P.HasEndpoints (Provider) (P.Maybe [EndpointsSetting]) where
+instance P.HasEndpoints (Provider) (P.Maybe [Endpoints]) where
     endpoints =
-        P.lens (_endpoints :: Provider -> P.Maybe [EndpointsSetting])
+        P.lens (_endpoints :: Provider -> P.Maybe [Endpoints])
                (\s a -> s { _endpoints = a } :: Provider)
 
 instance P.HasForbiddenAccountIds (Provider) (P.Maybe [P.Text]) where

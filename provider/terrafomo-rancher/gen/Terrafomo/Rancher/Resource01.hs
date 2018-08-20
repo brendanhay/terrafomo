@@ -206,7 +206,7 @@ data EnvironmentResource s = EnvironmentResource'
     { _description       :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _member            :: TF.Attr s [TF.Attr s (MemberSetting s)]
+    , _member            :: TF.Attr s [TF.Attr s (EnvironmentMember s)]
     -- ^ @member@ - (Optional)
     --
     , _name              :: TF.Attr s P.Text
@@ -268,9 +268,9 @@ instance P.HasDescription (EnvironmentResource s) (TF.Attr s P.Text) where
         P.lens (_description :: EnvironmentResource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: EnvironmentResource s)
 
-instance P.HasMember (EnvironmentResource s) (TF.Attr s [TF.Attr s (MemberSetting s)]) where
+instance P.HasMember (EnvironmentResource s) (TF.Attr s [TF.Attr s (EnvironmentMember s)]) where
     member =
-        P.lens (_member :: EnvironmentResource s -> TF.Attr s [TF.Attr s (MemberSetting s)])
+        P.lens (_member :: EnvironmentResource s -> TF.Attr s [TF.Attr s (EnvironmentMember s)])
                (\s a -> s { _member = a } :: EnvironmentResource s)
 
 instance P.HasName (EnvironmentResource s) (TF.Attr s P.Text) where
@@ -291,7 +291,7 @@ instance P.HasProjectTemplateId (EnvironmentResource s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (EnvironmentResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedMember (TF.Ref s' (EnvironmentResource s)) (TF.Attr s [TF.Attr s (MemberSetting s)]) where
+instance s ~ s' => P.HasComputedMember (TF.Ref s' (EnvironmentResource s)) (TF.Attr s [TF.Attr s (EnvironmentMember s)]) where
     computedMember x = TF.compute (TF.refKey x) "member"
 
 instance s ~ s' => P.HasComputedOrchestration (TF.Ref s' (EnvironmentResource s)) (TF.Attr s P.Text) where

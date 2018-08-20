@@ -371,13 +371,13 @@ data LoadBalancerPolicyResource s = LoadBalancerPolicyResource'
     { _loadBalancerName :: TF.Attr s P.Text
     -- ^ @load_balancer_name@ - (Required, Forces New)
     --
-    , _policyAttribute  :: TF.Attr s [TF.Attr s (PolicyAttributeSetting s)]
+    , _policyAttribute :: TF.Attr s [TF.Attr s (LoadBalancerPolicyPolicyAttribute s)]
     -- ^ @policy_attribute@ - (Optional)
     --
-    , _policyName       :: TF.Attr s P.Text
+    , _policyName :: TF.Attr s P.Text
     -- ^ @policy_name@ - (Required, Forces New)
     --
-    , _policyTypeName   :: TF.Attr s P.Text
+    , _policyTypeName :: TF.Attr s P.Text
     -- ^ @policy_type_name@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -413,9 +413,9 @@ instance P.HasLoadBalancerName (LoadBalancerPolicyResource s) (TF.Attr s P.Text)
         P.lens (_loadBalancerName :: LoadBalancerPolicyResource s -> TF.Attr s P.Text)
                (\s a -> s { _loadBalancerName = a } :: LoadBalancerPolicyResource s)
 
-instance P.HasPolicyAttribute (LoadBalancerPolicyResource s) (TF.Attr s [TF.Attr s (PolicyAttributeSetting s)]) where
+instance P.HasPolicyAttribute (LoadBalancerPolicyResource s) (TF.Attr s [TF.Attr s (LoadBalancerPolicyPolicyAttribute s)]) where
     policyAttribute =
-        P.lens (_policyAttribute :: LoadBalancerPolicyResource s -> TF.Attr s [TF.Attr s (PolicyAttributeSetting s)])
+        P.lens (_policyAttribute :: LoadBalancerPolicyResource s -> TF.Attr s [TF.Attr s (LoadBalancerPolicyPolicyAttribute s)])
                (\s a -> s { _policyAttribute = a } :: LoadBalancerPolicyResource s)
 
 instance P.HasPolicyName (LoadBalancerPolicyResource s) (TF.Attr s P.Text) where
@@ -472,16 +472,16 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (MacieMemberAccountAssociationReso
 -- See the <https://www.terraform.io/docs/providers/aws/r/macie_s3_bucket_association.html terraform documentation>
 -- for more information.
 data MacieS3BucketAssociationResource s = MacieS3BucketAssociationResource'
-    { _bucketName         :: TF.Attr s P.Text
+    { _bucketName :: TF.Attr s P.Text
     -- ^ @bucket_name@ - (Required, Forces New)
     --
-    , _classificationType :: TF.Attr s (ClassificationTypeSetting s)
+    , _classificationType :: TF.Attr s (MacieS3BucketAssociationClassificationType s)
     -- ^ @classification_type@ - (Optional)
     --
-    , _memberAccountId    :: TF.Attr s P.Text
+    , _memberAccountId :: TF.Attr s P.Text
     -- ^ @member_account_id@ - (Optional, Forces New)
     --
-    , _prefix             :: TF.Attr s P.Text
+    , _prefix :: TF.Attr s P.Text
     -- ^ @prefix@ - (Optional, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -511,7 +511,7 @@ instance TF.IsValid (MacieS3BucketAssociationResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_classificationType"
                   (_classificationType
-                      :: MacieS3BucketAssociationResource s -> TF.Attr s (ClassificationTypeSetting s))
+                      :: MacieS3BucketAssociationResource s -> TF.Attr s (MacieS3BucketAssociationClassificationType s))
                   TF.validator
 
 instance P.HasBucketName (MacieS3BucketAssociationResource s) (TF.Attr s P.Text) where
@@ -519,9 +519,9 @@ instance P.HasBucketName (MacieS3BucketAssociationResource s) (TF.Attr s P.Text)
         P.lens (_bucketName :: MacieS3BucketAssociationResource s -> TF.Attr s P.Text)
                (\s a -> s { _bucketName = a } :: MacieS3BucketAssociationResource s)
 
-instance P.HasClassificationType (MacieS3BucketAssociationResource s) (TF.Attr s (ClassificationTypeSetting s)) where
+instance P.HasClassificationType (MacieS3BucketAssociationResource s) (TF.Attr s (MacieS3BucketAssociationClassificationType s)) where
     classificationType =
-        P.lens (_classificationType :: MacieS3BucketAssociationResource s -> TF.Attr s (ClassificationTypeSetting s))
+        P.lens (_classificationType :: MacieS3BucketAssociationResource s -> TF.Attr s (MacieS3BucketAssociationClassificationType s))
                (\s a -> s { _classificationType = a } :: MacieS3BucketAssociationResource s)
 
 instance P.HasMemberAccountId (MacieS3BucketAssociationResource s) (TF.Attr s P.Text) where
@@ -537,7 +537,7 @@ instance P.HasPrefix (MacieS3BucketAssociationResource s) (TF.Attr s P.Text) whe
 instance s ~ s' => P.HasComputedId (TF.Ref s' (MacieS3BucketAssociationResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedClassificationType (TF.Ref s' (MacieS3BucketAssociationResource s)) (TF.Attr s (ClassificationTypeSetting s)) where
+instance s ~ s' => P.HasComputedClassificationType (TF.Ref s' (MacieS3BucketAssociationResource s)) (TF.Attr s (MacieS3BucketAssociationClassificationType s)) where
     computedClassificationType x = TF.compute (TF.refKey x) "classification_type"
 
 -- | @aws_main_route_table_association@ Resource.
@@ -693,7 +693,7 @@ data MqBrokerResource s = MqBrokerResource'
     , _brokerName :: TF.Attr s P.Text
     -- ^ @broker_name@ - (Required, Forces New)
     --
-    , _configuration :: TF.Attr s (ConfigurationSetting s)
+    , _configuration :: TF.Attr s (MqBrokerConfiguration s)
     -- ^ @configuration@ - (Optional)
     --
     , _deploymentMode :: TF.Attr s P.Text
@@ -708,7 +708,7 @@ data MqBrokerResource s = MqBrokerResource'
     , _hostInstanceType :: TF.Attr s P.Text
     -- ^ @host_instance_type@ - (Required, Forces New)
     --
-    , _maintenanceWindowStartTime :: TF.Attr s (MaintenanceWindowStartTimeSetting s)
+    , _maintenanceWindowStartTime :: TF.Attr s (MqBrokerMaintenanceWindowStartTime s)
     -- ^ @maintenance_window_start_time@ - (Optional, Forces New)
     --
     , _publiclyAccessible :: TF.Attr s P.Bool
@@ -720,7 +720,7 @@ data MqBrokerResource s = MqBrokerResource'
     , _subnetIds :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @subnet_ids@ - (Optional, Forces New)
     --
-    , _user :: TF.Attr s [TF.Attr s (UserSetting s)]
+    , _user :: TF.Attr s [TF.Attr s (MqBrokerUser s)]
     -- ^ @user@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -731,7 +731,7 @@ mqBrokerResource
     -> TF.Attr s P.Text -- ^ @broker_name@ ('P._brokerName', 'P.brokerName')
     -> TF.Attr s P.Text -- ^ @engine_type@ ('P._engineType', 'P.engineType')
     -> TF.Attr s P.Text -- ^ @host_instance_type@ ('P._hostInstanceType', 'P.hostInstanceType')
-    -> TF.Attr s [TF.Attr s (UserSetting s)] -- ^ @user@ ('P._user', 'P.user')
+    -> TF.Attr s [TF.Attr s (MqBrokerUser s)] -- ^ @user@ ('P._user', 'P.user')
     -> TF.Attr s P.Text -- ^ @engine_version@ ('P._engineVersion', 'P.engineVersion')
     -> P.Resource (MqBrokerResource s)
 mqBrokerResource _securityGroups _brokerName _engineType _hostInstanceType _user _engineVersion =
@@ -773,11 +773,11 @@ instance TF.IsValid (MqBrokerResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_configuration"
                   (_configuration
-                      :: MqBrokerResource s -> TF.Attr s (ConfigurationSetting s))
+                      :: MqBrokerResource s -> TF.Attr s (MqBrokerConfiguration s))
                   TF.validator
            P.<> TF.settingsValidator "_maintenanceWindowStartTime"
                   (_maintenanceWindowStartTime
-                      :: MqBrokerResource s -> TF.Attr s (MaintenanceWindowStartTimeSetting s))
+                      :: MqBrokerResource s -> TF.Attr s (MqBrokerMaintenanceWindowStartTime s))
                   TF.validator
 
 instance P.HasApplyImmediately (MqBrokerResource s) (TF.Attr s P.Bool) where
@@ -795,9 +795,9 @@ instance P.HasBrokerName (MqBrokerResource s) (TF.Attr s P.Text) where
         P.lens (_brokerName :: MqBrokerResource s -> TF.Attr s P.Text)
                (\s a -> s { _brokerName = a } :: MqBrokerResource s)
 
-instance P.HasConfiguration (MqBrokerResource s) (TF.Attr s (ConfigurationSetting s)) where
+instance P.HasConfiguration (MqBrokerResource s) (TF.Attr s (MqBrokerConfiguration s)) where
     configuration =
-        P.lens (_configuration :: MqBrokerResource s -> TF.Attr s (ConfigurationSetting s))
+        P.lens (_configuration :: MqBrokerResource s -> TF.Attr s (MqBrokerConfiguration s))
                (\s a -> s { _configuration = a } :: MqBrokerResource s)
 
 instance P.HasDeploymentMode (MqBrokerResource s) (TF.Attr s P.Text) where
@@ -820,9 +820,9 @@ instance P.HasHostInstanceType (MqBrokerResource s) (TF.Attr s P.Text) where
         P.lens (_hostInstanceType :: MqBrokerResource s -> TF.Attr s P.Text)
                (\s a -> s { _hostInstanceType = a } :: MqBrokerResource s)
 
-instance P.HasMaintenanceWindowStartTime (MqBrokerResource s) (TF.Attr s (MaintenanceWindowStartTimeSetting s)) where
+instance P.HasMaintenanceWindowStartTime (MqBrokerResource s) (TF.Attr s (MqBrokerMaintenanceWindowStartTime s)) where
     maintenanceWindowStartTime =
-        P.lens (_maintenanceWindowStartTime :: MqBrokerResource s -> TF.Attr s (MaintenanceWindowStartTimeSetting s))
+        P.lens (_maintenanceWindowStartTime :: MqBrokerResource s -> TF.Attr s (MqBrokerMaintenanceWindowStartTime s))
                (\s a -> s { _maintenanceWindowStartTime = a } :: MqBrokerResource s)
 
 instance P.HasPubliclyAccessible (MqBrokerResource s) (TF.Attr s P.Bool) where
@@ -840,9 +840,9 @@ instance P.HasSubnetIds (MqBrokerResource s) (TF.Attr s [TF.Attr s P.Text]) wher
         P.lens (_subnetIds :: MqBrokerResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _subnetIds = a } :: MqBrokerResource s)
 
-instance P.HasUser (MqBrokerResource s) (TF.Attr s [TF.Attr s (UserSetting s)]) where
+instance P.HasUser (MqBrokerResource s) (TF.Attr s [TF.Attr s (MqBrokerUser s)]) where
     user =
-        P.lens (_user :: MqBrokerResource s -> TF.Attr s [TF.Attr s (UserSetting s)])
+        P.lens (_user :: MqBrokerResource s -> TF.Attr s [TF.Attr s (MqBrokerUser s)])
                (\s a -> s { _user = a } :: MqBrokerResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (MqBrokerResource s)) (TF.Attr s P.Text) where
@@ -851,13 +851,13 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (MqBrokerResource s)) (TF.Attr s P
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (MqBrokerResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
 
-instance s ~ s' => P.HasComputedConfiguration (TF.Ref s' (MqBrokerResource s)) (TF.Attr s (ConfigurationSetting s)) where
+instance s ~ s' => P.HasComputedConfiguration (TF.Ref s' (MqBrokerResource s)) (TF.Attr s (MqBrokerConfiguration s)) where
     computedConfiguration x = TF.compute (TF.refKey x) "configuration"
 
-instance s ~ s' => P.HasComputedInstances (TF.Ref s' (MqBrokerResource s)) (TF.Attr s [TF.Attr s (InstancesSetting s)]) where
+instance s ~ s' => P.HasComputedInstances (TF.Ref s' (MqBrokerResource s)) (TF.Attr s [TF.Attr s (MqBrokerInstances s)]) where
     computedInstances x = TF.compute (TF.refKey x) "instances"
 
-instance s ~ s' => P.HasComputedMaintenanceWindowStartTime (TF.Ref s' (MqBrokerResource s)) (TF.Attr s (MaintenanceWindowStartTimeSetting s)) where
+instance s ~ s' => P.HasComputedMaintenanceWindowStartTime (TF.Ref s' (MqBrokerResource s)) (TF.Attr s (MqBrokerMaintenanceWindowStartTime s)) where
     computedMaintenanceWindowStartTime x = TF.compute (TF.refKey x) "maintenance_window_start_time"
 
 instance s ~ s' => P.HasComputedSubnetIds (TF.Ref s' (MqBrokerResource s)) (TF.Attr s [TF.Attr s P.Text]) where
@@ -1311,25 +1311,25 @@ data NeptuneClusterParameterGroupResource s = NeptuneClusterParameterGroupResour
     { _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional, Forces New)
     --
-    , _family'     :: TF.Attr s P.Text
+    , _family' :: TF.Attr s P.Text
     -- ^ @family@ - (Required, Forces New)
     --
-    , _name        :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
     -- * 'namePrefix'
-    , _namePrefix  :: TF.Attr s P.Text
+    , _namePrefix :: TF.Attr s P.Text
     -- ^ @name_prefix@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
     -- * 'name'
-    , _parameter   :: TF.Attr s [TF.Attr s (ParameterSetting s)]
+    , _parameter :: TF.Attr s [TF.Attr s (NeptuneClusterParameterGroupParameter s)]
     -- ^ @parameter@ - (Optional)
     --
-    , _tags        :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _tags :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -1393,9 +1393,9 @@ instance P.HasNamePrefix (NeptuneClusterParameterGroupResource s) (TF.Attr s P.T
         P.lens (_namePrefix :: NeptuneClusterParameterGroupResource s -> TF.Attr s P.Text)
                (\s a -> s { _namePrefix = a } :: NeptuneClusterParameterGroupResource s)
 
-instance P.HasParameter (NeptuneClusterParameterGroupResource s) (TF.Attr s [TF.Attr s (ParameterSetting s)]) where
+instance P.HasParameter (NeptuneClusterParameterGroupResource s) (TF.Attr s [TF.Attr s (NeptuneClusterParameterGroupParameter s)]) where
     parameter =
-        P.lens (_parameter :: NeptuneClusterParameterGroupResource s -> TF.Attr s [TF.Attr s (ParameterSetting s)])
+        P.lens (_parameter :: NeptuneClusterParameterGroupResource s -> TF.Attr s [TF.Attr s (NeptuneClusterParameterGroupParameter s)])
                (\s a -> s { _parameter = a } :: NeptuneClusterParameterGroupResource s)
 
 instance P.HasTags (NeptuneClusterParameterGroupResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
@@ -1874,7 +1874,7 @@ data NeptuneParameterGroupResource s = NeptuneParameterGroupResource'
     , _name        :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _parameter   :: TF.Attr s [TF.Attr s (ParameterSetting s)]
+    , _parameter   :: TF.Attr s [TF.Attr s (NeptuneParameterGroupParameter s)]
     -- ^ @parameter@ - (Optional)
     --
     , _tags        :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
@@ -1924,9 +1924,9 @@ instance P.HasName (NeptuneParameterGroupResource s) (TF.Attr s P.Text) where
         P.lens (_name :: NeptuneParameterGroupResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: NeptuneParameterGroupResource s)
 
-instance P.HasParameter (NeptuneParameterGroupResource s) (TF.Attr s [TF.Attr s (ParameterSetting s)]) where
+instance P.HasParameter (NeptuneParameterGroupResource s) (TF.Attr s [TF.Attr s (NeptuneParameterGroupParameter s)]) where
     parameter =
-        P.lens (_parameter :: NeptuneParameterGroupResource s -> TF.Attr s [TF.Attr s (ParameterSetting s)])
+        P.lens (_parameter :: NeptuneParameterGroupResource s -> TF.Attr s [TF.Attr s (NeptuneParameterGroupParameter s)])
                (\s a -> s { _parameter = a } :: NeptuneParameterGroupResource s)
 
 instance P.HasTags (NeptuneParameterGroupResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
@@ -2047,10 +2047,10 @@ instance s ~ s' => P.HasComputedNamePrefix (TF.Ref s' (NeptuneSubnetGroupResourc
 -- See the <https://www.terraform.io/docs/providers/aws/r/network_acl.html terraform documentation>
 -- for more information.
 data NetworkAclResource s = NetworkAclResource'
-    { _egress    :: TF.Attr s [TF.Attr s (EgressSetting s)]
+    { _egress    :: TF.Attr s [TF.Attr s (NetworkAclEgress s)]
     -- ^ @egress@ - (Optional)
     --
-    , _ingress   :: TF.Attr s [TF.Attr s (IngressSetting s)]
+    , _ingress   :: TF.Attr s [TF.Attr s (NetworkAclIngress s)]
     -- ^ @ingress@ - (Optional)
     --
     , _subnetIds :: TF.Attr s [TF.Attr s P.Text]
@@ -2090,14 +2090,14 @@ instance TF.IsObject (NetworkAclResource s) where
 instance TF.IsValid (NetworkAclResource s) where
     validator = P.mempty
 
-instance P.HasEgress (NetworkAclResource s) (TF.Attr s [TF.Attr s (EgressSetting s)]) where
+instance P.HasEgress (NetworkAclResource s) (TF.Attr s [TF.Attr s (NetworkAclEgress s)]) where
     egress =
-        P.lens (_egress :: NetworkAclResource s -> TF.Attr s [TF.Attr s (EgressSetting s)])
+        P.lens (_egress :: NetworkAclResource s -> TF.Attr s [TF.Attr s (NetworkAclEgress s)])
                (\s a -> s { _egress = a } :: NetworkAclResource s)
 
-instance P.HasIngress (NetworkAclResource s) (TF.Attr s [TF.Attr s (IngressSetting s)]) where
+instance P.HasIngress (NetworkAclResource s) (TF.Attr s [TF.Attr s (NetworkAclIngress s)]) where
     ingress =
-        P.lens (_ingress :: NetworkAclResource s -> TF.Attr s [TF.Attr s (IngressSetting s)])
+        P.lens (_ingress :: NetworkAclResource s -> TF.Attr s [TF.Attr s (NetworkAclIngress s)])
                (\s a -> s { _ingress = a } :: NetworkAclResource s)
 
 instance P.HasSubnetIds (NetworkAclResource s) (TF.Attr s [TF.Attr s P.Text]) where
@@ -2118,10 +2118,10 @@ instance P.HasVpcId (NetworkAclResource s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (NetworkAclResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedEgress (TF.Ref s' (NetworkAclResource s)) (TF.Attr s [TF.Attr s (EgressSetting s)]) where
+instance s ~ s' => P.HasComputedEgress (TF.Ref s' (NetworkAclResource s)) (TF.Attr s [TF.Attr s (NetworkAclEgress s)]) where
     computedEgress x = TF.compute (TF.refKey x) "egress"
 
-instance s ~ s' => P.HasComputedIngress (TF.Ref s' (NetworkAclResource s)) (TF.Attr s [TF.Attr s (IngressSetting s)]) where
+instance s ~ s' => P.HasComputedIngress (TF.Ref s' (NetworkAclResource s)) (TF.Attr s [TF.Attr s (NetworkAclIngress s)]) where
     computedIngress x = TF.compute (TF.refKey x) "ingress"
 
 instance s ~ s' => P.HasComputedSubnetIds (TF.Ref s' (NetworkAclResource s)) (TF.Attr s [TF.Attr s P.Text]) where
@@ -2352,7 +2352,7 @@ instance s ~ s' => P.HasComputedStatus (TF.Ref s' (NetworkInterfaceAttachmentRes
 -- See the <https://www.terraform.io/docs/providers/aws/r/network_interface.html terraform documentation>
 -- for more information.
 data NetworkInterfaceResource s = NetworkInterfaceResource'
-    { _attachment      :: TF.Attr s [TF.Attr s (AttachmentSetting s)]
+    { _attachment      :: TF.Attr s [TF.Attr s (NetworkInterfaceAttachment s)]
     -- ^ @attachment@ - (Optional)
     --
     , _description     :: TF.Attr s P.Text
@@ -2415,9 +2415,9 @@ instance TF.IsObject (NetworkInterfaceResource s) where
 instance TF.IsValid (NetworkInterfaceResource s) where
     validator = P.mempty
 
-instance P.HasAttachment (NetworkInterfaceResource s) (TF.Attr s [TF.Attr s (AttachmentSetting s)]) where
+instance P.HasAttachment (NetworkInterfaceResource s) (TF.Attr s [TF.Attr s (NetworkInterfaceAttachment s)]) where
     attachment =
-        P.lens (_attachment :: NetworkInterfaceResource s -> TF.Attr s [TF.Attr s (AttachmentSetting s)])
+        P.lens (_attachment :: NetworkInterfaceResource s -> TF.Attr s [TF.Attr s (NetworkInterfaceAttachment s)])
                (\s a -> s { _attachment = a } :: NetworkInterfaceResource s)
 
 instance P.HasDescription (NetworkInterfaceResource s) (TF.Attr s P.Text) where
@@ -2463,7 +2463,7 @@ instance P.HasTags (NetworkInterfaceResource s) (TF.Attr s (P.Map P.Text (TF.Att
 instance s ~ s' => P.HasComputedId (TF.Ref s' (NetworkInterfaceResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedAttachment (TF.Ref s' (NetworkInterfaceResource s)) (TF.Attr s [TF.Attr s (AttachmentSetting s)]) where
+instance s ~ s' => P.HasComputedAttachment (TF.Ref s' (NetworkInterfaceResource s)) (TF.Attr s [TF.Attr s (NetworkInterfaceAttachment s)]) where
     computedAttachment x = TF.compute (TF.refKey x) "attachment"
 
 instance s ~ s' => P.HasComputedPrivateDnsName (TF.Ref s' (NetworkInterfaceResource s)) (TF.Attr s P.Text) where
@@ -2533,7 +2533,7 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (NetworkInterfaceSgAttachmentResou
 -- See the <https://www.terraform.io/docs/providers/aws/r/opsworks_application.html terraform documentation>
 -- for more information.
 data OpsworksApplicationResource s = OpsworksApplicationResource'
-    { _appSource :: TF.Attr s [TF.Attr s (AppSourceSetting s)]
+    { _appSource :: TF.Attr s [TF.Attr s (OpsworksApplicationAppSource s)]
     -- ^ @app_source@ - (Optional)
     --
     , _autoBundleOnDeploy :: TF.Attr s P.Text
@@ -2563,7 +2563,7 @@ data OpsworksApplicationResource s = OpsworksApplicationResource'
     , _enableSsl :: TF.Attr s P.Bool
     -- ^ @enable_ssl@ - (Optional)
     --
-    , _environment :: TF.Attr s [TF.Attr s (EnvironmentSetting s)]
+    , _environment :: TF.Attr s [TF.Attr s (OpsworksApplicationEnvironment s)]
     -- ^ @environment@ - (Optional)
     --
     , _name :: TF.Attr s P.Text
@@ -2575,7 +2575,7 @@ data OpsworksApplicationResource s = OpsworksApplicationResource'
     , _shortName :: TF.Attr s P.Text
     -- ^ @short_name@ - (Optional)
     --
-    , _sslConfiguration :: TF.Attr s [TF.Attr s (SslConfigurationSetting s)]
+    , _sslConfiguration :: TF.Attr s [TF.Attr s (OpsworksApplicationSslConfiguration s)]
     -- ^ @ssl_configuration@ - (Optional)
     --
     , _stackId :: TF.Attr s P.Text
@@ -2638,9 +2638,9 @@ instance TF.IsObject (OpsworksApplicationResource s) where
 instance TF.IsValid (OpsworksApplicationResource s) where
     validator = P.mempty
 
-instance P.HasAppSource (OpsworksApplicationResource s) (TF.Attr s [TF.Attr s (AppSourceSetting s)]) where
+instance P.HasAppSource (OpsworksApplicationResource s) (TF.Attr s [TF.Attr s (OpsworksApplicationAppSource s)]) where
     appSource =
-        P.lens (_appSource :: OpsworksApplicationResource s -> TF.Attr s [TF.Attr s (AppSourceSetting s)])
+        P.lens (_appSource :: OpsworksApplicationResource s -> TF.Attr s [TF.Attr s (OpsworksApplicationAppSource s)])
                (\s a -> s { _appSource = a } :: OpsworksApplicationResource s)
 
 instance P.HasAutoBundleOnDeploy (OpsworksApplicationResource s) (TF.Attr s P.Text) where
@@ -2688,9 +2688,9 @@ instance P.HasEnableSsl (OpsworksApplicationResource s) (TF.Attr s P.Bool) where
         P.lens (_enableSsl :: OpsworksApplicationResource s -> TF.Attr s P.Bool)
                (\s a -> s { _enableSsl = a } :: OpsworksApplicationResource s)
 
-instance P.HasEnvironment (OpsworksApplicationResource s) (TF.Attr s [TF.Attr s (EnvironmentSetting s)]) where
+instance P.HasEnvironment (OpsworksApplicationResource s) (TF.Attr s [TF.Attr s (OpsworksApplicationEnvironment s)]) where
     environment =
-        P.lens (_environment :: OpsworksApplicationResource s -> TF.Attr s [TF.Attr s (EnvironmentSetting s)])
+        P.lens (_environment :: OpsworksApplicationResource s -> TF.Attr s [TF.Attr s (OpsworksApplicationEnvironment s)])
                (\s a -> s { _environment = a } :: OpsworksApplicationResource s)
 
 instance P.HasName (OpsworksApplicationResource s) (TF.Attr s P.Text) where
@@ -2708,9 +2708,9 @@ instance P.HasShortName (OpsworksApplicationResource s) (TF.Attr s P.Text) where
         P.lens (_shortName :: OpsworksApplicationResource s -> TF.Attr s P.Text)
                (\s a -> s { _shortName = a } :: OpsworksApplicationResource s)
 
-instance P.HasSslConfiguration (OpsworksApplicationResource s) (TF.Attr s [TF.Attr s (SslConfigurationSetting s)]) where
+instance P.HasSslConfiguration (OpsworksApplicationResource s) (TF.Attr s [TF.Attr s (OpsworksApplicationSslConfiguration s)]) where
     sslConfiguration =
-        P.lens (_sslConfiguration :: OpsworksApplicationResource s -> TF.Attr s [TF.Attr s (SslConfigurationSetting s)])
+        P.lens (_sslConfiguration :: OpsworksApplicationResource s -> TF.Attr s [TF.Attr s (OpsworksApplicationSslConfiguration s)])
                (\s a -> s { _sslConfiguration = a } :: OpsworksApplicationResource s)
 
 instance P.HasStackId (OpsworksApplicationResource s) (TF.Attr s P.Text) where
@@ -2726,7 +2726,7 @@ instance P.HasType' (OpsworksApplicationResource s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (OpsworksApplicationResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedAppSource (TF.Ref s' (OpsworksApplicationResource s)) (TF.Attr s [TF.Attr s (AppSourceSetting s)]) where
+instance s ~ s' => P.HasComputedAppSource (TF.Ref s' (OpsworksApplicationResource s)) (TF.Attr s [TF.Attr s (OpsworksApplicationAppSource s)]) where
     computedAppSource x = TF.compute (TF.refKey x) "app_source"
 
 instance s ~ s' => P.HasComputedShortName (TF.Ref s' (OpsworksApplicationResource s)) (TF.Attr s P.Text) where
@@ -2737,64 +2737,64 @@ instance s ~ s' => P.HasComputedShortName (TF.Ref s' (OpsworksApplicationResourc
 -- See the <https://www.terraform.io/docs/providers/aws/r/opsworks_custom_layer.html terraform documentation>
 -- for more information.
 data OpsworksCustomLayerResource s = OpsworksCustomLayerResource'
-    { _autoAssignElasticIps     :: TF.Attr s P.Bool
+    { _autoAssignElasticIps :: TF.Attr s P.Bool
     -- ^ @auto_assign_elastic_ips@ - (Optional)
     --
-    , _autoAssignPublicIps      :: TF.Attr s P.Bool
+    , _autoAssignPublicIps :: TF.Attr s P.Bool
     -- ^ @auto_assign_public_ips@ - (Optional)
     --
-    , _autoHealing              :: TF.Attr s P.Bool
+    , _autoHealing :: TF.Attr s P.Bool
     -- ^ @auto_healing@ - (Optional)
     --
-    , _customConfigureRecipes   :: TF.Attr s [TF.Attr s P.Text]
+    , _customConfigureRecipes :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_configure_recipes@ - (Optional)
     --
-    , _customDeployRecipes      :: TF.Attr s [TF.Attr s P.Text]
+    , _customDeployRecipes :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_deploy_recipes@ - (Optional)
     --
     , _customInstanceProfileArn :: TF.Attr s P.Text
     -- ^ @custom_instance_profile_arn@ - (Optional)
     --
-    , _customJson               :: TF.Attr s P.Text
+    , _customJson :: TF.Attr s P.Text
     -- ^ @custom_json@ - (Optional)
     --
-    , _customSecurityGroupIds   :: TF.Attr s [TF.Attr s P.Text]
+    , _customSecurityGroupIds :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_security_group_ids@ - (Optional)
     --
-    , _customSetupRecipes       :: TF.Attr s [TF.Attr s P.Text]
+    , _customSetupRecipes :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_setup_recipes@ - (Optional)
     --
-    , _customShutdownRecipes    :: TF.Attr s [TF.Attr s P.Text]
+    , _customShutdownRecipes :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_shutdown_recipes@ - (Optional)
     --
-    , _customUndeployRecipes    :: TF.Attr s [TF.Attr s P.Text]
+    , _customUndeployRecipes :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_undeploy_recipes@ - (Optional)
     --
-    , _drainElbOnShutdown       :: TF.Attr s P.Bool
+    , _drainElbOnShutdown :: TF.Attr s P.Bool
     -- ^ @drain_elb_on_shutdown@ - (Optional)
     --
-    , _ebsVolume                :: TF.Attr s [TF.Attr s (EbsVolumeSetting s)]
+    , _ebsVolume :: TF.Attr s [TF.Attr s (OpsworksCustomLayerEbsVolume s)]
     -- ^ @ebs_volume@ - (Optional)
     --
-    , _elasticLoadBalancer      :: TF.Attr s P.Text
+    , _elasticLoadBalancer :: TF.Attr s P.Text
     -- ^ @elastic_load_balancer@ - (Optional)
     --
-    , _installUpdatesOnBoot     :: TF.Attr s P.Bool
+    , _installUpdatesOnBoot :: TF.Attr s P.Bool
     -- ^ @install_updates_on_boot@ - (Optional)
     --
-    , _instanceShutdownTimeout  :: TF.Attr s P.Int
+    , _instanceShutdownTimeout :: TF.Attr s P.Int
     -- ^ @instance_shutdown_timeout@ - (Optional)
     --
-    , _name                     :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _shortName                :: TF.Attr s P.Text
+    , _shortName :: TF.Attr s P.Text
     -- ^ @short_name@ - (Required)
     --
-    , _stackId                  :: TF.Attr s P.Text
+    , _stackId :: TF.Attr s P.Text
     -- ^ @stack_id@ - (Required, Forces New)
     --
-    , _systemPackages           :: TF.Attr s [TF.Attr s P.Text]
+    , _systemPackages :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @system_packages@ - (Optional)
     --
     , _useEbsOptimizedInstances :: TF.Attr s P.Bool
@@ -2922,9 +2922,9 @@ instance P.HasDrainElbOnShutdown (OpsworksCustomLayerResource s) (TF.Attr s P.Bo
         P.lens (_drainElbOnShutdown :: OpsworksCustomLayerResource s -> TF.Attr s P.Bool)
                (\s a -> s { _drainElbOnShutdown = a } :: OpsworksCustomLayerResource s)
 
-instance P.HasEbsVolume (OpsworksCustomLayerResource s) (TF.Attr s [TF.Attr s (EbsVolumeSetting s)]) where
+instance P.HasEbsVolume (OpsworksCustomLayerResource s) (TF.Attr s [TF.Attr s (OpsworksCustomLayerEbsVolume s)]) where
     ebsVolume =
-        P.lens (_ebsVolume :: OpsworksCustomLayerResource s -> TF.Attr s [TF.Attr s (EbsVolumeSetting s)])
+        P.lens (_ebsVolume :: OpsworksCustomLayerResource s -> TF.Attr s [TF.Attr s (OpsworksCustomLayerEbsVolume s)])
                (\s a -> s { _ebsVolume = a } :: OpsworksCustomLayerResource s)
 
 instance P.HasElasticLoadBalancer (OpsworksCustomLayerResource s) (TF.Attr s P.Text) where
@@ -2975,73 +2975,73 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (OpsworksCustomLayerResource s)) (
 -- See the <https://www.terraform.io/docs/providers/aws/r/opsworks_ganglia_layer.html terraform documentation>
 -- for more information.
 data OpsworksGangliaLayerResource s = OpsworksGangliaLayerResource'
-    { _autoAssignElasticIps     :: TF.Attr s P.Bool
+    { _autoAssignElasticIps :: TF.Attr s P.Bool
     -- ^ @auto_assign_elastic_ips@ - (Optional)
     --
-    , _autoAssignPublicIps      :: TF.Attr s P.Bool
+    , _autoAssignPublicIps :: TF.Attr s P.Bool
     -- ^ @auto_assign_public_ips@ - (Optional)
     --
-    , _autoHealing              :: TF.Attr s P.Bool
+    , _autoHealing :: TF.Attr s P.Bool
     -- ^ @auto_healing@ - (Optional)
     --
-    , _customConfigureRecipes   :: TF.Attr s [TF.Attr s P.Text]
+    , _customConfigureRecipes :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_configure_recipes@ - (Optional)
     --
-    , _customDeployRecipes      :: TF.Attr s [TF.Attr s P.Text]
+    , _customDeployRecipes :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_deploy_recipes@ - (Optional)
     --
     , _customInstanceProfileArn :: TF.Attr s P.Text
     -- ^ @custom_instance_profile_arn@ - (Optional)
     --
-    , _customJson               :: TF.Attr s P.Text
+    , _customJson :: TF.Attr s P.Text
     -- ^ @custom_json@ - (Optional)
     --
-    , _customSecurityGroupIds   :: TF.Attr s [TF.Attr s P.Text]
+    , _customSecurityGroupIds :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_security_group_ids@ - (Optional)
     --
-    , _customSetupRecipes       :: TF.Attr s [TF.Attr s P.Text]
+    , _customSetupRecipes :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_setup_recipes@ - (Optional)
     --
-    , _customShutdownRecipes    :: TF.Attr s [TF.Attr s P.Text]
+    , _customShutdownRecipes :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_shutdown_recipes@ - (Optional)
     --
-    , _customUndeployRecipes    :: TF.Attr s [TF.Attr s P.Text]
+    , _customUndeployRecipes :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_undeploy_recipes@ - (Optional)
     --
-    , _drainElbOnShutdown       :: TF.Attr s P.Bool
+    , _drainElbOnShutdown :: TF.Attr s P.Bool
     -- ^ @drain_elb_on_shutdown@ - (Optional)
     --
-    , _ebsVolume                :: TF.Attr s [TF.Attr s (EbsVolumeSetting s)]
+    , _ebsVolume :: TF.Attr s [TF.Attr s (OpsworksGangliaLayerEbsVolume s)]
     -- ^ @ebs_volume@ - (Optional)
     --
-    , _elasticLoadBalancer      :: TF.Attr s P.Text
+    , _elasticLoadBalancer :: TF.Attr s P.Text
     -- ^ @elastic_load_balancer@ - (Optional)
     --
-    , _installUpdatesOnBoot     :: TF.Attr s P.Bool
+    , _installUpdatesOnBoot :: TF.Attr s P.Bool
     -- ^ @install_updates_on_boot@ - (Optional)
     --
-    , _instanceShutdownTimeout  :: TF.Attr s P.Int
+    , _instanceShutdownTimeout :: TF.Attr s P.Int
     -- ^ @instance_shutdown_timeout@ - (Optional)
     --
-    , _name                     :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
     --
-    , _password                 :: TF.Attr s P.Text
+    , _password :: TF.Attr s P.Text
     -- ^ @password@ - (Required)
     --
-    , _stackId                  :: TF.Attr s P.Text
+    , _stackId :: TF.Attr s P.Text
     -- ^ @stack_id@ - (Required, Forces New)
     --
-    , _systemPackages           :: TF.Attr s [TF.Attr s P.Text]
+    , _systemPackages :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @system_packages@ - (Optional)
     --
-    , _url                      :: TF.Attr s P.Text
+    , _url :: TF.Attr s P.Text
     -- ^ @url@ - (Optional)
     --
     , _useEbsOptimizedInstances :: TF.Attr s P.Bool
     -- ^ @use_ebs_optimized_instances@ - (Optional)
     --
-    , _username                 :: TF.Attr s P.Text
+    , _username :: TF.Attr s P.Text
     -- ^ @username@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -3169,9 +3169,9 @@ instance P.HasDrainElbOnShutdown (OpsworksGangliaLayerResource s) (TF.Attr s P.B
         P.lens (_drainElbOnShutdown :: OpsworksGangliaLayerResource s -> TF.Attr s P.Bool)
                (\s a -> s { _drainElbOnShutdown = a } :: OpsworksGangliaLayerResource s)
 
-instance P.HasEbsVolume (OpsworksGangliaLayerResource s) (TF.Attr s [TF.Attr s (EbsVolumeSetting s)]) where
+instance P.HasEbsVolume (OpsworksGangliaLayerResource s) (TF.Attr s [TF.Attr s (OpsworksGangliaLayerEbsVolume s)]) where
     ebsVolume =
-        P.lens (_ebsVolume :: OpsworksGangliaLayerResource s -> TF.Attr s [TF.Attr s (EbsVolumeSetting s)])
+        P.lens (_ebsVolume :: OpsworksGangliaLayerResource s -> TF.Attr s [TF.Attr s (OpsworksGangliaLayerEbsVolume s)])
                (\s a -> s { _ebsVolume = a } :: OpsworksGangliaLayerResource s)
 
 instance P.HasElasticLoadBalancer (OpsworksGangliaLayerResource s) (TF.Attr s P.Text) where
@@ -3232,79 +3232,79 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (OpsworksGangliaLayerResource s)) 
 -- See the <https://www.terraform.io/docs/providers/aws/r/opsworks_haproxy_layer.html terraform documentation>
 -- for more information.
 data OpsworksHaproxyLayerResource s = OpsworksHaproxyLayerResource'
-    { _autoAssignElasticIps     :: TF.Attr s P.Bool
+    { _autoAssignElasticIps :: TF.Attr s P.Bool
     -- ^ @auto_assign_elastic_ips@ - (Optional)
     --
-    , _autoAssignPublicIps      :: TF.Attr s P.Bool
+    , _autoAssignPublicIps :: TF.Attr s P.Bool
     -- ^ @auto_assign_public_ips@ - (Optional)
     --
-    , _autoHealing              :: TF.Attr s P.Bool
+    , _autoHealing :: TF.Attr s P.Bool
     -- ^ @auto_healing@ - (Optional)
     --
-    , _customConfigureRecipes   :: TF.Attr s [TF.Attr s P.Text]
+    , _customConfigureRecipes :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_configure_recipes@ - (Optional)
     --
-    , _customDeployRecipes      :: TF.Attr s [TF.Attr s P.Text]
+    , _customDeployRecipes :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_deploy_recipes@ - (Optional)
     --
     , _customInstanceProfileArn :: TF.Attr s P.Text
     -- ^ @custom_instance_profile_arn@ - (Optional)
     --
-    , _customJson               :: TF.Attr s P.Text
+    , _customJson :: TF.Attr s P.Text
     -- ^ @custom_json@ - (Optional)
     --
-    , _customSecurityGroupIds   :: TF.Attr s [TF.Attr s P.Text]
+    , _customSecurityGroupIds :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_security_group_ids@ - (Optional)
     --
-    , _customSetupRecipes       :: TF.Attr s [TF.Attr s P.Text]
+    , _customSetupRecipes :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_setup_recipes@ - (Optional)
     --
-    , _customShutdownRecipes    :: TF.Attr s [TF.Attr s P.Text]
+    , _customShutdownRecipes :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_shutdown_recipes@ - (Optional)
     --
-    , _customUndeployRecipes    :: TF.Attr s [TF.Attr s P.Text]
+    , _customUndeployRecipes :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_undeploy_recipes@ - (Optional)
     --
-    , _drainElbOnShutdown       :: TF.Attr s P.Bool
+    , _drainElbOnShutdown :: TF.Attr s P.Bool
     -- ^ @drain_elb_on_shutdown@ - (Optional)
     --
-    , _ebsVolume                :: TF.Attr s [TF.Attr s (EbsVolumeSetting s)]
+    , _ebsVolume :: TF.Attr s [TF.Attr s (OpsworksHaproxyLayerEbsVolume s)]
     -- ^ @ebs_volume@ - (Optional)
     --
-    , _elasticLoadBalancer      :: TF.Attr s P.Text
+    , _elasticLoadBalancer :: TF.Attr s P.Text
     -- ^ @elastic_load_balancer@ - (Optional)
     --
-    , _healthcheckMethod        :: TF.Attr s P.Text
+    , _healthcheckMethod :: TF.Attr s P.Text
     -- ^ @healthcheck_method@ - (Optional)
     --
-    , _healthcheckUrl           :: TF.Attr s P.Text
+    , _healthcheckUrl :: TF.Attr s P.Text
     -- ^ @healthcheck_url@ - (Optional)
     --
-    , _installUpdatesOnBoot     :: TF.Attr s P.Bool
+    , _installUpdatesOnBoot :: TF.Attr s P.Bool
     -- ^ @install_updates_on_boot@ - (Optional)
     --
-    , _instanceShutdownTimeout  :: TF.Attr s P.Int
+    , _instanceShutdownTimeout :: TF.Attr s P.Int
     -- ^ @instance_shutdown_timeout@ - (Optional)
     --
-    , _name                     :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
     --
-    , _stackId                  :: TF.Attr s P.Text
+    , _stackId :: TF.Attr s P.Text
     -- ^ @stack_id@ - (Required, Forces New)
     --
-    , _statsEnabled             :: TF.Attr s P.Bool
+    , _statsEnabled :: TF.Attr s P.Bool
     -- ^ @stats_enabled@ - (Optional)
     --
-    , _statsPassword            :: TF.Attr s P.Text
+    , _statsPassword :: TF.Attr s P.Text
     -- ^ @stats_password@ - (Required)
     --
-    , _statsUrl                 :: TF.Attr s P.Text
+    , _statsUrl :: TF.Attr s P.Text
     -- ^ @stats_url@ - (Optional)
     --
-    , _statsUser                :: TF.Attr s P.Text
+    , _statsUser :: TF.Attr s P.Text
     -- ^ @stats_user@ - (Optional)
     --
-    , _systemPackages           :: TF.Attr s [TF.Attr s P.Text]
+    , _systemPackages :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @system_packages@ - (Optional)
     --
     , _useEbsOptimizedInstances :: TF.Attr s P.Bool
@@ -3441,9 +3441,9 @@ instance P.HasDrainElbOnShutdown (OpsworksHaproxyLayerResource s) (TF.Attr s P.B
         P.lens (_drainElbOnShutdown :: OpsworksHaproxyLayerResource s -> TF.Attr s P.Bool)
                (\s a -> s { _drainElbOnShutdown = a } :: OpsworksHaproxyLayerResource s)
 
-instance P.HasEbsVolume (OpsworksHaproxyLayerResource s) (TF.Attr s [TF.Attr s (EbsVolumeSetting s)]) where
+instance P.HasEbsVolume (OpsworksHaproxyLayerResource s) (TF.Attr s [TF.Attr s (OpsworksHaproxyLayerEbsVolume s)]) where
     ebsVolume =
-        P.lens (_ebsVolume :: OpsworksHaproxyLayerResource s -> TF.Attr s [TF.Attr s (EbsVolumeSetting s)])
+        P.lens (_ebsVolume :: OpsworksHaproxyLayerResource s -> TF.Attr s [TF.Attr s (OpsworksHaproxyLayerEbsVolume s)])
                (\s a -> s { _ebsVolume = a } :: OpsworksHaproxyLayerResource s)
 
 instance P.HasElasticLoadBalancer (OpsworksHaproxyLayerResource s) (TF.Attr s P.Text) where
@@ -3543,7 +3543,7 @@ data OpsworksInstanceResource s = OpsworksInstanceResource'
     , _deleteEip :: TF.Attr s P.Bool
     -- ^ @delete_eip@ - (Optional)
     --
-    , _ebsBlockDevice :: TF.Attr s [TF.Attr s (EbsBlockDeviceSetting s)]
+    , _ebsBlockDevice :: TF.Attr s [TF.Attr s (OpsworksInstanceEbsBlockDevice s)]
     -- ^ @ebs_block_device@ - (Optional, Forces New)
     --
     , _ebsOptimized :: TF.Attr s P.Bool
@@ -3555,7 +3555,7 @@ data OpsworksInstanceResource s = OpsworksInstanceResource'
     , _elasticIp :: TF.Attr s P.Text
     -- ^ @elastic_ip@ - (Optional)
     --
-    , _ephemeralBlockDevice :: TF.Attr s [TF.Attr s (EphemeralBlockDeviceSetting s)]
+    , _ephemeralBlockDevice :: TF.Attr s [TF.Attr s (OpsworksInstanceEphemeralBlockDevice s)]
     -- ^ @ephemeral_block_device@ - (Optional, Forces New)
     --
     , _hostname :: TF.Attr s P.Text
@@ -3612,7 +3612,7 @@ data OpsworksInstanceResource s = OpsworksInstanceResource'
     , _reportedOsVersion :: TF.Attr s P.Text
     -- ^ @reported_os_version@ - (Optional)
     --
-    , _rootBlockDevice :: TF.Attr s [TF.Attr s (RootBlockDeviceSetting s)]
+    , _rootBlockDevice :: TF.Attr s [TF.Attr s (OpsworksInstanceRootBlockDevice s)]
     -- ^ @root_block_device@ - (Optional, Forces New)
     --
     , _rootDeviceType :: TF.Attr s P.Text
@@ -3798,9 +3798,9 @@ instance P.HasDeleteEip (OpsworksInstanceResource s) (TF.Attr s P.Bool) where
         P.lens (_deleteEip :: OpsworksInstanceResource s -> TF.Attr s P.Bool)
                (\s a -> s { _deleteEip = a } :: OpsworksInstanceResource s)
 
-instance P.HasEbsBlockDevice (OpsworksInstanceResource s) (TF.Attr s [TF.Attr s (EbsBlockDeviceSetting s)]) where
+instance P.HasEbsBlockDevice (OpsworksInstanceResource s) (TF.Attr s [TF.Attr s (OpsworksInstanceEbsBlockDevice s)]) where
     ebsBlockDevice =
-        P.lens (_ebsBlockDevice :: OpsworksInstanceResource s -> TF.Attr s [TF.Attr s (EbsBlockDeviceSetting s)])
+        P.lens (_ebsBlockDevice :: OpsworksInstanceResource s -> TF.Attr s [TF.Attr s (OpsworksInstanceEbsBlockDevice s)])
                (\s a -> s { _ebsBlockDevice = a } :: OpsworksInstanceResource s)
 
 instance P.HasEbsOptimized (OpsworksInstanceResource s) (TF.Attr s P.Bool) where
@@ -3818,9 +3818,9 @@ instance P.HasElasticIp (OpsworksInstanceResource s) (TF.Attr s P.Text) where
         P.lens (_elasticIp :: OpsworksInstanceResource s -> TF.Attr s P.Text)
                (\s a -> s { _elasticIp = a } :: OpsworksInstanceResource s)
 
-instance P.HasEphemeralBlockDevice (OpsworksInstanceResource s) (TF.Attr s [TF.Attr s (EphemeralBlockDeviceSetting s)]) where
+instance P.HasEphemeralBlockDevice (OpsworksInstanceResource s) (TF.Attr s [TF.Attr s (OpsworksInstanceEphemeralBlockDevice s)]) where
     ephemeralBlockDevice =
-        P.lens (_ephemeralBlockDevice :: OpsworksInstanceResource s -> TF.Attr s [TF.Attr s (EphemeralBlockDeviceSetting s)])
+        P.lens (_ephemeralBlockDevice :: OpsworksInstanceResource s -> TF.Attr s [TF.Attr s (OpsworksInstanceEphemeralBlockDevice s)])
                (\s a -> s { _ephemeralBlockDevice = a } :: OpsworksInstanceResource s)
 
 instance P.HasHostname (OpsworksInstanceResource s) (TF.Attr s P.Text) where
@@ -3913,9 +3913,9 @@ instance P.HasReportedOsVersion (OpsworksInstanceResource s) (TF.Attr s P.Text) 
         P.lens (_reportedOsVersion :: OpsworksInstanceResource s -> TF.Attr s P.Text)
                (\s a -> s { _reportedOsVersion = a } :: OpsworksInstanceResource s)
 
-instance P.HasRootBlockDevice (OpsworksInstanceResource s) (TF.Attr s [TF.Attr s (RootBlockDeviceSetting s)]) where
+instance P.HasRootBlockDevice (OpsworksInstanceResource s) (TF.Attr s [TF.Attr s (OpsworksInstanceRootBlockDevice s)]) where
     rootBlockDevice =
-        P.lens (_rootBlockDevice :: OpsworksInstanceResource s -> TF.Attr s [TF.Attr s (RootBlockDeviceSetting s)])
+        P.lens (_rootBlockDevice :: OpsworksInstanceResource s -> TF.Attr s [TF.Attr s (OpsworksInstanceRootBlockDevice s)])
                (\s a -> s { _rootBlockDevice = a } :: OpsworksInstanceResource s)
 
 instance P.HasRootDeviceType (OpsworksInstanceResource s) (TF.Attr s P.Text) where
@@ -3990,7 +3990,7 @@ instance s ~ s' => P.HasComputedAvailabilityZone (TF.Ref s' (OpsworksInstanceRes
 instance s ~ s' => P.HasComputedCreatedAt (TF.Ref s' (OpsworksInstanceResource s)) (TF.Attr s P.Text) where
     computedCreatedAt x = TF.compute (TF.refKey x) "created_at"
 
-instance s ~ s' => P.HasComputedEbsBlockDevice (TF.Ref s' (OpsworksInstanceResource s)) (TF.Attr s [TF.Attr s (EbsBlockDeviceSetting s)]) where
+instance s ~ s' => P.HasComputedEbsBlockDevice (TF.Ref s' (OpsworksInstanceResource s)) (TF.Attr s [TF.Attr s (OpsworksInstanceEbsBlockDevice s)]) where
     computedEbsBlockDevice x = TF.compute (TF.refKey x) "ebs_block_device"
 
 instance s ~ s' => P.HasComputedEc2InstanceId (TF.Ref s' (OpsworksInstanceResource s)) (TF.Attr s P.Text) where
@@ -4002,7 +4002,7 @@ instance s ~ s' => P.HasComputedEcsClusterArn (TF.Ref s' (OpsworksInstanceResour
 instance s ~ s' => P.HasComputedElasticIp (TF.Ref s' (OpsworksInstanceResource s)) (TF.Attr s P.Text) where
     computedElasticIp x = TF.compute (TF.refKey x) "elastic_ip"
 
-instance s ~ s' => P.HasComputedEphemeralBlockDevice (TF.Ref s' (OpsworksInstanceResource s)) (TF.Attr s [TF.Attr s (EphemeralBlockDeviceSetting s)]) where
+instance s ~ s' => P.HasComputedEphemeralBlockDevice (TF.Ref s' (OpsworksInstanceResource s)) (TF.Attr s [TF.Attr s (OpsworksInstanceEphemeralBlockDevice s)]) where
     computedEphemeralBlockDevice x = TF.compute (TF.refKey x) "ephemeral_block_device"
 
 instance s ~ s' => P.HasComputedHostname (TF.Ref s' (OpsworksInstanceResource s)) (TF.Attr s P.Text) where
@@ -4050,7 +4050,7 @@ instance s ~ s' => P.HasComputedReportedOsName (TF.Ref s' (OpsworksInstanceResou
 instance s ~ s' => P.HasComputedReportedOsVersion (TF.Ref s' (OpsworksInstanceResource s)) (TF.Attr s P.Text) where
     computedReportedOsVersion x = TF.compute (TF.refKey x) "reported_os_version"
 
-instance s ~ s' => P.HasComputedRootBlockDevice (TF.Ref s' (OpsworksInstanceResource s)) (TF.Attr s [TF.Attr s (RootBlockDeviceSetting s)]) where
+instance s ~ s' => P.HasComputedRootBlockDevice (TF.Ref s' (OpsworksInstanceResource s)) (TF.Attr s [TF.Attr s (OpsworksInstanceRootBlockDevice s)]) where
     computedRootBlockDevice x = TF.compute (TF.refKey x) "root_block_device"
 
 instance s ~ s' => P.HasComputedRootDeviceType (TF.Ref s' (OpsworksInstanceResource s)) (TF.Attr s P.Text) where
@@ -4088,76 +4088,76 @@ instance s ~ s' => P.HasComputedVirtualizationType (TF.Ref s' (OpsworksInstanceR
 -- See the <https://www.terraform.io/docs/providers/aws/r/opsworks_java_app_layer.html terraform documentation>
 -- for more information.
 data OpsworksJavaAppLayerResource s = OpsworksJavaAppLayerResource'
-    { _appServer                :: TF.Attr s P.Text
+    { _appServer :: TF.Attr s P.Text
     -- ^ @app_server@ - (Optional)
     --
-    , _appServerVersion         :: TF.Attr s P.Text
+    , _appServerVersion :: TF.Attr s P.Text
     -- ^ @app_server_version@ - (Optional)
     --
-    , _autoAssignElasticIps     :: TF.Attr s P.Bool
+    , _autoAssignElasticIps :: TF.Attr s P.Bool
     -- ^ @auto_assign_elastic_ips@ - (Optional)
     --
-    , _autoAssignPublicIps      :: TF.Attr s P.Bool
+    , _autoAssignPublicIps :: TF.Attr s P.Bool
     -- ^ @auto_assign_public_ips@ - (Optional)
     --
-    , _autoHealing              :: TF.Attr s P.Bool
+    , _autoHealing :: TF.Attr s P.Bool
     -- ^ @auto_healing@ - (Optional)
     --
-    , _customConfigureRecipes   :: TF.Attr s [TF.Attr s P.Text]
+    , _customConfigureRecipes :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_configure_recipes@ - (Optional)
     --
-    , _customDeployRecipes      :: TF.Attr s [TF.Attr s P.Text]
+    , _customDeployRecipes :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_deploy_recipes@ - (Optional)
     --
     , _customInstanceProfileArn :: TF.Attr s P.Text
     -- ^ @custom_instance_profile_arn@ - (Optional)
     --
-    , _customJson               :: TF.Attr s P.Text
+    , _customJson :: TF.Attr s P.Text
     -- ^ @custom_json@ - (Optional)
     --
-    , _customSecurityGroupIds   :: TF.Attr s [TF.Attr s P.Text]
+    , _customSecurityGroupIds :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_security_group_ids@ - (Optional)
     --
-    , _customSetupRecipes       :: TF.Attr s [TF.Attr s P.Text]
+    , _customSetupRecipes :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_setup_recipes@ - (Optional)
     --
-    , _customShutdownRecipes    :: TF.Attr s [TF.Attr s P.Text]
+    , _customShutdownRecipes :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_shutdown_recipes@ - (Optional)
     --
-    , _customUndeployRecipes    :: TF.Attr s [TF.Attr s P.Text]
+    , _customUndeployRecipes :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_undeploy_recipes@ - (Optional)
     --
-    , _drainElbOnShutdown       :: TF.Attr s P.Bool
+    , _drainElbOnShutdown :: TF.Attr s P.Bool
     -- ^ @drain_elb_on_shutdown@ - (Optional)
     --
-    , _ebsVolume                :: TF.Attr s [TF.Attr s (EbsVolumeSetting s)]
+    , _ebsVolume :: TF.Attr s [TF.Attr s (OpsworksJavaAppLayerEbsVolume s)]
     -- ^ @ebs_volume@ - (Optional)
     --
-    , _elasticLoadBalancer      :: TF.Attr s P.Text
+    , _elasticLoadBalancer :: TF.Attr s P.Text
     -- ^ @elastic_load_balancer@ - (Optional)
     --
-    , _installUpdatesOnBoot     :: TF.Attr s P.Bool
+    , _installUpdatesOnBoot :: TF.Attr s P.Bool
     -- ^ @install_updates_on_boot@ - (Optional)
     --
-    , _instanceShutdownTimeout  :: TF.Attr s P.Int
+    , _instanceShutdownTimeout :: TF.Attr s P.Int
     -- ^ @instance_shutdown_timeout@ - (Optional)
     --
-    , _jvmOptions               :: TF.Attr s P.Text
+    , _jvmOptions :: TF.Attr s P.Text
     -- ^ @jvm_options@ - (Optional)
     --
-    , _jvmType                  :: TF.Attr s P.Text
+    , _jvmType :: TF.Attr s P.Text
     -- ^ @jvm_type@ - (Optional)
     --
-    , _jvmVersion               :: TF.Attr s P.Text
+    , _jvmVersion :: TF.Attr s P.Text
     -- ^ @jvm_version@ - (Optional)
     --
-    , _name                     :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
     --
-    , _stackId                  :: TF.Attr s P.Text
+    , _stackId :: TF.Attr s P.Text
     -- ^ @stack_id@ - (Required, Forces New)
     --
-    , _systemPackages           :: TF.Attr s [TF.Attr s P.Text]
+    , _systemPackages :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @system_packages@ - (Optional)
     --
     , _useEbsOptimizedInstances :: TF.Attr s P.Bool
@@ -4301,9 +4301,9 @@ instance P.HasDrainElbOnShutdown (OpsworksJavaAppLayerResource s) (TF.Attr s P.B
         P.lens (_drainElbOnShutdown :: OpsworksJavaAppLayerResource s -> TF.Attr s P.Bool)
                (\s a -> s { _drainElbOnShutdown = a } :: OpsworksJavaAppLayerResource s)
 
-instance P.HasEbsVolume (OpsworksJavaAppLayerResource s) (TF.Attr s [TF.Attr s (EbsVolumeSetting s)]) where
+instance P.HasEbsVolume (OpsworksJavaAppLayerResource s) (TF.Attr s [TF.Attr s (OpsworksJavaAppLayerEbsVolume s)]) where
     ebsVolume =
-        P.lens (_ebsVolume :: OpsworksJavaAppLayerResource s -> TF.Attr s [TF.Attr s (EbsVolumeSetting s)])
+        P.lens (_ebsVolume :: OpsworksJavaAppLayerResource s -> TF.Attr s [TF.Attr s (OpsworksJavaAppLayerEbsVolume s)])
                (\s a -> s { _ebsVolume = a } :: OpsworksJavaAppLayerResource s)
 
 instance P.HasElasticLoadBalancer (OpsworksJavaAppLayerResource s) (TF.Attr s P.Text) where
@@ -4364,64 +4364,64 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (OpsworksJavaAppLayerResource s)) 
 -- See the <https://www.terraform.io/docs/providers/aws/r/opsworks_memcached_layer.html terraform documentation>
 -- for more information.
 data OpsworksMemcachedLayerResource s = OpsworksMemcachedLayerResource'
-    { _allocatedMemory          :: TF.Attr s P.Int
+    { _allocatedMemory :: TF.Attr s P.Int
     -- ^ @allocated_memory@ - (Optional)
     --
-    , _autoAssignElasticIps     :: TF.Attr s P.Bool
+    , _autoAssignElasticIps :: TF.Attr s P.Bool
     -- ^ @auto_assign_elastic_ips@ - (Optional)
     --
-    , _autoAssignPublicIps      :: TF.Attr s P.Bool
+    , _autoAssignPublicIps :: TF.Attr s P.Bool
     -- ^ @auto_assign_public_ips@ - (Optional)
     --
-    , _autoHealing              :: TF.Attr s P.Bool
+    , _autoHealing :: TF.Attr s P.Bool
     -- ^ @auto_healing@ - (Optional)
     --
-    , _customConfigureRecipes   :: TF.Attr s [TF.Attr s P.Text]
+    , _customConfigureRecipes :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_configure_recipes@ - (Optional)
     --
-    , _customDeployRecipes      :: TF.Attr s [TF.Attr s P.Text]
+    , _customDeployRecipes :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_deploy_recipes@ - (Optional)
     --
     , _customInstanceProfileArn :: TF.Attr s P.Text
     -- ^ @custom_instance_profile_arn@ - (Optional)
     --
-    , _customJson               :: TF.Attr s P.Text
+    , _customJson :: TF.Attr s P.Text
     -- ^ @custom_json@ - (Optional)
     --
-    , _customSecurityGroupIds   :: TF.Attr s [TF.Attr s P.Text]
+    , _customSecurityGroupIds :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_security_group_ids@ - (Optional)
     --
-    , _customSetupRecipes       :: TF.Attr s [TF.Attr s P.Text]
+    , _customSetupRecipes :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_setup_recipes@ - (Optional)
     --
-    , _customShutdownRecipes    :: TF.Attr s [TF.Attr s P.Text]
+    , _customShutdownRecipes :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_shutdown_recipes@ - (Optional)
     --
-    , _customUndeployRecipes    :: TF.Attr s [TF.Attr s P.Text]
+    , _customUndeployRecipes :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_undeploy_recipes@ - (Optional)
     --
-    , _drainElbOnShutdown       :: TF.Attr s P.Bool
+    , _drainElbOnShutdown :: TF.Attr s P.Bool
     -- ^ @drain_elb_on_shutdown@ - (Optional)
     --
-    , _ebsVolume                :: TF.Attr s [TF.Attr s (EbsVolumeSetting s)]
+    , _ebsVolume :: TF.Attr s [TF.Attr s (OpsworksMemcachedLayerEbsVolume s)]
     -- ^ @ebs_volume@ - (Optional)
     --
-    , _elasticLoadBalancer      :: TF.Attr s P.Text
+    , _elasticLoadBalancer :: TF.Attr s P.Text
     -- ^ @elastic_load_balancer@ - (Optional)
     --
-    , _installUpdatesOnBoot     :: TF.Attr s P.Bool
+    , _installUpdatesOnBoot :: TF.Attr s P.Bool
     -- ^ @install_updates_on_boot@ - (Optional)
     --
-    , _instanceShutdownTimeout  :: TF.Attr s P.Int
+    , _instanceShutdownTimeout :: TF.Attr s P.Int
     -- ^ @instance_shutdown_timeout@ - (Optional)
     --
-    , _name                     :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
     --
-    , _stackId                  :: TF.Attr s P.Text
+    , _stackId :: TF.Attr s P.Text
     -- ^ @stack_id@ - (Required, Forces New)
     --
-    , _systemPackages           :: TF.Attr s [TF.Attr s P.Text]
+    , _systemPackages :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @system_packages@ - (Optional)
     --
     , _useEbsOptimizedInstances :: TF.Attr s P.Bool
@@ -4552,9 +4552,9 @@ instance P.HasDrainElbOnShutdown (OpsworksMemcachedLayerResource s) (TF.Attr s P
         P.lens (_drainElbOnShutdown :: OpsworksMemcachedLayerResource s -> TF.Attr s P.Bool)
                (\s a -> s { _drainElbOnShutdown = a } :: OpsworksMemcachedLayerResource s)
 
-instance P.HasEbsVolume (OpsworksMemcachedLayerResource s) (TF.Attr s [TF.Attr s (EbsVolumeSetting s)]) where
+instance P.HasEbsVolume (OpsworksMemcachedLayerResource s) (TF.Attr s [TF.Attr s (OpsworksMemcachedLayerEbsVolume s)]) where
     ebsVolume =
-        P.lens (_ebsVolume :: OpsworksMemcachedLayerResource s -> TF.Attr s [TF.Attr s (EbsVolumeSetting s)])
+        P.lens (_ebsVolume :: OpsworksMemcachedLayerResource s -> TF.Attr s [TF.Attr s (OpsworksMemcachedLayerEbsVolume s)])
                (\s a -> s { _ebsVolume = a } :: OpsworksMemcachedLayerResource s)
 
 instance P.HasElasticLoadBalancer (OpsworksMemcachedLayerResource s) (TF.Attr s P.Text) where
@@ -4600,70 +4600,70 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (OpsworksMemcachedLayerResource s)
 -- See the <https://www.terraform.io/docs/providers/aws/r/opsworks_mysql_layer.html terraform documentation>
 -- for more information.
 data OpsworksMysqlLayerResource s = OpsworksMysqlLayerResource'
-    { _autoAssignElasticIps       :: TF.Attr s P.Bool
+    { _autoAssignElasticIps :: TF.Attr s P.Bool
     -- ^ @auto_assign_elastic_ips@ - (Optional)
     --
-    , _autoAssignPublicIps        :: TF.Attr s P.Bool
+    , _autoAssignPublicIps :: TF.Attr s P.Bool
     -- ^ @auto_assign_public_ips@ - (Optional)
     --
-    , _autoHealing                :: TF.Attr s P.Bool
+    , _autoHealing :: TF.Attr s P.Bool
     -- ^ @auto_healing@ - (Optional)
     --
-    , _customConfigureRecipes     :: TF.Attr s [TF.Attr s P.Text]
+    , _customConfigureRecipes :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_configure_recipes@ - (Optional)
     --
-    , _customDeployRecipes        :: TF.Attr s [TF.Attr s P.Text]
+    , _customDeployRecipes :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_deploy_recipes@ - (Optional)
     --
-    , _customInstanceProfileArn   :: TF.Attr s P.Text
+    , _customInstanceProfileArn :: TF.Attr s P.Text
     -- ^ @custom_instance_profile_arn@ - (Optional)
     --
-    , _customJson                 :: TF.Attr s P.Text
+    , _customJson :: TF.Attr s P.Text
     -- ^ @custom_json@ - (Optional)
     --
-    , _customSecurityGroupIds     :: TF.Attr s [TF.Attr s P.Text]
+    , _customSecurityGroupIds :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_security_group_ids@ - (Optional)
     --
-    , _customSetupRecipes         :: TF.Attr s [TF.Attr s P.Text]
+    , _customSetupRecipes :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_setup_recipes@ - (Optional)
     --
-    , _customShutdownRecipes      :: TF.Attr s [TF.Attr s P.Text]
+    , _customShutdownRecipes :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_shutdown_recipes@ - (Optional)
     --
-    , _customUndeployRecipes      :: TF.Attr s [TF.Attr s P.Text]
+    , _customUndeployRecipes :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_undeploy_recipes@ - (Optional)
     --
-    , _drainElbOnShutdown         :: TF.Attr s P.Bool
+    , _drainElbOnShutdown :: TF.Attr s P.Bool
     -- ^ @drain_elb_on_shutdown@ - (Optional)
     --
-    , _ebsVolume                  :: TF.Attr s [TF.Attr s (EbsVolumeSetting s)]
+    , _ebsVolume :: TF.Attr s [TF.Attr s (OpsworksMysqlLayerEbsVolume s)]
     -- ^ @ebs_volume@ - (Optional)
     --
-    , _elasticLoadBalancer        :: TF.Attr s P.Text
+    , _elasticLoadBalancer :: TF.Attr s P.Text
     -- ^ @elastic_load_balancer@ - (Optional)
     --
-    , _installUpdatesOnBoot       :: TF.Attr s P.Bool
+    , _installUpdatesOnBoot :: TF.Attr s P.Bool
     -- ^ @install_updates_on_boot@ - (Optional)
     --
-    , _instanceShutdownTimeout    :: TF.Attr s P.Int
+    , _instanceShutdownTimeout :: TF.Attr s P.Int
     -- ^ @instance_shutdown_timeout@ - (Optional)
     --
-    , _name                       :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
     --
-    , _rootPassword               :: TF.Attr s P.Text
+    , _rootPassword :: TF.Attr s P.Text
     -- ^ @root_password@ - (Optional)
     --
     , _rootPasswordOnAllInstances :: TF.Attr s P.Bool
     -- ^ @root_password_on_all_instances@ - (Optional)
     --
-    , _stackId                    :: TF.Attr s P.Text
+    , _stackId :: TF.Attr s P.Text
     -- ^ @stack_id@ - (Required, Forces New)
     --
-    , _systemPackages             :: TF.Attr s [TF.Attr s P.Text]
+    , _systemPackages :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @system_packages@ - (Optional)
     --
-    , _useEbsOptimizedInstances   :: TF.Attr s P.Bool
+    , _useEbsOptimizedInstances :: TF.Attr s P.Bool
     -- ^ @use_ebs_optimized_instances@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -4788,9 +4788,9 @@ instance P.HasDrainElbOnShutdown (OpsworksMysqlLayerResource s) (TF.Attr s P.Boo
         P.lens (_drainElbOnShutdown :: OpsworksMysqlLayerResource s -> TF.Attr s P.Bool)
                (\s a -> s { _drainElbOnShutdown = a } :: OpsworksMysqlLayerResource s)
 
-instance P.HasEbsVolume (OpsworksMysqlLayerResource s) (TF.Attr s [TF.Attr s (EbsVolumeSetting s)]) where
+instance P.HasEbsVolume (OpsworksMysqlLayerResource s) (TF.Attr s [TF.Attr s (OpsworksMysqlLayerEbsVolume s)]) where
     ebsVolume =
-        P.lens (_ebsVolume :: OpsworksMysqlLayerResource s -> TF.Attr s [TF.Attr s (EbsVolumeSetting s)])
+        P.lens (_ebsVolume :: OpsworksMysqlLayerResource s -> TF.Attr s [TF.Attr s (OpsworksMysqlLayerEbsVolume s)])
                (\s a -> s { _ebsVolume = a } :: OpsworksMysqlLayerResource s)
 
 instance P.HasElasticLoadBalancer (OpsworksMysqlLayerResource s) (TF.Attr s P.Text) where
@@ -4846,64 +4846,64 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (OpsworksMysqlLayerResource s)) (T
 -- See the <https://www.terraform.io/docs/providers/aws/r/opsworks_nodejs_app_layer.html terraform documentation>
 -- for more information.
 data OpsworksNodejsAppLayerResource s = OpsworksNodejsAppLayerResource'
-    { _autoAssignElasticIps     :: TF.Attr s P.Bool
+    { _autoAssignElasticIps :: TF.Attr s P.Bool
     -- ^ @auto_assign_elastic_ips@ - (Optional)
     --
-    , _autoAssignPublicIps      :: TF.Attr s P.Bool
+    , _autoAssignPublicIps :: TF.Attr s P.Bool
     -- ^ @auto_assign_public_ips@ - (Optional)
     --
-    , _autoHealing              :: TF.Attr s P.Bool
+    , _autoHealing :: TF.Attr s P.Bool
     -- ^ @auto_healing@ - (Optional)
     --
-    , _customConfigureRecipes   :: TF.Attr s [TF.Attr s P.Text]
+    , _customConfigureRecipes :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_configure_recipes@ - (Optional)
     --
-    , _customDeployRecipes      :: TF.Attr s [TF.Attr s P.Text]
+    , _customDeployRecipes :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_deploy_recipes@ - (Optional)
     --
     , _customInstanceProfileArn :: TF.Attr s P.Text
     -- ^ @custom_instance_profile_arn@ - (Optional)
     --
-    , _customJson               :: TF.Attr s P.Text
+    , _customJson :: TF.Attr s P.Text
     -- ^ @custom_json@ - (Optional)
     --
-    , _customSecurityGroupIds   :: TF.Attr s [TF.Attr s P.Text]
+    , _customSecurityGroupIds :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_security_group_ids@ - (Optional)
     --
-    , _customSetupRecipes       :: TF.Attr s [TF.Attr s P.Text]
+    , _customSetupRecipes :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_setup_recipes@ - (Optional)
     --
-    , _customShutdownRecipes    :: TF.Attr s [TF.Attr s P.Text]
+    , _customShutdownRecipes :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_shutdown_recipes@ - (Optional)
     --
-    , _customUndeployRecipes    :: TF.Attr s [TF.Attr s P.Text]
+    , _customUndeployRecipes :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_undeploy_recipes@ - (Optional)
     --
-    , _drainElbOnShutdown       :: TF.Attr s P.Bool
+    , _drainElbOnShutdown :: TF.Attr s P.Bool
     -- ^ @drain_elb_on_shutdown@ - (Optional)
     --
-    , _ebsVolume                :: TF.Attr s [TF.Attr s (EbsVolumeSetting s)]
+    , _ebsVolume :: TF.Attr s [TF.Attr s (OpsworksNodejsAppLayerEbsVolume s)]
     -- ^ @ebs_volume@ - (Optional)
     --
-    , _elasticLoadBalancer      :: TF.Attr s P.Text
+    , _elasticLoadBalancer :: TF.Attr s P.Text
     -- ^ @elastic_load_balancer@ - (Optional)
     --
-    , _installUpdatesOnBoot     :: TF.Attr s P.Bool
+    , _installUpdatesOnBoot :: TF.Attr s P.Bool
     -- ^ @install_updates_on_boot@ - (Optional)
     --
-    , _instanceShutdownTimeout  :: TF.Attr s P.Int
+    , _instanceShutdownTimeout :: TF.Attr s P.Int
     -- ^ @instance_shutdown_timeout@ - (Optional)
     --
-    , _name                     :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
     --
-    , _nodejsVersion            :: TF.Attr s P.Text
+    , _nodejsVersion :: TF.Attr s P.Text
     -- ^ @nodejs_version@ - (Optional)
     --
-    , _stackId                  :: TF.Attr s P.Text
+    , _stackId :: TF.Attr s P.Text
     -- ^ @stack_id@ - (Required, Forces New)
     --
-    , _systemPackages           :: TF.Attr s [TF.Attr s P.Text]
+    , _systemPackages :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @system_packages@ - (Optional)
     --
     , _useEbsOptimizedInstances :: TF.Attr s P.Bool
@@ -5029,9 +5029,9 @@ instance P.HasDrainElbOnShutdown (OpsworksNodejsAppLayerResource s) (TF.Attr s P
         P.lens (_drainElbOnShutdown :: OpsworksNodejsAppLayerResource s -> TF.Attr s P.Bool)
                (\s a -> s { _drainElbOnShutdown = a } :: OpsworksNodejsAppLayerResource s)
 
-instance P.HasEbsVolume (OpsworksNodejsAppLayerResource s) (TF.Attr s [TF.Attr s (EbsVolumeSetting s)]) where
+instance P.HasEbsVolume (OpsworksNodejsAppLayerResource s) (TF.Attr s [TF.Attr s (OpsworksNodejsAppLayerEbsVolume s)]) where
     ebsVolume =
-        P.lens (_ebsVolume :: OpsworksNodejsAppLayerResource s -> TF.Attr s [TF.Attr s (EbsVolumeSetting s)])
+        P.lens (_ebsVolume :: OpsworksNodejsAppLayerResource s -> TF.Attr s [TF.Attr s (OpsworksNodejsAppLayerEbsVolume s)])
                (\s a -> s { _ebsVolume = a } :: OpsworksNodejsAppLayerResource s)
 
 instance P.HasElasticLoadBalancer (OpsworksNodejsAppLayerResource s) (TF.Attr s P.Text) where
@@ -5170,61 +5170,61 @@ instance s ~ s' => P.HasComputedStackId (TF.Ref s' (OpsworksPermissionResource s
 -- See the <https://www.terraform.io/docs/providers/aws/r/opsworks_php_app_layer.html terraform documentation>
 -- for more information.
 data OpsworksPhpAppLayerResource s = OpsworksPhpAppLayerResource'
-    { _autoAssignElasticIps     :: TF.Attr s P.Bool
+    { _autoAssignElasticIps :: TF.Attr s P.Bool
     -- ^ @auto_assign_elastic_ips@ - (Optional)
     --
-    , _autoAssignPublicIps      :: TF.Attr s P.Bool
+    , _autoAssignPublicIps :: TF.Attr s P.Bool
     -- ^ @auto_assign_public_ips@ - (Optional)
     --
-    , _autoHealing              :: TF.Attr s P.Bool
+    , _autoHealing :: TF.Attr s P.Bool
     -- ^ @auto_healing@ - (Optional)
     --
-    , _customConfigureRecipes   :: TF.Attr s [TF.Attr s P.Text]
+    , _customConfigureRecipes :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_configure_recipes@ - (Optional)
     --
-    , _customDeployRecipes      :: TF.Attr s [TF.Attr s P.Text]
+    , _customDeployRecipes :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_deploy_recipes@ - (Optional)
     --
     , _customInstanceProfileArn :: TF.Attr s P.Text
     -- ^ @custom_instance_profile_arn@ - (Optional)
     --
-    , _customJson               :: TF.Attr s P.Text
+    , _customJson :: TF.Attr s P.Text
     -- ^ @custom_json@ - (Optional)
     --
-    , _customSecurityGroupIds   :: TF.Attr s [TF.Attr s P.Text]
+    , _customSecurityGroupIds :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_security_group_ids@ - (Optional)
     --
-    , _customSetupRecipes       :: TF.Attr s [TF.Attr s P.Text]
+    , _customSetupRecipes :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_setup_recipes@ - (Optional)
     --
-    , _customShutdownRecipes    :: TF.Attr s [TF.Attr s P.Text]
+    , _customShutdownRecipes :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_shutdown_recipes@ - (Optional)
     --
-    , _customUndeployRecipes    :: TF.Attr s [TF.Attr s P.Text]
+    , _customUndeployRecipes :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_undeploy_recipes@ - (Optional)
     --
-    , _drainElbOnShutdown       :: TF.Attr s P.Bool
+    , _drainElbOnShutdown :: TF.Attr s P.Bool
     -- ^ @drain_elb_on_shutdown@ - (Optional)
     --
-    , _ebsVolume                :: TF.Attr s [TF.Attr s (EbsVolumeSetting s)]
+    , _ebsVolume :: TF.Attr s [TF.Attr s (OpsworksPhpAppLayerEbsVolume s)]
     -- ^ @ebs_volume@ - (Optional)
     --
-    , _elasticLoadBalancer      :: TF.Attr s P.Text
+    , _elasticLoadBalancer :: TF.Attr s P.Text
     -- ^ @elastic_load_balancer@ - (Optional)
     --
-    , _installUpdatesOnBoot     :: TF.Attr s P.Bool
+    , _installUpdatesOnBoot :: TF.Attr s P.Bool
     -- ^ @install_updates_on_boot@ - (Optional)
     --
-    , _instanceShutdownTimeout  :: TF.Attr s P.Int
+    , _instanceShutdownTimeout :: TF.Attr s P.Int
     -- ^ @instance_shutdown_timeout@ - (Optional)
     --
-    , _name                     :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
     --
-    , _stackId                  :: TF.Attr s P.Text
+    , _stackId :: TF.Attr s P.Text
     -- ^ @stack_id@ - (Required, Forces New)
     --
-    , _systemPackages           :: TF.Attr s [TF.Attr s P.Text]
+    , _systemPackages :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @system_packages@ - (Optional)
     --
     , _useEbsOptimizedInstances :: TF.Attr s P.Bool
@@ -5348,9 +5348,9 @@ instance P.HasDrainElbOnShutdown (OpsworksPhpAppLayerResource s) (TF.Attr s P.Bo
         P.lens (_drainElbOnShutdown :: OpsworksPhpAppLayerResource s -> TF.Attr s P.Bool)
                (\s a -> s { _drainElbOnShutdown = a } :: OpsworksPhpAppLayerResource s)
 
-instance P.HasEbsVolume (OpsworksPhpAppLayerResource s) (TF.Attr s [TF.Attr s (EbsVolumeSetting s)]) where
+instance P.HasEbsVolume (OpsworksPhpAppLayerResource s) (TF.Attr s [TF.Attr s (OpsworksPhpAppLayerEbsVolume s)]) where
     ebsVolume =
-        P.lens (_ebsVolume :: OpsworksPhpAppLayerResource s -> TF.Attr s [TF.Attr s (EbsVolumeSetting s)])
+        P.lens (_ebsVolume :: OpsworksPhpAppLayerResource s -> TF.Attr s [TF.Attr s (OpsworksPhpAppLayerEbsVolume s)])
                (\s a -> s { _ebsVolume = a } :: OpsworksPhpAppLayerResource s)
 
 instance P.HasElasticLoadBalancer (OpsworksPhpAppLayerResource s) (TF.Attr s P.Text) where
@@ -5396,79 +5396,79 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (OpsworksPhpAppLayerResource s)) (
 -- See the <https://www.terraform.io/docs/providers/aws/r/opsworks_rails_app_layer.html terraform documentation>
 -- for more information.
 data OpsworksRailsAppLayerResource s = OpsworksRailsAppLayerResource'
-    { _appServer                :: TF.Attr s P.Text
+    { _appServer :: TF.Attr s P.Text
     -- ^ @app_server@ - (Optional)
     --
-    , _autoAssignElasticIps     :: TF.Attr s P.Bool
+    , _autoAssignElasticIps :: TF.Attr s P.Bool
     -- ^ @auto_assign_elastic_ips@ - (Optional)
     --
-    , _autoAssignPublicIps      :: TF.Attr s P.Bool
+    , _autoAssignPublicIps :: TF.Attr s P.Bool
     -- ^ @auto_assign_public_ips@ - (Optional)
     --
-    , _autoHealing              :: TF.Attr s P.Bool
+    , _autoHealing :: TF.Attr s P.Bool
     -- ^ @auto_healing@ - (Optional)
     --
-    , _bundlerVersion           :: TF.Attr s P.Text
+    , _bundlerVersion :: TF.Attr s P.Text
     -- ^ @bundler_version@ - (Optional)
     --
-    , _customConfigureRecipes   :: TF.Attr s [TF.Attr s P.Text]
+    , _customConfigureRecipes :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_configure_recipes@ - (Optional)
     --
-    , _customDeployRecipes      :: TF.Attr s [TF.Attr s P.Text]
+    , _customDeployRecipes :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_deploy_recipes@ - (Optional)
     --
     , _customInstanceProfileArn :: TF.Attr s P.Text
     -- ^ @custom_instance_profile_arn@ - (Optional)
     --
-    , _customJson               :: TF.Attr s P.Text
+    , _customJson :: TF.Attr s P.Text
     -- ^ @custom_json@ - (Optional)
     --
-    , _customSecurityGroupIds   :: TF.Attr s [TF.Attr s P.Text]
+    , _customSecurityGroupIds :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_security_group_ids@ - (Optional)
     --
-    , _customSetupRecipes       :: TF.Attr s [TF.Attr s P.Text]
+    , _customSetupRecipes :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_setup_recipes@ - (Optional)
     --
-    , _customShutdownRecipes    :: TF.Attr s [TF.Attr s P.Text]
+    , _customShutdownRecipes :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_shutdown_recipes@ - (Optional)
     --
-    , _customUndeployRecipes    :: TF.Attr s [TF.Attr s P.Text]
+    , _customUndeployRecipes :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_undeploy_recipes@ - (Optional)
     --
-    , _drainElbOnShutdown       :: TF.Attr s P.Bool
+    , _drainElbOnShutdown :: TF.Attr s P.Bool
     -- ^ @drain_elb_on_shutdown@ - (Optional)
     --
-    , _ebsVolume                :: TF.Attr s [TF.Attr s (EbsVolumeSetting s)]
+    , _ebsVolume :: TF.Attr s [TF.Attr s (OpsworksRailsAppLayerEbsVolume s)]
     -- ^ @ebs_volume@ - (Optional)
     --
-    , _elasticLoadBalancer      :: TF.Attr s P.Text
+    , _elasticLoadBalancer :: TF.Attr s P.Text
     -- ^ @elastic_load_balancer@ - (Optional)
     --
-    , _installUpdatesOnBoot     :: TF.Attr s P.Bool
+    , _installUpdatesOnBoot :: TF.Attr s P.Bool
     -- ^ @install_updates_on_boot@ - (Optional)
     --
-    , _instanceShutdownTimeout  :: TF.Attr s P.Int
+    , _instanceShutdownTimeout :: TF.Attr s P.Int
     -- ^ @instance_shutdown_timeout@ - (Optional)
     --
-    , _manageBundler            :: TF.Attr s P.Bool
+    , _manageBundler :: TF.Attr s P.Bool
     -- ^ @manage_bundler@ - (Optional)
     --
-    , _name                     :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
     --
-    , _passengerVersion         :: TF.Attr s P.Text
+    , _passengerVersion :: TF.Attr s P.Text
     -- ^ @passenger_version@ - (Optional)
     --
-    , _rubyVersion              :: TF.Attr s P.Text
+    , _rubyVersion :: TF.Attr s P.Text
     -- ^ @ruby_version@ - (Optional)
     --
-    , _rubygemsVersion          :: TF.Attr s P.Text
+    , _rubygemsVersion :: TF.Attr s P.Text
     -- ^ @rubygems_version@ - (Optional)
     --
-    , _stackId                  :: TF.Attr s P.Text
+    , _stackId :: TF.Attr s P.Text
     -- ^ @stack_id@ - (Required, Forces New)
     --
-    , _systemPackages           :: TF.Attr s [TF.Attr s P.Text]
+    , _systemPackages :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @system_packages@ - (Optional)
     --
     , _useEbsOptimizedInstances :: TF.Attr s P.Bool
@@ -5614,9 +5614,9 @@ instance P.HasDrainElbOnShutdown (OpsworksRailsAppLayerResource s) (TF.Attr s P.
         P.lens (_drainElbOnShutdown :: OpsworksRailsAppLayerResource s -> TF.Attr s P.Bool)
                (\s a -> s { _drainElbOnShutdown = a } :: OpsworksRailsAppLayerResource s)
 
-instance P.HasEbsVolume (OpsworksRailsAppLayerResource s) (TF.Attr s [TF.Attr s (EbsVolumeSetting s)]) where
+instance P.HasEbsVolume (OpsworksRailsAppLayerResource s) (TF.Attr s [TF.Attr s (OpsworksRailsAppLayerEbsVolume s)]) where
     ebsVolume =
-        P.lens (_ebsVolume :: OpsworksRailsAppLayerResource s -> TF.Attr s [TF.Attr s (EbsVolumeSetting s)])
+        P.lens (_ebsVolume :: OpsworksRailsAppLayerResource s -> TF.Attr s [TF.Attr s (OpsworksRailsAppLayerEbsVolume s)])
                (\s a -> s { _ebsVolume = a } :: OpsworksRailsAppLayerResource s)
 
 instance P.HasElasticLoadBalancer (OpsworksRailsAppLayerResource s) (TF.Attr s P.Text) where
@@ -5766,7 +5766,7 @@ data OpsworksStackResource s = OpsworksStackResource'
     , _configurationManagerVersion :: TF.Attr s P.Text
     -- ^ @configuration_manager_version@ - (Optional)
     --
-    , _customCookbooksSource :: TF.Attr s [TF.Attr s (CustomCookbooksSourceSetting s)]
+    , _customCookbooksSource :: TF.Attr s [TF.Attr s (OpsworksStackCustomCookbooksSource s)]
     -- ^ @custom_cookbooks_source@ - (Optional)
     --
     , _customJson :: TF.Attr s P.Text
@@ -5907,9 +5907,9 @@ instance P.HasConfigurationManagerVersion (OpsworksStackResource s) (TF.Attr s P
         P.lens (_configurationManagerVersion :: OpsworksStackResource s -> TF.Attr s P.Text)
                (\s a -> s { _configurationManagerVersion = a } :: OpsworksStackResource s)
 
-instance P.HasCustomCookbooksSource (OpsworksStackResource s) (TF.Attr s [TF.Attr s (CustomCookbooksSourceSetting s)]) where
+instance P.HasCustomCookbooksSource (OpsworksStackResource s) (TF.Attr s [TF.Attr s (OpsworksStackCustomCookbooksSource s)]) where
     customCookbooksSource =
-        P.lens (_customCookbooksSource :: OpsworksStackResource s -> TF.Attr s [TF.Attr s (CustomCookbooksSourceSetting s)])
+        P.lens (_customCookbooksSource :: OpsworksStackResource s -> TF.Attr s [TF.Attr s (OpsworksStackCustomCookbooksSource s)])
                (\s a -> s { _customCookbooksSource = a } :: OpsworksStackResource s)
 
 instance P.HasCustomJson (OpsworksStackResource s) (TF.Attr s P.Text) where
@@ -6001,7 +6001,7 @@ instance s ~ s' => P.HasComputedAgentVersion (TF.Ref s' (OpsworksStackResource s
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (OpsworksStackResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
 
-instance s ~ s' => P.HasComputedCustomCookbooksSource (TF.Ref s' (OpsworksStackResource s)) (TF.Attr s [TF.Attr s (CustomCookbooksSourceSetting s)]) where
+instance s ~ s' => P.HasComputedCustomCookbooksSource (TF.Ref s' (OpsworksStackResource s)) (TF.Attr s [TF.Attr s (OpsworksStackCustomCookbooksSource s)]) where
     computedCustomCookbooksSource x = TF.compute (TF.refKey x) "custom_cookbooks_source"
 
 instance s ~ s' => P.HasComputedDefaultAvailabilityZone (TF.Ref s' (OpsworksStackResource s)) (TF.Attr s P.Text) where
@@ -6021,61 +6021,61 @@ instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (OpsworksStackResource s)) (TF.
 -- See the <https://www.terraform.io/docs/providers/aws/r/opsworks_static_web_layer.html terraform documentation>
 -- for more information.
 data OpsworksStaticWebLayerResource s = OpsworksStaticWebLayerResource'
-    { _autoAssignElasticIps     :: TF.Attr s P.Bool
+    { _autoAssignElasticIps :: TF.Attr s P.Bool
     -- ^ @auto_assign_elastic_ips@ - (Optional)
     --
-    , _autoAssignPublicIps      :: TF.Attr s P.Bool
+    , _autoAssignPublicIps :: TF.Attr s P.Bool
     -- ^ @auto_assign_public_ips@ - (Optional)
     --
-    , _autoHealing              :: TF.Attr s P.Bool
+    , _autoHealing :: TF.Attr s P.Bool
     -- ^ @auto_healing@ - (Optional)
     --
-    , _customConfigureRecipes   :: TF.Attr s [TF.Attr s P.Text]
+    , _customConfigureRecipes :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_configure_recipes@ - (Optional)
     --
-    , _customDeployRecipes      :: TF.Attr s [TF.Attr s P.Text]
+    , _customDeployRecipes :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_deploy_recipes@ - (Optional)
     --
     , _customInstanceProfileArn :: TF.Attr s P.Text
     -- ^ @custom_instance_profile_arn@ - (Optional)
     --
-    , _customJson               :: TF.Attr s P.Text
+    , _customJson :: TF.Attr s P.Text
     -- ^ @custom_json@ - (Optional)
     --
-    , _customSecurityGroupIds   :: TF.Attr s [TF.Attr s P.Text]
+    , _customSecurityGroupIds :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_security_group_ids@ - (Optional)
     --
-    , _customSetupRecipes       :: TF.Attr s [TF.Attr s P.Text]
+    , _customSetupRecipes :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_setup_recipes@ - (Optional)
     --
-    , _customShutdownRecipes    :: TF.Attr s [TF.Attr s P.Text]
+    , _customShutdownRecipes :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_shutdown_recipes@ - (Optional)
     --
-    , _customUndeployRecipes    :: TF.Attr s [TF.Attr s P.Text]
+    , _customUndeployRecipes :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @custom_undeploy_recipes@ - (Optional)
     --
-    , _drainElbOnShutdown       :: TF.Attr s P.Bool
+    , _drainElbOnShutdown :: TF.Attr s P.Bool
     -- ^ @drain_elb_on_shutdown@ - (Optional)
     --
-    , _ebsVolume                :: TF.Attr s [TF.Attr s (EbsVolumeSetting s)]
+    , _ebsVolume :: TF.Attr s [TF.Attr s (OpsworksStaticWebLayerEbsVolume s)]
     -- ^ @ebs_volume@ - (Optional)
     --
-    , _elasticLoadBalancer      :: TF.Attr s P.Text
+    , _elasticLoadBalancer :: TF.Attr s P.Text
     -- ^ @elastic_load_balancer@ - (Optional)
     --
-    , _installUpdatesOnBoot     :: TF.Attr s P.Bool
+    , _installUpdatesOnBoot :: TF.Attr s P.Bool
     -- ^ @install_updates_on_boot@ - (Optional)
     --
-    , _instanceShutdownTimeout  :: TF.Attr s P.Int
+    , _instanceShutdownTimeout :: TF.Attr s P.Int
     -- ^ @instance_shutdown_timeout@ - (Optional)
     --
-    , _name                     :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Optional)
     --
-    , _stackId                  :: TF.Attr s P.Text
+    , _stackId :: TF.Attr s P.Text
     -- ^ @stack_id@ - (Required, Forces New)
     --
-    , _systemPackages           :: TF.Attr s [TF.Attr s P.Text]
+    , _systemPackages :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @system_packages@ - (Optional)
     --
     , _useEbsOptimizedInstances :: TF.Attr s P.Bool
@@ -6199,9 +6199,9 @@ instance P.HasDrainElbOnShutdown (OpsworksStaticWebLayerResource s) (TF.Attr s P
         P.lens (_drainElbOnShutdown :: OpsworksStaticWebLayerResource s -> TF.Attr s P.Bool)
                (\s a -> s { _drainElbOnShutdown = a } :: OpsworksStaticWebLayerResource s)
 
-instance P.HasEbsVolume (OpsworksStaticWebLayerResource s) (TF.Attr s [TF.Attr s (EbsVolumeSetting s)]) where
+instance P.HasEbsVolume (OpsworksStaticWebLayerResource s) (TF.Attr s [TF.Attr s (OpsworksStaticWebLayerEbsVolume s)]) where
     ebsVolume =
-        P.lens (_ebsVolume :: OpsworksStaticWebLayerResource s -> TF.Attr s [TF.Attr s (EbsVolumeSetting s)])
+        P.lens (_ebsVolume :: OpsworksStaticWebLayerResource s -> TF.Attr s [TF.Attr s (OpsworksStaticWebLayerEbsVolume s)])
                (\s a -> s { _ebsVolume = a } :: OpsworksStaticWebLayerResource s)
 
 instance P.HasElasticLoadBalancer (OpsworksStaticWebLayerResource s) (TF.Attr s P.Text) where
@@ -6955,25 +6955,25 @@ data RdsClusterParameterGroupResource s = RdsClusterParameterGroupResource'
     { _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional, Forces New)
     --
-    , _family'     :: TF.Attr s P.Text
+    , _family' :: TF.Attr s P.Text
     -- ^ @family@ - (Required, Forces New)
     --
-    , _name        :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
     -- * 'namePrefix'
-    , _namePrefix  :: TF.Attr s P.Text
+    , _namePrefix :: TF.Attr s P.Text
     -- ^ @name_prefix@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
     -- * 'name'
-    , _parameter   :: TF.Attr s [TF.Attr s (ParameterSetting s)]
+    , _parameter :: TF.Attr s [TF.Attr s (RdsClusterParameterGroupParameter s)]
     -- ^ @parameter@ - (Optional)
     --
-    , _tags        :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _tags :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -7037,9 +7037,9 @@ instance P.HasNamePrefix (RdsClusterParameterGroupResource s) (TF.Attr s P.Text)
         P.lens (_namePrefix :: RdsClusterParameterGroupResource s -> TF.Attr s P.Text)
                (\s a -> s { _namePrefix = a } :: RdsClusterParameterGroupResource s)
 
-instance P.HasParameter (RdsClusterParameterGroupResource s) (TF.Attr s [TF.Attr s (ParameterSetting s)]) where
+instance P.HasParameter (RdsClusterParameterGroupResource s) (TF.Attr s [TF.Attr s (RdsClusterParameterGroupParameter s)]) where
     parameter =
-        P.lens (_parameter :: RdsClusterParameterGroupResource s -> TF.Attr s [TF.Attr s (ParameterSetting s)])
+        P.lens (_parameter :: RdsClusterParameterGroupResource s -> TF.Attr s [TF.Attr s (RdsClusterParameterGroupParameter s)])
                (\s a -> s { _parameter = a } :: RdsClusterParameterGroupResource s)
 
 instance P.HasTags (RdsClusterParameterGroupResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
@@ -7139,7 +7139,7 @@ data RdsClusterResource s = RdsClusterResource'
     , _replicationSourceIdentifier :: TF.Attr s P.Text
     -- ^ @replication_source_identifier@ - (Optional)
     --
-    , _s3Import :: TF.Attr s (S3ImportSetting s)
+    , _s3Import :: TF.Attr s (RdsClusterS3Import s)
     -- ^ @s3_import@ - (Optional)
     --
     -- Conflicts with:
@@ -7265,7 +7265,7 @@ instance TF.IsValid (RdsClusterResource s) where
         ])
            P.<> TF.settingsValidator "_s3Import"
                   (_s3Import
-                      :: RdsClusterResource s -> TF.Attr s (S3ImportSetting s))
+                      :: RdsClusterResource s -> TF.Attr s (RdsClusterS3Import s))
                   TF.validator
 
 instance P.HasApplyImmediately (RdsClusterResource s) (TF.Attr s P.Bool) where
@@ -7383,9 +7383,9 @@ instance P.HasReplicationSourceIdentifier (RdsClusterResource s) (TF.Attr s P.Te
         P.lens (_replicationSourceIdentifier :: RdsClusterResource s -> TF.Attr s P.Text)
                (\s a -> s { _replicationSourceIdentifier = a } :: RdsClusterResource s)
 
-instance P.HasS3Import (RdsClusterResource s) (TF.Attr s (S3ImportSetting s)) where
+instance P.HasS3Import (RdsClusterResource s) (TF.Attr s (RdsClusterS3Import s)) where
     s3Import =
-        P.lens (_s3Import :: RdsClusterResource s -> TF.Attr s (S3ImportSetting s))
+        P.lens (_s3Import :: RdsClusterResource s -> TF.Attr s (RdsClusterS3Import s))
                (\s a -> s { _s3Import = a } :: RdsClusterResource s)
 
 instance P.HasSkipFinalSnapshot (RdsClusterResource s) (TF.Attr s P.Bool) where
@@ -7543,7 +7543,7 @@ data RedshiftClusterResource s = RedshiftClusterResource'
     , _kmsKeyId :: TF.Attr s P.Text
     -- ^ @kms_key_id@ - (Optional, Forces New)
     --
-    , _logging :: TF.Attr s (LoggingSetting s)
+    , _logging :: TF.Attr s (RedshiftClusterLogging s)
     -- ^ @logging@ - (Optional)
     --
     , _masterPassword :: TF.Attr s P.Text
@@ -7576,7 +7576,7 @@ data RedshiftClusterResource s = RedshiftClusterResource'
     , _snapshotClusterIdentifier :: TF.Attr s P.Text
     -- ^ @snapshot_cluster_identifier@ - (Optional, Forces New)
     --
-    , _snapshotCopy :: TF.Attr s (SnapshotCopySetting s)
+    , _snapshotCopy :: TF.Attr s (RedshiftClusterSnapshotCopy s)
     -- ^ @snapshot_copy@ - (Optional)
     --
     , _snapshotIdentifier :: TF.Attr s P.Text
@@ -7676,11 +7676,11 @@ instance TF.IsValid (RedshiftClusterResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_logging"
                   (_logging
-                      :: RedshiftClusterResource s -> TF.Attr s (LoggingSetting s))
+                      :: RedshiftClusterResource s -> TF.Attr s (RedshiftClusterLogging s))
                   TF.validator
            P.<> TF.settingsValidator "_snapshotCopy"
                   (_snapshotCopy
-                      :: RedshiftClusterResource s -> TF.Attr s (SnapshotCopySetting s))
+                      :: RedshiftClusterResource s -> TF.Attr s (RedshiftClusterSnapshotCopy s))
                   TF.validator
 
 instance P.HasAllowVersionUpgrade (RedshiftClusterResource s) (TF.Attr s P.Bool) where
@@ -7778,9 +7778,9 @@ instance P.HasKmsKeyId (RedshiftClusterResource s) (TF.Attr s P.Text) where
         P.lens (_kmsKeyId :: RedshiftClusterResource s -> TF.Attr s P.Text)
                (\s a -> s { _kmsKeyId = a } :: RedshiftClusterResource s)
 
-instance P.HasLogging (RedshiftClusterResource s) (TF.Attr s (LoggingSetting s)) where
+instance P.HasLogging (RedshiftClusterResource s) (TF.Attr s (RedshiftClusterLogging s)) where
     logging =
-        P.lens (_logging :: RedshiftClusterResource s -> TF.Attr s (LoggingSetting s))
+        P.lens (_logging :: RedshiftClusterResource s -> TF.Attr s (RedshiftClusterLogging s))
                (\s a -> s { _logging = a } :: RedshiftClusterResource s)
 
 instance P.HasMasterPassword (RedshiftClusterResource s) (TF.Attr s P.Text) where
@@ -7833,9 +7833,9 @@ instance P.HasSnapshotClusterIdentifier (RedshiftClusterResource s) (TF.Attr s P
         P.lens (_snapshotClusterIdentifier :: RedshiftClusterResource s -> TF.Attr s P.Text)
                (\s a -> s { _snapshotClusterIdentifier = a } :: RedshiftClusterResource s)
 
-instance P.HasSnapshotCopy (RedshiftClusterResource s) (TF.Attr s (SnapshotCopySetting s)) where
+instance P.HasSnapshotCopy (RedshiftClusterResource s) (TF.Attr s (RedshiftClusterSnapshotCopy s)) where
     snapshotCopy =
-        P.lens (_snapshotCopy :: RedshiftClusterResource s -> TF.Attr s (SnapshotCopySetting s))
+        P.lens (_snapshotCopy :: RedshiftClusterResource s -> TF.Attr s (RedshiftClusterSnapshotCopy s))
                (\s a -> s { _snapshotCopy = a } :: RedshiftClusterResource s)
 
 instance P.HasSnapshotIdentifier (RedshiftClusterResource s) (TF.Attr s P.Text) where
@@ -7918,7 +7918,7 @@ data RedshiftParameterGroupResource s = RedshiftParameterGroupResource'
     , _name        :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _parameter   :: TF.Attr s [TF.Attr s (ParameterSetting s)]
+    , _parameter   :: TF.Attr s [TF.Attr s (RedshiftParameterGroupParameter s)]
     -- ^ @parameter@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -7963,9 +7963,9 @@ instance P.HasName (RedshiftParameterGroupResource s) (TF.Attr s P.Text) where
         P.lens (_name :: RedshiftParameterGroupResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: RedshiftParameterGroupResource s)
 
-instance P.HasParameter (RedshiftParameterGroupResource s) (TF.Attr s [TF.Attr s (ParameterSetting s)]) where
+instance P.HasParameter (RedshiftParameterGroupResource s) (TF.Attr s [TF.Attr s (RedshiftParameterGroupParameter s)]) where
     parameter =
-        P.lens (_parameter :: RedshiftParameterGroupResource s -> TF.Attr s [TF.Attr s (ParameterSetting s)])
+        P.lens (_parameter :: RedshiftParameterGroupResource s -> TF.Attr s [TF.Attr s (RedshiftParameterGroupParameter s)])
                (\s a -> s { _parameter = a } :: RedshiftParameterGroupResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (RedshiftParameterGroupResource s)) (TF.Attr s P.Text) where
@@ -7979,7 +7979,7 @@ data RedshiftSecurityGroupResource s = RedshiftSecurityGroupResource'
     { _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional, Forces New)
     --
-    , _ingress     :: TF.Attr s [TF.Attr s (IngressSetting s)]
+    , _ingress     :: TF.Attr s [TF.Attr s (RedshiftSecurityGroupIngress s)]
     -- ^ @ingress@ - (Required)
     --
     , _name        :: TF.Attr s P.Text
@@ -7989,7 +7989,7 @@ data RedshiftSecurityGroupResource s = RedshiftSecurityGroupResource'
 
 -- | Define a new @aws_redshift_security_group@ resource value.
 redshiftSecurityGroupResource
-    :: TF.Attr s [TF.Attr s (IngressSetting s)] -- ^ @ingress@ ('P._ingress', 'P.ingress')
+    :: TF.Attr s [TF.Attr s (RedshiftSecurityGroupIngress s)] -- ^ @ingress@ ('P._ingress', 'P.ingress')
     -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (RedshiftSecurityGroupResource s)
 redshiftSecurityGroupResource _ingress _name =
@@ -8015,9 +8015,9 @@ instance P.HasDescription (RedshiftSecurityGroupResource s) (TF.Attr s P.Text) w
         P.lens (_description :: RedshiftSecurityGroupResource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: RedshiftSecurityGroupResource s)
 
-instance P.HasIngress (RedshiftSecurityGroupResource s) (TF.Attr s [TF.Attr s (IngressSetting s)]) where
+instance P.HasIngress (RedshiftSecurityGroupResource s) (TF.Attr s [TF.Attr s (RedshiftSecurityGroupIngress s)]) where
     ingress =
-        P.lens (_ingress :: RedshiftSecurityGroupResource s -> TF.Attr s [TF.Attr s (IngressSetting s)])
+        P.lens (_ingress :: RedshiftSecurityGroupResource s -> TF.Attr s [TF.Attr s (RedshiftSecurityGroupIngress s)])
                (\s a -> s { _ingress = a } :: RedshiftSecurityGroupResource s)
 
 instance P.HasName (RedshiftSecurityGroupResource s) (TF.Attr s P.Text) where
@@ -8404,7 +8404,7 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (Route53QueryLogResource s)) (TF.A
 -- See the <https://www.terraform.io/docs/providers/aws/r/route53_record.html terraform documentation>
 -- for more information.
 data Route53RecordResource s = Route53RecordResource'
-    { _alias :: TF.Attr s [TF.Attr s (AliasSetting s)]
+    { _alias :: TF.Attr s [TF.Attr s (Route53RecordAlias s)]
     -- ^ @alias@ - (Optional)
     --
     -- Conflicts with:
@@ -8417,7 +8417,7 @@ data Route53RecordResource s = Route53RecordResource'
     , _failover :: TF.Attr s P.Text
     -- ^ @failover@ - (Optional)
     --
-    , _failoverRoutingPolicy :: TF.Attr s [TF.Attr s (FailoverRoutingPolicySetting s)]
+    , _failoverRoutingPolicy :: TF.Attr s [TF.Attr s (Route53RecordFailoverRoutingPolicy s)]
     -- ^ @failover_routing_policy@ - (Optional)
     --
     -- Conflicts with:
@@ -8426,7 +8426,7 @@ data Route53RecordResource s = Route53RecordResource'
     -- * 'latencyRoutingPolicy'
     -- * 'multivalueAnswerRoutingPolicy'
     -- * 'weightedRoutingPolicy'
-    , _geolocationRoutingPolicy :: TF.Attr s [TF.Attr s (GeolocationRoutingPolicySetting s)]
+    , _geolocationRoutingPolicy :: TF.Attr s [TF.Attr s (Route53RecordGeolocationRoutingPolicy s)]
     -- ^ @geolocation_routing_policy@ - (Optional)
     --
     -- Conflicts with:
@@ -8438,7 +8438,7 @@ data Route53RecordResource s = Route53RecordResource'
     , _healthCheckId :: TF.Attr s P.Text
     -- ^ @health_check_id@ - (Optional)
     --
-    , _latencyRoutingPolicy :: TF.Attr s [TF.Attr s (LatencyRoutingPolicySetting s)]
+    , _latencyRoutingPolicy :: TF.Attr s [TF.Attr s (Route53RecordLatencyRoutingPolicy s)]
     -- ^ @latency_routing_policy@ - (Optional)
     --
     -- Conflicts with:
@@ -8480,7 +8480,7 @@ data Route53RecordResource s = Route53RecordResource'
     , _weight :: TF.Attr s P.Int
     -- ^ @weight@ - (Optional)
     --
-    , _weightedRoutingPolicy :: TF.Attr s [TF.Attr s (WeightedRoutingPolicySetting s)]
+    , _weightedRoutingPolicy :: TF.Attr s [TF.Attr s (Route53RecordWeightedRoutingPolicy s)]
     -- ^ @weighted_routing_policy@ - (Optional)
     --
     -- Conflicts with:
@@ -8585,9 +8585,9 @@ instance TF.IsValid (Route53RecordResource s) where
                             ])
         ])
 
-instance P.HasAlias (Route53RecordResource s) (TF.Attr s [TF.Attr s (AliasSetting s)]) where
+instance P.HasAlias (Route53RecordResource s) (TF.Attr s [TF.Attr s (Route53RecordAlias s)]) where
     alias =
-        P.lens (_alias :: Route53RecordResource s -> TF.Attr s [TF.Attr s (AliasSetting s)])
+        P.lens (_alias :: Route53RecordResource s -> TF.Attr s [TF.Attr s (Route53RecordAlias s)])
                (\s a -> s { _alias = a } :: Route53RecordResource s)
 
 instance P.HasAllowOverwrite (Route53RecordResource s) (TF.Attr s P.Bool) where
@@ -8600,14 +8600,14 @@ instance P.HasFailover (Route53RecordResource s) (TF.Attr s P.Text) where
         P.lens (_failover :: Route53RecordResource s -> TF.Attr s P.Text)
                (\s a -> s { _failover = a } :: Route53RecordResource s)
 
-instance P.HasFailoverRoutingPolicy (Route53RecordResource s) (TF.Attr s [TF.Attr s (FailoverRoutingPolicySetting s)]) where
+instance P.HasFailoverRoutingPolicy (Route53RecordResource s) (TF.Attr s [TF.Attr s (Route53RecordFailoverRoutingPolicy s)]) where
     failoverRoutingPolicy =
-        P.lens (_failoverRoutingPolicy :: Route53RecordResource s -> TF.Attr s [TF.Attr s (FailoverRoutingPolicySetting s)])
+        P.lens (_failoverRoutingPolicy :: Route53RecordResource s -> TF.Attr s [TF.Attr s (Route53RecordFailoverRoutingPolicy s)])
                (\s a -> s { _failoverRoutingPolicy = a } :: Route53RecordResource s)
 
-instance P.HasGeolocationRoutingPolicy (Route53RecordResource s) (TF.Attr s [TF.Attr s (GeolocationRoutingPolicySetting s)]) where
+instance P.HasGeolocationRoutingPolicy (Route53RecordResource s) (TF.Attr s [TF.Attr s (Route53RecordGeolocationRoutingPolicy s)]) where
     geolocationRoutingPolicy =
-        P.lens (_geolocationRoutingPolicy :: Route53RecordResource s -> TF.Attr s [TF.Attr s (GeolocationRoutingPolicySetting s)])
+        P.lens (_geolocationRoutingPolicy :: Route53RecordResource s -> TF.Attr s [TF.Attr s (Route53RecordGeolocationRoutingPolicy s)])
                (\s a -> s { _geolocationRoutingPolicy = a } :: Route53RecordResource s)
 
 instance P.HasHealthCheckId (Route53RecordResource s) (TF.Attr s P.Text) where
@@ -8615,9 +8615,9 @@ instance P.HasHealthCheckId (Route53RecordResource s) (TF.Attr s P.Text) where
         P.lens (_healthCheckId :: Route53RecordResource s -> TF.Attr s P.Text)
                (\s a -> s { _healthCheckId = a } :: Route53RecordResource s)
 
-instance P.HasLatencyRoutingPolicy (Route53RecordResource s) (TF.Attr s [TF.Attr s (LatencyRoutingPolicySetting s)]) where
+instance P.HasLatencyRoutingPolicy (Route53RecordResource s) (TF.Attr s [TF.Attr s (Route53RecordLatencyRoutingPolicy s)]) where
     latencyRoutingPolicy =
-        P.lens (_latencyRoutingPolicy :: Route53RecordResource s -> TF.Attr s [TF.Attr s (LatencyRoutingPolicySetting s)])
+        P.lens (_latencyRoutingPolicy :: Route53RecordResource s -> TF.Attr s [TF.Attr s (Route53RecordLatencyRoutingPolicy s)])
                (\s a -> s { _latencyRoutingPolicy = a } :: Route53RecordResource s)
 
 instance P.HasMultivalueAnswerRoutingPolicy (Route53RecordResource s) (TF.Attr s P.Bool) where
@@ -8655,9 +8655,9 @@ instance P.HasWeight (Route53RecordResource s) (TF.Attr s P.Int) where
         P.lens (_weight :: Route53RecordResource s -> TF.Attr s P.Int)
                (\s a -> s { _weight = a } :: Route53RecordResource s)
 
-instance P.HasWeightedRoutingPolicy (Route53RecordResource s) (TF.Attr s [TF.Attr s (WeightedRoutingPolicySetting s)]) where
+instance P.HasWeightedRoutingPolicy (Route53RecordResource s) (TF.Attr s [TF.Attr s (Route53RecordWeightedRoutingPolicy s)]) where
     weightedRoutingPolicy =
-        P.lens (_weightedRoutingPolicy :: Route53RecordResource s -> TF.Attr s [TF.Attr s (WeightedRoutingPolicySetting s)])
+        P.lens (_weightedRoutingPolicy :: Route53RecordResource s -> TF.Attr s [TF.Attr s (Route53RecordWeightedRoutingPolicy s)])
                (\s a -> s { _weightedRoutingPolicy = a } :: Route53RecordResource s)
 
 instance P.HasZoneId (Route53RecordResource s) (TF.Attr s P.Text) where
@@ -9051,7 +9051,7 @@ data RouteTableResource s = RouteTableResource'
     { _propagatingVgws :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @propagating_vgws@ - (Optional)
     --
-    , _route           :: TF.Attr s [TF.Attr s (RouteSetting s)]
+    , _route           :: TF.Attr s [TF.Attr s (RouteTableRoute s)]
     -- ^ @route@ - (Optional)
     --
     , _tags            :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
@@ -9091,9 +9091,9 @@ instance P.HasPropagatingVgws (RouteTableResource s) (TF.Attr s [TF.Attr s P.Tex
         P.lens (_propagatingVgws :: RouteTableResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _propagatingVgws = a } :: RouteTableResource s)
 
-instance P.HasRoute (RouteTableResource s) (TF.Attr s [TF.Attr s (RouteSetting s)]) where
+instance P.HasRoute (RouteTableResource s) (TF.Attr s [TF.Attr s (RouteTableRoute s)]) where
     route =
-        P.lens (_route :: RouteTableResource s -> TF.Attr s [TF.Attr s (RouteSetting s)])
+        P.lens (_route :: RouteTableResource s -> TF.Attr s [TF.Attr s (RouteTableRoute s)])
                (\s a -> s { _route = a } :: RouteTableResource s)
 
 instance P.HasTags (RouteTableResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
@@ -9112,7 +9112,7 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (RouteTableResource s)) (TF.Attr s
 instance s ~ s' => P.HasComputedPropagatingVgws (TF.Ref s' (RouteTableResource s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedPropagatingVgws x = TF.compute (TF.refKey x) "propagating_vgws"
 
-instance s ~ s' => P.HasComputedRoute (TF.Ref s' (RouteTableResource s)) (TF.Attr s [TF.Attr s (RouteSetting s)]) where
+instance s ~ s' => P.HasComputedRoute (TF.Ref s' (RouteTableResource s)) (TF.Attr s [TF.Attr s (RouteTableRoute s)]) where
     computedRoute x = TF.compute (TF.refKey x) "route"
 
 -- | @aws_s3_bucket_inventory@ Resource.
@@ -9123,13 +9123,13 @@ data S3BucketInventoryResource s = S3BucketInventoryResource'
     { _bucket                 :: TF.Attr s P.Text
     -- ^ @bucket@ - (Required, Forces New)
     --
-    , _destination            :: TF.Attr s (DestinationSetting s)
+    , _destination            :: TF.Attr s (S3BucketInventoryDestination s)
     -- ^ @destination@ - (Required)
     --
     , _enabled                :: TF.Attr s P.Bool
     -- ^ @enabled@ - (Optional)
     --
-    , _filter                 :: TF.Attr s (FilterSetting s)
+    , _filter                 :: TF.Attr s (S3BucketInventoryFilter s)
     -- ^ @filter@ - (Optional)
     --
     , _includedObjectVersions :: TF.Attr s P.Text
@@ -9141,7 +9141,7 @@ data S3BucketInventoryResource s = S3BucketInventoryResource'
     , _optionalFields         :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @optional_fields@ - (Optional)
     --
-    , _schedule               :: TF.Attr s (ScheduleSetting s)
+    , _schedule               :: TF.Attr s (S3BucketInventorySchedule s)
     -- ^ @schedule@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -9149,9 +9149,9 @@ data S3BucketInventoryResource s = S3BucketInventoryResource'
 -- | Define a new @aws_s3_bucket_inventory@ resource value.
 s3BucketInventoryResource
     :: TF.Attr s P.Text -- ^ @bucket@ ('P._bucket', 'P.bucket')
-    -> TF.Attr s (DestinationSetting s) -- ^ @destination@ ('P._destination', 'P.destination')
+    -> TF.Attr s (S3BucketInventoryDestination s) -- ^ @destination@ ('P._destination', 'P.destination')
     -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
-    -> TF.Attr s (ScheduleSetting s) -- ^ @schedule@ ('P._schedule', 'P.schedule')
+    -> TF.Attr s (S3BucketInventorySchedule s) -- ^ @schedule@ ('P._schedule', 'P.schedule')
     -> TF.Attr s P.Text -- ^ @included_object_versions@ ('P._includedObjectVersions', 'P.includedObjectVersions')
     -> P.Resource (S3BucketInventoryResource s)
 s3BucketInventoryResource _bucket _destination _name _schedule _includedObjectVersions =
@@ -9183,15 +9183,15 @@ instance TF.IsValid (S3BucketInventoryResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_destination"
                   (_destination
-                      :: S3BucketInventoryResource s -> TF.Attr s (DestinationSetting s))
+                      :: S3BucketInventoryResource s -> TF.Attr s (S3BucketInventoryDestination s))
                   TF.validator
            P.<> TF.settingsValidator "_filter"
                   (_filter
-                      :: S3BucketInventoryResource s -> TF.Attr s (FilterSetting s))
+                      :: S3BucketInventoryResource s -> TF.Attr s (S3BucketInventoryFilter s))
                   TF.validator
            P.<> TF.settingsValidator "_schedule"
                   (_schedule
-                      :: S3BucketInventoryResource s -> TF.Attr s (ScheduleSetting s))
+                      :: S3BucketInventoryResource s -> TF.Attr s (S3BucketInventorySchedule s))
                   TF.validator
 
 instance P.HasBucket (S3BucketInventoryResource s) (TF.Attr s P.Text) where
@@ -9199,9 +9199,9 @@ instance P.HasBucket (S3BucketInventoryResource s) (TF.Attr s P.Text) where
         P.lens (_bucket :: S3BucketInventoryResource s -> TF.Attr s P.Text)
                (\s a -> s { _bucket = a } :: S3BucketInventoryResource s)
 
-instance P.HasDestination (S3BucketInventoryResource s) (TF.Attr s (DestinationSetting s)) where
+instance P.HasDestination (S3BucketInventoryResource s) (TF.Attr s (S3BucketInventoryDestination s)) where
     destination =
-        P.lens (_destination :: S3BucketInventoryResource s -> TF.Attr s (DestinationSetting s))
+        P.lens (_destination :: S3BucketInventoryResource s -> TF.Attr s (S3BucketInventoryDestination s))
                (\s a -> s { _destination = a } :: S3BucketInventoryResource s)
 
 instance P.HasEnabled (S3BucketInventoryResource s) (TF.Attr s P.Bool) where
@@ -9209,9 +9209,9 @@ instance P.HasEnabled (S3BucketInventoryResource s) (TF.Attr s P.Bool) where
         P.lens (_enabled :: S3BucketInventoryResource s -> TF.Attr s P.Bool)
                (\s a -> s { _enabled = a } :: S3BucketInventoryResource s)
 
-instance P.HasFilter (S3BucketInventoryResource s) (TF.Attr s (FilterSetting s)) where
+instance P.HasFilter (S3BucketInventoryResource s) (TF.Attr s (S3BucketInventoryFilter s)) where
     filter =
-        P.lens (_filter :: S3BucketInventoryResource s -> TF.Attr s (FilterSetting s))
+        P.lens (_filter :: S3BucketInventoryResource s -> TF.Attr s (S3BucketInventoryFilter s))
                (\s a -> s { _filter = a } :: S3BucketInventoryResource s)
 
 instance P.HasIncludedObjectVersions (S3BucketInventoryResource s) (TF.Attr s P.Text) where
@@ -9229,9 +9229,9 @@ instance P.HasOptionalFields (S3BucketInventoryResource s) (TF.Attr s [TF.Attr s
         P.lens (_optionalFields :: S3BucketInventoryResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _optionalFields = a } :: S3BucketInventoryResource s)
 
-instance P.HasSchedule (S3BucketInventoryResource s) (TF.Attr s (ScheduleSetting s)) where
+instance P.HasSchedule (S3BucketInventoryResource s) (TF.Attr s (S3BucketInventorySchedule s)) where
     schedule =
-        P.lens (_schedule :: S3BucketInventoryResource s -> TF.Attr s (ScheduleSetting s))
+        P.lens (_schedule :: S3BucketInventoryResource s -> TF.Attr s (S3BucketInventorySchedule s))
                (\s a -> s { _schedule = a } :: S3BucketInventoryResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (S3BucketInventoryResource s)) (TF.Attr s P.Text) where
@@ -9245,7 +9245,7 @@ data S3BucketMetricResource s = S3BucketMetricResource'
     { _bucket :: TF.Attr s P.Text
     -- ^ @bucket@ - (Required, Forces New)
     --
-    , _filter :: TF.Attr s (FilterSetting s)
+    , _filter :: TF.Attr s (S3BucketMetricFilter s)
     -- ^ @filter@ - (Optional)
     --
     , _name   :: TF.Attr s P.Text
@@ -9277,7 +9277,7 @@ instance TF.IsValid (S3BucketMetricResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_filter"
                   (_filter
-                      :: S3BucketMetricResource s -> TF.Attr s (FilterSetting s))
+                      :: S3BucketMetricResource s -> TF.Attr s (S3BucketMetricFilter s))
                   TF.validator
 
 instance P.HasBucket (S3BucketMetricResource s) (TF.Attr s P.Text) where
@@ -9285,9 +9285,9 @@ instance P.HasBucket (S3BucketMetricResource s) (TF.Attr s P.Text) where
         P.lens (_bucket :: S3BucketMetricResource s -> TF.Attr s P.Text)
                (\s a -> s { _bucket = a } :: S3BucketMetricResource s)
 
-instance P.HasFilter (S3BucketMetricResource s) (TF.Attr s (FilterSetting s)) where
+instance P.HasFilter (S3BucketMetricResource s) (TF.Attr s (S3BucketMetricFilter s)) where
     filter =
-        P.lens (_filter :: S3BucketMetricResource s -> TF.Attr s (FilterSetting s))
+        P.lens (_filter :: S3BucketMetricResource s -> TF.Attr s (S3BucketMetricFilter s))
                (\s a -> s { _filter = a } :: S3BucketMetricResource s)
 
 instance P.HasName (S3BucketMetricResource s) (TF.Attr s P.Text) where
@@ -9303,16 +9303,16 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (S3BucketMetricResource s)) (TF.At
 -- See the <https://www.terraform.io/docs/providers/aws/r/s3_bucket_notification.html terraform documentation>
 -- for more information.
 data S3BucketNotificationResource s = S3BucketNotificationResource'
-    { _bucket         :: TF.Attr s P.Text
+    { _bucket :: TF.Attr s P.Text
     -- ^ @bucket@ - (Required, Forces New)
     --
-    , _lambdaFunction :: TF.Attr s [TF.Attr s (LambdaFunctionSetting s)]
+    , _lambdaFunction :: TF.Attr s [TF.Attr s (S3BucketNotificationLambdaFunction s)]
     -- ^ @lambda_function@ - (Optional)
     --
-    , _queue          :: TF.Attr s [TF.Attr s (QueueSetting s)]
+    , _queue :: TF.Attr s [TF.Attr s (S3BucketNotificationQueue s)]
     -- ^ @queue@ - (Optional)
     --
-    , _topic          :: TF.Attr s [TF.Attr s (TopicSetting s)]
+    , _topic :: TF.Attr s [TF.Attr s (S3BucketNotificationTopic s)]
     -- ^ @topic@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -9346,19 +9346,19 @@ instance P.HasBucket (S3BucketNotificationResource s) (TF.Attr s P.Text) where
         P.lens (_bucket :: S3BucketNotificationResource s -> TF.Attr s P.Text)
                (\s a -> s { _bucket = a } :: S3BucketNotificationResource s)
 
-instance P.HasLambdaFunction (S3BucketNotificationResource s) (TF.Attr s [TF.Attr s (LambdaFunctionSetting s)]) where
+instance P.HasLambdaFunction (S3BucketNotificationResource s) (TF.Attr s [TF.Attr s (S3BucketNotificationLambdaFunction s)]) where
     lambdaFunction =
-        P.lens (_lambdaFunction :: S3BucketNotificationResource s -> TF.Attr s [TF.Attr s (LambdaFunctionSetting s)])
+        P.lens (_lambdaFunction :: S3BucketNotificationResource s -> TF.Attr s [TF.Attr s (S3BucketNotificationLambdaFunction s)])
                (\s a -> s { _lambdaFunction = a } :: S3BucketNotificationResource s)
 
-instance P.HasQueue (S3BucketNotificationResource s) (TF.Attr s [TF.Attr s (QueueSetting s)]) where
+instance P.HasQueue (S3BucketNotificationResource s) (TF.Attr s [TF.Attr s (S3BucketNotificationQueue s)]) where
     queue =
-        P.lens (_queue :: S3BucketNotificationResource s -> TF.Attr s [TF.Attr s (QueueSetting s)])
+        P.lens (_queue :: S3BucketNotificationResource s -> TF.Attr s [TF.Attr s (S3BucketNotificationQueue s)])
                (\s a -> s { _queue = a } :: S3BucketNotificationResource s)
 
-instance P.HasTopic (S3BucketNotificationResource s) (TF.Attr s [TF.Attr s (TopicSetting s)]) where
+instance P.HasTopic (S3BucketNotificationResource s) (TF.Attr s [TF.Attr s (S3BucketNotificationTopic s)]) where
     topic =
-        P.lens (_topic :: S3BucketNotificationResource s -> TF.Attr s [TF.Attr s (TopicSetting s)])
+        P.lens (_topic :: S3BucketNotificationResource s -> TF.Attr s [TF.Attr s (S3BucketNotificationTopic s)])
                (\s a -> s { _topic = a } :: S3BucketNotificationResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (S3BucketNotificationResource s)) (TF.Attr s P.Text) where
@@ -9702,7 +9702,7 @@ data S3BucketResource s = S3BucketResource'
     -- Conflicts with:
     --
     -- * 'bucket'
-    , _corsRule :: TF.Attr s [TF.Attr s (CorsRuleSetting s)]
+    , _corsRule :: TF.Attr s [TF.Attr s (S3BucketCorsRule s)]
     -- ^ @cors_rule@ - (Optional)
     --
     , _forceDestroy :: TF.Attr s P.Bool
@@ -9711,10 +9711,10 @@ data S3BucketResource s = S3BucketResource'
     , _hostedZoneId :: TF.Attr s P.Text
     -- ^ @hosted_zone_id@ - (Optional)
     --
-    , _lifecycleRule :: TF.Attr s [TF.Attr s (LifecycleRuleSetting s)]
+    , _lifecycleRule :: TF.Attr s [TF.Attr s (S3BucketLifecycleRule s)]
     -- ^ @lifecycle_rule@ - (Optional)
     --
-    , _logging :: TF.Attr s [TF.Attr s (LoggingSetting s)]
+    , _logging :: TF.Attr s [TF.Attr s (S3BucketLogging s)]
     -- ^ @logging@ - (Optional)
     --
     , _policy :: TF.Attr s P.Text
@@ -9723,22 +9723,22 @@ data S3BucketResource s = S3BucketResource'
     , _region :: TF.Attr s P.Region
     -- ^ @region@ - (Optional)
     --
-    , _replicationConfiguration :: TF.Attr s (ReplicationConfigurationSetting s)
+    , _replicationConfiguration :: TF.Attr s (S3BucketReplicationConfiguration s)
     -- ^ @replication_configuration@ - (Optional)
     --
     , _requestPayer :: TF.Attr s P.Text
     -- ^ @request_payer@ - (Optional)
     --
-    , _serverSideEncryptionConfiguration :: TF.Attr s (ServerSideEncryptionConfigurationSetting s)
+    , _serverSideEncryptionConfiguration :: TF.Attr s (S3BucketServerSideEncryptionConfiguration s)
     -- ^ @server_side_encryption_configuration@ - (Optional)
     --
     , _tags :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @tags@ - (Optional)
     --
-    , _versioning :: TF.Attr s (VersioningSetting s)
+    , _versioning :: TF.Attr s (S3BucketVersioning s)
     -- ^ @versioning@ - (Optional)
     --
-    , _website :: TF.Attr s [TF.Attr s (WebsiteSetting s)]
+    , _website :: TF.Attr s [TF.Attr s (S3BucketWebsite s)]
     -- ^ @website@ - (Optional)
     --
     , _websiteDomain :: TF.Attr s P.Text
@@ -9816,15 +9816,15 @@ instance TF.IsValid (S3BucketResource s) where
         ])
            P.<> TF.settingsValidator "_replicationConfiguration"
                   (_replicationConfiguration
-                      :: S3BucketResource s -> TF.Attr s (ReplicationConfigurationSetting s))
+                      :: S3BucketResource s -> TF.Attr s (S3BucketReplicationConfiguration s))
                   TF.validator
            P.<> TF.settingsValidator "_serverSideEncryptionConfiguration"
                   (_serverSideEncryptionConfiguration
-                      :: S3BucketResource s -> TF.Attr s (ServerSideEncryptionConfigurationSetting s))
+                      :: S3BucketResource s -> TF.Attr s (S3BucketServerSideEncryptionConfiguration s))
                   TF.validator
            P.<> TF.settingsValidator "_versioning"
                   (_versioning
-                      :: S3BucketResource s -> TF.Attr s (VersioningSetting s))
+                      :: S3BucketResource s -> TF.Attr s (S3BucketVersioning s))
                   TF.validator
 
 instance P.HasAccelerationStatus (S3BucketResource s) (TF.Attr s P.Text) where
@@ -9852,9 +9852,9 @@ instance P.HasBucketPrefix (S3BucketResource s) (TF.Attr s P.Text) where
         P.lens (_bucketPrefix :: S3BucketResource s -> TF.Attr s P.Text)
                (\s a -> s { _bucketPrefix = a } :: S3BucketResource s)
 
-instance P.HasCorsRule (S3BucketResource s) (TF.Attr s [TF.Attr s (CorsRuleSetting s)]) where
+instance P.HasCorsRule (S3BucketResource s) (TF.Attr s [TF.Attr s (S3BucketCorsRule s)]) where
     corsRule =
-        P.lens (_corsRule :: S3BucketResource s -> TF.Attr s [TF.Attr s (CorsRuleSetting s)])
+        P.lens (_corsRule :: S3BucketResource s -> TF.Attr s [TF.Attr s (S3BucketCorsRule s)])
                (\s a -> s { _corsRule = a } :: S3BucketResource s)
 
 instance P.HasForceDestroy (S3BucketResource s) (TF.Attr s P.Bool) where
@@ -9867,14 +9867,14 @@ instance P.HasHostedZoneId (S3BucketResource s) (TF.Attr s P.Text) where
         P.lens (_hostedZoneId :: S3BucketResource s -> TF.Attr s P.Text)
                (\s a -> s { _hostedZoneId = a } :: S3BucketResource s)
 
-instance P.HasLifecycleRule (S3BucketResource s) (TF.Attr s [TF.Attr s (LifecycleRuleSetting s)]) where
+instance P.HasLifecycleRule (S3BucketResource s) (TF.Attr s [TF.Attr s (S3BucketLifecycleRule s)]) where
     lifecycleRule =
-        P.lens (_lifecycleRule :: S3BucketResource s -> TF.Attr s [TF.Attr s (LifecycleRuleSetting s)])
+        P.lens (_lifecycleRule :: S3BucketResource s -> TF.Attr s [TF.Attr s (S3BucketLifecycleRule s)])
                (\s a -> s { _lifecycleRule = a } :: S3BucketResource s)
 
-instance P.HasLogging (S3BucketResource s) (TF.Attr s [TF.Attr s (LoggingSetting s)]) where
+instance P.HasLogging (S3BucketResource s) (TF.Attr s [TF.Attr s (S3BucketLogging s)]) where
     logging =
-        P.lens (_logging :: S3BucketResource s -> TF.Attr s [TF.Attr s (LoggingSetting s)])
+        P.lens (_logging :: S3BucketResource s -> TF.Attr s [TF.Attr s (S3BucketLogging s)])
                (\s a -> s { _logging = a } :: S3BucketResource s)
 
 instance P.HasPolicy (S3BucketResource s) (TF.Attr s P.Text) where
@@ -9887,9 +9887,9 @@ instance P.HasRegion (S3BucketResource s) (TF.Attr s P.Region) where
         P.lens (_region :: S3BucketResource s -> TF.Attr s P.Region)
                (\s a -> s { _region = a } :: S3BucketResource s)
 
-instance P.HasReplicationConfiguration (S3BucketResource s) (TF.Attr s (ReplicationConfigurationSetting s)) where
+instance P.HasReplicationConfiguration (S3BucketResource s) (TF.Attr s (S3BucketReplicationConfiguration s)) where
     replicationConfiguration =
-        P.lens (_replicationConfiguration :: S3BucketResource s -> TF.Attr s (ReplicationConfigurationSetting s))
+        P.lens (_replicationConfiguration :: S3BucketResource s -> TF.Attr s (S3BucketReplicationConfiguration s))
                (\s a -> s { _replicationConfiguration = a } :: S3BucketResource s)
 
 instance P.HasRequestPayer (S3BucketResource s) (TF.Attr s P.Text) where
@@ -9897,9 +9897,9 @@ instance P.HasRequestPayer (S3BucketResource s) (TF.Attr s P.Text) where
         P.lens (_requestPayer :: S3BucketResource s -> TF.Attr s P.Text)
                (\s a -> s { _requestPayer = a } :: S3BucketResource s)
 
-instance P.HasServerSideEncryptionConfiguration (S3BucketResource s) (TF.Attr s (ServerSideEncryptionConfigurationSetting s)) where
+instance P.HasServerSideEncryptionConfiguration (S3BucketResource s) (TF.Attr s (S3BucketServerSideEncryptionConfiguration s)) where
     serverSideEncryptionConfiguration =
-        P.lens (_serverSideEncryptionConfiguration :: S3BucketResource s -> TF.Attr s (ServerSideEncryptionConfigurationSetting s))
+        P.lens (_serverSideEncryptionConfiguration :: S3BucketResource s -> TF.Attr s (S3BucketServerSideEncryptionConfiguration s))
                (\s a -> s { _serverSideEncryptionConfiguration = a } :: S3BucketResource s)
 
 instance P.HasTags (S3BucketResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
@@ -9907,14 +9907,14 @@ instance P.HasTags (S3BucketResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Te
         P.lens (_tags :: S3BucketResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _tags = a } :: S3BucketResource s)
 
-instance P.HasVersioning (S3BucketResource s) (TF.Attr s (VersioningSetting s)) where
+instance P.HasVersioning (S3BucketResource s) (TF.Attr s (S3BucketVersioning s)) where
     versioning =
-        P.lens (_versioning :: S3BucketResource s -> TF.Attr s (VersioningSetting s))
+        P.lens (_versioning :: S3BucketResource s -> TF.Attr s (S3BucketVersioning s))
                (\s a -> s { _versioning = a } :: S3BucketResource s)
 
-instance P.HasWebsite (S3BucketResource s) (TF.Attr s [TF.Attr s (WebsiteSetting s)]) where
+instance P.HasWebsite (S3BucketResource s) (TF.Attr s [TF.Attr s (S3BucketWebsite s)]) where
     website =
-        P.lens (_website :: S3BucketResource s -> TF.Attr s [TF.Attr s (WebsiteSetting s)])
+        P.lens (_website :: S3BucketResource s -> TF.Attr s [TF.Attr s (S3BucketWebsite s)])
                (\s a -> s { _website = a } :: S3BucketResource s)
 
 instance P.HasWebsiteDomain (S3BucketResource s) (TF.Attr s P.Text) where
@@ -9954,7 +9954,7 @@ instance s ~ s' => P.HasComputedRegion (TF.Ref s' (S3BucketResource s)) (TF.Attr
 instance s ~ s' => P.HasComputedRequestPayer (TF.Ref s' (S3BucketResource s)) (TF.Attr s P.Text) where
     computedRequestPayer x = TF.compute (TF.refKey x) "request_payer"
 
-instance s ~ s' => P.HasComputedVersioning (TF.Ref s' (S3BucketResource s)) (TF.Attr s (VersioningSetting s)) where
+instance s ~ s' => P.HasComputedVersioning (TF.Ref s' (S3BucketResource s)) (TF.Attr s (S3BucketVersioning s)) where
     computedVersioning x = TF.compute (TF.refKey x) "versioning"
 
 instance s ~ s' => P.HasComputedWebsiteDomain (TF.Ref s' (S3BucketResource s)) (TF.Attr s P.Text) where
@@ -9986,7 +9986,7 @@ data SecretsmanagerSecretResource s = SecretsmanagerSecretResource'
     , _rotationLambdaArn    :: TF.Attr s P.Text
     -- ^ @rotation_lambda_arn@ - (Optional)
     --
-    , _rotationRules        :: TF.Attr s (RotationRulesSetting s)
+    , _rotationRules        :: TF.Attr s (SecretsmanagerSecretRotationRules s)
     -- ^ @rotation_rules@ - (Optional)
     --
     , _tags                 :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
@@ -10027,7 +10027,7 @@ instance TF.IsValid (SecretsmanagerSecretResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_rotationRules"
                   (_rotationRules
-                      :: SecretsmanagerSecretResource s -> TF.Attr s (RotationRulesSetting s))
+                      :: SecretsmanagerSecretResource s -> TF.Attr s (SecretsmanagerSecretRotationRules s))
                   TF.validator
 
 instance P.HasDescription (SecretsmanagerSecretResource s) (TF.Attr s P.Text) where
@@ -10060,9 +10060,9 @@ instance P.HasRotationLambdaArn (SecretsmanagerSecretResource s) (TF.Attr s P.Te
         P.lens (_rotationLambdaArn :: SecretsmanagerSecretResource s -> TF.Attr s P.Text)
                (\s a -> s { _rotationLambdaArn = a } :: SecretsmanagerSecretResource s)
 
-instance P.HasRotationRules (SecretsmanagerSecretResource s) (TF.Attr s (RotationRulesSetting s)) where
+instance P.HasRotationRules (SecretsmanagerSecretResource s) (TF.Attr s (SecretsmanagerSecretRotationRules s)) where
     rotationRules =
-        P.lens (_rotationRules :: SecretsmanagerSecretResource s -> TF.Attr s (RotationRulesSetting s))
+        P.lens (_rotationRules :: SecretsmanagerSecretResource s -> TF.Attr s (SecretsmanagerSecretRotationRules s))
                (\s a -> s { _rotationRules = a } :: SecretsmanagerSecretResource s)
 
 instance P.HasTags (SecretsmanagerSecretResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
@@ -10150,10 +10150,10 @@ data SecurityGroupResource s = SecurityGroupResource'
     { _description         :: TF.Attr s P.Text
     -- ^ @description@ - (Optional, Forces New)
     --
-    , _egress              :: TF.Attr s [TF.Attr s (EgressSetting s)]
+    , _egress              :: TF.Attr s [TF.Attr s (SecurityGroupEgress s)]
     -- ^ @egress@ - (Optional)
     --
-    , _ingress             :: TF.Attr s [TF.Attr s (IngressSetting s)]
+    , _ingress             :: TF.Attr s [TF.Attr s (SecurityGroupIngress s)]
     -- ^ @ingress@ - (Optional)
     --
     , _name                :: TF.Attr s P.Text
@@ -10226,14 +10226,14 @@ instance P.HasDescription (SecurityGroupResource s) (TF.Attr s P.Text) where
         P.lens (_description :: SecurityGroupResource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: SecurityGroupResource s)
 
-instance P.HasEgress (SecurityGroupResource s) (TF.Attr s [TF.Attr s (EgressSetting s)]) where
+instance P.HasEgress (SecurityGroupResource s) (TF.Attr s [TF.Attr s (SecurityGroupEgress s)]) where
     egress =
-        P.lens (_egress :: SecurityGroupResource s -> TF.Attr s [TF.Attr s (EgressSetting s)])
+        P.lens (_egress :: SecurityGroupResource s -> TF.Attr s [TF.Attr s (SecurityGroupEgress s)])
                (\s a -> s { _egress = a } :: SecurityGroupResource s)
 
-instance P.HasIngress (SecurityGroupResource s) (TF.Attr s [TF.Attr s (IngressSetting s)]) where
+instance P.HasIngress (SecurityGroupResource s) (TF.Attr s [TF.Attr s (SecurityGroupIngress s)]) where
     ingress =
-        P.lens (_ingress :: SecurityGroupResource s -> TF.Attr s [TF.Attr s (IngressSetting s)])
+        P.lens (_ingress :: SecurityGroupResource s -> TF.Attr s [TF.Attr s (SecurityGroupIngress s)])
                (\s a -> s { _ingress = a } :: SecurityGroupResource s)
 
 instance P.HasName (SecurityGroupResource s) (TF.Attr s P.Text) where
@@ -10267,10 +10267,10 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (SecurityGroupResource s)) (TF.Att
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (SecurityGroupResource s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
 
-instance s ~ s' => P.HasComputedEgress (TF.Ref s' (SecurityGroupResource s)) (TF.Attr s [TF.Attr s (EgressSetting s)]) where
+instance s ~ s' => P.HasComputedEgress (TF.Ref s' (SecurityGroupResource s)) (TF.Attr s [TF.Attr s (SecurityGroupEgress s)]) where
     computedEgress x = TF.compute (TF.refKey x) "egress"
 
-instance s ~ s' => P.HasComputedIngress (TF.Ref s' (SecurityGroupResource s)) (TF.Attr s [TF.Attr s (IngressSetting s)]) where
+instance s ~ s' => P.HasComputedIngress (TF.Ref s' (SecurityGroupResource s)) (TF.Attr s [TF.Attr s (SecurityGroupIngress s)]) where
     computedIngress x = TF.compute (TF.refKey x) "ingress"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (SecurityGroupResource s)) (TF.Attr s P.Text) where
@@ -10572,26 +10572,26 @@ instance s ~ s' => P.HasComputedHostedZone (TF.Ref s' (ServiceDiscoveryPublicDns
 -- See the <https://www.terraform.io/docs/providers/aws/r/service_discovery_service.html terraform documentation>
 -- for more information.
 data ServiceDiscoveryServiceResource s = ServiceDiscoveryServiceResource'
-    { _description             :: TF.Attr s P.Text
+    { _description :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
-    , _dnsConfig               :: TF.Attr s (DnsConfigSetting s)
+    , _dnsConfig :: TF.Attr s (ServiceDiscoveryServiceDnsConfig s)
     -- ^ @dns_config@ - (Required)
     --
-    , _healthCheckConfig       :: TF.Attr s (HealthCheckConfigSetting s)
+    , _healthCheckConfig :: TF.Attr s (ServiceDiscoveryServiceHealthCheckConfig s)
     -- ^ @health_check_config@ - (Optional)
     --
-    , _healthCheckCustomConfig :: TF.Attr s (HealthCheckCustomConfigSetting s)
+    , _healthCheckCustomConfig :: TF.Attr s (ServiceDiscoveryServiceHealthCheckCustomConfig s)
     -- ^ @health_check_custom_config@ - (Optional, Forces New)
     --
-    , _name                    :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @aws_service_discovery_service@ resource value.
 serviceDiscoveryServiceResource
-    :: TF.Attr s (DnsConfigSetting s) -- ^ @dns_config@ ('P._dnsConfig', 'P.dnsConfig')
+    :: TF.Attr s (ServiceDiscoveryServiceDnsConfig s) -- ^ @dns_config@ ('P._dnsConfig', 'P.dnsConfig')
     -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (ServiceDiscoveryServiceResource s)
 serviceDiscoveryServiceResource _dnsConfig _name =
@@ -10617,15 +10617,15 @@ instance TF.IsValid (ServiceDiscoveryServiceResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_dnsConfig"
                   (_dnsConfig
-                      :: ServiceDiscoveryServiceResource s -> TF.Attr s (DnsConfigSetting s))
+                      :: ServiceDiscoveryServiceResource s -> TF.Attr s (ServiceDiscoveryServiceDnsConfig s))
                   TF.validator
            P.<> TF.settingsValidator "_healthCheckConfig"
                   (_healthCheckConfig
-                      :: ServiceDiscoveryServiceResource s -> TF.Attr s (HealthCheckConfigSetting s))
+                      :: ServiceDiscoveryServiceResource s -> TF.Attr s (ServiceDiscoveryServiceHealthCheckConfig s))
                   TF.validator
            P.<> TF.settingsValidator "_healthCheckCustomConfig"
                   (_healthCheckCustomConfig
-                      :: ServiceDiscoveryServiceResource s -> TF.Attr s (HealthCheckCustomConfigSetting s))
+                      :: ServiceDiscoveryServiceResource s -> TF.Attr s (ServiceDiscoveryServiceHealthCheckCustomConfig s))
                   TF.validator
 
 instance P.HasDescription (ServiceDiscoveryServiceResource s) (TF.Attr s P.Text) where
@@ -10633,19 +10633,19 @@ instance P.HasDescription (ServiceDiscoveryServiceResource s) (TF.Attr s P.Text)
         P.lens (_description :: ServiceDiscoveryServiceResource s -> TF.Attr s P.Text)
                (\s a -> s { _description = a } :: ServiceDiscoveryServiceResource s)
 
-instance P.HasDnsConfig (ServiceDiscoveryServiceResource s) (TF.Attr s (DnsConfigSetting s)) where
+instance P.HasDnsConfig (ServiceDiscoveryServiceResource s) (TF.Attr s (ServiceDiscoveryServiceDnsConfig s)) where
     dnsConfig =
-        P.lens (_dnsConfig :: ServiceDiscoveryServiceResource s -> TF.Attr s (DnsConfigSetting s))
+        P.lens (_dnsConfig :: ServiceDiscoveryServiceResource s -> TF.Attr s (ServiceDiscoveryServiceDnsConfig s))
                (\s a -> s { _dnsConfig = a } :: ServiceDiscoveryServiceResource s)
 
-instance P.HasHealthCheckConfig (ServiceDiscoveryServiceResource s) (TF.Attr s (HealthCheckConfigSetting s)) where
+instance P.HasHealthCheckConfig (ServiceDiscoveryServiceResource s) (TF.Attr s (ServiceDiscoveryServiceHealthCheckConfig s)) where
     healthCheckConfig =
-        P.lens (_healthCheckConfig :: ServiceDiscoveryServiceResource s -> TF.Attr s (HealthCheckConfigSetting s))
+        P.lens (_healthCheckConfig :: ServiceDiscoveryServiceResource s -> TF.Attr s (ServiceDiscoveryServiceHealthCheckConfig s))
                (\s a -> s { _healthCheckConfig = a } :: ServiceDiscoveryServiceResource s)
 
-instance P.HasHealthCheckCustomConfig (ServiceDiscoveryServiceResource s) (TF.Attr s (HealthCheckCustomConfigSetting s)) where
+instance P.HasHealthCheckCustomConfig (ServiceDiscoveryServiceResource s) (TF.Attr s (ServiceDiscoveryServiceHealthCheckCustomConfig s)) where
     healthCheckCustomConfig =
-        P.lens (_healthCheckCustomConfig :: ServiceDiscoveryServiceResource s -> TF.Attr s (HealthCheckCustomConfigSetting s))
+        P.lens (_healthCheckCustomConfig :: ServiceDiscoveryServiceResource s -> TF.Attr s (ServiceDiscoveryServiceHealthCheckCustomConfig s))
                (\s a -> s { _healthCheckCustomConfig = a } :: ServiceDiscoveryServiceResource s)
 
 instance P.HasName (ServiceDiscoveryServiceResource s) (TF.Attr s P.Text) where
@@ -10988,33 +10988,33 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (SesDomainMailFromResource s)) (TF
 -- See the <https://www.terraform.io/docs/providers/aws/r/ses_event_destination.html terraform documentation>
 -- for more information.
 data SesEventDestinationResource s = SesEventDestinationResource'
-    { _cloudwatchDestination :: TF.Attr s (CloudwatchDestinationSetting s)
+    { _cloudwatchDestination :: TF.Attr s (SesEventDestinationCloudwatchDestination s)
     -- ^ @cloudwatch_destination@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
     -- * 'kinesisDestination'
     -- * 'snsDestination'
-    , _configurationSetName  :: TF.Attr s P.Text
+    , _configurationSetName :: TF.Attr s P.Text
     -- ^ @configuration_set_name@ - (Required, Forces New)
     --
-    , _enabled               :: TF.Attr s P.Bool
+    , _enabled :: TF.Attr s P.Bool
     -- ^ @enabled@ - (Optional, Forces New)
     --
-    , _kinesisDestination    :: TF.Attr s (KinesisDestinationSetting s)
+    , _kinesisDestination :: TF.Attr s (SesEventDestinationKinesisDestination s)
     -- ^ @kinesis_destination@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
     -- * 'cloudwatchDestination'
     -- * 'snsDestination'
-    , _matchingTypes         :: TF.Attr s [TF.Attr s P.Text]
+    , _matchingTypes :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @matching_types@ - (Required, Forces New)
     --
-    , _name                  :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _snsDestination        :: TF.Attr s (SnsDestinationSetting s)
+    , _snsDestination :: TF.Attr s (SesEventDestinationSnsDestination s)
     -- ^ @sns_destination@ - (Optional, Forces New)
     --
     -- Conflicts with:
@@ -11072,20 +11072,20 @@ instance TF.IsValid (SesEventDestinationResource s) where
         ])
            P.<> TF.settingsValidator "_cloudwatchDestination"
                   (_cloudwatchDestination
-                      :: SesEventDestinationResource s -> TF.Attr s (CloudwatchDestinationSetting s))
+                      :: SesEventDestinationResource s -> TF.Attr s (SesEventDestinationCloudwatchDestination s))
                   TF.validator
            P.<> TF.settingsValidator "_kinesisDestination"
                   (_kinesisDestination
-                      :: SesEventDestinationResource s -> TF.Attr s (KinesisDestinationSetting s))
+                      :: SesEventDestinationResource s -> TF.Attr s (SesEventDestinationKinesisDestination s))
                   TF.validator
            P.<> TF.settingsValidator "_snsDestination"
                   (_snsDestination
-                      :: SesEventDestinationResource s -> TF.Attr s (SnsDestinationSetting s))
+                      :: SesEventDestinationResource s -> TF.Attr s (SesEventDestinationSnsDestination s))
                   TF.validator
 
-instance P.HasCloudwatchDestination (SesEventDestinationResource s) (TF.Attr s (CloudwatchDestinationSetting s)) where
+instance P.HasCloudwatchDestination (SesEventDestinationResource s) (TF.Attr s (SesEventDestinationCloudwatchDestination s)) where
     cloudwatchDestination =
-        P.lens (_cloudwatchDestination :: SesEventDestinationResource s -> TF.Attr s (CloudwatchDestinationSetting s))
+        P.lens (_cloudwatchDestination :: SesEventDestinationResource s -> TF.Attr s (SesEventDestinationCloudwatchDestination s))
                (\s a -> s { _cloudwatchDestination = a } :: SesEventDestinationResource s)
 
 instance P.HasConfigurationSetName (SesEventDestinationResource s) (TF.Attr s P.Text) where
@@ -11098,9 +11098,9 @@ instance P.HasEnabled (SesEventDestinationResource s) (TF.Attr s P.Bool) where
         P.lens (_enabled :: SesEventDestinationResource s -> TF.Attr s P.Bool)
                (\s a -> s { _enabled = a } :: SesEventDestinationResource s)
 
-instance P.HasKinesisDestination (SesEventDestinationResource s) (TF.Attr s (KinesisDestinationSetting s)) where
+instance P.HasKinesisDestination (SesEventDestinationResource s) (TF.Attr s (SesEventDestinationKinesisDestination s)) where
     kinesisDestination =
-        P.lens (_kinesisDestination :: SesEventDestinationResource s -> TF.Attr s (KinesisDestinationSetting s))
+        P.lens (_kinesisDestination :: SesEventDestinationResource s -> TF.Attr s (SesEventDestinationKinesisDestination s))
                (\s a -> s { _kinesisDestination = a } :: SesEventDestinationResource s)
 
 instance P.HasMatchingTypes (SesEventDestinationResource s) (TF.Attr s [TF.Attr s P.Text]) where
@@ -11113,9 +11113,9 @@ instance P.HasName (SesEventDestinationResource s) (TF.Attr s P.Text) where
         P.lens (_name :: SesEventDestinationResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: SesEventDestinationResource s)
 
-instance P.HasSnsDestination (SesEventDestinationResource s) (TF.Attr s (SnsDestinationSetting s)) where
+instance P.HasSnsDestination (SesEventDestinationResource s) (TF.Attr s (SesEventDestinationSnsDestination s)) where
     snsDestination =
-        P.lens (_snsDestination :: SesEventDestinationResource s -> TF.Attr s (SnsDestinationSetting s))
+        P.lens (_snsDestination :: SesEventDestinationResource s -> TF.Attr s (SesEventDestinationSnsDestination s))
                (\s a -> s { _snsDestination = a } :: SesEventDestinationResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (SesEventDestinationResource s)) (TF.Attr s P.Text) where

@@ -18,8 +18,8 @@
 module Terrafomo.Rancher.Settings01
     (
     -- ** member
-      MemberSetting (..)
-    , newMemberSetting
+      EnvironmentMember (..)
+    , newEnvironmentMember
 
     ) where
 
@@ -45,7 +45,7 @@ import qualified Terrafomo.Rancher.Types as P
 import qualified Terrafomo.Validator     as TF
 
 -- | @member@ nested settings.
-data MemberSetting s = MemberSetting'
+data EnvironmentMember s = EnvironmentMember'
     { _externalId     :: TF.Attr s P.Text
     -- ^ @external_id@ - (Required)
     --
@@ -58,49 +58,49 @@ data MemberSetting s = MemberSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @member@ settings value.
-newMemberSetting
+newEnvironmentMember
     :: TF.Attr s P.Text -- ^ 'P._externalId': @external_id@
     -> TF.Attr s P.Text -- ^ 'P._role': @role@
     -> TF.Attr s P.Text -- ^ 'P._externalIdType': @external_id_type@
-    -> MemberSetting s
-newMemberSetting _externalId _role _externalIdType =
-    MemberSetting'
+    -> EnvironmentMember s
+newEnvironmentMember _externalId _role _externalIdType =
+    EnvironmentMember'
         { _externalId = _externalId
         , _externalIdType = _externalIdType
         , _role = _role
         }
 
-instance TF.IsValue  (MemberSetting s)
-instance TF.IsObject (MemberSetting s) where
-    toObject MemberSetting'{..} = P.catMaybes
+instance TF.IsValue  (EnvironmentMember s)
+instance TF.IsObject (EnvironmentMember s) where
+    toObject EnvironmentMember'{..} = P.catMaybes
         [ TF.assign "external_id" <$> TF.attribute _externalId
         , TF.assign "external_id_type" <$> TF.attribute _externalIdType
         , TF.assign "role" <$> TF.attribute _role
         ]
 
-instance TF.IsValid (MemberSetting s) where
+instance TF.IsValid (EnvironmentMember s) where
     validator = P.mempty
 
-instance P.HasExternalId (MemberSetting s) (TF.Attr s P.Text) where
+instance P.HasExternalId (EnvironmentMember s) (TF.Attr s P.Text) where
     externalId =
-        P.lens (_externalId :: MemberSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _externalId = a } :: MemberSetting s)
+        P.lens (_externalId :: EnvironmentMember s -> TF.Attr s P.Text)
+               (\s a -> s { _externalId = a } :: EnvironmentMember s)
 
-instance P.HasExternalIdType (MemberSetting s) (TF.Attr s P.Text) where
+instance P.HasExternalIdType (EnvironmentMember s) (TF.Attr s P.Text) where
     externalIdType =
-        P.lens (_externalIdType :: MemberSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _externalIdType = a } :: MemberSetting s)
+        P.lens (_externalIdType :: EnvironmentMember s -> TF.Attr s P.Text)
+               (\s a -> s { _externalIdType = a } :: EnvironmentMember s)
 
-instance P.HasRole (MemberSetting s) (TF.Attr s P.Text) where
+instance P.HasRole (EnvironmentMember s) (TF.Attr s P.Text) where
     role =
-        P.lens (_role :: MemberSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _role = a } :: MemberSetting s)
+        P.lens (_role :: EnvironmentMember s -> TF.Attr s P.Text)
+               (\s a -> s { _role = a } :: EnvironmentMember s)
 
-instance s ~ s' => P.HasComputedExternalId (TF.Ref s' (MemberSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedExternalId (TF.Ref s' (EnvironmentMember s)) (TF.Attr s P.Text) where
     computedExternalId x = TF.compute (TF.refKey x) "external_id"
 
-instance s ~ s' => P.HasComputedExternalIdType (TF.Ref s' (MemberSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedExternalIdType (TF.Ref s' (EnvironmentMember s)) (TF.Attr s P.Text) where
     computedExternalIdType x = TF.compute (TF.refKey x) "external_id_type"
 
-instance s ~ s' => P.HasComputedRole (TF.Ref s' (MemberSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedRole (TF.Ref s' (EnvironmentMember s)) (TF.Attr s P.Text) where
     computedRole x = TF.compute (TF.refKey x) "role"

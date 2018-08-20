@@ -17,325 +17,325 @@
 --
 module Terrafomo.AWS.Settings02
     (
-    -- ** appversion_lifecycle
-      AppversionLifecycleSetting (..)
-    , newAppversionLifecycleSetting
+    -- ** crl_configuration
+      AcmpcaCertificateAuthorityCrlConfiguration (..)
+    , newAcmpcaCertificateAuthorityCrlConfiguration
 
-    -- ** args
-    , ArgsSetting (..)
-    , newArgsSetting
+    -- ** revocation_configuration
+    , AcmpcaCertificateAuthorityRevocationConfiguration (..)
+    , newAcmpcaCertificateAuthorityRevocationConfiguration
 
-    -- ** dag_node
-    , DagNodeSetting (..)
-    , newDagNodeSetting
+    -- ** access_logs
+    , AlbAccessLogs (..)
+    , newAlbAccessLogs
 
-    -- ** artifact_store
-    , ArtifactStoreSetting (..)
-    , newArtifactStoreSetting
+    -- ** default_action
+    , AlbListenerDefaultAction (..)
+    , newAlbListenerDefaultAction
 
-    -- ** encryption_key
-    , EncryptionKeySetting (..)
-    , newEncryptionKeySetting
+    -- ** action
+    , AlbListenerRuleAction (..)
+    , newAlbListenerRuleAction
 
-    -- ** artifacts
-    , ArtifactsSetting (..)
-    , newArtifactsSetting
+    -- ** condition
+    , AlbListenerRuleCondition (..)
+    , newAlbListenerRuleCondition
 
-    -- ** association
-    , AssociationSetting (..)
-    , newAssociationSetting
+    -- ** subnet_mapping
+    , AlbSubnetMapping (..)
+    , newAlbSubnetMapping
 
-    -- ** associations
-    , AssociationsSetting (..)
-    , newAssociationsSetting
+    -- ** health_check
+    , AlbTargetGroupHealthCheck (..)
+    , newAlbTargetGroupHealthCheck
 
-    -- ** assume_role
-    , AssumeRoleSetting (..)
-    , newAssumeRoleSetting
-
-    -- ** attachment
-    , AttachmentSetting (..)
-    , newAttachmentSetting
-
-    -- ** attachments
-    , AttachmentsSetting (..)
-    , newAttachmentsSetting
-
-    -- ** attribute
-    , AttributeSetting (..)
-    , newAttributeSetting
-
-    -- ** audio_codec_options
-    , AudioCodecOptionsSetting (..)
-    , newAudioCodecOptionsSetting
-
-    -- ** audio
-    , AudioSetting (..)
-    , newAudioSetting
-
-    -- ** auth
-    , AuthSetting (..)
-    , newAuthSetting
-
-    -- ** source
-    , SourceSetting (..)
-    , newSourceSetting
-
-    -- ** source_detail
-    , SourceDetailSetting (..)
-    , newSourceDetailSetting
-
-    -- ** auto_rollback_configuration
-    , AutoRollbackConfigurationSetting (..)
-    , newAutoRollbackConfigurationSetting
-
-    -- ** batch_target
-    , BatchTargetSetting (..)
-    , newBatchTargetSetting
+    -- ** stickiness
+    , AlbTargetGroupStickiness (..)
+    , newAlbTargetGroupStickiness
 
     -- ** block_device_mappings
-    , BlockDeviceMappingsSetting (..)
-    , newBlockDeviceMappingsSetting
+    , AmiBlockDeviceMappings (..)
+    , newAmiBlockDeviceMappings
 
-    -- ** ebs
-    , EbsSetting (..)
-    , newEbsSetting
+    -- ** ebs_block_device
+    , AmiCopyEbsBlockDevice (..)
+    , newAmiCopyEbsBlockDevice
 
-    -- ** blue_green_deployment_config
-    , BlueGreenDeploymentConfigSetting (..)
-    , newBlueGreenDeploymentConfigSetting
+    -- ** ephemeral_block_device
+    , AmiCopyEphemeralBlockDevice (..)
+    , newAmiCopyEphemeralBlockDevice
 
-    -- ** green_fleet_provisioning_option
-    , GreenFleetProvisioningOptionSetting (..)
-    , newGreenFleetProvisioningOptionSetting
+    -- ** ebs_block_device
+    , AmiEbsBlockDevice (..)
+    , newAmiEbsBlockDevice
 
-    -- ** terminate_blue_instances_on_deployment_success
-    , TerminateBlueInstancesOnDeploymentSuccessSetting (..)
-    , newTerminateBlueInstancesOnDeploymentSuccessSetting
+    -- ** ephemeral_block_device
+    , AmiEphemeralBlockDevice (..)
+    , newAmiEphemeralBlockDevice
 
-    -- ** deployment_ready_option
-    , DeploymentReadyOptionSetting (..)
-    , newDeploymentReadyOptionSetting
+    -- ** filter
+    , AmiFilter (..)
+    , newAmiFilter
 
-    -- ** bootstrap_action
-    , BootstrapActionSetting (..)
-    , newBootstrapActionSetting
+    -- ** ebs_block_device
+    , AmiFromInstanceEbsBlockDevice (..)
+    , newAmiFromInstanceEbsBlockDevice
 
-    -- ** bounce_action
-    , BounceActionSetting (..)
-    , newBounceActionSetting
+    -- ** ephemeral_block_device
+    , AmiFromInstanceEphemeralBlockDevice (..)
+    , newAmiFromInstanceEphemeralBlockDevice
 
-    -- ** bucket
-    , BucketSetting (..)
-    , newBucketSetting
+    -- ** filter
+    , AmiIdsFilter (..)
+    , newAmiIdsFilter
 
-    -- ** encryption
-    , EncryptionSetting (..)
-    , newEncryptionSetting
+    -- ** product_codes
+    , AmiProductCodes (..)
+    , newAmiProductCodes
 
-    -- ** sse_s3
-    , SseS3Setting (..)
-    , newSseS3Setting
+    -- ** throttle_settings
+    , ApiGatewayAccountThrottleSettings (..)
+    , newApiGatewayAccountThrottleSettings
 
-    -- ** sse_kms
-    , SseKmsSetting (..)
-    , newSseKmsSetting
+    -- ** location
+    , ApiGatewayDocumentationPartLocation (..)
+    , newApiGatewayDocumentationPartLocation
 
-    -- ** byte_match_tuples
-    , ByteMatchTuplesSetting (..)
-    , newByteMatchTuplesSetting
+    -- ** endpoint_configuration
+    , ApiGatewayDomainNameEndpointConfiguration (..)
+    , newApiGatewayDomainNameEndpointConfiguration
 
-    -- ** field_to_match
-    , FieldToMatchSetting (..)
-    , newFieldToMatchSetting
+    -- ** settings
+    , ApiGatewayMethodSettingsSettings (..)
+    , newApiGatewayMethodSettingsSettings
 
-    -- ** xss_match_tuples
-    , XssMatchTuplesSetting (..)
-    , newXssMatchTuplesSetting
+    -- ** endpoint_configuration
+    , ApiGatewayRestApiEndpointConfiguration (..)
+    , newApiGatewayRestApiEndpointConfiguration
 
-    -- ** xss_match_tuple
-    , XssMatchTupleSetting (..)
-    , newXssMatchTupleSetting
+    -- ** access_log_settings
+    , ApiGatewayStageAccessLogSettings (..)
+    , newApiGatewayStageAccessLogSettings
 
-    -- ** sql_injection_match_tuples
-    , SqlInjectionMatchTuplesSetting (..)
-    , newSqlInjectionMatchTuplesSetting
+    -- ** api_stages
+    , ApiGatewayUsagePlanApiStages (..)
+    , newApiGatewayUsagePlanApiStages
 
-    -- ** sql_injection_match_tuple
-    , SqlInjectionMatchTupleSetting (..)
-    , newSqlInjectionMatchTupleSetting
+    -- ** quota_settings
+    , ApiGatewayUsagePlanQuotaSettings (..)
+    , newApiGatewayUsagePlanQuotaSettings
 
-    -- ** size_constraints
-    , SizeConstraintsSetting (..)
-    , newSizeConstraintsSetting
+    -- ** throttle_settings
+    , ApiGatewayUsagePlanThrottleSettings (..)
+    , newApiGatewayUsagePlanThrottleSettings
 
-    -- ** regex_match_tuple
-    , RegexMatchTupleSetting (..)
-    , newRegexMatchTupleSetting
+    -- ** customized_metric_specification
+    , AppautoscalingPolicyCustomizedMetricSpecification (..)
+    , newAppautoscalingPolicyCustomizedMetricSpecification
 
-    -- ** cache_nodes
-    , CacheNodesSetting (..)
-    , newCacheNodesSetting
+    -- ** target_tracking_scaling_policy_configuration
+    , AppautoscalingPolicyTargetTrackingScalingPolicyConfiguration (..)
+    , newAppautoscalingPolicyTargetTrackingScalingPolicyConfiguration
 
-    -- ** cache
-    , CacheSetting (..)
-    , newCacheSetting
+    -- ** predefined_metric_specification
+    , AppautoscalingPolicyPredefinedMetricSpecification (..)
+    , newAppautoscalingPolicyPredefinedMetricSpecification
 
-    -- ** certificate_authority_configuration
-    , CertificateAuthorityConfigurationSetting (..)
-    , newCertificateAuthorityConfigurationSetting
+    -- ** dimensions
+    , AppautoscalingPolicyDimensions (..)
+    , newAppautoscalingPolicyDimensions
 
-    -- ** subject
-    , SubjectSetting (..)
-    , newSubjectSetting
+    -- ** step_adjustment
+    , AppautoscalingPolicyStepAdjustment (..)
+    , newAppautoscalingPolicyStepAdjustment
 
-    -- ** certificate_authority
-    , CertificateAuthoritySetting (..)
-    , newCertificateAuthoritySetting
+    -- ** step_scaling_policy_configuration
+    , AppautoscalingPolicyStepScalingPolicyConfiguration (..)
+    , newAppautoscalingPolicyStepScalingPolicyConfiguration
 
-    -- ** cidr_block_associations
-    , CidrBlockAssociationsSetting (..)
-    , newCidrBlockAssociationsSetting
+    -- ** scalable_target_action
+    , AppautoscalingScheduledActionScalableTargetAction (..)
+    , newAppautoscalingScheduledActionScalableTargetAction
 
-    -- ** classification_type
-    , ClassificationTypeSetting (..)
-    , newClassificationTypeSetting
+    -- ** dynamodb_config
+    , AppsyncDatasourceDynamodbConfig (..)
+    , newAppsyncDatasourceDynamodbConfig
 
-    -- ** cloudwatch_alarm
-    , CloudwatchAlarmSetting (..)
-    , newCloudwatchAlarmSetting
+    -- ** elasticsearch_config
+    , AppsyncDatasourceElasticsearchConfig (..)
+    , newAppsyncDatasourceElasticsearchConfig
 
-    -- ** cloudwatch_destination
-    , CloudwatchDestinationSetting (..)
-    , newCloudwatchDestinationSetting
+    -- ** lambda_config
+    , AppsyncDatasourceLambdaConfig (..)
+    , newAppsyncDatasourceLambdaConfig
 
-    -- ** cloudwatch_logging_options
-    , CloudwatchLoggingOptionsSetting (..)
-    , newCloudwatchLoggingOptionsSetting
+    -- ** user_pool_config
+    , AppsyncGraphqlApiUserPoolConfig (..)
+    , newAppsyncGraphqlApiUserPoolConfig
 
-    -- ** splunk_configuration
-    , SplunkConfigurationSetting (..)
-    , newSplunkConfigurationSetting
+    -- ** assume_role
+    , AssumeRole (..)
+    , newAssumeRole
 
-    -- ** processing_configuration
-    , ProcessingConfigurationSetting (..)
-    , newProcessingConfigurationSetting
+    -- ** initial_lifecycle_hook
+    , AutoscalingGroupInitialLifecycleHook (..)
+    , newAutoscalingGroupInitialLifecycleHook
 
-    -- ** redshift_configuration
-    , RedshiftConfigurationSetting (..)
-    , newRedshiftConfigurationSetting
+    -- ** launch_template
+    , AutoscalingGroupLaunchTemplate (..)
+    , newAutoscalingGroupLaunchTemplate
 
-    -- ** s3_backup_configuration
-    , S3BackupConfigurationSetting (..)
-    , newS3BackupConfigurationSetting
+    -- ** tag
+    , AutoscalingGroupTag (..)
+    , newAutoscalingGroupTag
 
-    -- ** extended_s3_configuration
-    , ExtendedS3ConfigurationSetting (..)
-    , newExtendedS3ConfigurationSetting
+    -- ** filter
+    , AutoscalingGroupsFilter (..)
+    , newAutoscalingGroupsFilter
 
-    -- ** data_format_conversion_configuration
-    , DataFormatConversionConfigurationSetting (..)
-    , newDataFormatConversionConfigurationSetting
+    -- ** customized_metric_specification
+    , AutoscalingPolicyCustomizedMetricSpecification (..)
+    , newAutoscalingPolicyCustomizedMetricSpecification
 
-    -- ** schema_configuration
-    , SchemaConfigurationSetting (..)
-    , newSchemaConfigurationSetting
+    -- ** target_tracking_configuration
+    , AutoscalingPolicyTargetTrackingConfiguration (..)
+    , newAutoscalingPolicyTargetTrackingConfiguration
 
-    -- ** output_format_configuration
-    , OutputFormatConfigurationSetting (..)
-    , newOutputFormatConfigurationSetting
+    -- ** predefined_metric_specification
+    , AutoscalingPolicyPredefinedMetricSpecification (..)
+    , newAutoscalingPolicyPredefinedMetricSpecification
 
-    -- ** serializer
-    , SerializerSetting (..)
-    , newSerializerSetting
+    -- ** metric_dimension
+    , AutoscalingPolicyMetricDimension (..)
+    , newAutoscalingPolicyMetricDimension
 
-    -- ** parquet_ser_de
-    , ParquetSerDeSetting (..)
-    , newParquetSerDeSetting
+    -- ** step_adjustment
+    , AutoscalingPolicyStepAdjustment (..)
+    , newAutoscalingPolicyStepAdjustment
 
-    -- ** orc_ser_de
-    , OrcSerDeSetting (..)
-    , newOrcSerDeSetting
+    -- ** compute_resources
+    , BatchComputeEnvironmentComputeResources (..)
+    , newBatchComputeEnvironmentComputeResources
 
-    -- ** input_format_configuration
-    , InputFormatConfigurationSetting (..)
-    , newInputFormatConfigurationSetting
+    -- ** retry_strategy
+    , BatchJobDefinitionRetryStrategy (..)
+    , newBatchJobDefinitionRetryStrategy
 
-    -- ** deserializer
-    , DeserializerSetting (..)
-    , newDeserializerSetting
-
-    -- ** open_x_json_ser_de
-    , OpenXJsonSerDeSetting (..)
-    , newOpenXJsonSerDeSetting
-
-    -- ** hive_json_ser_de
-    , HiveJsonSerDeSetting (..)
-    , newHiveJsonSerDeSetting
-
-    -- ** elasticsearch_configuration
-    , ElasticsearchConfigurationSetting (..)
-    , newElasticsearchConfigurationSetting
-
-    -- ** processors
-    , ProcessorsSetting (..)
-    , newProcessorsSetting
-
-    -- ** parameters
-    , ParametersSetting (..)
-    , newParametersSetting
-
-    -- ** s3_configuration
-    , S3ConfigurationSetting (..)
-    , newS3ConfigurationSetting
-
-    -- ** cloudwatch_metric
-    , CloudwatchMetricSetting (..)
-    , newCloudwatchMetricSetting
-
-    -- ** cluster_config
-    , ClusterConfigSetting (..)
-    , newClusterConfigSetting
-
-    -- ** cluster_mode
-    , ClusterModeSetting (..)
-    , newClusterModeSetting
-
-    -- ** cognito_identity_providers
-    , CognitoIdentityProvidersSetting (..)
-    , newCognitoIdentityProvidersSetting
-
-    -- ** cognito_options
-    , CognitoOptionsSetting (..)
-    , newCognitoOptionsSetting
-
-    -- ** columns
-    , ColumnsSetting (..)
-    , newColumnsSetting
-
-    -- ** storage_descriptor
-    , StorageDescriptorSetting (..)
-    , newStorageDescriptorSetting
-
-    -- ** sort_columns
-    , SortColumnsSetting (..)
-    , newSortColumnsSetting
-
-    -- ** skewed_info
-    , SkewedInfoSetting (..)
-    , newSkewedInfoSetting
-
-    -- ** ser_de_info
-    , SerDeInfoSetting (..)
-    , newSerDeInfoSetting
-
-    -- ** command
-    , CommandSetting (..)
-    , newCommandSetting
+    -- ** timeout
+    , BatchJobDefinitionTimeout (..)
+    , newBatchJobDefinitionTimeout
 
     -- ** compute_environment_order
-    , ComputeEnvironmentOrderSetting (..)
-    , newComputeEnvironmentOrderSetting
+    , BatchJobQueueComputeEnvironmentOrder (..)
+    , newBatchJobQueueComputeEnvironmentOrder
+
+    -- ** cost_types
+    , BudgetsBudgetCostTypes (..)
+    , newBudgetsBudgetCostTypes
+
+    -- ** cookies
+    , CloudfrontDistributionCookies (..)
+    , newCloudfrontDistributionCookies
+
+    -- ** forwarded_values
+    , CloudfrontDistributionForwardedValues (..)
+    , newCloudfrontDistributionForwardedValues
+
+    -- ** ordered_cache_behavior
+    , CloudfrontDistributionOrderedCacheBehavior (..)
+    , newCloudfrontDistributionOrderedCacheBehavior
+
+    -- ** lambda_function_association
+    , CloudfrontDistributionLambdaFunctionAssociation (..)
+    , newCloudfrontDistributionLambdaFunctionAssociation
+
+    -- ** default_cache_behavior
+    , CloudfrontDistributionDefaultCacheBehavior (..)
+    , newCloudfrontDistributionDefaultCacheBehavior
+
+    -- ** custom_error_response
+    , CloudfrontDistributionCustomErrorResponse (..)
+    , newCloudfrontDistributionCustomErrorResponse
+
+    -- ** custom_header
+    , CloudfrontDistributionCustomHeader (..)
+    , newCloudfrontDistributionCustomHeader
+
+    -- ** origin
+    , CloudfrontDistributionOrigin (..)
+    , newCloudfrontDistributionOrigin
+
+    -- ** s3_origin_config
+    , CloudfrontDistributionS3OriginConfig (..)
+    , newCloudfrontDistributionS3OriginConfig
+
+    -- ** custom_origin_config
+    , CloudfrontDistributionCustomOriginConfig (..)
+    , newCloudfrontDistributionCustomOriginConfig
+
+    -- ** geo_restriction
+    , CloudfrontDistributionGeoRestriction (..)
+    , newCloudfrontDistributionGeoRestriction
+
+    -- ** restrictions
+    , CloudfrontDistributionRestrictions (..)
+    , newCloudfrontDistributionRestrictions
+
+    -- ** logging_config
+    , CloudfrontDistributionLoggingConfig (..)
+    , newCloudfrontDistributionLoggingConfig
+
+    -- ** viewer_certificate
+    , CloudfrontDistributionViewerCertificate (..)
+    , newCloudfrontDistributionViewerCertificate
+
+    -- ** data_resource
+    , CloudtrailDataResource (..)
+    , newCloudtrailDataResource
+
+    -- ** event_selector
+    , CloudtrailEventSelector (..)
+    , newCloudtrailEventSelector
+
+    -- ** batch_target
+    , CloudwatchEventTargetBatchTarget (..)
+    , newCloudwatchEventTargetBatchTarget
+
+    -- ** ecs_target
+    , CloudwatchEventTargetEcsTarget (..)
+    , newCloudwatchEventTargetEcsTarget
+
+    -- ** input_transformer
+    , CloudwatchEventTargetInputTransformer (..)
+    , newCloudwatchEventTargetInputTransformer
+
+    -- ** kinesis_target
+    , CloudwatchEventTargetKinesisTarget (..)
+    , newCloudwatchEventTargetKinesisTarget
+
+    -- ** run_command_targets
+    , CloudwatchEventTargetRunCommandTargets (..)
+    , newCloudwatchEventTargetRunCommandTargets
+
+    -- ** sqs_target
+    , CloudwatchEventTargetSqsTarget (..)
+    , newCloudwatchEventTargetSqsTarget
+
+    -- ** metric_transformation
+    , CloudwatchLogMetricFilterMetricTransformation (..)
+    , newCloudwatchLogMetricFilterMetricTransformation
+
+    -- ** artifacts
+    , CodebuildProjectArtifacts (..)
+    , newCodebuildProjectArtifacts
+
+    -- ** auth
+    , CodebuildProjectAuth (..)
+    , newCodebuildProjectAuth
+
+    -- ** source
+    , CodebuildProjectSource (..)
+    , newCodebuildProjectSource
 
     ) where
 
@@ -360,277 +360,4340 @@ import qualified Terrafomo.HCL       as TF
 import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.Validator as TF
 
--- | @appversion_lifecycle@ nested settings.
-data AppversionLifecycleSetting s = AppversionLifecycleSetting'
-    { _deleteSourceFromS3 :: TF.Attr s P.Bool
-    -- ^ @delete_source_from_s3@ - (Optional)
+-- | @crl_configuration@ nested settings.
+data AcmpcaCertificateAuthorityCrlConfiguration s = AcmpcaCertificateAuthorityCrlConfiguration'
+    { _customCname      :: TF.Attr s P.Text
+    -- ^ @custom_cname@ - (Optional)
     --
-    , _maxAgeInDays       :: TF.Attr s P.Int
-    -- ^ @max_age_in_days@ - (Optional)
+    , _enabled          :: TF.Attr s P.Bool
+    -- ^ @enabled@ - (Optional)
     --
-    , _maxCount           :: TF.Attr s P.Int
-    -- ^ @max_count@ - (Optional)
+    , _expirationInDays :: TF.Attr s P.Int
+    -- ^ @expiration_in_days@ - (Required)
     --
-    , _serviceRole        :: TF.Attr s P.Text
-    -- ^ @service_role@ - (Required)
+    , _s3BucketName     :: TF.Attr s P.Text
+    -- ^ @s3_bucket_name@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
--- | Construct a new @appversion_lifecycle@ settings value.
-newAppversionLifecycleSetting
-    :: TF.Attr s P.Text -- ^ 'P._serviceRole': @service_role@
-    -> AppversionLifecycleSetting s
-newAppversionLifecycleSetting _serviceRole =
-    AppversionLifecycleSetting'
-        { _deleteSourceFromS3 = TF.Nil
-        , _maxAgeInDays = TF.Nil
-        , _maxCount = TF.Nil
-        , _serviceRole = _serviceRole
+-- | Construct a new @crl_configuration@ settings value.
+newAcmpcaCertificateAuthorityCrlConfiguration
+    :: TF.Attr s P.Int -- ^ 'P._expirationInDays': @expiration_in_days@
+    -> AcmpcaCertificateAuthorityCrlConfiguration s
+newAcmpcaCertificateAuthorityCrlConfiguration _expirationInDays =
+    AcmpcaCertificateAuthorityCrlConfiguration'
+        { _customCname = TF.Nil
+        , _enabled = TF.Nil
+        , _expirationInDays = _expirationInDays
+        , _s3BucketName = TF.Nil
         }
 
-instance TF.IsValue  (AppversionLifecycleSetting s)
-instance TF.IsObject (AppversionLifecycleSetting s) where
-    toObject AppversionLifecycleSetting'{..} = P.catMaybes
-        [ TF.assign "delete_source_from_s3" <$> TF.attribute _deleteSourceFromS3
-        , TF.assign "max_age_in_days" <$> TF.attribute _maxAgeInDays
-        , TF.assign "max_count" <$> TF.attribute _maxCount
-        , TF.assign "service_role" <$> TF.attribute _serviceRole
+instance TF.IsValue  (AcmpcaCertificateAuthorityCrlConfiguration s)
+instance TF.IsObject (AcmpcaCertificateAuthorityCrlConfiguration s) where
+    toObject AcmpcaCertificateAuthorityCrlConfiguration'{..} = P.catMaybes
+        [ TF.assign "custom_cname" <$> TF.attribute _customCname
+        , TF.assign "enabled" <$> TF.attribute _enabled
+        , TF.assign "expiration_in_days" <$> TF.attribute _expirationInDays
+        , TF.assign "s3_bucket_name" <$> TF.attribute _s3BucketName
         ]
 
-instance TF.IsValid (AppversionLifecycleSetting s) where
+instance TF.IsValid (AcmpcaCertificateAuthorityCrlConfiguration s) where
     validator = P.mempty
 
-instance P.HasDeleteSourceFromS3 (AppversionLifecycleSetting s) (TF.Attr s P.Bool) where
-    deleteSourceFromS3 =
-        P.lens (_deleteSourceFromS3 :: AppversionLifecycleSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _deleteSourceFromS3 = a } :: AppversionLifecycleSetting s)
+instance P.HasCustomCname (AcmpcaCertificateAuthorityCrlConfiguration s) (TF.Attr s P.Text) where
+    customCname =
+        P.lens (_customCname :: AcmpcaCertificateAuthorityCrlConfiguration s -> TF.Attr s P.Text)
+               (\s a -> s { _customCname = a } :: AcmpcaCertificateAuthorityCrlConfiguration s)
 
-instance P.HasMaxAgeInDays (AppversionLifecycleSetting s) (TF.Attr s P.Int) where
-    maxAgeInDays =
-        P.lens (_maxAgeInDays :: AppversionLifecycleSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _maxAgeInDays = a } :: AppversionLifecycleSetting s)
+instance P.HasEnabled (AcmpcaCertificateAuthorityCrlConfiguration s) (TF.Attr s P.Bool) where
+    enabled =
+        P.lens (_enabled :: AcmpcaCertificateAuthorityCrlConfiguration s -> TF.Attr s P.Bool)
+               (\s a -> s { _enabled = a } :: AcmpcaCertificateAuthorityCrlConfiguration s)
 
-instance P.HasMaxCount (AppversionLifecycleSetting s) (TF.Attr s P.Int) where
-    maxCount =
-        P.lens (_maxCount :: AppversionLifecycleSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _maxCount = a } :: AppversionLifecycleSetting s)
+instance P.HasExpirationInDays (AcmpcaCertificateAuthorityCrlConfiguration s) (TF.Attr s P.Int) where
+    expirationInDays =
+        P.lens (_expirationInDays :: AcmpcaCertificateAuthorityCrlConfiguration s -> TF.Attr s P.Int)
+               (\s a -> s { _expirationInDays = a } :: AcmpcaCertificateAuthorityCrlConfiguration s)
 
-instance P.HasServiceRole (AppversionLifecycleSetting s) (TF.Attr s P.Text) where
-    serviceRole =
-        P.lens (_serviceRole :: AppversionLifecycleSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _serviceRole = a } :: AppversionLifecycleSetting s)
+instance P.HasS3BucketName (AcmpcaCertificateAuthorityCrlConfiguration s) (TF.Attr s P.Text) where
+    s3BucketName =
+        P.lens (_s3BucketName :: AcmpcaCertificateAuthorityCrlConfiguration s -> TF.Attr s P.Text)
+               (\s a -> s { _s3BucketName = a } :: AcmpcaCertificateAuthorityCrlConfiguration s)
 
--- | @args@ nested settings.
-data ArgsSetting s = ArgsSetting'
-    { _name  :: TF.Attr s P.Text
+instance s ~ s' => P.HasComputedCustomCname (TF.Ref s' (AcmpcaCertificateAuthorityCrlConfiguration s)) (TF.Attr s P.Text) where
+    computedCustomCname x = TF.compute (TF.refKey x) "custom_cname"
+
+instance s ~ s' => P.HasComputedEnabled (TF.Ref s' (AcmpcaCertificateAuthorityCrlConfiguration s)) (TF.Attr s P.Bool) where
+    computedEnabled x = TF.compute (TF.refKey x) "enabled"
+
+instance s ~ s' => P.HasComputedExpirationInDays (TF.Ref s' (AcmpcaCertificateAuthorityCrlConfiguration s)) (TF.Attr s P.Int) where
+    computedExpirationInDays x = TF.compute (TF.refKey x) "expiration_in_days"
+
+instance s ~ s' => P.HasComputedS3BucketName (TF.Ref s' (AcmpcaCertificateAuthorityCrlConfiguration s)) (TF.Attr s P.Text) where
+    computedS3BucketName x = TF.compute (TF.refKey x) "s3_bucket_name"
+
+-- | @revocation_configuration@ nested settings.
+data AcmpcaCertificateAuthorityRevocationConfiguration s = AcmpcaCertificateAuthorityRevocationConfiguration'
+    { _crlConfiguration :: TF.Attr s [TF.Attr s (AcmpcaCertificateAuthorityCrlConfiguration s)]
+    -- ^ @crl_configuration@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @revocation_configuration@ settings value.
+newAcmpcaCertificateAuthorityRevocationConfiguration
+    :: AcmpcaCertificateAuthorityRevocationConfiguration s
+newAcmpcaCertificateAuthorityRevocationConfiguration =
+    AcmpcaCertificateAuthorityRevocationConfiguration'
+        { _crlConfiguration = TF.Nil
+        }
+
+instance TF.IsValue  (AcmpcaCertificateAuthorityRevocationConfiguration s)
+instance TF.IsObject (AcmpcaCertificateAuthorityRevocationConfiguration s) where
+    toObject AcmpcaCertificateAuthorityRevocationConfiguration'{..} = P.catMaybes
+        [ TF.assign "crl_configuration" <$> TF.attribute _crlConfiguration
+        ]
+
+instance TF.IsValid (AcmpcaCertificateAuthorityRevocationConfiguration s) where
+    validator = P.mempty
+
+instance P.HasCrlConfiguration (AcmpcaCertificateAuthorityRevocationConfiguration s) (TF.Attr s [TF.Attr s (AcmpcaCertificateAuthorityCrlConfiguration s)]) where
+    crlConfiguration =
+        P.lens (_crlConfiguration :: AcmpcaCertificateAuthorityRevocationConfiguration s -> TF.Attr s [TF.Attr s (AcmpcaCertificateAuthorityCrlConfiguration s)])
+               (\s a -> s { _crlConfiguration = a } :: AcmpcaCertificateAuthorityRevocationConfiguration s)
+
+instance s ~ s' => P.HasComputedCrlConfiguration (TF.Ref s' (AcmpcaCertificateAuthorityRevocationConfiguration s)) (TF.Attr s [TF.Attr s (AcmpcaCertificateAuthorityCrlConfiguration s)]) where
+    computedCrlConfiguration x = TF.compute (TF.refKey x) "crl_configuration"
+
+-- | @access_logs@ nested settings.
+data AlbAccessLogs s = AlbAccessLogs'
+    { _bucket  :: TF.Attr s P.Text
+    -- ^ @bucket@ - (Required)
+    --
+    , _enabled :: TF.Attr s P.Bool
+    -- ^ @enabled@ - (Optional)
+    --
+    , _prefix  :: TF.Attr s P.Text
+    -- ^ @prefix@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @access_logs@ settings value.
+newAlbAccessLogs
+    :: TF.Attr s P.Text -- ^ 'P._bucket': @bucket@
+    -> AlbAccessLogs s
+newAlbAccessLogs _bucket =
+    AlbAccessLogs'
+        { _bucket = _bucket
+        , _enabled = TF.Nil
+        , _prefix = TF.Nil
+        }
+
+instance TF.IsValue  (AlbAccessLogs s)
+instance TF.IsObject (AlbAccessLogs s) where
+    toObject AlbAccessLogs'{..} = P.catMaybes
+        [ TF.assign "bucket" <$> TF.attribute _bucket
+        , TF.assign "enabled" <$> TF.attribute _enabled
+        , TF.assign "prefix" <$> TF.attribute _prefix
+        ]
+
+instance TF.IsValid (AlbAccessLogs s) where
+    validator = P.mempty
+
+instance P.HasBucket (AlbAccessLogs s) (TF.Attr s P.Text) where
+    bucket =
+        P.lens (_bucket :: AlbAccessLogs s -> TF.Attr s P.Text)
+               (\s a -> s { _bucket = a } :: AlbAccessLogs s)
+
+instance P.HasEnabled (AlbAccessLogs s) (TF.Attr s P.Bool) where
+    enabled =
+        P.lens (_enabled :: AlbAccessLogs s -> TF.Attr s P.Bool)
+               (\s a -> s { _enabled = a } :: AlbAccessLogs s)
+
+instance P.HasPrefix (AlbAccessLogs s) (TF.Attr s P.Text) where
+    prefix =
+        P.lens (_prefix :: AlbAccessLogs s -> TF.Attr s P.Text)
+               (\s a -> s { _prefix = a } :: AlbAccessLogs s)
+
+instance s ~ s' => P.HasComputedBucket (TF.Ref s' (AlbAccessLogs s)) (TF.Attr s P.Text) where
+    computedBucket x = TF.compute (TF.refKey x) "bucket"
+
+instance s ~ s' => P.HasComputedEnabled (TF.Ref s' (AlbAccessLogs s)) (TF.Attr s P.Bool) where
+    computedEnabled x = TF.compute (TF.refKey x) "enabled"
+
+instance s ~ s' => P.HasComputedPrefix (TF.Ref s' (AlbAccessLogs s)) (TF.Attr s P.Text) where
+    computedPrefix x = TF.compute (TF.refKey x) "prefix"
+
+-- | @default_action@ nested settings.
+data AlbListenerDefaultAction s = AlbListenerDefaultAction'
+    { _targetGroupArn :: TF.Attr s P.Text
+    -- ^ @target_group_arn@ - (Required)
+    --
+    , _type'          :: TF.Attr s P.Text
+    -- ^ @type@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @default_action@ settings value.
+newAlbListenerDefaultAction
+    :: TF.Attr s P.Text -- ^ 'P._targetGroupArn': @target_group_arn@
+    -> TF.Attr s P.Text -- ^ 'P._type'': @type@
+    -> AlbListenerDefaultAction s
+newAlbListenerDefaultAction _targetGroupArn _type' =
+    AlbListenerDefaultAction'
+        { _targetGroupArn = _targetGroupArn
+        , _type' = _type'
+        }
+
+instance TF.IsValue  (AlbListenerDefaultAction s)
+instance TF.IsObject (AlbListenerDefaultAction s) where
+    toObject AlbListenerDefaultAction'{..} = P.catMaybes
+        [ TF.assign "target_group_arn" <$> TF.attribute _targetGroupArn
+        , TF.assign "type" <$> TF.attribute _type'
+        ]
+
+instance TF.IsValid (AlbListenerDefaultAction s) where
+    validator = P.mempty
+
+instance P.HasTargetGroupArn (AlbListenerDefaultAction s) (TF.Attr s P.Text) where
+    targetGroupArn =
+        P.lens (_targetGroupArn :: AlbListenerDefaultAction s -> TF.Attr s P.Text)
+               (\s a -> s { _targetGroupArn = a } :: AlbListenerDefaultAction s)
+
+instance P.HasType' (AlbListenerDefaultAction s) (TF.Attr s P.Text) where
+    type' =
+        P.lens (_type' :: AlbListenerDefaultAction s -> TF.Attr s P.Text)
+               (\s a -> s { _type' = a } :: AlbListenerDefaultAction s)
+
+instance s ~ s' => P.HasComputedTargetGroupArn (TF.Ref s' (AlbListenerDefaultAction s)) (TF.Attr s P.Text) where
+    computedTargetGroupArn x = TF.compute (TF.refKey x) "target_group_arn"
+
+instance s ~ s' => P.HasComputedType (TF.Ref s' (AlbListenerDefaultAction s)) (TF.Attr s P.Text) where
+    computedType x = TF.compute (TF.refKey x) "type"
+
+-- | @action@ nested settings.
+data AlbListenerRuleAction s = AlbListenerRuleAction'
+    { _targetGroupArn :: TF.Attr s P.Text
+    -- ^ @target_group_arn@ - (Required)
+    --
+    , _type'          :: TF.Attr s P.Text
+    -- ^ @type@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @action@ settings value.
+newAlbListenerRuleAction
+    :: TF.Attr s P.Text -- ^ 'P._targetGroupArn': @target_group_arn@
+    -> TF.Attr s P.Text -- ^ 'P._type'': @type@
+    -> AlbListenerRuleAction s
+newAlbListenerRuleAction _targetGroupArn _type' =
+    AlbListenerRuleAction'
+        { _targetGroupArn = _targetGroupArn
+        , _type' = _type'
+        }
+
+instance TF.IsValue  (AlbListenerRuleAction s)
+instance TF.IsObject (AlbListenerRuleAction s) where
+    toObject AlbListenerRuleAction'{..} = P.catMaybes
+        [ TF.assign "target_group_arn" <$> TF.attribute _targetGroupArn
+        , TF.assign "type" <$> TF.attribute _type'
+        ]
+
+instance TF.IsValid (AlbListenerRuleAction s) where
+    validator = P.mempty
+
+instance P.HasTargetGroupArn (AlbListenerRuleAction s) (TF.Attr s P.Text) where
+    targetGroupArn =
+        P.lens (_targetGroupArn :: AlbListenerRuleAction s -> TF.Attr s P.Text)
+               (\s a -> s { _targetGroupArn = a } :: AlbListenerRuleAction s)
+
+instance P.HasType' (AlbListenerRuleAction s) (TF.Attr s P.Text) where
+    type' =
+        P.lens (_type' :: AlbListenerRuleAction s -> TF.Attr s P.Text)
+               (\s a -> s { _type' = a } :: AlbListenerRuleAction s)
+
+-- | @condition@ nested settings.
+data AlbListenerRuleCondition s = AlbListenerRuleCondition'
+    { _field  :: TF.Attr s P.Text
+    -- ^ @field@ - (Optional)
+    --
+    , _values :: TF.Attr s P.Text
+    -- ^ @values@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @condition@ settings value.
+newAlbListenerRuleCondition
+    :: AlbListenerRuleCondition s
+newAlbListenerRuleCondition =
+    AlbListenerRuleCondition'
+        { _field = TF.Nil
+        , _values = TF.Nil
+        }
+
+instance TF.IsValue  (AlbListenerRuleCondition s)
+instance TF.IsObject (AlbListenerRuleCondition s) where
+    toObject AlbListenerRuleCondition'{..} = P.catMaybes
+        [ TF.assign "field" <$> TF.attribute _field
+        , TF.assign "values" <$> TF.attribute _values
+        ]
+
+instance TF.IsValid (AlbListenerRuleCondition s) where
+    validator = P.mempty
+
+instance P.HasField (AlbListenerRuleCondition s) (TF.Attr s P.Text) where
+    field =
+        P.lens (_field :: AlbListenerRuleCondition s -> TF.Attr s P.Text)
+               (\s a -> s { _field = a } :: AlbListenerRuleCondition s)
+
+instance P.HasValues (AlbListenerRuleCondition s) (TF.Attr s P.Text) where
+    values =
+        P.lens (_values :: AlbListenerRuleCondition s -> TF.Attr s P.Text)
+               (\s a -> s { _values = a } :: AlbListenerRuleCondition s)
+
+-- | @subnet_mapping@ nested settings.
+data AlbSubnetMapping s = AlbSubnetMapping'
+    { _allocationId :: TF.Attr s P.Text
+    -- ^ @allocation_id@ - (Optional)
+    --
+    , _subnetId     :: TF.Attr s P.Text
+    -- ^ @subnet_id@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @subnet_mapping@ settings value.
+newAlbSubnetMapping
+    :: TF.Attr s P.Text -- ^ 'P._subnetId': @subnet_id@
+    -> AlbSubnetMapping s
+newAlbSubnetMapping _subnetId =
+    AlbSubnetMapping'
+        { _allocationId = TF.Nil
+        , _subnetId = _subnetId
+        }
+
+instance TF.IsValue  (AlbSubnetMapping s)
+instance TF.IsObject (AlbSubnetMapping s) where
+    toObject AlbSubnetMapping'{..} = P.catMaybes
+        [ TF.assign "allocation_id" <$> TF.attribute _allocationId
+        , TF.assign "subnet_id" <$> TF.attribute _subnetId
+        ]
+
+instance TF.IsValid (AlbSubnetMapping s) where
+    validator = P.mempty
+
+instance P.HasAllocationId (AlbSubnetMapping s) (TF.Attr s P.Text) where
+    allocationId =
+        P.lens (_allocationId :: AlbSubnetMapping s -> TF.Attr s P.Text)
+               (\s a -> s { _allocationId = a } :: AlbSubnetMapping s)
+
+instance P.HasSubnetId (AlbSubnetMapping s) (TF.Attr s P.Text) where
+    subnetId =
+        P.lens (_subnetId :: AlbSubnetMapping s -> TF.Attr s P.Text)
+               (\s a -> s { _subnetId = a } :: AlbSubnetMapping s)
+
+-- | @health_check@ nested settings.
+data AlbTargetGroupHealthCheck s = AlbTargetGroupHealthCheck'
+    { _healthyThreshold   :: TF.Attr s P.Int
+    -- ^ @healthy_threshold@ - (Optional)
+    --
+    , _interval           :: TF.Attr s P.Int
+    -- ^ @interval@ - (Optional)
+    --
+    , _matcher            :: TF.Attr s P.Text
+    -- ^ @matcher@ - (Optional)
+    --
+    , _path               :: TF.Attr s P.Text
+    -- ^ @path@ - (Optional)
+    --
+    , _port               :: TF.Attr s P.Text
+    -- ^ @port@ - (Optional)
+    --
+    , _protocol           :: TF.Attr s P.Text
+    -- ^ @protocol@ - (Optional)
+    --
+    , _timeout            :: TF.Attr s P.Int
+    -- ^ @timeout@ - (Optional)
+    --
+    , _unhealthyThreshold :: TF.Attr s P.Int
+    -- ^ @unhealthy_threshold@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @health_check@ settings value.
+newAlbTargetGroupHealthCheck
+    :: AlbTargetGroupHealthCheck s
+newAlbTargetGroupHealthCheck =
+    AlbTargetGroupHealthCheck'
+        { _healthyThreshold = TF.value 3
+        , _interval = TF.value 30
+        , _matcher = TF.Nil
+        , _path = TF.Nil
+        , _port = TF.value "traffic-port"
+        , _protocol = TF.value "HTTP"
+        , _timeout = TF.Nil
+        , _unhealthyThreshold = TF.value 3
+        }
+
+instance TF.IsValue  (AlbTargetGroupHealthCheck s)
+instance TF.IsObject (AlbTargetGroupHealthCheck s) where
+    toObject AlbTargetGroupHealthCheck'{..} = P.catMaybes
+        [ TF.assign "healthy_threshold" <$> TF.attribute _healthyThreshold
+        , TF.assign "interval" <$> TF.attribute _interval
+        , TF.assign "matcher" <$> TF.attribute _matcher
+        , TF.assign "path" <$> TF.attribute _path
+        , TF.assign "port" <$> TF.attribute _port
+        , TF.assign "protocol" <$> TF.attribute _protocol
+        , TF.assign "timeout" <$> TF.attribute _timeout
+        , TF.assign "unhealthy_threshold" <$> TF.attribute _unhealthyThreshold
+        ]
+
+instance TF.IsValid (AlbTargetGroupHealthCheck s) where
+    validator = P.mempty
+
+instance P.HasHealthyThreshold (AlbTargetGroupHealthCheck s) (TF.Attr s P.Int) where
+    healthyThreshold =
+        P.lens (_healthyThreshold :: AlbTargetGroupHealthCheck s -> TF.Attr s P.Int)
+               (\s a -> s { _healthyThreshold = a } :: AlbTargetGroupHealthCheck s)
+
+instance P.HasInterval (AlbTargetGroupHealthCheck s) (TF.Attr s P.Int) where
+    interval =
+        P.lens (_interval :: AlbTargetGroupHealthCheck s -> TF.Attr s P.Int)
+               (\s a -> s { _interval = a } :: AlbTargetGroupHealthCheck s)
+
+instance P.HasMatcher (AlbTargetGroupHealthCheck s) (TF.Attr s P.Text) where
+    matcher =
+        P.lens (_matcher :: AlbTargetGroupHealthCheck s -> TF.Attr s P.Text)
+               (\s a -> s { _matcher = a } :: AlbTargetGroupHealthCheck s)
+
+instance P.HasPath (AlbTargetGroupHealthCheck s) (TF.Attr s P.Text) where
+    path =
+        P.lens (_path :: AlbTargetGroupHealthCheck s -> TF.Attr s P.Text)
+               (\s a -> s { _path = a } :: AlbTargetGroupHealthCheck s)
+
+instance P.HasPort (AlbTargetGroupHealthCheck s) (TF.Attr s P.Text) where
+    port =
+        P.lens (_port :: AlbTargetGroupHealthCheck s -> TF.Attr s P.Text)
+               (\s a -> s { _port = a } :: AlbTargetGroupHealthCheck s)
+
+instance P.HasProtocol (AlbTargetGroupHealthCheck s) (TF.Attr s P.Text) where
+    protocol =
+        P.lens (_protocol :: AlbTargetGroupHealthCheck s -> TF.Attr s P.Text)
+               (\s a -> s { _protocol = a } :: AlbTargetGroupHealthCheck s)
+
+instance P.HasTimeout (AlbTargetGroupHealthCheck s) (TF.Attr s P.Int) where
+    timeout =
+        P.lens (_timeout :: AlbTargetGroupHealthCheck s -> TF.Attr s P.Int)
+               (\s a -> s { _timeout = a } :: AlbTargetGroupHealthCheck s)
+
+instance P.HasUnhealthyThreshold (AlbTargetGroupHealthCheck s) (TF.Attr s P.Int) where
+    unhealthyThreshold =
+        P.lens (_unhealthyThreshold :: AlbTargetGroupHealthCheck s -> TF.Attr s P.Int)
+               (\s a -> s { _unhealthyThreshold = a } :: AlbTargetGroupHealthCheck s)
+
+instance s ~ s' => P.HasComputedHealthyThreshold (TF.Ref s' (AlbTargetGroupHealthCheck s)) (TF.Attr s P.Int) where
+    computedHealthyThreshold x = TF.compute (TF.refKey x) "healthy_threshold"
+
+instance s ~ s' => P.HasComputedInterval (TF.Ref s' (AlbTargetGroupHealthCheck s)) (TF.Attr s P.Int) where
+    computedInterval x = TF.compute (TF.refKey x) "interval"
+
+instance s ~ s' => P.HasComputedMatcher (TF.Ref s' (AlbTargetGroupHealthCheck s)) (TF.Attr s P.Text) where
+    computedMatcher x = TF.compute (TF.refKey x) "matcher"
+
+instance s ~ s' => P.HasComputedPath (TF.Ref s' (AlbTargetGroupHealthCheck s)) (TF.Attr s P.Text) where
+    computedPath x = TF.compute (TF.refKey x) "path"
+
+instance s ~ s' => P.HasComputedPort (TF.Ref s' (AlbTargetGroupHealthCheck s)) (TF.Attr s P.Text) where
+    computedPort x = TF.compute (TF.refKey x) "port"
+
+instance s ~ s' => P.HasComputedProtocol (TF.Ref s' (AlbTargetGroupHealthCheck s)) (TF.Attr s P.Text) where
+    computedProtocol x = TF.compute (TF.refKey x) "protocol"
+
+instance s ~ s' => P.HasComputedTimeout (TF.Ref s' (AlbTargetGroupHealthCheck s)) (TF.Attr s P.Int) where
+    computedTimeout x = TF.compute (TF.refKey x) "timeout"
+
+instance s ~ s' => P.HasComputedUnhealthyThreshold (TF.Ref s' (AlbTargetGroupHealthCheck s)) (TF.Attr s P.Int) where
+    computedUnhealthyThreshold x = TF.compute (TF.refKey x) "unhealthy_threshold"
+
+-- | @stickiness@ nested settings.
+data AlbTargetGroupStickiness s = AlbTargetGroupStickiness'
+    { _cookieDuration :: TF.Attr s P.Int
+    -- ^ @cookie_duration@ - (Optional)
+    --
+    , _enabled        :: TF.Attr s P.Bool
+    -- ^ @enabled@ - (Optional)
+    --
+    , _type'          :: TF.Attr s P.Text
+    -- ^ @type@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @stickiness@ settings value.
+newAlbTargetGroupStickiness
+    :: TF.Attr s P.Text -- ^ 'P._type'': @type@
+    -> AlbTargetGroupStickiness s
+newAlbTargetGroupStickiness _type' =
+    AlbTargetGroupStickiness'
+        { _cookieDuration = TF.value 86400
+        , _enabled = TF.value P.True
+        , _type' = _type'
+        }
+
+instance TF.IsValue  (AlbTargetGroupStickiness s)
+instance TF.IsObject (AlbTargetGroupStickiness s) where
+    toObject AlbTargetGroupStickiness'{..} = P.catMaybes
+        [ TF.assign "cookie_duration" <$> TF.attribute _cookieDuration
+        , TF.assign "enabled" <$> TF.attribute _enabled
+        , TF.assign "type" <$> TF.attribute _type'
+        ]
+
+instance TF.IsValid (AlbTargetGroupStickiness s) where
+    validator = P.mempty
+
+instance P.HasCookieDuration (AlbTargetGroupStickiness s) (TF.Attr s P.Int) where
+    cookieDuration =
+        P.lens (_cookieDuration :: AlbTargetGroupStickiness s -> TF.Attr s P.Int)
+               (\s a -> s { _cookieDuration = a } :: AlbTargetGroupStickiness s)
+
+instance P.HasEnabled (AlbTargetGroupStickiness s) (TF.Attr s P.Bool) where
+    enabled =
+        P.lens (_enabled :: AlbTargetGroupStickiness s -> TF.Attr s P.Bool)
+               (\s a -> s { _enabled = a } :: AlbTargetGroupStickiness s)
+
+instance P.HasType' (AlbTargetGroupStickiness s) (TF.Attr s P.Text) where
+    type' =
+        P.lens (_type' :: AlbTargetGroupStickiness s -> TF.Attr s P.Text)
+               (\s a -> s { _type' = a } :: AlbTargetGroupStickiness s)
+
+instance s ~ s' => P.HasComputedCookieDuration (TF.Ref s' (AlbTargetGroupStickiness s)) (TF.Attr s P.Int) where
+    computedCookieDuration x = TF.compute (TF.refKey x) "cookie_duration"
+
+instance s ~ s' => P.HasComputedEnabled (TF.Ref s' (AlbTargetGroupStickiness s)) (TF.Attr s P.Bool) where
+    computedEnabled x = TF.compute (TF.refKey x) "enabled"
+
+instance s ~ s' => P.HasComputedType (TF.Ref s' (AlbTargetGroupStickiness s)) (TF.Attr s P.Text) where
+    computedType x = TF.compute (TF.refKey x) "type"
+
+-- | @block_device_mappings@ nested settings.
+data AmiBlockDeviceMappings s = AmiBlockDeviceMappings'
+    deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @block_device_mappings@ settings value.
+newAmiBlockDeviceMappings
+    :: AmiBlockDeviceMappings s
+newAmiBlockDeviceMappings =
+    AmiBlockDeviceMappings'
+
+instance TF.IsValue  (AmiBlockDeviceMappings s)
+instance TF.IsObject (AmiBlockDeviceMappings s) where
+    toObject AmiBlockDeviceMappings' = []
+
+instance TF.IsValid (AmiBlockDeviceMappings s) where
+    validator = P.mempty
+
+instance s ~ s' => P.HasComputedDeviceName (TF.Ref s' (AmiBlockDeviceMappings s)) (TF.Attr s P.Text) where
+    computedDeviceName x = TF.compute (TF.refKey x) "device_name"
+
+instance s ~ s' => P.HasComputedEbs (TF.Ref s' (AmiBlockDeviceMappings s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    computedEbs x = TF.compute (TF.refKey x) "ebs"
+
+instance s ~ s' => P.HasComputedNoDevice (TF.Ref s' (AmiBlockDeviceMappings s)) (TF.Attr s P.Text) where
+    computedNoDevice x = TF.compute (TF.refKey x) "no_device"
+
+instance s ~ s' => P.HasComputedVirtualName (TF.Ref s' (AmiBlockDeviceMappings s)) (TF.Attr s P.Text) where
+    computedVirtualName x = TF.compute (TF.refKey x) "virtual_name"
+
+-- | @ebs_block_device@ nested settings.
+data AmiCopyEbsBlockDevice s = AmiCopyEbsBlockDevice'
+    deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @ebs_block_device@ settings value.
+newAmiCopyEbsBlockDevice
+    :: AmiCopyEbsBlockDevice s
+newAmiCopyEbsBlockDevice =
+    AmiCopyEbsBlockDevice'
+
+instance TF.IsValue  (AmiCopyEbsBlockDevice s)
+instance TF.IsObject (AmiCopyEbsBlockDevice s) where
+    toObject AmiCopyEbsBlockDevice' = []
+
+instance TF.IsValid (AmiCopyEbsBlockDevice s) where
+    validator = P.mempty
+
+instance s ~ s' => P.HasComputedDeleteOnTermination (TF.Ref s' (AmiCopyEbsBlockDevice s)) (TF.Attr s P.Bool) where
+    computedDeleteOnTermination x = TF.compute (TF.refKey x) "delete_on_termination"
+
+instance s ~ s' => P.HasComputedDeviceName (TF.Ref s' (AmiCopyEbsBlockDevice s)) (TF.Attr s P.Text) where
+    computedDeviceName x = TF.compute (TF.refKey x) "device_name"
+
+instance s ~ s' => P.HasComputedEncrypted (TF.Ref s' (AmiCopyEbsBlockDevice s)) (TF.Attr s P.Bool) where
+    computedEncrypted x = TF.compute (TF.refKey x) "encrypted"
+
+instance s ~ s' => P.HasComputedIops (TF.Ref s' (AmiCopyEbsBlockDevice s)) (TF.Attr s P.Int) where
+    computedIops x = TF.compute (TF.refKey x) "iops"
+
+instance s ~ s' => P.HasComputedSnapshotId (TF.Ref s' (AmiCopyEbsBlockDevice s)) (TF.Attr s P.Text) where
+    computedSnapshotId x = TF.compute (TF.refKey x) "snapshot_id"
+
+instance s ~ s' => P.HasComputedVolumeSize (TF.Ref s' (AmiCopyEbsBlockDevice s)) (TF.Attr s P.Int) where
+    computedVolumeSize x = TF.compute (TF.refKey x) "volume_size"
+
+instance s ~ s' => P.HasComputedVolumeType (TF.Ref s' (AmiCopyEbsBlockDevice s)) (TF.Attr s P.Text) where
+    computedVolumeType x = TF.compute (TF.refKey x) "volume_type"
+
+-- | @ephemeral_block_device@ nested settings.
+data AmiCopyEphemeralBlockDevice s = AmiCopyEphemeralBlockDevice'
+    deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @ephemeral_block_device@ settings value.
+newAmiCopyEphemeralBlockDevice
+    :: AmiCopyEphemeralBlockDevice s
+newAmiCopyEphemeralBlockDevice =
+    AmiCopyEphemeralBlockDevice'
+
+instance TF.IsValue  (AmiCopyEphemeralBlockDevice s)
+instance TF.IsObject (AmiCopyEphemeralBlockDevice s) where
+    toObject AmiCopyEphemeralBlockDevice' = []
+
+instance TF.IsValid (AmiCopyEphemeralBlockDevice s) where
+    validator = P.mempty
+
+instance s ~ s' => P.HasComputedDeviceName (TF.Ref s' (AmiCopyEphemeralBlockDevice s)) (TF.Attr s P.Text) where
+    computedDeviceName x = TF.compute (TF.refKey x) "device_name"
+
+instance s ~ s' => P.HasComputedVirtualName (TF.Ref s' (AmiCopyEphemeralBlockDevice s)) (TF.Attr s P.Text) where
+    computedVirtualName x = TF.compute (TF.refKey x) "virtual_name"
+
+-- | @ebs_block_device@ nested settings.
+data AmiEbsBlockDevice s = AmiEbsBlockDevice'
+    { _deleteOnTermination :: TF.Attr s P.Bool
+    -- ^ @delete_on_termination@ - (Optional, Forces New)
+    --
+    , _deviceName          :: TF.Attr s P.Text
+    -- ^ @device_name@ - (Required, Forces New)
+    --
+    , _encrypted           :: TF.Attr s P.Bool
+    -- ^ @encrypted@ - (Optional, Forces New)
+    --
+    , _iops                :: TF.Attr s P.Int
+    -- ^ @iops@ - (Optional, Forces New)
+    --
+    , _snapshotId          :: TF.Attr s P.Text
+    -- ^ @snapshot_id@ - (Optional, Forces New)
+    --
+    , _volumeSize          :: TF.Attr s P.Int
+    -- ^ @volume_size@ - (Optional, Forces New)
+    --
+    , _volumeType          :: TF.Attr s P.Text
+    -- ^ @volume_type@ - (Optional, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @ebs_block_device@ settings value.
+newAmiEbsBlockDevice
+    :: TF.Attr s P.Text -- ^ 'P._deviceName': @device_name@
+    -> AmiEbsBlockDevice s
+newAmiEbsBlockDevice _deviceName =
+    AmiEbsBlockDevice'
+        { _deleteOnTermination = TF.value P.True
+        , _deviceName = _deviceName
+        , _encrypted = TF.Nil
+        , _iops = TF.Nil
+        , _snapshotId = TF.Nil
+        , _volumeSize = TF.Nil
+        , _volumeType = TF.value "standard"
+        }
+
+instance TF.IsValue  (AmiEbsBlockDevice s)
+instance TF.IsObject (AmiEbsBlockDevice s) where
+    toObject AmiEbsBlockDevice'{..} = P.catMaybes
+        [ TF.assign "delete_on_termination" <$> TF.attribute _deleteOnTermination
+        , TF.assign "device_name" <$> TF.attribute _deviceName
+        , TF.assign "encrypted" <$> TF.attribute _encrypted
+        , TF.assign "iops" <$> TF.attribute _iops
+        , TF.assign "snapshot_id" <$> TF.attribute _snapshotId
+        , TF.assign "volume_size" <$> TF.attribute _volumeSize
+        , TF.assign "volume_type" <$> TF.attribute _volumeType
+        ]
+
+instance TF.IsValid (AmiEbsBlockDevice s) where
+    validator = P.mempty
+
+instance P.HasDeleteOnTermination (AmiEbsBlockDevice s) (TF.Attr s P.Bool) where
+    deleteOnTermination =
+        P.lens (_deleteOnTermination :: AmiEbsBlockDevice s -> TF.Attr s P.Bool)
+               (\s a -> s { _deleteOnTermination = a } :: AmiEbsBlockDevice s)
+
+instance P.HasDeviceName (AmiEbsBlockDevice s) (TF.Attr s P.Text) where
+    deviceName =
+        P.lens (_deviceName :: AmiEbsBlockDevice s -> TF.Attr s P.Text)
+               (\s a -> s { _deviceName = a } :: AmiEbsBlockDevice s)
+
+instance P.HasEncrypted (AmiEbsBlockDevice s) (TF.Attr s P.Bool) where
+    encrypted =
+        P.lens (_encrypted :: AmiEbsBlockDevice s -> TF.Attr s P.Bool)
+               (\s a -> s { _encrypted = a } :: AmiEbsBlockDevice s)
+
+instance P.HasIops (AmiEbsBlockDevice s) (TF.Attr s P.Int) where
+    iops =
+        P.lens (_iops :: AmiEbsBlockDevice s -> TF.Attr s P.Int)
+               (\s a -> s { _iops = a } :: AmiEbsBlockDevice s)
+
+instance P.HasSnapshotId (AmiEbsBlockDevice s) (TF.Attr s P.Text) where
+    snapshotId =
+        P.lens (_snapshotId :: AmiEbsBlockDevice s -> TF.Attr s P.Text)
+               (\s a -> s { _snapshotId = a } :: AmiEbsBlockDevice s)
+
+instance P.HasVolumeSize (AmiEbsBlockDevice s) (TF.Attr s P.Int) where
+    volumeSize =
+        P.lens (_volumeSize :: AmiEbsBlockDevice s -> TF.Attr s P.Int)
+               (\s a -> s { _volumeSize = a } :: AmiEbsBlockDevice s)
+
+instance P.HasVolumeType (AmiEbsBlockDevice s) (TF.Attr s P.Text) where
+    volumeType =
+        P.lens (_volumeType :: AmiEbsBlockDevice s -> TF.Attr s P.Text)
+               (\s a -> s { _volumeType = a } :: AmiEbsBlockDevice s)
+
+instance s ~ s' => P.HasComputedVolumeSize (TF.Ref s' (AmiEbsBlockDevice s)) (TF.Attr s P.Int) where
+    computedVolumeSize x = TF.compute (TF.refKey x) "volume_size"
+
+-- | @ephemeral_block_device@ nested settings.
+data AmiEphemeralBlockDevice s = AmiEphemeralBlockDevice'
+    { _deviceName  :: TF.Attr s P.Text
+    -- ^ @device_name@ - (Required)
+    --
+    , _virtualName :: TF.Attr s P.Text
+    -- ^ @virtual_name@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @ephemeral_block_device@ settings value.
+newAmiEphemeralBlockDevice
+    :: TF.Attr s P.Text -- ^ 'P._deviceName': @device_name@
+    -> TF.Attr s P.Text -- ^ 'P._virtualName': @virtual_name@
+    -> AmiEphemeralBlockDevice s
+newAmiEphemeralBlockDevice _deviceName _virtualName =
+    AmiEphemeralBlockDevice'
+        { _deviceName = _deviceName
+        , _virtualName = _virtualName
+        }
+
+instance TF.IsValue  (AmiEphemeralBlockDevice s)
+instance TF.IsObject (AmiEphemeralBlockDevice s) where
+    toObject AmiEphemeralBlockDevice'{..} = P.catMaybes
+        [ TF.assign "device_name" <$> TF.attribute _deviceName
+        , TF.assign "virtual_name" <$> TF.attribute _virtualName
+        ]
+
+instance TF.IsValid (AmiEphemeralBlockDevice s) where
+    validator = P.mempty
+
+instance P.HasDeviceName (AmiEphemeralBlockDevice s) (TF.Attr s P.Text) where
+    deviceName =
+        P.lens (_deviceName :: AmiEphemeralBlockDevice s -> TF.Attr s P.Text)
+               (\s a -> s { _deviceName = a } :: AmiEphemeralBlockDevice s)
+
+instance P.HasVirtualName (AmiEphemeralBlockDevice s) (TF.Attr s P.Text) where
+    virtualName =
+        P.lens (_virtualName :: AmiEphemeralBlockDevice s -> TF.Attr s P.Text)
+               (\s a -> s { _virtualName = a } :: AmiEphemeralBlockDevice s)
+
+-- | @filter@ nested settings.
+data AmiFilter s = AmiFilter'
+    { _name   :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _param :: TF.Attr s P.Bool
-    -- ^ @param@ - (Optional)
+    , _values :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @values@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @filter@ settings value.
+newAmiFilter
+    :: TF.Attr s P.Text -- ^ 'P._name': @name@
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ 'P._values': @values@
+    -> AmiFilter s
+newAmiFilter _name _values =
+    AmiFilter'
+        { _name = _name
+        , _values = _values
+        }
+
+instance TF.IsValue  (AmiFilter s)
+instance TF.IsObject (AmiFilter s) where
+    toObject AmiFilter'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "values" <$> TF.attribute _values
+        ]
+
+instance TF.IsValid (AmiFilter s) where
+    validator = P.mempty
+
+instance P.HasName (AmiFilter s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: AmiFilter s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: AmiFilter s)
+
+instance P.HasValues (AmiFilter s) (TF.Attr s [TF.Attr s P.Text]) where
+    values =
+        P.lens (_values :: AmiFilter s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _values = a } :: AmiFilter s)
+
+-- | @ebs_block_device@ nested settings.
+data AmiFromInstanceEbsBlockDevice s = AmiFromInstanceEbsBlockDevice'
+    deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @ebs_block_device@ settings value.
+newAmiFromInstanceEbsBlockDevice
+    :: AmiFromInstanceEbsBlockDevice s
+newAmiFromInstanceEbsBlockDevice =
+    AmiFromInstanceEbsBlockDevice'
+
+instance TF.IsValue  (AmiFromInstanceEbsBlockDevice s)
+instance TF.IsObject (AmiFromInstanceEbsBlockDevice s) where
+    toObject AmiFromInstanceEbsBlockDevice' = []
+
+instance TF.IsValid (AmiFromInstanceEbsBlockDevice s) where
+    validator = P.mempty
+
+instance s ~ s' => P.HasComputedDeleteOnTermination (TF.Ref s' (AmiFromInstanceEbsBlockDevice s)) (TF.Attr s P.Bool) where
+    computedDeleteOnTermination x = TF.compute (TF.refKey x) "delete_on_termination"
+
+instance s ~ s' => P.HasComputedDeviceName (TF.Ref s' (AmiFromInstanceEbsBlockDevice s)) (TF.Attr s P.Text) where
+    computedDeviceName x = TF.compute (TF.refKey x) "device_name"
+
+instance s ~ s' => P.HasComputedEncrypted (TF.Ref s' (AmiFromInstanceEbsBlockDevice s)) (TF.Attr s P.Bool) where
+    computedEncrypted x = TF.compute (TF.refKey x) "encrypted"
+
+instance s ~ s' => P.HasComputedIops (TF.Ref s' (AmiFromInstanceEbsBlockDevice s)) (TF.Attr s P.Int) where
+    computedIops x = TF.compute (TF.refKey x) "iops"
+
+instance s ~ s' => P.HasComputedSnapshotId (TF.Ref s' (AmiFromInstanceEbsBlockDevice s)) (TF.Attr s P.Text) where
+    computedSnapshotId x = TF.compute (TF.refKey x) "snapshot_id"
+
+instance s ~ s' => P.HasComputedVolumeSize (TF.Ref s' (AmiFromInstanceEbsBlockDevice s)) (TF.Attr s P.Int) where
+    computedVolumeSize x = TF.compute (TF.refKey x) "volume_size"
+
+instance s ~ s' => P.HasComputedVolumeType (TF.Ref s' (AmiFromInstanceEbsBlockDevice s)) (TF.Attr s P.Text) where
+    computedVolumeType x = TF.compute (TF.refKey x) "volume_type"
+
+-- | @ephemeral_block_device@ nested settings.
+data AmiFromInstanceEphemeralBlockDevice s = AmiFromInstanceEphemeralBlockDevice'
+    deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @ephemeral_block_device@ settings value.
+newAmiFromInstanceEphemeralBlockDevice
+    :: AmiFromInstanceEphemeralBlockDevice s
+newAmiFromInstanceEphemeralBlockDevice =
+    AmiFromInstanceEphemeralBlockDevice'
+
+instance TF.IsValue  (AmiFromInstanceEphemeralBlockDevice s)
+instance TF.IsObject (AmiFromInstanceEphemeralBlockDevice s) where
+    toObject AmiFromInstanceEphemeralBlockDevice' = []
+
+instance TF.IsValid (AmiFromInstanceEphemeralBlockDevice s) where
+    validator = P.mempty
+
+instance s ~ s' => P.HasComputedDeviceName (TF.Ref s' (AmiFromInstanceEphemeralBlockDevice s)) (TF.Attr s P.Text) where
+    computedDeviceName x = TF.compute (TF.refKey x) "device_name"
+
+instance s ~ s' => P.HasComputedVirtualName (TF.Ref s' (AmiFromInstanceEphemeralBlockDevice s)) (TF.Attr s P.Text) where
+    computedVirtualName x = TF.compute (TF.refKey x) "virtual_name"
+
+-- | @filter@ nested settings.
+data AmiIdsFilter s = AmiIdsFilter'
+    { _name   :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    , _values :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @values@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @filter@ settings value.
+newAmiIdsFilter
+    :: TF.Attr s P.Text -- ^ 'P._name': @name@
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ 'P._values': @values@
+    -> AmiIdsFilter s
+newAmiIdsFilter _name _values =
+    AmiIdsFilter'
+        { _name = _name
+        , _values = _values
+        }
+
+instance TF.IsValue  (AmiIdsFilter s)
+instance TF.IsObject (AmiIdsFilter s) where
+    toObject AmiIdsFilter'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "values" <$> TF.attribute _values
+        ]
+
+instance TF.IsValid (AmiIdsFilter s) where
+    validator = P.mempty
+
+instance P.HasName (AmiIdsFilter s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: AmiIdsFilter s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: AmiIdsFilter s)
+
+instance P.HasValues (AmiIdsFilter s) (TF.Attr s [TF.Attr s P.Text]) where
+    values =
+        P.lens (_values :: AmiIdsFilter s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _values = a } :: AmiIdsFilter s)
+
+-- | @product_codes@ nested settings.
+data AmiProductCodes s = AmiProductCodes'
+    deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @product_codes@ settings value.
+newAmiProductCodes
+    :: AmiProductCodes s
+newAmiProductCodes =
+    AmiProductCodes'
+
+instance TF.IsValue  (AmiProductCodes s)
+instance TF.IsObject (AmiProductCodes s) where
+    toObject AmiProductCodes' = []
+
+instance TF.IsValid (AmiProductCodes s) where
+    validator = P.mempty
+
+instance s ~ s' => P.HasComputedProductCodeId (TF.Ref s' (AmiProductCodes s)) (TF.Attr s P.Text) where
+    computedProductCodeId x = TF.compute (TF.refKey x) "product_code_id"
+
+instance s ~ s' => P.HasComputedProductCodeType (TF.Ref s' (AmiProductCodes s)) (TF.Attr s P.Text) where
+    computedProductCodeType x = TF.compute (TF.refKey x) "product_code_type"
+
+-- | @throttle_settings@ nested settings.
+data ApiGatewayAccountThrottleSettings s = ApiGatewayAccountThrottleSettings'
+    deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @throttle_settings@ settings value.
+newApiGatewayAccountThrottleSettings
+    :: ApiGatewayAccountThrottleSettings s
+newApiGatewayAccountThrottleSettings =
+    ApiGatewayAccountThrottleSettings'
+
+instance TF.IsValue  (ApiGatewayAccountThrottleSettings s)
+instance TF.IsObject (ApiGatewayAccountThrottleSettings s) where
+    toObject ApiGatewayAccountThrottleSettings' = []
+
+instance TF.IsValid (ApiGatewayAccountThrottleSettings s) where
+    validator = P.mempty
+
+instance s ~ s' => P.HasComputedBurstLimit (TF.Ref s' (ApiGatewayAccountThrottleSettings s)) (TF.Attr s P.Int) where
+    computedBurstLimit x = TF.compute (TF.refKey x) "burst_limit"
+
+instance s ~ s' => P.HasComputedRateLimit (TF.Ref s' (ApiGatewayAccountThrottleSettings s)) (TF.Attr s P.Double) where
+    computedRateLimit x = TF.compute (TF.refKey x) "rate_limit"
+
+-- | @location@ nested settings.
+data ApiGatewayDocumentationPartLocation s = ApiGatewayDocumentationPartLocation'
+    { _method     :: TF.Attr s P.Text
+    -- ^ @method@ - (Optional, Forces New)
+    --
+    , _name       :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional, Forces New)
+    --
+    , _path       :: TF.Attr s P.Text
+    -- ^ @path@ - (Optional, Forces New)
+    --
+    , _statusCode :: TF.Attr s P.Text
+    -- ^ @status_code@ - (Optional, Forces New)
+    --
+    , _type'      :: TF.Attr s P.Text
+    -- ^ @type@ - (Required, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @location@ settings value.
+newApiGatewayDocumentationPartLocation
+    :: TF.Attr s P.Text -- ^ 'P._type'': @type@
+    -> ApiGatewayDocumentationPartLocation s
+newApiGatewayDocumentationPartLocation _type' =
+    ApiGatewayDocumentationPartLocation'
+        { _method = TF.Nil
+        , _name = TF.Nil
+        , _path = TF.Nil
+        , _statusCode = TF.Nil
+        , _type' = _type'
+        }
+
+instance TF.IsValue  (ApiGatewayDocumentationPartLocation s)
+instance TF.IsObject (ApiGatewayDocumentationPartLocation s) where
+    toObject ApiGatewayDocumentationPartLocation'{..} = P.catMaybes
+        [ TF.assign "method" <$> TF.attribute _method
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "path" <$> TF.attribute _path
+        , TF.assign "status_code" <$> TF.attribute _statusCode
+        , TF.assign "type" <$> TF.attribute _type'
+        ]
+
+instance TF.IsValid (ApiGatewayDocumentationPartLocation s) where
+    validator = P.mempty
+
+instance P.HasMethod (ApiGatewayDocumentationPartLocation s) (TF.Attr s P.Text) where
+    method =
+        P.lens (_method :: ApiGatewayDocumentationPartLocation s -> TF.Attr s P.Text)
+               (\s a -> s { _method = a } :: ApiGatewayDocumentationPartLocation s)
+
+instance P.HasName (ApiGatewayDocumentationPartLocation s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: ApiGatewayDocumentationPartLocation s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ApiGatewayDocumentationPartLocation s)
+
+instance P.HasPath (ApiGatewayDocumentationPartLocation s) (TF.Attr s P.Text) where
+    path =
+        P.lens (_path :: ApiGatewayDocumentationPartLocation s -> TF.Attr s P.Text)
+               (\s a -> s { _path = a } :: ApiGatewayDocumentationPartLocation s)
+
+instance P.HasStatusCode (ApiGatewayDocumentationPartLocation s) (TF.Attr s P.Text) where
+    statusCode =
+        P.lens (_statusCode :: ApiGatewayDocumentationPartLocation s -> TF.Attr s P.Text)
+               (\s a -> s { _statusCode = a } :: ApiGatewayDocumentationPartLocation s)
+
+instance P.HasType' (ApiGatewayDocumentationPartLocation s) (TF.Attr s P.Text) where
+    type' =
+        P.lens (_type' :: ApiGatewayDocumentationPartLocation s -> TF.Attr s P.Text)
+               (\s a -> s { _type' = a } :: ApiGatewayDocumentationPartLocation s)
+
+-- | @endpoint_configuration@ nested settings.
+data ApiGatewayDomainNameEndpointConfiguration s = ApiGatewayDomainNameEndpointConfiguration'
+    { _types :: TF.Attr s P.Text
+    -- ^ @types@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @endpoint_configuration@ settings value.
+newApiGatewayDomainNameEndpointConfiguration
+    :: TF.Attr s P.Text -- ^ 'P._types': @types@
+    -> ApiGatewayDomainNameEndpointConfiguration s
+newApiGatewayDomainNameEndpointConfiguration _types =
+    ApiGatewayDomainNameEndpointConfiguration'
+        { _types = _types
+        }
+
+instance TF.IsValue  (ApiGatewayDomainNameEndpointConfiguration s)
+instance TF.IsObject (ApiGatewayDomainNameEndpointConfiguration s) where
+    toObject ApiGatewayDomainNameEndpointConfiguration'{..} = P.catMaybes
+        [ TF.assign "types" <$> TF.attribute _types
+        ]
+
+instance TF.IsValid (ApiGatewayDomainNameEndpointConfiguration s) where
+    validator = P.mempty
+
+instance P.HasTypes (ApiGatewayDomainNameEndpointConfiguration s) (TF.Attr s P.Text) where
+    types =
+        P.lens (_types :: ApiGatewayDomainNameEndpointConfiguration s -> TF.Attr s P.Text)
+               (\s a -> s { _types = a } :: ApiGatewayDomainNameEndpointConfiguration s)
+
+-- | @settings@ nested settings.
+data ApiGatewayMethodSettingsSettings s = ApiGatewayMethodSettingsSettings'
+    { _cacheDataEncrypted                     :: TF.Attr s P.Bool
+    -- ^ @cache_data_encrypted@ - (Optional)
+    --
+    , _cacheTtlInSeconds                      :: TF.Attr s P.Int
+    -- ^ @cache_ttl_in_seconds@ - (Optional)
+    --
+    , _cachingEnabled                         :: TF.Attr s P.Bool
+    -- ^ @caching_enabled@ - (Optional)
+    --
+    , _dataTraceEnabled                       :: TF.Attr s P.Bool
+    -- ^ @data_trace_enabled@ - (Optional)
+    --
+    , _loggingLevel                           :: TF.Attr s P.Text
+    -- ^ @logging_level@ - (Optional)
+    --
+    , _metricsEnabled                         :: TF.Attr s P.Bool
+    -- ^ @metrics_enabled@ - (Optional)
+    --
+    , _requireAuthorizationForCacheControl    :: TF.Attr s P.Bool
+    -- ^ @require_authorization_for_cache_control@ - (Optional)
+    --
+    , _throttlingBurstLimit                   :: TF.Attr s P.Int
+    -- ^ @throttling_burst_limit@ - (Optional)
+    --
+    , _throttlingRateLimit                    :: TF.Attr s P.Double
+    -- ^ @throttling_rate_limit@ - (Optional)
+    --
+    , _unauthorizedCacheControlHeaderStrategy :: TF.Attr s P.Text
+    -- ^ @unauthorized_cache_control_header_strategy@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @settings@ settings value.
+newApiGatewayMethodSettingsSettings
+    :: ApiGatewayMethodSettingsSettings s
+newApiGatewayMethodSettingsSettings =
+    ApiGatewayMethodSettingsSettings'
+        { _cacheDataEncrypted = TF.Nil
+        , _cacheTtlInSeconds = TF.Nil
+        , _cachingEnabled = TF.Nil
+        , _dataTraceEnabled = TF.Nil
+        , _loggingLevel = TF.Nil
+        , _metricsEnabled = TF.Nil
+        , _requireAuthorizationForCacheControl = TF.Nil
+        , _throttlingBurstLimit = TF.Nil
+        , _throttlingRateLimit = TF.Nil
+        , _unauthorizedCacheControlHeaderStrategy = TF.Nil
+        }
+
+instance TF.IsValue  (ApiGatewayMethodSettingsSettings s)
+instance TF.IsObject (ApiGatewayMethodSettingsSettings s) where
+    toObject ApiGatewayMethodSettingsSettings'{..} = P.catMaybes
+        [ TF.assign "cache_data_encrypted" <$> TF.attribute _cacheDataEncrypted
+        , TF.assign "cache_ttl_in_seconds" <$> TF.attribute _cacheTtlInSeconds
+        , TF.assign "caching_enabled" <$> TF.attribute _cachingEnabled
+        , TF.assign "data_trace_enabled" <$> TF.attribute _dataTraceEnabled
+        , TF.assign "logging_level" <$> TF.attribute _loggingLevel
+        , TF.assign "metrics_enabled" <$> TF.attribute _metricsEnabled
+        , TF.assign "require_authorization_for_cache_control" <$> TF.attribute _requireAuthorizationForCacheControl
+        , TF.assign "throttling_burst_limit" <$> TF.attribute _throttlingBurstLimit
+        , TF.assign "throttling_rate_limit" <$> TF.attribute _throttlingRateLimit
+        , TF.assign "unauthorized_cache_control_header_strategy" <$> TF.attribute _unauthorizedCacheControlHeaderStrategy
+        ]
+
+instance TF.IsValid (ApiGatewayMethodSettingsSettings s) where
+    validator = P.mempty
+
+instance P.HasCacheDataEncrypted (ApiGatewayMethodSettingsSettings s) (TF.Attr s P.Bool) where
+    cacheDataEncrypted =
+        P.lens (_cacheDataEncrypted :: ApiGatewayMethodSettingsSettings s -> TF.Attr s P.Bool)
+               (\s a -> s { _cacheDataEncrypted = a } :: ApiGatewayMethodSettingsSettings s)
+
+instance P.HasCacheTtlInSeconds (ApiGatewayMethodSettingsSettings s) (TF.Attr s P.Int) where
+    cacheTtlInSeconds =
+        P.lens (_cacheTtlInSeconds :: ApiGatewayMethodSettingsSettings s -> TF.Attr s P.Int)
+               (\s a -> s { _cacheTtlInSeconds = a } :: ApiGatewayMethodSettingsSettings s)
+
+instance P.HasCachingEnabled (ApiGatewayMethodSettingsSettings s) (TF.Attr s P.Bool) where
+    cachingEnabled =
+        P.lens (_cachingEnabled :: ApiGatewayMethodSettingsSettings s -> TF.Attr s P.Bool)
+               (\s a -> s { _cachingEnabled = a } :: ApiGatewayMethodSettingsSettings s)
+
+instance P.HasDataTraceEnabled (ApiGatewayMethodSettingsSettings s) (TF.Attr s P.Bool) where
+    dataTraceEnabled =
+        P.lens (_dataTraceEnabled :: ApiGatewayMethodSettingsSettings s -> TF.Attr s P.Bool)
+               (\s a -> s { _dataTraceEnabled = a } :: ApiGatewayMethodSettingsSettings s)
+
+instance P.HasLoggingLevel (ApiGatewayMethodSettingsSettings s) (TF.Attr s P.Text) where
+    loggingLevel =
+        P.lens (_loggingLevel :: ApiGatewayMethodSettingsSettings s -> TF.Attr s P.Text)
+               (\s a -> s { _loggingLevel = a } :: ApiGatewayMethodSettingsSettings s)
+
+instance P.HasMetricsEnabled (ApiGatewayMethodSettingsSettings s) (TF.Attr s P.Bool) where
+    metricsEnabled =
+        P.lens (_metricsEnabled :: ApiGatewayMethodSettingsSettings s -> TF.Attr s P.Bool)
+               (\s a -> s { _metricsEnabled = a } :: ApiGatewayMethodSettingsSettings s)
+
+instance P.HasRequireAuthorizationForCacheControl (ApiGatewayMethodSettingsSettings s) (TF.Attr s P.Bool) where
+    requireAuthorizationForCacheControl =
+        P.lens (_requireAuthorizationForCacheControl :: ApiGatewayMethodSettingsSettings s -> TF.Attr s P.Bool)
+               (\s a -> s { _requireAuthorizationForCacheControl = a } :: ApiGatewayMethodSettingsSettings s)
+
+instance P.HasThrottlingBurstLimit (ApiGatewayMethodSettingsSettings s) (TF.Attr s P.Int) where
+    throttlingBurstLimit =
+        P.lens (_throttlingBurstLimit :: ApiGatewayMethodSettingsSettings s -> TF.Attr s P.Int)
+               (\s a -> s { _throttlingBurstLimit = a } :: ApiGatewayMethodSettingsSettings s)
+
+instance P.HasThrottlingRateLimit (ApiGatewayMethodSettingsSettings s) (TF.Attr s P.Double) where
+    throttlingRateLimit =
+        P.lens (_throttlingRateLimit :: ApiGatewayMethodSettingsSettings s -> TF.Attr s P.Double)
+               (\s a -> s { _throttlingRateLimit = a } :: ApiGatewayMethodSettingsSettings s)
+
+instance P.HasUnauthorizedCacheControlHeaderStrategy (ApiGatewayMethodSettingsSettings s) (TF.Attr s P.Text) where
+    unauthorizedCacheControlHeaderStrategy =
+        P.lens (_unauthorizedCacheControlHeaderStrategy :: ApiGatewayMethodSettingsSettings s -> TF.Attr s P.Text)
+               (\s a -> s { _unauthorizedCacheControlHeaderStrategy = a } :: ApiGatewayMethodSettingsSettings s)
+
+-- | @endpoint_configuration@ nested settings.
+data ApiGatewayRestApiEndpointConfiguration s = ApiGatewayRestApiEndpointConfiguration'
+    { _types :: TF.Attr s P.Text
+    -- ^ @types@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @endpoint_configuration@ settings value.
+newApiGatewayRestApiEndpointConfiguration
+    :: TF.Attr s P.Text -- ^ 'P._types': @types@
+    -> ApiGatewayRestApiEndpointConfiguration s
+newApiGatewayRestApiEndpointConfiguration _types =
+    ApiGatewayRestApiEndpointConfiguration'
+        { _types = _types
+        }
+
+instance TF.IsValue  (ApiGatewayRestApiEndpointConfiguration s)
+instance TF.IsObject (ApiGatewayRestApiEndpointConfiguration s) where
+    toObject ApiGatewayRestApiEndpointConfiguration'{..} = P.catMaybes
+        [ TF.assign "types" <$> TF.attribute _types
+        ]
+
+instance TF.IsValid (ApiGatewayRestApiEndpointConfiguration s) where
+    validator = P.mempty
+
+instance P.HasTypes (ApiGatewayRestApiEndpointConfiguration s) (TF.Attr s P.Text) where
+    types =
+        P.lens (_types :: ApiGatewayRestApiEndpointConfiguration s -> TF.Attr s P.Text)
+               (\s a -> s { _types = a } :: ApiGatewayRestApiEndpointConfiguration s)
+
+-- | @access_log_settings@ nested settings.
+data ApiGatewayStageAccessLogSettings s = ApiGatewayStageAccessLogSettings'
+    { _destinationArn :: TF.Attr s P.Text
+    -- ^ @destination_arn@ - (Required)
+    --
+    , _format         :: TF.Attr s P.Text
+    -- ^ @format@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @access_log_settings@ settings value.
+newApiGatewayStageAccessLogSettings
+    :: TF.Attr s P.Text -- ^ 'P._destinationArn': @destination_arn@
+    -> TF.Attr s P.Text -- ^ 'P._format': @format@
+    -> ApiGatewayStageAccessLogSettings s
+newApiGatewayStageAccessLogSettings _destinationArn _format =
+    ApiGatewayStageAccessLogSettings'
+        { _destinationArn = _destinationArn
+        , _format = _format
+        }
+
+instance TF.IsValue  (ApiGatewayStageAccessLogSettings s)
+instance TF.IsObject (ApiGatewayStageAccessLogSettings s) where
+    toObject ApiGatewayStageAccessLogSettings'{..} = P.catMaybes
+        [ TF.assign "destination_arn" <$> TF.attribute _destinationArn
+        , TF.assign "format" <$> TF.attribute _format
+        ]
+
+instance TF.IsValid (ApiGatewayStageAccessLogSettings s) where
+    validator = P.mempty
+
+instance P.HasDestinationArn (ApiGatewayStageAccessLogSettings s) (TF.Attr s P.Text) where
+    destinationArn =
+        P.lens (_destinationArn :: ApiGatewayStageAccessLogSettings s -> TF.Attr s P.Text)
+               (\s a -> s { _destinationArn = a } :: ApiGatewayStageAccessLogSettings s)
+
+instance P.HasFormat (ApiGatewayStageAccessLogSettings s) (TF.Attr s P.Text) where
+    format =
+        P.lens (_format :: ApiGatewayStageAccessLogSettings s -> TF.Attr s P.Text)
+               (\s a -> s { _format = a } :: ApiGatewayStageAccessLogSettings s)
+
+-- | @api_stages@ nested settings.
+data ApiGatewayUsagePlanApiStages s = ApiGatewayUsagePlanApiStages'
+    { _apiId :: TF.Attr s P.Text
+    -- ^ @api_id@ - (Required)
+    --
+    , _stage :: TF.Attr s P.Text
+    -- ^ @stage@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @api_stages@ settings value.
+newApiGatewayUsagePlanApiStages
+    :: TF.Attr s P.Text -- ^ 'P._apiId': @api_id@
+    -> TF.Attr s P.Text -- ^ 'P._stage': @stage@
+    -> ApiGatewayUsagePlanApiStages s
+newApiGatewayUsagePlanApiStages _apiId _stage =
+    ApiGatewayUsagePlanApiStages'
+        { _apiId = _apiId
+        , _stage = _stage
+        }
+
+instance TF.IsValue  (ApiGatewayUsagePlanApiStages s)
+instance TF.IsObject (ApiGatewayUsagePlanApiStages s) where
+    toObject ApiGatewayUsagePlanApiStages'{..} = P.catMaybes
+        [ TF.assign "api_id" <$> TF.attribute _apiId
+        , TF.assign "stage" <$> TF.attribute _stage
+        ]
+
+instance TF.IsValid (ApiGatewayUsagePlanApiStages s) where
+    validator = P.mempty
+
+instance P.HasApiId (ApiGatewayUsagePlanApiStages s) (TF.Attr s P.Text) where
+    apiId =
+        P.lens (_apiId :: ApiGatewayUsagePlanApiStages s -> TF.Attr s P.Text)
+               (\s a -> s { _apiId = a } :: ApiGatewayUsagePlanApiStages s)
+
+instance P.HasStage (ApiGatewayUsagePlanApiStages s) (TF.Attr s P.Text) where
+    stage =
+        P.lens (_stage :: ApiGatewayUsagePlanApiStages s -> TF.Attr s P.Text)
+               (\s a -> s { _stage = a } :: ApiGatewayUsagePlanApiStages s)
+
+-- | @quota_settings@ nested settings.
+data ApiGatewayUsagePlanQuotaSettings s = ApiGatewayUsagePlanQuotaSettings'
+    { _limit  :: TF.Attr s P.Int
+    -- ^ @limit@ - (Required)
+    --
+    , _offset :: TF.Attr s P.Int
+    -- ^ @offset@ - (Optional)
+    --
+    , _period :: TF.Attr s P.Text
+    -- ^ @period@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @quota_settings@ settings value.
+newApiGatewayUsagePlanQuotaSettings
+    :: TF.Attr s P.Int -- ^ 'P._limit': @limit@
+    -> TF.Attr s P.Text -- ^ 'P._period': @period@
+    -> ApiGatewayUsagePlanQuotaSettings s
+newApiGatewayUsagePlanQuotaSettings _limit _period =
+    ApiGatewayUsagePlanQuotaSettings'
+        { _limit = _limit
+        , _offset = TF.value 0
+        , _period = _period
+        }
+
+instance TF.IsValue  (ApiGatewayUsagePlanQuotaSettings s)
+instance TF.IsObject (ApiGatewayUsagePlanQuotaSettings s) where
+    toObject ApiGatewayUsagePlanQuotaSettings'{..} = P.catMaybes
+        [ TF.assign "limit" <$> TF.attribute _limit
+        , TF.assign "offset" <$> TF.attribute _offset
+        , TF.assign "period" <$> TF.attribute _period
+        ]
+
+instance TF.IsValid (ApiGatewayUsagePlanQuotaSettings s) where
+    validator = P.mempty
+
+instance P.HasLimit (ApiGatewayUsagePlanQuotaSettings s) (TF.Attr s P.Int) where
+    limit =
+        P.lens (_limit :: ApiGatewayUsagePlanQuotaSettings s -> TF.Attr s P.Int)
+               (\s a -> s { _limit = a } :: ApiGatewayUsagePlanQuotaSettings s)
+
+instance P.HasOffset (ApiGatewayUsagePlanQuotaSettings s) (TF.Attr s P.Int) where
+    offset =
+        P.lens (_offset :: ApiGatewayUsagePlanQuotaSettings s -> TF.Attr s P.Int)
+               (\s a -> s { _offset = a } :: ApiGatewayUsagePlanQuotaSettings s)
+
+instance P.HasPeriod (ApiGatewayUsagePlanQuotaSettings s) (TF.Attr s P.Text) where
+    period =
+        P.lens (_period :: ApiGatewayUsagePlanQuotaSettings s -> TF.Attr s P.Text)
+               (\s a -> s { _period = a } :: ApiGatewayUsagePlanQuotaSettings s)
+
+-- | @throttle_settings@ nested settings.
+data ApiGatewayUsagePlanThrottleSettings s = ApiGatewayUsagePlanThrottleSettings'
+    { _burstLimit :: TF.Attr s P.Int
+    -- ^ @burst_limit@ - (Optional)
+    --
+    , _rateLimit  :: TF.Attr s P.Double
+    -- ^ @rate_limit@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @throttle_settings@ settings value.
+newApiGatewayUsagePlanThrottleSettings
+    :: ApiGatewayUsagePlanThrottleSettings s
+newApiGatewayUsagePlanThrottleSettings =
+    ApiGatewayUsagePlanThrottleSettings'
+        { _burstLimit = TF.value 0
+        , _rateLimit = TF.value 0.0
+        }
+
+instance TF.IsValue  (ApiGatewayUsagePlanThrottleSettings s)
+instance TF.IsObject (ApiGatewayUsagePlanThrottleSettings s) where
+    toObject ApiGatewayUsagePlanThrottleSettings'{..} = P.catMaybes
+        [ TF.assign "burst_limit" <$> TF.attribute _burstLimit
+        , TF.assign "rate_limit" <$> TF.attribute _rateLimit
+        ]
+
+instance TF.IsValid (ApiGatewayUsagePlanThrottleSettings s) where
+    validator = P.mempty
+
+instance P.HasBurstLimit (ApiGatewayUsagePlanThrottleSettings s) (TF.Attr s P.Int) where
+    burstLimit =
+        P.lens (_burstLimit :: ApiGatewayUsagePlanThrottleSettings s -> TF.Attr s P.Int)
+               (\s a -> s { _burstLimit = a } :: ApiGatewayUsagePlanThrottleSettings s)
+
+instance P.HasRateLimit (ApiGatewayUsagePlanThrottleSettings s) (TF.Attr s P.Double) where
+    rateLimit =
+        P.lens (_rateLimit :: ApiGatewayUsagePlanThrottleSettings s -> TF.Attr s P.Double)
+               (\s a -> s { _rateLimit = a } :: ApiGatewayUsagePlanThrottleSettings s)
+
+-- | @customized_metric_specification@ nested settings.
+data AppautoscalingPolicyCustomizedMetricSpecification s = AppautoscalingPolicyCustomizedMetricSpecification'
+    { _dimensions :: TF.Attr s [TF.Attr s (AppautoscalingPolicyDimensions s)]
+    -- ^ @dimensions@ - (Optional)
+    --
+    , _metricName :: TF.Attr s P.Text
+    -- ^ @metric_name@ - (Required)
+    --
+    , _namespace  :: TF.Attr s P.Text
+    -- ^ @namespace@ - (Required)
+    --
+    , _statistic  :: TF.Attr s P.Text
+    -- ^ @statistic@ - (Required)
+    --
+    , _unit       :: TF.Attr s P.Text
+    -- ^ @unit@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @customized_metric_specification@ settings value.
+newAppautoscalingPolicyCustomizedMetricSpecification
+    :: TF.Attr s P.Text -- ^ 'P._metricName': @metric_name@
+    -> TF.Attr s P.Text -- ^ 'P._namespace': @namespace@
+    -> TF.Attr s P.Text -- ^ 'P._statistic': @statistic@
+    -> AppautoscalingPolicyCustomizedMetricSpecification s
+newAppautoscalingPolicyCustomizedMetricSpecification _metricName _namespace _statistic =
+    AppautoscalingPolicyCustomizedMetricSpecification'
+        { _dimensions = TF.Nil
+        , _metricName = _metricName
+        , _namespace = _namespace
+        , _statistic = _statistic
+        , _unit = TF.Nil
+        }
+
+instance TF.IsValue  (AppautoscalingPolicyCustomizedMetricSpecification s)
+instance TF.IsObject (AppautoscalingPolicyCustomizedMetricSpecification s) where
+    toObject AppautoscalingPolicyCustomizedMetricSpecification'{..} = P.catMaybes
+        [ TF.assign "dimensions" <$> TF.attribute _dimensions
+        , TF.assign "metric_name" <$> TF.attribute _metricName
+        , TF.assign "namespace" <$> TF.attribute _namespace
+        , TF.assign "statistic" <$> TF.attribute _statistic
+        , TF.assign "unit" <$> TF.attribute _unit
+        ]
+
+instance TF.IsValid (AppautoscalingPolicyCustomizedMetricSpecification s) where
+    validator = P.mempty
+
+instance P.HasDimensions (AppautoscalingPolicyCustomizedMetricSpecification s) (TF.Attr s [TF.Attr s (AppautoscalingPolicyDimensions s)]) where
+    dimensions =
+        P.lens (_dimensions :: AppautoscalingPolicyCustomizedMetricSpecification s -> TF.Attr s [TF.Attr s (AppautoscalingPolicyDimensions s)])
+               (\s a -> s { _dimensions = a } :: AppautoscalingPolicyCustomizedMetricSpecification s)
+
+instance P.HasMetricName (AppautoscalingPolicyCustomizedMetricSpecification s) (TF.Attr s P.Text) where
+    metricName =
+        P.lens (_metricName :: AppautoscalingPolicyCustomizedMetricSpecification s -> TF.Attr s P.Text)
+               (\s a -> s { _metricName = a } :: AppautoscalingPolicyCustomizedMetricSpecification s)
+
+instance P.HasNamespace (AppautoscalingPolicyCustomizedMetricSpecification s) (TF.Attr s P.Text) where
+    namespace =
+        P.lens (_namespace :: AppautoscalingPolicyCustomizedMetricSpecification s -> TF.Attr s P.Text)
+               (\s a -> s { _namespace = a } :: AppautoscalingPolicyCustomizedMetricSpecification s)
+
+instance P.HasStatistic (AppautoscalingPolicyCustomizedMetricSpecification s) (TF.Attr s P.Text) where
+    statistic =
+        P.lens (_statistic :: AppautoscalingPolicyCustomizedMetricSpecification s -> TF.Attr s P.Text)
+               (\s a -> s { _statistic = a } :: AppautoscalingPolicyCustomizedMetricSpecification s)
+
+instance P.HasUnit (AppautoscalingPolicyCustomizedMetricSpecification s) (TF.Attr s P.Text) where
+    unit =
+        P.lens (_unit :: AppautoscalingPolicyCustomizedMetricSpecification s -> TF.Attr s P.Text)
+               (\s a -> s { _unit = a } :: AppautoscalingPolicyCustomizedMetricSpecification s)
+
+-- | @target_tracking_scaling_policy_configuration@ nested settings.
+data AppautoscalingPolicyTargetTrackingScalingPolicyConfiguration s = AppautoscalingPolicyTargetTrackingScalingPolicyConfiguration'
+    { _customizedMetricSpecification :: TF.Attr s (AppautoscalingPolicyCustomizedMetricSpecification s)
+    -- ^ @customized_metric_specification@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'predefinedMetricSpecification'
+    , _disableScaleIn :: TF.Attr s P.Bool
+    -- ^ @disable_scale_in@ - (Optional)
+    --
+    , _predefinedMetricSpecification :: TF.Attr s (AppautoscalingPolicyPredefinedMetricSpecification s)
+    -- ^ @predefined_metric_specification@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'customizedMetricSpecification'
+    , _scaleInCooldown :: TF.Attr s P.Int
+    -- ^ @scale_in_cooldown@ - (Optional)
+    --
+    , _scaleOutCooldown :: TF.Attr s P.Int
+    -- ^ @scale_out_cooldown@ - (Optional)
+    --
+    , _targetValue :: TF.Attr s P.Double
+    -- ^ @target_value@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @target_tracking_scaling_policy_configuration@ settings value.
+newAppautoscalingPolicyTargetTrackingScalingPolicyConfiguration
+    :: TF.Attr s P.Double -- ^ 'P._targetValue': @target_value@
+    -> AppautoscalingPolicyTargetTrackingScalingPolicyConfiguration s
+newAppautoscalingPolicyTargetTrackingScalingPolicyConfiguration _targetValue =
+    AppautoscalingPolicyTargetTrackingScalingPolicyConfiguration'
+        { _customizedMetricSpecification = TF.Nil
+        , _disableScaleIn = TF.value P.False
+        , _predefinedMetricSpecification = TF.Nil
+        , _scaleInCooldown = TF.Nil
+        , _scaleOutCooldown = TF.Nil
+        , _targetValue = _targetValue
+        }
+
+instance TF.IsValue  (AppautoscalingPolicyTargetTrackingScalingPolicyConfiguration s)
+instance TF.IsObject (AppautoscalingPolicyTargetTrackingScalingPolicyConfiguration s) where
+    toObject AppautoscalingPolicyTargetTrackingScalingPolicyConfiguration'{..} = P.catMaybes
+        [ TF.assign "customized_metric_specification" <$> TF.attribute _customizedMetricSpecification
+        , TF.assign "disable_scale_in" <$> TF.attribute _disableScaleIn
+        , TF.assign "predefined_metric_specification" <$> TF.attribute _predefinedMetricSpecification
+        , TF.assign "scale_in_cooldown" <$> TF.attribute _scaleInCooldown
+        , TF.assign "scale_out_cooldown" <$> TF.attribute _scaleOutCooldown
+        , TF.assign "target_value" <$> TF.attribute _targetValue
+        ]
+
+instance TF.IsValid (AppautoscalingPolicyTargetTrackingScalingPolicyConfiguration s) where
+    validator = TF.fieldsValidator (\AppautoscalingPolicyTargetTrackingScalingPolicyConfiguration'{..} -> Map.fromList $ P.catMaybes
+        [ if (_customizedMetricSpecification P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_customizedMetricSpecification",
+                            [ "_predefinedMetricSpecification"
+                            ])
+        , if (_predefinedMetricSpecification P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_predefinedMetricSpecification",
+                            [ "_customizedMetricSpecification"
+                            ])
+        ])
+           P.<> TF.settingsValidator "_customizedMetricSpecification"
+                  (_customizedMetricSpecification
+                      :: AppautoscalingPolicyTargetTrackingScalingPolicyConfiguration s -> TF.Attr s (AppautoscalingPolicyCustomizedMetricSpecification s))
+                  TF.validator
+           P.<> TF.settingsValidator "_predefinedMetricSpecification"
+                  (_predefinedMetricSpecification
+                      :: AppautoscalingPolicyTargetTrackingScalingPolicyConfiguration s -> TF.Attr s (AppautoscalingPolicyPredefinedMetricSpecification s))
+                  TF.validator
+
+instance P.HasCustomizedMetricSpecification (AppautoscalingPolicyTargetTrackingScalingPolicyConfiguration s) (TF.Attr s (AppautoscalingPolicyCustomizedMetricSpecification s)) where
+    customizedMetricSpecification =
+        P.lens (_customizedMetricSpecification :: AppautoscalingPolicyTargetTrackingScalingPolicyConfiguration s -> TF.Attr s (AppautoscalingPolicyCustomizedMetricSpecification s))
+               (\s a -> s { _customizedMetricSpecification = a } :: AppautoscalingPolicyTargetTrackingScalingPolicyConfiguration s)
+
+instance P.HasDisableScaleIn (AppautoscalingPolicyTargetTrackingScalingPolicyConfiguration s) (TF.Attr s P.Bool) where
+    disableScaleIn =
+        P.lens (_disableScaleIn :: AppautoscalingPolicyTargetTrackingScalingPolicyConfiguration s -> TF.Attr s P.Bool)
+               (\s a -> s { _disableScaleIn = a } :: AppautoscalingPolicyTargetTrackingScalingPolicyConfiguration s)
+
+instance P.HasPredefinedMetricSpecification (AppautoscalingPolicyTargetTrackingScalingPolicyConfiguration s) (TF.Attr s (AppautoscalingPolicyPredefinedMetricSpecification s)) where
+    predefinedMetricSpecification =
+        P.lens (_predefinedMetricSpecification :: AppautoscalingPolicyTargetTrackingScalingPolicyConfiguration s -> TF.Attr s (AppautoscalingPolicyPredefinedMetricSpecification s))
+               (\s a -> s { _predefinedMetricSpecification = a } :: AppautoscalingPolicyTargetTrackingScalingPolicyConfiguration s)
+
+instance P.HasScaleInCooldown (AppautoscalingPolicyTargetTrackingScalingPolicyConfiguration s) (TF.Attr s P.Int) where
+    scaleInCooldown =
+        P.lens (_scaleInCooldown :: AppautoscalingPolicyTargetTrackingScalingPolicyConfiguration s -> TF.Attr s P.Int)
+               (\s a -> s { _scaleInCooldown = a } :: AppautoscalingPolicyTargetTrackingScalingPolicyConfiguration s)
+
+instance P.HasScaleOutCooldown (AppautoscalingPolicyTargetTrackingScalingPolicyConfiguration s) (TF.Attr s P.Int) where
+    scaleOutCooldown =
+        P.lens (_scaleOutCooldown :: AppautoscalingPolicyTargetTrackingScalingPolicyConfiguration s -> TF.Attr s P.Int)
+               (\s a -> s { _scaleOutCooldown = a } :: AppautoscalingPolicyTargetTrackingScalingPolicyConfiguration s)
+
+instance P.HasTargetValue (AppautoscalingPolicyTargetTrackingScalingPolicyConfiguration s) (TF.Attr s P.Double) where
+    targetValue =
+        P.lens (_targetValue :: AppautoscalingPolicyTargetTrackingScalingPolicyConfiguration s -> TF.Attr s P.Double)
+               (\s a -> s { _targetValue = a } :: AppautoscalingPolicyTargetTrackingScalingPolicyConfiguration s)
+
+-- | @predefined_metric_specification@ nested settings.
+data AppautoscalingPolicyPredefinedMetricSpecification s = AppautoscalingPolicyPredefinedMetricSpecification'
+    { _predefinedMetricType :: TF.Attr s P.Text
+    -- ^ @predefined_metric_type@ - (Required)
+    --
+    , _resourceLabel        :: TF.Attr s P.Text
+    -- ^ @resource_label@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @predefined_metric_specification@ settings value.
+newAppautoscalingPolicyPredefinedMetricSpecification
+    :: TF.Attr s P.Text -- ^ 'P._predefinedMetricType': @predefined_metric_type@
+    -> AppautoscalingPolicyPredefinedMetricSpecification s
+newAppautoscalingPolicyPredefinedMetricSpecification _predefinedMetricType =
+    AppautoscalingPolicyPredefinedMetricSpecification'
+        { _predefinedMetricType = _predefinedMetricType
+        , _resourceLabel = TF.Nil
+        }
+
+instance TF.IsValue  (AppautoscalingPolicyPredefinedMetricSpecification s)
+instance TF.IsObject (AppautoscalingPolicyPredefinedMetricSpecification s) where
+    toObject AppautoscalingPolicyPredefinedMetricSpecification'{..} = P.catMaybes
+        [ TF.assign "predefined_metric_type" <$> TF.attribute _predefinedMetricType
+        , TF.assign "resource_label" <$> TF.attribute _resourceLabel
+        ]
+
+instance TF.IsValid (AppautoscalingPolicyPredefinedMetricSpecification s) where
+    validator = P.mempty
+
+instance P.HasPredefinedMetricType (AppautoscalingPolicyPredefinedMetricSpecification s) (TF.Attr s P.Text) where
+    predefinedMetricType =
+        P.lens (_predefinedMetricType :: AppautoscalingPolicyPredefinedMetricSpecification s -> TF.Attr s P.Text)
+               (\s a -> s { _predefinedMetricType = a } :: AppautoscalingPolicyPredefinedMetricSpecification s)
+
+instance P.HasResourceLabel (AppautoscalingPolicyPredefinedMetricSpecification s) (TF.Attr s P.Text) where
+    resourceLabel =
+        P.lens (_resourceLabel :: AppautoscalingPolicyPredefinedMetricSpecification s -> TF.Attr s P.Text)
+               (\s a -> s { _resourceLabel = a } :: AppautoscalingPolicyPredefinedMetricSpecification s)
+
+-- | @dimensions@ nested settings.
+data AppautoscalingPolicyDimensions s = AppautoscalingPolicyDimensions'
+    { _name  :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
     --
     , _value :: TF.Attr s P.Text
     -- ^ @value@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
--- | Construct a new @args@ settings value.
-newArgsSetting
+-- | Construct a new @dimensions@ settings value.
+newAppautoscalingPolicyDimensions
     :: TF.Attr s P.Text -- ^ 'P._name': @name@
     -> TF.Attr s P.Text -- ^ 'P._value': @value@
-    -> ArgsSetting s
-newArgsSetting _name _value =
-    ArgsSetting'
+    -> AppautoscalingPolicyDimensions s
+newAppautoscalingPolicyDimensions _name _value =
+    AppautoscalingPolicyDimensions'
         { _name = _name
-        , _param = TF.Nil
         , _value = _value
         }
 
-instance TF.IsValue  (ArgsSetting s)
-instance TF.IsObject (ArgsSetting s) where
-    toObject ArgsSetting'{..} = P.catMaybes
+instance TF.IsValue  (AppautoscalingPolicyDimensions s)
+instance TF.IsObject (AppautoscalingPolicyDimensions s) where
+    toObject AppautoscalingPolicyDimensions'{..} = P.catMaybes
         [ TF.assign "name" <$> TF.attribute _name
-        , TF.assign "param" <$> TF.attribute _param
         , TF.assign "value" <$> TF.attribute _value
         ]
 
-instance TF.IsValid (ArgsSetting s) where
+instance TF.IsValid (AppautoscalingPolicyDimensions s) where
     validator = P.mempty
 
-instance P.HasName (ArgsSetting s) (TF.Attr s P.Text) where
+instance P.HasName (AppautoscalingPolicyDimensions s) (TF.Attr s P.Text) where
     name =
-        P.lens (_name :: ArgsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: ArgsSetting s)
+        P.lens (_name :: AppautoscalingPolicyDimensions s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: AppautoscalingPolicyDimensions s)
 
-instance P.HasParam (ArgsSetting s) (TF.Attr s P.Bool) where
-    param =
-        P.lens (_param :: ArgsSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _param = a } :: ArgsSetting s)
-
-instance P.HasValue (ArgsSetting s) (TF.Attr s P.Text) where
+instance P.HasValue (AppautoscalingPolicyDimensions s) (TF.Attr s P.Text) where
     value =
-        P.lens (_value :: ArgsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _value = a } :: ArgsSetting s)
+        P.lens (_value :: AppautoscalingPolicyDimensions s -> TF.Attr s P.Text)
+               (\s a -> s { _value = a } :: AppautoscalingPolicyDimensions s)
 
--- | @dag_node@ nested settings.
-data DagNodeSetting s = DagNodeSetting'
-    { _args       :: TF.Attr s (P.NonEmpty (TF.Attr s (ArgsSetting s)))
-    -- ^ @args@ - (Required)
+-- | @step_adjustment@ nested settings.
+data AppautoscalingPolicyStepAdjustment s = AppautoscalingPolicyStepAdjustment'
+    { _metricIntervalLowerBound :: TF.Attr s P.Double
+    -- ^ @metric_interval_lower_bound@ - (Optional)
     --
-    , _id         :: TF.Attr s P.Text
-    -- ^ @id@ - (Required)
+    , _metricIntervalUpperBound :: TF.Attr s P.Double
+    -- ^ @metric_interval_upper_bound@ - (Optional)
     --
-    , _lineNumber :: TF.Attr s P.Int
-    -- ^ @line_number@ - (Optional)
-    --
-    , _nodeType   :: TF.Attr s P.Text
-    -- ^ @node_type@ - (Required)
+    , _scalingAdjustment        :: TF.Attr s P.Int
+    -- ^ @scaling_adjustment@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
--- | Construct a new @dag_node@ settings value.
-newDagNodeSetting
-    :: TF.Attr s (P.NonEmpty (TF.Attr s (ArgsSetting s))) -- ^ 'P._args': @args@
-    -> TF.Attr s P.Text -- ^ 'P._id': @id@
-    -> TF.Attr s P.Text -- ^ 'P._nodeType': @node_type@
-    -> DagNodeSetting s
-newDagNodeSetting _args _id _nodeType =
-    DagNodeSetting'
-        { _args = _args
-        , _id = _id
-        , _lineNumber = TF.Nil
-        , _nodeType = _nodeType
+-- | Construct a new @step_adjustment@ settings value.
+newAppautoscalingPolicyStepAdjustment
+    :: TF.Attr s P.Int -- ^ 'P._scalingAdjustment': @scaling_adjustment@
+    -> AppautoscalingPolicyStepAdjustment s
+newAppautoscalingPolicyStepAdjustment _scalingAdjustment =
+    AppautoscalingPolicyStepAdjustment'
+        { _metricIntervalLowerBound = TF.value (-1.0)
+        , _metricIntervalUpperBound = TF.value (-1.0)
+        , _scalingAdjustment = _scalingAdjustment
         }
 
-instance TF.IsValue  (DagNodeSetting s)
-instance TF.IsObject (DagNodeSetting s) where
-    toObject DagNodeSetting'{..} = P.catMaybes
-        [ TF.assign "args" <$> TF.attribute _args
-        , TF.assign "id" <$> TF.attribute _id
-        , TF.assign "line_number" <$> TF.attribute _lineNumber
-        , TF.assign "node_type" <$> TF.attribute _nodeType
+instance TF.IsValue  (AppautoscalingPolicyStepAdjustment s)
+instance TF.IsObject (AppautoscalingPolicyStepAdjustment s) where
+    toObject AppautoscalingPolicyStepAdjustment'{..} = P.catMaybes
+        [ TF.assign "metric_interval_lower_bound" <$> TF.attribute _metricIntervalLowerBound
+        , TF.assign "metric_interval_upper_bound" <$> TF.attribute _metricIntervalUpperBound
+        , TF.assign "scaling_adjustment" <$> TF.attribute _scalingAdjustment
         ]
 
-instance TF.IsValid (DagNodeSetting s) where
+instance TF.IsValid (AppautoscalingPolicyStepAdjustment s) where
     validator = P.mempty
 
-instance P.HasArgs (DagNodeSetting s) (TF.Attr s (P.NonEmpty (TF.Attr s (ArgsSetting s)))) where
-    args =
-        P.lens (_args :: DagNodeSetting s -> TF.Attr s (P.NonEmpty (TF.Attr s (ArgsSetting s))))
-               (\s a -> s { _args = a } :: DagNodeSetting s)
+instance P.HasMetricIntervalLowerBound (AppautoscalingPolicyStepAdjustment s) (TF.Attr s P.Double) where
+    metricIntervalLowerBound =
+        P.lens (_metricIntervalLowerBound :: AppautoscalingPolicyStepAdjustment s -> TF.Attr s P.Double)
+               (\s a -> s { _metricIntervalLowerBound = a } :: AppautoscalingPolicyStepAdjustment s)
 
-instance P.HasId (DagNodeSetting s) (TF.Attr s P.Text) where
+instance P.HasMetricIntervalUpperBound (AppautoscalingPolicyStepAdjustment s) (TF.Attr s P.Double) where
+    metricIntervalUpperBound =
+        P.lens (_metricIntervalUpperBound :: AppautoscalingPolicyStepAdjustment s -> TF.Attr s P.Double)
+               (\s a -> s { _metricIntervalUpperBound = a } :: AppautoscalingPolicyStepAdjustment s)
+
+instance P.HasScalingAdjustment (AppautoscalingPolicyStepAdjustment s) (TF.Attr s P.Int) where
+    scalingAdjustment =
+        P.lens (_scalingAdjustment :: AppautoscalingPolicyStepAdjustment s -> TF.Attr s P.Int)
+               (\s a -> s { _scalingAdjustment = a } :: AppautoscalingPolicyStepAdjustment s)
+
+-- | @step_scaling_policy_configuration@ nested settings.
+data AppautoscalingPolicyStepScalingPolicyConfiguration s = AppautoscalingPolicyStepScalingPolicyConfiguration'
+    { _adjustmentType :: TF.Attr s P.Text
+    -- ^ @adjustment_type@ - (Optional)
+    --
+    , _cooldown :: TF.Attr s P.Int
+    -- ^ @cooldown@ - (Optional)
+    --
+    , _metricAggregationType :: TF.Attr s P.Text
+    -- ^ @metric_aggregation_type@ - (Optional)
+    --
+    , _minAdjustmentMagnitude :: TF.Attr s P.Int
+    -- ^ @min_adjustment_magnitude@ - (Optional)
+    --
+    , _stepAdjustment :: TF.Attr s [TF.Attr s (AppautoscalingPolicyStepAdjustment s)]
+    -- ^ @step_adjustment@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @step_scaling_policy_configuration@ settings value.
+newAppautoscalingPolicyStepScalingPolicyConfiguration
+    :: AppautoscalingPolicyStepScalingPolicyConfiguration s
+newAppautoscalingPolicyStepScalingPolicyConfiguration =
+    AppautoscalingPolicyStepScalingPolicyConfiguration'
+        { _adjustmentType = TF.Nil
+        , _cooldown = TF.Nil
+        , _metricAggregationType = TF.Nil
+        , _minAdjustmentMagnitude = TF.Nil
+        , _stepAdjustment = TF.Nil
+        }
+
+instance TF.IsValue  (AppautoscalingPolicyStepScalingPolicyConfiguration s)
+instance TF.IsObject (AppautoscalingPolicyStepScalingPolicyConfiguration s) where
+    toObject AppautoscalingPolicyStepScalingPolicyConfiguration'{..} = P.catMaybes
+        [ TF.assign "adjustment_type" <$> TF.attribute _adjustmentType
+        , TF.assign "cooldown" <$> TF.attribute _cooldown
+        , TF.assign "metric_aggregation_type" <$> TF.attribute _metricAggregationType
+        , TF.assign "min_adjustment_magnitude" <$> TF.attribute _minAdjustmentMagnitude
+        , TF.assign "step_adjustment" <$> TF.attribute _stepAdjustment
+        ]
+
+instance TF.IsValid (AppautoscalingPolicyStepScalingPolicyConfiguration s) where
+    validator = P.mempty
+
+instance P.HasAdjustmentType (AppautoscalingPolicyStepScalingPolicyConfiguration s) (TF.Attr s P.Text) where
+    adjustmentType =
+        P.lens (_adjustmentType :: AppautoscalingPolicyStepScalingPolicyConfiguration s -> TF.Attr s P.Text)
+               (\s a -> s { _adjustmentType = a } :: AppautoscalingPolicyStepScalingPolicyConfiguration s)
+
+instance P.HasCooldown (AppautoscalingPolicyStepScalingPolicyConfiguration s) (TF.Attr s P.Int) where
+    cooldown =
+        P.lens (_cooldown :: AppautoscalingPolicyStepScalingPolicyConfiguration s -> TF.Attr s P.Int)
+               (\s a -> s { _cooldown = a } :: AppautoscalingPolicyStepScalingPolicyConfiguration s)
+
+instance P.HasMetricAggregationType (AppautoscalingPolicyStepScalingPolicyConfiguration s) (TF.Attr s P.Text) where
+    metricAggregationType =
+        P.lens (_metricAggregationType :: AppautoscalingPolicyStepScalingPolicyConfiguration s -> TF.Attr s P.Text)
+               (\s a -> s { _metricAggregationType = a } :: AppautoscalingPolicyStepScalingPolicyConfiguration s)
+
+instance P.HasMinAdjustmentMagnitude (AppautoscalingPolicyStepScalingPolicyConfiguration s) (TF.Attr s P.Int) where
+    minAdjustmentMagnitude =
+        P.lens (_minAdjustmentMagnitude :: AppautoscalingPolicyStepScalingPolicyConfiguration s -> TF.Attr s P.Int)
+               (\s a -> s { _minAdjustmentMagnitude = a } :: AppautoscalingPolicyStepScalingPolicyConfiguration s)
+
+instance P.HasStepAdjustment (AppautoscalingPolicyStepScalingPolicyConfiguration s) (TF.Attr s [TF.Attr s (AppautoscalingPolicyStepAdjustment s)]) where
+    stepAdjustment =
+        P.lens (_stepAdjustment :: AppautoscalingPolicyStepScalingPolicyConfiguration s -> TF.Attr s [TF.Attr s (AppautoscalingPolicyStepAdjustment s)])
+               (\s a -> s { _stepAdjustment = a } :: AppautoscalingPolicyStepScalingPolicyConfiguration s)
+
+-- | @scalable_target_action@ nested settings.
+data AppautoscalingScheduledActionScalableTargetAction s = AppautoscalingScheduledActionScalableTargetAction'
+    { _maxCapacity :: TF.Attr s P.Int
+    -- ^ @max_capacity@ - (Optional, Forces New)
+    --
+    , _minCapacity :: TF.Attr s P.Int
+    -- ^ @min_capacity@ - (Optional, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @scalable_target_action@ settings value.
+newAppautoscalingScheduledActionScalableTargetAction
+    :: AppautoscalingScheduledActionScalableTargetAction s
+newAppautoscalingScheduledActionScalableTargetAction =
+    AppautoscalingScheduledActionScalableTargetAction'
+        { _maxCapacity = TF.Nil
+        , _minCapacity = TF.Nil
+        }
+
+instance TF.IsValue  (AppautoscalingScheduledActionScalableTargetAction s)
+instance TF.IsObject (AppautoscalingScheduledActionScalableTargetAction s) where
+    toObject AppautoscalingScheduledActionScalableTargetAction'{..} = P.catMaybes
+        [ TF.assign "max_capacity" <$> TF.attribute _maxCapacity
+        , TF.assign "min_capacity" <$> TF.attribute _minCapacity
+        ]
+
+instance TF.IsValid (AppautoscalingScheduledActionScalableTargetAction s) where
+    validator = P.mempty
+
+instance P.HasMaxCapacity (AppautoscalingScheduledActionScalableTargetAction s) (TF.Attr s P.Int) where
+    maxCapacity =
+        P.lens (_maxCapacity :: AppautoscalingScheduledActionScalableTargetAction s -> TF.Attr s P.Int)
+               (\s a -> s { _maxCapacity = a } :: AppautoscalingScheduledActionScalableTargetAction s)
+
+instance P.HasMinCapacity (AppautoscalingScheduledActionScalableTargetAction s) (TF.Attr s P.Int) where
+    minCapacity =
+        P.lens (_minCapacity :: AppautoscalingScheduledActionScalableTargetAction s -> TF.Attr s P.Int)
+               (\s a -> s { _minCapacity = a } :: AppautoscalingScheduledActionScalableTargetAction s)
+
+-- | @dynamodb_config@ nested settings.
+data AppsyncDatasourceDynamodbConfig s = AppsyncDatasourceDynamodbConfig'
+    { _region               :: TF.Attr s P.Text
+    -- ^ @region@ - (Required)
+    --
+    , _tableName            :: TF.Attr s P.Text
+    -- ^ @table_name@ - (Required)
+    --
+    , _useCallerCredentials :: TF.Attr s P.Bool
+    -- ^ @use_caller_credentials@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @dynamodb_config@ settings value.
+newAppsyncDatasourceDynamodbConfig
+    :: TF.Attr s P.Text -- ^ 'P._tableName': @table_name@
+    -> TF.Attr s P.Text -- ^ 'P._region': @region@
+    -> AppsyncDatasourceDynamodbConfig s
+newAppsyncDatasourceDynamodbConfig _tableName _region =
+    AppsyncDatasourceDynamodbConfig'
+        { _region = _region
+        , _tableName = _tableName
+        , _useCallerCredentials = TF.Nil
+        }
+
+instance TF.IsValue  (AppsyncDatasourceDynamodbConfig s)
+instance TF.IsObject (AppsyncDatasourceDynamodbConfig s) where
+    toObject AppsyncDatasourceDynamodbConfig'{..} = P.catMaybes
+        [ TF.assign "region" <$> TF.attribute _region
+        , TF.assign "table_name" <$> TF.attribute _tableName
+        , TF.assign "use_caller_credentials" <$> TF.attribute _useCallerCredentials
+        ]
+
+instance TF.IsValid (AppsyncDatasourceDynamodbConfig s) where
+    validator = P.mempty
+
+instance P.HasRegion (AppsyncDatasourceDynamodbConfig s) (TF.Attr s P.Text) where
+    region =
+        P.lens (_region :: AppsyncDatasourceDynamodbConfig s -> TF.Attr s P.Text)
+               (\s a -> s { _region = a } :: AppsyncDatasourceDynamodbConfig s)
+
+instance P.HasTableName (AppsyncDatasourceDynamodbConfig s) (TF.Attr s P.Text) where
+    tableName =
+        P.lens (_tableName :: AppsyncDatasourceDynamodbConfig s -> TF.Attr s P.Text)
+               (\s a -> s { _tableName = a } :: AppsyncDatasourceDynamodbConfig s)
+
+instance P.HasUseCallerCredentials (AppsyncDatasourceDynamodbConfig s) (TF.Attr s P.Bool) where
+    useCallerCredentials =
+        P.lens (_useCallerCredentials :: AppsyncDatasourceDynamodbConfig s -> TF.Attr s P.Bool)
+               (\s a -> s { _useCallerCredentials = a } :: AppsyncDatasourceDynamodbConfig s)
+
+-- | @elasticsearch_config@ nested settings.
+data AppsyncDatasourceElasticsearchConfig s = AppsyncDatasourceElasticsearchConfig'
+    { _endpoint :: TF.Attr s P.Text
+    -- ^ @endpoint@ - (Required)
+    --
+    , _region   :: TF.Attr s P.Text
+    -- ^ @region@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @elasticsearch_config@ settings value.
+newAppsyncDatasourceElasticsearchConfig
+    :: TF.Attr s P.Text -- ^ 'P._endpoint': @endpoint@
+    -> TF.Attr s P.Text -- ^ 'P._region': @region@
+    -> AppsyncDatasourceElasticsearchConfig s
+newAppsyncDatasourceElasticsearchConfig _endpoint _region =
+    AppsyncDatasourceElasticsearchConfig'
+        { _endpoint = _endpoint
+        , _region = _region
+        }
+
+instance TF.IsValue  (AppsyncDatasourceElasticsearchConfig s)
+instance TF.IsObject (AppsyncDatasourceElasticsearchConfig s) where
+    toObject AppsyncDatasourceElasticsearchConfig'{..} = P.catMaybes
+        [ TF.assign "endpoint" <$> TF.attribute _endpoint
+        , TF.assign "region" <$> TF.attribute _region
+        ]
+
+instance TF.IsValid (AppsyncDatasourceElasticsearchConfig s) where
+    validator = P.mempty
+
+instance P.HasEndpoint (AppsyncDatasourceElasticsearchConfig s) (TF.Attr s P.Text) where
+    endpoint =
+        P.lens (_endpoint :: AppsyncDatasourceElasticsearchConfig s -> TF.Attr s P.Text)
+               (\s a -> s { _endpoint = a } :: AppsyncDatasourceElasticsearchConfig s)
+
+instance P.HasRegion (AppsyncDatasourceElasticsearchConfig s) (TF.Attr s P.Text) where
+    region =
+        P.lens (_region :: AppsyncDatasourceElasticsearchConfig s -> TF.Attr s P.Text)
+               (\s a -> s { _region = a } :: AppsyncDatasourceElasticsearchConfig s)
+
+-- | @lambda_config@ nested settings.
+data AppsyncDatasourceLambdaConfig s = AppsyncDatasourceLambdaConfig'
+    { _functionArn :: TF.Attr s P.Text
+    -- ^ @function_arn@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @lambda_config@ settings value.
+newAppsyncDatasourceLambdaConfig
+    :: TF.Attr s P.Text -- ^ 'P._functionArn': @function_arn@
+    -> AppsyncDatasourceLambdaConfig s
+newAppsyncDatasourceLambdaConfig _functionArn =
+    AppsyncDatasourceLambdaConfig'
+        { _functionArn = _functionArn
+        }
+
+instance TF.IsValue  (AppsyncDatasourceLambdaConfig s)
+instance TF.IsObject (AppsyncDatasourceLambdaConfig s) where
+    toObject AppsyncDatasourceLambdaConfig'{..} = P.catMaybes
+        [ TF.assign "function_arn" <$> TF.attribute _functionArn
+        ]
+
+instance TF.IsValid (AppsyncDatasourceLambdaConfig s) where
+    validator = P.mempty
+
+instance P.HasFunctionArn (AppsyncDatasourceLambdaConfig s) (TF.Attr s P.Text) where
+    functionArn =
+        P.lens (_functionArn :: AppsyncDatasourceLambdaConfig s -> TF.Attr s P.Text)
+               (\s a -> s { _functionArn = a } :: AppsyncDatasourceLambdaConfig s)
+
+-- | @user_pool_config@ nested settings.
+data AppsyncGraphqlApiUserPoolConfig s = AppsyncGraphqlApiUserPoolConfig'
+    { _appIdClientRegex :: TF.Attr s P.Text
+    -- ^ @app_id_client_regex@ - (Optional)
+    --
+    , _awsRegion        :: TF.Attr s P.Text
+    -- ^ @aws_region@ - (Required)
+    --
+    , _defaultAction    :: TF.Attr s P.Text
+    -- ^ @default_action@ - (Required)
+    --
+    , _userPoolId       :: TF.Attr s P.Text
+    -- ^ @user_pool_id@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @user_pool_config@ settings value.
+newAppsyncGraphqlApiUserPoolConfig
+    :: TF.Attr s P.Text -- ^ 'P._defaultAction': @default_action@
+    -> TF.Attr s P.Text -- ^ 'P._userPoolId': @user_pool_id@
+    -> TF.Attr s P.Text -- ^ 'P._awsRegion': @aws_region@
+    -> AppsyncGraphqlApiUserPoolConfig s
+newAppsyncGraphqlApiUserPoolConfig _defaultAction _userPoolId _awsRegion =
+    AppsyncGraphqlApiUserPoolConfig'
+        { _appIdClientRegex = TF.Nil
+        , _awsRegion = _awsRegion
+        , _defaultAction = _defaultAction
+        , _userPoolId = _userPoolId
+        }
+
+instance TF.IsValue  (AppsyncGraphqlApiUserPoolConfig s)
+instance TF.IsObject (AppsyncGraphqlApiUserPoolConfig s) where
+    toObject AppsyncGraphqlApiUserPoolConfig'{..} = P.catMaybes
+        [ TF.assign "app_id_client_regex" <$> TF.attribute _appIdClientRegex
+        , TF.assign "aws_region" <$> TF.attribute _awsRegion
+        , TF.assign "default_action" <$> TF.attribute _defaultAction
+        , TF.assign "user_pool_id" <$> TF.attribute _userPoolId
+        ]
+
+instance TF.IsValid (AppsyncGraphqlApiUserPoolConfig s) where
+    validator = P.mempty
+
+instance P.HasAppIdClientRegex (AppsyncGraphqlApiUserPoolConfig s) (TF.Attr s P.Text) where
+    appIdClientRegex =
+        P.lens (_appIdClientRegex :: AppsyncGraphqlApiUserPoolConfig s -> TF.Attr s P.Text)
+               (\s a -> s { _appIdClientRegex = a } :: AppsyncGraphqlApiUserPoolConfig s)
+
+instance P.HasAwsRegion (AppsyncGraphqlApiUserPoolConfig s) (TF.Attr s P.Text) where
+    awsRegion =
+        P.lens (_awsRegion :: AppsyncGraphqlApiUserPoolConfig s -> TF.Attr s P.Text)
+               (\s a -> s { _awsRegion = a } :: AppsyncGraphqlApiUserPoolConfig s)
+
+instance P.HasDefaultAction (AppsyncGraphqlApiUserPoolConfig s) (TF.Attr s P.Text) where
+    defaultAction =
+        P.lens (_defaultAction :: AppsyncGraphqlApiUserPoolConfig s -> TF.Attr s P.Text)
+               (\s a -> s { _defaultAction = a } :: AppsyncGraphqlApiUserPoolConfig s)
+
+instance P.HasUserPoolId (AppsyncGraphqlApiUserPoolConfig s) (TF.Attr s P.Text) where
+    userPoolId =
+        P.lens (_userPoolId :: AppsyncGraphqlApiUserPoolConfig s -> TF.Attr s P.Text)
+               (\s a -> s { _userPoolId = a } :: AppsyncGraphqlApiUserPoolConfig s)
+
+-- | @assume_role@ nested settings.
+data AssumeRole = AssumeRole'
+    { _externalId  :: P.Maybe P.Text
+    -- ^ @external_id@ - (Optional)
+    -- The external ID to use when assuming the role. If omitted, no external ID is
+    -- passed to the AssumeRole call.
+    --
+    , _policy      :: P.Maybe P.Text
+    -- ^ @policy@ - (Optional)
+    -- The permissions applied when assuming a role. You cannot use, this policy to
+    -- grant further permissions that are in excess to those of the,  role that is
+    -- being assumed.
+    --
+    , _roleArn     :: P.Maybe P.Text
+    -- ^ @role_arn@ - (Optional)
+    -- The ARN of an IAM role to assume prior to making API calls.
+    --
+    , _sessionName :: P.Maybe P.Text
+    -- ^ @session_name@ - (Optional)
+    -- The session name to use when assuming the role. If omitted, no session name
+    -- is passed to the AssumeRole call.
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @assume_role@ settings value.
+newAssumeRole
+    :: AssumeRole
+newAssumeRole =
+    AssumeRole'
+        { _externalId = P.Nothing
+        , _policy = P.Nothing
+        , _roleArn = P.Nothing
+        , _sessionName = P.Nothing
+        }
+
+instance TF.IsValue  (AssumeRole)
+instance TF.IsObject (AssumeRole) where
+    toObject AssumeRole'{..} = P.catMaybes
+        [ TF.assign "external_id" <$> _externalId
+        , TF.assign "policy" <$> _policy
+        , TF.assign "role_arn" <$> _roleArn
+        , TF.assign "session_name" <$> _sessionName
+        ]
+
+instance TF.IsValid (AssumeRole) where
+    validator = P.mempty
+
+instance P.HasExternalId (AssumeRole) (P.Maybe P.Text) where
+    externalId =
+        P.lens (_externalId :: AssumeRole -> P.Maybe P.Text)
+               (\s a -> s { _externalId = a } :: AssumeRole)
+
+instance P.HasPolicy (AssumeRole) (P.Maybe P.Text) where
+    policy =
+        P.lens (_policy :: AssumeRole -> P.Maybe P.Text)
+               (\s a -> s { _policy = a } :: AssumeRole)
+
+instance P.HasRoleArn (AssumeRole) (P.Maybe P.Text) where
+    roleArn =
+        P.lens (_roleArn :: AssumeRole -> P.Maybe P.Text)
+               (\s a -> s { _roleArn = a } :: AssumeRole)
+
+instance P.HasSessionName (AssumeRole) (P.Maybe P.Text) where
+    sessionName =
+        P.lens (_sessionName :: AssumeRole -> P.Maybe P.Text)
+               (\s a -> s { _sessionName = a } :: AssumeRole)
+
+-- | @initial_lifecycle_hook@ nested settings.
+data AutoscalingGroupInitialLifecycleHook s = AutoscalingGroupInitialLifecycleHook'
+    { _defaultResult         :: TF.Attr s P.Text
+    -- ^ @default_result@ - (Optional)
+    --
+    , _heartbeatTimeout      :: TF.Attr s P.Int
+    -- ^ @heartbeat_timeout@ - (Optional)
+    --
+    , _lifecycleTransition   :: TF.Attr s P.Text
+    -- ^ @lifecycle_transition@ - (Required)
+    --
+    , _name                  :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    , _notificationMetadata  :: TF.Attr s P.Text
+    -- ^ @notification_metadata@ - (Optional)
+    --
+    , _notificationTargetArn :: TF.Attr s P.Text
+    -- ^ @notification_target_arn@ - (Optional)
+    --
+    , _roleArn               :: TF.Attr s P.Text
+    -- ^ @role_arn@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @initial_lifecycle_hook@ settings value.
+newAutoscalingGroupInitialLifecycleHook
+    :: TF.Attr s P.Text -- ^ 'P._name': @name@
+    -> TF.Attr s P.Text -- ^ 'P._lifecycleTransition': @lifecycle_transition@
+    -> AutoscalingGroupInitialLifecycleHook s
+newAutoscalingGroupInitialLifecycleHook _name _lifecycleTransition =
+    AutoscalingGroupInitialLifecycleHook'
+        { _defaultResult = TF.Nil
+        , _heartbeatTimeout = TF.Nil
+        , _lifecycleTransition = _lifecycleTransition
+        , _name = _name
+        , _notificationMetadata = TF.Nil
+        , _notificationTargetArn = TF.Nil
+        , _roleArn = TF.Nil
+        }
+
+instance TF.IsValue  (AutoscalingGroupInitialLifecycleHook s)
+instance TF.IsObject (AutoscalingGroupInitialLifecycleHook s) where
+    toObject AutoscalingGroupInitialLifecycleHook'{..} = P.catMaybes
+        [ TF.assign "default_result" <$> TF.attribute _defaultResult
+        , TF.assign "heartbeat_timeout" <$> TF.attribute _heartbeatTimeout
+        , TF.assign "lifecycle_transition" <$> TF.attribute _lifecycleTransition
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "notification_metadata" <$> TF.attribute _notificationMetadata
+        , TF.assign "notification_target_arn" <$> TF.attribute _notificationTargetArn
+        , TF.assign "role_arn" <$> TF.attribute _roleArn
+        ]
+
+instance TF.IsValid (AutoscalingGroupInitialLifecycleHook s) where
+    validator = P.mempty
+
+instance P.HasDefaultResult (AutoscalingGroupInitialLifecycleHook s) (TF.Attr s P.Text) where
+    defaultResult =
+        P.lens (_defaultResult :: AutoscalingGroupInitialLifecycleHook s -> TF.Attr s P.Text)
+               (\s a -> s { _defaultResult = a } :: AutoscalingGroupInitialLifecycleHook s)
+
+instance P.HasHeartbeatTimeout (AutoscalingGroupInitialLifecycleHook s) (TF.Attr s P.Int) where
+    heartbeatTimeout =
+        P.lens (_heartbeatTimeout :: AutoscalingGroupInitialLifecycleHook s -> TF.Attr s P.Int)
+               (\s a -> s { _heartbeatTimeout = a } :: AutoscalingGroupInitialLifecycleHook s)
+
+instance P.HasLifecycleTransition (AutoscalingGroupInitialLifecycleHook s) (TF.Attr s P.Text) where
+    lifecycleTransition =
+        P.lens (_lifecycleTransition :: AutoscalingGroupInitialLifecycleHook s -> TF.Attr s P.Text)
+               (\s a -> s { _lifecycleTransition = a } :: AutoscalingGroupInitialLifecycleHook s)
+
+instance P.HasName (AutoscalingGroupInitialLifecycleHook s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: AutoscalingGroupInitialLifecycleHook s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: AutoscalingGroupInitialLifecycleHook s)
+
+instance P.HasNotificationMetadata (AutoscalingGroupInitialLifecycleHook s) (TF.Attr s P.Text) where
+    notificationMetadata =
+        P.lens (_notificationMetadata :: AutoscalingGroupInitialLifecycleHook s -> TF.Attr s P.Text)
+               (\s a -> s { _notificationMetadata = a } :: AutoscalingGroupInitialLifecycleHook s)
+
+instance P.HasNotificationTargetArn (AutoscalingGroupInitialLifecycleHook s) (TF.Attr s P.Text) where
+    notificationTargetArn =
+        P.lens (_notificationTargetArn :: AutoscalingGroupInitialLifecycleHook s -> TF.Attr s P.Text)
+               (\s a -> s { _notificationTargetArn = a } :: AutoscalingGroupInitialLifecycleHook s)
+
+instance P.HasRoleArn (AutoscalingGroupInitialLifecycleHook s) (TF.Attr s P.Text) where
+    roleArn =
+        P.lens (_roleArn :: AutoscalingGroupInitialLifecycleHook s -> TF.Attr s P.Text)
+               (\s a -> s { _roleArn = a } :: AutoscalingGroupInitialLifecycleHook s)
+
+instance s ~ s' => P.HasComputedDefaultResult (TF.Ref s' (AutoscalingGroupInitialLifecycleHook s)) (TF.Attr s P.Text) where
+    computedDefaultResult x = TF.compute (TF.refKey x) "default_result"
+
+-- | @launch_template@ nested settings.
+data AutoscalingGroupLaunchTemplate s = AutoscalingGroupLaunchTemplate'
+    { _id      :: TF.Attr s P.Text
+    -- ^ @id@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'name'
+    , _name    :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'id'
+    , _version :: TF.Attr s P.Text
+    -- ^ @version@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @launch_template@ settings value.
+newAutoscalingGroupLaunchTemplate
+    :: AutoscalingGroupLaunchTemplate s
+newAutoscalingGroupLaunchTemplate =
+    AutoscalingGroupLaunchTemplate'
+        { _id = TF.Nil
+        , _name = TF.Nil
+        , _version = TF.Nil
+        }
+
+instance TF.IsValue  (AutoscalingGroupLaunchTemplate s)
+instance TF.IsObject (AutoscalingGroupLaunchTemplate s) where
+    toObject AutoscalingGroupLaunchTemplate'{..} = P.catMaybes
+        [ TF.assign "id" <$> TF.attribute _id
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "version" <$> TF.attribute _version
+        ]
+
+instance TF.IsValid (AutoscalingGroupLaunchTemplate s) where
+    validator = TF.fieldsValidator (\AutoscalingGroupLaunchTemplate'{..} -> Map.fromList $ P.catMaybes
+        [ if (_id P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_id",
+                            [ "_name"
+                            ])
+        , if (_name P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_name",
+                            [ "_id"
+                            ])
+        ])
+
+instance P.HasId (AutoscalingGroupLaunchTemplate s) (TF.Attr s P.Text) where
     id =
-        P.lens (_id :: DagNodeSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _id = a } :: DagNodeSetting s)
+        P.lens (_id :: AutoscalingGroupLaunchTemplate s -> TF.Attr s P.Text)
+               (\s a -> s { _id = a } :: AutoscalingGroupLaunchTemplate s)
 
-instance P.HasLineNumber (DagNodeSetting s) (TF.Attr s P.Int) where
-    lineNumber =
-        P.lens (_lineNumber :: DagNodeSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _lineNumber = a } :: DagNodeSetting s)
+instance P.HasName (AutoscalingGroupLaunchTemplate s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: AutoscalingGroupLaunchTemplate s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: AutoscalingGroupLaunchTemplate s)
 
-instance P.HasNodeType (DagNodeSetting s) (TF.Attr s P.Text) where
-    nodeType =
-        P.lens (_nodeType :: DagNodeSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _nodeType = a } :: DagNodeSetting s)
+instance P.HasVersion (AutoscalingGroupLaunchTemplate s) (TF.Attr s P.Text) where
+    version =
+        P.lens (_version :: AutoscalingGroupLaunchTemplate s -> TF.Attr s P.Text)
+               (\s a -> s { _version = a } :: AutoscalingGroupLaunchTemplate s)
 
--- | @artifact_store@ nested settings.
-data ArtifactStoreSetting s = ArtifactStoreSetting'
-    { _encryptionKey :: TF.Attr s (EncryptionKeySetting s)
-    -- ^ @encryption_key@ - (Optional)
+instance s ~ s' => P.HasComputedId (TF.Ref s' (AutoscalingGroupLaunchTemplate s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (AutoscalingGroupLaunchTemplate s)) (TF.Attr s P.Text) where
+    computedName x = TF.compute (TF.refKey x) "name"
+
+-- | @tag@ nested settings.
+data AutoscalingGroupTag s = AutoscalingGroupTag'
+    { _key               :: TF.Attr s P.Text
+    -- ^ @key@ - (Required)
     --
-    , _location      :: TF.Attr s P.Text
-    -- ^ @location@ - (Required)
+    , _propagateAtLaunch :: TF.Attr s P.Bool
+    -- ^ @propagate_at_launch@ - (Required)
     --
-    , _type'         :: TF.Attr s P.Text
-    -- ^ @type@ - (Required)
+    , _value             :: TF.Attr s P.Text
+    -- ^ @value@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
--- | Construct a new @artifact_store@ settings value.
-newArtifactStoreSetting
-    :: TF.Attr s P.Text -- ^ 'P._location': @location@
-    -> TF.Attr s P.Text -- ^ 'P._type'': @type@
-    -> ArtifactStoreSetting s
-newArtifactStoreSetting _location _type' =
-    ArtifactStoreSetting'
-        { _encryptionKey = TF.Nil
-        , _location = _location
-        , _type' = _type'
+-- | Construct a new @tag@ settings value.
+newAutoscalingGroupTag
+    :: TF.Attr s P.Text -- ^ 'P._key': @key@
+    -> TF.Attr s P.Bool -- ^ 'P._propagateAtLaunch': @propagate_at_launch@
+    -> TF.Attr s P.Text -- ^ 'P._value': @value@
+    -> AutoscalingGroupTag s
+newAutoscalingGroupTag _key _propagateAtLaunch _value =
+    AutoscalingGroupTag'
+        { _key = _key
+        , _propagateAtLaunch = _propagateAtLaunch
+        , _value = _value
         }
 
-instance TF.IsValue  (ArtifactStoreSetting s)
-instance TF.IsObject (ArtifactStoreSetting s) where
-    toObject ArtifactStoreSetting'{..} = P.catMaybes
-        [ TF.assign "encryption_key" <$> TF.attribute _encryptionKey
-        , TF.assign "location" <$> TF.attribute _location
-        , TF.assign "type" <$> TF.attribute _type'
+instance TF.IsValue  (AutoscalingGroupTag s)
+instance TF.IsObject (AutoscalingGroupTag s) where
+    toObject AutoscalingGroupTag'{..} = P.catMaybes
+        [ TF.assign "key" <$> TF.attribute _key
+        , TF.assign "propagate_at_launch" <$> TF.attribute _propagateAtLaunch
+        , TF.assign "value" <$> TF.attribute _value
         ]
 
-instance TF.IsValid (ArtifactStoreSetting s) where
+instance TF.IsValid (AutoscalingGroupTag s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_encryptionKey"
-                  (_encryptionKey
-                      :: ArtifactStoreSetting s -> TF.Attr s (EncryptionKeySetting s))
+
+instance P.HasKey (AutoscalingGroupTag s) (TF.Attr s P.Text) where
+    key =
+        P.lens (_key :: AutoscalingGroupTag s -> TF.Attr s P.Text)
+               (\s a -> s { _key = a } :: AutoscalingGroupTag s)
+
+instance P.HasPropagateAtLaunch (AutoscalingGroupTag s) (TF.Attr s P.Bool) where
+    propagateAtLaunch =
+        P.lens (_propagateAtLaunch :: AutoscalingGroupTag s -> TF.Attr s P.Bool)
+               (\s a -> s { _propagateAtLaunch = a } :: AutoscalingGroupTag s)
+
+instance P.HasValue (AutoscalingGroupTag s) (TF.Attr s P.Text) where
+    value =
+        P.lens (_value :: AutoscalingGroupTag s -> TF.Attr s P.Text)
+               (\s a -> s { _value = a } :: AutoscalingGroupTag s)
+
+-- | @filter@ nested settings.
+data AutoscalingGroupsFilter s = AutoscalingGroupsFilter'
+    { _name   :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    , _values :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @values@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @filter@ settings value.
+newAutoscalingGroupsFilter
+    :: TF.Attr s P.Text -- ^ 'P._name': @name@
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ 'P._values': @values@
+    -> AutoscalingGroupsFilter s
+newAutoscalingGroupsFilter _name _values =
+    AutoscalingGroupsFilter'
+        { _name = _name
+        , _values = _values
+        }
+
+instance TF.IsValue  (AutoscalingGroupsFilter s)
+instance TF.IsObject (AutoscalingGroupsFilter s) where
+    toObject AutoscalingGroupsFilter'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "values" <$> TF.attribute _values
+        ]
+
+instance TF.IsValid (AutoscalingGroupsFilter s) where
+    validator = P.mempty
+
+instance P.HasName (AutoscalingGroupsFilter s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: AutoscalingGroupsFilter s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: AutoscalingGroupsFilter s)
+
+instance P.HasValues (AutoscalingGroupsFilter s) (TF.Attr s [TF.Attr s P.Text]) where
+    values =
+        P.lens (_values :: AutoscalingGroupsFilter s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _values = a } :: AutoscalingGroupsFilter s)
+
+-- | @customized_metric_specification@ nested settings.
+data AutoscalingPolicyCustomizedMetricSpecification s = AutoscalingPolicyCustomizedMetricSpecification'
+    { _metricDimension :: TF.Attr s [TF.Attr s (AutoscalingPolicyMetricDimension s)]
+    -- ^ @metric_dimension@ - (Optional)
+    --
+    , _metricName :: TF.Attr s P.Text
+    -- ^ @metric_name@ - (Required)
+    --
+    , _namespace :: TF.Attr s P.Text
+    -- ^ @namespace@ - (Required)
+    --
+    , _statistic :: TF.Attr s P.Text
+    -- ^ @statistic@ - (Required)
+    --
+    , _unit :: TF.Attr s P.Text
+    -- ^ @unit@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @customized_metric_specification@ settings value.
+newAutoscalingPolicyCustomizedMetricSpecification
+    :: TF.Attr s P.Text -- ^ 'P._metricName': @metric_name@
+    -> TF.Attr s P.Text -- ^ 'P._namespace': @namespace@
+    -> TF.Attr s P.Text -- ^ 'P._statistic': @statistic@
+    -> AutoscalingPolicyCustomizedMetricSpecification s
+newAutoscalingPolicyCustomizedMetricSpecification _metricName _namespace _statistic =
+    AutoscalingPolicyCustomizedMetricSpecification'
+        { _metricDimension = TF.Nil
+        , _metricName = _metricName
+        , _namespace = _namespace
+        , _statistic = _statistic
+        , _unit = TF.Nil
+        }
+
+instance TF.IsValue  (AutoscalingPolicyCustomizedMetricSpecification s)
+instance TF.IsObject (AutoscalingPolicyCustomizedMetricSpecification s) where
+    toObject AutoscalingPolicyCustomizedMetricSpecification'{..} = P.catMaybes
+        [ TF.assign "metric_dimension" <$> TF.attribute _metricDimension
+        , TF.assign "metric_name" <$> TF.attribute _metricName
+        , TF.assign "namespace" <$> TF.attribute _namespace
+        , TF.assign "statistic" <$> TF.attribute _statistic
+        , TF.assign "unit" <$> TF.attribute _unit
+        ]
+
+instance TF.IsValid (AutoscalingPolicyCustomizedMetricSpecification s) where
+    validator = P.mempty
+
+instance P.HasMetricDimension (AutoscalingPolicyCustomizedMetricSpecification s) (TF.Attr s [TF.Attr s (AutoscalingPolicyMetricDimension s)]) where
+    metricDimension =
+        P.lens (_metricDimension :: AutoscalingPolicyCustomizedMetricSpecification s -> TF.Attr s [TF.Attr s (AutoscalingPolicyMetricDimension s)])
+               (\s a -> s { _metricDimension = a } :: AutoscalingPolicyCustomizedMetricSpecification s)
+
+instance P.HasMetricName (AutoscalingPolicyCustomizedMetricSpecification s) (TF.Attr s P.Text) where
+    metricName =
+        P.lens (_metricName :: AutoscalingPolicyCustomizedMetricSpecification s -> TF.Attr s P.Text)
+               (\s a -> s { _metricName = a } :: AutoscalingPolicyCustomizedMetricSpecification s)
+
+instance P.HasNamespace (AutoscalingPolicyCustomizedMetricSpecification s) (TF.Attr s P.Text) where
+    namespace =
+        P.lens (_namespace :: AutoscalingPolicyCustomizedMetricSpecification s -> TF.Attr s P.Text)
+               (\s a -> s { _namespace = a } :: AutoscalingPolicyCustomizedMetricSpecification s)
+
+instance P.HasStatistic (AutoscalingPolicyCustomizedMetricSpecification s) (TF.Attr s P.Text) where
+    statistic =
+        P.lens (_statistic :: AutoscalingPolicyCustomizedMetricSpecification s -> TF.Attr s P.Text)
+               (\s a -> s { _statistic = a } :: AutoscalingPolicyCustomizedMetricSpecification s)
+
+instance P.HasUnit (AutoscalingPolicyCustomizedMetricSpecification s) (TF.Attr s P.Text) where
+    unit =
+        P.lens (_unit :: AutoscalingPolicyCustomizedMetricSpecification s -> TF.Attr s P.Text)
+               (\s a -> s { _unit = a } :: AutoscalingPolicyCustomizedMetricSpecification s)
+
+-- | @target_tracking_configuration@ nested settings.
+data AutoscalingPolicyTargetTrackingConfiguration s = AutoscalingPolicyTargetTrackingConfiguration'
+    { _customizedMetricSpecification :: TF.Attr s (AutoscalingPolicyCustomizedMetricSpecification s)
+    -- ^ @customized_metric_specification@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'predefinedMetricSpecification'
+    , _disableScaleIn :: TF.Attr s P.Bool
+    -- ^ @disable_scale_in@ - (Optional)
+    --
+    , _predefinedMetricSpecification :: TF.Attr s (AutoscalingPolicyPredefinedMetricSpecification s)
+    -- ^ @predefined_metric_specification@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'customizedMetricSpecification'
+    , _targetValue :: TF.Attr s P.Double
+    -- ^ @target_value@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @target_tracking_configuration@ settings value.
+newAutoscalingPolicyTargetTrackingConfiguration
+    :: TF.Attr s P.Double -- ^ 'P._targetValue': @target_value@
+    -> AutoscalingPolicyTargetTrackingConfiguration s
+newAutoscalingPolicyTargetTrackingConfiguration _targetValue =
+    AutoscalingPolicyTargetTrackingConfiguration'
+        { _customizedMetricSpecification = TF.Nil
+        , _disableScaleIn = TF.value P.False
+        , _predefinedMetricSpecification = TF.Nil
+        , _targetValue = _targetValue
+        }
+
+instance TF.IsValue  (AutoscalingPolicyTargetTrackingConfiguration s)
+instance TF.IsObject (AutoscalingPolicyTargetTrackingConfiguration s) where
+    toObject AutoscalingPolicyTargetTrackingConfiguration'{..} = P.catMaybes
+        [ TF.assign "customized_metric_specification" <$> TF.attribute _customizedMetricSpecification
+        , TF.assign "disable_scale_in" <$> TF.attribute _disableScaleIn
+        , TF.assign "predefined_metric_specification" <$> TF.attribute _predefinedMetricSpecification
+        , TF.assign "target_value" <$> TF.attribute _targetValue
+        ]
+
+instance TF.IsValid (AutoscalingPolicyTargetTrackingConfiguration s) where
+    validator = TF.fieldsValidator (\AutoscalingPolicyTargetTrackingConfiguration'{..} -> Map.fromList $ P.catMaybes
+        [ if (_customizedMetricSpecification P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_customizedMetricSpecification",
+                            [ "_predefinedMetricSpecification"
+                            ])
+        , if (_predefinedMetricSpecification P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_predefinedMetricSpecification",
+                            [ "_customizedMetricSpecification"
+                            ])
+        ])
+           P.<> TF.settingsValidator "_customizedMetricSpecification"
+                  (_customizedMetricSpecification
+                      :: AutoscalingPolicyTargetTrackingConfiguration s -> TF.Attr s (AutoscalingPolicyCustomizedMetricSpecification s))
+                  TF.validator
+           P.<> TF.settingsValidator "_predefinedMetricSpecification"
+                  (_predefinedMetricSpecification
+                      :: AutoscalingPolicyTargetTrackingConfiguration s -> TF.Attr s (AutoscalingPolicyPredefinedMetricSpecification s))
                   TF.validator
 
-instance P.HasEncryptionKey (ArtifactStoreSetting s) (TF.Attr s (EncryptionKeySetting s)) where
-    encryptionKey =
-        P.lens (_encryptionKey :: ArtifactStoreSetting s -> TF.Attr s (EncryptionKeySetting s))
-               (\s a -> s { _encryptionKey = a } :: ArtifactStoreSetting s)
+instance P.HasCustomizedMetricSpecification (AutoscalingPolicyTargetTrackingConfiguration s) (TF.Attr s (AutoscalingPolicyCustomizedMetricSpecification s)) where
+    customizedMetricSpecification =
+        P.lens (_customizedMetricSpecification :: AutoscalingPolicyTargetTrackingConfiguration s -> TF.Attr s (AutoscalingPolicyCustomizedMetricSpecification s))
+               (\s a -> s { _customizedMetricSpecification = a } :: AutoscalingPolicyTargetTrackingConfiguration s)
 
-instance P.HasLocation (ArtifactStoreSetting s) (TF.Attr s P.Text) where
-    location =
-        P.lens (_location :: ArtifactStoreSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _location = a } :: ArtifactStoreSetting s)
+instance P.HasDisableScaleIn (AutoscalingPolicyTargetTrackingConfiguration s) (TF.Attr s P.Bool) where
+    disableScaleIn =
+        P.lens (_disableScaleIn :: AutoscalingPolicyTargetTrackingConfiguration s -> TF.Attr s P.Bool)
+               (\s a -> s { _disableScaleIn = a } :: AutoscalingPolicyTargetTrackingConfiguration s)
 
-instance P.HasType' (ArtifactStoreSetting s) (TF.Attr s P.Text) where
-    type' =
-        P.lens (_type' :: ArtifactStoreSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a } :: ArtifactStoreSetting s)
+instance P.HasPredefinedMetricSpecification (AutoscalingPolicyTargetTrackingConfiguration s) (TF.Attr s (AutoscalingPolicyPredefinedMetricSpecification s)) where
+    predefinedMetricSpecification =
+        P.lens (_predefinedMetricSpecification :: AutoscalingPolicyTargetTrackingConfiguration s -> TF.Attr s (AutoscalingPolicyPredefinedMetricSpecification s))
+               (\s a -> s { _predefinedMetricSpecification = a } :: AutoscalingPolicyTargetTrackingConfiguration s)
 
--- | @encryption_key@ nested settings.
-data EncryptionKeySetting s = EncryptionKeySetting'
-    { _id    :: TF.Attr s P.Text
-    -- ^ @id@ - (Required)
+instance P.HasTargetValue (AutoscalingPolicyTargetTrackingConfiguration s) (TF.Attr s P.Double) where
+    targetValue =
+        P.lens (_targetValue :: AutoscalingPolicyTargetTrackingConfiguration s -> TF.Attr s P.Double)
+               (\s a -> s { _targetValue = a } :: AutoscalingPolicyTargetTrackingConfiguration s)
+
+-- | @predefined_metric_specification@ nested settings.
+data AutoscalingPolicyPredefinedMetricSpecification s = AutoscalingPolicyPredefinedMetricSpecification'
+    { _predefinedMetricType :: TF.Attr s P.Text
+    -- ^ @predefined_metric_type@ - (Required)
     --
-    , _type' :: TF.Attr s P.Text
-    -- ^ @type@ - (Required)
+    , _resourceLabel        :: TF.Attr s P.Text
+    -- ^ @resource_label@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
--- | Construct a new @encryption_key@ settings value.
-newEncryptionKeySetting
-    :: TF.Attr s P.Text -- ^ 'P._id': @id@
+-- | Construct a new @predefined_metric_specification@ settings value.
+newAutoscalingPolicyPredefinedMetricSpecification
+    :: TF.Attr s P.Text -- ^ 'P._predefinedMetricType': @predefined_metric_type@
+    -> AutoscalingPolicyPredefinedMetricSpecification s
+newAutoscalingPolicyPredefinedMetricSpecification _predefinedMetricType =
+    AutoscalingPolicyPredefinedMetricSpecification'
+        { _predefinedMetricType = _predefinedMetricType
+        , _resourceLabel = TF.Nil
+        }
+
+instance TF.IsValue  (AutoscalingPolicyPredefinedMetricSpecification s)
+instance TF.IsObject (AutoscalingPolicyPredefinedMetricSpecification s) where
+    toObject AutoscalingPolicyPredefinedMetricSpecification'{..} = P.catMaybes
+        [ TF.assign "predefined_metric_type" <$> TF.attribute _predefinedMetricType
+        , TF.assign "resource_label" <$> TF.attribute _resourceLabel
+        ]
+
+instance TF.IsValid (AutoscalingPolicyPredefinedMetricSpecification s) where
+    validator = P.mempty
+
+instance P.HasPredefinedMetricType (AutoscalingPolicyPredefinedMetricSpecification s) (TF.Attr s P.Text) where
+    predefinedMetricType =
+        P.lens (_predefinedMetricType :: AutoscalingPolicyPredefinedMetricSpecification s -> TF.Attr s P.Text)
+               (\s a -> s { _predefinedMetricType = a } :: AutoscalingPolicyPredefinedMetricSpecification s)
+
+instance P.HasResourceLabel (AutoscalingPolicyPredefinedMetricSpecification s) (TF.Attr s P.Text) where
+    resourceLabel =
+        P.lens (_resourceLabel :: AutoscalingPolicyPredefinedMetricSpecification s -> TF.Attr s P.Text)
+               (\s a -> s { _resourceLabel = a } :: AutoscalingPolicyPredefinedMetricSpecification s)
+
+-- | @metric_dimension@ nested settings.
+data AutoscalingPolicyMetricDimension s = AutoscalingPolicyMetricDimension'
+    { _name  :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    , _value :: TF.Attr s P.Text
+    -- ^ @value@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @metric_dimension@ settings value.
+newAutoscalingPolicyMetricDimension
+    :: TF.Attr s P.Text -- ^ 'P._name': @name@
+    -> TF.Attr s P.Text -- ^ 'P._value': @value@
+    -> AutoscalingPolicyMetricDimension s
+newAutoscalingPolicyMetricDimension _name _value =
+    AutoscalingPolicyMetricDimension'
+        { _name = _name
+        , _value = _value
+        }
+
+instance TF.IsValue  (AutoscalingPolicyMetricDimension s)
+instance TF.IsObject (AutoscalingPolicyMetricDimension s) where
+    toObject AutoscalingPolicyMetricDimension'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "value" <$> TF.attribute _value
+        ]
+
+instance TF.IsValid (AutoscalingPolicyMetricDimension s) where
+    validator = P.mempty
+
+instance P.HasName (AutoscalingPolicyMetricDimension s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: AutoscalingPolicyMetricDimension s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: AutoscalingPolicyMetricDimension s)
+
+instance P.HasValue (AutoscalingPolicyMetricDimension s) (TF.Attr s P.Text) where
+    value =
+        P.lens (_value :: AutoscalingPolicyMetricDimension s -> TF.Attr s P.Text)
+               (\s a -> s { _value = a } :: AutoscalingPolicyMetricDimension s)
+
+-- | @step_adjustment@ nested settings.
+data AutoscalingPolicyStepAdjustment s = AutoscalingPolicyStepAdjustment'
+    { _metricIntervalLowerBound :: TF.Attr s P.Text
+    -- ^ @metric_interval_lower_bound@ - (Optional)
+    --
+    , _metricIntervalUpperBound :: TF.Attr s P.Text
+    -- ^ @metric_interval_upper_bound@ - (Optional)
+    --
+    , _scalingAdjustment        :: TF.Attr s P.Int
+    -- ^ @scaling_adjustment@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @step_adjustment@ settings value.
+newAutoscalingPolicyStepAdjustment
+    :: TF.Attr s P.Int -- ^ 'P._scalingAdjustment': @scaling_adjustment@
+    -> AutoscalingPolicyStepAdjustment s
+newAutoscalingPolicyStepAdjustment _scalingAdjustment =
+    AutoscalingPolicyStepAdjustment'
+        { _metricIntervalLowerBound = TF.Nil
+        , _metricIntervalUpperBound = TF.Nil
+        , _scalingAdjustment = _scalingAdjustment
+        }
+
+instance TF.IsValue  (AutoscalingPolicyStepAdjustment s)
+instance TF.IsObject (AutoscalingPolicyStepAdjustment s) where
+    toObject AutoscalingPolicyStepAdjustment'{..} = P.catMaybes
+        [ TF.assign "metric_interval_lower_bound" <$> TF.attribute _metricIntervalLowerBound
+        , TF.assign "metric_interval_upper_bound" <$> TF.attribute _metricIntervalUpperBound
+        , TF.assign "scaling_adjustment" <$> TF.attribute _scalingAdjustment
+        ]
+
+instance TF.IsValid (AutoscalingPolicyStepAdjustment s) where
+    validator = P.mempty
+
+instance P.HasMetricIntervalLowerBound (AutoscalingPolicyStepAdjustment s) (TF.Attr s P.Text) where
+    metricIntervalLowerBound =
+        P.lens (_metricIntervalLowerBound :: AutoscalingPolicyStepAdjustment s -> TF.Attr s P.Text)
+               (\s a -> s { _metricIntervalLowerBound = a } :: AutoscalingPolicyStepAdjustment s)
+
+instance P.HasMetricIntervalUpperBound (AutoscalingPolicyStepAdjustment s) (TF.Attr s P.Text) where
+    metricIntervalUpperBound =
+        P.lens (_metricIntervalUpperBound :: AutoscalingPolicyStepAdjustment s -> TF.Attr s P.Text)
+               (\s a -> s { _metricIntervalUpperBound = a } :: AutoscalingPolicyStepAdjustment s)
+
+instance P.HasScalingAdjustment (AutoscalingPolicyStepAdjustment s) (TF.Attr s P.Int) where
+    scalingAdjustment =
+        P.lens (_scalingAdjustment :: AutoscalingPolicyStepAdjustment s -> TF.Attr s P.Int)
+               (\s a -> s { _scalingAdjustment = a } :: AutoscalingPolicyStepAdjustment s)
+
+-- | @compute_resources@ nested settings.
+data BatchComputeEnvironmentComputeResources s = BatchComputeEnvironmentComputeResources'
+    { _bidPercentage    :: TF.Attr s P.Int
+    -- ^ @bid_percentage@ - (Optional, Forces New)
+    --
+    , _desiredVcpus     :: TF.Attr s P.Int
+    -- ^ @desired_vcpus@ - (Optional)
+    --
+    , _ec2KeyPair       :: TF.Attr s P.Text
+    -- ^ @ec2_key_pair@ - (Optional, Forces New)
+    --
+    , _imageId          :: TF.Attr s P.Text
+    -- ^ @image_id@ - (Optional, Forces New)
+    --
+    , _instanceRole     :: TF.Attr s P.Text
+    -- ^ @instance_role@ - (Required, Forces New)
+    --
+    , _instanceType     :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @instance_type@ - (Required, Forces New)
+    --
+    , _maxVcpus         :: TF.Attr s P.Int
+    -- ^ @max_vcpus@ - (Required)
+    --
+    , _minVcpus         :: TF.Attr s P.Int
+    -- ^ @min_vcpus@ - (Required)
+    --
+    , _securityGroupIds :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @security_group_ids@ - (Required, Forces New)
+    --
+    , _spotIamFleetRole :: TF.Attr s P.Text
+    -- ^ @spot_iam_fleet_role@ - (Optional, Forces New)
+    --
+    , _subnets          :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @subnets@ - (Required, Forces New)
+    --
+    , _tags             :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @tags@ - (Optional)
+    --
+    , _type'            :: TF.Attr s P.Text
+    -- ^ @type@ - (Required, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @compute_resources@ settings value.
+newBatchComputeEnvironmentComputeResources
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ 'P._securityGroupIds': @security_group_ids@
+    -> TF.Attr s P.Text -- ^ 'P._instanceRole': @instance_role@
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ 'P._subnets': @subnets@
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ 'P._instanceType': @instance_type@
     -> TF.Attr s P.Text -- ^ 'P._type'': @type@
-    -> EncryptionKeySetting s
-newEncryptionKeySetting _id _type' =
-    EncryptionKeySetting'
-        { _id = _id
+    -> TF.Attr s P.Int -- ^ 'P._maxVcpus': @max_vcpus@
+    -> TF.Attr s P.Int -- ^ 'P._minVcpus': @min_vcpus@
+    -> BatchComputeEnvironmentComputeResources s
+newBatchComputeEnvironmentComputeResources _securityGroupIds _instanceRole _subnets _instanceType _type' _maxVcpus _minVcpus =
+    BatchComputeEnvironmentComputeResources'
+        { _bidPercentage = TF.Nil
+        , _desiredVcpus = TF.Nil
+        , _ec2KeyPair = TF.Nil
+        , _imageId = TF.Nil
+        , _instanceRole = _instanceRole
+        , _instanceType = _instanceType
+        , _maxVcpus = _maxVcpus
+        , _minVcpus = _minVcpus
+        , _securityGroupIds = _securityGroupIds
+        , _spotIamFleetRole = TF.Nil
+        , _subnets = _subnets
+        , _tags = TF.Nil
         , _type' = _type'
         }
 
-instance TF.IsValue  (EncryptionKeySetting s)
-instance TF.IsObject (EncryptionKeySetting s) where
-    toObject EncryptionKeySetting'{..} = P.catMaybes
-        [ TF.assign "id" <$> TF.attribute _id
+instance TF.IsValue  (BatchComputeEnvironmentComputeResources s)
+instance TF.IsObject (BatchComputeEnvironmentComputeResources s) where
+    toObject BatchComputeEnvironmentComputeResources'{..} = P.catMaybes
+        [ TF.assign "bid_percentage" <$> TF.attribute _bidPercentage
+        , TF.assign "desired_vcpus" <$> TF.attribute _desiredVcpus
+        , TF.assign "ec2_key_pair" <$> TF.attribute _ec2KeyPair
+        , TF.assign "image_id" <$> TF.attribute _imageId
+        , TF.assign "instance_role" <$> TF.attribute _instanceRole
+        , TF.assign "instance_type" <$> TF.attribute _instanceType
+        , TF.assign "max_vcpus" <$> TF.attribute _maxVcpus
+        , TF.assign "min_vcpus" <$> TF.attribute _minVcpus
+        , TF.assign "security_group_ids" <$> TF.attribute _securityGroupIds
+        , TF.assign "spot_iam_fleet_role" <$> TF.attribute _spotIamFleetRole
+        , TF.assign "subnets" <$> TF.attribute _subnets
+        , TF.assign "tags" <$> TF.attribute _tags
         , TF.assign "type" <$> TF.attribute _type'
         ]
 
-instance TF.IsValid (EncryptionKeySetting s) where
+instance TF.IsValid (BatchComputeEnvironmentComputeResources s) where
     validator = P.mempty
 
-instance P.HasId (EncryptionKeySetting s) (TF.Attr s P.Text) where
-    id =
-        P.lens (_id :: EncryptionKeySetting s -> TF.Attr s P.Text)
-               (\s a -> s { _id = a } :: EncryptionKeySetting s)
+instance P.HasBidPercentage (BatchComputeEnvironmentComputeResources s) (TF.Attr s P.Int) where
+    bidPercentage =
+        P.lens (_bidPercentage :: BatchComputeEnvironmentComputeResources s -> TF.Attr s P.Int)
+               (\s a -> s { _bidPercentage = a } :: BatchComputeEnvironmentComputeResources s)
 
-instance P.HasType' (EncryptionKeySetting s) (TF.Attr s P.Text) where
+instance P.HasDesiredVcpus (BatchComputeEnvironmentComputeResources s) (TF.Attr s P.Int) where
+    desiredVcpus =
+        P.lens (_desiredVcpus :: BatchComputeEnvironmentComputeResources s -> TF.Attr s P.Int)
+               (\s a -> s { _desiredVcpus = a } :: BatchComputeEnvironmentComputeResources s)
+
+instance P.HasEc2KeyPair (BatchComputeEnvironmentComputeResources s) (TF.Attr s P.Text) where
+    ec2KeyPair =
+        P.lens (_ec2KeyPair :: BatchComputeEnvironmentComputeResources s -> TF.Attr s P.Text)
+               (\s a -> s { _ec2KeyPair = a } :: BatchComputeEnvironmentComputeResources s)
+
+instance P.HasImageId (BatchComputeEnvironmentComputeResources s) (TF.Attr s P.Text) where
+    imageId =
+        P.lens (_imageId :: BatchComputeEnvironmentComputeResources s -> TF.Attr s P.Text)
+               (\s a -> s { _imageId = a } :: BatchComputeEnvironmentComputeResources s)
+
+instance P.HasInstanceRole (BatchComputeEnvironmentComputeResources s) (TF.Attr s P.Text) where
+    instanceRole =
+        P.lens (_instanceRole :: BatchComputeEnvironmentComputeResources s -> TF.Attr s P.Text)
+               (\s a -> s { _instanceRole = a } :: BatchComputeEnvironmentComputeResources s)
+
+instance P.HasInstanceType (BatchComputeEnvironmentComputeResources s) (TF.Attr s [TF.Attr s P.Text]) where
+    instanceType =
+        P.lens (_instanceType :: BatchComputeEnvironmentComputeResources s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _instanceType = a } :: BatchComputeEnvironmentComputeResources s)
+
+instance P.HasMaxVcpus (BatchComputeEnvironmentComputeResources s) (TF.Attr s P.Int) where
+    maxVcpus =
+        P.lens (_maxVcpus :: BatchComputeEnvironmentComputeResources s -> TF.Attr s P.Int)
+               (\s a -> s { _maxVcpus = a } :: BatchComputeEnvironmentComputeResources s)
+
+instance P.HasMinVcpus (BatchComputeEnvironmentComputeResources s) (TF.Attr s P.Int) where
+    minVcpus =
+        P.lens (_minVcpus :: BatchComputeEnvironmentComputeResources s -> TF.Attr s P.Int)
+               (\s a -> s { _minVcpus = a } :: BatchComputeEnvironmentComputeResources s)
+
+instance P.HasSecurityGroupIds (BatchComputeEnvironmentComputeResources s) (TF.Attr s [TF.Attr s P.Text]) where
+    securityGroupIds =
+        P.lens (_securityGroupIds :: BatchComputeEnvironmentComputeResources s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _securityGroupIds = a } :: BatchComputeEnvironmentComputeResources s)
+
+instance P.HasSpotIamFleetRole (BatchComputeEnvironmentComputeResources s) (TF.Attr s P.Text) where
+    spotIamFleetRole =
+        P.lens (_spotIamFleetRole :: BatchComputeEnvironmentComputeResources s -> TF.Attr s P.Text)
+               (\s a -> s { _spotIamFleetRole = a } :: BatchComputeEnvironmentComputeResources s)
+
+instance P.HasSubnets (BatchComputeEnvironmentComputeResources s) (TF.Attr s [TF.Attr s P.Text]) where
+    subnets =
+        P.lens (_subnets :: BatchComputeEnvironmentComputeResources s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _subnets = a } :: BatchComputeEnvironmentComputeResources s)
+
+instance P.HasTags (BatchComputeEnvironmentComputeResources s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    tags =
+        P.lens (_tags :: BatchComputeEnvironmentComputeResources s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _tags = a } :: BatchComputeEnvironmentComputeResources s)
+
+instance P.HasType' (BatchComputeEnvironmentComputeResources s) (TF.Attr s P.Text) where
     type' =
-        P.lens (_type' :: EncryptionKeySetting s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a } :: EncryptionKeySetting s)
+        P.lens (_type' :: BatchComputeEnvironmentComputeResources s -> TF.Attr s P.Text)
+               (\s a -> s { _type' = a } :: BatchComputeEnvironmentComputeResources s)
+
+-- | @retry_strategy@ nested settings.
+data BatchJobDefinitionRetryStrategy s = BatchJobDefinitionRetryStrategy'
+    { _attempts :: TF.Attr s P.Int
+    -- ^ @attempts@ - (Optional, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @retry_strategy@ settings value.
+newBatchJobDefinitionRetryStrategy
+    :: BatchJobDefinitionRetryStrategy s
+newBatchJobDefinitionRetryStrategy =
+    BatchJobDefinitionRetryStrategy'
+        { _attempts = TF.Nil
+        }
+
+instance TF.IsValue  (BatchJobDefinitionRetryStrategy s)
+instance TF.IsObject (BatchJobDefinitionRetryStrategy s) where
+    toObject BatchJobDefinitionRetryStrategy'{..} = P.catMaybes
+        [ TF.assign "attempts" <$> TF.attribute _attempts
+        ]
+
+instance TF.IsValid (BatchJobDefinitionRetryStrategy s) where
+    validator = P.mempty
+
+instance P.HasAttempts (BatchJobDefinitionRetryStrategy s) (TF.Attr s P.Int) where
+    attempts =
+        P.lens (_attempts :: BatchJobDefinitionRetryStrategy s -> TF.Attr s P.Int)
+               (\s a -> s { _attempts = a } :: BatchJobDefinitionRetryStrategy s)
+
+-- | @timeout@ nested settings.
+data BatchJobDefinitionTimeout s = BatchJobDefinitionTimeout'
+    { _attemptDurationSeconds :: TF.Attr s P.Int
+    -- ^ @attempt_duration_seconds@ - (Optional, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @timeout@ settings value.
+newBatchJobDefinitionTimeout
+    :: BatchJobDefinitionTimeout s
+newBatchJobDefinitionTimeout =
+    BatchJobDefinitionTimeout'
+        { _attemptDurationSeconds = TF.Nil
+        }
+
+instance TF.IsValue  (BatchJobDefinitionTimeout s)
+instance TF.IsObject (BatchJobDefinitionTimeout s) where
+    toObject BatchJobDefinitionTimeout'{..} = P.catMaybes
+        [ TF.assign "attempt_duration_seconds" <$> TF.attribute _attemptDurationSeconds
+        ]
+
+instance TF.IsValid (BatchJobDefinitionTimeout s) where
+    validator = P.mempty
+
+instance P.HasAttemptDurationSeconds (BatchJobDefinitionTimeout s) (TF.Attr s P.Int) where
+    attemptDurationSeconds =
+        P.lens (_attemptDurationSeconds :: BatchJobDefinitionTimeout s -> TF.Attr s P.Int)
+               (\s a -> s { _attemptDurationSeconds = a } :: BatchJobDefinitionTimeout s)
+
+-- | @compute_environment_order@ nested settings.
+data BatchJobQueueComputeEnvironmentOrder s = BatchJobQueueComputeEnvironmentOrder'
+    deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @compute_environment_order@ settings value.
+newBatchJobQueueComputeEnvironmentOrder
+    :: BatchJobQueueComputeEnvironmentOrder s
+newBatchJobQueueComputeEnvironmentOrder =
+    BatchJobQueueComputeEnvironmentOrder'
+
+instance TF.IsValue  (BatchJobQueueComputeEnvironmentOrder s)
+instance TF.IsObject (BatchJobQueueComputeEnvironmentOrder s) where
+    toObject BatchJobQueueComputeEnvironmentOrder' = []
+
+instance TF.IsValid (BatchJobQueueComputeEnvironmentOrder s) where
+    validator = P.mempty
+
+instance s ~ s' => P.HasComputedComputeEnvironment (TF.Ref s' (BatchJobQueueComputeEnvironmentOrder s)) (TF.Attr s P.Text) where
+    computedComputeEnvironment x = TF.compute (TF.refKey x) "compute_environment"
+
+instance s ~ s' => P.HasComputedOrder (TF.Ref s' (BatchJobQueueComputeEnvironmentOrder s)) (TF.Attr s P.Int) where
+    computedOrder x = TF.compute (TF.refKey x) "order"
+
+-- | @cost_types@ nested settings.
+data BudgetsBudgetCostTypes s = BudgetsBudgetCostTypes'
+    { _includeCredit            :: TF.Attr s P.Bool
+    -- ^ @include_credit@ - (Optional)
+    --
+    , _includeDiscount          :: TF.Attr s P.Bool
+    -- ^ @include_discount@ - (Optional)
+    --
+    , _includeOtherSubscription :: TF.Attr s P.Bool
+    -- ^ @include_other_subscription@ - (Optional)
+    --
+    , _includeRecurring         :: TF.Attr s P.Bool
+    -- ^ @include_recurring@ - (Optional)
+    --
+    , _includeRefund            :: TF.Attr s P.Bool
+    -- ^ @include_refund@ - (Optional)
+    --
+    , _includeSubscription      :: TF.Attr s P.Bool
+    -- ^ @include_subscription@ - (Optional)
+    --
+    , _includeSupport           :: TF.Attr s P.Bool
+    -- ^ @include_support@ - (Optional)
+    --
+    , _includeTax               :: TF.Attr s P.Bool
+    -- ^ @include_tax@ - (Optional)
+    --
+    , _includeUpfront           :: TF.Attr s P.Bool
+    -- ^ @include_upfront@ - (Optional)
+    --
+    , _useAmortized             :: TF.Attr s P.Bool
+    -- ^ @use_amortized@ - (Optional)
+    --
+    , _useBlended               :: TF.Attr s P.Bool
+    -- ^ @use_blended@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @cost_types@ settings value.
+newBudgetsBudgetCostTypes
+    :: BudgetsBudgetCostTypes s
+newBudgetsBudgetCostTypes =
+    BudgetsBudgetCostTypes'
+        { _includeCredit = TF.value P.True
+        , _includeDiscount = TF.value P.True
+        , _includeOtherSubscription = TF.value P.True
+        , _includeRecurring = TF.value P.True
+        , _includeRefund = TF.value P.True
+        , _includeSubscription = TF.value P.True
+        , _includeSupport = TF.value P.True
+        , _includeTax = TF.value P.True
+        , _includeUpfront = TF.value P.True
+        , _useAmortized = TF.value P.False
+        , _useBlended = TF.value P.False
+        }
+
+instance TF.IsValue  (BudgetsBudgetCostTypes s)
+instance TF.IsObject (BudgetsBudgetCostTypes s) where
+    toObject BudgetsBudgetCostTypes'{..} = P.catMaybes
+        [ TF.assign "include_credit" <$> TF.attribute _includeCredit
+        , TF.assign "include_discount" <$> TF.attribute _includeDiscount
+        , TF.assign "include_other_subscription" <$> TF.attribute _includeOtherSubscription
+        , TF.assign "include_recurring" <$> TF.attribute _includeRecurring
+        , TF.assign "include_refund" <$> TF.attribute _includeRefund
+        , TF.assign "include_subscription" <$> TF.attribute _includeSubscription
+        , TF.assign "include_support" <$> TF.attribute _includeSupport
+        , TF.assign "include_tax" <$> TF.attribute _includeTax
+        , TF.assign "include_upfront" <$> TF.attribute _includeUpfront
+        , TF.assign "use_amortized" <$> TF.attribute _useAmortized
+        , TF.assign "use_blended" <$> TF.attribute _useBlended
+        ]
+
+instance TF.IsValid (BudgetsBudgetCostTypes s) where
+    validator = P.mempty
+
+instance P.HasIncludeCredit (BudgetsBudgetCostTypes s) (TF.Attr s P.Bool) where
+    includeCredit =
+        P.lens (_includeCredit :: BudgetsBudgetCostTypes s -> TF.Attr s P.Bool)
+               (\s a -> s { _includeCredit = a } :: BudgetsBudgetCostTypes s)
+
+instance P.HasIncludeDiscount (BudgetsBudgetCostTypes s) (TF.Attr s P.Bool) where
+    includeDiscount =
+        P.lens (_includeDiscount :: BudgetsBudgetCostTypes s -> TF.Attr s P.Bool)
+               (\s a -> s { _includeDiscount = a } :: BudgetsBudgetCostTypes s)
+
+instance P.HasIncludeOtherSubscription (BudgetsBudgetCostTypes s) (TF.Attr s P.Bool) where
+    includeOtherSubscription =
+        P.lens (_includeOtherSubscription :: BudgetsBudgetCostTypes s -> TF.Attr s P.Bool)
+               (\s a -> s { _includeOtherSubscription = a } :: BudgetsBudgetCostTypes s)
+
+instance P.HasIncludeRecurring (BudgetsBudgetCostTypes s) (TF.Attr s P.Bool) where
+    includeRecurring =
+        P.lens (_includeRecurring :: BudgetsBudgetCostTypes s -> TF.Attr s P.Bool)
+               (\s a -> s { _includeRecurring = a } :: BudgetsBudgetCostTypes s)
+
+instance P.HasIncludeRefund (BudgetsBudgetCostTypes s) (TF.Attr s P.Bool) where
+    includeRefund =
+        P.lens (_includeRefund :: BudgetsBudgetCostTypes s -> TF.Attr s P.Bool)
+               (\s a -> s { _includeRefund = a } :: BudgetsBudgetCostTypes s)
+
+instance P.HasIncludeSubscription (BudgetsBudgetCostTypes s) (TF.Attr s P.Bool) where
+    includeSubscription =
+        P.lens (_includeSubscription :: BudgetsBudgetCostTypes s -> TF.Attr s P.Bool)
+               (\s a -> s { _includeSubscription = a } :: BudgetsBudgetCostTypes s)
+
+instance P.HasIncludeSupport (BudgetsBudgetCostTypes s) (TF.Attr s P.Bool) where
+    includeSupport =
+        P.lens (_includeSupport :: BudgetsBudgetCostTypes s -> TF.Attr s P.Bool)
+               (\s a -> s { _includeSupport = a } :: BudgetsBudgetCostTypes s)
+
+instance P.HasIncludeTax (BudgetsBudgetCostTypes s) (TF.Attr s P.Bool) where
+    includeTax =
+        P.lens (_includeTax :: BudgetsBudgetCostTypes s -> TF.Attr s P.Bool)
+               (\s a -> s { _includeTax = a } :: BudgetsBudgetCostTypes s)
+
+instance P.HasIncludeUpfront (BudgetsBudgetCostTypes s) (TF.Attr s P.Bool) where
+    includeUpfront =
+        P.lens (_includeUpfront :: BudgetsBudgetCostTypes s -> TF.Attr s P.Bool)
+               (\s a -> s { _includeUpfront = a } :: BudgetsBudgetCostTypes s)
+
+instance P.HasUseAmortized (BudgetsBudgetCostTypes s) (TF.Attr s P.Bool) where
+    useAmortized =
+        P.lens (_useAmortized :: BudgetsBudgetCostTypes s -> TF.Attr s P.Bool)
+               (\s a -> s { _useAmortized = a } :: BudgetsBudgetCostTypes s)
+
+instance P.HasUseBlended (BudgetsBudgetCostTypes s) (TF.Attr s P.Bool) where
+    useBlended =
+        P.lens (_useBlended :: BudgetsBudgetCostTypes s -> TF.Attr s P.Bool)
+               (\s a -> s { _useBlended = a } :: BudgetsBudgetCostTypes s)
+
+-- | @cookies@ nested settings.
+data CloudfrontDistributionCookies s = CloudfrontDistributionCookies'
+    { _forward          :: TF.Attr s P.Text
+    -- ^ @forward@ - (Required)
+    --
+    , _whitelistedNames :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @whitelisted_names@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @cookies@ settings value.
+newCloudfrontDistributionCookies
+    :: TF.Attr s P.Text -- ^ 'P._forward': @forward@
+    -> CloudfrontDistributionCookies s
+newCloudfrontDistributionCookies _forward =
+    CloudfrontDistributionCookies'
+        { _forward = _forward
+        , _whitelistedNames = TF.Nil
+        }
+
+instance TF.IsValue  (CloudfrontDistributionCookies s)
+instance TF.IsObject (CloudfrontDistributionCookies s) where
+    toObject CloudfrontDistributionCookies'{..} = P.catMaybes
+        [ TF.assign "forward" <$> TF.attribute _forward
+        , TF.assign "whitelisted_names" <$> TF.attribute _whitelistedNames
+        ]
+
+instance TF.IsValid (CloudfrontDistributionCookies s) where
+    validator = P.mempty
+
+instance P.HasForward (CloudfrontDistributionCookies s) (TF.Attr s P.Text) where
+    forward =
+        P.lens (_forward :: CloudfrontDistributionCookies s -> TF.Attr s P.Text)
+               (\s a -> s { _forward = a } :: CloudfrontDistributionCookies s)
+
+instance P.HasWhitelistedNames (CloudfrontDistributionCookies s) (TF.Attr s [TF.Attr s P.Text]) where
+    whitelistedNames =
+        P.lens (_whitelistedNames :: CloudfrontDistributionCookies s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _whitelistedNames = a } :: CloudfrontDistributionCookies s)
+
+-- | @forwarded_values@ nested settings.
+data CloudfrontDistributionForwardedValues s = CloudfrontDistributionForwardedValues'
+    { _cookies              :: TF.Attr s (CloudfrontDistributionCookies s)
+    -- ^ @cookies@ - (Required)
+    --
+    , _headers              :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @headers@ - (Optional)
+    --
+    , _queryString          :: TF.Attr s P.Bool
+    -- ^ @query_string@ - (Required)
+    --
+    , _queryStringCacheKeys :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @query_string_cache_keys@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @forwarded_values@ settings value.
+newCloudfrontDistributionForwardedValues
+    :: TF.Attr s (CloudfrontDistributionCookies s) -- ^ 'P._cookies': @cookies@
+    -> TF.Attr s P.Bool -- ^ 'P._queryString': @query_string@
+    -> CloudfrontDistributionForwardedValues s
+newCloudfrontDistributionForwardedValues _cookies _queryString =
+    CloudfrontDistributionForwardedValues'
+        { _cookies = _cookies
+        , _headers = TF.Nil
+        , _queryString = _queryString
+        , _queryStringCacheKeys = TF.Nil
+        }
+
+instance TF.IsValue  (CloudfrontDistributionForwardedValues s)
+instance TF.IsObject (CloudfrontDistributionForwardedValues s) where
+    toObject CloudfrontDistributionForwardedValues'{..} = P.catMaybes
+        [ TF.assign "cookies" <$> TF.attribute _cookies
+        , TF.assign "headers" <$> TF.attribute _headers
+        , TF.assign "query_string" <$> TF.attribute _queryString
+        , TF.assign "query_string_cache_keys" <$> TF.attribute _queryStringCacheKeys
+        ]
+
+instance TF.IsValid (CloudfrontDistributionForwardedValues s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_cookies"
+                  (_cookies
+                      :: CloudfrontDistributionForwardedValues s -> TF.Attr s (CloudfrontDistributionCookies s))
+                  TF.validator
+
+instance P.HasCookies (CloudfrontDistributionForwardedValues s) (TF.Attr s (CloudfrontDistributionCookies s)) where
+    cookies =
+        P.lens (_cookies :: CloudfrontDistributionForwardedValues s -> TF.Attr s (CloudfrontDistributionCookies s))
+               (\s a -> s { _cookies = a } :: CloudfrontDistributionForwardedValues s)
+
+instance P.HasHeaders (CloudfrontDistributionForwardedValues s) (TF.Attr s [TF.Attr s P.Text]) where
+    headers =
+        P.lens (_headers :: CloudfrontDistributionForwardedValues s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _headers = a } :: CloudfrontDistributionForwardedValues s)
+
+instance P.HasQueryString (CloudfrontDistributionForwardedValues s) (TF.Attr s P.Bool) where
+    queryString =
+        P.lens (_queryString :: CloudfrontDistributionForwardedValues s -> TF.Attr s P.Bool)
+               (\s a -> s { _queryString = a } :: CloudfrontDistributionForwardedValues s)
+
+instance P.HasQueryStringCacheKeys (CloudfrontDistributionForwardedValues s) (TF.Attr s [TF.Attr s P.Text]) where
+    queryStringCacheKeys =
+        P.lens (_queryStringCacheKeys :: CloudfrontDistributionForwardedValues s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _queryStringCacheKeys = a } :: CloudfrontDistributionForwardedValues s)
+
+-- | @ordered_cache_behavior@ nested settings.
+data CloudfrontDistributionOrderedCacheBehavior s = CloudfrontDistributionOrderedCacheBehavior'
+    { _allowedMethods :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @allowed_methods@ - (Required)
+    --
+    , _cachedMethods :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @cached_methods@ - (Required)
+    --
+    , _compress :: TF.Attr s P.Bool
+    -- ^ @compress@ - (Optional)
+    --
+    , _defaultTtl :: TF.Attr s P.Int
+    -- ^ @default_ttl@ - (Optional)
+    --
+    , _fieldLevelEncryptionId :: TF.Attr s P.Text
+    -- ^ @field_level_encryption_id@ - (Optional)
+    --
+    , _forwardedValues :: TF.Attr s (CloudfrontDistributionForwardedValues s)
+    -- ^ @forwarded_values@ - (Required)
+    --
+    , _lambdaFunctionAssociation :: TF.Attr s [TF.Attr s (CloudfrontDistributionLambdaFunctionAssociation s)]
+    -- ^ @lambda_function_association@ - (Optional)
+    --
+    , _maxTtl :: TF.Attr s P.Int
+    -- ^ @max_ttl@ - (Optional)
+    --
+    , _minTtl :: TF.Attr s P.Int
+    -- ^ @min_ttl@ - (Optional)
+    --
+    , _pathPattern :: TF.Attr s P.Text
+    -- ^ @path_pattern@ - (Required)
+    --
+    , _smoothStreaming :: TF.Attr s P.Bool
+    -- ^ @smooth_streaming@ - (Optional)
+    --
+    , _targetOriginId :: TF.Attr s P.Text
+    -- ^ @target_origin_id@ - (Required)
+    --
+    , _trustedSigners :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @trusted_signers@ - (Optional)
+    --
+    , _viewerProtocolPolicy :: TF.Attr s P.Text
+    -- ^ @viewer_protocol_policy@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @ordered_cache_behavior@ settings value.
+newCloudfrontDistributionOrderedCacheBehavior
+    :: TF.Attr s P.Text -- ^ 'P._targetOriginId': @target_origin_id@
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ 'P._allowedMethods': @allowed_methods@
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ 'P._cachedMethods': @cached_methods@
+    -> TF.Attr s P.Text -- ^ 'P._pathPattern': @path_pattern@
+    -> TF.Attr s P.Text -- ^ 'P._viewerProtocolPolicy': @viewer_protocol_policy@
+    -> TF.Attr s (CloudfrontDistributionForwardedValues s) -- ^ 'P._forwardedValues': @forwarded_values@
+    -> CloudfrontDistributionOrderedCacheBehavior s
+newCloudfrontDistributionOrderedCacheBehavior _targetOriginId _allowedMethods _cachedMethods _pathPattern _viewerProtocolPolicy _forwardedValues =
+    CloudfrontDistributionOrderedCacheBehavior'
+        { _allowedMethods = _allowedMethods
+        , _cachedMethods = _cachedMethods
+        , _compress = TF.value P.False
+        , _defaultTtl = TF.value 86400
+        , _fieldLevelEncryptionId = TF.Nil
+        , _forwardedValues = _forwardedValues
+        , _lambdaFunctionAssociation = TF.Nil
+        , _maxTtl = TF.value 31536000
+        , _minTtl = TF.value 0
+        , _pathPattern = _pathPattern
+        , _smoothStreaming = TF.Nil
+        , _targetOriginId = _targetOriginId
+        , _trustedSigners = TF.Nil
+        , _viewerProtocolPolicy = _viewerProtocolPolicy
+        }
+
+instance TF.IsValue  (CloudfrontDistributionOrderedCacheBehavior s)
+instance TF.IsObject (CloudfrontDistributionOrderedCacheBehavior s) where
+    toObject CloudfrontDistributionOrderedCacheBehavior'{..} = P.catMaybes
+        [ TF.assign "allowed_methods" <$> TF.attribute _allowedMethods
+        , TF.assign "cached_methods" <$> TF.attribute _cachedMethods
+        , TF.assign "compress" <$> TF.attribute _compress
+        , TF.assign "default_ttl" <$> TF.attribute _defaultTtl
+        , TF.assign "field_level_encryption_id" <$> TF.attribute _fieldLevelEncryptionId
+        , TF.assign "forwarded_values" <$> TF.attribute _forwardedValues
+        , TF.assign "lambda_function_association" <$> TF.attribute _lambdaFunctionAssociation
+        , TF.assign "max_ttl" <$> TF.attribute _maxTtl
+        , TF.assign "min_ttl" <$> TF.attribute _minTtl
+        , TF.assign "path_pattern" <$> TF.attribute _pathPattern
+        , TF.assign "smooth_streaming" <$> TF.attribute _smoothStreaming
+        , TF.assign "target_origin_id" <$> TF.attribute _targetOriginId
+        , TF.assign "trusted_signers" <$> TF.attribute _trustedSigners
+        , TF.assign "viewer_protocol_policy" <$> TF.attribute _viewerProtocolPolicy
+        ]
+
+instance TF.IsValid (CloudfrontDistributionOrderedCacheBehavior s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_forwardedValues"
+                  (_forwardedValues
+                      :: CloudfrontDistributionOrderedCacheBehavior s -> TF.Attr s (CloudfrontDistributionForwardedValues s))
+                  TF.validator
+
+instance P.HasAllowedMethods (CloudfrontDistributionOrderedCacheBehavior s) (TF.Attr s [TF.Attr s P.Text]) where
+    allowedMethods =
+        P.lens (_allowedMethods :: CloudfrontDistributionOrderedCacheBehavior s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _allowedMethods = a } :: CloudfrontDistributionOrderedCacheBehavior s)
+
+instance P.HasCachedMethods (CloudfrontDistributionOrderedCacheBehavior s) (TF.Attr s [TF.Attr s P.Text]) where
+    cachedMethods =
+        P.lens (_cachedMethods :: CloudfrontDistributionOrderedCacheBehavior s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _cachedMethods = a } :: CloudfrontDistributionOrderedCacheBehavior s)
+
+instance P.HasCompress (CloudfrontDistributionOrderedCacheBehavior s) (TF.Attr s P.Bool) where
+    compress =
+        P.lens (_compress :: CloudfrontDistributionOrderedCacheBehavior s -> TF.Attr s P.Bool)
+               (\s a -> s { _compress = a } :: CloudfrontDistributionOrderedCacheBehavior s)
+
+instance P.HasDefaultTtl (CloudfrontDistributionOrderedCacheBehavior s) (TF.Attr s P.Int) where
+    defaultTtl =
+        P.lens (_defaultTtl :: CloudfrontDistributionOrderedCacheBehavior s -> TF.Attr s P.Int)
+               (\s a -> s { _defaultTtl = a } :: CloudfrontDistributionOrderedCacheBehavior s)
+
+instance P.HasFieldLevelEncryptionId (CloudfrontDistributionOrderedCacheBehavior s) (TF.Attr s P.Text) where
+    fieldLevelEncryptionId =
+        P.lens (_fieldLevelEncryptionId :: CloudfrontDistributionOrderedCacheBehavior s -> TF.Attr s P.Text)
+               (\s a -> s { _fieldLevelEncryptionId = a } :: CloudfrontDistributionOrderedCacheBehavior s)
+
+instance P.HasForwardedValues (CloudfrontDistributionOrderedCacheBehavior s) (TF.Attr s (CloudfrontDistributionForwardedValues s)) where
+    forwardedValues =
+        P.lens (_forwardedValues :: CloudfrontDistributionOrderedCacheBehavior s -> TF.Attr s (CloudfrontDistributionForwardedValues s))
+               (\s a -> s { _forwardedValues = a } :: CloudfrontDistributionOrderedCacheBehavior s)
+
+instance P.HasLambdaFunctionAssociation (CloudfrontDistributionOrderedCacheBehavior s) (TF.Attr s [TF.Attr s (CloudfrontDistributionLambdaFunctionAssociation s)]) where
+    lambdaFunctionAssociation =
+        P.lens (_lambdaFunctionAssociation :: CloudfrontDistributionOrderedCacheBehavior s -> TF.Attr s [TF.Attr s (CloudfrontDistributionLambdaFunctionAssociation s)])
+               (\s a -> s { _lambdaFunctionAssociation = a } :: CloudfrontDistributionOrderedCacheBehavior s)
+
+instance P.HasMaxTtl (CloudfrontDistributionOrderedCacheBehavior s) (TF.Attr s P.Int) where
+    maxTtl =
+        P.lens (_maxTtl :: CloudfrontDistributionOrderedCacheBehavior s -> TF.Attr s P.Int)
+               (\s a -> s { _maxTtl = a } :: CloudfrontDistributionOrderedCacheBehavior s)
+
+instance P.HasMinTtl (CloudfrontDistributionOrderedCacheBehavior s) (TF.Attr s P.Int) where
+    minTtl =
+        P.lens (_minTtl :: CloudfrontDistributionOrderedCacheBehavior s -> TF.Attr s P.Int)
+               (\s a -> s { _minTtl = a } :: CloudfrontDistributionOrderedCacheBehavior s)
+
+instance P.HasPathPattern (CloudfrontDistributionOrderedCacheBehavior s) (TF.Attr s P.Text) where
+    pathPattern =
+        P.lens (_pathPattern :: CloudfrontDistributionOrderedCacheBehavior s -> TF.Attr s P.Text)
+               (\s a -> s { _pathPattern = a } :: CloudfrontDistributionOrderedCacheBehavior s)
+
+instance P.HasSmoothStreaming (CloudfrontDistributionOrderedCacheBehavior s) (TF.Attr s P.Bool) where
+    smoothStreaming =
+        P.lens (_smoothStreaming :: CloudfrontDistributionOrderedCacheBehavior s -> TF.Attr s P.Bool)
+               (\s a -> s { _smoothStreaming = a } :: CloudfrontDistributionOrderedCacheBehavior s)
+
+instance P.HasTargetOriginId (CloudfrontDistributionOrderedCacheBehavior s) (TF.Attr s P.Text) where
+    targetOriginId =
+        P.lens (_targetOriginId :: CloudfrontDistributionOrderedCacheBehavior s -> TF.Attr s P.Text)
+               (\s a -> s { _targetOriginId = a } :: CloudfrontDistributionOrderedCacheBehavior s)
+
+instance P.HasTrustedSigners (CloudfrontDistributionOrderedCacheBehavior s) (TF.Attr s [TF.Attr s P.Text]) where
+    trustedSigners =
+        P.lens (_trustedSigners :: CloudfrontDistributionOrderedCacheBehavior s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _trustedSigners = a } :: CloudfrontDistributionOrderedCacheBehavior s)
+
+instance P.HasViewerProtocolPolicy (CloudfrontDistributionOrderedCacheBehavior s) (TF.Attr s P.Text) where
+    viewerProtocolPolicy =
+        P.lens (_viewerProtocolPolicy :: CloudfrontDistributionOrderedCacheBehavior s -> TF.Attr s P.Text)
+               (\s a -> s { _viewerProtocolPolicy = a } :: CloudfrontDistributionOrderedCacheBehavior s)
+
+-- | @lambda_function_association@ nested settings.
+data CloudfrontDistributionLambdaFunctionAssociation s = CloudfrontDistributionLambdaFunctionAssociation'
+    { _eventType :: TF.Attr s P.Text
+    -- ^ @event_type@ - (Required)
+    --
+    , _lambdaArn :: TF.Attr s P.Text
+    -- ^ @lambda_arn@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @lambda_function_association@ settings value.
+newCloudfrontDistributionLambdaFunctionAssociation
+    :: TF.Attr s P.Text -- ^ 'P._lambdaArn': @lambda_arn@
+    -> TF.Attr s P.Text -- ^ 'P._eventType': @event_type@
+    -> CloudfrontDistributionLambdaFunctionAssociation s
+newCloudfrontDistributionLambdaFunctionAssociation _lambdaArn _eventType =
+    CloudfrontDistributionLambdaFunctionAssociation'
+        { _eventType = _eventType
+        , _lambdaArn = _lambdaArn
+        }
+
+instance TF.IsValue  (CloudfrontDistributionLambdaFunctionAssociation s)
+instance TF.IsObject (CloudfrontDistributionLambdaFunctionAssociation s) where
+    toObject CloudfrontDistributionLambdaFunctionAssociation'{..} = P.catMaybes
+        [ TF.assign "event_type" <$> TF.attribute _eventType
+        , TF.assign "lambda_arn" <$> TF.attribute _lambdaArn
+        ]
+
+instance TF.IsValid (CloudfrontDistributionLambdaFunctionAssociation s) where
+    validator = P.mempty
+
+instance P.HasEventType (CloudfrontDistributionLambdaFunctionAssociation s) (TF.Attr s P.Text) where
+    eventType =
+        P.lens (_eventType :: CloudfrontDistributionLambdaFunctionAssociation s -> TF.Attr s P.Text)
+               (\s a -> s { _eventType = a } :: CloudfrontDistributionLambdaFunctionAssociation s)
+
+instance P.HasLambdaArn (CloudfrontDistributionLambdaFunctionAssociation s) (TF.Attr s P.Text) where
+    lambdaArn =
+        P.lens (_lambdaArn :: CloudfrontDistributionLambdaFunctionAssociation s -> TF.Attr s P.Text)
+               (\s a -> s { _lambdaArn = a } :: CloudfrontDistributionLambdaFunctionAssociation s)
+
+-- | @default_cache_behavior@ nested settings.
+data CloudfrontDistributionDefaultCacheBehavior s = CloudfrontDistributionDefaultCacheBehavior'
+    { _allowedMethods :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @allowed_methods@ - (Required)
+    --
+    , _cachedMethods :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @cached_methods@ - (Required)
+    --
+    , _compress :: TF.Attr s P.Bool
+    -- ^ @compress@ - (Optional)
+    --
+    , _defaultTtl :: TF.Attr s P.Int
+    -- ^ @default_ttl@ - (Optional)
+    --
+    , _fieldLevelEncryptionId :: TF.Attr s P.Text
+    -- ^ @field_level_encryption_id@ - (Optional)
+    --
+    , _forwardedValues :: TF.Attr s (CloudfrontDistributionForwardedValues s)
+    -- ^ @forwarded_values@ - (Required)
+    --
+    , _lambdaFunctionAssociation :: TF.Attr s [TF.Attr s (CloudfrontDistributionLambdaFunctionAssociation s)]
+    -- ^ @lambda_function_association@ - (Optional)
+    --
+    , _maxTtl :: TF.Attr s P.Int
+    -- ^ @max_ttl@ - (Optional)
+    --
+    , _minTtl :: TF.Attr s P.Int
+    -- ^ @min_ttl@ - (Optional)
+    --
+    , _smoothStreaming :: TF.Attr s P.Bool
+    -- ^ @smooth_streaming@ - (Optional)
+    --
+    , _targetOriginId :: TF.Attr s P.Text
+    -- ^ @target_origin_id@ - (Required)
+    --
+    , _trustedSigners :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @trusted_signers@ - (Optional)
+    --
+    , _viewerProtocolPolicy :: TF.Attr s P.Text
+    -- ^ @viewer_protocol_policy@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @default_cache_behavior@ settings value.
+newCloudfrontDistributionDefaultCacheBehavior
+    :: TF.Attr s P.Text -- ^ 'P._targetOriginId': @target_origin_id@
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ 'P._allowedMethods': @allowed_methods@
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ 'P._cachedMethods': @cached_methods@
+    -> TF.Attr s P.Text -- ^ 'P._viewerProtocolPolicy': @viewer_protocol_policy@
+    -> TF.Attr s (CloudfrontDistributionForwardedValues s) -- ^ 'P._forwardedValues': @forwarded_values@
+    -> CloudfrontDistributionDefaultCacheBehavior s
+newCloudfrontDistributionDefaultCacheBehavior _targetOriginId _allowedMethods _cachedMethods _viewerProtocolPolicy _forwardedValues =
+    CloudfrontDistributionDefaultCacheBehavior'
+        { _allowedMethods = _allowedMethods
+        , _cachedMethods = _cachedMethods
+        , _compress = TF.value P.False
+        , _defaultTtl = TF.value 86400
+        , _fieldLevelEncryptionId = TF.Nil
+        , _forwardedValues = _forwardedValues
+        , _lambdaFunctionAssociation = TF.Nil
+        , _maxTtl = TF.value 31536000
+        , _minTtl = TF.value 0
+        , _smoothStreaming = TF.Nil
+        , _targetOriginId = _targetOriginId
+        , _trustedSigners = TF.Nil
+        , _viewerProtocolPolicy = _viewerProtocolPolicy
+        }
+
+instance TF.IsValue  (CloudfrontDistributionDefaultCacheBehavior s)
+instance TF.IsObject (CloudfrontDistributionDefaultCacheBehavior s) where
+    toObject CloudfrontDistributionDefaultCacheBehavior'{..} = P.catMaybes
+        [ TF.assign "allowed_methods" <$> TF.attribute _allowedMethods
+        , TF.assign "cached_methods" <$> TF.attribute _cachedMethods
+        , TF.assign "compress" <$> TF.attribute _compress
+        , TF.assign "default_ttl" <$> TF.attribute _defaultTtl
+        , TF.assign "field_level_encryption_id" <$> TF.attribute _fieldLevelEncryptionId
+        , TF.assign "forwarded_values" <$> TF.attribute _forwardedValues
+        , TF.assign "lambda_function_association" <$> TF.attribute _lambdaFunctionAssociation
+        , TF.assign "max_ttl" <$> TF.attribute _maxTtl
+        , TF.assign "min_ttl" <$> TF.attribute _minTtl
+        , TF.assign "smooth_streaming" <$> TF.attribute _smoothStreaming
+        , TF.assign "target_origin_id" <$> TF.attribute _targetOriginId
+        , TF.assign "trusted_signers" <$> TF.attribute _trustedSigners
+        , TF.assign "viewer_protocol_policy" <$> TF.attribute _viewerProtocolPolicy
+        ]
+
+instance TF.IsValid (CloudfrontDistributionDefaultCacheBehavior s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_forwardedValues"
+                  (_forwardedValues
+                      :: CloudfrontDistributionDefaultCacheBehavior s -> TF.Attr s (CloudfrontDistributionForwardedValues s))
+                  TF.validator
+
+instance P.HasAllowedMethods (CloudfrontDistributionDefaultCacheBehavior s) (TF.Attr s [TF.Attr s P.Text]) where
+    allowedMethods =
+        P.lens (_allowedMethods :: CloudfrontDistributionDefaultCacheBehavior s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _allowedMethods = a } :: CloudfrontDistributionDefaultCacheBehavior s)
+
+instance P.HasCachedMethods (CloudfrontDistributionDefaultCacheBehavior s) (TF.Attr s [TF.Attr s P.Text]) where
+    cachedMethods =
+        P.lens (_cachedMethods :: CloudfrontDistributionDefaultCacheBehavior s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _cachedMethods = a } :: CloudfrontDistributionDefaultCacheBehavior s)
+
+instance P.HasCompress (CloudfrontDistributionDefaultCacheBehavior s) (TF.Attr s P.Bool) where
+    compress =
+        P.lens (_compress :: CloudfrontDistributionDefaultCacheBehavior s -> TF.Attr s P.Bool)
+               (\s a -> s { _compress = a } :: CloudfrontDistributionDefaultCacheBehavior s)
+
+instance P.HasDefaultTtl (CloudfrontDistributionDefaultCacheBehavior s) (TF.Attr s P.Int) where
+    defaultTtl =
+        P.lens (_defaultTtl :: CloudfrontDistributionDefaultCacheBehavior s -> TF.Attr s P.Int)
+               (\s a -> s { _defaultTtl = a } :: CloudfrontDistributionDefaultCacheBehavior s)
+
+instance P.HasFieldLevelEncryptionId (CloudfrontDistributionDefaultCacheBehavior s) (TF.Attr s P.Text) where
+    fieldLevelEncryptionId =
+        P.lens (_fieldLevelEncryptionId :: CloudfrontDistributionDefaultCacheBehavior s -> TF.Attr s P.Text)
+               (\s a -> s { _fieldLevelEncryptionId = a } :: CloudfrontDistributionDefaultCacheBehavior s)
+
+instance P.HasForwardedValues (CloudfrontDistributionDefaultCacheBehavior s) (TF.Attr s (CloudfrontDistributionForwardedValues s)) where
+    forwardedValues =
+        P.lens (_forwardedValues :: CloudfrontDistributionDefaultCacheBehavior s -> TF.Attr s (CloudfrontDistributionForwardedValues s))
+               (\s a -> s { _forwardedValues = a } :: CloudfrontDistributionDefaultCacheBehavior s)
+
+instance P.HasLambdaFunctionAssociation (CloudfrontDistributionDefaultCacheBehavior s) (TF.Attr s [TF.Attr s (CloudfrontDistributionLambdaFunctionAssociation s)]) where
+    lambdaFunctionAssociation =
+        P.lens (_lambdaFunctionAssociation :: CloudfrontDistributionDefaultCacheBehavior s -> TF.Attr s [TF.Attr s (CloudfrontDistributionLambdaFunctionAssociation s)])
+               (\s a -> s { _lambdaFunctionAssociation = a } :: CloudfrontDistributionDefaultCacheBehavior s)
+
+instance P.HasMaxTtl (CloudfrontDistributionDefaultCacheBehavior s) (TF.Attr s P.Int) where
+    maxTtl =
+        P.lens (_maxTtl :: CloudfrontDistributionDefaultCacheBehavior s -> TF.Attr s P.Int)
+               (\s a -> s { _maxTtl = a } :: CloudfrontDistributionDefaultCacheBehavior s)
+
+instance P.HasMinTtl (CloudfrontDistributionDefaultCacheBehavior s) (TF.Attr s P.Int) where
+    minTtl =
+        P.lens (_minTtl :: CloudfrontDistributionDefaultCacheBehavior s -> TF.Attr s P.Int)
+               (\s a -> s { _minTtl = a } :: CloudfrontDistributionDefaultCacheBehavior s)
+
+instance P.HasSmoothStreaming (CloudfrontDistributionDefaultCacheBehavior s) (TF.Attr s P.Bool) where
+    smoothStreaming =
+        P.lens (_smoothStreaming :: CloudfrontDistributionDefaultCacheBehavior s -> TF.Attr s P.Bool)
+               (\s a -> s { _smoothStreaming = a } :: CloudfrontDistributionDefaultCacheBehavior s)
+
+instance P.HasTargetOriginId (CloudfrontDistributionDefaultCacheBehavior s) (TF.Attr s P.Text) where
+    targetOriginId =
+        P.lens (_targetOriginId :: CloudfrontDistributionDefaultCacheBehavior s -> TF.Attr s P.Text)
+               (\s a -> s { _targetOriginId = a } :: CloudfrontDistributionDefaultCacheBehavior s)
+
+instance P.HasTrustedSigners (CloudfrontDistributionDefaultCacheBehavior s) (TF.Attr s [TF.Attr s P.Text]) where
+    trustedSigners =
+        P.lens (_trustedSigners :: CloudfrontDistributionDefaultCacheBehavior s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _trustedSigners = a } :: CloudfrontDistributionDefaultCacheBehavior s)
+
+instance P.HasViewerProtocolPolicy (CloudfrontDistributionDefaultCacheBehavior s) (TF.Attr s P.Text) where
+    viewerProtocolPolicy =
+        P.lens (_viewerProtocolPolicy :: CloudfrontDistributionDefaultCacheBehavior s -> TF.Attr s P.Text)
+               (\s a -> s { _viewerProtocolPolicy = a } :: CloudfrontDistributionDefaultCacheBehavior s)
+
+-- | @custom_error_response@ nested settings.
+data CloudfrontDistributionCustomErrorResponse s = CloudfrontDistributionCustomErrorResponse'
+    { _errorCachingMinTtl :: TF.Attr s P.Int
+    -- ^ @error_caching_min_ttl@ - (Optional)
+    --
+    , _errorCode          :: TF.Attr s P.Int
+    -- ^ @error_code@ - (Required)
+    --
+    , _responseCode       :: TF.Attr s P.Int
+    -- ^ @response_code@ - (Optional)
+    --
+    , _responsePagePath   :: TF.Attr s P.Text
+    -- ^ @response_page_path@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @custom_error_response@ settings value.
+newCloudfrontDistributionCustomErrorResponse
+    :: TF.Attr s P.Int -- ^ 'P._errorCode': @error_code@
+    -> CloudfrontDistributionCustomErrorResponse s
+newCloudfrontDistributionCustomErrorResponse _errorCode =
+    CloudfrontDistributionCustomErrorResponse'
+        { _errorCachingMinTtl = TF.Nil
+        , _errorCode = _errorCode
+        , _responseCode = TF.Nil
+        , _responsePagePath = TF.Nil
+        }
+
+instance TF.IsValue  (CloudfrontDistributionCustomErrorResponse s)
+instance TF.IsObject (CloudfrontDistributionCustomErrorResponse s) where
+    toObject CloudfrontDistributionCustomErrorResponse'{..} = P.catMaybes
+        [ TF.assign "error_caching_min_ttl" <$> TF.attribute _errorCachingMinTtl
+        , TF.assign "error_code" <$> TF.attribute _errorCode
+        , TF.assign "response_code" <$> TF.attribute _responseCode
+        , TF.assign "response_page_path" <$> TF.attribute _responsePagePath
+        ]
+
+instance TF.IsValid (CloudfrontDistributionCustomErrorResponse s) where
+    validator = P.mempty
+
+instance P.HasErrorCachingMinTtl (CloudfrontDistributionCustomErrorResponse s) (TF.Attr s P.Int) where
+    errorCachingMinTtl =
+        P.lens (_errorCachingMinTtl :: CloudfrontDistributionCustomErrorResponse s -> TF.Attr s P.Int)
+               (\s a -> s { _errorCachingMinTtl = a } :: CloudfrontDistributionCustomErrorResponse s)
+
+instance P.HasErrorCode (CloudfrontDistributionCustomErrorResponse s) (TF.Attr s P.Int) where
+    errorCode =
+        P.lens (_errorCode :: CloudfrontDistributionCustomErrorResponse s -> TF.Attr s P.Int)
+               (\s a -> s { _errorCode = a } :: CloudfrontDistributionCustomErrorResponse s)
+
+instance P.HasResponseCode (CloudfrontDistributionCustomErrorResponse s) (TF.Attr s P.Int) where
+    responseCode =
+        P.lens (_responseCode :: CloudfrontDistributionCustomErrorResponse s -> TF.Attr s P.Int)
+               (\s a -> s { _responseCode = a } :: CloudfrontDistributionCustomErrorResponse s)
+
+instance P.HasResponsePagePath (CloudfrontDistributionCustomErrorResponse s) (TF.Attr s P.Text) where
+    responsePagePath =
+        P.lens (_responsePagePath :: CloudfrontDistributionCustomErrorResponse s -> TF.Attr s P.Text)
+               (\s a -> s { _responsePagePath = a } :: CloudfrontDistributionCustomErrorResponse s)
+
+-- | @custom_header@ nested settings.
+data CloudfrontDistributionCustomHeader s = CloudfrontDistributionCustomHeader'
+    { _name  :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    , _value :: TF.Attr s P.Text
+    -- ^ @value@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @custom_header@ settings value.
+newCloudfrontDistributionCustomHeader
+    :: TF.Attr s P.Text -- ^ 'P._name': @name@
+    -> TF.Attr s P.Text -- ^ 'P._value': @value@
+    -> CloudfrontDistributionCustomHeader s
+newCloudfrontDistributionCustomHeader _name _value =
+    CloudfrontDistributionCustomHeader'
+        { _name = _name
+        , _value = _value
+        }
+
+instance TF.IsValue  (CloudfrontDistributionCustomHeader s)
+instance TF.IsObject (CloudfrontDistributionCustomHeader s) where
+    toObject CloudfrontDistributionCustomHeader'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "value" <$> TF.attribute _value
+        ]
+
+instance TF.IsValid (CloudfrontDistributionCustomHeader s) where
+    validator = P.mempty
+
+instance P.HasName (CloudfrontDistributionCustomHeader s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: CloudfrontDistributionCustomHeader s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: CloudfrontDistributionCustomHeader s)
+
+instance P.HasValue (CloudfrontDistributionCustomHeader s) (TF.Attr s P.Text) where
+    value =
+        P.lens (_value :: CloudfrontDistributionCustomHeader s -> TF.Attr s P.Text)
+               (\s a -> s { _value = a } :: CloudfrontDistributionCustomHeader s)
+
+-- | @origin@ nested settings.
+data CloudfrontDistributionOrigin s = CloudfrontDistributionOrigin'
+    { _customHeader :: TF.Attr s [TF.Attr s (CloudfrontDistributionCustomHeader s)]
+    -- ^ @custom_header@ - (Optional)
+    --
+    , _customOriginConfig :: TF.Attr s (CloudfrontDistributionCustomOriginConfig s)
+    -- ^ @custom_origin_config@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 's3OriginConfig'
+    , _domainName :: TF.Attr s P.Text
+    -- ^ @domain_name@ - (Required)
+    --
+    , _originId :: TF.Attr s P.Text
+    -- ^ @origin_id@ - (Required)
+    --
+    , _originPath :: TF.Attr s P.Text
+    -- ^ @origin_path@ - (Optional)
+    --
+    , _s3OriginConfig :: TF.Attr s (CloudfrontDistributionS3OriginConfig s)
+    -- ^ @s3_origin_config@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'customOriginConfig'
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @origin@ settings value.
+newCloudfrontDistributionOrigin
+    :: TF.Attr s P.Text -- ^ 'P._originId': @origin_id@
+    -> TF.Attr s P.Text -- ^ 'P._domainName': @domain_name@
+    -> CloudfrontDistributionOrigin s
+newCloudfrontDistributionOrigin _originId _domainName =
+    CloudfrontDistributionOrigin'
+        { _customHeader = TF.Nil
+        , _customOriginConfig = TF.Nil
+        , _domainName = _domainName
+        , _originId = _originId
+        , _originPath = TF.Nil
+        , _s3OriginConfig = TF.Nil
+        }
+
+instance TF.IsValue  (CloudfrontDistributionOrigin s)
+instance TF.IsObject (CloudfrontDistributionOrigin s) where
+    toObject CloudfrontDistributionOrigin'{..} = P.catMaybes
+        [ TF.assign "custom_header" <$> TF.attribute _customHeader
+        , TF.assign "custom_origin_config" <$> TF.attribute _customOriginConfig
+        , TF.assign "domain_name" <$> TF.attribute _domainName
+        , TF.assign "origin_id" <$> TF.attribute _originId
+        , TF.assign "origin_path" <$> TF.attribute _originPath
+        , TF.assign "s3_origin_config" <$> TF.attribute _s3OriginConfig
+        ]
+
+instance TF.IsValid (CloudfrontDistributionOrigin s) where
+    validator = TF.fieldsValidator (\CloudfrontDistributionOrigin'{..} -> Map.fromList $ P.catMaybes
+        [ if (_customOriginConfig P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_customOriginConfig",
+                            [ "_s3OriginConfig"
+                            ])
+        , if (_s3OriginConfig P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_s3OriginConfig",
+                            [ "_customOriginConfig"
+                            ])
+        ])
+           P.<> TF.settingsValidator "_customOriginConfig"
+                  (_customOriginConfig
+                      :: CloudfrontDistributionOrigin s -> TF.Attr s (CloudfrontDistributionCustomOriginConfig s))
+                  TF.validator
+           P.<> TF.settingsValidator "_s3OriginConfig"
+                  (_s3OriginConfig
+                      :: CloudfrontDistributionOrigin s -> TF.Attr s (CloudfrontDistributionS3OriginConfig s))
+                  TF.validator
+
+instance P.HasCustomHeader (CloudfrontDistributionOrigin s) (TF.Attr s [TF.Attr s (CloudfrontDistributionCustomHeader s)]) where
+    customHeader =
+        P.lens (_customHeader :: CloudfrontDistributionOrigin s -> TF.Attr s [TF.Attr s (CloudfrontDistributionCustomHeader s)])
+               (\s a -> s { _customHeader = a } :: CloudfrontDistributionOrigin s)
+
+instance P.HasCustomOriginConfig (CloudfrontDistributionOrigin s) (TF.Attr s (CloudfrontDistributionCustomOriginConfig s)) where
+    customOriginConfig =
+        P.lens (_customOriginConfig :: CloudfrontDistributionOrigin s -> TF.Attr s (CloudfrontDistributionCustomOriginConfig s))
+               (\s a -> s { _customOriginConfig = a } :: CloudfrontDistributionOrigin s)
+
+instance P.HasDomainName (CloudfrontDistributionOrigin s) (TF.Attr s P.Text) where
+    domainName =
+        P.lens (_domainName :: CloudfrontDistributionOrigin s -> TF.Attr s P.Text)
+               (\s a -> s { _domainName = a } :: CloudfrontDistributionOrigin s)
+
+instance P.HasOriginId (CloudfrontDistributionOrigin s) (TF.Attr s P.Text) where
+    originId =
+        P.lens (_originId :: CloudfrontDistributionOrigin s -> TF.Attr s P.Text)
+               (\s a -> s { _originId = a } :: CloudfrontDistributionOrigin s)
+
+instance P.HasOriginPath (CloudfrontDistributionOrigin s) (TF.Attr s P.Text) where
+    originPath =
+        P.lens (_originPath :: CloudfrontDistributionOrigin s -> TF.Attr s P.Text)
+               (\s a -> s { _originPath = a } :: CloudfrontDistributionOrigin s)
+
+instance P.HasS3OriginConfig (CloudfrontDistributionOrigin s) (TF.Attr s (CloudfrontDistributionS3OriginConfig s)) where
+    s3OriginConfig =
+        P.lens (_s3OriginConfig :: CloudfrontDistributionOrigin s -> TF.Attr s (CloudfrontDistributionS3OriginConfig s))
+               (\s a -> s { _s3OriginConfig = a } :: CloudfrontDistributionOrigin s)
+
+-- | @s3_origin_config@ nested settings.
+data CloudfrontDistributionS3OriginConfig s = CloudfrontDistributionS3OriginConfig'
+    { _originAccessIdentity :: TF.Attr s P.Text
+    -- ^ @origin_access_identity@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @s3_origin_config@ settings value.
+newCloudfrontDistributionS3OriginConfig
+    :: TF.Attr s P.Text -- ^ 'P._originAccessIdentity': @origin_access_identity@
+    -> CloudfrontDistributionS3OriginConfig s
+newCloudfrontDistributionS3OriginConfig _originAccessIdentity =
+    CloudfrontDistributionS3OriginConfig'
+        { _originAccessIdentity = _originAccessIdentity
+        }
+
+instance TF.IsValue  (CloudfrontDistributionS3OriginConfig s)
+instance TF.IsObject (CloudfrontDistributionS3OriginConfig s) where
+    toObject CloudfrontDistributionS3OriginConfig'{..} = P.catMaybes
+        [ TF.assign "origin_access_identity" <$> TF.attribute _originAccessIdentity
+        ]
+
+instance TF.IsValid (CloudfrontDistributionS3OriginConfig s) where
+    validator = P.mempty
+
+instance P.HasOriginAccessIdentity (CloudfrontDistributionS3OriginConfig s) (TF.Attr s P.Text) where
+    originAccessIdentity =
+        P.lens (_originAccessIdentity :: CloudfrontDistributionS3OriginConfig s -> TF.Attr s P.Text)
+               (\s a -> s { _originAccessIdentity = a } :: CloudfrontDistributionS3OriginConfig s)
+
+-- | @custom_origin_config@ nested settings.
+data CloudfrontDistributionCustomOriginConfig s = CloudfrontDistributionCustomOriginConfig'
+    { _httpPort               :: TF.Attr s P.Int
+    -- ^ @http_port@ - (Required)
+    --
+    , _httpsPort              :: TF.Attr s P.Int
+    -- ^ @https_port@ - (Required)
+    --
+    , _originKeepaliveTimeout :: TF.Attr s P.Int
+    -- ^ @origin_keepalive_timeout@ - (Optional)
+    --
+    , _originProtocolPolicy   :: TF.Attr s P.Text
+    -- ^ @origin_protocol_policy@ - (Required)
+    --
+    , _originReadTimeout      :: TF.Attr s P.Int
+    -- ^ @origin_read_timeout@ - (Optional)
+    --
+    , _originSslProtocols     :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @origin_ssl_protocols@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @custom_origin_config@ settings value.
+newCloudfrontDistributionCustomOriginConfig
+    :: TF.Attr s P.Text -- ^ 'P._originProtocolPolicy': @origin_protocol_policy@
+    -> TF.Attr s P.Int -- ^ 'P._httpPort': @http_port@
+    -> TF.Attr s P.Int -- ^ 'P._httpsPort': @https_port@
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ 'P._originSslProtocols': @origin_ssl_protocols@
+    -> CloudfrontDistributionCustomOriginConfig s
+newCloudfrontDistributionCustomOriginConfig _originProtocolPolicy _httpPort _httpsPort _originSslProtocols =
+    CloudfrontDistributionCustomOriginConfig'
+        { _httpPort = _httpPort
+        , _httpsPort = _httpsPort
+        , _originKeepaliveTimeout = TF.value 5
+        , _originProtocolPolicy = _originProtocolPolicy
+        , _originReadTimeout = TF.value 30
+        , _originSslProtocols = _originSslProtocols
+        }
+
+instance TF.IsValue  (CloudfrontDistributionCustomOriginConfig s)
+instance TF.IsObject (CloudfrontDistributionCustomOriginConfig s) where
+    toObject CloudfrontDistributionCustomOriginConfig'{..} = P.catMaybes
+        [ TF.assign "http_port" <$> TF.attribute _httpPort
+        , TF.assign "https_port" <$> TF.attribute _httpsPort
+        , TF.assign "origin_keepalive_timeout" <$> TF.attribute _originKeepaliveTimeout
+        , TF.assign "origin_protocol_policy" <$> TF.attribute _originProtocolPolicy
+        , TF.assign "origin_read_timeout" <$> TF.attribute _originReadTimeout
+        , TF.assign "origin_ssl_protocols" <$> TF.attribute _originSslProtocols
+        ]
+
+instance TF.IsValid (CloudfrontDistributionCustomOriginConfig s) where
+    validator = P.mempty
+
+instance P.HasHttpPort (CloudfrontDistributionCustomOriginConfig s) (TF.Attr s P.Int) where
+    httpPort =
+        P.lens (_httpPort :: CloudfrontDistributionCustomOriginConfig s -> TF.Attr s P.Int)
+               (\s a -> s { _httpPort = a } :: CloudfrontDistributionCustomOriginConfig s)
+
+instance P.HasHttpsPort (CloudfrontDistributionCustomOriginConfig s) (TF.Attr s P.Int) where
+    httpsPort =
+        P.lens (_httpsPort :: CloudfrontDistributionCustomOriginConfig s -> TF.Attr s P.Int)
+               (\s a -> s { _httpsPort = a } :: CloudfrontDistributionCustomOriginConfig s)
+
+instance P.HasOriginKeepaliveTimeout (CloudfrontDistributionCustomOriginConfig s) (TF.Attr s P.Int) where
+    originKeepaliveTimeout =
+        P.lens (_originKeepaliveTimeout :: CloudfrontDistributionCustomOriginConfig s -> TF.Attr s P.Int)
+               (\s a -> s { _originKeepaliveTimeout = a } :: CloudfrontDistributionCustomOriginConfig s)
+
+instance P.HasOriginProtocolPolicy (CloudfrontDistributionCustomOriginConfig s) (TF.Attr s P.Text) where
+    originProtocolPolicy =
+        P.lens (_originProtocolPolicy :: CloudfrontDistributionCustomOriginConfig s -> TF.Attr s P.Text)
+               (\s a -> s { _originProtocolPolicy = a } :: CloudfrontDistributionCustomOriginConfig s)
+
+instance P.HasOriginReadTimeout (CloudfrontDistributionCustomOriginConfig s) (TF.Attr s P.Int) where
+    originReadTimeout =
+        P.lens (_originReadTimeout :: CloudfrontDistributionCustomOriginConfig s -> TF.Attr s P.Int)
+               (\s a -> s { _originReadTimeout = a } :: CloudfrontDistributionCustomOriginConfig s)
+
+instance P.HasOriginSslProtocols (CloudfrontDistributionCustomOriginConfig s) (TF.Attr s [TF.Attr s P.Text]) where
+    originSslProtocols =
+        P.lens (_originSslProtocols :: CloudfrontDistributionCustomOriginConfig s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _originSslProtocols = a } :: CloudfrontDistributionCustomOriginConfig s)
+
+-- | @geo_restriction@ nested settings.
+data CloudfrontDistributionGeoRestriction s = CloudfrontDistributionGeoRestriction'
+    { _locations       :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @locations@ - (Optional)
+    --
+    , _restrictionType :: TF.Attr s P.Text
+    -- ^ @restriction_type@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @geo_restriction@ settings value.
+newCloudfrontDistributionGeoRestriction
+    :: TF.Attr s P.Text -- ^ 'P._restrictionType': @restriction_type@
+    -> CloudfrontDistributionGeoRestriction s
+newCloudfrontDistributionGeoRestriction _restrictionType =
+    CloudfrontDistributionGeoRestriction'
+        { _locations = TF.Nil
+        , _restrictionType = _restrictionType
+        }
+
+instance TF.IsValue  (CloudfrontDistributionGeoRestriction s)
+instance TF.IsObject (CloudfrontDistributionGeoRestriction s) where
+    toObject CloudfrontDistributionGeoRestriction'{..} = P.catMaybes
+        [ TF.assign "locations" <$> TF.attribute _locations
+        , TF.assign "restriction_type" <$> TF.attribute _restrictionType
+        ]
+
+instance TF.IsValid (CloudfrontDistributionGeoRestriction s) where
+    validator = P.mempty
+
+instance P.HasLocations (CloudfrontDistributionGeoRestriction s) (TF.Attr s [TF.Attr s P.Text]) where
+    locations =
+        P.lens (_locations :: CloudfrontDistributionGeoRestriction s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _locations = a } :: CloudfrontDistributionGeoRestriction s)
+
+instance P.HasRestrictionType (CloudfrontDistributionGeoRestriction s) (TF.Attr s P.Text) where
+    restrictionType =
+        P.lens (_restrictionType :: CloudfrontDistributionGeoRestriction s -> TF.Attr s P.Text)
+               (\s a -> s { _restrictionType = a } :: CloudfrontDistributionGeoRestriction s)
+
+-- | @restrictions@ nested settings.
+data CloudfrontDistributionRestrictions s = CloudfrontDistributionRestrictions'
+    { _geoRestriction :: TF.Attr s (CloudfrontDistributionGeoRestriction s)
+    -- ^ @geo_restriction@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @restrictions@ settings value.
+newCloudfrontDistributionRestrictions
+    :: TF.Attr s (CloudfrontDistributionGeoRestriction s) -- ^ 'P._geoRestriction': @geo_restriction@
+    -> CloudfrontDistributionRestrictions s
+newCloudfrontDistributionRestrictions _geoRestriction =
+    CloudfrontDistributionRestrictions'
+        { _geoRestriction = _geoRestriction
+        }
+
+instance TF.IsValue  (CloudfrontDistributionRestrictions s)
+instance TF.IsObject (CloudfrontDistributionRestrictions s) where
+    toObject CloudfrontDistributionRestrictions'{..} = P.catMaybes
+        [ TF.assign "geo_restriction" <$> TF.attribute _geoRestriction
+        ]
+
+instance TF.IsValid (CloudfrontDistributionRestrictions s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_geoRestriction"
+                  (_geoRestriction
+                      :: CloudfrontDistributionRestrictions s -> TF.Attr s (CloudfrontDistributionGeoRestriction s))
+                  TF.validator
+
+instance P.HasGeoRestriction (CloudfrontDistributionRestrictions s) (TF.Attr s (CloudfrontDistributionGeoRestriction s)) where
+    geoRestriction =
+        P.lens (_geoRestriction :: CloudfrontDistributionRestrictions s -> TF.Attr s (CloudfrontDistributionGeoRestriction s))
+               (\s a -> s { _geoRestriction = a } :: CloudfrontDistributionRestrictions s)
+
+-- | @logging_config@ nested settings.
+data CloudfrontDistributionLoggingConfig s = CloudfrontDistributionLoggingConfig'
+    { _bucket         :: TF.Attr s P.Text
+    -- ^ @bucket@ - (Required)
+    --
+    , _includeCookies :: TF.Attr s P.Bool
+    -- ^ @include_cookies@ - (Optional)
+    --
+    , _prefix         :: TF.Attr s P.Text
+    -- ^ @prefix@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @logging_config@ settings value.
+newCloudfrontDistributionLoggingConfig
+    :: TF.Attr s P.Text -- ^ 'P._bucket': @bucket@
+    -> CloudfrontDistributionLoggingConfig s
+newCloudfrontDistributionLoggingConfig _bucket =
+    CloudfrontDistributionLoggingConfig'
+        { _bucket = _bucket
+        , _includeCookies = TF.value P.False
+        , _prefix = TF.Nil
+        }
+
+instance TF.IsValue  (CloudfrontDistributionLoggingConfig s)
+instance TF.IsObject (CloudfrontDistributionLoggingConfig s) where
+    toObject CloudfrontDistributionLoggingConfig'{..} = P.catMaybes
+        [ TF.assign "bucket" <$> TF.attribute _bucket
+        , TF.assign "include_cookies" <$> TF.attribute _includeCookies
+        , TF.assign "prefix" <$> TF.attribute _prefix
+        ]
+
+instance TF.IsValid (CloudfrontDistributionLoggingConfig s) where
+    validator = P.mempty
+
+instance P.HasBucket (CloudfrontDistributionLoggingConfig s) (TF.Attr s P.Text) where
+    bucket =
+        P.lens (_bucket :: CloudfrontDistributionLoggingConfig s -> TF.Attr s P.Text)
+               (\s a -> s { _bucket = a } :: CloudfrontDistributionLoggingConfig s)
+
+instance P.HasIncludeCookies (CloudfrontDistributionLoggingConfig s) (TF.Attr s P.Bool) where
+    includeCookies =
+        P.lens (_includeCookies :: CloudfrontDistributionLoggingConfig s -> TF.Attr s P.Bool)
+               (\s a -> s { _includeCookies = a } :: CloudfrontDistributionLoggingConfig s)
+
+instance P.HasPrefix (CloudfrontDistributionLoggingConfig s) (TF.Attr s P.Text) where
+    prefix =
+        P.lens (_prefix :: CloudfrontDistributionLoggingConfig s -> TF.Attr s P.Text)
+               (\s a -> s { _prefix = a } :: CloudfrontDistributionLoggingConfig s)
+
+-- | @viewer_certificate@ nested settings.
+data CloudfrontDistributionViewerCertificate s = CloudfrontDistributionViewerCertificate'
+    { _acmCertificateArn            :: TF.Attr s P.Text
+    -- ^ @acm_certificate_arn@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'cloudfrontDefaultCertificate'
+    -- * 'iamCertificateId'
+    , _cloudfrontDefaultCertificate :: TF.Attr s P.Bool
+    -- ^ @cloudfront_default_certificate@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'acmCertificateArn'
+    -- * 'iamCertificateId'
+    , _iamCertificateId             :: TF.Attr s P.Text
+    -- ^ @iam_certificate_id@ - (Optional)
+    --
+    -- Conflicts with:
+    --
+    -- * 'acmCertificateArn'
+    -- * 'cloudfrontDefaultCertificate'
+    , _minimumProtocolVersion       :: TF.Attr s P.Text
+    -- ^ @minimum_protocol_version@ - (Optional)
+    --
+    , _sslSupportMethod             :: TF.Attr s P.Text
+    -- ^ @ssl_support_method@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @viewer_certificate@ settings value.
+newCloudfrontDistributionViewerCertificate
+    :: CloudfrontDistributionViewerCertificate s
+newCloudfrontDistributionViewerCertificate =
+    CloudfrontDistributionViewerCertificate'
+        { _acmCertificateArn = TF.Nil
+        , _cloudfrontDefaultCertificate = TF.Nil
+        , _iamCertificateId = TF.Nil
+        , _minimumProtocolVersion = TF.value "TLSv1"
+        , _sslSupportMethod = TF.Nil
+        }
+
+instance TF.IsValue  (CloudfrontDistributionViewerCertificate s)
+instance TF.IsObject (CloudfrontDistributionViewerCertificate s) where
+    toObject CloudfrontDistributionViewerCertificate'{..} = P.catMaybes
+        [ TF.assign "acm_certificate_arn" <$> TF.attribute _acmCertificateArn
+        , TF.assign "cloudfront_default_certificate" <$> TF.attribute _cloudfrontDefaultCertificate
+        , TF.assign "iam_certificate_id" <$> TF.attribute _iamCertificateId
+        , TF.assign "minimum_protocol_version" <$> TF.attribute _minimumProtocolVersion
+        , TF.assign "ssl_support_method" <$> TF.attribute _sslSupportMethod
+        ]
+
+instance TF.IsValid (CloudfrontDistributionViewerCertificate s) where
+    validator = TF.fieldsValidator (\CloudfrontDistributionViewerCertificate'{..} -> Map.fromList $ P.catMaybes
+        [ if (_acmCertificateArn P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_acmCertificateArn",
+                            [ "_cloudfrontDefaultCertificate"                            , "_iamCertificateId"
+                            ])
+        , if (_cloudfrontDefaultCertificate P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_cloudfrontDefaultCertificate",
+                            [ "_acmCertificateArn"                            , "_iamCertificateId"
+                            ])
+        , if (_iamCertificateId P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_iamCertificateId",
+                            [ "_acmCertificateArn"                            , "_cloudfrontDefaultCertificate"
+                            ])
+        ])
+
+instance P.HasAcmCertificateArn (CloudfrontDistributionViewerCertificate s) (TF.Attr s P.Text) where
+    acmCertificateArn =
+        P.lens (_acmCertificateArn :: CloudfrontDistributionViewerCertificate s -> TF.Attr s P.Text)
+               (\s a -> s { _acmCertificateArn = a } :: CloudfrontDistributionViewerCertificate s)
+
+instance P.HasCloudfrontDefaultCertificate (CloudfrontDistributionViewerCertificate s) (TF.Attr s P.Bool) where
+    cloudfrontDefaultCertificate =
+        P.lens (_cloudfrontDefaultCertificate :: CloudfrontDistributionViewerCertificate s -> TF.Attr s P.Bool)
+               (\s a -> s { _cloudfrontDefaultCertificate = a } :: CloudfrontDistributionViewerCertificate s)
+
+instance P.HasIamCertificateId (CloudfrontDistributionViewerCertificate s) (TF.Attr s P.Text) where
+    iamCertificateId =
+        P.lens (_iamCertificateId :: CloudfrontDistributionViewerCertificate s -> TF.Attr s P.Text)
+               (\s a -> s { _iamCertificateId = a } :: CloudfrontDistributionViewerCertificate s)
+
+instance P.HasMinimumProtocolVersion (CloudfrontDistributionViewerCertificate s) (TF.Attr s P.Text) where
+    minimumProtocolVersion =
+        P.lens (_minimumProtocolVersion :: CloudfrontDistributionViewerCertificate s -> TF.Attr s P.Text)
+               (\s a -> s { _minimumProtocolVersion = a } :: CloudfrontDistributionViewerCertificate s)
+
+instance P.HasSslSupportMethod (CloudfrontDistributionViewerCertificate s) (TF.Attr s P.Text) where
+    sslSupportMethod =
+        P.lens (_sslSupportMethod :: CloudfrontDistributionViewerCertificate s -> TF.Attr s P.Text)
+               (\s a -> s { _sslSupportMethod = a } :: CloudfrontDistributionViewerCertificate s)
+
+-- | @data_resource@ nested settings.
+data CloudtrailDataResource s = CloudtrailDataResource'
+    { _type'  :: TF.Attr s P.Text
+    -- ^ @type@ - (Required)
+    --
+    , _values :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @values@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @data_resource@ settings value.
+newCloudtrailDataResource
+    :: TF.Attr s P.Text -- ^ 'P._type'': @type@
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ 'P._values': @values@
+    -> CloudtrailDataResource s
+newCloudtrailDataResource _type' _values =
+    CloudtrailDataResource'
+        { _type' = _type'
+        , _values = _values
+        }
+
+instance TF.IsValue  (CloudtrailDataResource s)
+instance TF.IsObject (CloudtrailDataResource s) where
+    toObject CloudtrailDataResource'{..} = P.catMaybes
+        [ TF.assign "type" <$> TF.attribute _type'
+        , TF.assign "values" <$> TF.attribute _values
+        ]
+
+instance TF.IsValid (CloudtrailDataResource s) where
+    validator = P.mempty
+
+instance P.HasType' (CloudtrailDataResource s) (TF.Attr s P.Text) where
+    type' =
+        P.lens (_type' :: CloudtrailDataResource s -> TF.Attr s P.Text)
+               (\s a -> s { _type' = a } :: CloudtrailDataResource s)
+
+instance P.HasValues (CloudtrailDataResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    values =
+        P.lens (_values :: CloudtrailDataResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _values = a } :: CloudtrailDataResource s)
+
+-- | @event_selector@ nested settings.
+data CloudtrailEventSelector s = CloudtrailEventSelector'
+    { _dataResource :: TF.Attr s [TF.Attr s (CloudtrailDataResource s)]
+    -- ^ @data_resource@ - (Optional)
+    --
+    , _includeManagementEvents :: TF.Attr s P.Bool
+    -- ^ @include_management_events@ - (Optional)
+    --
+    , _readWriteType :: TF.Attr s P.Text
+    -- ^ @read_write_type@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @event_selector@ settings value.
+newCloudtrailEventSelector
+    :: CloudtrailEventSelector s
+newCloudtrailEventSelector =
+    CloudtrailEventSelector'
+        { _dataResource = TF.Nil
+        , _includeManagementEvents = TF.value P.True
+        , _readWriteType = TF.value "All"
+        }
+
+instance TF.IsValue  (CloudtrailEventSelector s)
+instance TF.IsObject (CloudtrailEventSelector s) where
+    toObject CloudtrailEventSelector'{..} = P.catMaybes
+        [ TF.assign "data_resource" <$> TF.attribute _dataResource
+        , TF.assign "include_management_events" <$> TF.attribute _includeManagementEvents
+        , TF.assign "read_write_type" <$> TF.attribute _readWriteType
+        ]
+
+instance TF.IsValid (CloudtrailEventSelector s) where
+    validator = P.mempty
+
+instance P.HasDataResource (CloudtrailEventSelector s) (TF.Attr s [TF.Attr s (CloudtrailDataResource s)]) where
+    dataResource =
+        P.lens (_dataResource :: CloudtrailEventSelector s -> TF.Attr s [TF.Attr s (CloudtrailDataResource s)])
+               (\s a -> s { _dataResource = a } :: CloudtrailEventSelector s)
+
+instance P.HasIncludeManagementEvents (CloudtrailEventSelector s) (TF.Attr s P.Bool) where
+    includeManagementEvents =
+        P.lens (_includeManagementEvents :: CloudtrailEventSelector s -> TF.Attr s P.Bool)
+               (\s a -> s { _includeManagementEvents = a } :: CloudtrailEventSelector s)
+
+instance P.HasReadWriteType (CloudtrailEventSelector s) (TF.Attr s P.Text) where
+    readWriteType =
+        P.lens (_readWriteType :: CloudtrailEventSelector s -> TF.Attr s P.Text)
+               (\s a -> s { _readWriteType = a } :: CloudtrailEventSelector s)
+
+-- | @batch_target@ nested settings.
+data CloudwatchEventTargetBatchTarget s = CloudwatchEventTargetBatchTarget'
+    { _arraySize     :: TF.Attr s P.Int
+    -- ^ @array_size@ - (Optional)
+    --
+    , _jobAttempts   :: TF.Attr s P.Int
+    -- ^ @job_attempts@ - (Optional)
+    --
+    , _jobDefinition :: TF.Attr s P.Text
+    -- ^ @job_definition@ - (Required)
+    --
+    , _jobName       :: TF.Attr s P.Text
+    -- ^ @job_name@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @batch_target@ settings value.
+newCloudwatchEventTargetBatchTarget
+    :: TF.Attr s P.Text -- ^ 'P._jobDefinition': @job_definition@
+    -> TF.Attr s P.Text -- ^ 'P._jobName': @job_name@
+    -> CloudwatchEventTargetBatchTarget s
+newCloudwatchEventTargetBatchTarget _jobDefinition _jobName =
+    CloudwatchEventTargetBatchTarget'
+        { _arraySize = TF.Nil
+        , _jobAttempts = TF.Nil
+        , _jobDefinition = _jobDefinition
+        , _jobName = _jobName
+        }
+
+instance TF.IsValue  (CloudwatchEventTargetBatchTarget s)
+instance TF.IsObject (CloudwatchEventTargetBatchTarget s) where
+    toObject CloudwatchEventTargetBatchTarget'{..} = P.catMaybes
+        [ TF.assign "array_size" <$> TF.attribute _arraySize
+        , TF.assign "job_attempts" <$> TF.attribute _jobAttempts
+        , TF.assign "job_definition" <$> TF.attribute _jobDefinition
+        , TF.assign "job_name" <$> TF.attribute _jobName
+        ]
+
+instance TF.IsValid (CloudwatchEventTargetBatchTarget s) where
+    validator = P.mempty
+
+instance P.HasArraySize (CloudwatchEventTargetBatchTarget s) (TF.Attr s P.Int) where
+    arraySize =
+        P.lens (_arraySize :: CloudwatchEventTargetBatchTarget s -> TF.Attr s P.Int)
+               (\s a -> s { _arraySize = a } :: CloudwatchEventTargetBatchTarget s)
+
+instance P.HasJobAttempts (CloudwatchEventTargetBatchTarget s) (TF.Attr s P.Int) where
+    jobAttempts =
+        P.lens (_jobAttempts :: CloudwatchEventTargetBatchTarget s -> TF.Attr s P.Int)
+               (\s a -> s { _jobAttempts = a } :: CloudwatchEventTargetBatchTarget s)
+
+instance P.HasJobDefinition (CloudwatchEventTargetBatchTarget s) (TF.Attr s P.Text) where
+    jobDefinition =
+        P.lens (_jobDefinition :: CloudwatchEventTargetBatchTarget s -> TF.Attr s P.Text)
+               (\s a -> s { _jobDefinition = a } :: CloudwatchEventTargetBatchTarget s)
+
+instance P.HasJobName (CloudwatchEventTargetBatchTarget s) (TF.Attr s P.Text) where
+    jobName =
+        P.lens (_jobName :: CloudwatchEventTargetBatchTarget s -> TF.Attr s P.Text)
+               (\s a -> s { _jobName = a } :: CloudwatchEventTargetBatchTarget s)
+
+-- | @ecs_target@ nested settings.
+data CloudwatchEventTargetEcsTarget s = CloudwatchEventTargetEcsTarget'
+    { _taskCount         :: TF.Attr s P.Int
+    -- ^ @task_count@ - (Optional)
+    --
+    , _taskDefinitionArn :: TF.Attr s P.Text
+    -- ^ @task_definition_arn@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @ecs_target@ settings value.
+newCloudwatchEventTargetEcsTarget
+    :: TF.Attr s P.Text -- ^ 'P._taskDefinitionArn': @task_definition_arn@
+    -> CloudwatchEventTargetEcsTarget s
+newCloudwatchEventTargetEcsTarget _taskDefinitionArn =
+    CloudwatchEventTargetEcsTarget'
+        { _taskCount = TF.Nil
+        , _taskDefinitionArn = _taskDefinitionArn
+        }
+
+instance TF.IsValue  (CloudwatchEventTargetEcsTarget s)
+instance TF.IsObject (CloudwatchEventTargetEcsTarget s) where
+    toObject CloudwatchEventTargetEcsTarget'{..} = P.catMaybes
+        [ TF.assign "task_count" <$> TF.attribute _taskCount
+        , TF.assign "task_definition_arn" <$> TF.attribute _taskDefinitionArn
+        ]
+
+instance TF.IsValid (CloudwatchEventTargetEcsTarget s) where
+    validator = P.mempty
+
+instance P.HasTaskCount (CloudwatchEventTargetEcsTarget s) (TF.Attr s P.Int) where
+    taskCount =
+        P.lens (_taskCount :: CloudwatchEventTargetEcsTarget s -> TF.Attr s P.Int)
+               (\s a -> s { _taskCount = a } :: CloudwatchEventTargetEcsTarget s)
+
+instance P.HasTaskDefinitionArn (CloudwatchEventTargetEcsTarget s) (TF.Attr s P.Text) where
+    taskDefinitionArn =
+        P.lens (_taskDefinitionArn :: CloudwatchEventTargetEcsTarget s -> TF.Attr s P.Text)
+               (\s a -> s { _taskDefinitionArn = a } :: CloudwatchEventTargetEcsTarget s)
+
+-- | @input_transformer@ nested settings.
+data CloudwatchEventTargetInputTransformer s = CloudwatchEventTargetInputTransformer'
+    { _inputPaths    :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @input_paths@ - (Optional)
+    --
+    , _inputTemplate :: TF.Attr s P.Text
+    -- ^ @input_template@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @input_transformer@ settings value.
+newCloudwatchEventTargetInputTransformer
+    :: TF.Attr s P.Text -- ^ 'P._inputTemplate': @input_template@
+    -> CloudwatchEventTargetInputTransformer s
+newCloudwatchEventTargetInputTransformer _inputTemplate =
+    CloudwatchEventTargetInputTransformer'
+        { _inputPaths = TF.Nil
+        , _inputTemplate = _inputTemplate
+        }
+
+instance TF.IsValue  (CloudwatchEventTargetInputTransformer s)
+instance TF.IsObject (CloudwatchEventTargetInputTransformer s) where
+    toObject CloudwatchEventTargetInputTransformer'{..} = P.catMaybes
+        [ TF.assign "input_paths" <$> TF.attribute _inputPaths
+        , TF.assign "input_template" <$> TF.attribute _inputTemplate
+        ]
+
+instance TF.IsValid (CloudwatchEventTargetInputTransformer s) where
+    validator = P.mempty
+
+instance P.HasInputPaths (CloudwatchEventTargetInputTransformer s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    inputPaths =
+        P.lens (_inputPaths :: CloudwatchEventTargetInputTransformer s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _inputPaths = a } :: CloudwatchEventTargetInputTransformer s)
+
+instance P.HasInputTemplate (CloudwatchEventTargetInputTransformer s) (TF.Attr s P.Text) where
+    inputTemplate =
+        P.lens (_inputTemplate :: CloudwatchEventTargetInputTransformer s -> TF.Attr s P.Text)
+               (\s a -> s { _inputTemplate = a } :: CloudwatchEventTargetInputTransformer s)
+
+-- | @kinesis_target@ nested settings.
+data CloudwatchEventTargetKinesisTarget s = CloudwatchEventTargetKinesisTarget'
+    { _partitionKeyPath :: TF.Attr s P.Text
+    -- ^ @partition_key_path@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @kinesis_target@ settings value.
+newCloudwatchEventTargetKinesisTarget
+    :: CloudwatchEventTargetKinesisTarget s
+newCloudwatchEventTargetKinesisTarget =
+    CloudwatchEventTargetKinesisTarget'
+        { _partitionKeyPath = TF.Nil
+        }
+
+instance TF.IsValue  (CloudwatchEventTargetKinesisTarget s)
+instance TF.IsObject (CloudwatchEventTargetKinesisTarget s) where
+    toObject CloudwatchEventTargetKinesisTarget'{..} = P.catMaybes
+        [ TF.assign "partition_key_path" <$> TF.attribute _partitionKeyPath
+        ]
+
+instance TF.IsValid (CloudwatchEventTargetKinesisTarget s) where
+    validator = P.mempty
+
+instance P.HasPartitionKeyPath (CloudwatchEventTargetKinesisTarget s) (TF.Attr s P.Text) where
+    partitionKeyPath =
+        P.lens (_partitionKeyPath :: CloudwatchEventTargetKinesisTarget s -> TF.Attr s P.Text)
+               (\s a -> s { _partitionKeyPath = a } :: CloudwatchEventTargetKinesisTarget s)
+
+-- | @run_command_targets@ nested settings.
+data CloudwatchEventTargetRunCommandTargets s = CloudwatchEventTargetRunCommandTargets'
+    { _key    :: TF.Attr s P.Text
+    -- ^ @key@ - (Required)
+    --
+    , _values :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @values@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @run_command_targets@ settings value.
+newCloudwatchEventTargetRunCommandTargets
+    :: TF.Attr s P.Text -- ^ 'P._key': @key@
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ 'P._values': @values@
+    -> CloudwatchEventTargetRunCommandTargets s
+newCloudwatchEventTargetRunCommandTargets _key _values =
+    CloudwatchEventTargetRunCommandTargets'
+        { _key = _key
+        , _values = _values
+        }
+
+instance TF.IsValue  (CloudwatchEventTargetRunCommandTargets s)
+instance TF.IsObject (CloudwatchEventTargetRunCommandTargets s) where
+    toObject CloudwatchEventTargetRunCommandTargets'{..} = P.catMaybes
+        [ TF.assign "key" <$> TF.attribute _key
+        , TF.assign "values" <$> TF.attribute _values
+        ]
+
+instance TF.IsValid (CloudwatchEventTargetRunCommandTargets s) where
+    validator = P.mempty
+
+instance P.HasKey (CloudwatchEventTargetRunCommandTargets s) (TF.Attr s P.Text) where
+    key =
+        P.lens (_key :: CloudwatchEventTargetRunCommandTargets s -> TF.Attr s P.Text)
+               (\s a -> s { _key = a } :: CloudwatchEventTargetRunCommandTargets s)
+
+instance P.HasValues (CloudwatchEventTargetRunCommandTargets s) (TF.Attr s [TF.Attr s P.Text]) where
+    values =
+        P.lens (_values :: CloudwatchEventTargetRunCommandTargets s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _values = a } :: CloudwatchEventTargetRunCommandTargets s)
+
+-- | @sqs_target@ nested settings.
+data CloudwatchEventTargetSqsTarget s = CloudwatchEventTargetSqsTarget'
+    { _messageGroupId :: TF.Attr s P.Text
+    -- ^ @message_group_id@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @sqs_target@ settings value.
+newCloudwatchEventTargetSqsTarget
+    :: CloudwatchEventTargetSqsTarget s
+newCloudwatchEventTargetSqsTarget =
+    CloudwatchEventTargetSqsTarget'
+        { _messageGroupId = TF.Nil
+        }
+
+instance TF.IsValue  (CloudwatchEventTargetSqsTarget s)
+instance TF.IsObject (CloudwatchEventTargetSqsTarget s) where
+    toObject CloudwatchEventTargetSqsTarget'{..} = P.catMaybes
+        [ TF.assign "message_group_id" <$> TF.attribute _messageGroupId
+        ]
+
+instance TF.IsValid (CloudwatchEventTargetSqsTarget s) where
+    validator = P.mempty
+
+instance P.HasMessageGroupId (CloudwatchEventTargetSqsTarget s) (TF.Attr s P.Text) where
+    messageGroupId =
+        P.lens (_messageGroupId :: CloudwatchEventTargetSqsTarget s -> TF.Attr s P.Text)
+               (\s a -> s { _messageGroupId = a } :: CloudwatchEventTargetSqsTarget s)
+
+-- | @metric_transformation@ nested settings.
+data CloudwatchLogMetricFilterMetricTransformation s = CloudwatchLogMetricFilterMetricTransformation'
+    { _defaultValue :: TF.Attr s P.Double
+    -- ^ @default_value@ - (Optional)
+    --
+    , _name         :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    , _namespace    :: TF.Attr s P.Text
+    -- ^ @namespace@ - (Required)
+    --
+    , _value        :: TF.Attr s P.Text
+    -- ^ @value@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @metric_transformation@ settings value.
+newCloudwatchLogMetricFilterMetricTransformation
+    :: TF.Attr s P.Text -- ^ 'P._name': @name@
+    -> TF.Attr s P.Text -- ^ 'P._namespace': @namespace@
+    -> TF.Attr s P.Text -- ^ 'P._value': @value@
+    -> CloudwatchLogMetricFilterMetricTransformation s
+newCloudwatchLogMetricFilterMetricTransformation _name _namespace _value =
+    CloudwatchLogMetricFilterMetricTransformation'
+        { _defaultValue = TF.Nil
+        , _name = _name
+        , _namespace = _namespace
+        , _value = _value
+        }
+
+instance TF.IsValue  (CloudwatchLogMetricFilterMetricTransformation s)
+instance TF.IsObject (CloudwatchLogMetricFilterMetricTransformation s) where
+    toObject CloudwatchLogMetricFilterMetricTransformation'{..} = P.catMaybes
+        [ TF.assign "default_value" <$> TF.attribute _defaultValue
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "namespace" <$> TF.attribute _namespace
+        , TF.assign "value" <$> TF.attribute _value
+        ]
+
+instance TF.IsValid (CloudwatchLogMetricFilterMetricTransformation s) where
+    validator = P.mempty
+
+instance P.HasDefaultValue (CloudwatchLogMetricFilterMetricTransformation s) (TF.Attr s P.Double) where
+    defaultValue =
+        P.lens (_defaultValue :: CloudwatchLogMetricFilterMetricTransformation s -> TF.Attr s P.Double)
+               (\s a -> s { _defaultValue = a } :: CloudwatchLogMetricFilterMetricTransformation s)
+
+instance P.HasName (CloudwatchLogMetricFilterMetricTransformation s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: CloudwatchLogMetricFilterMetricTransformation s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: CloudwatchLogMetricFilterMetricTransformation s)
+
+instance P.HasNamespace (CloudwatchLogMetricFilterMetricTransformation s) (TF.Attr s P.Text) where
+    namespace =
+        P.lens (_namespace :: CloudwatchLogMetricFilterMetricTransformation s -> TF.Attr s P.Text)
+               (\s a -> s { _namespace = a } :: CloudwatchLogMetricFilterMetricTransformation s)
+
+instance P.HasValue (CloudwatchLogMetricFilterMetricTransformation s) (TF.Attr s P.Text) where
+    value =
+        P.lens (_value :: CloudwatchLogMetricFilterMetricTransformation s -> TF.Attr s P.Text)
+               (\s a -> s { _value = a } :: CloudwatchLogMetricFilterMetricTransformation s)
 
 -- | @artifacts@ nested settings.
-data ArtifactsSetting s = ArtifactsSetting'
+data CodebuildProjectArtifacts s = CodebuildProjectArtifacts'
     { _location      :: TF.Attr s P.Text
     -- ^ @location@ - (Optional)
     --
@@ -652,11 +4715,11 @@ data ArtifactsSetting s = ArtifactsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @artifacts@ settings value.
-newArtifactsSetting
+newCodebuildProjectArtifacts
     :: TF.Attr s P.Text -- ^ 'P._type'': @type@
-    -> ArtifactsSetting s
-newArtifactsSetting _type' =
-    ArtifactsSetting'
+    -> CodebuildProjectArtifacts s
+newCodebuildProjectArtifacts _type' =
+    CodebuildProjectArtifacts'
         { _location = TF.Nil
         , _name = TF.Nil
         , _namespaceType = TF.Nil
@@ -665,9 +4728,9 @@ newArtifactsSetting _type' =
         , _type' = _type'
         }
 
-instance TF.IsValue  (ArtifactsSetting s)
-instance TF.IsObject (ArtifactsSetting s) where
-    toObject ArtifactsSetting'{..} = P.catMaybes
+instance TF.IsValue  (CodebuildProjectArtifacts s)
+instance TF.IsObject (CodebuildProjectArtifacts s) where
+    toObject CodebuildProjectArtifacts'{..} = P.catMaybes
         [ TF.assign "location" <$> TF.attribute _location
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "namespace_type" <$> TF.attribute _namespaceType
@@ -676,431 +4739,41 @@ instance TF.IsObject (ArtifactsSetting s) where
         , TF.assign "type" <$> TF.attribute _type'
         ]
 
-instance TF.IsValid (ArtifactsSetting s) where
+instance TF.IsValid (CodebuildProjectArtifacts s) where
     validator = P.mempty
 
-instance P.HasLocation (ArtifactsSetting s) (TF.Attr s P.Text) where
+instance P.HasLocation (CodebuildProjectArtifacts s) (TF.Attr s P.Text) where
     location =
-        P.lens (_location :: ArtifactsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _location = a } :: ArtifactsSetting s)
+        P.lens (_location :: CodebuildProjectArtifacts s -> TF.Attr s P.Text)
+               (\s a -> s { _location = a } :: CodebuildProjectArtifacts s)
 
-instance P.HasName (ArtifactsSetting s) (TF.Attr s P.Text) where
+instance P.HasName (CodebuildProjectArtifacts s) (TF.Attr s P.Text) where
     name =
-        P.lens (_name :: ArtifactsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: ArtifactsSetting s)
+        P.lens (_name :: CodebuildProjectArtifacts s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: CodebuildProjectArtifacts s)
 
-instance P.HasNamespaceType (ArtifactsSetting s) (TF.Attr s P.Text) where
+instance P.HasNamespaceType (CodebuildProjectArtifacts s) (TF.Attr s P.Text) where
     namespaceType =
-        P.lens (_namespaceType :: ArtifactsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _namespaceType = a } :: ArtifactsSetting s)
+        P.lens (_namespaceType :: CodebuildProjectArtifacts s -> TF.Attr s P.Text)
+               (\s a -> s { _namespaceType = a } :: CodebuildProjectArtifacts s)
 
-instance P.HasPackaging (ArtifactsSetting s) (TF.Attr s P.Text) where
+instance P.HasPackaging (CodebuildProjectArtifacts s) (TF.Attr s P.Text) where
     packaging =
-        P.lens (_packaging :: ArtifactsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _packaging = a } :: ArtifactsSetting s)
+        P.lens (_packaging :: CodebuildProjectArtifacts s -> TF.Attr s P.Text)
+               (\s a -> s { _packaging = a } :: CodebuildProjectArtifacts s)
 
-instance P.HasPath (ArtifactsSetting s) (TF.Attr s P.Text) where
+instance P.HasPath (CodebuildProjectArtifacts s) (TF.Attr s P.Text) where
     path =
-        P.lens (_path :: ArtifactsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _path = a } :: ArtifactsSetting s)
+        P.lens (_path :: CodebuildProjectArtifacts s -> TF.Attr s P.Text)
+               (\s a -> s { _path = a } :: CodebuildProjectArtifacts s)
 
-instance P.HasType' (ArtifactsSetting s) (TF.Attr s P.Text) where
+instance P.HasType' (CodebuildProjectArtifacts s) (TF.Attr s P.Text) where
     type' =
-        P.lens (_type' :: ArtifactsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a } :: ArtifactsSetting s)
-
--- | @association@ nested settings.
-data AssociationSetting s = AssociationSetting'
-    deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @association@ settings value.
-newAssociationSetting
-    :: AssociationSetting s
-newAssociationSetting =
-    AssociationSetting'
-
-instance TF.IsValue  (AssociationSetting s)
-instance TF.IsObject (AssociationSetting s) where
-    toObject AssociationSetting' = []
-
-instance TF.IsValid (AssociationSetting s) where
-    validator = P.mempty
-
-instance s ~ s' => P.HasComputedAllocationId (TF.Ref s' (AssociationSetting s)) (TF.Attr s P.Text) where
-    computedAllocationId x = TF.compute (TF.refKey x) "allocation_id"
-
-instance s ~ s' => P.HasComputedAssociationId (TF.Ref s' (AssociationSetting s)) (TF.Attr s P.Text) where
-    computedAssociationId x = TF.compute (TF.refKey x) "association_id"
-
-instance s ~ s' => P.HasComputedIpOwnerId (TF.Ref s' (AssociationSetting s)) (TF.Attr s P.Text) where
-    computedIpOwnerId x = TF.compute (TF.refKey x) "ip_owner_id"
-
-instance s ~ s' => P.HasComputedPublicDnsName (TF.Ref s' (AssociationSetting s)) (TF.Attr s P.Text) where
-    computedPublicDnsName x = TF.compute (TF.refKey x) "public_dns_name"
-
-instance s ~ s' => P.HasComputedPublicIp (TF.Ref s' (AssociationSetting s)) (TF.Attr s P.Text) where
-    computedPublicIp x = TF.compute (TF.refKey x) "public_ip"
-
--- | @associations@ nested settings.
-data AssociationsSetting s = AssociationsSetting'
-    deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @associations@ settings value.
-newAssociationsSetting
-    :: AssociationsSetting s
-newAssociationsSetting =
-    AssociationsSetting'
-
-instance TF.IsValue  (AssociationsSetting s)
-instance TF.IsObject (AssociationsSetting s) where
-    toObject AssociationsSetting' = []
-
-instance TF.IsValid (AssociationsSetting s) where
-    validator = P.mempty
-
-instance s ~ s' => P.HasComputedMain (TF.Ref s' (AssociationsSetting s)) (TF.Attr s P.Bool) where
-    computedMain x = TF.compute (TF.refKey x) "main"
-
-instance s ~ s' => P.HasComputedRouteTableAssociationId (TF.Ref s' (AssociationsSetting s)) (TF.Attr s P.Text) where
-    computedRouteTableAssociationId x = TF.compute (TF.refKey x) "route_table_association_id"
-
-instance s ~ s' => P.HasComputedRouteTableId (TF.Ref s' (AssociationsSetting s)) (TF.Attr s P.Text) where
-    computedRouteTableId x = TF.compute (TF.refKey x) "route_table_id"
-
-instance s ~ s' => P.HasComputedSubnetId (TF.Ref s' (AssociationsSetting s)) (TF.Attr s P.Text) where
-    computedSubnetId x = TF.compute (TF.refKey x) "subnet_id"
-
--- | @assume_role@ nested settings.
-data AssumeRoleSetting = AssumeRoleSetting'
-    { _externalId  :: P.Maybe P.Text
-    -- ^ @external_id@ - (Optional)
-    -- The external ID to use when assuming the role. If omitted, no external ID is
-    -- passed to the AssumeRole call.
-    --
-    , _policy      :: P.Maybe P.Document
-    -- ^ @policy@ - (Optional)
-    -- The permissions applied when assuming a role. You cannot use, this policy to
-    -- grant further permissions that are in excess to those of the,  role that is
-    -- being assumed.
-    --
-    , _roleArn     :: P.Maybe P.Text
-    -- ^ @role_arn@ - (Optional)
-    -- The ARN of an IAM role to assume prior to making API calls.
-    --
-    , _sessionName :: P.Maybe P.Text
-    -- ^ @session_name@ - (Optional)
-    -- The session name to use when assuming the role. If omitted, no session name
-    -- is passed to the AssumeRole call.
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @assume_role@ settings value.
-newAssumeRoleSetting
-    :: AssumeRoleSetting
-newAssumeRoleSetting =
-    AssumeRoleSetting'
-        { _externalId = P.Nothing
-        , _policy = P.Nothing
-        , _roleArn = P.Nothing
-        , _sessionName = P.Nothing
-        }
-
-instance TF.IsValue  (AssumeRoleSetting)
-instance TF.IsObject (AssumeRoleSetting) where
-    toObject AssumeRoleSetting'{..} = P.catMaybes
-        [ TF.assign "external_id" <$> _externalId
-        , TF.assign "policy" <$> _policy
-        , TF.assign "role_arn" <$> _roleArn
-        , TF.assign "session_name" <$> _sessionName
-        ]
-
-instance TF.IsValid (AssumeRoleSetting) where
-    validator = P.mempty
-
-instance P.HasExternalId (AssumeRoleSetting) (P.Maybe P.Text) where
-    externalId =
-        P.lens (_externalId :: AssumeRoleSetting -> P.Maybe P.Text)
-               (\s a -> s { _externalId = a } :: AssumeRoleSetting)
-
-instance P.HasPolicy (AssumeRoleSetting) (P.Maybe P.Document) where
-    policy =
-        P.lens (_policy :: AssumeRoleSetting -> P.Maybe P.Document)
-               (\s a -> s { _policy = a } :: AssumeRoleSetting)
-
-instance P.HasRoleArn (AssumeRoleSetting) (P.Maybe P.Text) where
-    roleArn =
-        P.lens (_roleArn :: AssumeRoleSetting -> P.Maybe P.Text)
-               (\s a -> s { _roleArn = a } :: AssumeRoleSetting)
-
-instance P.HasSessionName (AssumeRoleSetting) (P.Maybe P.Text) where
-    sessionName =
-        P.lens (_sessionName :: AssumeRoleSetting -> P.Maybe P.Text)
-               (\s a -> s { _sessionName = a } :: AssumeRoleSetting)
-
--- | @attachment@ nested settings.
-data AttachmentSetting s = AttachmentSetting'
-    { _deviceIndex :: TF.Attr s P.Int
-    -- ^ @device_index@ - (Required)
-    --
-    , _instance'   :: TF.Attr s P.Text
-    -- ^ @instance@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @attachment@ settings value.
-newAttachmentSetting
-    :: TF.Attr s P.Int -- ^ 'P._deviceIndex': @device_index@
-    -> TF.Attr s P.Text -- ^ 'P._instance'': @instance@
-    -> AttachmentSetting s
-newAttachmentSetting _deviceIndex _instance' =
-    AttachmentSetting'
-        { _deviceIndex = _deviceIndex
-        , _instance' = _instance'
-        }
-
-instance TF.IsValue  (AttachmentSetting s)
-instance TF.IsObject (AttachmentSetting s) where
-    toObject AttachmentSetting'{..} = P.catMaybes
-        [ TF.assign "device_index" <$> TF.attribute _deviceIndex
-        , TF.assign "instance" <$> TF.attribute _instance'
-        ]
-
-instance TF.IsValid (AttachmentSetting s) where
-    validator = P.mempty
-
-instance P.HasDeviceIndex (AttachmentSetting s) (TF.Attr s P.Int) where
-    deviceIndex =
-        P.lens (_deviceIndex :: AttachmentSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _deviceIndex = a } :: AttachmentSetting s)
-
-instance P.HasInstance' (AttachmentSetting s) (TF.Attr s P.Text) where
-    instance' =
-        P.lens (_instance' :: AttachmentSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _instance' = a } :: AttachmentSetting s)
-
-instance s ~ s' => P.HasComputedAttachmentId (TF.Ref s' (AttachmentSetting s)) (TF.Attr s P.Text) where
-    computedAttachmentId x = TF.compute (TF.refKey x) "attachment_id"
-
-instance s ~ s' => P.HasComputedDeviceIndex (TF.Ref s' (AttachmentSetting s)) (TF.Attr s P.Int) where
-    computedDeviceIndex x = TF.compute (TF.refKey x) "device_index"
-
-instance s ~ s' => P.HasComputedInstanceId (TF.Ref s' (AttachmentSetting s)) (TF.Attr s P.Text) where
-    computedInstanceId x = TF.compute (TF.refKey x) "instance_id"
-
-instance s ~ s' => P.HasComputedInstanceOwnerId (TF.Ref s' (AttachmentSetting s)) (TF.Attr s P.Text) where
-    computedInstanceOwnerId x = TF.compute (TF.refKey x) "instance_owner_id"
-
--- | @attachments@ nested settings.
-data AttachmentsSetting s = AttachmentsSetting'
-    deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @attachments@ settings value.
-newAttachmentsSetting
-    :: AttachmentsSetting s
-newAttachmentsSetting =
-    AttachmentsSetting'
-
-instance TF.IsValue  (AttachmentsSetting s)
-instance TF.IsObject (AttachmentsSetting s) where
-    toObject AttachmentsSetting' = []
-
-instance TF.IsValid (AttachmentsSetting s) where
-    validator = P.mempty
-
-instance s ~ s' => P.HasComputedState (TF.Ref s' (AttachmentsSetting s)) (TF.Attr s P.Text) where
-    computedState x = TF.compute (TF.refKey x) "state"
-
-instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (AttachmentsSetting s)) (TF.Attr s P.Text) where
-    computedVpcId x = TF.compute (TF.refKey x) "vpc_id"
-
--- | @attribute@ nested settings.
-data AttributeSetting s = AttributeSetting'
-    { _name  :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
-    --
-    , _type' :: TF.Attr s P.Text
-    -- ^ @type@ - (Required)
-    --
-    , _value :: TF.Attr s P.Text
-    -- ^ @value@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @attribute@ settings value.
-newAttributeSetting
-    :: TF.Attr s P.Text -- ^ 'P._name': @name@
-    -> TF.Attr s P.Text -- ^ 'P._type'': @type@
-    -> TF.Attr s P.Text -- ^ 'P._value': @value@
-    -> AttributeSetting s
-newAttributeSetting _name _type' _value =
-    AttributeSetting'
-        { _name = _name
-        , _type' = _type'
-        , _value = _value
-        }
-
-instance TF.IsValue  (AttributeSetting s)
-instance TF.IsObject (AttributeSetting s) where
-    toObject AttributeSetting'{..} = P.catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        , TF.assign "type" <$> TF.attribute _type'
-        , TF.assign "value" <$> TF.attribute _value
-        ]
-
-instance TF.IsValid (AttributeSetting s) where
-    validator = P.mempty
-
-instance P.HasName (AttributeSetting s) (TF.Attr s P.Text) where
-    name =
-        P.lens (_name :: AttributeSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: AttributeSetting s)
-
-instance P.HasType' (AttributeSetting s) (TF.Attr s P.Text) where
-    type' =
-        P.lens (_type' :: AttributeSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a } :: AttributeSetting s)
-
-instance P.HasValue (AttributeSetting s) (TF.Attr s P.Text) where
-    value =
-        P.lens (_value :: AttributeSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _value = a } :: AttributeSetting s)
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (AttributeSetting s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
-
-instance s ~ s' => P.HasComputedType (TF.Ref s' (AttributeSetting s)) (TF.Attr s P.Text) where
-    computedType x = TF.compute (TF.refKey x) "type"
-
--- | @audio_codec_options@ nested settings.
-data AudioCodecOptionsSetting s = AudioCodecOptionsSetting'
-    { _bitDepth :: TF.Attr s P.Text
-    -- ^ @bit_depth@ - (Optional, Forces New)
-    --
-    , _bitOrder :: TF.Attr s P.Text
-    -- ^ @bit_order@ - (Optional, Forces New)
-    --
-    , _profile  :: TF.Attr s P.Text
-    -- ^ @profile@ - (Optional, Forces New)
-    --
-    , _signed   :: TF.Attr s P.Text
-    -- ^ @signed@ - (Optional, Forces New)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @audio_codec_options@ settings value.
-newAudioCodecOptionsSetting
-    :: AudioCodecOptionsSetting s
-newAudioCodecOptionsSetting =
-    AudioCodecOptionsSetting'
-        { _bitDepth = TF.Nil
-        , _bitOrder = TF.Nil
-        , _profile = TF.Nil
-        , _signed = TF.Nil
-        }
-
-instance TF.IsValue  (AudioCodecOptionsSetting s)
-instance TF.IsObject (AudioCodecOptionsSetting s) where
-    toObject AudioCodecOptionsSetting'{..} = P.catMaybes
-        [ TF.assign "bit_depth" <$> TF.attribute _bitDepth
-        , TF.assign "bit_order" <$> TF.attribute _bitOrder
-        , TF.assign "profile" <$> TF.attribute _profile
-        , TF.assign "signed" <$> TF.attribute _signed
-        ]
-
-instance TF.IsValid (AudioCodecOptionsSetting s) where
-    validator = P.mempty
-
-instance P.HasBitDepth (AudioCodecOptionsSetting s) (TF.Attr s P.Text) where
-    bitDepth =
-        P.lens (_bitDepth :: AudioCodecOptionsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _bitDepth = a } :: AudioCodecOptionsSetting s)
-
-instance P.HasBitOrder (AudioCodecOptionsSetting s) (TF.Attr s P.Text) where
-    bitOrder =
-        P.lens (_bitOrder :: AudioCodecOptionsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _bitOrder = a } :: AudioCodecOptionsSetting s)
-
-instance P.HasProfile (AudioCodecOptionsSetting s) (TF.Attr s P.Text) where
-    profile =
-        P.lens (_profile :: AudioCodecOptionsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _profile = a } :: AudioCodecOptionsSetting s)
-
-instance P.HasSigned (AudioCodecOptionsSetting s) (TF.Attr s P.Text) where
-    signed =
-        P.lens (_signed :: AudioCodecOptionsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _signed = a } :: AudioCodecOptionsSetting s)
-
--- | @audio@ nested settings.
-data AudioSetting s = AudioSetting'
-    { _audioPackingMode :: TF.Attr s P.Text
-    -- ^ @audio_packing_mode@ - (Optional, Forces New)
-    --
-    , _bitRate          :: TF.Attr s P.Text
-    -- ^ @bit_rate@ - (Optional, Forces New)
-    --
-    , _channels         :: TF.Attr s P.Text
-    -- ^ @channels@ - (Optional, Forces New)
-    --
-    , _codec            :: TF.Attr s P.Text
-    -- ^ @codec@ - (Optional, Forces New)
-    --
-    , _sampleRate       :: TF.Attr s P.Text
-    -- ^ @sample_rate@ - (Optional, Forces New)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @audio@ settings value.
-newAudioSetting
-    :: AudioSetting s
-newAudioSetting =
-    AudioSetting'
-        { _audioPackingMode = TF.Nil
-        , _bitRate = TF.Nil
-        , _channels = TF.Nil
-        , _codec = TF.Nil
-        , _sampleRate = TF.Nil
-        }
-
-instance TF.IsValue  (AudioSetting s)
-instance TF.IsObject (AudioSetting s) where
-    toObject AudioSetting'{..} = P.catMaybes
-        [ TF.assign "audio_packing_mode" <$> TF.attribute _audioPackingMode
-        , TF.assign "bit_rate" <$> TF.attribute _bitRate
-        , TF.assign "channels" <$> TF.attribute _channels
-        , TF.assign "codec" <$> TF.attribute _codec
-        , TF.assign "sample_rate" <$> TF.attribute _sampleRate
-        ]
-
-instance TF.IsValid (AudioSetting s) where
-    validator = P.mempty
-
-instance P.HasAudioPackingMode (AudioSetting s) (TF.Attr s P.Text) where
-    audioPackingMode =
-        P.lens (_audioPackingMode :: AudioSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _audioPackingMode = a } :: AudioSetting s)
-
-instance P.HasBitRate (AudioSetting s) (TF.Attr s P.Text) where
-    bitRate =
-        P.lens (_bitRate :: AudioSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _bitRate = a } :: AudioSetting s)
-
-instance P.HasChannels (AudioSetting s) (TF.Attr s P.Text) where
-    channels =
-        P.lens (_channels :: AudioSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _channels = a } :: AudioSetting s)
-
-instance P.HasCodec (AudioSetting s) (TF.Attr s P.Text) where
-    codec =
-        P.lens (_codec :: AudioSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _codec = a } :: AudioSetting s)
-
-instance P.HasSampleRate (AudioSetting s) (TF.Attr s P.Text) where
-    sampleRate =
-        P.lens (_sampleRate :: AudioSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _sampleRate = a } :: AudioSetting s)
+        P.lens (_type' :: CodebuildProjectArtifacts s -> TF.Attr s P.Text)
+               (\s a -> s { _type' = a } :: CodebuildProjectArtifacts s)
 
 -- | @auth@ nested settings.
-data AuthSetting s = AuthSetting'
+data CodebuildProjectAuth s = CodebuildProjectAuth'
     { _resource' :: TF.Attr s P.Text
     -- ^ @resource@ - (Optional)
     --
@@ -1110,38 +4783,38 @@ data AuthSetting s = AuthSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @auth@ settings value.
-newAuthSetting
+newCodebuildProjectAuth
     :: TF.Attr s P.Text -- ^ 'P._type'': @type@
-    -> AuthSetting s
-newAuthSetting _type' =
-    AuthSetting'
+    -> CodebuildProjectAuth s
+newCodebuildProjectAuth _type' =
+    CodebuildProjectAuth'
         { _resource' = TF.Nil
         , _type' = _type'
         }
 
-instance TF.IsValue  (AuthSetting s)
-instance TF.IsObject (AuthSetting s) where
-    toObject AuthSetting'{..} = P.catMaybes
+instance TF.IsValue  (CodebuildProjectAuth s)
+instance TF.IsObject (CodebuildProjectAuth s) where
+    toObject CodebuildProjectAuth'{..} = P.catMaybes
         [ TF.assign "resource" <$> TF.attribute _resource'
         , TF.assign "type" <$> TF.attribute _type'
         ]
 
-instance TF.IsValid (AuthSetting s) where
+instance TF.IsValid (CodebuildProjectAuth s) where
     validator = P.mempty
 
-instance P.HasResource' (AuthSetting s) (TF.Attr s P.Text) where
+instance P.HasResource' (CodebuildProjectAuth s) (TF.Attr s P.Text) where
     resource' =
-        P.lens (_resource' :: AuthSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _resource' = a } :: AuthSetting s)
+        P.lens (_resource' :: CodebuildProjectAuth s -> TF.Attr s P.Text)
+               (\s a -> s { _resource' = a } :: CodebuildProjectAuth s)
 
-instance P.HasType' (AuthSetting s) (TF.Attr s P.Text) where
+instance P.HasType' (CodebuildProjectAuth s) (TF.Attr s P.Text) where
     type' =
-        P.lens (_type' :: AuthSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a } :: AuthSetting s)
+        P.lens (_type' :: CodebuildProjectAuth s -> TF.Attr s P.Text)
+               (\s a -> s { _type' = a } :: CodebuildProjectAuth s)
 
 -- | @source@ nested settings.
-data SourceSetting s = SourceSetting'
-    { _auth              :: TF.Attr s [TF.Attr s (AuthSetting s)]
+data CodebuildProjectSource s = CodebuildProjectSource'
+    { _auth              :: TF.Attr s [TF.Attr s (CodebuildProjectAuth s)]
     -- ^ @auth@ - (Optional)
     --
     , _buildspec         :: TF.Attr s P.Text
@@ -1162,25 +4835,14 @@ data SourceSetting s = SourceSetting'
     , _type'             :: TF.Attr s P.Text
     -- ^ @type@ - (Required)
     --
-    , _owner             :: TF.Attr s P.Text
-    -- ^ @owner@ - (Required)
-    --
-    , _sourceDetail      :: TF.Attr s [TF.Attr s (SourceDetailSetting s)]
-    -- ^ @source_detail@ - (Optional)
-    --
-    , _sourceIdentifier  :: TF.Attr s P.Text
-    -- ^ @source_identifier@ - (Required)
-    --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @source@ settings value.
-newSourceSetting
-    :: TF.Attr s P.Text -- ^ 'P._sourceIdentifier': @source_identifier@
-    -> TF.Attr s P.Text -- ^ 'P._owner': @owner@
-    -> TF.Attr s P.Text -- ^ 'P._type'': @type@
-    -> SourceSetting s
-newSourceSetting _sourceIdentifier _owner _type' =
-    SourceSetting'
+newCodebuildProjectSource
+    :: TF.Attr s P.Text -- ^ 'P._type'': @type@
+    -> CodebuildProjectSource s
+newCodebuildProjectSource _type' =
+    CodebuildProjectSource'
         { _auth = TF.Nil
         , _buildspec = TF.Nil
         , _gitCloneDepth = TF.Nil
@@ -1188,14 +4850,11 @@ newSourceSetting _sourceIdentifier _owner _type' =
         , _location = TF.Nil
         , _reportBuildStatus = TF.Nil
         , _type' = _type'
-        , _owner = _owner
-        , _sourceDetail = TF.Nil
-        , _sourceIdentifier = _sourceIdentifier
         }
 
-instance TF.IsValue  (SourceSetting s)
-instance TF.IsObject (SourceSetting s) where
-    toObject SourceSetting'{..} = P.catMaybes
+instance TF.IsValue  (CodebuildProjectSource s)
+instance TF.IsObject (CodebuildProjectSource s) where
+    toObject CodebuildProjectSource'{..} = P.catMaybes
         [ TF.assign "auth" <$> TF.attribute _auth
         , TF.assign "buildspec" <$> TF.attribute _buildspec
         , TF.assign "git_clone_depth" <$> TF.attribute _gitCloneDepth
@@ -1203,4084 +4862,42 @@ instance TF.IsObject (SourceSetting s) where
         , TF.assign "location" <$> TF.attribute _location
         , TF.assign "report_build_status" <$> TF.attribute _reportBuildStatus
         , TF.assign "type" <$> TF.attribute _type'
-        , TF.assign "owner" <$> TF.attribute _owner
-        , TF.assign "source_detail" <$> TF.attribute _sourceDetail
-        , TF.assign "source_identifier" <$> TF.attribute _sourceIdentifier
         ]
 
-instance TF.IsValid (SourceSetting s) where
+instance TF.IsValid (CodebuildProjectSource s) where
     validator = P.mempty
 
-instance P.HasAuth (SourceSetting s) (TF.Attr s [TF.Attr s (AuthSetting s)]) where
+instance P.HasAuth (CodebuildProjectSource s) (TF.Attr s [TF.Attr s (CodebuildProjectAuth s)]) where
     auth =
-        P.lens (_auth :: SourceSetting s -> TF.Attr s [TF.Attr s (AuthSetting s)])
-               (\s a -> s { _auth = a } :: SourceSetting s)
+        P.lens (_auth :: CodebuildProjectSource s -> TF.Attr s [TF.Attr s (CodebuildProjectAuth s)])
+               (\s a -> s { _auth = a } :: CodebuildProjectSource s)
 
-instance P.HasBuildspec (SourceSetting s) (TF.Attr s P.Text) where
+instance P.HasBuildspec (CodebuildProjectSource s) (TF.Attr s P.Text) where
     buildspec =
-        P.lens (_buildspec :: SourceSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _buildspec = a } :: SourceSetting s)
+        P.lens (_buildspec :: CodebuildProjectSource s -> TF.Attr s P.Text)
+               (\s a -> s { _buildspec = a } :: CodebuildProjectSource s)
 
-instance P.HasGitCloneDepth (SourceSetting s) (TF.Attr s P.Int) where
+instance P.HasGitCloneDepth (CodebuildProjectSource s) (TF.Attr s P.Int) where
     gitCloneDepth =
-        P.lens (_gitCloneDepth :: SourceSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _gitCloneDepth = a } :: SourceSetting s)
+        P.lens (_gitCloneDepth :: CodebuildProjectSource s -> TF.Attr s P.Int)
+               (\s a -> s { _gitCloneDepth = a } :: CodebuildProjectSource s)
 
-instance P.HasInsecureSsl (SourceSetting s) (TF.Attr s P.Bool) where
+instance P.HasInsecureSsl (CodebuildProjectSource s) (TF.Attr s P.Bool) where
     insecureSsl =
-        P.lens (_insecureSsl :: SourceSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _insecureSsl = a } :: SourceSetting s)
+        P.lens (_insecureSsl :: CodebuildProjectSource s -> TF.Attr s P.Bool)
+               (\s a -> s { _insecureSsl = a } :: CodebuildProjectSource s)
 
-instance P.HasLocation (SourceSetting s) (TF.Attr s P.Text) where
+instance P.HasLocation (CodebuildProjectSource s) (TF.Attr s P.Text) where
     location =
-        P.lens (_location :: SourceSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _location = a } :: SourceSetting s)
+        P.lens (_location :: CodebuildProjectSource s -> TF.Attr s P.Text)
+               (\s a -> s { _location = a } :: CodebuildProjectSource s)
 
-instance P.HasReportBuildStatus (SourceSetting s) (TF.Attr s P.Bool) where
+instance P.HasReportBuildStatus (CodebuildProjectSource s) (TF.Attr s P.Bool) where
     reportBuildStatus =
-        P.lens (_reportBuildStatus :: SourceSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _reportBuildStatus = a } :: SourceSetting s)
+        P.lens (_reportBuildStatus :: CodebuildProjectSource s -> TF.Attr s P.Bool)
+               (\s a -> s { _reportBuildStatus = a } :: CodebuildProjectSource s)
 
-instance P.HasType' (SourceSetting s) (TF.Attr s P.Text) where
+instance P.HasType' (CodebuildProjectSource s) (TF.Attr s P.Text) where
     type' =
-        P.lens (_type' :: SourceSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a } :: SourceSetting s)
-
-instance P.HasOwner (SourceSetting s) (TF.Attr s P.Text) where
-    owner =
-        P.lens (_owner :: SourceSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _owner = a } :: SourceSetting s)
-
-instance P.HasSourceDetail (SourceSetting s) (TF.Attr s [TF.Attr s (SourceDetailSetting s)]) where
-    sourceDetail =
-        P.lens (_sourceDetail :: SourceSetting s -> TF.Attr s [TF.Attr s (SourceDetailSetting s)])
-               (\s a -> s { _sourceDetail = a } :: SourceSetting s)
-
-instance P.HasSourceIdentifier (SourceSetting s) (TF.Attr s P.Text) where
-    sourceIdentifier =
-        P.lens (_sourceIdentifier :: SourceSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _sourceIdentifier = a } :: SourceSetting s)
-
--- | @source_detail@ nested settings.
-data SourceDetailSetting s = SourceDetailSetting'
-    { _eventSource               :: TF.Attr s P.Text
-    -- ^ @event_source@ - (Optional)
-    --
-    , _maximumExecutionFrequency :: TF.Attr s P.Text
-    -- ^ @maximum_execution_frequency@ - (Optional)
-    --
-    , _messageType               :: TF.Attr s P.Text
-    -- ^ @message_type@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @source_detail@ settings value.
-newSourceDetailSetting
-    :: SourceDetailSetting s
-newSourceDetailSetting =
-    SourceDetailSetting'
-        { _eventSource = TF.value "aws.config"
-        , _maximumExecutionFrequency = TF.Nil
-        , _messageType = TF.Nil
-        }
-
-instance TF.IsValue  (SourceDetailSetting s)
-instance TF.IsObject (SourceDetailSetting s) where
-    toObject SourceDetailSetting'{..} = P.catMaybes
-        [ TF.assign "event_source" <$> TF.attribute _eventSource
-        , TF.assign "maximum_execution_frequency" <$> TF.attribute _maximumExecutionFrequency
-        , TF.assign "message_type" <$> TF.attribute _messageType
-        ]
-
-instance TF.IsValid (SourceDetailSetting s) where
-    validator = P.mempty
-
-instance P.HasEventSource (SourceDetailSetting s) (TF.Attr s P.Text) where
-    eventSource =
-        P.lens (_eventSource :: SourceDetailSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _eventSource = a } :: SourceDetailSetting s)
-
-instance P.HasMaximumExecutionFrequency (SourceDetailSetting s) (TF.Attr s P.Text) where
-    maximumExecutionFrequency =
-        P.lens (_maximumExecutionFrequency :: SourceDetailSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _maximumExecutionFrequency = a } :: SourceDetailSetting s)
-
-instance P.HasMessageType (SourceDetailSetting s) (TF.Attr s P.Text) where
-    messageType =
-        P.lens (_messageType :: SourceDetailSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _messageType = a } :: SourceDetailSetting s)
-
--- | @auto_rollback_configuration@ nested settings.
-data AutoRollbackConfigurationSetting s = AutoRollbackConfigurationSetting'
-    { _enabled :: TF.Attr s P.Bool
-    -- ^ @enabled@ - (Optional)
-    --
-    , _events  :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @events@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @auto_rollback_configuration@ settings value.
-newAutoRollbackConfigurationSetting
-    :: AutoRollbackConfigurationSetting s
-newAutoRollbackConfigurationSetting =
-    AutoRollbackConfigurationSetting'
-        { _enabled = TF.Nil
-        , _events = TF.Nil
-        }
-
-instance TF.IsValue  (AutoRollbackConfigurationSetting s)
-instance TF.IsObject (AutoRollbackConfigurationSetting s) where
-    toObject AutoRollbackConfigurationSetting'{..} = P.catMaybes
-        [ TF.assign "enabled" <$> TF.attribute _enabled
-        , TF.assign "events" <$> TF.attribute _events
-        ]
-
-instance TF.IsValid (AutoRollbackConfigurationSetting s) where
-    validator = P.mempty
-
-instance P.HasEnabled (AutoRollbackConfigurationSetting s) (TF.Attr s P.Bool) where
-    enabled =
-        P.lens (_enabled :: AutoRollbackConfigurationSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _enabled = a } :: AutoRollbackConfigurationSetting s)
-
-instance P.HasEvents (AutoRollbackConfigurationSetting s) (TF.Attr s [TF.Attr s P.Text]) where
-    events =
-        P.lens (_events :: AutoRollbackConfigurationSetting s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _events = a } :: AutoRollbackConfigurationSetting s)
-
--- | @batch_target@ nested settings.
-data BatchTargetSetting s = BatchTargetSetting'
-    { _arraySize     :: TF.Attr s P.Int
-    -- ^ @array_size@ - (Optional)
-    --
-    , _jobAttempts   :: TF.Attr s P.Int
-    -- ^ @job_attempts@ - (Optional)
-    --
-    , _jobDefinition :: TF.Attr s P.Text
-    -- ^ @job_definition@ - (Required)
-    --
-    , _jobName       :: TF.Attr s P.Text
-    -- ^ @job_name@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @batch_target@ settings value.
-newBatchTargetSetting
-    :: TF.Attr s P.Text -- ^ 'P._jobDefinition': @job_definition@
-    -> TF.Attr s P.Text -- ^ 'P._jobName': @job_name@
-    -> BatchTargetSetting s
-newBatchTargetSetting _jobDefinition _jobName =
-    BatchTargetSetting'
-        { _arraySize = TF.Nil
-        , _jobAttempts = TF.Nil
-        , _jobDefinition = _jobDefinition
-        , _jobName = _jobName
-        }
-
-instance TF.IsValue  (BatchTargetSetting s)
-instance TF.IsObject (BatchTargetSetting s) where
-    toObject BatchTargetSetting'{..} = P.catMaybes
-        [ TF.assign "array_size" <$> TF.attribute _arraySize
-        , TF.assign "job_attempts" <$> TF.attribute _jobAttempts
-        , TF.assign "job_definition" <$> TF.attribute _jobDefinition
-        , TF.assign "job_name" <$> TF.attribute _jobName
-        ]
-
-instance TF.IsValid (BatchTargetSetting s) where
-    validator = P.mempty
-
-instance P.HasArraySize (BatchTargetSetting s) (TF.Attr s P.Int) where
-    arraySize =
-        P.lens (_arraySize :: BatchTargetSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _arraySize = a } :: BatchTargetSetting s)
-
-instance P.HasJobAttempts (BatchTargetSetting s) (TF.Attr s P.Int) where
-    jobAttempts =
-        P.lens (_jobAttempts :: BatchTargetSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _jobAttempts = a } :: BatchTargetSetting s)
-
-instance P.HasJobDefinition (BatchTargetSetting s) (TF.Attr s P.Text) where
-    jobDefinition =
-        P.lens (_jobDefinition :: BatchTargetSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _jobDefinition = a } :: BatchTargetSetting s)
-
-instance P.HasJobName (BatchTargetSetting s) (TF.Attr s P.Text) where
-    jobName =
-        P.lens (_jobName :: BatchTargetSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _jobName = a } :: BatchTargetSetting s)
-
--- | @block_device_mappings@ nested settings.
-data BlockDeviceMappingsSetting s = BlockDeviceMappingsSetting'
-    { _deviceName  :: TF.Attr s P.Text
-    -- ^ @device_name@ - (Optional)
-    --
-    , _ebs         :: TF.Attr s (EbsSetting s)
-    -- ^ @ebs@ - (Optional)
-    --
-    , _noDevice    :: TF.Attr s P.Text
-    -- ^ @no_device@ - (Optional)
-    --
-    , _virtualName :: TF.Attr s P.Text
-    -- ^ @virtual_name@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @block_device_mappings@ settings value.
-newBlockDeviceMappingsSetting
-    :: BlockDeviceMappingsSetting s
-newBlockDeviceMappingsSetting =
-    BlockDeviceMappingsSetting'
-        { _deviceName = TF.Nil
-        , _ebs = TF.Nil
-        , _noDevice = TF.Nil
-        , _virtualName = TF.Nil
-        }
-
-instance TF.IsValue  (BlockDeviceMappingsSetting s)
-instance TF.IsObject (BlockDeviceMappingsSetting s) where
-    toObject BlockDeviceMappingsSetting'{..} = P.catMaybes
-        [ TF.assign "device_name" <$> TF.attribute _deviceName
-        , TF.assign "ebs" <$> TF.attribute _ebs
-        , TF.assign "no_device" <$> TF.attribute _noDevice
-        , TF.assign "virtual_name" <$> TF.attribute _virtualName
-        ]
-
-instance TF.IsValid (BlockDeviceMappingsSetting s) where
-    validator = P.mempty
-           P.<> TF.settingsValidator "_ebs"
-                  (_ebs
-                      :: BlockDeviceMappingsSetting s -> TF.Attr s (EbsSetting s))
-                  TF.validator
-
-instance P.HasDeviceName (BlockDeviceMappingsSetting s) (TF.Attr s P.Text) where
-    deviceName =
-        P.lens (_deviceName :: BlockDeviceMappingsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _deviceName = a } :: BlockDeviceMappingsSetting s)
-
-instance P.HasEbs (BlockDeviceMappingsSetting s) (TF.Attr s (EbsSetting s)) where
-    ebs =
-        P.lens (_ebs :: BlockDeviceMappingsSetting s -> TF.Attr s (EbsSetting s))
-               (\s a -> s { _ebs = a } :: BlockDeviceMappingsSetting s)
-
-instance P.HasNoDevice (BlockDeviceMappingsSetting s) (TF.Attr s P.Text) where
-    noDevice =
-        P.lens (_noDevice :: BlockDeviceMappingsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _noDevice = a } :: BlockDeviceMappingsSetting s)
-
-instance P.HasVirtualName (BlockDeviceMappingsSetting s) (TF.Attr s P.Text) where
-    virtualName =
-        P.lens (_virtualName :: BlockDeviceMappingsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _virtualName = a } :: BlockDeviceMappingsSetting s)
-
-instance s ~ s' => P.HasComputedDeviceName (TF.Ref s' (BlockDeviceMappingsSetting s)) (TF.Attr s P.Text) where
-    computedDeviceName x = TF.compute (TF.refKey x) "device_name"
-
-instance s ~ s' => P.HasComputedEbs (TF.Ref s' (BlockDeviceMappingsSetting s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
-    computedEbs x = TF.compute (TF.refKey x) "ebs"
-
-instance s ~ s' => P.HasComputedNoDevice (TF.Ref s' (BlockDeviceMappingsSetting s)) (TF.Attr s P.Text) where
-    computedNoDevice x = TF.compute (TF.refKey x) "no_device"
-
-instance s ~ s' => P.HasComputedVirtualName (TF.Ref s' (BlockDeviceMappingsSetting s)) (TF.Attr s P.Text) where
-    computedVirtualName x = TF.compute (TF.refKey x) "virtual_name"
-
--- | @ebs@ nested settings.
-data EbsSetting s = EbsSetting'
-    { _deleteOnTermination :: TF.Attr s P.Bool
-    -- ^ @delete_on_termination@ - (Optional)
-    --
-    , _encrypted           :: TF.Attr s P.Bool
-    -- ^ @encrypted@ - (Optional)
-    --
-    , _iops                :: TF.Attr s P.Int
-    -- ^ @iops@ - (Optional)
-    --
-    , _kmsKeyId            :: TF.Attr s P.Text
-    -- ^ @kms_key_id@ - (Optional)
-    --
-    , _snapshotId          :: TF.Attr s P.Text
-    -- ^ @snapshot_id@ - (Optional)
-    --
-    , _volumeSize          :: TF.Attr s P.Int
-    -- ^ @volume_size@ - (Optional)
-    --
-    , _volumeType          :: TF.Attr s P.Text
-    -- ^ @volume_type@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @ebs@ settings value.
-newEbsSetting
-    :: EbsSetting s
-newEbsSetting =
-    EbsSetting'
-        { _deleteOnTermination = TF.Nil
-        , _encrypted = TF.Nil
-        , _iops = TF.Nil
-        , _kmsKeyId = TF.Nil
-        , _snapshotId = TF.Nil
-        , _volumeSize = TF.Nil
-        , _volumeType = TF.Nil
-        }
-
-instance TF.IsValue  (EbsSetting s)
-instance TF.IsObject (EbsSetting s) where
-    toObject EbsSetting'{..} = P.catMaybes
-        [ TF.assign "delete_on_termination" <$> TF.attribute _deleteOnTermination
-        , TF.assign "encrypted" <$> TF.attribute _encrypted
-        , TF.assign "iops" <$> TF.attribute _iops
-        , TF.assign "kms_key_id" <$> TF.attribute _kmsKeyId
-        , TF.assign "snapshot_id" <$> TF.attribute _snapshotId
-        , TF.assign "volume_size" <$> TF.attribute _volumeSize
-        , TF.assign "volume_type" <$> TF.attribute _volumeType
-        ]
-
-instance TF.IsValid (EbsSetting s) where
-    validator = P.mempty
-
-instance P.HasDeleteOnTermination (EbsSetting s) (TF.Attr s P.Bool) where
-    deleteOnTermination =
-        P.lens (_deleteOnTermination :: EbsSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _deleteOnTermination = a } :: EbsSetting s)
-
-instance P.HasEncrypted (EbsSetting s) (TF.Attr s P.Bool) where
-    encrypted =
-        P.lens (_encrypted :: EbsSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _encrypted = a } :: EbsSetting s)
-
-instance P.HasIops (EbsSetting s) (TF.Attr s P.Int) where
-    iops =
-        P.lens (_iops :: EbsSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _iops = a } :: EbsSetting s)
-
-instance P.HasKmsKeyId (EbsSetting s) (TF.Attr s P.Text) where
-    kmsKeyId =
-        P.lens (_kmsKeyId :: EbsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _kmsKeyId = a } :: EbsSetting s)
-
-instance P.HasSnapshotId (EbsSetting s) (TF.Attr s P.Text) where
-    snapshotId =
-        P.lens (_snapshotId :: EbsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _snapshotId = a } :: EbsSetting s)
-
-instance P.HasVolumeSize (EbsSetting s) (TF.Attr s P.Int) where
-    volumeSize =
-        P.lens (_volumeSize :: EbsSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _volumeSize = a } :: EbsSetting s)
-
-instance P.HasVolumeType (EbsSetting s) (TF.Attr s P.Text) where
-    volumeType =
-        P.lens (_volumeType :: EbsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _volumeType = a } :: EbsSetting s)
-
-instance s ~ s' => P.HasComputedIops (TF.Ref s' (EbsSetting s)) (TF.Attr s P.Int) where
-    computedIops x = TF.compute (TF.refKey x) "iops"
-
-instance s ~ s' => P.HasComputedVolumeSize (TF.Ref s' (EbsSetting s)) (TF.Attr s P.Int) where
-    computedVolumeSize x = TF.compute (TF.refKey x) "volume_size"
-
-instance s ~ s' => P.HasComputedVolumeType (TF.Ref s' (EbsSetting s)) (TF.Attr s P.Text) where
-    computedVolumeType x = TF.compute (TF.refKey x) "volume_type"
-
--- | @blue_green_deployment_config@ nested settings.
-data BlueGreenDeploymentConfigSetting s = BlueGreenDeploymentConfigSetting'
-    { _deploymentReadyOption :: TF.Attr s (DeploymentReadyOptionSetting s)
-    -- ^ @deployment_ready_option@ - (Optional)
-    --
-    , _greenFleetProvisioningOption :: TF.Attr s (GreenFleetProvisioningOptionSetting s)
-    -- ^ @green_fleet_provisioning_option@ - (Optional)
-    --
-    , _terminateBlueInstancesOnDeploymentSuccess :: TF.Attr s (TerminateBlueInstancesOnDeploymentSuccessSetting s)
-    -- ^ @terminate_blue_instances_on_deployment_success@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @blue_green_deployment_config@ settings value.
-newBlueGreenDeploymentConfigSetting
-    :: BlueGreenDeploymentConfigSetting s
-newBlueGreenDeploymentConfigSetting =
-    BlueGreenDeploymentConfigSetting'
-        { _deploymentReadyOption = TF.Nil
-        , _greenFleetProvisioningOption = TF.Nil
-        , _terminateBlueInstancesOnDeploymentSuccess = TF.Nil
-        }
-
-instance TF.IsValue  (BlueGreenDeploymentConfigSetting s)
-instance TF.IsObject (BlueGreenDeploymentConfigSetting s) where
-    toObject BlueGreenDeploymentConfigSetting'{..} = P.catMaybes
-        [ TF.assign "deployment_ready_option" <$> TF.attribute _deploymentReadyOption
-        , TF.assign "green_fleet_provisioning_option" <$> TF.attribute _greenFleetProvisioningOption
-        , TF.assign "terminate_blue_instances_on_deployment_success" <$> TF.attribute _terminateBlueInstancesOnDeploymentSuccess
-        ]
-
-instance TF.IsValid (BlueGreenDeploymentConfigSetting s) where
-    validator = P.mempty
-           P.<> TF.settingsValidator "_deploymentReadyOption"
-                  (_deploymentReadyOption
-                      :: BlueGreenDeploymentConfigSetting s -> TF.Attr s (DeploymentReadyOptionSetting s))
-                  TF.validator
-           P.<> TF.settingsValidator "_greenFleetProvisioningOption"
-                  (_greenFleetProvisioningOption
-                      :: BlueGreenDeploymentConfigSetting s -> TF.Attr s (GreenFleetProvisioningOptionSetting s))
-                  TF.validator
-           P.<> TF.settingsValidator "_terminateBlueInstancesOnDeploymentSuccess"
-                  (_terminateBlueInstancesOnDeploymentSuccess
-                      :: BlueGreenDeploymentConfigSetting s -> TF.Attr s (TerminateBlueInstancesOnDeploymentSuccessSetting s))
-                  TF.validator
-
-instance P.HasDeploymentReadyOption (BlueGreenDeploymentConfigSetting s) (TF.Attr s (DeploymentReadyOptionSetting s)) where
-    deploymentReadyOption =
-        P.lens (_deploymentReadyOption :: BlueGreenDeploymentConfigSetting s -> TF.Attr s (DeploymentReadyOptionSetting s))
-               (\s a -> s { _deploymentReadyOption = a } :: BlueGreenDeploymentConfigSetting s)
-
-instance P.HasGreenFleetProvisioningOption (BlueGreenDeploymentConfigSetting s) (TF.Attr s (GreenFleetProvisioningOptionSetting s)) where
-    greenFleetProvisioningOption =
-        P.lens (_greenFleetProvisioningOption :: BlueGreenDeploymentConfigSetting s -> TF.Attr s (GreenFleetProvisioningOptionSetting s))
-               (\s a -> s { _greenFleetProvisioningOption = a } :: BlueGreenDeploymentConfigSetting s)
-
-instance P.HasTerminateBlueInstancesOnDeploymentSuccess (BlueGreenDeploymentConfigSetting s) (TF.Attr s (TerminateBlueInstancesOnDeploymentSuccessSetting s)) where
-    terminateBlueInstancesOnDeploymentSuccess =
-        P.lens (_terminateBlueInstancesOnDeploymentSuccess :: BlueGreenDeploymentConfigSetting s -> TF.Attr s (TerminateBlueInstancesOnDeploymentSuccessSetting s))
-               (\s a -> s { _terminateBlueInstancesOnDeploymentSuccess = a } :: BlueGreenDeploymentConfigSetting s)
-
-instance s ~ s' => P.HasComputedGreenFleetProvisioningOption (TF.Ref s' (BlueGreenDeploymentConfigSetting s)) (TF.Attr s (GreenFleetProvisioningOptionSetting s)) where
-    computedGreenFleetProvisioningOption x = TF.compute (TF.refKey x) "green_fleet_provisioning_option"
-
--- | @green_fleet_provisioning_option@ nested settings.
-data GreenFleetProvisioningOptionSetting s = GreenFleetProvisioningOptionSetting'
-    { _action :: TF.Attr s P.Text
-    -- ^ @action@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @green_fleet_provisioning_option@ settings value.
-newGreenFleetProvisioningOptionSetting
-    :: GreenFleetProvisioningOptionSetting s
-newGreenFleetProvisioningOptionSetting =
-    GreenFleetProvisioningOptionSetting'
-        { _action = TF.Nil
-        }
-
-instance TF.IsValue  (GreenFleetProvisioningOptionSetting s)
-instance TF.IsObject (GreenFleetProvisioningOptionSetting s) where
-    toObject GreenFleetProvisioningOptionSetting'{..} = P.catMaybes
-        [ TF.assign "action" <$> TF.attribute _action
-        ]
-
-instance TF.IsValid (GreenFleetProvisioningOptionSetting s) where
-    validator = P.mempty
-
-instance P.HasAction (GreenFleetProvisioningOptionSetting s) (TF.Attr s P.Text) where
-    action =
-        P.lens (_action :: GreenFleetProvisioningOptionSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _action = a } :: GreenFleetProvisioningOptionSetting s)
-
--- | @terminate_blue_instances_on_deployment_success@ nested settings.
-data TerminateBlueInstancesOnDeploymentSuccessSetting s = TerminateBlueInstancesOnDeploymentSuccessSetting'
-    { _action                       :: TF.Attr s P.Text
-    -- ^ @action@ - (Optional)
-    --
-    , _terminationWaitTimeInMinutes :: TF.Attr s P.Int
-    -- ^ @termination_wait_time_in_minutes@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @terminate_blue_instances_on_deployment_success@ settings value.
-newTerminateBlueInstancesOnDeploymentSuccessSetting
-    :: TerminateBlueInstancesOnDeploymentSuccessSetting s
-newTerminateBlueInstancesOnDeploymentSuccessSetting =
-    TerminateBlueInstancesOnDeploymentSuccessSetting'
-        { _action = TF.Nil
-        , _terminationWaitTimeInMinutes = TF.Nil
-        }
-
-instance TF.IsValue  (TerminateBlueInstancesOnDeploymentSuccessSetting s)
-instance TF.IsObject (TerminateBlueInstancesOnDeploymentSuccessSetting s) where
-    toObject TerminateBlueInstancesOnDeploymentSuccessSetting'{..} = P.catMaybes
-        [ TF.assign "action" <$> TF.attribute _action
-        , TF.assign "termination_wait_time_in_minutes" <$> TF.attribute _terminationWaitTimeInMinutes
-        ]
-
-instance TF.IsValid (TerminateBlueInstancesOnDeploymentSuccessSetting s) where
-    validator = P.mempty
-
-instance P.HasAction (TerminateBlueInstancesOnDeploymentSuccessSetting s) (TF.Attr s P.Text) where
-    action =
-        P.lens (_action :: TerminateBlueInstancesOnDeploymentSuccessSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _action = a } :: TerminateBlueInstancesOnDeploymentSuccessSetting s)
-
-instance P.HasTerminationWaitTimeInMinutes (TerminateBlueInstancesOnDeploymentSuccessSetting s) (TF.Attr s P.Int) where
-    terminationWaitTimeInMinutes =
-        P.lens (_terminationWaitTimeInMinutes :: TerminateBlueInstancesOnDeploymentSuccessSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _terminationWaitTimeInMinutes = a } :: TerminateBlueInstancesOnDeploymentSuccessSetting s)
-
--- | @deployment_ready_option@ nested settings.
-data DeploymentReadyOptionSetting s = DeploymentReadyOptionSetting'
-    { _actionOnTimeout   :: TF.Attr s P.Text
-    -- ^ @action_on_timeout@ - (Optional)
-    --
-    , _waitTimeInMinutes :: TF.Attr s P.Int
-    -- ^ @wait_time_in_minutes@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @deployment_ready_option@ settings value.
-newDeploymentReadyOptionSetting
-    :: DeploymentReadyOptionSetting s
-newDeploymentReadyOptionSetting =
-    DeploymentReadyOptionSetting'
-        { _actionOnTimeout = TF.Nil
-        , _waitTimeInMinutes = TF.Nil
-        }
-
-instance TF.IsValue  (DeploymentReadyOptionSetting s)
-instance TF.IsObject (DeploymentReadyOptionSetting s) where
-    toObject DeploymentReadyOptionSetting'{..} = P.catMaybes
-        [ TF.assign "action_on_timeout" <$> TF.attribute _actionOnTimeout
-        , TF.assign "wait_time_in_minutes" <$> TF.attribute _waitTimeInMinutes
-        ]
-
-instance TF.IsValid (DeploymentReadyOptionSetting s) where
-    validator = P.mempty
-
-instance P.HasActionOnTimeout (DeploymentReadyOptionSetting s) (TF.Attr s P.Text) where
-    actionOnTimeout =
-        P.lens (_actionOnTimeout :: DeploymentReadyOptionSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _actionOnTimeout = a } :: DeploymentReadyOptionSetting s)
-
-instance P.HasWaitTimeInMinutes (DeploymentReadyOptionSetting s) (TF.Attr s P.Int) where
-    waitTimeInMinutes =
-        P.lens (_waitTimeInMinutes :: DeploymentReadyOptionSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _waitTimeInMinutes = a } :: DeploymentReadyOptionSetting s)
-
--- | @bootstrap_action@ nested settings.
-data BootstrapActionSetting s = BootstrapActionSetting'
-    { _args :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @args@ - (Optional, Forces New)
-    --
-    , _name :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
-    --
-    , _path :: TF.Attr s P.Text
-    -- ^ @path@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @bootstrap_action@ settings value.
-newBootstrapActionSetting
-    :: TF.Attr s P.Text -- ^ 'P._name': @name@
-    -> TF.Attr s P.Text -- ^ 'P._path': @path@
-    -> BootstrapActionSetting s
-newBootstrapActionSetting _name _path =
-    BootstrapActionSetting'
-        { _args = TF.Nil
-        , _name = _name
-        , _path = _path
-        }
-
-instance TF.IsValue  (BootstrapActionSetting s)
-instance TF.IsObject (BootstrapActionSetting s) where
-    toObject BootstrapActionSetting'{..} = P.catMaybes
-        [ TF.assign "args" <$> TF.attribute _args
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "path" <$> TF.attribute _path
-        ]
-
-instance TF.IsValid (BootstrapActionSetting s) where
-    validator = P.mempty
-
-instance P.HasArgs (BootstrapActionSetting s) (TF.Attr s [TF.Attr s P.Text]) where
-    args =
-        P.lens (_args :: BootstrapActionSetting s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _args = a } :: BootstrapActionSetting s)
-
-instance P.HasName (BootstrapActionSetting s) (TF.Attr s P.Text) where
-    name =
-        P.lens (_name :: BootstrapActionSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: BootstrapActionSetting s)
-
-instance P.HasPath (BootstrapActionSetting s) (TF.Attr s P.Text) where
-    path =
-        P.lens (_path :: BootstrapActionSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _path = a } :: BootstrapActionSetting s)
-
--- | @bounce_action@ nested settings.
-data BounceActionSetting s = BounceActionSetting'
-    { _message       :: TF.Attr s P.Text
-    -- ^ @message@ - (Required)
-    --
-    , _position      :: TF.Attr s P.Int
-    -- ^ @position@ - (Required)
-    --
-    , _sender        :: TF.Attr s P.Text
-    -- ^ @sender@ - (Required)
-    --
-    , _smtpReplyCode :: TF.Attr s P.Text
-    -- ^ @smtp_reply_code@ - (Required)
-    --
-    , _statusCode    :: TF.Attr s P.Text
-    -- ^ @status_code@ - (Optional)
-    --
-    , _topicArn      :: TF.Attr s P.Text
-    -- ^ @topic_arn@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @bounce_action@ settings value.
-newBounceActionSetting
-    :: TF.Attr s P.Text -- ^ 'P._smtpReplyCode': @smtp_reply_code@
-    -> TF.Attr s P.Text -- ^ 'P._message': @message@
-    -> TF.Attr s P.Int -- ^ 'P._position': @position@
-    -> TF.Attr s P.Text -- ^ 'P._sender': @sender@
-    -> BounceActionSetting s
-newBounceActionSetting _smtpReplyCode _message _position _sender =
-    BounceActionSetting'
-        { _message = _message
-        , _position = _position
-        , _sender = _sender
-        , _smtpReplyCode = _smtpReplyCode
-        , _statusCode = TF.Nil
-        , _topicArn = TF.Nil
-        }
-
-instance TF.IsValue  (BounceActionSetting s)
-instance TF.IsObject (BounceActionSetting s) where
-    toObject BounceActionSetting'{..} = P.catMaybes
-        [ TF.assign "message" <$> TF.attribute _message
-        , TF.assign "position" <$> TF.attribute _position
-        , TF.assign "sender" <$> TF.attribute _sender
-        , TF.assign "smtp_reply_code" <$> TF.attribute _smtpReplyCode
-        , TF.assign "status_code" <$> TF.attribute _statusCode
-        , TF.assign "topic_arn" <$> TF.attribute _topicArn
-        ]
-
-instance TF.IsValid (BounceActionSetting s) where
-    validator = P.mempty
-
-instance P.HasMessage (BounceActionSetting s) (TF.Attr s P.Text) where
-    message =
-        P.lens (_message :: BounceActionSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _message = a } :: BounceActionSetting s)
-
-instance P.HasPosition (BounceActionSetting s) (TF.Attr s P.Int) where
-    position =
-        P.lens (_position :: BounceActionSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _position = a } :: BounceActionSetting s)
-
-instance P.HasSender (BounceActionSetting s) (TF.Attr s P.Text) where
-    sender =
-        P.lens (_sender :: BounceActionSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _sender = a } :: BounceActionSetting s)
-
-instance P.HasSmtpReplyCode (BounceActionSetting s) (TF.Attr s P.Text) where
-    smtpReplyCode =
-        P.lens (_smtpReplyCode :: BounceActionSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _smtpReplyCode = a } :: BounceActionSetting s)
-
-instance P.HasStatusCode (BounceActionSetting s) (TF.Attr s P.Text) where
-    statusCode =
-        P.lens (_statusCode :: BounceActionSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _statusCode = a } :: BounceActionSetting s)
-
-instance P.HasTopicArn (BounceActionSetting s) (TF.Attr s P.Text) where
-    topicArn =
-        P.lens (_topicArn :: BounceActionSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _topicArn = a } :: BounceActionSetting s)
-
--- | @bucket@ nested settings.
-data BucketSetting s = BucketSetting'
-    { _accountId  :: TF.Attr s P.Text
-    -- ^ @account_id@ - (Optional)
-    --
-    , _bucketArn  :: TF.Attr s P.Text
-    -- ^ @bucket_arn@ - (Required)
-    --
-    , _encryption :: TF.Attr s (EncryptionSetting s)
-    -- ^ @encryption@ - (Optional)
-    --
-    , _format     :: TF.Attr s P.Text
-    -- ^ @format@ - (Required)
-    --
-    , _prefix     :: TF.Attr s P.Text
-    -- ^ @prefix@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @bucket@ settings value.
-newBucketSetting
-    :: TF.Attr s P.Text -- ^ 'P._bucketArn': @bucket_arn@
-    -> TF.Attr s P.Text -- ^ 'P._format': @format@
-    -> BucketSetting s
-newBucketSetting _bucketArn _format =
-    BucketSetting'
-        { _accountId = TF.Nil
-        , _bucketArn = _bucketArn
-        , _encryption = TF.Nil
-        , _format = _format
-        , _prefix = TF.Nil
-        }
-
-instance TF.IsValue  (BucketSetting s)
-instance TF.IsObject (BucketSetting s) where
-    toObject BucketSetting'{..} = P.catMaybes
-        [ TF.assign "account_id" <$> TF.attribute _accountId
-        , TF.assign "bucket_arn" <$> TF.attribute _bucketArn
-        , TF.assign "encryption" <$> TF.attribute _encryption
-        , TF.assign "format" <$> TF.attribute _format
-        , TF.assign "prefix" <$> TF.attribute _prefix
-        ]
-
-instance TF.IsValid (BucketSetting s) where
-    validator = P.mempty
-           P.<> TF.settingsValidator "_encryption"
-                  (_encryption
-                      :: BucketSetting s -> TF.Attr s (EncryptionSetting s))
-                  TF.validator
-
-instance P.HasAccountId (BucketSetting s) (TF.Attr s P.Text) where
-    accountId =
-        P.lens (_accountId :: BucketSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _accountId = a } :: BucketSetting s)
-
-instance P.HasBucketArn (BucketSetting s) (TF.Attr s P.Text) where
-    bucketArn =
-        P.lens (_bucketArn :: BucketSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _bucketArn = a } :: BucketSetting s)
-
-instance P.HasEncryption (BucketSetting s) (TF.Attr s (EncryptionSetting s)) where
-    encryption =
-        P.lens (_encryption :: BucketSetting s -> TF.Attr s (EncryptionSetting s))
-               (\s a -> s { _encryption = a } :: BucketSetting s)
-
-instance P.HasFormat (BucketSetting s) (TF.Attr s P.Text) where
-    format =
-        P.lens (_format :: BucketSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _format = a } :: BucketSetting s)
-
-instance P.HasPrefix (BucketSetting s) (TF.Attr s P.Text) where
-    prefix =
-        P.lens (_prefix :: BucketSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _prefix = a } :: BucketSetting s)
-
--- | @encryption@ nested settings.
-data EncryptionSetting s = EncryptionSetting'
-    { _sseKms :: TF.Attr s (SseKmsSetting s)
-    -- ^ @sse_kms@ - (Optional)
-    --
-    -- Conflicts with:
-    --
-    -- * 'sseS3'
-    , _sseS3  :: TF.Attr s (SseS3Setting s)
-    -- ^ @sse_s3@ - (Optional)
-    --
-    -- Conflicts with:
-    --
-    -- * 'sseKms'
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @encryption@ settings value.
-newEncryptionSetting
-    :: EncryptionSetting s
-newEncryptionSetting =
-    EncryptionSetting'
-        { _sseKms = TF.Nil
-        , _sseS3 = TF.Nil
-        }
-
-instance TF.IsValue  (EncryptionSetting s)
-instance TF.IsObject (EncryptionSetting s) where
-    toObject EncryptionSetting'{..} = P.catMaybes
-        [ TF.assign "sse_kms" <$> TF.attribute _sseKms
-        , TF.assign "sse_s3" <$> TF.attribute _sseS3
-        ]
-
-instance TF.IsValid (EncryptionSetting s) where
-    validator = TF.fieldsValidator (\EncryptionSetting'{..} -> Map.fromList $ P.catMaybes
-        [ if (_sseKms P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_sseKms",
-                            [ "_sseS3"
-                            ])
-        , if (_sseS3 P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_sseS3",
-                            [ "_sseKms"
-                            ])
-        ])
-           P.<> TF.settingsValidator "_sseKms"
-                  (_sseKms
-                      :: EncryptionSetting s -> TF.Attr s (SseKmsSetting s))
-                  TF.validator
-           P.<> TF.settingsValidator "_sseS3"
-                  (_sseS3
-                      :: EncryptionSetting s -> TF.Attr s (SseS3Setting s))
-                  TF.validator
-
-instance P.HasSseKms (EncryptionSetting s) (TF.Attr s (SseKmsSetting s)) where
-    sseKms =
-        P.lens (_sseKms :: EncryptionSetting s -> TF.Attr s (SseKmsSetting s))
-               (\s a -> s { _sseKms = a } :: EncryptionSetting s)
-
-instance P.HasSseS3 (EncryptionSetting s) (TF.Attr s (SseS3Setting s)) where
-    sseS3 =
-        P.lens (_sseS3 :: EncryptionSetting s -> TF.Attr s (SseS3Setting s))
-               (\s a -> s { _sseS3 = a } :: EncryptionSetting s)
-
--- | @sse_s3@ nested settings.
-data SseS3Setting s = SseS3Setting'
-    deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @sse_s3@ settings value.
-newSseS3Setting
-    :: SseS3Setting s
-newSseS3Setting =
-    SseS3Setting'
-
-instance TF.IsValue  (SseS3Setting s)
-instance TF.IsObject (SseS3Setting s) where
-    toObject SseS3Setting' = []
-
-instance TF.IsValid (SseS3Setting s) where
-    validator = P.mempty
-
--- | @sse_kms@ nested settings.
-data SseKmsSetting s = SseKmsSetting'
-    { _keyId :: TF.Attr s P.Text
-    -- ^ @key_id@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @sse_kms@ settings value.
-newSseKmsSetting
-    :: TF.Attr s P.Text -- ^ 'P._keyId': @key_id@
-    -> SseKmsSetting s
-newSseKmsSetting _keyId =
-    SseKmsSetting'
-        { _keyId = _keyId
-        }
-
-instance TF.IsValue  (SseKmsSetting s)
-instance TF.IsObject (SseKmsSetting s) where
-    toObject SseKmsSetting'{..} = P.catMaybes
-        [ TF.assign "key_id" <$> TF.attribute _keyId
-        ]
-
-instance TF.IsValid (SseKmsSetting s) where
-    validator = P.mempty
-
-instance P.HasKeyId (SseKmsSetting s) (TF.Attr s P.Text) where
-    keyId =
-        P.lens (_keyId :: SseKmsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _keyId = a } :: SseKmsSetting s)
-
--- | @byte_match_tuples@ nested settings.
-data ByteMatchTuplesSetting s = ByteMatchTuplesSetting'
-    { _fieldToMatch         :: TF.Attr s (FieldToMatchSetting s)
-    -- ^ @field_to_match@ - (Required)
-    --
-    , _positionalConstraint :: TF.Attr s P.Text
-    -- ^ @positional_constraint@ - (Required)
-    --
-    , _targetString         :: TF.Attr s P.Text
-    -- ^ @target_string@ - (Optional)
-    --
-    , _textTransformation   :: TF.Attr s P.Text
-    -- ^ @text_transformation@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @byte_match_tuples@ settings value.
-newByteMatchTuplesSetting
-    :: TF.Attr s P.Text -- ^ 'P._positionalConstraint': @positional_constraint@
-    -> TF.Attr s (FieldToMatchSetting s) -- ^ 'P._fieldToMatch': @field_to_match@
-    -> TF.Attr s P.Text -- ^ 'P._textTransformation': @text_transformation@
-    -> ByteMatchTuplesSetting s
-newByteMatchTuplesSetting _positionalConstraint _fieldToMatch _textTransformation =
-    ByteMatchTuplesSetting'
-        { _fieldToMatch = _fieldToMatch
-        , _positionalConstraint = _positionalConstraint
-        , _targetString = TF.Nil
-        , _textTransformation = _textTransformation
-        }
-
-instance TF.IsValue  (ByteMatchTuplesSetting s)
-instance TF.IsObject (ByteMatchTuplesSetting s) where
-    toObject ByteMatchTuplesSetting'{..} = P.catMaybes
-        [ TF.assign "field_to_match" <$> TF.attribute _fieldToMatch
-        , TF.assign "positional_constraint" <$> TF.attribute _positionalConstraint
-        , TF.assign "target_string" <$> TF.attribute _targetString
-        , TF.assign "text_transformation" <$> TF.attribute _textTransformation
-        ]
-
-instance TF.IsValid (ByteMatchTuplesSetting s) where
-    validator = P.mempty
-           P.<> TF.settingsValidator "_fieldToMatch"
-                  (_fieldToMatch
-                      :: ByteMatchTuplesSetting s -> TF.Attr s (FieldToMatchSetting s))
-                  TF.validator
-
-instance P.HasFieldToMatch (ByteMatchTuplesSetting s) (TF.Attr s (FieldToMatchSetting s)) where
-    fieldToMatch =
-        P.lens (_fieldToMatch :: ByteMatchTuplesSetting s -> TF.Attr s (FieldToMatchSetting s))
-               (\s a -> s { _fieldToMatch = a } :: ByteMatchTuplesSetting s)
-
-instance P.HasPositionalConstraint (ByteMatchTuplesSetting s) (TF.Attr s P.Text) where
-    positionalConstraint =
-        P.lens (_positionalConstraint :: ByteMatchTuplesSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _positionalConstraint = a } :: ByteMatchTuplesSetting s)
-
-instance P.HasTargetString (ByteMatchTuplesSetting s) (TF.Attr s P.Text) where
-    targetString =
-        P.lens (_targetString :: ByteMatchTuplesSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _targetString = a } :: ByteMatchTuplesSetting s)
-
-instance P.HasTextTransformation (ByteMatchTuplesSetting s) (TF.Attr s P.Text) where
-    textTransformation =
-        P.lens (_textTransformation :: ByteMatchTuplesSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _textTransformation = a } :: ByteMatchTuplesSetting s)
-
--- | @field_to_match@ nested settings.
-data FieldToMatchSetting s = FieldToMatchSetting'
-    { _data' :: TF.Attr s P.Text
-    -- ^ @data@ - (Optional)
-    --
-    , _type' :: TF.Attr s P.Text
-    -- ^ @type@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @field_to_match@ settings value.
-newFieldToMatchSetting
-    :: TF.Attr s P.Text -- ^ 'P._type'': @type@
-    -> FieldToMatchSetting s
-newFieldToMatchSetting _type' =
-    FieldToMatchSetting'
-        { _data' = TF.Nil
-        , _type' = _type'
-        }
-
-instance TF.IsValue  (FieldToMatchSetting s)
-instance TF.IsObject (FieldToMatchSetting s) where
-    toObject FieldToMatchSetting'{..} = P.catMaybes
-        [ TF.assign "data" <$> TF.attribute _data'
-        , TF.assign "type" <$> TF.attribute _type'
-        ]
-
-instance TF.IsValid (FieldToMatchSetting s) where
-    validator = P.mempty
-
-instance P.HasData' (FieldToMatchSetting s) (TF.Attr s P.Text) where
-    data' =
-        P.lens (_data' :: FieldToMatchSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _data' = a } :: FieldToMatchSetting s)
-
-instance P.HasType' (FieldToMatchSetting s) (TF.Attr s P.Text) where
-    type' =
-        P.lens (_type' :: FieldToMatchSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a } :: FieldToMatchSetting s)
-
--- | @xss_match_tuples@ nested settings.
-data XssMatchTuplesSetting s = XssMatchTuplesSetting'
-    { _fieldToMatch       :: TF.Attr s (FieldToMatchSetting s)
-    -- ^ @field_to_match@ - (Required)
-    --
-    , _textTransformation :: TF.Attr s P.Text
-    -- ^ @text_transformation@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @xss_match_tuples@ settings value.
-newXssMatchTuplesSetting
-    :: TF.Attr s (FieldToMatchSetting s) -- ^ 'P._fieldToMatch': @field_to_match@
-    -> TF.Attr s P.Text -- ^ 'P._textTransformation': @text_transformation@
-    -> XssMatchTuplesSetting s
-newXssMatchTuplesSetting _fieldToMatch _textTransformation =
-    XssMatchTuplesSetting'
-        { _fieldToMatch = _fieldToMatch
-        , _textTransformation = _textTransformation
-        }
-
-instance TF.IsValue  (XssMatchTuplesSetting s)
-instance TF.IsObject (XssMatchTuplesSetting s) where
-    toObject XssMatchTuplesSetting'{..} = P.catMaybes
-        [ TF.assign "field_to_match" <$> TF.attribute _fieldToMatch
-        , TF.assign "text_transformation" <$> TF.attribute _textTransformation
-        ]
-
-instance TF.IsValid (XssMatchTuplesSetting s) where
-    validator = P.mempty
-           P.<> TF.settingsValidator "_fieldToMatch"
-                  (_fieldToMatch
-                      :: XssMatchTuplesSetting s -> TF.Attr s (FieldToMatchSetting s))
-                  TF.validator
-
-instance P.HasFieldToMatch (XssMatchTuplesSetting s) (TF.Attr s (FieldToMatchSetting s)) where
-    fieldToMatch =
-        P.lens (_fieldToMatch :: XssMatchTuplesSetting s -> TF.Attr s (FieldToMatchSetting s))
-               (\s a -> s { _fieldToMatch = a } :: XssMatchTuplesSetting s)
-
-instance P.HasTextTransformation (XssMatchTuplesSetting s) (TF.Attr s P.Text) where
-    textTransformation =
-        P.lens (_textTransformation :: XssMatchTuplesSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _textTransformation = a } :: XssMatchTuplesSetting s)
-
--- | @xss_match_tuple@ nested settings.
-data XssMatchTupleSetting s = XssMatchTupleSetting'
-    { _fieldToMatch       :: TF.Attr s (FieldToMatchSetting s)
-    -- ^ @field_to_match@ - (Required)
-    --
-    , _textTransformation :: TF.Attr s P.Text
-    -- ^ @text_transformation@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @xss_match_tuple@ settings value.
-newXssMatchTupleSetting
-    :: TF.Attr s (FieldToMatchSetting s) -- ^ 'P._fieldToMatch': @field_to_match@
-    -> TF.Attr s P.Text -- ^ 'P._textTransformation': @text_transformation@
-    -> XssMatchTupleSetting s
-newXssMatchTupleSetting _fieldToMatch _textTransformation =
-    XssMatchTupleSetting'
-        { _fieldToMatch = _fieldToMatch
-        , _textTransformation = _textTransformation
-        }
-
-instance TF.IsValue  (XssMatchTupleSetting s)
-instance TF.IsObject (XssMatchTupleSetting s) where
-    toObject XssMatchTupleSetting'{..} = P.catMaybes
-        [ TF.assign "field_to_match" <$> TF.attribute _fieldToMatch
-        , TF.assign "text_transformation" <$> TF.attribute _textTransformation
-        ]
-
-instance TF.IsValid (XssMatchTupleSetting s) where
-    validator = P.mempty
-           P.<> TF.settingsValidator "_fieldToMatch"
-                  (_fieldToMatch
-                      :: XssMatchTupleSetting s -> TF.Attr s (FieldToMatchSetting s))
-                  TF.validator
-
-instance P.HasFieldToMatch (XssMatchTupleSetting s) (TF.Attr s (FieldToMatchSetting s)) where
-    fieldToMatch =
-        P.lens (_fieldToMatch :: XssMatchTupleSetting s -> TF.Attr s (FieldToMatchSetting s))
-               (\s a -> s { _fieldToMatch = a } :: XssMatchTupleSetting s)
-
-instance P.HasTextTransformation (XssMatchTupleSetting s) (TF.Attr s P.Text) where
-    textTransformation =
-        P.lens (_textTransformation :: XssMatchTupleSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _textTransformation = a } :: XssMatchTupleSetting s)
-
--- | @sql_injection_match_tuples@ nested settings.
-data SqlInjectionMatchTuplesSetting s = SqlInjectionMatchTuplesSetting'
-    { _fieldToMatch       :: TF.Attr s (FieldToMatchSetting s)
-    -- ^ @field_to_match@ - (Required)
-    --
-    , _textTransformation :: TF.Attr s P.Text
-    -- ^ @text_transformation@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @sql_injection_match_tuples@ settings value.
-newSqlInjectionMatchTuplesSetting
-    :: TF.Attr s (FieldToMatchSetting s) -- ^ 'P._fieldToMatch': @field_to_match@
-    -> TF.Attr s P.Text -- ^ 'P._textTransformation': @text_transformation@
-    -> SqlInjectionMatchTuplesSetting s
-newSqlInjectionMatchTuplesSetting _fieldToMatch _textTransformation =
-    SqlInjectionMatchTuplesSetting'
-        { _fieldToMatch = _fieldToMatch
-        , _textTransformation = _textTransformation
-        }
-
-instance TF.IsValue  (SqlInjectionMatchTuplesSetting s)
-instance TF.IsObject (SqlInjectionMatchTuplesSetting s) where
-    toObject SqlInjectionMatchTuplesSetting'{..} = P.catMaybes
-        [ TF.assign "field_to_match" <$> TF.attribute _fieldToMatch
-        , TF.assign "text_transformation" <$> TF.attribute _textTransformation
-        ]
-
-instance TF.IsValid (SqlInjectionMatchTuplesSetting s) where
-    validator = P.mempty
-           P.<> TF.settingsValidator "_fieldToMatch"
-                  (_fieldToMatch
-                      :: SqlInjectionMatchTuplesSetting s -> TF.Attr s (FieldToMatchSetting s))
-                  TF.validator
-
-instance P.HasFieldToMatch (SqlInjectionMatchTuplesSetting s) (TF.Attr s (FieldToMatchSetting s)) where
-    fieldToMatch =
-        P.lens (_fieldToMatch :: SqlInjectionMatchTuplesSetting s -> TF.Attr s (FieldToMatchSetting s))
-               (\s a -> s { _fieldToMatch = a } :: SqlInjectionMatchTuplesSetting s)
-
-instance P.HasTextTransformation (SqlInjectionMatchTuplesSetting s) (TF.Attr s P.Text) where
-    textTransformation =
-        P.lens (_textTransformation :: SqlInjectionMatchTuplesSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _textTransformation = a } :: SqlInjectionMatchTuplesSetting s)
-
--- | @sql_injection_match_tuple@ nested settings.
-data SqlInjectionMatchTupleSetting s = SqlInjectionMatchTupleSetting'
-    { _fieldToMatch       :: TF.Attr s (FieldToMatchSetting s)
-    -- ^ @field_to_match@ - (Required)
-    --
-    , _textTransformation :: TF.Attr s P.Text
-    -- ^ @text_transformation@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @sql_injection_match_tuple@ settings value.
-newSqlInjectionMatchTupleSetting
-    :: TF.Attr s (FieldToMatchSetting s) -- ^ 'P._fieldToMatch': @field_to_match@
-    -> TF.Attr s P.Text -- ^ 'P._textTransformation': @text_transformation@
-    -> SqlInjectionMatchTupleSetting s
-newSqlInjectionMatchTupleSetting _fieldToMatch _textTransformation =
-    SqlInjectionMatchTupleSetting'
-        { _fieldToMatch = _fieldToMatch
-        , _textTransformation = _textTransformation
-        }
-
-instance TF.IsValue  (SqlInjectionMatchTupleSetting s)
-instance TF.IsObject (SqlInjectionMatchTupleSetting s) where
-    toObject SqlInjectionMatchTupleSetting'{..} = P.catMaybes
-        [ TF.assign "field_to_match" <$> TF.attribute _fieldToMatch
-        , TF.assign "text_transformation" <$> TF.attribute _textTransformation
-        ]
-
-instance TF.IsValid (SqlInjectionMatchTupleSetting s) where
-    validator = P.mempty
-           P.<> TF.settingsValidator "_fieldToMatch"
-                  (_fieldToMatch
-                      :: SqlInjectionMatchTupleSetting s -> TF.Attr s (FieldToMatchSetting s))
-                  TF.validator
-
-instance P.HasFieldToMatch (SqlInjectionMatchTupleSetting s) (TF.Attr s (FieldToMatchSetting s)) where
-    fieldToMatch =
-        P.lens (_fieldToMatch :: SqlInjectionMatchTupleSetting s -> TF.Attr s (FieldToMatchSetting s))
-               (\s a -> s { _fieldToMatch = a } :: SqlInjectionMatchTupleSetting s)
-
-instance P.HasTextTransformation (SqlInjectionMatchTupleSetting s) (TF.Attr s P.Text) where
-    textTransformation =
-        P.lens (_textTransformation :: SqlInjectionMatchTupleSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _textTransformation = a } :: SqlInjectionMatchTupleSetting s)
-
--- | @size_constraints@ nested settings.
-data SizeConstraintsSetting s = SizeConstraintsSetting'
-    { _comparisonOperator :: TF.Attr s P.Text
-    -- ^ @comparison_operator@ - (Required)
-    --
-    , _fieldToMatch       :: TF.Attr s (FieldToMatchSetting s)
-    -- ^ @field_to_match@ - (Required)
-    --
-    , _size               :: TF.Attr s P.Int
-    -- ^ @size@ - (Required)
-    --
-    , _textTransformation :: TF.Attr s P.Text
-    -- ^ @text_transformation@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @size_constraints@ settings value.
-newSizeConstraintsSetting
-    :: TF.Attr s (FieldToMatchSetting s) -- ^ 'P._fieldToMatch': @field_to_match@
-    -> TF.Attr s P.Text -- ^ 'P._comparisonOperator': @comparison_operator@
-    -> TF.Attr s P.Int -- ^ 'P._size': @size@
-    -> TF.Attr s P.Text -- ^ 'P._textTransformation': @text_transformation@
-    -> SizeConstraintsSetting s
-newSizeConstraintsSetting _fieldToMatch _comparisonOperator _size _textTransformation =
-    SizeConstraintsSetting'
-        { _comparisonOperator = _comparisonOperator
-        , _fieldToMatch = _fieldToMatch
-        , _size = _size
-        , _textTransformation = _textTransformation
-        }
-
-instance TF.IsValue  (SizeConstraintsSetting s)
-instance TF.IsObject (SizeConstraintsSetting s) where
-    toObject SizeConstraintsSetting'{..} = P.catMaybes
-        [ TF.assign "comparison_operator" <$> TF.attribute _comparisonOperator
-        , TF.assign "field_to_match" <$> TF.attribute _fieldToMatch
-        , TF.assign "size" <$> TF.attribute _size
-        , TF.assign "text_transformation" <$> TF.attribute _textTransformation
-        ]
-
-instance TF.IsValid (SizeConstraintsSetting s) where
-    validator = P.mempty
-           P.<> TF.settingsValidator "_fieldToMatch"
-                  (_fieldToMatch
-                      :: SizeConstraintsSetting s -> TF.Attr s (FieldToMatchSetting s))
-                  TF.validator
-
-instance P.HasComparisonOperator (SizeConstraintsSetting s) (TF.Attr s P.Text) where
-    comparisonOperator =
-        P.lens (_comparisonOperator :: SizeConstraintsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _comparisonOperator = a } :: SizeConstraintsSetting s)
-
-instance P.HasFieldToMatch (SizeConstraintsSetting s) (TF.Attr s (FieldToMatchSetting s)) where
-    fieldToMatch =
-        P.lens (_fieldToMatch :: SizeConstraintsSetting s -> TF.Attr s (FieldToMatchSetting s))
-               (\s a -> s { _fieldToMatch = a } :: SizeConstraintsSetting s)
-
-instance P.HasSize (SizeConstraintsSetting s) (TF.Attr s P.Int) where
-    size =
-        P.lens (_size :: SizeConstraintsSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _size = a } :: SizeConstraintsSetting s)
-
-instance P.HasTextTransformation (SizeConstraintsSetting s) (TF.Attr s P.Text) where
-    textTransformation =
-        P.lens (_textTransformation :: SizeConstraintsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _textTransformation = a } :: SizeConstraintsSetting s)
-
--- | @regex_match_tuple@ nested settings.
-data RegexMatchTupleSetting s = RegexMatchTupleSetting'
-    { _fieldToMatch       :: TF.Attr s (FieldToMatchSetting s)
-    -- ^ @field_to_match@ - (Required)
-    --
-    , _regexPatternSetId  :: TF.Attr s P.Text
-    -- ^ @regex_pattern_set_id@ - (Required)
-    --
-    , _textTransformation :: TF.Attr s P.Text
-    -- ^ @text_transformation@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @regex_match_tuple@ settings value.
-newRegexMatchTupleSetting
-    :: TF.Attr s P.Text -- ^ 'P._regexPatternSetId': @regex_pattern_set_id@
-    -> TF.Attr s (FieldToMatchSetting s) -- ^ 'P._fieldToMatch': @field_to_match@
-    -> TF.Attr s P.Text -- ^ 'P._textTransformation': @text_transformation@
-    -> RegexMatchTupleSetting s
-newRegexMatchTupleSetting _regexPatternSetId _fieldToMatch _textTransformation =
-    RegexMatchTupleSetting'
-        { _fieldToMatch = _fieldToMatch
-        , _regexPatternSetId = _regexPatternSetId
-        , _textTransformation = _textTransformation
-        }
-
-instance TF.IsValue  (RegexMatchTupleSetting s)
-instance TF.IsObject (RegexMatchTupleSetting s) where
-    toObject RegexMatchTupleSetting'{..} = P.catMaybes
-        [ TF.assign "field_to_match" <$> TF.attribute _fieldToMatch
-        , TF.assign "regex_pattern_set_id" <$> TF.attribute _regexPatternSetId
-        , TF.assign "text_transformation" <$> TF.attribute _textTransformation
-        ]
-
-instance TF.IsValid (RegexMatchTupleSetting s) where
-    validator = P.mempty
-           P.<> TF.settingsValidator "_fieldToMatch"
-                  (_fieldToMatch
-                      :: RegexMatchTupleSetting s -> TF.Attr s (FieldToMatchSetting s))
-                  TF.validator
-
-instance P.HasFieldToMatch (RegexMatchTupleSetting s) (TF.Attr s (FieldToMatchSetting s)) where
-    fieldToMatch =
-        P.lens (_fieldToMatch :: RegexMatchTupleSetting s -> TF.Attr s (FieldToMatchSetting s))
-               (\s a -> s { _fieldToMatch = a } :: RegexMatchTupleSetting s)
-
-instance P.HasRegexPatternSetId (RegexMatchTupleSetting s) (TF.Attr s P.Text) where
-    regexPatternSetId =
-        P.lens (_regexPatternSetId :: RegexMatchTupleSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _regexPatternSetId = a } :: RegexMatchTupleSetting s)
-
-instance P.HasTextTransformation (RegexMatchTupleSetting s) (TF.Attr s P.Text) where
-    textTransformation =
-        P.lens (_textTransformation :: RegexMatchTupleSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _textTransformation = a } :: RegexMatchTupleSetting s)
-
--- | @cache_nodes@ nested settings.
-data CacheNodesSetting s = CacheNodesSetting'
-    deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @cache_nodes@ settings value.
-newCacheNodesSetting
-    :: CacheNodesSetting s
-newCacheNodesSetting =
-    CacheNodesSetting'
-
-instance TF.IsValue  (CacheNodesSetting s)
-instance TF.IsObject (CacheNodesSetting s) where
-    toObject CacheNodesSetting' = []
-
-instance TF.IsValid (CacheNodesSetting s) where
-    validator = P.mempty
-
-instance s ~ s' => P.HasComputedAddress (TF.Ref s' (CacheNodesSetting s)) (TF.Attr s P.Text) where
-    computedAddress x = TF.compute (TF.refKey x) "address"
-
-instance s ~ s' => P.HasComputedAvailabilityZone (TF.Ref s' (CacheNodesSetting s)) (TF.Attr s P.Text) where
-    computedAvailabilityZone x = TF.compute (TF.refKey x) "availability_zone"
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (CacheNodesSetting s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
-instance s ~ s' => P.HasComputedPort (TF.Ref s' (CacheNodesSetting s)) (TF.Attr s P.Int) where
-    computedPort x = TF.compute (TF.refKey x) "port"
-
--- | @cache@ nested settings.
-data CacheSetting s = CacheSetting'
-    { _location :: TF.Attr s P.Text
-    -- ^ @location@ - (Optional)
-    --
-    , _type'    :: TF.Attr s P.Text
-    -- ^ @type@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @cache@ settings value.
-newCacheSetting
-    :: CacheSetting s
-newCacheSetting =
-    CacheSetting'
-        { _location = TF.Nil
-        , _type' = TF.value "NO_CACHE"
-        }
-
-instance TF.IsValue  (CacheSetting s)
-instance TF.IsObject (CacheSetting s) where
-    toObject CacheSetting'{..} = P.catMaybes
-        [ TF.assign "location" <$> TF.attribute _location
-        , TF.assign "type" <$> TF.attribute _type'
-        ]
-
-instance TF.IsValid (CacheSetting s) where
-    validator = P.mempty
-
-instance P.HasLocation (CacheSetting s) (TF.Attr s P.Text) where
-    location =
-        P.lens (_location :: CacheSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _location = a } :: CacheSetting s)
-
-instance P.HasType' (CacheSetting s) (TF.Attr s P.Text) where
-    type' =
-        P.lens (_type' :: CacheSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a } :: CacheSetting s)
-
--- | @certificate_authority_configuration@ nested settings.
-data CertificateAuthorityConfigurationSetting s = CertificateAuthorityConfigurationSetting'
-    { _keyAlgorithm     :: TF.Attr s P.Text
-    -- ^ @key_algorithm@ - (Required, Forces New)
-    --
-    , _signingAlgorithm :: TF.Attr s P.Text
-    -- ^ @signing_algorithm@ - (Required, Forces New)
-    --
-    , _subject          :: TF.Attr s (SubjectSetting s)
-    -- ^ @subject@ - (Required, Forces New)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @certificate_authority_configuration@ settings value.
-newCertificateAuthorityConfigurationSetting
-    :: TF.Attr s P.Text -- ^ 'P._keyAlgorithm': @key_algorithm@
-    -> TF.Attr s P.Text -- ^ 'P._signingAlgorithm': @signing_algorithm@
-    -> TF.Attr s (SubjectSetting s) -- ^ 'P._subject': @subject@
-    -> CertificateAuthorityConfigurationSetting s
-newCertificateAuthorityConfigurationSetting _keyAlgorithm _signingAlgorithm _subject =
-    CertificateAuthorityConfigurationSetting'
-        { _keyAlgorithm = _keyAlgorithm
-        , _signingAlgorithm = _signingAlgorithm
-        , _subject = _subject
-        }
-
-instance TF.IsValue  (CertificateAuthorityConfigurationSetting s)
-instance TF.IsObject (CertificateAuthorityConfigurationSetting s) where
-    toObject CertificateAuthorityConfigurationSetting'{..} = P.catMaybes
-        [ TF.assign "key_algorithm" <$> TF.attribute _keyAlgorithm
-        , TF.assign "signing_algorithm" <$> TF.attribute _signingAlgorithm
-        , TF.assign "subject" <$> TF.attribute _subject
-        ]
-
-instance TF.IsValid (CertificateAuthorityConfigurationSetting s) where
-    validator = P.mempty
-           P.<> TF.settingsValidator "_subject"
-                  (_subject
-                      :: CertificateAuthorityConfigurationSetting s -> TF.Attr s (SubjectSetting s))
-                  TF.validator
-
-instance P.HasKeyAlgorithm (CertificateAuthorityConfigurationSetting s) (TF.Attr s P.Text) where
-    keyAlgorithm =
-        P.lens (_keyAlgorithm :: CertificateAuthorityConfigurationSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _keyAlgorithm = a } :: CertificateAuthorityConfigurationSetting s)
-
-instance P.HasSigningAlgorithm (CertificateAuthorityConfigurationSetting s) (TF.Attr s P.Text) where
-    signingAlgorithm =
-        P.lens (_signingAlgorithm :: CertificateAuthorityConfigurationSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _signingAlgorithm = a } :: CertificateAuthorityConfigurationSetting s)
-
-instance P.HasSubject (CertificateAuthorityConfigurationSetting s) (TF.Attr s (SubjectSetting s)) where
-    subject =
-        P.lens (_subject :: CertificateAuthorityConfigurationSetting s -> TF.Attr s (SubjectSetting s))
-               (\s a -> s { _subject = a } :: CertificateAuthorityConfigurationSetting s)
-
--- | @subject@ nested settings.
-data SubjectSetting s = SubjectSetting'
-    { _commonName                 :: TF.Attr s P.Text
-    -- ^ @common_name@ - (Optional, Forces New)
-    --
-    , _country                    :: TF.Attr s P.Text
-    -- ^ @country@ - (Optional, Forces New)
-    --
-    , _distinguishedNameQualifier :: TF.Attr s P.Text
-    -- ^ @distinguished_name_qualifier@ - (Optional, Forces New)
-    --
-    , _generationQualifier        :: TF.Attr s P.Text
-    -- ^ @generation_qualifier@ - (Optional, Forces New)
-    --
-    , _givenName                  :: TF.Attr s P.Text
-    -- ^ @given_name@ - (Optional, Forces New)
-    --
-    , _initials                   :: TF.Attr s P.Text
-    -- ^ @initials@ - (Optional, Forces New)
-    --
-    , _locality                   :: TF.Attr s P.Text
-    -- ^ @locality@ - (Optional, Forces New)
-    --
-    , _organization               :: TF.Attr s P.Text
-    -- ^ @organization@ - (Optional, Forces New)
-    --
-    , _organizationalUnit         :: TF.Attr s P.Text
-    -- ^ @organizational_unit@ - (Optional, Forces New)
-    --
-    , _pseudonym                  :: TF.Attr s P.Text
-    -- ^ @pseudonym@ - (Optional, Forces New)
-    --
-    , _state                      :: TF.Attr s P.Text
-    -- ^ @state@ - (Optional, Forces New)
-    --
-    , _surname                    :: TF.Attr s P.Text
-    -- ^ @surname@ - (Optional, Forces New)
-    --
-    , _title                      :: TF.Attr s P.Text
-    -- ^ @title@ - (Optional, Forces New)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @subject@ settings value.
-newSubjectSetting
-    :: SubjectSetting s
-newSubjectSetting =
-    SubjectSetting'
-        { _commonName = TF.Nil
-        , _country = TF.Nil
-        , _distinguishedNameQualifier = TF.Nil
-        , _generationQualifier = TF.Nil
-        , _givenName = TF.Nil
-        , _initials = TF.Nil
-        , _locality = TF.Nil
-        , _organization = TF.Nil
-        , _organizationalUnit = TF.Nil
-        , _pseudonym = TF.Nil
-        , _state = TF.Nil
-        , _surname = TF.Nil
-        , _title = TF.Nil
-        }
-
-instance TF.IsValue  (SubjectSetting s)
-instance TF.IsObject (SubjectSetting s) where
-    toObject SubjectSetting'{..} = P.catMaybes
-        [ TF.assign "common_name" <$> TF.attribute _commonName
-        , TF.assign "country" <$> TF.attribute _country
-        , TF.assign "distinguished_name_qualifier" <$> TF.attribute _distinguishedNameQualifier
-        , TF.assign "generation_qualifier" <$> TF.attribute _generationQualifier
-        , TF.assign "given_name" <$> TF.attribute _givenName
-        , TF.assign "initials" <$> TF.attribute _initials
-        , TF.assign "locality" <$> TF.attribute _locality
-        , TF.assign "organization" <$> TF.attribute _organization
-        , TF.assign "organizational_unit" <$> TF.attribute _organizationalUnit
-        , TF.assign "pseudonym" <$> TF.attribute _pseudonym
-        , TF.assign "state" <$> TF.attribute _state
-        , TF.assign "surname" <$> TF.attribute _surname
-        , TF.assign "title" <$> TF.attribute _title
-        ]
-
-instance TF.IsValid (SubjectSetting s) where
-    validator = P.mempty
-
-instance P.HasCommonName (SubjectSetting s) (TF.Attr s P.Text) where
-    commonName =
-        P.lens (_commonName :: SubjectSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _commonName = a } :: SubjectSetting s)
-
-instance P.HasCountry (SubjectSetting s) (TF.Attr s P.Text) where
-    country =
-        P.lens (_country :: SubjectSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _country = a } :: SubjectSetting s)
-
-instance P.HasDistinguishedNameQualifier (SubjectSetting s) (TF.Attr s P.Text) where
-    distinguishedNameQualifier =
-        P.lens (_distinguishedNameQualifier :: SubjectSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _distinguishedNameQualifier = a } :: SubjectSetting s)
-
-instance P.HasGenerationQualifier (SubjectSetting s) (TF.Attr s P.Text) where
-    generationQualifier =
-        P.lens (_generationQualifier :: SubjectSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _generationQualifier = a } :: SubjectSetting s)
-
-instance P.HasGivenName (SubjectSetting s) (TF.Attr s P.Text) where
-    givenName =
-        P.lens (_givenName :: SubjectSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _givenName = a } :: SubjectSetting s)
-
-instance P.HasInitials (SubjectSetting s) (TF.Attr s P.Text) where
-    initials =
-        P.lens (_initials :: SubjectSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _initials = a } :: SubjectSetting s)
-
-instance P.HasLocality (SubjectSetting s) (TF.Attr s P.Text) where
-    locality =
-        P.lens (_locality :: SubjectSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _locality = a } :: SubjectSetting s)
-
-instance P.HasOrganization (SubjectSetting s) (TF.Attr s P.Text) where
-    organization =
-        P.lens (_organization :: SubjectSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _organization = a } :: SubjectSetting s)
-
-instance P.HasOrganizationalUnit (SubjectSetting s) (TF.Attr s P.Text) where
-    organizationalUnit =
-        P.lens (_organizationalUnit :: SubjectSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _organizationalUnit = a } :: SubjectSetting s)
-
-instance P.HasPseudonym (SubjectSetting s) (TF.Attr s P.Text) where
-    pseudonym =
-        P.lens (_pseudonym :: SubjectSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _pseudonym = a } :: SubjectSetting s)
-
-instance P.HasState (SubjectSetting s) (TF.Attr s P.Text) where
-    state =
-        P.lens (_state :: SubjectSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _state = a } :: SubjectSetting s)
-
-instance P.HasSurname (SubjectSetting s) (TF.Attr s P.Text) where
-    surname =
-        P.lens (_surname :: SubjectSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _surname = a } :: SubjectSetting s)
-
-instance P.HasTitle (SubjectSetting s) (TF.Attr s P.Text) where
-    title =
-        P.lens (_title :: SubjectSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _title = a } :: SubjectSetting s)
-
--- | @certificate_authority@ nested settings.
-data CertificateAuthoritySetting s = CertificateAuthoritySetting'
-    deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @certificate_authority@ settings value.
-newCertificateAuthoritySetting
-    :: CertificateAuthoritySetting s
-newCertificateAuthoritySetting =
-    CertificateAuthoritySetting'
-
-instance TF.IsValue  (CertificateAuthoritySetting s)
-instance TF.IsObject (CertificateAuthoritySetting s) where
-    toObject CertificateAuthoritySetting' = []
-
-instance TF.IsValid (CertificateAuthoritySetting s) where
-    validator = P.mempty
-
-instance s ~ s' => P.HasComputedData (TF.Ref s' (CertificateAuthoritySetting s)) (TF.Attr s P.Text) where
-    computedData x = TF.compute (TF.refKey x) "data"
-
--- | @cidr_block_associations@ nested settings.
-data CidrBlockAssociationsSetting s = CidrBlockAssociationsSetting'
-    deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @cidr_block_associations@ settings value.
-newCidrBlockAssociationsSetting
-    :: CidrBlockAssociationsSetting s
-newCidrBlockAssociationsSetting =
-    CidrBlockAssociationsSetting'
-
-instance TF.IsValue  (CidrBlockAssociationsSetting s)
-instance TF.IsObject (CidrBlockAssociationsSetting s) where
-    toObject CidrBlockAssociationsSetting' = []
-
-instance TF.IsValid (CidrBlockAssociationsSetting s) where
-    validator = P.mempty
-
-instance s ~ s' => P.HasComputedAssociationId (TF.Ref s' (CidrBlockAssociationsSetting s)) (TF.Attr s P.Text) where
-    computedAssociationId x = TF.compute (TF.refKey x) "association_id"
-
-instance s ~ s' => P.HasComputedCidrBlock (TF.Ref s' (CidrBlockAssociationsSetting s)) (TF.Attr s P.Text) where
-    computedCidrBlock x = TF.compute (TF.refKey x) "cidr_block"
-
-instance s ~ s' => P.HasComputedState (TF.Ref s' (CidrBlockAssociationsSetting s)) (TF.Attr s P.Text) where
-    computedState x = TF.compute (TF.refKey x) "state"
-
--- | @classification_type@ nested settings.
-data ClassificationTypeSetting s = ClassificationTypeSetting'
-    { _continuous :: TF.Attr s P.Text
-    -- ^ @continuous@ - (Optional)
-    --
-    , _oneTime    :: TF.Attr s P.Text
-    -- ^ @one_time@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @classification_type@ settings value.
-newClassificationTypeSetting
-    :: ClassificationTypeSetting s
-newClassificationTypeSetting =
-    ClassificationTypeSetting'
-        { _continuous = TF.value "FULL"
-        , _oneTime = TF.value "NONE"
-        }
-
-instance TF.IsValue  (ClassificationTypeSetting s)
-instance TF.IsObject (ClassificationTypeSetting s) where
-    toObject ClassificationTypeSetting'{..} = P.catMaybes
-        [ TF.assign "continuous" <$> TF.attribute _continuous
-        , TF.assign "one_time" <$> TF.attribute _oneTime
-        ]
-
-instance TF.IsValid (ClassificationTypeSetting s) where
-    validator = P.mempty
-
-instance P.HasContinuous (ClassificationTypeSetting s) (TF.Attr s P.Text) where
-    continuous =
-        P.lens (_continuous :: ClassificationTypeSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _continuous = a } :: ClassificationTypeSetting s)
-
-instance P.HasOneTime (ClassificationTypeSetting s) (TF.Attr s P.Text) where
-    oneTime =
-        P.lens (_oneTime :: ClassificationTypeSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _oneTime = a } :: ClassificationTypeSetting s)
-
--- | @cloudwatch_alarm@ nested settings.
-data CloudwatchAlarmSetting s = CloudwatchAlarmSetting'
-    { _alarmName   :: TF.Attr s P.Text
-    -- ^ @alarm_name@ - (Required)
-    --
-    , _roleArn     :: TF.Attr s P.Text
-    -- ^ @role_arn@ - (Required)
-    --
-    , _stateReason :: TF.Attr s P.Text
-    -- ^ @state_reason@ - (Required)
-    --
-    , _stateValue  :: TF.Attr s P.Text
-    -- ^ @state_value@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @cloudwatch_alarm@ settings value.
-newCloudwatchAlarmSetting
-    :: TF.Attr s P.Text -- ^ 'P._roleArn': @role_arn@
-    -> TF.Attr s P.Text -- ^ 'P._alarmName': @alarm_name@
-    -> TF.Attr s P.Text -- ^ 'P._stateReason': @state_reason@
-    -> TF.Attr s P.Text -- ^ 'P._stateValue': @state_value@
-    -> CloudwatchAlarmSetting s
-newCloudwatchAlarmSetting _roleArn _alarmName _stateReason _stateValue =
-    CloudwatchAlarmSetting'
-        { _alarmName = _alarmName
-        , _roleArn = _roleArn
-        , _stateReason = _stateReason
-        , _stateValue = _stateValue
-        }
-
-instance TF.IsValue  (CloudwatchAlarmSetting s)
-instance TF.IsObject (CloudwatchAlarmSetting s) where
-    toObject CloudwatchAlarmSetting'{..} = P.catMaybes
-        [ TF.assign "alarm_name" <$> TF.attribute _alarmName
-        , TF.assign "role_arn" <$> TF.attribute _roleArn
-        , TF.assign "state_reason" <$> TF.attribute _stateReason
-        , TF.assign "state_value" <$> TF.attribute _stateValue
-        ]
-
-instance TF.IsValid (CloudwatchAlarmSetting s) where
-    validator = P.mempty
-
-instance P.HasAlarmName (CloudwatchAlarmSetting s) (TF.Attr s P.Text) where
-    alarmName =
-        P.lens (_alarmName :: CloudwatchAlarmSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _alarmName = a } :: CloudwatchAlarmSetting s)
-
-instance P.HasRoleArn (CloudwatchAlarmSetting s) (TF.Attr s P.Text) where
-    roleArn =
-        P.lens (_roleArn :: CloudwatchAlarmSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _roleArn = a } :: CloudwatchAlarmSetting s)
-
-instance P.HasStateReason (CloudwatchAlarmSetting s) (TF.Attr s P.Text) where
-    stateReason =
-        P.lens (_stateReason :: CloudwatchAlarmSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _stateReason = a } :: CloudwatchAlarmSetting s)
-
-instance P.HasStateValue (CloudwatchAlarmSetting s) (TF.Attr s P.Text) where
-    stateValue =
-        P.lens (_stateValue :: CloudwatchAlarmSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _stateValue = a } :: CloudwatchAlarmSetting s)
-
--- | @cloudwatch_destination@ nested settings.
-data CloudwatchDestinationSetting s = CloudwatchDestinationSetting'
-    { _defaultValue  :: TF.Attr s P.Text
-    -- ^ @default_value@ - (Required)
-    --
-    , _dimensionName :: TF.Attr s P.Text
-    -- ^ @dimension_name@ - (Required)
-    --
-    , _valueSource   :: TF.Attr s P.Text
-    -- ^ @value_source@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @cloudwatch_destination@ settings value.
-newCloudwatchDestinationSetting
-    :: TF.Attr s P.Text -- ^ 'P._dimensionName': @dimension_name@
-    -> TF.Attr s P.Text -- ^ 'P._valueSource': @value_source@
-    -> TF.Attr s P.Text -- ^ 'P._defaultValue': @default_value@
-    -> CloudwatchDestinationSetting s
-newCloudwatchDestinationSetting _dimensionName _valueSource _defaultValue =
-    CloudwatchDestinationSetting'
-        { _defaultValue = _defaultValue
-        , _dimensionName = _dimensionName
-        , _valueSource = _valueSource
-        }
-
-instance TF.IsValue  (CloudwatchDestinationSetting s)
-instance TF.IsObject (CloudwatchDestinationSetting s) where
-    toObject CloudwatchDestinationSetting'{..} = P.catMaybes
-        [ TF.assign "default_value" <$> TF.attribute _defaultValue
-        , TF.assign "dimension_name" <$> TF.attribute _dimensionName
-        , TF.assign "value_source" <$> TF.attribute _valueSource
-        ]
-
-instance TF.IsValid (CloudwatchDestinationSetting s) where
-    validator = P.mempty
-
-instance P.HasDefaultValue (CloudwatchDestinationSetting s) (TF.Attr s P.Text) where
-    defaultValue =
-        P.lens (_defaultValue :: CloudwatchDestinationSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _defaultValue = a } :: CloudwatchDestinationSetting s)
-
-instance P.HasDimensionName (CloudwatchDestinationSetting s) (TF.Attr s P.Text) where
-    dimensionName =
-        P.lens (_dimensionName :: CloudwatchDestinationSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _dimensionName = a } :: CloudwatchDestinationSetting s)
-
-instance P.HasValueSource (CloudwatchDestinationSetting s) (TF.Attr s P.Text) where
-    valueSource =
-        P.lens (_valueSource :: CloudwatchDestinationSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _valueSource = a } :: CloudwatchDestinationSetting s)
-
--- | @cloudwatch_logging_options@ nested settings.
-data CloudwatchLoggingOptionsSetting s = CloudwatchLoggingOptionsSetting'
-    { _enabled       :: TF.Attr s P.Bool
-    -- ^ @enabled@ - (Optional)
-    --
-    , _logGroupName  :: TF.Attr s P.Text
-    -- ^ @log_group_name@ - (Optional)
-    --
-    , _logStreamName :: TF.Attr s P.Text
-    -- ^ @log_stream_name@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @cloudwatch_logging_options@ settings value.
-newCloudwatchLoggingOptionsSetting
-    :: CloudwatchLoggingOptionsSetting s
-newCloudwatchLoggingOptionsSetting =
-    CloudwatchLoggingOptionsSetting'
-        { _enabled = TF.value P.False
-        , _logGroupName = TF.Nil
-        , _logStreamName = TF.Nil
-        }
-
-instance TF.IsValue  (CloudwatchLoggingOptionsSetting s)
-instance TF.IsObject (CloudwatchLoggingOptionsSetting s) where
-    toObject CloudwatchLoggingOptionsSetting'{..} = P.catMaybes
-        [ TF.assign "enabled" <$> TF.attribute _enabled
-        , TF.assign "log_group_name" <$> TF.attribute _logGroupName
-        , TF.assign "log_stream_name" <$> TF.attribute _logStreamName
-        ]
-
-instance TF.IsValid (CloudwatchLoggingOptionsSetting s) where
-    validator = P.mempty
-
-instance P.HasEnabled (CloudwatchLoggingOptionsSetting s) (TF.Attr s P.Bool) where
-    enabled =
-        P.lens (_enabled :: CloudwatchLoggingOptionsSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _enabled = a } :: CloudwatchLoggingOptionsSetting s)
-
-instance P.HasLogGroupName (CloudwatchLoggingOptionsSetting s) (TF.Attr s P.Text) where
-    logGroupName =
-        P.lens (_logGroupName :: CloudwatchLoggingOptionsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _logGroupName = a } :: CloudwatchLoggingOptionsSetting s)
-
-instance P.HasLogStreamName (CloudwatchLoggingOptionsSetting s) (TF.Attr s P.Text) where
-    logStreamName =
-        P.lens (_logStreamName :: CloudwatchLoggingOptionsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _logStreamName = a } :: CloudwatchLoggingOptionsSetting s)
-
--- | @splunk_configuration@ nested settings.
-data SplunkConfigurationSetting s = SplunkConfigurationSetting'
-    { _cloudwatchLoggingOptions :: TF.Attr s (CloudwatchLoggingOptionsSetting s)
-    -- ^ @cloudwatch_logging_options@ - (Optional)
-    --
-    , _hecAcknowledgmentTimeout :: TF.Attr s P.Int
-    -- ^ @hec_acknowledgment_timeout@ - (Optional)
-    --
-    , _hecEndpoint              :: TF.Attr s P.Text
-    -- ^ @hec_endpoint@ - (Required)
-    --
-    , _hecEndpointType          :: TF.Attr s P.Text
-    -- ^ @hec_endpoint_type@ - (Optional)
-    --
-    , _hecToken                 :: TF.Attr s P.Text
-    -- ^ @hec_token@ - (Required)
-    --
-    , _processingConfiguration  :: TF.Attr s (ProcessingConfigurationSetting s)
-    -- ^ @processing_configuration@ - (Optional)
-    --
-    , _retryDuration            :: TF.Attr s P.Int
-    -- ^ @retry_duration@ - (Optional)
-    --
-    , _s3BackupMode             :: TF.Attr s P.Text
-    -- ^ @s3_backup_mode@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @splunk_configuration@ settings value.
-newSplunkConfigurationSetting
-    :: TF.Attr s P.Text -- ^ 'P._hecEndpoint': @hec_endpoint@
-    -> TF.Attr s P.Text -- ^ 'P._hecToken': @hec_token@
-    -> SplunkConfigurationSetting s
-newSplunkConfigurationSetting _hecEndpoint _hecToken =
-    SplunkConfigurationSetting'
-        { _cloudwatchLoggingOptions = TF.Nil
-        , _hecAcknowledgmentTimeout = TF.value 180
-        , _hecEndpoint = _hecEndpoint
-        , _hecEndpointType = TF.value "Raw"
-        , _hecToken = _hecToken
-        , _processingConfiguration = TF.Nil
-        , _retryDuration = TF.value 3600
-        , _s3BackupMode = TF.value "FailedEventsOnly"
-        }
-
-instance TF.IsValue  (SplunkConfigurationSetting s)
-instance TF.IsObject (SplunkConfigurationSetting s) where
-    toObject SplunkConfigurationSetting'{..} = P.catMaybes
-        [ TF.assign "cloudwatch_logging_options" <$> TF.attribute _cloudwatchLoggingOptions
-        , TF.assign "hec_acknowledgment_timeout" <$> TF.attribute _hecAcknowledgmentTimeout
-        , TF.assign "hec_endpoint" <$> TF.attribute _hecEndpoint
-        , TF.assign "hec_endpoint_type" <$> TF.attribute _hecEndpointType
-        , TF.assign "hec_token" <$> TF.attribute _hecToken
-        , TF.assign "processing_configuration" <$> TF.attribute _processingConfiguration
-        , TF.assign "retry_duration" <$> TF.attribute _retryDuration
-        , TF.assign "s3_backup_mode" <$> TF.attribute _s3BackupMode
-        ]
-
-instance TF.IsValid (SplunkConfigurationSetting s) where
-    validator = P.mempty
-           P.<> TF.settingsValidator "_cloudwatchLoggingOptions"
-                  (_cloudwatchLoggingOptions
-                      :: SplunkConfigurationSetting s -> TF.Attr s (CloudwatchLoggingOptionsSetting s))
-                  TF.validator
-           P.<> TF.settingsValidator "_processingConfiguration"
-                  (_processingConfiguration
-                      :: SplunkConfigurationSetting s -> TF.Attr s (ProcessingConfigurationSetting s))
-                  TF.validator
-
-instance P.HasCloudwatchLoggingOptions (SplunkConfigurationSetting s) (TF.Attr s (CloudwatchLoggingOptionsSetting s)) where
-    cloudwatchLoggingOptions =
-        P.lens (_cloudwatchLoggingOptions :: SplunkConfigurationSetting s -> TF.Attr s (CloudwatchLoggingOptionsSetting s))
-               (\s a -> s { _cloudwatchLoggingOptions = a } :: SplunkConfigurationSetting s)
-
-instance P.HasHecAcknowledgmentTimeout (SplunkConfigurationSetting s) (TF.Attr s P.Int) where
-    hecAcknowledgmentTimeout =
-        P.lens (_hecAcknowledgmentTimeout :: SplunkConfigurationSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _hecAcknowledgmentTimeout = a } :: SplunkConfigurationSetting s)
-
-instance P.HasHecEndpoint (SplunkConfigurationSetting s) (TF.Attr s P.Text) where
-    hecEndpoint =
-        P.lens (_hecEndpoint :: SplunkConfigurationSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _hecEndpoint = a } :: SplunkConfigurationSetting s)
-
-instance P.HasHecEndpointType (SplunkConfigurationSetting s) (TF.Attr s P.Text) where
-    hecEndpointType =
-        P.lens (_hecEndpointType :: SplunkConfigurationSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _hecEndpointType = a } :: SplunkConfigurationSetting s)
-
-instance P.HasHecToken (SplunkConfigurationSetting s) (TF.Attr s P.Text) where
-    hecToken =
-        P.lens (_hecToken :: SplunkConfigurationSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _hecToken = a } :: SplunkConfigurationSetting s)
-
-instance P.HasProcessingConfiguration (SplunkConfigurationSetting s) (TF.Attr s (ProcessingConfigurationSetting s)) where
-    processingConfiguration =
-        P.lens (_processingConfiguration :: SplunkConfigurationSetting s -> TF.Attr s (ProcessingConfigurationSetting s))
-               (\s a -> s { _processingConfiguration = a } :: SplunkConfigurationSetting s)
-
-instance P.HasRetryDuration (SplunkConfigurationSetting s) (TF.Attr s P.Int) where
-    retryDuration =
-        P.lens (_retryDuration :: SplunkConfigurationSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _retryDuration = a } :: SplunkConfigurationSetting s)
-
-instance P.HasS3BackupMode (SplunkConfigurationSetting s) (TF.Attr s P.Text) where
-    s3BackupMode =
-        P.lens (_s3BackupMode :: SplunkConfigurationSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _s3BackupMode = a } :: SplunkConfigurationSetting s)
-
-instance s ~ s' => P.HasComputedCloudwatchLoggingOptions (TF.Ref s' (SplunkConfigurationSetting s)) (TF.Attr s (CloudwatchLoggingOptionsSetting s)) where
-    computedCloudwatchLoggingOptions x = TF.compute (TF.refKey x) "cloudwatch_logging_options"
-
--- | @processing_configuration@ nested settings.
-data ProcessingConfigurationSetting s = ProcessingConfigurationSetting'
-    { _enabled    :: TF.Attr s P.Bool
-    -- ^ @enabled@ - (Optional)
-    --
-    , _processors :: TF.Attr s [TF.Attr s (ProcessorsSetting s)]
-    -- ^ @processors@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @processing_configuration@ settings value.
-newProcessingConfigurationSetting
-    :: ProcessingConfigurationSetting s
-newProcessingConfigurationSetting =
-    ProcessingConfigurationSetting'
-        { _enabled = TF.Nil
-        , _processors = TF.Nil
-        }
-
-instance TF.IsValue  (ProcessingConfigurationSetting s)
-instance TF.IsObject (ProcessingConfigurationSetting s) where
-    toObject ProcessingConfigurationSetting'{..} = P.catMaybes
-        [ TF.assign "enabled" <$> TF.attribute _enabled
-        , TF.assign "processors" <$> TF.attribute _processors
-        ]
-
-instance TF.IsValid (ProcessingConfigurationSetting s) where
-    validator = P.mempty
-
-instance P.HasEnabled (ProcessingConfigurationSetting s) (TF.Attr s P.Bool) where
-    enabled =
-        P.lens (_enabled :: ProcessingConfigurationSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _enabled = a } :: ProcessingConfigurationSetting s)
-
-instance P.HasProcessors (ProcessingConfigurationSetting s) (TF.Attr s [TF.Attr s (ProcessorsSetting s)]) where
-    processors =
-        P.lens (_processors :: ProcessingConfigurationSetting s -> TF.Attr s [TF.Attr s (ProcessorsSetting s)])
-               (\s a -> s { _processors = a } :: ProcessingConfigurationSetting s)
-
--- | @redshift_configuration@ nested settings.
-data RedshiftConfigurationSetting s = RedshiftConfigurationSetting'
-    { _cloudwatchLoggingOptions :: TF.Attr s (CloudwatchLoggingOptionsSetting s)
-    -- ^ @cloudwatch_logging_options@ - (Optional)
-    --
-    , _clusterJdbcurl           :: TF.Attr s P.Text
-    -- ^ @cluster_jdbcurl@ - (Required)
-    --
-    , _copyOptions              :: TF.Attr s P.Text
-    -- ^ @copy_options@ - (Optional)
-    --
-    , _dataTableColumns         :: TF.Attr s P.Text
-    -- ^ @data_table_columns@ - (Optional)
-    --
-    , _dataTableName            :: TF.Attr s P.Text
-    -- ^ @data_table_name@ - (Required)
-    --
-    , _password                 :: TF.Attr s P.Text
-    -- ^ @password@ - (Required)
-    --
-    , _processingConfiguration  :: TF.Attr s (ProcessingConfigurationSetting s)
-    -- ^ @processing_configuration@ - (Optional)
-    --
-    , _retryDuration            :: TF.Attr s P.Int
-    -- ^ @retry_duration@ - (Optional)
-    --
-    , _roleArn                  :: TF.Attr s P.Text
-    -- ^ @role_arn@ - (Required)
-    --
-    , _s3BackupConfiguration    :: TF.Attr s (S3BackupConfigurationSetting s)
-    -- ^ @s3_backup_configuration@ - (Optional)
-    --
-    , _s3BackupMode             :: TF.Attr s P.Text
-    -- ^ @s3_backup_mode@ - (Optional)
-    --
-    , _username                 :: TF.Attr s P.Text
-    -- ^ @username@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @redshift_configuration@ settings value.
-newRedshiftConfigurationSetting
-    :: TF.Attr s P.Text -- ^ 'P._roleArn': @role_arn@
-    -> TF.Attr s P.Text -- ^ 'P._clusterJdbcurl': @cluster_jdbcurl@
-    -> TF.Attr s P.Text -- ^ 'P._dataTableName': @data_table_name@
-    -> TF.Attr s P.Text -- ^ 'P._password': @password@
-    -> TF.Attr s P.Text -- ^ 'P._username': @username@
-    -> RedshiftConfigurationSetting s
-newRedshiftConfigurationSetting _roleArn _clusterJdbcurl _dataTableName _password _username =
-    RedshiftConfigurationSetting'
-        { _cloudwatchLoggingOptions = TF.Nil
-        , _clusterJdbcurl = _clusterJdbcurl
-        , _copyOptions = TF.Nil
-        , _dataTableColumns = TF.Nil
-        , _dataTableName = _dataTableName
-        , _password = _password
-        , _processingConfiguration = TF.Nil
-        , _retryDuration = TF.value 3600
-        , _roleArn = _roleArn
-        , _s3BackupConfiguration = TF.Nil
-        , _s3BackupMode = TF.value "Disabled"
-        , _username = _username
-        }
-
-instance TF.IsValue  (RedshiftConfigurationSetting s)
-instance TF.IsObject (RedshiftConfigurationSetting s) where
-    toObject RedshiftConfigurationSetting'{..} = P.catMaybes
-        [ TF.assign "cloudwatch_logging_options" <$> TF.attribute _cloudwatchLoggingOptions
-        , TF.assign "cluster_jdbcurl" <$> TF.attribute _clusterJdbcurl
-        , TF.assign "copy_options" <$> TF.attribute _copyOptions
-        , TF.assign "data_table_columns" <$> TF.attribute _dataTableColumns
-        , TF.assign "data_table_name" <$> TF.attribute _dataTableName
-        , TF.assign "password" <$> TF.attribute _password
-        , TF.assign "processing_configuration" <$> TF.attribute _processingConfiguration
-        , TF.assign "retry_duration" <$> TF.attribute _retryDuration
-        , TF.assign "role_arn" <$> TF.attribute _roleArn
-        , TF.assign "s3_backup_configuration" <$> TF.attribute _s3BackupConfiguration
-        , TF.assign "s3_backup_mode" <$> TF.attribute _s3BackupMode
-        , TF.assign "username" <$> TF.attribute _username
-        ]
-
-instance TF.IsValid (RedshiftConfigurationSetting s) where
-    validator = P.mempty
-           P.<> TF.settingsValidator "_cloudwatchLoggingOptions"
-                  (_cloudwatchLoggingOptions
-                      :: RedshiftConfigurationSetting s -> TF.Attr s (CloudwatchLoggingOptionsSetting s))
-                  TF.validator
-           P.<> TF.settingsValidator "_processingConfiguration"
-                  (_processingConfiguration
-                      :: RedshiftConfigurationSetting s -> TF.Attr s (ProcessingConfigurationSetting s))
-                  TF.validator
-           P.<> TF.settingsValidator "_s3BackupConfiguration"
-                  (_s3BackupConfiguration
-                      :: RedshiftConfigurationSetting s -> TF.Attr s (S3BackupConfigurationSetting s))
-                  TF.validator
-
-instance P.HasCloudwatchLoggingOptions (RedshiftConfigurationSetting s) (TF.Attr s (CloudwatchLoggingOptionsSetting s)) where
-    cloudwatchLoggingOptions =
-        P.lens (_cloudwatchLoggingOptions :: RedshiftConfigurationSetting s -> TF.Attr s (CloudwatchLoggingOptionsSetting s))
-               (\s a -> s { _cloudwatchLoggingOptions = a } :: RedshiftConfigurationSetting s)
-
-instance P.HasClusterJdbcurl (RedshiftConfigurationSetting s) (TF.Attr s P.Text) where
-    clusterJdbcurl =
-        P.lens (_clusterJdbcurl :: RedshiftConfigurationSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _clusterJdbcurl = a } :: RedshiftConfigurationSetting s)
-
-instance P.HasCopyOptions (RedshiftConfigurationSetting s) (TF.Attr s P.Text) where
-    copyOptions =
-        P.lens (_copyOptions :: RedshiftConfigurationSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _copyOptions = a } :: RedshiftConfigurationSetting s)
-
-instance P.HasDataTableColumns (RedshiftConfigurationSetting s) (TF.Attr s P.Text) where
-    dataTableColumns =
-        P.lens (_dataTableColumns :: RedshiftConfigurationSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _dataTableColumns = a } :: RedshiftConfigurationSetting s)
-
-instance P.HasDataTableName (RedshiftConfigurationSetting s) (TF.Attr s P.Text) where
-    dataTableName =
-        P.lens (_dataTableName :: RedshiftConfigurationSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _dataTableName = a } :: RedshiftConfigurationSetting s)
-
-instance P.HasPassword (RedshiftConfigurationSetting s) (TF.Attr s P.Text) where
-    password =
-        P.lens (_password :: RedshiftConfigurationSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _password = a } :: RedshiftConfigurationSetting s)
-
-instance P.HasProcessingConfiguration (RedshiftConfigurationSetting s) (TF.Attr s (ProcessingConfigurationSetting s)) where
-    processingConfiguration =
-        P.lens (_processingConfiguration :: RedshiftConfigurationSetting s -> TF.Attr s (ProcessingConfigurationSetting s))
-               (\s a -> s { _processingConfiguration = a } :: RedshiftConfigurationSetting s)
-
-instance P.HasRetryDuration (RedshiftConfigurationSetting s) (TF.Attr s P.Int) where
-    retryDuration =
-        P.lens (_retryDuration :: RedshiftConfigurationSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _retryDuration = a } :: RedshiftConfigurationSetting s)
-
-instance P.HasRoleArn (RedshiftConfigurationSetting s) (TF.Attr s P.Text) where
-    roleArn =
-        P.lens (_roleArn :: RedshiftConfigurationSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _roleArn = a } :: RedshiftConfigurationSetting s)
-
-instance P.HasS3BackupConfiguration (RedshiftConfigurationSetting s) (TF.Attr s (S3BackupConfigurationSetting s)) where
-    s3BackupConfiguration =
-        P.lens (_s3BackupConfiguration :: RedshiftConfigurationSetting s -> TF.Attr s (S3BackupConfigurationSetting s))
-               (\s a -> s { _s3BackupConfiguration = a } :: RedshiftConfigurationSetting s)
-
-instance P.HasS3BackupMode (RedshiftConfigurationSetting s) (TF.Attr s P.Text) where
-    s3BackupMode =
-        P.lens (_s3BackupMode :: RedshiftConfigurationSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _s3BackupMode = a } :: RedshiftConfigurationSetting s)
-
-instance P.HasUsername (RedshiftConfigurationSetting s) (TF.Attr s P.Text) where
-    username =
-        P.lens (_username :: RedshiftConfigurationSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _username = a } :: RedshiftConfigurationSetting s)
-
-instance s ~ s' => P.HasComputedCloudwatchLoggingOptions (TF.Ref s' (RedshiftConfigurationSetting s)) (TF.Attr s (CloudwatchLoggingOptionsSetting s)) where
-    computedCloudwatchLoggingOptions x = TF.compute (TF.refKey x) "cloudwatch_logging_options"
-
--- | @s3_backup_configuration@ nested settings.
-data S3BackupConfigurationSetting s = S3BackupConfigurationSetting'
-    { _bucketArn                :: TF.Attr s P.Text
-    -- ^ @bucket_arn@ - (Required)
-    --
-    , _bufferInterval           :: TF.Attr s P.Int
-    -- ^ @buffer_interval@ - (Optional)
-    --
-    , _bufferSize               :: TF.Attr s P.Int
-    -- ^ @buffer_size@ - (Optional)
-    --
-    , _cloudwatchLoggingOptions :: TF.Attr s (CloudwatchLoggingOptionsSetting s)
-    -- ^ @cloudwatch_logging_options@ - (Optional)
-    --
-    , _compressionFormat        :: TF.Attr s P.Text
-    -- ^ @compression_format@ - (Optional)
-    --
-    , _kmsKeyArn                :: TF.Attr s P.Text
-    -- ^ @kms_key_arn@ - (Optional)
-    --
-    , _prefix                   :: TF.Attr s P.Text
-    -- ^ @prefix@ - (Optional)
-    --
-    , _roleArn                  :: TF.Attr s P.Text
-    -- ^ @role_arn@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @s3_backup_configuration@ settings value.
-newS3BackupConfigurationSetting
-    :: TF.Attr s P.Text -- ^ 'P._bucketArn': @bucket_arn@
-    -> TF.Attr s P.Text -- ^ 'P._roleArn': @role_arn@
-    -> S3BackupConfigurationSetting s
-newS3BackupConfigurationSetting _bucketArn _roleArn =
-    S3BackupConfigurationSetting'
-        { _bucketArn = _bucketArn
-        , _bufferInterval = TF.value 300
-        , _bufferSize = TF.value 5
-        , _cloudwatchLoggingOptions = TF.Nil
-        , _compressionFormat = TF.value "UNCOMPRESSED"
-        , _kmsKeyArn = TF.Nil
-        , _prefix = TF.Nil
-        , _roleArn = _roleArn
-        }
-
-instance TF.IsValue  (S3BackupConfigurationSetting s)
-instance TF.IsObject (S3BackupConfigurationSetting s) where
-    toObject S3BackupConfigurationSetting'{..} = P.catMaybes
-        [ TF.assign "bucket_arn" <$> TF.attribute _bucketArn
-        , TF.assign "buffer_interval" <$> TF.attribute _bufferInterval
-        , TF.assign "buffer_size" <$> TF.attribute _bufferSize
-        , TF.assign "cloudwatch_logging_options" <$> TF.attribute _cloudwatchLoggingOptions
-        , TF.assign "compression_format" <$> TF.attribute _compressionFormat
-        , TF.assign "kms_key_arn" <$> TF.attribute _kmsKeyArn
-        , TF.assign "prefix" <$> TF.attribute _prefix
-        , TF.assign "role_arn" <$> TF.attribute _roleArn
-        ]
-
-instance TF.IsValid (S3BackupConfigurationSetting s) where
-    validator = P.mempty
-           P.<> TF.settingsValidator "_cloudwatchLoggingOptions"
-                  (_cloudwatchLoggingOptions
-                      :: S3BackupConfigurationSetting s -> TF.Attr s (CloudwatchLoggingOptionsSetting s))
-                  TF.validator
-
-instance P.HasBucketArn (S3BackupConfigurationSetting s) (TF.Attr s P.Text) where
-    bucketArn =
-        P.lens (_bucketArn :: S3BackupConfigurationSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _bucketArn = a } :: S3BackupConfigurationSetting s)
-
-instance P.HasBufferInterval (S3BackupConfigurationSetting s) (TF.Attr s P.Int) where
-    bufferInterval =
-        P.lens (_bufferInterval :: S3BackupConfigurationSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _bufferInterval = a } :: S3BackupConfigurationSetting s)
-
-instance P.HasBufferSize (S3BackupConfigurationSetting s) (TF.Attr s P.Int) where
-    bufferSize =
-        P.lens (_bufferSize :: S3BackupConfigurationSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _bufferSize = a } :: S3BackupConfigurationSetting s)
-
-instance P.HasCloudwatchLoggingOptions (S3BackupConfigurationSetting s) (TF.Attr s (CloudwatchLoggingOptionsSetting s)) where
-    cloudwatchLoggingOptions =
-        P.lens (_cloudwatchLoggingOptions :: S3BackupConfigurationSetting s -> TF.Attr s (CloudwatchLoggingOptionsSetting s))
-               (\s a -> s { _cloudwatchLoggingOptions = a } :: S3BackupConfigurationSetting s)
-
-instance P.HasCompressionFormat (S3BackupConfigurationSetting s) (TF.Attr s P.Text) where
-    compressionFormat =
-        P.lens (_compressionFormat :: S3BackupConfigurationSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _compressionFormat = a } :: S3BackupConfigurationSetting s)
-
-instance P.HasKmsKeyArn (S3BackupConfigurationSetting s) (TF.Attr s P.Text) where
-    kmsKeyArn =
-        P.lens (_kmsKeyArn :: S3BackupConfigurationSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _kmsKeyArn = a } :: S3BackupConfigurationSetting s)
-
-instance P.HasPrefix (S3BackupConfigurationSetting s) (TF.Attr s P.Text) where
-    prefix =
-        P.lens (_prefix :: S3BackupConfigurationSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _prefix = a } :: S3BackupConfigurationSetting s)
-
-instance P.HasRoleArn (S3BackupConfigurationSetting s) (TF.Attr s P.Text) where
-    roleArn =
-        P.lens (_roleArn :: S3BackupConfigurationSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _roleArn = a } :: S3BackupConfigurationSetting s)
-
-instance s ~ s' => P.HasComputedCloudwatchLoggingOptions (TF.Ref s' (S3BackupConfigurationSetting s)) (TF.Attr s (CloudwatchLoggingOptionsSetting s)) where
-    computedCloudwatchLoggingOptions x = TF.compute (TF.refKey x) "cloudwatch_logging_options"
-
--- | @extended_s3_configuration@ nested settings.
-data ExtendedS3ConfigurationSetting s = ExtendedS3ConfigurationSetting'
-    { _bucketArn :: TF.Attr s P.Text
-    -- ^ @bucket_arn@ - (Required)
-    --
-    , _bufferInterval :: TF.Attr s P.Int
-    -- ^ @buffer_interval@ - (Optional)
-    --
-    , _bufferSize :: TF.Attr s P.Int
-    -- ^ @buffer_size@ - (Optional)
-    --
-    , _cloudwatchLoggingOptions :: TF.Attr s (CloudwatchLoggingOptionsSetting s)
-    -- ^ @cloudwatch_logging_options@ - (Optional)
-    --
-    , _compressionFormat :: TF.Attr s P.Text
-    -- ^ @compression_format@ - (Optional)
-    --
-    , _dataFormatConversionConfiguration :: TF.Attr s (DataFormatConversionConfigurationSetting s)
-    -- ^ @data_format_conversion_configuration@ - (Optional)
-    --
-    , _kmsKeyArn :: TF.Attr s P.Text
-    -- ^ @kms_key_arn@ - (Optional)
-    --
-    , _prefix :: TF.Attr s P.Text
-    -- ^ @prefix@ - (Optional)
-    --
-    , _processingConfiguration :: TF.Attr s (ProcessingConfigurationSetting s)
-    -- ^ @processing_configuration@ - (Optional)
-    --
-    , _roleArn :: TF.Attr s P.Text
-    -- ^ @role_arn@ - (Required)
-    --
-    , _s3BackupConfiguration :: TF.Attr s (S3BackupConfigurationSetting s)
-    -- ^ @s3_backup_configuration@ - (Optional)
-    --
-    , _s3BackupMode :: TF.Attr s P.Text
-    -- ^ @s3_backup_mode@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @extended_s3_configuration@ settings value.
-newExtendedS3ConfigurationSetting
-    :: TF.Attr s P.Text -- ^ 'P._bucketArn': @bucket_arn@
-    -> TF.Attr s P.Text -- ^ 'P._roleArn': @role_arn@
-    -> ExtendedS3ConfigurationSetting s
-newExtendedS3ConfigurationSetting _bucketArn _roleArn =
-    ExtendedS3ConfigurationSetting'
-        { _bucketArn = _bucketArn
-        , _bufferInterval = TF.value 300
-        , _bufferSize = TF.value 5
-        , _cloudwatchLoggingOptions = TF.Nil
-        , _compressionFormat = TF.value "UNCOMPRESSED"
-        , _dataFormatConversionConfiguration = TF.Nil
-        , _kmsKeyArn = TF.Nil
-        , _prefix = TF.Nil
-        , _processingConfiguration = TF.Nil
-        , _roleArn = _roleArn
-        , _s3BackupConfiguration = TF.Nil
-        , _s3BackupMode = TF.value "Disabled"
-        }
-
-instance TF.IsValue  (ExtendedS3ConfigurationSetting s)
-instance TF.IsObject (ExtendedS3ConfigurationSetting s) where
-    toObject ExtendedS3ConfigurationSetting'{..} = P.catMaybes
-        [ TF.assign "bucket_arn" <$> TF.attribute _bucketArn
-        , TF.assign "buffer_interval" <$> TF.attribute _bufferInterval
-        , TF.assign "buffer_size" <$> TF.attribute _bufferSize
-        , TF.assign "cloudwatch_logging_options" <$> TF.attribute _cloudwatchLoggingOptions
-        , TF.assign "compression_format" <$> TF.attribute _compressionFormat
-        , TF.assign "data_format_conversion_configuration" <$> TF.attribute _dataFormatConversionConfiguration
-        , TF.assign "kms_key_arn" <$> TF.attribute _kmsKeyArn
-        , TF.assign "prefix" <$> TF.attribute _prefix
-        , TF.assign "processing_configuration" <$> TF.attribute _processingConfiguration
-        , TF.assign "role_arn" <$> TF.attribute _roleArn
-        , TF.assign "s3_backup_configuration" <$> TF.attribute _s3BackupConfiguration
-        , TF.assign "s3_backup_mode" <$> TF.attribute _s3BackupMode
-        ]
-
-instance TF.IsValid (ExtendedS3ConfigurationSetting s) where
-    validator = P.mempty
-           P.<> TF.settingsValidator "_cloudwatchLoggingOptions"
-                  (_cloudwatchLoggingOptions
-                      :: ExtendedS3ConfigurationSetting s -> TF.Attr s (CloudwatchLoggingOptionsSetting s))
-                  TF.validator
-           P.<> TF.settingsValidator "_dataFormatConversionConfiguration"
-                  (_dataFormatConversionConfiguration
-                      :: ExtendedS3ConfigurationSetting s -> TF.Attr s (DataFormatConversionConfigurationSetting s))
-                  TF.validator
-           P.<> TF.settingsValidator "_processingConfiguration"
-                  (_processingConfiguration
-                      :: ExtendedS3ConfigurationSetting s -> TF.Attr s (ProcessingConfigurationSetting s))
-                  TF.validator
-           P.<> TF.settingsValidator "_s3BackupConfiguration"
-                  (_s3BackupConfiguration
-                      :: ExtendedS3ConfigurationSetting s -> TF.Attr s (S3BackupConfigurationSetting s))
-                  TF.validator
-
-instance P.HasBucketArn (ExtendedS3ConfigurationSetting s) (TF.Attr s P.Text) where
-    bucketArn =
-        P.lens (_bucketArn :: ExtendedS3ConfigurationSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _bucketArn = a } :: ExtendedS3ConfigurationSetting s)
-
-instance P.HasBufferInterval (ExtendedS3ConfigurationSetting s) (TF.Attr s P.Int) where
-    bufferInterval =
-        P.lens (_bufferInterval :: ExtendedS3ConfigurationSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _bufferInterval = a } :: ExtendedS3ConfigurationSetting s)
-
-instance P.HasBufferSize (ExtendedS3ConfigurationSetting s) (TF.Attr s P.Int) where
-    bufferSize =
-        P.lens (_bufferSize :: ExtendedS3ConfigurationSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _bufferSize = a } :: ExtendedS3ConfigurationSetting s)
-
-instance P.HasCloudwatchLoggingOptions (ExtendedS3ConfigurationSetting s) (TF.Attr s (CloudwatchLoggingOptionsSetting s)) where
-    cloudwatchLoggingOptions =
-        P.lens (_cloudwatchLoggingOptions :: ExtendedS3ConfigurationSetting s -> TF.Attr s (CloudwatchLoggingOptionsSetting s))
-               (\s a -> s { _cloudwatchLoggingOptions = a } :: ExtendedS3ConfigurationSetting s)
-
-instance P.HasCompressionFormat (ExtendedS3ConfigurationSetting s) (TF.Attr s P.Text) where
-    compressionFormat =
-        P.lens (_compressionFormat :: ExtendedS3ConfigurationSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _compressionFormat = a } :: ExtendedS3ConfigurationSetting s)
-
-instance P.HasDataFormatConversionConfiguration (ExtendedS3ConfigurationSetting s) (TF.Attr s (DataFormatConversionConfigurationSetting s)) where
-    dataFormatConversionConfiguration =
-        P.lens (_dataFormatConversionConfiguration :: ExtendedS3ConfigurationSetting s -> TF.Attr s (DataFormatConversionConfigurationSetting s))
-               (\s a -> s { _dataFormatConversionConfiguration = a } :: ExtendedS3ConfigurationSetting s)
-
-instance P.HasKmsKeyArn (ExtendedS3ConfigurationSetting s) (TF.Attr s P.Text) where
-    kmsKeyArn =
-        P.lens (_kmsKeyArn :: ExtendedS3ConfigurationSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _kmsKeyArn = a } :: ExtendedS3ConfigurationSetting s)
-
-instance P.HasPrefix (ExtendedS3ConfigurationSetting s) (TF.Attr s P.Text) where
-    prefix =
-        P.lens (_prefix :: ExtendedS3ConfigurationSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _prefix = a } :: ExtendedS3ConfigurationSetting s)
-
-instance P.HasProcessingConfiguration (ExtendedS3ConfigurationSetting s) (TF.Attr s (ProcessingConfigurationSetting s)) where
-    processingConfiguration =
-        P.lens (_processingConfiguration :: ExtendedS3ConfigurationSetting s -> TF.Attr s (ProcessingConfigurationSetting s))
-               (\s a -> s { _processingConfiguration = a } :: ExtendedS3ConfigurationSetting s)
-
-instance P.HasRoleArn (ExtendedS3ConfigurationSetting s) (TF.Attr s P.Text) where
-    roleArn =
-        P.lens (_roleArn :: ExtendedS3ConfigurationSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _roleArn = a } :: ExtendedS3ConfigurationSetting s)
-
-instance P.HasS3BackupConfiguration (ExtendedS3ConfigurationSetting s) (TF.Attr s (S3BackupConfigurationSetting s)) where
-    s3BackupConfiguration =
-        P.lens (_s3BackupConfiguration :: ExtendedS3ConfigurationSetting s -> TF.Attr s (S3BackupConfigurationSetting s))
-               (\s a -> s { _s3BackupConfiguration = a } :: ExtendedS3ConfigurationSetting s)
-
-instance P.HasS3BackupMode (ExtendedS3ConfigurationSetting s) (TF.Attr s P.Text) where
-    s3BackupMode =
-        P.lens (_s3BackupMode :: ExtendedS3ConfigurationSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _s3BackupMode = a } :: ExtendedS3ConfigurationSetting s)
-
-instance s ~ s' => P.HasComputedCloudwatchLoggingOptions (TF.Ref s' (ExtendedS3ConfigurationSetting s)) (TF.Attr s (CloudwatchLoggingOptionsSetting s)) where
-    computedCloudwatchLoggingOptions x = TF.compute (TF.refKey x) "cloudwatch_logging_options"
-
--- | @data_format_conversion_configuration@ nested settings.
-data DataFormatConversionConfigurationSetting s = DataFormatConversionConfigurationSetting'
-    { _enabled :: TF.Attr s P.Bool
-    -- ^ @enabled@ - (Optional)
-    --
-    , _inputFormatConfiguration :: TF.Attr s (InputFormatConfigurationSetting s)
-    -- ^ @input_format_configuration@ - (Required)
-    --
-    , _outputFormatConfiguration :: TF.Attr s (OutputFormatConfigurationSetting s)
-    -- ^ @output_format_configuration@ - (Required)
-    --
-    , _schemaConfiguration :: TF.Attr s (SchemaConfigurationSetting s)
-    -- ^ @schema_configuration@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @data_format_conversion_configuration@ settings value.
-newDataFormatConversionConfigurationSetting
-    :: TF.Attr s (InputFormatConfigurationSetting s) -- ^ 'P._inputFormatConfiguration': @input_format_configuration@
-    -> TF.Attr s (OutputFormatConfigurationSetting s) -- ^ 'P._outputFormatConfiguration': @output_format_configuration@
-    -> TF.Attr s (SchemaConfigurationSetting s) -- ^ 'P._schemaConfiguration': @schema_configuration@
-    -> DataFormatConversionConfigurationSetting s
-newDataFormatConversionConfigurationSetting _inputFormatConfiguration _outputFormatConfiguration _schemaConfiguration =
-    DataFormatConversionConfigurationSetting'
-        { _enabled = TF.value P.True
-        , _inputFormatConfiguration = _inputFormatConfiguration
-        , _outputFormatConfiguration = _outputFormatConfiguration
-        , _schemaConfiguration = _schemaConfiguration
-        }
-
-instance TF.IsValue  (DataFormatConversionConfigurationSetting s)
-instance TF.IsObject (DataFormatConversionConfigurationSetting s) where
-    toObject DataFormatConversionConfigurationSetting'{..} = P.catMaybes
-        [ TF.assign "enabled" <$> TF.attribute _enabled
-        , TF.assign "input_format_configuration" <$> TF.attribute _inputFormatConfiguration
-        , TF.assign "output_format_configuration" <$> TF.attribute _outputFormatConfiguration
-        , TF.assign "schema_configuration" <$> TF.attribute _schemaConfiguration
-        ]
-
-instance TF.IsValid (DataFormatConversionConfigurationSetting s) where
-    validator = P.mempty
-           P.<> TF.settingsValidator "_inputFormatConfiguration"
-                  (_inputFormatConfiguration
-                      :: DataFormatConversionConfigurationSetting s -> TF.Attr s (InputFormatConfigurationSetting s))
-                  TF.validator
-           P.<> TF.settingsValidator "_outputFormatConfiguration"
-                  (_outputFormatConfiguration
-                      :: DataFormatConversionConfigurationSetting s -> TF.Attr s (OutputFormatConfigurationSetting s))
-                  TF.validator
-           P.<> TF.settingsValidator "_schemaConfiguration"
-                  (_schemaConfiguration
-                      :: DataFormatConversionConfigurationSetting s -> TF.Attr s (SchemaConfigurationSetting s))
-                  TF.validator
-
-instance P.HasEnabled (DataFormatConversionConfigurationSetting s) (TF.Attr s P.Bool) where
-    enabled =
-        P.lens (_enabled :: DataFormatConversionConfigurationSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _enabled = a } :: DataFormatConversionConfigurationSetting s)
-
-instance P.HasInputFormatConfiguration (DataFormatConversionConfigurationSetting s) (TF.Attr s (InputFormatConfigurationSetting s)) where
-    inputFormatConfiguration =
-        P.lens (_inputFormatConfiguration :: DataFormatConversionConfigurationSetting s -> TF.Attr s (InputFormatConfigurationSetting s))
-               (\s a -> s { _inputFormatConfiguration = a } :: DataFormatConversionConfigurationSetting s)
-
-instance P.HasOutputFormatConfiguration (DataFormatConversionConfigurationSetting s) (TF.Attr s (OutputFormatConfigurationSetting s)) where
-    outputFormatConfiguration =
-        P.lens (_outputFormatConfiguration :: DataFormatConversionConfigurationSetting s -> TF.Attr s (OutputFormatConfigurationSetting s))
-               (\s a -> s { _outputFormatConfiguration = a } :: DataFormatConversionConfigurationSetting s)
-
-instance P.HasSchemaConfiguration (DataFormatConversionConfigurationSetting s) (TF.Attr s (SchemaConfigurationSetting s)) where
-    schemaConfiguration =
-        P.lens (_schemaConfiguration :: DataFormatConversionConfigurationSetting s -> TF.Attr s (SchemaConfigurationSetting s))
-               (\s a -> s { _schemaConfiguration = a } :: DataFormatConversionConfigurationSetting s)
-
--- | @schema_configuration@ nested settings.
-data SchemaConfigurationSetting s = SchemaConfigurationSetting'
-    { _catalogId    :: TF.Attr s P.Text
-    -- ^ @catalog_id@ - (Optional)
-    --
-    , _databaseName :: TF.Attr s P.Text
-    -- ^ @database_name@ - (Required)
-    --
-    , _region       :: TF.Attr s P.Text
-    -- ^ @region@ - (Optional)
-    --
-    , _roleArn      :: TF.Attr s P.Text
-    -- ^ @role_arn@ - (Required)
-    --
-    , _tableName    :: TF.Attr s P.Text
-    -- ^ @table_name@ - (Required)
-    --
-    , _versionId    :: TF.Attr s P.Text
-    -- ^ @version_id@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @schema_configuration@ settings value.
-newSchemaConfigurationSetting
-    :: TF.Attr s P.Text -- ^ 'P._roleArn': @role_arn@
-    -> TF.Attr s P.Text -- ^ 'P._databaseName': @database_name@
-    -> TF.Attr s P.Text -- ^ 'P._tableName': @table_name@
-    -> SchemaConfigurationSetting s
-newSchemaConfigurationSetting _roleArn _databaseName _tableName =
-    SchemaConfigurationSetting'
-        { _catalogId = TF.Nil
-        , _databaseName = _databaseName
-        , _region = TF.Nil
-        , _roleArn = _roleArn
-        , _tableName = _tableName
-        , _versionId = TF.value "LATEST"
-        }
-
-instance TF.IsValue  (SchemaConfigurationSetting s)
-instance TF.IsObject (SchemaConfigurationSetting s) where
-    toObject SchemaConfigurationSetting'{..} = P.catMaybes
-        [ TF.assign "catalog_id" <$> TF.attribute _catalogId
-        , TF.assign "database_name" <$> TF.attribute _databaseName
-        , TF.assign "region" <$> TF.attribute _region
-        , TF.assign "role_arn" <$> TF.attribute _roleArn
-        , TF.assign "table_name" <$> TF.attribute _tableName
-        , TF.assign "version_id" <$> TF.attribute _versionId
-        ]
-
-instance TF.IsValid (SchemaConfigurationSetting s) where
-    validator = P.mempty
-
-instance P.HasCatalogId (SchemaConfigurationSetting s) (TF.Attr s P.Text) where
-    catalogId =
-        P.lens (_catalogId :: SchemaConfigurationSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _catalogId = a } :: SchemaConfigurationSetting s)
-
-instance P.HasDatabaseName (SchemaConfigurationSetting s) (TF.Attr s P.Text) where
-    databaseName =
-        P.lens (_databaseName :: SchemaConfigurationSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _databaseName = a } :: SchemaConfigurationSetting s)
-
-instance P.HasRegion (SchemaConfigurationSetting s) (TF.Attr s P.Text) where
-    region =
-        P.lens (_region :: SchemaConfigurationSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _region = a } :: SchemaConfigurationSetting s)
-
-instance P.HasRoleArn (SchemaConfigurationSetting s) (TF.Attr s P.Text) where
-    roleArn =
-        P.lens (_roleArn :: SchemaConfigurationSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _roleArn = a } :: SchemaConfigurationSetting s)
-
-instance P.HasTableName (SchemaConfigurationSetting s) (TF.Attr s P.Text) where
-    tableName =
-        P.lens (_tableName :: SchemaConfigurationSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _tableName = a } :: SchemaConfigurationSetting s)
-
-instance P.HasVersionId (SchemaConfigurationSetting s) (TF.Attr s P.Text) where
-    versionId =
-        P.lens (_versionId :: SchemaConfigurationSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _versionId = a } :: SchemaConfigurationSetting s)
-
-instance s ~ s' => P.HasComputedCatalogId (TF.Ref s' (SchemaConfigurationSetting s)) (TF.Attr s P.Text) where
-    computedCatalogId x = TF.compute (TF.refKey x) "catalog_id"
-
-instance s ~ s' => P.HasComputedRegion (TF.Ref s' (SchemaConfigurationSetting s)) (TF.Attr s P.Text) where
-    computedRegion x = TF.compute (TF.refKey x) "region"
-
--- | @output_format_configuration@ nested settings.
-data OutputFormatConfigurationSetting s = OutputFormatConfigurationSetting'
-    { _serializer :: TF.Attr s (SerializerSetting s)
-    -- ^ @serializer@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @output_format_configuration@ settings value.
-newOutputFormatConfigurationSetting
-    :: TF.Attr s (SerializerSetting s) -- ^ 'P._serializer': @serializer@
-    -> OutputFormatConfigurationSetting s
-newOutputFormatConfigurationSetting _serializer =
-    OutputFormatConfigurationSetting'
-        { _serializer = _serializer
-        }
-
-instance TF.IsValue  (OutputFormatConfigurationSetting s)
-instance TF.IsObject (OutputFormatConfigurationSetting s) where
-    toObject OutputFormatConfigurationSetting'{..} = P.catMaybes
-        [ TF.assign "serializer" <$> TF.attribute _serializer
-        ]
-
-instance TF.IsValid (OutputFormatConfigurationSetting s) where
-    validator = P.mempty
-           P.<> TF.settingsValidator "_serializer"
-                  (_serializer
-                      :: OutputFormatConfigurationSetting s -> TF.Attr s (SerializerSetting s))
-                  TF.validator
-
-instance P.HasSerializer (OutputFormatConfigurationSetting s) (TF.Attr s (SerializerSetting s)) where
-    serializer =
-        P.lens (_serializer :: OutputFormatConfigurationSetting s -> TF.Attr s (SerializerSetting s))
-               (\s a -> s { _serializer = a } :: OutputFormatConfigurationSetting s)
-
--- | @serializer@ nested settings.
-data SerializerSetting s = SerializerSetting'
-    { _orcSerDe     :: TF.Attr s (OrcSerDeSetting s)
-    -- ^ @orc_ser_de@ - (Optional)
-    --
-    -- Conflicts with:
-    --
-    -- * 'parquetSerDe'
-    , _parquetSerDe :: TF.Attr s (ParquetSerDeSetting s)
-    -- ^ @parquet_ser_de@ - (Optional)
-    --
-    -- Conflicts with:
-    --
-    -- * 'orcSerDe'
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @serializer@ settings value.
-newSerializerSetting
-    :: SerializerSetting s
-newSerializerSetting =
-    SerializerSetting'
-        { _orcSerDe = TF.Nil
-        , _parquetSerDe = TF.Nil
-        }
-
-instance TF.IsValue  (SerializerSetting s)
-instance TF.IsObject (SerializerSetting s) where
-    toObject SerializerSetting'{..} = P.catMaybes
-        [ TF.assign "orc_ser_de" <$> TF.attribute _orcSerDe
-        , TF.assign "parquet_ser_de" <$> TF.attribute _parquetSerDe
-        ]
-
-instance TF.IsValid (SerializerSetting s) where
-    validator = TF.fieldsValidator (\SerializerSetting'{..} -> Map.fromList $ P.catMaybes
-        [ if (_orcSerDe P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_orcSerDe",
-                            [ "_parquetSerDe"
-                            ])
-        , if (_parquetSerDe P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_parquetSerDe",
-                            [ "_orcSerDe"
-                            ])
-        ])
-           P.<> TF.settingsValidator "_orcSerDe"
-                  (_orcSerDe
-                      :: SerializerSetting s -> TF.Attr s (OrcSerDeSetting s))
-                  TF.validator
-           P.<> TF.settingsValidator "_parquetSerDe"
-                  (_parquetSerDe
-                      :: SerializerSetting s -> TF.Attr s (ParquetSerDeSetting s))
-                  TF.validator
-
-instance P.HasOrcSerDe (SerializerSetting s) (TF.Attr s (OrcSerDeSetting s)) where
-    orcSerDe =
-        P.lens (_orcSerDe :: SerializerSetting s -> TF.Attr s (OrcSerDeSetting s))
-               (\s a -> s { _orcSerDe = a } :: SerializerSetting s)
-
-instance P.HasParquetSerDe (SerializerSetting s) (TF.Attr s (ParquetSerDeSetting s)) where
-    parquetSerDe =
-        P.lens (_parquetSerDe :: SerializerSetting s -> TF.Attr s (ParquetSerDeSetting s))
-               (\s a -> s { _parquetSerDe = a } :: SerializerSetting s)
-
--- | @parquet_ser_de@ nested settings.
-data ParquetSerDeSetting s = ParquetSerDeSetting'
-    { _blockSizeBytes              :: TF.Attr s P.Int
-    -- ^ @block_size_bytes@ - (Optional)
-    --
-    , _compression                 :: TF.Attr s P.Text
-    -- ^ @compression@ - (Optional)
-    --
-    , _enableDictionaryCompression :: TF.Attr s P.Bool
-    -- ^ @enable_dictionary_compression@ - (Optional)
-    --
-    , _maxPaddingBytes             :: TF.Attr s P.Int
-    -- ^ @max_padding_bytes@ - (Optional)
-    --
-    , _pageSizeBytes               :: TF.Attr s P.Int
-    -- ^ @page_size_bytes@ - (Optional)
-    --
-    , _writerVersion               :: TF.Attr s P.Text
-    -- ^ @writer_version@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @parquet_ser_de@ settings value.
-newParquetSerDeSetting
-    :: ParquetSerDeSetting s
-newParquetSerDeSetting =
-    ParquetSerDeSetting'
-        { _blockSizeBytes = TF.value 268435456
-        , _compression = TF.value "SNAPPY"
-        , _enableDictionaryCompression = TF.value P.False
-        , _maxPaddingBytes = TF.value 0
-        , _pageSizeBytes = TF.value 1048576
-        , _writerVersion = TF.value "V1"
-        }
-
-instance TF.IsValue  (ParquetSerDeSetting s)
-instance TF.IsObject (ParquetSerDeSetting s) where
-    toObject ParquetSerDeSetting'{..} = P.catMaybes
-        [ TF.assign "block_size_bytes" <$> TF.attribute _blockSizeBytes
-        , TF.assign "compression" <$> TF.attribute _compression
-        , TF.assign "enable_dictionary_compression" <$> TF.attribute _enableDictionaryCompression
-        , TF.assign "max_padding_bytes" <$> TF.attribute _maxPaddingBytes
-        , TF.assign "page_size_bytes" <$> TF.attribute _pageSizeBytes
-        , TF.assign "writer_version" <$> TF.attribute _writerVersion
-        ]
-
-instance TF.IsValid (ParquetSerDeSetting s) where
-    validator = P.mempty
-
-instance P.HasBlockSizeBytes (ParquetSerDeSetting s) (TF.Attr s P.Int) where
-    blockSizeBytes =
-        P.lens (_blockSizeBytes :: ParquetSerDeSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _blockSizeBytes = a } :: ParquetSerDeSetting s)
-
-instance P.HasCompression (ParquetSerDeSetting s) (TF.Attr s P.Text) where
-    compression =
-        P.lens (_compression :: ParquetSerDeSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _compression = a } :: ParquetSerDeSetting s)
-
-instance P.HasEnableDictionaryCompression (ParquetSerDeSetting s) (TF.Attr s P.Bool) where
-    enableDictionaryCompression =
-        P.lens (_enableDictionaryCompression :: ParquetSerDeSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _enableDictionaryCompression = a } :: ParquetSerDeSetting s)
-
-instance P.HasMaxPaddingBytes (ParquetSerDeSetting s) (TF.Attr s P.Int) where
-    maxPaddingBytes =
-        P.lens (_maxPaddingBytes :: ParquetSerDeSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _maxPaddingBytes = a } :: ParquetSerDeSetting s)
-
-instance P.HasPageSizeBytes (ParquetSerDeSetting s) (TF.Attr s P.Int) where
-    pageSizeBytes =
-        P.lens (_pageSizeBytes :: ParquetSerDeSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _pageSizeBytes = a } :: ParquetSerDeSetting s)
-
-instance P.HasWriterVersion (ParquetSerDeSetting s) (TF.Attr s P.Text) where
-    writerVersion =
-        P.lens (_writerVersion :: ParquetSerDeSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _writerVersion = a } :: ParquetSerDeSetting s)
-
--- | @orc_ser_de@ nested settings.
-data OrcSerDeSetting s = OrcSerDeSetting'
-    { _blockSizeBytes                      :: TF.Attr s P.Int
-    -- ^ @block_size_bytes@ - (Optional)
-    --
-    , _bloomFilterColumns                  :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @bloom_filter_columns@ - (Optional)
-    --
-    , _bloomFilterFalsePositiveProbability :: TF.Attr s P.Double
-    -- ^ @bloom_filter_false_positive_probability@ - (Optional)
-    --
-    , _compression                         :: TF.Attr s P.Text
-    -- ^ @compression@ - (Optional)
-    --
-    , _dictionaryKeyThreshold              :: TF.Attr s P.Double
-    -- ^ @dictionary_key_threshold@ - (Optional)
-    --
-    , _enablePadding                       :: TF.Attr s P.Bool
-    -- ^ @enable_padding@ - (Optional)
-    --
-    , _formatVersion                       :: TF.Attr s P.Text
-    -- ^ @format_version@ - (Optional)
-    --
-    , _paddingTolerance                    :: TF.Attr s P.Double
-    -- ^ @padding_tolerance@ - (Optional)
-    --
-    , _rowIndexStride                      :: TF.Attr s P.Int
-    -- ^ @row_index_stride@ - (Optional)
-    --
-    , _stripeSizeBytes                     :: TF.Attr s P.Int
-    -- ^ @stripe_size_bytes@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @orc_ser_de@ settings value.
-newOrcSerDeSetting
-    :: OrcSerDeSetting s
-newOrcSerDeSetting =
-    OrcSerDeSetting'
-        { _blockSizeBytes = TF.value 268435456
-        , _bloomFilterColumns = TF.Nil
-        , _bloomFilterFalsePositiveProbability = TF.value 5.0e-2
-        , _compression = TF.value "SNAPPY"
-        , _dictionaryKeyThreshold = TF.value 0.0
-        , _enablePadding = TF.value P.False
-        , _formatVersion = TF.value "V0_12"
-        , _paddingTolerance = TF.value 5.0e-2
-        , _rowIndexStride = TF.value 10000
-        , _stripeSizeBytes = TF.value 67108864
-        }
-
-instance TF.IsValue  (OrcSerDeSetting s)
-instance TF.IsObject (OrcSerDeSetting s) where
-    toObject OrcSerDeSetting'{..} = P.catMaybes
-        [ TF.assign "block_size_bytes" <$> TF.attribute _blockSizeBytes
-        , TF.assign "bloom_filter_columns" <$> TF.attribute _bloomFilterColumns
-        , TF.assign "bloom_filter_false_positive_probability" <$> TF.attribute _bloomFilterFalsePositiveProbability
-        , TF.assign "compression" <$> TF.attribute _compression
-        , TF.assign "dictionary_key_threshold" <$> TF.attribute _dictionaryKeyThreshold
-        , TF.assign "enable_padding" <$> TF.attribute _enablePadding
-        , TF.assign "format_version" <$> TF.attribute _formatVersion
-        , TF.assign "padding_tolerance" <$> TF.attribute _paddingTolerance
-        , TF.assign "row_index_stride" <$> TF.attribute _rowIndexStride
-        , TF.assign "stripe_size_bytes" <$> TF.attribute _stripeSizeBytes
-        ]
-
-instance TF.IsValid (OrcSerDeSetting s) where
-    validator = P.mempty
-
-instance P.HasBlockSizeBytes (OrcSerDeSetting s) (TF.Attr s P.Int) where
-    blockSizeBytes =
-        P.lens (_blockSizeBytes :: OrcSerDeSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _blockSizeBytes = a } :: OrcSerDeSetting s)
-
-instance P.HasBloomFilterColumns (OrcSerDeSetting s) (TF.Attr s [TF.Attr s P.Text]) where
-    bloomFilterColumns =
-        P.lens (_bloomFilterColumns :: OrcSerDeSetting s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _bloomFilterColumns = a } :: OrcSerDeSetting s)
-
-instance P.HasBloomFilterFalsePositiveProbability (OrcSerDeSetting s) (TF.Attr s P.Double) where
-    bloomFilterFalsePositiveProbability =
-        P.lens (_bloomFilterFalsePositiveProbability :: OrcSerDeSetting s -> TF.Attr s P.Double)
-               (\s a -> s { _bloomFilterFalsePositiveProbability = a } :: OrcSerDeSetting s)
-
-instance P.HasCompression (OrcSerDeSetting s) (TF.Attr s P.Text) where
-    compression =
-        P.lens (_compression :: OrcSerDeSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _compression = a } :: OrcSerDeSetting s)
-
-instance P.HasDictionaryKeyThreshold (OrcSerDeSetting s) (TF.Attr s P.Double) where
-    dictionaryKeyThreshold =
-        P.lens (_dictionaryKeyThreshold :: OrcSerDeSetting s -> TF.Attr s P.Double)
-               (\s a -> s { _dictionaryKeyThreshold = a } :: OrcSerDeSetting s)
-
-instance P.HasEnablePadding (OrcSerDeSetting s) (TF.Attr s P.Bool) where
-    enablePadding =
-        P.lens (_enablePadding :: OrcSerDeSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _enablePadding = a } :: OrcSerDeSetting s)
-
-instance P.HasFormatVersion (OrcSerDeSetting s) (TF.Attr s P.Text) where
-    formatVersion =
-        P.lens (_formatVersion :: OrcSerDeSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _formatVersion = a } :: OrcSerDeSetting s)
-
-instance P.HasPaddingTolerance (OrcSerDeSetting s) (TF.Attr s P.Double) where
-    paddingTolerance =
-        P.lens (_paddingTolerance :: OrcSerDeSetting s -> TF.Attr s P.Double)
-               (\s a -> s { _paddingTolerance = a } :: OrcSerDeSetting s)
-
-instance P.HasRowIndexStride (OrcSerDeSetting s) (TF.Attr s P.Int) where
-    rowIndexStride =
-        P.lens (_rowIndexStride :: OrcSerDeSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _rowIndexStride = a } :: OrcSerDeSetting s)
-
-instance P.HasStripeSizeBytes (OrcSerDeSetting s) (TF.Attr s P.Int) where
-    stripeSizeBytes =
-        P.lens (_stripeSizeBytes :: OrcSerDeSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _stripeSizeBytes = a } :: OrcSerDeSetting s)
-
--- | @input_format_configuration@ nested settings.
-data InputFormatConfigurationSetting s = InputFormatConfigurationSetting'
-    { _deserializer :: TF.Attr s (DeserializerSetting s)
-    -- ^ @deserializer@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @input_format_configuration@ settings value.
-newInputFormatConfigurationSetting
-    :: TF.Attr s (DeserializerSetting s) -- ^ 'P._deserializer': @deserializer@
-    -> InputFormatConfigurationSetting s
-newInputFormatConfigurationSetting _deserializer =
-    InputFormatConfigurationSetting'
-        { _deserializer = _deserializer
-        }
-
-instance TF.IsValue  (InputFormatConfigurationSetting s)
-instance TF.IsObject (InputFormatConfigurationSetting s) where
-    toObject InputFormatConfigurationSetting'{..} = P.catMaybes
-        [ TF.assign "deserializer" <$> TF.attribute _deserializer
-        ]
-
-instance TF.IsValid (InputFormatConfigurationSetting s) where
-    validator = P.mempty
-           P.<> TF.settingsValidator "_deserializer"
-                  (_deserializer
-                      :: InputFormatConfigurationSetting s -> TF.Attr s (DeserializerSetting s))
-                  TF.validator
-
-instance P.HasDeserializer (InputFormatConfigurationSetting s) (TF.Attr s (DeserializerSetting s)) where
-    deserializer =
-        P.lens (_deserializer :: InputFormatConfigurationSetting s -> TF.Attr s (DeserializerSetting s))
-               (\s a -> s { _deserializer = a } :: InputFormatConfigurationSetting s)
-
--- | @deserializer@ nested settings.
-data DeserializerSetting s = DeserializerSetting'
-    { _hiveJsonSerDe  :: TF.Attr s (HiveJsonSerDeSetting s)
-    -- ^ @hive_json_ser_de@ - (Optional)
-    --
-    -- Conflicts with:
-    --
-    -- * 'openXJsonSerDe'
-    , _openXJsonSerDe :: TF.Attr s (OpenXJsonSerDeSetting s)
-    -- ^ @open_x_json_ser_de@ - (Optional)
-    --
-    -- Conflicts with:
-    --
-    -- * 'hiveJsonSerDe'
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @deserializer@ settings value.
-newDeserializerSetting
-    :: DeserializerSetting s
-newDeserializerSetting =
-    DeserializerSetting'
-        { _hiveJsonSerDe = TF.Nil
-        , _openXJsonSerDe = TF.Nil
-        }
-
-instance TF.IsValue  (DeserializerSetting s)
-instance TF.IsObject (DeserializerSetting s) where
-    toObject DeserializerSetting'{..} = P.catMaybes
-        [ TF.assign "hive_json_ser_de" <$> TF.attribute _hiveJsonSerDe
-        , TF.assign "open_x_json_ser_de" <$> TF.attribute _openXJsonSerDe
-        ]
-
-instance TF.IsValid (DeserializerSetting s) where
-    validator = TF.fieldsValidator (\DeserializerSetting'{..} -> Map.fromList $ P.catMaybes
-        [ if (_hiveJsonSerDe P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_hiveJsonSerDe",
-                            [ "_openXJsonSerDe"
-                            ])
-        , if (_openXJsonSerDe P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_openXJsonSerDe",
-                            [ "_hiveJsonSerDe"
-                            ])
-        ])
-           P.<> TF.settingsValidator "_hiveJsonSerDe"
-                  (_hiveJsonSerDe
-                      :: DeserializerSetting s -> TF.Attr s (HiveJsonSerDeSetting s))
-                  TF.validator
-           P.<> TF.settingsValidator "_openXJsonSerDe"
-                  (_openXJsonSerDe
-                      :: DeserializerSetting s -> TF.Attr s (OpenXJsonSerDeSetting s))
-                  TF.validator
-
-instance P.HasHiveJsonSerDe (DeserializerSetting s) (TF.Attr s (HiveJsonSerDeSetting s)) where
-    hiveJsonSerDe =
-        P.lens (_hiveJsonSerDe :: DeserializerSetting s -> TF.Attr s (HiveJsonSerDeSetting s))
-               (\s a -> s { _hiveJsonSerDe = a } :: DeserializerSetting s)
-
-instance P.HasOpenXJsonSerDe (DeserializerSetting s) (TF.Attr s (OpenXJsonSerDeSetting s)) where
-    openXJsonSerDe =
-        P.lens (_openXJsonSerDe :: DeserializerSetting s -> TF.Attr s (OpenXJsonSerDeSetting s))
-               (\s a -> s { _openXJsonSerDe = a } :: DeserializerSetting s)
-
--- | @open_x_json_ser_de@ nested settings.
-data OpenXJsonSerDeSetting s = OpenXJsonSerDeSetting'
-    { _caseInsensitive :: TF.Attr s P.Bool
-    -- ^ @case_insensitive@ - (Optional)
-    --
-    , _columnToJsonKeyMappings :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
-    -- ^ @column_to_json_key_mappings@ - (Optional)
-    --
-    , _convertDotsInJsonKeysToUnderscores :: TF.Attr s P.Bool
-    -- ^ @convert_dots_in_json_keys_to_underscores@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @open_x_json_ser_de@ settings value.
-newOpenXJsonSerDeSetting
-    :: OpenXJsonSerDeSetting s
-newOpenXJsonSerDeSetting =
-    OpenXJsonSerDeSetting'
-        { _caseInsensitive = TF.value P.True
-        , _columnToJsonKeyMappings = TF.Nil
-        , _convertDotsInJsonKeysToUnderscores = TF.value P.False
-        }
-
-instance TF.IsValue  (OpenXJsonSerDeSetting s)
-instance TF.IsObject (OpenXJsonSerDeSetting s) where
-    toObject OpenXJsonSerDeSetting'{..} = P.catMaybes
-        [ TF.assign "case_insensitive" <$> TF.attribute _caseInsensitive
-        , TF.assign "column_to_json_key_mappings" <$> TF.attribute _columnToJsonKeyMappings
-        , TF.assign "convert_dots_in_json_keys_to_underscores" <$> TF.attribute _convertDotsInJsonKeysToUnderscores
-        ]
-
-instance TF.IsValid (OpenXJsonSerDeSetting s) where
-    validator = P.mempty
-
-instance P.HasCaseInsensitive (OpenXJsonSerDeSetting s) (TF.Attr s P.Bool) where
-    caseInsensitive =
-        P.lens (_caseInsensitive :: OpenXJsonSerDeSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _caseInsensitive = a } :: OpenXJsonSerDeSetting s)
-
-instance P.HasColumnToJsonKeyMappings (OpenXJsonSerDeSetting s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
-    columnToJsonKeyMappings =
-        P.lens (_columnToJsonKeyMappings :: OpenXJsonSerDeSetting s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _columnToJsonKeyMappings = a } :: OpenXJsonSerDeSetting s)
-
-instance P.HasConvertDotsInJsonKeysToUnderscores (OpenXJsonSerDeSetting s) (TF.Attr s P.Bool) where
-    convertDotsInJsonKeysToUnderscores =
-        P.lens (_convertDotsInJsonKeysToUnderscores :: OpenXJsonSerDeSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _convertDotsInJsonKeysToUnderscores = a } :: OpenXJsonSerDeSetting s)
-
--- | @hive_json_ser_de@ nested settings.
-data HiveJsonSerDeSetting s = HiveJsonSerDeSetting'
-    { _timestampFormats :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @timestamp_formats@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @hive_json_ser_de@ settings value.
-newHiveJsonSerDeSetting
-    :: HiveJsonSerDeSetting s
-newHiveJsonSerDeSetting =
-    HiveJsonSerDeSetting'
-        { _timestampFormats = TF.Nil
-        }
-
-instance TF.IsValue  (HiveJsonSerDeSetting s)
-instance TF.IsObject (HiveJsonSerDeSetting s) where
-    toObject HiveJsonSerDeSetting'{..} = P.catMaybes
-        [ TF.assign "timestamp_formats" <$> TF.attribute _timestampFormats
-        ]
-
-instance TF.IsValid (HiveJsonSerDeSetting s) where
-    validator = P.mempty
-
-instance P.HasTimestampFormats (HiveJsonSerDeSetting s) (TF.Attr s [TF.Attr s P.Text]) where
-    timestampFormats =
-        P.lens (_timestampFormats :: HiveJsonSerDeSetting s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _timestampFormats = a } :: HiveJsonSerDeSetting s)
-
--- | @elasticsearch_configuration@ nested settings.
-data ElasticsearchConfigurationSetting s = ElasticsearchConfigurationSetting'
-    { _bufferingInterval        :: TF.Attr s P.Int
-    -- ^ @buffering_interval@ - (Optional)
-    --
-    , _bufferingSize            :: TF.Attr s P.Int
-    -- ^ @buffering_size@ - (Optional)
-    --
-    , _cloudwatchLoggingOptions :: TF.Attr s (CloudwatchLoggingOptionsSetting s)
-    -- ^ @cloudwatch_logging_options@ - (Optional)
-    --
-    , _domainArn                :: TF.Attr s P.Text
-    -- ^ @domain_arn@ - (Required)
-    --
-    , _indexName                :: TF.Attr s P.Text
-    -- ^ @index_name@ - (Required)
-    --
-    , _indexRotationPeriod      :: TF.Attr s P.Text
-    -- ^ @index_rotation_period@ - (Optional)
-    --
-    , _processingConfiguration  :: TF.Attr s (ProcessingConfigurationSetting s)
-    -- ^ @processing_configuration@ - (Optional)
-    --
-    , _retryDuration            :: TF.Attr s P.Int
-    -- ^ @retry_duration@ - (Optional)
-    --
-    , _roleArn                  :: TF.Attr s P.Text
-    -- ^ @role_arn@ - (Required)
-    --
-    , _s3BackupMode             :: TF.Attr s P.Text
-    -- ^ @s3_backup_mode@ - (Optional)
-    --
-    , _typeName                 :: TF.Attr s P.Text
-    -- ^ @type_name@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @elasticsearch_configuration@ settings value.
-newElasticsearchConfigurationSetting
-    :: TF.Attr s P.Text -- ^ 'P._domainArn': @domain_arn@
-    -> TF.Attr s P.Text -- ^ 'P._roleArn': @role_arn@
-    -> TF.Attr s P.Text -- ^ 'P._indexName': @index_name@
-    -> ElasticsearchConfigurationSetting s
-newElasticsearchConfigurationSetting _domainArn _roleArn _indexName =
-    ElasticsearchConfigurationSetting'
-        { _bufferingInterval = TF.value 300
-        , _bufferingSize = TF.value 5
-        , _cloudwatchLoggingOptions = TF.Nil
-        , _domainArn = _domainArn
-        , _indexName = _indexName
-        , _indexRotationPeriod = TF.value "OneDay"
-        , _processingConfiguration = TF.Nil
-        , _retryDuration = TF.value 300
-        , _roleArn = _roleArn
-        , _s3BackupMode = TF.value "FailedDocumentsOnly"
-        , _typeName = TF.Nil
-        }
-
-instance TF.IsValue  (ElasticsearchConfigurationSetting s)
-instance TF.IsObject (ElasticsearchConfigurationSetting s) where
-    toObject ElasticsearchConfigurationSetting'{..} = P.catMaybes
-        [ TF.assign "buffering_interval" <$> TF.attribute _bufferingInterval
-        , TF.assign "buffering_size" <$> TF.attribute _bufferingSize
-        , TF.assign "cloudwatch_logging_options" <$> TF.attribute _cloudwatchLoggingOptions
-        , TF.assign "domain_arn" <$> TF.attribute _domainArn
-        , TF.assign "index_name" <$> TF.attribute _indexName
-        , TF.assign "index_rotation_period" <$> TF.attribute _indexRotationPeriod
-        , TF.assign "processing_configuration" <$> TF.attribute _processingConfiguration
-        , TF.assign "retry_duration" <$> TF.attribute _retryDuration
-        , TF.assign "role_arn" <$> TF.attribute _roleArn
-        , TF.assign "s3_backup_mode" <$> TF.attribute _s3BackupMode
-        , TF.assign "type_name" <$> TF.attribute _typeName
-        ]
-
-instance TF.IsValid (ElasticsearchConfigurationSetting s) where
-    validator = P.mempty
-           P.<> TF.settingsValidator "_cloudwatchLoggingOptions"
-                  (_cloudwatchLoggingOptions
-                      :: ElasticsearchConfigurationSetting s -> TF.Attr s (CloudwatchLoggingOptionsSetting s))
-                  TF.validator
-           P.<> TF.settingsValidator "_processingConfiguration"
-                  (_processingConfiguration
-                      :: ElasticsearchConfigurationSetting s -> TF.Attr s (ProcessingConfigurationSetting s))
-                  TF.validator
-
-instance P.HasBufferingInterval (ElasticsearchConfigurationSetting s) (TF.Attr s P.Int) where
-    bufferingInterval =
-        P.lens (_bufferingInterval :: ElasticsearchConfigurationSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _bufferingInterval = a } :: ElasticsearchConfigurationSetting s)
-
-instance P.HasBufferingSize (ElasticsearchConfigurationSetting s) (TF.Attr s P.Int) where
-    bufferingSize =
-        P.lens (_bufferingSize :: ElasticsearchConfigurationSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _bufferingSize = a } :: ElasticsearchConfigurationSetting s)
-
-instance P.HasCloudwatchLoggingOptions (ElasticsearchConfigurationSetting s) (TF.Attr s (CloudwatchLoggingOptionsSetting s)) where
-    cloudwatchLoggingOptions =
-        P.lens (_cloudwatchLoggingOptions :: ElasticsearchConfigurationSetting s -> TF.Attr s (CloudwatchLoggingOptionsSetting s))
-               (\s a -> s { _cloudwatchLoggingOptions = a } :: ElasticsearchConfigurationSetting s)
-
-instance P.HasDomainArn (ElasticsearchConfigurationSetting s) (TF.Attr s P.Text) where
-    domainArn =
-        P.lens (_domainArn :: ElasticsearchConfigurationSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _domainArn = a } :: ElasticsearchConfigurationSetting s)
-
-instance P.HasIndexName (ElasticsearchConfigurationSetting s) (TF.Attr s P.Text) where
-    indexName =
-        P.lens (_indexName :: ElasticsearchConfigurationSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _indexName = a } :: ElasticsearchConfigurationSetting s)
-
-instance P.HasIndexRotationPeriod (ElasticsearchConfigurationSetting s) (TF.Attr s P.Text) where
-    indexRotationPeriod =
-        P.lens (_indexRotationPeriod :: ElasticsearchConfigurationSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _indexRotationPeriod = a } :: ElasticsearchConfigurationSetting s)
-
-instance P.HasProcessingConfiguration (ElasticsearchConfigurationSetting s) (TF.Attr s (ProcessingConfigurationSetting s)) where
-    processingConfiguration =
-        P.lens (_processingConfiguration :: ElasticsearchConfigurationSetting s -> TF.Attr s (ProcessingConfigurationSetting s))
-               (\s a -> s { _processingConfiguration = a } :: ElasticsearchConfigurationSetting s)
-
-instance P.HasRetryDuration (ElasticsearchConfigurationSetting s) (TF.Attr s P.Int) where
-    retryDuration =
-        P.lens (_retryDuration :: ElasticsearchConfigurationSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _retryDuration = a } :: ElasticsearchConfigurationSetting s)
-
-instance P.HasRoleArn (ElasticsearchConfigurationSetting s) (TF.Attr s P.Text) where
-    roleArn =
-        P.lens (_roleArn :: ElasticsearchConfigurationSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _roleArn = a } :: ElasticsearchConfigurationSetting s)
-
-instance P.HasS3BackupMode (ElasticsearchConfigurationSetting s) (TF.Attr s P.Text) where
-    s3BackupMode =
-        P.lens (_s3BackupMode :: ElasticsearchConfigurationSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _s3BackupMode = a } :: ElasticsearchConfigurationSetting s)
-
-instance P.HasTypeName (ElasticsearchConfigurationSetting s) (TF.Attr s P.Text) where
-    typeName =
-        P.lens (_typeName :: ElasticsearchConfigurationSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _typeName = a } :: ElasticsearchConfigurationSetting s)
-
-instance s ~ s' => P.HasComputedCloudwatchLoggingOptions (TF.Ref s' (ElasticsearchConfigurationSetting s)) (TF.Attr s (CloudwatchLoggingOptionsSetting s)) where
-    computedCloudwatchLoggingOptions x = TF.compute (TF.refKey x) "cloudwatch_logging_options"
-
--- | @processors@ nested settings.
-data ProcessorsSetting s = ProcessorsSetting'
-    { _parameters :: TF.Attr s [TF.Attr s (ParametersSetting s)]
-    -- ^ @parameters@ - (Optional)
-    --
-    , _type'      :: TF.Attr s P.Text
-    -- ^ @type@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @processors@ settings value.
-newProcessorsSetting
-    :: TF.Attr s P.Text -- ^ 'P._type'': @type@
-    -> ProcessorsSetting s
-newProcessorsSetting _type' =
-    ProcessorsSetting'
-        { _parameters = TF.Nil
-        , _type' = _type'
-        }
-
-instance TF.IsValue  (ProcessorsSetting s)
-instance TF.IsObject (ProcessorsSetting s) where
-    toObject ProcessorsSetting'{..} = P.catMaybes
-        [ TF.assign "parameters" <$> TF.attribute _parameters
-        , TF.assign "type" <$> TF.attribute _type'
-        ]
-
-instance TF.IsValid (ProcessorsSetting s) where
-    validator = P.mempty
-
-instance P.HasParameters (ProcessorsSetting s) (TF.Attr s [TF.Attr s (ParametersSetting s)]) where
-    parameters =
-        P.lens (_parameters :: ProcessorsSetting s -> TF.Attr s [TF.Attr s (ParametersSetting s)])
-               (\s a -> s { _parameters = a } :: ProcessorsSetting s)
-
-instance P.HasType' (ProcessorsSetting s) (TF.Attr s P.Text) where
-    type' =
-        P.lens (_type' :: ProcessorsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a } :: ProcessorsSetting s)
-
--- | @parameters@ nested settings.
-data ParametersSetting s = ParametersSetting'
-    { _name           :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
-    --
-    , _value          :: TF.Attr s P.Text
-    -- ^ @value@ - (Required)
-    --
-    , _parameterName  :: TF.Attr s P.Text
-    -- ^ @parameter_name@ - (Required)
-    --
-    , _parameterValue :: TF.Attr s P.Text
-    -- ^ @parameter_value@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @parameters@ settings value.
-newParametersSetting
-    :: TF.Attr s P.Text -- ^ 'P._name': @name@
-    -> TF.Attr s P.Text -- ^ 'P._parameterName': @parameter_name@
-    -> TF.Attr s P.Text -- ^ 'P._parameterValue': @parameter_value@
-    -> TF.Attr s P.Text -- ^ 'P._value': @value@
-    -> ParametersSetting s
-newParametersSetting _name _parameterName _parameterValue _value =
-    ParametersSetting'
-        { _name = _name
-        , _value = _value
-        , _parameterName = _parameterName
-        , _parameterValue = _parameterValue
-        }
-
-instance TF.IsValue  (ParametersSetting s)
-instance TF.IsObject (ParametersSetting s) where
-    toObject ParametersSetting'{..} = P.catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        , TF.assign "value" <$> TF.attribute _value
-        , TF.assign "parameter_name" <$> TF.attribute _parameterName
-        , TF.assign "parameter_value" <$> TF.attribute _parameterValue
-        ]
-
-instance TF.IsValid (ParametersSetting s) where
-    validator = P.mempty
-
-instance P.HasName (ParametersSetting s) (TF.Attr s P.Text) where
-    name =
-        P.lens (_name :: ParametersSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: ParametersSetting s)
-
-instance P.HasValue (ParametersSetting s) (TF.Attr s P.Text) where
-    value =
-        P.lens (_value :: ParametersSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _value = a } :: ParametersSetting s)
-
-instance P.HasParameterName (ParametersSetting s) (TF.Attr s P.Text) where
-    parameterName =
-        P.lens (_parameterName :: ParametersSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _parameterName = a } :: ParametersSetting s)
-
-instance P.HasParameterValue (ParametersSetting s) (TF.Attr s P.Text) where
-    parameterValue =
-        P.lens (_parameterValue :: ParametersSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _parameterValue = a } :: ParametersSetting s)
-
--- | @s3_configuration@ nested settings.
-data S3ConfigurationSetting s = S3ConfigurationSetting'
-    { _bucketArn                :: TF.Attr s P.Text
-    -- ^ @bucket_arn@ - (Required)
-    --
-    , _bufferInterval           :: TF.Attr s P.Int
-    -- ^ @buffer_interval@ - (Optional)
-    --
-    , _bufferSize               :: TF.Attr s P.Int
-    -- ^ @buffer_size@ - (Optional)
-    --
-    , _cloudwatchLoggingOptions :: TF.Attr s (CloudwatchLoggingOptionsSetting s)
-    -- ^ @cloudwatch_logging_options@ - (Optional)
-    --
-    , _compressionFormat        :: TF.Attr s P.Text
-    -- ^ @compression_format@ - (Optional)
-    --
-    , _kmsKeyArn                :: TF.Attr s P.Text
-    -- ^ @kms_key_arn@ - (Optional)
-    --
-    , _prefix                   :: TF.Attr s P.Text
-    -- ^ @prefix@ - (Optional)
-    --
-    , _roleArn                  :: TF.Attr s P.Text
-    -- ^ @role_arn@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @s3_configuration@ settings value.
-newS3ConfigurationSetting
-    :: TF.Attr s P.Text -- ^ 'P._bucketArn': @bucket_arn@
-    -> TF.Attr s P.Text -- ^ 'P._roleArn': @role_arn@
-    -> S3ConfigurationSetting s
-newS3ConfigurationSetting _bucketArn _roleArn =
-    S3ConfigurationSetting'
-        { _bucketArn = _bucketArn
-        , _bufferInterval = TF.value 300
-        , _bufferSize = TF.value 5
-        , _cloudwatchLoggingOptions = TF.Nil
-        , _compressionFormat = TF.value "UNCOMPRESSED"
-        , _kmsKeyArn = TF.Nil
-        , _prefix = TF.Nil
-        , _roleArn = _roleArn
-        }
-
-instance TF.IsValue  (S3ConfigurationSetting s)
-instance TF.IsObject (S3ConfigurationSetting s) where
-    toObject S3ConfigurationSetting'{..} = P.catMaybes
-        [ TF.assign "bucket_arn" <$> TF.attribute _bucketArn
-        , TF.assign "buffer_interval" <$> TF.attribute _bufferInterval
-        , TF.assign "buffer_size" <$> TF.attribute _bufferSize
-        , TF.assign "cloudwatch_logging_options" <$> TF.attribute _cloudwatchLoggingOptions
-        , TF.assign "compression_format" <$> TF.attribute _compressionFormat
-        , TF.assign "kms_key_arn" <$> TF.attribute _kmsKeyArn
-        , TF.assign "prefix" <$> TF.attribute _prefix
-        , TF.assign "role_arn" <$> TF.attribute _roleArn
-        ]
-
-instance TF.IsValid (S3ConfigurationSetting s) where
-    validator = P.mempty
-           P.<> TF.settingsValidator "_cloudwatchLoggingOptions"
-                  (_cloudwatchLoggingOptions
-                      :: S3ConfigurationSetting s -> TF.Attr s (CloudwatchLoggingOptionsSetting s))
-                  TF.validator
-
-instance P.HasBucketArn (S3ConfigurationSetting s) (TF.Attr s P.Text) where
-    bucketArn =
-        P.lens (_bucketArn :: S3ConfigurationSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _bucketArn = a } :: S3ConfigurationSetting s)
-
-instance P.HasBufferInterval (S3ConfigurationSetting s) (TF.Attr s P.Int) where
-    bufferInterval =
-        P.lens (_bufferInterval :: S3ConfigurationSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _bufferInterval = a } :: S3ConfigurationSetting s)
-
-instance P.HasBufferSize (S3ConfigurationSetting s) (TF.Attr s P.Int) where
-    bufferSize =
-        P.lens (_bufferSize :: S3ConfigurationSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _bufferSize = a } :: S3ConfigurationSetting s)
-
-instance P.HasCloudwatchLoggingOptions (S3ConfigurationSetting s) (TF.Attr s (CloudwatchLoggingOptionsSetting s)) where
-    cloudwatchLoggingOptions =
-        P.lens (_cloudwatchLoggingOptions :: S3ConfigurationSetting s -> TF.Attr s (CloudwatchLoggingOptionsSetting s))
-               (\s a -> s { _cloudwatchLoggingOptions = a } :: S3ConfigurationSetting s)
-
-instance P.HasCompressionFormat (S3ConfigurationSetting s) (TF.Attr s P.Text) where
-    compressionFormat =
-        P.lens (_compressionFormat :: S3ConfigurationSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _compressionFormat = a } :: S3ConfigurationSetting s)
-
-instance P.HasKmsKeyArn (S3ConfigurationSetting s) (TF.Attr s P.Text) where
-    kmsKeyArn =
-        P.lens (_kmsKeyArn :: S3ConfigurationSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _kmsKeyArn = a } :: S3ConfigurationSetting s)
-
-instance P.HasPrefix (S3ConfigurationSetting s) (TF.Attr s P.Text) where
-    prefix =
-        P.lens (_prefix :: S3ConfigurationSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _prefix = a } :: S3ConfigurationSetting s)
-
-instance P.HasRoleArn (S3ConfigurationSetting s) (TF.Attr s P.Text) where
-    roleArn =
-        P.lens (_roleArn :: S3ConfigurationSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _roleArn = a } :: S3ConfigurationSetting s)
-
-instance s ~ s' => P.HasComputedCloudwatchLoggingOptions (TF.Ref s' (S3ConfigurationSetting s)) (TF.Attr s (CloudwatchLoggingOptionsSetting s)) where
-    computedCloudwatchLoggingOptions x = TF.compute (TF.refKey x) "cloudwatch_logging_options"
-
--- | @cloudwatch_metric@ nested settings.
-data CloudwatchMetricSetting s = CloudwatchMetricSetting'
-    { _metricName      :: TF.Attr s P.Text
-    -- ^ @metric_name@ - (Required)
-    --
-    , _metricNamespace :: TF.Attr s P.Text
-    -- ^ @metric_namespace@ - (Required)
-    --
-    , _metricTimestamp :: TF.Attr s P.Text
-    -- ^ @metric_timestamp@ - (Optional)
-    --
-    , _metricUnit      :: TF.Attr s P.Text
-    -- ^ @metric_unit@ - (Required)
-    --
-    , _metricValue     :: TF.Attr s P.Text
-    -- ^ @metric_value@ - (Required)
-    --
-    , _roleArn         :: TF.Attr s P.Text
-    -- ^ @role_arn@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @cloudwatch_metric@ settings value.
-newCloudwatchMetricSetting
-    :: TF.Attr s P.Text -- ^ 'P._roleArn': @role_arn@
-    -> TF.Attr s P.Text -- ^ 'P._metricName': @metric_name@
-    -> TF.Attr s P.Text -- ^ 'P._metricNamespace': @metric_namespace@
-    -> TF.Attr s P.Text -- ^ 'P._metricUnit': @metric_unit@
-    -> TF.Attr s P.Text -- ^ 'P._metricValue': @metric_value@
-    -> CloudwatchMetricSetting s
-newCloudwatchMetricSetting _roleArn _metricName _metricNamespace _metricUnit _metricValue =
-    CloudwatchMetricSetting'
-        { _metricName = _metricName
-        , _metricNamespace = _metricNamespace
-        , _metricTimestamp = TF.Nil
-        , _metricUnit = _metricUnit
-        , _metricValue = _metricValue
-        , _roleArn = _roleArn
-        }
-
-instance TF.IsValue  (CloudwatchMetricSetting s)
-instance TF.IsObject (CloudwatchMetricSetting s) where
-    toObject CloudwatchMetricSetting'{..} = P.catMaybes
-        [ TF.assign "metric_name" <$> TF.attribute _metricName
-        , TF.assign "metric_namespace" <$> TF.attribute _metricNamespace
-        , TF.assign "metric_timestamp" <$> TF.attribute _metricTimestamp
-        , TF.assign "metric_unit" <$> TF.attribute _metricUnit
-        , TF.assign "metric_value" <$> TF.attribute _metricValue
-        , TF.assign "role_arn" <$> TF.attribute _roleArn
-        ]
-
-instance TF.IsValid (CloudwatchMetricSetting s) where
-    validator = P.mempty
-
-instance P.HasMetricName (CloudwatchMetricSetting s) (TF.Attr s P.Text) where
-    metricName =
-        P.lens (_metricName :: CloudwatchMetricSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _metricName = a } :: CloudwatchMetricSetting s)
-
-instance P.HasMetricNamespace (CloudwatchMetricSetting s) (TF.Attr s P.Text) where
-    metricNamespace =
-        P.lens (_metricNamespace :: CloudwatchMetricSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _metricNamespace = a } :: CloudwatchMetricSetting s)
-
-instance P.HasMetricTimestamp (CloudwatchMetricSetting s) (TF.Attr s P.Text) where
-    metricTimestamp =
-        P.lens (_metricTimestamp :: CloudwatchMetricSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _metricTimestamp = a } :: CloudwatchMetricSetting s)
-
-instance P.HasMetricUnit (CloudwatchMetricSetting s) (TF.Attr s P.Text) where
-    metricUnit =
-        P.lens (_metricUnit :: CloudwatchMetricSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _metricUnit = a } :: CloudwatchMetricSetting s)
-
-instance P.HasMetricValue (CloudwatchMetricSetting s) (TF.Attr s P.Text) where
-    metricValue =
-        P.lens (_metricValue :: CloudwatchMetricSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _metricValue = a } :: CloudwatchMetricSetting s)
-
-instance P.HasRoleArn (CloudwatchMetricSetting s) (TF.Attr s P.Text) where
-    roleArn =
-        P.lens (_roleArn :: CloudwatchMetricSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _roleArn = a } :: CloudwatchMetricSetting s)
-
--- | @cluster_config@ nested settings.
-data ClusterConfigSetting s = ClusterConfigSetting'
-    { _dedicatedMasterCount   :: TF.Attr s P.Int
-    -- ^ @dedicated_master_count@ - (Optional)
-    --
-    , _dedicatedMasterEnabled :: TF.Attr s P.Bool
-    -- ^ @dedicated_master_enabled@ - (Optional)
-    --
-    , _dedicatedMasterType    :: TF.Attr s P.Text
-    -- ^ @dedicated_master_type@ - (Optional)
-    --
-    , _instanceCount          :: TF.Attr s P.Int
-    -- ^ @instance_count@ - (Optional)
-    --
-    , _instanceType           :: TF.Attr s P.Text
-    -- ^ @instance_type@ - (Optional)
-    --
-    , _zoneAwarenessEnabled   :: TF.Attr s P.Bool
-    -- ^ @zone_awareness_enabled@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @cluster_config@ settings value.
-newClusterConfigSetting
-    :: ClusterConfigSetting s
-newClusterConfigSetting =
-    ClusterConfigSetting'
-        { _dedicatedMasterCount = TF.Nil
-        , _dedicatedMasterEnabled = TF.value P.False
-        , _dedicatedMasterType = TF.Nil
-        , _instanceCount = TF.value 1
-        , _instanceType = TF.value "m3.medium.elasticsearch"
-        , _zoneAwarenessEnabled = TF.Nil
-        }
-
-instance TF.IsValue  (ClusterConfigSetting s)
-instance TF.IsObject (ClusterConfigSetting s) where
-    toObject ClusterConfigSetting'{..} = P.catMaybes
-        [ TF.assign "dedicated_master_count" <$> TF.attribute _dedicatedMasterCount
-        , TF.assign "dedicated_master_enabled" <$> TF.attribute _dedicatedMasterEnabled
-        , TF.assign "dedicated_master_type" <$> TF.attribute _dedicatedMasterType
-        , TF.assign "instance_count" <$> TF.attribute _instanceCount
-        , TF.assign "instance_type" <$> TF.attribute _instanceType
-        , TF.assign "zone_awareness_enabled" <$> TF.attribute _zoneAwarenessEnabled
-        ]
-
-instance TF.IsValid (ClusterConfigSetting s) where
-    validator = P.mempty
-
-instance P.HasDedicatedMasterCount (ClusterConfigSetting s) (TF.Attr s P.Int) where
-    dedicatedMasterCount =
-        P.lens (_dedicatedMasterCount :: ClusterConfigSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _dedicatedMasterCount = a } :: ClusterConfigSetting s)
-
-instance P.HasDedicatedMasterEnabled (ClusterConfigSetting s) (TF.Attr s P.Bool) where
-    dedicatedMasterEnabled =
-        P.lens (_dedicatedMasterEnabled :: ClusterConfigSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _dedicatedMasterEnabled = a } :: ClusterConfigSetting s)
-
-instance P.HasDedicatedMasterType (ClusterConfigSetting s) (TF.Attr s P.Text) where
-    dedicatedMasterType =
-        P.lens (_dedicatedMasterType :: ClusterConfigSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _dedicatedMasterType = a } :: ClusterConfigSetting s)
-
-instance P.HasInstanceCount (ClusterConfigSetting s) (TF.Attr s P.Int) where
-    instanceCount =
-        P.lens (_instanceCount :: ClusterConfigSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _instanceCount = a } :: ClusterConfigSetting s)
-
-instance P.HasInstanceType (ClusterConfigSetting s) (TF.Attr s P.Text) where
-    instanceType =
-        P.lens (_instanceType :: ClusterConfigSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _instanceType = a } :: ClusterConfigSetting s)
-
-instance P.HasZoneAwarenessEnabled (ClusterConfigSetting s) (TF.Attr s P.Bool) where
-    zoneAwarenessEnabled =
-        P.lens (_zoneAwarenessEnabled :: ClusterConfigSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _zoneAwarenessEnabled = a } :: ClusterConfigSetting s)
-
--- | @cluster_mode@ nested settings.
-data ClusterModeSetting s = ClusterModeSetting'
-    { _numNodeGroups        :: TF.Attr s P.Int
-    -- ^ @num_node_groups@ - (Required)
-    --
-    , _replicasPerNodeGroup :: TF.Attr s P.Int
-    -- ^ @replicas_per_node_group@ - (Required, Forces New)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @cluster_mode@ settings value.
-newClusterModeSetting
-    :: TF.Attr s P.Int -- ^ 'P._replicasPerNodeGroup': @replicas_per_node_group@
-    -> TF.Attr s P.Int -- ^ 'P._numNodeGroups': @num_node_groups@
-    -> ClusterModeSetting s
-newClusterModeSetting _replicasPerNodeGroup _numNodeGroups =
-    ClusterModeSetting'
-        { _numNodeGroups = _numNodeGroups
-        , _replicasPerNodeGroup = _replicasPerNodeGroup
-        }
-
-instance TF.IsValue  (ClusterModeSetting s)
-instance TF.IsObject (ClusterModeSetting s) where
-    toObject ClusterModeSetting'{..} = P.catMaybes
-        [ TF.assign "num_node_groups" <$> TF.attribute _numNodeGroups
-        , TF.assign "replicas_per_node_group" <$> TF.attribute _replicasPerNodeGroup
-        ]
-
-instance TF.IsValid (ClusterModeSetting s) where
-    validator = P.mempty
-
-instance P.HasNumNodeGroups (ClusterModeSetting s) (TF.Attr s P.Int) where
-    numNodeGroups =
-        P.lens (_numNodeGroups :: ClusterModeSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _numNodeGroups = a } :: ClusterModeSetting s)
-
-instance P.HasReplicasPerNodeGroup (ClusterModeSetting s) (TF.Attr s P.Int) where
-    replicasPerNodeGroup =
-        P.lens (_replicasPerNodeGroup :: ClusterModeSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _replicasPerNodeGroup = a } :: ClusterModeSetting s)
-
--- | @cognito_identity_providers@ nested settings.
-data CognitoIdentityProvidersSetting s = CognitoIdentityProvidersSetting'
-    { _clientId             :: TF.Attr s P.Text
-    -- ^ @client_id@ - (Optional)
-    --
-    , _providerName         :: TF.Attr s P.Text
-    -- ^ @provider_name@ - (Optional)
-    --
-    , _serverSideTokenCheck :: TF.Attr s P.Bool
-    -- ^ @server_side_token_check@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @cognito_identity_providers@ settings value.
-newCognitoIdentityProvidersSetting
-    :: CognitoIdentityProvidersSetting s
-newCognitoIdentityProvidersSetting =
-    CognitoIdentityProvidersSetting'
-        { _clientId = TF.Nil
-        , _providerName = TF.Nil
-        , _serverSideTokenCheck = TF.value P.False
-        }
-
-instance TF.IsValue  (CognitoIdentityProvidersSetting s)
-instance TF.IsObject (CognitoIdentityProvidersSetting s) where
-    toObject CognitoIdentityProvidersSetting'{..} = P.catMaybes
-        [ TF.assign "client_id" <$> TF.attribute _clientId
-        , TF.assign "provider_name" <$> TF.attribute _providerName
-        , TF.assign "server_side_token_check" <$> TF.attribute _serverSideTokenCheck
-        ]
-
-instance TF.IsValid (CognitoIdentityProvidersSetting s) where
-    validator = P.mempty
-
-instance P.HasClientId (CognitoIdentityProvidersSetting s) (TF.Attr s P.Text) where
-    clientId =
-        P.lens (_clientId :: CognitoIdentityProvidersSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _clientId = a } :: CognitoIdentityProvidersSetting s)
-
-instance P.HasProviderName (CognitoIdentityProvidersSetting s) (TF.Attr s P.Text) where
-    providerName =
-        P.lens (_providerName :: CognitoIdentityProvidersSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _providerName = a } :: CognitoIdentityProvidersSetting s)
-
-instance P.HasServerSideTokenCheck (CognitoIdentityProvidersSetting s) (TF.Attr s P.Bool) where
-    serverSideTokenCheck =
-        P.lens (_serverSideTokenCheck :: CognitoIdentityProvidersSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _serverSideTokenCheck = a } :: CognitoIdentityProvidersSetting s)
-
--- | @cognito_options@ nested settings.
-data CognitoOptionsSetting s = CognitoOptionsSetting'
-    { _enabled        :: TF.Attr s P.Bool
-    -- ^ @enabled@ - (Optional)
-    --
-    , _identityPoolId :: TF.Attr s P.Text
-    -- ^ @identity_pool_id@ - (Required)
-    --
-    , _roleArn        :: TF.Attr s P.Text
-    -- ^ @role_arn@ - (Required)
-    --
-    , _userPoolId     :: TF.Attr s P.Text
-    -- ^ @user_pool_id@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @cognito_options@ settings value.
-newCognitoOptionsSetting
-    :: TF.Attr s P.Text -- ^ 'P._roleArn': @role_arn@
-    -> TF.Attr s P.Text -- ^ 'P._identityPoolId': @identity_pool_id@
-    -> TF.Attr s P.Text -- ^ 'P._userPoolId': @user_pool_id@
-    -> CognitoOptionsSetting s
-newCognitoOptionsSetting _roleArn _identityPoolId _userPoolId =
-    CognitoOptionsSetting'
-        { _enabled = TF.value P.False
-        , _identityPoolId = _identityPoolId
-        , _roleArn = _roleArn
-        , _userPoolId = _userPoolId
-        }
-
-instance TF.IsValue  (CognitoOptionsSetting s)
-instance TF.IsObject (CognitoOptionsSetting s) where
-    toObject CognitoOptionsSetting'{..} = P.catMaybes
-        [ TF.assign "enabled" <$> TF.attribute _enabled
-        , TF.assign "identity_pool_id" <$> TF.attribute _identityPoolId
-        , TF.assign "role_arn" <$> TF.attribute _roleArn
-        , TF.assign "user_pool_id" <$> TF.attribute _userPoolId
-        ]
-
-instance TF.IsValid (CognitoOptionsSetting s) where
-    validator = P.mempty
-
-instance P.HasEnabled (CognitoOptionsSetting s) (TF.Attr s P.Bool) where
-    enabled =
-        P.lens (_enabled :: CognitoOptionsSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _enabled = a } :: CognitoOptionsSetting s)
-
-instance P.HasIdentityPoolId (CognitoOptionsSetting s) (TF.Attr s P.Text) where
-    identityPoolId =
-        P.lens (_identityPoolId :: CognitoOptionsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _identityPoolId = a } :: CognitoOptionsSetting s)
-
-instance P.HasRoleArn (CognitoOptionsSetting s) (TF.Attr s P.Text) where
-    roleArn =
-        P.lens (_roleArn :: CognitoOptionsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _roleArn = a } :: CognitoOptionsSetting s)
-
-instance P.HasUserPoolId (CognitoOptionsSetting s) (TF.Attr s P.Text) where
-    userPoolId =
-        P.lens (_userPoolId :: CognitoOptionsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _userPoolId = a } :: CognitoOptionsSetting s)
-
--- | @columns@ nested settings.
-data ColumnsSetting s = ColumnsSetting'
-    { _comment :: TF.Attr s P.Text
-    -- ^ @comment@ - (Optional)
-    --
-    , _name    :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
-    --
-    , _type'   :: TF.Attr s P.Text
-    -- ^ @type@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @columns@ settings value.
-newColumnsSetting
-    :: TF.Attr s P.Text -- ^ 'P._name': @name@
-    -> ColumnsSetting s
-newColumnsSetting _name =
-    ColumnsSetting'
-        { _comment = TF.Nil
-        , _name = _name
-        , _type' = TF.Nil
-        }
-
-instance TF.IsValue  (ColumnsSetting s)
-instance TF.IsObject (ColumnsSetting s) where
-    toObject ColumnsSetting'{..} = P.catMaybes
-        [ TF.assign "comment" <$> TF.attribute _comment
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "type" <$> TF.attribute _type'
-        ]
-
-instance TF.IsValid (ColumnsSetting s) where
-    validator = P.mempty
-
-instance P.HasComment (ColumnsSetting s) (TF.Attr s P.Text) where
-    comment =
-        P.lens (_comment :: ColumnsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _comment = a } :: ColumnsSetting s)
-
-instance P.HasName (ColumnsSetting s) (TF.Attr s P.Text) where
-    name =
-        P.lens (_name :: ColumnsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: ColumnsSetting s)
-
-instance P.HasType' (ColumnsSetting s) (TF.Attr s P.Text) where
-    type' =
-        P.lens (_type' :: ColumnsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a } :: ColumnsSetting s)
-
--- | @storage_descriptor@ nested settings.
-data StorageDescriptorSetting s = StorageDescriptorSetting'
-    { _bucketColumns          :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @bucket_columns@ - (Optional)
-    --
-    , _columns                :: TF.Attr s [TF.Attr s (ColumnsSetting s)]
-    -- ^ @columns@ - (Optional)
-    --
-    , _compressed             :: TF.Attr s P.Bool
-    -- ^ @compressed@ - (Optional)
-    --
-    , _inputFormat            :: TF.Attr s P.Text
-    -- ^ @input_format@ - (Optional)
-    --
-    , _location               :: TF.Attr s P.Text
-    -- ^ @location@ - (Optional)
-    --
-    , _numberOfBuckets        :: TF.Attr s P.Int
-    -- ^ @number_of_buckets@ - (Optional)
-    --
-    , _outputFormat           :: TF.Attr s P.Text
-    -- ^ @output_format@ - (Optional)
-    --
-    , _parameters             :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
-    -- ^ @parameters@ - (Optional)
-    --
-    , _serDeInfo              :: TF.Attr s (SerDeInfoSetting s)
-    -- ^ @ser_de_info@ - (Optional)
-    --
-    , _skewedInfo             :: TF.Attr s (SkewedInfoSetting s)
-    -- ^ @skewed_info@ - (Optional)
-    --
-    , _sortColumns            :: TF.Attr s [TF.Attr s (SortColumnsSetting s)]
-    -- ^ @sort_columns@ - (Optional)
-    --
-    , _storedAsSubDirectories :: TF.Attr s P.Bool
-    -- ^ @stored_as_sub_directories@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @storage_descriptor@ settings value.
-newStorageDescriptorSetting
-    :: StorageDescriptorSetting s
-newStorageDescriptorSetting =
-    StorageDescriptorSetting'
-        { _bucketColumns = TF.Nil
-        , _columns = TF.Nil
-        , _compressed = TF.Nil
-        , _inputFormat = TF.Nil
-        , _location = TF.Nil
-        , _numberOfBuckets = TF.Nil
-        , _outputFormat = TF.Nil
-        , _parameters = TF.Nil
-        , _serDeInfo = TF.Nil
-        , _skewedInfo = TF.Nil
-        , _sortColumns = TF.Nil
-        , _storedAsSubDirectories = TF.Nil
-        }
-
-instance TF.IsValue  (StorageDescriptorSetting s)
-instance TF.IsObject (StorageDescriptorSetting s) where
-    toObject StorageDescriptorSetting'{..} = P.catMaybes
-        [ TF.assign "bucket_columns" <$> TF.attribute _bucketColumns
-        , TF.assign "columns" <$> TF.attribute _columns
-        , TF.assign "compressed" <$> TF.attribute _compressed
-        , TF.assign "input_format" <$> TF.attribute _inputFormat
-        , TF.assign "location" <$> TF.attribute _location
-        , TF.assign "number_of_buckets" <$> TF.attribute _numberOfBuckets
-        , TF.assign "output_format" <$> TF.attribute _outputFormat
-        , TF.assign "parameters" <$> TF.attribute _parameters
-        , TF.assign "ser_de_info" <$> TF.attribute _serDeInfo
-        , TF.assign "skewed_info" <$> TF.attribute _skewedInfo
-        , TF.assign "sort_columns" <$> TF.attribute _sortColumns
-        , TF.assign "stored_as_sub_directories" <$> TF.attribute _storedAsSubDirectories
-        ]
-
-instance TF.IsValid (StorageDescriptorSetting s) where
-    validator = P.mempty
-           P.<> TF.settingsValidator "_serDeInfo"
-                  (_serDeInfo
-                      :: StorageDescriptorSetting s -> TF.Attr s (SerDeInfoSetting s))
-                  TF.validator
-           P.<> TF.settingsValidator "_skewedInfo"
-                  (_skewedInfo
-                      :: StorageDescriptorSetting s -> TF.Attr s (SkewedInfoSetting s))
-                  TF.validator
-
-instance P.HasBucketColumns (StorageDescriptorSetting s) (TF.Attr s [TF.Attr s P.Text]) where
-    bucketColumns =
-        P.lens (_bucketColumns :: StorageDescriptorSetting s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _bucketColumns = a } :: StorageDescriptorSetting s)
-
-instance P.HasColumns (StorageDescriptorSetting s) (TF.Attr s [TF.Attr s (ColumnsSetting s)]) where
-    columns =
-        P.lens (_columns :: StorageDescriptorSetting s -> TF.Attr s [TF.Attr s (ColumnsSetting s)])
-               (\s a -> s { _columns = a } :: StorageDescriptorSetting s)
-
-instance P.HasCompressed (StorageDescriptorSetting s) (TF.Attr s P.Bool) where
-    compressed =
-        P.lens (_compressed :: StorageDescriptorSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _compressed = a } :: StorageDescriptorSetting s)
-
-instance P.HasInputFormat (StorageDescriptorSetting s) (TF.Attr s P.Text) where
-    inputFormat =
-        P.lens (_inputFormat :: StorageDescriptorSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _inputFormat = a } :: StorageDescriptorSetting s)
-
-instance P.HasLocation (StorageDescriptorSetting s) (TF.Attr s P.Text) where
-    location =
-        P.lens (_location :: StorageDescriptorSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _location = a } :: StorageDescriptorSetting s)
-
-instance P.HasNumberOfBuckets (StorageDescriptorSetting s) (TF.Attr s P.Int) where
-    numberOfBuckets =
-        P.lens (_numberOfBuckets :: StorageDescriptorSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _numberOfBuckets = a } :: StorageDescriptorSetting s)
-
-instance P.HasOutputFormat (StorageDescriptorSetting s) (TF.Attr s P.Text) where
-    outputFormat =
-        P.lens (_outputFormat :: StorageDescriptorSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _outputFormat = a } :: StorageDescriptorSetting s)
-
-instance P.HasParameters (StorageDescriptorSetting s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
-    parameters =
-        P.lens (_parameters :: StorageDescriptorSetting s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _parameters = a } :: StorageDescriptorSetting s)
-
-instance P.HasSerDeInfo (StorageDescriptorSetting s) (TF.Attr s (SerDeInfoSetting s)) where
-    serDeInfo =
-        P.lens (_serDeInfo :: StorageDescriptorSetting s -> TF.Attr s (SerDeInfoSetting s))
-               (\s a -> s { _serDeInfo = a } :: StorageDescriptorSetting s)
-
-instance P.HasSkewedInfo (StorageDescriptorSetting s) (TF.Attr s (SkewedInfoSetting s)) where
-    skewedInfo =
-        P.lens (_skewedInfo :: StorageDescriptorSetting s -> TF.Attr s (SkewedInfoSetting s))
-               (\s a -> s { _skewedInfo = a } :: StorageDescriptorSetting s)
-
-instance P.HasSortColumns (StorageDescriptorSetting s) (TF.Attr s [TF.Attr s (SortColumnsSetting s)]) where
-    sortColumns =
-        P.lens (_sortColumns :: StorageDescriptorSetting s -> TF.Attr s [TF.Attr s (SortColumnsSetting s)])
-               (\s a -> s { _sortColumns = a } :: StorageDescriptorSetting s)
-
-instance P.HasStoredAsSubDirectories (StorageDescriptorSetting s) (TF.Attr s P.Bool) where
-    storedAsSubDirectories =
-        P.lens (_storedAsSubDirectories :: StorageDescriptorSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _storedAsSubDirectories = a } :: StorageDescriptorSetting s)
-
--- | @sort_columns@ nested settings.
-data SortColumnsSetting s = SortColumnsSetting'
-    { _column    :: TF.Attr s P.Text
-    -- ^ @column@ - (Required)
-    --
-    , _sortOrder :: TF.Attr s P.Int
-    -- ^ @sort_order@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @sort_columns@ settings value.
-newSortColumnsSetting
-    :: TF.Attr s P.Text -- ^ 'P._column': @column@
-    -> TF.Attr s P.Int -- ^ 'P._sortOrder': @sort_order@
-    -> SortColumnsSetting s
-newSortColumnsSetting _column _sortOrder =
-    SortColumnsSetting'
-        { _column = _column
-        , _sortOrder = _sortOrder
-        }
-
-instance TF.IsValue  (SortColumnsSetting s)
-instance TF.IsObject (SortColumnsSetting s) where
-    toObject SortColumnsSetting'{..} = P.catMaybes
-        [ TF.assign "column" <$> TF.attribute _column
-        , TF.assign "sort_order" <$> TF.attribute _sortOrder
-        ]
-
-instance TF.IsValid (SortColumnsSetting s) where
-    validator = P.mempty
-
-instance P.HasColumn (SortColumnsSetting s) (TF.Attr s P.Text) where
-    column =
-        P.lens (_column :: SortColumnsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _column = a } :: SortColumnsSetting s)
-
-instance P.HasSortOrder (SortColumnsSetting s) (TF.Attr s P.Int) where
-    sortOrder =
-        P.lens (_sortOrder :: SortColumnsSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _sortOrder = a } :: SortColumnsSetting s)
-
--- | @skewed_info@ nested settings.
-data SkewedInfoSetting s = SkewedInfoSetting'
-    { _skewedColumnNames :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @skewed_column_names@ - (Optional)
-    --
-    , _skewedColumnValueLocationMaps :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
-    -- ^ @skewed_column_value_location_maps@ - (Optional)
-    --
-    , _skewedColumnValues :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @skewed_column_values@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @skewed_info@ settings value.
-newSkewedInfoSetting
-    :: SkewedInfoSetting s
-newSkewedInfoSetting =
-    SkewedInfoSetting'
-        { _skewedColumnNames = TF.Nil
-        , _skewedColumnValueLocationMaps = TF.Nil
-        , _skewedColumnValues = TF.Nil
-        }
-
-instance TF.IsValue  (SkewedInfoSetting s)
-instance TF.IsObject (SkewedInfoSetting s) where
-    toObject SkewedInfoSetting'{..} = P.catMaybes
-        [ TF.assign "skewed_column_names" <$> TF.attribute _skewedColumnNames
-        , TF.assign "skewed_column_value_location_maps" <$> TF.attribute _skewedColumnValueLocationMaps
-        , TF.assign "skewed_column_values" <$> TF.attribute _skewedColumnValues
-        ]
-
-instance TF.IsValid (SkewedInfoSetting s) where
-    validator = P.mempty
-
-instance P.HasSkewedColumnNames (SkewedInfoSetting s) (TF.Attr s [TF.Attr s P.Text]) where
-    skewedColumnNames =
-        P.lens (_skewedColumnNames :: SkewedInfoSetting s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _skewedColumnNames = a } :: SkewedInfoSetting s)
-
-instance P.HasSkewedColumnValueLocationMaps (SkewedInfoSetting s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
-    skewedColumnValueLocationMaps =
-        P.lens (_skewedColumnValueLocationMaps :: SkewedInfoSetting s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _skewedColumnValueLocationMaps = a } :: SkewedInfoSetting s)
-
-instance P.HasSkewedColumnValues (SkewedInfoSetting s) (TF.Attr s [TF.Attr s P.Text]) where
-    skewedColumnValues =
-        P.lens (_skewedColumnValues :: SkewedInfoSetting s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _skewedColumnValues = a } :: SkewedInfoSetting s)
-
--- | @ser_de_info@ nested settings.
-data SerDeInfoSetting s = SerDeInfoSetting'
-    { _name                 :: TF.Attr s P.Text
-    -- ^ @name@ - (Optional)
-    --
-    , _parameters           :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
-    -- ^ @parameters@ - (Optional)
-    --
-    , _serializationLibrary :: TF.Attr s P.Text
-    -- ^ @serialization_library@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @ser_de_info@ settings value.
-newSerDeInfoSetting
-    :: SerDeInfoSetting s
-newSerDeInfoSetting =
-    SerDeInfoSetting'
-        { _name = TF.Nil
-        , _parameters = TF.Nil
-        , _serializationLibrary = TF.Nil
-        }
-
-instance TF.IsValue  (SerDeInfoSetting s)
-instance TF.IsObject (SerDeInfoSetting s) where
-    toObject SerDeInfoSetting'{..} = P.catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        , TF.assign "parameters" <$> TF.attribute _parameters
-        , TF.assign "serialization_library" <$> TF.attribute _serializationLibrary
-        ]
-
-instance TF.IsValid (SerDeInfoSetting s) where
-    validator = P.mempty
-
-instance P.HasName (SerDeInfoSetting s) (TF.Attr s P.Text) where
-    name =
-        P.lens (_name :: SerDeInfoSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: SerDeInfoSetting s)
-
-instance P.HasParameters (SerDeInfoSetting s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
-    parameters =
-        P.lens (_parameters :: SerDeInfoSetting s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _parameters = a } :: SerDeInfoSetting s)
-
-instance P.HasSerializationLibrary (SerDeInfoSetting s) (TF.Attr s P.Text) where
-    serializationLibrary =
-        P.lens (_serializationLibrary :: SerDeInfoSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _serializationLibrary = a } :: SerDeInfoSetting s)
-
--- | @command@ nested settings.
-data CommandSetting s = CommandSetting'
-    { _name           :: TF.Attr s P.Text
-    -- ^ @name@ - (Optional)
-    --
-    , _scriptLocation :: TF.Attr s P.Text
-    -- ^ @script_location@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @command@ settings value.
-newCommandSetting
-    :: TF.Attr s P.Text -- ^ 'P._scriptLocation': @script_location@
-    -> CommandSetting s
-newCommandSetting _scriptLocation =
-    CommandSetting'
-        { _name = TF.value "glueetl"
-        , _scriptLocation = _scriptLocation
-        }
-
-instance TF.IsValue  (CommandSetting s)
-instance TF.IsObject (CommandSetting s) where
-    toObject CommandSetting'{..} = P.catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        , TF.assign "script_location" <$> TF.attribute _scriptLocation
-        ]
-
-instance TF.IsValid (CommandSetting s) where
-    validator = P.mempty
-
-instance P.HasName (CommandSetting s) (TF.Attr s P.Text) where
-    name =
-        P.lens (_name :: CommandSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: CommandSetting s)
-
-instance P.HasScriptLocation (CommandSetting s) (TF.Attr s P.Text) where
-    scriptLocation =
-        P.lens (_scriptLocation :: CommandSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _scriptLocation = a } :: CommandSetting s)
-
--- | @compute_environment_order@ nested settings.
-data ComputeEnvironmentOrderSetting s = ComputeEnvironmentOrderSetting'
-    deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @compute_environment_order@ settings value.
-newComputeEnvironmentOrderSetting
-    :: ComputeEnvironmentOrderSetting s
-newComputeEnvironmentOrderSetting =
-    ComputeEnvironmentOrderSetting'
-
-instance TF.IsValue  (ComputeEnvironmentOrderSetting s)
-instance TF.IsObject (ComputeEnvironmentOrderSetting s) where
-    toObject ComputeEnvironmentOrderSetting' = []
-
-instance TF.IsValid (ComputeEnvironmentOrderSetting s) where
-    validator = P.mempty
-
-instance s ~ s' => P.HasComputedComputeEnvironment (TF.Ref s' (ComputeEnvironmentOrderSetting s)) (TF.Attr s P.Text) where
-    computedComputeEnvironment x = TF.compute (TF.refKey x) "compute_environment"
-
-instance s ~ s' => P.HasComputedOrder (TF.Ref s' (ComputeEnvironmentOrderSetting s)) (TF.Attr s P.Int) where
-    computedOrder x = TF.compute (TF.refKey x) "order"
+        P.lens (_type' :: CodebuildProjectSource s -> TF.Attr s P.Text)
+               (\s a -> s { _type' = a } :: CodebuildProjectSource s)

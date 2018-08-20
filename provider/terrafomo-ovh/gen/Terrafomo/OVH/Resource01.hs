@@ -169,7 +169,7 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (CloudNetworkPrivateResource s)) (
 instance s ~ s' => P.HasComputedRegions (TF.Ref s' (CloudNetworkPrivateResource s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedRegions x = TF.compute (TF.refKey x) "regions"
 
-instance s ~ s' => P.HasComputedRegionsStatus (TF.Ref s' (CloudNetworkPrivateResource s)) (TF.Attr s [TF.Attr s (RegionsStatusSetting s)]) where
+instance s ~ s' => P.HasComputedRegionsStatus (TF.Ref s' (CloudNetworkPrivateResource s)) (TF.Attr s [TF.Attr s (CloudNetworkPrivateRegionsStatus s)]) where
     computedRegionsStatus x = TF.compute (TF.refKey x) "regions_status"
 
 instance s ~ s' => P.HasComputedStatus (TF.Ref s' (CloudNetworkPrivateResource s)) (TF.Attr s P.Text) where
@@ -295,7 +295,7 @@ instance s ~ s' => P.HasComputedCidr (TF.Ref s' (CloudNetworkPrivateSubnetResour
 instance s ~ s' => P.HasComputedGatewayIp (TF.Ref s' (CloudNetworkPrivateSubnetResource s)) (TF.Attr s P.Text) where
     computedGatewayIp x = TF.compute (TF.refKey x) "gateway_ip"
 
-instance s ~ s' => P.HasComputedIpPools (TF.Ref s' (CloudNetworkPrivateSubnetResource s)) (TF.Attr s [TF.Attr s (IpPoolsSetting s)]) where
+instance s ~ s' => P.HasComputedIpPools (TF.Ref s' (CloudNetworkPrivateSubnetResource s)) (TF.Attr s [TF.Attr s (CloudNetworkPrivateSubnetIpPools s)]) where
     computedIpPools x = TF.compute (TF.refKey x) "ip_pools"
 
 -- | @ovh_cloud_user@ Resource.
@@ -550,7 +550,7 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (DomainZoneRedirectionResource s))
 -- See the <https://www.terraform.io/docs/providers/ovh/r/iploadbalancing_http_route.html terraform documentation>
 -- for more information.
 data IploadbalancingHttpRouteResource s = IploadbalancingHttpRouteResource'
-    { _action      :: TF.Attr s [TF.Attr s (ActionSetting s)]
+    { _action      :: TF.Attr s [TF.Attr s (IploadbalancingHttpRouteAction s)]
     -- ^ @action@ - (Required)
     --
     , _displayName :: TF.Attr s P.Text
@@ -569,7 +569,7 @@ data IploadbalancingHttpRouteResource s = IploadbalancingHttpRouteResource'
 
 -- | Define a new @ovh_iploadbalancing_http_route@ resource value.
 iploadbalancingHttpRouteResource
-    :: TF.Attr s [TF.Attr s (ActionSetting s)] -- ^ @action@ ('P._action', 'P.action')
+    :: TF.Attr s [TF.Attr s (IploadbalancingHttpRouteAction s)] -- ^ @action@ ('P._action', 'P.action')
     -> TF.Attr s P.Text -- ^ @service_name@ ('P._serviceName', 'P.serviceName')
     -> P.Resource (IploadbalancingHttpRouteResource s)
 iploadbalancingHttpRouteResource _action _serviceName =
@@ -594,9 +594,9 @@ instance TF.IsObject (IploadbalancingHttpRouteResource s) where
 instance TF.IsValid (IploadbalancingHttpRouteResource s) where
     validator = P.mempty
 
-instance P.HasAction (IploadbalancingHttpRouteResource s) (TF.Attr s [TF.Attr s (ActionSetting s)]) where
+instance P.HasAction (IploadbalancingHttpRouteResource s) (TF.Attr s [TF.Attr s (IploadbalancingHttpRouteAction s)]) where
     action =
-        P.lens (_action :: IploadbalancingHttpRouteResource s -> TF.Attr s [TF.Attr s (ActionSetting s)])
+        P.lens (_action :: IploadbalancingHttpRouteResource s -> TF.Attr s [TF.Attr s (IploadbalancingHttpRouteAction s)])
                (\s a -> s { _action = a } :: IploadbalancingHttpRouteResource s)
 
 instance P.HasDisplayName (IploadbalancingHttpRouteResource s) (TF.Attr s P.Text) where
@@ -748,7 +748,7 @@ data IploadbalancingTcpFarmResource s = IploadbalancingTcpFarmResource'
     , _port           :: TF.Attr s P.Int
     -- ^ @port@ - (Optional)
     --
-    , _probe          :: TF.Attr s [TF.Attr s (ProbeSetting s)]
+    , _probe          :: TF.Attr s [TF.Attr s (IploadbalancingTcpFarmProbe s)]
     -- ^ @probe@ - (Optional)
     --
     , _serviceName    :: TF.Attr s P.Text
@@ -813,9 +813,9 @@ instance P.HasPort (IploadbalancingTcpFarmResource s) (TF.Attr s P.Int) where
         P.lens (_port :: IploadbalancingTcpFarmResource s -> TF.Attr s P.Int)
                (\s a -> s { _port = a } :: IploadbalancingTcpFarmResource s)
 
-instance P.HasProbe (IploadbalancingTcpFarmResource s) (TF.Attr s [TF.Attr s (ProbeSetting s)]) where
+instance P.HasProbe (IploadbalancingTcpFarmResource s) (TF.Attr s [TF.Attr s (IploadbalancingTcpFarmProbe s)]) where
     probe =
-        P.lens (_probe :: IploadbalancingTcpFarmResource s -> TF.Attr s [TF.Attr s (ProbeSetting s)])
+        P.lens (_probe :: IploadbalancingTcpFarmResource s -> TF.Attr s [TF.Attr s (IploadbalancingTcpFarmProbe s)])
                (\s a -> s { _probe = a } :: IploadbalancingTcpFarmResource s)
 
 instance P.HasServiceName (IploadbalancingTcpFarmResource s) (TF.Attr s P.Text) where
@@ -1063,7 +1063,7 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (PubliccloudPrivateNetworkResource
 instance s ~ s' => P.HasComputedRegions (TF.Ref s' (PubliccloudPrivateNetworkResource s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedRegions x = TF.compute (TF.refKey x) "regions"
 
-instance s ~ s' => P.HasComputedRegionsStatus (TF.Ref s' (PubliccloudPrivateNetworkResource s)) (TF.Attr s [TF.Attr s (RegionsStatusSetting s)]) where
+instance s ~ s' => P.HasComputedRegionsStatus (TF.Ref s' (PubliccloudPrivateNetworkResource s)) (TF.Attr s [TF.Attr s (PubliccloudPrivateNetworkRegionsStatus s)]) where
     computedRegionsStatus x = TF.compute (TF.refKey x) "regions_status"
 
 instance s ~ s' => P.HasComputedStatus (TF.Ref s' (PubliccloudPrivateNetworkResource s)) (TF.Attr s P.Text) where
@@ -1189,7 +1189,7 @@ instance s ~ s' => P.HasComputedCidr (TF.Ref s' (PubliccloudPrivateNetworkSubnet
 instance s ~ s' => P.HasComputedGatewayIp (TF.Ref s' (PubliccloudPrivateNetworkSubnetResource s)) (TF.Attr s P.Text) where
     computedGatewayIp x = TF.compute (TF.refKey x) "gateway_ip"
 
-instance s ~ s' => P.HasComputedIpPools (TF.Ref s' (PubliccloudPrivateNetworkSubnetResource s)) (TF.Attr s [TF.Attr s (IpPoolsSetting s)]) where
+instance s ~ s' => P.HasComputedIpPools (TF.Ref s' (PubliccloudPrivateNetworkSubnetResource s)) (TF.Attr s [TF.Attr s (PubliccloudPrivateNetworkSubnetIpPools s)]) where
     computedIpPools x = TF.compute (TF.refKey x) "ip_pools"
 
 -- | @ovh_publiccloud_user@ Resource.

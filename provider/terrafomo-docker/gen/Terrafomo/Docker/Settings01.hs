@@ -17,157 +17,161 @@
 --
 module Terrafomo.Docker.Settings01
     (
-    -- ** auth
-      AuthSetting (..)
-    , newAuthSetting
-
-    -- ** bind_options
-    , BindOptionsSetting (..)
-    , newBindOptionsSetting
-
-    -- ** mounts
-    , MountsSetting (..)
-    , newMountsSetting
-
-    -- ** container_spec
-    , ContainerSpecSetting (..)
-    , newContainerSpecSetting
-
-    -- ** task_spec
-    , TaskSpecSetting (..)
-    , newTaskSpecSetting
-
-    -- ** restart_policy
-    , RestartPolicySetting (..)
-    , newRestartPolicySetting
-
-    -- ** resources
-    , ResourcesSetting (..)
-    , newResourcesSetting
-
-    -- ** reservation
-    , ReservationSetting (..)
-    , newReservationSetting
-
-    -- ** generic_resources
-    , GenericResourcesSetting (..)
-    , newGenericResourcesSetting
-
-    -- ** limits
-    , LimitsSetting (..)
-    , newLimitsSetting
-
-    -- ** placement
-    , PlacementSetting (..)
-    , newPlacementSetting
-
-    -- ** platforms
-    , PlatformsSetting (..)
-    , newPlatformsSetting
-
-    -- ** log_driver
-    , LogDriverSetting (..)
-    , newLogDriverSetting
-
-    -- ** healthcheck
-    , HealthcheckSetting (..)
-    , newHealthcheckSetting
-
-    -- ** dns_config
-    , DnsConfigSetting (..)
-    , newDnsConfigSetting
-
-    -- ** secrets
-    , SecretsSetting (..)
-    , newSecretsSetting
-
-    -- ** privileges
-    , PrivilegesSetting (..)
-    , newPrivilegesSetting
-
-    -- ** se_linux_context
-    , SeLinuxContextSetting (..)
-    , newSeLinuxContextSetting
-
-    -- ** credential_spec
-    , CredentialSpecSetting (..)
-    , newCredentialSpecSetting
-
-    -- ** hosts
-    , HostsSetting (..)
-    , newHostsSetting
-
-    -- ** configs
-    , ConfigsSetting (..)
-    , newConfigsSetting
-
-    -- ** volume_options
-    , VolumeOptionsSetting (..)
-    , newVolumeOptionsSetting
-
-    -- ** tmpfs_options
-    , TmpfsOptionsSetting (..)
-    , newTmpfsOptionsSetting
-
     -- ** capabilities
-    , CapabilitiesSetting (..)
-    , newCapabilitiesSetting
-
-    -- ** converge_config
-    , ConvergeConfigSetting (..)
-    , newConvergeConfigSetting
+      ContainerCapabilities (..)
+    , newContainerCapabilities
 
     -- ** devices
-    , DevicesSetting (..)
-    , newDevicesSetting
-
-    -- ** endpoint_spec
-    , EndpointSpecSetting (..)
-    , newEndpointSpecSetting
-
-    -- ** ports
-    , PortsSetting (..)
-    , newPortsSetting
+    , ContainerDevices (..)
+    , newContainerDevices
 
     -- ** host
-    , HostSetting (..)
-    , newHostSetting
+    , ContainerHost (..)
+    , newContainerHost
 
-    -- ** ipam_config
-    , IpamConfigSetting (..)
-    , newIpamConfigSetting
-
-    -- ** mode
-    , ModeSetting (..)
-    , newModeSetting
-
-    -- ** replicated
-    , ReplicatedSetting (..)
-    , newReplicatedSetting
-
-    -- ** registry_auth
-    , RegistryAuthSetting (..)
-    , newRegistryAuthSetting
-
-    -- ** rollback_config
-    , RollbackConfigSetting (..)
-    , newRollbackConfigSetting
+    -- ** ports
+    , ContainerPorts (..)
+    , newContainerPorts
 
     -- ** ulimit
-    , UlimitSetting (..)
-    , newUlimitSetting
-
-    -- ** update_config
-    , UpdateConfigSetting (..)
-    , newUpdateConfigSetting
+    , ContainerUlimit (..)
+    , newContainerUlimit
 
     -- ** upload
-    , UploadSetting (..)
-    , newUploadSetting
+    , ContainerUpload (..)
+    , newContainerUpload
 
     -- ** volumes
-    , VolumesSetting (..)
-    , newVolumesSetting
+    , ContainerVolumes (..)
+    , newContainerVolumes
+
+    -- ** ipam_config
+    , NetworkIpamConfig (..)
+    , newNetworkIpamConfig
+
+    -- ** registry_auth
+    , RegistryAuth (..)
+    , newRegistryAuth
+
+    -- ** auth
+    , ServiceAuth (..)
+    , newServiceAuth
+
+    -- ** bind_options
+    , ServiceBindOptions (..)
+    , newServiceBindOptions
+
+    -- ** mounts
+    , ServiceMounts (..)
+    , newServiceMounts
+
+    -- ** container_spec
+    , ServiceContainerSpec (..)
+    , newServiceContainerSpec
+
+    -- ** task_spec
+    , ServiceTaskSpec (..)
+    , newServiceTaskSpec
+
+    -- ** restart_policy
+    , ServiceRestartPolicy (..)
+    , newServiceRestartPolicy
+
+    -- ** resources
+    , ServiceResources (..)
+    , newServiceResources
+
+    -- ** reservation
+    , ServiceReservation (..)
+    , newServiceReservation
+
+    -- ** generic_resources
+    , ServiceGenericResources (..)
+    , newServiceGenericResources
+
+    -- ** limits
+    , ServiceLimits (..)
+    , newServiceLimits
+
+    -- ** placement
+    , ServicePlacement (..)
+    , newServicePlacement
+
+    -- ** platforms
+    , ServicePlatforms (..)
+    , newServicePlatforms
+
+    -- ** log_driver
+    , ServiceLogDriver (..)
+    , newServiceLogDriver
+
+    -- ** healthcheck
+    , ServiceHealthcheck (..)
+    , newServiceHealthcheck
+
+    -- ** dns_config
+    , ServiceDnsConfig (..)
+    , newServiceDnsConfig
+
+    -- ** secrets
+    , ServiceSecrets (..)
+    , newServiceSecrets
+
+    -- ** privileges
+    , ServicePrivileges (..)
+    , newServicePrivileges
+
+    -- ** se_linux_context
+    , ServiceSeLinuxContext (..)
+    , newServiceSeLinuxContext
+
+    -- ** credential_spec
+    , ServiceCredentialSpec (..)
+    , newServiceCredentialSpec
+
+    -- ** hosts
+    , ServiceHosts (..)
+    , newServiceHosts
+
+    -- ** configs
+    , ServiceConfigs (..)
+    , newServiceConfigs
+
+    -- ** volume_options
+    , ServiceVolumeOptions (..)
+    , newServiceVolumeOptions
+
+    -- ** tmpfs_options
+    , ServiceTmpfsOptions (..)
+    , newServiceTmpfsOptions
+
+    -- ** converge_config
+    , ServiceConvergeConfig (..)
+    , newServiceConvergeConfig
+
+    -- ** endpoint_spec
+    , ServiceEndpointSpec (..)
+    , newServiceEndpointSpec
+
+    -- ** ports
+    , ServicePorts (..)
+    , newServicePorts
+
+    -- ** mode
+    , ServiceMode (..)
+    , newServiceMode
+
+    -- ** replicated
+    , ServiceReplicated (..)
+    , newServiceReplicated
+
+    -- ** rollback_config
+    , ServiceRollbackConfig (..)
+    , newServiceRollbackConfig
+
+    -- ** update_config
+    , ServiceUpdateConfig (..)
+    , newServiceUpdateConfig
 
     ) where
 
@@ -192,1573 +196,8 @@ import qualified Terrafomo.HCL          as TF
 import qualified Terrafomo.Name         as TF
 import qualified Terrafomo.Validator    as TF
 
--- | @auth@ nested settings.
-data AuthSetting s = AuthSetting'
-    { _password      :: TF.Attr s P.Text
-    -- ^ @password@ - (Optional, Forces New)
-    --
-    , _serverAddress :: TF.Attr s P.Text
-    -- ^ @server_address@ - (Required, Forces New)
-    --
-    , _username      :: TF.Attr s P.Text
-    -- ^ @username@ - (Optional, Forces New)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @auth@ settings value.
-newAuthSetting
-    :: TF.Attr s P.Text -- ^ 'P._serverAddress': @server_address@
-    -> AuthSetting s
-newAuthSetting _serverAddress =
-    AuthSetting'
-        { _password = TF.Nil
-        , _serverAddress = _serverAddress
-        , _username = TF.Nil
-        }
-
-instance TF.IsValue  (AuthSetting s)
-instance TF.IsObject (AuthSetting s) where
-    toObject AuthSetting'{..} = P.catMaybes
-        [ TF.assign "password" <$> TF.attribute _password
-        , TF.assign "server_address" <$> TF.attribute _serverAddress
-        , TF.assign "username" <$> TF.attribute _username
-        ]
-
-instance TF.IsValid (AuthSetting s) where
-    validator = P.mempty
-
-instance P.HasPassword (AuthSetting s) (TF.Attr s P.Text) where
-    password =
-        P.lens (_password :: AuthSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _password = a } :: AuthSetting s)
-
-instance P.HasServerAddress (AuthSetting s) (TF.Attr s P.Text) where
-    serverAddress =
-        P.lens (_serverAddress :: AuthSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _serverAddress = a } :: AuthSetting s)
-
-instance P.HasUsername (AuthSetting s) (TF.Attr s P.Text) where
-    username =
-        P.lens (_username :: AuthSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _username = a } :: AuthSetting s)
-
--- | @bind_options@ nested settings.
-data BindOptionsSetting s = BindOptionsSetting'
-    { _propagation :: TF.Attr s P.Text
-    -- ^ @propagation@ - (Optional)
-    -- A propagation mode with the value
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @bind_options@ settings value.
-newBindOptionsSetting
-    :: BindOptionsSetting s
-newBindOptionsSetting =
-    BindOptionsSetting'
-        { _propagation = TF.Nil
-        }
-
-instance TF.IsValue  (BindOptionsSetting s)
-instance TF.IsObject (BindOptionsSetting s) where
-    toObject BindOptionsSetting'{..} = P.catMaybes
-        [ TF.assign "propagation" <$> TF.attribute _propagation
-        ]
-
-instance TF.IsValid (BindOptionsSetting s) where
-    validator = P.mempty
-
-instance P.HasPropagation (BindOptionsSetting s) (TF.Attr s P.Text) where
-    propagation =
-        P.lens (_propagation :: BindOptionsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _propagation = a } :: BindOptionsSetting s)
-
--- | @mounts@ nested settings.
-data MountsSetting s = MountsSetting'
-    { _bindOptions   :: TF.Attr s (BindOptionsSetting s)
-    -- ^ @bind_options@ - (Optional)
-    -- Optional configuration for the bind type
-    --
-    , _readOnly      :: TF.Attr s P.Bool
-    -- ^ @read_only@ - (Optional)
-    -- Whether the mount should be read-only
-    --
-    , _source        :: TF.Attr s P.Text
-    -- ^ @source@ - (Required)
-    -- Mount source (e.g. a volume name, a host path)
-    --
-    , _target        :: TF.Attr s P.Text
-    -- ^ @target@ - (Required)
-    -- Container path
-    --
-    , _tmpfsOptions  :: TF.Attr s (TmpfsOptionsSetting s)
-    -- ^ @tmpfs_options@ - (Optional)
-    -- Optional configuration for the tmpfs type
-    --
-    , _type'         :: TF.Attr s P.Text
-    -- ^ @type@ - (Required)
-    -- The mount type
-    --
-    , _volumeOptions :: TF.Attr s (VolumeOptionsSetting s)
-    -- ^ @volume_options@ - (Optional)
-    -- Optional configuration for the volume type
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @mounts@ settings value.
-newMountsSetting
-    :: TF.Attr s P.Text -- ^ 'P._source': @source@
-    -> TF.Attr s P.Text -- ^ 'P._target': @target@
-    -> TF.Attr s P.Text -- ^ 'P._type'': @type@
-    -> MountsSetting s
-newMountsSetting _source _target _type' =
-    MountsSetting'
-        { _bindOptions = TF.Nil
-        , _readOnly = TF.Nil
-        , _source = _source
-        , _target = _target
-        , _tmpfsOptions = TF.Nil
-        , _type' = _type'
-        , _volumeOptions = TF.Nil
-        }
-
-instance TF.IsValue  (MountsSetting s)
-instance TF.IsObject (MountsSetting s) where
-    toObject MountsSetting'{..} = P.catMaybes
-        [ TF.assign "bind_options" <$> TF.attribute _bindOptions
-        , TF.assign "read_only" <$> TF.attribute _readOnly
-        , TF.assign "source" <$> TF.attribute _source
-        , TF.assign "target" <$> TF.attribute _target
-        , TF.assign "tmpfs_options" <$> TF.attribute _tmpfsOptions
-        , TF.assign "type" <$> TF.attribute _type'
-        , TF.assign "volume_options" <$> TF.attribute _volumeOptions
-        ]
-
-instance TF.IsValid (MountsSetting s) where
-    validator = P.mempty
-           P.<> TF.settingsValidator "_bindOptions"
-                  (_bindOptions
-                      :: MountsSetting s -> TF.Attr s (BindOptionsSetting s))
-                  TF.validator
-           P.<> TF.settingsValidator "_tmpfsOptions"
-                  (_tmpfsOptions
-                      :: MountsSetting s -> TF.Attr s (TmpfsOptionsSetting s))
-                  TF.validator
-           P.<> TF.settingsValidator "_volumeOptions"
-                  (_volumeOptions
-                      :: MountsSetting s -> TF.Attr s (VolumeOptionsSetting s))
-                  TF.validator
-
-instance P.HasBindOptions (MountsSetting s) (TF.Attr s (BindOptionsSetting s)) where
-    bindOptions =
-        P.lens (_bindOptions :: MountsSetting s -> TF.Attr s (BindOptionsSetting s))
-               (\s a -> s { _bindOptions = a } :: MountsSetting s)
-
-instance P.HasReadOnly (MountsSetting s) (TF.Attr s P.Bool) where
-    readOnly =
-        P.lens (_readOnly :: MountsSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _readOnly = a } :: MountsSetting s)
-
-instance P.HasSource (MountsSetting s) (TF.Attr s P.Text) where
-    source =
-        P.lens (_source :: MountsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _source = a } :: MountsSetting s)
-
-instance P.HasTarget (MountsSetting s) (TF.Attr s P.Text) where
-    target =
-        P.lens (_target :: MountsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _target = a } :: MountsSetting s)
-
-instance P.HasTmpfsOptions (MountsSetting s) (TF.Attr s (TmpfsOptionsSetting s)) where
-    tmpfsOptions =
-        P.lens (_tmpfsOptions :: MountsSetting s -> TF.Attr s (TmpfsOptionsSetting s))
-               (\s a -> s { _tmpfsOptions = a } :: MountsSetting s)
-
-instance P.HasType' (MountsSetting s) (TF.Attr s P.Text) where
-    type' =
-        P.lens (_type' :: MountsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a } :: MountsSetting s)
-
-instance P.HasVolumeOptions (MountsSetting s) (TF.Attr s (VolumeOptionsSetting s)) where
-    volumeOptions =
-        P.lens (_volumeOptions :: MountsSetting s -> TF.Attr s (VolumeOptionsSetting s))
-               (\s a -> s { _volumeOptions = a } :: MountsSetting s)
-
--- | @container_spec@ nested settings.
-data ContainerSpecSetting s = ContainerSpecSetting'
-    { _args            :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @args@ - (Optional)
-    -- Arguments to the command
-    --
-    , _command         :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @command@ - (Optional)
-    -- The command to be run in the image
-    --
-    , _configs         :: TF.Attr s [TF.Attr s (ConfigsSetting s)]
-    -- ^ @configs@ - (Optional)
-    -- References to zero or more configs that will be exposed to the service
-    --
-    , _dir             :: TF.Attr s P.Text
-    -- ^ @dir@ - (Optional)
-    -- The working directory for commands to run in
-    --
-    , _dnsConfig       :: TF.Attr s (DnsConfigSetting s)
-    -- ^ @dns_config@ - (Optional)
-    -- Specification for DNS related configurations in resolver configuration file
-    -- (resolv.conf)
-    --
-    , _env             :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
-    -- ^ @env@ - (Optional)
-    -- A list of environment variables in the form VAR="value"
-    --
-    , _groups          :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @groups@ - (Optional)
-    -- A list of additional groups that the container process will run as
-    --
-    , _healthcheck     :: TF.Attr s (HealthcheckSetting s)
-    -- ^ @healthcheck@ - (Optional)
-    -- A test to perform to check that the container is healthy
-    --
-    , _hostname        :: TF.Attr s P.Text
-    -- ^ @hostname@ - (Optional)
-    -- The hostname to use for the container, as a valid RFC 1123 hostname
-    --
-    , _hosts           :: TF.Attr s [TF.Attr s (HostsSetting s)]
-    -- ^ @hosts@ - (Optional, Forces New)
-    -- A list of hostname/IP mappings to add to the container's hosts file.
-    --
-    , _image           :: TF.Attr s P.Text
-    -- ^ @image@ - (Required)
-    -- The image name to use for the containers of the service
-    --
-    , _isolation       :: TF.Attr s P.Text
-    -- ^ @isolation@ - (Optional)
-    -- Isolation technology of the containers running the service. (Windows only)
-    --
-    , _labels          :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
-    -- ^ @labels@ - (Optional)
-    -- User-defined key/value metadata
-    --
-    , _mounts          :: TF.Attr s [TF.Attr s (MountsSetting s)]
-    -- ^ @mounts@ - (Optional)
-    -- Specification for mounts to be added to containers created as part of the
-    -- service
-    --
-    , _privileges      :: TF.Attr s (PrivilegesSetting s)
-    -- ^ @privileges@ - (Optional)
-    -- Security options for the container
-    --
-    , _readOnly        :: TF.Attr s P.Bool
-    -- ^ @read_only@ - (Optional)
-    -- Mount the container's root filesystem as read only
-    --
-    , _secrets         :: TF.Attr s [TF.Attr s (SecretsSetting s)]
-    -- ^ @secrets@ - (Optional)
-    -- References to zero or more secrets that will be exposed to the service
-    --
-    , _stopGracePeriod :: TF.Attr s P.Text
-    -- ^ @stop_grace_period@ - (Optional)
-    -- Amount of time to wait for the container to terminate before forcefully
-    -- removing it (ms|s|m|h)
-    --
-    , _stopSignal      :: TF.Attr s P.Text
-    -- ^ @stop_signal@ - (Optional)
-    -- Signal to stop the container
-    --
-    , _user            :: TF.Attr s P.Text
-    -- ^ @user@ - (Optional)
-    -- The user inside the container
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @container_spec@ settings value.
-newContainerSpecSetting
-    :: TF.Attr s P.Text -- ^ 'P._image': @image@
-    -> ContainerSpecSetting s
-newContainerSpecSetting _image =
-    ContainerSpecSetting'
-        { _args = TF.Nil
-        , _command = TF.Nil
-        , _configs = TF.Nil
-        , _dir = TF.Nil
-        , _dnsConfig = TF.Nil
-        , _env = TF.Nil
-        , _groups = TF.Nil
-        , _healthcheck = TF.Nil
-        , _hostname = TF.Nil
-        , _hosts = TF.Nil
-        , _image = _image
-        , _isolation = TF.value "default"
-        , _labels = TF.Nil
-        , _mounts = TF.Nil
-        , _privileges = TF.Nil
-        , _readOnly = TF.Nil
-        , _secrets = TF.Nil
-        , _stopGracePeriod = TF.Nil
-        , _stopSignal = TF.Nil
-        , _user = TF.Nil
-        }
-
-instance TF.IsValue  (ContainerSpecSetting s)
-instance TF.IsObject (ContainerSpecSetting s) where
-    toObject ContainerSpecSetting'{..} = P.catMaybes
-        [ TF.assign "args" <$> TF.attribute _args
-        , TF.assign "command" <$> TF.attribute _command
-        , TF.assign "configs" <$> TF.attribute _configs
-        , TF.assign "dir" <$> TF.attribute _dir
-        , TF.assign "dns_config" <$> TF.attribute _dnsConfig
-        , TF.assign "env" <$> TF.attribute _env
-        , TF.assign "groups" <$> TF.attribute _groups
-        , TF.assign "healthcheck" <$> TF.attribute _healthcheck
-        , TF.assign "hostname" <$> TF.attribute _hostname
-        , TF.assign "hosts" <$> TF.attribute _hosts
-        , TF.assign "image" <$> TF.attribute _image
-        , TF.assign "isolation" <$> TF.attribute _isolation
-        , TF.assign "labels" <$> TF.attribute _labels
-        , TF.assign "mounts" <$> TF.attribute _mounts
-        , TF.assign "privileges" <$> TF.attribute _privileges
-        , TF.assign "read_only" <$> TF.attribute _readOnly
-        , TF.assign "secrets" <$> TF.attribute _secrets
-        , TF.assign "stop_grace_period" <$> TF.attribute _stopGracePeriod
-        , TF.assign "stop_signal" <$> TF.attribute _stopSignal
-        , TF.assign "user" <$> TF.attribute _user
-        ]
-
-instance TF.IsValid (ContainerSpecSetting s) where
-    validator = P.mempty
-           P.<> TF.settingsValidator "_dnsConfig"
-                  (_dnsConfig
-                      :: ContainerSpecSetting s -> TF.Attr s (DnsConfigSetting s))
-                  TF.validator
-           P.<> TF.settingsValidator "_healthcheck"
-                  (_healthcheck
-                      :: ContainerSpecSetting s -> TF.Attr s (HealthcheckSetting s))
-                  TF.validator
-           P.<> TF.settingsValidator "_privileges"
-                  (_privileges
-                      :: ContainerSpecSetting s -> TF.Attr s (PrivilegesSetting s))
-                  TF.validator
-
-instance P.HasArgs (ContainerSpecSetting s) (TF.Attr s [TF.Attr s P.Text]) where
-    args =
-        P.lens (_args :: ContainerSpecSetting s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _args = a } :: ContainerSpecSetting s)
-
-instance P.HasCommand (ContainerSpecSetting s) (TF.Attr s [TF.Attr s P.Text]) where
-    command =
-        P.lens (_command :: ContainerSpecSetting s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _command = a } :: ContainerSpecSetting s)
-
-instance P.HasConfigs (ContainerSpecSetting s) (TF.Attr s [TF.Attr s (ConfigsSetting s)]) where
-    configs =
-        P.lens (_configs :: ContainerSpecSetting s -> TF.Attr s [TF.Attr s (ConfigsSetting s)])
-               (\s a -> s { _configs = a } :: ContainerSpecSetting s)
-
-instance P.HasDir (ContainerSpecSetting s) (TF.Attr s P.Text) where
-    dir =
-        P.lens (_dir :: ContainerSpecSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _dir = a } :: ContainerSpecSetting s)
-
-instance P.HasDnsConfig (ContainerSpecSetting s) (TF.Attr s (DnsConfigSetting s)) where
-    dnsConfig =
-        P.lens (_dnsConfig :: ContainerSpecSetting s -> TF.Attr s (DnsConfigSetting s))
-               (\s a -> s { _dnsConfig = a } :: ContainerSpecSetting s)
-
-instance P.HasEnv (ContainerSpecSetting s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
-    env =
-        P.lens (_env :: ContainerSpecSetting s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _env = a } :: ContainerSpecSetting s)
-
-instance P.HasGroups (ContainerSpecSetting s) (TF.Attr s [TF.Attr s P.Text]) where
-    groups =
-        P.lens (_groups :: ContainerSpecSetting s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _groups = a } :: ContainerSpecSetting s)
-
-instance P.HasHealthcheck (ContainerSpecSetting s) (TF.Attr s (HealthcheckSetting s)) where
-    healthcheck =
-        P.lens (_healthcheck :: ContainerSpecSetting s -> TF.Attr s (HealthcheckSetting s))
-               (\s a -> s { _healthcheck = a } :: ContainerSpecSetting s)
-
-instance P.HasHostname (ContainerSpecSetting s) (TF.Attr s P.Text) where
-    hostname =
-        P.lens (_hostname :: ContainerSpecSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _hostname = a } :: ContainerSpecSetting s)
-
-instance P.HasHosts (ContainerSpecSetting s) (TF.Attr s [TF.Attr s (HostsSetting s)]) where
-    hosts =
-        P.lens (_hosts :: ContainerSpecSetting s -> TF.Attr s [TF.Attr s (HostsSetting s)])
-               (\s a -> s { _hosts = a } :: ContainerSpecSetting s)
-
-instance P.HasImage (ContainerSpecSetting s) (TF.Attr s P.Text) where
-    image =
-        P.lens (_image :: ContainerSpecSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _image = a } :: ContainerSpecSetting s)
-
-instance P.HasIsolation (ContainerSpecSetting s) (TF.Attr s P.Text) where
-    isolation =
-        P.lens (_isolation :: ContainerSpecSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _isolation = a } :: ContainerSpecSetting s)
-
-instance P.HasLabels (ContainerSpecSetting s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
-    labels =
-        P.lens (_labels :: ContainerSpecSetting s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _labels = a } :: ContainerSpecSetting s)
-
-instance P.HasMounts (ContainerSpecSetting s) (TF.Attr s [TF.Attr s (MountsSetting s)]) where
-    mounts =
-        P.lens (_mounts :: ContainerSpecSetting s -> TF.Attr s [TF.Attr s (MountsSetting s)])
-               (\s a -> s { _mounts = a } :: ContainerSpecSetting s)
-
-instance P.HasPrivileges (ContainerSpecSetting s) (TF.Attr s (PrivilegesSetting s)) where
-    privileges =
-        P.lens (_privileges :: ContainerSpecSetting s -> TF.Attr s (PrivilegesSetting s))
-               (\s a -> s { _privileges = a } :: ContainerSpecSetting s)
-
-instance P.HasReadOnly (ContainerSpecSetting s) (TF.Attr s P.Bool) where
-    readOnly =
-        P.lens (_readOnly :: ContainerSpecSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _readOnly = a } :: ContainerSpecSetting s)
-
-instance P.HasSecrets (ContainerSpecSetting s) (TF.Attr s [TF.Attr s (SecretsSetting s)]) where
-    secrets =
-        P.lens (_secrets :: ContainerSpecSetting s -> TF.Attr s [TF.Attr s (SecretsSetting s)])
-               (\s a -> s { _secrets = a } :: ContainerSpecSetting s)
-
-instance P.HasStopGracePeriod (ContainerSpecSetting s) (TF.Attr s P.Text) where
-    stopGracePeriod =
-        P.lens (_stopGracePeriod :: ContainerSpecSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _stopGracePeriod = a } :: ContainerSpecSetting s)
-
-instance P.HasStopSignal (ContainerSpecSetting s) (TF.Attr s P.Text) where
-    stopSignal =
-        P.lens (_stopSignal :: ContainerSpecSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _stopSignal = a } :: ContainerSpecSetting s)
-
-instance P.HasUser (ContainerSpecSetting s) (TF.Attr s P.Text) where
-    user =
-        P.lens (_user :: ContainerSpecSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _user = a } :: ContainerSpecSetting s)
-
-instance s ~ s' => P.HasComputedDnsConfig (TF.Ref s' (ContainerSpecSetting s)) (TF.Attr s (DnsConfigSetting s)) where
-    computedDnsConfig x = TF.compute (TF.refKey x) "dns_config"
-
-instance s ~ s' => P.HasComputedHealthcheck (TF.Ref s' (ContainerSpecSetting s)) (TF.Attr s (HealthcheckSetting s)) where
-    computedHealthcheck x = TF.compute (TF.refKey x) "healthcheck"
-
-instance s ~ s' => P.HasComputedStopGracePeriod (TF.Ref s' (ContainerSpecSetting s)) (TF.Attr s P.Text) where
-    computedStopGracePeriod x = TF.compute (TF.refKey x) "stop_grace_period"
-
--- | @task_spec@ nested settings.
-data TaskSpecSetting s = TaskSpecSetting'
-    { _containerSpec :: TF.Attr s (ContainerSpecSetting s)
-    -- ^ @container_spec@ - (Required)
-    -- The spec for each container
-    --
-    , _forceUpdate :: TF.Attr s P.Int
-    -- ^ @force_update@ - (Optional)
-    -- A counter that triggers an update even if no relevant parameters have been
-    -- changed. See
-    -- https://github.com/docker/swarmkit/blob/master/api/specs.proto#L126
-    --
-    , _logDriver :: TF.Attr s (LogDriverSetting s)
-    -- ^ @log_driver@ - (Optional)
-    -- Specifies the log driver to use for tasks created from this spec. If not
-    -- present, the default one for the swarm will be used, finally falling back to
-    -- the engine default if not specified
-    --
-    , _networks :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @networks@ - (Optional)
-    -- Ids of the networks in which the  container will be put in.
-    --
-    , _placement :: TF.Attr s (PlacementSetting s)
-    -- ^ @placement@ - (Optional)
-    -- The placement preferences
-    --
-    , _resources :: TF.Attr s (ResourcesSetting s)
-    -- ^ @resources@ - (Optional)
-    -- Resource requirements which apply to each individual container created as
-    -- part of the service
-    --
-    , _restartPolicy :: TF.Attr s (P.Map P.Text (TF.Attr s (RestartPolicySetting s)))
-    -- ^ @restart_policy@ - (Optional)
-    -- Specification for the restart policy which applies to containers created as
-    -- part of this service.
-    --
-    , _runtime :: TF.Attr s P.Text
-    -- ^ @runtime@ - (Optional)
-    -- Runtime is the type of runtime specified for the task executor. See
-    -- https://github.com/moby/moby/blob/master/api/types/swarm/runtime.go
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @task_spec@ settings value.
-newTaskSpecSetting
-    :: TF.Attr s (ContainerSpecSetting s) -- ^ 'P._containerSpec': @container_spec@
-    -> TaskSpecSetting s
-newTaskSpecSetting _containerSpec =
-    TaskSpecSetting'
-        { _containerSpec = _containerSpec
-        , _forceUpdate = TF.Nil
-        , _logDriver = TF.Nil
-        , _networks = TF.Nil
-        , _placement = TF.Nil
-        , _resources = TF.Nil
-        , _restartPolicy = TF.Nil
-        , _runtime = TF.Nil
-        }
-
-instance TF.IsValue  (TaskSpecSetting s)
-instance TF.IsObject (TaskSpecSetting s) where
-    toObject TaskSpecSetting'{..} = P.catMaybes
-        [ TF.assign "container_spec" <$> TF.attribute _containerSpec
-        , TF.assign "force_update" <$> TF.attribute _forceUpdate
-        , TF.assign "log_driver" <$> TF.attribute _logDriver
-        , TF.assign "networks" <$> TF.attribute _networks
-        , TF.assign "placement" <$> TF.attribute _placement
-        , TF.assign "resources" <$> TF.attribute _resources
-        , TF.assign "restart_policy" <$> TF.attribute _restartPolicy
-        , TF.assign "runtime" <$> TF.attribute _runtime
-        ]
-
-instance TF.IsValid (TaskSpecSetting s) where
-    validator = P.mempty
-           P.<> TF.settingsValidator "_containerSpec"
-                  (_containerSpec
-                      :: TaskSpecSetting s -> TF.Attr s (ContainerSpecSetting s))
-                  TF.validator
-           P.<> TF.settingsValidator "_logDriver"
-                  (_logDriver
-                      :: TaskSpecSetting s -> TF.Attr s (LogDriverSetting s))
-                  TF.validator
-           P.<> TF.settingsValidator "_placement"
-                  (_placement
-                      :: TaskSpecSetting s -> TF.Attr s (PlacementSetting s))
-                  TF.validator
-           P.<> TF.settingsValidator "_resources"
-                  (_resources
-                      :: TaskSpecSetting s -> TF.Attr s (ResourcesSetting s))
-                  TF.validator
-
-instance P.HasContainerSpec (TaskSpecSetting s) (TF.Attr s (ContainerSpecSetting s)) where
-    containerSpec =
-        P.lens (_containerSpec :: TaskSpecSetting s -> TF.Attr s (ContainerSpecSetting s))
-               (\s a -> s { _containerSpec = a } :: TaskSpecSetting s)
-
-instance P.HasForceUpdate (TaskSpecSetting s) (TF.Attr s P.Int) where
-    forceUpdate =
-        P.lens (_forceUpdate :: TaskSpecSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _forceUpdate = a } :: TaskSpecSetting s)
-
-instance P.HasLogDriver (TaskSpecSetting s) (TF.Attr s (LogDriverSetting s)) where
-    logDriver =
-        P.lens (_logDriver :: TaskSpecSetting s -> TF.Attr s (LogDriverSetting s))
-               (\s a -> s { _logDriver = a } :: TaskSpecSetting s)
-
-instance P.HasNetworks (TaskSpecSetting s) (TF.Attr s [TF.Attr s P.Text]) where
-    networks =
-        P.lens (_networks :: TaskSpecSetting s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _networks = a } :: TaskSpecSetting s)
-
-instance P.HasPlacement (TaskSpecSetting s) (TF.Attr s (PlacementSetting s)) where
-    placement =
-        P.lens (_placement :: TaskSpecSetting s -> TF.Attr s (PlacementSetting s))
-               (\s a -> s { _placement = a } :: TaskSpecSetting s)
-
-instance P.HasResources (TaskSpecSetting s) (TF.Attr s (ResourcesSetting s)) where
-    resources =
-        P.lens (_resources :: TaskSpecSetting s -> TF.Attr s (ResourcesSetting s))
-               (\s a -> s { _resources = a } :: TaskSpecSetting s)
-
-instance P.HasRestartPolicy (TaskSpecSetting s) (TF.Attr s (P.Map P.Text (TF.Attr s (RestartPolicySetting s)))) where
-    restartPolicy =
-        P.lens (_restartPolicy :: TaskSpecSetting s -> TF.Attr s (P.Map P.Text (TF.Attr s (RestartPolicySetting s))))
-               (\s a -> s { _restartPolicy = a } :: TaskSpecSetting s)
-
-instance P.HasRuntime (TaskSpecSetting s) (TF.Attr s P.Text) where
-    runtime =
-        P.lens (_runtime :: TaskSpecSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _runtime = a } :: TaskSpecSetting s)
-
-instance s ~ s' => P.HasComputedForceUpdate (TF.Ref s' (TaskSpecSetting s)) (TF.Attr s P.Int) where
-    computedForceUpdate x = TF.compute (TF.refKey x) "force_update"
-
-instance s ~ s' => P.HasComputedPlacement (TF.Ref s' (TaskSpecSetting s)) (TF.Attr s (PlacementSetting s)) where
-    computedPlacement x = TF.compute (TF.refKey x) "placement"
-
-instance s ~ s' => P.HasComputedResources (TF.Ref s' (TaskSpecSetting s)) (TF.Attr s (ResourcesSetting s)) where
-    computedResources x = TF.compute (TF.refKey x) "resources"
-
-instance s ~ s' => P.HasComputedRestartPolicy (TF.Ref s' (TaskSpecSetting s)) (TF.Attr s (P.Map P.Text (TF.Attr s (RestartPolicySetting s)))) where
-    computedRestartPolicy x = TF.compute (TF.refKey x) "restart_policy"
-
-instance s ~ s' => P.HasComputedRuntime (TF.Ref s' (TaskSpecSetting s)) (TF.Attr s P.Text) where
-    computedRuntime x = TF.compute (TF.refKey x) "runtime"
-
--- | @restart_policy@ nested settings.
-data RestartPolicySetting s = RestartPolicySetting'
-    { _condition   :: TF.Attr s P.Text
-    -- ^ @condition@ - (Optional)
-    -- Condition for restart
-    --
-    , _delay       :: TF.Attr s P.Text
-    -- ^ @delay@ - (Optional)
-    -- Delay between restart attempts (ms|s|m|h)
-    --
-    , _maxAttempts :: TF.Attr s P.Int
-    -- ^ @max_attempts@ - (Optional)
-    -- Maximum attempts to restart a given container before giving up (default
-    -- value is 0, which is ignored)
-    --
-    , _window      :: TF.Attr s P.Text
-    -- ^ @window@ - (Optional)
-    -- The time window used to evaluate the restart policy (default value is 0,
-    -- which is unbounded) (ms|s|m|h)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @restart_policy@ settings value.
-newRestartPolicySetting
-    :: RestartPolicySetting s
-newRestartPolicySetting =
-    RestartPolicySetting'
-        { _condition = TF.Nil
-        , _delay = TF.Nil
-        , _maxAttempts = TF.Nil
-        , _window = TF.Nil
-        }
-
-instance TF.IsValue  (RestartPolicySetting s)
-instance TF.IsObject (RestartPolicySetting s) where
-    toObject RestartPolicySetting'{..} = P.catMaybes
-        [ TF.assign "condition" <$> TF.attribute _condition
-        , TF.assign "delay" <$> TF.attribute _delay
-        , TF.assign "max_attempts" <$> TF.attribute _maxAttempts
-        , TF.assign "window" <$> TF.attribute _window
-        ]
-
-instance TF.IsValid (RestartPolicySetting s) where
-    validator = P.mempty
-
-instance P.HasCondition (RestartPolicySetting s) (TF.Attr s P.Text) where
-    condition =
-        P.lens (_condition :: RestartPolicySetting s -> TF.Attr s P.Text)
-               (\s a -> s { _condition = a } :: RestartPolicySetting s)
-
-instance P.HasDelay (RestartPolicySetting s) (TF.Attr s P.Text) where
-    delay =
-        P.lens (_delay :: RestartPolicySetting s -> TF.Attr s P.Text)
-               (\s a -> s { _delay = a } :: RestartPolicySetting s)
-
-instance P.HasMaxAttempts (RestartPolicySetting s) (TF.Attr s P.Int) where
-    maxAttempts =
-        P.lens (_maxAttempts :: RestartPolicySetting s -> TF.Attr s P.Int)
-               (\s a -> s { _maxAttempts = a } :: RestartPolicySetting s)
-
-instance P.HasWindow (RestartPolicySetting s) (TF.Attr s P.Text) where
-    window =
-        P.lens (_window :: RestartPolicySetting s -> TF.Attr s P.Text)
-               (\s a -> s { _window = a } :: RestartPolicySetting s)
-
--- | @resources@ nested settings.
-data ResourcesSetting s = ResourcesSetting'
-    { _limits      :: TF.Attr s (LimitsSetting s)
-    -- ^ @limits@ - (Optional)
-    -- Describes the resources which can be advertised by a node and requested by a
-    -- task
-    --
-    , _reservation :: TF.Attr s (ReservationSetting s)
-    -- ^ @reservation@ - (Optional)
-    -- An object describing the resources which can be advertised by a node and
-    -- requested by a task
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @resources@ settings value.
-newResourcesSetting
-    :: ResourcesSetting s
-newResourcesSetting =
-    ResourcesSetting'
-        { _limits = TF.Nil
-        , _reservation = TF.Nil
-        }
-
-instance TF.IsValue  (ResourcesSetting s)
-instance TF.IsObject (ResourcesSetting s) where
-    toObject ResourcesSetting'{..} = P.catMaybes
-        [ TF.assign "limits" <$> TF.attribute _limits
-        , TF.assign "reservation" <$> TF.attribute _reservation
-        ]
-
-instance TF.IsValid (ResourcesSetting s) where
-    validator = P.mempty
-           P.<> TF.settingsValidator "_limits"
-                  (_limits
-                      :: ResourcesSetting s -> TF.Attr s (LimitsSetting s))
-                  TF.validator
-           P.<> TF.settingsValidator "_reservation"
-                  (_reservation
-                      :: ResourcesSetting s -> TF.Attr s (ReservationSetting s))
-                  TF.validator
-
-instance P.HasLimits (ResourcesSetting s) (TF.Attr s (LimitsSetting s)) where
-    limits =
-        P.lens (_limits :: ResourcesSetting s -> TF.Attr s (LimitsSetting s))
-               (\s a -> s { _limits = a } :: ResourcesSetting s)
-
-instance P.HasReservation (ResourcesSetting s) (TF.Attr s (ReservationSetting s)) where
-    reservation =
-        P.lens (_reservation :: ResourcesSetting s -> TF.Attr s (ReservationSetting s))
-               (\s a -> s { _reservation = a } :: ResourcesSetting s)
-
--- | @reservation@ nested settings.
-data ReservationSetting s = ReservationSetting'
-    { _genericResources :: TF.Attr s (GenericResourcesSetting s)
-    -- ^ @generic_resources@ - (Optional)
-    -- User-defined resources can be either Integer resources (e.g, SSD=3) or
-    -- String resources (e.g, GPU=UUID1)
-    --
-    , _memoryBytes      :: TF.Attr s P.Int
-    -- ^ @memory_bytes@ - (Optional)
-    -- The amounf of memory in bytes the container allocates
-    --
-    , _nanoCpus         :: TF.Attr s P.Int
-    -- ^ @nano_cpus@ - (Optional)
-    -- CPU shares in units of 1/1e9 (or 10^-9) of the CPU. Should be at least
-    -- 1000000
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @reservation@ settings value.
-newReservationSetting
-    :: ReservationSetting s
-newReservationSetting =
-    ReservationSetting'
-        { _genericResources = TF.Nil
-        , _memoryBytes = TF.Nil
-        , _nanoCpus = TF.Nil
-        }
-
-instance TF.IsValue  (ReservationSetting s)
-instance TF.IsObject (ReservationSetting s) where
-    toObject ReservationSetting'{..} = P.catMaybes
-        [ TF.assign "generic_resources" <$> TF.attribute _genericResources
-        , TF.assign "memory_bytes" <$> TF.attribute _memoryBytes
-        , TF.assign "nano_cpus" <$> TF.attribute _nanoCpus
-        ]
-
-instance TF.IsValid (ReservationSetting s) where
-    validator = P.mempty
-           P.<> TF.settingsValidator "_genericResources"
-                  (_genericResources
-                      :: ReservationSetting s -> TF.Attr s (GenericResourcesSetting s))
-                  TF.validator
-
-instance P.HasGenericResources (ReservationSetting s) (TF.Attr s (GenericResourcesSetting s)) where
-    genericResources =
-        P.lens (_genericResources :: ReservationSetting s -> TF.Attr s (GenericResourcesSetting s))
-               (\s a -> s { _genericResources = a } :: ReservationSetting s)
-
-instance P.HasMemoryBytes (ReservationSetting s) (TF.Attr s P.Int) where
-    memoryBytes =
-        P.lens (_memoryBytes :: ReservationSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _memoryBytes = a } :: ReservationSetting s)
-
-instance P.HasNanoCpus (ReservationSetting s) (TF.Attr s P.Int) where
-    nanoCpus =
-        P.lens (_nanoCpus :: ReservationSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _nanoCpus = a } :: ReservationSetting s)
-
--- | @generic_resources@ nested settings.
-data GenericResourcesSetting s = GenericResourcesSetting'
-    { _discreteResourcesSpec :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @discrete_resources_spec@ - (Optional)
-    -- The Integer resources
-    --
-    , _namedResourcesSpec    :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @named_resources_spec@ - (Optional)
-    -- The String resources
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @generic_resources@ settings value.
-newGenericResourcesSetting
-    :: GenericResourcesSetting s
-newGenericResourcesSetting =
-    GenericResourcesSetting'
-        { _discreteResourcesSpec = TF.Nil
-        , _namedResourcesSpec = TF.Nil
-        }
-
-instance TF.IsValue  (GenericResourcesSetting s)
-instance TF.IsObject (GenericResourcesSetting s) where
-    toObject GenericResourcesSetting'{..} = P.catMaybes
-        [ TF.assign "discrete_resources_spec" <$> TF.attribute _discreteResourcesSpec
-        , TF.assign "named_resources_spec" <$> TF.attribute _namedResourcesSpec
-        ]
-
-instance TF.IsValid (GenericResourcesSetting s) where
-    validator = P.mempty
-
-instance P.HasDiscreteResourcesSpec (GenericResourcesSetting s) (TF.Attr s [TF.Attr s P.Text]) where
-    discreteResourcesSpec =
-        P.lens (_discreteResourcesSpec :: GenericResourcesSetting s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _discreteResourcesSpec = a } :: GenericResourcesSetting s)
-
-instance P.HasNamedResourcesSpec (GenericResourcesSetting s) (TF.Attr s [TF.Attr s P.Text]) where
-    namedResourcesSpec =
-        P.lens (_namedResourcesSpec :: GenericResourcesSetting s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _namedResourcesSpec = a } :: GenericResourcesSetting s)
-
--- | @limits@ nested settings.
-data LimitsSetting s = LimitsSetting'
-    { _genericResources :: TF.Attr s (GenericResourcesSetting s)
-    -- ^ @generic_resources@ - (Optional)
-    -- User-defined resources can be either Integer resources (e.g, SSD=3) or
-    -- String resources (e.g, GPU=UUID1)
-    --
-    , _memoryBytes      :: TF.Attr s P.Int
-    -- ^ @memory_bytes@ - (Optional)
-    -- The amounf of memory in bytes the container allocates
-    --
-    , _nanoCpus         :: TF.Attr s P.Int
-    -- ^ @nano_cpus@ - (Optional)
-    -- CPU shares in units of 1/1e9 (or 10^-9) of the CPU. Should be at least
-    -- 1000000
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @limits@ settings value.
-newLimitsSetting
-    :: LimitsSetting s
-newLimitsSetting =
-    LimitsSetting'
-        { _genericResources = TF.Nil
-        , _memoryBytes = TF.Nil
-        , _nanoCpus = TF.Nil
-        }
-
-instance TF.IsValue  (LimitsSetting s)
-instance TF.IsObject (LimitsSetting s) where
-    toObject LimitsSetting'{..} = P.catMaybes
-        [ TF.assign "generic_resources" <$> TF.attribute _genericResources
-        , TF.assign "memory_bytes" <$> TF.attribute _memoryBytes
-        , TF.assign "nano_cpus" <$> TF.attribute _nanoCpus
-        ]
-
-instance TF.IsValid (LimitsSetting s) where
-    validator = P.mempty
-           P.<> TF.settingsValidator "_genericResources"
-                  (_genericResources
-                      :: LimitsSetting s -> TF.Attr s (GenericResourcesSetting s))
-                  TF.validator
-
-instance P.HasGenericResources (LimitsSetting s) (TF.Attr s (GenericResourcesSetting s)) where
-    genericResources =
-        P.lens (_genericResources :: LimitsSetting s -> TF.Attr s (GenericResourcesSetting s))
-               (\s a -> s { _genericResources = a } :: LimitsSetting s)
-
-instance P.HasMemoryBytes (LimitsSetting s) (TF.Attr s P.Int) where
-    memoryBytes =
-        P.lens (_memoryBytes :: LimitsSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _memoryBytes = a } :: LimitsSetting s)
-
-instance P.HasNanoCpus (LimitsSetting s) (TF.Attr s P.Int) where
-    nanoCpus =
-        P.lens (_nanoCpus :: LimitsSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _nanoCpus = a } :: LimitsSetting s)
-
--- | @placement@ nested settings.
-data PlacementSetting s = PlacementSetting'
-    { _constraints :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @constraints@ - (Optional)
-    -- An array of constraints. e.g.: node.role==manager
-    --
-    , _platforms   :: TF.Attr s [TF.Attr s (PlatformsSetting s)]
-    -- ^ @platforms@ - (Optional)
-    -- Platforms stores all the platforms that the service's image can run on
-    --
-    , _prefs       :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @prefs@ - (Optional)
-    -- Preferences provide a way to make the scheduler aware of factors such as
-    -- topology. They are provided in order from highest to lowest precedence,
-    -- e.g.: spread=node.role.manager
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @placement@ settings value.
-newPlacementSetting
-    :: PlacementSetting s
-newPlacementSetting =
-    PlacementSetting'
-        { _constraints = TF.Nil
-        , _platforms = TF.Nil
-        , _prefs = TF.Nil
-        }
-
-instance TF.IsValue  (PlacementSetting s)
-instance TF.IsObject (PlacementSetting s) where
-    toObject PlacementSetting'{..} = P.catMaybes
-        [ TF.assign "constraints" <$> TF.attribute _constraints
-        , TF.assign "platforms" <$> TF.attribute _platforms
-        , TF.assign "prefs" <$> TF.attribute _prefs
-        ]
-
-instance TF.IsValid (PlacementSetting s) where
-    validator = P.mempty
-
-instance P.HasConstraints (PlacementSetting s) (TF.Attr s [TF.Attr s P.Text]) where
-    constraints =
-        P.lens (_constraints :: PlacementSetting s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _constraints = a } :: PlacementSetting s)
-
-instance P.HasPlatforms (PlacementSetting s) (TF.Attr s [TF.Attr s (PlatformsSetting s)]) where
-    platforms =
-        P.lens (_platforms :: PlacementSetting s -> TF.Attr s [TF.Attr s (PlatformsSetting s)])
-               (\s a -> s { _platforms = a } :: PlacementSetting s)
-
-instance P.HasPrefs (PlacementSetting s) (TF.Attr s [TF.Attr s P.Text]) where
-    prefs =
-        P.lens (_prefs :: PlacementSetting s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _prefs = a } :: PlacementSetting s)
-
--- | @platforms@ nested settings.
-data PlatformsSetting s = PlatformsSetting'
-    { _architecture :: TF.Attr s P.Text
-    -- ^ @architecture@ - (Required)
-    -- The architecture, e.g. amd64
-    --
-    , _os           :: TF.Attr s P.Text
-    -- ^ @os@ - (Required)
-    -- The operation system, e.g. linux
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @platforms@ settings value.
-newPlatformsSetting
-    :: TF.Attr s P.Text -- ^ 'P._architecture': @architecture@
-    -> TF.Attr s P.Text -- ^ 'P._os': @os@
-    -> PlatformsSetting s
-newPlatformsSetting _architecture _os =
-    PlatformsSetting'
-        { _architecture = _architecture
-        , _os = _os
-        }
-
-instance TF.IsValue  (PlatformsSetting s)
-instance TF.IsObject (PlatformsSetting s) where
-    toObject PlatformsSetting'{..} = P.catMaybes
-        [ TF.assign "architecture" <$> TF.attribute _architecture
-        , TF.assign "os" <$> TF.attribute _os
-        ]
-
-instance TF.IsValid (PlatformsSetting s) where
-    validator = P.mempty
-
-instance P.HasArchitecture (PlatformsSetting s) (TF.Attr s P.Text) where
-    architecture =
-        P.lens (_architecture :: PlatformsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _architecture = a } :: PlatformsSetting s)
-
-instance P.HasOs (PlatformsSetting s) (TF.Attr s P.Text) where
-    os =
-        P.lens (_os :: PlatformsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _os = a } :: PlatformsSetting s)
-
--- | @log_driver@ nested settings.
-data LogDriverSetting s = LogDriverSetting'
-    { _name    :: TF.Attr s P.Text
-    -- ^ @name@ - (Required)
-    -- The logging driver to use: one of
-    -- none|json-file|syslog|journald|gelf|fluentd|awslogs|splunk|etwlogs|gcplogs
-    --
-    , _options :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
-    -- ^ @options@ - (Optional)
-    -- The options for the logging driver
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @log_driver@ settings value.
-newLogDriverSetting
-    :: TF.Attr s P.Text -- ^ 'P._name': @name@
-    -> LogDriverSetting s
-newLogDriverSetting _name =
-    LogDriverSetting'
-        { _name = _name
-        , _options = TF.Nil
-        }
-
-instance TF.IsValue  (LogDriverSetting s)
-instance TF.IsObject (LogDriverSetting s) where
-    toObject LogDriverSetting'{..} = P.catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        , TF.assign "options" <$> TF.attribute _options
-        ]
-
-instance TF.IsValid (LogDriverSetting s) where
-    validator = P.mempty
-
-instance P.HasName (LogDriverSetting s) (TF.Attr s P.Text) where
-    name =
-        P.lens (_name :: LogDriverSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: LogDriverSetting s)
-
-instance P.HasOptions (LogDriverSetting s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
-    options =
-        P.lens (_options :: LogDriverSetting s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _options = a } :: LogDriverSetting s)
-
--- | @healthcheck@ nested settings.
-data HealthcheckSetting s = HealthcheckSetting'
-    { _interval    :: TF.Attr s P.Text
-    -- ^ @interval@ - (Optional)
-    -- Time between running the check (ms|s|m|h)
-    --
-    , _retries     :: TF.Attr s P.Int
-    -- ^ @retries@ - (Optional)
-    -- Consecutive failures needed to report unhealthy
-    --
-    , _startPeriod :: TF.Attr s P.Text
-    -- ^ @start_period@ - (Optional)
-    -- Start period for the container to initialize before counting retries towards
-    -- unstable (ms|s|m|h)
-    --
-    , _test        :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @test@ - (Required)
-    -- The test to perform as list
-    --
-    , _timeout     :: TF.Attr s P.Text
-    -- ^ @timeout@ - (Optional)
-    -- Maximum time to allow one check to run (ms|s|m|h)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @healthcheck@ settings value.
-newHealthcheckSetting
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ 'P._test': @test@
-    -> HealthcheckSetting s
-newHealthcheckSetting _test =
-    HealthcheckSetting'
-        { _interval = TF.value "0s"
-        , _retries = TF.value 0
-        , _startPeriod = TF.value "0s"
-        , _test = _test
-        , _timeout = TF.value "0s"
-        }
-
-instance TF.IsValue  (HealthcheckSetting s)
-instance TF.IsObject (HealthcheckSetting s) where
-    toObject HealthcheckSetting'{..} = P.catMaybes
-        [ TF.assign "interval" <$> TF.attribute _interval
-        , TF.assign "retries" <$> TF.attribute _retries
-        , TF.assign "start_period" <$> TF.attribute _startPeriod
-        , TF.assign "test" <$> TF.attribute _test
-        , TF.assign "timeout" <$> TF.attribute _timeout
-        ]
-
-instance TF.IsValid (HealthcheckSetting s) where
-    validator = P.mempty
-
-instance P.HasInterval (HealthcheckSetting s) (TF.Attr s P.Text) where
-    interval =
-        P.lens (_interval :: HealthcheckSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _interval = a } :: HealthcheckSetting s)
-
-instance P.HasRetries (HealthcheckSetting s) (TF.Attr s P.Int) where
-    retries =
-        P.lens (_retries :: HealthcheckSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _retries = a } :: HealthcheckSetting s)
-
-instance P.HasStartPeriod (HealthcheckSetting s) (TF.Attr s P.Text) where
-    startPeriod =
-        P.lens (_startPeriod :: HealthcheckSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _startPeriod = a } :: HealthcheckSetting s)
-
-instance P.HasTest (HealthcheckSetting s) (TF.Attr s [TF.Attr s P.Text]) where
-    test =
-        P.lens (_test :: HealthcheckSetting s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _test = a } :: HealthcheckSetting s)
-
-instance P.HasTimeout (HealthcheckSetting s) (TF.Attr s P.Text) where
-    timeout =
-        P.lens (_timeout :: HealthcheckSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _timeout = a } :: HealthcheckSetting s)
-
--- | @dns_config@ nested settings.
-data DnsConfigSetting s = DnsConfigSetting'
-    { _nameservers :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @nameservers@ - (Required)
-    -- The IP addresses of the name servers
-    --
-    , _options     :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @options@ - (Optional)
-    -- A list of internal resolver variables to be modified (e.g., debug, ndots:3,
-    -- etc.)
-    --
-    , _search      :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @search@ - (Optional)
-    -- A search list for host-name lookup
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @dns_config@ settings value.
-newDnsConfigSetting
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ 'P._nameservers': @nameservers@
-    -> DnsConfigSetting s
-newDnsConfigSetting _nameservers =
-    DnsConfigSetting'
-        { _nameservers = _nameservers
-        , _options = TF.Nil
-        , _search = TF.Nil
-        }
-
-instance TF.IsValue  (DnsConfigSetting s)
-instance TF.IsObject (DnsConfigSetting s) where
-    toObject DnsConfigSetting'{..} = P.catMaybes
-        [ TF.assign "nameservers" <$> TF.attribute _nameservers
-        , TF.assign "options" <$> TF.attribute _options
-        , TF.assign "search" <$> TF.attribute _search
-        ]
-
-instance TF.IsValid (DnsConfigSetting s) where
-    validator = P.mempty
-
-instance P.HasNameservers (DnsConfigSetting s) (TF.Attr s [TF.Attr s P.Text]) where
-    nameservers =
-        P.lens (_nameservers :: DnsConfigSetting s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _nameservers = a } :: DnsConfigSetting s)
-
-instance P.HasOptions (DnsConfigSetting s) (TF.Attr s [TF.Attr s P.Text]) where
-    options =
-        P.lens (_options :: DnsConfigSetting s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _options = a } :: DnsConfigSetting s)
-
-instance P.HasSearch (DnsConfigSetting s) (TF.Attr s [TF.Attr s P.Text]) where
-    search =
-        P.lens (_search :: DnsConfigSetting s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _search = a } :: DnsConfigSetting s)
-
--- | @secrets@ nested settings.
-data SecretsSetting s = SecretsSetting'
-    { _fileName   :: TF.Attr s P.Text
-    -- ^ @file_name@ - (Required)
-    -- Represents the final filename in the filesystem
-    --
-    , _secretId   :: TF.Attr s P.Text
-    -- ^ @secret_id@ - (Required)
-    -- ID of the specific secret that we're referencing
-    --
-    , _secretName :: TF.Attr s P.Text
-    -- ^ @secret_name@ - (Optional)
-    -- Name of the secret that this references, but this is just provided for
-    -- lookup/display purposes. The config in the reference will be identified by
-    -- its ID
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @secrets@ settings value.
-newSecretsSetting
-    :: TF.Attr s P.Text -- ^ 'P._secretId': @secret_id@
-    -> TF.Attr s P.Text -- ^ 'P._fileName': @file_name@
-    -> SecretsSetting s
-newSecretsSetting _secretId _fileName =
-    SecretsSetting'
-        { _fileName = _fileName
-        , _secretId = _secretId
-        , _secretName = TF.Nil
-        }
-
-instance TF.IsValue  (SecretsSetting s)
-instance TF.IsObject (SecretsSetting s) where
-    toObject SecretsSetting'{..} = P.catMaybes
-        [ TF.assign "file_name" <$> TF.attribute _fileName
-        , TF.assign "secret_id" <$> TF.attribute _secretId
-        , TF.assign "secret_name" <$> TF.attribute _secretName
-        ]
-
-instance TF.IsValid (SecretsSetting s) where
-    validator = P.mempty
-
-instance P.HasFileName (SecretsSetting s) (TF.Attr s P.Text) where
-    fileName =
-        P.lens (_fileName :: SecretsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _fileName = a } :: SecretsSetting s)
-
-instance P.HasSecretId (SecretsSetting s) (TF.Attr s P.Text) where
-    secretId =
-        P.lens (_secretId :: SecretsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _secretId = a } :: SecretsSetting s)
-
-instance P.HasSecretName (SecretsSetting s) (TF.Attr s P.Text) where
-    secretName =
-        P.lens (_secretName :: SecretsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _secretName = a } :: SecretsSetting s)
-
--- | @privileges@ nested settings.
-data PrivilegesSetting s = PrivilegesSetting'
-    { _credentialSpec :: TF.Attr s (CredentialSpecSetting s)
-    -- ^ @credential_spec@ - (Optional)
-    -- CredentialSpec for managed service account (Windows only)
-    --
-    , _seLinuxContext :: TF.Attr s (SeLinuxContextSetting s)
-    -- ^ @se_linux_context@ - (Optional)
-    -- SELinux labels of the container
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @privileges@ settings value.
-newPrivilegesSetting
-    :: PrivilegesSetting s
-newPrivilegesSetting =
-    PrivilegesSetting'
-        { _credentialSpec = TF.Nil
-        , _seLinuxContext = TF.Nil
-        }
-
-instance TF.IsValue  (PrivilegesSetting s)
-instance TF.IsObject (PrivilegesSetting s) where
-    toObject PrivilegesSetting'{..} = P.catMaybes
-        [ TF.assign "credential_spec" <$> TF.attribute _credentialSpec
-        , TF.assign "se_linux_context" <$> TF.attribute _seLinuxContext
-        ]
-
-instance TF.IsValid (PrivilegesSetting s) where
-    validator = P.mempty
-           P.<> TF.settingsValidator "_credentialSpec"
-                  (_credentialSpec
-                      :: PrivilegesSetting s -> TF.Attr s (CredentialSpecSetting s))
-                  TF.validator
-           P.<> TF.settingsValidator "_seLinuxContext"
-                  (_seLinuxContext
-                      :: PrivilegesSetting s -> TF.Attr s (SeLinuxContextSetting s))
-                  TF.validator
-
-instance P.HasCredentialSpec (PrivilegesSetting s) (TF.Attr s (CredentialSpecSetting s)) where
-    credentialSpec =
-        P.lens (_credentialSpec :: PrivilegesSetting s -> TF.Attr s (CredentialSpecSetting s))
-               (\s a -> s { _credentialSpec = a } :: PrivilegesSetting s)
-
-instance P.HasSeLinuxContext (PrivilegesSetting s) (TF.Attr s (SeLinuxContextSetting s)) where
-    seLinuxContext =
-        P.lens (_seLinuxContext :: PrivilegesSetting s -> TF.Attr s (SeLinuxContextSetting s))
-               (\s a -> s { _seLinuxContext = a } :: PrivilegesSetting s)
-
--- | @se_linux_context@ nested settings.
-data SeLinuxContextSetting s = SeLinuxContextSetting'
-    { _disable :: TF.Attr s P.Bool
-    -- ^ @disable@ - (Optional)
-    -- Disable SELinux
-    --
-    , _level   :: TF.Attr s P.Text
-    -- ^ @level@ - (Optional)
-    -- SELinux level label
-    --
-    , _role    :: TF.Attr s P.Text
-    -- ^ @role@ - (Optional)
-    -- SELinux role label
-    --
-    , _type'   :: TF.Attr s P.Text
-    -- ^ @type@ - (Optional)
-    -- SELinux type label
-    --
-    , _user    :: TF.Attr s P.Text
-    -- ^ @user@ - (Optional)
-    -- SELinux user label
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @se_linux_context@ settings value.
-newSeLinuxContextSetting
-    :: SeLinuxContextSetting s
-newSeLinuxContextSetting =
-    SeLinuxContextSetting'
-        { _disable = TF.Nil
-        , _level = TF.Nil
-        , _role = TF.Nil
-        , _type' = TF.Nil
-        , _user = TF.Nil
-        }
-
-instance TF.IsValue  (SeLinuxContextSetting s)
-instance TF.IsObject (SeLinuxContextSetting s) where
-    toObject SeLinuxContextSetting'{..} = P.catMaybes
-        [ TF.assign "disable" <$> TF.attribute _disable
-        , TF.assign "level" <$> TF.attribute _level
-        , TF.assign "role" <$> TF.attribute _role
-        , TF.assign "type" <$> TF.attribute _type'
-        , TF.assign "user" <$> TF.attribute _user
-        ]
-
-instance TF.IsValid (SeLinuxContextSetting s) where
-    validator = P.mempty
-
-instance P.HasDisable (SeLinuxContextSetting s) (TF.Attr s P.Bool) where
-    disable =
-        P.lens (_disable :: SeLinuxContextSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _disable = a } :: SeLinuxContextSetting s)
-
-instance P.HasLevel (SeLinuxContextSetting s) (TF.Attr s P.Text) where
-    level =
-        P.lens (_level :: SeLinuxContextSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _level = a } :: SeLinuxContextSetting s)
-
-instance P.HasRole (SeLinuxContextSetting s) (TF.Attr s P.Text) where
-    role =
-        P.lens (_role :: SeLinuxContextSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _role = a } :: SeLinuxContextSetting s)
-
-instance P.HasType' (SeLinuxContextSetting s) (TF.Attr s P.Text) where
-    type' =
-        P.lens (_type' :: SeLinuxContextSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a } :: SeLinuxContextSetting s)
-
-instance P.HasUser (SeLinuxContextSetting s) (TF.Attr s P.Text) where
-    user =
-        P.lens (_user :: SeLinuxContextSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _user = a } :: SeLinuxContextSetting s)
-
--- | @credential_spec@ nested settings.
-data CredentialSpecSetting s = CredentialSpecSetting'
-    { _file     :: TF.Attr s P.Text
-    -- ^ @file@ - (Optional)
-    -- Load credential spec from this file
-    --
-    , _registry :: TF.Attr s P.Text
-    -- ^ @registry@ - (Optional)
-    -- Load credential spec from this value in the Windows registry
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @credential_spec@ settings value.
-newCredentialSpecSetting
-    :: CredentialSpecSetting s
-newCredentialSpecSetting =
-    CredentialSpecSetting'
-        { _file = TF.Nil
-        , _registry = TF.Nil
-        }
-
-instance TF.IsValue  (CredentialSpecSetting s)
-instance TF.IsObject (CredentialSpecSetting s) where
-    toObject CredentialSpecSetting'{..} = P.catMaybes
-        [ TF.assign "file" <$> TF.attribute _file
-        , TF.assign "registry" <$> TF.attribute _registry
-        ]
-
-instance TF.IsValid (CredentialSpecSetting s) where
-    validator = P.mempty
-
-instance P.HasFile (CredentialSpecSetting s) (TF.Attr s P.Text) where
-    file =
-        P.lens (_file :: CredentialSpecSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _file = a } :: CredentialSpecSetting s)
-
-instance P.HasRegistry (CredentialSpecSetting s) (TF.Attr s P.Text) where
-    registry =
-        P.lens (_registry :: CredentialSpecSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _registry = a } :: CredentialSpecSetting s)
-
--- | @hosts@ nested settings.
-data HostsSetting s = HostsSetting'
-    { _host :: TF.Attr s P.Text
-    -- ^ @host@ - (Required, Forces New)
-    --
-    , _ip   :: TF.Attr s P.Text
-    -- ^ @ip@ - (Required, Forces New)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @hosts@ settings value.
-newHostsSetting
-    :: TF.Attr s P.Text -- ^ 'P._host': @host@
-    -> TF.Attr s P.Text -- ^ 'P._ip': @ip@
-    -> HostsSetting s
-newHostsSetting _host _ip =
-    HostsSetting'
-        { _host = _host
-        , _ip = _ip
-        }
-
-instance TF.IsValue  (HostsSetting s)
-instance TF.IsObject (HostsSetting s) where
-    toObject HostsSetting'{..} = P.catMaybes
-        [ TF.assign "host" <$> TF.attribute _host
-        , TF.assign "ip" <$> TF.attribute _ip
-        ]
-
-instance TF.IsValid (HostsSetting s) where
-    validator = P.mempty
-
-instance P.HasHost (HostsSetting s) (TF.Attr s P.Text) where
-    host =
-        P.lens (_host :: HostsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _host = a } :: HostsSetting s)
-
-instance P.HasIp (HostsSetting s) (TF.Attr s P.Text) where
-    ip =
-        P.lens (_ip :: HostsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _ip = a } :: HostsSetting s)
-
--- | @configs@ nested settings.
-data ConfigsSetting s = ConfigsSetting'
-    { _configId   :: TF.Attr s P.Text
-    -- ^ @config_id@ - (Required)
-    -- ID of the specific config that we're referencing
-    --
-    , _configName :: TF.Attr s P.Text
-    -- ^ @config_name@ - (Optional)
-    -- Name of the config that this references, but this is just provided for
-    -- lookup/display purposes. The config in the reference will be identified by
-    -- its ID
-    --
-    , _fileName   :: TF.Attr s P.Text
-    -- ^ @file_name@ - (Required)
-    -- Represents the final filename in the filesystem
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @configs@ settings value.
-newConfigsSetting
-    :: TF.Attr s P.Text -- ^ 'P._configId': @config_id@
-    -> TF.Attr s P.Text -- ^ 'P._fileName': @file_name@
-    -> ConfigsSetting s
-newConfigsSetting _configId _fileName =
-    ConfigsSetting'
-        { _configId = _configId
-        , _configName = TF.Nil
-        , _fileName = _fileName
-        }
-
-instance TF.IsValue  (ConfigsSetting s)
-instance TF.IsObject (ConfigsSetting s) where
-    toObject ConfigsSetting'{..} = P.catMaybes
-        [ TF.assign "config_id" <$> TF.attribute _configId
-        , TF.assign "config_name" <$> TF.attribute _configName
-        , TF.assign "file_name" <$> TF.attribute _fileName
-        ]
-
-instance TF.IsValid (ConfigsSetting s) where
-    validator = P.mempty
-
-instance P.HasConfigId (ConfigsSetting s) (TF.Attr s P.Text) where
-    configId =
-        P.lens (_configId :: ConfigsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _configId = a } :: ConfigsSetting s)
-
-instance P.HasConfigName (ConfigsSetting s) (TF.Attr s P.Text) where
-    configName =
-        P.lens (_configName :: ConfigsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _configName = a } :: ConfigsSetting s)
-
-instance P.HasFileName (ConfigsSetting s) (TF.Attr s P.Text) where
-    fileName =
-        P.lens (_fileName :: ConfigsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _fileName = a } :: ConfigsSetting s)
-
--- | @volume_options@ nested settings.
-data VolumeOptionsSetting s = VolumeOptionsSetting'
-    { _driverName    :: TF.Attr s P.Text
-    -- ^ @driver_name@ - (Optional)
-    -- Name of the driver to use to create the volume.
-    --
-    , _driverOptions :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
-    -- ^ @driver_options@ - (Optional)
-    -- Key/value map of driver specific options
-    --
-    , _labels        :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
-    -- ^ @labels@ - (Optional)
-    -- User-defined key/value metadata
-    --
-    , _noCopy        :: TF.Attr s P.Bool
-    -- ^ @no_copy@ - (Optional)
-    -- Populate volume with data from the target
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @volume_options@ settings value.
-newVolumeOptionsSetting
-    :: VolumeOptionsSetting s
-newVolumeOptionsSetting =
-    VolumeOptionsSetting'
-        { _driverName = TF.Nil
-        , _driverOptions = TF.Nil
-        , _labels = TF.Nil
-        , _noCopy = TF.Nil
-        }
-
-instance TF.IsValue  (VolumeOptionsSetting s)
-instance TF.IsObject (VolumeOptionsSetting s) where
-    toObject VolumeOptionsSetting'{..} = P.catMaybes
-        [ TF.assign "driver_name" <$> TF.attribute _driverName
-        , TF.assign "driver_options" <$> TF.attribute _driverOptions
-        , TF.assign "labels" <$> TF.attribute _labels
-        , TF.assign "no_copy" <$> TF.attribute _noCopy
-        ]
-
-instance TF.IsValid (VolumeOptionsSetting s) where
-    validator = P.mempty
-
-instance P.HasDriverName (VolumeOptionsSetting s) (TF.Attr s P.Text) where
-    driverName =
-        P.lens (_driverName :: VolumeOptionsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _driverName = a } :: VolumeOptionsSetting s)
-
-instance P.HasDriverOptions (VolumeOptionsSetting s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
-    driverOptions =
-        P.lens (_driverOptions :: VolumeOptionsSetting s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _driverOptions = a } :: VolumeOptionsSetting s)
-
-instance P.HasLabels (VolumeOptionsSetting s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
-    labels =
-        P.lens (_labels :: VolumeOptionsSetting s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _labels = a } :: VolumeOptionsSetting s)
-
-instance P.HasNoCopy (VolumeOptionsSetting s) (TF.Attr s P.Bool) where
-    noCopy =
-        P.lens (_noCopy :: VolumeOptionsSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _noCopy = a } :: VolumeOptionsSetting s)
-
--- | @tmpfs_options@ nested settings.
-data TmpfsOptionsSetting s = TmpfsOptionsSetting'
-    { _mode      :: TF.Attr s P.Int
-    -- ^ @mode@ - (Optional)
-    -- The permission mode for the tmpfs mount in an integer
-    --
-    , _sizeBytes :: TF.Attr s P.Int
-    -- ^ @size_bytes@ - (Optional)
-    -- The size for the tmpfs mount in bytes
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @tmpfs_options@ settings value.
-newTmpfsOptionsSetting
-    :: TmpfsOptionsSetting s
-newTmpfsOptionsSetting =
-    TmpfsOptionsSetting'
-        { _mode = TF.Nil
-        , _sizeBytes = TF.Nil
-        }
-
-instance TF.IsValue  (TmpfsOptionsSetting s)
-instance TF.IsObject (TmpfsOptionsSetting s) where
-    toObject TmpfsOptionsSetting'{..} = P.catMaybes
-        [ TF.assign "mode" <$> TF.attribute _mode
-        , TF.assign "size_bytes" <$> TF.attribute _sizeBytes
-        ]
-
-instance TF.IsValid (TmpfsOptionsSetting s) where
-    validator = P.mempty
-
-instance P.HasMode (TmpfsOptionsSetting s) (TF.Attr s P.Int) where
-    mode =
-        P.lens (_mode :: TmpfsOptionsSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _mode = a } :: TmpfsOptionsSetting s)
-
-instance P.HasSizeBytes (TmpfsOptionsSetting s) (TF.Attr s P.Int) where
-    sizeBytes =
-        P.lens (_sizeBytes :: TmpfsOptionsSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _sizeBytes = a } :: TmpfsOptionsSetting s)
-
 -- | @capabilities@ nested settings.
-data CapabilitiesSetting s = CapabilitiesSetting'
+data ContainerCapabilities s = ContainerCapabilities'
     { _add  :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @add@ - (Optional, Forces New)
     --
@@ -1768,77 +207,36 @@ data CapabilitiesSetting s = CapabilitiesSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @capabilities@ settings value.
-newCapabilitiesSetting
-    :: CapabilitiesSetting s
-newCapabilitiesSetting =
-    CapabilitiesSetting'
+newContainerCapabilities
+    :: ContainerCapabilities s
+newContainerCapabilities =
+    ContainerCapabilities'
         { _add = TF.Nil
         , _drop = TF.Nil
         }
 
-instance TF.IsValue  (CapabilitiesSetting s)
-instance TF.IsObject (CapabilitiesSetting s) where
-    toObject CapabilitiesSetting'{..} = P.catMaybes
+instance TF.IsValue  (ContainerCapabilities s)
+instance TF.IsObject (ContainerCapabilities s) where
+    toObject ContainerCapabilities'{..} = P.catMaybes
         [ TF.assign "add" <$> TF.attribute _add
         , TF.assign "drop" <$> TF.attribute _drop
         ]
 
-instance TF.IsValid (CapabilitiesSetting s) where
+instance TF.IsValid (ContainerCapabilities s) where
     validator = P.mempty
 
-instance P.HasAdd (CapabilitiesSetting s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasAdd (ContainerCapabilities s) (TF.Attr s [TF.Attr s P.Text]) where
     add =
-        P.lens (_add :: CapabilitiesSetting s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _add = a } :: CapabilitiesSetting s)
+        P.lens (_add :: ContainerCapabilities s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _add = a } :: ContainerCapabilities s)
 
-instance P.HasDrop (CapabilitiesSetting s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasDrop (ContainerCapabilities s) (TF.Attr s [TF.Attr s P.Text]) where
     drop =
-        P.lens (_drop :: CapabilitiesSetting s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _drop = a } :: CapabilitiesSetting s)
-
--- | @converge_config@ nested settings.
-data ConvergeConfigSetting s = ConvergeConfigSetting'
-    { _delay   :: TF.Attr s P.Text
-    -- ^ @delay@ - (Optional)
-    -- The interval to check if the desired state is reached (ms|s). Default: 7s
-    --
-    , _timeout :: TF.Attr s P.Text
-    -- ^ @timeout@ - (Optional)
-    -- The timeout of the service to reach the desired state (s|m). Default: 3m
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @converge_config@ settings value.
-newConvergeConfigSetting
-    :: ConvergeConfigSetting s
-newConvergeConfigSetting =
-    ConvergeConfigSetting'
-        { _delay = TF.value "7s"
-        , _timeout = TF.value "3m"
-        }
-
-instance TF.IsValue  (ConvergeConfigSetting s)
-instance TF.IsObject (ConvergeConfigSetting s) where
-    toObject ConvergeConfigSetting'{..} = P.catMaybes
-        [ TF.assign "delay" <$> TF.attribute _delay
-        , TF.assign "timeout" <$> TF.attribute _timeout
-        ]
-
-instance TF.IsValid (ConvergeConfigSetting s) where
-    validator = P.mempty
-
-instance P.HasDelay (ConvergeConfigSetting s) (TF.Attr s P.Text) where
-    delay =
-        P.lens (_delay :: ConvergeConfigSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _delay = a } :: ConvergeConfigSetting s)
-
-instance P.HasTimeout (ConvergeConfigSetting s) (TF.Attr s P.Text) where
-    timeout =
-        P.lens (_timeout :: ConvergeConfigSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _timeout = a } :: ConvergeConfigSetting s)
+        P.lens (_drop :: ContainerCapabilities s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _drop = a } :: ContainerCapabilities s)
 
 -- | @devices@ nested settings.
-data DevicesSetting s = DevicesSetting'
+data ContainerDevices s = ContainerDevices'
     { _containerPath :: TF.Attr s P.Text
     -- ^ @container_path@ - (Optional, Forces New)
     --
@@ -1851,195 +249,44 @@ data DevicesSetting s = DevicesSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @devices@ settings value.
-newDevicesSetting
+newContainerDevices
     :: TF.Attr s P.Text -- ^ 'P._hostPath': @host_path@
-    -> DevicesSetting s
-newDevicesSetting _hostPath =
-    DevicesSetting'
+    -> ContainerDevices s
+newContainerDevices _hostPath =
+    ContainerDevices'
         { _containerPath = TF.Nil
         , _hostPath = _hostPath
         , _permissions = TF.Nil
         }
 
-instance TF.IsValue  (DevicesSetting s)
-instance TF.IsObject (DevicesSetting s) where
-    toObject DevicesSetting'{..} = P.catMaybes
+instance TF.IsValue  (ContainerDevices s)
+instance TF.IsObject (ContainerDevices s) where
+    toObject ContainerDevices'{..} = P.catMaybes
         [ TF.assign "container_path" <$> TF.attribute _containerPath
         , TF.assign "host_path" <$> TF.attribute _hostPath
         , TF.assign "permissions" <$> TF.attribute _permissions
         ]
 
-instance TF.IsValid (DevicesSetting s) where
+instance TF.IsValid (ContainerDevices s) where
     validator = P.mempty
 
-instance P.HasContainerPath (DevicesSetting s) (TF.Attr s P.Text) where
+instance P.HasContainerPath (ContainerDevices s) (TF.Attr s P.Text) where
     containerPath =
-        P.lens (_containerPath :: DevicesSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _containerPath = a } :: DevicesSetting s)
+        P.lens (_containerPath :: ContainerDevices s -> TF.Attr s P.Text)
+               (\s a -> s { _containerPath = a } :: ContainerDevices s)
 
-instance P.HasHostPath (DevicesSetting s) (TF.Attr s P.Text) where
+instance P.HasHostPath (ContainerDevices s) (TF.Attr s P.Text) where
     hostPath =
-        P.lens (_hostPath :: DevicesSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _hostPath = a } :: DevicesSetting s)
+        P.lens (_hostPath :: ContainerDevices s -> TF.Attr s P.Text)
+               (\s a -> s { _hostPath = a } :: ContainerDevices s)
 
-instance P.HasPermissions (DevicesSetting s) (TF.Attr s P.Text) where
+instance P.HasPermissions (ContainerDevices s) (TF.Attr s P.Text) where
     permissions =
-        P.lens (_permissions :: DevicesSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _permissions = a } :: DevicesSetting s)
-
--- | @endpoint_spec@ nested settings.
-data EndpointSpecSetting s = EndpointSpecSetting'
-    { _mode  :: TF.Attr s P.Text
-    -- ^ @mode@ - (Optional)
-    -- The mode of resolution to use for internal load balancing between tasks
-    --
-    , _ports :: TF.Attr s [TF.Attr s (PortsSetting s)]
-    -- ^ @ports@ - (Optional)
-    -- List of exposed ports that this service is accessible on from the outside.
-    -- Ports can only be provided if 'vip' resolution mode is used.
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @endpoint_spec@ settings value.
-newEndpointSpecSetting
-    :: EndpointSpecSetting s
-newEndpointSpecSetting =
-    EndpointSpecSetting'
-        { _mode = TF.Nil
-        , _ports = TF.Nil
-        }
-
-instance TF.IsValue  (EndpointSpecSetting s)
-instance TF.IsObject (EndpointSpecSetting s) where
-    toObject EndpointSpecSetting'{..} = P.catMaybes
-        [ TF.assign "mode" <$> TF.attribute _mode
-        , TF.assign "ports" <$> TF.attribute _ports
-        ]
-
-instance TF.IsValid (EndpointSpecSetting s) where
-    validator = P.mempty
-
-instance P.HasMode (EndpointSpecSetting s) (TF.Attr s P.Text) where
-    mode =
-        P.lens (_mode :: EndpointSpecSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _mode = a } :: EndpointSpecSetting s)
-
-instance P.HasPorts (EndpointSpecSetting s) (TF.Attr s [TF.Attr s (PortsSetting s)]) where
-    ports =
-        P.lens (_ports :: EndpointSpecSetting s -> TF.Attr s [TF.Attr s (PortsSetting s)])
-               (\s a -> s { _ports = a } :: EndpointSpecSetting s)
-
-instance s ~ s' => P.HasComputedMode (TF.Ref s' (EndpointSpecSetting s)) (TF.Attr s P.Text) where
-    computedMode x = TF.compute (TF.refKey x) "mode"
-
--- | @ports@ nested settings.
-data PortsSetting s = PortsSetting'
-    { _external      :: TF.Attr s P.Int
-    -- ^ @external@ - (Optional, Forces New)
-    --
-    , _internal      :: TF.Attr s P.Int
-    -- ^ @internal@ - (Required, Forces New)
-    --
-    , _ip            :: TF.Attr s P.Text
-    -- ^ @ip@ - (Optional, Forces New)
-    --
-    , _protocol      :: TF.Attr s P.Text
-    -- ^ @protocol@ - (Optional, Forces New)
-    --
-    , _name          :: TF.Attr s P.Text
-    -- ^ @name@ - (Optional)
-    -- A random name for the port
-    --
-    , _publishMode   :: TF.Attr s P.Text
-    -- ^ @publish_mode@ - (Optional)
-    -- Represents the mode in which the port is to be published: 'ingress' or
-    -- 'host'
-    --
-    , _publishedPort :: TF.Attr s P.Int
-    -- ^ @published_port@ - (Optional)
-    -- The port on the swarm hosts.
-    --
-    , _targetPort    :: TF.Attr s P.Int
-    -- ^ @target_port@ - (Required)
-    -- The port inside the container
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @ports@ settings value.
-newPortsSetting
-    :: TF.Attr s P.Int -- ^ 'P._internal': @internal@
-    -> TF.Attr s P.Int -- ^ 'P._targetPort': @target_port@
-    -> PortsSetting s
-newPortsSetting _internal _targetPort =
-    PortsSetting'
-        { _external = TF.Nil
-        , _internal = _internal
-        , _ip = TF.Nil
-        , _protocol = TF.value "tcp"
-        , _name = TF.Nil
-        , _publishMode = TF.value "ingress"
-        , _publishedPort = TF.Nil
-        , _targetPort = _targetPort
-        }
-
-instance TF.IsValue  (PortsSetting s)
-instance TF.IsObject (PortsSetting s) where
-    toObject PortsSetting'{..} = P.catMaybes
-        [ TF.assign "external" <$> TF.attribute _external
-        , TF.assign "internal" <$> TF.attribute _internal
-        , TF.assign "ip" <$> TF.attribute _ip
-        , TF.assign "protocol" <$> TF.attribute _protocol
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "publish_mode" <$> TF.attribute _publishMode
-        , TF.assign "published_port" <$> TF.attribute _publishedPort
-        , TF.assign "target_port" <$> TF.attribute _targetPort
-        ]
-
-instance TF.IsValid (PortsSetting s) where
-    validator = P.mempty
-
-instance P.HasExternal (PortsSetting s) (TF.Attr s P.Int) where
-    external =
-        P.lens (_external :: PortsSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _external = a } :: PortsSetting s)
-
-instance P.HasInternal (PortsSetting s) (TF.Attr s P.Int) where
-    internal =
-        P.lens (_internal :: PortsSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _internal = a } :: PortsSetting s)
-
-instance P.HasIp (PortsSetting s) (TF.Attr s P.Text) where
-    ip =
-        P.lens (_ip :: PortsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _ip = a } :: PortsSetting s)
-
-instance P.HasProtocol (PortsSetting s) (TF.Attr s P.Text) where
-    protocol =
-        P.lens (_protocol :: PortsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _protocol = a } :: PortsSetting s)
-
-instance P.HasName (PortsSetting s) (TF.Attr s P.Text) where
-    name =
-        P.lens (_name :: PortsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: PortsSetting s)
-
-instance P.HasPublishMode (PortsSetting s) (TF.Attr s P.Text) where
-    publishMode =
-        P.lens (_publishMode :: PortsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _publishMode = a } :: PortsSetting s)
-
-instance P.HasPublishedPort (PortsSetting s) (TF.Attr s P.Int) where
-    publishedPort =
-        P.lens (_publishedPort :: PortsSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _publishedPort = a } :: PortsSetting s)
-
-instance P.HasTargetPort (PortsSetting s) (TF.Attr s P.Int) where
-    targetPort =
-        P.lens (_targetPort :: PortsSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _targetPort = a } :: PortsSetting s)
+        P.lens (_permissions :: ContainerDevices s -> TF.Attr s P.Text)
+               (\s a -> s { _permissions = a } :: ContainerDevices s)
 
 -- | @host@ nested settings.
-data HostSetting s = HostSetting'
+data ContainerHost s = ContainerHost'
     { _host :: TF.Attr s P.Text
     -- ^ @host@ - (Required, Forces New)
     --
@@ -2049,38 +296,270 @@ data HostSetting s = HostSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @host@ settings value.
-newHostSetting
+newContainerHost
     :: TF.Attr s P.Text -- ^ 'P._host': @host@
     -> TF.Attr s P.Text -- ^ 'P._ip': @ip@
-    -> HostSetting s
-newHostSetting _host _ip =
-    HostSetting'
+    -> ContainerHost s
+newContainerHost _host _ip =
+    ContainerHost'
         { _host = _host
         , _ip = _ip
         }
 
-instance TF.IsValue  (HostSetting s)
-instance TF.IsObject (HostSetting s) where
-    toObject HostSetting'{..} = P.catMaybes
+instance TF.IsValue  (ContainerHost s)
+instance TF.IsObject (ContainerHost s) where
+    toObject ContainerHost'{..} = P.catMaybes
         [ TF.assign "host" <$> TF.attribute _host
         , TF.assign "ip" <$> TF.attribute _ip
         ]
 
-instance TF.IsValid (HostSetting s) where
+instance TF.IsValid (ContainerHost s) where
     validator = P.mempty
 
-instance P.HasHost (HostSetting s) (TF.Attr s P.Text) where
+instance P.HasHost (ContainerHost s) (TF.Attr s P.Text) where
     host =
-        P.lens (_host :: HostSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _host = a } :: HostSetting s)
+        P.lens (_host :: ContainerHost s -> TF.Attr s P.Text)
+               (\s a -> s { _host = a } :: ContainerHost s)
 
-instance P.HasIp (HostSetting s) (TF.Attr s P.Text) where
+instance P.HasIp (ContainerHost s) (TF.Attr s P.Text) where
     ip =
-        P.lens (_ip :: HostSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _ip = a } :: HostSetting s)
+        P.lens (_ip :: ContainerHost s -> TF.Attr s P.Text)
+               (\s a -> s { _ip = a } :: ContainerHost s)
+
+-- | @ports@ nested settings.
+data ContainerPorts s = ContainerPorts'
+    { _external :: TF.Attr s P.Int
+    -- ^ @external@ - (Optional, Forces New)
+    --
+    , _internal :: TF.Attr s P.Int
+    -- ^ @internal@ - (Required, Forces New)
+    --
+    , _ip       :: TF.Attr s P.Text
+    -- ^ @ip@ - (Optional, Forces New)
+    --
+    , _protocol :: TF.Attr s P.Text
+    -- ^ @protocol@ - (Optional, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @ports@ settings value.
+newContainerPorts
+    :: TF.Attr s P.Int -- ^ 'P._internal': @internal@
+    -> ContainerPorts s
+newContainerPorts _internal =
+    ContainerPorts'
+        { _external = TF.Nil
+        , _internal = _internal
+        , _ip = TF.Nil
+        , _protocol = TF.value "tcp"
+        }
+
+instance TF.IsValue  (ContainerPorts s)
+instance TF.IsObject (ContainerPorts s) where
+    toObject ContainerPorts'{..} = P.catMaybes
+        [ TF.assign "external" <$> TF.attribute _external
+        , TF.assign "internal" <$> TF.attribute _internal
+        , TF.assign "ip" <$> TF.attribute _ip
+        , TF.assign "protocol" <$> TF.attribute _protocol
+        ]
+
+instance TF.IsValid (ContainerPorts s) where
+    validator = P.mempty
+
+instance P.HasExternal (ContainerPorts s) (TF.Attr s P.Int) where
+    external =
+        P.lens (_external :: ContainerPorts s -> TF.Attr s P.Int)
+               (\s a -> s { _external = a } :: ContainerPorts s)
+
+instance P.HasInternal (ContainerPorts s) (TF.Attr s P.Int) where
+    internal =
+        P.lens (_internal :: ContainerPorts s -> TF.Attr s P.Int)
+               (\s a -> s { _internal = a } :: ContainerPorts s)
+
+instance P.HasIp (ContainerPorts s) (TF.Attr s P.Text) where
+    ip =
+        P.lens (_ip :: ContainerPorts s -> TF.Attr s P.Text)
+               (\s a -> s { _ip = a } :: ContainerPorts s)
+
+instance P.HasProtocol (ContainerPorts s) (TF.Attr s P.Text) where
+    protocol =
+        P.lens (_protocol :: ContainerPorts s -> TF.Attr s P.Text)
+               (\s a -> s { _protocol = a } :: ContainerPorts s)
+
+-- | @ulimit@ nested settings.
+data ContainerUlimit s = ContainerUlimit'
+    { _hard :: TF.Attr s P.Int
+    -- ^ @hard@ - (Required, Forces New)
+    --
+    , _name :: TF.Attr s P.Text
+    -- ^ @name@ - (Required, Forces New)
+    --
+    , _soft :: TF.Attr s P.Int
+    -- ^ @soft@ - (Required, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @ulimit@ settings value.
+newContainerUlimit
+    :: TF.Attr s P.Int -- ^ 'P._hard': @hard@
+    -> TF.Attr s P.Text -- ^ 'P._name': @name@
+    -> TF.Attr s P.Int -- ^ 'P._soft': @soft@
+    -> ContainerUlimit s
+newContainerUlimit _hard _name _soft =
+    ContainerUlimit'
+        { _hard = _hard
+        , _name = _name
+        , _soft = _soft
+        }
+
+instance TF.IsValue  (ContainerUlimit s)
+instance TF.IsObject (ContainerUlimit s) where
+    toObject ContainerUlimit'{..} = P.catMaybes
+        [ TF.assign "hard" <$> TF.attribute _hard
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "soft" <$> TF.attribute _soft
+        ]
+
+instance TF.IsValid (ContainerUlimit s) where
+    validator = P.mempty
+
+instance P.HasHard (ContainerUlimit s) (TF.Attr s P.Int) where
+    hard =
+        P.lens (_hard :: ContainerUlimit s -> TF.Attr s P.Int)
+               (\s a -> s { _hard = a } :: ContainerUlimit s)
+
+instance P.HasName (ContainerUlimit s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: ContainerUlimit s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ContainerUlimit s)
+
+instance P.HasSoft (ContainerUlimit s) (TF.Attr s P.Int) where
+    soft =
+        P.lens (_soft :: ContainerUlimit s -> TF.Attr s P.Int)
+               (\s a -> s { _soft = a } :: ContainerUlimit s)
+
+-- | @upload@ nested settings.
+data ContainerUpload s = ContainerUpload'
+    { _content    :: TF.Attr s P.Text
+    -- ^ @content@ - (Required, Forces New)
+    --
+    , _executable :: TF.Attr s P.Bool
+    -- ^ @executable@ - (Optional, Forces New)
+    --
+    , _file       :: TF.Attr s P.Text
+    -- ^ @file@ - (Required, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @upload@ settings value.
+newContainerUpload
+    :: TF.Attr s P.Text -- ^ 'P._content': @content@
+    -> TF.Attr s P.Text -- ^ 'P._file': @file@
+    -> ContainerUpload s
+newContainerUpload _content _file =
+    ContainerUpload'
+        { _content = _content
+        , _executable = TF.value P.False
+        , _file = _file
+        }
+
+instance TF.IsValue  (ContainerUpload s)
+instance TF.IsObject (ContainerUpload s) where
+    toObject ContainerUpload'{..} = P.catMaybes
+        [ TF.assign "content" <$> TF.attribute _content
+        , TF.assign "executable" <$> TF.attribute _executable
+        , TF.assign "file" <$> TF.attribute _file
+        ]
+
+instance TF.IsValid (ContainerUpload s) where
+    validator = P.mempty
+
+instance P.HasContent (ContainerUpload s) (TF.Attr s P.Text) where
+    content =
+        P.lens (_content :: ContainerUpload s -> TF.Attr s P.Text)
+               (\s a -> s { _content = a } :: ContainerUpload s)
+
+instance P.HasExecutable (ContainerUpload s) (TF.Attr s P.Bool) where
+    executable =
+        P.lens (_executable :: ContainerUpload s -> TF.Attr s P.Bool)
+               (\s a -> s { _executable = a } :: ContainerUpload s)
+
+instance P.HasFile (ContainerUpload s) (TF.Attr s P.Text) where
+    file =
+        P.lens (_file :: ContainerUpload s -> TF.Attr s P.Text)
+               (\s a -> s { _file = a } :: ContainerUpload s)
+
+-- | @volumes@ nested settings.
+data ContainerVolumes s = ContainerVolumes'
+    { _containerPath :: TF.Attr s P.Text
+    -- ^ @container_path@ - (Optional, Forces New)
+    --
+    , _fromContainer :: TF.Attr s P.Text
+    -- ^ @from_container@ - (Optional, Forces New)
+    --
+    , _hostPath      :: TF.Attr s P.Text
+    -- ^ @host_path@ - (Optional, Forces New)
+    --
+    , _readOnly      :: TF.Attr s P.Bool
+    -- ^ @read_only@ - (Optional, Forces New)
+    --
+    , _volumeName    :: TF.Attr s P.Text
+    -- ^ @volume_name@ - (Optional, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @volumes@ settings value.
+newContainerVolumes
+    :: ContainerVolumes s
+newContainerVolumes =
+    ContainerVolumes'
+        { _containerPath = TF.Nil
+        , _fromContainer = TF.Nil
+        , _hostPath = TF.Nil
+        , _readOnly = TF.Nil
+        , _volumeName = TF.Nil
+        }
+
+instance TF.IsValue  (ContainerVolumes s)
+instance TF.IsObject (ContainerVolumes s) where
+    toObject ContainerVolumes'{..} = P.catMaybes
+        [ TF.assign "container_path" <$> TF.attribute _containerPath
+        , TF.assign "from_container" <$> TF.attribute _fromContainer
+        , TF.assign "host_path" <$> TF.attribute _hostPath
+        , TF.assign "read_only" <$> TF.attribute _readOnly
+        , TF.assign "volume_name" <$> TF.attribute _volumeName
+        ]
+
+instance TF.IsValid (ContainerVolumes s) where
+    validator = P.mempty
+
+instance P.HasContainerPath (ContainerVolumes s) (TF.Attr s P.Text) where
+    containerPath =
+        P.lens (_containerPath :: ContainerVolumes s -> TF.Attr s P.Text)
+               (\s a -> s { _containerPath = a } :: ContainerVolumes s)
+
+instance P.HasFromContainer (ContainerVolumes s) (TF.Attr s P.Text) where
+    fromContainer =
+        P.lens (_fromContainer :: ContainerVolumes s -> TF.Attr s P.Text)
+               (\s a -> s { _fromContainer = a } :: ContainerVolumes s)
+
+instance P.HasHostPath (ContainerVolumes s) (TF.Attr s P.Text) where
+    hostPath =
+        P.lens (_hostPath :: ContainerVolumes s -> TF.Attr s P.Text)
+               (\s a -> s { _hostPath = a } :: ContainerVolumes s)
+
+instance P.HasReadOnly (ContainerVolumes s) (TF.Attr s P.Bool) where
+    readOnly =
+        P.lens (_readOnly :: ContainerVolumes s -> TF.Attr s P.Bool)
+               (\s a -> s { _readOnly = a } :: ContainerVolumes s)
+
+instance P.HasVolumeName (ContainerVolumes s) (TF.Attr s P.Text) where
+    volumeName =
+        P.lens (_volumeName :: ContainerVolumes s -> TF.Attr s P.Text)
+               (\s a -> s { _volumeName = a } :: ContainerVolumes s)
 
 -- | @ipam_config@ nested settings.
-data IpamConfigSetting s = IpamConfigSetting'
+data NetworkIpamConfig s = NetworkIpamConfig'
     { _auxAddress :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @aux_address@ - (Optional, Forces New)
     --
@@ -2096,145 +575,50 @@ data IpamConfigSetting s = IpamConfigSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @ipam_config@ settings value.
-newIpamConfigSetting
-    :: IpamConfigSetting s
-newIpamConfigSetting =
-    IpamConfigSetting'
+newNetworkIpamConfig
+    :: NetworkIpamConfig s
+newNetworkIpamConfig =
+    NetworkIpamConfig'
         { _auxAddress = TF.Nil
         , _gateway = TF.Nil
         , _ipRange = TF.Nil
         , _subnet = TF.Nil
         }
 
-instance TF.IsValue  (IpamConfigSetting s)
-instance TF.IsObject (IpamConfigSetting s) where
-    toObject IpamConfigSetting'{..} = P.catMaybes
+instance TF.IsValue  (NetworkIpamConfig s)
+instance TF.IsObject (NetworkIpamConfig s) where
+    toObject NetworkIpamConfig'{..} = P.catMaybes
         [ TF.assign "aux_address" <$> TF.attribute _auxAddress
         , TF.assign "gateway" <$> TF.attribute _gateway
         , TF.assign "ip_range" <$> TF.attribute _ipRange
         , TF.assign "subnet" <$> TF.attribute _subnet
         ]
 
-instance TF.IsValid (IpamConfigSetting s) where
+instance TF.IsValid (NetworkIpamConfig s) where
     validator = P.mempty
 
-instance P.HasAuxAddress (IpamConfigSetting s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+instance P.HasAuxAddress (NetworkIpamConfig s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     auxAddress =
-        P.lens (_auxAddress :: IpamConfigSetting s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _auxAddress = a } :: IpamConfigSetting s)
+        P.lens (_auxAddress :: NetworkIpamConfig s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _auxAddress = a } :: NetworkIpamConfig s)
 
-instance P.HasGateway (IpamConfigSetting s) (TF.Attr s P.Text) where
+instance P.HasGateway (NetworkIpamConfig s) (TF.Attr s P.Text) where
     gateway =
-        P.lens (_gateway :: IpamConfigSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _gateway = a } :: IpamConfigSetting s)
+        P.lens (_gateway :: NetworkIpamConfig s -> TF.Attr s P.Text)
+               (\s a -> s { _gateway = a } :: NetworkIpamConfig s)
 
-instance P.HasIpRange (IpamConfigSetting s) (TF.Attr s P.Text) where
+instance P.HasIpRange (NetworkIpamConfig s) (TF.Attr s P.Text) where
     ipRange =
-        P.lens (_ipRange :: IpamConfigSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _ipRange = a } :: IpamConfigSetting s)
+        P.lens (_ipRange :: NetworkIpamConfig s -> TF.Attr s P.Text)
+               (\s a -> s { _ipRange = a } :: NetworkIpamConfig s)
 
-instance P.HasSubnet (IpamConfigSetting s) (TF.Attr s P.Text) where
+instance P.HasSubnet (NetworkIpamConfig s) (TF.Attr s P.Text) where
     subnet =
-        P.lens (_subnet :: IpamConfigSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _subnet = a } :: IpamConfigSetting s)
-
--- | @mode@ nested settings.
-data ModeSetting s = ModeSetting'
-    { _global     :: TF.Attr s P.Bool
-    -- ^ @global@ - (Optional)
-    -- The global service mode
-    --
-    -- Conflicts with:
-    --
-    -- * 'replicated'
-    , _replicated :: TF.Attr s (ReplicatedSetting s)
-    -- ^ @replicated@ - (Optional)
-    -- The replicated service mode
-    --
-    -- Conflicts with:
-    --
-    -- * 'global'
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @mode@ settings value.
-newModeSetting
-    :: ModeSetting s
-newModeSetting =
-    ModeSetting'
-        { _global = TF.value P.False
-        , _replicated = TF.Nil
-        }
-
-instance TF.IsValue  (ModeSetting s)
-instance TF.IsObject (ModeSetting s) where
-    toObject ModeSetting'{..} = P.catMaybes
-        [ TF.assign "global" <$> TF.attribute _global
-        , TF.assign "replicated" <$> TF.attribute _replicated
-        ]
-
-instance TF.IsValid (ModeSetting s) where
-    validator = TF.fieldsValidator (\ModeSetting'{..} -> Map.fromList $ P.catMaybes
-        [ if (_global P.== TF.value P.False)
-              then P.Nothing
-              else P.Just ("_global",
-                            [ "_replicated"
-                            ])
-        , if (_replicated P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_replicated",
-                            [ "_global"
-                            ])
-        ])
-           P.<> TF.settingsValidator "_replicated"
-                  (_replicated
-                      :: ModeSetting s -> TF.Attr s (ReplicatedSetting s))
-                  TF.validator
-
-instance P.HasGlobal (ModeSetting s) (TF.Attr s P.Bool) where
-    global =
-        P.lens (_global :: ModeSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _global = a } :: ModeSetting s)
-
-instance P.HasReplicated (ModeSetting s) (TF.Attr s (ReplicatedSetting s)) where
-    replicated =
-        P.lens (_replicated :: ModeSetting s -> TF.Attr s (ReplicatedSetting s))
-               (\s a -> s { _replicated = a } :: ModeSetting s)
-
-instance s ~ s' => P.HasComputedReplicated (TF.Ref s' (ModeSetting s)) (TF.Attr s (ReplicatedSetting s)) where
-    computedReplicated x = TF.compute (TF.refKey x) "replicated"
-
--- | @replicated@ nested settings.
-data ReplicatedSetting s = ReplicatedSetting'
-    { _replicas :: TF.Attr s P.Int
-    -- ^ @replicas@ - (Optional)
-    -- The amount of replicas of the service
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @replicated@ settings value.
-newReplicatedSetting
-    :: ReplicatedSetting s
-newReplicatedSetting =
-    ReplicatedSetting'
-        { _replicas = TF.value 1
-        }
-
-instance TF.IsValue  (ReplicatedSetting s)
-instance TF.IsObject (ReplicatedSetting s) where
-    toObject ReplicatedSetting'{..} = P.catMaybes
-        [ TF.assign "replicas" <$> TF.attribute _replicas
-        ]
-
-instance TF.IsValid (ReplicatedSetting s) where
-    validator = P.mempty
-
-instance P.HasReplicas (ReplicatedSetting s) (TF.Attr s P.Int) where
-    replicas =
-        P.lens (_replicas :: ReplicatedSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _replicas = a } :: ReplicatedSetting s)
+        P.lens (_subnet :: NetworkIpamConfig s -> TF.Attr s P.Text)
+               (\s a -> s { _subnet = a } :: NetworkIpamConfig s)
 
 -- | @registry_auth@ nested settings.
-data RegistryAuthSetting = RegistryAuthSetting'
+data RegistryAuth = RegistryAuth'
     { _address    :: P.Text
     -- ^ @address@ - (Required)
     -- Address of the registry
@@ -2264,28 +648,28 @@ data RegistryAuthSetting = RegistryAuthSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @registry_auth@ settings value.
-newRegistryAuthSetting
+newRegistryAuth
     :: P.Text -- ^ 'P._address': @address@
-    -> RegistryAuthSetting
-newRegistryAuthSetting _address =
-    RegistryAuthSetting'
+    -> RegistryAuth
+newRegistryAuth _address =
+    RegistryAuth'
         { _address = _address
         , _configFile = P.Nothing
         , _password = P.Nothing
         , _username = P.Nothing
         }
 
-instance TF.IsValue  (RegistryAuthSetting)
-instance TF.IsObject (RegistryAuthSetting) where
-    toObject RegistryAuthSetting'{..} = P.catMaybes
+instance TF.IsValue  (RegistryAuth)
+instance TF.IsObject (RegistryAuth) where
+    toObject RegistryAuth'{..} = P.catMaybes
         [ P.Just $ TF.assign "address" _address
         , TF.assign "config_file" <$> _configFile
         , TF.assign "password" <$> _password
         , TF.assign "username" <$> _username
         ]
 
-instance TF.IsValid (RegistryAuthSetting) where
-    validator = TF.fieldsValidator (\RegistryAuthSetting'{..} -> Map.fromList $ P.catMaybes
+instance TF.IsValid (RegistryAuth) where
+    validator = TF.fieldsValidator (\RegistryAuth'{..} -> Map.fromList $ P.catMaybes
         [ if (_configFile P.== P.Nothing)
               then P.Nothing
               else P.Just ("_configFile",
@@ -2303,28 +687,1850 @@ instance TF.IsValid (RegistryAuthSetting) where
                             ])
         ])
 
-instance P.HasAddress (RegistryAuthSetting) (P.Text) where
+instance P.HasAddress (RegistryAuth) (P.Text) where
     address =
-        P.lens (_address :: RegistryAuthSetting -> P.Text)
-               (\s a -> s { _address = a } :: RegistryAuthSetting)
+        P.lens (_address :: RegistryAuth -> P.Text)
+               (\s a -> s { _address = a } :: RegistryAuth)
 
-instance P.HasConfigFile (RegistryAuthSetting) (P.Maybe P.Text) where
+instance P.HasConfigFile (RegistryAuth) (P.Maybe P.Text) where
     configFile =
-        P.lens (_configFile :: RegistryAuthSetting -> P.Maybe P.Text)
-               (\s a -> s { _configFile = a } :: RegistryAuthSetting)
+        P.lens (_configFile :: RegistryAuth -> P.Maybe P.Text)
+               (\s a -> s { _configFile = a } :: RegistryAuth)
 
-instance P.HasPassword (RegistryAuthSetting) (P.Maybe P.Text) where
+instance P.HasPassword (RegistryAuth) (P.Maybe P.Text) where
     password =
-        P.lens (_password :: RegistryAuthSetting -> P.Maybe P.Text)
-               (\s a -> s { _password = a } :: RegistryAuthSetting)
+        P.lens (_password :: RegistryAuth -> P.Maybe P.Text)
+               (\s a -> s { _password = a } :: RegistryAuth)
 
-instance P.HasUsername (RegistryAuthSetting) (P.Maybe P.Text) where
+instance P.HasUsername (RegistryAuth) (P.Maybe P.Text) where
     username =
-        P.lens (_username :: RegistryAuthSetting -> P.Maybe P.Text)
-               (\s a -> s { _username = a } :: RegistryAuthSetting)
+        P.lens (_username :: RegistryAuth -> P.Maybe P.Text)
+               (\s a -> s { _username = a } :: RegistryAuth)
+
+-- | @auth@ nested settings.
+data ServiceAuth s = ServiceAuth'
+    { _password      :: TF.Attr s P.Text
+    -- ^ @password@ - (Optional, Forces New)
+    --
+    , _serverAddress :: TF.Attr s P.Text
+    -- ^ @server_address@ - (Required, Forces New)
+    --
+    , _username      :: TF.Attr s P.Text
+    -- ^ @username@ - (Optional, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @auth@ settings value.
+newServiceAuth
+    :: TF.Attr s P.Text -- ^ 'P._serverAddress': @server_address@
+    -> ServiceAuth s
+newServiceAuth _serverAddress =
+    ServiceAuth'
+        { _password = TF.Nil
+        , _serverAddress = _serverAddress
+        , _username = TF.Nil
+        }
+
+instance TF.IsValue  (ServiceAuth s)
+instance TF.IsObject (ServiceAuth s) where
+    toObject ServiceAuth'{..} = P.catMaybes
+        [ TF.assign "password" <$> TF.attribute _password
+        , TF.assign "server_address" <$> TF.attribute _serverAddress
+        , TF.assign "username" <$> TF.attribute _username
+        ]
+
+instance TF.IsValid (ServiceAuth s) where
+    validator = P.mempty
+
+instance P.HasPassword (ServiceAuth s) (TF.Attr s P.Text) where
+    password =
+        P.lens (_password :: ServiceAuth s -> TF.Attr s P.Text)
+               (\s a -> s { _password = a } :: ServiceAuth s)
+
+instance P.HasServerAddress (ServiceAuth s) (TF.Attr s P.Text) where
+    serverAddress =
+        P.lens (_serverAddress :: ServiceAuth s -> TF.Attr s P.Text)
+               (\s a -> s { _serverAddress = a } :: ServiceAuth s)
+
+instance P.HasUsername (ServiceAuth s) (TF.Attr s P.Text) where
+    username =
+        P.lens (_username :: ServiceAuth s -> TF.Attr s P.Text)
+               (\s a -> s { _username = a } :: ServiceAuth s)
+
+-- | @bind_options@ nested settings.
+data ServiceBindOptions s = ServiceBindOptions'
+    { _propagation :: TF.Attr s P.Text
+    -- ^ @propagation@ - (Optional)
+    -- A propagation mode with the value
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @bind_options@ settings value.
+newServiceBindOptions
+    :: ServiceBindOptions s
+newServiceBindOptions =
+    ServiceBindOptions'
+        { _propagation = TF.Nil
+        }
+
+instance TF.IsValue  (ServiceBindOptions s)
+instance TF.IsObject (ServiceBindOptions s) where
+    toObject ServiceBindOptions'{..} = P.catMaybes
+        [ TF.assign "propagation" <$> TF.attribute _propagation
+        ]
+
+instance TF.IsValid (ServiceBindOptions s) where
+    validator = P.mempty
+
+instance P.HasPropagation (ServiceBindOptions s) (TF.Attr s P.Text) where
+    propagation =
+        P.lens (_propagation :: ServiceBindOptions s -> TF.Attr s P.Text)
+               (\s a -> s { _propagation = a } :: ServiceBindOptions s)
+
+-- | @mounts@ nested settings.
+data ServiceMounts s = ServiceMounts'
+    { _bindOptions   :: TF.Attr s (ServiceBindOptions s)
+    -- ^ @bind_options@ - (Optional)
+    -- Optional configuration for the bind type
+    --
+    , _readOnly      :: TF.Attr s P.Bool
+    -- ^ @read_only@ - (Optional)
+    -- Whether the mount should be read-only
+    --
+    , _source        :: TF.Attr s P.Text
+    -- ^ @source@ - (Required)
+    -- Mount source (e.g. a volume name, a host path)
+    --
+    , _target        :: TF.Attr s P.Text
+    -- ^ @target@ - (Required)
+    -- Container path
+    --
+    , _tmpfsOptions  :: TF.Attr s (ServiceTmpfsOptions s)
+    -- ^ @tmpfs_options@ - (Optional)
+    -- Optional configuration for the tmpfs type
+    --
+    , _type'         :: TF.Attr s P.Text
+    -- ^ @type@ - (Required)
+    -- The mount type
+    --
+    , _volumeOptions :: TF.Attr s (ServiceVolumeOptions s)
+    -- ^ @volume_options@ - (Optional)
+    -- Optional configuration for the volume type
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @mounts@ settings value.
+newServiceMounts
+    :: TF.Attr s P.Text -- ^ 'P._source': @source@
+    -> TF.Attr s P.Text -- ^ 'P._target': @target@
+    -> TF.Attr s P.Text -- ^ 'P._type'': @type@
+    -> ServiceMounts s
+newServiceMounts _source _target _type' =
+    ServiceMounts'
+        { _bindOptions = TF.Nil
+        , _readOnly = TF.Nil
+        , _source = _source
+        , _target = _target
+        , _tmpfsOptions = TF.Nil
+        , _type' = _type'
+        , _volumeOptions = TF.Nil
+        }
+
+instance TF.IsValue  (ServiceMounts s)
+instance TF.IsObject (ServiceMounts s) where
+    toObject ServiceMounts'{..} = P.catMaybes
+        [ TF.assign "bind_options" <$> TF.attribute _bindOptions
+        , TF.assign "read_only" <$> TF.attribute _readOnly
+        , TF.assign "source" <$> TF.attribute _source
+        , TF.assign "target" <$> TF.attribute _target
+        , TF.assign "tmpfs_options" <$> TF.attribute _tmpfsOptions
+        , TF.assign "type" <$> TF.attribute _type'
+        , TF.assign "volume_options" <$> TF.attribute _volumeOptions
+        ]
+
+instance TF.IsValid (ServiceMounts s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_bindOptions"
+                  (_bindOptions
+                      :: ServiceMounts s -> TF.Attr s (ServiceBindOptions s))
+                  TF.validator
+           P.<> TF.settingsValidator "_tmpfsOptions"
+                  (_tmpfsOptions
+                      :: ServiceMounts s -> TF.Attr s (ServiceTmpfsOptions s))
+                  TF.validator
+           P.<> TF.settingsValidator "_volumeOptions"
+                  (_volumeOptions
+                      :: ServiceMounts s -> TF.Attr s (ServiceVolumeOptions s))
+                  TF.validator
+
+instance P.HasBindOptions (ServiceMounts s) (TF.Attr s (ServiceBindOptions s)) where
+    bindOptions =
+        P.lens (_bindOptions :: ServiceMounts s -> TF.Attr s (ServiceBindOptions s))
+               (\s a -> s { _bindOptions = a } :: ServiceMounts s)
+
+instance P.HasReadOnly (ServiceMounts s) (TF.Attr s P.Bool) where
+    readOnly =
+        P.lens (_readOnly :: ServiceMounts s -> TF.Attr s P.Bool)
+               (\s a -> s { _readOnly = a } :: ServiceMounts s)
+
+instance P.HasSource (ServiceMounts s) (TF.Attr s P.Text) where
+    source =
+        P.lens (_source :: ServiceMounts s -> TF.Attr s P.Text)
+               (\s a -> s { _source = a } :: ServiceMounts s)
+
+instance P.HasTarget (ServiceMounts s) (TF.Attr s P.Text) where
+    target =
+        P.lens (_target :: ServiceMounts s -> TF.Attr s P.Text)
+               (\s a -> s { _target = a } :: ServiceMounts s)
+
+instance P.HasTmpfsOptions (ServiceMounts s) (TF.Attr s (ServiceTmpfsOptions s)) where
+    tmpfsOptions =
+        P.lens (_tmpfsOptions :: ServiceMounts s -> TF.Attr s (ServiceTmpfsOptions s))
+               (\s a -> s { _tmpfsOptions = a } :: ServiceMounts s)
+
+instance P.HasType' (ServiceMounts s) (TF.Attr s P.Text) where
+    type' =
+        P.lens (_type' :: ServiceMounts s -> TF.Attr s P.Text)
+               (\s a -> s { _type' = a } :: ServiceMounts s)
+
+instance P.HasVolumeOptions (ServiceMounts s) (TF.Attr s (ServiceVolumeOptions s)) where
+    volumeOptions =
+        P.lens (_volumeOptions :: ServiceMounts s -> TF.Attr s (ServiceVolumeOptions s))
+               (\s a -> s { _volumeOptions = a } :: ServiceMounts s)
+
+-- | @container_spec@ nested settings.
+data ServiceContainerSpec s = ServiceContainerSpec'
+    { _args            :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @args@ - (Optional)
+    -- Arguments to the command
+    --
+    , _command         :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @command@ - (Optional)
+    -- The command to be run in the image
+    --
+    , _configs         :: TF.Attr s [TF.Attr s (ServiceConfigs s)]
+    -- ^ @configs@ - (Optional)
+    -- References to zero or more configs that will be exposed to the service
+    --
+    , _dir             :: TF.Attr s P.Text
+    -- ^ @dir@ - (Optional)
+    -- The working directory for commands to run in
+    --
+    , _dnsConfig       :: TF.Attr s (ServiceDnsConfig s)
+    -- ^ @dns_config@ - (Optional)
+    -- Specification for DNS related configurations in resolver configuration file
+    -- (resolv.conf)
+    --
+    , _env             :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @env@ - (Optional)
+    -- A list of environment variables in the form VAR="value"
+    --
+    , _groups          :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @groups@ - (Optional)
+    -- A list of additional groups that the container process will run as
+    --
+    , _healthcheck     :: TF.Attr s (ServiceHealthcheck s)
+    -- ^ @healthcheck@ - (Optional)
+    -- A test to perform to check that the container is healthy
+    --
+    , _hostname        :: TF.Attr s P.Text
+    -- ^ @hostname@ - (Optional)
+    -- The hostname to use for the container, as a valid RFC 1123 hostname
+    --
+    , _hosts           :: TF.Attr s [TF.Attr s (ServiceHosts s)]
+    -- ^ @hosts@ - (Optional, Forces New)
+    -- A list of hostname/IP mappings to add to the container's hosts file.
+    --
+    , _image           :: TF.Attr s P.Text
+    -- ^ @image@ - (Required)
+    -- The image name to use for the containers of the service
+    --
+    , _isolation       :: TF.Attr s P.Text
+    -- ^ @isolation@ - (Optional)
+    -- Isolation technology of the containers running the service. (Windows only)
+    --
+    , _labels          :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @labels@ - (Optional)
+    -- User-defined key/value metadata
+    --
+    , _mounts          :: TF.Attr s [TF.Attr s (ServiceMounts s)]
+    -- ^ @mounts@ - (Optional)
+    -- Specification for mounts to be added to containers created as part of the
+    -- service
+    --
+    , _privileges      :: TF.Attr s (ServicePrivileges s)
+    -- ^ @privileges@ - (Optional)
+    -- Security options for the container
+    --
+    , _readOnly        :: TF.Attr s P.Bool
+    -- ^ @read_only@ - (Optional)
+    -- Mount the container's root filesystem as read only
+    --
+    , _secrets         :: TF.Attr s [TF.Attr s (ServiceSecrets s)]
+    -- ^ @secrets@ - (Optional)
+    -- References to zero or more secrets that will be exposed to the service
+    --
+    , _stopGracePeriod :: TF.Attr s P.Text
+    -- ^ @stop_grace_period@ - (Optional)
+    -- Amount of time to wait for the container to terminate before forcefully
+    -- removing it (ms|s|m|h)
+    --
+    , _stopSignal      :: TF.Attr s P.Text
+    -- ^ @stop_signal@ - (Optional)
+    -- Signal to stop the container
+    --
+    , _user            :: TF.Attr s P.Text
+    -- ^ @user@ - (Optional)
+    -- The user inside the container
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @container_spec@ settings value.
+newServiceContainerSpec
+    :: TF.Attr s P.Text -- ^ 'P._image': @image@
+    -> ServiceContainerSpec s
+newServiceContainerSpec _image =
+    ServiceContainerSpec'
+        { _args = TF.Nil
+        , _command = TF.Nil
+        , _configs = TF.Nil
+        , _dir = TF.Nil
+        , _dnsConfig = TF.Nil
+        , _env = TF.Nil
+        , _groups = TF.Nil
+        , _healthcheck = TF.Nil
+        , _hostname = TF.Nil
+        , _hosts = TF.Nil
+        , _image = _image
+        , _isolation = TF.value "default"
+        , _labels = TF.Nil
+        , _mounts = TF.Nil
+        , _privileges = TF.Nil
+        , _readOnly = TF.Nil
+        , _secrets = TF.Nil
+        , _stopGracePeriod = TF.Nil
+        , _stopSignal = TF.Nil
+        , _user = TF.Nil
+        }
+
+instance TF.IsValue  (ServiceContainerSpec s)
+instance TF.IsObject (ServiceContainerSpec s) where
+    toObject ServiceContainerSpec'{..} = P.catMaybes
+        [ TF.assign "args" <$> TF.attribute _args
+        , TF.assign "command" <$> TF.attribute _command
+        , TF.assign "configs" <$> TF.attribute _configs
+        , TF.assign "dir" <$> TF.attribute _dir
+        , TF.assign "dns_config" <$> TF.attribute _dnsConfig
+        , TF.assign "env" <$> TF.attribute _env
+        , TF.assign "groups" <$> TF.attribute _groups
+        , TF.assign "healthcheck" <$> TF.attribute _healthcheck
+        , TF.assign "hostname" <$> TF.attribute _hostname
+        , TF.assign "hosts" <$> TF.attribute _hosts
+        , TF.assign "image" <$> TF.attribute _image
+        , TF.assign "isolation" <$> TF.attribute _isolation
+        , TF.assign "labels" <$> TF.attribute _labels
+        , TF.assign "mounts" <$> TF.attribute _mounts
+        , TF.assign "privileges" <$> TF.attribute _privileges
+        , TF.assign "read_only" <$> TF.attribute _readOnly
+        , TF.assign "secrets" <$> TF.attribute _secrets
+        , TF.assign "stop_grace_period" <$> TF.attribute _stopGracePeriod
+        , TF.assign "stop_signal" <$> TF.attribute _stopSignal
+        , TF.assign "user" <$> TF.attribute _user
+        ]
+
+instance TF.IsValid (ServiceContainerSpec s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_dnsConfig"
+                  (_dnsConfig
+                      :: ServiceContainerSpec s -> TF.Attr s (ServiceDnsConfig s))
+                  TF.validator
+           P.<> TF.settingsValidator "_healthcheck"
+                  (_healthcheck
+                      :: ServiceContainerSpec s -> TF.Attr s (ServiceHealthcheck s))
+                  TF.validator
+           P.<> TF.settingsValidator "_privileges"
+                  (_privileges
+                      :: ServiceContainerSpec s -> TF.Attr s (ServicePrivileges s))
+                  TF.validator
+
+instance P.HasArgs (ServiceContainerSpec s) (TF.Attr s [TF.Attr s P.Text]) where
+    args =
+        P.lens (_args :: ServiceContainerSpec s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _args = a } :: ServiceContainerSpec s)
+
+instance P.HasCommand (ServiceContainerSpec s) (TF.Attr s [TF.Attr s P.Text]) where
+    command =
+        P.lens (_command :: ServiceContainerSpec s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _command = a } :: ServiceContainerSpec s)
+
+instance P.HasConfigs (ServiceContainerSpec s) (TF.Attr s [TF.Attr s (ServiceConfigs s)]) where
+    configs =
+        P.lens (_configs :: ServiceContainerSpec s -> TF.Attr s [TF.Attr s (ServiceConfigs s)])
+               (\s a -> s { _configs = a } :: ServiceContainerSpec s)
+
+instance P.HasDir (ServiceContainerSpec s) (TF.Attr s P.Text) where
+    dir =
+        P.lens (_dir :: ServiceContainerSpec s -> TF.Attr s P.Text)
+               (\s a -> s { _dir = a } :: ServiceContainerSpec s)
+
+instance P.HasDnsConfig (ServiceContainerSpec s) (TF.Attr s (ServiceDnsConfig s)) where
+    dnsConfig =
+        P.lens (_dnsConfig :: ServiceContainerSpec s -> TF.Attr s (ServiceDnsConfig s))
+               (\s a -> s { _dnsConfig = a } :: ServiceContainerSpec s)
+
+instance P.HasEnv (ServiceContainerSpec s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    env =
+        P.lens (_env :: ServiceContainerSpec s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _env = a } :: ServiceContainerSpec s)
+
+instance P.HasGroups (ServiceContainerSpec s) (TF.Attr s [TF.Attr s P.Text]) where
+    groups =
+        P.lens (_groups :: ServiceContainerSpec s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _groups = a } :: ServiceContainerSpec s)
+
+instance P.HasHealthcheck (ServiceContainerSpec s) (TF.Attr s (ServiceHealthcheck s)) where
+    healthcheck =
+        P.lens (_healthcheck :: ServiceContainerSpec s -> TF.Attr s (ServiceHealthcheck s))
+               (\s a -> s { _healthcheck = a } :: ServiceContainerSpec s)
+
+instance P.HasHostname (ServiceContainerSpec s) (TF.Attr s P.Text) where
+    hostname =
+        P.lens (_hostname :: ServiceContainerSpec s -> TF.Attr s P.Text)
+               (\s a -> s { _hostname = a } :: ServiceContainerSpec s)
+
+instance P.HasHosts (ServiceContainerSpec s) (TF.Attr s [TF.Attr s (ServiceHosts s)]) where
+    hosts =
+        P.lens (_hosts :: ServiceContainerSpec s -> TF.Attr s [TF.Attr s (ServiceHosts s)])
+               (\s a -> s { _hosts = a } :: ServiceContainerSpec s)
+
+instance P.HasImage (ServiceContainerSpec s) (TF.Attr s P.Text) where
+    image =
+        P.lens (_image :: ServiceContainerSpec s -> TF.Attr s P.Text)
+               (\s a -> s { _image = a } :: ServiceContainerSpec s)
+
+instance P.HasIsolation (ServiceContainerSpec s) (TF.Attr s P.Text) where
+    isolation =
+        P.lens (_isolation :: ServiceContainerSpec s -> TF.Attr s P.Text)
+               (\s a -> s { _isolation = a } :: ServiceContainerSpec s)
+
+instance P.HasLabels (ServiceContainerSpec s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    labels =
+        P.lens (_labels :: ServiceContainerSpec s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _labels = a } :: ServiceContainerSpec s)
+
+instance P.HasMounts (ServiceContainerSpec s) (TF.Attr s [TF.Attr s (ServiceMounts s)]) where
+    mounts =
+        P.lens (_mounts :: ServiceContainerSpec s -> TF.Attr s [TF.Attr s (ServiceMounts s)])
+               (\s a -> s { _mounts = a } :: ServiceContainerSpec s)
+
+instance P.HasPrivileges (ServiceContainerSpec s) (TF.Attr s (ServicePrivileges s)) where
+    privileges =
+        P.lens (_privileges :: ServiceContainerSpec s -> TF.Attr s (ServicePrivileges s))
+               (\s a -> s { _privileges = a } :: ServiceContainerSpec s)
+
+instance P.HasReadOnly (ServiceContainerSpec s) (TF.Attr s P.Bool) where
+    readOnly =
+        P.lens (_readOnly :: ServiceContainerSpec s -> TF.Attr s P.Bool)
+               (\s a -> s { _readOnly = a } :: ServiceContainerSpec s)
+
+instance P.HasSecrets (ServiceContainerSpec s) (TF.Attr s [TF.Attr s (ServiceSecrets s)]) where
+    secrets =
+        P.lens (_secrets :: ServiceContainerSpec s -> TF.Attr s [TF.Attr s (ServiceSecrets s)])
+               (\s a -> s { _secrets = a } :: ServiceContainerSpec s)
+
+instance P.HasStopGracePeriod (ServiceContainerSpec s) (TF.Attr s P.Text) where
+    stopGracePeriod =
+        P.lens (_stopGracePeriod :: ServiceContainerSpec s -> TF.Attr s P.Text)
+               (\s a -> s { _stopGracePeriod = a } :: ServiceContainerSpec s)
+
+instance P.HasStopSignal (ServiceContainerSpec s) (TF.Attr s P.Text) where
+    stopSignal =
+        P.lens (_stopSignal :: ServiceContainerSpec s -> TF.Attr s P.Text)
+               (\s a -> s { _stopSignal = a } :: ServiceContainerSpec s)
+
+instance P.HasUser (ServiceContainerSpec s) (TF.Attr s P.Text) where
+    user =
+        P.lens (_user :: ServiceContainerSpec s -> TF.Attr s P.Text)
+               (\s a -> s { _user = a } :: ServiceContainerSpec s)
+
+instance s ~ s' => P.HasComputedDnsConfig (TF.Ref s' (ServiceContainerSpec s)) (TF.Attr s (ServiceDnsConfig s)) where
+    computedDnsConfig x = TF.compute (TF.refKey x) "dns_config"
+
+instance s ~ s' => P.HasComputedHealthcheck (TF.Ref s' (ServiceContainerSpec s)) (TF.Attr s (ServiceHealthcheck s)) where
+    computedHealthcheck x = TF.compute (TF.refKey x) "healthcheck"
+
+instance s ~ s' => P.HasComputedStopGracePeriod (TF.Ref s' (ServiceContainerSpec s)) (TF.Attr s P.Text) where
+    computedStopGracePeriod x = TF.compute (TF.refKey x) "stop_grace_period"
+
+-- | @task_spec@ nested settings.
+data ServiceTaskSpec s = ServiceTaskSpec'
+    { _containerSpec :: TF.Attr s (ServiceContainerSpec s)
+    -- ^ @container_spec@ - (Required)
+    -- The spec for each container
+    --
+    , _forceUpdate :: TF.Attr s P.Int
+    -- ^ @force_update@ - (Optional)
+    -- A counter that triggers an update even if no relevant parameters have been
+    -- changed. See
+    -- https://github.com/docker/swarmkit/blob/master/api/specs.proto#L126
+    --
+    , _logDriver :: TF.Attr s (ServiceLogDriver s)
+    -- ^ @log_driver@ - (Optional)
+    -- Specifies the log driver to use for tasks created from this spec. If not
+    -- present, the default one for the swarm will be used, finally falling back to
+    -- the engine default if not specified
+    --
+    , _networks :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @networks@ - (Optional)
+    -- Ids of the networks in which the  container will be put in.
+    --
+    , _placement :: TF.Attr s (ServicePlacement s)
+    -- ^ @placement@ - (Optional)
+    -- The placement preferences
+    --
+    , _resources :: TF.Attr s (ServiceResources s)
+    -- ^ @resources@ - (Optional)
+    -- Resource requirements which apply to each individual container created as
+    -- part of the service
+    --
+    , _restartPolicy :: TF.Attr s (P.Map P.Text (TF.Attr s (ServiceRestartPolicy s)))
+    -- ^ @restart_policy@ - (Optional)
+    -- Specification for the restart policy which applies to containers created as
+    -- part of this service.
+    --
+    , _runtime :: TF.Attr s P.Text
+    -- ^ @runtime@ - (Optional)
+    -- Runtime is the type of runtime specified for the task executor. See
+    -- https://github.com/moby/moby/blob/master/api/types/swarm/runtime.go
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @task_spec@ settings value.
+newServiceTaskSpec
+    :: TF.Attr s (ServiceContainerSpec s) -- ^ 'P._containerSpec': @container_spec@
+    -> ServiceTaskSpec s
+newServiceTaskSpec _containerSpec =
+    ServiceTaskSpec'
+        { _containerSpec = _containerSpec
+        , _forceUpdate = TF.Nil
+        , _logDriver = TF.Nil
+        , _networks = TF.Nil
+        , _placement = TF.Nil
+        , _resources = TF.Nil
+        , _restartPolicy = TF.Nil
+        , _runtime = TF.Nil
+        }
+
+instance TF.IsValue  (ServiceTaskSpec s)
+instance TF.IsObject (ServiceTaskSpec s) where
+    toObject ServiceTaskSpec'{..} = P.catMaybes
+        [ TF.assign "container_spec" <$> TF.attribute _containerSpec
+        , TF.assign "force_update" <$> TF.attribute _forceUpdate
+        , TF.assign "log_driver" <$> TF.attribute _logDriver
+        , TF.assign "networks" <$> TF.attribute _networks
+        , TF.assign "placement" <$> TF.attribute _placement
+        , TF.assign "resources" <$> TF.attribute _resources
+        , TF.assign "restart_policy" <$> TF.attribute _restartPolicy
+        , TF.assign "runtime" <$> TF.attribute _runtime
+        ]
+
+instance TF.IsValid (ServiceTaskSpec s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_containerSpec"
+                  (_containerSpec
+                      :: ServiceTaskSpec s -> TF.Attr s (ServiceContainerSpec s))
+                  TF.validator
+           P.<> TF.settingsValidator "_logDriver"
+                  (_logDriver
+                      :: ServiceTaskSpec s -> TF.Attr s (ServiceLogDriver s))
+                  TF.validator
+           P.<> TF.settingsValidator "_placement"
+                  (_placement
+                      :: ServiceTaskSpec s -> TF.Attr s (ServicePlacement s))
+                  TF.validator
+           P.<> TF.settingsValidator "_resources"
+                  (_resources
+                      :: ServiceTaskSpec s -> TF.Attr s (ServiceResources s))
+                  TF.validator
+
+instance P.HasContainerSpec (ServiceTaskSpec s) (TF.Attr s (ServiceContainerSpec s)) where
+    containerSpec =
+        P.lens (_containerSpec :: ServiceTaskSpec s -> TF.Attr s (ServiceContainerSpec s))
+               (\s a -> s { _containerSpec = a } :: ServiceTaskSpec s)
+
+instance P.HasForceUpdate (ServiceTaskSpec s) (TF.Attr s P.Int) where
+    forceUpdate =
+        P.lens (_forceUpdate :: ServiceTaskSpec s -> TF.Attr s P.Int)
+               (\s a -> s { _forceUpdate = a } :: ServiceTaskSpec s)
+
+instance P.HasLogDriver (ServiceTaskSpec s) (TF.Attr s (ServiceLogDriver s)) where
+    logDriver =
+        P.lens (_logDriver :: ServiceTaskSpec s -> TF.Attr s (ServiceLogDriver s))
+               (\s a -> s { _logDriver = a } :: ServiceTaskSpec s)
+
+instance P.HasNetworks (ServiceTaskSpec s) (TF.Attr s [TF.Attr s P.Text]) where
+    networks =
+        P.lens (_networks :: ServiceTaskSpec s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _networks = a } :: ServiceTaskSpec s)
+
+instance P.HasPlacement (ServiceTaskSpec s) (TF.Attr s (ServicePlacement s)) where
+    placement =
+        P.lens (_placement :: ServiceTaskSpec s -> TF.Attr s (ServicePlacement s))
+               (\s a -> s { _placement = a } :: ServiceTaskSpec s)
+
+instance P.HasResources (ServiceTaskSpec s) (TF.Attr s (ServiceResources s)) where
+    resources =
+        P.lens (_resources :: ServiceTaskSpec s -> TF.Attr s (ServiceResources s))
+               (\s a -> s { _resources = a } :: ServiceTaskSpec s)
+
+instance P.HasRestartPolicy (ServiceTaskSpec s) (TF.Attr s (P.Map P.Text (TF.Attr s (ServiceRestartPolicy s)))) where
+    restartPolicy =
+        P.lens (_restartPolicy :: ServiceTaskSpec s -> TF.Attr s (P.Map P.Text (TF.Attr s (ServiceRestartPolicy s))))
+               (\s a -> s { _restartPolicy = a } :: ServiceTaskSpec s)
+
+instance P.HasRuntime (ServiceTaskSpec s) (TF.Attr s P.Text) where
+    runtime =
+        P.lens (_runtime :: ServiceTaskSpec s -> TF.Attr s P.Text)
+               (\s a -> s { _runtime = a } :: ServiceTaskSpec s)
+
+instance s ~ s' => P.HasComputedForceUpdate (TF.Ref s' (ServiceTaskSpec s)) (TF.Attr s P.Int) where
+    computedForceUpdate x = TF.compute (TF.refKey x) "force_update"
+
+instance s ~ s' => P.HasComputedPlacement (TF.Ref s' (ServiceTaskSpec s)) (TF.Attr s (ServicePlacement s)) where
+    computedPlacement x = TF.compute (TF.refKey x) "placement"
+
+instance s ~ s' => P.HasComputedResources (TF.Ref s' (ServiceTaskSpec s)) (TF.Attr s (ServiceResources s)) where
+    computedResources x = TF.compute (TF.refKey x) "resources"
+
+instance s ~ s' => P.HasComputedRestartPolicy (TF.Ref s' (ServiceTaskSpec s)) (TF.Attr s (P.Map P.Text (TF.Attr s (ServiceRestartPolicy s)))) where
+    computedRestartPolicy x = TF.compute (TF.refKey x) "restart_policy"
+
+instance s ~ s' => P.HasComputedRuntime (TF.Ref s' (ServiceTaskSpec s)) (TF.Attr s P.Text) where
+    computedRuntime x = TF.compute (TF.refKey x) "runtime"
+
+-- | @restart_policy@ nested settings.
+data ServiceRestartPolicy s = ServiceRestartPolicy'
+    { _condition   :: TF.Attr s P.Text
+    -- ^ @condition@ - (Optional)
+    -- Condition for restart
+    --
+    , _delay       :: TF.Attr s P.Text
+    -- ^ @delay@ - (Optional)
+    -- Delay between restart attempts (ms|s|m|h)
+    --
+    , _maxAttempts :: TF.Attr s P.Int
+    -- ^ @max_attempts@ - (Optional)
+    -- Maximum attempts to restart a given container before giving up (default
+    -- value is 0, which is ignored)
+    --
+    , _window      :: TF.Attr s P.Text
+    -- ^ @window@ - (Optional)
+    -- The time window used to evaluate the restart policy (default value is 0,
+    -- which is unbounded) (ms|s|m|h)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @restart_policy@ settings value.
+newServiceRestartPolicy
+    :: ServiceRestartPolicy s
+newServiceRestartPolicy =
+    ServiceRestartPolicy'
+        { _condition = TF.Nil
+        , _delay = TF.Nil
+        , _maxAttempts = TF.Nil
+        , _window = TF.Nil
+        }
+
+instance TF.IsValue  (ServiceRestartPolicy s)
+instance TF.IsObject (ServiceRestartPolicy s) where
+    toObject ServiceRestartPolicy'{..} = P.catMaybes
+        [ TF.assign "condition" <$> TF.attribute _condition
+        , TF.assign "delay" <$> TF.attribute _delay
+        , TF.assign "max_attempts" <$> TF.attribute _maxAttempts
+        , TF.assign "window" <$> TF.attribute _window
+        ]
+
+instance TF.IsValid (ServiceRestartPolicy s) where
+    validator = P.mempty
+
+instance P.HasCondition (ServiceRestartPolicy s) (TF.Attr s P.Text) where
+    condition =
+        P.lens (_condition :: ServiceRestartPolicy s -> TF.Attr s P.Text)
+               (\s a -> s { _condition = a } :: ServiceRestartPolicy s)
+
+instance P.HasDelay (ServiceRestartPolicy s) (TF.Attr s P.Text) where
+    delay =
+        P.lens (_delay :: ServiceRestartPolicy s -> TF.Attr s P.Text)
+               (\s a -> s { _delay = a } :: ServiceRestartPolicy s)
+
+instance P.HasMaxAttempts (ServiceRestartPolicy s) (TF.Attr s P.Int) where
+    maxAttempts =
+        P.lens (_maxAttempts :: ServiceRestartPolicy s -> TF.Attr s P.Int)
+               (\s a -> s { _maxAttempts = a } :: ServiceRestartPolicy s)
+
+instance P.HasWindow (ServiceRestartPolicy s) (TF.Attr s P.Text) where
+    window =
+        P.lens (_window :: ServiceRestartPolicy s -> TF.Attr s P.Text)
+               (\s a -> s { _window = a } :: ServiceRestartPolicy s)
+
+-- | @resources@ nested settings.
+data ServiceResources s = ServiceResources'
+    { _limits      :: TF.Attr s (ServiceLimits s)
+    -- ^ @limits@ - (Optional)
+    -- Describes the resources which can be advertised by a node and requested by a
+    -- task
+    --
+    , _reservation :: TF.Attr s (ServiceReservation s)
+    -- ^ @reservation@ - (Optional)
+    -- An object describing the resources which can be advertised by a node and
+    -- requested by a task
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @resources@ settings value.
+newServiceResources
+    :: ServiceResources s
+newServiceResources =
+    ServiceResources'
+        { _limits = TF.Nil
+        , _reservation = TF.Nil
+        }
+
+instance TF.IsValue  (ServiceResources s)
+instance TF.IsObject (ServiceResources s) where
+    toObject ServiceResources'{..} = P.catMaybes
+        [ TF.assign "limits" <$> TF.attribute _limits
+        , TF.assign "reservation" <$> TF.attribute _reservation
+        ]
+
+instance TF.IsValid (ServiceResources s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_limits"
+                  (_limits
+                      :: ServiceResources s -> TF.Attr s (ServiceLimits s))
+                  TF.validator
+           P.<> TF.settingsValidator "_reservation"
+                  (_reservation
+                      :: ServiceResources s -> TF.Attr s (ServiceReservation s))
+                  TF.validator
+
+instance P.HasLimits (ServiceResources s) (TF.Attr s (ServiceLimits s)) where
+    limits =
+        P.lens (_limits :: ServiceResources s -> TF.Attr s (ServiceLimits s))
+               (\s a -> s { _limits = a } :: ServiceResources s)
+
+instance P.HasReservation (ServiceResources s) (TF.Attr s (ServiceReservation s)) where
+    reservation =
+        P.lens (_reservation :: ServiceResources s -> TF.Attr s (ServiceReservation s))
+               (\s a -> s { _reservation = a } :: ServiceResources s)
+
+-- | @reservation@ nested settings.
+data ServiceReservation s = ServiceReservation'
+    { _genericResources :: TF.Attr s (ServiceGenericResources s)
+    -- ^ @generic_resources@ - (Optional)
+    -- User-defined resources can be either Integer resources (e.g, SSD=3) or
+    -- String resources (e.g, GPU=UUID1)
+    --
+    , _memoryBytes      :: TF.Attr s P.Int
+    -- ^ @memory_bytes@ - (Optional)
+    -- The amounf of memory in bytes the container allocates
+    --
+    , _nanoCpus         :: TF.Attr s P.Int
+    -- ^ @nano_cpus@ - (Optional)
+    -- CPU shares in units of 1/1e9 (or 10^-9) of the CPU. Should be at least
+    -- 1000000
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @reservation@ settings value.
+newServiceReservation
+    :: ServiceReservation s
+newServiceReservation =
+    ServiceReservation'
+        { _genericResources = TF.Nil
+        , _memoryBytes = TF.Nil
+        , _nanoCpus = TF.Nil
+        }
+
+instance TF.IsValue  (ServiceReservation s)
+instance TF.IsObject (ServiceReservation s) where
+    toObject ServiceReservation'{..} = P.catMaybes
+        [ TF.assign "generic_resources" <$> TF.attribute _genericResources
+        , TF.assign "memory_bytes" <$> TF.attribute _memoryBytes
+        , TF.assign "nano_cpus" <$> TF.attribute _nanoCpus
+        ]
+
+instance TF.IsValid (ServiceReservation s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_genericResources"
+                  (_genericResources
+                      :: ServiceReservation s -> TF.Attr s (ServiceGenericResources s))
+                  TF.validator
+
+instance P.HasGenericResources (ServiceReservation s) (TF.Attr s (ServiceGenericResources s)) where
+    genericResources =
+        P.lens (_genericResources :: ServiceReservation s -> TF.Attr s (ServiceGenericResources s))
+               (\s a -> s { _genericResources = a } :: ServiceReservation s)
+
+instance P.HasMemoryBytes (ServiceReservation s) (TF.Attr s P.Int) where
+    memoryBytes =
+        P.lens (_memoryBytes :: ServiceReservation s -> TF.Attr s P.Int)
+               (\s a -> s { _memoryBytes = a } :: ServiceReservation s)
+
+instance P.HasNanoCpus (ServiceReservation s) (TF.Attr s P.Int) where
+    nanoCpus =
+        P.lens (_nanoCpus :: ServiceReservation s -> TF.Attr s P.Int)
+               (\s a -> s { _nanoCpus = a } :: ServiceReservation s)
+
+-- | @generic_resources@ nested settings.
+data ServiceGenericResources s = ServiceGenericResources'
+    { _discreteResourcesSpec :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @discrete_resources_spec@ - (Optional)
+    -- The Integer resources
+    --
+    , _namedResourcesSpec    :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @named_resources_spec@ - (Optional)
+    -- The String resources
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @generic_resources@ settings value.
+newServiceGenericResources
+    :: ServiceGenericResources s
+newServiceGenericResources =
+    ServiceGenericResources'
+        { _discreteResourcesSpec = TF.Nil
+        , _namedResourcesSpec = TF.Nil
+        }
+
+instance TF.IsValue  (ServiceGenericResources s)
+instance TF.IsObject (ServiceGenericResources s) where
+    toObject ServiceGenericResources'{..} = P.catMaybes
+        [ TF.assign "discrete_resources_spec" <$> TF.attribute _discreteResourcesSpec
+        , TF.assign "named_resources_spec" <$> TF.attribute _namedResourcesSpec
+        ]
+
+instance TF.IsValid (ServiceGenericResources s) where
+    validator = P.mempty
+
+instance P.HasDiscreteResourcesSpec (ServiceGenericResources s) (TF.Attr s [TF.Attr s P.Text]) where
+    discreteResourcesSpec =
+        P.lens (_discreteResourcesSpec :: ServiceGenericResources s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _discreteResourcesSpec = a } :: ServiceGenericResources s)
+
+instance P.HasNamedResourcesSpec (ServiceGenericResources s) (TF.Attr s [TF.Attr s P.Text]) where
+    namedResourcesSpec =
+        P.lens (_namedResourcesSpec :: ServiceGenericResources s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _namedResourcesSpec = a } :: ServiceGenericResources s)
+
+-- | @limits@ nested settings.
+data ServiceLimits s = ServiceLimits'
+    { _genericResources :: TF.Attr s (ServiceGenericResources s)
+    -- ^ @generic_resources@ - (Optional)
+    -- User-defined resources can be either Integer resources (e.g, SSD=3) or
+    -- String resources (e.g, GPU=UUID1)
+    --
+    , _memoryBytes      :: TF.Attr s P.Int
+    -- ^ @memory_bytes@ - (Optional)
+    -- The amounf of memory in bytes the container allocates
+    --
+    , _nanoCpus         :: TF.Attr s P.Int
+    -- ^ @nano_cpus@ - (Optional)
+    -- CPU shares in units of 1/1e9 (or 10^-9) of the CPU. Should be at least
+    -- 1000000
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @limits@ settings value.
+newServiceLimits
+    :: ServiceLimits s
+newServiceLimits =
+    ServiceLimits'
+        { _genericResources = TF.Nil
+        , _memoryBytes = TF.Nil
+        , _nanoCpus = TF.Nil
+        }
+
+instance TF.IsValue  (ServiceLimits s)
+instance TF.IsObject (ServiceLimits s) where
+    toObject ServiceLimits'{..} = P.catMaybes
+        [ TF.assign "generic_resources" <$> TF.attribute _genericResources
+        , TF.assign "memory_bytes" <$> TF.attribute _memoryBytes
+        , TF.assign "nano_cpus" <$> TF.attribute _nanoCpus
+        ]
+
+instance TF.IsValid (ServiceLimits s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_genericResources"
+                  (_genericResources
+                      :: ServiceLimits s -> TF.Attr s (ServiceGenericResources s))
+                  TF.validator
+
+instance P.HasGenericResources (ServiceLimits s) (TF.Attr s (ServiceGenericResources s)) where
+    genericResources =
+        P.lens (_genericResources :: ServiceLimits s -> TF.Attr s (ServiceGenericResources s))
+               (\s a -> s { _genericResources = a } :: ServiceLimits s)
+
+instance P.HasMemoryBytes (ServiceLimits s) (TF.Attr s P.Int) where
+    memoryBytes =
+        P.lens (_memoryBytes :: ServiceLimits s -> TF.Attr s P.Int)
+               (\s a -> s { _memoryBytes = a } :: ServiceLimits s)
+
+instance P.HasNanoCpus (ServiceLimits s) (TF.Attr s P.Int) where
+    nanoCpus =
+        P.lens (_nanoCpus :: ServiceLimits s -> TF.Attr s P.Int)
+               (\s a -> s { _nanoCpus = a } :: ServiceLimits s)
+
+-- | @placement@ nested settings.
+data ServicePlacement s = ServicePlacement'
+    { _constraints :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @constraints@ - (Optional)
+    -- An array of constraints. e.g.: node.role==manager
+    --
+    , _platforms   :: TF.Attr s [TF.Attr s (ServicePlatforms s)]
+    -- ^ @platforms@ - (Optional)
+    -- Platforms stores all the platforms that the service's image can run on
+    --
+    , _prefs       :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @prefs@ - (Optional)
+    -- Preferences provide a way to make the scheduler aware of factors such as
+    -- topology. They are provided in order from highest to lowest precedence,
+    -- e.g.: spread=node.role.manager
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @placement@ settings value.
+newServicePlacement
+    :: ServicePlacement s
+newServicePlacement =
+    ServicePlacement'
+        { _constraints = TF.Nil
+        , _platforms = TF.Nil
+        , _prefs = TF.Nil
+        }
+
+instance TF.IsValue  (ServicePlacement s)
+instance TF.IsObject (ServicePlacement s) where
+    toObject ServicePlacement'{..} = P.catMaybes
+        [ TF.assign "constraints" <$> TF.attribute _constraints
+        , TF.assign "platforms" <$> TF.attribute _platforms
+        , TF.assign "prefs" <$> TF.attribute _prefs
+        ]
+
+instance TF.IsValid (ServicePlacement s) where
+    validator = P.mempty
+
+instance P.HasConstraints (ServicePlacement s) (TF.Attr s [TF.Attr s P.Text]) where
+    constraints =
+        P.lens (_constraints :: ServicePlacement s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _constraints = a } :: ServicePlacement s)
+
+instance P.HasPlatforms (ServicePlacement s) (TF.Attr s [TF.Attr s (ServicePlatforms s)]) where
+    platforms =
+        P.lens (_platforms :: ServicePlacement s -> TF.Attr s [TF.Attr s (ServicePlatforms s)])
+               (\s a -> s { _platforms = a } :: ServicePlacement s)
+
+instance P.HasPrefs (ServicePlacement s) (TF.Attr s [TF.Attr s P.Text]) where
+    prefs =
+        P.lens (_prefs :: ServicePlacement s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _prefs = a } :: ServicePlacement s)
+
+-- | @platforms@ nested settings.
+data ServicePlatforms s = ServicePlatforms'
+    { _architecture :: TF.Attr s P.Text
+    -- ^ @architecture@ - (Required)
+    -- The architecture, e.g. amd64
+    --
+    , _os           :: TF.Attr s P.Text
+    -- ^ @os@ - (Required)
+    -- The operation system, e.g. linux
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @platforms@ settings value.
+newServicePlatforms
+    :: TF.Attr s P.Text -- ^ 'P._architecture': @architecture@
+    -> TF.Attr s P.Text -- ^ 'P._os': @os@
+    -> ServicePlatforms s
+newServicePlatforms _architecture _os =
+    ServicePlatforms'
+        { _architecture = _architecture
+        , _os = _os
+        }
+
+instance TF.IsValue  (ServicePlatforms s)
+instance TF.IsObject (ServicePlatforms s) where
+    toObject ServicePlatforms'{..} = P.catMaybes
+        [ TF.assign "architecture" <$> TF.attribute _architecture
+        , TF.assign "os" <$> TF.attribute _os
+        ]
+
+instance TF.IsValid (ServicePlatforms s) where
+    validator = P.mempty
+
+instance P.HasArchitecture (ServicePlatforms s) (TF.Attr s P.Text) where
+    architecture =
+        P.lens (_architecture :: ServicePlatforms s -> TF.Attr s P.Text)
+               (\s a -> s { _architecture = a } :: ServicePlatforms s)
+
+instance P.HasOs (ServicePlatforms s) (TF.Attr s P.Text) where
+    os =
+        P.lens (_os :: ServicePlatforms s -> TF.Attr s P.Text)
+               (\s a -> s { _os = a } :: ServicePlatforms s)
+
+-- | @log_driver@ nested settings.
+data ServiceLogDriver s = ServiceLogDriver'
+    { _name    :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    -- The logging driver to use: one of
+    -- none|json-file|syslog|journald|gelf|fluentd|awslogs|splunk|etwlogs|gcplogs
+    --
+    , _options :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @options@ - (Optional)
+    -- The options for the logging driver
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @log_driver@ settings value.
+newServiceLogDriver
+    :: TF.Attr s P.Text -- ^ 'P._name': @name@
+    -> ServiceLogDriver s
+newServiceLogDriver _name =
+    ServiceLogDriver'
+        { _name = _name
+        , _options = TF.Nil
+        }
+
+instance TF.IsValue  (ServiceLogDriver s)
+instance TF.IsObject (ServiceLogDriver s) where
+    toObject ServiceLogDriver'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "options" <$> TF.attribute _options
+        ]
+
+instance TF.IsValid (ServiceLogDriver s) where
+    validator = P.mempty
+
+instance P.HasName (ServiceLogDriver s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: ServiceLogDriver s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ServiceLogDriver s)
+
+instance P.HasOptions (ServiceLogDriver s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    options =
+        P.lens (_options :: ServiceLogDriver s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _options = a } :: ServiceLogDriver s)
+
+-- | @healthcheck@ nested settings.
+data ServiceHealthcheck s = ServiceHealthcheck'
+    { _interval    :: TF.Attr s P.Text
+    -- ^ @interval@ - (Optional)
+    -- Time between running the check (ms|s|m|h)
+    --
+    , _retries     :: TF.Attr s P.Int
+    -- ^ @retries@ - (Optional)
+    -- Consecutive failures needed to report unhealthy
+    --
+    , _startPeriod :: TF.Attr s P.Text
+    -- ^ @start_period@ - (Optional)
+    -- Start period for the container to initialize before counting retries towards
+    -- unstable (ms|s|m|h)
+    --
+    , _test        :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @test@ - (Required)
+    -- The test to perform as list
+    --
+    , _timeout     :: TF.Attr s P.Text
+    -- ^ @timeout@ - (Optional)
+    -- Maximum time to allow one check to run (ms|s|m|h)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @healthcheck@ settings value.
+newServiceHealthcheck
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ 'P._test': @test@
+    -> ServiceHealthcheck s
+newServiceHealthcheck _test =
+    ServiceHealthcheck'
+        { _interval = TF.value "0s"
+        , _retries = TF.value 0
+        , _startPeriod = TF.value "0s"
+        , _test = _test
+        , _timeout = TF.value "0s"
+        }
+
+instance TF.IsValue  (ServiceHealthcheck s)
+instance TF.IsObject (ServiceHealthcheck s) where
+    toObject ServiceHealthcheck'{..} = P.catMaybes
+        [ TF.assign "interval" <$> TF.attribute _interval
+        , TF.assign "retries" <$> TF.attribute _retries
+        , TF.assign "start_period" <$> TF.attribute _startPeriod
+        , TF.assign "test" <$> TF.attribute _test
+        , TF.assign "timeout" <$> TF.attribute _timeout
+        ]
+
+instance TF.IsValid (ServiceHealthcheck s) where
+    validator = P.mempty
+
+instance P.HasInterval (ServiceHealthcheck s) (TF.Attr s P.Text) where
+    interval =
+        P.lens (_interval :: ServiceHealthcheck s -> TF.Attr s P.Text)
+               (\s a -> s { _interval = a } :: ServiceHealthcheck s)
+
+instance P.HasRetries (ServiceHealthcheck s) (TF.Attr s P.Int) where
+    retries =
+        P.lens (_retries :: ServiceHealthcheck s -> TF.Attr s P.Int)
+               (\s a -> s { _retries = a } :: ServiceHealthcheck s)
+
+instance P.HasStartPeriod (ServiceHealthcheck s) (TF.Attr s P.Text) where
+    startPeriod =
+        P.lens (_startPeriod :: ServiceHealthcheck s -> TF.Attr s P.Text)
+               (\s a -> s { _startPeriod = a } :: ServiceHealthcheck s)
+
+instance P.HasTest (ServiceHealthcheck s) (TF.Attr s [TF.Attr s P.Text]) where
+    test =
+        P.lens (_test :: ServiceHealthcheck s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _test = a } :: ServiceHealthcheck s)
+
+instance P.HasTimeout (ServiceHealthcheck s) (TF.Attr s P.Text) where
+    timeout =
+        P.lens (_timeout :: ServiceHealthcheck s -> TF.Attr s P.Text)
+               (\s a -> s { _timeout = a } :: ServiceHealthcheck s)
+
+-- | @dns_config@ nested settings.
+data ServiceDnsConfig s = ServiceDnsConfig'
+    { _nameservers :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @nameservers@ - (Required)
+    -- The IP addresses of the name servers
+    --
+    , _options     :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @options@ - (Optional)
+    -- A list of internal resolver variables to be modified (e.g., debug, ndots:3,
+    -- etc.)
+    --
+    , _search      :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @search@ - (Optional)
+    -- A search list for host-name lookup
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @dns_config@ settings value.
+newServiceDnsConfig
+    :: TF.Attr s [TF.Attr s P.Text] -- ^ 'P._nameservers': @nameservers@
+    -> ServiceDnsConfig s
+newServiceDnsConfig _nameservers =
+    ServiceDnsConfig'
+        { _nameservers = _nameservers
+        , _options = TF.Nil
+        , _search = TF.Nil
+        }
+
+instance TF.IsValue  (ServiceDnsConfig s)
+instance TF.IsObject (ServiceDnsConfig s) where
+    toObject ServiceDnsConfig'{..} = P.catMaybes
+        [ TF.assign "nameservers" <$> TF.attribute _nameservers
+        , TF.assign "options" <$> TF.attribute _options
+        , TF.assign "search" <$> TF.attribute _search
+        ]
+
+instance TF.IsValid (ServiceDnsConfig s) where
+    validator = P.mempty
+
+instance P.HasNameservers (ServiceDnsConfig s) (TF.Attr s [TF.Attr s P.Text]) where
+    nameservers =
+        P.lens (_nameservers :: ServiceDnsConfig s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _nameservers = a } :: ServiceDnsConfig s)
+
+instance P.HasOptions (ServiceDnsConfig s) (TF.Attr s [TF.Attr s P.Text]) where
+    options =
+        P.lens (_options :: ServiceDnsConfig s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _options = a } :: ServiceDnsConfig s)
+
+instance P.HasSearch (ServiceDnsConfig s) (TF.Attr s [TF.Attr s P.Text]) where
+    search =
+        P.lens (_search :: ServiceDnsConfig s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _search = a } :: ServiceDnsConfig s)
+
+-- | @secrets@ nested settings.
+data ServiceSecrets s = ServiceSecrets'
+    { _fileName   :: TF.Attr s P.Text
+    -- ^ @file_name@ - (Required)
+    -- Represents the final filename in the filesystem
+    --
+    , _secretId   :: TF.Attr s P.Text
+    -- ^ @secret_id@ - (Required)
+    -- ID of the specific secret that we're referencing
+    --
+    , _secretName :: TF.Attr s P.Text
+    -- ^ @secret_name@ - (Optional)
+    -- Name of the secret that this references, but this is just provided for
+    -- lookup/display purposes. The config in the reference will be identified by
+    -- its ID
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @secrets@ settings value.
+newServiceSecrets
+    :: TF.Attr s P.Text -- ^ 'P._secretId': @secret_id@
+    -> TF.Attr s P.Text -- ^ 'P._fileName': @file_name@
+    -> ServiceSecrets s
+newServiceSecrets _secretId _fileName =
+    ServiceSecrets'
+        { _fileName = _fileName
+        , _secretId = _secretId
+        , _secretName = TF.Nil
+        }
+
+instance TF.IsValue  (ServiceSecrets s)
+instance TF.IsObject (ServiceSecrets s) where
+    toObject ServiceSecrets'{..} = P.catMaybes
+        [ TF.assign "file_name" <$> TF.attribute _fileName
+        , TF.assign "secret_id" <$> TF.attribute _secretId
+        , TF.assign "secret_name" <$> TF.attribute _secretName
+        ]
+
+instance TF.IsValid (ServiceSecrets s) where
+    validator = P.mempty
+
+instance P.HasFileName (ServiceSecrets s) (TF.Attr s P.Text) where
+    fileName =
+        P.lens (_fileName :: ServiceSecrets s -> TF.Attr s P.Text)
+               (\s a -> s { _fileName = a } :: ServiceSecrets s)
+
+instance P.HasSecretId (ServiceSecrets s) (TF.Attr s P.Text) where
+    secretId =
+        P.lens (_secretId :: ServiceSecrets s -> TF.Attr s P.Text)
+               (\s a -> s { _secretId = a } :: ServiceSecrets s)
+
+instance P.HasSecretName (ServiceSecrets s) (TF.Attr s P.Text) where
+    secretName =
+        P.lens (_secretName :: ServiceSecrets s -> TF.Attr s P.Text)
+               (\s a -> s { _secretName = a } :: ServiceSecrets s)
+
+-- | @privileges@ nested settings.
+data ServicePrivileges s = ServicePrivileges'
+    { _credentialSpec :: TF.Attr s (ServiceCredentialSpec s)
+    -- ^ @credential_spec@ - (Optional)
+    -- CredentialSpec for managed service account (Windows only)
+    --
+    , _seLinuxContext :: TF.Attr s (ServiceSeLinuxContext s)
+    -- ^ @se_linux_context@ - (Optional)
+    -- SELinux labels of the container
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @privileges@ settings value.
+newServicePrivileges
+    :: ServicePrivileges s
+newServicePrivileges =
+    ServicePrivileges'
+        { _credentialSpec = TF.Nil
+        , _seLinuxContext = TF.Nil
+        }
+
+instance TF.IsValue  (ServicePrivileges s)
+instance TF.IsObject (ServicePrivileges s) where
+    toObject ServicePrivileges'{..} = P.catMaybes
+        [ TF.assign "credential_spec" <$> TF.attribute _credentialSpec
+        , TF.assign "se_linux_context" <$> TF.attribute _seLinuxContext
+        ]
+
+instance TF.IsValid (ServicePrivileges s) where
+    validator = P.mempty
+           P.<> TF.settingsValidator "_credentialSpec"
+                  (_credentialSpec
+                      :: ServicePrivileges s -> TF.Attr s (ServiceCredentialSpec s))
+                  TF.validator
+           P.<> TF.settingsValidator "_seLinuxContext"
+                  (_seLinuxContext
+                      :: ServicePrivileges s -> TF.Attr s (ServiceSeLinuxContext s))
+                  TF.validator
+
+instance P.HasCredentialSpec (ServicePrivileges s) (TF.Attr s (ServiceCredentialSpec s)) where
+    credentialSpec =
+        P.lens (_credentialSpec :: ServicePrivileges s -> TF.Attr s (ServiceCredentialSpec s))
+               (\s a -> s { _credentialSpec = a } :: ServicePrivileges s)
+
+instance P.HasSeLinuxContext (ServicePrivileges s) (TF.Attr s (ServiceSeLinuxContext s)) where
+    seLinuxContext =
+        P.lens (_seLinuxContext :: ServicePrivileges s -> TF.Attr s (ServiceSeLinuxContext s))
+               (\s a -> s { _seLinuxContext = a } :: ServicePrivileges s)
+
+-- | @se_linux_context@ nested settings.
+data ServiceSeLinuxContext s = ServiceSeLinuxContext'
+    { _disable :: TF.Attr s P.Bool
+    -- ^ @disable@ - (Optional)
+    -- Disable SELinux
+    --
+    , _level   :: TF.Attr s P.Text
+    -- ^ @level@ - (Optional)
+    -- SELinux level label
+    --
+    , _role    :: TF.Attr s P.Text
+    -- ^ @role@ - (Optional)
+    -- SELinux role label
+    --
+    , _type'   :: TF.Attr s P.Text
+    -- ^ @type@ - (Optional)
+    -- SELinux type label
+    --
+    , _user    :: TF.Attr s P.Text
+    -- ^ @user@ - (Optional)
+    -- SELinux user label
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @se_linux_context@ settings value.
+newServiceSeLinuxContext
+    :: ServiceSeLinuxContext s
+newServiceSeLinuxContext =
+    ServiceSeLinuxContext'
+        { _disable = TF.Nil
+        , _level = TF.Nil
+        , _role = TF.Nil
+        , _type' = TF.Nil
+        , _user = TF.Nil
+        }
+
+instance TF.IsValue  (ServiceSeLinuxContext s)
+instance TF.IsObject (ServiceSeLinuxContext s) where
+    toObject ServiceSeLinuxContext'{..} = P.catMaybes
+        [ TF.assign "disable" <$> TF.attribute _disable
+        , TF.assign "level" <$> TF.attribute _level
+        , TF.assign "role" <$> TF.attribute _role
+        , TF.assign "type" <$> TF.attribute _type'
+        , TF.assign "user" <$> TF.attribute _user
+        ]
+
+instance TF.IsValid (ServiceSeLinuxContext s) where
+    validator = P.mempty
+
+instance P.HasDisable (ServiceSeLinuxContext s) (TF.Attr s P.Bool) where
+    disable =
+        P.lens (_disable :: ServiceSeLinuxContext s -> TF.Attr s P.Bool)
+               (\s a -> s { _disable = a } :: ServiceSeLinuxContext s)
+
+instance P.HasLevel (ServiceSeLinuxContext s) (TF.Attr s P.Text) where
+    level =
+        P.lens (_level :: ServiceSeLinuxContext s -> TF.Attr s P.Text)
+               (\s a -> s { _level = a } :: ServiceSeLinuxContext s)
+
+instance P.HasRole (ServiceSeLinuxContext s) (TF.Attr s P.Text) where
+    role =
+        P.lens (_role :: ServiceSeLinuxContext s -> TF.Attr s P.Text)
+               (\s a -> s { _role = a } :: ServiceSeLinuxContext s)
+
+instance P.HasType' (ServiceSeLinuxContext s) (TF.Attr s P.Text) where
+    type' =
+        P.lens (_type' :: ServiceSeLinuxContext s -> TF.Attr s P.Text)
+               (\s a -> s { _type' = a } :: ServiceSeLinuxContext s)
+
+instance P.HasUser (ServiceSeLinuxContext s) (TF.Attr s P.Text) where
+    user =
+        P.lens (_user :: ServiceSeLinuxContext s -> TF.Attr s P.Text)
+               (\s a -> s { _user = a } :: ServiceSeLinuxContext s)
+
+-- | @credential_spec@ nested settings.
+data ServiceCredentialSpec s = ServiceCredentialSpec'
+    { _file     :: TF.Attr s P.Text
+    -- ^ @file@ - (Optional)
+    -- Load credential spec from this file
+    --
+    , _registry :: TF.Attr s P.Text
+    -- ^ @registry@ - (Optional)
+    -- Load credential spec from this value in the Windows registry
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @credential_spec@ settings value.
+newServiceCredentialSpec
+    :: ServiceCredentialSpec s
+newServiceCredentialSpec =
+    ServiceCredentialSpec'
+        { _file = TF.Nil
+        , _registry = TF.Nil
+        }
+
+instance TF.IsValue  (ServiceCredentialSpec s)
+instance TF.IsObject (ServiceCredentialSpec s) where
+    toObject ServiceCredentialSpec'{..} = P.catMaybes
+        [ TF.assign "file" <$> TF.attribute _file
+        , TF.assign "registry" <$> TF.attribute _registry
+        ]
+
+instance TF.IsValid (ServiceCredentialSpec s) where
+    validator = P.mempty
+
+instance P.HasFile (ServiceCredentialSpec s) (TF.Attr s P.Text) where
+    file =
+        P.lens (_file :: ServiceCredentialSpec s -> TF.Attr s P.Text)
+               (\s a -> s { _file = a } :: ServiceCredentialSpec s)
+
+instance P.HasRegistry (ServiceCredentialSpec s) (TF.Attr s P.Text) where
+    registry =
+        P.lens (_registry :: ServiceCredentialSpec s -> TF.Attr s P.Text)
+               (\s a -> s { _registry = a } :: ServiceCredentialSpec s)
+
+-- | @hosts@ nested settings.
+data ServiceHosts s = ServiceHosts'
+    { _host :: TF.Attr s P.Text
+    -- ^ @host@ - (Required, Forces New)
+    --
+    , _ip   :: TF.Attr s P.Text
+    -- ^ @ip@ - (Required, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @hosts@ settings value.
+newServiceHosts
+    :: TF.Attr s P.Text -- ^ 'P._host': @host@
+    -> TF.Attr s P.Text -- ^ 'P._ip': @ip@
+    -> ServiceHosts s
+newServiceHosts _host _ip =
+    ServiceHosts'
+        { _host = _host
+        , _ip = _ip
+        }
+
+instance TF.IsValue  (ServiceHosts s)
+instance TF.IsObject (ServiceHosts s) where
+    toObject ServiceHosts'{..} = P.catMaybes
+        [ TF.assign "host" <$> TF.attribute _host
+        , TF.assign "ip" <$> TF.attribute _ip
+        ]
+
+instance TF.IsValid (ServiceHosts s) where
+    validator = P.mempty
+
+instance P.HasHost (ServiceHosts s) (TF.Attr s P.Text) where
+    host =
+        P.lens (_host :: ServiceHosts s -> TF.Attr s P.Text)
+               (\s a -> s { _host = a } :: ServiceHosts s)
+
+instance P.HasIp (ServiceHosts s) (TF.Attr s P.Text) where
+    ip =
+        P.lens (_ip :: ServiceHosts s -> TF.Attr s P.Text)
+               (\s a -> s { _ip = a } :: ServiceHosts s)
+
+-- | @configs@ nested settings.
+data ServiceConfigs s = ServiceConfigs'
+    { _configId   :: TF.Attr s P.Text
+    -- ^ @config_id@ - (Required)
+    -- ID of the specific config that we're referencing
+    --
+    , _configName :: TF.Attr s P.Text
+    -- ^ @config_name@ - (Optional)
+    -- Name of the config that this references, but this is just provided for
+    -- lookup/display purposes. The config in the reference will be identified by
+    -- its ID
+    --
+    , _fileName   :: TF.Attr s P.Text
+    -- ^ @file_name@ - (Required)
+    -- Represents the final filename in the filesystem
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @configs@ settings value.
+newServiceConfigs
+    :: TF.Attr s P.Text -- ^ 'P._configId': @config_id@
+    -> TF.Attr s P.Text -- ^ 'P._fileName': @file_name@
+    -> ServiceConfigs s
+newServiceConfigs _configId _fileName =
+    ServiceConfigs'
+        { _configId = _configId
+        , _configName = TF.Nil
+        , _fileName = _fileName
+        }
+
+instance TF.IsValue  (ServiceConfigs s)
+instance TF.IsObject (ServiceConfigs s) where
+    toObject ServiceConfigs'{..} = P.catMaybes
+        [ TF.assign "config_id" <$> TF.attribute _configId
+        , TF.assign "config_name" <$> TF.attribute _configName
+        , TF.assign "file_name" <$> TF.attribute _fileName
+        ]
+
+instance TF.IsValid (ServiceConfigs s) where
+    validator = P.mempty
+
+instance P.HasConfigId (ServiceConfigs s) (TF.Attr s P.Text) where
+    configId =
+        P.lens (_configId :: ServiceConfigs s -> TF.Attr s P.Text)
+               (\s a -> s { _configId = a } :: ServiceConfigs s)
+
+instance P.HasConfigName (ServiceConfigs s) (TF.Attr s P.Text) where
+    configName =
+        P.lens (_configName :: ServiceConfigs s -> TF.Attr s P.Text)
+               (\s a -> s { _configName = a } :: ServiceConfigs s)
+
+instance P.HasFileName (ServiceConfigs s) (TF.Attr s P.Text) where
+    fileName =
+        P.lens (_fileName :: ServiceConfigs s -> TF.Attr s P.Text)
+               (\s a -> s { _fileName = a } :: ServiceConfigs s)
+
+-- | @volume_options@ nested settings.
+data ServiceVolumeOptions s = ServiceVolumeOptions'
+    { _driverName    :: TF.Attr s P.Text
+    -- ^ @driver_name@ - (Optional)
+    -- Name of the driver to use to create the volume.
+    --
+    , _driverOptions :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @driver_options@ - (Optional)
+    -- Key/value map of driver specific options
+    --
+    , _labels        :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @labels@ - (Optional)
+    -- User-defined key/value metadata
+    --
+    , _noCopy        :: TF.Attr s P.Bool
+    -- ^ @no_copy@ - (Optional)
+    -- Populate volume with data from the target
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @volume_options@ settings value.
+newServiceVolumeOptions
+    :: ServiceVolumeOptions s
+newServiceVolumeOptions =
+    ServiceVolumeOptions'
+        { _driverName = TF.Nil
+        , _driverOptions = TF.Nil
+        , _labels = TF.Nil
+        , _noCopy = TF.Nil
+        }
+
+instance TF.IsValue  (ServiceVolumeOptions s)
+instance TF.IsObject (ServiceVolumeOptions s) where
+    toObject ServiceVolumeOptions'{..} = P.catMaybes
+        [ TF.assign "driver_name" <$> TF.attribute _driverName
+        , TF.assign "driver_options" <$> TF.attribute _driverOptions
+        , TF.assign "labels" <$> TF.attribute _labels
+        , TF.assign "no_copy" <$> TF.attribute _noCopy
+        ]
+
+instance TF.IsValid (ServiceVolumeOptions s) where
+    validator = P.mempty
+
+instance P.HasDriverName (ServiceVolumeOptions s) (TF.Attr s P.Text) where
+    driverName =
+        P.lens (_driverName :: ServiceVolumeOptions s -> TF.Attr s P.Text)
+               (\s a -> s { _driverName = a } :: ServiceVolumeOptions s)
+
+instance P.HasDriverOptions (ServiceVolumeOptions s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    driverOptions =
+        P.lens (_driverOptions :: ServiceVolumeOptions s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _driverOptions = a } :: ServiceVolumeOptions s)
+
+instance P.HasLabels (ServiceVolumeOptions s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    labels =
+        P.lens (_labels :: ServiceVolumeOptions s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _labels = a } :: ServiceVolumeOptions s)
+
+instance P.HasNoCopy (ServiceVolumeOptions s) (TF.Attr s P.Bool) where
+    noCopy =
+        P.lens (_noCopy :: ServiceVolumeOptions s -> TF.Attr s P.Bool)
+               (\s a -> s { _noCopy = a } :: ServiceVolumeOptions s)
+
+-- | @tmpfs_options@ nested settings.
+data ServiceTmpfsOptions s = ServiceTmpfsOptions'
+    { _mode      :: TF.Attr s P.Int
+    -- ^ @mode@ - (Optional)
+    -- The permission mode for the tmpfs mount in an integer
+    --
+    , _sizeBytes :: TF.Attr s P.Int
+    -- ^ @size_bytes@ - (Optional)
+    -- The size for the tmpfs mount in bytes
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @tmpfs_options@ settings value.
+newServiceTmpfsOptions
+    :: ServiceTmpfsOptions s
+newServiceTmpfsOptions =
+    ServiceTmpfsOptions'
+        { _mode = TF.Nil
+        , _sizeBytes = TF.Nil
+        }
+
+instance TF.IsValue  (ServiceTmpfsOptions s)
+instance TF.IsObject (ServiceTmpfsOptions s) where
+    toObject ServiceTmpfsOptions'{..} = P.catMaybes
+        [ TF.assign "mode" <$> TF.attribute _mode
+        , TF.assign "size_bytes" <$> TF.attribute _sizeBytes
+        ]
+
+instance TF.IsValid (ServiceTmpfsOptions s) where
+    validator = P.mempty
+
+instance P.HasMode (ServiceTmpfsOptions s) (TF.Attr s P.Int) where
+    mode =
+        P.lens (_mode :: ServiceTmpfsOptions s -> TF.Attr s P.Int)
+               (\s a -> s { _mode = a } :: ServiceTmpfsOptions s)
+
+instance P.HasSizeBytes (ServiceTmpfsOptions s) (TF.Attr s P.Int) where
+    sizeBytes =
+        P.lens (_sizeBytes :: ServiceTmpfsOptions s -> TF.Attr s P.Int)
+               (\s a -> s { _sizeBytes = a } :: ServiceTmpfsOptions s)
+
+-- | @converge_config@ nested settings.
+data ServiceConvergeConfig s = ServiceConvergeConfig'
+    { _delay   :: TF.Attr s P.Text
+    -- ^ @delay@ - (Optional)
+    -- The interval to check if the desired state is reached (ms|s). Default: 7s
+    --
+    , _timeout :: TF.Attr s P.Text
+    -- ^ @timeout@ - (Optional)
+    -- The timeout of the service to reach the desired state (s|m). Default: 3m
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @converge_config@ settings value.
+newServiceConvergeConfig
+    :: ServiceConvergeConfig s
+newServiceConvergeConfig =
+    ServiceConvergeConfig'
+        { _delay = TF.value "7s"
+        , _timeout = TF.value "3m"
+        }
+
+instance TF.IsValue  (ServiceConvergeConfig s)
+instance TF.IsObject (ServiceConvergeConfig s) where
+    toObject ServiceConvergeConfig'{..} = P.catMaybes
+        [ TF.assign "delay" <$> TF.attribute _delay
+        , TF.assign "timeout" <$> TF.attribute _timeout
+        ]
+
+instance TF.IsValid (ServiceConvergeConfig s) where
+    validator = P.mempty
+
+instance P.HasDelay (ServiceConvergeConfig s) (TF.Attr s P.Text) where
+    delay =
+        P.lens (_delay :: ServiceConvergeConfig s -> TF.Attr s P.Text)
+               (\s a -> s { _delay = a } :: ServiceConvergeConfig s)
+
+instance P.HasTimeout (ServiceConvergeConfig s) (TF.Attr s P.Text) where
+    timeout =
+        P.lens (_timeout :: ServiceConvergeConfig s -> TF.Attr s P.Text)
+               (\s a -> s { _timeout = a } :: ServiceConvergeConfig s)
+
+-- | @endpoint_spec@ nested settings.
+data ServiceEndpointSpec s = ServiceEndpointSpec'
+    { _mode  :: TF.Attr s P.Text
+    -- ^ @mode@ - (Optional)
+    -- The mode of resolution to use for internal load balancing between tasks
+    --
+    , _ports :: TF.Attr s [TF.Attr s (ServicePorts s)]
+    -- ^ @ports@ - (Optional)
+    -- List of exposed ports that this service is accessible on from the outside.
+    -- Ports can only be provided if 'vip' resolution mode is used.
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @endpoint_spec@ settings value.
+newServiceEndpointSpec
+    :: ServiceEndpointSpec s
+newServiceEndpointSpec =
+    ServiceEndpointSpec'
+        { _mode = TF.Nil
+        , _ports = TF.Nil
+        }
+
+instance TF.IsValue  (ServiceEndpointSpec s)
+instance TF.IsObject (ServiceEndpointSpec s) where
+    toObject ServiceEndpointSpec'{..} = P.catMaybes
+        [ TF.assign "mode" <$> TF.attribute _mode
+        , TF.assign "ports" <$> TF.attribute _ports
+        ]
+
+instance TF.IsValid (ServiceEndpointSpec s) where
+    validator = P.mempty
+
+instance P.HasMode (ServiceEndpointSpec s) (TF.Attr s P.Text) where
+    mode =
+        P.lens (_mode :: ServiceEndpointSpec s -> TF.Attr s P.Text)
+               (\s a -> s { _mode = a } :: ServiceEndpointSpec s)
+
+instance P.HasPorts (ServiceEndpointSpec s) (TF.Attr s [TF.Attr s (ServicePorts s)]) where
+    ports =
+        P.lens (_ports :: ServiceEndpointSpec s -> TF.Attr s [TF.Attr s (ServicePorts s)])
+               (\s a -> s { _ports = a } :: ServiceEndpointSpec s)
+
+instance s ~ s' => P.HasComputedMode (TF.Ref s' (ServiceEndpointSpec s)) (TF.Attr s P.Text) where
+    computedMode x = TF.compute (TF.refKey x) "mode"
+
+-- | @ports@ nested settings.
+data ServicePorts s = ServicePorts'
+    { _name          :: TF.Attr s P.Text
+    -- ^ @name@ - (Optional)
+    -- A random name for the port
+    --
+    , _protocol      :: TF.Attr s P.Text
+    -- ^ @protocol@ - (Optional)
+    -- Rrepresents the protocol of a port: 'tcp', 'udp' or 'sctp'
+    --
+    , _publishMode   :: TF.Attr s P.Text
+    -- ^ @publish_mode@ - (Optional)
+    -- Represents the mode in which the port is to be published: 'ingress' or
+    -- 'host'
+    --
+    , _publishedPort :: TF.Attr s P.Int
+    -- ^ @published_port@ - (Optional)
+    -- The port on the swarm hosts.
+    --
+    , _targetPort    :: TF.Attr s P.Int
+    -- ^ @target_port@ - (Required)
+    -- The port inside the container
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @ports@ settings value.
+newServicePorts
+    :: TF.Attr s P.Int -- ^ 'P._targetPort': @target_port@
+    -> ServicePorts s
+newServicePorts _targetPort =
+    ServicePorts'
+        { _name = TF.Nil
+        , _protocol = TF.value "tcp"
+        , _publishMode = TF.value "ingress"
+        , _publishedPort = TF.Nil
+        , _targetPort = _targetPort
+        }
+
+instance TF.IsValue  (ServicePorts s)
+instance TF.IsObject (ServicePorts s) where
+    toObject ServicePorts'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "protocol" <$> TF.attribute _protocol
+        , TF.assign "publish_mode" <$> TF.attribute _publishMode
+        , TF.assign "published_port" <$> TF.attribute _publishedPort
+        , TF.assign "target_port" <$> TF.attribute _targetPort
+        ]
+
+instance TF.IsValid (ServicePorts s) where
+    validator = P.mempty
+
+instance P.HasName (ServicePorts s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: ServicePorts s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ServicePorts s)
+
+instance P.HasProtocol (ServicePorts s) (TF.Attr s P.Text) where
+    protocol =
+        P.lens (_protocol :: ServicePorts s -> TF.Attr s P.Text)
+               (\s a -> s { _protocol = a } :: ServicePorts s)
+
+instance P.HasPublishMode (ServicePorts s) (TF.Attr s P.Text) where
+    publishMode =
+        P.lens (_publishMode :: ServicePorts s -> TF.Attr s P.Text)
+               (\s a -> s { _publishMode = a } :: ServicePorts s)
+
+instance P.HasPublishedPort (ServicePorts s) (TF.Attr s P.Int) where
+    publishedPort =
+        P.lens (_publishedPort :: ServicePorts s -> TF.Attr s P.Int)
+               (\s a -> s { _publishedPort = a } :: ServicePorts s)
+
+instance P.HasTargetPort (ServicePorts s) (TF.Attr s P.Int) where
+    targetPort =
+        P.lens (_targetPort :: ServicePorts s -> TF.Attr s P.Int)
+               (\s a -> s { _targetPort = a } :: ServicePorts s)
+
+-- | @mode@ nested settings.
+data ServiceMode s = ServiceMode'
+    { _global     :: TF.Attr s P.Bool
+    -- ^ @global@ - (Optional)
+    -- The global service mode
+    --
+    -- Conflicts with:
+    --
+    -- * 'replicated'
+    , _replicated :: TF.Attr s (ServiceReplicated s)
+    -- ^ @replicated@ - (Optional)
+    -- The replicated service mode
+    --
+    -- Conflicts with:
+    --
+    -- * 'global'
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @mode@ settings value.
+newServiceMode
+    :: ServiceMode s
+newServiceMode =
+    ServiceMode'
+        { _global = TF.value P.False
+        , _replicated = TF.Nil
+        }
+
+instance TF.IsValue  (ServiceMode s)
+instance TF.IsObject (ServiceMode s) where
+    toObject ServiceMode'{..} = P.catMaybes
+        [ TF.assign "global" <$> TF.attribute _global
+        , TF.assign "replicated" <$> TF.attribute _replicated
+        ]
+
+instance TF.IsValid (ServiceMode s) where
+    validator = TF.fieldsValidator (\ServiceMode'{..} -> Map.fromList $ P.catMaybes
+        [ if (_global P.== TF.value P.False)
+              then P.Nothing
+              else P.Just ("_global",
+                            [ "_replicated"
+                            ])
+        , if (_replicated P.== TF.Nil)
+              then P.Nothing
+              else P.Just ("_replicated",
+                            [ "_global"
+                            ])
+        ])
+           P.<> TF.settingsValidator "_replicated"
+                  (_replicated
+                      :: ServiceMode s -> TF.Attr s (ServiceReplicated s))
+                  TF.validator
+
+instance P.HasGlobal (ServiceMode s) (TF.Attr s P.Bool) where
+    global =
+        P.lens (_global :: ServiceMode s -> TF.Attr s P.Bool)
+               (\s a -> s { _global = a } :: ServiceMode s)
+
+instance P.HasReplicated (ServiceMode s) (TF.Attr s (ServiceReplicated s)) where
+    replicated =
+        P.lens (_replicated :: ServiceMode s -> TF.Attr s (ServiceReplicated s))
+               (\s a -> s { _replicated = a } :: ServiceMode s)
+
+instance s ~ s' => P.HasComputedReplicated (TF.Ref s' (ServiceMode s)) (TF.Attr s (ServiceReplicated s)) where
+    computedReplicated x = TF.compute (TF.refKey x) "replicated"
+
+-- | @replicated@ nested settings.
+data ServiceReplicated s = ServiceReplicated'
+    { _replicas :: TF.Attr s P.Int
+    -- ^ @replicas@ - (Optional)
+    -- The amount of replicas of the service
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @replicated@ settings value.
+newServiceReplicated
+    :: ServiceReplicated s
+newServiceReplicated =
+    ServiceReplicated'
+        { _replicas = TF.value 1
+        }
+
+instance TF.IsValue  (ServiceReplicated s)
+instance TF.IsObject (ServiceReplicated s) where
+    toObject ServiceReplicated'{..} = P.catMaybes
+        [ TF.assign "replicas" <$> TF.attribute _replicas
+        ]
+
+instance TF.IsValid (ServiceReplicated s) where
+    validator = P.mempty
+
+instance P.HasReplicas (ServiceReplicated s) (TF.Attr s P.Int) where
+    replicas =
+        P.lens (_replicas :: ServiceReplicated s -> TF.Attr s P.Int)
+               (\s a -> s { _replicas = a } :: ServiceReplicated s)
 
 -- | @rollback_config@ nested settings.
-data RollbackConfigSetting s = RollbackConfigSetting'
+data ServiceRollbackConfig s = ServiceRollbackConfig'
     { _delay           :: TF.Attr s P.Text
     -- ^ @delay@ - (Optional)
     -- Delay between task rollbacks (ns|us|ms|s|m|h)
@@ -2352,10 +2558,10 @@ data RollbackConfigSetting s = RollbackConfigSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @rollback_config@ settings value.
-newRollbackConfigSetting
-    :: RollbackConfigSetting s
-newRollbackConfigSetting =
-    RollbackConfigSetting'
+newServiceRollbackConfig
+    :: ServiceRollbackConfig s
+newServiceRollbackConfig =
+    ServiceRollbackConfig'
         { _delay = TF.value "0s"
         , _failureAction = TF.value "pause"
         , _maxFailureRatio = TF.value "0.0"
@@ -2364,9 +2570,9 @@ newRollbackConfigSetting =
         , _parallelism = TF.value 1
         }
 
-instance TF.IsValue  (RollbackConfigSetting s)
-instance TF.IsObject (RollbackConfigSetting s) where
-    toObject RollbackConfigSetting'{..} = P.catMaybes
+instance TF.IsValue  (ServiceRollbackConfig s)
+instance TF.IsObject (ServiceRollbackConfig s) where
+    toObject ServiceRollbackConfig'{..} = P.catMaybes
         [ TF.assign "delay" <$> TF.attribute _delay
         , TF.assign "failure_action" <$> TF.attribute _failureAction
         , TF.assign "max_failure_ratio" <$> TF.attribute _maxFailureRatio
@@ -2375,93 +2581,41 @@ instance TF.IsObject (RollbackConfigSetting s) where
         , TF.assign "parallelism" <$> TF.attribute _parallelism
         ]
 
-instance TF.IsValid (RollbackConfigSetting s) where
+instance TF.IsValid (ServiceRollbackConfig s) where
     validator = P.mempty
 
-instance P.HasDelay (RollbackConfigSetting s) (TF.Attr s P.Text) where
+instance P.HasDelay (ServiceRollbackConfig s) (TF.Attr s P.Text) where
     delay =
-        P.lens (_delay :: RollbackConfigSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _delay = a } :: RollbackConfigSetting s)
+        P.lens (_delay :: ServiceRollbackConfig s -> TF.Attr s P.Text)
+               (\s a -> s { _delay = a } :: ServiceRollbackConfig s)
 
-instance P.HasFailureAction (RollbackConfigSetting s) (TF.Attr s P.Text) where
+instance P.HasFailureAction (ServiceRollbackConfig s) (TF.Attr s P.Text) where
     failureAction =
-        P.lens (_failureAction :: RollbackConfigSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _failureAction = a } :: RollbackConfigSetting s)
+        P.lens (_failureAction :: ServiceRollbackConfig s -> TF.Attr s P.Text)
+               (\s a -> s { _failureAction = a } :: ServiceRollbackConfig s)
 
-instance P.HasMaxFailureRatio (RollbackConfigSetting s) (TF.Attr s P.Text) where
+instance P.HasMaxFailureRatio (ServiceRollbackConfig s) (TF.Attr s P.Text) where
     maxFailureRatio =
-        P.lens (_maxFailureRatio :: RollbackConfigSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _maxFailureRatio = a } :: RollbackConfigSetting s)
+        P.lens (_maxFailureRatio :: ServiceRollbackConfig s -> TF.Attr s P.Text)
+               (\s a -> s { _maxFailureRatio = a } :: ServiceRollbackConfig s)
 
-instance P.HasMonitor (RollbackConfigSetting s) (TF.Attr s P.Text) where
+instance P.HasMonitor (ServiceRollbackConfig s) (TF.Attr s P.Text) where
     monitor =
-        P.lens (_monitor :: RollbackConfigSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _monitor = a } :: RollbackConfigSetting s)
+        P.lens (_monitor :: ServiceRollbackConfig s -> TF.Attr s P.Text)
+               (\s a -> s { _monitor = a } :: ServiceRollbackConfig s)
 
-instance P.HasOrder (RollbackConfigSetting s) (TF.Attr s P.Text) where
+instance P.HasOrder (ServiceRollbackConfig s) (TF.Attr s P.Text) where
     order =
-        P.lens (_order :: RollbackConfigSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _order = a } :: RollbackConfigSetting s)
+        P.lens (_order :: ServiceRollbackConfig s -> TF.Attr s P.Text)
+               (\s a -> s { _order = a } :: ServiceRollbackConfig s)
 
-instance P.HasParallelism (RollbackConfigSetting s) (TF.Attr s P.Int) where
+instance P.HasParallelism (ServiceRollbackConfig s) (TF.Attr s P.Int) where
     parallelism =
-        P.lens (_parallelism :: RollbackConfigSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _parallelism = a } :: RollbackConfigSetting s)
-
--- | @ulimit@ nested settings.
-data UlimitSetting s = UlimitSetting'
-    { _hard :: TF.Attr s P.Int
-    -- ^ @hard@ - (Required, Forces New)
-    --
-    , _name :: TF.Attr s P.Text
-    -- ^ @name@ - (Required, Forces New)
-    --
-    , _soft :: TF.Attr s P.Int
-    -- ^ @soft@ - (Required, Forces New)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @ulimit@ settings value.
-newUlimitSetting
-    :: TF.Attr s P.Int -- ^ 'P._hard': @hard@
-    -> TF.Attr s P.Text -- ^ 'P._name': @name@
-    -> TF.Attr s P.Int -- ^ 'P._soft': @soft@
-    -> UlimitSetting s
-newUlimitSetting _hard _name _soft =
-    UlimitSetting'
-        { _hard = _hard
-        , _name = _name
-        , _soft = _soft
-        }
-
-instance TF.IsValue  (UlimitSetting s)
-instance TF.IsObject (UlimitSetting s) where
-    toObject UlimitSetting'{..} = P.catMaybes
-        [ TF.assign "hard" <$> TF.attribute _hard
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "soft" <$> TF.attribute _soft
-        ]
-
-instance TF.IsValid (UlimitSetting s) where
-    validator = P.mempty
-
-instance P.HasHard (UlimitSetting s) (TF.Attr s P.Int) where
-    hard =
-        P.lens (_hard :: UlimitSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _hard = a } :: UlimitSetting s)
-
-instance P.HasName (UlimitSetting s) (TF.Attr s P.Text) where
-    name =
-        P.lens (_name :: UlimitSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: UlimitSetting s)
-
-instance P.HasSoft (UlimitSetting s) (TF.Attr s P.Int) where
-    soft =
-        P.lens (_soft :: UlimitSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _soft = a } :: UlimitSetting s)
+        P.lens (_parallelism :: ServiceRollbackConfig s -> TF.Attr s P.Int)
+               (\s a -> s { _parallelism = a } :: ServiceRollbackConfig s)
 
 -- | @update_config@ nested settings.
-data UpdateConfigSetting s = UpdateConfigSetting'
+data ServiceUpdateConfig s = ServiceUpdateConfig'
     { _delay           :: TF.Attr s P.Text
     -- ^ @delay@ - (Optional)
     -- Delay between task updates (ns|us|ms|s|m|h)
@@ -2489,10 +2643,10 @@ data UpdateConfigSetting s = UpdateConfigSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @update_config@ settings value.
-newUpdateConfigSetting
-    :: UpdateConfigSetting s
-newUpdateConfigSetting =
-    UpdateConfigSetting'
+newServiceUpdateConfig
+    :: ServiceUpdateConfig s
+newServiceUpdateConfig =
+    ServiceUpdateConfig'
         { _delay = TF.value "0s"
         , _failureAction = TF.value "pause"
         , _maxFailureRatio = TF.value "0.0"
@@ -2501,9 +2655,9 @@ newUpdateConfigSetting =
         , _parallelism = TF.value 1
         }
 
-instance TF.IsValue  (UpdateConfigSetting s)
-instance TF.IsObject (UpdateConfigSetting s) where
-    toObject UpdateConfigSetting'{..} = P.catMaybes
+instance TF.IsValue  (ServiceUpdateConfig s)
+instance TF.IsObject (ServiceUpdateConfig s) where
+    toObject ServiceUpdateConfig'{..} = P.catMaybes
         [ TF.assign "delay" <$> TF.attribute _delay
         , TF.assign "failure_action" <$> TF.attribute _failureAction
         , TF.assign "max_failure_ratio" <$> TF.attribute _maxFailureRatio
@@ -2512,155 +2666,35 @@ instance TF.IsObject (UpdateConfigSetting s) where
         , TF.assign "parallelism" <$> TF.attribute _parallelism
         ]
 
-instance TF.IsValid (UpdateConfigSetting s) where
+instance TF.IsValid (ServiceUpdateConfig s) where
     validator = P.mempty
 
-instance P.HasDelay (UpdateConfigSetting s) (TF.Attr s P.Text) where
+instance P.HasDelay (ServiceUpdateConfig s) (TF.Attr s P.Text) where
     delay =
-        P.lens (_delay :: UpdateConfigSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _delay = a } :: UpdateConfigSetting s)
+        P.lens (_delay :: ServiceUpdateConfig s -> TF.Attr s P.Text)
+               (\s a -> s { _delay = a } :: ServiceUpdateConfig s)
 
-instance P.HasFailureAction (UpdateConfigSetting s) (TF.Attr s P.Text) where
+instance P.HasFailureAction (ServiceUpdateConfig s) (TF.Attr s P.Text) where
     failureAction =
-        P.lens (_failureAction :: UpdateConfigSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _failureAction = a } :: UpdateConfigSetting s)
+        P.lens (_failureAction :: ServiceUpdateConfig s -> TF.Attr s P.Text)
+               (\s a -> s { _failureAction = a } :: ServiceUpdateConfig s)
 
-instance P.HasMaxFailureRatio (UpdateConfigSetting s) (TF.Attr s P.Text) where
+instance P.HasMaxFailureRatio (ServiceUpdateConfig s) (TF.Attr s P.Text) where
     maxFailureRatio =
-        P.lens (_maxFailureRatio :: UpdateConfigSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _maxFailureRatio = a } :: UpdateConfigSetting s)
+        P.lens (_maxFailureRatio :: ServiceUpdateConfig s -> TF.Attr s P.Text)
+               (\s a -> s { _maxFailureRatio = a } :: ServiceUpdateConfig s)
 
-instance P.HasMonitor (UpdateConfigSetting s) (TF.Attr s P.Text) where
+instance P.HasMonitor (ServiceUpdateConfig s) (TF.Attr s P.Text) where
     monitor =
-        P.lens (_monitor :: UpdateConfigSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _monitor = a } :: UpdateConfigSetting s)
+        P.lens (_monitor :: ServiceUpdateConfig s -> TF.Attr s P.Text)
+               (\s a -> s { _monitor = a } :: ServiceUpdateConfig s)
 
-instance P.HasOrder (UpdateConfigSetting s) (TF.Attr s P.Text) where
+instance P.HasOrder (ServiceUpdateConfig s) (TF.Attr s P.Text) where
     order =
-        P.lens (_order :: UpdateConfigSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _order = a } :: UpdateConfigSetting s)
+        P.lens (_order :: ServiceUpdateConfig s -> TF.Attr s P.Text)
+               (\s a -> s { _order = a } :: ServiceUpdateConfig s)
 
-instance P.HasParallelism (UpdateConfigSetting s) (TF.Attr s P.Int) where
+instance P.HasParallelism (ServiceUpdateConfig s) (TF.Attr s P.Int) where
     parallelism =
-        P.lens (_parallelism :: UpdateConfigSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _parallelism = a } :: UpdateConfigSetting s)
-
--- | @upload@ nested settings.
-data UploadSetting s = UploadSetting'
-    { _content    :: TF.Attr s P.Text
-    -- ^ @content@ - (Required, Forces New)
-    --
-    , _executable :: TF.Attr s P.Bool
-    -- ^ @executable@ - (Optional, Forces New)
-    --
-    , _file       :: TF.Attr s P.Text
-    -- ^ @file@ - (Required, Forces New)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @upload@ settings value.
-newUploadSetting
-    :: TF.Attr s P.Text -- ^ 'P._content': @content@
-    -> TF.Attr s P.Text -- ^ 'P._file': @file@
-    -> UploadSetting s
-newUploadSetting _content _file =
-    UploadSetting'
-        { _content = _content
-        , _executable = TF.value P.False
-        , _file = _file
-        }
-
-instance TF.IsValue  (UploadSetting s)
-instance TF.IsObject (UploadSetting s) where
-    toObject UploadSetting'{..} = P.catMaybes
-        [ TF.assign "content" <$> TF.attribute _content
-        , TF.assign "executable" <$> TF.attribute _executable
-        , TF.assign "file" <$> TF.attribute _file
-        ]
-
-instance TF.IsValid (UploadSetting s) where
-    validator = P.mempty
-
-instance P.HasContent (UploadSetting s) (TF.Attr s P.Text) where
-    content =
-        P.lens (_content :: UploadSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _content = a } :: UploadSetting s)
-
-instance P.HasExecutable (UploadSetting s) (TF.Attr s P.Bool) where
-    executable =
-        P.lens (_executable :: UploadSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _executable = a } :: UploadSetting s)
-
-instance P.HasFile (UploadSetting s) (TF.Attr s P.Text) where
-    file =
-        P.lens (_file :: UploadSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _file = a } :: UploadSetting s)
-
--- | @volumes@ nested settings.
-data VolumesSetting s = VolumesSetting'
-    { _containerPath :: TF.Attr s P.Text
-    -- ^ @container_path@ - (Optional, Forces New)
-    --
-    , _fromContainer :: TF.Attr s P.Text
-    -- ^ @from_container@ - (Optional, Forces New)
-    --
-    , _hostPath      :: TF.Attr s P.Text
-    -- ^ @host_path@ - (Optional, Forces New)
-    --
-    , _readOnly      :: TF.Attr s P.Bool
-    -- ^ @read_only@ - (Optional, Forces New)
-    --
-    , _volumeName    :: TF.Attr s P.Text
-    -- ^ @volume_name@ - (Optional, Forces New)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @volumes@ settings value.
-newVolumesSetting
-    :: VolumesSetting s
-newVolumesSetting =
-    VolumesSetting'
-        { _containerPath = TF.Nil
-        , _fromContainer = TF.Nil
-        , _hostPath = TF.Nil
-        , _readOnly = TF.Nil
-        , _volumeName = TF.Nil
-        }
-
-instance TF.IsValue  (VolumesSetting s)
-instance TF.IsObject (VolumesSetting s) where
-    toObject VolumesSetting'{..} = P.catMaybes
-        [ TF.assign "container_path" <$> TF.attribute _containerPath
-        , TF.assign "from_container" <$> TF.attribute _fromContainer
-        , TF.assign "host_path" <$> TF.attribute _hostPath
-        , TF.assign "read_only" <$> TF.attribute _readOnly
-        , TF.assign "volume_name" <$> TF.attribute _volumeName
-        ]
-
-instance TF.IsValid (VolumesSetting s) where
-    validator = P.mempty
-
-instance P.HasContainerPath (VolumesSetting s) (TF.Attr s P.Text) where
-    containerPath =
-        P.lens (_containerPath :: VolumesSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _containerPath = a } :: VolumesSetting s)
-
-instance P.HasFromContainer (VolumesSetting s) (TF.Attr s P.Text) where
-    fromContainer =
-        P.lens (_fromContainer :: VolumesSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _fromContainer = a } :: VolumesSetting s)
-
-instance P.HasHostPath (VolumesSetting s) (TF.Attr s P.Text) where
-    hostPath =
-        P.lens (_hostPath :: VolumesSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _hostPath = a } :: VolumesSetting s)
-
-instance P.HasReadOnly (VolumesSetting s) (TF.Attr s P.Bool) where
-    readOnly =
-        P.lens (_readOnly :: VolumesSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _readOnly = a } :: VolumesSetting s)
-
-instance P.HasVolumeName (VolumesSetting s) (TF.Attr s P.Text) where
-    volumeName =
-        P.lens (_volumeName :: VolumesSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _volumeName = a } :: VolumesSetting s)
+        P.lens (_parallelism :: ServiceUpdateConfig s -> TF.Attr s P.Int)
+               (\s a -> s { _parallelism = a } :: ServiceUpdateConfig s)

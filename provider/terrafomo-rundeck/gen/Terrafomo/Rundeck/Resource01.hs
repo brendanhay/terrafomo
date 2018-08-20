@@ -67,7 +67,7 @@ data JobResource s = JobResource'
     { _allowConcurrentExecutions   :: TF.Attr s P.Bool
     -- ^ @allow_concurrent_executions@ - (Optional)
     --
-    , _command                     :: TF.Attr s [TF.Attr s (CommandSetting s)]
+    , _command                     :: TF.Attr s [TF.Attr s (JobCommand s)]
     -- ^ @command@ - (Required)
     --
     , _commandOrderingStrategy     :: TF.Attr s P.Text
@@ -97,7 +97,7 @@ data JobResource s = JobResource'
     , _nodeFilterQuery             :: TF.Attr s P.Text
     -- ^ @node_filter_query@ - (Optional)
     --
-    , _option                      :: TF.Attr s [TF.Attr s (OptionSetting s)]
+    , _option                      :: TF.Attr s [TF.Attr s (JobOption s)]
     -- ^ @option@ - (Optional)
     --
     , _preserveOptionsOrder        :: TF.Attr s P.Bool
@@ -119,7 +119,7 @@ data JobResource s = JobResource'
 
 -- | Define a new @rundeck_job@ resource value.
 jobResource
-    :: TF.Attr s [TF.Attr s (CommandSetting s)] -- ^ @command@ ('P._command', 'P.command')
+    :: TF.Attr s [TF.Attr s (JobCommand s)] -- ^ @command@ ('P._command', 'P.command')
     -> TF.Attr s P.Text -- ^ @description@ ('P._description', 'P.description')
     -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> TF.Attr s P.Text -- ^ @project_name@ ('P._projectName', 'P.projectName')
@@ -175,9 +175,9 @@ instance P.HasAllowConcurrentExecutions (JobResource s) (TF.Attr s P.Bool) where
         P.lens (_allowConcurrentExecutions :: JobResource s -> TF.Attr s P.Bool)
                (\s a -> s { _allowConcurrentExecutions = a } :: JobResource s)
 
-instance P.HasCommand (JobResource s) (TF.Attr s [TF.Attr s (CommandSetting s)]) where
+instance P.HasCommand (JobResource s) (TF.Attr s [TF.Attr s (JobCommand s)]) where
     command =
-        P.lens (_command :: JobResource s -> TF.Attr s [TF.Attr s (CommandSetting s)])
+        P.lens (_command :: JobResource s -> TF.Attr s [TF.Attr s (JobCommand s)])
                (\s a -> s { _command = a } :: JobResource s)
 
 instance P.HasCommandOrderingStrategy (JobResource s) (TF.Attr s P.Text) where
@@ -225,9 +225,9 @@ instance P.HasNodeFilterQuery (JobResource s) (TF.Attr s P.Text) where
         P.lens (_nodeFilterQuery :: JobResource s -> TF.Attr s P.Text)
                (\s a -> s { _nodeFilterQuery = a } :: JobResource s)
 
-instance P.HasOption (JobResource s) (TF.Attr s [TF.Attr s (OptionSetting s)]) where
+instance P.HasOption (JobResource s) (TF.Attr s [TF.Attr s (JobOption s)]) where
     option =
-        P.lens (_option :: JobResource s -> TF.Attr s [TF.Attr s (OptionSetting s)])
+        P.lens (_option :: JobResource s -> TF.Attr s [TF.Attr s (JobOption s)])
                (\s a -> s { _option = a } :: JobResource s)
 
 instance P.HasPreserveOptionsOrder (JobResource s) (TF.Attr s P.Bool) where
@@ -335,7 +335,7 @@ data ProjectResource s = ProjectResource'
     -- ^ @name@ - (Required, Forces New)
     -- Unique name for the project
     --
-    , _resourceModelSource :: TF.Attr s [TF.Attr s (ResourceModelSourceSetting s)]
+    , _resourceModelSource :: TF.Attr s [TF.Attr s (ProjectResourceModelSource s)]
     -- ^ @resource_model_source@ - (Required)
     --
     , _sshAuthenticationType :: TF.Attr s P.Text
@@ -352,7 +352,7 @@ data ProjectResource s = ProjectResource'
 -- | Define a new @rundeck_project@ resource value.
 projectResource
     :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
-    -> TF.Attr s [TF.Attr s (ResourceModelSourceSetting s)] -- ^ @resource_model_source@ ('P._resourceModelSource', 'P.resourceModelSource')
+    -> TF.Attr s [TF.Attr s (ProjectResourceModelSource s)] -- ^ @resource_model_source@ ('P._resourceModelSource', 'P.resourceModelSource')
     -> P.Resource (ProjectResource s)
 projectResource _name _resourceModelSource =
     TF.unsafeResource "rundeck_project" TF.validator $
@@ -409,9 +409,9 @@ instance P.HasName (ProjectResource s) (TF.Attr s P.Text) where
         P.lens (_name :: ProjectResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ProjectResource s)
 
-instance P.HasResourceModelSource (ProjectResource s) (TF.Attr s [TF.Attr s (ResourceModelSourceSetting s)]) where
+instance P.HasResourceModelSource (ProjectResource s) (TF.Attr s [TF.Attr s (ProjectResourceModelSource s)]) where
     resourceModelSource =
-        P.lens (_resourceModelSource :: ProjectResource s -> TF.Attr s [TF.Attr s (ResourceModelSourceSetting s)])
+        P.lens (_resourceModelSource :: ProjectResource s -> TF.Attr s [TF.Attr s (ProjectResourceModelSource s)])
                (\s a -> s { _resourceModelSource = a } :: ProjectResource s)
 
 instance P.HasSshAuthenticationType (ProjectResource s) (TF.Attr s P.Text) where
