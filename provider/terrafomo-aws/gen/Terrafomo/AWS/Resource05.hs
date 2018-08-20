@@ -17,16 +17,8 @@
 --
 module Terrafomo.AWS.Resource05
     (
-    -- ** aws_load_balancer_policy
-      LoadBalancerPolicyResource (..)
-    , loadBalancerPolicyResource
-
-    -- ** aws_macie_member_account_association
-    , MacieMemberAccountAssociationResource (..)
-    , macieMemberAccountAssociationResource
-
     -- ** aws_macie_s3_bucket_association
-    , MacieS3BucketAssociationResource (..)
+      MacieS3BucketAssociationResource (..)
     , macieS3BucketAssociationResource
 
     -- ** aws_main_route_table_association
@@ -64,6 +56,10 @@ module Terrafomo.AWS.Resource05
     -- ** aws_neptune_cluster
     , NeptuneClusterResource (..)
     , neptuneClusterResource
+
+    -- ** aws_neptune_cluster_snapshot
+    , NeptuneClusterSnapshotResource (..)
+    , neptuneClusterSnapshotResource
 
     -- ** aws_neptune_event_subscription
     , NeptuneEventSubscriptionResource (..)
@@ -337,6 +333,10 @@ module Terrafomo.AWS.Resource05
     , SesIdentityNotificationTopicResource (..)
     , sesIdentityNotificationTopicResource
 
+    -- ** aws_ses_receipt_filter
+    , SesReceiptFilterResource (..)
+    , sesReceiptFilterResource
+
     ) where
 
 import Data.Functor ((<$>))
@@ -362,110 +362,6 @@ import qualified Terrafomo.HCL          as TF
 import qualified Terrafomo.Name         as TF
 import qualified Terrafomo.Schema       as TF
 import qualified Terrafomo.Validator    as TF
-
--- | @aws_load_balancer_policy@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/aws/r/load_balancer_policy.html terraform documentation>
--- for more information.
-data LoadBalancerPolicyResource s = LoadBalancerPolicyResource'
-    { _loadBalancerName :: TF.Attr s P.Text
-    -- ^ @load_balancer_name@ - (Required, Forces New)
-    --
-    , _policyAttribute  :: TF.Attr s [TF.Attr s (PolicyAttributeSetting s)]
-    -- ^ @policy_attribute@ - (Optional)
-    --
-    , _policyName       :: TF.Attr s P.Text
-    -- ^ @policy_name@ - (Required, Forces New)
-    --
-    , _policyTypeName   :: TF.Attr s P.Text
-    -- ^ @policy_type_name@ - (Required, Forces New)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Define a new @aws_load_balancer_policy@ resource value.
-loadBalancerPolicyResource
-    :: TF.Attr s P.Text -- ^ @load_balancer_name@ ('P._loadBalancerName', 'P.loadBalancerName')
-    -> TF.Attr s P.Text -- ^ @policy_name@ ('P._policyName', 'P.policyName')
-    -> TF.Attr s P.Text -- ^ @policy_type_name@ ('P._policyTypeName', 'P.policyTypeName')
-    -> P.Resource (LoadBalancerPolicyResource s)
-loadBalancerPolicyResource _loadBalancerName _policyName _policyTypeName =
-    TF.unsafeResource "aws_load_balancer_policy" TF.validator $
-        LoadBalancerPolicyResource'
-            { _loadBalancerName = _loadBalancerName
-            , _policyAttribute = TF.Nil
-            , _policyName = _policyName
-            , _policyTypeName = _policyTypeName
-            }
-
-instance TF.IsObject (LoadBalancerPolicyResource s) where
-    toObject LoadBalancerPolicyResource'{..} = P.catMaybes
-        [ TF.assign "load_balancer_name" <$> TF.attribute _loadBalancerName
-        , TF.assign "policy_attribute" <$> TF.attribute _policyAttribute
-        , TF.assign "policy_name" <$> TF.attribute _policyName
-        , TF.assign "policy_type_name" <$> TF.attribute _policyTypeName
-        ]
-
-instance TF.IsValid (LoadBalancerPolicyResource s) where
-    validator = P.mempty
-
-instance P.HasLoadBalancerName (LoadBalancerPolicyResource s) (TF.Attr s P.Text) where
-    loadBalancerName =
-        P.lens (_loadBalancerName :: LoadBalancerPolicyResource s -> TF.Attr s P.Text)
-               (\s a -> s { _loadBalancerName = a } :: LoadBalancerPolicyResource s)
-
-instance P.HasPolicyAttribute (LoadBalancerPolicyResource s) (TF.Attr s [TF.Attr s (PolicyAttributeSetting s)]) where
-    policyAttribute =
-        P.lens (_policyAttribute :: LoadBalancerPolicyResource s -> TF.Attr s [TF.Attr s (PolicyAttributeSetting s)])
-               (\s a -> s { _policyAttribute = a } :: LoadBalancerPolicyResource s)
-
-instance P.HasPolicyName (LoadBalancerPolicyResource s) (TF.Attr s P.Text) where
-    policyName =
-        P.lens (_policyName :: LoadBalancerPolicyResource s -> TF.Attr s P.Text)
-               (\s a -> s { _policyName = a } :: LoadBalancerPolicyResource s)
-
-instance P.HasPolicyTypeName (LoadBalancerPolicyResource s) (TF.Attr s P.Text) where
-    policyTypeName =
-        P.lens (_policyTypeName :: LoadBalancerPolicyResource s -> TF.Attr s P.Text)
-               (\s a -> s { _policyTypeName = a } :: LoadBalancerPolicyResource s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (LoadBalancerPolicyResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
--- | @aws_macie_member_account_association@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/aws/r/macie_member_account_association.html terraform documentation>
--- for more information.
-data MacieMemberAccountAssociationResource s = MacieMemberAccountAssociationResource'
-    { _memberAccountId :: TF.Attr s P.Text
-    -- ^ @member_account_id@ - (Required, Forces New)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Define a new @aws_macie_member_account_association@ resource value.
-macieMemberAccountAssociationResource
-    :: TF.Attr s P.Text -- ^ @member_account_id@ ('P._memberAccountId', 'P.memberAccountId')
-    -> P.Resource (MacieMemberAccountAssociationResource s)
-macieMemberAccountAssociationResource _memberAccountId =
-    TF.unsafeResource "aws_macie_member_account_association" TF.validator $
-        MacieMemberAccountAssociationResource'
-            { _memberAccountId = _memberAccountId
-            }
-
-instance TF.IsObject (MacieMemberAccountAssociationResource s) where
-    toObject MacieMemberAccountAssociationResource'{..} = P.catMaybes
-        [ TF.assign "member_account_id" <$> TF.attribute _memberAccountId
-        ]
-
-instance TF.IsValid (MacieMemberAccountAssociationResource s) where
-    validator = P.mempty
-
-instance P.HasMemberAccountId (MacieMemberAccountAssociationResource s) (TF.Attr s P.Text) where
-    memberAccountId =
-        P.lens (_memberAccountId :: MacieMemberAccountAssociationResource s -> TF.Attr s P.Text)
-               (\s a -> s { _memberAccountId = a } :: MacieMemberAccountAssociationResource s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (MacieMemberAccountAssociationResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @aws_macie_s3_bucket_association@ Resource.
 --
@@ -1724,6 +1620,92 @@ instance s ~ s' => P.HasComputedReaderEndpoint (TF.Ref s' (NeptuneClusterResourc
 
 instance s ~ s' => P.HasComputedVpcSecurityGroupIds (TF.Ref s' (NeptuneClusterResource s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedVpcSecurityGroupIds x = TF.compute (TF.refKey x) "vpc_security_group_ids"
+
+-- | @aws_neptune_cluster_snapshot@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/aws/r/neptune_cluster_snapshot.html terraform documentation>
+-- for more information.
+data NeptuneClusterSnapshotResource s = NeptuneClusterSnapshotResource'
+    { _dbClusterIdentifier         :: TF.Attr s P.Text
+    -- ^ @db_cluster_identifier@ - (Required, Forces New)
+    --
+    , _dbClusterSnapshotIdentifier :: TF.Attr s P.Text
+    -- ^ @db_cluster_snapshot_identifier@ - (Required, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @aws_neptune_cluster_snapshot@ resource value.
+neptuneClusterSnapshotResource
+    :: TF.Attr s P.Text -- ^ @db_cluster_identifier@ ('P._dbClusterIdentifier', 'P.dbClusterIdentifier')
+    -> TF.Attr s P.Text -- ^ @db_cluster_snapshot_identifier@ ('P._dbClusterSnapshotIdentifier', 'P.dbClusterSnapshotIdentifier')
+    -> P.Resource (NeptuneClusterSnapshotResource s)
+neptuneClusterSnapshotResource _dbClusterIdentifier _dbClusterSnapshotIdentifier =
+    TF.unsafeResource "aws_neptune_cluster_snapshot" TF.validator $
+        NeptuneClusterSnapshotResource'
+            { _dbClusterIdentifier = _dbClusterIdentifier
+            , _dbClusterSnapshotIdentifier = _dbClusterSnapshotIdentifier
+            }
+
+instance TF.IsObject (NeptuneClusterSnapshotResource s) where
+    toObject NeptuneClusterSnapshotResource'{..} = P.catMaybes
+        [ TF.assign "db_cluster_identifier" <$> TF.attribute _dbClusterIdentifier
+        , TF.assign "db_cluster_snapshot_identifier" <$> TF.attribute _dbClusterSnapshotIdentifier
+        ]
+
+instance TF.IsValid (NeptuneClusterSnapshotResource s) where
+    validator = P.mempty
+
+instance P.HasDbClusterIdentifier (NeptuneClusterSnapshotResource s) (TF.Attr s P.Text) where
+    dbClusterIdentifier =
+        P.lens (_dbClusterIdentifier :: NeptuneClusterSnapshotResource s -> TF.Attr s P.Text)
+               (\s a -> s { _dbClusterIdentifier = a } :: NeptuneClusterSnapshotResource s)
+
+instance P.HasDbClusterSnapshotIdentifier (NeptuneClusterSnapshotResource s) (TF.Attr s P.Text) where
+    dbClusterSnapshotIdentifier =
+        P.lens (_dbClusterSnapshotIdentifier :: NeptuneClusterSnapshotResource s -> TF.Attr s P.Text)
+               (\s a -> s { _dbClusterSnapshotIdentifier = a } :: NeptuneClusterSnapshotResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (NeptuneClusterSnapshotResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedAllocatedStorage (TF.Ref s' (NeptuneClusterSnapshotResource s)) (TF.Attr s P.Int) where
+    computedAllocatedStorage x = TF.compute (TF.refKey x) "allocated_storage"
+
+instance s ~ s' => P.HasComputedAvailabilityZones (TF.Ref s' (NeptuneClusterSnapshotResource s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedAvailabilityZones x = TF.compute (TF.refKey x) "availability_zones"
+
+instance s ~ s' => P.HasComputedDbClusterSnapshotArn (TF.Ref s' (NeptuneClusterSnapshotResource s)) (TF.Attr s P.Text) where
+    computedDbClusterSnapshotArn x = TF.compute (TF.refKey x) "db_cluster_snapshot_arn"
+
+instance s ~ s' => P.HasComputedEngine (TF.Ref s' (NeptuneClusterSnapshotResource s)) (TF.Attr s P.Text) where
+    computedEngine x = TF.compute (TF.refKey x) "engine"
+
+instance s ~ s' => P.HasComputedEngineVersion (TF.Ref s' (NeptuneClusterSnapshotResource s)) (TF.Attr s P.Text) where
+    computedEngineVersion x = TF.compute (TF.refKey x) "engine_version"
+
+instance s ~ s' => P.HasComputedKmsKeyId (TF.Ref s' (NeptuneClusterSnapshotResource s)) (TF.Attr s P.Text) where
+    computedKmsKeyId x = TF.compute (TF.refKey x) "kms_key_id"
+
+instance s ~ s' => P.HasComputedLicenseModel (TF.Ref s' (NeptuneClusterSnapshotResource s)) (TF.Attr s P.Text) where
+    computedLicenseModel x = TF.compute (TF.refKey x) "license_model"
+
+instance s ~ s' => P.HasComputedPort (TF.Ref s' (NeptuneClusterSnapshotResource s)) (TF.Attr s P.Int) where
+    computedPort x = TF.compute (TF.refKey x) "port"
+
+instance s ~ s' => P.HasComputedSnapshotType (TF.Ref s' (NeptuneClusterSnapshotResource s)) (TF.Attr s P.Text) where
+    computedSnapshotType x = TF.compute (TF.refKey x) "snapshot_type"
+
+instance s ~ s' => P.HasComputedSourceDbClusterSnapshotArn (TF.Ref s' (NeptuneClusterSnapshotResource s)) (TF.Attr s P.Text) where
+    computedSourceDbClusterSnapshotArn x = TF.compute (TF.refKey x) "source_db_cluster_snapshot_arn"
+
+instance s ~ s' => P.HasComputedStatus (TF.Ref s' (NeptuneClusterSnapshotResource s)) (TF.Attr s P.Text) where
+    computedStatus x = TF.compute (TF.refKey x) "status"
+
+instance s ~ s' => P.HasComputedStorageEncrypted (TF.Ref s' (NeptuneClusterSnapshotResource s)) (TF.Attr s P.Bool) where
+    computedStorageEncrypted x = TF.compute (TF.refKey x) "storage_encrypted"
+
+instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (NeptuneClusterSnapshotResource s)) (TF.Attr s P.Text) where
+    computedVpcId x = TF.compute (TF.refKey x) "vpc_id"
 
 -- | @aws_neptune_event_subscription@ Resource.
 --
@@ -7106,6 +7088,9 @@ data RdsClusterResource s = RdsClusterResource'
     , _engine :: TF.Attr s P.Text
     -- ^ @engine@ - (Optional, Forces New)
     --
+    , _engineMode :: TF.Attr s P.Text
+    -- ^ @engine_mode@ - (Optional, Forces New)
+    --
     , _engineVersion :: TF.Attr s P.Text
     -- ^ @engine_version@ - (Optional, Forces New)
     --
@@ -7186,6 +7171,7 @@ rdsClusterResource =
             , _dbSubnetGroupName = TF.Nil
             , _enabledCloudwatchLogsExports = TF.Nil
             , _engine = TF.value "aurora"
+            , _engineMode = TF.value "provisioned"
             , _engineVersion = TF.Nil
             , _finalSnapshotIdentifier = TF.Nil
             , _iamDatabaseAuthenticationEnabled = TF.Nil
@@ -7201,7 +7187,7 @@ rdsClusterResource =
             , _skipFinalSnapshot = TF.value P.False
             , _snapshotIdentifier = TF.Nil
             , _sourceRegion = TF.Nil
-            , _storageEncrypted = TF.value P.False
+            , _storageEncrypted = TF.Nil
             , _tags = TF.Nil
             , _vpcSecurityGroupIds = TF.Nil
             }
@@ -7220,6 +7206,7 @@ instance TF.IsObject (RdsClusterResource s) where
         , TF.assign "db_subnet_group_name" <$> TF.attribute _dbSubnetGroupName
         , TF.assign "enabled_cloudwatch_logs_exports" <$> TF.attribute _enabledCloudwatchLogsExports
         , TF.assign "engine" <$> TF.attribute _engine
+        , TF.assign "engine_mode" <$> TF.attribute _engineMode
         , TF.assign "engine_version" <$> TF.attribute _engineVersion
         , TF.assign "final_snapshot_identifier" <$> TF.attribute _finalSnapshotIdentifier
         , TF.assign "iam_database_authentication_enabled" <$> TF.attribute _iamDatabaseAuthenticationEnabled
@@ -7327,6 +7314,11 @@ instance P.HasEngine (RdsClusterResource s) (TF.Attr s P.Text) where
     engine =
         P.lens (_engine :: RdsClusterResource s -> TF.Attr s P.Text)
                (\s a -> s { _engine = a } :: RdsClusterResource s)
+
+instance P.HasEngineMode (RdsClusterResource s) (TF.Attr s P.Text) where
+    engineMode =
+        P.lens (_engineMode :: RdsClusterResource s -> TF.Attr s P.Text)
+               (\s a -> s { _engineMode = a } :: RdsClusterResource s)
 
 instance P.HasEngineVersion (RdsClusterResource s) (TF.Attr s P.Text) where
     engineVersion =
@@ -10136,6 +10128,9 @@ instance P.HasVersionStages (SecretsmanagerSecretVersionResource s) (TF.Attr s [
 instance s ~ s' => P.HasComputedId (TF.Ref s' (SecretsmanagerSecretVersionResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
+instance s ~ s' => P.HasComputedArn (TF.Ref s' (SecretsmanagerSecretVersionResource s)) (TF.Attr s P.Text) where
+    computedArn x = TF.compute (TF.refKey x) "arn"
+
 instance s ~ s' => P.HasComputedVersionId (TF.Ref s' (SecretsmanagerSecretVersionResource s)) (TF.Attr s P.Text) where
     computedVersionId x = TF.compute (TF.refKey x) "version_id"
 
@@ -11176,4 +11171,62 @@ instance P.HasTopicArn (SesIdentityNotificationTopicResource s) (TF.Attr s P.Tex
                (\s a -> s { _topicArn = a } :: SesIdentityNotificationTopicResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (SesIdentityNotificationTopicResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+-- | @aws_ses_receipt_filter@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/aws/r/ses_receipt_filter.html terraform documentation>
+-- for more information.
+data SesReceiptFilterResource s = SesReceiptFilterResource'
+    { _cidr   :: TF.Attr s P.Text
+    -- ^ @cidr@ - (Required, Forces New)
+    --
+    , _name   :: TF.Attr s P.Text
+    -- ^ @name@ - (Required, Forces New)
+    --
+    , _policy :: TF.Attr s P.Text
+    -- ^ @policy@ - (Required, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @aws_ses_receipt_filter@ resource value.
+sesReceiptFilterResource
+    :: TF.Attr s P.Text -- ^ @cidr@ ('P._cidr', 'P.cidr')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> TF.Attr s P.Text -- ^ @policy@ ('P._policy', 'P.policy')
+    -> P.Resource (SesReceiptFilterResource s)
+sesReceiptFilterResource _cidr _name _policy =
+    TF.unsafeResource "aws_ses_receipt_filter" TF.validator $
+        SesReceiptFilterResource'
+            { _cidr = _cidr
+            , _name = _name
+            , _policy = _policy
+            }
+
+instance TF.IsObject (SesReceiptFilterResource s) where
+    toObject SesReceiptFilterResource'{..} = P.catMaybes
+        [ TF.assign "cidr" <$> TF.attribute _cidr
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "policy" <$> TF.attribute _policy
+        ]
+
+instance TF.IsValid (SesReceiptFilterResource s) where
+    validator = P.mempty
+
+instance P.HasCidr (SesReceiptFilterResource s) (TF.Attr s P.Text) where
+    cidr =
+        P.lens (_cidr :: SesReceiptFilterResource s -> TF.Attr s P.Text)
+               (\s a -> s { _cidr = a } :: SesReceiptFilterResource s)
+
+instance P.HasName (SesReceiptFilterResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: SesReceiptFilterResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: SesReceiptFilterResource s)
+
+instance P.HasPolicy (SesReceiptFilterResource s) (TF.Attr s P.Text) where
+    policy =
+        P.lens (_policy :: SesReceiptFilterResource s -> TF.Attr s P.Text)
+               (\s a -> s { _policy = a } :: SesReceiptFilterResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SesReceiptFilterResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"

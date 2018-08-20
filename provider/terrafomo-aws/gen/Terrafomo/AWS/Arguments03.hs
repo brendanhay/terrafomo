@@ -14,10 +14,7 @@
 module Terrafomo.AWS.Arguments03
     (
     -- ** Arguments
-      HasNumberOfDisks (..)
-    , HasNumberOfNodes (..)
-    , HasObjectAcl (..)
-    , HasObjectKeyPrefix (..)
+      HasObjectKeyPrefix (..)
     , HasOffset (..)
     , HasOkActions (..)
     , HasOnFailure (..)
@@ -512,6 +509,7 @@ module Terrafomo.AWS.Arguments03
     , HasSourceSecurityGroupId (..)
     , HasSourceSelectionCriteria (..)
     , HasSourceType (..)
+    , HasSourceVolumeArn (..)
     , HasSplunkConfiguration (..)
     , HasSpotIamFleetRole (..)
     , HasSpotInstanceType (..)
@@ -625,6 +623,7 @@ module Terrafomo.AWS.Arguments03
     , HasTargetGroupInfo (..)
     , HasTargetId (..)
     , HasTargetKeyId (..)
+    , HasTargetName (..)
     , HasTargetOriginId (..)
     , HasTargetParameter (..)
     , HasTargetPrefix (..)
@@ -767,6 +766,7 @@ module Terrafomo.AWS.Arguments03
     , HasVolume (..)
     , HasVolumeId (..)
     , HasVolumeSize (..)
+    , HasVolumeSizeInBytes (..)
     , HasVolumeTags (..)
     , HasVolumeType (..)
     , HasVolumesPerInstance (..)
@@ -819,24 +819,6 @@ import GHC.Base ((.))
 
 import qualified Lens.Micro       as P
 import qualified Terrafomo.Schema as TF
-
-class HasNumberOfDisks a b | a -> b where
-    numberOfDisks :: P.Lens' a b
-
-instance HasNumberOfDisks a b => HasNumberOfDisks (TF.Schema l p a) b where
-    numberOfDisks = TF.configuration . numberOfDisks
-
-class HasNumberOfNodes a b | a -> b where
-    numberOfNodes :: P.Lens' a b
-
-instance HasNumberOfNodes a b => HasNumberOfNodes (TF.Schema l p a) b where
-    numberOfNodes = TF.configuration . numberOfNodes
-
-class HasObjectAcl a b | a -> b where
-    objectAcl :: P.Lens' a b
-
-instance HasObjectAcl a b => HasObjectAcl (TF.Schema l p a) b where
-    objectAcl = TF.configuration . objectAcl
 
 class HasObjectKeyPrefix a b | a -> b where
     objectKeyPrefix :: P.Lens' a b
@@ -3808,6 +3790,12 @@ class HasSourceType a b | a -> b where
 instance HasSourceType a b => HasSourceType (TF.Schema l p a) b where
     sourceType = TF.configuration . sourceType
 
+class HasSourceVolumeArn a b | a -> b where
+    sourceVolumeArn :: P.Lens' a b
+
+instance HasSourceVolumeArn a b => HasSourceVolumeArn (TF.Schema l p a) b where
+    sourceVolumeArn = TF.configuration . sourceVolumeArn
+
 class HasSplunkConfiguration a b | a -> b where
     splunkConfiguration :: P.Lens' a b
 
@@ -4485,6 +4473,12 @@ class HasTargetKeyId a b | a -> b where
 
 instance HasTargetKeyId a b => HasTargetKeyId (TF.Schema l p a) b where
     targetKeyId = TF.configuration . targetKeyId
+
+class HasTargetName a b | a -> b where
+    targetName :: P.Lens' a b
+
+instance HasTargetName a b => HasTargetName (TF.Schema l p a) b where
+    targetName = TF.configuration . targetName
 
 class HasTargetOriginId a b | a -> b where
     targetOriginId :: P.Lens' a b
@@ -5337,6 +5331,12 @@ class HasVolumeSize a b | a -> b where
 
 instance HasVolumeSize a b => HasVolumeSize (TF.Schema l p a) b where
     volumeSize = TF.configuration . volumeSize
+
+class HasVolumeSizeInBytes a b | a -> b where
+    volumeSizeInBytes :: P.Lens' a b
+
+instance HasVolumeSizeInBytes a b => HasVolumeSizeInBytes (TF.Schema l p a) b where
+    volumeSizeInBytes = TF.configuration . volumeSizeInBytes
 
 class HasVolumeTags a b | a -> b where
     volumeTags :: P.Lens' a b

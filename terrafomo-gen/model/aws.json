@@ -13071,6 +13071,18 @@
           "maxItems": 0
         },
         {
+          "name": "arn",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
           "name": "comparison_operator",
           "type": "TypeString",
           "conflictsWith": [],
@@ -21100,6 +21112,18 @@
     {
       "name": "aws_default_subnet",
       "schemas": [
+        {
+          "name": "arn",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
         {
           "name": "assign_ipv6_address_on_creation",
           "type": "TypeBool",
@@ -45687,6 +45711,206 @@
       ]
     },
     {
+      "name": "aws_neptune_cluster_snapshot",
+      "schemas": [
+        {
+          "name": "allocated_storage",
+          "type": "TypeInt",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "availability_zones",
+          "type": "TypeList",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "schema": {
+            "name": "availability_zones",
+            "type": "TypeString",
+            "conflictsWith": [],
+            "optional": false,
+            "required": false,
+            "computed": false,
+            "forceNew": false,
+            "sensitive": false,
+            "minItems": 0,
+            "maxItems": 0
+          }
+        },
+        {
+          "name": "db_cluster_identifier",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "db_cluster_snapshot_arn",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "db_cluster_snapshot_identifier",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "engine",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "engine_version",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "kms_key_id",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "license_model",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "port",
+          "type": "TypeInt",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "snapshot_type",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "source_db_cluster_snapshot_arn",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "status",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "storage_encrypted",
+          "type": "TypeBool",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "vpc_id",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        }
+      ],
+      "timeouts": {
+        "create": 1200000000000
+      }
+    },
+    {
       "name": "aws_neptune_event_subscription",
       "schemas": [
         {
@@ -53517,6 +53741,19 @@
           "default": "aurora"
         },
         {
+          "name": "engine_mode",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0,
+          "default": "provisioned"
+        },
+        {
           "name": "engine_version",
           "type": "TypeString",
           "conflictsWith": [],
@@ -53822,8 +54059,7 @@
           "forceNew": true,
           "sensitive": false,
           "minItems": 0,
-          "maxItems": 0,
-          "default": "false"
+          "maxItems": 0
         },
         {
           "name": "tags",
@@ -58447,6 +58683,18 @@
     {
       "name": "aws_secretsmanager_secret_version",
       "schemas": [
+        {
+          "name": "arn",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
         {
           "name": "secret_id",
           "type": "TypeString",
@@ -64764,6 +65012,167 @@
       ]
     },
     {
+      "name": "aws_storagegateway_cached_iscsi_volume",
+      "schemas": [
+        {
+          "name": "arn",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "chap_enabled",
+          "type": "TypeBool",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "gateway_arn",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "lun_number",
+          "type": "TypeInt",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "network_interface_id",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "network_interface_port",
+          "type": "TypeInt",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "snapshot_id",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "source_volume_arn",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": true,
+          "required": false,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "target_arn",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "target_name",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "volume_arn",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "volume_id",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
+          "name": "volume_size_in_bytes",
+          "type": "TypeInt",
+          "conflictsWith": [],
+          "optional": false,
+          "required": true,
+          "computed": false,
+          "forceNew": true,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        }
+      ]
+    },
+    {
       "name": "aws_storagegateway_gateway",
       "schemas": [
         {
@@ -65497,6 +65906,18 @@
     {
       "name": "aws_subnet",
       "schemas": [
+        {
+          "name": "arn",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
         {
           "name": "assign_ipv6_address_on_creation",
           "type": "TypeBool",
@@ -84492,6 +84913,18 @@
       "name": "aws_secretsmanager_secret_version",
       "schemas": [
         {
+          "name": "arn",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
+        {
           "name": "secret_id",
           "type": "TypeString",
           "conflictsWith": [],
@@ -84994,6 +85427,18 @@
     {
       "name": "aws_subnet",
       "schemas": [
+        {
+          "name": "arn",
+          "type": "TypeString",
+          "conflictsWith": [],
+          "optional": false,
+          "required": false,
+          "computed": true,
+          "forceNew": false,
+          "sensitive": false,
+          "minItems": 0,
+          "maxItems": 0
+        },
         {
           "name": "assign_ipv6_address_on_creation",
           "type": "TypeBool",

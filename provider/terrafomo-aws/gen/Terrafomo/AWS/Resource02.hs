@@ -17,16 +17,8 @@
 --
 module Terrafomo.AWS.Resource02
     (
-    -- ** aws_acmpca_certificate_authority
-      AcmpcaCertificateAuthorityResource (..)
-    , acmpcaCertificateAuthorityResource
-
-    -- ** aws_alb_listener_certificate
-    , AlbListenerCertificateResource (..)
-    , albListenerCertificateResource
-
     -- ** aws_alb_listener
-    , AlbListenerResource (..)
+      AlbListenerResource (..)
     , albListenerResource
 
     -- ** aws_alb_listener_rule
@@ -337,6 +329,14 @@ module Terrafomo.AWS.Resource02
     , CognitoIdentityPoolRolesAttachmentResource (..)
     , cognitoIdentityPoolRolesAttachmentResource
 
+    -- ** aws_cognito_identity_provider
+    , CognitoIdentityProviderResource (..)
+    , cognitoIdentityProviderResource
+
+    -- ** aws_cognito_resource_server
+    , CognitoResourceServerResource (..)
+    , cognitoResourceServerResource
+
     ) where
 
 import Data.Functor ((<$>))
@@ -362,161 +362,6 @@ import qualified Terrafomo.HCL          as TF
 import qualified Terrafomo.Name         as TF
 import qualified Terrafomo.Schema       as TF
 import qualified Terrafomo.Validator    as TF
-
--- | @aws_acmpca_certificate_authority@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/aws/r/acmpca_certificate_authority.html terraform documentation>
--- for more information.
-data AcmpcaCertificateAuthorityResource s = AcmpcaCertificateAuthorityResource'
-    { _certificateAuthorityConfiguration :: TF.Attr s (CertificateAuthorityConfigurationSetting s)
-    -- ^ @certificate_authority_configuration@ - (Required)
-    --
-    , _enabled :: TF.Attr s P.Bool
-    -- ^ @enabled@ - (Optional)
-    --
-    , _revocationConfiguration :: TF.Attr s (RevocationConfigurationSetting s)
-    -- ^ @revocation_configuration@ - (Optional)
-    --
-    , _tags :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
-    -- ^ @tags@ - (Optional)
-    --
-    , _type' :: TF.Attr s P.Text
-    -- ^ @type@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Define a new @aws_acmpca_certificate_authority@ resource value.
-acmpcaCertificateAuthorityResource
-    :: TF.Attr s (CertificateAuthorityConfigurationSetting s) -- ^ @certificate_authority_configuration@ ('P._certificateAuthorityConfiguration', 'P.certificateAuthorityConfiguration')
-    -> P.Resource (AcmpcaCertificateAuthorityResource s)
-acmpcaCertificateAuthorityResource _certificateAuthorityConfiguration =
-    TF.unsafeResource "aws_acmpca_certificate_authority" TF.validator $
-        AcmpcaCertificateAuthorityResource'
-            { _certificateAuthorityConfiguration = _certificateAuthorityConfiguration
-            , _enabled = TF.value P.True
-            , _revocationConfiguration = TF.Nil
-            , _tags = TF.Nil
-            , _type' = TF.value "SUBORDINATE"
-            }
-
-instance TF.IsObject (AcmpcaCertificateAuthorityResource s) where
-    toObject AcmpcaCertificateAuthorityResource'{..} = P.catMaybes
-        [ TF.assign "certificate_authority_configuration" <$> TF.attribute _certificateAuthorityConfiguration
-        , TF.assign "enabled" <$> TF.attribute _enabled
-        , TF.assign "revocation_configuration" <$> TF.attribute _revocationConfiguration
-        , TF.assign "tags" <$> TF.attribute _tags
-        , TF.assign "type" <$> TF.attribute _type'
-        ]
-
-instance TF.IsValid (AcmpcaCertificateAuthorityResource s) where
-    validator = P.mempty
-           P.<> TF.settingsValidator "_certificateAuthorityConfiguration"
-                  (_certificateAuthorityConfiguration
-                      :: AcmpcaCertificateAuthorityResource s -> TF.Attr s (CertificateAuthorityConfigurationSetting s))
-                  TF.validator
-           P.<> TF.settingsValidator "_revocationConfiguration"
-                  (_revocationConfiguration
-                      :: AcmpcaCertificateAuthorityResource s -> TF.Attr s (RevocationConfigurationSetting s))
-                  TF.validator
-
-instance P.HasCertificateAuthorityConfiguration (AcmpcaCertificateAuthorityResource s) (TF.Attr s (CertificateAuthorityConfigurationSetting s)) where
-    certificateAuthorityConfiguration =
-        P.lens (_certificateAuthorityConfiguration :: AcmpcaCertificateAuthorityResource s -> TF.Attr s (CertificateAuthorityConfigurationSetting s))
-               (\s a -> s { _certificateAuthorityConfiguration = a } :: AcmpcaCertificateAuthorityResource s)
-
-instance P.HasEnabled (AcmpcaCertificateAuthorityResource s) (TF.Attr s P.Bool) where
-    enabled =
-        P.lens (_enabled :: AcmpcaCertificateAuthorityResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _enabled = a } :: AcmpcaCertificateAuthorityResource s)
-
-instance P.HasRevocationConfiguration (AcmpcaCertificateAuthorityResource s) (TF.Attr s (RevocationConfigurationSetting s)) where
-    revocationConfiguration =
-        P.lens (_revocationConfiguration :: AcmpcaCertificateAuthorityResource s -> TF.Attr s (RevocationConfigurationSetting s))
-               (\s a -> s { _revocationConfiguration = a } :: AcmpcaCertificateAuthorityResource s)
-
-instance P.HasTags (AcmpcaCertificateAuthorityResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
-    tags =
-        P.lens (_tags :: AcmpcaCertificateAuthorityResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _tags = a } :: AcmpcaCertificateAuthorityResource s)
-
-instance P.HasType' (AcmpcaCertificateAuthorityResource s) (TF.Attr s P.Text) where
-    type' =
-        P.lens (_type' :: AcmpcaCertificateAuthorityResource s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a } :: AcmpcaCertificateAuthorityResource s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (AcmpcaCertificateAuthorityResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
-instance s ~ s' => P.HasComputedArn (TF.Ref s' (AcmpcaCertificateAuthorityResource s)) (TF.Attr s P.Text) where
-    computedArn x = TF.compute (TF.refKey x) "arn"
-
-instance s ~ s' => P.HasComputedCertificate (TF.Ref s' (AcmpcaCertificateAuthorityResource s)) (TF.Attr s P.Text) where
-    computedCertificate x = TF.compute (TF.refKey x) "certificate"
-
-instance s ~ s' => P.HasComputedCertificateChain (TF.Ref s' (AcmpcaCertificateAuthorityResource s)) (TF.Attr s P.Text) where
-    computedCertificateChain x = TF.compute (TF.refKey x) "certificate_chain"
-
-instance s ~ s' => P.HasComputedCertificateSigningRequest (TF.Ref s' (AcmpcaCertificateAuthorityResource s)) (TF.Attr s P.Text) where
-    computedCertificateSigningRequest x = TF.compute (TF.refKey x) "certificate_signing_request"
-
-instance s ~ s' => P.HasComputedNotAfter (TF.Ref s' (AcmpcaCertificateAuthorityResource s)) (TF.Attr s P.Text) where
-    computedNotAfter x = TF.compute (TF.refKey x) "not_after"
-
-instance s ~ s' => P.HasComputedNotBefore (TF.Ref s' (AcmpcaCertificateAuthorityResource s)) (TF.Attr s P.Text) where
-    computedNotBefore x = TF.compute (TF.refKey x) "not_before"
-
-instance s ~ s' => P.HasComputedSerial (TF.Ref s' (AcmpcaCertificateAuthorityResource s)) (TF.Attr s P.Text) where
-    computedSerial x = TF.compute (TF.refKey x) "serial"
-
-instance s ~ s' => P.HasComputedStatus (TF.Ref s' (AcmpcaCertificateAuthorityResource s)) (TF.Attr s P.Text) where
-    computedStatus x = TF.compute (TF.refKey x) "status"
-
--- | @aws_alb_listener_certificate@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/aws/r/alb_listener_certificate.html terraform documentation>
--- for more information.
-data AlbListenerCertificateResource s = AlbListenerCertificateResource'
-    { _certificateArn :: TF.Attr s P.Text
-    -- ^ @certificate_arn@ - (Required, Forces New)
-    --
-    , _listenerArn    :: TF.Attr s P.Text
-    -- ^ @listener_arn@ - (Required, Forces New)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Define a new @aws_alb_listener_certificate@ resource value.
-albListenerCertificateResource
-    :: TF.Attr s P.Text -- ^ @certificate_arn@ ('P._certificateArn', 'P.certificateArn')
-    -> TF.Attr s P.Text -- ^ @listener_arn@ ('P._listenerArn', 'P.listenerArn')
-    -> P.Resource (AlbListenerCertificateResource s)
-albListenerCertificateResource _certificateArn _listenerArn =
-    TF.unsafeResource "aws_alb_listener_certificate" TF.validator $
-        AlbListenerCertificateResource'
-            { _certificateArn = _certificateArn
-            , _listenerArn = _listenerArn
-            }
-
-instance TF.IsObject (AlbListenerCertificateResource s) where
-    toObject AlbListenerCertificateResource'{..} = P.catMaybes
-        [ TF.assign "certificate_arn" <$> TF.attribute _certificateArn
-        , TF.assign "listener_arn" <$> TF.attribute _listenerArn
-        ]
-
-instance TF.IsValid (AlbListenerCertificateResource s) where
-    validator = P.mempty
-
-instance P.HasCertificateArn (AlbListenerCertificateResource s) (TF.Attr s P.Text) where
-    certificateArn =
-        P.lens (_certificateArn :: AlbListenerCertificateResource s -> TF.Attr s P.Text)
-               (\s a -> s { _certificateArn = a } :: AlbListenerCertificateResource s)
-
-instance P.HasListenerArn (AlbListenerCertificateResource s) (TF.Attr s P.Text) where
-    listenerArn =
-        P.lens (_listenerArn :: AlbListenerCertificateResource s -> TF.Attr s P.Text)
-               (\s a -> s { _listenerArn = a } :: AlbListenerCertificateResource s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (AlbListenerCertificateResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @aws_alb_listener@ Resource.
 --
@@ -7773,6 +7618,9 @@ instance P.HasUnit (CloudwatchMetricAlarmResource s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (CloudwatchMetricAlarmResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
+instance s ~ s' => P.HasComputedArn (TF.Ref s' (CloudwatchMetricAlarmResource s)) (TF.Attr s P.Text) where
+    computedArn x = TF.compute (TF.refKey x) "arn"
+
 instance s ~ s' => P.HasComputedEvaluateLowSampleCountPercentiles (TF.Ref s' (CloudwatchMetricAlarmResource s)) (TF.Attr s P.Text) where
     computedEvaluateLowSampleCountPercentiles x = TF.compute (TF.refKey x) "evaluate_low_sample_count_percentiles"
 
@@ -8679,3 +8527,163 @@ instance P.HasRoles (CognitoIdentityPoolRolesAttachmentResource s) (TF.Attr s (P
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (CognitoIdentityPoolRolesAttachmentResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
+
+-- | @aws_cognito_identity_provider@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/aws/r/cognito_identity_provider.html terraform documentation>
+-- for more information.
+data CognitoIdentityProviderResource s = CognitoIdentityProviderResource'
+    { _attributeMapping :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @attribute_mapping@ - (Optional)
+    --
+    , _idpIdentifiers   :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @idp_identifiers@ - (Optional)
+    --
+    , _providerDetails  :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    -- ^ @provider_details@ - (Required)
+    --
+    , _providerName     :: TF.Attr s P.Text
+    -- ^ @provider_name@ - (Required)
+    --
+    , _providerType     :: TF.Attr s P.Text
+    -- ^ @provider_type@ - (Required)
+    --
+    , _userPoolId       :: TF.Attr s P.Text
+    -- ^ @user_pool_id@ - (Required, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @aws_cognito_identity_provider@ resource value.
+cognitoIdentityProviderResource
+    :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text)) -- ^ @provider_details@ ('P._providerDetails', 'P.providerDetails')
+    -> TF.Attr s P.Text -- ^ @user_pool_id@ ('P._userPoolId', 'P.userPoolId')
+    -> TF.Attr s P.Text -- ^ @provider_name@ ('P._providerName', 'P.providerName')
+    -> TF.Attr s P.Text -- ^ @provider_type@ ('P._providerType', 'P.providerType')
+    -> P.Resource (CognitoIdentityProviderResource s)
+cognitoIdentityProviderResource _providerDetails _userPoolId _providerName _providerType =
+    TF.unsafeResource "aws_cognito_identity_provider" TF.validator $
+        CognitoIdentityProviderResource'
+            { _attributeMapping = TF.Nil
+            , _idpIdentifiers = TF.Nil
+            , _providerDetails = _providerDetails
+            , _providerName = _providerName
+            , _providerType = _providerType
+            , _userPoolId = _userPoolId
+            }
+
+instance TF.IsObject (CognitoIdentityProviderResource s) where
+    toObject CognitoIdentityProviderResource'{..} = P.catMaybes
+        [ TF.assign "attribute_mapping" <$> TF.attribute _attributeMapping
+        , TF.assign "idp_identifiers" <$> TF.attribute _idpIdentifiers
+        , TF.assign "provider_details" <$> TF.attribute _providerDetails
+        , TF.assign "provider_name" <$> TF.attribute _providerName
+        , TF.assign "provider_type" <$> TF.attribute _providerType
+        , TF.assign "user_pool_id" <$> TF.attribute _userPoolId
+        ]
+
+instance TF.IsValid (CognitoIdentityProviderResource s) where
+    validator = P.mempty
+
+instance P.HasAttributeMapping (CognitoIdentityProviderResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    attributeMapping =
+        P.lens (_attributeMapping :: CognitoIdentityProviderResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _attributeMapping = a } :: CognitoIdentityProviderResource s)
+
+instance P.HasIdpIdentifiers (CognitoIdentityProviderResource s) (TF.Attr s [TF.Attr s P.Text]) where
+    idpIdentifiers =
+        P.lens (_idpIdentifiers :: CognitoIdentityProviderResource s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _idpIdentifiers = a } :: CognitoIdentityProviderResource s)
+
+instance P.HasProviderDetails (CognitoIdentityProviderResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+    providerDetails =
+        P.lens (_providerDetails :: CognitoIdentityProviderResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _providerDetails = a } :: CognitoIdentityProviderResource s)
+
+instance P.HasProviderName (CognitoIdentityProviderResource s) (TF.Attr s P.Text) where
+    providerName =
+        P.lens (_providerName :: CognitoIdentityProviderResource s -> TF.Attr s P.Text)
+               (\s a -> s { _providerName = a } :: CognitoIdentityProviderResource s)
+
+instance P.HasProviderType (CognitoIdentityProviderResource s) (TF.Attr s P.Text) where
+    providerType =
+        P.lens (_providerType :: CognitoIdentityProviderResource s -> TF.Attr s P.Text)
+               (\s a -> s { _providerType = a } :: CognitoIdentityProviderResource s)
+
+instance P.HasUserPoolId (CognitoIdentityProviderResource s) (TF.Attr s P.Text) where
+    userPoolId =
+        P.lens (_userPoolId :: CognitoIdentityProviderResource s -> TF.Attr s P.Text)
+               (\s a -> s { _userPoolId = a } :: CognitoIdentityProviderResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (CognitoIdentityProviderResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+-- | @aws_cognito_resource_server@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/aws/r/cognito_resource_server.html terraform documentation>
+-- for more information.
+data CognitoResourceServerResource s = CognitoResourceServerResource'
+    { _identifier :: TF.Attr s P.Text
+    -- ^ @identifier@ - (Required, Forces New)
+    --
+    , _name       :: TF.Attr s P.Text
+    -- ^ @name@ - (Required, Forces New)
+    --
+    , _scope      :: TF.Attr s [TF.Attr s (ScopeSetting s)]
+    -- ^ @scope@ - (Optional)
+    --
+    , _userPoolId :: TF.Attr s P.Text
+    -- ^ @user_pool_id@ - (Required, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @aws_cognito_resource_server@ resource value.
+cognitoResourceServerResource
+    :: TF.Attr s P.Text -- ^ @user_pool_id@ ('P._userPoolId', 'P.userPoolId')
+    -> TF.Attr s P.Text -- ^ @identifier@ ('P._identifier', 'P.identifier')
+    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    -> P.Resource (CognitoResourceServerResource s)
+cognitoResourceServerResource _userPoolId _identifier _name =
+    TF.unsafeResource "aws_cognito_resource_server" TF.validator $
+        CognitoResourceServerResource'
+            { _identifier = _identifier
+            , _name = _name
+            , _scope = TF.Nil
+            , _userPoolId = _userPoolId
+            }
+
+instance TF.IsObject (CognitoResourceServerResource s) where
+    toObject CognitoResourceServerResource'{..} = P.catMaybes
+        [ TF.assign "identifier" <$> TF.attribute _identifier
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "scope" <$> TF.attribute _scope
+        , TF.assign "user_pool_id" <$> TF.attribute _userPoolId
+        ]
+
+instance TF.IsValid (CognitoResourceServerResource s) where
+    validator = P.mempty
+
+instance P.HasIdentifier (CognitoResourceServerResource s) (TF.Attr s P.Text) where
+    identifier =
+        P.lens (_identifier :: CognitoResourceServerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _identifier = a } :: CognitoResourceServerResource s)
+
+instance P.HasName (CognitoResourceServerResource s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: CognitoResourceServerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: CognitoResourceServerResource s)
+
+instance P.HasScope (CognitoResourceServerResource s) (TF.Attr s [TF.Attr s (ScopeSetting s)]) where
+    scope =
+        P.lens (_scope :: CognitoResourceServerResource s -> TF.Attr s [TF.Attr s (ScopeSetting s)])
+               (\s a -> s { _scope = a } :: CognitoResourceServerResource s)
+
+instance P.HasUserPoolId (CognitoResourceServerResource s) (TF.Attr s P.Text) where
+    userPoolId =
+        P.lens (_userPoolId :: CognitoResourceServerResource s -> TF.Attr s P.Text)
+               (\s a -> s { _userPoolId = a } :: CognitoResourceServerResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (CognitoResourceServerResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedScopeIdentifiers (TF.Ref s' (CognitoResourceServerResource s)) (TF.Attr s [TF.Attr s P.Text]) where
+    computedScopeIdentifiers x = TF.compute (TF.refKey x) "scope_identifiers"

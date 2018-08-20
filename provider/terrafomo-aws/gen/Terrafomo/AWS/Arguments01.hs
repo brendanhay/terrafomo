@@ -378,6 +378,10 @@ module Terrafomo.AWS.Arguments01
     , HasContentBasedDeduplication (..)
     , HasContentConfig (..)
     , HasContentConfigPermissions (..)
+    , HasContentDisposition (..)
+    , HasContentEncoding (..)
+    , HasContentHandling (..)
+    , HasContentLanguage (..)
     ) where
 import GHC.Base ((.))
 
@@ -2567,3 +2571,27 @@ class HasContentConfigPermissions a b | a -> b where
 
 instance HasContentConfigPermissions a b => HasContentConfigPermissions (TF.Schema l p a) b where
     contentConfigPermissions = TF.configuration . contentConfigPermissions
+
+class HasContentDisposition a b | a -> b where
+    contentDisposition :: P.Lens' a b
+
+instance HasContentDisposition a b => HasContentDisposition (TF.Schema l p a) b where
+    contentDisposition = TF.configuration . contentDisposition
+
+class HasContentEncoding a b | a -> b where
+    contentEncoding :: P.Lens' a b
+
+instance HasContentEncoding a b => HasContentEncoding (TF.Schema l p a) b where
+    contentEncoding = TF.configuration . contentEncoding
+
+class HasContentHandling a b | a -> b where
+    contentHandling :: P.Lens' a b
+
+instance HasContentHandling a b => HasContentHandling (TF.Schema l p a) b where
+    contentHandling = TF.configuration . contentHandling
+
+class HasContentLanguage a b | a -> b where
+    contentLanguage :: P.Lens' a b
+
+instance HasContentLanguage a b => HasContentLanguage (TF.Schema l p a) b where
+    contentLanguage = TF.configuration . contentLanguage
