@@ -6,12 +6,15 @@
 /terrafomo-gen/schema
 *.rej
 
-# profiling
+# Profiling
 *.prof
 *.aux
 *.hp
 *.ps
 *.pdf
 
-# hpack
+# Hpack
 *.cabal
+
+# Generator IR
+/terrafomo-gen/ir
