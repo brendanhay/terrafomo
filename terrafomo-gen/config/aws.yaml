@@ -52,5 +52,5 @@ field-overrides:
 
   # Settings
 
-  AttributeSetting:
-    type: 'TF.Attr s P.TableAttributeType'
+  DynamodbTableAttributeSetting:
+    type': 'TF.Attr s P.TableAttributeType'
