@@ -17,12 +17,8 @@
 --
 module Terrafomo.AWS.Resource06
     (
-    -- ** aws_ses_receipt_filter
-      SesReceiptFilterResource (..)
-    , sesReceiptFilterResource
-
     -- ** aws_ses_receipt_rule
-    , SesReceiptRuleResource (..)
+      SesReceiptRuleResource (..)
     , sesReceiptRuleResource
 
     -- ** aws_ses_receipt_rule_set
@@ -132,6 +128,10 @@ module Terrafomo.AWS.Resource06
     -- ** aws_storagegateway_cache
     , StoragegatewayCacheResource (..)
     , storagegatewayCacheResource
+
+    -- ** aws_storagegateway_cached_iscsi_volume
+    , StoragegatewayCachedIscsiVolumeResource (..)
+    , storagegatewayCachedIscsiVolumeResource
 
     -- ** aws_storagegateway_gateway
     , StoragegatewayGatewayResource (..)
@@ -362,64 +362,6 @@ import qualified Terrafomo.HCL          as TF
 import qualified Terrafomo.Name         as TF
 import qualified Terrafomo.Schema       as TF
 import qualified Terrafomo.Validator    as TF
-
--- | @aws_ses_receipt_filter@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/aws/r/ses_receipt_filter.html terraform documentation>
--- for more information.
-data SesReceiptFilterResource s = SesReceiptFilterResource'
-    { _cidr   :: TF.Attr s P.Text
-    -- ^ @cidr@ - (Required, Forces New)
-    --
-    , _name   :: TF.Attr s P.Text
-    -- ^ @name@ - (Required, Forces New)
-    --
-    , _policy :: TF.Attr s P.Text
-    -- ^ @policy@ - (Required, Forces New)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Define a new @aws_ses_receipt_filter@ resource value.
-sesReceiptFilterResource
-    :: TF.Attr s P.Text -- ^ @cidr@ ('P._cidr', 'P.cidr')
-    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
-    -> TF.Attr s P.Text -- ^ @policy@ ('P._policy', 'P.policy')
-    -> P.Resource (SesReceiptFilterResource s)
-sesReceiptFilterResource _cidr _name _policy =
-    TF.unsafeResource "aws_ses_receipt_filter" TF.validator $
-        SesReceiptFilterResource'
-            { _cidr = _cidr
-            , _name = _name
-            , _policy = _policy
-            }
-
-instance TF.IsObject (SesReceiptFilterResource s) where
-    toObject SesReceiptFilterResource'{..} = P.catMaybes
-        [ TF.assign "cidr" <$> TF.attribute _cidr
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "policy" <$> TF.attribute _policy
-        ]
-
-instance TF.IsValid (SesReceiptFilterResource s) where
-    validator = P.mempty
-
-instance P.HasCidr (SesReceiptFilterResource s) (TF.Attr s P.Text) where
-    cidr =
-        P.lens (_cidr :: SesReceiptFilterResource s -> TF.Attr s P.Text)
-               (\s a -> s { _cidr = a } :: SesReceiptFilterResource s)
-
-instance P.HasName (SesReceiptFilterResource s) (TF.Attr s P.Text) where
-    name =
-        P.lens (_name :: SesReceiptFilterResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: SesReceiptFilterResource s)
-
-instance P.HasPolicy (SesReceiptFilterResource s) (TF.Attr s P.Text) where
-    policy =
-        P.lens (_policy :: SesReceiptFilterResource s -> TF.Attr s P.Text)
-               (\s a -> s { _policy = a } :: SesReceiptFilterResource s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (SesReceiptFilterResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
 
 -- | @aws_ses_receipt_rule@ Resource.
 --
@@ -3584,6 +3526,116 @@ instance P.HasGatewayArn (StoragegatewayCacheResource s) (TF.Attr s P.Text) wher
 instance s ~ s' => P.HasComputedId (TF.Ref s' (StoragegatewayCacheResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
+-- | @aws_storagegateway_cached_iscsi_volume@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/aws/r/storagegateway_cached_iscsi_volume.html terraform documentation>
+-- for more information.
+data StoragegatewayCachedIscsiVolumeResource s = StoragegatewayCachedIscsiVolumeResource'
+    { _gatewayArn         :: TF.Attr s P.Text
+    -- ^ @gateway_arn@ - (Required, Forces New)
+    --
+    , _networkInterfaceId :: TF.Attr s P.Text
+    -- ^ @network_interface_id@ - (Required, Forces New)
+    --
+    , _snapshotId         :: TF.Attr s P.Text
+    -- ^ @snapshot_id@ - (Optional, Forces New)
+    --
+    , _sourceVolumeArn    :: TF.Attr s P.Text
+    -- ^ @source_volume_arn@ - (Optional, Forces New)
+    --
+    , _targetName         :: TF.Attr s P.Text
+    -- ^ @target_name@ - (Required, Forces New)
+    --
+    , _volumeSizeInBytes  :: TF.Attr s P.Int
+    -- ^ @volume_size_in_bytes@ - (Required, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @aws_storagegateway_cached_iscsi_volume@ resource value.
+storagegatewayCachedIscsiVolumeResource
+    :: TF.Attr s P.Text -- ^ @gateway_arn@ ('P._gatewayArn', 'P.gatewayArn')
+    -> TF.Attr s P.Int -- ^ @volume_size_in_bytes@ ('P._volumeSizeInBytes', 'P.volumeSizeInBytes')
+    -> TF.Attr s P.Text -- ^ @network_interface_id@ ('P._networkInterfaceId', 'P.networkInterfaceId')
+    -> TF.Attr s P.Text -- ^ @target_name@ ('P._targetName', 'P.targetName')
+    -> P.Resource (StoragegatewayCachedIscsiVolumeResource s)
+storagegatewayCachedIscsiVolumeResource _gatewayArn _volumeSizeInBytes _networkInterfaceId _targetName =
+    TF.unsafeResource "aws_storagegateway_cached_iscsi_volume" TF.validator $
+        StoragegatewayCachedIscsiVolumeResource'
+            { _gatewayArn = _gatewayArn
+            , _networkInterfaceId = _networkInterfaceId
+            , _snapshotId = TF.Nil
+            , _sourceVolumeArn = TF.Nil
+            , _targetName = _targetName
+            , _volumeSizeInBytes = _volumeSizeInBytes
+            }
+
+instance TF.IsObject (StoragegatewayCachedIscsiVolumeResource s) where
+    toObject StoragegatewayCachedIscsiVolumeResource'{..} = P.catMaybes
+        [ TF.assign "gateway_arn" <$> TF.attribute _gatewayArn
+        , TF.assign "network_interface_id" <$> TF.attribute _networkInterfaceId
+        , TF.assign "snapshot_id" <$> TF.attribute _snapshotId
+        , TF.assign "source_volume_arn" <$> TF.attribute _sourceVolumeArn
+        , TF.assign "target_name" <$> TF.attribute _targetName
+        , TF.assign "volume_size_in_bytes" <$> TF.attribute _volumeSizeInBytes
+        ]
+
+instance TF.IsValid (StoragegatewayCachedIscsiVolumeResource s) where
+    validator = P.mempty
+
+instance P.HasGatewayArn (StoragegatewayCachedIscsiVolumeResource s) (TF.Attr s P.Text) where
+    gatewayArn =
+        P.lens (_gatewayArn :: StoragegatewayCachedIscsiVolumeResource s -> TF.Attr s P.Text)
+               (\s a -> s { _gatewayArn = a } :: StoragegatewayCachedIscsiVolumeResource s)
+
+instance P.HasNetworkInterfaceId (StoragegatewayCachedIscsiVolumeResource s) (TF.Attr s P.Text) where
+    networkInterfaceId =
+        P.lens (_networkInterfaceId :: StoragegatewayCachedIscsiVolumeResource s -> TF.Attr s P.Text)
+               (\s a -> s { _networkInterfaceId = a } :: StoragegatewayCachedIscsiVolumeResource s)
+
+instance P.HasSnapshotId (StoragegatewayCachedIscsiVolumeResource s) (TF.Attr s P.Text) where
+    snapshotId =
+        P.lens (_snapshotId :: StoragegatewayCachedIscsiVolumeResource s -> TF.Attr s P.Text)
+               (\s a -> s { _snapshotId = a } :: StoragegatewayCachedIscsiVolumeResource s)
+
+instance P.HasSourceVolumeArn (StoragegatewayCachedIscsiVolumeResource s) (TF.Attr s P.Text) where
+    sourceVolumeArn =
+        P.lens (_sourceVolumeArn :: StoragegatewayCachedIscsiVolumeResource s -> TF.Attr s P.Text)
+               (\s a -> s { _sourceVolumeArn = a } :: StoragegatewayCachedIscsiVolumeResource s)
+
+instance P.HasTargetName (StoragegatewayCachedIscsiVolumeResource s) (TF.Attr s P.Text) where
+    targetName =
+        P.lens (_targetName :: StoragegatewayCachedIscsiVolumeResource s -> TF.Attr s P.Text)
+               (\s a -> s { _targetName = a } :: StoragegatewayCachedIscsiVolumeResource s)
+
+instance P.HasVolumeSizeInBytes (StoragegatewayCachedIscsiVolumeResource s) (TF.Attr s P.Int) where
+    volumeSizeInBytes =
+        P.lens (_volumeSizeInBytes :: StoragegatewayCachedIscsiVolumeResource s -> TF.Attr s P.Int)
+               (\s a -> s { _volumeSizeInBytes = a } :: StoragegatewayCachedIscsiVolumeResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (StoragegatewayCachedIscsiVolumeResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedArn (TF.Ref s' (StoragegatewayCachedIscsiVolumeResource s)) (TF.Attr s P.Text) where
+    computedArn x = TF.compute (TF.refKey x) "arn"
+
+instance s ~ s' => P.HasComputedChapEnabled (TF.Ref s' (StoragegatewayCachedIscsiVolumeResource s)) (TF.Attr s P.Bool) where
+    computedChapEnabled x = TF.compute (TF.refKey x) "chap_enabled"
+
+instance s ~ s' => P.HasComputedLunNumber (TF.Ref s' (StoragegatewayCachedIscsiVolumeResource s)) (TF.Attr s P.Int) where
+    computedLunNumber x = TF.compute (TF.refKey x) "lun_number"
+
+instance s ~ s' => P.HasComputedNetworkInterfacePort (TF.Ref s' (StoragegatewayCachedIscsiVolumeResource s)) (TF.Attr s P.Int) where
+    computedNetworkInterfacePort x = TF.compute (TF.refKey x) "network_interface_port"
+
+instance s ~ s' => P.HasComputedTargetArn (TF.Ref s' (StoragegatewayCachedIscsiVolumeResource s)) (TF.Attr s P.Text) where
+    computedTargetArn x = TF.compute (TF.refKey x) "target_arn"
+
+instance s ~ s' => P.HasComputedVolumeArn (TF.Ref s' (StoragegatewayCachedIscsiVolumeResource s)) (TF.Attr s P.Text) where
+    computedVolumeArn x = TF.compute (TF.refKey x) "volume_arn"
+
+instance s ~ s' => P.HasComputedVolumeId (TF.Ref s' (StoragegatewayCachedIscsiVolumeResource s)) (TF.Attr s P.Text) where
+    computedVolumeId x = TF.compute (TF.refKey x) "volume_id"
+
 -- | @aws_storagegateway_gateway@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/aws/r/storagegateway_gateway.html terraform documentation>
@@ -4257,6 +4309,9 @@ instance P.HasVpcId (SubnetResource s) (TF.Attr s P.Text) where
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (SubnetResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedArn (TF.Ref s' (SubnetResource s)) (TF.Attr s P.Text) where
+    computedArn x = TF.compute (TF.refKey x) "arn"
 
 instance s ~ s' => P.HasComputedAvailabilityZone (TF.Ref s' (SubnetResource s)) (TF.Attr s P.Text) where
     computedAvailabilityZone x = TF.compute (TF.refKey x) "availability_zone"

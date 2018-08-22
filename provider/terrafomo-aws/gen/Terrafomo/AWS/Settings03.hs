@@ -3222,7 +3222,7 @@ data DynamodbTableAttributeSetting s = DynamodbTableAttributeSetting'
     { _name  :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _type' :: TF.Attr s P.Text
+    , _type' :: TF.Attr s P.TableAttributeType
     -- ^ @type@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -3230,7 +3230,7 @@ data DynamodbTableAttributeSetting s = DynamodbTableAttributeSetting'
 -- | Construct a new @attribute@ settings value.
 newDynamodbTableAttributeSetting
     :: TF.Attr s P.Text -- ^ 'P._name': @name@
-    -> TF.Attr s P.Text -- ^ 'P._type'': @type@
+    -> TF.Attr s P.TableAttributeType -- ^ 'P._type'': @type@
     -> DynamodbTableAttributeSetting s
 newDynamodbTableAttributeSetting _name _type' =
     DynamodbTableAttributeSetting'
@@ -3253,9 +3253,9 @@ instance P.HasName (DynamodbTableAttributeSetting s) (TF.Attr s P.Text) where
         P.lens (_name :: DynamodbTableAttributeSetting s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: DynamodbTableAttributeSetting s)
 
-instance P.HasType' (DynamodbTableAttributeSetting s) (TF.Attr s P.Text) where
+instance P.HasType' (DynamodbTableAttributeSetting s) (TF.Attr s P.TableAttributeType) where
     type' =
-        P.lens (_type' :: DynamodbTableAttributeSetting s -> TF.Attr s P.Text)
+        P.lens (_type' :: DynamodbTableAttributeSetting s -> TF.Attr s P.TableAttributeType)
                (\s a -> s { _type' = a } :: DynamodbTableAttributeSetting s)
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (DynamodbTableAttributeSetting s)) (TF.Attr s P.Text) where

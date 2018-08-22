@@ -17,16 +17,8 @@
 --
 module Terrafomo.AWS.Resource04
     (
-    -- ** aws_elb
-      ElbResource (..)
-    , elbResource
-
-    -- ** aws_emr_cluster
-    , EmrClusterResource (..)
-    , emrClusterResource
-
     -- ** aws_emr_instance_group
-    , EmrInstanceGroupResource (..)
+      EmrInstanceGroupResource (..)
     , emrInstanceGroupResource
 
     -- ** aws_emr_security_configuration
@@ -337,6 +329,14 @@ module Terrafomo.AWS.Resource04
     , LoadBalancerListenerPolicyResource (..)
     , loadBalancerListenerPolicyResource
 
+    -- ** aws_load_balancer_policy
+    , LoadBalancerPolicyResource (..)
+    , loadBalancerPolicyResource
+
+    -- ** aws_macie_member_account_association
+    , MacieMemberAccountAssociationResource (..)
+    , macieMemberAccountAssociationResource
+
     ) where
 
 import Data.Functor ((<$>))
@@ -362,577 +362,6 @@ import qualified Terrafomo.HCL          as TF
 import qualified Terrafomo.Name         as TF
 import qualified Terrafomo.Schema       as TF
 import qualified Terrafomo.Validator    as TF
-
--- | @aws_elb@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/aws/r/elb.html terraform documentation>
--- for more information.
-data ElbResource s = ElbResource'
-    { _accessLogs                :: TF.Attr s (ElbAccessLogsSetting s)
-    -- ^ @access_logs@ - (Optional)
-    --
-    , _availabilityZones         :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @availability_zones@ - (Optional)
-    --
-    , _connectionDraining        :: TF.Attr s P.Bool
-    -- ^ @connection_draining@ - (Optional)
-    --
-    , _connectionDrainingTimeout :: TF.Attr s P.Int
-    -- ^ @connection_draining_timeout@ - (Optional)
-    --
-    , _crossZoneLoadBalancing    :: TF.Attr s P.Bool
-    -- ^ @cross_zone_load_balancing@ - (Optional)
-    --
-    , _healthCheck               :: TF.Attr s (ElbHealthCheckSetting s)
-    -- ^ @health_check@ - (Optional)
-    --
-    , _idleTimeout               :: TF.Attr s P.Int
-    -- ^ @idle_timeout@ - (Optional)
-    --
-    , _instances                 :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @instances@ - (Optional)
-    --
-    , _internal                  :: TF.Attr s P.Bool
-    -- ^ @internal@ - (Optional, Forces New)
-    --
-    , _listener                  :: TF.Attr s [TF.Attr s (ElbListenerSetting s)]
-    -- ^ @listener@ - (Required)
-    --
-    , _name                      :: TF.Attr s P.Text
-    -- ^ @name@ - (Optional, Forces New)
-    --
-    -- Conflicts with:
-    --
-    -- * 'namePrefix'
-    , _namePrefix                :: TF.Attr s P.Text
-    -- ^ @name_prefix@ - (Optional, Forces New)
-    --
-    -- Conflicts with:
-    --
-    -- * 'name'
-    , _securityGroups            :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @security_groups@ - (Optional)
-    --
-    , _sourceSecurityGroup       :: TF.Attr s P.Text
-    -- ^ @source_security_group@ - (Optional)
-    --
-    , _subnets                   :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @subnets@ - (Optional)
-    --
-    , _tags                      :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
-    -- ^ @tags@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Define a new @aws_elb@ resource value.
-elbResource
-    :: TF.Attr s [TF.Attr s (ElbListenerSetting s)] -- ^ @listener@ ('P._listener', 'P.listener')
-    -> P.Resource (ElbResource s)
-elbResource _listener =
-    TF.unsafeResource "aws_elb" TF.validator $
-        ElbResource'
-            { _accessLogs = TF.Nil
-            , _availabilityZones = TF.Nil
-            , _connectionDraining = TF.value P.False
-            , _connectionDrainingTimeout = TF.value 300
-            , _crossZoneLoadBalancing = TF.value P.True
-            , _healthCheck = TF.Nil
-            , _idleTimeout = TF.value 60
-            , _instances = TF.Nil
-            , _internal = TF.Nil
-            , _listener = _listener
-            , _name = TF.Nil
-            , _namePrefix = TF.Nil
-            , _securityGroups = TF.Nil
-            , _sourceSecurityGroup = TF.Nil
-            , _subnets = TF.Nil
-            , _tags = TF.Nil
-            }
-
-instance TF.IsObject (ElbResource s) where
-    toObject ElbResource'{..} = P.catMaybes
-        [ TF.assign "access_logs" <$> TF.attribute _accessLogs
-        , TF.assign "availability_zones" <$> TF.attribute _availabilityZones
-        , TF.assign "connection_draining" <$> TF.attribute _connectionDraining
-        , TF.assign "connection_draining_timeout" <$> TF.attribute _connectionDrainingTimeout
-        , TF.assign "cross_zone_load_balancing" <$> TF.attribute _crossZoneLoadBalancing
-        , TF.assign "health_check" <$> TF.attribute _healthCheck
-        , TF.assign "idle_timeout" <$> TF.attribute _idleTimeout
-        , TF.assign "instances" <$> TF.attribute _instances
-        , TF.assign "internal" <$> TF.attribute _internal
-        , TF.assign "listener" <$> TF.attribute _listener
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "name_prefix" <$> TF.attribute _namePrefix
-        , TF.assign "security_groups" <$> TF.attribute _securityGroups
-        , TF.assign "source_security_group" <$> TF.attribute _sourceSecurityGroup
-        , TF.assign "subnets" <$> TF.attribute _subnets
-        , TF.assign "tags" <$> TF.attribute _tags
-        ]
-
-instance TF.IsValid (ElbResource s) where
-    validator = TF.fieldsValidator (\ElbResource'{..} -> Map.fromList $ P.catMaybes
-        [ if (_name P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_name",
-                            [ "_namePrefix"
-                            ])
-        , if (_namePrefix P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_namePrefix",
-                            [ "_name"
-                            ])
-        ])
-           P.<> TF.settingsValidator "_accessLogs"
-                  (_accessLogs
-                      :: ElbResource s -> TF.Attr s (ElbAccessLogsSetting s))
-                  TF.validator
-           P.<> TF.settingsValidator "_healthCheck"
-                  (_healthCheck
-                      :: ElbResource s -> TF.Attr s (ElbHealthCheckSetting s))
-                  TF.validator
-
-instance P.HasAccessLogs (ElbResource s) (TF.Attr s (ElbAccessLogsSetting s)) where
-    accessLogs =
-        P.lens (_accessLogs :: ElbResource s -> TF.Attr s (ElbAccessLogsSetting s))
-               (\s a -> s { _accessLogs = a } :: ElbResource s)
-
-instance P.HasAvailabilityZones (ElbResource s) (TF.Attr s [TF.Attr s P.Text]) where
-    availabilityZones =
-        P.lens (_availabilityZones :: ElbResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _availabilityZones = a } :: ElbResource s)
-
-instance P.HasConnectionDraining (ElbResource s) (TF.Attr s P.Bool) where
-    connectionDraining =
-        P.lens (_connectionDraining :: ElbResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _connectionDraining = a } :: ElbResource s)
-
-instance P.HasConnectionDrainingTimeout (ElbResource s) (TF.Attr s P.Int) where
-    connectionDrainingTimeout =
-        P.lens (_connectionDrainingTimeout :: ElbResource s -> TF.Attr s P.Int)
-               (\s a -> s { _connectionDrainingTimeout = a } :: ElbResource s)
-
-instance P.HasCrossZoneLoadBalancing (ElbResource s) (TF.Attr s P.Bool) where
-    crossZoneLoadBalancing =
-        P.lens (_crossZoneLoadBalancing :: ElbResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _crossZoneLoadBalancing = a } :: ElbResource s)
-
-instance P.HasHealthCheck (ElbResource s) (TF.Attr s (ElbHealthCheckSetting s)) where
-    healthCheck =
-        P.lens (_healthCheck :: ElbResource s -> TF.Attr s (ElbHealthCheckSetting s))
-               (\s a -> s { _healthCheck = a } :: ElbResource s)
-
-instance P.HasIdleTimeout (ElbResource s) (TF.Attr s P.Int) where
-    idleTimeout =
-        P.lens (_idleTimeout :: ElbResource s -> TF.Attr s P.Int)
-               (\s a -> s { _idleTimeout = a } :: ElbResource s)
-
-instance P.HasInstances (ElbResource s) (TF.Attr s [TF.Attr s P.Text]) where
-    instances =
-        P.lens (_instances :: ElbResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _instances = a } :: ElbResource s)
-
-instance P.HasInternal (ElbResource s) (TF.Attr s P.Bool) where
-    internal =
-        P.lens (_internal :: ElbResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _internal = a } :: ElbResource s)
-
-instance P.HasListener (ElbResource s) (TF.Attr s [TF.Attr s (ElbListenerSetting s)]) where
-    listener =
-        P.lens (_listener :: ElbResource s -> TF.Attr s [TF.Attr s (ElbListenerSetting s)])
-               (\s a -> s { _listener = a } :: ElbResource s)
-
-instance P.HasName (ElbResource s) (TF.Attr s P.Text) where
-    name =
-        P.lens (_name :: ElbResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: ElbResource s)
-
-instance P.HasNamePrefix (ElbResource s) (TF.Attr s P.Text) where
-    namePrefix =
-        P.lens (_namePrefix :: ElbResource s -> TF.Attr s P.Text)
-               (\s a -> s { _namePrefix = a } :: ElbResource s)
-
-instance P.HasSecurityGroups (ElbResource s) (TF.Attr s [TF.Attr s P.Text]) where
-    securityGroups =
-        P.lens (_securityGroups :: ElbResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _securityGroups = a } :: ElbResource s)
-
-instance P.HasSourceSecurityGroup (ElbResource s) (TF.Attr s P.Text) where
-    sourceSecurityGroup =
-        P.lens (_sourceSecurityGroup :: ElbResource s -> TF.Attr s P.Text)
-               (\s a -> s { _sourceSecurityGroup = a } :: ElbResource s)
-
-instance P.HasSubnets (ElbResource s) (TF.Attr s [TF.Attr s P.Text]) where
-    subnets =
-        P.lens (_subnets :: ElbResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _subnets = a } :: ElbResource s)
-
-instance P.HasTags (ElbResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
-    tags =
-        P.lens (_tags :: ElbResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _tags = a } :: ElbResource s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (ElbResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
-instance s ~ s' => P.HasComputedArn (TF.Ref s' (ElbResource s)) (TF.Attr s P.Text) where
-    computedArn x = TF.compute (TF.refKey x) "arn"
-
-instance s ~ s' => P.HasComputedAvailabilityZones (TF.Ref s' (ElbResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedAvailabilityZones x = TF.compute (TF.refKey x) "availability_zones"
-
-instance s ~ s' => P.HasComputedDnsName (TF.Ref s' (ElbResource s)) (TF.Attr s P.Text) where
-    computedDnsName x = TF.compute (TF.refKey x) "dns_name"
-
-instance s ~ s' => P.HasComputedHealthCheck (TF.Ref s' (ElbResource s)) (TF.Attr s (ElbHealthCheckSetting s)) where
-    computedHealthCheck x = TF.compute (TF.refKey x) "health_check"
-
-instance s ~ s' => P.HasComputedInstances (TF.Ref s' (ElbResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedInstances x = TF.compute (TF.refKey x) "instances"
-
-instance s ~ s' => P.HasComputedInternal (TF.Ref s' (ElbResource s)) (TF.Attr s P.Bool) where
-    computedInternal x = TF.compute (TF.refKey x) "internal"
-
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ElbResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
-
-instance s ~ s' => P.HasComputedSecurityGroups (TF.Ref s' (ElbResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedSecurityGroups x = TF.compute (TF.refKey x) "security_groups"
-
-instance s ~ s' => P.HasComputedSourceSecurityGroup (TF.Ref s' (ElbResource s)) (TF.Attr s P.Text) where
-    computedSourceSecurityGroup x = TF.compute (TF.refKey x) "source_security_group"
-
-instance s ~ s' => P.HasComputedSourceSecurityGroupId (TF.Ref s' (ElbResource s)) (TF.Attr s P.Text) where
-    computedSourceSecurityGroupId x = TF.compute (TF.refKey x) "source_security_group_id"
-
-instance s ~ s' => P.HasComputedSubnets (TF.Ref s' (ElbResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedSubnets x = TF.compute (TF.refKey x) "subnets"
-
-instance s ~ s' => P.HasComputedZoneId (TF.Ref s' (ElbResource s)) (TF.Attr s P.Text) where
-    computedZoneId x = TF.compute (TF.refKey x) "zone_id"
-
--- | @aws_emr_cluster@ Resource.
---
--- See the <https://www.terraform.io/docs/providers/aws/r/emr_cluster.html terraform documentation>
--- for more information.
-data EmrClusterResource s = EmrClusterResource'
-    { _additionalInfo :: TF.Attr s P.Text
-    -- ^ @additional_info@ - (Optional, Forces New)
-    --
-    , _applications :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @applications@ - (Optional, Forces New)
-    --
-    , _autoscalingRole :: TF.Attr s P.Text
-    -- ^ @autoscaling_role@ - (Optional, Forces New)
-    --
-    , _bootstrapAction :: TF.Attr s [TF.Attr s (EmrClusterBootstrapActionSetting s)]
-    -- ^ @bootstrap_action@ - (Optional, Forces New)
-    --
-    , _configurations :: TF.Attr s P.Text
-    -- ^ @configurations@ - (Optional, Forces New)
-    --
-    -- Conflicts with:
-    --
-    -- * 'configurationsJson'
-    , _configurationsJson :: TF.Attr s P.Text
-    -- ^ @configurations_json@ - (Optional, Forces New)
-    --
-    -- Conflicts with:
-    --
-    -- * 'configurations'
-    , _coreInstanceCount :: TF.Attr s P.Int
-    -- ^ @core_instance_count@ - (Optional)
-    --
-    , _coreInstanceType :: TF.Attr s P.Text
-    -- ^ @core_instance_type@ - (Optional, Forces New)
-    --
-    , _customAmiId :: TF.Attr s P.Text
-    -- ^ @custom_ami_id@ - (Optional, Forces New)
-    --
-    , _ebsRootVolumeSize :: TF.Attr s P.Int
-    -- ^ @ebs_root_volume_size@ - (Optional, Forces New)
-    --
-    , _ec2Attributes :: TF.Attr s (EmrClusterEc2AttributesSetting s)
-    -- ^ @ec2_attributes@ - (Optional, Forces New)
-    --
-    , _instanceGroup :: TF.Attr s [TF.Attr s (EmrClusterInstanceGroupSetting s)]
-    -- ^ @instance_group@ - (Optional, Forces New)
-    --
-    , _keepJobFlowAliveWhenNoSteps :: TF.Attr s P.Bool
-    -- ^ @keep_job_flow_alive_when_no_steps@ - (Optional, Forces New)
-    --
-    , _kerberosAttributes :: TF.Attr s (EmrClusterKerberosAttributesSetting s)
-    -- ^ @kerberos_attributes@ - (Optional, Forces New)
-    --
-    , _logUri :: TF.Attr s P.Text
-    -- ^ @log_uri@ - (Optional, Forces New)
-    --
-    , _masterInstanceType :: TF.Attr s P.Text
-    -- ^ @master_instance_type@ - (Optional, Forces New)
-    --
-    , _name :: TF.Attr s P.Text
-    -- ^ @name@ - (Required, Forces New)
-    --
-    , _releaseLabel :: TF.Attr s P.Text
-    -- ^ @release_label@ - (Required, Forces New)
-    --
-    , _scaleDownBehavior :: TF.Attr s P.Text
-    -- ^ @scale_down_behavior@ - (Optional, Forces New)
-    --
-    , _securityConfiguration :: TF.Attr s P.Text
-    -- ^ @security_configuration@ - (Optional, Forces New)
-    --
-    , _serviceRole :: TF.Attr s P.Text
-    -- ^ @service_role@ - (Required, Forces New)
-    --
-    , _step :: TF.Attr s [TF.Attr s (EmrClusterStepSetting s)]
-    -- ^ @step@ - (Optional, Forces New)
-    --
-    , _tags :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
-    -- ^ @tags@ - (Optional)
-    --
-    , _terminationProtection :: TF.Attr s P.Bool
-    -- ^ @termination_protection@ - (Optional)
-    --
-    , _visibleToAllUsers :: TF.Attr s P.Bool
-    -- ^ @visible_to_all_users@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Define a new @aws_emr_cluster@ resource value.
-emrClusterResource
-    :: TF.Attr s P.Text -- ^ @release_label@ ('P._releaseLabel', 'P.releaseLabel')
-    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
-    -> TF.Attr s P.Text -- ^ @service_role@ ('P._serviceRole', 'P.serviceRole')
-    -> P.Resource (EmrClusterResource s)
-emrClusterResource _releaseLabel _name _serviceRole =
-    TF.unsafeResource "aws_emr_cluster" TF.validator $
-        EmrClusterResource'
-            { _additionalInfo = TF.Nil
-            , _applications = TF.Nil
-            , _autoscalingRole = TF.Nil
-            , _bootstrapAction = TF.Nil
-            , _configurations = TF.Nil
-            , _configurationsJson = TF.Nil
-            , _coreInstanceCount = TF.Nil
-            , _coreInstanceType = TF.Nil
-            , _customAmiId = TF.Nil
-            , _ebsRootVolumeSize = TF.Nil
-            , _ec2Attributes = TF.Nil
-            , _instanceGroup = TF.Nil
-            , _keepJobFlowAliveWhenNoSteps = TF.Nil
-            , _kerberosAttributes = TF.Nil
-            , _logUri = TF.Nil
-            , _masterInstanceType = TF.Nil
-            , _name = _name
-            , _releaseLabel = _releaseLabel
-            , _scaleDownBehavior = TF.Nil
-            , _securityConfiguration = TF.Nil
-            , _serviceRole = _serviceRole
-            , _step = TF.Nil
-            , _tags = TF.Nil
-            , _terminationProtection = TF.Nil
-            , _visibleToAllUsers = TF.value P.True
-            }
-
-instance TF.IsObject (EmrClusterResource s) where
-    toObject EmrClusterResource'{..} = P.catMaybes
-        [ TF.assign "additional_info" <$> TF.attribute _additionalInfo
-        , TF.assign "applications" <$> TF.attribute _applications
-        , TF.assign "autoscaling_role" <$> TF.attribute _autoscalingRole
-        , TF.assign "bootstrap_action" <$> TF.attribute _bootstrapAction
-        , TF.assign "configurations" <$> TF.attribute _configurations
-        , TF.assign "configurations_json" <$> TF.attribute _configurationsJson
-        , TF.assign "core_instance_count" <$> TF.attribute _coreInstanceCount
-        , TF.assign "core_instance_type" <$> TF.attribute _coreInstanceType
-        , TF.assign "custom_ami_id" <$> TF.attribute _customAmiId
-        , TF.assign "ebs_root_volume_size" <$> TF.attribute _ebsRootVolumeSize
-        , TF.assign "ec2_attributes" <$> TF.attribute _ec2Attributes
-        , TF.assign "instance_group" <$> TF.attribute _instanceGroup
-        , TF.assign "keep_job_flow_alive_when_no_steps" <$> TF.attribute _keepJobFlowAliveWhenNoSteps
-        , TF.assign "kerberos_attributes" <$> TF.attribute _kerberosAttributes
-        , TF.assign "log_uri" <$> TF.attribute _logUri
-        , TF.assign "master_instance_type" <$> TF.attribute _masterInstanceType
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "release_label" <$> TF.attribute _releaseLabel
-        , TF.assign "scale_down_behavior" <$> TF.attribute _scaleDownBehavior
-        , TF.assign "security_configuration" <$> TF.attribute _securityConfiguration
-        , TF.assign "service_role" <$> TF.attribute _serviceRole
-        , TF.assign "step" <$> TF.attribute _step
-        , TF.assign "tags" <$> TF.attribute _tags
-        , TF.assign "termination_protection" <$> TF.attribute _terminationProtection
-        , TF.assign "visible_to_all_users" <$> TF.attribute _visibleToAllUsers
-        ]
-
-instance TF.IsValid (EmrClusterResource s) where
-    validator = TF.fieldsValidator (\EmrClusterResource'{..} -> Map.fromList $ P.catMaybes
-        [ if (_configurations P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_configurations",
-                            [ "_configurationsJson"
-                            ])
-        , if (_configurationsJson P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_configurationsJson",
-                            [ "_configurations"
-                            ])
-        ])
-           P.<> TF.settingsValidator "_ec2Attributes"
-                  (_ec2Attributes
-                      :: EmrClusterResource s -> TF.Attr s (EmrClusterEc2AttributesSetting s))
-                  TF.validator
-           P.<> TF.settingsValidator "_kerberosAttributes"
-                  (_kerberosAttributes
-                      :: EmrClusterResource s -> TF.Attr s (EmrClusterKerberosAttributesSetting s))
-                  TF.validator
-
-instance P.HasAdditionalInfo (EmrClusterResource s) (TF.Attr s P.Text) where
-    additionalInfo =
-        P.lens (_additionalInfo :: EmrClusterResource s -> TF.Attr s P.Text)
-               (\s a -> s { _additionalInfo = a } :: EmrClusterResource s)
-
-instance P.HasApplications (EmrClusterResource s) (TF.Attr s [TF.Attr s P.Text]) where
-    applications =
-        P.lens (_applications :: EmrClusterResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _applications = a } :: EmrClusterResource s)
-
-instance P.HasAutoscalingRole (EmrClusterResource s) (TF.Attr s P.Text) where
-    autoscalingRole =
-        P.lens (_autoscalingRole :: EmrClusterResource s -> TF.Attr s P.Text)
-               (\s a -> s { _autoscalingRole = a } :: EmrClusterResource s)
-
-instance P.HasBootstrapAction (EmrClusterResource s) (TF.Attr s [TF.Attr s (EmrClusterBootstrapActionSetting s)]) where
-    bootstrapAction =
-        P.lens (_bootstrapAction :: EmrClusterResource s -> TF.Attr s [TF.Attr s (EmrClusterBootstrapActionSetting s)])
-               (\s a -> s { _bootstrapAction = a } :: EmrClusterResource s)
-
-instance P.HasConfigurations (EmrClusterResource s) (TF.Attr s P.Text) where
-    configurations =
-        P.lens (_configurations :: EmrClusterResource s -> TF.Attr s P.Text)
-               (\s a -> s { _configurations = a } :: EmrClusterResource s)
-
-instance P.HasConfigurationsJson (EmrClusterResource s) (TF.Attr s P.Text) where
-    configurationsJson =
-        P.lens (_configurationsJson :: EmrClusterResource s -> TF.Attr s P.Text)
-               (\s a -> s { _configurationsJson = a } :: EmrClusterResource s)
-
-instance P.HasCoreInstanceCount (EmrClusterResource s) (TF.Attr s P.Int) where
-    coreInstanceCount =
-        P.lens (_coreInstanceCount :: EmrClusterResource s -> TF.Attr s P.Int)
-               (\s a -> s { _coreInstanceCount = a } :: EmrClusterResource s)
-
-instance P.HasCoreInstanceType (EmrClusterResource s) (TF.Attr s P.Text) where
-    coreInstanceType =
-        P.lens (_coreInstanceType :: EmrClusterResource s -> TF.Attr s P.Text)
-               (\s a -> s { _coreInstanceType = a } :: EmrClusterResource s)
-
-instance P.HasCustomAmiId (EmrClusterResource s) (TF.Attr s P.Text) where
-    customAmiId =
-        P.lens (_customAmiId :: EmrClusterResource s -> TF.Attr s P.Text)
-               (\s a -> s { _customAmiId = a } :: EmrClusterResource s)
-
-instance P.HasEbsRootVolumeSize (EmrClusterResource s) (TF.Attr s P.Int) where
-    ebsRootVolumeSize =
-        P.lens (_ebsRootVolumeSize :: EmrClusterResource s -> TF.Attr s P.Int)
-               (\s a -> s { _ebsRootVolumeSize = a } :: EmrClusterResource s)
-
-instance P.HasEc2Attributes (EmrClusterResource s) (TF.Attr s (EmrClusterEc2AttributesSetting s)) where
-    ec2Attributes =
-        P.lens (_ec2Attributes :: EmrClusterResource s -> TF.Attr s (EmrClusterEc2AttributesSetting s))
-               (\s a -> s { _ec2Attributes = a } :: EmrClusterResource s)
-
-instance P.HasInstanceGroup (EmrClusterResource s) (TF.Attr s [TF.Attr s (EmrClusterInstanceGroupSetting s)]) where
-    instanceGroup =
-        P.lens (_instanceGroup :: EmrClusterResource s -> TF.Attr s [TF.Attr s (EmrClusterInstanceGroupSetting s)])
-               (\s a -> s { _instanceGroup = a } :: EmrClusterResource s)
-
-instance P.HasKeepJobFlowAliveWhenNoSteps (EmrClusterResource s) (TF.Attr s P.Bool) where
-    keepJobFlowAliveWhenNoSteps =
-        P.lens (_keepJobFlowAliveWhenNoSteps :: EmrClusterResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _keepJobFlowAliveWhenNoSteps = a } :: EmrClusterResource s)
-
-instance P.HasKerberosAttributes (EmrClusterResource s) (TF.Attr s (EmrClusterKerberosAttributesSetting s)) where
-    kerberosAttributes =
-        P.lens (_kerberosAttributes :: EmrClusterResource s -> TF.Attr s (EmrClusterKerberosAttributesSetting s))
-               (\s a -> s { _kerberosAttributes = a } :: EmrClusterResource s)
-
-instance P.HasLogUri (EmrClusterResource s) (TF.Attr s P.Text) where
-    logUri =
-        P.lens (_logUri :: EmrClusterResource s -> TF.Attr s P.Text)
-               (\s a -> s { _logUri = a } :: EmrClusterResource s)
-
-instance P.HasMasterInstanceType (EmrClusterResource s) (TF.Attr s P.Text) where
-    masterInstanceType =
-        P.lens (_masterInstanceType :: EmrClusterResource s -> TF.Attr s P.Text)
-               (\s a -> s { _masterInstanceType = a } :: EmrClusterResource s)
-
-instance P.HasName (EmrClusterResource s) (TF.Attr s P.Text) where
-    name =
-        P.lens (_name :: EmrClusterResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: EmrClusterResource s)
-
-instance P.HasReleaseLabel (EmrClusterResource s) (TF.Attr s P.Text) where
-    releaseLabel =
-        P.lens (_releaseLabel :: EmrClusterResource s -> TF.Attr s P.Text)
-               (\s a -> s { _releaseLabel = a } :: EmrClusterResource s)
-
-instance P.HasScaleDownBehavior (EmrClusterResource s) (TF.Attr s P.Text) where
-    scaleDownBehavior =
-        P.lens (_scaleDownBehavior :: EmrClusterResource s -> TF.Attr s P.Text)
-               (\s a -> s { _scaleDownBehavior = a } :: EmrClusterResource s)
-
-instance P.HasSecurityConfiguration (EmrClusterResource s) (TF.Attr s P.Text) where
-    securityConfiguration =
-        P.lens (_securityConfiguration :: EmrClusterResource s -> TF.Attr s P.Text)
-               (\s a -> s { _securityConfiguration = a } :: EmrClusterResource s)
-
-instance P.HasServiceRole (EmrClusterResource s) (TF.Attr s P.Text) where
-    serviceRole =
-        P.lens (_serviceRole :: EmrClusterResource s -> TF.Attr s P.Text)
-               (\s a -> s { _serviceRole = a } :: EmrClusterResource s)
-
-instance P.HasStep (EmrClusterResource s) (TF.Attr s [TF.Attr s (EmrClusterStepSetting s)]) where
-    step =
-        P.lens (_step :: EmrClusterResource s -> TF.Attr s [TF.Attr s (EmrClusterStepSetting s)])
-               (\s a -> s { _step = a } :: EmrClusterResource s)
-
-instance P.HasTags (EmrClusterResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
-    tags =
-        P.lens (_tags :: EmrClusterResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _tags = a } :: EmrClusterResource s)
-
-instance P.HasTerminationProtection (EmrClusterResource s) (TF.Attr s P.Bool) where
-    terminationProtection =
-        P.lens (_terminationProtection :: EmrClusterResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _terminationProtection = a } :: EmrClusterResource s)
-
-instance P.HasVisibleToAllUsers (EmrClusterResource s) (TF.Attr s P.Bool) where
-    visibleToAllUsers =
-        P.lens (_visibleToAllUsers :: EmrClusterResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _visibleToAllUsers = a } :: EmrClusterResource s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (EmrClusterResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
-
-instance s ~ s' => P.HasComputedClusterState (TF.Ref s' (EmrClusterResource s)) (TF.Attr s P.Text) where
-    computedClusterState x = TF.compute (TF.refKey x) "cluster_state"
-
-instance s ~ s' => P.HasComputedCoreInstanceType (TF.Ref s' (EmrClusterResource s)) (TF.Attr s P.Text) where
-    computedCoreInstanceType x = TF.compute (TF.refKey x) "core_instance_type"
-
-instance s ~ s' => P.HasComputedKeepJobFlowAliveWhenNoSteps (TF.Ref s' (EmrClusterResource s)) (TF.Attr s P.Bool) where
-    computedKeepJobFlowAliveWhenNoSteps x = TF.compute (TF.refKey x) "keep_job_flow_alive_when_no_steps"
-
-instance s ~ s' => P.HasComputedMasterPublicDns (TF.Ref s' (EmrClusterResource s)) (TF.Attr s P.Text) where
-    computedMasterPublicDns x = TF.compute (TF.refKey x) "master_public_dns"
-
-instance s ~ s' => P.HasComputedScaleDownBehavior (TF.Ref s' (EmrClusterResource s)) (TF.Attr s P.Text) where
-    computedScaleDownBehavior x = TF.compute (TF.refKey x) "scale_down_behavior"
-
-instance s ~ s' => P.HasComputedStep (TF.Ref s' (EmrClusterResource s)) (TF.Attr s [TF.Attr s (EmrClusterStepSetting s)]) where
-    computedStep x = TF.compute (TF.refKey x) "step"
-
-instance s ~ s' => P.HasComputedTerminationProtection (TF.Ref s' (EmrClusterResource s)) (TF.Attr s P.Bool) where
-    computedTerminationProtection x = TF.compute (TF.refKey x) "termination_protection"
 
 -- | @aws_emr_instance_group@ Resource.
 --
@@ -8767,4 +8196,108 @@ instance P.HasPolicyNames (LoadBalancerListenerPolicyResource s) (TF.Attr s [TF.
                (\s a -> s { _policyNames = a } :: LoadBalancerListenerPolicyResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (LoadBalancerListenerPolicyResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+-- | @aws_load_balancer_policy@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/aws/r/load_balancer_policy.html terraform documentation>
+-- for more information.
+data LoadBalancerPolicyResource s = LoadBalancerPolicyResource'
+    { _loadBalancerName :: TF.Attr s P.Text
+    -- ^ @load_balancer_name@ - (Required, Forces New)
+    --
+    , _policyAttribute :: TF.Attr s [TF.Attr s (LoadBalancerPolicyPolicyAttributeSetting s)]
+    -- ^ @policy_attribute@ - (Optional)
+    --
+    , _policyName :: TF.Attr s P.Text
+    -- ^ @policy_name@ - (Required, Forces New)
+    --
+    , _policyTypeName :: TF.Attr s P.Text
+    -- ^ @policy_type_name@ - (Required, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @aws_load_balancer_policy@ resource value.
+loadBalancerPolicyResource
+    :: TF.Attr s P.Text -- ^ @load_balancer_name@ ('P._loadBalancerName', 'P.loadBalancerName')
+    -> TF.Attr s P.Text -- ^ @policy_name@ ('P._policyName', 'P.policyName')
+    -> TF.Attr s P.Text -- ^ @policy_type_name@ ('P._policyTypeName', 'P.policyTypeName')
+    -> P.Resource (LoadBalancerPolicyResource s)
+loadBalancerPolicyResource _loadBalancerName _policyName _policyTypeName =
+    TF.unsafeResource "aws_load_balancer_policy" TF.validator $
+        LoadBalancerPolicyResource'
+            { _loadBalancerName = _loadBalancerName
+            , _policyAttribute = TF.Nil
+            , _policyName = _policyName
+            , _policyTypeName = _policyTypeName
+            }
+
+instance TF.IsObject (LoadBalancerPolicyResource s) where
+    toObject LoadBalancerPolicyResource'{..} = P.catMaybes
+        [ TF.assign "load_balancer_name" <$> TF.attribute _loadBalancerName
+        , TF.assign "policy_attribute" <$> TF.attribute _policyAttribute
+        , TF.assign "policy_name" <$> TF.attribute _policyName
+        , TF.assign "policy_type_name" <$> TF.attribute _policyTypeName
+        ]
+
+instance TF.IsValid (LoadBalancerPolicyResource s) where
+    validator = P.mempty
+
+instance P.HasLoadBalancerName (LoadBalancerPolicyResource s) (TF.Attr s P.Text) where
+    loadBalancerName =
+        P.lens (_loadBalancerName :: LoadBalancerPolicyResource s -> TF.Attr s P.Text)
+               (\s a -> s { _loadBalancerName = a } :: LoadBalancerPolicyResource s)
+
+instance P.HasPolicyAttribute (LoadBalancerPolicyResource s) (TF.Attr s [TF.Attr s (LoadBalancerPolicyPolicyAttributeSetting s)]) where
+    policyAttribute =
+        P.lens (_policyAttribute :: LoadBalancerPolicyResource s -> TF.Attr s [TF.Attr s (LoadBalancerPolicyPolicyAttributeSetting s)])
+               (\s a -> s { _policyAttribute = a } :: LoadBalancerPolicyResource s)
+
+instance P.HasPolicyName (LoadBalancerPolicyResource s) (TF.Attr s P.Text) where
+    policyName =
+        P.lens (_policyName :: LoadBalancerPolicyResource s -> TF.Attr s P.Text)
+               (\s a -> s { _policyName = a } :: LoadBalancerPolicyResource s)
+
+instance P.HasPolicyTypeName (LoadBalancerPolicyResource s) (TF.Attr s P.Text) where
+    policyTypeName =
+        P.lens (_policyTypeName :: LoadBalancerPolicyResource s -> TF.Attr s P.Text)
+               (\s a -> s { _policyTypeName = a } :: LoadBalancerPolicyResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (LoadBalancerPolicyResource s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+-- | @aws_macie_member_account_association@ Resource.
+--
+-- See the <https://www.terraform.io/docs/providers/aws/r/macie_member_account_association.html terraform documentation>
+-- for more information.
+data MacieMemberAccountAssociationResource s = MacieMemberAccountAssociationResource'
+    { _memberAccountId :: TF.Attr s P.Text
+    -- ^ @member_account_id@ - (Required, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Define a new @aws_macie_member_account_association@ resource value.
+macieMemberAccountAssociationResource
+    :: TF.Attr s P.Text -- ^ @member_account_id@ ('P._memberAccountId', 'P.memberAccountId')
+    -> P.Resource (MacieMemberAccountAssociationResource s)
+macieMemberAccountAssociationResource _memberAccountId =
+    TF.unsafeResource "aws_macie_member_account_association" TF.validator $
+        MacieMemberAccountAssociationResource'
+            { _memberAccountId = _memberAccountId
+            }
+
+instance TF.IsObject (MacieMemberAccountAssociationResource s) where
+    toObject MacieMemberAccountAssociationResource'{..} = P.catMaybes
+        [ TF.assign "member_account_id" <$> TF.attribute _memberAccountId
+        ]
+
+instance TF.IsValid (MacieMemberAccountAssociationResource s) where
+    validator = P.mempty
+
+instance P.HasMemberAccountId (MacieMemberAccountAssociationResource s) (TF.Attr s P.Text) where
+    memberAccountId =
+        P.lens (_memberAccountId :: MacieMemberAccountAssociationResource s -> TF.Attr s P.Text)
+               (\s a -> s { _memberAccountId = a } :: MacieMemberAccountAssociationResource s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (MacieMemberAccountAssociationResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"

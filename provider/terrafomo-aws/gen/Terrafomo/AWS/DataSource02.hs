@@ -4874,6 +4874,9 @@ instance P.HasVersionStage (SecretsmanagerSecretVersionData s) (TF.Attr s P.Text
 instance s ~ s' => P.HasComputedId (TF.Ref s' (SecretsmanagerSecretVersionData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
+instance s ~ s' => P.HasComputedArn (TF.Ref s' (SecretsmanagerSecretVersionData s)) (TF.Attr s P.Text) where
+    computedArn x = TF.compute (TF.refKey x) "arn"
+
 instance s ~ s' => P.HasComputedSecretString (TF.Ref s' (SecretsmanagerSecretVersionData s)) (TF.Attr s P.Text) where
     computedSecretString x = TF.compute (TF.refKey x) "secret_string"
 
@@ -5324,6 +5327,9 @@ instance P.HasVpcId (SubnetData s) (TF.Attr s P.Text) where
     vpcId =
         P.lens (_vpcId :: SubnetData s -> TF.Attr s P.Text)
                (\s a -> s { _vpcId = a } :: SubnetData s)
+
+instance s ~ s' => P.HasComputedArn (TF.Ref s' (SubnetData s)) (TF.Attr s P.Text) where
+    computedArn x = TF.compute (TF.refKey x) "arn"
 
 instance s ~ s' => P.HasComputedAssignIpv6AddressOnCreation (TF.Ref s' (SubnetData s)) (TF.Attr s P.Bool) where
     computedAssignIpv6AddressOnCreation x = TF.compute (TF.refKey x) "assign_ipv6_address_on_creation"
