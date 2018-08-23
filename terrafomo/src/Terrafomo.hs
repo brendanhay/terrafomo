@@ -1,78 +1,72 @@
 module Terrafomo
     (
     -- * Terraform Monad
-      Error          (..)
-    , Config
-    , Document
-    , renderDocumentIO
-    , renderDocument
+      Monad.Terraform
+    , Monad.runTerraform
 
-    , Terraform
-    , runTerraform
+    -- ** Monad Homomorphism
+    , Monad.MonadTerraform (..)
 
-    -- ** Terraform Monad Class
-    , MonadTerraform (..)
+    -- ** Errors
+    , Monad.Error          (..)
 
-    -- * Backends
-    , Backend        (..)
-    , Local          (..)
-    , localBackend
+    -- ** Rendering Documents
+    , Monad.Document
+    , Monad.renderDocument
+    , Monad.renderDocumentIO
 
-    -- * Providers
-    , IsProvider     (..)
-    , withProvider
+    -- * Backend Configuration
+    , Core.Backend        (..)
+    , Core.localBackend
 
-    -- * Syntax
-    , Name           (..)
-    , Attr
-    , Key
+    -- * Provider Configuration
+    , Core.Provider       (..)
+    , Monad.withProvider
 
-    -- ** Functions
-    , join
-    , file
+    -- * DataSource and Resources
+    , Core.Schema
 
-    -- ** Values
-    , value
-    , nil
-    , true
-    , false
+    -- ** Creating References
+    , Core.Ref
+    , Monad.define
 
-    -- * Declarations
-    , Schema
+    -- ** Provider Aliases
+    , Lens.provider
 
-    -- ** References
-    , Ref
-    , define
+    -- ** Resource Dependencies
+    , Lens.dependOn
 
-    -- ** Lifecycles
-    , HasLifecycle   (..)
-    , Lifecycle      (..)
+    -- ** Resource Lifecycle
+    , Core.Lifecycle      (..)
+    , Lens.preventDestroy
+    , Lens.createBeforeDestroy
 
-    -- ** Ignored Attributes
-    , Changes
-    , ignoreAllChanges
+    -- *** Ignored Attributes
+    , Core.Changes
+    , Lens.ignoreChanges
+    , Lens.ignoreAllChanges
 
-    -- ** Dependencies
-    , dependOn
+    -- * Outputs and Remote State
+    , Core.Output
+    , Monad.output
+    , Monad.remote
 
-    -- ** Outputs and Remote State
-    , Output
-    , output
-    , remote
+    -- * Interpolation Expressions
+    , Core.Expr
 
-    -- * Serialization
-    , HCL.IsValue    (..)
-    , HCL.IsObject   (..)
-    , HCL.IsSection  (..)
+    -- ** Primitives
+    , Core.value
+    , Core.null
+    , Core.true
+    , Core.false
+
+    -- ** Builtin Functions
+    , Builtin.modulo
+    , Builtin.join
+    , Builtin.file
     ) where
 
-import Terrafomo.Attribute
-import Terrafomo.Backend
-import Terrafomo.Lifecycle
-import Terrafomo.Monad
-import Terrafomo.Name
-import Terrafomo.Output
-import Terrafomo.Provider
-import Terrafomo.Schema
-
-import qualified Terrafomo.HCL as HCL
+import qualified Terrafomo.Builtin as Builtin
+import qualified Terrafomo.Core    as Core
+import qualified Terrafomo.Lens    as Lens
+import qualified Terrafomo.Monad   as Monad

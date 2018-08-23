@@ -21,25 +21,17 @@ library:
 
   exposed-modules:
     - Terrafomo
-    - Terrafomo.Attribute
-    - Terrafomo.Backend
-    - Terrafomo.Format
+    - Terrafomo.Builtin
+    - Terrafomo.Core
     - Terrafomo.HCL
-    - Terrafomo.Lifecycle
+    - Terrafomo.Lens
     - Terrafomo.Monad
-    - Terrafomo.Name
-    - Terrafomo.Output
-    - Terrafomo.Provider
-    - Terrafomo.RemoteState
-    - Terrafomo.Schema
-    - Terrafomo.Validator
+    - Terrafomo.Render
 
   dependencies:
     - aeson
-    - aeson-pretty
-    - containers
-    - formatting >= 6.2.5
-    - iproute
+    - data-fix
+    - hashable
     - microlens
     - mmorph
     - mtl
@@ -47,6 +39,7 @@ library:
     - random
     - text
     - transformers
+    - unordered-containers
 
 tests:
   hspec:
