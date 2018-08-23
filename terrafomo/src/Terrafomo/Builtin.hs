@@ -9,7 +9,6 @@ module Terrafomo.Builtin
     , quote
     ) where
 
-import Data.Fix  (Fix (Fix))
 import Data.Text (Text)
 
 import Terrafomo.Core (Expr)
@@ -48,4 +47,4 @@ file path = Core.function "file" [quote path]
 quote :: JSON.ToJSON a => Expr s a -> Expr s Text
 quote = Core.ecata (f . HCL.encodeVar) f
   where
-    f = Fix . Core.Quote
+    f = Core.Fix . Core.Quote

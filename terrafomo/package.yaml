@@ -30,11 +30,9 @@ library:
 
   dependencies:
     - aeson
-    - data-fix
     - hashable
     - microlens
     - mmorph
-    - mtl
     - prettyprinter
     - random
     - text

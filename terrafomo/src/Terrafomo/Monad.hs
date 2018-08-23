@@ -26,11 +26,11 @@ module Terrafomo.Monad
     , remote
     ) where
 
-import Control.Exception    (Exception)
-import Control.Monad        (ap, unless, void)
-import Control.Monad.Except (Except)
-import Control.Monad.Morph  (MFunctor (hoist))
-import Control.Monad.Trans  (MonadTrans (lift))
+import Control.Exception          (Exception)
+import Control.Monad              (ap, unless, void)
+import Control.Monad.Morph        (MFunctor (hoist))
+import Control.Monad.Trans.Class  (MonadTrans (lift))
+import Control.Monad.Trans.Except (Except)
 
 import Data.Hashable       (Hashable)
 import Data.HashMap.Strict (HashMap)
@@ -40,14 +40,14 @@ import Data.Typeable       (Typeable)
 
 import Terrafomo.Internal.ValueMap (ValueMap)
 
-import qualified Control.Monad.Except              as Except
-import qualified Control.Monad.Reader              as Reader
-import qualified Control.Monad.State.Strict        as State
+import qualified Control.Monad.Trans.Except        as Except
 import qualified Control.Monad.Trans.Identity      as Identity
 import qualified Control.Monad.Trans.Maybe         as Maybe
 import qualified Control.Monad.Trans.RWS.Lazy      as LRWS
 import qualified Control.Monad.Trans.RWS.Strict    as RWS
+import qualified Control.Monad.Trans.Reader        as Reader
 import qualified Control.Monad.Trans.State.Lazy    as LState
+import qualified Control.Monad.Trans.State.Strict  as State
 import qualified Control.Monad.Trans.Writer.Lazy   as LWriter
 import qualified Control.Monad.Trans.Writer.Strict as Writer
 import qualified Data.Aeson                        as JSON
@@ -135,21 +135,22 @@ instance Monad (Terraform s) where
         (x, w') <- unTerraform m r w
         unTerraform (k x) r w'
 
-instance Reader.MonadReader Config (Terraform s) where
-    ask       = Terraform (\r w -> pure (r, w))
-    local f m = Terraform (\r w -> unTerraform m (f r) w)
+-- MTL-less Transformer Functions
 
-instance State.MonadState Document (Terraform s) where
-    get   = Terraform (\_ w -> pure (w, w))
-    put w = Terraform (\_ _ -> pure ((), w))
+ask :: Terraform s Config
+ask = Terraform (\r w -> pure (r, w))
 
-instance Except.MonadError Error (Terraform s) where
-    throwError e   = Terraform (\_ _ -> Except.throwError e)
-    catchError m f =
-        Terraform $ \r w ->
-            unTerraform m r w
-                `Except.catchError` \e ->
-                    unTerraform (f e) r w
+local :: (Config -> Config) -> Terraform s a -> Terraform s a
+local f m = Terraform (\r w -> unTerraform m (f r) w)
+
+get :: Terraform s Document
+get = Terraform (\_ w -> pure (w, w))
+
+put :: Document -> Terraform s ()
+put !w = Terraform (\_ _ -> pure ((), w))
+
+throwError :: Error -> Terraform s a
+throwError e = Terraform (\_ _ -> Except.throwE e)
 
 -- Monad Homomorphism
 
@@ -180,7 +181,7 @@ class Monad m => MonadTerraform s m | m -> s where
 
 instance MonadTerraform s (Terraform s) where
     liftTerraform  = id
-    localTerraform = Reader.local
+    localTerraform = local
 
 -- Transformer Instances
 
@@ -248,7 +249,7 @@ lookupProvider
     -> m (Maybe Core.Attr)
 lookupProvider name =
     liftTerraform $
-        Reader.asks (HashMap.lookup name . defaultProviders)
+         HashMap.lookup name . defaultProviders <$> ask
 
 -- Resources
 
@@ -270,7 +271,7 @@ define name x =
 
         case Core.validate (Core.schemaValidator x) (Core.schemaConfig x) of
             Nothing -> pure ()
-            Just es -> Except.throwError (ConflictsWith attr es)
+            Just es -> throwError (ConflictsWith attr es)
 
         void $ insertProvider (Core.schemaProvider x)
 
@@ -278,7 +279,7 @@ define name x =
             insertValue attr value resources (\s w -> w { resources = s })
 
         unless unique $
-            Except.throwError (DuplicateResource attr value)
+            throwError (DuplicateResource attr value)
 
         pure $! Core.UnsafeRef attr (Core.schemaConfig x)
 
@@ -296,7 +297,7 @@ output
     -> m (Core.Output a)
 output name expr =
     liftTerraform $ do
-        b <- State.gets backend
+        b <- backend <$> get
 
         let out   = Core.UnsafeOutput name b expr
             value = HCL.encodeOutput out
@@ -305,7 +306,7 @@ output name expr =
             insertValue name value outputs (\s w -> w { outputs = s })
 
         unless unique $
-            Except.throwError (DuplicateOutput name value)
+            throwError (DuplicateOutput name value)
 
         pure out
 
@@ -342,7 +343,7 @@ insertValue
     -> m Bool
 insertValue key value state update =
     liftTerraform $ do
-        m <- State.gets state
-        case ValueMap.insert key value m of
+        s <- get
+        case ValueMap.insert key value (state s) of
             Nothing -> pure False
-            Just m' -> State.modify' (update m') >> pure True
+            Just m  -> put (update m s) >> pure True

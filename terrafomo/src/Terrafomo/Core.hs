@@ -1,8 +1,13 @@
+{-# LANGUAGE UndecidableInstances #-}
+
 module Terrafomo.Core
     ( Type      (..)
     , Name      (..)
     , Attr      (..)
     , Ref       (..)
+
+    , Fix       (..)
+    , cata
 
     , Var       (..)
     , ExprF     (..)
@@ -41,7 +46,6 @@ module Terrafomo.Core
     ) where
 
 import Data.Bifunctor      (Bifunctor (first, second))
-import Data.Fix            (Fix (Fix))
 import Data.Function       (on)
 import Data.Hashable       (Hashable)
 import Data.HashMap.Strict (HashMap)
@@ -54,7 +58,6 @@ import GHC.Generics (Generic)
 import Prelude hiding (null)
 
 import qualified Data.Aeson.Types        as JSON
-import qualified Data.Fix                as Fix
 import qualified Data.Hashable           as Hash
 import qualified Data.HashMap.Strict     as HashMap
 import qualified Data.HashSet            as HashSet
@@ -95,6 +98,24 @@ data Ref s a = UnsafeRef !Attr !a
     deriving (Show, Eq, Ord, Generic)
 
 instance Hashable a => Hashable (Ref s a)
+
+-- | A fix-point type used for the 'Expr' expression and recursion schemes.
+newtype Fix f = Fix { unfix :: f (Fix f) }
+
+instance Show (f (Fix f)) => Show (Fix f) where
+    showsPrec d (Fix f) =
+        showParen (d > 10) $
+            showString "Fix " . showsPrec 11 f
+
+instance Eq (f (Fix f)) => Eq (Fix f) where
+    (==) = on (==) unfix
+
+instance Ord (f (Fix f)) => Ord (Fix f) where
+    compare = on compare unfix
+
+-- | A catamorphism, or generalized fold.
+cata :: Functor f => (f a -> a) -> (Fix f -> a)
+cata psi = psi . fmap (cata psi) . unfix
 
 -- | An interpolation expression variable. This is paramterized over the
 -- current (remote) state thread @s@ similar to 'Control.Monad.ST'.
@@ -149,7 +170,7 @@ ecata
     -> Fix (ExprF a b)
     -> Fix (ExprF a' b')
 ecata f g =
-    Fix.cata $ \case
+    cata $ \case
         Var    a     -> f a
         Quote  b     -> g b
         Prefix n xs  -> Fix (Prefix n xs)
