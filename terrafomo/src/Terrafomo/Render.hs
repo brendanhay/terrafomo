@@ -17,32 +17,33 @@ module Terrafomo.Render
 import Data.Semigroup            ((<>))
 import Data.Text.Prettyprint.Doc (Doc, pretty, (<+>))
 
+import Terrafomo.Core
+
 import qualified Data.Aeson                            as JSON
 import qualified Data.Foldable                         as Fold
 import qualified Data.HashMap.Strict                   as HashMap
 import qualified Data.List                             as List
 import qualified Data.Text.Prettyprint.Doc             as PP
 import qualified Data.Text.Prettyprint.Doc.Render.Text as Render
-import qualified Terrafomo.Core                        as Core
-import qualified Terrafomo.HCL                         as HCL
+import qualified Terrafomo.Encode                         as Encode
 
-renderDocument :: [HCL.Section] -> PP.SimpleDocStream ann
+renderDocument :: [Section] -> PP.SimpleDocStream ann
 renderDocument =
     PP.layoutPretty PP.defaultLayoutOptions
         . PP.vsep . List.intersperse mempty . map prettySection
 
-prettySection :: HCL.Section -> Doc ann
-prettySection (HCL.Section typ keys node) =
+prettySection :: Section -> Doc ann
+prettySection (Section typ keys node) =
     Fold.foldl' (<+>) (prettyType typ) (map (PP.dquotes . pretty) keys)
         <+> prettyNode node
 
-prettyType :: Core.Type -> Doc ann
-prettyType = pretty . HCL.encodeType
+prettyType :: Type -> Doc ann
+prettyType = pretty . Encode.encodeType
 
-prettyNode :: HCL.Node -> Doc ann
+prettyNode :: Node -> Doc ann
 prettyNode = \case
-    HCL.Nested s -> object [prettySection s]
-    HCL.Object o -> prettyObject o
+    Nested s -> object [prettySection s]
+    Object o -> prettyObject o
 
 prettyJSON :: JSON.Value -> Doc ann
 prettyJSON = \case

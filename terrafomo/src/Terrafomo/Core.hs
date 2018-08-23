@@ -6,16 +6,18 @@ module Terrafomo.Core
     , Attr      (..)
     , Ref       (..)
 
-    , Fix       (..)
-    , cata
+    , Section   (..)
+    , Node      (..)
 
     , Var       (..)
     , ExprF     (..)
-    , operator
-    , function
-    , ecata
+    , Fix       (..)
+    , cata
 
     , Expr
+    , ecata
+    , operator
+    , function
     , value
     , null
     , true
@@ -31,7 +33,7 @@ module Terrafomo.Core
 
     , Backend   (..)
     , hashBackend
-    , encodeBackend
+    , serializeBackend
     , localBackend
 
     , Changes   (..)
@@ -99,23 +101,17 @@ data Ref s a = UnsafeRef !Attr !a
 
 instance Hashable a => Hashable (Ref s a)
 
--- | A fix-point type used for the 'Expr' expression and recursion schemes.
-newtype Fix f = Fix { unfix :: f (Fix f) }
+-- | FIXME: Document
+--
+-- An intentionally restricted version of HCL's @ObjectItem@ struct.
+data Section = Section !Type ![Text] !Node
+    deriving (Show, Eq)
 
-instance Show (f (Fix f)) => Show (Fix f) where
-    showsPrec d (Fix f) =
-        showParen (d > 10) $
-            showString "Fix " . showsPrec 11 f
-
-instance Eq (f (Fix f)) => Eq (Fix f) where
-    (==) = on (==) unfix
-
-instance Ord (f (Fix f)) => Ord (Fix f) where
-    compare = on compare unfix
-
--- | A catamorphism, or generalized fold.
-cata :: Functor f => (f a -> a) -> (Fix f -> a)
-cata psi = psi . fmap (cata psi) . unfix
+-- | FIXME: Document
+data Node
+    = Nested !Section
+    | Object !JSON.Object
+      deriving (Show, Eq)
 
 -- | An interpolation expression variable. This is paramterized over the
 -- current (remote) state thread @s@ similar to 'Control.Monad.ST'.
@@ -155,26 +151,23 @@ instance Bifunctor (ExprF a) where
         Prefix n xs  -> Prefix n xs
         Infix  n a b -> Infix  n a b
 
--- | Construct an infix operator expression.
-operator :: Text -> Fix (ExprF a b) -> Fix (ExprF a b) -> Fix (ExprF a b)
-operator n a b = Fix (Infix n a b)
+-- | A fix-point type used for the 'Expr' expression and recursion schemes.
+newtype Fix f = Fix { unfix :: f (Fix f) }
 
--- | Construct prefix (function application) expression.
-function :: Text -> [Fix (ExprF a b)] -> Fix (ExprF a b)
-function n = Fix . Prefix n
+instance Show (f (Fix f)) => Show (Fix f) where
+    showsPrec d (Fix f) =
+        showParen (d > 10) $
+            showString "Fix " . showsPrec 11 f
 
--- | FIXME: Documentation
-ecata
-    :: (a -> Fix (ExprF a' b'))
-    -> (b -> Fix (ExprF a' b'))
-    -> Fix (ExprF a b)
-    -> Fix (ExprF a' b')
-ecata f g =
-    cata $ \case
-        Var    a     -> f a
-        Quote  b     -> g b
-        Prefix n xs  -> Fix (Prefix n xs)
-        Infix  n a b -> Fix (Infix  n a b)
+instance Eq (f (Fix f)) => Eq (Fix f) where
+    (==) = on (==) unfix
+
+instance Ord (f (Fix f)) => Ord (Fix f) where
+    compare = on compare unfix
+
+-- | A catamorphism, or generalized fold.
+cata :: Functor f => (f a -> a) -> (Fix f -> a)
+cata psi = psi . fmap (cata psi) . unfix
 
 -- | The expression type is a fixed point of the polymorphic expression functor.
 --
@@ -193,6 +186,27 @@ instance Num a => Num (Expr s a) where
     abs         = function "abs"    . pure
     signum      = function "signum" . pure
     fromInteger = value . fromInteger
+
+-- | FIXME: Documentation
+ecata
+    :: (a -> Fix (ExprF a' b'))
+    -> (b -> Fix (ExprF a' b'))
+    -> Fix (ExprF a b)
+    -> Fix (ExprF a' b')
+ecata f g =
+    cata $ \case
+        Var    a     -> f a
+        Quote  b     -> g b
+        Prefix n xs  -> Fix (Prefix n xs)
+        Infix  n a b -> Fix (Infix  n a b)
+
+-- | Construct an infix operator expression.
+operator :: Text -> Fix (ExprF a b) -> Fix (ExprF a b) -> Fix (ExprF a b)
+operator n a b = Fix (Infix n a b)
+
+-- | Construct prefix (function application) expression.
+function :: Text -> [Fix (ExprF a b)] -> Fix (ExprF a b)
+function n = Fix . Prefix n
 
 -- | Specify a constant Haskell value. Equivalent to 'Just'.
 value :: a -> Expr s a
@@ -302,14 +316,15 @@ hashBackend x =
     Hash.hash (backendName x)
         `Hash.hashWithSalt` backendConfig x
 
-encodeBackend :: Backend b -> Backend JSON.Object
-encodeBackend x =
+serializeBackend :: Backend b -> Backend JSON.Object
+serializeBackend x =
     x { backendConfig  =
           HashMap.fromList $ encode (backendEncoder x) (backendConfig x)
       , backendEncoder =
           Encoder HashMap.toList
       }
 
+-- FIXME: Document
 localBackend :: FilePath -> Backend FilePath
 localBackend path =
     Backend

@@ -15,7 +15,7 @@ import Terrafomo.Core (Expr)
 
 import qualified Data.Aeson     as JSON
 import qualified Terrafomo.Core as Core
-import qualified Terrafomo.HCL  as HCL
+import qualified Terrafomo.Encode  as Encode
 
 -- Constants and Primitive Values
 
@@ -45,6 +45,6 @@ file path = Core.function "file" [quote path]
 -- Interpolation
 
 quote :: JSON.ToJSON a => Expr s a -> Expr s Text
-quote = Core.ecata (f . HCL.encodeVar) f
+quote = Core.ecata (f . Encode.encodeVar) f
   where
     f = Core.Fix . Core.Quote

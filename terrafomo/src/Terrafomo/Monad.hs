@@ -54,15 +54,15 @@ import qualified Data.Aeson                        as JSON
 import qualified Data.HashMap.Strict               as HashMap
 import qualified System.IO                         as IO
 import qualified Terrafomo.Core                    as Core
-import qualified Terrafomo.HCL                     as HCL
+import qualified Terrafomo.Encode                  as Encode
 import qualified Terrafomo.Internal.Hash           as Hash
 import qualified Terrafomo.Internal.ValueMap       as ValueMap
 import qualified Terrafomo.Render                  as Render
 
 -- | FIXME: Document
 data Error
-    = DuplicateOutput   !Text      !HCL.Section
-    | DuplicateResource !Core.Attr !HCL.Section
+    = DuplicateOutput   !Text      !Encode.Section
+    | DuplicateResource !Core.Attr !Encode.Section
     | ConflictsWith     !Core.Attr !(HashMap Text (HashSet Text))
       deriving (Show, Eq, Typeable)
 
@@ -76,10 +76,10 @@ newtype Config = Config
 data Document = UnsafeDocument
     { supply    :: !Int
     , backend   :: !(Core.Backend JSON.Object)
-    , providers :: !(ValueMap Core.Attr HCL.Section)
-    , remotes   :: !(ValueMap Text      HCL.Section)
-    , resources :: !(ValueMap Core.Attr HCL.Section)
-    , outputs   :: !(ValueMap Text      HCL.Section)
+    , providers :: !(ValueMap Core.Attr Encode.Section)
+    , remotes   :: !(ValueMap Text      Encode.Section)
+    , resources :: !(ValueMap Core.Attr Encode.Section)
+    , outputs   :: !(ValueMap Text      Encode.Section)
     }
 
 renderDocument :: Document -> Text
@@ -92,9 +92,9 @@ renderDocumentIO hd =
     Render.renderIO hd
         . Render.renderDocument . flattenState
 
-flattenState :: Document -> [HCL.Section]
+flattenState :: Document -> [Encode.Section]
 flattenState s =
-    HCL.encodeBackend (backend s) :
+    Encode.encodeBackend (backend s) :
         concat [ ValueMap.values (providers  s)
                , ValueMap.values (remotes    s)
                , ValueMap.values (resources s)
@@ -117,7 +117,7 @@ runTerraform x m =
             Config { defaultProviders = mempty }
             UnsafeDocument
                 { supply    = 100000
-                , backend   = Core.encodeBackend x
+                , backend   = Core.serializeBackend x
                 , providers = ValueMap.empty
                 , remotes   = ValueMap.empty
                 , resources = ValueMap.empty
@@ -238,7 +238,7 @@ insertProvider x =
         Nothing -> lookupProvider (Core.providerName x)
         Just _  ->
             let alias = Core.providerAlias x
-                value = HCL.encodeProvider x
+                value = Encode.encodeProvider x
 
              in insertValue alias value providers (\s w -> w { providers = s })
              >> pure (Just alias)
@@ -267,7 +267,7 @@ define
 define name x =
     liftTerraform $ do
         let attr  = Core.Attr (Core.schemaName x) name
-            value = HCL.encodeSchema name x
+            value = Encode.encodeSchema name x
 
         case Core.validate (Core.schemaValidator x) (Core.schemaConfig x) of
             Nothing -> pure ()
@@ -300,7 +300,7 @@ output name expr =
         b <- backend <$> get
 
         let out   = Core.UnsafeOutput name b expr
-            value = HCL.encodeOutput out
+            value = Encode.encodeOutput out
 
         unique <-
             insertValue name value outputs (\s w -> w { outputs = s })
@@ -321,7 +321,7 @@ remote x =
     liftTerraform $ do
         let b     = Core.outputBackend x
             name  = Hash.human (Core.hashBackend b)
-            value = HCL.encodeRemote name b
+            value = Encode.encodeRemote name b
 
         void $ insertValue name value remotes (\s w -> w { remotes = s })
 

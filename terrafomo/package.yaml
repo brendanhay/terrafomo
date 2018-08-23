@@ -23,7 +23,7 @@ library:
     - Terrafomo
     - Terrafomo.Builtin
     - Terrafomo.Core
-    - Terrafomo.HCL
+    - Terrafomo.Encode
     - Terrafomo.Lens
     - Terrafomo.Monad
     - Terrafomo.Render
