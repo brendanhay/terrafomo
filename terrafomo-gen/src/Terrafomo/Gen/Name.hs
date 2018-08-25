@@ -1,5 +1,6 @@
 module Terrafomo.Gen.Name where
 
+import Data.Maybe (mapMaybe, listToMaybe)
 import Data.Semigroup (Semigroup ((<>)))
 import Data.Text      (Text)
 
@@ -63,23 +64,13 @@ dataSourceNames, resourceNames :: Text -> (DataName, ConName, VarName)
 dataSourceNames x = datatypeNames (Name (resourceName x <> "Data"))
 resourceNames   x = datatypeNames (Name (resourceName x <> "Resource"))
 
--- FIXME: avoid special casing provider
 settingsNames :: Text -> Key -> (DataName, ConName, VarName)
 settingsNames x (Key xs) =
     case x of
         "provider" -> (Name "Provider", Name "Provider'", Name "newProvider")
-        _          -> names joined
+        _          -> names xs
   where
-    joined =
-        Text.upperHead . originalName
-            $ Text.intercalate "_" (xs ++ [suffix x])
-
-    suffix txt
-        | Just n <- Text.stripSuffix "Settings" txt = n <> "Setting"
-        | Text.isSuffixOf "Setting"             txt = txt
-        | otherwise                           = txt <> "Setting"
-
-    names txt =
+    names (minimize x -> txt) =
         ( Name txt
         , Name (txt `Text.snoc` '\'')
         , Name ("new" <> txt)
@@ -173,3 +164,19 @@ camel = \case
 
 split :: Text -> [Text]
 split = filter (not . Text.null) . Text.split (== '_')
+
+minimize :: Text -> [Text] -> Text
+minimize original =
+    Text.upperHead . camel . prefix (split original)
+  where
+    prefix xs = \case
+        []   -> xs
+        [y]  -> split y ++ ("_" : xs)
+        y:ys -> split y ++ mapMaybe only ys ++ ("_" : xs)
+
+    only = listToMaybe . filter valid . split
+
+    valid = \case
+        "configuration" -> False
+        "options"       -> False
+        _               -> True

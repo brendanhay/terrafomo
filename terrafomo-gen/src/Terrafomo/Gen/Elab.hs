@@ -143,8 +143,8 @@ elabDataSource provider original schemas =
 
 elabSettings :: Text -> [Go.Schema] -> Elab Settings
 elabSettings original schemas = do
-    k <- getCurrentKey
-    x <- Settings' <$> elabSchema original (Name.settingsNames original k) schemas
+    names <- Name.settingsNames original <$> getCurrentKey
+    x     <- Settings' <$> elabSchema original names schemas
     insertSettings x
     pure x
 
