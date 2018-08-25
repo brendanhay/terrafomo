@@ -24,7 +24,8 @@ module {{ namespace }}
 import GHC.Base ((.))
 
 import qualified Lens.Micro as P
-import qualified Terrafomo.Schema as TF
+import qualified Terrafomo.Core as TF
+import qualified Terrafomo.Lens as TF
   {% endif %}
 
 class {{ class.value.name }} a b | a -> b where

@@ -23,5 +23,4 @@ library:
 {% endfor %}
 
   reexported-modules: >
-    terrafomo:Terrafomo,
-    terrafomo:Terrafomo.Format
+    terrafomo:Terrafomo

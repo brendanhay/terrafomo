@@ -25,8 +25,8 @@ import qualified {{ import.value }} as P
 {% endfor %}
 import qualified Data.Aeson as P
 import qualified Data.String as P
-import qualified Terrafomo.HCL as TF
-import qualified Terrafomo.Validator as TF
+import qualified Terrafomo.Encode as TF
+import qualified Terrafomo.Core as TF
 
 {% for primitive in primitives %}
 

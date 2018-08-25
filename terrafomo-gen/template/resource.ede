@@ -5,7 +5,7 @@
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
-{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+-- {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 {% include "_include/license.ede" %}
 --
@@ -30,12 +30,10 @@ import {{ import.value }}
 {% for import in qualified %}
 import qualified {{ import.value }} as P
 {% endfor %}
-import qualified Data.Map.Strict as Map
-import qualified Terrafomo.Attribute as TF
-import qualified Terrafomo.HCL as TF
-import qualified Terrafomo.Name as TF
-import qualified Terrafomo.Schema as TF
-import qualified Terrafomo.Validator as TF
+import qualified Data.Aeson as JSON
+import qualified Terrafomo.Core as TF
+import qualified Terrafomo.Encode as TF
+import qualified Terrafomo.Validate as TF
 {% for resource in resources %}
 
 -- | @{{ resource.value.original }}@ {{ type }}.
@@ -48,28 +46,26 @@ data {{ resource.value.type }} = {{ resource.value.con.name }}
 -- | Define a new @{{ resource.value.original }}@ {{ type | toLower }} value.
 {{ resource.value.con.smart }}
   {% for param in resource.value.parameters %}
-    {% if param.first %}::{% else %}->{% endif %} {{ param.value.type }} -- ^ @{{ param.value.original }}@ ('P.{{ param.value.name }}', 'P.{{ param.value.method }}'){% if param.last %}
+    {% if param.first %}::{% else %}->{% endif %} {{ param.value.type }} -- ^ Lens: 'P.{{ param.value.method }}', Field: '{{ param.value.name }}', HCL: @{{ param.value.original }}@{% if param.last %}
     -> P.{{ type }} ({{ resource.value.type }}){% endif %}
   {% else %}
     :: P.{{ type }} ({{ resource.value.type }})
   {% endfor %}
 {{ resource.value.con.smart }}{% for param in resource.value.parameters %} {{ param.value.name }}{% endfor %} =
-    TF.unsafe{{ type }} "{{ resource.value.original }}" TF.validator $
+    TF.unsafe{{ type }} "{{ resource.value.original }}" P.defaultProvider {% if type == "Resource" %} TF.lifecycleEncoder{% endif %}
+      {% for field in resource.value.arguments %}
+        {% if field.first %}(TF.Encoder $ \{{ resource.value.con.name }}{..} -> P.catMaybes
+            [{% else %}    ,{% endif %} {{ field.value.encoder }} {{ field.value.name }}{% if field.last %}
+            ]){% endif %}
+        {% else %}
+        P.mempty
+      {% endfor %}
+      {% for field in resource.value.arguments %}
+        {% if field.first %}({{ resource.value.con.name }}
+            { {% else %}    , {% endif %}{{ field.value.name }} = {{ field.value.default }}{% if field.last %}
+            }){% endif %}
+      {% else %}
         {{ resource.value.con.name }}
-          {% for field in resource.value.arguments %}
-            {% if field.first %}{ {% else %}, {% endif %}{{ field.value.name }} = {{ field.value.default }}{% if field.last %}
-            }{% endif %}
-          {% endfor %}
-
-instance TF.IsObject ({{ resource.value.type }}) where
-  {% for field in resource.value.arguments %}
-    {% if field.first %}toObject {{ resource.value.con.name }}{..} = P.catMaybes
-        [{% else %}    ,{% endif %} {{ field.value.encoder }} {{ field.value.name }}{% if field.last %}
-        ]{% endif %}
-  {% else %}
-    toObject _ = []
-  {% endfor %}
-
-{% include "_include/validator.ede" with schema = resource.value %}
+      {% endfor %}
 {% include "_include/lenses.ede" with schema = resource.value %}
 {% endfor %}
