@@ -66,9 +66,9 @@ $1: format-$1
 
 gen-$1: $(GENERATE) $(GO_VENDOR)-$1 $(MODEL_DIR)/$1.json
 	$(GENERATE) \
-	    --template-dir=terrafomo-gen/template       \
-	    --ir-dir=terrafomo-gen/ir                   \
-	    --config-yaml=terrafomo-gen/config/$1.yaml  \
+	    --template-dir=terrafomo-gen/template      \
+	    --ir-dir=terrafomo-gen/ir                  \
+	    --config-yaml=terrafomo-gen/config/$1.yaml \
 	    --provider-json=$(MODEL_DIR)/$1.json
 
 format-$1: $(STYLISH) gen-$1
@@ -89,7 +89,8 @@ $(GO_VENDOR)-$1/gen.go: $(GO_VENDOR)-$1 $(GO_TEMPLATE)
 	sed "s/replace_provider/$1/g" $(GO_TEMPLATE) > $$@
 
 $(MODEL_DIR)/$1.json: $(GO_VENDOR)-$1/gen.go $(MODEL_DIR)
-	go run $(GO_VENDOR)-$1/gen.go > $$@
+	cd $(GO_VENDOR)-$1 && \
+	    go run gen.go > $(dir $(realpath $(firstword $(MAKEFILE_LIST))))/$$@
 endef
 
 $(foreach p,$(PROVIDERS),$(eval $(call provider,$p)))
