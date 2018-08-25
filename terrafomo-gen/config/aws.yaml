@@ -7,50 +7,69 @@ extra-deps:
   - iproute
   - amazonka-iam-policy >= 0.0.4
 
+#
+# field-overrides now support two modes of type substitution, allowing for a
+# less verbose method of overriding only the generator assigned primitives.
+#
+# 1. leaf - replace only the leaf of the calculated type expression.
+#    This automatically handles qualifiers:
+#
+# S3BucketResource:
+#   region: Region
+#
+# 2. verbatim - replace the entire type expression.
+#    This requires the TF./P. qualifiers and completely supplants the calculated
+#    type via string substitution:
+#
+# S3BucketResource:
+#   region:
+#     verbatim: 'TF.Expr s P.Region'
+#
+
 field-overrides:
   # Provider
 
-  Provider:
-    region: 'P.Region'
+  AWS:
+    region: Region
 
   AssumeRoleSetting:
-    policy: 'P.Maybe P.Document'
+    policy: Document
 
   # Resources
 
   IamRoleResource:
-    assumeRolePolicy: 'TF.Attr s P.Document'
+    assumeRolePolicy: Document
 
   IamRolePolicyResource:
-    policy: 'TF.Attr s P.Document'
+    policy: Document
 
   IamPolicyResource:
-    policy: 'TF.Attr s P.Document'
+    policy: Document
 
   IamGroupPolicyResource:
-    policy: 'TF.Attr s P.Document'
+    policy: Document
 
   S3BucketResource:
-    region: 'TF.Attr s P.Region'
+    region: Region
 
   SecurityGroupRuleResource:
-    type': 'TF.Attr s P.NetworkTraffic'
-    protocol: 'TF.Attr s P.NetworkProtocol'
-    cidrBlocks: 'TF.Attr s [TF.Attr s P.IPRange]'
-    ipv6CidrBlocks: 'TF.Attr s [TF.Attr s P.IPRange]'
+    type': NetworkTraffic
+    protocol: NetworkProtocol
+    cidrBlocks: IPRange
+    ipv6CidrBlocks: IPRange
 
   VpcResource:
-    cidrBlock: 'TF.Attr s P.IPRange'
+    cidrBlock: IPRange
 
   SubnetResource:
-    cidrBlock: 'TF.Attr s P.IPRange'
-    availabilityZone: 'TF.Attr s P.Zone'
+    cidrBlock: IPRange
+    availabilityZone: Zone
 
   RouteResource:
-    destinationCidrBlock: 'TF.Attr s P.IPRange'
-    destinationIpv6CidrBlock: 'TF.Attr s P.IPRange'
+    destinationCidrBlock: IPRange
+    destinationIpv6CidrBlock: IPRange
 
   # Settings
 
   DynamodbTableAttribute:
-    type': 'TF.Attr s P.TableAttributeType'
+    type': TableAttributeType
