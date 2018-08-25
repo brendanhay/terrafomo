@@ -5,10 +5,9 @@
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
--- {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 {% include "_include/license.ede" %}
---
 module {{ namespace }}
     (
     -- * {{ provider.name }} Provider Datatype
@@ -36,7 +35,6 @@ import qualified {{ import.value }} as P
 {% endfor %}
 import qualified Data.Aeson as JSON
 import qualified Terrafomo.Core as TF
-import qualified Terrafomo.Encode as TF
 
 type DataSource a = TF.Schema {{ provider.schema.type }} ()               a
 type Resource   a = TF.Schema {{ provider.schema.type }} (TF.Lifecycle a) a
@@ -93,7 +91,7 @@ TF.newExampleResource "foo"
 -}
 defaultProvider :: TF.Provider {{ provider.schema.type }}
 defaultProvider =
-    TF.defaultProvider "{{ provider.original }}"
+    TF.defaultProvider "{{ provider.original }}" (P.Just "~> {{ provider.version }}")
       {% if provider.schema.arguments | empty %}
         P.mempty
       {% else %}

@@ -57,8 +57,8 @@ module Terrafomo
     -- ** Primitives
     , Core.value
     , Core.null
-    , Core.true
-    , Core.false
+    , Builtin.true
+    , Builtin.false
 
     -- ** Builtin Functions
     , Builtin.modulo

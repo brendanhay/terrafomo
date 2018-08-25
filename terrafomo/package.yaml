@@ -27,9 +27,11 @@ library:
     - Terrafomo.Lens
     - Terrafomo.Monad
     - Terrafomo.Render
+    - Terrafomo.Validate
 
   dependencies:
     - aeson
+    - contravariant
     - hashable
     - microlens
     - mmorph

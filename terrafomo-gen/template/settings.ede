@@ -5,10 +5,9 @@
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
--- {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 {% include "_include/license.ede" %}
---
 module {{ namespace }}
     (
     {% for setting in settings %}
@@ -27,8 +26,8 @@ import GHC.Base (($))
 import qualified {{ import.value }} as P
 {% endfor %}
 import qualified Data.Aeson as JSON
+import qualified Data.HashMap.Strict as HashMap
 import qualified Terrafomo.Core as TF
-import qualified Terrafomo.Encode as TF
 import qualified Terrafomo.Validate as TF
 {% for setting in settings %}
 
@@ -59,5 +58,9 @@ instance JSON.ToJSON ({{ setting.value.type }}) where
   {% else %}
     toJSON {{ setting.value.con.name }} = JSON.object []
   {% endfor %}
+
+instance P.Hashable ({{ setting.value.type }})
+
+{% include "_include/validator.ede" with schema = setting.value %}
 {% include "_include/lenses.ede" with schema = setting.value %}
 {% endfor %}

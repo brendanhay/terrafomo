@@ -4,7 +4,6 @@
 {-# LANGUAGE UndecidableInstances #-}
 
 {% include "_include/license.ede" %}
---
 module {{ namespace }}
     (
 {% if !(arguments | empty) %}

@@ -9,6 +9,6 @@ instance P.{{ field.value.class }} ({{ schema.type }}) ({{ field.value.type }}) 
   {% for field in schema.attributes %}
 
 instance s ~ s' => P.{{ field.value.class }} (TF.Ref s' ({{ schema.type }})) ({{ field.value.type }}) where
-    {{ field.value.method }} x = TF.computed x "{{ field.value.original }}"
+    {{ field.value.method }} x = TF.unsafeComputed x "{{ field.value.original }}"
   {% endfor %}
 {% endif %}

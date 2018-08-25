@@ -25,7 +25,7 @@ import qualified Data.HashMap.Strict                   as HashMap
 import qualified Data.List                             as List
 import qualified Data.Text.Prettyprint.Doc             as PP
 import qualified Data.Text.Prettyprint.Doc.Render.Text as Render
-import qualified Terrafomo.Encode                         as Encode
+import qualified Terrafomo.Encode                      as Encode
 
 renderDocument :: [Section] -> PP.SimpleDocStream ann
 renderDocument =

@@ -1,13 +1,16 @@
 module Terrafomo.Encode
-    ( Section (..)
-    , Node    (..)
+    (
+    -- * Encoders
+      lifecycleEncoder
 
+    -- * Encoding Functions
     , encodeType
     , encodeName
     , encodeAttr
     , encodeVar
     , encodeExpr
     , encodeBackend
+    , serializeBackend
     , encodeRemote
     , encodeProvider
     , encodeSchema
@@ -18,7 +21,7 @@ module Terrafomo.Encode
 import Data.Aeson     ((.=))
 import Data.Hashable  (Hashable)
 import Data.HashSet   (HashSet)
-import Data.Maybe     (catMaybes)
+import Data.Maybe     (catMaybes, maybeToList)
 import Data.Semigroup (Semigroup ((<>)))
 import Data.Text.Lazy (Text)
 
@@ -28,6 +31,9 @@ import qualified Data.Aeson          as JSON
 import qualified Data.Aeson.Types    as JSON
 import qualified Data.HashMap.Strict as HashMap
 import qualified Data.HashSet        as HashSet
+
+lifecycleEncoder :: Encoder (Lifecycle a)
+lifecycleEncoder = Encoder (maybeToList . encodeLifecycle)
 
 -- | FIXME: Document
 encodeType :: Type -> Text
@@ -52,9 +58,9 @@ encodeAttr (Attr name attr) = encodeName name <> "." <> attr
 -- | FIXME: Document
 encodeVar :: JSON.ToJSON a => Var s a -> JSON.Value
 encodeVar = \case
-    Compute attr -> JSON.toJSON ("${" <> encodeAttr attr <> "}")
-    Const   x    -> JSON.toJSON x
-    Null         -> JSON.String "null"
+    Compute attr name -> JSON.toJSON ("${" <> encodeAttr attr <> "." <> name <> "}")
+    Const   a         -> JSON.toJSON a
+    Null              -> JSON.Null
 
 -- | FIXME: Document
 encodeExpr :: Expr s a -> JSON.Value
@@ -70,6 +76,15 @@ encodeBackend x =
                     encode (backendEncoder x) (backendConfig x)
 
 -- | FIXME: Document
+serializeBackend :: Backend b -> Backend JSON.Object
+serializeBackend x =
+    x { backendConfig  =
+          HashMap.fromList (encode (backendEncoder x) (backendConfig x))
+      , backendEncoder =
+          Encoder HashMap.toList
+      }
+
+-- | FIXME: Document
 encodeRemote :: Text -> Backend b -> Section
 encodeRemote name x =
     Section TypeData ["terraform_remote_state", name] $
@@ -82,7 +97,7 @@ encodeProvider :: Hashable p => Provider p -> Section
 encodeProvider x =
     Section TypeProvider [providerName x] $
         object $
-            let Attr _ alias = providerAlias x
+            let Attr _ alias = hashProvider x
              in catMaybes
                 ( fmap ("version" .=) (providerVersion x)
                 : fmap ("alias"   .=) (Just alias)
@@ -92,7 +107,7 @@ encodeProvider x =
 -- | FIXME: Document
 encodeAlias :: Hashable p => Provider p -> Maybe JSON.Pair
 encodeAlias x = do
-    ("alias" .= encodeAttr (providerAlias x))
+    ("alias" .= encodeAttr (hashProvider x))
           <$ providerConfig x
 
 -- | FIXME: Document
@@ -113,15 +128,14 @@ encodeLifecycle :: Lifecycle a -> Maybe JSON.Pair
 encodeLifecycle x
     | x == mempty = Nothing
     | otherwise   = Just $
-        "lifecycle" .=
-            JSON.object
-                [ "prevent_destroy"       .= preventDestroy x
-                , "create_before_destroy" .= createBeforeDestroy x
-                , "ignore_changes"        .=
-                    case ignoreChanges x of
-                        Wildcard -> HashSet.singleton "*"
-                        Match xs -> HashSet.map encodeName xs
-                ]
+        "lifecycle" .= JSON.object
+            [ "prevent_destroy"       .= preventDestroy x
+            , "create_before_destroy" .= createBeforeDestroy x
+            , "ignore_changes"        .=
+                case ignoreChanges x of
+                    Wildcard -> HashSet.singleton "*"
+                    Match xs -> HashSet.map encodeName xs
+            ]
 
 -- | FIXME: Document
 encodeDependsOn :: HashSet Attr -> Maybe JSON.Pair

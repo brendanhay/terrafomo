@@ -6,6 +6,7 @@ import Data.Function  (on)
 import Data.Semigroup (Semigroup ((<>)))
 import Data.Set       (Set)
 import Data.Text      (Text)
+import Data.Version   (Version)
 
 import GHC.Generics (Generic)
 
@@ -31,6 +32,7 @@ data Provider = Provider'
     { providerName         :: !ProviderName
     , providerPackage      :: !Text
     , providerDependencies :: !(Set Text)
+    , providerVersion      :: !Version
     , providerOriginal     :: !Text
     , providerUrl          :: !Text
     , providerResources    :: ![Resource]
@@ -39,29 +41,6 @@ data Provider = Provider'
     , providerPrimitives   :: ![Primitive]
     , providerSchema       :: !Settings
     } deriving (Show, Eq, Ord, Generic)
-
--- emptyProvider = Provider'
---     { providerName         = "Provider"
---     , providerPackage      = "terrafaomo-provider"
---     , providerDependencies = mempty
---     , providerOriginal     = "provider"
---     , providerUrl          = "url"
---     , providerResources    = [Resource' "url" emptySchema]
---     , providerDataSources  = [Resource' "url" emptySchema]
---     , providerSettings     = [Settings' emptySchema]
---     , providerSchema       = Settings' emptySchema
---     }
-
--- emptySchema = Schema'
---     { schemaName       = "Foo"
---     , schemaOriginal   = "foo"
---     , schemaKey        = Key ["foo"]
---     , schemaType       = Type.Free "Foo"
---     , schemaCon        = Con "Foo" "newFoo"
---     , schemaThreaded   = True
---     , schemaArguments  = []
---     , schemaAttributes = []
---     }
 
 instance JSON.ToJSON Provider where
     toJSON = JSON.genericToJSON (JSON.options "provider")

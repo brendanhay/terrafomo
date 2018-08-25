@@ -1,7 +1,11 @@
 module Terrafomo.Builtin
     (
+    -- * Constants
+      true
+    , false
+
     -- * Terraform Builtins
-      modulo
+    , modulo
     , join
     , file
 
@@ -11,40 +15,48 @@ module Terrafomo.Builtin
 
 import Data.Text (Text)
 
-import Terrafomo.Core (Expr)
+import Terrafomo.Core
 
-import qualified Data.Aeson     as JSON
-import qualified Terrafomo.Core as Core
-import qualified Terrafomo.Encode  as Encode
+import qualified Data.Aeson       as JSON
+import qualified Terrafomo.Encode as Encode
 
--- Constants and Primitive Values
+-- Primitives
+
+-- | Specify a boolean attribute value. Equivalent to @value True@.
+true :: Expr s Bool
+true = value True
+
+-- | Specify a boolean attribute value. Equivalent to @value False@.
+false :: Expr s Bool
+false = value False
+
+-- Builtin Functions
 
 -- FIXME: Implement most builtins but then add a disclaimer about preferring Haskell functions.
-
--- Builtins
 
 -- | Integer modulo.
 --
 -- See: <https://www.terraform.io/docs/configuration/interpolation.html#math math>
 modulo :: Integral a => Expr s a -> Expr s a -> Expr s a
-modulo n d = Core.function "%" [n, d]
+modulo n d = function "%" [n, d]
 
 -- | Joins the list with the specified delimiter.
 --
 -- See: <https://www.terraform.io/docs/configuration/interpolation.html#join-delim-list- join(delim, list)>
 join :: JSON.ToJSON a => Text -> [Expr s a] -> Expr s Text
-join sep xs = Core.function "join" (Core.value sep : map quote xs)
+join sep xs = function "join" (value sep : map quote xs)
 
 -- | Read the contents of a file. The path is interpreted relative to the
 -- working directory.
 --
 -- See: <https://www.terraform.io/docs/configuration/interpolation.html#file-path- file(path)>
 file :: Expr s FilePath -> Expr s Text
-file path = Core.function "file" [quote path]
+file path = function "file" [quote path]
 
--- Interpolation
+-- Utilities
 
+-- FIXME:
 quote :: JSON.ToJSON a => Expr s a -> Expr s Text
-quote = Core.ecata (f . Encode.encodeVar) f
+quote = ecata (f . Encode.encodeVar) f
   where
-    f = Core.Fix . Core.Quote
+    f = Fix . Quote

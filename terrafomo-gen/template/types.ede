@@ -1,7 +1,6 @@
 -- This module was auto-generated. If it is modified, it will not be overwritten.
 
 {% include "_include/license.ede" %}
---
 module {{ namespace }} where
 
 -- import Data.Text (Text)

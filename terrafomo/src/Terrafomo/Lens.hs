@@ -1,12 +1,15 @@
 module Terrafomo.Lens
     (
-    -- * DataSource/Resource Provider
+    -- * Provider
       provider
 
-    -- * DataSource/Resource Dependencies
+    -- * Configuration
+    , configuration
+
+    -- * Dependencies
     , dependOn
 
-    -- * Resource Lifecycle
+    -- * Lifecycle
     , preventDestroy
     , createBeforeDestroy
     , ignoreChanges
@@ -32,12 +35,19 @@ provider = g . f
     g = Lens.lens Core.schemaProvider
             (\s a -> s { Core.schemaProvider = a })
 
+-- | The underlying type/data config representing the specific resource or
+-- datasource configuration.
+configuration :: Lens.Lens' (Core.Schema l p a) a
+configuration =
+    Lens.lens Core.schemaConfig
+        (\s a -> s { Core.schemaConfig = a })
+
 -- | Helper for explicitly depending upon a ref.
 dependOn
     :: Core.Ref s a
     -> Core.Schema p l b
     -> Core.Schema p l b
-dependOn (Core.UnsafeRef attr _) =
+dependOn (Core.UnsafeRef attr) =
     Lens.over dependsOn (HashSet.insert attr)
 
 -- | Explicit dependencies that this resource or datasource has. These

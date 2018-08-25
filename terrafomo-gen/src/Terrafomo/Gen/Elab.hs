@@ -36,12 +36,11 @@ import qualified Data.Set                   as Set
 import qualified Data.Text                  as Text
 import qualified Data.Text.Read             as Text
 import qualified Terrafomo.Gen.Diff         as Diff
+import qualified Data.Version               as Version
 import qualified Terrafomo.Gen.Go           as Go
 import qualified Terrafomo.Gen.Name         as Name
 import qualified Terrafomo.Gen.Type         as Type
 import qualified Terrafomo.Gen.URL          as URL
-
-import Debug.Trace (trace)
 
 data Env = Env
     { _config :: !Config
@@ -86,10 +85,16 @@ run cfg provider =
                let settings =
                        Map.elems (Map.delete (schemaName (fromSettings schema)) _settings)
 
+               let version = Version.makeVersion
+                           . take 2
+                           . Version.versionBranch
+                           $ Go.providerVersion provider
+
                validate provider $ Provider'
                    { providerName         = configProviderName cfg
                    , providerPackage      = configPackage      cfg
                    , providerDependencies = configDependencies cfg
+                   , providerVersion      = version
                    , providerOriginal     = original
                    , providerUrl          = URL.provider original
                    , providerResources    = resources
@@ -391,11 +396,9 @@ elabField schema = do
                     then pure s
                     else elabExpr (repeated s)
 
-            Go.TypeList   -> do
-                s <- elabType schema
-                if original == "logging"
-                    then elabExpr (trace (ppShow (repeated s)) (repeated s))
-                    else elabExpr (repeated s)
+            Go.TypeList   ->
+                elabType schema
+                    >>= elabExpr . repeated
 
             Go.TypeMap    ->
                 (elabType schema <|> elabExpr Type.Text)

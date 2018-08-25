@@ -6,7 +6,6 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 {% include "_include/license.ede" %}
---
 module {{ namespace }}
     (
     {% for primitive in primitives %}

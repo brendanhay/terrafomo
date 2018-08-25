@@ -34,7 +34,6 @@ import Control.Monad.Trans.Except (Except)
 
 import Data.Hashable       (Hashable)
 import Data.HashMap.Strict (HashMap)
-import Data.HashSet        (HashSet)
 import Data.Text.Lazy      (Text)
 import Data.Typeable       (Typeable)
 
@@ -43,9 +42,9 @@ import Terrafomo.Internal.ValueMap (ValueMap)
 import qualified Control.Monad.Trans.Except        as Except
 import qualified Control.Monad.Trans.Identity      as Identity
 import qualified Control.Monad.Trans.Maybe         as Maybe
+import qualified Control.Monad.Trans.Reader        as Reader
 import qualified Control.Monad.Trans.RWS.Lazy      as LRWS
 import qualified Control.Monad.Trans.RWS.Strict    as RWS
-import qualified Control.Monad.Trans.Reader        as Reader
 import qualified Control.Monad.Trans.State.Lazy    as LState
 import qualified Control.Monad.Trans.State.Strict  as State
 import qualified Control.Monad.Trans.Writer.Lazy   as LWriter
@@ -58,12 +57,13 @@ import qualified Terrafomo.Encode                  as Encode
 import qualified Terrafomo.Internal.Hash           as Hash
 import qualified Terrafomo.Internal.ValueMap       as ValueMap
 import qualified Terrafomo.Render                  as Render
+import qualified Terrafomo.Validate                as Validate
 
 -- | FIXME: Document
 data Error
-    = DuplicateOutput   !Text      !Encode.Section
-    | DuplicateResource !Core.Attr !Encode.Section
-    | ConflictsWith     !Core.Attr !(HashMap Text (HashSet Text))
+    = DuplicateOutput   !Text      !Core.Section
+    | DuplicateResource !Core.Attr !Core.Section
+    | ConflictsWith     !Core.Attr !Validate.ConflictsWith
       deriving (Show, Eq, Typeable)
 
 instance Exception Error
@@ -76,24 +76,24 @@ newtype Config = Config
 data Document = UnsafeDocument
     { supply    :: !Int
     , backend   :: !(Core.Backend JSON.Object)
-    , providers :: !(ValueMap Core.Attr Encode.Section)
-    , remotes   :: !(ValueMap Text      Encode.Section)
-    , resources :: !(ValueMap Core.Attr Encode.Section)
-    , outputs   :: !(ValueMap Text      Encode.Section)
+    , providers :: !(ValueMap Core.Attr Core.Section)
+    , remotes   :: !(ValueMap Text      Core.Section)
+    , resources :: !(ValueMap Core.Attr Core.Section)
+    , outputs   :: !(ValueMap Text      Core.Section)
     }
 
 renderDocument :: Document -> Text
 renderDocument =
     Render.renderLazy
-        . Render.renderDocument . flattenState
+        . Render.renderDocument . flatten
 
 renderDocumentIO :: IO.Handle -> Document -> IO ()
 renderDocumentIO hd =
     Render.renderIO hd
-        . Render.renderDocument . flattenState
+        . Render.renderDocument . flatten
 
-flattenState :: Document -> [Encode.Section]
-flattenState s =
+flatten :: Document -> [Core.Section]
+flatten s =
     Encode.encodeBackend (backend s) :
         concat [ ValueMap.values (providers  s)
                , ValueMap.values (remotes    s)
@@ -117,7 +117,7 @@ runTerraform x m =
             Config { defaultProviders = mempty }
             UnsafeDocument
                 { supply    = 100000
-                , backend   = Core.serializeBackend x
+                , backend   = Encode.serializeBackend x
                 , providers = ValueMap.empty
                 , remotes   = ValueMap.empty
                 , resources = ValueMap.empty
@@ -237,7 +237,7 @@ insertProvider x =
     case Core.providerConfig x of
         Nothing -> lookupProvider (Core.providerName x)
         Just _  ->
-            let alias = Core.providerAlias x
+            let alias = Core.hashProvider x
                 value = Encode.encodeProvider x
 
              in insertValue alias value providers (\s w -> w { providers = s })
@@ -260,6 +260,7 @@ lookupProvider name =
 define
     :: ( MonadTerraform s m
        , Hashable p
+       , Validate.HasValidator a
        )
     => Text
     -> Core.Schema p l a
@@ -269,7 +270,7 @@ define name x =
         let attr  = Core.Attr (Core.schemaName x) name
             value = Encode.encodeSchema name x
 
-        case Core.validate (Core.schemaValidator x) (Core.schemaConfig x) of
+        case Validate.validate Validate.validator (Core.schemaConfig x) of
             Nothing -> pure ()
             Just es -> throwError (ConflictsWith attr es)
 
@@ -281,7 +282,7 @@ define name x =
         unless unique $
             throwError (DuplicateResource attr value)
 
-        pure $! Core.UnsafeRef attr (Core.schemaConfig x)
+        pure $! Core.UnsafeRef attr
 
 -- | Emit an output variable to the remote state.
 --
@@ -325,7 +326,7 @@ remote x =
 
         void $ insertValue name value remotes (\s w -> w { remotes = s })
 
-        pure $! Core.unsafeOutputValue x
+        pure $! Core.outputValue x
 
 insertValue
     :: ( MonadTerraform s m
