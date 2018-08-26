@@ -1,6 +1,6 @@
 module Terrafomo.Gen.Name where
 
-import Data.Maybe (mapMaybe, listToMaybe)
+import Data.Maybe     (listToMaybe)
 import Data.Semigroup (Semigroup ((<>)))
 import Data.Text      (Text)
 
@@ -26,6 +26,17 @@ resourceKey = \case
           . filter (not . Text.null)
           $ (Text.dropWhile (== '_') (Text.dropWhile (/= '_') x))
           : xs
+
+commonPrefix :: Key -> Key -> Maybe Text
+commonPrefix (Key xs) (Key ys) = do
+    x <- listToMaybe xs
+    y <- listToMaybe ys
+
+    (prefix, _left, _right) <-
+        Text.commonPrefixes (max x y) (min x y)
+
+    -- FIXME: Add metric to check for prefix length / percentage / edit distance.
+    pure prefix
 
 instance JSON.ToJSONKey Key where
     toJSONKey = JSON.toJSONKeyText (fromKey '.')
@@ -68,9 +79,9 @@ settingsNames :: Text -> Key -> (DataName, ConName, VarName)
 settingsNames x (Key xs) =
     case x of
         "provider" -> (Name "Provider", Name "Provider'", Name "newProvider")
-        _          -> names xs
+        _          -> names (minimize x xs)
   where
-    names (minimize x -> txt) =
+    names txt =
         ( Name txt
         , Name (txt `Text.snoc` '\'')
         , Name ("new" <> txt)
@@ -171,10 +182,9 @@ minimize original =
   where
     prefix xs = \case
         []   -> xs
-        [y]  -> split y ++ ("_" : xs)
-        y:ys -> split y ++ mapMaybe only ys ++ ("_" : xs)
+        y:ys -> split y ++ concatMap only ys ++ xs
 
-    only = listToMaybe . filter valid . split
+    only = filter valid . split
 
     valid = \case
         "configuration" -> False

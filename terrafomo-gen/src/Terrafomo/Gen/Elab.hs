@@ -5,7 +5,7 @@ module Terrafomo.Gen.Elab
     ) where
 
 import Control.Applicative        ((<|>))
-import Control.Monad              (unless, (>=>))
+import Control.Monad              (unless)
 import Control.Monad.Except       (Except)
 import Control.Monad.Reader       (ReaderT)
 import Control.Monad.State.Strict (StateT)
@@ -143,41 +143,50 @@ elabDataSource provider original schemas =
 
 elabSettings :: Text -> [Go.Schema] -> Elab Settings
 elabSettings original schemas = do
-    names <- Name.settingsNames original <$> getCurrentKey
-    x     <- Settings' <$> elabSchema original names schemas
-    insertSettings x
-    pure x
+    let try names = do
+            x     <- Settings' <$> elabSchema original names schemas
+            insertSettings x
+            pure x
+
+    key@(Name.Key ks) <- getCurrentKey
+
+    case ks of
+        []  -> try (Name.settingsNames original key)
+        k:_ -> try (Name.settingsNames original (Name.Key [k]))
+           <|> try (Name.settingsNames original key)
 
 insertSettings :: Settings -> Elab ()
 insertSettings s@(Settings' x) = do
     let name = schemaName x
 
     merged <-
-        State.gets (Map.lookup name . _settings >=> Diff.settings s) >>= \case
-            Nothing   -> pure s
-            Just diff -> do
-                -- If the schema keys are the same - we need to perform a merge
-                unless (Diff.schemaA diff == Diff.schemaB diff) $
-                    Except.throwError $
-                        "Unable to merge differing settings types:\n"
-                            ++ unlines [ "New => "  ++ ppShow x
-                                       , "Diff => " ++ ppShow diff
-                                       ]
+        State.gets (Map.lookup name . _settings) >>= \case
+            Nothing -> pure s
+            Just y  -> case Diff.settings s y of
+                Nothing   -> pure s
+                Just diff -> do
+                    unless (Diff.shallow diff) $
+                        Except.throwError $
+                            "Unable to merge differing settings types:\n"
+                                ++ unlines [ "New => "  ++ ppShow x
+                                           , "Old => "  ++ ppShow y
+                                           , "Diff => " ++ ppShow diff
+                                           ]
 
-                pure $! Settings' $ x
-                    -- FIXME: The nub here is unsafe. Currently
-                    -- A/LbSubnetMapping returns two _subnetId fields which are
-                    -- identical except for forceNew=true.
-                    { schemaArguments  =
-                        List.nubBy (on (==) fieldName)
-                            . Diff.patch
-                            $ Diff.schemaArguments diff
+                    pure $! Settings' $ x
+                        -- FIXME: The nub here is unsafe. Currently
+                        -- A/LbSubnetMapping returns two _subnetId fields which are
+                        -- identical except for forceNew=true.
+                        { schemaArguments  =
+                            List.nubBy (on (==) fieldName)
+                                . Diff.patch
+                                $ Diff.schemaArguments diff
 
-                    , schemaAttributes =
-                        List.nubBy (on (==) fieldName)
-                            . Diff.patch
-                            $ Diff.schemaAttributes diff
-                    }
+                        , schemaAttributes =
+                            List.nubBy (on (==) fieldName)
+                                . Diff.patch
+                                $ Diff.schemaAttributes diff
+                        }
 
     State.modify' $ \r ->
         r { _settings = Map.insert name merged (_settings r)

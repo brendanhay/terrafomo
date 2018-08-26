@@ -3,14 +3,16 @@
 module Terrafomo.Gen.Diff where
 
 import Data.Function (on)
+import Data.Maybe    (isJust)
 import Data.Text     (Text)
 
 import Terrafomo.Gen.Haskell (Con, Conflict, Field, Schema, Settings)
-import Terrafomo.Gen.Name    (DataName, Key, LabelName)
+import Terrafomo.Gen.Name    (DataName, Key (Key), LabelName)
 import Terrafomo.Gen.Type    (Type)
 
 import qualified Data.List             as List
 import qualified Terrafomo.Gen.Haskell as HS
+import qualified Terrafomo.Gen.Name    as Name
 
 data Diff a
     = NotEqual !a !a
@@ -32,9 +34,15 @@ patch = \case
     NotEqual xs ys -> List.nub (List.union xs ys)
     Equal    xs    -> xs
 
+equal :: Diff a -> Bool
+equal = \case
+    Equal{} -> True
+    _       -> False
+
 data SchemaDiff = SchemaDiff
     { schemaA          :: !Key
     , schemaB          :: !Key
+    , schemaLCP        :: !(Maybe Text)
     , schemaName       :: !(Diff DataName)
     , schemaOriginal   :: !(Diff Text)
     , schemaType       :: !(Diff Type)
@@ -49,6 +57,7 @@ instance Show SchemaDiff where
           showString "SchemaDiff "
         . showString "{ schemaA = " . shows schemaA
         . showString ", schemaB = " . shows schemaB
+        . showString ", schemaLCP = " . shows schemaLCP
         . sdiff "schemName"        schemaName
         . sdiff "schemaOriginal"   schemaOriginal
         . sdiff "schemaType"       schemaType
@@ -74,6 +83,9 @@ schema a b
             { schemaA          = HS.schemaKey a
             , schemaB          = HS.schemaKey b
 
+            , schemaLCP        =
+                Name.commonPrefix (HS.schemaKey a) (HS.schemaKey b)
+
             , schemaName       = on diff HS.schemaName       a b
             , schemaOriginal   = on diff HS.schemaOriginal   a b
             , schemaType       = on diff HS.schemaType       a b
@@ -83,6 +95,16 @@ schema a b
             , schemaArguments  = on diffList HS.schemaArguments  a b
             , schemaAttributes = on diffList HS.schemaAttributes a b
             }
+
+shallow :: SchemaDiff -> Bool
+shallow SchemaDiff{..} =
+    and [ isJust (Name.commonPrefix schemaA schemaB)
+        , equal schemaName
+        , equal schemaOriginal
+        , equal schemaType
+        , equal schemaCon
+        , equal schemaThreaded
+        ]
 
 settings :: Settings -> Settings -> Maybe SchemaDiff
 settings = on schema HS.fromSettings
