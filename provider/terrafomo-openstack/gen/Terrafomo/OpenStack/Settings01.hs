@@ -17,97 +17,117 @@
 --
 module Terrafomo.OpenStack.Settings01
     (
-    -- ** allocation_pools
-      AllocationPoolsSetting (..)
-    , newAllocationPoolsSetting
-
-    -- ** allowed_address_pairs
-    , AllowedAddressPairsSetting (..)
-    , newAllowedAddressPairsSetting
+    -- ** attachment
+      BlockstorageVolumeV1Attachment (..)
+    , newBlockstorageVolumeV1Attachment
 
     -- ** attachment
-    , AttachmentSetting (..)
-    , newAttachmentSetting
+    , BlockstorageVolumeV2Attachment (..)
+    , newBlockstorageVolumeV2Attachment
+
+    -- ** attachment
+    , BlockstorageVolumeV3Attachment (..)
+    , newBlockstorageVolumeV3Attachment
 
     -- ** block_device
-    , BlockDeviceSetting (..)
-    , newBlockDeviceSetting
-
-    -- ** configuration
-    , ConfigurationSetting (..)
-    , newConfigurationSetting
-
-    -- ** database
-    , DatabaseSetting (..)
-    , newDatabaseSetting
-
-    -- ** datastore
-    , DatastoreSetting (..)
-    , newDatastoreSetting
-
-    -- ** dpd
-    , DpdSetting (..)
-    , newDpdSetting
-
-    -- ** external_fixed_ip
-    , ExternalFixedIpSetting (..)
-    , newExternalFixedIpSetting
-
-    -- ** fixed_ip
-    , FixedIpSetting (..)
-    , newFixedIpSetting
-
-    -- ** host_routes
-    , HostRoutesSetting (..)
-    , newHostRoutesSetting
-
-    -- ** lifetime
-    , LifetimeSetting (..)
-    , newLifetimeSetting
-
-    -- ** multi_factor_auth_rule
-    , MultiFactorAuthRuleSetting (..)
-    , newMultiFactorAuthRuleSetting
+    , ComputeInstanceV2BlockDevice (..)
+    , newComputeInstanceV2BlockDevice
 
     -- ** network
-    , NetworkSetting (..)
-    , newNetworkSetting
-
-    -- ** persistence
-    , PersistenceSetting (..)
-    , newPersistenceSetting
+    , ComputeInstanceV2Network (..)
+    , newComputeInstanceV2Network
 
     -- ** personality
-    , PersonalitySetting (..)
-    , newPersonalitySetting
-
-    -- ** roles
-    , RolesSetting (..)
-    , newRolesSetting
-
-    -- ** rule
-    , RuleSetting (..)
-    , newRuleSetting
+    , ComputeInstanceV2Personality (..)
+    , newComputeInstanceV2Personality
 
     -- ** scheduler_hints
-    , SchedulerHintsSetting (..)
-    , newSchedulerHintsSetting
-
-    -- ** segments
-    , SegmentsSetting (..)
-    , newSegmentsSetting
-
-    -- ** user
-    , UserSetting (..)
-    , newUserSetting
-
-    -- ** vendor_options
-    , VendorOptionsSetting (..)
-    , newVendorOptionsSetting
+    , ComputeInstanceV2SchedulerHints (..)
+    , newComputeInstanceV2SchedulerHints
 
     -- ** volume
-    , VolumeSetting (..)
-    , newVolumeSetting
+    , ComputeInstanceV2Volume (..)
+    , newComputeInstanceV2Volume
+
+    -- ** rule
+    , ComputeSecgroupV2Rule (..)
+    , newComputeSecgroupV2Rule
+
+    -- ** configuration
+    , DbConfigurationV1Configuration (..)
+    , newDbConfigurationV1Configuration
+
+    -- ** datastore
+    , DbConfigurationV1Datastore (..)
+    , newDbConfigurationV1Datastore
+
+    -- ** database
+    , DbInstanceV1Database (..)
+    , newDbInstanceV1Database
+
+    -- ** datastore
+    , DbInstanceV1Datastore (..)
+    , newDbInstanceV1Datastore
+
+    -- ** network
+    , DbInstanceV1Network (..)
+    , newDbInstanceV1Network
+
+    -- ** user
+    , DbInstanceV1User (..)
+    , newDbInstanceV1User
+
+    -- ** roles
+    , IdentityAuthScopeV3Roles (..)
+    , newIdentityAuthScopeV3Roles
+
+    -- ** multi_factor_auth_rule
+    , IdentityUserV3MultiFactorAuthRule (..)
+    , newIdentityUserV3MultiFactorAuthRule
+
+    -- ** persistence
+    , LbPoolV2Persistence (..)
+    , newLbPoolV2Persistence
+
+    -- ** segments
+    , NetworkingNetworkV2Segments (..)
+    , newNetworkingNetworkV2Segments
+
+    -- ** allowed_address_pairs
+    , NetworkingPortV2AllowedAddressPairs (..)
+    , newNetworkingPortV2AllowedAddressPairs
+
+    -- ** fixed_ip
+    , NetworkingPortV2FixedIp (..)
+    , newNetworkingPortV2FixedIp
+
+    -- ** external_fixed_ip
+    , NetworkingRouterV2ExternalFixedIp (..)
+    , newNetworkingRouterV2ExternalFixedIp
+
+    -- ** vendor_options
+    , NetworkingRouterV2VendorOptions (..)
+    , newNetworkingRouterV2VendorOptions
+
+    -- ** allocation_pools
+    , NetworkingSubnetV2AllocationPools (..)
+    , newNetworkingSubnetV2AllocationPools
+
+    -- ** host_routes
+    , NetworkingSubnetV2HostRoutes (..)
+    , newNetworkingSubnetV2HostRoutes
+
+    -- ** lifetime
+    , VpnaasIkePolicyV2Lifetime (..)
+    , newVpnaasIkePolicyV2Lifetime
+
+    -- ** lifetime
+    , VpnaasIpsecPolicyV2Lifetime (..)
+    , newVpnaasIpsecPolicyV2Lifetime
+
+    -- ** dpd
+    , VpnaasSiteConnectionV2Dpd (..)
+    , newVpnaasSiteConnectionV2Dpd
 
     ) where
 
@@ -132,121 +152,86 @@ import qualified Terrafomo.OpenStack.Lens  as P
 import qualified Terrafomo.OpenStack.Types as P
 import qualified Terrafomo.Validator       as TF
 
--- | @allocation_pools@ nested settings.
-data AllocationPoolsSetting s = AllocationPoolsSetting'
-    { _end   :: TF.Attr s P.Text
-    -- ^ @end@ - (Required)
-    --
-    , _start :: TF.Attr s P.Text
-    -- ^ @start@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @allocation_pools@ settings value.
-newAllocationPoolsSetting
-    :: TF.Attr s P.Text -- ^ 'P._end': @end@
-    -> TF.Attr s P.Text -- ^ 'P._start': @start@
-    -> AllocationPoolsSetting s
-newAllocationPoolsSetting _end _start =
-    AllocationPoolsSetting'
-        { _end = _end
-        , _start = _start
-        }
-
-instance TF.IsValue  (AllocationPoolsSetting s)
-instance TF.IsObject (AllocationPoolsSetting s) where
-    toObject AllocationPoolsSetting'{..} = P.catMaybes
-        [ TF.assign "end" <$> TF.attribute _end
-        , TF.assign "start" <$> TF.attribute _start
-        ]
-
-instance TF.IsValid (AllocationPoolsSetting s) where
-    validator = P.mempty
-
-instance P.HasEnd (AllocationPoolsSetting s) (TF.Attr s P.Text) where
-    end =
-        P.lens (_end :: AllocationPoolsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _end = a } :: AllocationPoolsSetting s)
-
-instance P.HasStart (AllocationPoolsSetting s) (TF.Attr s P.Text) where
-    start =
-        P.lens (_start :: AllocationPoolsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _start = a } :: AllocationPoolsSetting s)
-
-instance s ~ s' => P.HasComputedEnd (TF.Ref s' (AllocationPoolsSetting s)) (TF.Attr s P.Text) where
-    computedEnd x = TF.compute (TF.refKey x) "end"
-
-instance s ~ s' => P.HasComputedStart (TF.Ref s' (AllocationPoolsSetting s)) (TF.Attr s P.Text) where
-    computedStart x = TF.compute (TF.refKey x) "start"
-
--- | @allowed_address_pairs@ nested settings.
-data AllowedAddressPairsSetting s = AllowedAddressPairsSetting'
-    { _ipAddress  :: TF.Attr s P.Text
-    -- ^ @ip_address@ - (Required)
-    --
-    , _macAddress :: TF.Attr s P.Text
-    -- ^ @mac_address@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @allowed_address_pairs@ settings value.
-newAllowedAddressPairsSetting
-    :: TF.Attr s P.Text -- ^ 'P._ipAddress': @ip_address@
-    -> AllowedAddressPairsSetting s
-newAllowedAddressPairsSetting _ipAddress =
-    AllowedAddressPairsSetting'
-        { _ipAddress = _ipAddress
-        , _macAddress = TF.Nil
-        }
-
-instance TF.IsValue  (AllowedAddressPairsSetting s)
-instance TF.IsObject (AllowedAddressPairsSetting s) where
-    toObject AllowedAddressPairsSetting'{..} = P.catMaybes
-        [ TF.assign "ip_address" <$> TF.attribute _ipAddress
-        , TF.assign "mac_address" <$> TF.attribute _macAddress
-        ]
-
-instance TF.IsValid (AllowedAddressPairsSetting s) where
-    validator = P.mempty
-
-instance P.HasIpAddress (AllowedAddressPairsSetting s) (TF.Attr s P.Text) where
-    ipAddress =
-        P.lens (_ipAddress :: AllowedAddressPairsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _ipAddress = a } :: AllowedAddressPairsSetting s)
-
-instance P.HasMacAddress (AllowedAddressPairsSetting s) (TF.Attr s P.Text) where
-    macAddress =
-        P.lens (_macAddress :: AllowedAddressPairsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _macAddress = a } :: AllowedAddressPairsSetting s)
-
 -- | @attachment@ nested settings.
-data AttachmentSetting s = AttachmentSetting'
+data BlockstorageVolumeV1Attachment s = BlockstorageVolumeV1Attachment'
     deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @attachment@ settings value.
-newAttachmentSetting
-    :: AttachmentSetting s
-newAttachmentSetting =
-    AttachmentSetting'
+newBlockstorageVolumeV1Attachment
+    :: BlockstorageVolumeV1Attachment s
+newBlockstorageVolumeV1Attachment =
+    BlockstorageVolumeV1Attachment'
 
-instance TF.IsValue  (AttachmentSetting s)
-instance TF.IsObject (AttachmentSetting s) where
-    toObject AttachmentSetting' = []
+instance TF.IsValue  (BlockstorageVolumeV1Attachment s)
+instance TF.IsObject (BlockstorageVolumeV1Attachment s) where
+    toObject BlockstorageVolumeV1Attachment' = []
 
-instance TF.IsValid (AttachmentSetting s) where
+instance TF.IsValid (BlockstorageVolumeV1Attachment s) where
     validator = P.mempty
 
-instance s ~ s' => P.HasComputedDevice (TF.Ref s' (AttachmentSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedDevice (TF.Ref s' (BlockstorageVolumeV1Attachment s)) (TF.Attr s P.Text) where
     computedDevice x = TF.compute (TF.refKey x) "device"
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (AttachmentSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (BlockstorageVolumeV1Attachment s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedInstanceId (TF.Ref s' (AttachmentSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedInstanceId (TF.Ref s' (BlockstorageVolumeV1Attachment s)) (TF.Attr s P.Text) where
+    computedInstanceId x = TF.compute (TF.refKey x) "instance_id"
+
+-- | @attachment@ nested settings.
+data BlockstorageVolumeV2Attachment s = BlockstorageVolumeV2Attachment'
+    deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @attachment@ settings value.
+newBlockstorageVolumeV2Attachment
+    :: BlockstorageVolumeV2Attachment s
+newBlockstorageVolumeV2Attachment =
+    BlockstorageVolumeV2Attachment'
+
+instance TF.IsValue  (BlockstorageVolumeV2Attachment s)
+instance TF.IsObject (BlockstorageVolumeV2Attachment s) where
+    toObject BlockstorageVolumeV2Attachment' = []
+
+instance TF.IsValid (BlockstorageVolumeV2Attachment s) where
+    validator = P.mempty
+
+instance s ~ s' => P.HasComputedDevice (TF.Ref s' (BlockstorageVolumeV2Attachment s)) (TF.Attr s P.Text) where
+    computedDevice x = TF.compute (TF.refKey x) "device"
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (BlockstorageVolumeV2Attachment s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedInstanceId (TF.Ref s' (BlockstorageVolumeV2Attachment s)) (TF.Attr s P.Text) where
+    computedInstanceId x = TF.compute (TF.refKey x) "instance_id"
+
+-- | @attachment@ nested settings.
+data BlockstorageVolumeV3Attachment s = BlockstorageVolumeV3Attachment'
+    deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @attachment@ settings value.
+newBlockstorageVolumeV3Attachment
+    :: BlockstorageVolumeV3Attachment s
+newBlockstorageVolumeV3Attachment =
+    BlockstorageVolumeV3Attachment'
+
+instance TF.IsValue  (BlockstorageVolumeV3Attachment s)
+instance TF.IsObject (BlockstorageVolumeV3Attachment s) where
+    toObject BlockstorageVolumeV3Attachment' = []
+
+instance TF.IsValid (BlockstorageVolumeV3Attachment s) where
+    validator = P.mempty
+
+instance s ~ s' => P.HasComputedDevice (TF.Ref s' (BlockstorageVolumeV3Attachment s)) (TF.Attr s P.Text) where
+    computedDevice x = TF.compute (TF.refKey x) "device"
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (BlockstorageVolumeV3Attachment s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+instance s ~ s' => P.HasComputedInstanceId (TF.Ref s' (BlockstorageVolumeV3Attachment s)) (TF.Attr s P.Text) where
     computedInstanceId x = TF.compute (TF.refKey x) "instance_id"
 
 -- | @block_device@ nested settings.
-data BlockDeviceSetting s = BlockDeviceSetting'
+data ComputeInstanceV2BlockDevice s = ComputeInstanceV2BlockDevice'
     { _bootIndex           :: TF.Attr s P.Int
     -- ^ @boot_index@ - (Optional, Forces New)
     --
@@ -271,11 +256,11 @@ data BlockDeviceSetting s = BlockDeviceSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @block_device@ settings value.
-newBlockDeviceSetting
+newComputeInstanceV2BlockDevice
     :: TF.Attr s P.Text -- ^ 'P._sourceType': @source_type@
-    -> BlockDeviceSetting s
-newBlockDeviceSetting _sourceType =
-    BlockDeviceSetting'
+    -> ComputeInstanceV2BlockDevice s
+newComputeInstanceV2BlockDevice _sourceType =
+    ComputeInstanceV2BlockDevice'
         { _bootIndex = TF.Nil
         , _deleteOnTermination = TF.value P.False
         , _destinationType = TF.Nil
@@ -285,9 +270,9 @@ newBlockDeviceSetting _sourceType =
         , _volumeSize = TF.Nil
         }
 
-instance TF.IsValue  (BlockDeviceSetting s)
-instance TF.IsObject (BlockDeviceSetting s) where
-    toObject BlockDeviceSetting'{..} = P.catMaybes
+instance TF.IsValue  (ComputeInstanceV2BlockDevice s)
+instance TF.IsObject (ComputeInstanceV2BlockDevice s) where
+    toObject ComputeInstanceV2BlockDevice'{..} = P.catMaybes
         [ TF.assign "boot_index" <$> TF.attribute _bootIndex
         , TF.assign "delete_on_termination" <$> TF.attribute _deleteOnTermination
         , TF.assign "destination_type" <$> TF.attribute _destinationType
@@ -297,437 +282,46 @@ instance TF.IsObject (BlockDeviceSetting s) where
         , TF.assign "volume_size" <$> TF.attribute _volumeSize
         ]
 
-instance TF.IsValid (BlockDeviceSetting s) where
+instance TF.IsValid (ComputeInstanceV2BlockDevice s) where
     validator = P.mempty
 
-instance P.HasBootIndex (BlockDeviceSetting s) (TF.Attr s P.Int) where
+instance P.HasBootIndex (ComputeInstanceV2BlockDevice s) (TF.Attr s P.Int) where
     bootIndex =
-        P.lens (_bootIndex :: BlockDeviceSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _bootIndex = a } :: BlockDeviceSetting s)
+        P.lens (_bootIndex :: ComputeInstanceV2BlockDevice s -> TF.Attr s P.Int)
+               (\s a -> s { _bootIndex = a } :: ComputeInstanceV2BlockDevice s)
 
-instance P.HasDeleteOnTermination (BlockDeviceSetting s) (TF.Attr s P.Bool) where
+instance P.HasDeleteOnTermination (ComputeInstanceV2BlockDevice s) (TF.Attr s P.Bool) where
     deleteOnTermination =
-        P.lens (_deleteOnTermination :: BlockDeviceSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _deleteOnTermination = a } :: BlockDeviceSetting s)
+        P.lens (_deleteOnTermination :: ComputeInstanceV2BlockDevice s -> TF.Attr s P.Bool)
+               (\s a -> s { _deleteOnTermination = a } :: ComputeInstanceV2BlockDevice s)
 
-instance P.HasDestinationType (BlockDeviceSetting s) (TF.Attr s P.Text) where
+instance P.HasDestinationType (ComputeInstanceV2BlockDevice s) (TF.Attr s P.Text) where
     destinationType =
-        P.lens (_destinationType :: BlockDeviceSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _destinationType = a } :: BlockDeviceSetting s)
+        P.lens (_destinationType :: ComputeInstanceV2BlockDevice s -> TF.Attr s P.Text)
+               (\s a -> s { _destinationType = a } :: ComputeInstanceV2BlockDevice s)
 
-instance P.HasGuestFormat (BlockDeviceSetting s) (TF.Attr s P.Text) where
+instance P.HasGuestFormat (ComputeInstanceV2BlockDevice s) (TF.Attr s P.Text) where
     guestFormat =
-        P.lens (_guestFormat :: BlockDeviceSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _guestFormat = a } :: BlockDeviceSetting s)
+        P.lens (_guestFormat :: ComputeInstanceV2BlockDevice s -> TF.Attr s P.Text)
+               (\s a -> s { _guestFormat = a } :: ComputeInstanceV2BlockDevice s)
 
-instance P.HasSourceType (BlockDeviceSetting s) (TF.Attr s P.Text) where
+instance P.HasSourceType (ComputeInstanceV2BlockDevice s) (TF.Attr s P.Text) where
     sourceType =
-        P.lens (_sourceType :: BlockDeviceSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _sourceType = a } :: BlockDeviceSetting s)
+        P.lens (_sourceType :: ComputeInstanceV2BlockDevice s -> TF.Attr s P.Text)
+               (\s a -> s { _sourceType = a } :: ComputeInstanceV2BlockDevice s)
 
-instance P.HasUuid (BlockDeviceSetting s) (TF.Attr s P.Text) where
+instance P.HasUuid (ComputeInstanceV2BlockDevice s) (TF.Attr s P.Text) where
     uuid =
-        P.lens (_uuid :: BlockDeviceSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _uuid = a } :: BlockDeviceSetting s)
+        P.lens (_uuid :: ComputeInstanceV2BlockDevice s -> TF.Attr s P.Text)
+               (\s a -> s { _uuid = a } :: ComputeInstanceV2BlockDevice s)
 
-instance P.HasVolumeSize (BlockDeviceSetting s) (TF.Attr s P.Int) where
+instance P.HasVolumeSize (ComputeInstanceV2BlockDevice s) (TF.Attr s P.Int) where
     volumeSize =
-        P.lens (_volumeSize :: BlockDeviceSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _volumeSize = a } :: BlockDeviceSetting s)
-
--- | @configuration@ nested settings.
-data ConfigurationSetting s = ConfigurationSetting'
-    { _name  :: TF.Attr s P.Text
-    -- ^ @name@ - (Required, Forces New)
-    --
-    , _value :: TF.Attr s P.Text
-    -- ^ @value@ - (Required, Forces New)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @configuration@ settings value.
-newConfigurationSetting
-    :: TF.Attr s P.Text -- ^ 'P._name': @name@
-    -> TF.Attr s P.Text -- ^ 'P._value': @value@
-    -> ConfigurationSetting s
-newConfigurationSetting _name _value =
-    ConfigurationSetting'
-        { _name = _name
-        , _value = _value
-        }
-
-instance TF.IsValue  (ConfigurationSetting s)
-instance TF.IsObject (ConfigurationSetting s) where
-    toObject ConfigurationSetting'{..} = P.catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        , TF.assign "value" <$> TF.attribute _value
-        ]
-
-instance TF.IsValid (ConfigurationSetting s) where
-    validator = P.mempty
-
-instance P.HasName (ConfigurationSetting s) (TF.Attr s P.Text) where
-    name =
-        P.lens (_name :: ConfigurationSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: ConfigurationSetting s)
-
-instance P.HasValue (ConfigurationSetting s) (TF.Attr s P.Text) where
-    value =
-        P.lens (_value :: ConfigurationSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _value = a } :: ConfigurationSetting s)
-
--- | @database@ nested settings.
-data DatabaseSetting s = DatabaseSetting'
-    { _charset :: TF.Attr s P.Text
-    -- ^ @charset@ - (Optional, Forces New)
-    --
-    , _collate :: TF.Attr s P.Text
-    -- ^ @collate@ - (Optional, Forces New)
-    --
-    , _name    :: TF.Attr s P.Text
-    -- ^ @name@ - (Required, Forces New)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @database@ settings value.
-newDatabaseSetting
-    :: TF.Attr s P.Text -- ^ 'P._name': @name@
-    -> DatabaseSetting s
-newDatabaseSetting _name =
-    DatabaseSetting'
-        { _charset = TF.Nil
-        , _collate = TF.Nil
-        , _name = _name
-        }
-
-instance TF.IsValue  (DatabaseSetting s)
-instance TF.IsObject (DatabaseSetting s) where
-    toObject DatabaseSetting'{..} = P.catMaybes
-        [ TF.assign "charset" <$> TF.attribute _charset
-        , TF.assign "collate" <$> TF.attribute _collate
-        , TF.assign "name" <$> TF.attribute _name
-        ]
-
-instance TF.IsValid (DatabaseSetting s) where
-    validator = P.mempty
-
-instance P.HasCharset (DatabaseSetting s) (TF.Attr s P.Text) where
-    charset =
-        P.lens (_charset :: DatabaseSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _charset = a } :: DatabaseSetting s)
-
-instance P.HasCollate (DatabaseSetting s) (TF.Attr s P.Text) where
-    collate =
-        P.lens (_collate :: DatabaseSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _collate = a } :: DatabaseSetting s)
-
-instance P.HasName (DatabaseSetting s) (TF.Attr s P.Text) where
-    name =
-        P.lens (_name :: DatabaseSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: DatabaseSetting s)
-
--- | @datastore@ nested settings.
-data DatastoreSetting s = DatastoreSetting'
-    { _type'   :: TF.Attr s P.Text
-    -- ^ @type@ - (Required, Forces New)
-    --
-    , _version :: TF.Attr s P.Text
-    -- ^ @version@ - (Required, Forces New)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @datastore@ settings value.
-newDatastoreSetting
-    :: TF.Attr s P.Text -- ^ 'P._type'': @type@
-    -> TF.Attr s P.Text -- ^ 'P._version': @version@
-    -> DatastoreSetting s
-newDatastoreSetting _type' _version =
-    DatastoreSetting'
-        { _type' = _type'
-        , _version = _version
-        }
-
-instance TF.IsValue  (DatastoreSetting s)
-instance TF.IsObject (DatastoreSetting s) where
-    toObject DatastoreSetting'{..} = P.catMaybes
-        [ TF.assign "type" <$> TF.attribute _type'
-        , TF.assign "version" <$> TF.attribute _version
-        ]
-
-instance TF.IsValid (DatastoreSetting s) where
-    validator = P.mempty
-
-instance P.HasType' (DatastoreSetting s) (TF.Attr s P.Text) where
-    type' =
-        P.lens (_type' :: DatastoreSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a } :: DatastoreSetting s)
-
-instance P.HasVersion (DatastoreSetting s) (TF.Attr s P.Text) where
-    version =
-        P.lens (_version :: DatastoreSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _version = a } :: DatastoreSetting s)
-
--- | @dpd@ nested settings.
-data DpdSetting s = DpdSetting'
-    { _action   :: TF.Attr s P.Text
-    -- ^ @action@ - (Optional)
-    --
-    , _interval :: TF.Attr s P.Int
-    -- ^ @interval@ - (Optional)
-    --
-    , _timeout  :: TF.Attr s P.Int
-    -- ^ @timeout@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @dpd@ settings value.
-newDpdSetting
-    :: DpdSetting s
-newDpdSetting =
-    DpdSetting'
-        { _action = TF.Nil
-        , _interval = TF.Nil
-        , _timeout = TF.Nil
-        }
-
-instance TF.IsValue  (DpdSetting s)
-instance TF.IsObject (DpdSetting s) where
-    toObject DpdSetting'{..} = P.catMaybes
-        [ TF.assign "action" <$> TF.attribute _action
-        , TF.assign "interval" <$> TF.attribute _interval
-        , TF.assign "timeout" <$> TF.attribute _timeout
-        ]
-
-instance TF.IsValid (DpdSetting s) where
-    validator = P.mempty
-
-instance P.HasAction (DpdSetting s) (TF.Attr s P.Text) where
-    action =
-        P.lens (_action :: DpdSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _action = a } :: DpdSetting s)
-
-instance P.HasInterval (DpdSetting s) (TF.Attr s P.Int) where
-    interval =
-        P.lens (_interval :: DpdSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _interval = a } :: DpdSetting s)
-
-instance P.HasTimeout (DpdSetting s) (TF.Attr s P.Int) where
-    timeout =
-        P.lens (_timeout :: DpdSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _timeout = a } :: DpdSetting s)
-
-instance s ~ s' => P.HasComputedAction (TF.Ref s' (DpdSetting s)) (TF.Attr s P.Text) where
-    computedAction x = TF.compute (TF.refKey x) "action"
-
-instance s ~ s' => P.HasComputedInterval (TF.Ref s' (DpdSetting s)) (TF.Attr s P.Int) where
-    computedInterval x = TF.compute (TF.refKey x) "interval"
-
-instance s ~ s' => P.HasComputedTimeout (TF.Ref s' (DpdSetting s)) (TF.Attr s P.Int) where
-    computedTimeout x = TF.compute (TF.refKey x) "timeout"
-
--- | @external_fixed_ip@ nested settings.
-data ExternalFixedIpSetting s = ExternalFixedIpSetting'
-    { _ipAddress :: TF.Attr s P.Text
-    -- ^ @ip_address@ - (Optional)
-    --
-    , _subnetId  :: TF.Attr s P.Text
-    -- ^ @subnet_id@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @external_fixed_ip@ settings value.
-newExternalFixedIpSetting
-    :: ExternalFixedIpSetting s
-newExternalFixedIpSetting =
-    ExternalFixedIpSetting'
-        { _ipAddress = TF.Nil
-        , _subnetId = TF.Nil
-        }
-
-instance TF.IsValue  (ExternalFixedIpSetting s)
-instance TF.IsObject (ExternalFixedIpSetting s) where
-    toObject ExternalFixedIpSetting'{..} = P.catMaybes
-        [ TF.assign "ip_address" <$> TF.attribute _ipAddress
-        , TF.assign "subnet_id" <$> TF.attribute _subnetId
-        ]
-
-instance TF.IsValid (ExternalFixedIpSetting s) where
-    validator = P.mempty
-
-instance P.HasIpAddress (ExternalFixedIpSetting s) (TF.Attr s P.Text) where
-    ipAddress =
-        P.lens (_ipAddress :: ExternalFixedIpSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _ipAddress = a } :: ExternalFixedIpSetting s)
-
-instance P.HasSubnetId (ExternalFixedIpSetting s) (TF.Attr s P.Text) where
-    subnetId =
-        P.lens (_subnetId :: ExternalFixedIpSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _subnetId = a } :: ExternalFixedIpSetting s)
-
--- | @fixed_ip@ nested settings.
-data FixedIpSetting s = FixedIpSetting'
-    { _ipAddress :: TF.Attr s P.Text
-    -- ^ @ip_address@ - (Optional)
-    --
-    , _subnetId  :: TF.Attr s P.Text
-    -- ^ @subnet_id@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @fixed_ip@ settings value.
-newFixedIpSetting
-    :: TF.Attr s P.Text -- ^ 'P._subnetId': @subnet_id@
-    -> FixedIpSetting s
-newFixedIpSetting _subnetId =
-    FixedIpSetting'
-        { _ipAddress = TF.Nil
-        , _subnetId = _subnetId
-        }
-
-instance TF.IsValue  (FixedIpSetting s)
-instance TF.IsObject (FixedIpSetting s) where
-    toObject FixedIpSetting'{..} = P.catMaybes
-        [ TF.assign "ip_address" <$> TF.attribute _ipAddress
-        , TF.assign "subnet_id" <$> TF.attribute _subnetId
-        ]
-
-instance TF.IsValid (FixedIpSetting s) where
-    validator = P.mempty
-
-instance P.HasIpAddress (FixedIpSetting s) (TF.Attr s P.Text) where
-    ipAddress =
-        P.lens (_ipAddress :: FixedIpSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _ipAddress = a } :: FixedIpSetting s)
-
-instance P.HasSubnetId (FixedIpSetting s) (TF.Attr s P.Text) where
-    subnetId =
-        P.lens (_subnetId :: FixedIpSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _subnetId = a } :: FixedIpSetting s)
-
--- | @host_routes@ nested settings.
-data HostRoutesSetting s = HostRoutesSetting'
-    { _destinationCidr :: TF.Attr s P.Text
-    -- ^ @destination_cidr@ - (Required)
-    --
-    , _nextHop         :: TF.Attr s P.Text
-    -- ^ @next_hop@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @host_routes@ settings value.
-newHostRoutesSetting
-    :: TF.Attr s P.Text -- ^ 'P._destinationCidr': @destination_cidr@
-    -> TF.Attr s P.Text -- ^ 'P._nextHop': @next_hop@
-    -> HostRoutesSetting s
-newHostRoutesSetting _destinationCidr _nextHop =
-    HostRoutesSetting'
-        { _destinationCidr = _destinationCidr
-        , _nextHop = _nextHop
-        }
-
-instance TF.IsValue  (HostRoutesSetting s)
-instance TF.IsObject (HostRoutesSetting s) where
-    toObject HostRoutesSetting'{..} = P.catMaybes
-        [ TF.assign "destination_cidr" <$> TF.attribute _destinationCidr
-        , TF.assign "next_hop" <$> TF.attribute _nextHop
-        ]
-
-instance TF.IsValid (HostRoutesSetting s) where
-    validator = P.mempty
-
-instance P.HasDestinationCidr (HostRoutesSetting s) (TF.Attr s P.Text) where
-    destinationCidr =
-        P.lens (_destinationCidr :: HostRoutesSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _destinationCidr = a } :: HostRoutesSetting s)
-
-instance P.HasNextHop (HostRoutesSetting s) (TF.Attr s P.Text) where
-    nextHop =
-        P.lens (_nextHop :: HostRoutesSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _nextHop = a } :: HostRoutesSetting s)
-
-instance s ~ s' => P.HasComputedDestinationCidr (TF.Ref s' (HostRoutesSetting s)) (TF.Attr s P.Text) where
-    computedDestinationCidr x = TF.compute (TF.refKey x) "destination_cidr"
-
-instance s ~ s' => P.HasComputedNextHop (TF.Ref s' (HostRoutesSetting s)) (TF.Attr s P.Text) where
-    computedNextHop x = TF.compute (TF.refKey x) "next_hop"
-
--- | @lifetime@ nested settings.
-data LifetimeSetting s = LifetimeSetting'
-    { _units :: TF.Attr s P.Text
-    -- ^ @units@ - (Optional)
-    --
-    , _value :: TF.Attr s P.Int
-    -- ^ @value@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @lifetime@ settings value.
-newLifetimeSetting
-    :: LifetimeSetting s
-newLifetimeSetting =
-    LifetimeSetting'
-        { _units = TF.Nil
-        , _value = TF.Nil
-        }
-
-instance TF.IsValue  (LifetimeSetting s)
-instance TF.IsObject (LifetimeSetting s) where
-    toObject LifetimeSetting'{..} = P.catMaybes
-        [ TF.assign "units" <$> TF.attribute _units
-        , TF.assign "value" <$> TF.attribute _value
-        ]
-
-instance TF.IsValid (LifetimeSetting s) where
-    validator = P.mempty
-
-instance P.HasUnits (LifetimeSetting s) (TF.Attr s P.Text) where
-    units =
-        P.lens (_units :: LifetimeSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _units = a } :: LifetimeSetting s)
-
-instance P.HasValue (LifetimeSetting s) (TF.Attr s P.Int) where
-    value =
-        P.lens (_value :: LifetimeSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _value = a } :: LifetimeSetting s)
-
-instance s ~ s' => P.HasComputedUnits (TF.Ref s' (LifetimeSetting s)) (TF.Attr s P.Text) where
-    computedUnits x = TF.compute (TF.refKey x) "units"
-
-instance s ~ s' => P.HasComputedValue (TF.Ref s' (LifetimeSetting s)) (TF.Attr s P.Int) where
-    computedValue x = TF.compute (TF.refKey x) "value"
-
--- | @multi_factor_auth_rule@ nested settings.
-data MultiFactorAuthRuleSetting s = MultiFactorAuthRuleSetting'
-    { _rule :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text))
-    -- ^ @rule@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @multi_factor_auth_rule@ settings value.
-newMultiFactorAuthRuleSetting
-    :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ 'P._rule': @rule@
-    -> MultiFactorAuthRuleSetting s
-newMultiFactorAuthRuleSetting _rule =
-    MultiFactorAuthRuleSetting'
-        { _rule = _rule
-        }
-
-instance TF.IsValue  (MultiFactorAuthRuleSetting s)
-instance TF.IsObject (MultiFactorAuthRuleSetting s) where
-    toObject MultiFactorAuthRuleSetting'{..} = P.catMaybes
-        [ TF.assign "rule" <$> TF.attribute _rule
-        ]
-
-instance TF.IsValid (MultiFactorAuthRuleSetting s) where
-    validator = P.mempty
-
-instance P.HasRule (MultiFactorAuthRuleSetting s) (TF.Attr s (P.NonEmpty (TF.Attr s P.Text))) where
-    rule =
-        P.lens (_rule :: MultiFactorAuthRuleSetting s -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)))
-               (\s a -> s { _rule = a } :: MultiFactorAuthRuleSetting s)
+        P.lens (_volumeSize :: ComputeInstanceV2BlockDevice s -> TF.Attr s P.Int)
+               (\s a -> s { _volumeSize = a } :: ComputeInstanceV2BlockDevice s)
 
 -- | @network@ nested settings.
-data NetworkSetting s = NetworkSetting'
+data ComputeInstanceV2Network s = ComputeInstanceV2Network'
     { _accessNetwork :: TF.Attr s P.Bool
     -- ^ @access_network@ - (Optional)
     --
@@ -752,10 +346,10 @@ data NetworkSetting s = NetworkSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @network@ settings value.
-newNetworkSetting
-    :: NetworkSetting s
-newNetworkSetting =
-    NetworkSetting'
+newComputeInstanceV2Network
+    :: ComputeInstanceV2Network s
+newComputeInstanceV2Network =
+    ComputeInstanceV2Network'
         { _accessNetwork = TF.value P.False
         , _fixedIpV4 = TF.Nil
         , _fixedIpV6 = TF.Nil
@@ -765,9 +359,9 @@ newNetworkSetting =
         , _uuid = TF.Nil
         }
 
-instance TF.IsValue  (NetworkSetting s)
-instance TF.IsObject (NetworkSetting s) where
-    toObject NetworkSetting'{..} = P.catMaybes
+instance TF.IsValue  (ComputeInstanceV2Network s)
+instance TF.IsObject (ComputeInstanceV2Network s) where
+    toObject ComputeInstanceV2Network'{..} = P.catMaybes
         [ TF.assign "access_network" <$> TF.attribute _accessNetwork
         , TF.assign "fixed_ip_v4" <$> TF.attribute _fixedIpV4
         , TF.assign "fixed_ip_v6" <$> TF.attribute _fixedIpV6
@@ -777,107 +371,67 @@ instance TF.IsObject (NetworkSetting s) where
         , TF.assign "uuid" <$> TF.attribute _uuid
         ]
 
-instance TF.IsValid (NetworkSetting s) where
+instance TF.IsValid (ComputeInstanceV2Network s) where
     validator = P.mempty
 
-instance P.HasAccessNetwork (NetworkSetting s) (TF.Attr s P.Bool) where
+instance P.HasAccessNetwork (ComputeInstanceV2Network s) (TF.Attr s P.Bool) where
     accessNetwork =
-        P.lens (_accessNetwork :: NetworkSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _accessNetwork = a } :: NetworkSetting s)
+        P.lens (_accessNetwork :: ComputeInstanceV2Network s -> TF.Attr s P.Bool)
+               (\s a -> s { _accessNetwork = a } :: ComputeInstanceV2Network s)
 
-instance P.HasFixedIpV4 (NetworkSetting s) (TF.Attr s P.Text) where
+instance P.HasFixedIpV4 (ComputeInstanceV2Network s) (TF.Attr s P.Text) where
     fixedIpV4 =
-        P.lens (_fixedIpV4 :: NetworkSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _fixedIpV4 = a } :: NetworkSetting s)
+        P.lens (_fixedIpV4 :: ComputeInstanceV2Network s -> TF.Attr s P.Text)
+               (\s a -> s { _fixedIpV4 = a } :: ComputeInstanceV2Network s)
 
-instance P.HasFixedIpV6 (NetworkSetting s) (TF.Attr s P.Text) where
+instance P.HasFixedIpV6 (ComputeInstanceV2Network s) (TF.Attr s P.Text) where
     fixedIpV6 =
-        P.lens (_fixedIpV6 :: NetworkSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _fixedIpV6 = a } :: NetworkSetting s)
+        P.lens (_fixedIpV6 :: ComputeInstanceV2Network s -> TF.Attr s P.Text)
+               (\s a -> s { _fixedIpV6 = a } :: ComputeInstanceV2Network s)
 
-instance P.HasFloatingIp (NetworkSetting s) (TF.Attr s P.Text) where
+instance P.HasFloatingIp (ComputeInstanceV2Network s) (TF.Attr s P.Text) where
     floatingIp =
-        P.lens (_floatingIp :: NetworkSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _floatingIp = a } :: NetworkSetting s)
+        P.lens (_floatingIp :: ComputeInstanceV2Network s -> TF.Attr s P.Text)
+               (\s a -> s { _floatingIp = a } :: ComputeInstanceV2Network s)
 
-instance P.HasName (NetworkSetting s) (TF.Attr s P.Text) where
+instance P.HasName (ComputeInstanceV2Network s) (TF.Attr s P.Text) where
     name =
-        P.lens (_name :: NetworkSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: NetworkSetting s)
+        P.lens (_name :: ComputeInstanceV2Network s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ComputeInstanceV2Network s)
 
-instance P.HasPort (NetworkSetting s) (TF.Attr s P.Text) where
+instance P.HasPort (ComputeInstanceV2Network s) (TF.Attr s P.Text) where
     port =
-        P.lens (_port :: NetworkSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _port = a } :: NetworkSetting s)
+        P.lens (_port :: ComputeInstanceV2Network s -> TF.Attr s P.Text)
+               (\s a -> s { _port = a } :: ComputeInstanceV2Network s)
 
-instance P.HasUuid (NetworkSetting s) (TF.Attr s P.Text) where
+instance P.HasUuid (ComputeInstanceV2Network s) (TF.Attr s P.Text) where
     uuid =
-        P.lens (_uuid :: NetworkSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _uuid = a } :: NetworkSetting s)
+        P.lens (_uuid :: ComputeInstanceV2Network s -> TF.Attr s P.Text)
+               (\s a -> s { _uuid = a } :: ComputeInstanceV2Network s)
 
-instance s ~ s' => P.HasComputedFixedIpV4 (TF.Ref s' (NetworkSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedFixedIpV4 (TF.Ref s' (ComputeInstanceV2Network s)) (TF.Attr s P.Text) where
     computedFixedIpV4 x = TF.compute (TF.refKey x) "fixed_ip_v4"
 
-instance s ~ s' => P.HasComputedFixedIpV6 (TF.Ref s' (NetworkSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedFixedIpV6 (TF.Ref s' (ComputeInstanceV2Network s)) (TF.Attr s P.Text) where
     computedFixedIpV6 x = TF.compute (TF.refKey x) "fixed_ip_v6"
 
-instance s ~ s' => P.HasComputedFloatingIp (TF.Ref s' (NetworkSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedFloatingIp (TF.Ref s' (ComputeInstanceV2Network s)) (TF.Attr s P.Text) where
     computedFloatingIp x = TF.compute (TF.refKey x) "floating_ip"
 
-instance s ~ s' => P.HasComputedMac (TF.Ref s' (NetworkSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedMac (TF.Ref s' (ComputeInstanceV2Network s)) (TF.Attr s P.Text) where
     computedMac x = TF.compute (TF.refKey x) "mac"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (NetworkSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ComputeInstanceV2Network s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputedPort (TF.Ref s' (NetworkSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedPort (TF.Ref s' (ComputeInstanceV2Network s)) (TF.Attr s P.Text) where
     computedPort x = TF.compute (TF.refKey x) "port"
 
-instance s ~ s' => P.HasComputedUuid (TF.Ref s' (NetworkSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedUuid (TF.Ref s' (ComputeInstanceV2Network s)) (TF.Attr s P.Text) where
     computedUuid x = TF.compute (TF.refKey x) "uuid"
 
--- | @persistence@ nested settings.
-data PersistenceSetting s = PersistenceSetting'
-    { _cookieName :: TF.Attr s P.Text
-    -- ^ @cookie_name@ - (Optional, Forces New)
-    --
-    , _type'      :: TF.Attr s P.Text
-    -- ^ @type@ - (Required, Forces New)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @persistence@ settings value.
-newPersistenceSetting
-    :: TF.Attr s P.Text -- ^ 'P._type'': @type@
-    -> PersistenceSetting s
-newPersistenceSetting _type' =
-    PersistenceSetting'
-        { _cookieName = TF.Nil
-        , _type' = _type'
-        }
-
-instance TF.IsValue  (PersistenceSetting s)
-instance TF.IsObject (PersistenceSetting s) where
-    toObject PersistenceSetting'{..} = P.catMaybes
-        [ TF.assign "cookie_name" <$> TF.attribute _cookieName
-        , TF.assign "type" <$> TF.attribute _type'
-        ]
-
-instance TF.IsValid (PersistenceSetting s) where
-    validator = P.mempty
-
-instance P.HasCookieName (PersistenceSetting s) (TF.Attr s P.Text) where
-    cookieName =
-        P.lens (_cookieName :: PersistenceSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _cookieName = a } :: PersistenceSetting s)
-
-instance P.HasType' (PersistenceSetting s) (TF.Attr s P.Text) where
-    type' =
-        P.lens (_type' :: PersistenceSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a } :: PersistenceSetting s)
-
 -- | @personality@ nested settings.
-data PersonalitySetting s = PersonalitySetting'
+data ComputeInstanceV2Personality s = ComputeInstanceV2Personality'
     { _content :: TF.Attr s P.Text
     -- ^ @content@ - (Required)
     --
@@ -887,146 +441,38 @@ data PersonalitySetting s = PersonalitySetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @personality@ settings value.
-newPersonalitySetting
+newComputeInstanceV2Personality
     :: TF.Attr s P.Text -- ^ 'P._content': @content@
     -> TF.Attr s P.Text -- ^ 'P._file': @file@
-    -> PersonalitySetting s
-newPersonalitySetting _content _file =
-    PersonalitySetting'
+    -> ComputeInstanceV2Personality s
+newComputeInstanceV2Personality _content _file =
+    ComputeInstanceV2Personality'
         { _content = _content
         , _file = _file
         }
 
-instance TF.IsValue  (PersonalitySetting s)
-instance TF.IsObject (PersonalitySetting s) where
-    toObject PersonalitySetting'{..} = P.catMaybes
+instance TF.IsValue  (ComputeInstanceV2Personality s)
+instance TF.IsObject (ComputeInstanceV2Personality s) where
+    toObject ComputeInstanceV2Personality'{..} = P.catMaybes
         [ TF.assign "content" <$> TF.attribute _content
         , TF.assign "file" <$> TF.attribute _file
         ]
 
-instance TF.IsValid (PersonalitySetting s) where
+instance TF.IsValid (ComputeInstanceV2Personality s) where
     validator = P.mempty
 
-instance P.HasContent (PersonalitySetting s) (TF.Attr s P.Text) where
+instance P.HasContent (ComputeInstanceV2Personality s) (TF.Attr s P.Text) where
     content =
-        P.lens (_content :: PersonalitySetting s -> TF.Attr s P.Text)
-               (\s a -> s { _content = a } :: PersonalitySetting s)
+        P.lens (_content :: ComputeInstanceV2Personality s -> TF.Attr s P.Text)
+               (\s a -> s { _content = a } :: ComputeInstanceV2Personality s)
 
-instance P.HasFile (PersonalitySetting s) (TF.Attr s P.Text) where
+instance P.HasFile (ComputeInstanceV2Personality s) (TF.Attr s P.Text) where
     file =
-        P.lens (_file :: PersonalitySetting s -> TF.Attr s P.Text)
-               (\s a -> s { _file = a } :: PersonalitySetting s)
-
--- | @roles@ nested settings.
-data RolesSetting s = RolesSetting'
-    deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @roles@ settings value.
-newRolesSetting
-    :: RolesSetting s
-newRolesSetting =
-    RolesSetting'
-
-instance TF.IsValue  (RolesSetting s)
-instance TF.IsObject (RolesSetting s) where
-    toObject RolesSetting' = []
-
-instance TF.IsValid (RolesSetting s) where
-    validator = P.mempty
-
-instance s ~ s' => P.HasComputedRoleId (TF.Ref s' (RolesSetting s)) (TF.Attr s P.Text) where
-    computedRoleId x = TF.compute (TF.refKey x) "role_id"
-
-instance s ~ s' => P.HasComputedRoleName (TF.Ref s' (RolesSetting s)) (TF.Attr s P.Text) where
-    computedRoleName x = TF.compute (TF.refKey x) "role_name"
-
--- | @rule@ nested settings.
-data RuleSetting s = RuleSetting'
-    { _cidr        :: TF.Attr s P.Text
-    -- ^ @cidr@ - (Optional)
-    --
-    , _fromGroupId :: TF.Attr s P.Text
-    -- ^ @from_group_id@ - (Optional)
-    --
-    , _fromPort    :: TF.Attr s P.Int
-    -- ^ @from_port@ - (Required)
-    --
-    , _ipProtocol  :: TF.Attr s P.Text
-    -- ^ @ip_protocol@ - (Required)
-    --
-    , _self        :: TF.Attr s P.Bool
-    -- ^ @self@ - (Optional)
-    --
-    , _toPort      :: TF.Attr s P.Int
-    -- ^ @to_port@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @rule@ settings value.
-newRuleSetting
-    :: TF.Attr s P.Int -- ^ 'P._fromPort': @from_port@
-    -> TF.Attr s P.Int -- ^ 'P._toPort': @to_port@
-    -> TF.Attr s P.Text -- ^ 'P._ipProtocol': @ip_protocol@
-    -> RuleSetting s
-newRuleSetting _fromPort _toPort _ipProtocol =
-    RuleSetting'
-        { _cidr = TF.Nil
-        , _fromGroupId = TF.Nil
-        , _fromPort = _fromPort
-        , _ipProtocol = _ipProtocol
-        , _self = TF.value P.False
-        , _toPort = _toPort
-        }
-
-instance TF.IsValue  (RuleSetting s)
-instance TF.IsObject (RuleSetting s) where
-    toObject RuleSetting'{..} = P.catMaybes
-        [ TF.assign "cidr" <$> TF.attribute _cidr
-        , TF.assign "from_group_id" <$> TF.attribute _fromGroupId
-        , TF.assign "from_port" <$> TF.attribute _fromPort
-        , TF.assign "ip_protocol" <$> TF.attribute _ipProtocol
-        , TF.assign "self" <$> TF.attribute _self
-        , TF.assign "to_port" <$> TF.attribute _toPort
-        ]
-
-instance TF.IsValid (RuleSetting s) where
-    validator = P.mempty
-
-instance P.HasCidr (RuleSetting s) (TF.Attr s P.Text) where
-    cidr =
-        P.lens (_cidr :: RuleSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _cidr = a } :: RuleSetting s)
-
-instance P.HasFromGroupId (RuleSetting s) (TF.Attr s P.Text) where
-    fromGroupId =
-        P.lens (_fromGroupId :: RuleSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _fromGroupId = a } :: RuleSetting s)
-
-instance P.HasFromPort (RuleSetting s) (TF.Attr s P.Int) where
-    fromPort =
-        P.lens (_fromPort :: RuleSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _fromPort = a } :: RuleSetting s)
-
-instance P.HasIpProtocol (RuleSetting s) (TF.Attr s P.Text) where
-    ipProtocol =
-        P.lens (_ipProtocol :: RuleSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _ipProtocol = a } :: RuleSetting s)
-
-instance P.HasSelf (RuleSetting s) (TF.Attr s P.Bool) where
-    self =
-        P.lens (_self :: RuleSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _self = a } :: RuleSetting s)
-
-instance P.HasToPort (RuleSetting s) (TF.Attr s P.Int) where
-    toPort =
-        P.lens (_toPort :: RuleSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _toPort = a } :: RuleSetting s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (RuleSetting s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+        P.lens (_file :: ComputeInstanceV2Personality s -> TF.Attr s P.Text)
+               (\s a -> s { _file = a } :: ComputeInstanceV2Personality s)
 
 -- | @scheduler_hints@ nested settings.
-data SchedulerHintsSetting s = SchedulerHintsSetting'
+data ComputeInstanceV2SchedulerHints s = ComputeInstanceV2SchedulerHints'
     { _additionalProperties :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @additional_properties@ - (Optional, Forces New)
     --
@@ -1051,10 +497,10 @@ data SchedulerHintsSetting s = SchedulerHintsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @scheduler_hints@ settings value.
-newSchedulerHintsSetting
-    :: SchedulerHintsSetting s
-newSchedulerHintsSetting =
-    SchedulerHintsSetting'
+newComputeInstanceV2SchedulerHints
+    :: ComputeInstanceV2SchedulerHints s
+newComputeInstanceV2SchedulerHints =
+    ComputeInstanceV2SchedulerHints'
         { _additionalProperties = TF.Nil
         , _buildNearHostIp = TF.Nil
         , _differentHost = TF.Nil
@@ -1064,9 +510,9 @@ newSchedulerHintsSetting =
         , _targetCell = TF.Nil
         }
 
-instance TF.IsValue  (SchedulerHintsSetting s)
-instance TF.IsObject (SchedulerHintsSetting s) where
-    toObject SchedulerHintsSetting'{..} = P.catMaybes
+instance TF.IsValue  (ComputeInstanceV2SchedulerHints s)
+instance TF.IsObject (ComputeInstanceV2SchedulerHints s) where
+    toObject ComputeInstanceV2SchedulerHints'{..} = P.catMaybes
         [ TF.assign "additional_properties" <$> TF.attribute _additionalProperties
         , TF.assign "build_near_host_ip" <$> TF.attribute _buildNearHostIp
         , TF.assign "different_host" <$> TF.attribute _differentHost
@@ -1076,95 +522,419 @@ instance TF.IsObject (SchedulerHintsSetting s) where
         , TF.assign "target_cell" <$> TF.attribute _targetCell
         ]
 
-instance TF.IsValid (SchedulerHintsSetting s) where
+instance TF.IsValid (ComputeInstanceV2SchedulerHints s) where
     validator = P.mempty
 
-instance P.HasAdditionalProperties (SchedulerHintsSetting s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+instance P.HasAdditionalProperties (ComputeInstanceV2SchedulerHints s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     additionalProperties =
-        P.lens (_additionalProperties :: SchedulerHintsSetting s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _additionalProperties = a } :: SchedulerHintsSetting s)
+        P.lens (_additionalProperties :: ComputeInstanceV2SchedulerHints s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _additionalProperties = a } :: ComputeInstanceV2SchedulerHints s)
 
-instance P.HasBuildNearHostIp (SchedulerHintsSetting s) (TF.Attr s P.Text) where
+instance P.HasBuildNearHostIp (ComputeInstanceV2SchedulerHints s) (TF.Attr s P.Text) where
     buildNearHostIp =
-        P.lens (_buildNearHostIp :: SchedulerHintsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _buildNearHostIp = a } :: SchedulerHintsSetting s)
+        P.lens (_buildNearHostIp :: ComputeInstanceV2SchedulerHints s -> TF.Attr s P.Text)
+               (\s a -> s { _buildNearHostIp = a } :: ComputeInstanceV2SchedulerHints s)
 
-instance P.HasDifferentHost (SchedulerHintsSetting s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasDifferentHost (ComputeInstanceV2SchedulerHints s) (TF.Attr s [TF.Attr s P.Text]) where
     differentHost =
-        P.lens (_differentHost :: SchedulerHintsSetting s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _differentHost = a } :: SchedulerHintsSetting s)
+        P.lens (_differentHost :: ComputeInstanceV2SchedulerHints s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _differentHost = a } :: ComputeInstanceV2SchedulerHints s)
 
-instance P.HasGroup (SchedulerHintsSetting s) (TF.Attr s P.Text) where
+instance P.HasGroup (ComputeInstanceV2SchedulerHints s) (TF.Attr s P.Text) where
     group =
-        P.lens (_group :: SchedulerHintsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _group = a } :: SchedulerHintsSetting s)
+        P.lens (_group :: ComputeInstanceV2SchedulerHints s -> TF.Attr s P.Text)
+               (\s a -> s { _group = a } :: ComputeInstanceV2SchedulerHints s)
 
-instance P.HasQuery (SchedulerHintsSetting s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasQuery (ComputeInstanceV2SchedulerHints s) (TF.Attr s [TF.Attr s P.Text]) where
     query =
-        P.lens (_query :: SchedulerHintsSetting s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _query = a } :: SchedulerHintsSetting s)
+        P.lens (_query :: ComputeInstanceV2SchedulerHints s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _query = a } :: ComputeInstanceV2SchedulerHints s)
 
-instance P.HasSameHost (SchedulerHintsSetting s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasSameHost (ComputeInstanceV2SchedulerHints s) (TF.Attr s [TF.Attr s P.Text]) where
     sameHost =
-        P.lens (_sameHost :: SchedulerHintsSetting s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _sameHost = a } :: SchedulerHintsSetting s)
+        P.lens (_sameHost :: ComputeInstanceV2SchedulerHints s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _sameHost = a } :: ComputeInstanceV2SchedulerHints s)
 
-instance P.HasTargetCell (SchedulerHintsSetting s) (TF.Attr s P.Text) where
+instance P.HasTargetCell (ComputeInstanceV2SchedulerHints s) (TF.Attr s P.Text) where
     targetCell =
-        P.lens (_targetCell :: SchedulerHintsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _targetCell = a } :: SchedulerHintsSetting s)
+        P.lens (_targetCell :: ComputeInstanceV2SchedulerHints s -> TF.Attr s P.Text)
+               (\s a -> s { _targetCell = a } :: ComputeInstanceV2SchedulerHints s)
 
--- | @segments@ nested settings.
-data SegmentsSetting s = SegmentsSetting'
-    { _networkType     :: TF.Attr s P.Text
-    -- ^ @network_type@ - (Optional, Forces New)
+-- | @volume@ nested settings.
+data ComputeInstanceV2Volume s = ComputeInstanceV2Volume'
+    { _device   :: TF.Attr s P.Text
+    -- ^ @device@ - (Optional)
     --
-    , _physicalNetwork :: TF.Attr s P.Text
-    -- ^ @physical_network@ - (Optional, Forces New)
+    , _id       :: TF.Attr s P.Text
+    -- ^ @id@ - (Optional)
     --
-    , _segmentationId  :: TF.Attr s P.Int
-    -- ^ @segmentation_id@ - (Optional, Forces New)
+    , _volumeId :: TF.Attr s P.Text
+    -- ^ @volume_id@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
--- | Construct a new @segments@ settings value.
-newSegmentsSetting
-    :: SegmentsSetting s
-newSegmentsSetting =
-    SegmentsSetting'
-        { _networkType = TF.Nil
-        , _physicalNetwork = TF.Nil
-        , _segmentationId = TF.Nil
+-- | Construct a new @volume@ settings value.
+newComputeInstanceV2Volume
+    :: TF.Attr s P.Text -- ^ 'P._volumeId': @volume_id@
+    -> ComputeInstanceV2Volume s
+newComputeInstanceV2Volume _volumeId =
+    ComputeInstanceV2Volume'
+        { _device = TF.Nil
+        , _id = TF.Nil
+        , _volumeId = _volumeId
         }
 
-instance TF.IsValue  (SegmentsSetting s)
-instance TF.IsObject (SegmentsSetting s) where
-    toObject SegmentsSetting'{..} = P.catMaybes
-        [ TF.assign "network_type" <$> TF.attribute _networkType
-        , TF.assign "physical_network" <$> TF.attribute _physicalNetwork
-        , TF.assign "segmentation_id" <$> TF.attribute _segmentationId
+instance TF.IsValue  (ComputeInstanceV2Volume s)
+instance TF.IsObject (ComputeInstanceV2Volume s) where
+    toObject ComputeInstanceV2Volume'{..} = P.catMaybes
+        [ TF.assign "device" <$> TF.attribute _device
+        , TF.assign "id" <$> TF.attribute _id
+        , TF.assign "volume_id" <$> TF.attribute _volumeId
         ]
 
-instance TF.IsValid (SegmentsSetting s) where
+instance TF.IsValid (ComputeInstanceV2Volume s) where
     validator = P.mempty
 
-instance P.HasNetworkType (SegmentsSetting s) (TF.Attr s P.Text) where
-    networkType =
-        P.lens (_networkType :: SegmentsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _networkType = a } :: SegmentsSetting s)
+instance P.HasDevice (ComputeInstanceV2Volume s) (TF.Attr s P.Text) where
+    device =
+        P.lens (_device :: ComputeInstanceV2Volume s -> TF.Attr s P.Text)
+               (\s a -> s { _device = a } :: ComputeInstanceV2Volume s)
 
-instance P.HasPhysicalNetwork (SegmentsSetting s) (TF.Attr s P.Text) where
-    physicalNetwork =
-        P.lens (_physicalNetwork :: SegmentsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _physicalNetwork = a } :: SegmentsSetting s)
+instance P.HasId (ComputeInstanceV2Volume s) (TF.Attr s P.Text) where
+    id =
+        P.lens (_id :: ComputeInstanceV2Volume s -> TF.Attr s P.Text)
+               (\s a -> s { _id = a } :: ComputeInstanceV2Volume s)
 
-instance P.HasSegmentationId (SegmentsSetting s) (TF.Attr s P.Int) where
-    segmentationId =
-        P.lens (_segmentationId :: SegmentsSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _segmentationId = a } :: SegmentsSetting s)
+instance P.HasVolumeId (ComputeInstanceV2Volume s) (TF.Attr s P.Text) where
+    volumeId =
+        P.lens (_volumeId :: ComputeInstanceV2Volume s -> TF.Attr s P.Text)
+               (\s a -> s { _volumeId = a } :: ComputeInstanceV2Volume s)
+
+instance s ~ s' => P.HasComputedDevice (TF.Ref s' (ComputeInstanceV2Volume s)) (TF.Attr s P.Text) where
+    computedDevice x = TF.compute (TF.refKey x) "device"
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeInstanceV2Volume s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+-- | @rule@ nested settings.
+data ComputeSecgroupV2Rule s = ComputeSecgroupV2Rule'
+    { _cidr        :: TF.Attr s P.Text
+    -- ^ @cidr@ - (Optional)
+    --
+    , _fromGroupId :: TF.Attr s P.Text
+    -- ^ @from_group_id@ - (Optional)
+    --
+    , _fromPort    :: TF.Attr s P.Int
+    -- ^ @from_port@ - (Required)
+    --
+    , _ipProtocol  :: TF.Attr s P.Text
+    -- ^ @ip_protocol@ - (Required)
+    --
+    , _self        :: TF.Attr s P.Bool
+    -- ^ @self@ - (Optional)
+    --
+    , _toPort      :: TF.Attr s P.Int
+    -- ^ @to_port@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @rule@ settings value.
+newComputeSecgroupV2Rule
+    :: TF.Attr s P.Int -- ^ 'P._fromPort': @from_port@
+    -> TF.Attr s P.Int -- ^ 'P._toPort': @to_port@
+    -> TF.Attr s P.Text -- ^ 'P._ipProtocol': @ip_protocol@
+    -> ComputeSecgroupV2Rule s
+newComputeSecgroupV2Rule _fromPort _toPort _ipProtocol =
+    ComputeSecgroupV2Rule'
+        { _cidr = TF.Nil
+        , _fromGroupId = TF.Nil
+        , _fromPort = _fromPort
+        , _ipProtocol = _ipProtocol
+        , _self = TF.value P.False
+        , _toPort = _toPort
+        }
+
+instance TF.IsValue  (ComputeSecgroupV2Rule s)
+instance TF.IsObject (ComputeSecgroupV2Rule s) where
+    toObject ComputeSecgroupV2Rule'{..} = P.catMaybes
+        [ TF.assign "cidr" <$> TF.attribute _cidr
+        , TF.assign "from_group_id" <$> TF.attribute _fromGroupId
+        , TF.assign "from_port" <$> TF.attribute _fromPort
+        , TF.assign "ip_protocol" <$> TF.attribute _ipProtocol
+        , TF.assign "self" <$> TF.attribute _self
+        , TF.assign "to_port" <$> TF.attribute _toPort
+        ]
+
+instance TF.IsValid (ComputeSecgroupV2Rule s) where
+    validator = P.mempty
+
+instance P.HasCidr (ComputeSecgroupV2Rule s) (TF.Attr s P.Text) where
+    cidr =
+        P.lens (_cidr :: ComputeSecgroupV2Rule s -> TF.Attr s P.Text)
+               (\s a -> s { _cidr = a } :: ComputeSecgroupV2Rule s)
+
+instance P.HasFromGroupId (ComputeSecgroupV2Rule s) (TF.Attr s P.Text) where
+    fromGroupId =
+        P.lens (_fromGroupId :: ComputeSecgroupV2Rule s -> TF.Attr s P.Text)
+               (\s a -> s { _fromGroupId = a } :: ComputeSecgroupV2Rule s)
+
+instance P.HasFromPort (ComputeSecgroupV2Rule s) (TF.Attr s P.Int) where
+    fromPort =
+        P.lens (_fromPort :: ComputeSecgroupV2Rule s -> TF.Attr s P.Int)
+               (\s a -> s { _fromPort = a } :: ComputeSecgroupV2Rule s)
+
+instance P.HasIpProtocol (ComputeSecgroupV2Rule s) (TF.Attr s P.Text) where
+    ipProtocol =
+        P.lens (_ipProtocol :: ComputeSecgroupV2Rule s -> TF.Attr s P.Text)
+               (\s a -> s { _ipProtocol = a } :: ComputeSecgroupV2Rule s)
+
+instance P.HasSelf (ComputeSecgroupV2Rule s) (TF.Attr s P.Bool) where
+    self =
+        P.lens (_self :: ComputeSecgroupV2Rule s -> TF.Attr s P.Bool)
+               (\s a -> s { _self = a } :: ComputeSecgroupV2Rule s)
+
+instance P.HasToPort (ComputeSecgroupV2Rule s) (TF.Attr s P.Int) where
+    toPort =
+        P.lens (_toPort :: ComputeSecgroupV2Rule s -> TF.Attr s P.Int)
+               (\s a -> s { _toPort = a } :: ComputeSecgroupV2Rule s)
+
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ComputeSecgroupV2Rule s)) (TF.Attr s P.Text) where
+    computedId x = TF.compute (TF.refKey x) "id"
+
+-- | @configuration@ nested settings.
+data DbConfigurationV1Configuration s = DbConfigurationV1Configuration'
+    { _name  :: TF.Attr s P.Text
+    -- ^ @name@ - (Required, Forces New)
+    --
+    , _value :: TF.Attr s P.Text
+    -- ^ @value@ - (Required, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @configuration@ settings value.
+newDbConfigurationV1Configuration
+    :: TF.Attr s P.Text -- ^ 'P._name': @name@
+    -> TF.Attr s P.Text -- ^ 'P._value': @value@
+    -> DbConfigurationV1Configuration s
+newDbConfigurationV1Configuration _name _value =
+    DbConfigurationV1Configuration'
+        { _name = _name
+        , _value = _value
+        }
+
+instance TF.IsValue  (DbConfigurationV1Configuration s)
+instance TF.IsObject (DbConfigurationV1Configuration s) where
+    toObject DbConfigurationV1Configuration'{..} = P.catMaybes
+        [ TF.assign "name" <$> TF.attribute _name
+        , TF.assign "value" <$> TF.attribute _value
+        ]
+
+instance TF.IsValid (DbConfigurationV1Configuration s) where
+    validator = P.mempty
+
+instance P.HasName (DbConfigurationV1Configuration s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: DbConfigurationV1Configuration s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: DbConfigurationV1Configuration s)
+
+instance P.HasValue (DbConfigurationV1Configuration s) (TF.Attr s P.Text) where
+    value =
+        P.lens (_value :: DbConfigurationV1Configuration s -> TF.Attr s P.Text)
+               (\s a -> s { _value = a } :: DbConfigurationV1Configuration s)
+
+-- | @datastore@ nested settings.
+data DbConfigurationV1Datastore s = DbConfigurationV1Datastore'
+    { _type'   :: TF.Attr s P.Text
+    -- ^ @type@ - (Required, Forces New)
+    --
+    , _version :: TF.Attr s P.Text
+    -- ^ @version@ - (Required, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @datastore@ settings value.
+newDbConfigurationV1Datastore
+    :: TF.Attr s P.Text -- ^ 'P._type'': @type@
+    -> TF.Attr s P.Text -- ^ 'P._version': @version@
+    -> DbConfigurationV1Datastore s
+newDbConfigurationV1Datastore _type' _version =
+    DbConfigurationV1Datastore'
+        { _type' = _type'
+        , _version = _version
+        }
+
+instance TF.IsValue  (DbConfigurationV1Datastore s)
+instance TF.IsObject (DbConfigurationV1Datastore s) where
+    toObject DbConfigurationV1Datastore'{..} = P.catMaybes
+        [ TF.assign "type" <$> TF.attribute _type'
+        , TF.assign "version" <$> TF.attribute _version
+        ]
+
+instance TF.IsValid (DbConfigurationV1Datastore s) where
+    validator = P.mempty
+
+instance P.HasType' (DbConfigurationV1Datastore s) (TF.Attr s P.Text) where
+    type' =
+        P.lens (_type' :: DbConfigurationV1Datastore s -> TF.Attr s P.Text)
+               (\s a -> s { _type' = a } :: DbConfigurationV1Datastore s)
+
+instance P.HasVersion (DbConfigurationV1Datastore s) (TF.Attr s P.Text) where
+    version =
+        P.lens (_version :: DbConfigurationV1Datastore s -> TF.Attr s P.Text)
+               (\s a -> s { _version = a } :: DbConfigurationV1Datastore s)
+
+-- | @database@ nested settings.
+data DbInstanceV1Database s = DbInstanceV1Database'
+    { _charset :: TF.Attr s P.Text
+    -- ^ @charset@ - (Optional, Forces New)
+    --
+    , _collate :: TF.Attr s P.Text
+    -- ^ @collate@ - (Optional, Forces New)
+    --
+    , _name    :: TF.Attr s P.Text
+    -- ^ @name@ - (Required, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @database@ settings value.
+newDbInstanceV1Database
+    :: TF.Attr s P.Text -- ^ 'P._name': @name@
+    -> DbInstanceV1Database s
+newDbInstanceV1Database _name =
+    DbInstanceV1Database'
+        { _charset = TF.Nil
+        , _collate = TF.Nil
+        , _name = _name
+        }
+
+instance TF.IsValue  (DbInstanceV1Database s)
+instance TF.IsObject (DbInstanceV1Database s) where
+    toObject DbInstanceV1Database'{..} = P.catMaybes
+        [ TF.assign "charset" <$> TF.attribute _charset
+        , TF.assign "collate" <$> TF.attribute _collate
+        , TF.assign "name" <$> TF.attribute _name
+        ]
+
+instance TF.IsValid (DbInstanceV1Database s) where
+    validator = P.mempty
+
+instance P.HasCharset (DbInstanceV1Database s) (TF.Attr s P.Text) where
+    charset =
+        P.lens (_charset :: DbInstanceV1Database s -> TF.Attr s P.Text)
+               (\s a -> s { _charset = a } :: DbInstanceV1Database s)
+
+instance P.HasCollate (DbInstanceV1Database s) (TF.Attr s P.Text) where
+    collate =
+        P.lens (_collate :: DbInstanceV1Database s -> TF.Attr s P.Text)
+               (\s a -> s { _collate = a } :: DbInstanceV1Database s)
+
+instance P.HasName (DbInstanceV1Database s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: DbInstanceV1Database s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: DbInstanceV1Database s)
+
+-- | @datastore@ nested settings.
+data DbInstanceV1Datastore s = DbInstanceV1Datastore'
+    { _type'   :: TF.Attr s P.Text
+    -- ^ @type@ - (Required, Forces New)
+    --
+    , _version :: TF.Attr s P.Text
+    -- ^ @version@ - (Required, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @datastore@ settings value.
+newDbInstanceV1Datastore
+    :: TF.Attr s P.Text -- ^ 'P._type'': @type@
+    -> TF.Attr s P.Text -- ^ 'P._version': @version@
+    -> DbInstanceV1Datastore s
+newDbInstanceV1Datastore _type' _version =
+    DbInstanceV1Datastore'
+        { _type' = _type'
+        , _version = _version
+        }
+
+instance TF.IsValue  (DbInstanceV1Datastore s)
+instance TF.IsObject (DbInstanceV1Datastore s) where
+    toObject DbInstanceV1Datastore'{..} = P.catMaybes
+        [ TF.assign "type" <$> TF.attribute _type'
+        , TF.assign "version" <$> TF.attribute _version
+        ]
+
+instance TF.IsValid (DbInstanceV1Datastore s) where
+    validator = P.mempty
+
+instance P.HasType' (DbInstanceV1Datastore s) (TF.Attr s P.Text) where
+    type' =
+        P.lens (_type' :: DbInstanceV1Datastore s -> TF.Attr s P.Text)
+               (\s a -> s { _type' = a } :: DbInstanceV1Datastore s)
+
+instance P.HasVersion (DbInstanceV1Datastore s) (TF.Attr s P.Text) where
+    version =
+        P.lens (_version :: DbInstanceV1Datastore s -> TF.Attr s P.Text)
+               (\s a -> s { _version = a } :: DbInstanceV1Datastore s)
+
+-- | @network@ nested settings.
+data DbInstanceV1Network s = DbInstanceV1Network'
+    { _fixedIpV4 :: TF.Attr s P.Text
+    -- ^ @fixed_ip_v4@ - (Optional, Forces New)
+    --
+    , _fixedIpV6 :: TF.Attr s P.Text
+    -- ^ @fixed_ip_v6@ - (Optional, Forces New)
+    --
+    , _port      :: TF.Attr s P.Text
+    -- ^ @port@ - (Optional, Forces New)
+    --
+    , _uuid      :: TF.Attr s P.Text
+    -- ^ @uuid@ - (Optional, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @network@ settings value.
+newDbInstanceV1Network
+    :: DbInstanceV1Network s
+newDbInstanceV1Network =
+    DbInstanceV1Network'
+        { _fixedIpV4 = TF.Nil
+        , _fixedIpV6 = TF.Nil
+        , _port = TF.Nil
+        , _uuid = TF.Nil
+        }
+
+instance TF.IsValue  (DbInstanceV1Network s)
+instance TF.IsObject (DbInstanceV1Network s) where
+    toObject DbInstanceV1Network'{..} = P.catMaybes
+        [ TF.assign "fixed_ip_v4" <$> TF.attribute _fixedIpV4
+        , TF.assign "fixed_ip_v6" <$> TF.attribute _fixedIpV6
+        , TF.assign "port" <$> TF.attribute _port
+        , TF.assign "uuid" <$> TF.attribute _uuid
+        ]
+
+instance TF.IsValid (DbInstanceV1Network s) where
+    validator = P.mempty
+
+instance P.HasFixedIpV4 (DbInstanceV1Network s) (TF.Attr s P.Text) where
+    fixedIpV4 =
+        P.lens (_fixedIpV4 :: DbInstanceV1Network s -> TF.Attr s P.Text)
+               (\s a -> s { _fixedIpV4 = a } :: DbInstanceV1Network s)
+
+instance P.HasFixedIpV6 (DbInstanceV1Network s) (TF.Attr s P.Text) where
+    fixedIpV6 =
+        P.lens (_fixedIpV6 :: DbInstanceV1Network s -> TF.Attr s P.Text)
+               (\s a -> s { _fixedIpV6 = a } :: DbInstanceV1Network s)
+
+instance P.HasPort (DbInstanceV1Network s) (TF.Attr s P.Text) where
+    port =
+        P.lens (_port :: DbInstanceV1Network s -> TF.Attr s P.Text)
+               (\s a -> s { _port = a } :: DbInstanceV1Network s)
+
+instance P.HasUuid (DbInstanceV1Network s) (TF.Attr s P.Text) where
+    uuid =
+        P.lens (_uuid :: DbInstanceV1Network s -> TF.Attr s P.Text)
+               (\s a -> s { _uuid = a } :: DbInstanceV1Network s)
 
 -- | @user@ nested settings.
-data UserSetting s = UserSetting'
+data DbInstanceV1User s = DbInstanceV1User'
     { _databases :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @databases@ - (Optional, Forces New)
     --
@@ -1180,130 +950,577 @@ data UserSetting s = UserSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @user@ settings value.
-newUserSetting
+newDbInstanceV1User
     :: TF.Attr s P.Text -- ^ 'P._name': @name@
-    -> UserSetting s
-newUserSetting _name =
-    UserSetting'
+    -> DbInstanceV1User s
+newDbInstanceV1User _name =
+    DbInstanceV1User'
         { _databases = TF.Nil
         , _host = TF.Nil
         , _name = _name
         , _password = TF.Nil
         }
 
-instance TF.IsValue  (UserSetting s)
-instance TF.IsObject (UserSetting s) where
-    toObject UserSetting'{..} = P.catMaybes
+instance TF.IsValue  (DbInstanceV1User s)
+instance TF.IsObject (DbInstanceV1User s) where
+    toObject DbInstanceV1User'{..} = P.catMaybes
         [ TF.assign "databases" <$> TF.attribute _databases
         , TF.assign "host" <$> TF.attribute _host
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "password" <$> TF.attribute _password
         ]
 
-instance TF.IsValid (UserSetting s) where
+instance TF.IsValid (DbInstanceV1User s) where
     validator = P.mempty
 
-instance P.HasDatabases (UserSetting s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasDatabases (DbInstanceV1User s) (TF.Attr s [TF.Attr s P.Text]) where
     databases =
-        P.lens (_databases :: UserSetting s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _databases = a } :: UserSetting s)
+        P.lens (_databases :: DbInstanceV1User s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _databases = a } :: DbInstanceV1User s)
 
-instance P.HasHost (UserSetting s) (TF.Attr s P.Text) where
+instance P.HasHost (DbInstanceV1User s) (TF.Attr s P.Text) where
     host =
-        P.lens (_host :: UserSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _host = a } :: UserSetting s)
+        P.lens (_host :: DbInstanceV1User s -> TF.Attr s P.Text)
+               (\s a -> s { _host = a } :: DbInstanceV1User s)
 
-instance P.HasName (UserSetting s) (TF.Attr s P.Text) where
+instance P.HasName (DbInstanceV1User s) (TF.Attr s P.Text) where
     name =
-        P.lens (_name :: UserSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: UserSetting s)
+        P.lens (_name :: DbInstanceV1User s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: DbInstanceV1User s)
 
-instance P.HasPassword (UserSetting s) (TF.Attr s P.Text) where
+instance P.HasPassword (DbInstanceV1User s) (TF.Attr s P.Text) where
     password =
-        P.lens (_password :: UserSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _password = a } :: UserSetting s)
+        P.lens (_password :: DbInstanceV1User s -> TF.Attr s P.Text)
+               (\s a -> s { _password = a } :: DbInstanceV1User s)
+
+-- | @roles@ nested settings.
+data IdentityAuthScopeV3Roles s = IdentityAuthScopeV3Roles'
+    deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @roles@ settings value.
+newIdentityAuthScopeV3Roles
+    :: IdentityAuthScopeV3Roles s
+newIdentityAuthScopeV3Roles =
+    IdentityAuthScopeV3Roles'
+
+instance TF.IsValue  (IdentityAuthScopeV3Roles s)
+instance TF.IsObject (IdentityAuthScopeV3Roles s) where
+    toObject IdentityAuthScopeV3Roles' = []
+
+instance TF.IsValid (IdentityAuthScopeV3Roles s) where
+    validator = P.mempty
+
+instance s ~ s' => P.HasComputedRoleId (TF.Ref s' (IdentityAuthScopeV3Roles s)) (TF.Attr s P.Text) where
+    computedRoleId x = TF.compute (TF.refKey x) "role_id"
+
+instance s ~ s' => P.HasComputedRoleName (TF.Ref s' (IdentityAuthScopeV3Roles s)) (TF.Attr s P.Text) where
+    computedRoleName x = TF.compute (TF.refKey x) "role_name"
+
+-- | @multi_factor_auth_rule@ nested settings.
+data IdentityUserV3MultiFactorAuthRule s = IdentityUserV3MultiFactorAuthRule'
+    { _rule :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text))
+    -- ^ @rule@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @multi_factor_auth_rule@ settings value.
+newIdentityUserV3MultiFactorAuthRule
+    :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text)) -- ^ 'P._rule': @rule@
+    -> IdentityUserV3MultiFactorAuthRule s
+newIdentityUserV3MultiFactorAuthRule _rule =
+    IdentityUserV3MultiFactorAuthRule'
+        { _rule = _rule
+        }
+
+instance TF.IsValue  (IdentityUserV3MultiFactorAuthRule s)
+instance TF.IsObject (IdentityUserV3MultiFactorAuthRule s) where
+    toObject IdentityUserV3MultiFactorAuthRule'{..} = P.catMaybes
+        [ TF.assign "rule" <$> TF.attribute _rule
+        ]
+
+instance TF.IsValid (IdentityUserV3MultiFactorAuthRule s) where
+    validator = P.mempty
+
+instance P.HasRule (IdentityUserV3MultiFactorAuthRule s) (TF.Attr s (P.NonEmpty (TF.Attr s P.Text))) where
+    rule =
+        P.lens (_rule :: IdentityUserV3MultiFactorAuthRule s -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)))
+               (\s a -> s { _rule = a } :: IdentityUserV3MultiFactorAuthRule s)
+
+-- | @persistence@ nested settings.
+data LbPoolV2Persistence s = LbPoolV2Persistence'
+    { _cookieName :: TF.Attr s P.Text
+    -- ^ @cookie_name@ - (Optional, Forces New)
+    --
+    , _type'      :: TF.Attr s P.Text
+    -- ^ @type@ - (Required, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @persistence@ settings value.
+newLbPoolV2Persistence
+    :: TF.Attr s P.Text -- ^ 'P._type'': @type@
+    -> LbPoolV2Persistence s
+newLbPoolV2Persistence _type' =
+    LbPoolV2Persistence'
+        { _cookieName = TF.Nil
+        , _type' = _type'
+        }
+
+instance TF.IsValue  (LbPoolV2Persistence s)
+instance TF.IsObject (LbPoolV2Persistence s) where
+    toObject LbPoolV2Persistence'{..} = P.catMaybes
+        [ TF.assign "cookie_name" <$> TF.attribute _cookieName
+        , TF.assign "type" <$> TF.attribute _type'
+        ]
+
+instance TF.IsValid (LbPoolV2Persistence s) where
+    validator = P.mempty
+
+instance P.HasCookieName (LbPoolV2Persistence s) (TF.Attr s P.Text) where
+    cookieName =
+        P.lens (_cookieName :: LbPoolV2Persistence s -> TF.Attr s P.Text)
+               (\s a -> s { _cookieName = a } :: LbPoolV2Persistence s)
+
+instance P.HasType' (LbPoolV2Persistence s) (TF.Attr s P.Text) where
+    type' =
+        P.lens (_type' :: LbPoolV2Persistence s -> TF.Attr s P.Text)
+               (\s a -> s { _type' = a } :: LbPoolV2Persistence s)
+
+-- | @segments@ nested settings.
+data NetworkingNetworkV2Segments s = NetworkingNetworkV2Segments'
+    { _networkType     :: TF.Attr s P.Text
+    -- ^ @network_type@ - (Optional, Forces New)
+    --
+    , _physicalNetwork :: TF.Attr s P.Text
+    -- ^ @physical_network@ - (Optional, Forces New)
+    --
+    , _segmentationId  :: TF.Attr s P.Int
+    -- ^ @segmentation_id@ - (Optional, Forces New)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @segments@ settings value.
+newNetworkingNetworkV2Segments
+    :: NetworkingNetworkV2Segments s
+newNetworkingNetworkV2Segments =
+    NetworkingNetworkV2Segments'
+        { _networkType = TF.Nil
+        , _physicalNetwork = TF.Nil
+        , _segmentationId = TF.Nil
+        }
+
+instance TF.IsValue  (NetworkingNetworkV2Segments s)
+instance TF.IsObject (NetworkingNetworkV2Segments s) where
+    toObject NetworkingNetworkV2Segments'{..} = P.catMaybes
+        [ TF.assign "network_type" <$> TF.attribute _networkType
+        , TF.assign "physical_network" <$> TF.attribute _physicalNetwork
+        , TF.assign "segmentation_id" <$> TF.attribute _segmentationId
+        ]
+
+instance TF.IsValid (NetworkingNetworkV2Segments s) where
+    validator = P.mempty
+
+instance P.HasNetworkType (NetworkingNetworkV2Segments s) (TF.Attr s P.Text) where
+    networkType =
+        P.lens (_networkType :: NetworkingNetworkV2Segments s -> TF.Attr s P.Text)
+               (\s a -> s { _networkType = a } :: NetworkingNetworkV2Segments s)
+
+instance P.HasPhysicalNetwork (NetworkingNetworkV2Segments s) (TF.Attr s P.Text) where
+    physicalNetwork =
+        P.lens (_physicalNetwork :: NetworkingNetworkV2Segments s -> TF.Attr s P.Text)
+               (\s a -> s { _physicalNetwork = a } :: NetworkingNetworkV2Segments s)
+
+instance P.HasSegmentationId (NetworkingNetworkV2Segments s) (TF.Attr s P.Int) where
+    segmentationId =
+        P.lens (_segmentationId :: NetworkingNetworkV2Segments s -> TF.Attr s P.Int)
+               (\s a -> s { _segmentationId = a } :: NetworkingNetworkV2Segments s)
+
+-- | @allowed_address_pairs@ nested settings.
+data NetworkingPortV2AllowedAddressPairs s = NetworkingPortV2AllowedAddressPairs'
+    { _ipAddress  :: TF.Attr s P.Text
+    -- ^ @ip_address@ - (Required)
+    --
+    , _macAddress :: TF.Attr s P.Text
+    -- ^ @mac_address@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @allowed_address_pairs@ settings value.
+newNetworkingPortV2AllowedAddressPairs
+    :: TF.Attr s P.Text -- ^ 'P._ipAddress': @ip_address@
+    -> NetworkingPortV2AllowedAddressPairs s
+newNetworkingPortV2AllowedAddressPairs _ipAddress =
+    NetworkingPortV2AllowedAddressPairs'
+        { _ipAddress = _ipAddress
+        , _macAddress = TF.Nil
+        }
+
+instance TF.IsValue  (NetworkingPortV2AllowedAddressPairs s)
+instance TF.IsObject (NetworkingPortV2AllowedAddressPairs s) where
+    toObject NetworkingPortV2AllowedAddressPairs'{..} = P.catMaybes
+        [ TF.assign "ip_address" <$> TF.attribute _ipAddress
+        , TF.assign "mac_address" <$> TF.attribute _macAddress
+        ]
+
+instance TF.IsValid (NetworkingPortV2AllowedAddressPairs s) where
+    validator = P.mempty
+
+instance P.HasIpAddress (NetworkingPortV2AllowedAddressPairs s) (TF.Attr s P.Text) where
+    ipAddress =
+        P.lens (_ipAddress :: NetworkingPortV2AllowedAddressPairs s -> TF.Attr s P.Text)
+               (\s a -> s { _ipAddress = a } :: NetworkingPortV2AllowedAddressPairs s)
+
+instance P.HasMacAddress (NetworkingPortV2AllowedAddressPairs s) (TF.Attr s P.Text) where
+    macAddress =
+        P.lens (_macAddress :: NetworkingPortV2AllowedAddressPairs s -> TF.Attr s P.Text)
+               (\s a -> s { _macAddress = a } :: NetworkingPortV2AllowedAddressPairs s)
+
+-- | @fixed_ip@ nested settings.
+data NetworkingPortV2FixedIp s = NetworkingPortV2FixedIp'
+    { _ipAddress :: TF.Attr s P.Text
+    -- ^ @ip_address@ - (Optional)
+    --
+    , _subnetId  :: TF.Attr s P.Text
+    -- ^ @subnet_id@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @fixed_ip@ settings value.
+newNetworkingPortV2FixedIp
+    :: TF.Attr s P.Text -- ^ 'P._subnetId': @subnet_id@
+    -> NetworkingPortV2FixedIp s
+newNetworkingPortV2FixedIp _subnetId =
+    NetworkingPortV2FixedIp'
+        { _ipAddress = TF.Nil
+        , _subnetId = _subnetId
+        }
+
+instance TF.IsValue  (NetworkingPortV2FixedIp s)
+instance TF.IsObject (NetworkingPortV2FixedIp s) where
+    toObject NetworkingPortV2FixedIp'{..} = P.catMaybes
+        [ TF.assign "ip_address" <$> TF.attribute _ipAddress
+        , TF.assign "subnet_id" <$> TF.attribute _subnetId
+        ]
+
+instance TF.IsValid (NetworkingPortV2FixedIp s) where
+    validator = P.mempty
+
+instance P.HasIpAddress (NetworkingPortV2FixedIp s) (TF.Attr s P.Text) where
+    ipAddress =
+        P.lens (_ipAddress :: NetworkingPortV2FixedIp s -> TF.Attr s P.Text)
+               (\s a -> s { _ipAddress = a } :: NetworkingPortV2FixedIp s)
+
+instance P.HasSubnetId (NetworkingPortV2FixedIp s) (TF.Attr s P.Text) where
+    subnetId =
+        P.lens (_subnetId :: NetworkingPortV2FixedIp s -> TF.Attr s P.Text)
+               (\s a -> s { _subnetId = a } :: NetworkingPortV2FixedIp s)
+
+-- | @external_fixed_ip@ nested settings.
+data NetworkingRouterV2ExternalFixedIp s = NetworkingRouterV2ExternalFixedIp'
+    { _ipAddress :: TF.Attr s P.Text
+    -- ^ @ip_address@ - (Optional)
+    --
+    , _subnetId  :: TF.Attr s P.Text
+    -- ^ @subnet_id@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @external_fixed_ip@ settings value.
+newNetworkingRouterV2ExternalFixedIp
+    :: NetworkingRouterV2ExternalFixedIp s
+newNetworkingRouterV2ExternalFixedIp =
+    NetworkingRouterV2ExternalFixedIp'
+        { _ipAddress = TF.Nil
+        , _subnetId = TF.Nil
+        }
+
+instance TF.IsValue  (NetworkingRouterV2ExternalFixedIp s)
+instance TF.IsObject (NetworkingRouterV2ExternalFixedIp s) where
+    toObject NetworkingRouterV2ExternalFixedIp'{..} = P.catMaybes
+        [ TF.assign "ip_address" <$> TF.attribute _ipAddress
+        , TF.assign "subnet_id" <$> TF.attribute _subnetId
+        ]
+
+instance TF.IsValid (NetworkingRouterV2ExternalFixedIp s) where
+    validator = P.mempty
+
+instance P.HasIpAddress (NetworkingRouterV2ExternalFixedIp s) (TF.Attr s P.Text) where
+    ipAddress =
+        P.lens (_ipAddress :: NetworkingRouterV2ExternalFixedIp s -> TF.Attr s P.Text)
+               (\s a -> s { _ipAddress = a } :: NetworkingRouterV2ExternalFixedIp s)
+
+instance P.HasSubnetId (NetworkingRouterV2ExternalFixedIp s) (TF.Attr s P.Text) where
+    subnetId =
+        P.lens (_subnetId :: NetworkingRouterV2ExternalFixedIp s -> TF.Attr s P.Text)
+               (\s a -> s { _subnetId = a } :: NetworkingRouterV2ExternalFixedIp s)
 
 -- | @vendor_options@ nested settings.
-data VendorOptionsSetting s = VendorOptionsSetting'
+data NetworkingRouterV2VendorOptions s = NetworkingRouterV2VendorOptions'
     { _setRouterGatewayAfterCreate :: TF.Attr s P.Bool
     -- ^ @set_router_gateway_after_create@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @vendor_options@ settings value.
-newVendorOptionsSetting
-    :: VendorOptionsSetting s
-newVendorOptionsSetting =
-    VendorOptionsSetting'
+newNetworkingRouterV2VendorOptions
+    :: NetworkingRouterV2VendorOptions s
+newNetworkingRouterV2VendorOptions =
+    NetworkingRouterV2VendorOptions'
         { _setRouterGatewayAfterCreate = TF.value P.False
         }
 
-instance TF.IsValue  (VendorOptionsSetting s)
-instance TF.IsObject (VendorOptionsSetting s) where
-    toObject VendorOptionsSetting'{..} = P.catMaybes
+instance TF.IsValue  (NetworkingRouterV2VendorOptions s)
+instance TF.IsObject (NetworkingRouterV2VendorOptions s) where
+    toObject NetworkingRouterV2VendorOptions'{..} = P.catMaybes
         [ TF.assign "set_router_gateway_after_create" <$> TF.attribute _setRouterGatewayAfterCreate
         ]
 
-instance TF.IsValid (VendorOptionsSetting s) where
+instance TF.IsValid (NetworkingRouterV2VendorOptions s) where
     validator = P.mempty
 
-instance P.HasSetRouterGatewayAfterCreate (VendorOptionsSetting s) (TF.Attr s P.Bool) where
+instance P.HasSetRouterGatewayAfterCreate (NetworkingRouterV2VendorOptions s) (TF.Attr s P.Bool) where
     setRouterGatewayAfterCreate =
-        P.lens (_setRouterGatewayAfterCreate :: VendorOptionsSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _setRouterGatewayAfterCreate = a } :: VendorOptionsSetting s)
+        P.lens (_setRouterGatewayAfterCreate :: NetworkingRouterV2VendorOptions s -> TF.Attr s P.Bool)
+               (\s a -> s { _setRouterGatewayAfterCreate = a } :: NetworkingRouterV2VendorOptions s)
 
--- | @volume@ nested settings.
-data VolumeSetting s = VolumeSetting'
-    { _device   :: TF.Attr s P.Text
-    -- ^ @device@ - (Optional)
+-- | @allocation_pools@ nested settings.
+data NetworkingSubnetV2AllocationPools s = NetworkingSubnetV2AllocationPools'
+    { _end   :: TF.Attr s P.Text
+    -- ^ @end@ - (Required)
     --
-    , _id       :: TF.Attr s P.Text
-    -- ^ @id@ - (Optional)
-    --
-    , _volumeId :: TF.Attr s P.Text
-    -- ^ @volume_id@ - (Required)
+    , _start :: TF.Attr s P.Text
+    -- ^ @start@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
--- | Construct a new @volume@ settings value.
-newVolumeSetting
-    :: TF.Attr s P.Text -- ^ 'P._volumeId': @volume_id@
-    -> VolumeSetting s
-newVolumeSetting _volumeId =
-    VolumeSetting'
-        { _device = TF.Nil
-        , _id = TF.Nil
-        , _volumeId = _volumeId
+-- | Construct a new @allocation_pools@ settings value.
+newNetworkingSubnetV2AllocationPools
+    :: TF.Attr s P.Text -- ^ 'P._end': @end@
+    -> TF.Attr s P.Text -- ^ 'P._start': @start@
+    -> NetworkingSubnetV2AllocationPools s
+newNetworkingSubnetV2AllocationPools _end _start =
+    NetworkingSubnetV2AllocationPools'
+        { _end = _end
+        , _start = _start
         }
 
-instance TF.IsValue  (VolumeSetting s)
-instance TF.IsObject (VolumeSetting s) where
-    toObject VolumeSetting'{..} = P.catMaybes
-        [ TF.assign "device" <$> TF.attribute _device
-        , TF.assign "id" <$> TF.attribute _id
-        , TF.assign "volume_id" <$> TF.attribute _volumeId
+instance TF.IsValue  (NetworkingSubnetV2AllocationPools s)
+instance TF.IsObject (NetworkingSubnetV2AllocationPools s) where
+    toObject NetworkingSubnetV2AllocationPools'{..} = P.catMaybes
+        [ TF.assign "end" <$> TF.attribute _end
+        , TF.assign "start" <$> TF.attribute _start
         ]
 
-instance TF.IsValid (VolumeSetting s) where
+instance TF.IsValid (NetworkingSubnetV2AllocationPools s) where
     validator = P.mempty
 
-instance P.HasDevice (VolumeSetting s) (TF.Attr s P.Text) where
-    device =
-        P.lens (_device :: VolumeSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _device = a } :: VolumeSetting s)
+instance P.HasEnd (NetworkingSubnetV2AllocationPools s) (TF.Attr s P.Text) where
+    end =
+        P.lens (_end :: NetworkingSubnetV2AllocationPools s -> TF.Attr s P.Text)
+               (\s a -> s { _end = a } :: NetworkingSubnetV2AllocationPools s)
 
-instance P.HasId (VolumeSetting s) (TF.Attr s P.Text) where
-    id =
-        P.lens (_id :: VolumeSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _id = a } :: VolumeSetting s)
+instance P.HasStart (NetworkingSubnetV2AllocationPools s) (TF.Attr s P.Text) where
+    start =
+        P.lens (_start :: NetworkingSubnetV2AllocationPools s -> TF.Attr s P.Text)
+               (\s a -> s { _start = a } :: NetworkingSubnetV2AllocationPools s)
 
-instance P.HasVolumeId (VolumeSetting s) (TF.Attr s P.Text) where
-    volumeId =
-        P.lens (_volumeId :: VolumeSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _volumeId = a } :: VolumeSetting s)
+instance s ~ s' => P.HasComputedEnd (TF.Ref s' (NetworkingSubnetV2AllocationPools s)) (TF.Attr s P.Text) where
+    computedEnd x = TF.compute (TF.refKey x) "end"
 
-instance s ~ s' => P.HasComputedDevice (TF.Ref s' (VolumeSetting s)) (TF.Attr s P.Text) where
-    computedDevice x = TF.compute (TF.refKey x) "device"
+instance s ~ s' => P.HasComputedStart (TF.Ref s' (NetworkingSubnetV2AllocationPools s)) (TF.Attr s P.Text) where
+    computedStart x = TF.compute (TF.refKey x) "start"
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (VolumeSetting s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+-- | @host_routes@ nested settings.
+data NetworkingSubnetV2HostRoutes s = NetworkingSubnetV2HostRoutes'
+    { _destinationCidr :: TF.Attr s P.Text
+    -- ^ @destination_cidr@ - (Required)
+    --
+    , _nextHop         :: TF.Attr s P.Text
+    -- ^ @next_hop@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @host_routes@ settings value.
+newNetworkingSubnetV2HostRoutes
+    :: TF.Attr s P.Text -- ^ 'P._destinationCidr': @destination_cidr@
+    -> TF.Attr s P.Text -- ^ 'P._nextHop': @next_hop@
+    -> NetworkingSubnetV2HostRoutes s
+newNetworkingSubnetV2HostRoutes _destinationCidr _nextHop =
+    NetworkingSubnetV2HostRoutes'
+        { _destinationCidr = _destinationCidr
+        , _nextHop = _nextHop
+        }
+
+instance TF.IsValue  (NetworkingSubnetV2HostRoutes s)
+instance TF.IsObject (NetworkingSubnetV2HostRoutes s) where
+    toObject NetworkingSubnetV2HostRoutes'{..} = P.catMaybes
+        [ TF.assign "destination_cidr" <$> TF.attribute _destinationCidr
+        , TF.assign "next_hop" <$> TF.attribute _nextHop
+        ]
+
+instance TF.IsValid (NetworkingSubnetV2HostRoutes s) where
+    validator = P.mempty
+
+instance P.HasDestinationCidr (NetworkingSubnetV2HostRoutes s) (TF.Attr s P.Text) where
+    destinationCidr =
+        P.lens (_destinationCidr :: NetworkingSubnetV2HostRoutes s -> TF.Attr s P.Text)
+               (\s a -> s { _destinationCidr = a } :: NetworkingSubnetV2HostRoutes s)
+
+instance P.HasNextHop (NetworkingSubnetV2HostRoutes s) (TF.Attr s P.Text) where
+    nextHop =
+        P.lens (_nextHop :: NetworkingSubnetV2HostRoutes s -> TF.Attr s P.Text)
+               (\s a -> s { _nextHop = a } :: NetworkingSubnetV2HostRoutes s)
+
+instance s ~ s' => P.HasComputedDestinationCidr (TF.Ref s' (NetworkingSubnetV2HostRoutes s)) (TF.Attr s P.Text) where
+    computedDestinationCidr x = TF.compute (TF.refKey x) "destination_cidr"
+
+instance s ~ s' => P.HasComputedNextHop (TF.Ref s' (NetworkingSubnetV2HostRoutes s)) (TF.Attr s P.Text) where
+    computedNextHop x = TF.compute (TF.refKey x) "next_hop"
+
+-- | @lifetime@ nested settings.
+data VpnaasIkePolicyV2Lifetime s = VpnaasIkePolicyV2Lifetime'
+    { _units :: TF.Attr s P.Text
+    -- ^ @units@ - (Optional)
+    --
+    , _value :: TF.Attr s P.Int
+    -- ^ @value@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @lifetime@ settings value.
+newVpnaasIkePolicyV2Lifetime
+    :: VpnaasIkePolicyV2Lifetime s
+newVpnaasIkePolicyV2Lifetime =
+    VpnaasIkePolicyV2Lifetime'
+        { _units = TF.Nil
+        , _value = TF.Nil
+        }
+
+instance TF.IsValue  (VpnaasIkePolicyV2Lifetime s)
+instance TF.IsObject (VpnaasIkePolicyV2Lifetime s) where
+    toObject VpnaasIkePolicyV2Lifetime'{..} = P.catMaybes
+        [ TF.assign "units" <$> TF.attribute _units
+        , TF.assign "value" <$> TF.attribute _value
+        ]
+
+instance TF.IsValid (VpnaasIkePolicyV2Lifetime s) where
+    validator = P.mempty
+
+instance P.HasUnits (VpnaasIkePolicyV2Lifetime s) (TF.Attr s P.Text) where
+    units =
+        P.lens (_units :: VpnaasIkePolicyV2Lifetime s -> TF.Attr s P.Text)
+               (\s a -> s { _units = a } :: VpnaasIkePolicyV2Lifetime s)
+
+instance P.HasValue (VpnaasIkePolicyV2Lifetime s) (TF.Attr s P.Int) where
+    value =
+        P.lens (_value :: VpnaasIkePolicyV2Lifetime s -> TF.Attr s P.Int)
+               (\s a -> s { _value = a } :: VpnaasIkePolicyV2Lifetime s)
+
+instance s ~ s' => P.HasComputedUnits (TF.Ref s' (VpnaasIkePolicyV2Lifetime s)) (TF.Attr s P.Text) where
+    computedUnits x = TF.compute (TF.refKey x) "units"
+
+instance s ~ s' => P.HasComputedValue (TF.Ref s' (VpnaasIkePolicyV2Lifetime s)) (TF.Attr s P.Int) where
+    computedValue x = TF.compute (TF.refKey x) "value"
+
+-- | @lifetime@ nested settings.
+data VpnaasIpsecPolicyV2Lifetime s = VpnaasIpsecPolicyV2Lifetime'
+    { _units :: TF.Attr s P.Text
+    -- ^ @units@ - (Optional)
+    --
+    , _value :: TF.Attr s P.Int
+    -- ^ @value@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @lifetime@ settings value.
+newVpnaasIpsecPolicyV2Lifetime
+    :: VpnaasIpsecPolicyV2Lifetime s
+newVpnaasIpsecPolicyV2Lifetime =
+    VpnaasIpsecPolicyV2Lifetime'
+        { _units = TF.Nil
+        , _value = TF.Nil
+        }
+
+instance TF.IsValue  (VpnaasIpsecPolicyV2Lifetime s)
+instance TF.IsObject (VpnaasIpsecPolicyV2Lifetime s) where
+    toObject VpnaasIpsecPolicyV2Lifetime'{..} = P.catMaybes
+        [ TF.assign "units" <$> TF.attribute _units
+        , TF.assign "value" <$> TF.attribute _value
+        ]
+
+instance TF.IsValid (VpnaasIpsecPolicyV2Lifetime s) where
+    validator = P.mempty
+
+instance P.HasUnits (VpnaasIpsecPolicyV2Lifetime s) (TF.Attr s P.Text) where
+    units =
+        P.lens (_units :: VpnaasIpsecPolicyV2Lifetime s -> TF.Attr s P.Text)
+               (\s a -> s { _units = a } :: VpnaasIpsecPolicyV2Lifetime s)
+
+instance P.HasValue (VpnaasIpsecPolicyV2Lifetime s) (TF.Attr s P.Int) where
+    value =
+        P.lens (_value :: VpnaasIpsecPolicyV2Lifetime s -> TF.Attr s P.Int)
+               (\s a -> s { _value = a } :: VpnaasIpsecPolicyV2Lifetime s)
+
+instance s ~ s' => P.HasComputedUnits (TF.Ref s' (VpnaasIpsecPolicyV2Lifetime s)) (TF.Attr s P.Text) where
+    computedUnits x = TF.compute (TF.refKey x) "units"
+
+instance s ~ s' => P.HasComputedValue (TF.Ref s' (VpnaasIpsecPolicyV2Lifetime s)) (TF.Attr s P.Int) where
+    computedValue x = TF.compute (TF.refKey x) "value"
+
+-- | @dpd@ nested settings.
+data VpnaasSiteConnectionV2Dpd s = VpnaasSiteConnectionV2Dpd'
+    { _action   :: TF.Attr s P.Text
+    -- ^ @action@ - (Optional)
+    --
+    , _interval :: TF.Attr s P.Int
+    -- ^ @interval@ - (Optional)
+    --
+    , _timeout  :: TF.Attr s P.Int
+    -- ^ @timeout@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @dpd@ settings value.
+newVpnaasSiteConnectionV2Dpd
+    :: VpnaasSiteConnectionV2Dpd s
+newVpnaasSiteConnectionV2Dpd =
+    VpnaasSiteConnectionV2Dpd'
+        { _action = TF.Nil
+        , _interval = TF.Nil
+        , _timeout = TF.Nil
+        }
+
+instance TF.IsValue  (VpnaasSiteConnectionV2Dpd s)
+instance TF.IsObject (VpnaasSiteConnectionV2Dpd s) where
+    toObject VpnaasSiteConnectionV2Dpd'{..} = P.catMaybes
+        [ TF.assign "action" <$> TF.attribute _action
+        , TF.assign "interval" <$> TF.attribute _interval
+        , TF.assign "timeout" <$> TF.attribute _timeout
+        ]
+
+instance TF.IsValid (VpnaasSiteConnectionV2Dpd s) where
+    validator = P.mempty
+
+instance P.HasAction (VpnaasSiteConnectionV2Dpd s) (TF.Attr s P.Text) where
+    action =
+        P.lens (_action :: VpnaasSiteConnectionV2Dpd s -> TF.Attr s P.Text)
+               (\s a -> s { _action = a } :: VpnaasSiteConnectionV2Dpd s)
+
+instance P.HasInterval (VpnaasSiteConnectionV2Dpd s) (TF.Attr s P.Int) where
+    interval =
+        P.lens (_interval :: VpnaasSiteConnectionV2Dpd s -> TF.Attr s P.Int)
+               (\s a -> s { _interval = a } :: VpnaasSiteConnectionV2Dpd s)
+
+instance P.HasTimeout (VpnaasSiteConnectionV2Dpd s) (TF.Attr s P.Int) where
+    timeout =
+        P.lens (_timeout :: VpnaasSiteConnectionV2Dpd s -> TF.Attr s P.Int)
+               (\s a -> s { _timeout = a } :: VpnaasSiteConnectionV2Dpd s)
+
+instance s ~ s' => P.HasComputedAction (TF.Ref s' (VpnaasSiteConnectionV2Dpd s)) (TF.Attr s P.Text) where
+    computedAction x = TF.compute (TF.refKey x) "action"
+
+instance s ~ s' => P.HasComputedInterval (TF.Ref s' (VpnaasSiteConnectionV2Dpd s)) (TF.Attr s P.Int) where
+    computedInterval x = TF.compute (TF.refKey x) "interval"
+
+instance s ~ s' => P.HasComputedTimeout (TF.Ref s' (VpnaasSiteConnectionV2Dpd s)) (TF.Attr s P.Int) where
+    computedTimeout x = TF.compute (TF.refKey x) "timeout"

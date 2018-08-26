@@ -18,44 +18,52 @@
 module Terrafomo.UltraDNS.Settings01
     (
     -- ** geo_info
-      GeoInfoSetting (..)
-    , newGeoInfoSetting
+      DirpoolGeoInfo (..)
+    , newDirpoolGeoInfo
 
     -- ** rdata
-    , RdataSetting (..)
-    , newRdataSetting
+    , DirpoolRdata (..)
+    , newDirpoolRdata
 
     -- ** ip_info
-    , IpInfoSetting (..)
-    , newIpInfoSetting
+    , DirpoolIpInfo (..)
+    , newDirpoolIpInfo
 
     -- ** no_response
-    , NoResponseSetting (..)
-    , newNoResponseSetting
+    , DirpoolNoResponse (..)
+    , newDirpoolNoResponse
 
     -- ** ips
-    , IpsSetting (..)
-    , newIpsSetting
+    , DirpoolIps (..)
+    , newDirpoolIps
 
     -- ** http_probe
-    , HttpProbeSetting (..)
-    , newHttpProbeSetting
+    , ProbeHttpHttpProbe (..)
+    , newProbeHttpHttpProbe
 
     -- ** transaction
-    , TransactionSetting (..)
-    , newTransactionSetting
+    , ProbeHttpTransaction (..)
+    , newProbeHttpTransaction
 
     -- ** limit
-    , LimitSetting (..)
-    , newLimitSetting
-
-    -- ** ping_probe
-    , PingProbeSetting (..)
-    , newPingProbeSetting
+    , ProbeHttpLimit (..)
+    , newProbeHttpLimit
 
     -- ** total_limits
-    , TotalLimitsSetting (..)
-    , newTotalLimitsSetting
+    , ProbeHttpTotalLimits (..)
+    , newProbeHttpTotalLimits
+
+    -- ** limit
+    , ProbePingLimit (..)
+    , newProbePingLimit
+
+    -- ** ping_probe
+    , ProbePingPingProbe (..)
+    , newProbePingPingProbe
+
+    -- ** rdata
+    , TcpoolRdata (..)
+    , newTcpoolRdata
 
     ) where
 
@@ -81,7 +89,7 @@ import qualified Terrafomo.UltraDNS.Types as P
 import qualified Terrafomo.Validator      as TF
 
 -- | @geo_info@ nested settings.
-data GeoInfoSetting s = GeoInfoSetting'
+data DirpoolGeoInfo s = DirpoolGeoInfo'
     { _codes          :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @codes@ - (Optional)
     --
@@ -94,164 +102,104 @@ data GeoInfoSetting s = GeoInfoSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @geo_info@ settings value.
-newGeoInfoSetting
-    :: GeoInfoSetting s
-newGeoInfoSetting =
-    GeoInfoSetting'
+newDirpoolGeoInfo
+    :: DirpoolGeoInfo s
+newDirpoolGeoInfo =
+    DirpoolGeoInfo'
         { _codes = TF.Nil
         , _isAccountLevel = TF.value P.False
         , _name = TF.Nil
         }
 
-instance TF.IsValue  (GeoInfoSetting s)
-instance TF.IsObject (GeoInfoSetting s) where
-    toObject GeoInfoSetting'{..} = P.catMaybes
+instance TF.IsValue  (DirpoolGeoInfo s)
+instance TF.IsObject (DirpoolGeoInfo s) where
+    toObject DirpoolGeoInfo'{..} = P.catMaybes
         [ TF.assign "codes" <$> TF.attribute _codes
         , TF.assign "is_account_level" <$> TF.attribute _isAccountLevel
         , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance TF.IsValid (GeoInfoSetting s) where
+instance TF.IsValid (DirpoolGeoInfo s) where
     validator = P.mempty
 
-instance P.HasCodes (GeoInfoSetting s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasCodes (DirpoolGeoInfo s) (TF.Attr s [TF.Attr s P.Text]) where
     codes =
-        P.lens (_codes :: GeoInfoSetting s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _codes = a } :: GeoInfoSetting s)
+        P.lens (_codes :: DirpoolGeoInfo s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _codes = a } :: DirpoolGeoInfo s)
 
-instance P.HasIsAccountLevel (GeoInfoSetting s) (TF.Attr s P.Bool) where
+instance P.HasIsAccountLevel (DirpoolGeoInfo s) (TF.Attr s P.Bool) where
     isAccountLevel =
-        P.lens (_isAccountLevel :: GeoInfoSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _isAccountLevel = a } :: GeoInfoSetting s)
+        P.lens (_isAccountLevel :: DirpoolGeoInfo s -> TF.Attr s P.Bool)
+               (\s a -> s { _isAccountLevel = a } :: DirpoolGeoInfo s)
 
-instance P.HasName (GeoInfoSetting s) (TF.Attr s P.Text) where
+instance P.HasName (DirpoolGeoInfo s) (TF.Attr s P.Text) where
     name =
-        P.lens (_name :: GeoInfoSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: GeoInfoSetting s)
+        P.lens (_name :: DirpoolGeoInfo s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: DirpoolGeoInfo s)
 
 -- | @rdata@ nested settings.
-data RdataSetting s = RdataSetting'
+data DirpoolRdata s = DirpoolRdata'
     { _allNonConfigured :: TF.Attr s P.Bool
     -- ^ @all_non_configured@ - (Optional)
     --
-    , _geoInfo          :: TF.Attr s [TF.Attr s (GeoInfoSetting s)]
+    , _geoInfo          :: TF.Attr s [TF.Attr s (DirpoolGeoInfo s)]
     -- ^ @geo_info@ - (Optional)
     --
     , _host             :: TF.Attr s P.Text
     -- ^ @host@ - (Required)
     --
-    , _ipInfo           :: TF.Attr s [TF.Attr s (IpInfoSetting s)]
+    , _ipInfo           :: TF.Attr s [TF.Attr s (DirpoolIpInfo s)]
     -- ^ @ip_info@ - (Optional)
-    --
-    , _failoverDelay    :: TF.Attr s P.Int
-    -- ^ @failover_delay@ - (Optional)
-    --
-    , _priority         :: TF.Attr s P.Int
-    -- ^ @priority@ - (Optional)
-    --
-    , _runProbes        :: TF.Attr s P.Bool
-    -- ^ @run_probes@ - (Optional)
-    --
-    , _state            :: TF.Attr s P.Text
-    -- ^ @state@ - (Optional)
-    --
-    , _threshold        :: TF.Attr s P.Int
-    -- ^ @threshold@ - (Optional)
-    --
-    , _weight           :: TF.Attr s P.Int
-    -- ^ @weight@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @rdata@ settings value.
-newRdataSetting
+newDirpoolRdata
     :: TF.Attr s P.Text -- ^ 'P._host': @host@
-    -> RdataSetting s
-newRdataSetting _host =
-    RdataSetting'
+    -> DirpoolRdata s
+newDirpoolRdata _host =
+    DirpoolRdata'
         { _allNonConfigured = TF.value P.False
         , _geoInfo = TF.Nil
         , _host = _host
         , _ipInfo = TF.Nil
-        , _failoverDelay = TF.value 0
-        , _priority = TF.value 1
-        , _runProbes = TF.value P.True
-        , _state = TF.value "NORMAL"
-        , _threshold = TF.value 1
-        , _weight = TF.value 2
         }
 
-instance TF.IsValue  (RdataSetting s)
-instance TF.IsObject (RdataSetting s) where
-    toObject RdataSetting'{..} = P.catMaybes
+instance TF.IsValue  (DirpoolRdata s)
+instance TF.IsObject (DirpoolRdata s) where
+    toObject DirpoolRdata'{..} = P.catMaybes
         [ TF.assign "all_non_configured" <$> TF.attribute _allNonConfigured
         , TF.assign "geo_info" <$> TF.attribute _geoInfo
         , TF.assign "host" <$> TF.attribute _host
         , TF.assign "ip_info" <$> TF.attribute _ipInfo
-        , TF.assign "failover_delay" <$> TF.attribute _failoverDelay
-        , TF.assign "priority" <$> TF.attribute _priority
-        , TF.assign "run_probes" <$> TF.attribute _runProbes
-        , TF.assign "state" <$> TF.attribute _state
-        , TF.assign "threshold" <$> TF.attribute _threshold
-        , TF.assign "weight" <$> TF.attribute _weight
         ]
 
-instance TF.IsValid (RdataSetting s) where
+instance TF.IsValid (DirpoolRdata s) where
     validator = P.mempty
 
-instance P.HasAllNonConfigured (RdataSetting s) (TF.Attr s P.Bool) where
+instance P.HasAllNonConfigured (DirpoolRdata s) (TF.Attr s P.Bool) where
     allNonConfigured =
-        P.lens (_allNonConfigured :: RdataSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _allNonConfigured = a } :: RdataSetting s)
+        P.lens (_allNonConfigured :: DirpoolRdata s -> TF.Attr s P.Bool)
+               (\s a -> s { _allNonConfigured = a } :: DirpoolRdata s)
 
-instance P.HasGeoInfo (RdataSetting s) (TF.Attr s [TF.Attr s (GeoInfoSetting s)]) where
+instance P.HasGeoInfo (DirpoolRdata s) (TF.Attr s [TF.Attr s (DirpoolGeoInfo s)]) where
     geoInfo =
-        P.lens (_geoInfo :: RdataSetting s -> TF.Attr s [TF.Attr s (GeoInfoSetting s)])
-               (\s a -> s { _geoInfo = a } :: RdataSetting s)
+        P.lens (_geoInfo :: DirpoolRdata s -> TF.Attr s [TF.Attr s (DirpoolGeoInfo s)])
+               (\s a -> s { _geoInfo = a } :: DirpoolRdata s)
 
-instance P.HasHost (RdataSetting s) (TF.Attr s P.Text) where
+instance P.HasHost (DirpoolRdata s) (TF.Attr s P.Text) where
     host =
-        P.lens (_host :: RdataSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _host = a } :: RdataSetting s)
+        P.lens (_host :: DirpoolRdata s -> TF.Attr s P.Text)
+               (\s a -> s { _host = a } :: DirpoolRdata s)
 
-instance P.HasIpInfo (RdataSetting s) (TF.Attr s [TF.Attr s (IpInfoSetting s)]) where
+instance P.HasIpInfo (DirpoolRdata s) (TF.Attr s [TF.Attr s (DirpoolIpInfo s)]) where
     ipInfo =
-        P.lens (_ipInfo :: RdataSetting s -> TF.Attr s [TF.Attr s (IpInfoSetting s)])
-               (\s a -> s { _ipInfo = a } :: RdataSetting s)
-
-instance P.HasFailoverDelay (RdataSetting s) (TF.Attr s P.Int) where
-    failoverDelay =
-        P.lens (_failoverDelay :: RdataSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _failoverDelay = a } :: RdataSetting s)
-
-instance P.HasPriority (RdataSetting s) (TF.Attr s P.Int) where
-    priority =
-        P.lens (_priority :: RdataSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _priority = a } :: RdataSetting s)
-
-instance P.HasRunProbes (RdataSetting s) (TF.Attr s P.Bool) where
-    runProbes =
-        P.lens (_runProbes :: RdataSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _runProbes = a } :: RdataSetting s)
-
-instance P.HasState (RdataSetting s) (TF.Attr s P.Text) where
-    state =
-        P.lens (_state :: RdataSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _state = a } :: RdataSetting s)
-
-instance P.HasThreshold (RdataSetting s) (TF.Attr s P.Int) where
-    threshold =
-        P.lens (_threshold :: RdataSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _threshold = a } :: RdataSetting s)
-
-instance P.HasWeight (RdataSetting s) (TF.Attr s P.Int) where
-    weight =
-        P.lens (_weight :: RdataSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _weight = a } :: RdataSetting s)
+        P.lens (_ipInfo :: DirpoolRdata s -> TF.Attr s [TF.Attr s (DirpoolIpInfo s)])
+               (\s a -> s { _ipInfo = a } :: DirpoolRdata s)
 
 -- | @ip_info@ nested settings.
-data IpInfoSetting s = IpInfoSetting'
-    { _ips            :: TF.Attr s [TF.Attr s (IpsSetting s)]
+data DirpoolIpInfo s = DirpoolIpInfo'
+    { _ips            :: TF.Attr s [TF.Attr s (DirpoolIps s)]
     -- ^ @ips@ - (Optional)
     --
     , _isAccountLevel :: TF.Attr s P.Bool
@@ -263,92 +211,92 @@ data IpInfoSetting s = IpInfoSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @ip_info@ settings value.
-newIpInfoSetting
-    :: IpInfoSetting s
-newIpInfoSetting =
-    IpInfoSetting'
+newDirpoolIpInfo
+    :: DirpoolIpInfo s
+newDirpoolIpInfo =
+    DirpoolIpInfo'
         { _ips = TF.Nil
         , _isAccountLevel = TF.value P.False
         , _name = TF.Nil
         }
 
-instance TF.IsValue  (IpInfoSetting s)
-instance TF.IsObject (IpInfoSetting s) where
-    toObject IpInfoSetting'{..} = P.catMaybes
+instance TF.IsValue  (DirpoolIpInfo s)
+instance TF.IsObject (DirpoolIpInfo s) where
+    toObject DirpoolIpInfo'{..} = P.catMaybes
         [ TF.assign "ips" <$> TF.attribute _ips
         , TF.assign "is_account_level" <$> TF.attribute _isAccountLevel
         , TF.assign "name" <$> TF.attribute _name
         ]
 
-instance TF.IsValid (IpInfoSetting s) where
+instance TF.IsValid (DirpoolIpInfo s) where
     validator = P.mempty
 
-instance P.HasIps (IpInfoSetting s) (TF.Attr s [TF.Attr s (IpsSetting s)]) where
+instance P.HasIps (DirpoolIpInfo s) (TF.Attr s [TF.Attr s (DirpoolIps s)]) where
     ips =
-        P.lens (_ips :: IpInfoSetting s -> TF.Attr s [TF.Attr s (IpsSetting s)])
-               (\s a -> s { _ips = a } :: IpInfoSetting s)
+        P.lens (_ips :: DirpoolIpInfo s -> TF.Attr s [TF.Attr s (DirpoolIps s)])
+               (\s a -> s { _ips = a } :: DirpoolIpInfo s)
 
-instance P.HasIsAccountLevel (IpInfoSetting s) (TF.Attr s P.Bool) where
+instance P.HasIsAccountLevel (DirpoolIpInfo s) (TF.Attr s P.Bool) where
     isAccountLevel =
-        P.lens (_isAccountLevel :: IpInfoSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _isAccountLevel = a } :: IpInfoSetting s)
+        P.lens (_isAccountLevel :: DirpoolIpInfo s -> TF.Attr s P.Bool)
+               (\s a -> s { _isAccountLevel = a } :: DirpoolIpInfo s)
 
-instance P.HasName (IpInfoSetting s) (TF.Attr s P.Text) where
+instance P.HasName (DirpoolIpInfo s) (TF.Attr s P.Text) where
     name =
-        P.lens (_name :: IpInfoSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: IpInfoSetting s)
+        P.lens (_name :: DirpoolIpInfo s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: DirpoolIpInfo s)
 
 -- | @no_response@ nested settings.
-data NoResponseSetting s = NoResponseSetting'
+data DirpoolNoResponse s = DirpoolNoResponse'
     { _allNonConfigured :: TF.Attr s P.Bool
     -- ^ @all_non_configured@ - (Optional)
     --
-    , _geoInfo          :: TF.Attr s [TF.Attr s (GeoInfoSetting s)]
+    , _geoInfo          :: TF.Attr s [TF.Attr s (DirpoolGeoInfo s)]
     -- ^ @geo_info@ - (Optional)
     --
-    , _ipInfo           :: TF.Attr s [TF.Attr s (IpInfoSetting s)]
+    , _ipInfo           :: TF.Attr s [TF.Attr s (DirpoolIpInfo s)]
     -- ^ @ip_info@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @no_response@ settings value.
-newNoResponseSetting
-    :: NoResponseSetting s
-newNoResponseSetting =
-    NoResponseSetting'
+newDirpoolNoResponse
+    :: DirpoolNoResponse s
+newDirpoolNoResponse =
+    DirpoolNoResponse'
         { _allNonConfigured = TF.value P.False
         , _geoInfo = TF.Nil
         , _ipInfo = TF.Nil
         }
 
-instance TF.IsValue  (NoResponseSetting s)
-instance TF.IsObject (NoResponseSetting s) where
-    toObject NoResponseSetting'{..} = P.catMaybes
+instance TF.IsValue  (DirpoolNoResponse s)
+instance TF.IsObject (DirpoolNoResponse s) where
+    toObject DirpoolNoResponse'{..} = P.catMaybes
         [ TF.assign "all_non_configured" <$> TF.attribute _allNonConfigured
         , TF.assign "geo_info" <$> TF.attribute _geoInfo
         , TF.assign "ip_info" <$> TF.attribute _ipInfo
         ]
 
-instance TF.IsValid (NoResponseSetting s) where
+instance TF.IsValid (DirpoolNoResponse s) where
     validator = P.mempty
 
-instance P.HasAllNonConfigured (NoResponseSetting s) (TF.Attr s P.Bool) where
+instance P.HasAllNonConfigured (DirpoolNoResponse s) (TF.Attr s P.Bool) where
     allNonConfigured =
-        P.lens (_allNonConfigured :: NoResponseSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _allNonConfigured = a } :: NoResponseSetting s)
+        P.lens (_allNonConfigured :: DirpoolNoResponse s -> TF.Attr s P.Bool)
+               (\s a -> s { _allNonConfigured = a } :: DirpoolNoResponse s)
 
-instance P.HasGeoInfo (NoResponseSetting s) (TF.Attr s [TF.Attr s (GeoInfoSetting s)]) where
+instance P.HasGeoInfo (DirpoolNoResponse s) (TF.Attr s [TF.Attr s (DirpoolGeoInfo s)]) where
     geoInfo =
-        P.lens (_geoInfo :: NoResponseSetting s -> TF.Attr s [TF.Attr s (GeoInfoSetting s)])
-               (\s a -> s { _geoInfo = a } :: NoResponseSetting s)
+        P.lens (_geoInfo :: DirpoolNoResponse s -> TF.Attr s [TF.Attr s (DirpoolGeoInfo s)])
+               (\s a -> s { _geoInfo = a } :: DirpoolNoResponse s)
 
-instance P.HasIpInfo (NoResponseSetting s) (TF.Attr s [TF.Attr s (IpInfoSetting s)]) where
+instance P.HasIpInfo (DirpoolNoResponse s) (TF.Attr s [TF.Attr s (DirpoolIpInfo s)]) where
     ipInfo =
-        P.lens (_ipInfo :: NoResponseSetting s -> TF.Attr s [TF.Attr s (IpInfoSetting s)])
-               (\s a -> s { _ipInfo = a } :: NoResponseSetting s)
+        P.lens (_ipInfo :: DirpoolNoResponse s -> TF.Attr s [TF.Attr s (DirpoolIpInfo s)])
+               (\s a -> s { _ipInfo = a } :: DirpoolNoResponse s)
 
 -- | @ips@ nested settings.
-data IpsSetting s = IpsSetting'
+data DirpoolIps s = DirpoolIps'
     { _address :: TF.Attr s P.Text
     -- ^ @address@ - (Optional)
     --
@@ -364,93 +312,93 @@ data IpsSetting s = IpsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @ips@ settings value.
-newIpsSetting
-    :: IpsSetting s
-newIpsSetting =
-    IpsSetting'
+newDirpoolIps
+    :: DirpoolIps s
+newDirpoolIps =
+    DirpoolIps'
         { _address = TF.Nil
         , _cidr = TF.Nil
         , _end = TF.Nil
         , _start = TF.Nil
         }
 
-instance TF.IsValue  (IpsSetting s)
-instance TF.IsObject (IpsSetting s) where
-    toObject IpsSetting'{..} = P.catMaybes
+instance TF.IsValue  (DirpoolIps s)
+instance TF.IsObject (DirpoolIps s) where
+    toObject DirpoolIps'{..} = P.catMaybes
         [ TF.assign "address" <$> TF.attribute _address
         , TF.assign "cidr" <$> TF.attribute _cidr
         , TF.assign "end" <$> TF.attribute _end
         , TF.assign "start" <$> TF.attribute _start
         ]
 
-instance TF.IsValid (IpsSetting s) where
+instance TF.IsValid (DirpoolIps s) where
     validator = P.mempty
 
-instance P.HasAddress (IpsSetting s) (TF.Attr s P.Text) where
+instance P.HasAddress (DirpoolIps s) (TF.Attr s P.Text) where
     address =
-        P.lens (_address :: IpsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _address = a } :: IpsSetting s)
+        P.lens (_address :: DirpoolIps s -> TF.Attr s P.Text)
+               (\s a -> s { _address = a } :: DirpoolIps s)
 
-instance P.HasCidr (IpsSetting s) (TF.Attr s P.Text) where
+instance P.HasCidr (DirpoolIps s) (TF.Attr s P.Text) where
     cidr =
-        P.lens (_cidr :: IpsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _cidr = a } :: IpsSetting s)
+        P.lens (_cidr :: DirpoolIps s -> TF.Attr s P.Text)
+               (\s a -> s { _cidr = a } :: DirpoolIps s)
 
-instance P.HasEnd (IpsSetting s) (TF.Attr s P.Text) where
+instance P.HasEnd (DirpoolIps s) (TF.Attr s P.Text) where
     end =
-        P.lens (_end :: IpsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _end = a } :: IpsSetting s)
+        P.lens (_end :: DirpoolIps s -> TF.Attr s P.Text)
+               (\s a -> s { _end = a } :: DirpoolIps s)
 
-instance P.HasStart (IpsSetting s) (TF.Attr s P.Text) where
+instance P.HasStart (DirpoolIps s) (TF.Attr s P.Text) where
     start =
-        P.lens (_start :: IpsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _start = a } :: IpsSetting s)
+        P.lens (_start :: DirpoolIps s -> TF.Attr s P.Text)
+               (\s a -> s { _start = a } :: DirpoolIps s)
 
 -- | @http_probe@ nested settings.
-data HttpProbeSetting s = HttpProbeSetting'
-    { _totalLimits :: TF.Attr s [TF.Attr s (TotalLimitsSetting s)]
+data ProbeHttpHttpProbe s = ProbeHttpHttpProbe'
+    { _totalLimits :: TF.Attr s [TF.Attr s (ProbeHttpTotalLimits s)]
     -- ^ @total_limits@ - (Optional)
     --
-    , _transaction :: TF.Attr s [TF.Attr s (TransactionSetting s)]
+    , _transaction :: TF.Attr s [TF.Attr s (ProbeHttpTransaction s)]
     -- ^ @transaction@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @http_probe@ settings value.
-newHttpProbeSetting
-    :: HttpProbeSetting s
-newHttpProbeSetting =
-    HttpProbeSetting'
+newProbeHttpHttpProbe
+    :: ProbeHttpHttpProbe s
+newProbeHttpHttpProbe =
+    ProbeHttpHttpProbe'
         { _totalLimits = TF.Nil
         , _transaction = TF.Nil
         }
 
-instance TF.IsValue  (HttpProbeSetting s)
-instance TF.IsObject (HttpProbeSetting s) where
-    toObject HttpProbeSetting'{..} = P.catMaybes
+instance TF.IsValue  (ProbeHttpHttpProbe s)
+instance TF.IsObject (ProbeHttpHttpProbe s) where
+    toObject ProbeHttpHttpProbe'{..} = P.catMaybes
         [ TF.assign "total_limits" <$> TF.attribute _totalLimits
         , TF.assign "transaction" <$> TF.attribute _transaction
         ]
 
-instance TF.IsValid (HttpProbeSetting s) where
+instance TF.IsValid (ProbeHttpHttpProbe s) where
     validator = P.mempty
 
-instance P.HasTotalLimits (HttpProbeSetting s) (TF.Attr s [TF.Attr s (TotalLimitsSetting s)]) where
+instance P.HasTotalLimits (ProbeHttpHttpProbe s) (TF.Attr s [TF.Attr s (ProbeHttpTotalLimits s)]) where
     totalLimits =
-        P.lens (_totalLimits :: HttpProbeSetting s -> TF.Attr s [TF.Attr s (TotalLimitsSetting s)])
-               (\s a -> s { _totalLimits = a } :: HttpProbeSetting s)
+        P.lens (_totalLimits :: ProbeHttpHttpProbe s -> TF.Attr s [TF.Attr s (ProbeHttpTotalLimits s)])
+               (\s a -> s { _totalLimits = a } :: ProbeHttpHttpProbe s)
 
-instance P.HasTransaction (HttpProbeSetting s) (TF.Attr s [TF.Attr s (TransactionSetting s)]) where
+instance P.HasTransaction (ProbeHttpHttpProbe s) (TF.Attr s [TF.Attr s (ProbeHttpTransaction s)]) where
     transaction =
-        P.lens (_transaction :: HttpProbeSetting s -> TF.Attr s [TF.Attr s (TransactionSetting s)])
-               (\s a -> s { _transaction = a } :: HttpProbeSetting s)
+        P.lens (_transaction :: ProbeHttpHttpProbe s -> TF.Attr s [TF.Attr s (ProbeHttpTransaction s)])
+               (\s a -> s { _transaction = a } :: ProbeHttpHttpProbe s)
 
 -- | @transaction@ nested settings.
-data TransactionSetting s = TransactionSetting'
+data ProbeHttpTransaction s = ProbeHttpTransaction'
     { _followRedirects :: TF.Attr s P.Bool
     -- ^ @follow_redirects@ - (Optional)
     --
-    , _limit           :: TF.Attr s [TF.Attr s (LimitSetting s)]
+    , _limit           :: TF.Attr s [TF.Attr s (ProbeHttpLimit s)]
     -- ^ @limit@ - (Optional)
     --
     , _method          :: TF.Attr s P.Text
@@ -465,12 +413,12 @@ data TransactionSetting s = TransactionSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @transaction@ settings value.
-newTransactionSetting
+newProbeHttpTransaction
     :: TF.Attr s P.Text -- ^ 'P._method': @method@
     -> TF.Attr s P.Text -- ^ 'P._url': @url@
-    -> TransactionSetting s
-newTransactionSetting _method _url =
-    TransactionSetting'
+    -> ProbeHttpTransaction s
+newProbeHttpTransaction _method _url =
+    ProbeHttpTransaction'
         { _followRedirects = TF.value P.False
         , _limit = TF.Nil
         , _method = _method
@@ -478,9 +426,9 @@ newTransactionSetting _method _url =
         , _url = _url
         }
 
-instance TF.IsValue  (TransactionSetting s)
-instance TF.IsObject (TransactionSetting s) where
-    toObject TransactionSetting'{..} = P.catMaybes
+instance TF.IsValue  (ProbeHttpTransaction s)
+instance TF.IsObject (ProbeHttpTransaction s) where
+    toObject ProbeHttpTransaction'{..} = P.catMaybes
         [ TF.assign "follow_redirects" <$> TF.attribute _followRedirects
         , TF.assign "limit" <$> TF.attribute _limit
         , TF.assign "method" <$> TF.attribute _method
@@ -488,36 +436,36 @@ instance TF.IsObject (TransactionSetting s) where
         , TF.assign "url" <$> TF.attribute _url
         ]
 
-instance TF.IsValid (TransactionSetting s) where
+instance TF.IsValid (ProbeHttpTransaction s) where
     validator = P.mempty
 
-instance P.HasFollowRedirects (TransactionSetting s) (TF.Attr s P.Bool) where
+instance P.HasFollowRedirects (ProbeHttpTransaction s) (TF.Attr s P.Bool) where
     followRedirects =
-        P.lens (_followRedirects :: TransactionSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _followRedirects = a } :: TransactionSetting s)
+        P.lens (_followRedirects :: ProbeHttpTransaction s -> TF.Attr s P.Bool)
+               (\s a -> s { _followRedirects = a } :: ProbeHttpTransaction s)
 
-instance P.HasLimit (TransactionSetting s) (TF.Attr s [TF.Attr s (LimitSetting s)]) where
+instance P.HasLimit (ProbeHttpTransaction s) (TF.Attr s [TF.Attr s (ProbeHttpLimit s)]) where
     limit =
-        P.lens (_limit :: TransactionSetting s -> TF.Attr s [TF.Attr s (LimitSetting s)])
-               (\s a -> s { _limit = a } :: TransactionSetting s)
+        P.lens (_limit :: ProbeHttpTransaction s -> TF.Attr s [TF.Attr s (ProbeHttpLimit s)])
+               (\s a -> s { _limit = a } :: ProbeHttpTransaction s)
 
-instance P.HasMethod (TransactionSetting s) (TF.Attr s P.Text) where
+instance P.HasMethod (ProbeHttpTransaction s) (TF.Attr s P.Text) where
     method =
-        P.lens (_method :: TransactionSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _method = a } :: TransactionSetting s)
+        P.lens (_method :: ProbeHttpTransaction s -> TF.Attr s P.Text)
+               (\s a -> s { _method = a } :: ProbeHttpTransaction s)
 
-instance P.HasTransmittedData (TransactionSetting s) (TF.Attr s P.Text) where
+instance P.HasTransmittedData (ProbeHttpTransaction s) (TF.Attr s P.Text) where
     transmittedData =
-        P.lens (_transmittedData :: TransactionSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _transmittedData = a } :: TransactionSetting s)
+        P.lens (_transmittedData :: ProbeHttpTransaction s -> TF.Attr s P.Text)
+               (\s a -> s { _transmittedData = a } :: ProbeHttpTransaction s)
 
-instance P.HasUrl (TransactionSetting s) (TF.Attr s P.Text) where
+instance P.HasUrl (ProbeHttpTransaction s) (TF.Attr s P.Text) where
     url =
-        P.lens (_url :: TransactionSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _url = a } :: TransactionSetting s)
+        P.lens (_url :: ProbeHttpTransaction s -> TF.Attr s P.Text)
+               (\s a -> s { _url = a } :: ProbeHttpTransaction s)
 
 -- | @limit@ nested settings.
-data LimitSetting s = LimitSetting'
+data ProbeHttpLimit s = ProbeHttpLimit'
     { _critical :: TF.Attr s P.Int
     -- ^ @critical@ - (Required)
     --
@@ -533,103 +481,54 @@ data LimitSetting s = LimitSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @limit@ settings value.
-newLimitSetting
+newProbeHttpLimit
     :: TF.Attr s P.Int -- ^ 'P._critical': @critical@
     -> TF.Attr s P.Int -- ^ 'P._fail': @fail@
     -> TF.Attr s P.Text -- ^ 'P._name': @name@
     -> TF.Attr s P.Int -- ^ 'P._warning': @warning@
-    -> LimitSetting s
-newLimitSetting _critical _fail _name _warning =
-    LimitSetting'
+    -> ProbeHttpLimit s
+newProbeHttpLimit _critical _fail _name _warning =
+    ProbeHttpLimit'
         { _critical = _critical
         , _fail = _fail
         , _name = _name
         , _warning = _warning
         }
 
-instance TF.IsValue  (LimitSetting s)
-instance TF.IsObject (LimitSetting s) where
-    toObject LimitSetting'{..} = P.catMaybes
+instance TF.IsValue  (ProbeHttpLimit s)
+instance TF.IsObject (ProbeHttpLimit s) where
+    toObject ProbeHttpLimit'{..} = P.catMaybes
         [ TF.assign "critical" <$> TF.attribute _critical
         , TF.assign "fail" <$> TF.attribute _fail
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "warning" <$> TF.attribute _warning
         ]
 
-instance TF.IsValid (LimitSetting s) where
+instance TF.IsValid (ProbeHttpLimit s) where
     validator = P.mempty
 
-instance P.HasCritical (LimitSetting s) (TF.Attr s P.Int) where
+instance P.HasCritical (ProbeHttpLimit s) (TF.Attr s P.Int) where
     critical =
-        P.lens (_critical :: LimitSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _critical = a } :: LimitSetting s)
+        P.lens (_critical :: ProbeHttpLimit s -> TF.Attr s P.Int)
+               (\s a -> s { _critical = a } :: ProbeHttpLimit s)
 
-instance P.HasFail (LimitSetting s) (TF.Attr s P.Int) where
+instance P.HasFail (ProbeHttpLimit s) (TF.Attr s P.Int) where
     fail =
-        P.lens (_fail :: LimitSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _fail = a } :: LimitSetting s)
+        P.lens (_fail :: ProbeHttpLimit s -> TF.Attr s P.Int)
+               (\s a -> s { _fail = a } :: ProbeHttpLimit s)
 
-instance P.HasName (LimitSetting s) (TF.Attr s P.Text) where
+instance P.HasName (ProbeHttpLimit s) (TF.Attr s P.Text) where
     name =
-        P.lens (_name :: LimitSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: LimitSetting s)
+        P.lens (_name :: ProbeHttpLimit s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ProbeHttpLimit s)
 
-instance P.HasWarning (LimitSetting s) (TF.Attr s P.Int) where
+instance P.HasWarning (ProbeHttpLimit s) (TF.Attr s P.Int) where
     warning =
-        P.lens (_warning :: LimitSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _warning = a } :: LimitSetting s)
-
--- | @ping_probe@ nested settings.
-data PingProbeSetting s = PingProbeSetting'
-    { _limit      :: TF.Attr s [TF.Attr s (LimitSetting s)]
-    -- ^ @limit@ - (Optional)
-    --
-    , _packetSize :: TF.Attr s P.Int
-    -- ^ @packet_size@ - (Optional)
-    --
-    , _packets    :: TF.Attr s P.Int
-    -- ^ @packets@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @ping_probe@ settings value.
-newPingProbeSetting
-    :: PingProbeSetting s
-newPingProbeSetting =
-    PingProbeSetting'
-        { _limit = TF.Nil
-        , _packetSize = TF.value 56
-        , _packets = TF.value 3
-        }
-
-instance TF.IsValue  (PingProbeSetting s)
-instance TF.IsObject (PingProbeSetting s) where
-    toObject PingProbeSetting'{..} = P.catMaybes
-        [ TF.assign "limit" <$> TF.attribute _limit
-        , TF.assign "packet_size" <$> TF.attribute _packetSize
-        , TF.assign "packets" <$> TF.attribute _packets
-        ]
-
-instance TF.IsValid (PingProbeSetting s) where
-    validator = P.mempty
-
-instance P.HasLimit (PingProbeSetting s) (TF.Attr s [TF.Attr s (LimitSetting s)]) where
-    limit =
-        P.lens (_limit :: PingProbeSetting s -> TF.Attr s [TF.Attr s (LimitSetting s)])
-               (\s a -> s { _limit = a } :: PingProbeSetting s)
-
-instance P.HasPacketSize (PingProbeSetting s) (TF.Attr s P.Int) where
-    packetSize =
-        P.lens (_packetSize :: PingProbeSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _packetSize = a } :: PingProbeSetting s)
-
-instance P.HasPackets (PingProbeSetting s) (TF.Attr s P.Int) where
-    packets =
-        P.lens (_packets :: PingProbeSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _packets = a } :: PingProbeSetting s)
+        P.lens (_warning :: ProbeHttpLimit s -> TF.Attr s P.Int)
+               (\s a -> s { _warning = a } :: ProbeHttpLimit s)
 
 -- | @total_limits@ nested settings.
-data TotalLimitsSetting s = TotalLimitsSetting'
+data ProbeHttpTotalLimits s = ProbeHttpTotalLimits'
     { _critical :: TF.Attr s P.Int
     -- ^ @critical@ - (Optional)
     --
@@ -642,37 +541,239 @@ data TotalLimitsSetting s = TotalLimitsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @total_limits@ settings value.
-newTotalLimitsSetting
-    :: TotalLimitsSetting s
-newTotalLimitsSetting =
-    TotalLimitsSetting'
+newProbeHttpTotalLimits
+    :: ProbeHttpTotalLimits s
+newProbeHttpTotalLimits =
+    ProbeHttpTotalLimits'
         { _critical = TF.Nil
         , _fail = TF.Nil
         , _warning = TF.Nil
         }
 
-instance TF.IsValue  (TotalLimitsSetting s)
-instance TF.IsObject (TotalLimitsSetting s) where
-    toObject TotalLimitsSetting'{..} = P.catMaybes
+instance TF.IsValue  (ProbeHttpTotalLimits s)
+instance TF.IsObject (ProbeHttpTotalLimits s) where
+    toObject ProbeHttpTotalLimits'{..} = P.catMaybes
         [ TF.assign "critical" <$> TF.attribute _critical
         , TF.assign "fail" <$> TF.attribute _fail
         , TF.assign "warning" <$> TF.attribute _warning
         ]
 
-instance TF.IsValid (TotalLimitsSetting s) where
+instance TF.IsValid (ProbeHttpTotalLimits s) where
     validator = P.mempty
 
-instance P.HasCritical (TotalLimitsSetting s) (TF.Attr s P.Int) where
+instance P.HasCritical (ProbeHttpTotalLimits s) (TF.Attr s P.Int) where
     critical =
-        P.lens (_critical :: TotalLimitsSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _critical = a } :: TotalLimitsSetting s)
+        P.lens (_critical :: ProbeHttpTotalLimits s -> TF.Attr s P.Int)
+               (\s a -> s { _critical = a } :: ProbeHttpTotalLimits s)
 
-instance P.HasFail (TotalLimitsSetting s) (TF.Attr s P.Int) where
+instance P.HasFail (ProbeHttpTotalLimits s) (TF.Attr s P.Int) where
     fail =
-        P.lens (_fail :: TotalLimitsSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _fail = a } :: TotalLimitsSetting s)
+        P.lens (_fail :: ProbeHttpTotalLimits s -> TF.Attr s P.Int)
+               (\s a -> s { _fail = a } :: ProbeHttpTotalLimits s)
 
-instance P.HasWarning (TotalLimitsSetting s) (TF.Attr s P.Int) where
+instance P.HasWarning (ProbeHttpTotalLimits s) (TF.Attr s P.Int) where
     warning =
-        P.lens (_warning :: TotalLimitsSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _warning = a } :: TotalLimitsSetting s)
+        P.lens (_warning :: ProbeHttpTotalLimits s -> TF.Attr s P.Int)
+               (\s a -> s { _warning = a } :: ProbeHttpTotalLimits s)
+
+-- | @limit@ nested settings.
+data ProbePingLimit s = ProbePingLimit'
+    { _critical :: TF.Attr s P.Int
+    -- ^ @critical@ - (Required)
+    --
+    , _fail     :: TF.Attr s P.Int
+    -- ^ @fail@ - (Required)
+    --
+    , _name     :: TF.Attr s P.Text
+    -- ^ @name@ - (Required)
+    --
+    , _warning  :: TF.Attr s P.Int
+    -- ^ @warning@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @limit@ settings value.
+newProbePingLimit
+    :: TF.Attr s P.Int -- ^ 'P._critical': @critical@
+    -> TF.Attr s P.Int -- ^ 'P._fail': @fail@
+    -> TF.Attr s P.Text -- ^ 'P._name': @name@
+    -> TF.Attr s P.Int -- ^ 'P._warning': @warning@
+    -> ProbePingLimit s
+newProbePingLimit _critical _fail _name _warning =
+    ProbePingLimit'
+        { _critical = _critical
+        , _fail = _fail
+        , _name = _name
+        , _warning = _warning
+        }
+
+instance TF.IsValue  (ProbePingLimit s)
+instance TF.IsObject (ProbePingLimit s) where
+    toObject ProbePingLimit'{..} = P.catMaybes
+        [ TF.assign "critical" <$> TF.attribute _critical
+        , TF.assign "fail" <$> TF.attribute _fail
+        , TF.assign "name" <$> TF.attribute _name
+        , TF.assign "warning" <$> TF.attribute _warning
+        ]
+
+instance TF.IsValid (ProbePingLimit s) where
+    validator = P.mempty
+
+instance P.HasCritical (ProbePingLimit s) (TF.Attr s P.Int) where
+    critical =
+        P.lens (_critical :: ProbePingLimit s -> TF.Attr s P.Int)
+               (\s a -> s { _critical = a } :: ProbePingLimit s)
+
+instance P.HasFail (ProbePingLimit s) (TF.Attr s P.Int) where
+    fail =
+        P.lens (_fail :: ProbePingLimit s -> TF.Attr s P.Int)
+               (\s a -> s { _fail = a } :: ProbePingLimit s)
+
+instance P.HasName (ProbePingLimit s) (TF.Attr s P.Text) where
+    name =
+        P.lens (_name :: ProbePingLimit s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: ProbePingLimit s)
+
+instance P.HasWarning (ProbePingLimit s) (TF.Attr s P.Int) where
+    warning =
+        P.lens (_warning :: ProbePingLimit s -> TF.Attr s P.Int)
+               (\s a -> s { _warning = a } :: ProbePingLimit s)
+
+-- | @ping_probe@ nested settings.
+data ProbePingPingProbe s = ProbePingPingProbe'
+    { _limit      :: TF.Attr s [TF.Attr s (ProbePingLimit s)]
+    -- ^ @limit@ - (Optional)
+    --
+    , _packetSize :: TF.Attr s P.Int
+    -- ^ @packet_size@ - (Optional)
+    --
+    , _packets    :: TF.Attr s P.Int
+    -- ^ @packets@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @ping_probe@ settings value.
+newProbePingPingProbe
+    :: ProbePingPingProbe s
+newProbePingPingProbe =
+    ProbePingPingProbe'
+        { _limit = TF.Nil
+        , _packetSize = TF.value 56
+        , _packets = TF.value 3
+        }
+
+instance TF.IsValue  (ProbePingPingProbe s)
+instance TF.IsObject (ProbePingPingProbe s) where
+    toObject ProbePingPingProbe'{..} = P.catMaybes
+        [ TF.assign "limit" <$> TF.attribute _limit
+        , TF.assign "packet_size" <$> TF.attribute _packetSize
+        , TF.assign "packets" <$> TF.attribute _packets
+        ]
+
+instance TF.IsValid (ProbePingPingProbe s) where
+    validator = P.mempty
+
+instance P.HasLimit (ProbePingPingProbe s) (TF.Attr s [TF.Attr s (ProbePingLimit s)]) where
+    limit =
+        P.lens (_limit :: ProbePingPingProbe s -> TF.Attr s [TF.Attr s (ProbePingLimit s)])
+               (\s a -> s { _limit = a } :: ProbePingPingProbe s)
+
+instance P.HasPacketSize (ProbePingPingProbe s) (TF.Attr s P.Int) where
+    packetSize =
+        P.lens (_packetSize :: ProbePingPingProbe s -> TF.Attr s P.Int)
+               (\s a -> s { _packetSize = a } :: ProbePingPingProbe s)
+
+instance P.HasPackets (ProbePingPingProbe s) (TF.Attr s P.Int) where
+    packets =
+        P.lens (_packets :: ProbePingPingProbe s -> TF.Attr s P.Int)
+               (\s a -> s { _packets = a } :: ProbePingPingProbe s)
+
+-- | @rdata@ nested settings.
+data TcpoolRdata s = TcpoolRdata'
+    { _failoverDelay :: TF.Attr s P.Int
+    -- ^ @failover_delay@ - (Optional)
+    --
+    , _host          :: TF.Attr s P.Text
+    -- ^ @host@ - (Required)
+    --
+    , _priority      :: TF.Attr s P.Int
+    -- ^ @priority@ - (Optional)
+    --
+    , _runProbes     :: TF.Attr s P.Bool
+    -- ^ @run_probes@ - (Optional)
+    --
+    , _state         :: TF.Attr s P.Text
+    -- ^ @state@ - (Optional)
+    --
+    , _threshold     :: TF.Attr s P.Int
+    -- ^ @threshold@ - (Optional)
+    --
+    , _weight        :: TF.Attr s P.Int
+    -- ^ @weight@ - (Optional)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @rdata@ settings value.
+newTcpoolRdata
+    :: TF.Attr s P.Text -- ^ 'P._host': @host@
+    -> TcpoolRdata s
+newTcpoolRdata _host =
+    TcpoolRdata'
+        { _failoverDelay = TF.value 0
+        , _host = _host
+        , _priority = TF.value 1
+        , _runProbes = TF.value P.True
+        , _state = TF.value "NORMAL"
+        , _threshold = TF.value 1
+        , _weight = TF.value 2
+        }
+
+instance TF.IsValue  (TcpoolRdata s)
+instance TF.IsObject (TcpoolRdata s) where
+    toObject TcpoolRdata'{..} = P.catMaybes
+        [ TF.assign "failover_delay" <$> TF.attribute _failoverDelay
+        , TF.assign "host" <$> TF.attribute _host
+        , TF.assign "priority" <$> TF.attribute _priority
+        , TF.assign "run_probes" <$> TF.attribute _runProbes
+        , TF.assign "state" <$> TF.attribute _state
+        , TF.assign "threshold" <$> TF.attribute _threshold
+        , TF.assign "weight" <$> TF.attribute _weight
+        ]
+
+instance TF.IsValid (TcpoolRdata s) where
+    validator = P.mempty
+
+instance P.HasFailoverDelay (TcpoolRdata s) (TF.Attr s P.Int) where
+    failoverDelay =
+        P.lens (_failoverDelay :: TcpoolRdata s -> TF.Attr s P.Int)
+               (\s a -> s { _failoverDelay = a } :: TcpoolRdata s)
+
+instance P.HasHost (TcpoolRdata s) (TF.Attr s P.Text) where
+    host =
+        P.lens (_host :: TcpoolRdata s -> TF.Attr s P.Text)
+               (\s a -> s { _host = a } :: TcpoolRdata s)
+
+instance P.HasPriority (TcpoolRdata s) (TF.Attr s P.Int) where
+    priority =
+        P.lens (_priority :: TcpoolRdata s -> TF.Attr s P.Int)
+               (\s a -> s { _priority = a } :: TcpoolRdata s)
+
+instance P.HasRunProbes (TcpoolRdata s) (TF.Attr s P.Bool) where
+    runProbes =
+        P.lens (_runProbes :: TcpoolRdata s -> TF.Attr s P.Bool)
+               (\s a -> s { _runProbes = a } :: TcpoolRdata s)
+
+instance P.HasState (TcpoolRdata s) (TF.Attr s P.Text) where
+    state =
+        P.lens (_state :: TcpoolRdata s -> TF.Attr s P.Text)
+               (\s a -> s { _state = a } :: TcpoolRdata s)
+
+instance P.HasThreshold (TcpoolRdata s) (TF.Attr s P.Int) where
+    threshold =
+        P.lens (_threshold :: TcpoolRdata s -> TF.Attr s P.Int)
+               (\s a -> s { _threshold = a } :: TcpoolRdata s)
+
+instance P.HasWeight (TcpoolRdata s) (TF.Attr s P.Int) where
+    weight =
+        P.lens (_weight :: TcpoolRdata s -> TF.Attr s P.Int)
+               (\s a -> s { _weight = a } :: TcpoolRdata s)

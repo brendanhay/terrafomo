@@ -2102,7 +2102,7 @@ data DistributedPortGroupResource s = DistributedPortGroupResource'
     -- ^ @vlan_override_allowed@ - (Optional)
     -- Allow the VLAN configuration on a port to override those on the portgroup.
     --
-    , _vlanRange :: TF.Attr s [TF.Attr s (VlanRangeSetting s)]
+    , _vlanRange :: TF.Attr s [TF.Attr s (DistributedPortGroupVlanRange s)]
     -- ^ @vlan_range@ - (Optional)
     -- The VLAN ID for single VLAN mode. 0 denotes no VLAN.
     --
@@ -2462,9 +2462,9 @@ instance P.HasVlanOverrideAllowed (DistributedPortGroupResource s) (TF.Attr s P.
         P.lens (_vlanOverrideAllowed :: DistributedPortGroupResource s -> TF.Attr s P.Bool)
                (\s a -> s { _vlanOverrideAllowed = a } :: DistributedPortGroupResource s)
 
-instance P.HasVlanRange (DistributedPortGroupResource s) (TF.Attr s [TF.Attr s (VlanRangeSetting s)]) where
+instance P.HasVlanRange (DistributedPortGroupResource s) (TF.Attr s [TF.Attr s (DistributedPortGroupVlanRange s)]) where
     vlanRange =
-        P.lens (_vlanRange :: DistributedPortGroupResource s -> TF.Attr s [TF.Attr s (VlanRangeSetting s)])
+        P.lens (_vlanRange :: DistributedPortGroupResource s -> TF.Attr s [TF.Attr s (DistributedPortGroupVlanRange s)])
                (\s a -> s { _vlanRange = a } :: DistributedPortGroupResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Text) where
@@ -2554,7 +2554,7 @@ instance s ~ s' => P.HasComputedTxUplink (TF.Ref s' (DistributedPortGroupResourc
 instance s ~ s' => P.HasComputedVlanId (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s P.Int) where
     computedVlanId x = TF.compute (TF.refKey x) "vlan_id"
 
-instance s ~ s' => P.HasComputedVlanRange (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s [TF.Attr s (VlanRangeSetting s)]) where
+instance s ~ s' => P.HasComputedVlanRange (TF.Ref s' (DistributedPortGroupResource s)) (TF.Attr s [TF.Attr s (DistributedPortGroupVlanRange s)]) where
     computedVlanRange x = TF.compute (TF.refKey x) "vlan_range"
 
 -- | @vsphere_distributed_virtual_switch@ Resource.
@@ -2680,7 +2680,7 @@ data DistributedVirtualSwitchResource s = DistributedVirtualSwitchResource'
     -- The allocation level for the hbr traffic class. Can be one of high, low,
     -- normal, or custom.
     --
-    , _host :: TF.Attr s [TF.Attr s (HostSetting s)]
+    , _host :: TF.Attr s [TF.Attr s (DistributedVirtualSwitchHost s)]
     -- ^ @host@ - (Optional)
     -- A host member specification.
     --
@@ -2935,7 +2935,7 @@ data DistributedVirtualSwitchResource s = DistributedVirtualSwitchResource'
     --
     -- * 'portPrivateSecondaryVlanId'
     -- * 'vlanRange'
-    , _vlanRange :: TF.Attr s [TF.Attr s (VlanRangeSetting s)]
+    , _vlanRange :: TF.Attr s [TF.Attr s (DistributedVirtualSwitchVlanRange s)]
     -- ^ @vlan_range@ - (Optional)
     -- The VLAN ID for single VLAN mode. 0 denotes no VLAN.
     --
@@ -3321,9 +3321,9 @@ instance P.HasHbrShareLevel (DistributedVirtualSwitchResource s) (TF.Attr s P.Te
         P.lens (_hbrShareLevel :: DistributedVirtualSwitchResource s -> TF.Attr s P.Text)
                (\s a -> s { _hbrShareLevel = a } :: DistributedVirtualSwitchResource s)
 
-instance P.HasHost (DistributedVirtualSwitchResource s) (TF.Attr s [TF.Attr s (HostSetting s)]) where
+instance P.HasHost (DistributedVirtualSwitchResource s) (TF.Attr s [TF.Attr s (DistributedVirtualSwitchHost s)]) where
     host =
-        P.lens (_host :: DistributedVirtualSwitchResource s -> TF.Attr s [TF.Attr s (HostSetting s)])
+        P.lens (_host :: DistributedVirtualSwitchResource s -> TF.Attr s [TF.Attr s (DistributedVirtualSwitchHost s)])
                (\s a -> s { _host = a } :: DistributedVirtualSwitchResource s)
 
 instance P.HasIngressShapingAverageBandwidth (DistributedVirtualSwitchResource s) (TF.Attr s P.Int) where
@@ -3586,9 +3586,9 @@ instance P.HasVlanId (DistributedVirtualSwitchResource s) (TF.Attr s P.Int) wher
         P.lens (_vlanId :: DistributedVirtualSwitchResource s -> TF.Attr s P.Int)
                (\s a -> s { _vlanId = a } :: DistributedVirtualSwitchResource s)
 
-instance P.HasVlanRange (DistributedVirtualSwitchResource s) (TF.Attr s [TF.Attr s (VlanRangeSetting s)]) where
+instance P.HasVlanRange (DistributedVirtualSwitchResource s) (TF.Attr s [TF.Attr s (DistributedVirtualSwitchVlanRange s)]) where
     vlanRange =
-        P.lens (_vlanRange :: DistributedVirtualSwitchResource s -> TF.Attr s [TF.Attr s (VlanRangeSetting s)])
+        P.lens (_vlanRange :: DistributedVirtualSwitchResource s -> TF.Attr s [TF.Attr s (DistributedVirtualSwitchVlanRange s)])
                (\s a -> s { _vlanRange = a } :: DistributedVirtualSwitchResource s)
 
 instance P.HasVmotionMaximumMbit (DistributedVirtualSwitchResource s) (TF.Attr s P.Int) where
@@ -3814,7 +3814,7 @@ instance s ~ s' => P.HasComputedVirtualmachineShareLevel (TF.Ref s' (Distributed
 instance s ~ s' => P.HasComputedVlanId (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Int) where
     computedVlanId x = TF.compute (TF.refKey x) "vlan_id"
 
-instance s ~ s' => P.HasComputedVlanRange (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s [TF.Attr s (VlanRangeSetting s)]) where
+instance s ~ s' => P.HasComputedVlanRange (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s [TF.Attr s (DistributedVirtualSwitchVlanRange s)]) where
     computedVlanRange x = TF.compute (TF.refKey x) "vlan_range"
 
 instance s ~ s' => P.HasComputedVmotionMaximumMbit (TF.Ref s' (DistributedVirtualSwitchResource s)) (TF.Attr s P.Int) where
@@ -4615,7 +4615,7 @@ instance s ~ s' => P.HasComputedComputedPolicy (TF.Ref s' (HostPortGroupResource
 instance s ~ s' => P.HasComputedKey (TF.Ref s' (HostPortGroupResource s)) (TF.Attr s P.Text) where
     computedKey x = TF.compute (TF.refKey x) "key"
 
-instance s ~ s' => P.HasComputedPorts (TF.Ref s' (HostPortGroupResource s)) (TF.Attr s (PortsSetting s)) where
+instance s ~ s' => P.HasComputedPorts (TF.Ref s' (HostPortGroupResource s)) (TF.Attr s (HostPortGroupPorts s)) where
     computedPorts x = TF.compute (TF.refKey x) "ports"
 
 -- | @vsphere_host_virtual_switch@ Resource.
@@ -5882,11 +5882,11 @@ data VirtualMachineResource s = VirtualMachineResource'
     -- If set to true, a virtual machine that fails to boot will try again after
     -- the delay defined in boot_retry_delay.
     --
-    , _cdrom :: TF.Attr s (CdromSetting s)
+    , _cdrom :: TF.Attr s (VirtualMachineCdrom s)
     -- ^ @cdrom@ - (Optional)
     -- A specification for a CDROM device on this virtual machine.
     --
-    , _clone :: TF.Attr s (CloneSetting s)
+    , _clone :: TF.Attr s (VirtualMachineClone s)
     -- ^ @clone@ - (Optional)
     -- A specification for cloning a virtual machine from template.
     --
@@ -5941,7 +5941,7 @@ data VirtualMachineResource s = VirtualMachineResource'
     -- Conflicts with:
     --
     -- * 'datastoreClusterId'
-    , _disk :: TF.Attr s [TF.Attr s (DiskSetting s)]
+    , _disk :: TF.Attr s [TF.Attr s (VirtualMachineDisk s)]
     -- ^ @disk@ - (Optional)
     -- A specification for a virtual disk device on this virtual machine.
     --
@@ -6046,7 +6046,7 @@ data VirtualMachineResource s = VirtualMachineResource'
     -- Enable nested hardware virtualization on this virtual machine, facilitating
     -- nested virtualization in the guest.
     --
-    , _networkInterface :: TF.Attr s [TF.Attr s (NetworkInterfaceSetting s)]
+    , _networkInterface :: TF.Attr s [TF.Attr s (VirtualMachineNetworkInterface s)]
     -- ^ @network_interface@ - (Required)
     -- A specification for a virtual NIC on this virtual machine.
     --
@@ -6121,7 +6121,7 @@ data VirtualMachineResource s = VirtualMachineResource'
     -- ^ @tags@ - (Optional)
     -- A list of tag IDs to apply to this object.
     --
-    , _vapp :: TF.Attr s (VappSetting s)
+    , _vapp :: TF.Attr s (VirtualMachineVapp s)
     -- ^ @vapp@ - (Optional)
     -- VApp configuration data for this virtual machine. Can be used to provide
     -- configuration data for OVF images.
@@ -6143,7 +6143,7 @@ data VirtualMachineResource s = VirtualMachineResource'
 -- | Define a new @vsphere_virtual_machine@ resource value.
 virtualMachineResource
     :: TF.Attr s P.Text -- ^ @resource_pool_id@ ('P._resourcePoolId', 'P.resourcePoolId')
-    -> TF.Attr s [TF.Attr s (NetworkInterfaceSetting s)] -- ^ @network_interface@ ('P._networkInterface', 'P.networkInterface')
+    -> TF.Attr s [TF.Attr s (VirtualMachineNetworkInterface s)] -- ^ @network_interface@ ('P._networkInterface', 'P.networkInterface')
     -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
     -> P.Resource (VirtualMachineResource s)
 virtualMachineResource _resourcePoolId _networkInterface _name =
@@ -6286,15 +6286,15 @@ instance TF.IsValid (VirtualMachineResource s) where
         ])
            P.<> TF.settingsValidator "_cdrom"
                   (_cdrom
-                      :: VirtualMachineResource s -> TF.Attr s (CdromSetting s))
+                      :: VirtualMachineResource s -> TF.Attr s (VirtualMachineCdrom s))
                   TF.validator
            P.<> TF.settingsValidator "_clone"
                   (_clone
-                      :: VirtualMachineResource s -> TF.Attr s (CloneSetting s))
+                      :: VirtualMachineResource s -> TF.Attr s (VirtualMachineClone s))
                   TF.validator
            P.<> TF.settingsValidator "_vapp"
                   (_vapp
-                      :: VirtualMachineResource s -> TF.Attr s (VappSetting s))
+                      :: VirtualMachineResource s -> TF.Attr s (VirtualMachineVapp s))
                   TF.validator
 
 instance P.HasAlternateGuestName (VirtualMachineResource s) (TF.Attr s P.Text) where
@@ -6322,14 +6322,14 @@ instance P.HasBootRetryEnabled (VirtualMachineResource s) (TF.Attr s P.Bool) whe
         P.lens (_bootRetryEnabled :: VirtualMachineResource s -> TF.Attr s P.Bool)
                (\s a -> s { _bootRetryEnabled = a } :: VirtualMachineResource s)
 
-instance P.HasCdrom (VirtualMachineResource s) (TF.Attr s (CdromSetting s)) where
+instance P.HasCdrom (VirtualMachineResource s) (TF.Attr s (VirtualMachineCdrom s)) where
     cdrom =
-        P.lens (_cdrom :: VirtualMachineResource s -> TF.Attr s (CdromSetting s))
+        P.lens (_cdrom :: VirtualMachineResource s -> TF.Attr s (VirtualMachineCdrom s))
                (\s a -> s { _cdrom = a } :: VirtualMachineResource s)
 
-instance P.HasClone (VirtualMachineResource s) (TF.Attr s (CloneSetting s)) where
+instance P.HasClone (VirtualMachineResource s) (TF.Attr s (VirtualMachineClone s)) where
     clone =
-        P.lens (_clone :: VirtualMachineResource s -> TF.Attr s (CloneSetting s))
+        P.lens (_clone :: VirtualMachineResource s -> TF.Attr s (VirtualMachineClone s))
                (\s a -> s { _clone = a } :: VirtualMachineResource s)
 
 instance P.HasCpuHotAddEnabled (VirtualMachineResource s) (TF.Attr s P.Bool) where
@@ -6382,9 +6382,9 @@ instance P.HasDatastoreId (VirtualMachineResource s) (TF.Attr s P.Text) where
         P.lens (_datastoreId :: VirtualMachineResource s -> TF.Attr s P.Text)
                (\s a -> s { _datastoreId = a } :: VirtualMachineResource s)
 
-instance P.HasDisk (VirtualMachineResource s) (TF.Attr s [TF.Attr s (DiskSetting s)]) where
+instance P.HasDisk (VirtualMachineResource s) (TF.Attr s [TF.Attr s (VirtualMachineDisk s)]) where
     disk =
-        P.lens (_disk :: VirtualMachineResource s -> TF.Attr s [TF.Attr s (DiskSetting s)])
+        P.lens (_disk :: VirtualMachineResource s -> TF.Attr s [TF.Attr s (VirtualMachineDisk s)])
                (\s a -> s { _disk = a } :: VirtualMachineResource s)
 
 instance P.HasEfiSecureBootEnabled (VirtualMachineResource s) (TF.Attr s P.Bool) where
@@ -6492,9 +6492,9 @@ instance P.HasNestedHvEnabled (VirtualMachineResource s) (TF.Attr s P.Bool) wher
         P.lens (_nestedHvEnabled :: VirtualMachineResource s -> TF.Attr s P.Bool)
                (\s a -> s { _nestedHvEnabled = a } :: VirtualMachineResource s)
 
-instance P.HasNetworkInterface (VirtualMachineResource s) (TF.Attr s [TF.Attr s (NetworkInterfaceSetting s)]) where
+instance P.HasNetworkInterface (VirtualMachineResource s) (TF.Attr s [TF.Attr s (VirtualMachineNetworkInterface s)]) where
     networkInterface =
-        P.lens (_networkInterface :: VirtualMachineResource s -> TF.Attr s [TF.Attr s (NetworkInterfaceSetting s)])
+        P.lens (_networkInterface :: VirtualMachineResource s -> TF.Attr s [TF.Attr s (VirtualMachineNetworkInterface s)])
                (\s a -> s { _networkInterface = a } :: VirtualMachineResource s)
 
 instance P.HasNumCoresPerSocket (VirtualMachineResource s) (TF.Attr s P.Int) where
@@ -6572,9 +6572,9 @@ instance P.HasTags (VirtualMachineResource s) (TF.Attr s [TF.Attr s P.Text]) whe
         P.lens (_tags :: VirtualMachineResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _tags = a } :: VirtualMachineResource s)
 
-instance P.HasVapp (VirtualMachineResource s) (TF.Attr s (VappSetting s)) where
+instance P.HasVapp (VirtualMachineResource s) (TF.Attr s (VirtualMachineVapp s)) where
     vapp =
-        P.lens (_vapp :: VirtualMachineResource s -> TF.Attr s (VappSetting s))
+        P.lens (_vapp :: VirtualMachineResource s -> TF.Attr s (VirtualMachineVapp s))
                (\s a -> s { _vapp = a } :: VirtualMachineResource s)
 
 instance P.HasWaitForGuestNetRoutable (VirtualMachineResource s) (TF.Attr s P.Bool) where
@@ -6602,7 +6602,7 @@ instance s ~ s' => P.HasComputedDatastoreId (TF.Ref s' (VirtualMachineResource s
 instance s ~ s' => P.HasComputedDefaultIpAddress (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s P.Text) where
     computedDefaultIpAddress x = TF.compute (TF.refKey x) "default_ip_address"
 
-instance s ~ s' => P.HasComputedDisk (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s [TF.Attr s (DiskSetting s)]) where
+instance s ~ s' => P.HasComputedDisk (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s [TF.Attr s (VirtualMachineDisk s)]) where
     computedDisk x = TF.compute (TF.refKey x) "disk"
 
 instance s ~ s' => P.HasComputedGuestIpAddresses (TF.Ref s' (VirtualMachineResource s)) (TF.Attr s [TF.Attr s P.Text]) where

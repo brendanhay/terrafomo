@@ -371,7 +371,7 @@ data ContainerClusterResource s = ContainerClusterResource'
     { _additionalZones :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @additional_zones@ - (Optional)
     --
-    , _addonsConfig :: TF.Attr s (AddonsConfigSetting s)
+    , _addonsConfig :: TF.Attr s (ContainerClusterAddonsConfig s)
     -- ^ @addons_config@ - (Optional)
     --
     , _clusterIpv4Cidr :: TF.Attr s P.Text
@@ -389,19 +389,19 @@ data ContainerClusterResource s = ContainerClusterResource'
     , _initialNodeCount :: TF.Attr s P.Int
     -- ^ @initial_node_count@ - (Optional, Forces New)
     --
-    , _ipAllocationPolicy :: TF.Attr s (IpAllocationPolicySetting s)
+    , _ipAllocationPolicy :: TF.Attr s (ContainerClusterIpAllocationPolicy s)
     -- ^ @ip_allocation_policy@ - (Optional, Forces New)
     --
     , _loggingService :: TF.Attr s P.Text
     -- ^ @logging_service@ - (Optional)
     --
-    , _maintenancePolicy :: TF.Attr s (MaintenancePolicySetting s)
+    , _maintenancePolicy :: TF.Attr s (ContainerClusterMaintenancePolicy s)
     -- ^ @maintenance_policy@ - (Optional)
     --
-    , _masterAuth :: TF.Attr s (MasterAuthSetting s)
+    , _masterAuth :: TF.Attr s (ContainerClusterMasterAuth s)
     -- ^ @master_auth@ - (Optional, Forces New)
     --
-    , _masterAuthorizedNetworksConfig :: TF.Attr s (MasterAuthorizedNetworksConfigSetting s)
+    , _masterAuthorizedNetworksConfig :: TF.Attr s (ContainerClusterMasterAuthorizedNetworksConfig s)
     -- ^ @master_authorized_networks_config@ - (Optional)
     --
     , _masterIpv4CidrBlock :: TF.Attr s P.Text
@@ -419,19 +419,19 @@ data ContainerClusterResource s = ContainerClusterResource'
     , _network :: TF.Attr s P.Text
     -- ^ @network@ - (Optional, Forces New)
     --
-    , _networkPolicy :: TF.Attr s (NetworkPolicySetting s)
+    , _networkPolicy :: TF.Attr s (ContainerClusterNetworkPolicy s)
     -- ^ @network_policy@ - (Optional)
     --
-    , _nodeConfig :: TF.Attr s (NodeConfigSetting s)
+    , _nodeConfig :: TF.Attr s (ContainerClusterNodeConfig s)
     -- ^ @node_config@ - (Optional, Forces New)
     --
-    , _nodePool :: TF.Attr s [TF.Attr s (NodePoolSetting s)]
+    , _nodePool :: TF.Attr s [TF.Attr s (ContainerClusterNodePool s)]
     -- ^ @node_pool@ - (Optional, Forces New)
     --
     , _nodeVersion :: TF.Attr s P.Text
     -- ^ @node_version@ - (Optional)
     --
-    , _podSecurityPolicyConfig :: TF.Attr s (PodSecurityPolicyConfigSetting s)
+    , _podSecurityPolicyConfig :: TF.Attr s (ContainerClusterPodSecurityPolicyConfig s)
     -- ^ @pod_security_policy_config@ - (Optional)
     --
     , _privateCluster :: TF.Attr s P.Bool
@@ -549,35 +549,35 @@ instance TF.IsValid (ContainerClusterResource s) where
         ])
            P.<> TF.settingsValidator "_addonsConfig"
                   (_addonsConfig
-                      :: ContainerClusterResource s -> TF.Attr s (AddonsConfigSetting s))
+                      :: ContainerClusterResource s -> TF.Attr s (ContainerClusterAddonsConfig s))
                   TF.validator
            P.<> TF.settingsValidator "_ipAllocationPolicy"
                   (_ipAllocationPolicy
-                      :: ContainerClusterResource s -> TF.Attr s (IpAllocationPolicySetting s))
+                      :: ContainerClusterResource s -> TF.Attr s (ContainerClusterIpAllocationPolicy s))
                   TF.validator
            P.<> TF.settingsValidator "_maintenancePolicy"
                   (_maintenancePolicy
-                      :: ContainerClusterResource s -> TF.Attr s (MaintenancePolicySetting s))
+                      :: ContainerClusterResource s -> TF.Attr s (ContainerClusterMaintenancePolicy s))
                   TF.validator
            P.<> TF.settingsValidator "_masterAuth"
                   (_masterAuth
-                      :: ContainerClusterResource s -> TF.Attr s (MasterAuthSetting s))
+                      :: ContainerClusterResource s -> TF.Attr s (ContainerClusterMasterAuth s))
                   TF.validator
            P.<> TF.settingsValidator "_masterAuthorizedNetworksConfig"
                   (_masterAuthorizedNetworksConfig
-                      :: ContainerClusterResource s -> TF.Attr s (MasterAuthorizedNetworksConfigSetting s))
+                      :: ContainerClusterResource s -> TF.Attr s (ContainerClusterMasterAuthorizedNetworksConfig s))
                   TF.validator
            P.<> TF.settingsValidator "_networkPolicy"
                   (_networkPolicy
-                      :: ContainerClusterResource s -> TF.Attr s (NetworkPolicySetting s))
+                      :: ContainerClusterResource s -> TF.Attr s (ContainerClusterNetworkPolicy s))
                   TF.validator
            P.<> TF.settingsValidator "_nodeConfig"
                   (_nodeConfig
-                      :: ContainerClusterResource s -> TF.Attr s (NodeConfigSetting s))
+                      :: ContainerClusterResource s -> TF.Attr s (ContainerClusterNodeConfig s))
                   TF.validator
            P.<> TF.settingsValidator "_podSecurityPolicyConfig"
                   (_podSecurityPolicyConfig
-                      :: ContainerClusterResource s -> TF.Attr s (PodSecurityPolicyConfigSetting s))
+                      :: ContainerClusterResource s -> TF.Attr s (ContainerClusterPodSecurityPolicyConfig s))
                   TF.validator
 
 instance P.HasAdditionalZones (ContainerClusterResource s) (TF.Attr s [TF.Attr s P.Text]) where
@@ -585,9 +585,9 @@ instance P.HasAdditionalZones (ContainerClusterResource s) (TF.Attr s [TF.Attr s
         P.lens (_additionalZones :: ContainerClusterResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _additionalZones = a } :: ContainerClusterResource s)
 
-instance P.HasAddonsConfig (ContainerClusterResource s) (TF.Attr s (AddonsConfigSetting s)) where
+instance P.HasAddonsConfig (ContainerClusterResource s) (TF.Attr s (ContainerClusterAddonsConfig s)) where
     addonsConfig =
-        P.lens (_addonsConfig :: ContainerClusterResource s -> TF.Attr s (AddonsConfigSetting s))
+        P.lens (_addonsConfig :: ContainerClusterResource s -> TF.Attr s (ContainerClusterAddonsConfig s))
                (\s a -> s { _addonsConfig = a } :: ContainerClusterResource s)
 
 instance P.HasClusterIpv4Cidr (ContainerClusterResource s) (TF.Attr s P.Text) where
@@ -615,9 +615,9 @@ instance P.HasInitialNodeCount (ContainerClusterResource s) (TF.Attr s P.Int) wh
         P.lens (_initialNodeCount :: ContainerClusterResource s -> TF.Attr s P.Int)
                (\s a -> s { _initialNodeCount = a } :: ContainerClusterResource s)
 
-instance P.HasIpAllocationPolicy (ContainerClusterResource s) (TF.Attr s (IpAllocationPolicySetting s)) where
+instance P.HasIpAllocationPolicy (ContainerClusterResource s) (TF.Attr s (ContainerClusterIpAllocationPolicy s)) where
     ipAllocationPolicy =
-        P.lens (_ipAllocationPolicy :: ContainerClusterResource s -> TF.Attr s (IpAllocationPolicySetting s))
+        P.lens (_ipAllocationPolicy :: ContainerClusterResource s -> TF.Attr s (ContainerClusterIpAllocationPolicy s))
                (\s a -> s { _ipAllocationPolicy = a } :: ContainerClusterResource s)
 
 instance P.HasLoggingService (ContainerClusterResource s) (TF.Attr s P.Text) where
@@ -625,19 +625,19 @@ instance P.HasLoggingService (ContainerClusterResource s) (TF.Attr s P.Text) whe
         P.lens (_loggingService :: ContainerClusterResource s -> TF.Attr s P.Text)
                (\s a -> s { _loggingService = a } :: ContainerClusterResource s)
 
-instance P.HasMaintenancePolicy (ContainerClusterResource s) (TF.Attr s (MaintenancePolicySetting s)) where
+instance P.HasMaintenancePolicy (ContainerClusterResource s) (TF.Attr s (ContainerClusterMaintenancePolicy s)) where
     maintenancePolicy =
-        P.lens (_maintenancePolicy :: ContainerClusterResource s -> TF.Attr s (MaintenancePolicySetting s))
+        P.lens (_maintenancePolicy :: ContainerClusterResource s -> TF.Attr s (ContainerClusterMaintenancePolicy s))
                (\s a -> s { _maintenancePolicy = a } :: ContainerClusterResource s)
 
-instance P.HasMasterAuth (ContainerClusterResource s) (TF.Attr s (MasterAuthSetting s)) where
+instance P.HasMasterAuth (ContainerClusterResource s) (TF.Attr s (ContainerClusterMasterAuth s)) where
     masterAuth =
-        P.lens (_masterAuth :: ContainerClusterResource s -> TF.Attr s (MasterAuthSetting s))
+        P.lens (_masterAuth :: ContainerClusterResource s -> TF.Attr s (ContainerClusterMasterAuth s))
                (\s a -> s { _masterAuth = a } :: ContainerClusterResource s)
 
-instance P.HasMasterAuthorizedNetworksConfig (ContainerClusterResource s) (TF.Attr s (MasterAuthorizedNetworksConfigSetting s)) where
+instance P.HasMasterAuthorizedNetworksConfig (ContainerClusterResource s) (TF.Attr s (ContainerClusterMasterAuthorizedNetworksConfig s)) where
     masterAuthorizedNetworksConfig =
-        P.lens (_masterAuthorizedNetworksConfig :: ContainerClusterResource s -> TF.Attr s (MasterAuthorizedNetworksConfigSetting s))
+        P.lens (_masterAuthorizedNetworksConfig :: ContainerClusterResource s -> TF.Attr s (ContainerClusterMasterAuthorizedNetworksConfig s))
                (\s a -> s { _masterAuthorizedNetworksConfig = a } :: ContainerClusterResource s)
 
 instance P.HasMasterIpv4CidrBlock (ContainerClusterResource s) (TF.Attr s P.Text) where
@@ -665,19 +665,19 @@ instance P.HasNetwork (ContainerClusterResource s) (TF.Attr s P.Text) where
         P.lens (_network :: ContainerClusterResource s -> TF.Attr s P.Text)
                (\s a -> s { _network = a } :: ContainerClusterResource s)
 
-instance P.HasNetworkPolicy (ContainerClusterResource s) (TF.Attr s (NetworkPolicySetting s)) where
+instance P.HasNetworkPolicy (ContainerClusterResource s) (TF.Attr s (ContainerClusterNetworkPolicy s)) where
     networkPolicy =
-        P.lens (_networkPolicy :: ContainerClusterResource s -> TF.Attr s (NetworkPolicySetting s))
+        P.lens (_networkPolicy :: ContainerClusterResource s -> TF.Attr s (ContainerClusterNetworkPolicy s))
                (\s a -> s { _networkPolicy = a } :: ContainerClusterResource s)
 
-instance P.HasNodeConfig (ContainerClusterResource s) (TF.Attr s (NodeConfigSetting s)) where
+instance P.HasNodeConfig (ContainerClusterResource s) (TF.Attr s (ContainerClusterNodeConfig s)) where
     nodeConfig =
-        P.lens (_nodeConfig :: ContainerClusterResource s -> TF.Attr s (NodeConfigSetting s))
+        P.lens (_nodeConfig :: ContainerClusterResource s -> TF.Attr s (ContainerClusterNodeConfig s))
                (\s a -> s { _nodeConfig = a } :: ContainerClusterResource s)
 
-instance P.HasNodePool (ContainerClusterResource s) (TF.Attr s [TF.Attr s (NodePoolSetting s)]) where
+instance P.HasNodePool (ContainerClusterResource s) (TF.Attr s [TF.Attr s (ContainerClusterNodePool s)]) where
     nodePool =
-        P.lens (_nodePool :: ContainerClusterResource s -> TF.Attr s [TF.Attr s (NodePoolSetting s)])
+        P.lens (_nodePool :: ContainerClusterResource s -> TF.Attr s [TF.Attr s (ContainerClusterNodePool s)])
                (\s a -> s { _nodePool = a } :: ContainerClusterResource s)
 
 instance P.HasNodeVersion (ContainerClusterResource s) (TF.Attr s P.Text) where
@@ -685,9 +685,9 @@ instance P.HasNodeVersion (ContainerClusterResource s) (TF.Attr s P.Text) where
         P.lens (_nodeVersion :: ContainerClusterResource s -> TF.Attr s P.Text)
                (\s a -> s { _nodeVersion = a } :: ContainerClusterResource s)
 
-instance P.HasPodSecurityPolicyConfig (ContainerClusterResource s) (TF.Attr s (PodSecurityPolicyConfigSetting s)) where
+instance P.HasPodSecurityPolicyConfig (ContainerClusterResource s) (TF.Attr s (ContainerClusterPodSecurityPolicyConfig s)) where
     podSecurityPolicyConfig =
-        P.lens (_podSecurityPolicyConfig :: ContainerClusterResource s -> TF.Attr s (PodSecurityPolicyConfigSetting s))
+        P.lens (_podSecurityPolicyConfig :: ContainerClusterResource s -> TF.Attr s (ContainerClusterPodSecurityPolicyConfig s))
                (\s a -> s { _podSecurityPolicyConfig = a } :: ContainerClusterResource s)
 
 instance P.HasPrivateCluster (ContainerClusterResource s) (TF.Attr s P.Bool) where
@@ -731,7 +731,7 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (ContainerClusterResource s)) (TF.
 instance s ~ s' => P.HasComputedAdditionalZones (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedAdditionalZones x = TF.compute (TF.refKey x) "additional_zones"
 
-instance s ~ s' => P.HasComputedAddonsConfig (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s (AddonsConfigSetting s)) where
+instance s ~ s' => P.HasComputedAddonsConfig (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s (ContainerClusterAddonsConfig s)) where
     computedAddonsConfig x = TF.compute (TF.refKey x) "addons_config"
 
 instance s ~ s' => P.HasComputedClusterIpv4Cidr (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
@@ -746,7 +746,7 @@ instance s ~ s' => P.HasComputedInstanceGroupUrls (TF.Ref s' (ContainerClusterRe
 instance s ~ s' => P.HasComputedLoggingService (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
     computedLoggingService x = TF.compute (TF.refKey x) "logging_service"
 
-instance s ~ s' => P.HasComputedMasterAuth (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s (MasterAuthSetting s)) where
+instance s ~ s' => P.HasComputedMasterAuth (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s (ContainerClusterMasterAuth s)) where
     computedMasterAuth x = TF.compute (TF.refKey x) "master_auth"
 
 instance s ~ s' => P.HasComputedMasterVersion (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
@@ -755,13 +755,13 @@ instance s ~ s' => P.HasComputedMasterVersion (TF.Ref s' (ContainerClusterResour
 instance s ~ s' => P.HasComputedMonitoringService (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
     computedMonitoringService x = TF.compute (TF.refKey x) "monitoring_service"
 
-instance s ~ s' => P.HasComputedNetworkPolicy (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s (NetworkPolicySetting s)) where
+instance s ~ s' => P.HasComputedNetworkPolicy (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s (ContainerClusterNetworkPolicy s)) where
     computedNetworkPolicy x = TF.compute (TF.refKey x) "network_policy"
 
-instance s ~ s' => P.HasComputedNodeConfig (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s (NodeConfigSetting s)) where
+instance s ~ s' => P.HasComputedNodeConfig (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s (ContainerClusterNodeConfig s)) where
     computedNodeConfig x = TF.compute (TF.refKey x) "node_config"
 
-instance s ~ s' => P.HasComputedNodePool (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s [TF.Attr s (NodePoolSetting s)]) where
+instance s ~ s' => P.HasComputedNodePool (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s [TF.Attr s (ContainerClusterNodePool s)]) where
     computedNodePool x = TF.compute (TF.refKey x) "node_pool"
 
 instance s ~ s' => P.HasComputedNodeVersion (TF.Ref s' (ContainerClusterResource s)) (TF.Attr s P.Text) where
@@ -784,7 +784,7 @@ instance s ~ s' => P.HasComputedZone (TF.Ref s' (ContainerClusterResource s)) (T
 -- See the <https://www.terraform.io/docs/providers/google/r/container_node_pool.html terraform documentation>
 -- for more information.
 data ContainerNodePoolResource s = ContainerNodePoolResource'
-    { _autoscaling      :: TF.Attr s (AutoscalingSetting s)
+    { _autoscaling      :: TF.Attr s (ContainerNodePoolAutoscaling s)
     -- ^ @autoscaling@ - (Optional)
     --
     , _cluster          :: TF.Attr s P.Text
@@ -793,13 +793,13 @@ data ContainerNodePoolResource s = ContainerNodePoolResource'
     , _initialNodeCount :: TF.Attr s P.Int
     -- ^ @initial_node_count@ - (Optional, Forces New)
     --
-    , _management       :: TF.Attr s (ManagementSetting s)
+    , _management       :: TF.Attr s (ContainerNodePoolManagement s)
     -- ^ @management@ - (Optional)
     --
     , _name             :: TF.Attr s P.Text
     -- ^ @name@ - (Optional, Forces New)
     --
-    , _nodeConfig       :: TF.Attr s (NodeConfigSetting s)
+    , _nodeConfig       :: TF.Attr s (ContainerNodePoolNodeConfig s)
     -- ^ @node_config@ - (Optional, Forces New)
     --
     , _nodeCount        :: TF.Attr s P.Int
@@ -858,20 +858,20 @@ instance TF.IsValid (ContainerNodePoolResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_autoscaling"
                   (_autoscaling
-                      :: ContainerNodePoolResource s -> TF.Attr s (AutoscalingSetting s))
+                      :: ContainerNodePoolResource s -> TF.Attr s (ContainerNodePoolAutoscaling s))
                   TF.validator
            P.<> TF.settingsValidator "_management"
                   (_management
-                      :: ContainerNodePoolResource s -> TF.Attr s (ManagementSetting s))
+                      :: ContainerNodePoolResource s -> TF.Attr s (ContainerNodePoolManagement s))
                   TF.validator
            P.<> TF.settingsValidator "_nodeConfig"
                   (_nodeConfig
-                      :: ContainerNodePoolResource s -> TF.Attr s (NodeConfigSetting s))
+                      :: ContainerNodePoolResource s -> TF.Attr s (ContainerNodePoolNodeConfig s))
                   TF.validator
 
-instance P.HasAutoscaling (ContainerNodePoolResource s) (TF.Attr s (AutoscalingSetting s)) where
+instance P.HasAutoscaling (ContainerNodePoolResource s) (TF.Attr s (ContainerNodePoolAutoscaling s)) where
     autoscaling =
-        P.lens (_autoscaling :: ContainerNodePoolResource s -> TF.Attr s (AutoscalingSetting s))
+        P.lens (_autoscaling :: ContainerNodePoolResource s -> TF.Attr s (ContainerNodePoolAutoscaling s))
                (\s a -> s { _autoscaling = a } :: ContainerNodePoolResource s)
 
 instance P.HasCluster (ContainerNodePoolResource s) (TF.Attr s P.Text) where
@@ -884,9 +884,9 @@ instance P.HasInitialNodeCount (ContainerNodePoolResource s) (TF.Attr s P.Int) w
         P.lens (_initialNodeCount :: ContainerNodePoolResource s -> TF.Attr s P.Int)
                (\s a -> s { _initialNodeCount = a } :: ContainerNodePoolResource s)
 
-instance P.HasManagement (ContainerNodePoolResource s) (TF.Attr s (ManagementSetting s)) where
+instance P.HasManagement (ContainerNodePoolResource s) (TF.Attr s (ContainerNodePoolManagement s)) where
     management =
-        P.lens (_management :: ContainerNodePoolResource s -> TF.Attr s (ManagementSetting s))
+        P.lens (_management :: ContainerNodePoolResource s -> TF.Attr s (ContainerNodePoolManagement s))
                (\s a -> s { _management = a } :: ContainerNodePoolResource s)
 
 instance P.HasName (ContainerNodePoolResource s) (TF.Attr s P.Text) where
@@ -894,9 +894,9 @@ instance P.HasName (ContainerNodePoolResource s) (TF.Attr s P.Text) where
         P.lens (_name :: ContainerNodePoolResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ContainerNodePoolResource s)
 
-instance P.HasNodeConfig (ContainerNodePoolResource s) (TF.Attr s (NodeConfigSetting s)) where
+instance P.HasNodeConfig (ContainerNodePoolResource s) (TF.Attr s (ContainerNodePoolNodeConfig s)) where
     nodeConfig =
-        P.lens (_nodeConfig :: ContainerNodePoolResource s -> TF.Attr s (NodeConfigSetting s))
+        P.lens (_nodeConfig :: ContainerNodePoolResource s -> TF.Attr s (ContainerNodePoolNodeConfig s))
                (\s a -> s { _nodeConfig = a } :: ContainerNodePoolResource s)
 
 instance P.HasNodeCount (ContainerNodePoolResource s) (TF.Attr s P.Int) where
@@ -933,13 +933,13 @@ instance s ~ s' => P.HasComputedInitialNodeCount (TF.Ref s' (ContainerNodePoolRe
 instance s ~ s' => P.HasComputedInstanceGroupUrls (TF.Ref s' (ContainerNodePoolResource s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedInstanceGroupUrls x = TF.compute (TF.refKey x) "instance_group_urls"
 
-instance s ~ s' => P.HasComputedManagement (TF.Ref s' (ContainerNodePoolResource s)) (TF.Attr s (ManagementSetting s)) where
+instance s ~ s' => P.HasComputedManagement (TF.Ref s' (ContainerNodePoolResource s)) (TF.Attr s (ContainerNodePoolManagement s)) where
     computedManagement x = TF.compute (TF.refKey x) "management"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (ContainerNodePoolResource s)) (TF.Attr s P.Text) where
     computedName x = TF.compute (TF.refKey x) "name"
 
-instance s ~ s' => P.HasComputedNodeConfig (TF.Ref s' (ContainerNodePoolResource s)) (TF.Attr s (NodeConfigSetting s)) where
+instance s ~ s' => P.HasComputedNodeConfig (TF.Ref s' (ContainerNodePoolResource s)) (TF.Attr s (ContainerNodePoolNodeConfig s)) where
     computedNodeConfig x = TF.compute (TF.refKey x) "node_config"
 
 instance s ~ s' => P.HasComputedNodeCount (TF.Ref s' (ContainerNodePoolResource s)) (TF.Attr s P.Int) where
@@ -1070,7 +1070,7 @@ instance s ~ s' => P.HasComputedState (TF.Ref s' (DataflowJobResource s)) (TF.At
 -- See the <https://www.terraform.io/docs/providers/google/r/dataproc_cluster.html terraform documentation>
 -- for more information.
 data DataprocClusterResource s = DataprocClusterResource'
-    { _clusterConfig :: TF.Attr s (ClusterConfigSetting s)
+    { _clusterConfig :: TF.Attr s (DataprocClusterClusterConfig s)
     -- ^ @cluster_config@ - (Optional)
     --
     , _labels        :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
@@ -1114,12 +1114,12 @@ instance TF.IsValid (DataprocClusterResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_clusterConfig"
                   (_clusterConfig
-                      :: DataprocClusterResource s -> TF.Attr s (ClusterConfigSetting s))
+                      :: DataprocClusterResource s -> TF.Attr s (DataprocClusterClusterConfig s))
                   TF.validator
 
-instance P.HasClusterConfig (DataprocClusterResource s) (TF.Attr s (ClusterConfigSetting s)) where
+instance P.HasClusterConfig (DataprocClusterResource s) (TF.Attr s (DataprocClusterClusterConfig s)) where
     clusterConfig =
-        P.lens (_clusterConfig :: DataprocClusterResource s -> TF.Attr s (ClusterConfigSetting s))
+        P.lens (_clusterConfig :: DataprocClusterResource s -> TF.Attr s (DataprocClusterClusterConfig s))
                (\s a -> s { _clusterConfig = a } :: DataprocClusterResource s)
 
 instance P.HasLabels (DataprocClusterResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
@@ -1145,7 +1145,7 @@ instance P.HasRegion (DataprocClusterResource s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (DataprocClusterResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedClusterConfig (TF.Ref s' (DataprocClusterResource s)) (TF.Attr s (ClusterConfigSetting s)) where
+instance s ~ s' => P.HasComputedClusterConfig (TF.Ref s' (DataprocClusterResource s)) (TF.Attr s (DataprocClusterClusterConfig s)) where
     computedClusterConfig x = TF.compute (TF.refKey x) "cluster_config"
 
 instance s ~ s' => P.HasComputedLabels (TF.Ref s' (DataprocClusterResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
@@ -1162,7 +1162,7 @@ data DataprocJobResource s = DataprocJobResource'
     { _forceDelete    :: TF.Attr s P.Bool
     -- ^ @force_delete@ - (Optional)
     --
-    , _hadoopConfig   :: TF.Attr s (HadoopConfigSetting s)
+    , _hadoopConfig   :: TF.Attr s (DataprocJobHadoopConfig s)
     -- ^ @hadoop_config@ - (Optional, Forces New)
     --
     -- Conflicts with:
@@ -1172,7 +1172,7 @@ data DataprocJobResource s = DataprocJobResource'
     -- * 'pysparkConfig'
     -- * 'sparkConfig'
     -- * 'sparksqlConfig'
-    , _hiveConfig     :: TF.Attr s (HiveConfigSetting s)
+    , _hiveConfig     :: TF.Attr s (DataprocJobHiveConfig s)
     -- ^ @hive_config@ - (Optional, Forces New)
     --
     -- Conflicts with:
@@ -1186,7 +1186,7 @@ data DataprocJobResource s = DataprocJobResource'
     -- ^ @labels@ - (Optional, Forces New)
     -- Optional. The labels to associate with this job.
     --
-    , _pigConfig      :: TF.Attr s (PigConfigSetting s)
+    , _pigConfig      :: TF.Attr s (DataprocJobPigConfig s)
     -- ^ @pig_config@ - (Optional, Forces New)
     --
     -- Conflicts with:
@@ -1196,13 +1196,13 @@ data DataprocJobResource s = DataprocJobResource'
     -- * 'pysparkConfig'
     -- * 'sparkConfig'
     -- * 'sparksqlConfig'
-    , _placement      :: TF.Attr s (PlacementSetting s)
+    , _placement      :: TF.Attr s (DataprocJobPlacement s)
     -- ^ @placement@ - (Required)
     --
     , _project        :: TF.Attr s P.Text
     -- ^ @project@ - (Optional, Forces New)
     --
-    , _pysparkConfig  :: TF.Attr s (PysparkConfigSetting s)
+    , _pysparkConfig  :: TF.Attr s (DataprocJobPysparkConfig s)
     -- ^ @pyspark_config@ - (Optional, Forces New)
     --
     -- Conflicts with:
@@ -1212,17 +1212,17 @@ data DataprocJobResource s = DataprocJobResource'
     -- * 'pigConfig'
     -- * 'sparkConfig'
     -- * 'sparksqlConfig'
-    , _reference      :: TF.Attr s (ReferenceSetting s)
+    , _reference      :: TF.Attr s (DataprocJobReference s)
     -- ^ @reference@ - (Optional)
     --
     , _region         :: TF.Attr s P.Text
     -- ^ @region@ - (Optional, Forces New)
     --
-    , _scheduling     :: TF.Attr s (SchedulingSetting s)
+    , _scheduling     :: TF.Attr s (DataprocJobScheduling s)
     -- ^ @scheduling@ - (Optional, Forces New)
     -- Optional. Job scheduling configuration.
     --
-    , _sparkConfig    :: TF.Attr s (SparkConfigSetting s)
+    , _sparkConfig    :: TF.Attr s (DataprocJobSparkConfig s)
     -- ^ @spark_config@ - (Optional, Forces New)
     --
     -- Conflicts with:
@@ -1232,7 +1232,7 @@ data DataprocJobResource s = DataprocJobResource'
     -- * 'pigConfig'
     -- * 'pysparkConfig'
     -- * 'sparksqlConfig'
-    , _sparksqlConfig :: TF.Attr s (SparksqlConfigSetting s)
+    , _sparksqlConfig :: TF.Attr s (DataprocJobSparksqlConfig s)
     -- ^ @sparksql_config@ - (Optional, Forces New)
     --
     -- Conflicts with:
@@ -1246,7 +1246,7 @@ data DataprocJobResource s = DataprocJobResource'
 
 -- | Define a new @google_dataproc_job@ resource value.
 dataprocJobResource
-    :: TF.Attr s (PlacementSetting s) -- ^ @placement@ ('P._placement', 'P.placement')
+    :: TF.Attr s (DataprocJobPlacement s) -- ^ @placement@ ('P._placement', 'P.placement')
     -> P.Resource (DataprocJobResource s)
 dataprocJobResource _placement =
     TF.unsafeResource "google_dataproc_job" TF.validator $
@@ -1318,39 +1318,39 @@ instance TF.IsValid (DataprocJobResource s) where
         ])
            P.<> TF.settingsValidator "_hadoopConfig"
                   (_hadoopConfig
-                      :: DataprocJobResource s -> TF.Attr s (HadoopConfigSetting s))
+                      :: DataprocJobResource s -> TF.Attr s (DataprocJobHadoopConfig s))
                   TF.validator
            P.<> TF.settingsValidator "_hiveConfig"
                   (_hiveConfig
-                      :: DataprocJobResource s -> TF.Attr s (HiveConfigSetting s))
+                      :: DataprocJobResource s -> TF.Attr s (DataprocJobHiveConfig s))
                   TF.validator
            P.<> TF.settingsValidator "_pigConfig"
                   (_pigConfig
-                      :: DataprocJobResource s -> TF.Attr s (PigConfigSetting s))
+                      :: DataprocJobResource s -> TF.Attr s (DataprocJobPigConfig s))
                   TF.validator
            P.<> TF.settingsValidator "_placement"
                   (_placement
-                      :: DataprocJobResource s -> TF.Attr s (PlacementSetting s))
+                      :: DataprocJobResource s -> TF.Attr s (DataprocJobPlacement s))
                   TF.validator
            P.<> TF.settingsValidator "_pysparkConfig"
                   (_pysparkConfig
-                      :: DataprocJobResource s -> TF.Attr s (PysparkConfigSetting s))
+                      :: DataprocJobResource s -> TF.Attr s (DataprocJobPysparkConfig s))
                   TF.validator
            P.<> TF.settingsValidator "_reference"
                   (_reference
-                      :: DataprocJobResource s -> TF.Attr s (ReferenceSetting s))
+                      :: DataprocJobResource s -> TF.Attr s (DataprocJobReference s))
                   TF.validator
            P.<> TF.settingsValidator "_scheduling"
                   (_scheduling
-                      :: DataprocJobResource s -> TF.Attr s (SchedulingSetting s))
+                      :: DataprocJobResource s -> TF.Attr s (DataprocJobScheduling s))
                   TF.validator
            P.<> TF.settingsValidator "_sparkConfig"
                   (_sparkConfig
-                      :: DataprocJobResource s -> TF.Attr s (SparkConfigSetting s))
+                      :: DataprocJobResource s -> TF.Attr s (DataprocJobSparkConfig s))
                   TF.validator
            P.<> TF.settingsValidator "_sparksqlConfig"
                   (_sparksqlConfig
-                      :: DataprocJobResource s -> TF.Attr s (SparksqlConfigSetting s))
+                      :: DataprocJobResource s -> TF.Attr s (DataprocJobSparksqlConfig s))
                   TF.validator
 
 instance P.HasForceDelete (DataprocJobResource s) (TF.Attr s P.Bool) where
@@ -1358,14 +1358,14 @@ instance P.HasForceDelete (DataprocJobResource s) (TF.Attr s P.Bool) where
         P.lens (_forceDelete :: DataprocJobResource s -> TF.Attr s P.Bool)
                (\s a -> s { _forceDelete = a } :: DataprocJobResource s)
 
-instance P.HasHadoopConfig (DataprocJobResource s) (TF.Attr s (HadoopConfigSetting s)) where
+instance P.HasHadoopConfig (DataprocJobResource s) (TF.Attr s (DataprocJobHadoopConfig s)) where
     hadoopConfig =
-        P.lens (_hadoopConfig :: DataprocJobResource s -> TF.Attr s (HadoopConfigSetting s))
+        P.lens (_hadoopConfig :: DataprocJobResource s -> TF.Attr s (DataprocJobHadoopConfig s))
                (\s a -> s { _hadoopConfig = a } :: DataprocJobResource s)
 
-instance P.HasHiveConfig (DataprocJobResource s) (TF.Attr s (HiveConfigSetting s)) where
+instance P.HasHiveConfig (DataprocJobResource s) (TF.Attr s (DataprocJobHiveConfig s)) where
     hiveConfig =
-        P.lens (_hiveConfig :: DataprocJobResource s -> TF.Attr s (HiveConfigSetting s))
+        P.lens (_hiveConfig :: DataprocJobResource s -> TF.Attr s (DataprocJobHiveConfig s))
                (\s a -> s { _hiveConfig = a } :: DataprocJobResource s)
 
 instance P.HasLabels (DataprocJobResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
@@ -1373,14 +1373,14 @@ instance P.HasLabels (DataprocJobResource s) (TF.Attr s (P.Map P.Text (TF.Attr s
         P.lens (_labels :: DataprocJobResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _labels = a } :: DataprocJobResource s)
 
-instance P.HasPigConfig (DataprocJobResource s) (TF.Attr s (PigConfigSetting s)) where
+instance P.HasPigConfig (DataprocJobResource s) (TF.Attr s (DataprocJobPigConfig s)) where
     pigConfig =
-        P.lens (_pigConfig :: DataprocJobResource s -> TF.Attr s (PigConfigSetting s))
+        P.lens (_pigConfig :: DataprocJobResource s -> TF.Attr s (DataprocJobPigConfig s))
                (\s a -> s { _pigConfig = a } :: DataprocJobResource s)
 
-instance P.HasPlacement (DataprocJobResource s) (TF.Attr s (PlacementSetting s)) where
+instance P.HasPlacement (DataprocJobResource s) (TF.Attr s (DataprocJobPlacement s)) where
     placement =
-        P.lens (_placement :: DataprocJobResource s -> TF.Attr s (PlacementSetting s))
+        P.lens (_placement :: DataprocJobResource s -> TF.Attr s (DataprocJobPlacement s))
                (\s a -> s { _placement = a } :: DataprocJobResource s)
 
 instance P.HasProject (DataprocJobResource s) (TF.Attr s P.Text) where
@@ -1388,14 +1388,14 @@ instance P.HasProject (DataprocJobResource s) (TF.Attr s P.Text) where
         P.lens (_project :: DataprocJobResource s -> TF.Attr s P.Text)
                (\s a -> s { _project = a } :: DataprocJobResource s)
 
-instance P.HasPysparkConfig (DataprocJobResource s) (TF.Attr s (PysparkConfigSetting s)) where
+instance P.HasPysparkConfig (DataprocJobResource s) (TF.Attr s (DataprocJobPysparkConfig s)) where
     pysparkConfig =
-        P.lens (_pysparkConfig :: DataprocJobResource s -> TF.Attr s (PysparkConfigSetting s))
+        P.lens (_pysparkConfig :: DataprocJobResource s -> TF.Attr s (DataprocJobPysparkConfig s))
                (\s a -> s { _pysparkConfig = a } :: DataprocJobResource s)
 
-instance P.HasReference (DataprocJobResource s) (TF.Attr s (ReferenceSetting s)) where
+instance P.HasReference (DataprocJobResource s) (TF.Attr s (DataprocJobReference s)) where
     reference =
-        P.lens (_reference :: DataprocJobResource s -> TF.Attr s (ReferenceSetting s))
+        P.lens (_reference :: DataprocJobResource s -> TF.Attr s (DataprocJobReference s))
                (\s a -> s { _reference = a } :: DataprocJobResource s)
 
 instance P.HasRegion (DataprocJobResource s) (TF.Attr s P.Text) where
@@ -1403,19 +1403,19 @@ instance P.HasRegion (DataprocJobResource s) (TF.Attr s P.Text) where
         P.lens (_region :: DataprocJobResource s -> TF.Attr s P.Text)
                (\s a -> s { _region = a } :: DataprocJobResource s)
 
-instance P.HasScheduling (DataprocJobResource s) (TF.Attr s (SchedulingSetting s)) where
+instance P.HasScheduling (DataprocJobResource s) (TF.Attr s (DataprocJobScheduling s)) where
     scheduling =
-        P.lens (_scheduling :: DataprocJobResource s -> TF.Attr s (SchedulingSetting s))
+        P.lens (_scheduling :: DataprocJobResource s -> TF.Attr s (DataprocJobScheduling s))
                (\s a -> s { _scheduling = a } :: DataprocJobResource s)
 
-instance P.HasSparkConfig (DataprocJobResource s) (TF.Attr s (SparkConfigSetting s)) where
+instance P.HasSparkConfig (DataprocJobResource s) (TF.Attr s (DataprocJobSparkConfig s)) where
     sparkConfig =
-        P.lens (_sparkConfig :: DataprocJobResource s -> TF.Attr s (SparkConfigSetting s))
+        P.lens (_sparkConfig :: DataprocJobResource s -> TF.Attr s (DataprocJobSparkConfig s))
                (\s a -> s { _sparkConfig = a } :: DataprocJobResource s)
 
-instance P.HasSparksqlConfig (DataprocJobResource s) (TF.Attr s (SparksqlConfigSetting s)) where
+instance P.HasSparksqlConfig (DataprocJobResource s) (TF.Attr s (DataprocJobSparksqlConfig s)) where
     sparksqlConfig =
-        P.lens (_sparksqlConfig :: DataprocJobResource s -> TF.Attr s (SparksqlConfigSetting s))
+        P.lens (_sparksqlConfig :: DataprocJobResource s -> TF.Attr s (DataprocJobSparksqlConfig s))
                (\s a -> s { _sparksqlConfig = a } :: DataprocJobResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (DataprocJobResource s)) (TF.Attr s P.Text) where
@@ -1430,10 +1430,10 @@ instance s ~ s' => P.HasComputedDriverOutputResourceUri (TF.Ref s' (DataprocJobR
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (DataprocJobResource s)) (TF.Attr s P.Text) where
     computedProject x = TF.compute (TF.refKey x) "project"
 
-instance s ~ s' => P.HasComputedReference (TF.Ref s' (DataprocJobResource s)) (TF.Attr s (ReferenceSetting s)) where
+instance s ~ s' => P.HasComputedReference (TF.Ref s' (DataprocJobResource s)) (TF.Attr s (DataprocJobReference s)) where
     computedReference x = TF.compute (TF.refKey x) "reference"
 
-instance s ~ s' => P.HasComputedStatus (TF.Ref s' (DataprocJobResource s)) (TF.Attr s (StatusSetting s)) where
+instance s ~ s' => P.HasComputedStatus (TF.Ref s' (DataprocJobResource s)) (TF.Attr s (DataprocJobStatus s)) where
     computedStatus x = TF.compute (TF.refKey x) "status"
 
 -- | @google_dns_managed_zone@ Resource.
@@ -1704,7 +1704,7 @@ instance P.HasServiceName (EndpointsServiceResource s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (EndpointsServiceResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedApis (TF.Ref s' (EndpointsServiceResource s)) (TF.Attr s [TF.Attr s (ApisSetting s)]) where
+instance s ~ s' => P.HasComputedApis (TF.Ref s' (EndpointsServiceResource s)) (TF.Attr s [TF.Attr s (EndpointsServiceApis s)]) where
     computedApis x = TF.compute (TF.refKey x) "apis"
 
 instance s ~ s' => P.HasComputedConfigId (TF.Ref s' (EndpointsServiceResource s)) (TF.Attr s P.Text) where
@@ -1713,7 +1713,7 @@ instance s ~ s' => P.HasComputedConfigId (TF.Ref s' (EndpointsServiceResource s)
 instance s ~ s' => P.HasComputedDnsAddress (TF.Ref s' (EndpointsServiceResource s)) (TF.Attr s P.Text) where
     computedDnsAddress x = TF.compute (TF.refKey x) "dns_address"
 
-instance s ~ s' => P.HasComputedEndpoints (TF.Ref s' (EndpointsServiceResource s)) (TF.Attr s [TF.Attr s (EndpointsSetting s)]) where
+instance s ~ s' => P.HasComputedEndpoints (TF.Ref s' (EndpointsServiceResource s)) (TF.Attr s [TF.Attr s (EndpointsServiceEndpoints s)]) where
     computedEndpoints x = TF.compute (TF.refKey x) "endpoints"
 
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (EndpointsServiceResource s)) (TF.Attr s P.Text) where
@@ -1896,7 +1896,7 @@ instance s ~ s' => P.HasComputedEtag (TF.Ref s' (FolderIamPolicyResource s)) (TF
 -- See the <https://www.terraform.io/docs/providers/google/r/folder_organization_policy.html terraform documentation>
 -- for more information.
 data FolderOrganizationPolicyResource s = FolderOrganizationPolicyResource'
-    { _booleanPolicy :: TF.Attr s (BooleanPolicySetting s)
+    { _booleanPolicy :: TF.Attr s (FolderOrganizationPolicyBooleanPolicy s)
     -- ^ @boolean_policy@ - (Optional)
     --
     -- Conflicts with:
@@ -1909,14 +1909,14 @@ data FolderOrganizationPolicyResource s = FolderOrganizationPolicyResource'
     , _folder        :: TF.Attr s P.Text
     -- ^ @folder@ - (Required, Forces New)
     --
-    , _listPolicy    :: TF.Attr s (ListPolicySetting s)
+    , _listPolicy    :: TF.Attr s (FolderOrganizationPolicyListPolicy s)
     -- ^ @list_policy@ - (Optional)
     --
     -- Conflicts with:
     --
     -- * 'booleanPolicy'
     -- * 'restorePolicy'
-    , _restorePolicy :: TF.Attr s (RestorePolicySetting s)
+    , _restorePolicy :: TF.Attr s (FolderOrganizationPolicyRestorePolicy s)
     -- ^ @restore_policy@ - (Optional)
     --
     -- Conflicts with:
@@ -1974,20 +1974,20 @@ instance TF.IsValid (FolderOrganizationPolicyResource s) where
         ])
            P.<> TF.settingsValidator "_booleanPolicy"
                   (_booleanPolicy
-                      :: FolderOrganizationPolicyResource s -> TF.Attr s (BooleanPolicySetting s))
+                      :: FolderOrganizationPolicyResource s -> TF.Attr s (FolderOrganizationPolicyBooleanPolicy s))
                   TF.validator
            P.<> TF.settingsValidator "_listPolicy"
                   (_listPolicy
-                      :: FolderOrganizationPolicyResource s -> TF.Attr s (ListPolicySetting s))
+                      :: FolderOrganizationPolicyResource s -> TF.Attr s (FolderOrganizationPolicyListPolicy s))
                   TF.validator
            P.<> TF.settingsValidator "_restorePolicy"
                   (_restorePolicy
-                      :: FolderOrganizationPolicyResource s -> TF.Attr s (RestorePolicySetting s))
+                      :: FolderOrganizationPolicyResource s -> TF.Attr s (FolderOrganizationPolicyRestorePolicy s))
                   TF.validator
 
-instance P.HasBooleanPolicy (FolderOrganizationPolicyResource s) (TF.Attr s (BooleanPolicySetting s)) where
+instance P.HasBooleanPolicy (FolderOrganizationPolicyResource s) (TF.Attr s (FolderOrganizationPolicyBooleanPolicy s)) where
     booleanPolicy =
-        P.lens (_booleanPolicy :: FolderOrganizationPolicyResource s -> TF.Attr s (BooleanPolicySetting s))
+        P.lens (_booleanPolicy :: FolderOrganizationPolicyResource s -> TF.Attr s (FolderOrganizationPolicyBooleanPolicy s))
                (\s a -> s { _booleanPolicy = a } :: FolderOrganizationPolicyResource s)
 
 instance P.HasConstraint (FolderOrganizationPolicyResource s) (TF.Attr s P.Text) where
@@ -2000,14 +2000,14 @@ instance P.HasFolder (FolderOrganizationPolicyResource s) (TF.Attr s P.Text) whe
         P.lens (_folder :: FolderOrganizationPolicyResource s -> TF.Attr s P.Text)
                (\s a -> s { _folder = a } :: FolderOrganizationPolicyResource s)
 
-instance P.HasListPolicy (FolderOrganizationPolicyResource s) (TF.Attr s (ListPolicySetting s)) where
+instance P.HasListPolicy (FolderOrganizationPolicyResource s) (TF.Attr s (FolderOrganizationPolicyListPolicy s)) where
     listPolicy =
-        P.lens (_listPolicy :: FolderOrganizationPolicyResource s -> TF.Attr s (ListPolicySetting s))
+        P.lens (_listPolicy :: FolderOrganizationPolicyResource s -> TF.Attr s (FolderOrganizationPolicyListPolicy s))
                (\s a -> s { _listPolicy = a } :: FolderOrganizationPolicyResource s)
 
-instance P.HasRestorePolicy (FolderOrganizationPolicyResource s) (TF.Attr s (RestorePolicySetting s)) where
+instance P.HasRestorePolicy (FolderOrganizationPolicyResource s) (TF.Attr s (FolderOrganizationPolicyRestorePolicy s)) where
     restorePolicy =
-        P.lens (_restorePolicy :: FolderOrganizationPolicyResource s -> TF.Attr s (RestorePolicySetting s))
+        P.lens (_restorePolicy :: FolderOrganizationPolicyResource s -> TF.Attr s (FolderOrganizationPolicyRestorePolicy s))
                (\s a -> s { _restorePolicy = a } :: FolderOrganizationPolicyResource s)
 
 instance P.HasVersion (FolderOrganizationPolicyResource s) (TF.Attr s P.Int) where
@@ -3400,7 +3400,7 @@ instance s ~ s' => P.HasComputedEtag (TF.Ref s' (OrganizationIamPolicyResource s
 -- See the <https://www.terraform.io/docs/providers/google/r/organization_policy.html terraform documentation>
 -- for more information.
 data OrganizationPolicyResource s = OrganizationPolicyResource'
-    { _booleanPolicy :: TF.Attr s (BooleanPolicySetting s)
+    { _booleanPolicy :: TF.Attr s (OrganizationPolicyBooleanPolicy s)
     -- ^ @boolean_policy@ - (Optional)
     --
     -- Conflicts with:
@@ -3410,7 +3410,7 @@ data OrganizationPolicyResource s = OrganizationPolicyResource'
     , _constraint    :: TF.Attr s P.Text
     -- ^ @constraint@ - (Required, Forces New)
     --
-    , _listPolicy    :: TF.Attr s (ListPolicySetting s)
+    , _listPolicy    :: TF.Attr s (OrganizationPolicyListPolicy s)
     -- ^ @list_policy@ - (Optional)
     --
     -- Conflicts with:
@@ -3420,7 +3420,7 @@ data OrganizationPolicyResource s = OrganizationPolicyResource'
     , _orgId         :: TF.Attr s P.Text
     -- ^ @org_id@ - (Required, Forces New)
     --
-    , _restorePolicy :: TF.Attr s (RestorePolicySetting s)
+    , _restorePolicy :: TF.Attr s (OrganizationPolicyRestorePolicy s)
     -- ^ @restore_policy@ - (Optional)
     --
     -- Conflicts with:
@@ -3478,20 +3478,20 @@ instance TF.IsValid (OrganizationPolicyResource s) where
         ])
            P.<> TF.settingsValidator "_booleanPolicy"
                   (_booleanPolicy
-                      :: OrganizationPolicyResource s -> TF.Attr s (BooleanPolicySetting s))
+                      :: OrganizationPolicyResource s -> TF.Attr s (OrganizationPolicyBooleanPolicy s))
                   TF.validator
            P.<> TF.settingsValidator "_listPolicy"
                   (_listPolicy
-                      :: OrganizationPolicyResource s -> TF.Attr s (ListPolicySetting s))
+                      :: OrganizationPolicyResource s -> TF.Attr s (OrganizationPolicyListPolicy s))
                   TF.validator
            P.<> TF.settingsValidator "_restorePolicy"
                   (_restorePolicy
-                      :: OrganizationPolicyResource s -> TF.Attr s (RestorePolicySetting s))
+                      :: OrganizationPolicyResource s -> TF.Attr s (OrganizationPolicyRestorePolicy s))
                   TF.validator
 
-instance P.HasBooleanPolicy (OrganizationPolicyResource s) (TF.Attr s (BooleanPolicySetting s)) where
+instance P.HasBooleanPolicy (OrganizationPolicyResource s) (TF.Attr s (OrganizationPolicyBooleanPolicy s)) where
     booleanPolicy =
-        P.lens (_booleanPolicy :: OrganizationPolicyResource s -> TF.Attr s (BooleanPolicySetting s))
+        P.lens (_booleanPolicy :: OrganizationPolicyResource s -> TF.Attr s (OrganizationPolicyBooleanPolicy s))
                (\s a -> s { _booleanPolicy = a } :: OrganizationPolicyResource s)
 
 instance P.HasConstraint (OrganizationPolicyResource s) (TF.Attr s P.Text) where
@@ -3499,9 +3499,9 @@ instance P.HasConstraint (OrganizationPolicyResource s) (TF.Attr s P.Text) where
         P.lens (_constraint :: OrganizationPolicyResource s -> TF.Attr s P.Text)
                (\s a -> s { _constraint = a } :: OrganizationPolicyResource s)
 
-instance P.HasListPolicy (OrganizationPolicyResource s) (TF.Attr s (ListPolicySetting s)) where
+instance P.HasListPolicy (OrganizationPolicyResource s) (TF.Attr s (OrganizationPolicyListPolicy s)) where
     listPolicy =
-        P.lens (_listPolicy :: OrganizationPolicyResource s -> TF.Attr s (ListPolicySetting s))
+        P.lens (_listPolicy :: OrganizationPolicyResource s -> TF.Attr s (OrganizationPolicyListPolicy s))
                (\s a -> s { _listPolicy = a } :: OrganizationPolicyResource s)
 
 instance P.HasOrgId (OrganizationPolicyResource s) (TF.Attr s P.Text) where
@@ -3509,9 +3509,9 @@ instance P.HasOrgId (OrganizationPolicyResource s) (TF.Attr s P.Text) where
         P.lens (_orgId :: OrganizationPolicyResource s -> TF.Attr s P.Text)
                (\s a -> s { _orgId = a } :: OrganizationPolicyResource s)
 
-instance P.HasRestorePolicy (OrganizationPolicyResource s) (TF.Attr s (RestorePolicySetting s)) where
+instance P.HasRestorePolicy (OrganizationPolicyResource s) (TF.Attr s (OrganizationPolicyRestorePolicy s)) where
     restorePolicy =
-        P.lens (_restorePolicy :: OrganizationPolicyResource s -> TF.Attr s (RestorePolicySetting s))
+        P.lens (_restorePolicy :: OrganizationPolicyResource s -> TF.Attr s (OrganizationPolicyRestorePolicy s))
                (\s a -> s { _restorePolicy = a } :: OrganizationPolicyResource s)
 
 instance P.HasVersion (OrganizationPolicyResource s) (TF.Attr s P.Int) where
@@ -3812,7 +3812,7 @@ instance s ~ s' => P.HasComputedRestorePolicy (TF.Ref s' (ProjectIamPolicyResour
 -- See the <https://www.terraform.io/docs/providers/google/r/project_organization_policy.html terraform documentation>
 -- for more information.
 data ProjectOrganizationPolicyResource s = ProjectOrganizationPolicyResource'
-    { _booleanPolicy :: TF.Attr s (BooleanPolicySetting s)
+    { _booleanPolicy :: TF.Attr s (ProjectOrganizationPolicyBooleanPolicy s)
     -- ^ @boolean_policy@ - (Optional)
     --
     -- Conflicts with:
@@ -3822,7 +3822,7 @@ data ProjectOrganizationPolicyResource s = ProjectOrganizationPolicyResource'
     , _constraint    :: TF.Attr s P.Text
     -- ^ @constraint@ - (Required, Forces New)
     --
-    , _listPolicy    :: TF.Attr s (ListPolicySetting s)
+    , _listPolicy    :: TF.Attr s (ProjectOrganizationPolicyListPolicy s)
     -- ^ @list_policy@ - (Optional)
     --
     -- Conflicts with:
@@ -3832,7 +3832,7 @@ data ProjectOrganizationPolicyResource s = ProjectOrganizationPolicyResource'
     , _project       :: TF.Attr s P.Text
     -- ^ @project@ - (Required, Forces New)
     --
-    , _restorePolicy :: TF.Attr s (RestorePolicySetting s)
+    , _restorePolicy :: TF.Attr s (ProjectOrganizationPolicyRestorePolicy s)
     -- ^ @restore_policy@ - (Optional)
     --
     -- Conflicts with:
@@ -3890,20 +3890,20 @@ instance TF.IsValid (ProjectOrganizationPolicyResource s) where
         ])
            P.<> TF.settingsValidator "_booleanPolicy"
                   (_booleanPolicy
-                      :: ProjectOrganizationPolicyResource s -> TF.Attr s (BooleanPolicySetting s))
+                      :: ProjectOrganizationPolicyResource s -> TF.Attr s (ProjectOrganizationPolicyBooleanPolicy s))
                   TF.validator
            P.<> TF.settingsValidator "_listPolicy"
                   (_listPolicy
-                      :: ProjectOrganizationPolicyResource s -> TF.Attr s (ListPolicySetting s))
+                      :: ProjectOrganizationPolicyResource s -> TF.Attr s (ProjectOrganizationPolicyListPolicy s))
                   TF.validator
            P.<> TF.settingsValidator "_restorePolicy"
                   (_restorePolicy
-                      :: ProjectOrganizationPolicyResource s -> TF.Attr s (RestorePolicySetting s))
+                      :: ProjectOrganizationPolicyResource s -> TF.Attr s (ProjectOrganizationPolicyRestorePolicy s))
                   TF.validator
 
-instance P.HasBooleanPolicy (ProjectOrganizationPolicyResource s) (TF.Attr s (BooleanPolicySetting s)) where
+instance P.HasBooleanPolicy (ProjectOrganizationPolicyResource s) (TF.Attr s (ProjectOrganizationPolicyBooleanPolicy s)) where
     booleanPolicy =
-        P.lens (_booleanPolicy :: ProjectOrganizationPolicyResource s -> TF.Attr s (BooleanPolicySetting s))
+        P.lens (_booleanPolicy :: ProjectOrganizationPolicyResource s -> TF.Attr s (ProjectOrganizationPolicyBooleanPolicy s))
                (\s a -> s { _booleanPolicy = a } :: ProjectOrganizationPolicyResource s)
 
 instance P.HasConstraint (ProjectOrganizationPolicyResource s) (TF.Attr s P.Text) where
@@ -3911,9 +3911,9 @@ instance P.HasConstraint (ProjectOrganizationPolicyResource s) (TF.Attr s P.Text
         P.lens (_constraint :: ProjectOrganizationPolicyResource s -> TF.Attr s P.Text)
                (\s a -> s { _constraint = a } :: ProjectOrganizationPolicyResource s)
 
-instance P.HasListPolicy (ProjectOrganizationPolicyResource s) (TF.Attr s (ListPolicySetting s)) where
+instance P.HasListPolicy (ProjectOrganizationPolicyResource s) (TF.Attr s (ProjectOrganizationPolicyListPolicy s)) where
     listPolicy =
-        P.lens (_listPolicy :: ProjectOrganizationPolicyResource s -> TF.Attr s (ListPolicySetting s))
+        P.lens (_listPolicy :: ProjectOrganizationPolicyResource s -> TF.Attr s (ProjectOrganizationPolicyListPolicy s))
                (\s a -> s { _listPolicy = a } :: ProjectOrganizationPolicyResource s)
 
 instance P.HasProject (ProjectOrganizationPolicyResource s) (TF.Attr s P.Text) where
@@ -3921,9 +3921,9 @@ instance P.HasProject (ProjectOrganizationPolicyResource s) (TF.Attr s P.Text) w
         P.lens (_project :: ProjectOrganizationPolicyResource s -> TF.Attr s P.Text)
                (\s a -> s { _project = a } :: ProjectOrganizationPolicyResource s)
 
-instance P.HasRestorePolicy (ProjectOrganizationPolicyResource s) (TF.Attr s (RestorePolicySetting s)) where
+instance P.HasRestorePolicy (ProjectOrganizationPolicyResource s) (TF.Attr s (ProjectOrganizationPolicyRestorePolicy s)) where
     restorePolicy =
-        P.lens (_restorePolicy :: ProjectOrganizationPolicyResource s -> TF.Attr s (RestorePolicySetting s))
+        P.lens (_restorePolicy :: ProjectOrganizationPolicyResource s -> TF.Attr s (ProjectOrganizationPolicyRestorePolicy s))
                (\s a -> s { _restorePolicy = a } :: ProjectOrganizationPolicyResource s)
 
 instance P.HasVersion (ProjectOrganizationPolicyResource s) (TF.Attr s P.Int) where
@@ -3948,7 +3948,7 @@ instance s ~ s' => P.HasComputedVersion (TF.Ref s' (ProjectOrganizationPolicyRes
 -- See the <https://www.terraform.io/docs/providers/google/r/project.html terraform documentation>
 -- for more information.
 data ProjectResource s = ProjectResource'
-    { _appEngine         :: TF.Attr s (AppEngineSetting s)
+    { _appEngine         :: TF.Attr s (ProjectAppEngine s)
     -- ^ @app_engine@ - (Optional)
     --
     , _autoCreateNetwork :: TF.Attr s P.Bool
@@ -4018,12 +4018,12 @@ instance TF.IsValid (ProjectResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_appEngine"
                   (_appEngine
-                      :: ProjectResource s -> TF.Attr s (AppEngineSetting s))
+                      :: ProjectResource s -> TF.Attr s (ProjectAppEngine s))
                   TF.validator
 
-instance P.HasAppEngine (ProjectResource s) (TF.Attr s (AppEngineSetting s)) where
+instance P.HasAppEngine (ProjectResource s) (TF.Attr s (ProjectAppEngine s)) where
     appEngine =
-        P.lens (_appEngine :: ProjectResource s -> TF.Attr s (AppEngineSetting s))
+        P.lens (_appEngine :: ProjectResource s -> TF.Attr s (ProjectAppEngine s))
                (\s a -> s { _appEngine = a } :: ProjectResource s)
 
 instance P.HasAutoCreateNetwork (ProjectResource s) (TF.Attr s P.Bool) where
@@ -4494,7 +4494,7 @@ data PubsubSubscriptionResource s = PubsubSubscriptionResource'
     , _project            :: TF.Attr s P.Text
     -- ^ @project@ - (Optional, Forces New)
     --
-    , _pushConfig         :: TF.Attr s (PushConfigSetting s)
+    , _pushConfig         :: TF.Attr s (PubsubSubscriptionPushConfig s)
     -- ^ @push_config@ - (Optional)
     --
     , _topic              :: TF.Attr s P.Text
@@ -4530,7 +4530,7 @@ instance TF.IsValid (PubsubSubscriptionResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_pushConfig"
                   (_pushConfig
-                      :: PubsubSubscriptionResource s -> TF.Attr s (PushConfigSetting s))
+                      :: PubsubSubscriptionResource s -> TF.Attr s (PubsubSubscriptionPushConfig s))
                   TF.validator
 
 instance P.HasAckDeadlineSeconds (PubsubSubscriptionResource s) (TF.Attr s P.Int) where
@@ -4548,9 +4548,9 @@ instance P.HasProject (PubsubSubscriptionResource s) (TF.Attr s P.Text) where
         P.lens (_project :: PubsubSubscriptionResource s -> TF.Attr s P.Text)
                (\s a -> s { _project = a } :: PubsubSubscriptionResource s)
 
-instance P.HasPushConfig (PubsubSubscriptionResource s) (TF.Attr s (PushConfigSetting s)) where
+instance P.HasPushConfig (PubsubSubscriptionResource s) (TF.Attr s (PubsubSubscriptionPushConfig s)) where
     pushConfig =
-        P.lens (_pushConfig :: PubsubSubscriptionResource s -> TF.Attr s (PushConfigSetting s))
+        P.lens (_pushConfig :: PubsubSubscriptionResource s -> TF.Attr s (PubsubSubscriptionPushConfig s))
                (\s a -> s { _pushConfig = a } :: PubsubSubscriptionResource s)
 
 instance P.HasTopic (PubsubSubscriptionResource s) (TF.Attr s P.Text) where
@@ -6275,32 +6275,32 @@ instance s ~ s' => P.HasComputedState (TF.Ref s' (SpannerInstanceResource s)) (T
 -- See the <https://www.terraform.io/docs/providers/google/r/sql_database_instance.html terraform documentation>
 -- for more information.
 data SqlDatabaseInstanceResource s = SqlDatabaseInstanceResource'
-    { _databaseVersion      :: TF.Attr s P.Text
+    { _databaseVersion :: TF.Attr s P.Text
     -- ^ @database_version@ - (Optional, Forces New)
     --
-    , _masterInstanceName   :: TF.Attr s P.Text
+    , _masterInstanceName :: TF.Attr s P.Text
     -- ^ @master_instance_name@ - (Optional, Forces New)
     --
-    , _name                 :: TF.Attr s P.Text
+    , _name :: TF.Attr s P.Text
     -- ^ @name@ - (Optional, Forces New)
     --
-    , _project              :: TF.Attr s P.Text
+    , _project :: TF.Attr s P.Text
     -- ^ @project@ - (Optional, Forces New)
     --
-    , _region               :: TF.Attr s P.Text
+    , _region :: TF.Attr s P.Text
     -- ^ @region@ - (Optional, Forces New)
     --
-    , _replicaConfiguration :: TF.Attr s (ReplicaConfigurationSetting s)
+    , _replicaConfiguration :: TF.Attr s (SqlDatabaseInstanceReplicaConfiguration s)
     -- ^ @replica_configuration@ - (Optional)
     --
-    , _settings             :: TF.Attr s (Settings s)
+    , _settings :: TF.Attr s (SqlDatabaseInstanceSettings s)
     -- ^ @settings@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @google_sql_database_instance@ resource value.
 sqlDatabaseInstanceResource
-    :: TF.Attr s (Settings s) -- ^ @settings@ ('P._settings', 'P.settings')
+    :: TF.Attr s (SqlDatabaseInstanceSettings s) -- ^ @settings@ ('P._settings', 'P.settings')
     -> P.Resource (SqlDatabaseInstanceResource s)
 sqlDatabaseInstanceResource _settings =
     TF.unsafeResource "google_sql_database_instance" TF.validator $
@@ -6329,11 +6329,11 @@ instance TF.IsValid (SqlDatabaseInstanceResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_replicaConfiguration"
                   (_replicaConfiguration
-                      :: SqlDatabaseInstanceResource s -> TF.Attr s (ReplicaConfigurationSetting s))
+                      :: SqlDatabaseInstanceResource s -> TF.Attr s (SqlDatabaseInstanceReplicaConfiguration s))
                   TF.validator
            P.<> TF.settingsValidator "_settings"
                   (_settings
-                      :: SqlDatabaseInstanceResource s -> TF.Attr s (Settings s))
+                      :: SqlDatabaseInstanceResource s -> TF.Attr s (SqlDatabaseInstanceSettings s))
                   TF.validator
 
 instance P.HasDatabaseVersion (SqlDatabaseInstanceResource s) (TF.Attr s P.Text) where
@@ -6361,14 +6361,14 @@ instance P.HasRegion (SqlDatabaseInstanceResource s) (TF.Attr s P.Text) where
         P.lens (_region :: SqlDatabaseInstanceResource s -> TF.Attr s P.Text)
                (\s a -> s { _region = a } :: SqlDatabaseInstanceResource s)
 
-instance P.HasReplicaConfiguration (SqlDatabaseInstanceResource s) (TF.Attr s (ReplicaConfigurationSetting s)) where
+instance P.HasReplicaConfiguration (SqlDatabaseInstanceResource s) (TF.Attr s (SqlDatabaseInstanceReplicaConfiguration s)) where
     replicaConfiguration =
-        P.lens (_replicaConfiguration :: SqlDatabaseInstanceResource s -> TF.Attr s (ReplicaConfigurationSetting s))
+        P.lens (_replicaConfiguration :: SqlDatabaseInstanceResource s -> TF.Attr s (SqlDatabaseInstanceReplicaConfiguration s))
                (\s a -> s { _replicaConfiguration = a } :: SqlDatabaseInstanceResource s)
 
-instance P.HasSettings (SqlDatabaseInstanceResource s) (TF.Attr s (Settings s)) where
+instance P.HasSettings (SqlDatabaseInstanceResource s) (TF.Attr s (SqlDatabaseInstanceSettings s)) where
     settings =
-        P.lens (_settings :: SqlDatabaseInstanceResource s -> TF.Attr s (Settings s))
+        P.lens (_settings :: SqlDatabaseInstanceResource s -> TF.Attr s (SqlDatabaseInstanceSettings s))
                (\s a -> s { _settings = a } :: SqlDatabaseInstanceResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (SqlDatabaseInstanceResource s)) (TF.Attr s P.Text) where
@@ -6380,7 +6380,7 @@ instance s ~ s' => P.HasComputedConnectionName (TF.Ref s' (SqlDatabaseInstanceRe
 instance s ~ s' => P.HasComputedFirstIpAddress (TF.Ref s' (SqlDatabaseInstanceResource s)) (TF.Attr s P.Text) where
     computedFirstIpAddress x = TF.compute (TF.refKey x) "first_ip_address"
 
-instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (SqlDatabaseInstanceResource s)) (TF.Attr s [TF.Attr s (IpAddressSetting s)]) where
+instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (SqlDatabaseInstanceResource s)) (TF.Attr s [TF.Attr s (SqlDatabaseInstanceIpAddress s)]) where
     computedIpAddress x = TF.compute (TF.refKey x) "ip_address"
 
 instance s ~ s' => P.HasComputedMasterInstanceName (TF.Ref s' (SqlDatabaseInstanceResource s)) (TF.Attr s P.Text) where
@@ -6392,13 +6392,13 @@ instance s ~ s' => P.HasComputedName (TF.Ref s' (SqlDatabaseInstanceResource s))
 instance s ~ s' => P.HasComputedProject (TF.Ref s' (SqlDatabaseInstanceResource s)) (TF.Attr s P.Text) where
     computedProject x = TF.compute (TF.refKey x) "project"
 
-instance s ~ s' => P.HasComputedReplicaConfiguration (TF.Ref s' (SqlDatabaseInstanceResource s)) (TF.Attr s (ReplicaConfigurationSetting s)) where
+instance s ~ s' => P.HasComputedReplicaConfiguration (TF.Ref s' (SqlDatabaseInstanceResource s)) (TF.Attr s (SqlDatabaseInstanceReplicaConfiguration s)) where
     computedReplicaConfiguration x = TF.compute (TF.refKey x) "replica_configuration"
 
 instance s ~ s' => P.HasComputedSelfLink (TF.Ref s' (SqlDatabaseInstanceResource s)) (TF.Attr s P.Text) where
     computedSelfLink x = TF.compute (TF.refKey x) "self_link"
 
-instance s ~ s' => P.HasComputedServerCaCert (TF.Ref s' (SqlDatabaseInstanceResource s)) (TF.Attr s (ServerCaCertSetting s)) where
+instance s ~ s' => P.HasComputedServerCaCert (TF.Ref s' (SqlDatabaseInstanceResource s)) (TF.Attr s (SqlDatabaseInstanceServerCaCert s)) where
     computedServerCaCert x = TF.compute (TF.refKey x) "server_ca_cert"
 
 -- | @google_sql_database@ Resource.
@@ -7009,7 +7009,7 @@ instance s ~ s' => P.HasComputedStorageClass (TF.Ref s' (StorageBucketObjectReso
 -- See the <https://www.terraform.io/docs/providers/google/r/storage_bucket.html terraform documentation>
 -- for more information.
 data StorageBucketResource s = StorageBucketResource'
-    { _cors          :: TF.Attr s [TF.Attr s (CorsSetting s)]
+    { _cors          :: TF.Attr s [TF.Attr s (StorageBucketCors s)]
     -- ^ @cors@ - (Optional)
     --
     , _forceDestroy  :: TF.Attr s P.Bool
@@ -7018,13 +7018,13 @@ data StorageBucketResource s = StorageBucketResource'
     , _labels        :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @labels@ - (Optional)
     --
-    , _lifecycleRule :: TF.Attr s [TF.Attr s (LifecycleRuleSetting s)]
+    , _lifecycleRule :: TF.Attr s [TF.Attr s (StorageBucketLifecycleRule s)]
     -- ^ @lifecycle_rule@ - (Optional)
     --
     , _location      :: TF.Attr s P.Text
     -- ^ @location@ - (Optional, Forces New)
     --
-    , _logging       :: TF.Attr s (LoggingSetting s)
+    , _logging       :: TF.Attr s (StorageBucketLogging s)
     -- ^ @logging@ - (Optional)
     --
     , _name          :: TF.Attr s P.Text
@@ -7039,10 +7039,10 @@ data StorageBucketResource s = StorageBucketResource'
     , _storageClass  :: TF.Attr s P.Text
     -- ^ @storage_class@ - (Optional, Forces New)
     --
-    , _versioning    :: TF.Attr s (VersioningSetting s)
+    , _versioning    :: TF.Attr s (StorageBucketVersioning s)
     -- ^ @versioning@ - (Optional)
     --
-    , _website       :: TF.Attr s [TF.Attr s (WebsiteSetting s)]
+    , _website       :: TF.Attr s [TF.Attr s (StorageBucketWebsite s)]
     -- ^ @website@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -7088,16 +7088,16 @@ instance TF.IsValid (StorageBucketResource s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_logging"
                   (_logging
-                      :: StorageBucketResource s -> TF.Attr s (LoggingSetting s))
+                      :: StorageBucketResource s -> TF.Attr s (StorageBucketLogging s))
                   TF.validator
            P.<> TF.settingsValidator "_versioning"
                   (_versioning
-                      :: StorageBucketResource s -> TF.Attr s (VersioningSetting s))
+                      :: StorageBucketResource s -> TF.Attr s (StorageBucketVersioning s))
                   TF.validator
 
-instance P.HasCors (StorageBucketResource s) (TF.Attr s [TF.Attr s (CorsSetting s)]) where
+instance P.HasCors (StorageBucketResource s) (TF.Attr s [TF.Attr s (StorageBucketCors s)]) where
     cors =
-        P.lens (_cors :: StorageBucketResource s -> TF.Attr s [TF.Attr s (CorsSetting s)])
+        P.lens (_cors :: StorageBucketResource s -> TF.Attr s [TF.Attr s (StorageBucketCors s)])
                (\s a -> s { _cors = a } :: StorageBucketResource s)
 
 instance P.HasForceDestroy (StorageBucketResource s) (TF.Attr s P.Bool) where
@@ -7110,9 +7110,9 @@ instance P.HasLabels (StorageBucketResource s) (TF.Attr s (P.Map P.Text (TF.Attr
         P.lens (_labels :: StorageBucketResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _labels = a } :: StorageBucketResource s)
 
-instance P.HasLifecycleRule (StorageBucketResource s) (TF.Attr s [TF.Attr s (LifecycleRuleSetting s)]) where
+instance P.HasLifecycleRule (StorageBucketResource s) (TF.Attr s [TF.Attr s (StorageBucketLifecycleRule s)]) where
     lifecycleRule =
-        P.lens (_lifecycleRule :: StorageBucketResource s -> TF.Attr s [TF.Attr s (LifecycleRuleSetting s)])
+        P.lens (_lifecycleRule :: StorageBucketResource s -> TF.Attr s [TF.Attr s (StorageBucketLifecycleRule s)])
                (\s a -> s { _lifecycleRule = a } :: StorageBucketResource s)
 
 instance P.HasLocation (StorageBucketResource s) (TF.Attr s P.Text) where
@@ -7120,9 +7120,9 @@ instance P.HasLocation (StorageBucketResource s) (TF.Attr s P.Text) where
         P.lens (_location :: StorageBucketResource s -> TF.Attr s P.Text)
                (\s a -> s { _location = a } :: StorageBucketResource s)
 
-instance P.HasLogging (StorageBucketResource s) (TF.Attr s (LoggingSetting s)) where
+instance P.HasLogging (StorageBucketResource s) (TF.Attr s (StorageBucketLogging s)) where
     logging =
-        P.lens (_logging :: StorageBucketResource s -> TF.Attr s (LoggingSetting s))
+        P.lens (_logging :: StorageBucketResource s -> TF.Attr s (StorageBucketLogging s))
                (\s a -> s { _logging = a } :: StorageBucketResource s)
 
 instance P.HasName (StorageBucketResource s) (TF.Attr s P.Text) where
@@ -7145,14 +7145,14 @@ instance P.HasStorageClass (StorageBucketResource s) (TF.Attr s P.Text) where
         P.lens (_storageClass :: StorageBucketResource s -> TF.Attr s P.Text)
                (\s a -> s { _storageClass = a } :: StorageBucketResource s)
 
-instance P.HasVersioning (StorageBucketResource s) (TF.Attr s (VersioningSetting s)) where
+instance P.HasVersioning (StorageBucketResource s) (TF.Attr s (StorageBucketVersioning s)) where
     versioning =
-        P.lens (_versioning :: StorageBucketResource s -> TF.Attr s (VersioningSetting s))
+        P.lens (_versioning :: StorageBucketResource s -> TF.Attr s (StorageBucketVersioning s))
                (\s a -> s { _versioning = a } :: StorageBucketResource s)
 
-instance P.HasWebsite (StorageBucketResource s) (TF.Attr s [TF.Attr s (WebsiteSetting s)]) where
+instance P.HasWebsite (StorageBucketResource s) (TF.Attr s [TF.Attr s (StorageBucketWebsite s)]) where
     website =
-        P.lens (_website :: StorageBucketResource s -> TF.Attr s [TF.Attr s (WebsiteSetting s)])
+        P.lens (_website :: StorageBucketResource s -> TF.Attr s [TF.Attr s (StorageBucketWebsite s)])
                (\s a -> s { _website = a } :: StorageBucketResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (StorageBucketResource s)) (TF.Attr s P.Text) where

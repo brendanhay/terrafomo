@@ -236,7 +236,7 @@ data AcmpcaCertificateAuthorityData s = AcmpcaCertificateAuthorityData'
     { _arn :: TF.Attr s P.Text
     -- ^ @arn@ - (Required)
     --
-    , _revocationConfiguration :: TF.Attr s [TF.Attr s (RevocationConfigurationSetting s)]
+    , _revocationConfiguration :: TF.Attr s [TF.Attr s (AcmpcaCertificateAuthorityRevocationConfiguration s)]
     -- ^ @revocation_configuration@ - (Optional)
     --
     , _tags :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
@@ -271,9 +271,9 @@ instance P.HasArn (AcmpcaCertificateAuthorityData s) (TF.Attr s P.Text) where
         P.lens (_arn :: AcmpcaCertificateAuthorityData s -> TF.Attr s P.Text)
                (\s a -> s { _arn = a } :: AcmpcaCertificateAuthorityData s)
 
-instance P.HasRevocationConfiguration (AcmpcaCertificateAuthorityData s) (TF.Attr s [TF.Attr s (RevocationConfigurationSetting s)]) where
+instance P.HasRevocationConfiguration (AcmpcaCertificateAuthorityData s) (TF.Attr s [TF.Attr s (AcmpcaCertificateAuthorityRevocationConfiguration s)]) where
     revocationConfiguration =
-        P.lens (_revocationConfiguration :: AcmpcaCertificateAuthorityData s -> TF.Attr s [TF.Attr s (RevocationConfigurationSetting s)])
+        P.lens (_revocationConfiguration :: AcmpcaCertificateAuthorityData s -> TF.Attr s [TF.Attr s (AcmpcaCertificateAuthorityRevocationConfiguration s)])
                (\s a -> s { _revocationConfiguration = a } :: AcmpcaCertificateAuthorityData s)
 
 instance P.HasTags (AcmpcaCertificateAuthorityData s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
@@ -299,7 +299,7 @@ instance s ~ s' => P.HasComputedNotAfter (TF.Ref s' (AcmpcaCertificateAuthorityD
 instance s ~ s' => P.HasComputedNotBefore (TF.Ref s' (AcmpcaCertificateAuthorityData s)) (TF.Attr s P.Text) where
     computedNotBefore x = TF.compute (TF.refKey x) "not_before"
 
-instance s ~ s' => P.HasComputedRevocationConfiguration (TF.Ref s' (AcmpcaCertificateAuthorityData s)) (TF.Attr s [TF.Attr s (RevocationConfigurationSetting s)]) where
+instance s ~ s' => P.HasComputedRevocationConfiguration (TF.Ref s' (AcmpcaCertificateAuthorityData s)) (TF.Attr s [TF.Attr s (AcmpcaCertificateAuthorityRevocationConfiguration s)]) where
     computedRevocationConfiguration x = TF.compute (TF.refKey x) "revocation_configuration"
 
 instance s ~ s' => P.HasComputedSerial (TF.Ref s' (AcmpcaCertificateAuthorityData s)) (TF.Attr s P.Text) where
@@ -369,7 +369,7 @@ instance P.HasTags (AlbData s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) whe
 instance s ~ s' => P.HasComputedId (TF.Ref s' (AlbData s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedAccessLogs (TF.Ref s' (AlbData s)) (TF.Attr s (AccessLogsSetting s)) where
+instance s ~ s' => P.HasComputedAccessLogs (TF.Ref s' (AlbData s)) (TF.Attr s (AlbAccessLogs s)) where
     computedAccessLogs x = TF.compute (TF.refKey x) "access_logs"
 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (AlbData s)) (TF.Attr s P.Text) where
@@ -399,7 +399,7 @@ instance s ~ s' => P.HasComputedName (TF.Ref s' (AlbData s)) (TF.Attr s P.Text) 
 instance s ~ s' => P.HasComputedSecurityGroups (TF.Ref s' (AlbData s)) (TF.Attr s [TF.Attr s P.Text]) where
     computedSecurityGroups x = TF.compute (TF.refKey x) "security_groups"
 
-instance s ~ s' => P.HasComputedSubnetMapping (TF.Ref s' (AlbData s)) (TF.Attr s [TF.Attr s (SubnetMappingSetting s)]) where
+instance s ~ s' => P.HasComputedSubnetMapping (TF.Ref s' (AlbData s)) (TF.Attr s [TF.Attr s (AlbSubnetMapping s)]) where
     computedSubnetMapping x = TF.compute (TF.refKey x) "subnet_mapping"
 
 instance s ~ s' => P.HasComputedSubnets (TF.Ref s' (AlbData s)) (TF.Attr s [TF.Attr s P.Text]) where
@@ -501,7 +501,7 @@ instance s ~ s' => P.HasComputedArn (TF.Ref s' (AlbListenerData s)) (TF.Attr s P
 instance s ~ s' => P.HasComputedCertificateArn (TF.Ref s' (AlbListenerData s)) (TF.Attr s P.Text) where
     computedCertificateArn x = TF.compute (TF.refKey x) "certificate_arn"
 
-instance s ~ s' => P.HasComputedDefaultAction (TF.Ref s' (AlbListenerData s)) (TF.Attr s [TF.Attr s (DefaultActionSetting s)]) where
+instance s ~ s' => P.HasComputedDefaultAction (TF.Ref s' (AlbListenerData s)) (TF.Attr s [TF.Attr s (AlbListenerDefaultAction s)]) where
     computedDefaultAction x = TF.compute (TF.refKey x) "default_action"
 
 instance s ~ s' => P.HasComputedLoadBalancerArn (TF.Ref s' (AlbListenerData s)) (TF.Attr s P.Text) where
@@ -580,7 +580,7 @@ instance s ~ s' => P.HasComputedArnSuffix (TF.Ref s' (AlbTargetGroupData s)) (TF
 instance s ~ s' => P.HasComputedDeregistrationDelay (TF.Ref s' (AlbTargetGroupData s)) (TF.Attr s P.Int) where
     computedDeregistrationDelay x = TF.compute (TF.refKey x) "deregistration_delay"
 
-instance s ~ s' => P.HasComputedHealthCheck (TF.Ref s' (AlbTargetGroupData s)) (TF.Attr s (HealthCheckSetting s)) where
+instance s ~ s' => P.HasComputedHealthCheck (TF.Ref s' (AlbTargetGroupData s)) (TF.Attr s (AlbTargetGroupHealthCheck s)) where
     computedHealthCheck x = TF.compute (TF.refKey x) "health_check"
 
 instance s ~ s' => P.HasComputedName (TF.Ref s' (AlbTargetGroupData s)) (TF.Attr s P.Text) where
@@ -595,7 +595,7 @@ instance s ~ s' => P.HasComputedProtocol (TF.Ref s' (AlbTargetGroupData s)) (TF.
 instance s ~ s' => P.HasComputedSlowStart (TF.Ref s' (AlbTargetGroupData s)) (TF.Attr s P.Int) where
     computedSlowStart x = TF.compute (TF.refKey x) "slow_start"
 
-instance s ~ s' => P.HasComputedStickiness (TF.Ref s' (AlbTargetGroupData s)) (TF.Attr s (StickinessSetting s)) where
+instance s ~ s' => P.HasComputedStickiness (TF.Ref s' (AlbTargetGroupData s)) (TF.Attr s (AlbTargetGroupStickiness s)) where
     computedStickiness x = TF.compute (TF.refKey x) "stickiness"
 
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (AlbTargetGroupData s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
@@ -612,7 +612,7 @@ data AmiData s = AmiData'
     { _executableUsers :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @executable_users@ - (Optional, Forces New)
     --
-    , _filter          :: TF.Attr s [TF.Attr s (FilterSetting s)]
+    , _filter          :: TF.Attr s [TF.Attr s (AmiFilter s)]
     -- ^ @filter@ - (Optional, Forces New)
     --
     , _mostRecent      :: TF.Attr s P.Bool
@@ -661,9 +661,9 @@ instance P.HasExecutableUsers (AmiData s) (TF.Attr s [TF.Attr s P.Text]) where
         P.lens (_executableUsers :: AmiData s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _executableUsers = a } :: AmiData s)
 
-instance P.HasFilter (AmiData s) (TF.Attr s [TF.Attr s (FilterSetting s)]) where
+instance P.HasFilter (AmiData s) (TF.Attr s [TF.Attr s (AmiFilter s)]) where
     filter =
-        P.lens (_filter :: AmiData s -> TF.Attr s [TF.Attr s (FilterSetting s)])
+        P.lens (_filter :: AmiData s -> TF.Attr s [TF.Attr s (AmiFilter s)])
                (\s a -> s { _filter = a } :: AmiData s)
 
 instance P.HasMostRecent (AmiData s) (TF.Attr s P.Bool) where
@@ -692,7 +692,7 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (AmiData s)) (TF.Attr s P.Text) wh
 instance s ~ s' => P.HasComputedArchitecture (TF.Ref s' (AmiData s)) (TF.Attr s P.Text) where
     computedArchitecture x = TF.compute (TF.refKey x) "architecture"
 
-instance s ~ s' => P.HasComputedBlockDeviceMappings (TF.Ref s' (AmiData s)) (TF.Attr s [TF.Attr s (BlockDeviceMappingsSetting s)]) where
+instance s ~ s' => P.HasComputedBlockDeviceMappings (TF.Ref s' (AmiData s)) (TF.Attr s [TF.Attr s (AmiBlockDeviceMappings s)]) where
     computedBlockDeviceMappings x = TF.compute (TF.refKey x) "block_device_mappings"
 
 instance s ~ s' => P.HasComputedCreationDate (TF.Ref s' (AmiData s)) (TF.Attr s P.Text) where
@@ -728,7 +728,7 @@ instance s ~ s' => P.HasComputedOwnerId (TF.Ref s' (AmiData s)) (TF.Attr s P.Tex
 instance s ~ s' => P.HasComputedPlatform (TF.Ref s' (AmiData s)) (TF.Attr s P.Text) where
     computedPlatform x = TF.compute (TF.refKey x) "platform"
 
-instance s ~ s' => P.HasComputedProductCodes (TF.Ref s' (AmiData s)) (TF.Attr s [TF.Attr s (ProductCodesSetting s)]) where
+instance s ~ s' => P.HasComputedProductCodes (TF.Ref s' (AmiData s)) (TF.Attr s [TF.Attr s (AmiProductCodes s)]) where
     computedProductCodes x = TF.compute (TF.refKey x) "product_codes"
 
 instance s ~ s' => P.HasComputedPublic (TF.Ref s' (AmiData s)) (TF.Attr s P.Bool) where
@@ -769,7 +769,7 @@ data AmiIdsData s = AmiIdsData'
     { _executableUsers :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @executable_users@ - (Optional, Forces New)
     --
-    , _filter          :: TF.Attr s [TF.Attr s (FilterSetting s)]
+    , _filter          :: TF.Attr s [TF.Attr s (AmiIdsFilter s)]
     -- ^ @filter@ - (Optional, Forces New)
     --
     , _nameRegex       :: TF.Attr s P.Text
@@ -808,9 +808,9 @@ instance P.HasExecutableUsers (AmiIdsData s) (TF.Attr s [TF.Attr s P.Text]) wher
         P.lens (_executableUsers :: AmiIdsData s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _executableUsers = a } :: AmiIdsData s)
 
-instance P.HasFilter (AmiIdsData s) (TF.Attr s [TF.Attr s (FilterSetting s)]) where
+instance P.HasFilter (AmiIdsData s) (TF.Attr s [TF.Attr s (AmiIdsFilter s)]) where
     filter =
-        P.lens (_filter :: AmiIdsData s -> TF.Attr s [TF.Attr s (FilterSetting s)])
+        P.lens (_filter :: AmiIdsData s -> TF.Attr s [TF.Attr s (AmiIdsFilter s)])
                (\s a -> s { _filter = a } :: AmiIdsData s)
 
 instance P.HasNameRegex (AmiIdsData s) (TF.Attr s P.Text) where
@@ -924,7 +924,7 @@ instance s ~ s' => P.HasComputedService (TF.Ref s' (ArnData s)) (TF.Attr s P.Tex
 -- See the <https://www.terraform.io/docs/providers/aws/d/autoscaling_groups.html terraform documentation>
 -- for more information.
 data AutoscalingGroupsData s = AutoscalingGroupsData'
-    { _filter :: TF.Attr s [TF.Attr s (FilterSetting s)]
+    { _filter :: TF.Attr s [TF.Attr s (AutoscalingGroupsFilter s)]
     -- ^ @filter@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -946,9 +946,9 @@ instance TF.IsObject (AutoscalingGroupsData s) where
 instance TF.IsValid (AutoscalingGroupsData s) where
     validator = P.mempty
 
-instance P.HasFilter (AutoscalingGroupsData s) (TF.Attr s [TF.Attr s (FilterSetting s)]) where
+instance P.HasFilter (AutoscalingGroupsData s) (TF.Attr s [TF.Attr s (AutoscalingGroupsFilter s)]) where
     filter =
-        P.lens (_filter :: AutoscalingGroupsData s -> TF.Attr s [TF.Attr s (FilterSetting s)])
+        P.lens (_filter :: AutoscalingGroupsData s -> TF.Attr s [TF.Attr s (AutoscalingGroupsFilter s)])
                (\s a -> s { _filter = a } :: AutoscalingGroupsData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (AutoscalingGroupsData s)) (TF.Attr s P.Text) where
@@ -1148,7 +1148,7 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (BatchJobQueueData s)) (TF.Attr s 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (BatchJobQueueData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
 
-instance s ~ s' => P.HasComputedComputeEnvironmentOrder (TF.Ref s' (BatchJobQueueData s)) (TF.Attr s [TF.Attr s (ComputeEnvironmentOrderSetting s)]) where
+instance s ~ s' => P.HasComputedComputeEnvironmentOrder (TF.Ref s' (BatchJobQueueData s)) (TF.Attr s [TF.Attr s (BatchJobQueueComputeEnvironmentOrder s)]) where
     computedComputeEnvironmentOrder x = TF.compute (TF.refKey x) "compute_environment_order"
 
 instance s ~ s' => P.HasComputedPriority (TF.Ref s' (BatchJobQueueData s)) (TF.Attr s P.Int) where
@@ -1973,7 +1973,7 @@ data DynamodbTableData s = DynamodbTableData'
     { _name                 :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _serverSideEncryption :: TF.Attr s (ServerSideEncryptionSetting s)
+    , _serverSideEncryption :: TF.Attr s (DynamodbTableServerSideEncryption s)
     -- ^ @server_side_encryption@ - (Optional)
     --
     , _tags                 :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
@@ -2004,7 +2004,7 @@ instance TF.IsValid (DynamodbTableData s) where
     validator = P.mempty
            P.<> TF.settingsValidator "_serverSideEncryption"
                   (_serverSideEncryption
-                      :: DynamodbTableData s -> TF.Attr s (ServerSideEncryptionSetting s))
+                      :: DynamodbTableData s -> TF.Attr s (DynamodbTableServerSideEncryption s))
                   TF.validator
 
 instance P.HasName (DynamodbTableData s) (TF.Attr s P.Text) where
@@ -2012,9 +2012,9 @@ instance P.HasName (DynamodbTableData s) (TF.Attr s P.Text) where
         P.lens (_name :: DynamodbTableData s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: DynamodbTableData s)
 
-instance P.HasServerSideEncryption (DynamodbTableData s) (TF.Attr s (ServerSideEncryptionSetting s)) where
+instance P.HasServerSideEncryption (DynamodbTableData s) (TF.Attr s (DynamodbTableServerSideEncryption s)) where
     serverSideEncryption =
-        P.lens (_serverSideEncryption :: DynamodbTableData s -> TF.Attr s (ServerSideEncryptionSetting s))
+        P.lens (_serverSideEncryption :: DynamodbTableData s -> TF.Attr s (DynamodbTableServerSideEncryption s))
                (\s a -> s { _serverSideEncryption = a } :: DynamodbTableData s)
 
 instance P.HasTags (DynamodbTableData s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
@@ -2028,16 +2028,16 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (DynamodbTableData s)) (TF.Attr s 
 instance s ~ s' => P.HasComputedArn (TF.Ref s' (DynamodbTableData s)) (TF.Attr s P.Text) where
     computedArn x = TF.compute (TF.refKey x) "arn"
 
-instance s ~ s' => P.HasComputedAttribute (TF.Ref s' (DynamodbTableData s)) (TF.Attr s [TF.Attr s (AttributeSetting s)]) where
+instance s ~ s' => P.HasComputedAttribute (TF.Ref s' (DynamodbTableData s)) (TF.Attr s [TF.Attr s (DynamodbTableAttribute s)]) where
     computedAttribute x = TF.compute (TF.refKey x) "attribute"
 
-instance s ~ s' => P.HasComputedGlobalSecondaryIndex (TF.Ref s' (DynamodbTableData s)) (TF.Attr s [TF.Attr s (GlobalSecondaryIndexSetting s)]) where
+instance s ~ s' => P.HasComputedGlobalSecondaryIndex (TF.Ref s' (DynamodbTableData s)) (TF.Attr s [TF.Attr s (DynamodbTableGlobalSecondaryIndex s)]) where
     computedGlobalSecondaryIndex x = TF.compute (TF.refKey x) "global_secondary_index"
 
 instance s ~ s' => P.HasComputedHashKey (TF.Ref s' (DynamodbTableData s)) (TF.Attr s P.Text) where
     computedHashKey x = TF.compute (TF.refKey x) "hash_key"
 
-instance s ~ s' => P.HasComputedLocalSecondaryIndex (TF.Ref s' (DynamodbTableData s)) (TF.Attr s [TF.Attr s (LocalSecondaryIndexSetting s)]) where
+instance s ~ s' => P.HasComputedLocalSecondaryIndex (TF.Ref s' (DynamodbTableData s)) (TF.Attr s [TF.Attr s (DynamodbTableLocalSecondaryIndex s)]) where
     computedLocalSecondaryIndex x = TF.compute (TF.refKey x) "local_secondary_index"
 
 instance s ~ s' => P.HasComputedRangeKey (TF.Ref s' (DynamodbTableData s)) (TF.Attr s P.Text) where
@@ -2046,7 +2046,7 @@ instance s ~ s' => P.HasComputedRangeKey (TF.Ref s' (DynamodbTableData s)) (TF.A
 instance s ~ s' => P.HasComputedReadCapacity (TF.Ref s' (DynamodbTableData s)) (TF.Attr s P.Int) where
     computedReadCapacity x = TF.compute (TF.refKey x) "read_capacity"
 
-instance s ~ s' => P.HasComputedServerSideEncryption (TF.Ref s' (DynamodbTableData s)) (TF.Attr s (ServerSideEncryptionSetting s)) where
+instance s ~ s' => P.HasComputedServerSideEncryption (TF.Ref s' (DynamodbTableData s)) (TF.Attr s (DynamodbTableServerSideEncryption s)) where
     computedServerSideEncryption x = TF.compute (TF.refKey x) "server_side_encryption"
 
 instance s ~ s' => P.HasComputedStreamArn (TF.Ref s' (DynamodbTableData s)) (TF.Attr s P.Text) where
@@ -2064,7 +2064,7 @@ instance s ~ s' => P.HasComputedStreamViewType (TF.Ref s' (DynamodbTableData s))
 instance s ~ s' => P.HasComputedTags (TF.Ref s' (DynamodbTableData s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     computedTags x = TF.compute (TF.refKey x) "tags"
 
-instance s ~ s' => P.HasComputedTtl (TF.Ref s' (DynamodbTableData s)) (TF.Attr s (TtlSetting s)) where
+instance s ~ s' => P.HasComputedTtl (TF.Ref s' (DynamodbTableData s)) (TF.Attr s (DynamodbTableTtl s)) where
     computedTtl x = TF.compute (TF.refKey x) "ttl"
 
 instance s ~ s' => P.HasComputedWriteCapacity (TF.Ref s' (DynamodbTableData s)) (TF.Attr s P.Int) where
@@ -2075,7 +2075,7 @@ instance s ~ s' => P.HasComputedWriteCapacity (TF.Ref s' (DynamodbTableData s)) 
 -- See the <https://www.terraform.io/docs/providers/aws/d/ebs_snapshot.html terraform documentation>
 -- for more information.
 data EbsSnapshotData s = EbsSnapshotData'
-    { _filter              :: TF.Attr s [TF.Attr s (FilterSetting s)]
+    { _filter              :: TF.Attr s [TF.Attr s (EbsSnapshotFilter s)]
     -- ^ @filter@ - (Optional, Forces New)
     --
     , _mostRecent          :: TF.Attr s P.Bool
@@ -2122,9 +2122,9 @@ instance TF.IsObject (EbsSnapshotData s) where
 instance TF.IsValid (EbsSnapshotData s) where
     validator = P.mempty
 
-instance P.HasFilter (EbsSnapshotData s) (TF.Attr s [TF.Attr s (FilterSetting s)]) where
+instance P.HasFilter (EbsSnapshotData s) (TF.Attr s [TF.Attr s (EbsSnapshotFilter s)]) where
     filter =
-        P.lens (_filter :: EbsSnapshotData s -> TF.Attr s [TF.Attr s (FilterSetting s)])
+        P.lens (_filter :: EbsSnapshotData s -> TF.Attr s [TF.Attr s (EbsSnapshotFilter s)])
                (\s a -> s { _filter = a } :: EbsSnapshotData s)
 
 instance P.HasMostRecent (EbsSnapshotData s) (TF.Attr s P.Bool) where

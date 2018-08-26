@@ -1048,7 +1048,7 @@ data SystemResource s = SystemResource'
     , _image                    :: TF.Attr s P.Text
     -- ^ @image@ - (Optional)
     --
-    , _interface                :: TF.Attr s [TF.Attr s (InterfaceSetting s)]
+    , _interface                :: TF.Attr s [TF.Attr s (SystemInterface s)]
     -- ^ @interface@ - (Optional)
     --
     , _ipv6DefaultDevice        :: TF.Attr s P.Text
@@ -1296,9 +1296,9 @@ instance P.HasImage (SystemResource s) (TF.Attr s P.Text) where
         P.lens (_image :: SystemResource s -> TF.Attr s P.Text)
                (\s a -> s { _image = a } :: SystemResource s)
 
-instance P.HasInterface (SystemResource s) (TF.Attr s [TF.Attr s (InterfaceSetting s)]) where
+instance P.HasInterface (SystemResource s) (TF.Attr s [TF.Attr s (SystemInterface s)]) where
     interface =
-        P.lens (_interface :: SystemResource s -> TF.Attr s [TF.Attr s (InterfaceSetting s)])
+        P.lens (_interface :: SystemResource s -> TF.Attr s [TF.Attr s (SystemInterface s)])
                (\s a -> s { _interface = a } :: SystemResource s)
 
 instance P.HasIpv6DefaultDevice (SystemResource s) (TF.Attr s P.Text) where
@@ -1500,7 +1500,7 @@ instance s ~ s' => P.HasComputedHostname (TF.Ref s' (SystemResource s)) (TF.Attr
 instance s ~ s' => P.HasComputedImage (TF.Ref s' (SystemResource s)) (TF.Attr s P.Text) where
     computedImage x = TF.compute (TF.refKey x) "image"
 
-instance s ~ s' => P.HasComputedInterface (TF.Ref s' (SystemResource s)) (TF.Attr s [TF.Attr s (InterfaceSetting s)]) where
+instance s ~ s' => P.HasComputedInterface (TF.Ref s' (SystemResource s)) (TF.Attr s [TF.Attr s (SystemInterface s)]) where
     computedInterface x = TF.compute (TF.refKey x) "interface"
 
 instance s ~ s' => P.HasComputedIpv6DefaultDevice (TF.Ref s' (SystemResource s)) (TF.Attr s P.Text) where

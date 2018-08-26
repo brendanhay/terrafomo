@@ -176,7 +176,7 @@ data FirewallPolicyResource s = FirewallPolicyResource'
     , _name        :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _rules       :: TF.Attr s [TF.Attr s (RulesSetting s)]
+    , _rules       :: TF.Attr s [TF.Attr s (FirewallPolicyRules s)]
     -- ^ @rules@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -184,7 +184,7 @@ data FirewallPolicyResource s = FirewallPolicyResource'
 -- | Define a new @oneandone_firewall_policy@ resource value.
 firewallPolicyResource
     :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
-    -> TF.Attr s [TF.Attr s (RulesSetting s)] -- ^ @rules@ ('P._rules', 'P.rules')
+    -> TF.Attr s [TF.Attr s (FirewallPolicyRules s)] -- ^ @rules@ ('P._rules', 'P.rules')
     -> P.Resource (FirewallPolicyResource s)
 firewallPolicyResource _name _rules =
     TF.unsafeResource "oneandone_firewall_policy" TF.validator $
@@ -214,9 +214,9 @@ instance P.HasName (FirewallPolicyResource s) (TF.Attr s P.Text) where
         P.lens (_name :: FirewallPolicyResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: FirewallPolicyResource s)
 
-instance P.HasRules (FirewallPolicyResource s) (TF.Attr s [TF.Attr s (RulesSetting s)]) where
+instance P.HasRules (FirewallPolicyResource s) (TF.Attr s [TF.Attr s (FirewallPolicyRules s)]) where
     rules =
-        P.lens (_rules :: FirewallPolicyResource s -> TF.Attr s [TF.Attr s (RulesSetting s)])
+        P.lens (_rules :: FirewallPolicyResource s -> TF.Attr s [TF.Attr s (FirewallPolicyRules s)])
                (\s a -> s { _rules = a } :: FirewallPolicyResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (FirewallPolicyResource s)) (TF.Attr s P.Text) where
@@ -400,7 +400,7 @@ data LoadbalancerResource s = LoadbalancerResource'
     , _persistenceTime       :: TF.Attr s P.Int
     -- ^ @persistence_time@ - (Optional)
     --
-    , _rules                 :: TF.Attr s [TF.Attr s (RulesSetting s)]
+    , _rules                 :: TF.Attr s [TF.Attr s (LoadbalancerRules s)]
     -- ^ @rules@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -409,7 +409,7 @@ data LoadbalancerResource s = LoadbalancerResource'
 loadbalancerResource
     :: TF.Attr s P.Text -- ^ @method@ ('P._method', 'P.method')
     -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
-    -> TF.Attr s [TF.Attr s (RulesSetting s)] -- ^ @rules@ ('P._rules', 'P.rules')
+    -> TF.Attr s [TF.Attr s (LoadbalancerRules s)] -- ^ @rules@ ('P._rules', 'P.rules')
     -> P.Resource (LoadbalancerResource s)
 loadbalancerResource _method _name _rules =
     TF.unsafeResource "oneandone_loadbalancer" TF.validator $
@@ -495,9 +495,9 @@ instance P.HasPersistenceTime (LoadbalancerResource s) (TF.Attr s P.Int) where
         P.lens (_persistenceTime :: LoadbalancerResource s -> TF.Attr s P.Int)
                (\s a -> s { _persistenceTime = a } :: LoadbalancerResource s)
 
-instance P.HasRules (LoadbalancerResource s) (TF.Attr s [TF.Attr s (RulesSetting s)]) where
+instance P.HasRules (LoadbalancerResource s) (TF.Attr s [TF.Attr s (LoadbalancerRules s)]) where
     rules =
-        P.lens (_rules :: LoadbalancerResource s -> TF.Attr s [TF.Attr s (RulesSetting s)])
+        P.lens (_rules :: LoadbalancerResource s -> TF.Attr s [TF.Attr s (LoadbalancerRules s)])
                (\s a -> s { _rules = a } :: LoadbalancerResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (LoadbalancerResource s)) (TF.Attr s P.Text) where
@@ -520,13 +520,13 @@ data MonitoringPolicyResource s = MonitoringPolicyResource'
     , _name        :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _ports       :: TF.Attr s [TF.Attr s (PortsSetting s)]
+    , _ports       :: TF.Attr s [TF.Attr s (MonitoringPolicyPorts s)]
     -- ^ @ports@ - (Optional)
     --
-    , _processes   :: TF.Attr s [TF.Attr s (ProcessesSetting s)]
+    , _processes   :: TF.Attr s [TF.Attr s (MonitoringPolicyProcesses s)]
     -- ^ @processes@ - (Optional)
     --
-    , _thresholds  :: TF.Attr s [TF.Attr s (ThresholdsSetting s)]
+    , _thresholds  :: TF.Attr s [TF.Attr s (MonitoringPolicyThresholds s)]
     -- ^ @thresholds@ - (Required)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -535,7 +535,7 @@ data MonitoringPolicyResource s = MonitoringPolicyResource'
 monitoringPolicyResource
     :: TF.Attr s P.Bool -- ^ @agent@ ('P._agent', 'P.agent')
     -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
-    -> TF.Attr s [TF.Attr s (ThresholdsSetting s)] -- ^ @thresholds@ ('P._thresholds', 'P.thresholds')
+    -> TF.Attr s [TF.Attr s (MonitoringPolicyThresholds s)] -- ^ @thresholds@ ('P._thresholds', 'P.thresholds')
     -> P.Resource (MonitoringPolicyResource s)
 monitoringPolicyResource _agent _name _thresholds =
     TF.unsafeResource "oneandone_monitoring_policy" TF.validator $
@@ -583,19 +583,19 @@ instance P.HasName (MonitoringPolicyResource s) (TF.Attr s P.Text) where
         P.lens (_name :: MonitoringPolicyResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: MonitoringPolicyResource s)
 
-instance P.HasPorts (MonitoringPolicyResource s) (TF.Attr s [TF.Attr s (PortsSetting s)]) where
+instance P.HasPorts (MonitoringPolicyResource s) (TF.Attr s [TF.Attr s (MonitoringPolicyPorts s)]) where
     ports =
-        P.lens (_ports :: MonitoringPolicyResource s -> TF.Attr s [TF.Attr s (PortsSetting s)])
+        P.lens (_ports :: MonitoringPolicyResource s -> TF.Attr s [TF.Attr s (MonitoringPolicyPorts s)])
                (\s a -> s { _ports = a } :: MonitoringPolicyResource s)
 
-instance P.HasProcesses (MonitoringPolicyResource s) (TF.Attr s [TF.Attr s (ProcessesSetting s)]) where
+instance P.HasProcesses (MonitoringPolicyResource s) (TF.Attr s [TF.Attr s (MonitoringPolicyProcesses s)]) where
     processes =
-        P.lens (_processes :: MonitoringPolicyResource s -> TF.Attr s [TF.Attr s (ProcessesSetting s)])
+        P.lens (_processes :: MonitoringPolicyResource s -> TF.Attr s [TF.Attr s (MonitoringPolicyProcesses s)])
                (\s a -> s { _processes = a } :: MonitoringPolicyResource s)
 
-instance P.HasThresholds (MonitoringPolicyResource s) (TF.Attr s [TF.Attr s (ThresholdsSetting s)]) where
+instance P.HasThresholds (MonitoringPolicyResource s) (TF.Attr s [TF.Attr s (MonitoringPolicyThresholds s)]) where
     thresholds =
-        P.lens (_thresholds :: MonitoringPolicyResource s -> TF.Attr s [TF.Attr s (ThresholdsSetting s)])
+        P.lens (_thresholds :: MonitoringPolicyResource s -> TF.Attr s [TF.Attr s (MonitoringPolicyThresholds s)])
                (\s a -> s { _thresholds = a } :: MonitoringPolicyResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (MonitoringPolicyResource s)) (TF.Attr s P.Text) where
@@ -775,7 +775,7 @@ data ServerResource s = ServerResource'
     -- * 'hdds'
     -- * 'ram'
     -- * 'vcores'
-    , _hdds               :: TF.Attr s [TF.Attr s (HddsSetting s)]
+    , _hdds               :: TF.Attr s [TF.Attr s (ServerHdds s)]
     -- ^ @hdds@ - (Optional)
     --
     -- Conflicts with:
@@ -935,9 +935,9 @@ instance P.HasFixedInstanceSize (ServerResource s) (TF.Attr s P.Text) where
         P.lens (_fixedInstanceSize :: ServerResource s -> TF.Attr s P.Text)
                (\s a -> s { _fixedInstanceSize = a } :: ServerResource s)
 
-instance P.HasHdds (ServerResource s) (TF.Attr s [TF.Attr s (HddsSetting s)]) where
+instance P.HasHdds (ServerResource s) (TF.Attr s [TF.Attr s (ServerHdds s)]) where
     hdds =
-        P.lens (_hdds :: ServerResource s -> TF.Attr s [TF.Attr s (HddsSetting s)])
+        P.lens (_hdds :: ServerResource s -> TF.Attr s [TF.Attr s (ServerHdds s)])
                (\s a -> s { _hdds = a } :: ServerResource s)
 
 instance P.HasImage (ServerResource s) (TF.Attr s P.Text) where
@@ -993,7 +993,7 @@ instance P.HasVcores (ServerResource s) (TF.Attr s P.Int) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedIps (TF.Ref s' (ServerResource s)) (TF.Attr s [TF.Attr s (IpsSetting s)]) where
+instance s ~ s' => P.HasComputedIps (TF.Ref s' (ServerResource s)) (TF.Attr s [TF.Attr s (ServerIps s)]) where
     computedIps x = TF.compute (TF.refKey x) "ips"
 
 instance s ~ s' => P.HasComputedPassword (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
@@ -1016,7 +1016,7 @@ data SharedStorageResource s = SharedStorageResource'
     , _size           :: TF.Attr s P.Int
     -- ^ @size@ - (Required)
     --
-    , _storageServers :: TF.Attr s [TF.Attr s (StorageServersSetting s)]
+    , _storageServers :: TF.Attr s [TF.Attr s (SharedStorageStorageServers s)]
     -- ^ @storage_servers@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -1069,9 +1069,9 @@ instance P.HasSize (SharedStorageResource s) (TF.Attr s P.Int) where
         P.lens (_size :: SharedStorageResource s -> TF.Attr s P.Int)
                (\s a -> s { _size = a } :: SharedStorageResource s)
 
-instance P.HasStorageServers (SharedStorageResource s) (TF.Attr s [TF.Attr s (StorageServersSetting s)]) where
+instance P.HasStorageServers (SharedStorageResource s) (TF.Attr s [TF.Attr s (SharedStorageStorageServers s)]) where
     storageServers =
-        P.lens (_storageServers :: SharedStorageResource s -> TF.Attr s [TF.Attr s (StorageServersSetting s)])
+        P.lens (_storageServers :: SharedStorageResource s -> TF.Attr s [TF.Attr s (SharedStorageStorageServers s)])
                (\s a -> s { _storageServers = a } :: SharedStorageResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (SharedStorageResource s)) (TF.Attr s P.Text) where
@@ -1129,7 +1129,7 @@ instance s ~ s' => P.HasComputedMd5 (TF.Ref s' (SshKeyResource s)) (TF.Attr s P.
 instance s ~ s' => P.HasComputedPublicKey (TF.Ref s' (SshKeyResource s)) (TF.Attr s P.Text) where
     computedPublicKey x = TF.compute (TF.refKey x) "public_key"
 
-instance s ~ s' => P.HasComputedServers (TF.Ref s' (SshKeyResource s)) (TF.Attr s [TF.Attr s (ServersSetting s)]) where
+instance s ~ s' => P.HasComputedServers (TF.Ref s' (SshKeyResource s)) (TF.Attr s [TF.Attr s (SshKeyServers s)]) where
     computedServers x = TF.compute (TF.refKey x) "servers"
 
 -- | @oneandone_vpn@ Resource.

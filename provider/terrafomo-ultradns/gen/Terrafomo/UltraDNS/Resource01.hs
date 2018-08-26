@@ -81,10 +81,10 @@ data DirpoolResource s = DirpoolResource'
     , _name            :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _noResponse      :: TF.Attr s [TF.Attr s (NoResponseSetting s)]
+    , _noResponse      :: TF.Attr s [TF.Attr s (DirpoolNoResponse s)]
     -- ^ @no_response@ - (Optional)
     --
-    , _rdata           :: TF.Attr s [TF.Attr s (RdataSetting s)]
+    , _rdata           :: TF.Attr s [TF.Attr s (DirpoolRdata s)]
     -- ^ @rdata@ - (Required)
     --
     , _ttl             :: TF.Attr s P.Int
@@ -102,7 +102,7 @@ data DirpoolResource s = DirpoolResource'
 dirpoolResource
     :: TF.Attr s P.Text -- ^ @description@ ('P._description', 'P.description')
     -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
-    -> TF.Attr s [TF.Attr s (RdataSetting s)] -- ^ @rdata@ ('P._rdata', 'P.rdata')
+    -> TF.Attr s [TF.Attr s (DirpoolRdata s)] -- ^ @rdata@ ('P._rdata', 'P.rdata')
     -> TF.Attr s P.Text -- ^ @type@ ('P._type'', 'P.type'')
     -> TF.Attr s P.Text -- ^ @zone@ ('P._zone', 'P.zone')
     -> P.Resource (DirpoolResource s)
@@ -149,14 +149,14 @@ instance P.HasName (DirpoolResource s) (TF.Attr s P.Text) where
         P.lens (_name :: DirpoolResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: DirpoolResource s)
 
-instance P.HasNoResponse (DirpoolResource s) (TF.Attr s [TF.Attr s (NoResponseSetting s)]) where
+instance P.HasNoResponse (DirpoolResource s) (TF.Attr s [TF.Attr s (DirpoolNoResponse s)]) where
     noResponse =
-        P.lens (_noResponse :: DirpoolResource s -> TF.Attr s [TF.Attr s (NoResponseSetting s)])
+        P.lens (_noResponse :: DirpoolResource s -> TF.Attr s [TF.Attr s (DirpoolNoResponse s)])
                (\s a -> s { _noResponse = a } :: DirpoolResource s)
 
-instance P.HasRdata (DirpoolResource s) (TF.Attr s [TF.Attr s (RdataSetting s)]) where
+instance P.HasRdata (DirpoolResource s) (TF.Attr s [TF.Attr s (DirpoolRdata s)]) where
     rdata =
-        P.lens (_rdata :: DirpoolResource s -> TF.Attr s [TF.Attr s (RdataSetting s)])
+        P.lens (_rdata :: DirpoolResource s -> TF.Attr s [TF.Attr s (DirpoolRdata s)])
                (\s a -> s { _rdata = a } :: DirpoolResource s)
 
 instance P.HasTtl (DirpoolResource s) (TF.Attr s P.Int) where
@@ -188,7 +188,7 @@ data ProbeHttpResource s = ProbeHttpResource'
     { _agents     :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @agents@ - (Required)
     --
-    , _httpProbe  :: TF.Attr s [TF.Attr s (HttpProbeSetting s)]
+    , _httpProbe  :: TF.Attr s [TF.Attr s (ProbeHttpHttpProbe s)]
     -- ^ @http_probe@ - (Optional)
     --
     , _interval   :: TF.Attr s P.Text
@@ -246,9 +246,9 @@ instance P.HasAgents (ProbeHttpResource s) (TF.Attr s [TF.Attr s P.Text]) where
         P.lens (_agents :: ProbeHttpResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _agents = a } :: ProbeHttpResource s)
 
-instance P.HasHttpProbe (ProbeHttpResource s) (TF.Attr s [TF.Attr s (HttpProbeSetting s)]) where
+instance P.HasHttpProbe (ProbeHttpResource s) (TF.Attr s [TF.Attr s (ProbeHttpHttpProbe s)]) where
     httpProbe =
-        P.lens (_httpProbe :: ProbeHttpResource s -> TF.Attr s [TF.Attr s (HttpProbeSetting s)])
+        P.lens (_httpProbe :: ProbeHttpResource s -> TF.Attr s [TF.Attr s (ProbeHttpHttpProbe s)])
                (\s a -> s { _httpProbe = a } :: ProbeHttpResource s)
 
 instance P.HasInterval (ProbeHttpResource s) (TF.Attr s P.Text) where
@@ -293,7 +293,7 @@ data ProbePingResource s = ProbePingResource'
     , _name       :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _pingProbe  :: TF.Attr s [TF.Attr s (PingProbeSetting s)]
+    , _pingProbe  :: TF.Attr s [TF.Attr s (ProbePingPingProbe s)]
     -- ^ @ping_probe@ - (Optional)
     --
     , _poolRecord :: TF.Attr s P.Text
@@ -355,9 +355,9 @@ instance P.HasName (ProbePingResource s) (TF.Attr s P.Text) where
         P.lens (_name :: ProbePingResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: ProbePingResource s)
 
-instance P.HasPingProbe (ProbePingResource s) (TF.Attr s [TF.Attr s (PingProbeSetting s)]) where
+instance P.HasPingProbe (ProbePingResource s) (TF.Attr s [TF.Attr s (ProbePingPingProbe s)]) where
     pingProbe =
-        P.lens (_pingProbe :: ProbePingResource s -> TF.Attr s [TF.Attr s (PingProbeSetting s)])
+        P.lens (_pingProbe :: ProbePingResource s -> TF.Attr s [TF.Attr s (ProbePingPingProbe s)])
                (\s a -> s { _pingProbe = a } :: ProbePingResource s)
 
 instance P.HasPoolRecord (ProbePingResource s) (TF.Attr s P.Text) where
@@ -574,7 +574,7 @@ data TcpoolResource s = TcpoolResource'
     , _name                      :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _rdata                     :: TF.Attr s [TF.Attr s (RdataSetting s)]
+    , _rdata                     :: TF.Attr s [TF.Attr s (TcpoolRdata s)]
     -- ^ @rdata@ - (Required)
     --
     , _runProbes                 :: TF.Attr s P.Bool
@@ -592,7 +592,7 @@ data TcpoolResource s = TcpoolResource'
 tcpoolResource
     :: TF.Attr s P.Text -- ^ @description@ ('P._description', 'P.description')
     -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
-    -> TF.Attr s [TF.Attr s (RdataSetting s)] -- ^ @rdata@ ('P._rdata', 'P.rdata')
+    -> TF.Attr s [TF.Attr s (TcpoolRdata s)] -- ^ @rdata@ ('P._rdata', 'P.rdata')
     -> TF.Attr s P.Text -- ^ @zone@ ('P._zone', 'P.zone')
     -> P.Resource (TcpoolResource s)
 tcpoolResource _description _name _rdata _zone =
@@ -657,9 +657,9 @@ instance P.HasName (TcpoolResource s) (TF.Attr s P.Text) where
         P.lens (_name :: TcpoolResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: TcpoolResource s)
 
-instance P.HasRdata (TcpoolResource s) (TF.Attr s [TF.Attr s (RdataSetting s)]) where
+instance P.HasRdata (TcpoolResource s) (TF.Attr s [TF.Attr s (TcpoolRdata s)]) where
     rdata =
-        P.lens (_rdata :: TcpoolResource s -> TF.Attr s [TF.Attr s (RdataSetting s)])
+        P.lens (_rdata :: TcpoolResource s -> TF.Attr s [TF.Attr s (TcpoolRdata s)])
                (\s a -> s { _rdata = a } :: TcpoolResource s)
 
 instance P.HasRunProbes (TcpoolResource s) (TF.Attr s P.Bool) where

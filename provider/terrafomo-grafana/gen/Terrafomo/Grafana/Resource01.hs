@@ -188,7 +188,7 @@ data DataSourceResource s = DataSourceResource'
     , _isDefault         :: TF.Attr s P.Bool
     -- ^ @is_default@ - (Optional)
     --
-    , _jsonData          :: TF.Attr s [TF.Attr s (JsonDataSetting s)]
+    , _jsonData          :: TF.Attr s [TF.Attr s (DataSourceJsonData s)]
     -- ^ @json_data@ - (Optional)
     --
     , _name              :: TF.Attr s P.Text
@@ -197,7 +197,7 @@ data DataSourceResource s = DataSourceResource'
     , _password          :: TF.Attr s P.Text
     -- ^ @password@ - (Optional)
     --
-    , _secureJsonData    :: TF.Attr s [TF.Attr s (SecureJsonDataSetting s)]
+    , _secureJsonData    :: TF.Attr s [TF.Attr s (DataSourceSecureJsonData s)]
     -- ^ @secure_json_data@ - (Optional)
     --
     , _type'             :: TF.Attr s P.Text
@@ -284,9 +284,9 @@ instance P.HasIsDefault (DataSourceResource s) (TF.Attr s P.Bool) where
         P.lens (_isDefault :: DataSourceResource s -> TF.Attr s P.Bool)
                (\s a -> s { _isDefault = a } :: DataSourceResource s)
 
-instance P.HasJsonData (DataSourceResource s) (TF.Attr s [TF.Attr s (JsonDataSetting s)]) where
+instance P.HasJsonData (DataSourceResource s) (TF.Attr s [TF.Attr s (DataSourceJsonData s)]) where
     jsonData =
-        P.lens (_jsonData :: DataSourceResource s -> TF.Attr s [TF.Attr s (JsonDataSetting s)])
+        P.lens (_jsonData :: DataSourceResource s -> TF.Attr s [TF.Attr s (DataSourceJsonData s)])
                (\s a -> s { _jsonData = a } :: DataSourceResource s)
 
 instance P.HasName (DataSourceResource s) (TF.Attr s P.Text) where
@@ -299,9 +299,9 @@ instance P.HasPassword (DataSourceResource s) (TF.Attr s P.Text) where
         P.lens (_password :: DataSourceResource s -> TF.Attr s P.Text)
                (\s a -> s { _password = a } :: DataSourceResource s)
 
-instance P.HasSecureJsonData (DataSourceResource s) (TF.Attr s [TF.Attr s (SecureJsonDataSetting s)]) where
+instance P.HasSecureJsonData (DataSourceResource s) (TF.Attr s [TF.Attr s (DataSourceSecureJsonData s)]) where
     secureJsonData =
-        P.lens (_secureJsonData :: DataSourceResource s -> TF.Attr s [TF.Attr s (SecureJsonDataSetting s)])
+        P.lens (_secureJsonData :: DataSourceResource s -> TF.Attr s [TF.Attr s (DataSourceSecureJsonData s)])
                (\s a -> s { _secureJsonData = a } :: DataSourceResource s)
 
 instance P.HasType' (DataSourceResource s) (TF.Attr s P.Text) where

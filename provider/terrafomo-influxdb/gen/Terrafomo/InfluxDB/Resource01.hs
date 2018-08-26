@@ -121,7 +121,7 @@ data DatabaseResource s = DatabaseResource'
     { _name              :: TF.Attr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _retentionPolicies :: TF.Attr s [TF.Attr s (RetentionPoliciesSetting s)]
+    , _retentionPolicies :: TF.Attr s [TF.Attr s (DatabaseRetentionPolicies s)]
     -- ^ @retention_policies@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -151,9 +151,9 @@ instance P.HasName (DatabaseResource s) (TF.Attr s P.Text) where
         P.lens (_name :: DatabaseResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: DatabaseResource s)
 
-instance P.HasRetentionPolicies (DatabaseResource s) (TF.Attr s [TF.Attr s (RetentionPoliciesSetting s)]) where
+instance P.HasRetentionPolicies (DatabaseResource s) (TF.Attr s [TF.Attr s (DatabaseRetentionPolicies s)]) where
     retentionPolicies =
-        P.lens (_retentionPolicies :: DatabaseResource s -> TF.Attr s [TF.Attr s (RetentionPoliciesSetting s)])
+        P.lens (_retentionPolicies :: DatabaseResource s -> TF.Attr s [TF.Attr s (DatabaseRetentionPolicies s)])
                (\s a -> s { _retentionPolicies = a } :: DatabaseResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (DatabaseResource s)) (TF.Attr s P.Text) where
@@ -167,7 +167,7 @@ data UserResource s = UserResource'
     { _admin    :: TF.Attr s P.Bool
     -- ^ @admin@ - (Optional)
     --
-    , _grant    :: TF.Attr s [TF.Attr s (GrantSetting s)]
+    , _grant    :: TF.Attr s [TF.Attr s (UserGrant s)]
     -- ^ @grant@ - (Optional)
     --
     , _name     :: TF.Attr s P.Text
@@ -208,9 +208,9 @@ instance P.HasAdmin (UserResource s) (TF.Attr s P.Bool) where
         P.lens (_admin :: UserResource s -> TF.Attr s P.Bool)
                (\s a -> s { _admin = a } :: UserResource s)
 
-instance P.HasGrant (UserResource s) (TF.Attr s [TF.Attr s (GrantSetting s)]) where
+instance P.HasGrant (UserResource s) (TF.Attr s [TF.Attr s (UserGrant s)]) where
     grant =
-        P.lens (_grant :: UserResource s -> TF.Attr s [TF.Attr s (GrantSetting s)])
+        P.lens (_grant :: UserResource s -> TF.Attr s [TF.Attr s (UserGrant s)])
                (\s a -> s { _grant = a } :: UserResource s)
 
 instance P.HasName (UserResource s) (TF.Attr s P.Text) where

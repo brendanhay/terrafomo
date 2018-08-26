@@ -17,25 +17,25 @@
 --
 module Terrafomo.VCloudDirector.Settings01
     (
-    -- ** dhcp_pool
-      DhcpPoolSetting (..)
-    , newDhcpPoolSetting
-
     -- ** local_subnets
-    , LocalSubnetsSetting (..)
-    , newLocalSubnetsSetting
+      EdgegatewayVpnLocalSubnets (..)
+    , newEdgegatewayVpnLocalSubnets
 
     -- ** peer_subnets
-    , PeerSubnetsSetting (..)
-    , newPeerSubnetsSetting
+    , EdgegatewayVpnPeerSubnets (..)
+    , newEdgegatewayVpnPeerSubnets
 
     -- ** rule
-    , RuleSetting (..)
-    , newRuleSetting
+    , FirewallRulesRule (..)
+    , newFirewallRulesRule
+
+    -- ** dhcp_pool
+    , NetworkDhcpPool (..)
+    , newNetworkDhcpPool
 
     -- ** static_ip_pool
-    , StaticIpPoolSetting (..)
-    , newStaticIpPoolSetting
+    , NetworkStaticIpPool (..)
+    , newNetworkStaticIpPool
 
     ) where
 
@@ -60,69 +60,8 @@ import qualified Terrafomo.Validator            as TF
 import qualified Terrafomo.VCloudDirector.Lens  as P
 import qualified Terrafomo.VCloudDirector.Types as P
 
--- | @dhcp_pool@ nested settings.
-data DhcpPoolSetting s = DhcpPoolSetting'
-    { _defaultLeaseTime :: TF.Attr s P.Int
-    -- ^ @default_lease_time@ - (Optional)
-    --
-    , _endAddress       :: TF.Attr s P.Text
-    -- ^ @end_address@ - (Required)
-    --
-    , _maxLeaseTime     :: TF.Attr s P.Int
-    -- ^ @max_lease_time@ - (Optional)
-    --
-    , _startAddress     :: TF.Attr s P.Text
-    -- ^ @start_address@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @dhcp_pool@ settings value.
-newDhcpPoolSetting
-    :: TF.Attr s P.Text -- ^ 'P._endAddress': @end_address@
-    -> TF.Attr s P.Text -- ^ 'P._startAddress': @start_address@
-    -> DhcpPoolSetting s
-newDhcpPoolSetting _endAddress _startAddress =
-    DhcpPoolSetting'
-        { _defaultLeaseTime = TF.value 3600
-        , _endAddress = _endAddress
-        , _maxLeaseTime = TF.value 7200
-        , _startAddress = _startAddress
-        }
-
-instance TF.IsValue  (DhcpPoolSetting s)
-instance TF.IsObject (DhcpPoolSetting s) where
-    toObject DhcpPoolSetting'{..} = P.catMaybes
-        [ TF.assign "default_lease_time" <$> TF.attribute _defaultLeaseTime
-        , TF.assign "end_address" <$> TF.attribute _endAddress
-        , TF.assign "max_lease_time" <$> TF.attribute _maxLeaseTime
-        , TF.assign "start_address" <$> TF.attribute _startAddress
-        ]
-
-instance TF.IsValid (DhcpPoolSetting s) where
-    validator = P.mempty
-
-instance P.HasDefaultLeaseTime (DhcpPoolSetting s) (TF.Attr s P.Int) where
-    defaultLeaseTime =
-        P.lens (_defaultLeaseTime :: DhcpPoolSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _defaultLeaseTime = a } :: DhcpPoolSetting s)
-
-instance P.HasEndAddress (DhcpPoolSetting s) (TF.Attr s P.Text) where
-    endAddress =
-        P.lens (_endAddress :: DhcpPoolSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _endAddress = a } :: DhcpPoolSetting s)
-
-instance P.HasMaxLeaseTime (DhcpPoolSetting s) (TF.Attr s P.Int) where
-    maxLeaseTime =
-        P.lens (_maxLeaseTime :: DhcpPoolSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _maxLeaseTime = a } :: DhcpPoolSetting s)
-
-instance P.HasStartAddress (DhcpPoolSetting s) (TF.Attr s P.Text) where
-    startAddress =
-        P.lens (_startAddress :: DhcpPoolSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _startAddress = a } :: DhcpPoolSetting s)
-
 -- | @local_subnets@ nested settings.
-data LocalSubnetsSetting s = LocalSubnetsSetting'
+data EdgegatewayVpnLocalSubnets s = EdgegatewayVpnLocalSubnets'
     { _localSubnetGateway :: TF.Attr s P.Text
     -- ^ @local_subnet_gateway@ - (Required)
     --
@@ -135,46 +74,46 @@ data LocalSubnetsSetting s = LocalSubnetsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @local_subnets@ settings value.
-newLocalSubnetsSetting
+newEdgegatewayVpnLocalSubnets
     :: TF.Attr s P.Text -- ^ 'P._localSubnetGateway': @local_subnet_gateway@
     -> TF.Attr s P.Text -- ^ 'P._localSubnetMask': @local_subnet_mask@
     -> TF.Attr s P.Text -- ^ 'P._localSubnetName': @local_subnet_name@
-    -> LocalSubnetsSetting s
-newLocalSubnetsSetting _localSubnetGateway _localSubnetMask _localSubnetName =
-    LocalSubnetsSetting'
+    -> EdgegatewayVpnLocalSubnets s
+newEdgegatewayVpnLocalSubnets _localSubnetGateway _localSubnetMask _localSubnetName =
+    EdgegatewayVpnLocalSubnets'
         { _localSubnetGateway = _localSubnetGateway
         , _localSubnetMask = _localSubnetMask
         , _localSubnetName = _localSubnetName
         }
 
-instance TF.IsValue  (LocalSubnetsSetting s)
-instance TF.IsObject (LocalSubnetsSetting s) where
-    toObject LocalSubnetsSetting'{..} = P.catMaybes
+instance TF.IsValue  (EdgegatewayVpnLocalSubnets s)
+instance TF.IsObject (EdgegatewayVpnLocalSubnets s) where
+    toObject EdgegatewayVpnLocalSubnets'{..} = P.catMaybes
         [ TF.assign "local_subnet_gateway" <$> TF.attribute _localSubnetGateway
         , TF.assign "local_subnet_mask" <$> TF.attribute _localSubnetMask
         , TF.assign "local_subnet_name" <$> TF.attribute _localSubnetName
         ]
 
-instance TF.IsValid (LocalSubnetsSetting s) where
+instance TF.IsValid (EdgegatewayVpnLocalSubnets s) where
     validator = P.mempty
 
-instance P.HasLocalSubnetGateway (LocalSubnetsSetting s) (TF.Attr s P.Text) where
+instance P.HasLocalSubnetGateway (EdgegatewayVpnLocalSubnets s) (TF.Attr s P.Text) where
     localSubnetGateway =
-        P.lens (_localSubnetGateway :: LocalSubnetsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _localSubnetGateway = a } :: LocalSubnetsSetting s)
+        P.lens (_localSubnetGateway :: EdgegatewayVpnLocalSubnets s -> TF.Attr s P.Text)
+               (\s a -> s { _localSubnetGateway = a } :: EdgegatewayVpnLocalSubnets s)
 
-instance P.HasLocalSubnetMask (LocalSubnetsSetting s) (TF.Attr s P.Text) where
+instance P.HasLocalSubnetMask (EdgegatewayVpnLocalSubnets s) (TF.Attr s P.Text) where
     localSubnetMask =
-        P.lens (_localSubnetMask :: LocalSubnetsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _localSubnetMask = a } :: LocalSubnetsSetting s)
+        P.lens (_localSubnetMask :: EdgegatewayVpnLocalSubnets s -> TF.Attr s P.Text)
+               (\s a -> s { _localSubnetMask = a } :: EdgegatewayVpnLocalSubnets s)
 
-instance P.HasLocalSubnetName (LocalSubnetsSetting s) (TF.Attr s P.Text) where
+instance P.HasLocalSubnetName (EdgegatewayVpnLocalSubnets s) (TF.Attr s P.Text) where
     localSubnetName =
-        P.lens (_localSubnetName :: LocalSubnetsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _localSubnetName = a } :: LocalSubnetsSetting s)
+        P.lens (_localSubnetName :: EdgegatewayVpnLocalSubnets s -> TF.Attr s P.Text)
+               (\s a -> s { _localSubnetName = a } :: EdgegatewayVpnLocalSubnets s)
 
 -- | @peer_subnets@ nested settings.
-data PeerSubnetsSetting s = PeerSubnetsSetting'
+data EdgegatewayVpnPeerSubnets s = EdgegatewayVpnPeerSubnets'
     { _peerSubnetGateway :: TF.Attr s P.Text
     -- ^ @peer_subnet_gateway@ - (Required)
     --
@@ -187,46 +126,46 @@ data PeerSubnetsSetting s = PeerSubnetsSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @peer_subnets@ settings value.
-newPeerSubnetsSetting
+newEdgegatewayVpnPeerSubnets
     :: TF.Attr s P.Text -- ^ 'P._peerSubnetGateway': @peer_subnet_gateway@
     -> TF.Attr s P.Text -- ^ 'P._peerSubnetMask': @peer_subnet_mask@
     -> TF.Attr s P.Text -- ^ 'P._peerSubnetName': @peer_subnet_name@
-    -> PeerSubnetsSetting s
-newPeerSubnetsSetting _peerSubnetGateway _peerSubnetMask _peerSubnetName =
-    PeerSubnetsSetting'
+    -> EdgegatewayVpnPeerSubnets s
+newEdgegatewayVpnPeerSubnets _peerSubnetGateway _peerSubnetMask _peerSubnetName =
+    EdgegatewayVpnPeerSubnets'
         { _peerSubnetGateway = _peerSubnetGateway
         , _peerSubnetMask = _peerSubnetMask
         , _peerSubnetName = _peerSubnetName
         }
 
-instance TF.IsValue  (PeerSubnetsSetting s)
-instance TF.IsObject (PeerSubnetsSetting s) where
-    toObject PeerSubnetsSetting'{..} = P.catMaybes
+instance TF.IsValue  (EdgegatewayVpnPeerSubnets s)
+instance TF.IsObject (EdgegatewayVpnPeerSubnets s) where
+    toObject EdgegatewayVpnPeerSubnets'{..} = P.catMaybes
         [ TF.assign "peer_subnet_gateway" <$> TF.attribute _peerSubnetGateway
         , TF.assign "peer_subnet_mask" <$> TF.attribute _peerSubnetMask
         , TF.assign "peer_subnet_name" <$> TF.attribute _peerSubnetName
         ]
 
-instance TF.IsValid (PeerSubnetsSetting s) where
+instance TF.IsValid (EdgegatewayVpnPeerSubnets s) where
     validator = P.mempty
 
-instance P.HasPeerSubnetGateway (PeerSubnetsSetting s) (TF.Attr s P.Text) where
+instance P.HasPeerSubnetGateway (EdgegatewayVpnPeerSubnets s) (TF.Attr s P.Text) where
     peerSubnetGateway =
-        P.lens (_peerSubnetGateway :: PeerSubnetsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _peerSubnetGateway = a } :: PeerSubnetsSetting s)
+        P.lens (_peerSubnetGateway :: EdgegatewayVpnPeerSubnets s -> TF.Attr s P.Text)
+               (\s a -> s { _peerSubnetGateway = a } :: EdgegatewayVpnPeerSubnets s)
 
-instance P.HasPeerSubnetMask (PeerSubnetsSetting s) (TF.Attr s P.Text) where
+instance P.HasPeerSubnetMask (EdgegatewayVpnPeerSubnets s) (TF.Attr s P.Text) where
     peerSubnetMask =
-        P.lens (_peerSubnetMask :: PeerSubnetsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _peerSubnetMask = a } :: PeerSubnetsSetting s)
+        P.lens (_peerSubnetMask :: EdgegatewayVpnPeerSubnets s -> TF.Attr s P.Text)
+               (\s a -> s { _peerSubnetMask = a } :: EdgegatewayVpnPeerSubnets s)
 
-instance P.HasPeerSubnetName (PeerSubnetsSetting s) (TF.Attr s P.Text) where
+instance P.HasPeerSubnetName (EdgegatewayVpnPeerSubnets s) (TF.Attr s P.Text) where
     peerSubnetName =
-        P.lens (_peerSubnetName :: PeerSubnetsSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _peerSubnetName = a } :: PeerSubnetsSetting s)
+        P.lens (_peerSubnetName :: EdgegatewayVpnPeerSubnets s -> TF.Attr s P.Text)
+               (\s a -> s { _peerSubnetName = a } :: EdgegatewayVpnPeerSubnets s)
 
 -- | @rule@ nested settings.
-data RuleSetting s = RuleSetting'
+data FirewallRulesRule s = FirewallRulesRule'
     { _description     :: TF.Attr s P.Text
     -- ^ @description@ - (Required)
     --
@@ -254,7 +193,7 @@ data RuleSetting s = RuleSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @rule@ settings value.
-newRuleSetting
+newFirewallRulesRule
     :: TF.Attr s P.Text -- ^ 'P._description': @description@
     -> TF.Attr s P.Text -- ^ 'P._destinationIp': @destination_ip@
     -> TF.Attr s P.Text -- ^ 'P._sourceIp': @source_ip@
@@ -262,9 +201,9 @@ newRuleSetting
     -> TF.Attr s P.Text -- ^ 'P._destinationPort': @destination_port@
     -> TF.Attr s P.Text -- ^ 'P._sourcePort': @source_port@
     -> TF.Attr s P.Text -- ^ 'P._protocol': @protocol@
-    -> RuleSetting s
-newRuleSetting _description _destinationIp _sourceIp _policy _destinationPort _sourcePort _protocol =
-    RuleSetting'
+    -> FirewallRulesRule s
+newFirewallRulesRule _description _destinationIp _sourceIp _policy _destinationPort _sourcePort _protocol =
+    FirewallRulesRule'
         { _description = _description
         , _destinationIp = _destinationIp
         , _destinationPort = _destinationPort
@@ -275,9 +214,9 @@ newRuleSetting _description _destinationIp _sourceIp _policy _destinationPort _s
         , _sourcePort = _sourcePort
         }
 
-instance TF.IsValue  (RuleSetting s)
-instance TF.IsObject (RuleSetting s) where
-    toObject RuleSetting'{..} = P.catMaybes
+instance TF.IsValue  (FirewallRulesRule s)
+instance TF.IsObject (FirewallRulesRule s) where
+    toObject FirewallRulesRule'{..} = P.catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "destination_ip" <$> TF.attribute _destinationIp
         , TF.assign "destination_port" <$> TF.attribute _destinationPort
@@ -288,54 +227,115 @@ instance TF.IsObject (RuleSetting s) where
         , TF.assign "source_port" <$> TF.attribute _sourcePort
         ]
 
-instance TF.IsValid (RuleSetting s) where
+instance TF.IsValid (FirewallRulesRule s) where
     validator = P.mempty
 
-instance P.HasDescription (RuleSetting s) (TF.Attr s P.Text) where
+instance P.HasDescription (FirewallRulesRule s) (TF.Attr s P.Text) where
     description =
-        P.lens (_description :: RuleSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a } :: RuleSetting s)
+        P.lens (_description :: FirewallRulesRule s -> TF.Attr s P.Text)
+               (\s a -> s { _description = a } :: FirewallRulesRule s)
 
-instance P.HasDestinationIp (RuleSetting s) (TF.Attr s P.Text) where
+instance P.HasDestinationIp (FirewallRulesRule s) (TF.Attr s P.Text) where
     destinationIp =
-        P.lens (_destinationIp :: RuleSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _destinationIp = a } :: RuleSetting s)
+        P.lens (_destinationIp :: FirewallRulesRule s -> TF.Attr s P.Text)
+               (\s a -> s { _destinationIp = a } :: FirewallRulesRule s)
 
-instance P.HasDestinationPort (RuleSetting s) (TF.Attr s P.Text) where
+instance P.HasDestinationPort (FirewallRulesRule s) (TF.Attr s P.Text) where
     destinationPort =
-        P.lens (_destinationPort :: RuleSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _destinationPort = a } :: RuleSetting s)
+        P.lens (_destinationPort :: FirewallRulesRule s -> TF.Attr s P.Text)
+               (\s a -> s { _destinationPort = a } :: FirewallRulesRule s)
 
-instance P.HasId (RuleSetting s) (TF.Attr s P.Text) where
+instance P.HasId (FirewallRulesRule s) (TF.Attr s P.Text) where
     id =
-        P.lens (_id :: RuleSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _id = a } :: RuleSetting s)
+        P.lens (_id :: FirewallRulesRule s -> TF.Attr s P.Text)
+               (\s a -> s { _id = a } :: FirewallRulesRule s)
 
-instance P.HasPolicy (RuleSetting s) (TF.Attr s P.Text) where
+instance P.HasPolicy (FirewallRulesRule s) (TF.Attr s P.Text) where
     policy =
-        P.lens (_policy :: RuleSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _policy = a } :: RuleSetting s)
+        P.lens (_policy :: FirewallRulesRule s -> TF.Attr s P.Text)
+               (\s a -> s { _policy = a } :: FirewallRulesRule s)
 
-instance P.HasProtocol (RuleSetting s) (TF.Attr s P.Text) where
+instance P.HasProtocol (FirewallRulesRule s) (TF.Attr s P.Text) where
     protocol =
-        P.lens (_protocol :: RuleSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _protocol = a } :: RuleSetting s)
+        P.lens (_protocol :: FirewallRulesRule s -> TF.Attr s P.Text)
+               (\s a -> s { _protocol = a } :: FirewallRulesRule s)
 
-instance P.HasSourceIp (RuleSetting s) (TF.Attr s P.Text) where
+instance P.HasSourceIp (FirewallRulesRule s) (TF.Attr s P.Text) where
     sourceIp =
-        P.lens (_sourceIp :: RuleSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _sourceIp = a } :: RuleSetting s)
+        P.lens (_sourceIp :: FirewallRulesRule s -> TF.Attr s P.Text)
+               (\s a -> s { _sourceIp = a } :: FirewallRulesRule s)
 
-instance P.HasSourcePort (RuleSetting s) (TF.Attr s P.Text) where
+instance P.HasSourcePort (FirewallRulesRule s) (TF.Attr s P.Text) where
     sourcePort =
-        P.lens (_sourcePort :: RuleSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _sourcePort = a } :: RuleSetting s)
+        P.lens (_sourcePort :: FirewallRulesRule s -> TF.Attr s P.Text)
+               (\s a -> s { _sourcePort = a } :: FirewallRulesRule s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (RuleSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedId (TF.Ref s' (FirewallRulesRule s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
+-- | @dhcp_pool@ nested settings.
+data NetworkDhcpPool s = NetworkDhcpPool'
+    { _defaultLeaseTime :: TF.Attr s P.Int
+    -- ^ @default_lease_time@ - (Optional)
+    --
+    , _endAddress       :: TF.Attr s P.Text
+    -- ^ @end_address@ - (Required)
+    --
+    , _maxLeaseTime     :: TF.Attr s P.Int
+    -- ^ @max_lease_time@ - (Optional)
+    --
+    , _startAddress     :: TF.Attr s P.Text
+    -- ^ @start_address@ - (Required)
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @dhcp_pool@ settings value.
+newNetworkDhcpPool
+    :: TF.Attr s P.Text -- ^ 'P._endAddress': @end_address@
+    -> TF.Attr s P.Text -- ^ 'P._startAddress': @start_address@
+    -> NetworkDhcpPool s
+newNetworkDhcpPool _endAddress _startAddress =
+    NetworkDhcpPool'
+        { _defaultLeaseTime = TF.value 3600
+        , _endAddress = _endAddress
+        , _maxLeaseTime = TF.value 7200
+        , _startAddress = _startAddress
+        }
+
+instance TF.IsValue  (NetworkDhcpPool s)
+instance TF.IsObject (NetworkDhcpPool s) where
+    toObject NetworkDhcpPool'{..} = P.catMaybes
+        [ TF.assign "default_lease_time" <$> TF.attribute _defaultLeaseTime
+        , TF.assign "end_address" <$> TF.attribute _endAddress
+        , TF.assign "max_lease_time" <$> TF.attribute _maxLeaseTime
+        , TF.assign "start_address" <$> TF.attribute _startAddress
+        ]
+
+instance TF.IsValid (NetworkDhcpPool s) where
+    validator = P.mempty
+
+instance P.HasDefaultLeaseTime (NetworkDhcpPool s) (TF.Attr s P.Int) where
+    defaultLeaseTime =
+        P.lens (_defaultLeaseTime :: NetworkDhcpPool s -> TF.Attr s P.Int)
+               (\s a -> s { _defaultLeaseTime = a } :: NetworkDhcpPool s)
+
+instance P.HasEndAddress (NetworkDhcpPool s) (TF.Attr s P.Text) where
+    endAddress =
+        P.lens (_endAddress :: NetworkDhcpPool s -> TF.Attr s P.Text)
+               (\s a -> s { _endAddress = a } :: NetworkDhcpPool s)
+
+instance P.HasMaxLeaseTime (NetworkDhcpPool s) (TF.Attr s P.Int) where
+    maxLeaseTime =
+        P.lens (_maxLeaseTime :: NetworkDhcpPool s -> TF.Attr s P.Int)
+               (\s a -> s { _maxLeaseTime = a } :: NetworkDhcpPool s)
+
+instance P.HasStartAddress (NetworkDhcpPool s) (TF.Attr s P.Text) where
+    startAddress =
+        P.lens (_startAddress :: NetworkDhcpPool s -> TF.Attr s P.Text)
+               (\s a -> s { _startAddress = a } :: NetworkDhcpPool s)
+
 -- | @static_ip_pool@ nested settings.
-data StaticIpPoolSetting s = StaticIpPoolSetting'
+data NetworkStaticIpPool s = NetworkStaticIpPool'
     { _endAddress   :: TF.Attr s P.Text
     -- ^ @end_address@ - (Required)
     --
@@ -345,32 +345,32 @@ data StaticIpPoolSetting s = StaticIpPoolSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @static_ip_pool@ settings value.
-newStaticIpPoolSetting
+newNetworkStaticIpPool
     :: TF.Attr s P.Text -- ^ 'P._endAddress': @end_address@
     -> TF.Attr s P.Text -- ^ 'P._startAddress': @start_address@
-    -> StaticIpPoolSetting s
-newStaticIpPoolSetting _endAddress _startAddress =
-    StaticIpPoolSetting'
+    -> NetworkStaticIpPool s
+newNetworkStaticIpPool _endAddress _startAddress =
+    NetworkStaticIpPool'
         { _endAddress = _endAddress
         , _startAddress = _startAddress
         }
 
-instance TF.IsValue  (StaticIpPoolSetting s)
-instance TF.IsObject (StaticIpPoolSetting s) where
-    toObject StaticIpPoolSetting'{..} = P.catMaybes
+instance TF.IsValue  (NetworkStaticIpPool s)
+instance TF.IsObject (NetworkStaticIpPool s) where
+    toObject NetworkStaticIpPool'{..} = P.catMaybes
         [ TF.assign "end_address" <$> TF.attribute _endAddress
         , TF.assign "start_address" <$> TF.attribute _startAddress
         ]
 
-instance TF.IsValid (StaticIpPoolSetting s) where
+instance TF.IsValid (NetworkStaticIpPool s) where
     validator = P.mempty
 
-instance P.HasEndAddress (StaticIpPoolSetting s) (TF.Attr s P.Text) where
+instance P.HasEndAddress (NetworkStaticIpPool s) (TF.Attr s P.Text) where
     endAddress =
-        P.lens (_endAddress :: StaticIpPoolSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _endAddress = a } :: StaticIpPoolSetting s)
+        P.lens (_endAddress :: NetworkStaticIpPool s -> TF.Attr s P.Text)
+               (\s a -> s { _endAddress = a } :: NetworkStaticIpPool s)
 
-instance P.HasStartAddress (StaticIpPoolSetting s) (TF.Attr s P.Text) where
+instance P.HasStartAddress (NetworkStaticIpPool s) (TF.Attr s P.Text) where
     startAddress =
-        P.lens (_startAddress :: StaticIpPoolSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _startAddress = a } :: StaticIpPoolSetting s)
+        P.lens (_startAddress :: NetworkStaticIpPool s -> TF.Attr s P.Text)
+               (\s a -> s { _startAddress = a } :: NetworkStaticIpPool s)

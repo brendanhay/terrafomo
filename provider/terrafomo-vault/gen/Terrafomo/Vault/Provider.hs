@@ -73,7 +73,7 @@ data Provider = Provider'
     -- ^ @ca_cert_file@ - (Optional)
     -- Path to a CA certificate file to validate the server's certificate.
     --
-    , _clientAuth         :: P.Maybe [ClientAuthSetting]
+    , _clientAuth         :: P.Maybe [ClientAuth]
     -- ^ @client_auth@ - (Optional)
     -- Client authentication credentials.
     --
@@ -140,9 +140,9 @@ instance P.HasCaCertFile (Provider) (P.Maybe P.Text) where
         P.lens (_caCertFile :: Provider -> P.Maybe P.Text)
                (\s a -> s { _caCertFile = a } :: Provider)
 
-instance P.HasClientAuth (Provider) (P.Maybe [ClientAuthSetting]) where
+instance P.HasClientAuth (Provider) (P.Maybe [ClientAuth]) where
     clientAuth =
-        P.lens (_clientAuth :: Provider -> P.Maybe [ClientAuthSetting])
+        P.lens (_clientAuth :: Provider -> P.Maybe [ClientAuth])
                (\s a -> s { _clientAuth = a } :: Provider)
 
 instance P.HasMaxLeaseTtlSeconds (Provider) (P.Maybe P.Int) where

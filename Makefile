@@ -17,13 +17,15 @@ build: format
 	@$(MAKE) $(CONFIGS)
 	stack build --fast
 
-haddock: format
-	stack build --fast --haddock
+gen: $(addprefix gen-,$(PROVIDERS))
 
 format: $(addprefix format-,$(PROVIDERS))
 	@echo -e '\nFormatting...'
 	@find $(wildcard terrafomo*/src) -type f -name '*.hs' -print0 | \
 	    xargs -0 -I % sh -c 'echo " -> %"; $(STYLISH) -i "%"'
+
+haddock: format
+	stack build --fast --haddock
 
 clean: $(addprefix clean-,$(PROVIDERS))
 	rm -f $(GENERATE)
@@ -62,20 +64,20 @@ define provider
 $1: format-$1
 	stack build --fast $(call package,$1)
 
-generate-$1: $(GENERATE) $(GO_VENDOR)-$1 $(MODEL_DIR)/$1.json
+gen-$1: $(GENERATE) $(GO_VENDOR)-$1 $(MODEL_DIR)/$1.json
 	$(GENERATE) \
 	    --template-dir=terrafomo-gen/template       \
 	    --ir-dir=terrafomo-gen/ir                   \
 	    --config-yaml=terrafomo-gen/config/$1.yaml  \
 	    --provider-json=$(MODEL_DIR)/$1.json
 
-haddock-$1: format-$1
-	stack build --haddock --fast $(call package,$1)
-
-format-$1: $(STYLISH) generate-$1
+format-$1: $(STYLISH) gen-$1
 	@echo -e '\nFormatting...'
 	@find provider/$(call package,$1)/gen -type f -name '*.hs' -print0 | \
 	    xargs -0 -I % sh -c 'echo " -> %"; $(STYLISH) -i "%"'
+
+haddock-$1: format-$1
+	stack build --haddock --fast $(call package,$1)
 
 clean-$1:
 	rm -rf $(GO_VENDOR)-$1/gen.go $(MODEL_DIR)/$1.json

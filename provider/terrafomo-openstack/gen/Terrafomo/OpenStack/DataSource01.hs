@@ -639,7 +639,7 @@ instance s ~ s' => P.HasComputedProjectName (TF.Ref s' (IdentityAuthScopeV3Data 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (IdentityAuthScopeV3Data s)) (TF.Attr s P.Text) where
     computedRegion x = TF.compute (TF.refKey x) "region"
 
-instance s ~ s' => P.HasComputedRoles (TF.Ref s' (IdentityAuthScopeV3Data s)) (TF.Attr s [TF.Attr s (RolesSetting s)]) where
+instance s ~ s' => P.HasComputedRoles (TF.Ref s' (IdentityAuthScopeV3Data s)) (TF.Attr s [TF.Attr s (IdentityAuthScopeV3Roles s)]) where
     computedRoles x = TF.compute (TF.refKey x) "roles"
 
 instance s ~ s' => P.HasComputedUserDomainId (TF.Ref s' (IdentityAuthScopeV3Data s)) (TF.Attr s P.Text) where
@@ -1685,7 +1685,7 @@ instance P.HasTenantId (NetworkingSubnetV2Data s) (TF.Attr s P.Text) where
 instance s ~ s' => P.HasComputedId (TF.Ref s' (NetworkingSubnetV2Data s)) (TF.Attr s P.Text) where
     computedId x = TF.compute (TF.refKey x) "id"
 
-instance s ~ s' => P.HasComputedAllocationPools (TF.Ref s' (NetworkingSubnetV2Data s)) (TF.Attr s [TF.Attr s (AllocationPoolsSetting s)]) where
+instance s ~ s' => P.HasComputedAllocationPools (TF.Ref s' (NetworkingSubnetV2Data s)) (TF.Attr s [TF.Attr s (NetworkingSubnetV2AllocationPools s)]) where
     computedAllocationPools x = TF.compute (TF.refKey x) "allocation_pools"
 
 instance s ~ s' => P.HasComputedCidr (TF.Ref s' (NetworkingSubnetV2Data s)) (TF.Attr s P.Text) where
@@ -1700,7 +1700,7 @@ instance s ~ s' => P.HasComputedEnableDhcp (TF.Ref s' (NetworkingSubnetV2Data s)
 instance s ~ s' => P.HasComputedGatewayIp (TF.Ref s' (NetworkingSubnetV2Data s)) (TF.Attr s P.Text) where
     computedGatewayIp x = TF.compute (TF.refKey x) "gateway_ip"
 
-instance s ~ s' => P.HasComputedHostRoutes (TF.Ref s' (NetworkingSubnetV2Data s)) (TF.Attr s [TF.Attr s (HostRoutesSetting s)]) where
+instance s ~ s' => P.HasComputedHostRoutes (TF.Ref s' (NetworkingSubnetV2Data s)) (TF.Attr s [TF.Attr s (NetworkingSubnetV2HostRoutes s)]) where
     computedHostRoutes x = TF.compute (TF.refKey x) "host_routes"
 
 instance s ~ s' => P.HasComputedIpVersion (TF.Ref s' (NetworkingSubnetV2Data s)) (TF.Attr s P.Int) where

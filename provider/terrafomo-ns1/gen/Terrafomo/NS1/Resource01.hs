@@ -479,7 +479,7 @@ data MonitoringjobResource s = MonitoringjobResource'
     , _regions        :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @regions@ - (Required)
     --
-    , _rules          :: TF.Attr s [TF.Attr s (RulesSetting s)]
+    , _rules          :: TF.Attr s [TF.Attr s (MonitoringjobRules s)]
     -- ^ @rules@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -604,9 +604,9 @@ instance P.HasRegions (MonitoringjobResource s) (TF.Attr s [TF.Attr s P.Text]) w
         P.lens (_regions :: MonitoringjobResource s -> TF.Attr s [TF.Attr s P.Text])
                (\s a -> s { _regions = a } :: MonitoringjobResource s)
 
-instance P.HasRules (MonitoringjobResource s) (TF.Attr s [TF.Attr s (RulesSetting s)]) where
+instance P.HasRules (MonitoringjobResource s) (TF.Attr s [TF.Attr s (MonitoringjobRules s)]) where
     rules =
-        P.lens (_rules :: MonitoringjobResource s -> TF.Attr s [TF.Attr s (RulesSetting s)])
+        P.lens (_rules :: MonitoringjobResource s -> TF.Attr s [TF.Attr s (MonitoringjobRules s)])
                (\s a -> s { _rules = a } :: MonitoringjobResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (MonitoringjobResource s)) (TF.Attr s P.Text) where
@@ -620,7 +620,7 @@ data NotifylistResource s = NotifylistResource'
     { _name          :: TF.Attr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _notifications :: TF.Attr s [TF.Attr s (NotificationsSetting s)]
+    , _notifications :: TF.Attr s [TF.Attr s (NotifylistNotifications s)]
     -- ^ @notifications@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -650,9 +650,9 @@ instance P.HasName (NotifylistResource s) (TF.Attr s P.Text) where
         P.lens (_name :: NotifylistResource s -> TF.Attr s P.Text)
                (\s a -> s { _name = a } :: NotifylistResource s)
 
-instance P.HasNotifications (NotifylistResource s) (TF.Attr s [TF.Attr s (NotificationsSetting s)]) where
+instance P.HasNotifications (NotifylistResource s) (TF.Attr s [TF.Attr s (NotifylistNotifications s)]) where
     notifications =
-        P.lens (_notifications :: NotifylistResource s -> TF.Attr s [TF.Attr s (NotificationsSetting s)])
+        P.lens (_notifications :: NotifylistResource s -> TF.Attr s [TF.Attr s (NotifylistNotifications s)])
                (\s a -> s { _notifications = a } :: NotifylistResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (NotifylistResource s)) (TF.Attr s P.Text) where
@@ -663,13 +663,13 @@ instance s ~ s' => P.HasComputedId (TF.Ref s' (NotifylistResource s)) (TF.Attr s
 -- See the <https://www.terraform.io/docs/providers/ns1/r/record.html terraform documentation>
 -- for more information.
 data RecordResource s = RecordResource'
-    { _answers         :: TF.Attr s [TF.Attr s (AnswersSetting s)]
+    { _answers         :: TF.Attr s [TF.Attr s (RecordAnswers s)]
     -- ^ @answers@ - (Optional)
     --
     , _domain          :: TF.Attr s P.Text
     -- ^ @domain@ - (Required, Forces New)
     --
-    , _filters         :: TF.Attr s [TF.Attr s (FiltersSetting s)]
+    , _filters         :: TF.Attr s [TF.Attr s (RecordFilters s)]
     -- ^ @filters@ - (Optional)
     --
     , _link            :: TF.Attr s P.Text
@@ -678,7 +678,7 @@ data RecordResource s = RecordResource'
     , _meta            :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @meta@ - (Optional)
     --
-    , _regions         :: TF.Attr s [TF.Attr s (RegionsSetting s)]
+    , _regions         :: TF.Attr s [TF.Attr s (RecordRegions s)]
     -- ^ @regions@ - (Optional)
     --
     , _ttl             :: TF.Attr s P.Int
@@ -733,9 +733,9 @@ instance TF.IsObject (RecordResource s) where
 instance TF.IsValid (RecordResource s) where
     validator = P.mempty
 
-instance P.HasAnswers (RecordResource s) (TF.Attr s [TF.Attr s (AnswersSetting s)]) where
+instance P.HasAnswers (RecordResource s) (TF.Attr s [TF.Attr s (RecordAnswers s)]) where
     answers =
-        P.lens (_answers :: RecordResource s -> TF.Attr s [TF.Attr s (AnswersSetting s)])
+        P.lens (_answers :: RecordResource s -> TF.Attr s [TF.Attr s (RecordAnswers s)])
                (\s a -> s { _answers = a } :: RecordResource s)
 
 instance P.HasDomain (RecordResource s) (TF.Attr s P.Text) where
@@ -743,9 +743,9 @@ instance P.HasDomain (RecordResource s) (TF.Attr s P.Text) where
         P.lens (_domain :: RecordResource s -> TF.Attr s P.Text)
                (\s a -> s { _domain = a } :: RecordResource s)
 
-instance P.HasFilters (RecordResource s) (TF.Attr s [TF.Attr s (FiltersSetting s)]) where
+instance P.HasFilters (RecordResource s) (TF.Attr s [TF.Attr s (RecordFilters s)]) where
     filters =
-        P.lens (_filters :: RecordResource s -> TF.Attr s [TF.Attr s (FiltersSetting s)])
+        P.lens (_filters :: RecordResource s -> TF.Attr s [TF.Attr s (RecordFilters s)])
                (\s a -> s { _filters = a } :: RecordResource s)
 
 instance P.HasLink (RecordResource s) (TF.Attr s P.Text) where
@@ -758,9 +758,9 @@ instance P.HasMeta (RecordResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text
         P.lens (_meta :: RecordResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
                (\s a -> s { _meta = a } :: RecordResource s)
 
-instance P.HasRegions (RecordResource s) (TF.Attr s [TF.Attr s (RegionsSetting s)]) where
+instance P.HasRegions (RecordResource s) (TF.Attr s [TF.Attr s (RecordRegions s)]) where
     regions =
-        P.lens (_regions :: RecordResource s -> TF.Attr s [TF.Attr s (RegionsSetting s)])
+        P.lens (_regions :: RecordResource s -> TF.Attr s [TF.Attr s (RecordRegions s)])
                (\s a -> s { _regions = a } :: RecordResource s)
 
 instance P.HasTtl (RecordResource s) (TF.Attr s P.Int) where

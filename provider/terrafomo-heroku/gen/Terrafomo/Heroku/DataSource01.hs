@@ -109,7 +109,7 @@ instance s ~ s' => P.HasComputedHerokuHostname (TF.Ref s' (AppData s)) (TF.Attr 
 instance s ~ s' => P.HasComputedInternalRouting (TF.Ref s' (AppData s)) (TF.Attr s P.Bool) where
     computedInternalRouting x = TF.compute (TF.refKey x) "internal_routing"
 
-instance s ~ s' => P.HasComputedOrganization (TF.Ref s' (AppData s)) (TF.Attr s [TF.Attr s (OrganizationSetting s)]) where
+instance s ~ s' => P.HasComputedOrganization (TF.Ref s' (AppData s)) (TF.Attr s [TF.Attr s (AppOrganization s)]) where
     computedOrganization x = TF.compute (TF.refKey x) "organization"
 
 instance s ~ s' => P.HasComputedRegion (TF.Ref s' (AppData s)) (TF.Attr s P.Text) where

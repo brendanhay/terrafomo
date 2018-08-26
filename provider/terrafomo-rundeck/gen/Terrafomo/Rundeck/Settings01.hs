@@ -18,28 +18,28 @@
 module Terrafomo.Rundeck.Settings01
     (
     -- ** command
-      CommandSetting (..)
-    , newCommandSetting
+      JobCommand (..)
+    , newJobCommand
 
     -- ** step_plugin
-    , StepPluginSetting (..)
-    , newStepPluginSetting
+    , JobStepPlugin (..)
+    , newJobStepPlugin
 
     -- ** node_step_plugin
-    , NodeStepPluginSetting (..)
-    , newNodeStepPluginSetting
+    , JobNodeStepPlugin (..)
+    , newJobNodeStepPlugin
 
     -- ** job
-    , JobSetting (..)
-    , newJobSetting
+    , JobJob (..)
+    , newJobJob
 
     -- ** option
-    , OptionSetting (..)
-    , newOptionSetting
+    , JobOption (..)
+    , newJobOption
 
     -- ** resource_model_source
-    , ResourceModelSourceSetting (..)
-    , newResourceModelSourceSetting
+    , ProjectResourceModelSource (..)
+    , newProjectResourceModelSource
 
     ) where
 
@@ -65,17 +65,17 @@ import qualified Terrafomo.Rundeck.Types as P
 import qualified Terrafomo.Validator     as TF
 
 -- | @command@ nested settings.
-data CommandSetting s = CommandSetting'
+data JobCommand s = JobCommand'
     { _description    :: TF.Attr s P.Text
     -- ^ @description@ - (Optional)
     --
     , _inlineScript   :: TF.Attr s P.Text
     -- ^ @inline_script@ - (Optional)
     --
-    , _job            :: TF.Attr s [TF.Attr s (JobSetting s)]
+    , _job            :: TF.Attr s [TF.Attr s (JobJob s)]
     -- ^ @job@ - (Optional)
     --
-    , _nodeStepPlugin :: TF.Attr s [TF.Attr s (NodeStepPluginSetting s)]
+    , _nodeStepPlugin :: TF.Attr s [TF.Attr s (JobNodeStepPlugin s)]
     -- ^ @node_step_plugin@ - (Optional)
     --
     , _scriptFile     :: TF.Attr s P.Text
@@ -87,16 +87,16 @@ data CommandSetting s = CommandSetting'
     , _shellCommand   :: TF.Attr s P.Text
     -- ^ @shell_command@ - (Optional)
     --
-    , _stepPlugin     :: TF.Attr s [TF.Attr s (StepPluginSetting s)]
+    , _stepPlugin     :: TF.Attr s [TF.Attr s (JobStepPlugin s)]
     -- ^ @step_plugin@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @command@ settings value.
-newCommandSetting
-    :: CommandSetting s
-newCommandSetting =
-    CommandSetting'
+newJobCommand
+    :: JobCommand s
+newJobCommand =
+    JobCommand'
         { _description = TF.Nil
         , _inlineScript = TF.Nil
         , _job = TF.Nil
@@ -107,9 +107,9 @@ newCommandSetting =
         , _stepPlugin = TF.Nil
         }
 
-instance TF.IsValue  (CommandSetting s)
-instance TF.IsObject (CommandSetting s) where
-    toObject CommandSetting'{..} = P.catMaybes
+instance TF.IsValue  (JobCommand s)
+instance TF.IsObject (JobCommand s) where
+    toObject JobCommand'{..} = P.catMaybes
         [ TF.assign "description" <$> TF.attribute _description
         , TF.assign "inline_script" <$> TF.attribute _inlineScript
         , TF.assign "job" <$> TF.attribute _job
@@ -120,51 +120,51 @@ instance TF.IsObject (CommandSetting s) where
         , TF.assign "step_plugin" <$> TF.attribute _stepPlugin
         ]
 
-instance TF.IsValid (CommandSetting s) where
+instance TF.IsValid (JobCommand s) where
     validator = P.mempty
 
-instance P.HasDescription (CommandSetting s) (TF.Attr s P.Text) where
+instance P.HasDescription (JobCommand s) (TF.Attr s P.Text) where
     description =
-        P.lens (_description :: CommandSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a } :: CommandSetting s)
+        P.lens (_description :: JobCommand s -> TF.Attr s P.Text)
+               (\s a -> s { _description = a } :: JobCommand s)
 
-instance P.HasInlineScript (CommandSetting s) (TF.Attr s P.Text) where
+instance P.HasInlineScript (JobCommand s) (TF.Attr s P.Text) where
     inlineScript =
-        P.lens (_inlineScript :: CommandSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _inlineScript = a } :: CommandSetting s)
+        P.lens (_inlineScript :: JobCommand s -> TF.Attr s P.Text)
+               (\s a -> s { _inlineScript = a } :: JobCommand s)
 
-instance P.HasJob (CommandSetting s) (TF.Attr s [TF.Attr s (JobSetting s)]) where
+instance P.HasJob (JobCommand s) (TF.Attr s [TF.Attr s (JobJob s)]) where
     job =
-        P.lens (_job :: CommandSetting s -> TF.Attr s [TF.Attr s (JobSetting s)])
-               (\s a -> s { _job = a } :: CommandSetting s)
+        P.lens (_job :: JobCommand s -> TF.Attr s [TF.Attr s (JobJob s)])
+               (\s a -> s { _job = a } :: JobCommand s)
 
-instance P.HasNodeStepPlugin (CommandSetting s) (TF.Attr s [TF.Attr s (NodeStepPluginSetting s)]) where
+instance P.HasNodeStepPlugin (JobCommand s) (TF.Attr s [TF.Attr s (JobNodeStepPlugin s)]) where
     nodeStepPlugin =
-        P.lens (_nodeStepPlugin :: CommandSetting s -> TF.Attr s [TF.Attr s (NodeStepPluginSetting s)])
-               (\s a -> s { _nodeStepPlugin = a } :: CommandSetting s)
+        P.lens (_nodeStepPlugin :: JobCommand s -> TF.Attr s [TF.Attr s (JobNodeStepPlugin s)])
+               (\s a -> s { _nodeStepPlugin = a } :: JobCommand s)
 
-instance P.HasScriptFile (CommandSetting s) (TF.Attr s P.Text) where
+instance P.HasScriptFile (JobCommand s) (TF.Attr s P.Text) where
     scriptFile =
-        P.lens (_scriptFile :: CommandSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _scriptFile = a } :: CommandSetting s)
+        P.lens (_scriptFile :: JobCommand s -> TF.Attr s P.Text)
+               (\s a -> s { _scriptFile = a } :: JobCommand s)
 
-instance P.HasScriptFileArgs (CommandSetting s) (TF.Attr s P.Text) where
+instance P.HasScriptFileArgs (JobCommand s) (TF.Attr s P.Text) where
     scriptFileArgs =
-        P.lens (_scriptFileArgs :: CommandSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _scriptFileArgs = a } :: CommandSetting s)
+        P.lens (_scriptFileArgs :: JobCommand s -> TF.Attr s P.Text)
+               (\s a -> s { _scriptFileArgs = a } :: JobCommand s)
 
-instance P.HasShellCommand (CommandSetting s) (TF.Attr s P.Text) where
+instance P.HasShellCommand (JobCommand s) (TF.Attr s P.Text) where
     shellCommand =
-        P.lens (_shellCommand :: CommandSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _shellCommand = a } :: CommandSetting s)
+        P.lens (_shellCommand :: JobCommand s -> TF.Attr s P.Text)
+               (\s a -> s { _shellCommand = a } :: JobCommand s)
 
-instance P.HasStepPlugin (CommandSetting s) (TF.Attr s [TF.Attr s (StepPluginSetting s)]) where
+instance P.HasStepPlugin (JobCommand s) (TF.Attr s [TF.Attr s (JobStepPlugin s)]) where
     stepPlugin =
-        P.lens (_stepPlugin :: CommandSetting s -> TF.Attr s [TF.Attr s (StepPluginSetting s)])
-               (\s a -> s { _stepPlugin = a } :: CommandSetting s)
+        P.lens (_stepPlugin :: JobCommand s -> TF.Attr s [TF.Attr s (JobStepPlugin s)])
+               (\s a -> s { _stepPlugin = a } :: JobCommand s)
 
 -- | @step_plugin@ nested settings.
-data StepPluginSetting s = StepPluginSetting'
+data JobStepPlugin s = JobStepPlugin'
     { _config :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @config@ - (Optional)
     --
@@ -174,37 +174,37 @@ data StepPluginSetting s = StepPluginSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @step_plugin@ settings value.
-newStepPluginSetting
+newJobStepPlugin
     :: TF.Attr s P.Text -- ^ 'P._type'': @type@
-    -> StepPluginSetting s
-newStepPluginSetting _type' =
-    StepPluginSetting'
+    -> JobStepPlugin s
+newJobStepPlugin _type' =
+    JobStepPlugin'
         { _config = TF.Nil
         , _type' = _type'
         }
 
-instance TF.IsValue  (StepPluginSetting s)
-instance TF.IsObject (StepPluginSetting s) where
-    toObject StepPluginSetting'{..} = P.catMaybes
+instance TF.IsValue  (JobStepPlugin s)
+instance TF.IsObject (JobStepPlugin s) where
+    toObject JobStepPlugin'{..} = P.catMaybes
         [ TF.assign "config" <$> TF.attribute _config
         , TF.assign "type" <$> TF.attribute _type'
         ]
 
-instance TF.IsValid (StepPluginSetting s) where
+instance TF.IsValid (JobStepPlugin s) where
     validator = P.mempty
 
-instance P.HasConfig (StepPluginSetting s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+instance P.HasConfig (JobStepPlugin s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     config =
-        P.lens (_config :: StepPluginSetting s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _config = a } :: StepPluginSetting s)
+        P.lens (_config :: JobStepPlugin s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _config = a } :: JobStepPlugin s)
 
-instance P.HasType' (StepPluginSetting s) (TF.Attr s P.Text) where
+instance P.HasType' (JobStepPlugin s) (TF.Attr s P.Text) where
     type' =
-        P.lens (_type' :: StepPluginSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a } :: StepPluginSetting s)
+        P.lens (_type' :: JobStepPlugin s -> TF.Attr s P.Text)
+               (\s a -> s { _type' = a } :: JobStepPlugin s)
 
 -- | @node_step_plugin@ nested settings.
-data NodeStepPluginSetting s = NodeStepPluginSetting'
+data JobNodeStepPlugin s = JobNodeStepPlugin'
     { _config :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @config@ - (Optional)
     --
@@ -214,37 +214,37 @@ data NodeStepPluginSetting s = NodeStepPluginSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @node_step_plugin@ settings value.
-newNodeStepPluginSetting
+newJobNodeStepPlugin
     :: TF.Attr s P.Text -- ^ 'P._type'': @type@
-    -> NodeStepPluginSetting s
-newNodeStepPluginSetting _type' =
-    NodeStepPluginSetting'
+    -> JobNodeStepPlugin s
+newJobNodeStepPlugin _type' =
+    JobNodeStepPlugin'
         { _config = TF.Nil
         , _type' = _type'
         }
 
-instance TF.IsValue  (NodeStepPluginSetting s)
-instance TF.IsObject (NodeStepPluginSetting s) where
-    toObject NodeStepPluginSetting'{..} = P.catMaybes
+instance TF.IsValue  (JobNodeStepPlugin s)
+instance TF.IsObject (JobNodeStepPlugin s) where
+    toObject JobNodeStepPlugin'{..} = P.catMaybes
         [ TF.assign "config" <$> TF.attribute _config
         , TF.assign "type" <$> TF.attribute _type'
         ]
 
-instance TF.IsValid (NodeStepPluginSetting s) where
+instance TF.IsValid (JobNodeStepPlugin s) where
     validator = P.mempty
 
-instance P.HasConfig (NodeStepPluginSetting s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+instance P.HasConfig (JobNodeStepPlugin s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     config =
-        P.lens (_config :: NodeStepPluginSetting s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _config = a } :: NodeStepPluginSetting s)
+        P.lens (_config :: JobNodeStepPlugin s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _config = a } :: JobNodeStepPlugin s)
 
-instance P.HasType' (NodeStepPluginSetting s) (TF.Attr s P.Text) where
+instance P.HasType' (JobNodeStepPlugin s) (TF.Attr s P.Text) where
     type' =
-        P.lens (_type' :: NodeStepPluginSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a } :: NodeStepPluginSetting s)
+        P.lens (_type' :: JobNodeStepPlugin s -> TF.Attr s P.Text)
+               (\s a -> s { _type' = a } :: JobNodeStepPlugin s)
 
 -- | @job@ nested settings.
-data JobSetting s = JobSetting'
+data JobJob s = JobJob'
     { _args           :: TF.Attr s P.Text
     -- ^ @args@ - (Optional)
     --
@@ -260,51 +260,51 @@ data JobSetting s = JobSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @job@ settings value.
-newJobSetting
+newJobJob
     :: TF.Attr s P.Text -- ^ 'P._name': @name@
-    -> JobSetting s
-newJobSetting _name =
-    JobSetting'
+    -> JobJob s
+newJobJob _name =
+    JobJob'
         { _args = TF.Nil
         , _groupName = TF.Nil
         , _name = _name
         , _runForEachNode = TF.Nil
         }
 
-instance TF.IsValue  (JobSetting s)
-instance TF.IsObject (JobSetting s) where
-    toObject JobSetting'{..} = P.catMaybes
+instance TF.IsValue  (JobJob s)
+instance TF.IsObject (JobJob s) where
+    toObject JobJob'{..} = P.catMaybes
         [ TF.assign "args" <$> TF.attribute _args
         , TF.assign "group_name" <$> TF.attribute _groupName
         , TF.assign "name" <$> TF.attribute _name
         , TF.assign "run_for_each_node" <$> TF.attribute _runForEachNode
         ]
 
-instance TF.IsValid (JobSetting s) where
+instance TF.IsValid (JobJob s) where
     validator = P.mempty
 
-instance P.HasArgs (JobSetting s) (TF.Attr s P.Text) where
+instance P.HasArgs (JobJob s) (TF.Attr s P.Text) where
     args =
-        P.lens (_args :: JobSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _args = a } :: JobSetting s)
+        P.lens (_args :: JobJob s -> TF.Attr s P.Text)
+               (\s a -> s { _args = a } :: JobJob s)
 
-instance P.HasGroupName (JobSetting s) (TF.Attr s P.Text) where
+instance P.HasGroupName (JobJob s) (TF.Attr s P.Text) where
     groupName =
-        P.lens (_groupName :: JobSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _groupName = a } :: JobSetting s)
+        P.lens (_groupName :: JobJob s -> TF.Attr s P.Text)
+               (\s a -> s { _groupName = a } :: JobJob s)
 
-instance P.HasName (JobSetting s) (TF.Attr s P.Text) where
+instance P.HasName (JobJob s) (TF.Attr s P.Text) where
     name =
-        P.lens (_name :: JobSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: JobSetting s)
+        P.lens (_name :: JobJob s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: JobJob s)
 
-instance P.HasRunForEachNode (JobSetting s) (TF.Attr s P.Bool) where
+instance P.HasRunForEachNode (JobJob s) (TF.Attr s P.Bool) where
     runForEachNode =
-        P.lens (_runForEachNode :: JobSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _runForEachNode = a } :: JobSetting s)
+        P.lens (_runForEachNode :: JobJob s -> TF.Attr s P.Bool)
+               (\s a -> s { _runForEachNode = a } :: JobJob s)
 
 -- | @option@ nested settings.
-data OptionSetting s = OptionSetting'
+data JobOption s = JobOption'
     { _allowMultipleValues     :: TF.Attr s P.Bool
     -- ^ @allow_multiple_values@ - (Optional)
     --
@@ -344,11 +344,11 @@ data OptionSetting s = OptionSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @option@ settings value.
-newOptionSetting
+newJobOption
     :: TF.Attr s P.Text -- ^ 'P._name': @name@
-    -> OptionSetting s
-newOptionSetting _name =
-    OptionSetting'
+    -> JobOption s
+newJobOption _name =
+    JobOption'
         { _allowMultipleValues = TF.Nil
         , _defaultValue = TF.Nil
         , _description = TF.Nil
@@ -363,9 +363,9 @@ newOptionSetting _name =
         , _valueChoicesUrl = TF.Nil
         }
 
-instance TF.IsValue  (OptionSetting s)
-instance TF.IsObject (OptionSetting s) where
-    toObject OptionSetting'{..} = P.catMaybes
+instance TF.IsValue  (JobOption s)
+instance TF.IsObject (JobOption s) where
+    toObject JobOption'{..} = P.catMaybes
         [ TF.assign "allow_multiple_values" <$> TF.attribute _allowMultipleValues
         , TF.assign "default_value" <$> TF.attribute _defaultValue
         , TF.assign "description" <$> TF.attribute _description
@@ -380,71 +380,71 @@ instance TF.IsObject (OptionSetting s) where
         , TF.assign "value_choices_url" <$> TF.attribute _valueChoicesUrl
         ]
 
-instance TF.IsValid (OptionSetting s) where
+instance TF.IsValid (JobOption s) where
     validator = P.mempty
 
-instance P.HasAllowMultipleValues (OptionSetting s) (TF.Attr s P.Bool) where
+instance P.HasAllowMultipleValues (JobOption s) (TF.Attr s P.Bool) where
     allowMultipleValues =
-        P.lens (_allowMultipleValues :: OptionSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _allowMultipleValues = a } :: OptionSetting s)
+        P.lens (_allowMultipleValues :: JobOption s -> TF.Attr s P.Bool)
+               (\s a -> s { _allowMultipleValues = a } :: JobOption s)
 
-instance P.HasDefaultValue (OptionSetting s) (TF.Attr s P.Text) where
+instance P.HasDefaultValue (JobOption s) (TF.Attr s P.Text) where
     defaultValue =
-        P.lens (_defaultValue :: OptionSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _defaultValue = a } :: OptionSetting s)
+        P.lens (_defaultValue :: JobOption s -> TF.Attr s P.Text)
+               (\s a -> s { _defaultValue = a } :: JobOption s)
 
-instance P.HasDescription (OptionSetting s) (TF.Attr s P.Text) where
+instance P.HasDescription (JobOption s) (TF.Attr s P.Text) where
     description =
-        P.lens (_description :: OptionSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a } :: OptionSetting s)
+        P.lens (_description :: JobOption s -> TF.Attr s P.Text)
+               (\s a -> s { _description = a } :: JobOption s)
 
-instance P.HasExposedToScripts (OptionSetting s) (TF.Attr s P.Bool) where
+instance P.HasExposedToScripts (JobOption s) (TF.Attr s P.Bool) where
     exposedToScripts =
-        P.lens (_exposedToScripts :: OptionSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _exposedToScripts = a } :: OptionSetting s)
+        P.lens (_exposedToScripts :: JobOption s -> TF.Attr s P.Bool)
+               (\s a -> s { _exposedToScripts = a } :: JobOption s)
 
-instance P.HasMultiValueDelimiter (OptionSetting s) (TF.Attr s P.Text) where
+instance P.HasMultiValueDelimiter (JobOption s) (TF.Attr s P.Text) where
     multiValueDelimiter =
-        P.lens (_multiValueDelimiter :: OptionSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _multiValueDelimiter = a } :: OptionSetting s)
+        P.lens (_multiValueDelimiter :: JobOption s -> TF.Attr s P.Text)
+               (\s a -> s { _multiValueDelimiter = a } :: JobOption s)
 
-instance P.HasName (OptionSetting s) (TF.Attr s P.Text) where
+instance P.HasName (JobOption s) (TF.Attr s P.Text) where
     name =
-        P.lens (_name :: OptionSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: OptionSetting s)
+        P.lens (_name :: JobOption s -> TF.Attr s P.Text)
+               (\s a -> s { _name = a } :: JobOption s)
 
-instance P.HasObscureInput (OptionSetting s) (TF.Attr s P.Bool) where
+instance P.HasObscureInput (JobOption s) (TF.Attr s P.Bool) where
     obscureInput =
-        P.lens (_obscureInput :: OptionSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _obscureInput = a } :: OptionSetting s)
+        P.lens (_obscureInput :: JobOption s -> TF.Attr s P.Bool)
+               (\s a -> s { _obscureInput = a } :: JobOption s)
 
-instance P.HasRequirePredefinedChoice (OptionSetting s) (TF.Attr s P.Bool) where
+instance P.HasRequirePredefinedChoice (JobOption s) (TF.Attr s P.Bool) where
     requirePredefinedChoice =
-        P.lens (_requirePredefinedChoice :: OptionSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _requirePredefinedChoice = a } :: OptionSetting s)
+        P.lens (_requirePredefinedChoice :: JobOption s -> TF.Attr s P.Bool)
+               (\s a -> s { _requirePredefinedChoice = a } :: JobOption s)
 
-instance P.HasRequired (OptionSetting s) (TF.Attr s P.Bool) where
+instance P.HasRequired (JobOption s) (TF.Attr s P.Bool) where
     required =
-        P.lens (_required :: OptionSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _required = a } :: OptionSetting s)
+        P.lens (_required :: JobOption s -> TF.Attr s P.Bool)
+               (\s a -> s { _required = a } :: JobOption s)
 
-instance P.HasValidationRegex (OptionSetting s) (TF.Attr s P.Text) where
+instance P.HasValidationRegex (JobOption s) (TF.Attr s P.Text) where
     validationRegex =
-        P.lens (_validationRegex :: OptionSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _validationRegex = a } :: OptionSetting s)
+        P.lens (_validationRegex :: JobOption s -> TF.Attr s P.Text)
+               (\s a -> s { _validationRegex = a } :: JobOption s)
 
-instance P.HasValueChoices (OptionSetting s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasValueChoices (JobOption s) (TF.Attr s [TF.Attr s P.Text]) where
     valueChoices =
-        P.lens (_valueChoices :: OptionSetting s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _valueChoices = a } :: OptionSetting s)
+        P.lens (_valueChoices :: JobOption s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _valueChoices = a } :: JobOption s)
 
-instance P.HasValueChoicesUrl (OptionSetting s) (TF.Attr s P.Text) where
+instance P.HasValueChoicesUrl (JobOption s) (TF.Attr s P.Text) where
     valueChoicesUrl =
-        P.lens (_valueChoicesUrl :: OptionSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _valueChoicesUrl = a } :: OptionSetting s)
+        P.lens (_valueChoicesUrl :: JobOption s -> TF.Attr s P.Text)
+               (\s a -> s { _valueChoicesUrl = a } :: JobOption s)
 
 -- | @resource_model_source@ nested settings.
-data ResourceModelSourceSetting s = ResourceModelSourceSetting'
+data ProjectResourceModelSource s = ProjectResourceModelSource'
     { _config :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
     -- ^ @config@ - (Required)
     -- Configuration parameters for the selected plugin
@@ -456,32 +456,32 @@ data ResourceModelSourceSetting s = ResourceModelSourceSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @resource_model_source@ settings value.
-newResourceModelSourceSetting
+newProjectResourceModelSource
     :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text)) -- ^ 'P._config': @config@
     -> TF.Attr s P.Text -- ^ 'P._type'': @type@
-    -> ResourceModelSourceSetting s
-newResourceModelSourceSetting _config _type' =
-    ResourceModelSourceSetting'
+    -> ProjectResourceModelSource s
+newProjectResourceModelSource _config _type' =
+    ProjectResourceModelSource'
         { _config = _config
         , _type' = _type'
         }
 
-instance TF.IsValue  (ResourceModelSourceSetting s)
-instance TF.IsObject (ResourceModelSourceSetting s) where
-    toObject ResourceModelSourceSetting'{..} = P.catMaybes
+instance TF.IsValue  (ProjectResourceModelSource s)
+instance TF.IsObject (ProjectResourceModelSource s) where
+    toObject ProjectResourceModelSource'{..} = P.catMaybes
         [ TF.assign "config" <$> TF.attribute _config
         , TF.assign "type" <$> TF.attribute _type'
         ]
 
-instance TF.IsValid (ResourceModelSourceSetting s) where
+instance TF.IsValid (ProjectResourceModelSource s) where
     validator = P.mempty
 
-instance P.HasConfig (ResourceModelSourceSetting s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+instance P.HasConfig (ProjectResourceModelSource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
     config =
-        P.lens (_config :: ResourceModelSourceSetting s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _config = a } :: ResourceModelSourceSetting s)
+        P.lens (_config :: ProjectResourceModelSource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
+               (\s a -> s { _config = a } :: ProjectResourceModelSource s)
 
-instance P.HasType' (ResourceModelSourceSetting s) (TF.Attr s P.Text) where
+instance P.HasType' (ProjectResourceModelSource s) (TF.Attr s P.Text) where
     type' =
-        P.lens (_type' :: ResourceModelSourceSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a } :: ResourceModelSourceSetting s)
+        P.lens (_type' :: ProjectResourceModelSource s -> TF.Attr s P.Text)
+               (\s a -> s { _type' = a } :: ProjectResourceModelSource s)

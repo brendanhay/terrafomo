@@ -416,14 +416,14 @@ instance s ~ s' => P.HasComputedPublic (TF.Ref s' (NetworkData s)) (TF.Attr s P.
 -- See the <https://www.terraform.io/docs/providers/triton/d/package.html terraform documentation>
 -- for more information.
 data PackageData s = PackageData'
-    { _filter :: TF.Attr s [TF.Attr s (FilterSetting s)]
+    { _filter :: TF.Attr s [TF.Attr s (PackageFilter s)]
     -- ^ @filter@ - (Required, Forces New)
     --
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Define a new @triton_package@ datasource value.
 packageData
-    :: TF.Attr s [TF.Attr s (FilterSetting s)] -- ^ @filter@ ('P._filter', 'P.filter')
+    :: TF.Attr s [TF.Attr s (PackageFilter s)] -- ^ @filter@ ('P._filter', 'P.filter')
     -> P.DataSource (PackageData s)
 packageData _filter =
     TF.unsafeDataSource "triton_package" TF.validator $
@@ -439,9 +439,9 @@ instance TF.IsObject (PackageData s) where
 instance TF.IsValid (PackageData s) where
     validator = P.mempty
 
-instance P.HasFilter (PackageData s) (TF.Attr s [TF.Attr s (FilterSetting s)]) where
+instance P.HasFilter (PackageData s) (TF.Attr s [TF.Attr s (PackageFilter s)]) where
     filter =
-        P.lens (_filter :: PackageData s -> TF.Attr s [TF.Attr s (FilterSetting s)])
+        P.lens (_filter :: PackageData s -> TF.Attr s [TF.Attr s (PackageFilter s)])
                (\s a -> s { _filter = a } :: PackageData s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (PackageData s)) (TF.Attr s P.Text) where

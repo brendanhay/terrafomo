@@ -17,45 +17,45 @@
 --
 module Terrafomo.Vault.Settings01
     (
-    -- ** cassandra
-      CassandraSetting (..)
-    , newCassandraSetting
-
     -- ** client_auth
-    , ClientAuthSetting (..)
-    , newClientAuthSetting
+      ClientAuth (..)
+    , newClientAuth
 
-    -- ** group
-    , GroupSetting (..)
-    , newGroupSetting
+    -- ** cassandra
+    , DatabaseSecretBackendConnectionCassandra (..)
+    , newDatabaseSecretBackendConnectionCassandra
 
     -- ** hana
-    , HanaSetting (..)
-    , newHanaSetting
+    , DatabaseSecretBackendConnectionHana (..)
+    , newDatabaseSecretBackendConnectionHana
 
     -- ** mongodb
-    , MongodbSetting (..)
-    , newMongodbSetting
+    , DatabaseSecretBackendConnectionMongodb (..)
+    , newDatabaseSecretBackendConnectionMongodb
 
     -- ** mssql
-    , MssqlSetting (..)
-    , newMssqlSetting
+    , DatabaseSecretBackendConnectionMssql (..)
+    , newDatabaseSecretBackendConnectionMssql
 
     -- ** mysql
-    , MysqlSetting (..)
-    , newMysqlSetting
+    , DatabaseSecretBackendConnectionMysql (..)
+    , newDatabaseSecretBackendConnectionMysql
 
     -- ** oracle
-    , OracleSetting (..)
-    , newOracleSetting
+    , DatabaseSecretBackendConnectionOracle (..)
+    , newDatabaseSecretBackendConnectionOracle
 
     -- ** postgresql
-    , PostgresqlSetting (..)
-    , newPostgresqlSetting
+    , DatabaseSecretBackendConnectionPostgresql (..)
+    , newDatabaseSecretBackendConnectionPostgresql
+
+    -- ** group
+    , OktaAuthBackendGroup (..)
+    , newOktaAuthBackendGroup
 
     -- ** user
-    , UserSetting (..)
-    , newUserSetting
+    , OktaAuthBackendUser (..)
+    , newOktaAuthBackendUser
 
     ) where
 
@@ -80,8 +80,52 @@ import qualified Terrafomo.Validator   as TF
 import qualified Terrafomo.Vault.Lens  as P
 import qualified Terrafomo.Vault.Types as P
 
+-- | @client_auth@ nested settings.
+data ClientAuth = ClientAuth'
+    { _certFile :: P.Text
+    -- ^ @cert_file@ - (Required)
+    -- Path to a file containing the client certificate.
+    --
+    , _keyFile  :: P.Text
+    -- ^ @key_file@ - (Required)
+    -- Path to a file containing the private key that the certificate was issued
+    -- for.
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @client_auth@ settings value.
+newClientAuth
+    :: P.Text -- ^ 'P._certFile': @cert_file@
+    -> P.Text -- ^ 'P._keyFile': @key_file@
+    -> ClientAuth
+newClientAuth _certFile _keyFile =
+    ClientAuth'
+        { _certFile = _certFile
+        , _keyFile = _keyFile
+        }
+
+instance TF.IsValue  (ClientAuth)
+instance TF.IsObject (ClientAuth) where
+    toObject ClientAuth'{..} = P.catMaybes
+        [ P.Just $ TF.assign "cert_file" _certFile
+        , P.Just $ TF.assign "key_file" _keyFile
+        ]
+
+instance TF.IsValid (ClientAuth) where
+    validator = P.mempty
+
+instance P.HasCertFile (ClientAuth) (P.Text) where
+    certFile =
+        P.lens (_certFile :: ClientAuth -> P.Text)
+               (\s a -> s { _certFile = a } :: ClientAuth)
+
+instance P.HasKeyFile (ClientAuth) (P.Text) where
+    keyFile =
+        P.lens (_keyFile :: ClientAuth -> P.Text)
+               (\s a -> s { _keyFile = a } :: ClientAuth)
+
 -- | @cassandra@ nested settings.
-data CassandraSetting s = CassandraSetting'
+data DatabaseSecretBackendConnectionCassandra s = DatabaseSecretBackendConnectionCassandra'
     { _connectTimeout  :: TF.Attr s P.Int
     -- ^ @connect_timeout@ - (Optional)
     -- The number of seconds to use as a connection timeout.
@@ -128,10 +172,10 @@ data CassandraSetting s = CassandraSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @cassandra@ settings value.
-newCassandraSetting
-    :: CassandraSetting s
-newCassandraSetting =
-    CassandraSetting'
+newDatabaseSecretBackendConnectionCassandra
+    :: DatabaseSecretBackendConnectionCassandra s
+newDatabaseSecretBackendConnectionCassandra =
+    DatabaseSecretBackendConnectionCassandra'
         { _connectTimeout = TF.value 5
         , _hosts = TF.Nil
         , _insecureTls = TF.value P.False
@@ -144,9 +188,9 @@ newCassandraSetting =
         , _username = TF.Nil
         }
 
-instance TF.IsValue  (CassandraSetting s)
-instance TF.IsObject (CassandraSetting s) where
-    toObject CassandraSetting'{..} = P.catMaybes
+instance TF.IsValue  (DatabaseSecretBackendConnectionCassandra s)
+instance TF.IsObject (DatabaseSecretBackendConnectionCassandra s) where
+    toObject DatabaseSecretBackendConnectionCassandra'{..} = P.catMaybes
         [ TF.assign "connect_timeout" <$> TF.attribute _connectTimeout
         , TF.assign "hosts" <$> TF.attribute _hosts
         , TF.assign "insecure_tls" <$> TF.attribute _insecureTls
@@ -159,148 +203,61 @@ instance TF.IsObject (CassandraSetting s) where
         , TF.assign "username" <$> TF.attribute _username
         ]
 
-instance TF.IsValid (CassandraSetting s) where
+instance TF.IsValid (DatabaseSecretBackendConnectionCassandra s) where
     validator = P.mempty
 
-instance P.HasConnectTimeout (CassandraSetting s) (TF.Attr s P.Int) where
+instance P.HasConnectTimeout (DatabaseSecretBackendConnectionCassandra s) (TF.Attr s P.Int) where
     connectTimeout =
-        P.lens (_connectTimeout :: CassandraSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _connectTimeout = a } :: CassandraSetting s)
+        P.lens (_connectTimeout :: DatabaseSecretBackendConnectionCassandra s -> TF.Attr s P.Int)
+               (\s a -> s { _connectTimeout = a } :: DatabaseSecretBackendConnectionCassandra s)
 
-instance P.HasHosts (CassandraSetting s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasHosts (DatabaseSecretBackendConnectionCassandra s) (TF.Attr s [TF.Attr s P.Text]) where
     hosts =
-        P.lens (_hosts :: CassandraSetting s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _hosts = a } :: CassandraSetting s)
+        P.lens (_hosts :: DatabaseSecretBackendConnectionCassandra s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _hosts = a } :: DatabaseSecretBackendConnectionCassandra s)
 
-instance P.HasInsecureTls (CassandraSetting s) (TF.Attr s P.Bool) where
+instance P.HasInsecureTls (DatabaseSecretBackendConnectionCassandra s) (TF.Attr s P.Bool) where
     insecureTls =
-        P.lens (_insecureTls :: CassandraSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _insecureTls = a } :: CassandraSetting s)
+        P.lens (_insecureTls :: DatabaseSecretBackendConnectionCassandra s -> TF.Attr s P.Bool)
+               (\s a -> s { _insecureTls = a } :: DatabaseSecretBackendConnectionCassandra s)
 
-instance P.HasPassword (CassandraSetting s) (TF.Attr s P.Text) where
+instance P.HasPassword (DatabaseSecretBackendConnectionCassandra s) (TF.Attr s P.Text) where
     password =
-        P.lens (_password :: CassandraSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _password = a } :: CassandraSetting s)
+        P.lens (_password :: DatabaseSecretBackendConnectionCassandra s -> TF.Attr s P.Text)
+               (\s a -> s { _password = a } :: DatabaseSecretBackendConnectionCassandra s)
 
-instance P.HasPemBundle (CassandraSetting s) (TF.Attr s P.Text) where
+instance P.HasPemBundle (DatabaseSecretBackendConnectionCassandra s) (TF.Attr s P.Text) where
     pemBundle =
-        P.lens (_pemBundle :: CassandraSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _pemBundle = a } :: CassandraSetting s)
+        P.lens (_pemBundle :: DatabaseSecretBackendConnectionCassandra s -> TF.Attr s P.Text)
+               (\s a -> s { _pemBundle = a } :: DatabaseSecretBackendConnectionCassandra s)
 
-instance P.HasPemJson (CassandraSetting s) (TF.Attr s P.Text) where
+instance P.HasPemJson (DatabaseSecretBackendConnectionCassandra s) (TF.Attr s P.Text) where
     pemJson =
-        P.lens (_pemJson :: CassandraSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _pemJson = a } :: CassandraSetting s)
+        P.lens (_pemJson :: DatabaseSecretBackendConnectionCassandra s -> TF.Attr s P.Text)
+               (\s a -> s { _pemJson = a } :: DatabaseSecretBackendConnectionCassandra s)
 
-instance P.HasPort (CassandraSetting s) (TF.Attr s P.Int) where
+instance P.HasPort (DatabaseSecretBackendConnectionCassandra s) (TF.Attr s P.Int) where
     port =
-        P.lens (_port :: CassandraSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _port = a } :: CassandraSetting s)
+        P.lens (_port :: DatabaseSecretBackendConnectionCassandra s -> TF.Attr s P.Int)
+               (\s a -> s { _port = a } :: DatabaseSecretBackendConnectionCassandra s)
 
-instance P.HasProtocolVersion (CassandraSetting s) (TF.Attr s P.Int) where
+instance P.HasProtocolVersion (DatabaseSecretBackendConnectionCassandra s) (TF.Attr s P.Int) where
     protocolVersion =
-        P.lens (_protocolVersion :: CassandraSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _protocolVersion = a } :: CassandraSetting s)
+        P.lens (_protocolVersion :: DatabaseSecretBackendConnectionCassandra s -> TF.Attr s P.Int)
+               (\s a -> s { _protocolVersion = a } :: DatabaseSecretBackendConnectionCassandra s)
 
-instance P.HasTls (CassandraSetting s) (TF.Attr s P.Bool) where
+instance P.HasTls (DatabaseSecretBackendConnectionCassandra s) (TF.Attr s P.Bool) where
     tls =
-        P.lens (_tls :: CassandraSetting s -> TF.Attr s P.Bool)
-               (\s a -> s { _tls = a } :: CassandraSetting s)
+        P.lens (_tls :: DatabaseSecretBackendConnectionCassandra s -> TF.Attr s P.Bool)
+               (\s a -> s { _tls = a } :: DatabaseSecretBackendConnectionCassandra s)
 
-instance P.HasUsername (CassandraSetting s) (TF.Attr s P.Text) where
+instance P.HasUsername (DatabaseSecretBackendConnectionCassandra s) (TF.Attr s P.Text) where
     username =
-        P.lens (_username :: CassandraSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _username = a } :: CassandraSetting s)
-
--- | @client_auth@ nested settings.
-data ClientAuthSetting = ClientAuthSetting'
-    { _certFile :: P.Text
-    -- ^ @cert_file@ - (Required)
-    -- Path to a file containing the client certificate.
-    --
-    , _keyFile  :: P.Text
-    -- ^ @key_file@ - (Required)
-    -- Path to a file containing the private key that the certificate was issued
-    -- for.
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @client_auth@ settings value.
-newClientAuthSetting
-    :: P.Text -- ^ 'P._certFile': @cert_file@
-    -> P.Text -- ^ 'P._keyFile': @key_file@
-    -> ClientAuthSetting
-newClientAuthSetting _certFile _keyFile =
-    ClientAuthSetting'
-        { _certFile = _certFile
-        , _keyFile = _keyFile
-        }
-
-instance TF.IsValue  (ClientAuthSetting)
-instance TF.IsObject (ClientAuthSetting) where
-    toObject ClientAuthSetting'{..} = P.catMaybes
-        [ P.Just $ TF.assign "cert_file" _certFile
-        , P.Just $ TF.assign "key_file" _keyFile
-        ]
-
-instance TF.IsValid (ClientAuthSetting) where
-    validator = P.mempty
-
-instance P.HasCertFile (ClientAuthSetting) (P.Text) where
-    certFile =
-        P.lens (_certFile :: ClientAuthSetting -> P.Text)
-               (\s a -> s { _certFile = a } :: ClientAuthSetting)
-
-instance P.HasKeyFile (ClientAuthSetting) (P.Text) where
-    keyFile =
-        P.lens (_keyFile :: ClientAuthSetting -> P.Text)
-               (\s a -> s { _keyFile = a } :: ClientAuthSetting)
-
--- | @group@ nested settings.
-data GroupSetting s = GroupSetting'
-    { _groupName :: TF.Attr s P.Text
-    -- ^ @group_name@ - (Required)
-    -- Name of the Okta group
-    --
-    , _policies  :: TF.Attr s [TF.Attr s P.Text]
-    -- ^ @policies@ - (Required)
-    -- Policies to associate with this group
-    --
-    } deriving (P.Show, P.Eq, P.Ord)
-
--- | Construct a new @group@ settings value.
-newGroupSetting
-    :: TF.Attr s P.Text -- ^ 'P._groupName': @group_name@
-    -> TF.Attr s [TF.Attr s P.Text] -- ^ 'P._policies': @policies@
-    -> GroupSetting s
-newGroupSetting _groupName _policies =
-    GroupSetting'
-        { _groupName = _groupName
-        , _policies = _policies
-        }
-
-instance TF.IsValue  (GroupSetting s)
-instance TF.IsObject (GroupSetting s) where
-    toObject GroupSetting'{..} = P.catMaybes
-        [ TF.assign "group_name" <$> TF.attribute _groupName
-        , TF.assign "policies" <$> TF.attribute _policies
-        ]
-
-instance TF.IsValid (GroupSetting s) where
-    validator = P.mempty
-
-instance P.HasGroupName (GroupSetting s) (TF.Attr s P.Text) where
-    groupName =
-        P.lens (_groupName :: GroupSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _groupName = a } :: GroupSetting s)
-
-instance P.HasPolicies (GroupSetting s) (TF.Attr s [TF.Attr s P.Text]) where
-    policies =
-        P.lens (_policies :: GroupSetting s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _policies = a } :: GroupSetting s)
+        P.lens (_username :: DatabaseSecretBackendConnectionCassandra s -> TF.Attr s P.Text)
+               (\s a -> s { _username = a } :: DatabaseSecretBackendConnectionCassandra s)
 
 -- | @hana@ nested settings.
-data HanaSetting s = HanaSetting'
+data DatabaseSecretBackendConnectionHana s = DatabaseSecretBackendConnectionHana'
     { _connectionUrl         :: TF.Attr s P.Text
     -- ^ @connection_url@ - (Optional)
     -- Connection string to use to connect to the database.
@@ -320,50 +277,50 @@ data HanaSetting s = HanaSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @hana@ settings value.
-newHanaSetting
-    :: HanaSetting s
-newHanaSetting =
-    HanaSetting'
+newDatabaseSecretBackendConnectionHana
+    :: DatabaseSecretBackendConnectionHana s
+newDatabaseSecretBackendConnectionHana =
+    DatabaseSecretBackendConnectionHana'
         { _connectionUrl = TF.Nil
         , _maxConnectionLifetime = TF.Nil
         , _maxIdleConnections = TF.Nil
         , _maxOpenConnections = TF.value 2
         }
 
-instance TF.IsValue  (HanaSetting s)
-instance TF.IsObject (HanaSetting s) where
-    toObject HanaSetting'{..} = P.catMaybes
+instance TF.IsValue  (DatabaseSecretBackendConnectionHana s)
+instance TF.IsObject (DatabaseSecretBackendConnectionHana s) where
+    toObject DatabaseSecretBackendConnectionHana'{..} = P.catMaybes
         [ TF.assign "connection_url" <$> TF.attribute _connectionUrl
         , TF.assign "max_connection_lifetime" <$> TF.attribute _maxConnectionLifetime
         , TF.assign "max_idle_connections" <$> TF.attribute _maxIdleConnections
         , TF.assign "max_open_connections" <$> TF.attribute _maxOpenConnections
         ]
 
-instance TF.IsValid (HanaSetting s) where
+instance TF.IsValid (DatabaseSecretBackendConnectionHana s) where
     validator = P.mempty
 
-instance P.HasConnectionUrl (HanaSetting s) (TF.Attr s P.Text) where
+instance P.HasConnectionUrl (DatabaseSecretBackendConnectionHana s) (TF.Attr s P.Text) where
     connectionUrl =
-        P.lens (_connectionUrl :: HanaSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _connectionUrl = a } :: HanaSetting s)
+        P.lens (_connectionUrl :: DatabaseSecretBackendConnectionHana s -> TF.Attr s P.Text)
+               (\s a -> s { _connectionUrl = a } :: DatabaseSecretBackendConnectionHana s)
 
-instance P.HasMaxConnectionLifetime (HanaSetting s) (TF.Attr s P.Int) where
+instance P.HasMaxConnectionLifetime (DatabaseSecretBackendConnectionHana s) (TF.Attr s P.Int) where
     maxConnectionLifetime =
-        P.lens (_maxConnectionLifetime :: HanaSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _maxConnectionLifetime = a } :: HanaSetting s)
+        P.lens (_maxConnectionLifetime :: DatabaseSecretBackendConnectionHana s -> TF.Attr s P.Int)
+               (\s a -> s { _maxConnectionLifetime = a } :: DatabaseSecretBackendConnectionHana s)
 
-instance P.HasMaxIdleConnections (HanaSetting s) (TF.Attr s P.Int) where
+instance P.HasMaxIdleConnections (DatabaseSecretBackendConnectionHana s) (TF.Attr s P.Int) where
     maxIdleConnections =
-        P.lens (_maxIdleConnections :: HanaSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _maxIdleConnections = a } :: HanaSetting s)
+        P.lens (_maxIdleConnections :: DatabaseSecretBackendConnectionHana s -> TF.Attr s P.Int)
+               (\s a -> s { _maxIdleConnections = a } :: DatabaseSecretBackendConnectionHana s)
 
-instance P.HasMaxOpenConnections (HanaSetting s) (TF.Attr s P.Int) where
+instance P.HasMaxOpenConnections (DatabaseSecretBackendConnectionHana s) (TF.Attr s P.Int) where
     maxOpenConnections =
-        P.lens (_maxOpenConnections :: HanaSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _maxOpenConnections = a } :: HanaSetting s)
+        P.lens (_maxOpenConnections :: DatabaseSecretBackendConnectionHana s -> TF.Attr s P.Int)
+               (\s a -> s { _maxOpenConnections = a } :: DatabaseSecretBackendConnectionHana s)
 
 -- | @mongodb@ nested settings.
-data MongodbSetting s = MongodbSetting'
+data DatabaseSecretBackendConnectionMongodb s = DatabaseSecretBackendConnectionMongodb'
     { _connectionUrl :: TF.Attr s P.Text
     -- ^ @connection_url@ - (Optional)
     -- Connection string to use to connect to the database.
@@ -371,29 +328,29 @@ data MongodbSetting s = MongodbSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @mongodb@ settings value.
-newMongodbSetting
-    :: MongodbSetting s
-newMongodbSetting =
-    MongodbSetting'
+newDatabaseSecretBackendConnectionMongodb
+    :: DatabaseSecretBackendConnectionMongodb s
+newDatabaseSecretBackendConnectionMongodb =
+    DatabaseSecretBackendConnectionMongodb'
         { _connectionUrl = TF.Nil
         }
 
-instance TF.IsValue  (MongodbSetting s)
-instance TF.IsObject (MongodbSetting s) where
-    toObject MongodbSetting'{..} = P.catMaybes
+instance TF.IsValue  (DatabaseSecretBackendConnectionMongodb s)
+instance TF.IsObject (DatabaseSecretBackendConnectionMongodb s) where
+    toObject DatabaseSecretBackendConnectionMongodb'{..} = P.catMaybes
         [ TF.assign "connection_url" <$> TF.attribute _connectionUrl
         ]
 
-instance TF.IsValid (MongodbSetting s) where
+instance TF.IsValid (DatabaseSecretBackendConnectionMongodb s) where
     validator = P.mempty
 
-instance P.HasConnectionUrl (MongodbSetting s) (TF.Attr s P.Text) where
+instance P.HasConnectionUrl (DatabaseSecretBackendConnectionMongodb s) (TF.Attr s P.Text) where
     connectionUrl =
-        P.lens (_connectionUrl :: MongodbSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _connectionUrl = a } :: MongodbSetting s)
+        P.lens (_connectionUrl :: DatabaseSecretBackendConnectionMongodb s -> TF.Attr s P.Text)
+               (\s a -> s { _connectionUrl = a } :: DatabaseSecretBackendConnectionMongodb s)
 
 -- | @mssql@ nested settings.
-data MssqlSetting s = MssqlSetting'
+data DatabaseSecretBackendConnectionMssql s = DatabaseSecretBackendConnectionMssql'
     { _connectionUrl         :: TF.Attr s P.Text
     -- ^ @connection_url@ - (Optional)
     -- Connection string to use to connect to the database.
@@ -413,50 +370,50 @@ data MssqlSetting s = MssqlSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @mssql@ settings value.
-newMssqlSetting
-    :: MssqlSetting s
-newMssqlSetting =
-    MssqlSetting'
+newDatabaseSecretBackendConnectionMssql
+    :: DatabaseSecretBackendConnectionMssql s
+newDatabaseSecretBackendConnectionMssql =
+    DatabaseSecretBackendConnectionMssql'
         { _connectionUrl = TF.Nil
         , _maxConnectionLifetime = TF.Nil
         , _maxIdleConnections = TF.Nil
         , _maxOpenConnections = TF.value 2
         }
 
-instance TF.IsValue  (MssqlSetting s)
-instance TF.IsObject (MssqlSetting s) where
-    toObject MssqlSetting'{..} = P.catMaybes
+instance TF.IsValue  (DatabaseSecretBackendConnectionMssql s)
+instance TF.IsObject (DatabaseSecretBackendConnectionMssql s) where
+    toObject DatabaseSecretBackendConnectionMssql'{..} = P.catMaybes
         [ TF.assign "connection_url" <$> TF.attribute _connectionUrl
         , TF.assign "max_connection_lifetime" <$> TF.attribute _maxConnectionLifetime
         , TF.assign "max_idle_connections" <$> TF.attribute _maxIdleConnections
         , TF.assign "max_open_connections" <$> TF.attribute _maxOpenConnections
         ]
 
-instance TF.IsValid (MssqlSetting s) where
+instance TF.IsValid (DatabaseSecretBackendConnectionMssql s) where
     validator = P.mempty
 
-instance P.HasConnectionUrl (MssqlSetting s) (TF.Attr s P.Text) where
+instance P.HasConnectionUrl (DatabaseSecretBackendConnectionMssql s) (TF.Attr s P.Text) where
     connectionUrl =
-        P.lens (_connectionUrl :: MssqlSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _connectionUrl = a } :: MssqlSetting s)
+        P.lens (_connectionUrl :: DatabaseSecretBackendConnectionMssql s -> TF.Attr s P.Text)
+               (\s a -> s { _connectionUrl = a } :: DatabaseSecretBackendConnectionMssql s)
 
-instance P.HasMaxConnectionLifetime (MssqlSetting s) (TF.Attr s P.Int) where
+instance P.HasMaxConnectionLifetime (DatabaseSecretBackendConnectionMssql s) (TF.Attr s P.Int) where
     maxConnectionLifetime =
-        P.lens (_maxConnectionLifetime :: MssqlSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _maxConnectionLifetime = a } :: MssqlSetting s)
+        P.lens (_maxConnectionLifetime :: DatabaseSecretBackendConnectionMssql s -> TF.Attr s P.Int)
+               (\s a -> s { _maxConnectionLifetime = a } :: DatabaseSecretBackendConnectionMssql s)
 
-instance P.HasMaxIdleConnections (MssqlSetting s) (TF.Attr s P.Int) where
+instance P.HasMaxIdleConnections (DatabaseSecretBackendConnectionMssql s) (TF.Attr s P.Int) where
     maxIdleConnections =
-        P.lens (_maxIdleConnections :: MssqlSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _maxIdleConnections = a } :: MssqlSetting s)
+        P.lens (_maxIdleConnections :: DatabaseSecretBackendConnectionMssql s -> TF.Attr s P.Int)
+               (\s a -> s { _maxIdleConnections = a } :: DatabaseSecretBackendConnectionMssql s)
 
-instance P.HasMaxOpenConnections (MssqlSetting s) (TF.Attr s P.Int) where
+instance P.HasMaxOpenConnections (DatabaseSecretBackendConnectionMssql s) (TF.Attr s P.Int) where
     maxOpenConnections =
-        P.lens (_maxOpenConnections :: MssqlSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _maxOpenConnections = a } :: MssqlSetting s)
+        P.lens (_maxOpenConnections :: DatabaseSecretBackendConnectionMssql s -> TF.Attr s P.Int)
+               (\s a -> s { _maxOpenConnections = a } :: DatabaseSecretBackendConnectionMssql s)
 
 -- | @mysql@ nested settings.
-data MysqlSetting s = MysqlSetting'
+data DatabaseSecretBackendConnectionMysql s = DatabaseSecretBackendConnectionMysql'
     { _connectionUrl         :: TF.Attr s P.Text
     -- ^ @connection_url@ - (Optional)
     -- Connection string to use to connect to the database.
@@ -476,50 +433,50 @@ data MysqlSetting s = MysqlSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @mysql@ settings value.
-newMysqlSetting
-    :: MysqlSetting s
-newMysqlSetting =
-    MysqlSetting'
+newDatabaseSecretBackendConnectionMysql
+    :: DatabaseSecretBackendConnectionMysql s
+newDatabaseSecretBackendConnectionMysql =
+    DatabaseSecretBackendConnectionMysql'
         { _connectionUrl = TF.Nil
         , _maxConnectionLifetime = TF.Nil
         , _maxIdleConnections = TF.Nil
         , _maxOpenConnections = TF.value 2
         }
 
-instance TF.IsValue  (MysqlSetting s)
-instance TF.IsObject (MysqlSetting s) where
-    toObject MysqlSetting'{..} = P.catMaybes
+instance TF.IsValue  (DatabaseSecretBackendConnectionMysql s)
+instance TF.IsObject (DatabaseSecretBackendConnectionMysql s) where
+    toObject DatabaseSecretBackendConnectionMysql'{..} = P.catMaybes
         [ TF.assign "connection_url" <$> TF.attribute _connectionUrl
         , TF.assign "max_connection_lifetime" <$> TF.attribute _maxConnectionLifetime
         , TF.assign "max_idle_connections" <$> TF.attribute _maxIdleConnections
         , TF.assign "max_open_connections" <$> TF.attribute _maxOpenConnections
         ]
 
-instance TF.IsValid (MysqlSetting s) where
+instance TF.IsValid (DatabaseSecretBackendConnectionMysql s) where
     validator = P.mempty
 
-instance P.HasConnectionUrl (MysqlSetting s) (TF.Attr s P.Text) where
+instance P.HasConnectionUrl (DatabaseSecretBackendConnectionMysql s) (TF.Attr s P.Text) where
     connectionUrl =
-        P.lens (_connectionUrl :: MysqlSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _connectionUrl = a } :: MysqlSetting s)
+        P.lens (_connectionUrl :: DatabaseSecretBackendConnectionMysql s -> TF.Attr s P.Text)
+               (\s a -> s { _connectionUrl = a } :: DatabaseSecretBackendConnectionMysql s)
 
-instance P.HasMaxConnectionLifetime (MysqlSetting s) (TF.Attr s P.Int) where
+instance P.HasMaxConnectionLifetime (DatabaseSecretBackendConnectionMysql s) (TF.Attr s P.Int) where
     maxConnectionLifetime =
-        P.lens (_maxConnectionLifetime :: MysqlSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _maxConnectionLifetime = a } :: MysqlSetting s)
+        P.lens (_maxConnectionLifetime :: DatabaseSecretBackendConnectionMysql s -> TF.Attr s P.Int)
+               (\s a -> s { _maxConnectionLifetime = a } :: DatabaseSecretBackendConnectionMysql s)
 
-instance P.HasMaxIdleConnections (MysqlSetting s) (TF.Attr s P.Int) where
+instance P.HasMaxIdleConnections (DatabaseSecretBackendConnectionMysql s) (TF.Attr s P.Int) where
     maxIdleConnections =
-        P.lens (_maxIdleConnections :: MysqlSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _maxIdleConnections = a } :: MysqlSetting s)
+        P.lens (_maxIdleConnections :: DatabaseSecretBackendConnectionMysql s -> TF.Attr s P.Int)
+               (\s a -> s { _maxIdleConnections = a } :: DatabaseSecretBackendConnectionMysql s)
 
-instance P.HasMaxOpenConnections (MysqlSetting s) (TF.Attr s P.Int) where
+instance P.HasMaxOpenConnections (DatabaseSecretBackendConnectionMysql s) (TF.Attr s P.Int) where
     maxOpenConnections =
-        P.lens (_maxOpenConnections :: MysqlSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _maxOpenConnections = a } :: MysqlSetting s)
+        P.lens (_maxOpenConnections :: DatabaseSecretBackendConnectionMysql s -> TF.Attr s P.Int)
+               (\s a -> s { _maxOpenConnections = a } :: DatabaseSecretBackendConnectionMysql s)
 
 -- | @oracle@ nested settings.
-data OracleSetting s = OracleSetting'
+data DatabaseSecretBackendConnectionOracle s = DatabaseSecretBackendConnectionOracle'
     { _connectionUrl         :: TF.Attr s P.Text
     -- ^ @connection_url@ - (Optional)
     -- Connection string to use to connect to the database.
@@ -539,50 +496,50 @@ data OracleSetting s = OracleSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @oracle@ settings value.
-newOracleSetting
-    :: OracleSetting s
-newOracleSetting =
-    OracleSetting'
+newDatabaseSecretBackendConnectionOracle
+    :: DatabaseSecretBackendConnectionOracle s
+newDatabaseSecretBackendConnectionOracle =
+    DatabaseSecretBackendConnectionOracle'
         { _connectionUrl = TF.Nil
         , _maxConnectionLifetime = TF.Nil
         , _maxIdleConnections = TF.Nil
         , _maxOpenConnections = TF.value 2
         }
 
-instance TF.IsValue  (OracleSetting s)
-instance TF.IsObject (OracleSetting s) where
-    toObject OracleSetting'{..} = P.catMaybes
+instance TF.IsValue  (DatabaseSecretBackendConnectionOracle s)
+instance TF.IsObject (DatabaseSecretBackendConnectionOracle s) where
+    toObject DatabaseSecretBackendConnectionOracle'{..} = P.catMaybes
         [ TF.assign "connection_url" <$> TF.attribute _connectionUrl
         , TF.assign "max_connection_lifetime" <$> TF.attribute _maxConnectionLifetime
         , TF.assign "max_idle_connections" <$> TF.attribute _maxIdleConnections
         , TF.assign "max_open_connections" <$> TF.attribute _maxOpenConnections
         ]
 
-instance TF.IsValid (OracleSetting s) where
+instance TF.IsValid (DatabaseSecretBackendConnectionOracle s) where
     validator = P.mempty
 
-instance P.HasConnectionUrl (OracleSetting s) (TF.Attr s P.Text) where
+instance P.HasConnectionUrl (DatabaseSecretBackendConnectionOracle s) (TF.Attr s P.Text) where
     connectionUrl =
-        P.lens (_connectionUrl :: OracleSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _connectionUrl = a } :: OracleSetting s)
+        P.lens (_connectionUrl :: DatabaseSecretBackendConnectionOracle s -> TF.Attr s P.Text)
+               (\s a -> s { _connectionUrl = a } :: DatabaseSecretBackendConnectionOracle s)
 
-instance P.HasMaxConnectionLifetime (OracleSetting s) (TF.Attr s P.Int) where
+instance P.HasMaxConnectionLifetime (DatabaseSecretBackendConnectionOracle s) (TF.Attr s P.Int) where
     maxConnectionLifetime =
-        P.lens (_maxConnectionLifetime :: OracleSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _maxConnectionLifetime = a } :: OracleSetting s)
+        P.lens (_maxConnectionLifetime :: DatabaseSecretBackendConnectionOracle s -> TF.Attr s P.Int)
+               (\s a -> s { _maxConnectionLifetime = a } :: DatabaseSecretBackendConnectionOracle s)
 
-instance P.HasMaxIdleConnections (OracleSetting s) (TF.Attr s P.Int) where
+instance P.HasMaxIdleConnections (DatabaseSecretBackendConnectionOracle s) (TF.Attr s P.Int) where
     maxIdleConnections =
-        P.lens (_maxIdleConnections :: OracleSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _maxIdleConnections = a } :: OracleSetting s)
+        P.lens (_maxIdleConnections :: DatabaseSecretBackendConnectionOracle s -> TF.Attr s P.Int)
+               (\s a -> s { _maxIdleConnections = a } :: DatabaseSecretBackendConnectionOracle s)
 
-instance P.HasMaxOpenConnections (OracleSetting s) (TF.Attr s P.Int) where
+instance P.HasMaxOpenConnections (DatabaseSecretBackendConnectionOracle s) (TF.Attr s P.Int) where
     maxOpenConnections =
-        P.lens (_maxOpenConnections :: OracleSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _maxOpenConnections = a } :: OracleSetting s)
+        P.lens (_maxOpenConnections :: DatabaseSecretBackendConnectionOracle s -> TF.Attr s P.Int)
+               (\s a -> s { _maxOpenConnections = a } :: DatabaseSecretBackendConnectionOracle s)
 
 -- | @postgresql@ nested settings.
-data PostgresqlSetting s = PostgresqlSetting'
+data DatabaseSecretBackendConnectionPostgresql s = DatabaseSecretBackendConnectionPostgresql'
     { _connectionUrl         :: TF.Attr s P.Text
     -- ^ @connection_url@ - (Optional)
     -- Connection string to use to connect to the database.
@@ -602,50 +559,93 @@ data PostgresqlSetting s = PostgresqlSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @postgresql@ settings value.
-newPostgresqlSetting
-    :: PostgresqlSetting s
-newPostgresqlSetting =
-    PostgresqlSetting'
+newDatabaseSecretBackendConnectionPostgresql
+    :: DatabaseSecretBackendConnectionPostgresql s
+newDatabaseSecretBackendConnectionPostgresql =
+    DatabaseSecretBackendConnectionPostgresql'
         { _connectionUrl = TF.Nil
         , _maxConnectionLifetime = TF.Nil
         , _maxIdleConnections = TF.Nil
         , _maxOpenConnections = TF.value 2
         }
 
-instance TF.IsValue  (PostgresqlSetting s)
-instance TF.IsObject (PostgresqlSetting s) where
-    toObject PostgresqlSetting'{..} = P.catMaybes
+instance TF.IsValue  (DatabaseSecretBackendConnectionPostgresql s)
+instance TF.IsObject (DatabaseSecretBackendConnectionPostgresql s) where
+    toObject DatabaseSecretBackendConnectionPostgresql'{..} = P.catMaybes
         [ TF.assign "connection_url" <$> TF.attribute _connectionUrl
         , TF.assign "max_connection_lifetime" <$> TF.attribute _maxConnectionLifetime
         , TF.assign "max_idle_connections" <$> TF.attribute _maxIdleConnections
         , TF.assign "max_open_connections" <$> TF.attribute _maxOpenConnections
         ]
 
-instance TF.IsValid (PostgresqlSetting s) where
+instance TF.IsValid (DatabaseSecretBackendConnectionPostgresql s) where
     validator = P.mempty
 
-instance P.HasConnectionUrl (PostgresqlSetting s) (TF.Attr s P.Text) where
+instance P.HasConnectionUrl (DatabaseSecretBackendConnectionPostgresql s) (TF.Attr s P.Text) where
     connectionUrl =
-        P.lens (_connectionUrl :: PostgresqlSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _connectionUrl = a } :: PostgresqlSetting s)
+        P.lens (_connectionUrl :: DatabaseSecretBackendConnectionPostgresql s -> TF.Attr s P.Text)
+               (\s a -> s { _connectionUrl = a } :: DatabaseSecretBackendConnectionPostgresql s)
 
-instance P.HasMaxConnectionLifetime (PostgresqlSetting s) (TF.Attr s P.Int) where
+instance P.HasMaxConnectionLifetime (DatabaseSecretBackendConnectionPostgresql s) (TF.Attr s P.Int) where
     maxConnectionLifetime =
-        P.lens (_maxConnectionLifetime :: PostgresqlSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _maxConnectionLifetime = a } :: PostgresqlSetting s)
+        P.lens (_maxConnectionLifetime :: DatabaseSecretBackendConnectionPostgresql s -> TF.Attr s P.Int)
+               (\s a -> s { _maxConnectionLifetime = a } :: DatabaseSecretBackendConnectionPostgresql s)
 
-instance P.HasMaxIdleConnections (PostgresqlSetting s) (TF.Attr s P.Int) where
+instance P.HasMaxIdleConnections (DatabaseSecretBackendConnectionPostgresql s) (TF.Attr s P.Int) where
     maxIdleConnections =
-        P.lens (_maxIdleConnections :: PostgresqlSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _maxIdleConnections = a } :: PostgresqlSetting s)
+        P.lens (_maxIdleConnections :: DatabaseSecretBackendConnectionPostgresql s -> TF.Attr s P.Int)
+               (\s a -> s { _maxIdleConnections = a } :: DatabaseSecretBackendConnectionPostgresql s)
 
-instance P.HasMaxOpenConnections (PostgresqlSetting s) (TF.Attr s P.Int) where
+instance P.HasMaxOpenConnections (DatabaseSecretBackendConnectionPostgresql s) (TF.Attr s P.Int) where
     maxOpenConnections =
-        P.lens (_maxOpenConnections :: PostgresqlSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _maxOpenConnections = a } :: PostgresqlSetting s)
+        P.lens (_maxOpenConnections :: DatabaseSecretBackendConnectionPostgresql s -> TF.Attr s P.Int)
+               (\s a -> s { _maxOpenConnections = a } :: DatabaseSecretBackendConnectionPostgresql s)
+
+-- | @group@ nested settings.
+data OktaAuthBackendGroup s = OktaAuthBackendGroup'
+    { _groupName :: TF.Attr s P.Text
+    -- ^ @group_name@ - (Required)
+    -- Name of the Okta group
+    --
+    , _policies  :: TF.Attr s [TF.Attr s P.Text]
+    -- ^ @policies@ - (Required)
+    -- Policies to associate with this group
+    --
+    } deriving (P.Show, P.Eq, P.Ord)
+
+-- | Construct a new @group@ settings value.
+newOktaAuthBackendGroup
+    :: TF.Attr s P.Text -- ^ 'P._groupName': @group_name@
+    -> TF.Attr s [TF.Attr s P.Text] -- ^ 'P._policies': @policies@
+    -> OktaAuthBackendGroup s
+newOktaAuthBackendGroup _groupName _policies =
+    OktaAuthBackendGroup'
+        { _groupName = _groupName
+        , _policies = _policies
+        }
+
+instance TF.IsValue  (OktaAuthBackendGroup s)
+instance TF.IsObject (OktaAuthBackendGroup s) where
+    toObject OktaAuthBackendGroup'{..} = P.catMaybes
+        [ TF.assign "group_name" <$> TF.attribute _groupName
+        , TF.assign "policies" <$> TF.attribute _policies
+        ]
+
+instance TF.IsValid (OktaAuthBackendGroup s) where
+    validator = P.mempty
+
+instance P.HasGroupName (OktaAuthBackendGroup s) (TF.Attr s P.Text) where
+    groupName =
+        P.lens (_groupName :: OktaAuthBackendGroup s -> TF.Attr s P.Text)
+               (\s a -> s { _groupName = a } :: OktaAuthBackendGroup s)
+
+instance P.HasPolicies (OktaAuthBackendGroup s) (TF.Attr s [TF.Attr s P.Text]) where
+    policies =
+        P.lens (_policies :: OktaAuthBackendGroup s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _policies = a } :: OktaAuthBackendGroup s)
 
 -- | @user@ nested settings.
-data UserSetting s = UserSetting'
+data OktaAuthBackendUser s = OktaAuthBackendUser'
     { _groups   :: TF.Attr s [TF.Attr s P.Text]
     -- ^ @groups@ - (Required)
     -- Groups within the Okta auth backend to associate with this user
@@ -661,39 +661,39 @@ data UserSetting s = UserSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @user@ settings value.
-newUserSetting
+newOktaAuthBackendUser
     :: TF.Attr s [TF.Attr s P.Text] -- ^ 'P._groups': @groups@
     -> TF.Attr s P.Text -- ^ 'P._username': @username@
-    -> UserSetting s
-newUserSetting _groups _username =
-    UserSetting'
+    -> OktaAuthBackendUser s
+newOktaAuthBackendUser _groups _username =
+    OktaAuthBackendUser'
         { _groups = _groups
         , _policies = TF.Nil
         , _username = _username
         }
 
-instance TF.IsValue  (UserSetting s)
-instance TF.IsObject (UserSetting s) where
-    toObject UserSetting'{..} = P.catMaybes
+instance TF.IsValue  (OktaAuthBackendUser s)
+instance TF.IsObject (OktaAuthBackendUser s) where
+    toObject OktaAuthBackendUser'{..} = P.catMaybes
         [ TF.assign "groups" <$> TF.attribute _groups
         , TF.assign "policies" <$> TF.attribute _policies
         , TF.assign "username" <$> TF.attribute _username
         ]
 
-instance TF.IsValid (UserSetting s) where
+instance TF.IsValid (OktaAuthBackendUser s) where
     validator = P.mempty
 
-instance P.HasGroups (UserSetting s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasGroups (OktaAuthBackendUser s) (TF.Attr s [TF.Attr s P.Text]) where
     groups =
-        P.lens (_groups :: UserSetting s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _groups = a } :: UserSetting s)
+        P.lens (_groups :: OktaAuthBackendUser s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _groups = a } :: OktaAuthBackendUser s)
 
-instance P.HasPolicies (UserSetting s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasPolicies (OktaAuthBackendUser s) (TF.Attr s [TF.Attr s P.Text]) where
     policies =
-        P.lens (_policies :: UserSetting s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _policies = a } :: UserSetting s)
+        P.lens (_policies :: OktaAuthBackendUser s -> TF.Attr s [TF.Attr s P.Text])
+               (\s a -> s { _policies = a } :: OktaAuthBackendUser s)
 
-instance P.HasUsername (UserSetting s) (TF.Attr s P.Text) where
+instance P.HasUsername (OktaAuthBackendUser s) (TF.Attr s P.Text) where
     username =
-        P.lens (_username :: UserSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _username = a } :: UserSetting s)
+        P.lens (_username :: OktaAuthBackendUser s -> TF.Attr s P.Text)
+               (\s a -> s { _username = a } :: OktaAuthBackendUser s)

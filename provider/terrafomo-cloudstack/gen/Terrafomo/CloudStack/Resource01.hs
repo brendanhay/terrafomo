@@ -362,7 +362,7 @@ data EgressFirewallResource s = EgressFirewallResource'
     , _parallelism :: TF.Attr s P.Int
     -- ^ @parallelism@ - (Optional)
     --
-    , _rule        :: TF.Attr s [TF.Attr s (RuleSetting s)]
+    , _rule        :: TF.Attr s [TF.Attr s (EgressFirewallRule s)]
     -- ^ @rule@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -406,9 +406,9 @@ instance P.HasParallelism (EgressFirewallResource s) (TF.Attr s P.Int) where
         P.lens (_parallelism :: EgressFirewallResource s -> TF.Attr s P.Int)
                (\s a -> s { _parallelism = a } :: EgressFirewallResource s)
 
-instance P.HasRule (EgressFirewallResource s) (TF.Attr s [TF.Attr s (RuleSetting s)]) where
+instance P.HasRule (EgressFirewallResource s) (TF.Attr s [TF.Attr s (EgressFirewallRule s)]) where
     rule =
-        P.lens (_rule :: EgressFirewallResource s -> TF.Attr s [TF.Attr s (RuleSetting s)])
+        P.lens (_rule :: EgressFirewallResource s -> TF.Attr s [TF.Attr s (EgressFirewallRule s)])
                (\s a -> s { _rule = a } :: EgressFirewallResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (EgressFirewallResource s)) (TF.Attr s P.Text) where
@@ -428,7 +428,7 @@ data FirewallResource s = FirewallResource'
     , _parallelism :: TF.Attr s P.Int
     -- ^ @parallelism@ - (Optional)
     --
-    , _rule        :: TF.Attr s [TF.Attr s (RuleSetting s)]
+    , _rule        :: TF.Attr s [TF.Attr s (FirewallRule s)]
     -- ^ @rule@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -472,9 +472,9 @@ instance P.HasParallelism (FirewallResource s) (TF.Attr s P.Int) where
         P.lens (_parallelism :: FirewallResource s -> TF.Attr s P.Int)
                (\s a -> s { _parallelism = a } :: FirewallResource s)
 
-instance P.HasRule (FirewallResource s) (TF.Attr s [TF.Attr s (RuleSetting s)]) where
+instance P.HasRule (FirewallResource s) (TF.Attr s [TF.Attr s (FirewallRule s)]) where
     rule =
-        P.lens (_rule :: FirewallResource s -> TF.Attr s [TF.Attr s (RuleSetting s)])
+        P.lens (_rule :: FirewallResource s -> TF.Attr s [TF.Attr s (FirewallRule s)])
                (\s a -> s { _rule = a } :: FirewallResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (FirewallResource s)) (TF.Attr s P.Text) where
@@ -1066,7 +1066,7 @@ data NetworkAclRuleResource s = NetworkAclRuleResource'
     , _project     :: TF.Attr s P.Text
     -- ^ @project@ - (Optional, Forces New)
     --
-    , _rule        :: TF.Attr s [TF.Attr s (RuleSetting s)]
+    , _rule        :: TF.Attr s [TF.Attr s (NetworkAclRuleRule s)]
     -- ^ @rule@ - (Optional)
     --
     } deriving (P.Show, P.Eq, P.Ord)
@@ -1117,9 +1117,9 @@ instance P.HasProject (NetworkAclRuleResource s) (TF.Attr s P.Text) where
         P.lens (_project :: NetworkAclRuleResource s -> TF.Attr s P.Text)
                (\s a -> s { _project = a } :: NetworkAclRuleResource s)
 
-instance P.HasRule (NetworkAclRuleResource s) (TF.Attr s [TF.Attr s (RuleSetting s)]) where
+instance P.HasRule (NetworkAclRuleResource s) (TF.Attr s [TF.Attr s (NetworkAclRuleRule s)]) where
     rule =
-        P.lens (_rule :: NetworkAclRuleResource s -> TF.Attr s [TF.Attr s (RuleSetting s)])
+        P.lens (_rule :: NetworkAclRuleResource s -> TF.Attr s [TF.Attr s (NetworkAclRuleRule s)])
                (\s a -> s { _rule = a } :: NetworkAclRuleResource s)
 
 instance s ~ s' => P.HasComputedId (TF.Ref s' (NetworkAclRuleResource s)) (TF.Attr s P.Text) where
@@ -1380,7 +1380,7 @@ instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (NicResource s)) (TF.Attr s
 -- See the <https://www.terraform.io/docs/providers/cloudstack/r/port_forward.html terraform documentation>
 -- for more information.
 data PortForwardResource s = PortForwardResource'
-    { _forward     :: TF.Attr s [TF.Attr s (ForwardSetting s)]
+    { _forward     :: TF.Attr s [TF.Attr s (PortForwardForward s)]
     -- ^ @forward@ - (Required)
     --
     , _ipAddressId :: TF.Attr s P.Text
@@ -1396,7 +1396,7 @@ data PortForwardResource s = PortForwardResource'
 
 -- | Define a new @cloudstack_port_forward@ resource value.
 portForwardResource
-    :: TF.Attr s [TF.Attr s (ForwardSetting s)] -- ^ @forward@ ('P._forward', 'P.forward')
+    :: TF.Attr s [TF.Attr s (PortForwardForward s)] -- ^ @forward@ ('P._forward', 'P.forward')
     -> TF.Attr s P.Text -- ^ @ip_address_id@ ('P._ipAddressId', 'P.ipAddressId')
     -> P.Resource (PortForwardResource s)
 portForwardResource _forward _ipAddressId =
@@ -1419,9 +1419,9 @@ instance TF.IsObject (PortForwardResource s) where
 instance TF.IsValid (PortForwardResource s) where
     validator = P.mempty
 
-instance P.HasForward (PortForwardResource s) (TF.Attr s [TF.Attr s (ForwardSetting s)]) where
+instance P.HasForward (PortForwardResource s) (TF.Attr s [TF.Attr s (PortForwardForward s)]) where
     forward =
-        P.lens (_forward :: PortForwardResource s -> TF.Attr s [TF.Attr s (ForwardSetting s)])
+        P.lens (_forward :: PortForwardResource s -> TF.Attr s [TF.Attr s (PortForwardForward s)])
                (\s a -> s { _forward = a } :: PortForwardResource s)
 
 instance P.HasIpAddressId (PortForwardResource s) (TF.Attr s P.Text) where
@@ -1688,7 +1688,7 @@ data SecurityGroupRuleResource s = SecurityGroupRuleResource'
     , _project         :: TF.Attr s P.Text
     -- ^ @project@ - (Optional, Forces New)
     --
-    , _rule            :: TF.Attr s [TF.Attr s (RuleSetting s)]
+    , _rule            :: TF.Attr s [TF.Attr s (SecurityGroupRuleRule s)]
     -- ^ @rule@ - (Required)
     --
     , _securityGroupId :: TF.Attr s P.Text
@@ -1699,7 +1699,7 @@ data SecurityGroupRuleResource s = SecurityGroupRuleResource'
 -- | Define a new @cloudstack_security_group_rule@ resource value.
 securityGroupRuleResource
     :: TF.Attr s P.Text -- ^ @security_group_id@ ('P._securityGroupId', 'P.securityGroupId')
-    -> TF.Attr s [TF.Attr s (RuleSetting s)] -- ^ @rule@ ('P._rule', 'P.rule')
+    -> TF.Attr s [TF.Attr s (SecurityGroupRuleRule s)] -- ^ @rule@ ('P._rule', 'P.rule')
     -> P.Resource (SecurityGroupRuleResource s)
 securityGroupRuleResource _securityGroupId _rule =
     TF.unsafeResource "cloudstack_security_group_rule" TF.validator $
@@ -1731,9 +1731,9 @@ instance P.HasProject (SecurityGroupRuleResource s) (TF.Attr s P.Text) where
         P.lens (_project :: SecurityGroupRuleResource s -> TF.Attr s P.Text)
                (\s a -> s { _project = a } :: SecurityGroupRuleResource s)
 
-instance P.HasRule (SecurityGroupRuleResource s) (TF.Attr s [TF.Attr s (RuleSetting s)]) where
+instance P.HasRule (SecurityGroupRuleResource s) (TF.Attr s [TF.Attr s (SecurityGroupRuleRule s)]) where
     rule =
-        P.lens (_rule :: SecurityGroupRuleResource s -> TF.Attr s [TF.Attr s (RuleSetting s)])
+        P.lens (_rule :: SecurityGroupRuleResource s -> TF.Attr s [TF.Attr s (SecurityGroupRuleRule s)])
                (\s a -> s { _rule = a } :: SecurityGroupRuleResource s)
 
 instance P.HasSecurityGroupId (SecurityGroupRuleResource s) (TF.Attr s P.Text) where

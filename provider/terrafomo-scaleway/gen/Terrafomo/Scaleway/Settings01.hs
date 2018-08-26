@@ -18,8 +18,8 @@
 module Terrafomo.Scaleway.Settings01
     (
     -- ** volume
-      VolumeSetting (..)
-    , newVolumeSetting
+      ServerVolume (..)
+    , newServerVolume
 
     ) where
 
@@ -45,7 +45,7 @@ import qualified Terrafomo.Scaleway.Types as P
 import qualified Terrafomo.Validator      as TF
 
 -- | @volume@ nested settings.
-data VolumeSetting s = VolumeSetting'
+data ServerVolume s = ServerVolume'
     { _sizeInGb :: TF.Attr s P.Int
     -- ^ @size_in_gb@ - (Required)
     --
@@ -55,35 +55,35 @@ data VolumeSetting s = VolumeSetting'
     } deriving (P.Show, P.Eq, P.Ord)
 
 -- | Construct a new @volume@ settings value.
-newVolumeSetting
+newServerVolume
     :: TF.Attr s P.Int -- ^ 'P._sizeInGb': @size_in_gb@
     -> TF.Attr s P.Text -- ^ 'P._type'': @type@
-    -> VolumeSetting s
-newVolumeSetting _sizeInGb _type' =
-    VolumeSetting'
+    -> ServerVolume s
+newServerVolume _sizeInGb _type' =
+    ServerVolume'
         { _sizeInGb = _sizeInGb
         , _type' = _type'
         }
 
-instance TF.IsValue  (VolumeSetting s)
-instance TF.IsObject (VolumeSetting s) where
-    toObject VolumeSetting'{..} = P.catMaybes
+instance TF.IsValue  (ServerVolume s)
+instance TF.IsObject (ServerVolume s) where
+    toObject ServerVolume'{..} = P.catMaybes
         [ TF.assign "size_in_gb" <$> TF.attribute _sizeInGb
         , TF.assign "type" <$> TF.attribute _type'
         ]
 
-instance TF.IsValid (VolumeSetting s) where
+instance TF.IsValid (ServerVolume s) where
     validator = P.mempty
 
-instance P.HasSizeInGb (VolumeSetting s) (TF.Attr s P.Int) where
+instance P.HasSizeInGb (ServerVolume s) (TF.Attr s P.Int) where
     sizeInGb =
-        P.lens (_sizeInGb :: VolumeSetting s -> TF.Attr s P.Int)
-               (\s a -> s { _sizeInGb = a } :: VolumeSetting s)
+        P.lens (_sizeInGb :: ServerVolume s -> TF.Attr s P.Int)
+               (\s a -> s { _sizeInGb = a } :: ServerVolume s)
 
-instance P.HasType' (VolumeSetting s) (TF.Attr s P.Text) where
+instance P.HasType' (ServerVolume s) (TF.Attr s P.Text) where
     type' =
-        P.lens (_type' :: VolumeSetting s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a } :: VolumeSetting s)
+        P.lens (_type' :: ServerVolume s -> TF.Attr s P.Text)
+               (\s a -> s { _type' = a } :: ServerVolume s)
 
-instance s ~ s' => P.HasComputedVolumeId (TF.Ref s' (VolumeSetting s)) (TF.Attr s P.Text) where
+instance s ~ s' => P.HasComputedVolumeId (TF.Ref s' (ServerVolume s)) (TF.Attr s P.Text) where
     computedVolumeId x = TF.compute (TF.refKey x) "volume_id"
