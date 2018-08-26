@@ -1,7 +1,6 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -29,104 +28,114 @@ import GHC.Base (($))
 
 import Terrafomo.CloudStack.Settings
 
+import qualified Data.Hashable                 as P
+import qualified Data.HashMap.Strict           as P
+import qualified Data.HashMap.Strict           as HashMap
 import qualified Data.List.NonEmpty            as P
-import qualified Data.Map.Strict               as P
-import qualified Data.Map.Strict               as Map
 import qualified Data.Maybe                    as P
-import qualified Data.Monoid                   as P
-import qualified Data.Text                     as P
+import qualified Data.Text.Lazy                as P
 import qualified GHC.Generics                  as P
 import qualified Lens.Micro                    as P
 import qualified Prelude                       as P
-import qualified Terrafomo.Attribute           as TF
 import qualified Terrafomo.CloudStack.Lens     as P
 import qualified Terrafomo.CloudStack.Provider as P
 import qualified Terrafomo.CloudStack.Types    as P
+import qualified Terrafomo.Encode              as TF
 import qualified Terrafomo.HCL                 as TF
-import qualified Terrafomo.Name                as TF
+import qualified Terrafomo.HIL                 as TF
 import qualified Terrafomo.Schema              as TF
-import qualified Terrafomo.Validator           as TF
+import qualified Terrafomo.Validate            as TF
 
 -- | @cloudstack_template@ DataSource.
 --
 -- See the <https://www.terraform.io/docs/providers/cloudstack/d/template.html terraform documentation>
 -- for more information.
 data TemplateData s = TemplateData'
-    { _filter         :: TF.Attr s [TF.Attr s (TemplateFilter s)]
+    { _filter :: TF.Expr s [TF.Expr s (TemplateFilter s)]
     -- ^ @filter@ - (Required, Forces New)
     --
-    , _tags           :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _tags :: P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text)))
     -- ^ @tags@ - (Optional)
     --
-    , _templateFilter :: TF.Attr s P.Text
+    , _templateFilter :: TF.Expr s P.Text
     -- ^ @template_filter@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Define a new @cloudstack_template@ datasource value.
 templateData
-    :: TF.Attr s [TF.Attr s (TemplateFilter s)] -- ^ @filter@ ('P._filter', 'P.filter')
-    -> TF.Attr s P.Text -- ^ @template_filter@ ('P._templateFilter', 'P.templateFilter')
+    :: TF.Expr s [TF.Expr s (TemplateFilter s)] -- ^ Lens: 'P.filter', Field: '_filter', HCL: @filter@
+    -> TF.Expr s P.Text -- ^ Lens: 'P.templateFilter', Field: '_templateFilter', HCL: @template_filter@
     -> P.DataSource (TemplateData s)
 templateData _filter _templateFilter =
-    TF.unsafeDataSource "cloudstack_template" TF.validator $
-        TemplateData'
+    TF.unsafeDataSource "cloudstack_template" P.defaultProvider
+        (\TemplateData'{..} -> P.mconcat
+            [ TF.pair "filter" _filter
+            , P.maybe P.mempty (TF.pair "tags") _tags
+            , TF.pair "template_filter" _templateFilter
+            ])
+        (TemplateData'
             { _filter = _filter
-            , _tags = TF.Nil
+            , _tags = P.Nothing
             , _templateFilter = _templateFilter
-            }
+            })
 
-instance TF.IsObject (TemplateData s) where
-    toObject TemplateData'{..} = P.catMaybes
-        [ TF.assign "filter" <$> TF.attribute _filter
-        , TF.assign "tags" <$> TF.attribute _tags
-        , TF.assign "template_filter" <$> TF.attribute _templateFilter
-        ]
+instance P.Hashable (TemplateData s)
 
-instance TF.IsValid (TemplateData s) where
+instance TF.HasValidator (TemplateData s) where
     validator = P.mempty
 
-instance P.HasFilter (TemplateData s) (TF.Attr s [TF.Attr s (TemplateFilter s)]) where
+instance P.HasFilter (TemplateData s) (TF.Expr s [TF.Expr s (TemplateFilter s)]) where
     filter =
-        P.lens (_filter :: TemplateData s -> TF.Attr s [TF.Attr s (TemplateFilter s)])
-               (\s a -> s { _filter = a } :: TemplateData s)
+        P.lens (_filter :: TemplateData s -> TF.Expr s [TF.Expr s (TemplateFilter s)])
+            (\s a -> s { _filter = a } :: TemplateData s)
 
-instance P.HasTags (TemplateData s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+instance P.HasTags (TemplateData s) (P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text)))) where
     tags =
-        P.lens (_tags :: TemplateData s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _tags = a } :: TemplateData s)
+        P.lens (_tags :: TemplateData s -> P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text))))
+            (\s a -> s { _tags = a } :: TemplateData s)
 
-instance P.HasTemplateFilter (TemplateData s) (TF.Attr s P.Text) where
+instance P.HasTemplateFilter (TemplateData s) (TF.Expr s P.Text) where
     templateFilter =
-        P.lens (_templateFilter :: TemplateData s -> TF.Attr s P.Text)
-               (\s a -> s { _templateFilter = a } :: TemplateData s)
+        P.lens (_templateFilter :: TemplateData s -> TF.Expr s P.Text)
+            (\s a -> s { _templateFilter = a } :: TemplateData s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (TemplateData s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (TemplateData s)) (TF.Expr s P.Text) where
+    computedId x =
+        TF.unsafeCompute TF.encodeAttr x "id"
 
-instance s ~ s' => P.HasComputedAccount (TF.Ref s' (TemplateData s)) (TF.Attr s P.Text) where
-    computedAccount x = TF.compute (TF.refKey x) "account"
+instance s ~ s' => P.HasComputedAccount (TF.Ref s' (TemplateData s)) (TF.Expr s P.Text) where
+    computedAccount x =
+        TF.unsafeCompute TF.encodeAttr x "account"
 
-instance s ~ s' => P.HasComputedCreated (TF.Ref s' (TemplateData s)) (TF.Attr s P.Text) where
-    computedCreated x = TF.compute (TF.refKey x) "created"
+instance s ~ s' => P.HasComputedCreated (TF.Ref s' (TemplateData s)) (TF.Expr s P.Text) where
+    computedCreated x =
+        TF.unsafeCompute TF.encodeAttr x "created"
 
-instance s ~ s' => P.HasComputedDisplayText (TF.Ref s' (TemplateData s)) (TF.Attr s P.Text) where
-    computedDisplayText x = TF.compute (TF.refKey x) "display_text"
+instance s ~ s' => P.HasComputedDisplayText (TF.Ref s' (TemplateData s)) (TF.Expr s P.Text) where
+    computedDisplayText x =
+        TF.unsafeCompute TF.encodeAttr x "display_text"
 
-instance s ~ s' => P.HasComputedFormat (TF.Ref s' (TemplateData s)) (TF.Attr s P.Text) where
-    computedFormat x = TF.compute (TF.refKey x) "format"
+instance s ~ s' => P.HasComputedFormat (TF.Ref s' (TemplateData s)) (TF.Expr s P.Text) where
+    computedFormat x =
+        TF.unsafeCompute TF.encodeAttr x "format"
 
-instance s ~ s' => P.HasComputedHypervisor (TF.Ref s' (TemplateData s)) (TF.Attr s P.Text) where
-    computedHypervisor x = TF.compute (TF.refKey x) "hypervisor"
+instance s ~ s' => P.HasComputedHypervisor (TF.Ref s' (TemplateData s)) (TF.Expr s P.Text) where
+    computedHypervisor x =
+        TF.unsafeCompute TF.encodeAttr x "hypervisor"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (TemplateData s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+instance s ~ s' => P.HasComputedName (TF.Ref s' (TemplateData s)) (TF.Expr s P.Text) where
+    computedName x =
+        TF.unsafeCompute TF.encodeAttr x "name"
 
-instance s ~ s' => P.HasComputedSize (TF.Ref s' (TemplateData s)) (TF.Attr s P.Text) where
-    computedSize x = TF.compute (TF.refKey x) "size"
+instance s ~ s' => P.HasComputedSize (TF.Ref s' (TemplateData s)) (TF.Expr s P.Text) where
+    computedSize x =
+        TF.unsafeCompute TF.encodeAttr x "size"
 
-instance s ~ s' => P.HasComputedTags (TF.Ref s' (TemplateData s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
-    computedTags x = TF.compute (TF.refKey x) "tags"
+instance s ~ s' => P.HasComputedTags (TF.Ref s' (TemplateData s)) (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text))) where
+    computedTags x =
+        TF.unsafeCompute TF.encodeAttr x "tags"
 
-instance s ~ s' => P.HasComputedTemplateId (TF.Ref s' (TemplateData s)) (TF.Attr s P.Text) where
-    computedTemplateId x = TF.compute (TF.refKey x) "template_id"
+instance s ~ s' => P.HasComputedTemplateId (TF.Ref s' (TemplateData s)) (TF.Expr s P.Text) where
+    computedTemplateId x =
+        TF.unsafeCompute TF.encodeAttr x "template_id"

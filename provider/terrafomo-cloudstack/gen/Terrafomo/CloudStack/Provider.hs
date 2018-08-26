@@ -1,7 +1,6 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -18,8 +17,9 @@
 module Terrafomo.CloudStack.Provider
     (
     -- * CloudStack Provider Datatype
-      Provider (..)
+      CloudStack (..)
     , newProvider
+    , defaultProvider
 
     -- * CloudStack Specific Aliases
     , DataSource
@@ -34,32 +34,27 @@ import GHC.Base (($))
 
 import Terrafomo.CloudStack.Settings
 
+import qualified Data.Hashable              as P
+import qualified Data.HashMap.Strict        as P
 import qualified Data.List.NonEmpty         as P
-import qualified Data.Map.Strict            as P
-import qualified Data.Map.Strict            as Map
 import qualified Data.Maybe                 as P
-import qualified Data.Monoid                as P
-import qualified Data.Text                  as P
+import qualified Data.Text.Lazy             as P
 import qualified GHC.Generics               as P
 import qualified Lens.Micro                 as P
 import qualified Prelude                    as P
 import qualified Terrafomo.CloudStack.Lens  as P
 import qualified Terrafomo.CloudStack.Types as P
 import qualified Terrafomo.HCL              as TF
-import qualified Terrafomo.Lifecycle        as TF
-import qualified Terrafomo.Name             as TF
-import qualified Terrafomo.Provider         as TF
 import qualified Terrafomo.Schema           as TF
-import qualified Terrafomo.Validator        as TF
 
-type DataSource a = TF.Schema ()               Provider a
-type Resource   a = TF.Schema (TF.Lifecycle a) Provider a
+type DataSource a = TF.Resource CloudStack ()               a
+type Resource   a = TF.Resource CloudStack (TF.Lifecycle a) a
 
 -- | The @cloudstack@ Terraform provider configuration.
 --
 -- See the <https://www.terraform.io/docs/providers/cloudstack/index.html terraform documentation>
 -- for more information.
-data Provider = Provider'
+data CloudStack = CloudStack'
     { _apiKey      :: P.Maybe P.Text
     -- ^ @api_key@ - (Optional)
     --
@@ -103,14 +98,17 @@ data Provider = Provider'
     , _timeout     :: P.Int
     -- ^ @timeout@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
+instance P.Hashable (CloudStack)
+
+-- | Specify a new CloudStack provider configuration.
 newProvider
-    :: P.Bool -- ^ @http_get_only@ ('P._httpGetOnly', 'P.httpGetOnly')
-    -> P.Int -- ^ @timeout@ ('P._timeout', 'P.timeout')
-    -> Provider
+    :: P.Bool -- ^ Lens: 'P.httpGetOnly', Field: '_httpGetOnly', HCL: @http_get_only@
+    -> P.Int -- ^ Lens: 'P.timeout', Field: '_timeout', HCL: @timeout@
+    -> CloudStack
 newProvider _httpGetOnly _timeout =
-    Provider'
+    CloudStack'
         { _apiKey = P.Nothing
         , _apiUrl = P.Nothing
         , _config = P.Nothing
@@ -120,81 +118,77 @@ newProvider _httpGetOnly _timeout =
         , _timeout = _timeout
         }
 
-instance TF.IsProvider Provider where
-    type ProviderType Provider = "cloudstack"
+{- | The 'CloudStack' provider with absent configuration that is used
+to instantiate new 'Resource's and 'DataSource's. Provider configuration can be
+overridden on a per-resource basis by using the 'Terrafomo.provider' lens, the
+'newProvider' constructor, and any of the applicable lenses.
 
-instance TF.IsObject Provider where
-    toObject Provider'{..} =
-        P.catMaybes
-            [ TF.assign "api_key" <$> _apiKey
-            , TF.assign "api_url" <$> _apiUrl
-            , TF.assign "config" <$> _config
-            , P.Just $ TF.assign "http_get_only" _httpGetOnly
-            , TF.assign "profile" <$> _profile
-            , TF.assign "secret_key" <$> _secretKey
-            , P.Just $ TF.assign "timeout" _timeout
-            ]
+For example:
 
-instance TF.IsValid (Provider) where
-    validator = TF.fieldsValidator (\Provider'{..} -> Map.fromList $ P.catMaybes
-        [ if (_apiKey P.== P.Nothing)
-              then P.Nothing
-              else P.Just ("_apiKey",
-                            [ "_config"                            , "_profile"
-                            ])
-        , if (_apiUrl P.== P.Nothing)
-              then P.Nothing
-              else P.Just ("_apiUrl",
-                            [ "_config"                            , "_profile"
-                            ])
-        , if (_config P.== P.Nothing)
-              then P.Nothing
-              else P.Just ("_config",
-                            [ "_apiKey"                            , "_apiUrl"                            , "_secretKey"
-                            ])
-        , if (_profile P.== P.Nothing)
-              then P.Nothing
-              else P.Just ("_profile",
-                            [ "_apiKey"                            , "_apiUrl"                            , "_secretKey"
-                            ])
-        , if (_secretKey P.== P.Nothing)
-              then P.Nothing
-              else P.Just ("_secretKey",
-                            [ "_config"                            , "_profile"
-                            ])
-        ])
+@
+import qualified Terrafomo as TF
+import qualified Terrafomo.CloudStack.Provider as CloudStack
 
-instance P.HasApiKey (Provider) (P.Maybe P.Text) where
+TF.newExampleResource "foo"
+    & TF.provider ?~
+          CloudStack.(newProvider
+              -- Required arguments
+              _httpGetOnly -- (Required) 'P.Bool'
+              _timeout -- (Required) 'P.Int'
+              -- Lenses
+              & CloudStack.apiKey .~ Nothing -- 'P.Maybe P.Text'
+              & CloudStack.apiUrl .~ Nothing -- 'P.Maybe P.Text'
+              & CloudStack.config .~ Nothing -- 'P.Maybe P.Text'
+              & CloudStack.httpGetOnly .~ _httpGetOnly -- 'P.Bool'
+              & CloudStack.profile .~ Nothing -- 'P.Maybe P.Text'
+              & CloudStack.secretKey .~ Nothing -- 'P.Maybe P.Text'
+              & CloudStack.timeout .~ _timeout -- 'P.Int'
+@
+-}
+defaultProvider :: TF.Provider CloudStack
+defaultProvider =
+    TF.defaultProvider "cloudstack" (P.Just "~> 0.1")
+        (\CloudStack'{..} -> P.mconcat
+            [ P.maybe P.mempty (TF.pair "api_key") _apiKey
+            , P.maybe P.mempty (TF.pair "api_url") _apiUrl
+            , P.maybe P.mempty (TF.pair "config") _config
+            , TF.pair "http_get_only" _httpGetOnly
+            , P.maybe P.mempty (TF.pair "profile") _profile
+            , P.maybe P.mempty (TF.pair "secret_key") _secretKey
+            , TF.pair "timeout" _timeout
+            ])
+
+instance P.HasApiKey (CloudStack) (P.Maybe P.Text) where
     apiKey =
-        P.lens (_apiKey :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _apiKey = a } :: Provider)
+        P.lens (_apiKey :: CloudStack -> P.Maybe P.Text)
+            (\s a -> s { _apiKey = a } :: CloudStack)
 
-instance P.HasApiUrl (Provider) (P.Maybe P.Text) where
+instance P.HasApiUrl (CloudStack) (P.Maybe P.Text) where
     apiUrl =
-        P.lens (_apiUrl :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _apiUrl = a } :: Provider)
+        P.lens (_apiUrl :: CloudStack -> P.Maybe P.Text)
+            (\s a -> s { _apiUrl = a } :: CloudStack)
 
-instance P.HasConfig (Provider) (P.Maybe P.Text) where
+instance P.HasConfig (CloudStack) (P.Maybe P.Text) where
     config =
-        P.lens (_config :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _config = a } :: Provider)
+        P.lens (_config :: CloudStack -> P.Maybe P.Text)
+            (\s a -> s { _config = a } :: CloudStack)
 
-instance P.HasHttpGetOnly (Provider) (P.Bool) where
+instance P.HasHttpGetOnly (CloudStack) (P.Bool) where
     httpGetOnly =
-        P.lens (_httpGetOnly :: Provider -> P.Bool)
-               (\s a -> s { _httpGetOnly = a } :: Provider)
+        P.lens (_httpGetOnly :: CloudStack -> P.Bool)
+            (\s a -> s { _httpGetOnly = a } :: CloudStack)
 
-instance P.HasProfile (Provider) (P.Maybe P.Text) where
+instance P.HasProfile (CloudStack) (P.Maybe P.Text) where
     profile =
-        P.lens (_profile :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _profile = a } :: Provider)
+        P.lens (_profile :: CloudStack -> P.Maybe P.Text)
+            (\s a -> s { _profile = a } :: CloudStack)
 
-instance P.HasSecretKey (Provider) (P.Maybe P.Text) where
+instance P.HasSecretKey (CloudStack) (P.Maybe P.Text) where
     secretKey =
-        P.lens (_secretKey :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _secretKey = a } :: Provider)
+        P.lens (_secretKey :: CloudStack -> P.Maybe P.Text)
+            (\s a -> s { _secretKey = a } :: CloudStack)
 
-instance P.HasTimeout (Provider) (P.Int) where
+instance P.HasTimeout (CloudStack) (P.Int) where
     timeout =
-        P.lens (_timeout :: Provider -> P.Int)
-               (\s a -> s { _timeout = a } :: Provider)
+        P.lens (_timeout :: CloudStack -> P.Int)
+            (\s a -> s { _timeout = a } :: CloudStack)

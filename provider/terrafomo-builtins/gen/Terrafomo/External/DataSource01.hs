@@ -1,7 +1,6 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -29,79 +28,81 @@ import GHC.Base (($))
 
 import Terrafomo.External.Settings
 
+import qualified Data.Hashable               as P
+import qualified Data.HashMap.Strict         as P
+import qualified Data.HashMap.Strict         as HashMap
 import qualified Data.List.NonEmpty          as P
-import qualified Data.Map.Strict             as P
-import qualified Data.Map.Strict             as Map
 import qualified Data.Maybe                  as P
-import qualified Data.Monoid                 as P
-import qualified Data.Text                   as P
+import qualified Data.Text.Lazy              as P
 import qualified GHC.Generics                as P
 import qualified Lens.Micro                  as P
 import qualified Prelude                     as P
-import qualified Terrafomo.Attribute         as TF
+import qualified Terrafomo.Encode            as TF
 import qualified Terrafomo.External.Lens     as P
 import qualified Terrafomo.External.Provider as P
 import qualified Terrafomo.External.Types    as P
 import qualified Terrafomo.HCL               as TF
-import qualified Terrafomo.Name              as TF
+import qualified Terrafomo.HIL               as TF
 import qualified Terrafomo.Schema            as TF
-import qualified Terrafomo.Validator         as TF
+import qualified Terrafomo.Validate          as TF
 
 -- | @external@ DataSource.
 --
 -- See the <https://www.terraform.io/docs/providers/external/d/.html terraform documentation>
 -- for more information.
 data Data s = Data'
-    { _program    :: TF.Attr s [TF.Attr s P.Text]
+    { _program    :: TF.Expr s [TF.Expr s P.Text]
     -- ^ @program@ - (Required)
     --
-    , _query      :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _query      :: P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text)))
     -- ^ @query@ - (Optional)
     --
-    , _workingDir :: TF.Attr s P.Text
+    , _workingDir :: P.Maybe (TF.Expr s P.Text)
     -- ^ @working_dir@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Define a new @external@ datasource value.
 data'
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ @program@ ('P._program', 'P.program')
+    :: TF.Expr s [TF.Expr s P.Text] -- ^ Lens: 'P.program', Field: '_program', HCL: @program@
     -> P.DataSource (Data s)
 data' _program =
-    TF.unsafeDataSource "external" TF.validator $
-        Data'
+    TF.unsafeDataSource "external" P.defaultProvider
+        (\Data'{..} -> P.mconcat
+            [ TF.pair "program" _program
+            , P.maybe P.mempty (TF.pair "query") _query
+            , P.maybe P.mempty (TF.pair "working_dir") _workingDir
+            ])
+        (Data'
             { _program = _program
-            , _query = TF.Nil
-            , _workingDir = TF.Nil
-            }
+            , _query = P.Nothing
+            , _workingDir = P.Nothing
+            })
 
-instance TF.IsObject (Data s) where
-    toObject Data'{..} = P.catMaybes
-        [ TF.assign "program" <$> TF.attribute _program
-        , TF.assign "query" <$> TF.attribute _query
-        , TF.assign "working_dir" <$> TF.attribute _workingDir
-        ]
+instance P.Hashable (Data s)
 
-instance TF.IsValid (Data s) where
+instance TF.HasValidator (Data s) where
     validator = P.mempty
 
-instance P.HasProgram (Data s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasProgram (Data s) (TF.Expr s [TF.Expr s P.Text]) where
     program =
-        P.lens (_program :: Data s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _program = a } :: Data s)
+        P.lens (_program :: Data s -> TF.Expr s [TF.Expr s P.Text])
+            (\s a -> s { _program = a } :: Data s)
 
-instance P.HasQuery (Data s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+instance P.HasQuery (Data s) (P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text)))) where
     query =
-        P.lens (_query :: Data s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _query = a } :: Data s)
+        P.lens (_query :: Data s -> P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text))))
+            (\s a -> s { _query = a } :: Data s)
 
-instance P.HasWorkingDir (Data s) (TF.Attr s P.Text) where
+instance P.HasWorkingDir (Data s) (P.Maybe (TF.Expr s P.Text)) where
     workingDir =
-        P.lens (_workingDir :: Data s -> TF.Attr s P.Text)
-               (\s a -> s { _workingDir = a } :: Data s)
+        P.lens (_workingDir :: Data s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _workingDir = a } :: Data s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (Data s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (Data s)) (TF.Expr s P.Text) where
+    computedId x =
+        TF.unsafeCompute TF.encodeAttr x "id"
 
-instance s ~ s' => P.HasComputedResult (TF.Ref s' (Data s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
-    computedResult x = TF.compute (TF.refKey x) "result"
+instance s ~ s' => P.HasComputedResult (TF.Ref s' (Data s)) (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text))) where
+    computedResult x =
+        TF.unsafeCompute TF.encodeAttr x "result"

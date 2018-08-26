@@ -1,7 +1,6 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -18,8 +17,9 @@
 module Terrafomo.OVH.Provider
     (
     -- * OVH Provider Datatype
-      Provider (..)
+      OVH (..)
     , newProvider
+    , defaultProvider
 
     -- * OVH Specific Aliases
     , DataSource
@@ -34,32 +34,27 @@ import GHC.Base (($))
 
 import Terrafomo.OVH.Settings
 
+import qualified Data.Hashable       as P
+import qualified Data.HashMap.Strict as P
 import qualified Data.List.NonEmpty  as P
-import qualified Data.Map.Strict     as P
-import qualified Data.Map.Strict     as Map
 import qualified Data.Maybe          as P
-import qualified Data.Monoid         as P
-import qualified Data.Text           as P
+import qualified Data.Text.Lazy      as P
 import qualified GHC.Generics        as P
 import qualified Lens.Micro          as P
 import qualified Prelude             as P
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.Lifecycle as TF
-import qualified Terrafomo.Name      as TF
 import qualified Terrafomo.OVH.Lens  as P
 import qualified Terrafomo.OVH.Types as P
-import qualified Terrafomo.Provider  as TF
 import qualified Terrafomo.Schema    as TF
-import qualified Terrafomo.Validator as TF
 
-type DataSource a = TF.Schema ()               Provider a
-type Resource   a = TF.Schema (TF.Lifecycle a) Provider a
+type DataSource a = TF.Resource OVH ()               a
+type Resource   a = TF.Resource OVH (TF.Lifecycle a) a
 
 -- | The @ovh@ Terraform provider configuration.
 --
 -- See the <https://www.terraform.io/docs/providers/ovh/index.html terraform documentation>
 -- for more information.
-data Provider = Provider'
+data OVH = OVH'
     { _applicationKey    :: P.Maybe P.Text
     -- ^ @application_key@ - (Optional)
     -- The OVH API Application Key.
@@ -76,50 +71,71 @@ data Provider = Provider'
     -- ^ @endpoint@ - (Required)
     -- The OVH API endpoint to target (ex: "ovh-eu").
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
+instance P.Hashable (OVH)
+
+-- | Specify a new OVH provider configuration.
 newProvider
-    :: P.Text -- ^ @endpoint@ ('P._endpoint', 'P.endpoint')
-    -> Provider
+    :: P.Text -- ^ Lens: 'P.endpoint', Field: '_endpoint', HCL: @endpoint@
+    -> OVH
 newProvider _endpoint =
-    Provider'
+    OVH'
         { _applicationKey = P.Nothing
         , _applicationSecret = P.Nothing
         , _consumerKey = P.Nothing
         , _endpoint = _endpoint
         }
 
-instance TF.IsProvider Provider where
-    type ProviderType Provider = "ovh"
+{- | The 'OVH' provider with absent configuration that is used
+to instantiate new 'Resource's and 'DataSource's. Provider configuration can be
+overridden on a per-resource basis by using the 'Terrafomo.provider' lens, the
+'newProvider' constructor, and any of the applicable lenses.
 
-instance TF.IsObject Provider where
-    toObject Provider'{..} =
-        P.catMaybes
-            [ TF.assign "application_key" <$> _applicationKey
-            , TF.assign "application_secret" <$> _applicationSecret
-            , TF.assign "consumer_key" <$> _consumerKey
-            , P.Just $ TF.assign "endpoint" _endpoint
-            ]
+For example:
 
-instance TF.IsValid (Provider) where
-    validator = P.mempty
+@
+import qualified Terrafomo as TF
+import qualified Terrafomo.OVH.Provider as OVH
 
-instance P.HasApplicationKey (Provider) (P.Maybe P.Text) where
+TF.newExampleResource "foo"
+    & TF.provider ?~
+          OVH.(newProvider
+              -- Required arguments
+              _endpoint -- (Required) 'P.Text'
+              -- Lenses
+              & OVH.applicationKey .~ Nothing -- 'P.Maybe P.Text'
+              & OVH.applicationSecret .~ Nothing -- 'P.Maybe P.Text'
+              & OVH.consumerKey .~ Nothing -- 'P.Maybe P.Text'
+              & OVH.endpoint .~ _endpoint -- 'P.Text'
+@
+-}
+defaultProvider :: TF.Provider OVH
+defaultProvider =
+    TF.defaultProvider "ovh" (P.Just "~> 0.3")
+        (\OVH'{..} -> P.mconcat
+            [ P.maybe P.mempty (TF.pair "application_key") _applicationKey
+            , P.maybe P.mempty (TF.pair "application_secret") _applicationSecret
+            , P.maybe P.mempty (TF.pair "consumer_key") _consumerKey
+            , TF.pair "endpoint" _endpoint
+            ])
+
+instance P.HasApplicationKey (OVH) (P.Maybe P.Text) where
     applicationKey =
-        P.lens (_applicationKey :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _applicationKey = a } :: Provider)
+        P.lens (_applicationKey :: OVH -> P.Maybe P.Text)
+            (\s a -> s { _applicationKey = a } :: OVH)
 
-instance P.HasApplicationSecret (Provider) (P.Maybe P.Text) where
+instance P.HasApplicationSecret (OVH) (P.Maybe P.Text) where
     applicationSecret =
-        P.lens (_applicationSecret :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _applicationSecret = a } :: Provider)
+        P.lens (_applicationSecret :: OVH -> P.Maybe P.Text)
+            (\s a -> s { _applicationSecret = a } :: OVH)
 
-instance P.HasConsumerKey (Provider) (P.Maybe P.Text) where
+instance P.HasConsumerKey (OVH) (P.Maybe P.Text) where
     consumerKey =
-        P.lens (_consumerKey :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _consumerKey = a } :: Provider)
+        P.lens (_consumerKey :: OVH -> P.Maybe P.Text)
+            (\s a -> s { _consumerKey = a } :: OVH)
 
-instance P.HasEndpoint (Provider) (P.Text) where
+instance P.HasEndpoint (OVH) (P.Text) where
     endpoint =
-        P.lens (_endpoint :: Provider -> P.Text)
-               (\s a -> s { _endpoint = a } :: Provider)
+        P.lens (_endpoint :: OVH -> P.Text)
+            (\s a -> s { _endpoint = a } :: OVH)

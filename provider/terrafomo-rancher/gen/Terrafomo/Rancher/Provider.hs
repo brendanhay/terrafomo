@@ -1,7 +1,6 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -18,8 +17,9 @@
 module Terrafomo.Rancher.Provider
     (
     -- * Rancher Provider Datatype
-      Provider (..)
+      Rancher (..)
     , newProvider
+    , defaultProvider
 
     -- * Rancher Specific Aliases
     , DataSource
@@ -34,32 +34,27 @@ import GHC.Base (($))
 
 import Terrafomo.Rancher.Settings
 
+import qualified Data.Hashable           as P
+import qualified Data.HashMap.Strict     as P
 import qualified Data.List.NonEmpty      as P
-import qualified Data.Map.Strict         as P
-import qualified Data.Map.Strict         as Map
 import qualified Data.Maybe              as P
-import qualified Data.Monoid             as P
-import qualified Data.Text               as P
+import qualified Data.Text.Lazy          as P
 import qualified GHC.Generics            as P
 import qualified Lens.Micro              as P
 import qualified Prelude                 as P
 import qualified Terrafomo.HCL           as TF
-import qualified Terrafomo.Lifecycle     as TF
-import qualified Terrafomo.Name          as TF
-import qualified Terrafomo.Provider      as TF
 import qualified Terrafomo.Rancher.Lens  as P
 import qualified Terrafomo.Rancher.Types as P
 import qualified Terrafomo.Schema        as TF
-import qualified Terrafomo.Validator     as TF
 
-type DataSource a = TF.Schema ()               Provider a
-type Resource   a = TF.Schema (TF.Lifecycle a) Provider a
+type DataSource a = TF.Resource Rancher ()               a
+type Resource   a = TF.Resource Rancher (TF.Lifecycle a) a
 
 -- | The @rancher@ Terraform provider configuration.
 --
 -- See the <https://www.terraform.io/docs/providers/rancher/index.html terraform documentation>
 -- for more information.
-data Provider = Provider'
+data Rancher = Rancher'
     { _accessKey :: P.Maybe P.Text
     -- ^ @access_key@ - (Optional)
     -- API Key used to authenticate with the rancher server
@@ -76,49 +71,68 @@ data Provider = Provider'
     -- ^ @secret_key@ - (Optional)
     -- API secret used to authenticate with the rancher server
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
+instance P.Hashable (Rancher)
+
+-- | Specify a new Rancher provider configuration.
 newProvider
-    :: Provider
+    :: Rancher
 newProvider =
-    Provider'
+    Rancher'
         { _accessKey = P.Nothing
         , _apiUrl = P.Nothing
         , _config = P.Nothing
         , _secretKey = P.Nothing
         }
 
-instance TF.IsProvider Provider where
-    type ProviderType Provider = "rancher"
+{- | The 'Rancher' provider with absent configuration that is used
+to instantiate new 'Resource's and 'DataSource's. Provider configuration can be
+overridden on a per-resource basis by using the 'Terrafomo.provider' lens, the
+'newProvider' constructor, and any of the applicable lenses.
 
-instance TF.IsObject Provider where
-    toObject Provider'{..} =
-        P.catMaybes
-            [ TF.assign "access_key" <$> _accessKey
-            , TF.assign "api_url" <$> _apiUrl
-            , TF.assign "config" <$> _config
-            , TF.assign "secret_key" <$> _secretKey
-            ]
+For example:
 
-instance TF.IsValid (Provider) where
-    validator = P.mempty
+@
+import qualified Terrafomo as TF
+import qualified Terrafomo.Rancher.Provider as Rancher
 
-instance P.HasAccessKey (Provider) (P.Maybe P.Text) where
+TF.newExampleResource "foo"
+    & TF.provider ?~
+          Rancher.(newProvider
+              -- Lenses
+              & Rancher.accessKey .~ Nothing -- 'P.Maybe P.Text'
+              & Rancher.apiUrl .~ Nothing -- 'P.Maybe P.Text'
+              & Rancher.config .~ Nothing -- 'P.Maybe P.Text'
+              & Rancher.secretKey .~ Nothing -- 'P.Maybe P.Text'
+@
+-}
+defaultProvider :: TF.Provider Rancher
+defaultProvider =
+    TF.defaultProvider "rancher" (P.Just "~> 1.2")
+        (\Rancher'{..} -> P.mconcat
+            [ P.maybe P.mempty (TF.pair "access_key") _accessKey
+            , P.maybe P.mempty (TF.pair "api_url") _apiUrl
+            , P.maybe P.mempty (TF.pair "config") _config
+            , P.maybe P.mempty (TF.pair "secret_key") _secretKey
+            ])
+
+instance P.HasAccessKey (Rancher) (P.Maybe P.Text) where
     accessKey =
-        P.lens (_accessKey :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _accessKey = a } :: Provider)
+        P.lens (_accessKey :: Rancher -> P.Maybe P.Text)
+            (\s a -> s { _accessKey = a } :: Rancher)
 
-instance P.HasApiUrl (Provider) (P.Maybe P.Text) where
+instance P.HasApiUrl (Rancher) (P.Maybe P.Text) where
     apiUrl =
-        P.lens (_apiUrl :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _apiUrl = a } :: Provider)
+        P.lens (_apiUrl :: Rancher -> P.Maybe P.Text)
+            (\s a -> s { _apiUrl = a } :: Rancher)
 
-instance P.HasConfig (Provider) (P.Maybe P.Text) where
+instance P.HasConfig (Rancher) (P.Maybe P.Text) where
     config =
-        P.lens (_config :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _config = a } :: Provider)
+        P.lens (_config :: Rancher -> P.Maybe P.Text)
+            (\s a -> s { _config = a } :: Rancher)
 
-instance P.HasSecretKey (Provider) (P.Maybe P.Text) where
+instance P.HasSecretKey (Rancher) (P.Maybe P.Text) where
     secretKey =
-        P.lens (_secretKey :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _secretKey = a } :: Provider)
+        P.lens (_secretKey :: Rancher -> P.Maybe P.Text)
+            (\s a -> s { _secretKey = a } :: Rancher)

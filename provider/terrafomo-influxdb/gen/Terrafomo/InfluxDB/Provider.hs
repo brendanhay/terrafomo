@@ -1,7 +1,6 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -18,8 +17,9 @@
 module Terrafomo.InfluxDB.Provider
     (
     -- * InfluxDB Provider Datatype
-      Provider (..)
+      InfluxDB (..)
     , newProvider
+    , defaultProvider
 
     -- * InfluxDB Specific Aliases
     , DataSource
@@ -34,32 +34,27 @@ import GHC.Base (($))
 
 import Terrafomo.InfluxDB.Settings
 
+import qualified Data.Hashable            as P
+import qualified Data.HashMap.Strict      as P
 import qualified Data.List.NonEmpty       as P
-import qualified Data.Map.Strict          as P
-import qualified Data.Map.Strict          as Map
 import qualified Data.Maybe               as P
-import qualified Data.Monoid              as P
-import qualified Data.Text                as P
+import qualified Data.Text.Lazy           as P
 import qualified GHC.Generics             as P
 import qualified Lens.Micro               as P
 import qualified Prelude                  as P
 import qualified Terrafomo.HCL            as TF
 import qualified Terrafomo.InfluxDB.Lens  as P
 import qualified Terrafomo.InfluxDB.Types as P
-import qualified Terrafomo.Lifecycle      as TF
-import qualified Terrafomo.Name           as TF
-import qualified Terrafomo.Provider       as TF
 import qualified Terrafomo.Schema         as TF
-import qualified Terrafomo.Validator      as TF
 
-type DataSource a = TF.Schema ()               Provider a
-type Resource   a = TF.Schema (TF.Lifecycle a) Provider a
+type DataSource a = TF.Resource InfluxDB ()               a
+type Resource   a = TF.Resource InfluxDB (TF.Lifecycle a) a
 
 -- | The @influxdb@ Terraform provider configuration.
 --
 -- See the <https://www.terraform.io/docs/providers/influxdb/index.html terraform documentation>
 -- for more information.
-data Provider = Provider'
+data InfluxDB = InfluxDB'
     { _password :: P.Maybe P.Text
     -- ^ @password@ - (Optional)
     --
@@ -69,42 +64,60 @@ data Provider = Provider'
     , _username :: P.Maybe P.Text
     -- ^ @username@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
+instance P.Hashable (InfluxDB)
+
+-- | Specify a new InfluxDB provider configuration.
 newProvider
-    :: Provider
+    :: InfluxDB
 newProvider =
-    Provider'
+    InfluxDB'
         { _password = P.Nothing
         , _url = P.Nothing
         , _username = P.Nothing
         }
 
-instance TF.IsProvider Provider where
-    type ProviderType Provider = "influxdb"
+{- | The 'InfluxDB' provider with absent configuration that is used
+to instantiate new 'Resource's and 'DataSource's. Provider configuration can be
+overridden on a per-resource basis by using the 'Terrafomo.provider' lens, the
+'newProvider' constructor, and any of the applicable lenses.
 
-instance TF.IsObject Provider where
-    toObject Provider'{..} =
-        P.catMaybes
-            [ TF.assign "password" <$> _password
-            , TF.assign "url" <$> _url
-            , TF.assign "username" <$> _username
-            ]
+For example:
 
-instance TF.IsValid (Provider) where
-    validator = P.mempty
+@
+import qualified Terrafomo as TF
+import qualified Terrafomo.InfluxDB.Provider as InfluxDB
 
-instance P.HasPassword (Provider) (P.Maybe P.Text) where
+TF.newExampleResource "foo"
+    & TF.provider ?~
+          InfluxDB.(newProvider
+              -- Lenses
+              & InfluxDB.password .~ Nothing -- 'P.Maybe P.Text'
+              & InfluxDB.url .~ Nothing -- 'P.Maybe P.Text'
+              & InfluxDB.username .~ Nothing -- 'P.Maybe P.Text'
+@
+-}
+defaultProvider :: TF.Provider InfluxDB
+defaultProvider =
+    TF.defaultProvider "influxdb" (P.Just "~> 1.0")
+        (\InfluxDB'{..} -> P.mconcat
+            [ P.maybe P.mempty (TF.pair "password") _password
+            , P.maybe P.mempty (TF.pair "url") _url
+            , P.maybe P.mempty (TF.pair "username") _username
+            ])
+
+instance P.HasPassword (InfluxDB) (P.Maybe P.Text) where
     password =
-        P.lens (_password :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _password = a } :: Provider)
+        P.lens (_password :: InfluxDB -> P.Maybe P.Text)
+            (\s a -> s { _password = a } :: InfluxDB)
 
-instance P.HasUrl (Provider) (P.Maybe P.Text) where
+instance P.HasUrl (InfluxDB) (P.Maybe P.Text) where
     url =
-        P.lens (_url :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _url = a } :: Provider)
+        P.lens (_url :: InfluxDB -> P.Maybe P.Text)
+            (\s a -> s { _url = a } :: InfluxDB)
 
-instance P.HasUsername (Provider) (P.Maybe P.Text) where
+instance P.HasUsername (InfluxDB) (P.Maybe P.Text) where
     username =
-        P.lens (_username :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _username = a } :: Provider)
+        P.lens (_username :: InfluxDB -> P.Maybe P.Text)
+            (\s a -> s { _username = a } :: InfluxDB)

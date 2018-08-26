@@ -20,16 +20,17 @@ module Terrafomo.HTTP.Arguments01
 import GHC.Base ((.))
 
 import qualified Lens.Micro       as P
+import qualified Terrafomo.Lens   as TF
 import qualified Terrafomo.Schema as TF
 
 class HasRequestHeaders a b | a -> b where
     requestHeaders :: P.Lens' a b
 
-instance HasRequestHeaders a b => HasRequestHeaders (TF.Schema l p a) b where
+instance HasRequestHeaders a b => HasRequestHeaders (TF.Resource l p a) b where
     requestHeaders = TF.configuration . requestHeaders
 
 class HasUrl a b | a -> b where
     url :: P.Lens' a b
 
-instance HasUrl a b => HasUrl (TF.Schema l p a) b where
+instance HasUrl a b => HasUrl (TF.Resource l p a) b where
     url = TF.configuration . url

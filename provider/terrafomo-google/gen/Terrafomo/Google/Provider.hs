@@ -1,7 +1,6 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -18,8 +17,9 @@
 module Terrafomo.Google.Provider
     (
     -- * Google Provider Datatype
-      Provider (..)
+      Google (..)
     , newProvider
+    , defaultProvider
 
     -- * Google Specific Aliases
     , DataSource
@@ -34,32 +34,27 @@ import GHC.Base (($))
 
 import Terrafomo.Google.Settings
 
+import qualified Data.Hashable          as P
+import qualified Data.HashMap.Strict    as P
 import qualified Data.List.NonEmpty     as P
-import qualified Data.Map.Strict        as P
-import qualified Data.Map.Strict        as Map
 import qualified Data.Maybe             as P
-import qualified Data.Monoid            as P
-import qualified Data.Text              as P
+import qualified Data.Text.Lazy         as P
 import qualified GHC.Generics           as P
 import qualified Lens.Micro             as P
 import qualified Prelude                as P
 import qualified Terrafomo.Google.Lens  as P
 import qualified Terrafomo.Google.Types as P
 import qualified Terrafomo.HCL          as TF
-import qualified Terrafomo.Lifecycle    as TF
-import qualified Terrafomo.Name         as TF
-import qualified Terrafomo.Provider     as TF
 import qualified Terrafomo.Schema       as TF
-import qualified Terrafomo.Validator    as TF
 
-type DataSource a = TF.Schema ()               Provider a
-type Resource   a = TF.Schema (TF.Lifecycle a) Provider a
+type DataSource a = TF.Resource Google ()               a
+type Resource   a = TF.Resource Google (TF.Lifecycle a) a
 
 -- | The @google@ Terraform provider configuration.
 --
 -- See the <https://www.terraform.io/docs/providers/google/index.html terraform documentation>
 -- for more information.
-data Provider = Provider'
+data Google = Google'
     { _credentials :: P.Maybe P.Text
     -- ^ @credentials@ - (Optional)
     --
@@ -72,49 +67,68 @@ data Provider = Provider'
     , _zone        :: P.Maybe P.Text
     -- ^ @zone@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
+instance P.Hashable (Google)
+
+-- | Specify a new Google provider configuration.
 newProvider
-    :: Provider
+    :: Google
 newProvider =
-    Provider'
+    Google'
         { _credentials = P.Nothing
         , _project = P.Nothing
         , _region = P.Nothing
         , _zone = P.Nothing
         }
 
-instance TF.IsProvider Provider where
-    type ProviderType Provider = "google"
+{- | The 'Google' provider with absent configuration that is used
+to instantiate new 'Resource's and 'DataSource's. Provider configuration can be
+overridden on a per-resource basis by using the 'Terrafomo.provider' lens, the
+'newProvider' constructor, and any of the applicable lenses.
 
-instance TF.IsObject Provider where
-    toObject Provider'{..} =
-        P.catMaybes
-            [ TF.assign "credentials" <$> _credentials
-            , TF.assign "project" <$> _project
-            , TF.assign "region" <$> _region
-            , TF.assign "zone" <$> _zone
-            ]
+For example:
 
-instance TF.IsValid (Provider) where
-    validator = P.mempty
+@
+import qualified Terrafomo as TF
+import qualified Terrafomo.Google.Provider as Google
 
-instance P.HasCredentials (Provider) (P.Maybe P.Text) where
+TF.newExampleResource "foo"
+    & TF.provider ?~
+          Google.(newProvider
+              -- Lenses
+              & Google.credentials .~ Nothing -- 'P.Maybe P.Text'
+              & Google.project .~ Nothing -- 'P.Maybe P.Text'
+              & Google.region .~ Nothing -- 'P.Maybe P.Text'
+              & Google.zone .~ Nothing -- 'P.Maybe P.Text'
+@
+-}
+defaultProvider :: TF.Provider Google
+defaultProvider =
+    TF.defaultProvider "google" (P.Just "~> 1.16")
+        (\Google'{..} -> P.mconcat
+            [ P.maybe P.mempty (TF.pair "credentials") _credentials
+            , P.maybe P.mempty (TF.pair "project") _project
+            , P.maybe P.mempty (TF.pair "region") _region
+            , P.maybe P.mempty (TF.pair "zone") _zone
+            ])
+
+instance P.HasCredentials (Google) (P.Maybe P.Text) where
     credentials =
-        P.lens (_credentials :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _credentials = a } :: Provider)
+        P.lens (_credentials :: Google -> P.Maybe P.Text)
+            (\s a -> s { _credentials = a } :: Google)
 
-instance P.HasProject (Provider) (P.Maybe P.Text) where
+instance P.HasProject (Google) (P.Maybe P.Text) where
     project =
-        P.lens (_project :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _project = a } :: Provider)
+        P.lens (_project :: Google -> P.Maybe P.Text)
+            (\s a -> s { _project = a } :: Google)
 
-instance P.HasRegion (Provider) (P.Maybe P.Text) where
+instance P.HasRegion (Google) (P.Maybe P.Text) where
     region =
-        P.lens (_region :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _region = a } :: Provider)
+        P.lens (_region :: Google -> P.Maybe P.Text)
+            (\s a -> s { _region = a } :: Google)
 
-instance P.HasZone (Provider) (P.Maybe P.Text) where
+instance P.HasZone (Google) (P.Maybe P.Text) where
     zone =
-        P.lens (_zone :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _zone = a } :: Provider)
+        P.lens (_zone :: Google -> P.Maybe P.Text)
+            (\s a -> s { _zone = a } :: Google)

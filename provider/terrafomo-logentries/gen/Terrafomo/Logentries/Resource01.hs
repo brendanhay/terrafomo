@@ -1,7 +1,6 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -33,156 +32,159 @@ import GHC.Base (($))
 
 import Terrafomo.Logentries.Settings
 
+import qualified Data.Hashable                 as P
+import qualified Data.HashMap.Strict           as P
+import qualified Data.HashMap.Strict           as HashMap
 import qualified Data.List.NonEmpty            as P
-import qualified Data.Map.Strict               as P
-import qualified Data.Map.Strict               as Map
 import qualified Data.Maybe                    as P
-import qualified Data.Monoid                   as P
-import qualified Data.Text                     as P
+import qualified Data.Text.Lazy                as P
 import qualified GHC.Generics                  as P
 import qualified Lens.Micro                    as P
 import qualified Prelude                       as P
-import qualified Terrafomo.Attribute           as TF
+import qualified Terrafomo.Encode              as TF
 import qualified Terrafomo.HCL                 as TF
+import qualified Terrafomo.HIL                 as TF
 import qualified Terrafomo.Logentries.Lens     as P
 import qualified Terrafomo.Logentries.Provider as P
 import qualified Terrafomo.Logentries.Types    as P
-import qualified Terrafomo.Name                as TF
 import qualified Terrafomo.Schema              as TF
-import qualified Terrafomo.Validator           as TF
+import qualified Terrafomo.Validate            as TF
 
 -- | @logentries_log@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/logentries/r/log.html terraform documentation>
 -- for more information.
 data LogResource s = LogResource'
-    { _filename        :: TF.Attr s P.Text
+    { _filename        :: P.Maybe (TF.Expr s P.Text)
     -- ^ @filename@ - (Optional)
     --
-    , _logsetId        :: TF.Attr s P.Text
+    , _logsetId        :: TF.Expr s P.Text
     -- ^ @logset_id@ - (Required, Forces New)
     --
-    , _name            :: TF.Attr s P.Text
+    , _name            :: TF.Expr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _retentionPeriod :: TF.Attr s P.Text
-    -- ^ @retention_period@ - (Optional)
+    , _retentionPeriod :: TF.Expr s P.Text
+    -- ^ @retention_period@ - (Default @ACCOUNT_DEFAULT@)
     --
-    , _source          :: TF.Attr s P.Text
-    -- ^ @source@ - (Optional)
+    , _source          :: TF.Expr s P.Text
+    -- ^ @source@ - (Default @token@)
     --
-    , _type'           :: TF.Attr s P.Text
+    , _type'           :: P.Maybe (TF.Expr s P.Text)
     -- ^ @type@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Define a new @logentries_log@ resource value.
 logResource
-    :: TF.Attr s P.Text -- ^ @logset_id@ ('P._logsetId', 'P.logsetId')
-    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    :: TF.Expr s P.Text -- ^ Lens: 'P.logsetId', Field: '_logsetId', HCL: @logset_id@
+    -> TF.Expr s P.Text -- ^ Lens: 'P.name', Field: '_name', HCL: @name@
     -> P.Resource (LogResource s)
 logResource _logsetId _name =
-    TF.unsafeResource "logentries_log" TF.validator $
-        LogResource'
-            { _filename = TF.Nil
+    TF.unsafeResource "logentries_log" P.defaultProvider  TF.encodeLifecycle
+        (\LogResource'{..} -> P.mconcat
+            [ P.maybe P.mempty (TF.pair "filename") _filename
+            , TF.pair "logset_id" _logsetId
+            , TF.pair "name" _name
+            , TF.pair "retention_period" _retentionPeriod
+            , TF.pair "source" _source
+            , P.maybe P.mempty (TF.pair "type") _type'
+            ])
+        (LogResource'
+            { _filename = P.Nothing
             , _logsetId = _logsetId
             , _name = _name
             , _retentionPeriod = TF.value "ACCOUNT_DEFAULT"
             , _source = TF.value "token"
-            , _type' = TF.Nil
-            }
+            , _type' = P.Nothing
+            })
 
-instance TF.IsObject (LogResource s) where
-    toObject LogResource'{..} = P.catMaybes
-        [ TF.assign "filename" <$> TF.attribute _filename
-        , TF.assign "logset_id" <$> TF.attribute _logsetId
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "retention_period" <$> TF.attribute _retentionPeriod
-        , TF.assign "source" <$> TF.attribute _source
-        , TF.assign "type" <$> TF.attribute _type'
-        ]
+instance P.Hashable (LogResource s)
 
-instance TF.IsValid (LogResource s) where
+instance TF.HasValidator (LogResource s) where
     validator = P.mempty
 
-instance P.HasFilename (LogResource s) (TF.Attr s P.Text) where
+instance P.HasFilename (LogResource s) (P.Maybe (TF.Expr s P.Text)) where
     filename =
-        P.lens (_filename :: LogResource s -> TF.Attr s P.Text)
-               (\s a -> s { _filename = a } :: LogResource s)
+        P.lens (_filename :: LogResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _filename = a } :: LogResource s)
 
-instance P.HasLogsetId (LogResource s) (TF.Attr s P.Text) where
+instance P.HasLogsetId (LogResource s) (TF.Expr s P.Text) where
     logsetId =
-        P.lens (_logsetId :: LogResource s -> TF.Attr s P.Text)
-               (\s a -> s { _logsetId = a } :: LogResource s)
+        P.lens (_logsetId :: LogResource s -> TF.Expr s P.Text)
+            (\s a -> s { _logsetId = a } :: LogResource s)
 
-instance P.HasName (LogResource s) (TF.Attr s P.Text) where
+instance P.HasName (LogResource s) (TF.Expr s P.Text) where
     name =
-        P.lens (_name :: LogResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: LogResource s)
+        P.lens (_name :: LogResource s -> TF.Expr s P.Text)
+            (\s a -> s { _name = a } :: LogResource s)
 
-instance P.HasRetentionPeriod (LogResource s) (TF.Attr s P.Text) where
+instance P.HasRetentionPeriod (LogResource s) (TF.Expr s P.Text) where
     retentionPeriod =
-        P.lens (_retentionPeriod :: LogResource s -> TF.Attr s P.Text)
-               (\s a -> s { _retentionPeriod = a } :: LogResource s)
+        P.lens (_retentionPeriod :: LogResource s -> TF.Expr s P.Text)
+            (\s a -> s { _retentionPeriod = a } :: LogResource s)
 
-instance P.HasSource (LogResource s) (TF.Attr s P.Text) where
+instance P.HasSource (LogResource s) (TF.Expr s P.Text) where
     source =
-        P.lens (_source :: LogResource s -> TF.Attr s P.Text)
-               (\s a -> s { _source = a } :: LogResource s)
+        P.lens (_source :: LogResource s -> TF.Expr s P.Text)
+            (\s a -> s { _source = a } :: LogResource s)
 
-instance P.HasType' (LogResource s) (TF.Attr s P.Text) where
+instance P.HasType' (LogResource s) (P.Maybe (TF.Expr s P.Text)) where
     type' =
-        P.lens (_type' :: LogResource s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a } :: LogResource s)
+        P.lens (_type' :: LogResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _type' = a } :: LogResource s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (LogResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (LogResource s)) (TF.Expr s P.Text) where
+    computedId x =
+        TF.unsafeCompute TF.encodeAttr x "id"
 
-instance s ~ s' => P.HasComputedToken (TF.Ref s' (LogResource s)) (TF.Attr s P.Text) where
-    computedToken x = TF.compute (TF.refKey x) "token"
+instance s ~ s' => P.HasComputedToken (TF.Ref s' (LogResource s)) (TF.Expr s P.Text) where
+    computedToken x =
+        TF.unsafeCompute TF.encodeAttr x "token"
 
 -- | @logentries_logset@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/logentries/r/logset.html terraform documentation>
 -- for more information.
 data LogsetResource s = LogsetResource'
-    { _location :: TF.Attr s P.Text
-    -- ^ @location@ - (Optional)
+    { _location :: TF.Expr s P.Text
+    -- ^ @location@ - (Default @nonlocation@)
     --
-    , _name     :: TF.Attr s P.Text
+    , _name     :: TF.Expr s P.Text
     -- ^ @name@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Define a new @logentries_logset@ resource value.
 logsetResource
-    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    :: TF.Expr s P.Text -- ^ Lens: 'P.name', Field: '_name', HCL: @name@
     -> P.Resource (LogsetResource s)
 logsetResource _name =
-    TF.unsafeResource "logentries_logset" TF.validator $
-        LogsetResource'
+    TF.unsafeResource "logentries_logset" P.defaultProvider  TF.encodeLifecycle
+        (\LogsetResource'{..} -> P.mconcat
+            [ TF.pair "location" _location
+            , TF.pair "name" _name
+            ])
+        (LogsetResource'
             { _location = TF.value "nonlocation"
             , _name = _name
-            }
+            })
 
-instance TF.IsObject (LogsetResource s) where
-    toObject LogsetResource'{..} = P.catMaybes
-        [ TF.assign "location" <$> TF.attribute _location
-        , TF.assign "name" <$> TF.attribute _name
-        ]
+instance P.Hashable (LogsetResource s)
 
-instance TF.IsValid (LogsetResource s) where
+instance TF.HasValidator (LogsetResource s) where
     validator = P.mempty
 
-instance P.HasLocation (LogsetResource s) (TF.Attr s P.Text) where
+instance P.HasLocation (LogsetResource s) (TF.Expr s P.Text) where
     location =
-        P.lens (_location :: LogsetResource s -> TF.Attr s P.Text)
-               (\s a -> s { _location = a } :: LogsetResource s)
+        P.lens (_location :: LogsetResource s -> TF.Expr s P.Text)
+            (\s a -> s { _location = a } :: LogsetResource s)
 
-instance P.HasName (LogsetResource s) (TF.Attr s P.Text) where
+instance P.HasName (LogsetResource s) (TF.Expr s P.Text) where
     name =
-        P.lens (_name :: LogsetResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: LogsetResource s)
+        P.lens (_name :: LogsetResource s -> TF.Expr s P.Text)
+            (\s a -> s { _name = a } :: LogsetResource s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (LogsetResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (LogsetResource s)) (TF.Expr s P.Text) where
+    computedId x =
+        TF.unsafeCompute TF.encodeAttr x "id"

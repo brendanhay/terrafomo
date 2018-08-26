@@ -1,7 +1,6 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -33,116 +32,116 @@ import GHC.Base (($))
 
 import Terrafomo.Kubernetes.Settings
 
+import qualified Data.Hashable                 as P
+import qualified Data.HashMap.Strict           as P
+import qualified Data.HashMap.Strict           as HashMap
 import qualified Data.List.NonEmpty            as P
-import qualified Data.Map.Strict               as P
-import qualified Data.Map.Strict               as Map
 import qualified Data.Maybe                    as P
-import qualified Data.Monoid                   as P
-import qualified Data.Text                     as P
+import qualified Data.Text.Lazy                as P
 import qualified GHC.Generics                  as P
 import qualified Lens.Micro                    as P
 import qualified Prelude                       as P
-import qualified Terrafomo.Attribute           as TF
+import qualified Terrafomo.Encode              as TF
 import qualified Terrafomo.HCL                 as TF
+import qualified Terrafomo.HIL                 as TF
 import qualified Terrafomo.Kubernetes.Lens     as P
 import qualified Terrafomo.Kubernetes.Provider as P
 import qualified Terrafomo.Kubernetes.Types    as P
-import qualified Terrafomo.Name                as TF
 import qualified Terrafomo.Schema              as TF
-import qualified Terrafomo.Validator           as TF
+import qualified Terrafomo.Validate            as TF
 
 -- | @kubernetes_service@ DataSource.
 --
 -- See the <https://www.terraform.io/docs/providers/kubernetes/d/service.html terraform documentation>
 -- for more information.
 data ServiceData s = ServiceData'
-    { _metadata :: TF.Attr s (ServiceMetadata s)
+    { _metadata :: TF.Expr s (ServiceMetadata s)
     -- ^ @metadata@ - (Required)
     -- Standard service's metadata. More info:
     -- https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Define a new @kubernetes_service@ datasource value.
 serviceData
-    :: TF.Attr s (ServiceMetadata s) -- ^ @metadata@ ('P._metadata', 'P.metadata')
+    :: TF.Expr s (ServiceMetadata s) -- ^ Lens: 'P.metadata', Field: '_metadata', HCL: @metadata@
     -> P.DataSource (ServiceData s)
 serviceData _metadata =
-    TF.unsafeDataSource "kubernetes_service" TF.validator $
-        ServiceData'
+    TF.unsafeDataSource "kubernetes_service" P.defaultProvider
+        (\ServiceData'{..} -> P.mconcat
+            [ TF.pair "metadata" _metadata
+            ])
+        (ServiceData'
             { _metadata = _metadata
-            }
+            })
 
-instance TF.IsObject (ServiceData s) where
-    toObject ServiceData'{..} = P.catMaybes
-        [ TF.assign "metadata" <$> TF.attribute _metadata
-        ]
+instance P.Hashable (ServiceData s)
 
-instance TF.IsValid (ServiceData s) where
+instance TF.HasValidator (ServiceData s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_metadata"
-                  (_metadata
-                      :: ServiceData s -> TF.Attr s (ServiceMetadata s))
-                  TF.validator
+           P.<> TF.fieldValidator "_metadata" (_metadata :: ServiceData s -> TF.Expr s (ServiceMetadata s))
 
-instance P.HasMetadata (ServiceData s) (TF.Attr s (ServiceMetadata s)) where
+instance P.HasMetadata (ServiceData s) (TF.Expr s (ServiceMetadata s)) where
     metadata =
-        P.lens (_metadata :: ServiceData s -> TF.Attr s (ServiceMetadata s))
-               (\s a -> s { _metadata = a } :: ServiceData s)
+        P.lens (_metadata :: ServiceData s -> TF.Expr s (ServiceMetadata s))
+            (\s a -> s { _metadata = a } :: ServiceData s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (ServiceData s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ServiceData s)) (TF.Expr s P.Text) where
+    computedId x =
+        TF.unsafeCompute TF.encodeAttr x "id"
 
-instance s ~ s' => P.HasComputedLoadBalancerIngress (TF.Ref s' (ServiceData s)) (TF.Attr s [TF.Attr s (ServiceLoadBalancerIngress s)]) where
-    computedLoadBalancerIngress x = TF.compute (TF.refKey x) "load_balancer_ingress"
+instance s ~ s' => P.HasComputedLoadBalancerIngress (TF.Ref s' (ServiceData s)) (TF.Expr s [TF.Expr s (ServiceLoadBalancerIngress s)]) where
+    computedLoadBalancerIngress x =
+        TF.unsafeCompute TF.encodeAttr x "load_balancer_ingress"
 
-instance s ~ s' => P.HasComputedSpec (TF.Ref s' (ServiceData s)) (TF.Attr s (ServiceSpec s)) where
-    computedSpec x = TF.compute (TF.refKey x) "spec"
+instance s ~ s' => P.HasComputedSpec (TF.Ref s' (ServiceData s)) (TF.Expr s (ServiceSpec s)) where
+    computedSpec x =
+        TF.unsafeCompute TF.encodeAttr x "spec"
 
 -- | @kubernetes_storage_class@ DataSource.
 --
 -- See the <https://www.terraform.io/docs/providers/kubernetes/d/storage_class.html terraform documentation>
 -- for more information.
 data StorageClassData s = StorageClassData'
-    { _metadata :: TF.Attr s (StorageClassMetadata s)
+    { _metadata :: TF.Expr s (StorageClassMetadata s)
     -- ^ @metadata@ - (Required)
     -- Standard storage class's metadata. More info:
     -- https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Define a new @kubernetes_storage_class@ datasource value.
 storageClassData
-    :: TF.Attr s (StorageClassMetadata s) -- ^ @metadata@ ('P._metadata', 'P.metadata')
+    :: TF.Expr s (StorageClassMetadata s) -- ^ Lens: 'P.metadata', Field: '_metadata', HCL: @metadata@
     -> P.DataSource (StorageClassData s)
 storageClassData _metadata =
-    TF.unsafeDataSource "kubernetes_storage_class" TF.validator $
-        StorageClassData'
+    TF.unsafeDataSource "kubernetes_storage_class" P.defaultProvider
+        (\StorageClassData'{..} -> P.mconcat
+            [ TF.pair "metadata" _metadata
+            ])
+        (StorageClassData'
             { _metadata = _metadata
-            }
+            })
 
-instance TF.IsObject (StorageClassData s) where
-    toObject StorageClassData'{..} = P.catMaybes
-        [ TF.assign "metadata" <$> TF.attribute _metadata
-        ]
+instance P.Hashable (StorageClassData s)
 
-instance TF.IsValid (StorageClassData s) where
+instance TF.HasValidator (StorageClassData s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_metadata"
-                  (_metadata
-                      :: StorageClassData s -> TF.Attr s (StorageClassMetadata s))
-                  TF.validator
+           P.<> TF.fieldValidator "_metadata" (_metadata :: StorageClassData s -> TF.Expr s (StorageClassMetadata s))
 
-instance P.HasMetadata (StorageClassData s) (TF.Attr s (StorageClassMetadata s)) where
+instance P.HasMetadata (StorageClassData s) (TF.Expr s (StorageClassMetadata s)) where
     metadata =
-        P.lens (_metadata :: StorageClassData s -> TF.Attr s (StorageClassMetadata s))
-               (\s a -> s { _metadata = a } :: StorageClassData s)
+        P.lens (_metadata :: StorageClassData s -> TF.Expr s (StorageClassMetadata s))
+            (\s a -> s { _metadata = a } :: StorageClassData s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (StorageClassData s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (StorageClassData s)) (TF.Expr s P.Text) where
+    computedId x =
+        TF.unsafeCompute TF.encodeAttr x "id"
 
-instance s ~ s' => P.HasComputedParameters (TF.Ref s' (StorageClassData s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
-    computedParameters x = TF.compute (TF.refKey x) "parameters"
+instance s ~ s' => P.HasComputedParameters (TF.Ref s' (StorageClassData s)) (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text))) where
+    computedParameters x =
+        TF.unsafeCompute TF.encodeAttr x "parameters"
 
-instance s ~ s' => P.HasComputedStorageProvisioner (TF.Ref s' (StorageClassData s)) (TF.Attr s P.Text) where
-    computedStorageProvisioner x = TF.compute (TF.refKey x) "storage_provisioner"
+instance s ~ s' => P.HasComputedStorageProvisioner (TF.Ref s' (StorageClassData s)) (TF.Expr s P.Text) where
+    computedStorageProvisioner x =
+        TF.unsafeCompute TF.encodeAttr x "storage_provisioner"

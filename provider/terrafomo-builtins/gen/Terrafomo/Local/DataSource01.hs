@@ -1,7 +1,6 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -29,60 +28,62 @@ import GHC.Base (($))
 
 import Terrafomo.Local.Settings
 
+import qualified Data.Hashable            as P
+import qualified Data.HashMap.Strict      as P
+import qualified Data.HashMap.Strict      as HashMap
 import qualified Data.List.NonEmpty       as P
-import qualified Data.Map.Strict          as P
-import qualified Data.Map.Strict          as Map
 import qualified Data.Maybe               as P
-import qualified Data.Monoid              as P
-import qualified Data.Text                as P
+import qualified Data.Text.Lazy           as P
 import qualified GHC.Generics             as P
 import qualified Lens.Micro               as P
 import qualified Prelude                  as P
-import qualified Terrafomo.Attribute      as TF
+import qualified Terrafomo.Encode         as TF
 import qualified Terrafomo.HCL            as TF
+import qualified Terrafomo.HIL            as TF
 import qualified Terrafomo.Local.Lens     as P
 import qualified Terrafomo.Local.Provider as P
 import qualified Terrafomo.Local.Types    as P
-import qualified Terrafomo.Name           as TF
 import qualified Terrafomo.Schema         as TF
-import qualified Terrafomo.Validator      as TF
+import qualified Terrafomo.Validate       as TF
 
 -- | @local_file@ DataSource.
 --
 -- See the <https://www.terraform.io/docs/providers/local/d/file.html terraform documentation>
 -- for more information.
 data FileData s = FileData'
-    { _filename :: TF.Attr s P.Text
+    { _filename :: TF.Expr s P.Text
     -- ^ @filename@ - (Required, Forces New)
     -- Path to the output file
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Define a new @local_file@ datasource value.
 fileData
-    :: TF.Attr s P.Text -- ^ @filename@ ('P._filename', 'P.filename')
+    :: TF.Expr s P.Text -- ^ Lens: 'P.filename', Field: '_filename', HCL: @filename@
     -> P.DataSource (FileData s)
 fileData _filename =
-    TF.unsafeDataSource "local_file" TF.validator $
-        FileData'
+    TF.unsafeDataSource "local_file" P.defaultProvider
+        (\FileData'{..} -> P.mconcat
+            [ TF.pair "filename" _filename
+            ])
+        (FileData'
             { _filename = _filename
-            }
+            })
 
-instance TF.IsObject (FileData s) where
-    toObject FileData'{..} = P.catMaybes
-        [ TF.assign "filename" <$> TF.attribute _filename
-        ]
+instance P.Hashable (FileData s)
 
-instance TF.IsValid (FileData s) where
+instance TF.HasValidator (FileData s) where
     validator = P.mempty
 
-instance P.HasFilename (FileData s) (TF.Attr s P.Text) where
+instance P.HasFilename (FileData s) (TF.Expr s P.Text) where
     filename =
-        P.lens (_filename :: FileData s -> TF.Attr s P.Text)
-               (\s a -> s { _filename = a } :: FileData s)
+        P.lens (_filename :: FileData s -> TF.Expr s P.Text)
+            (\s a -> s { _filename = a } :: FileData s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (FileData s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (FileData s)) (TF.Expr s P.Text) where
+    computedId x =
+        TF.unsafeCompute TF.encodeAttr x "id"
 
-instance s ~ s' => P.HasComputedContent (TF.Ref s' (FileData s)) (TF.Attr s P.Text) where
-    computedContent x = TF.compute (TF.refKey x) "content"
+instance s ~ s' => P.HasComputedContent (TF.Ref s' (FileData s)) (TF.Expr s P.Text) where
+    computedContent x =
+        TF.unsafeCompute TF.encodeAttr x "content"

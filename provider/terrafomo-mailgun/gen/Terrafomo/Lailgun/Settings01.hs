@@ -1,7 +1,6 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -31,26 +30,26 @@ import Data.Functor ((<$>))
 
 import GHC.Base (($))
 
-
+import qualified Data.Hashable           as P
+import qualified Data.HashMap.Strict     as P
+import qualified Data.HashMap.Strict     as HashMap
 import qualified Data.List.NonEmpty      as P
-import qualified Data.Map.Strict         as P
-import qualified Data.Map.Strict         as Map
 import qualified Data.Maybe              as P
-import qualified Data.Monoid             as P
-import qualified Data.Text               as P
+import qualified Data.Text.Lazy          as P
 import qualified GHC.Generics            as P
 import qualified Lens.Micro              as P
 import qualified Prelude                 as P
-import qualified Terrafomo.Attribute     as TF
+import qualified Terrafomo.Encode        as TF
 import qualified Terrafomo.HCL           as TF
+import qualified Terrafomo.HIL           as TF
 import qualified Terrafomo.Lailgun.Lens  as P
 import qualified Terrafomo.Lailgun.Types as P
-import qualified Terrafomo.Name          as TF
-import qualified Terrafomo.Validator     as TF
+import qualified Terrafomo.Schema        as TF
+import qualified Terrafomo.Validate      as TF
 
 -- | @receiving_records@ nested settings.
 data DomainReceivingRecords s = DomainReceivingRecords'
-    deriving (P.Show, P.Eq, P.Ord)
+    deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @receiving_records@ settings value.
 newDomainReceivingRecords
@@ -58,28 +57,32 @@ newDomainReceivingRecords
 newDomainReceivingRecords =
     DomainReceivingRecords'
 
-instance TF.IsValue  (DomainReceivingRecords s)
-instance TF.IsObject (DomainReceivingRecords s) where
-    toObject DomainReceivingRecords' = []
+instance TF.ToHCL (DomainReceivingRecords s) where
+    toHCL DomainReceivingRecords' = P.mempty
 
-instance TF.IsValid (DomainReceivingRecords s) where
-    validator = P.mempty
+instance P.Hashable (DomainReceivingRecords s)
 
-instance s ~ s' => P.HasComputedPriority (TF.Ref s' (DomainReceivingRecords s)) (TF.Attr s P.Text) where
-    computedPriority x = TF.compute (TF.refKey x) "priority"
+instance TF.HasValidator (DomainReceivingRecords s)
 
-instance s ~ s' => P.HasComputedRecordType (TF.Ref s' (DomainReceivingRecords s)) (TF.Attr s P.Text) where
-    computedRecordType x = TF.compute (TF.refKey x) "record_type"
+instance s ~ s' => P.HasComputedPriority (TF.Ref s' (DomainReceivingRecords s)) (TF.Expr s P.Text) where
+    computedPriority x =
+        TF.unsafeCompute TF.encodeAttr x "priority"
 
-instance s ~ s' => P.HasComputedValid (TF.Ref s' (DomainReceivingRecords s)) (TF.Attr s P.Text) where
-    computedValid x = TF.compute (TF.refKey x) "valid"
+instance s ~ s' => P.HasComputedRecordType (TF.Ref s' (DomainReceivingRecords s)) (TF.Expr s P.Text) where
+    computedRecordType x =
+        TF.unsafeCompute TF.encodeAttr x "record_type"
 
-instance s ~ s' => P.HasComputedValue (TF.Ref s' (DomainReceivingRecords s)) (TF.Attr s P.Text) where
-    computedValue x = TF.compute (TF.refKey x) "value"
+instance s ~ s' => P.HasComputedValid (TF.Ref s' (DomainReceivingRecords s)) (TF.Expr s P.Text) where
+    computedValid x =
+        TF.unsafeCompute TF.encodeAttr x "valid"
+
+instance s ~ s' => P.HasComputedValue (TF.Ref s' (DomainReceivingRecords s)) (TF.Expr s P.Text) where
+    computedValue x =
+        TF.unsafeCompute TF.encodeAttr x "value"
 
 -- | @sending_records@ nested settings.
 data DomainSendingRecords s = DomainSendingRecords'
-    deriving (P.Show, P.Eq, P.Ord)
+    deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @sending_records@ settings value.
 newDomainSendingRecords
@@ -87,21 +90,25 @@ newDomainSendingRecords
 newDomainSendingRecords =
     DomainSendingRecords'
 
-instance TF.IsValue  (DomainSendingRecords s)
-instance TF.IsObject (DomainSendingRecords s) where
-    toObject DomainSendingRecords' = []
+instance TF.ToHCL (DomainSendingRecords s) where
+    toHCL DomainSendingRecords' = P.mempty
 
-instance TF.IsValid (DomainSendingRecords s) where
-    validator = P.mempty
+instance P.Hashable (DomainSendingRecords s)
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (DomainSendingRecords s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+instance TF.HasValidator (DomainSendingRecords s)
 
-instance s ~ s' => P.HasComputedRecordType (TF.Ref s' (DomainSendingRecords s)) (TF.Attr s P.Text) where
-    computedRecordType x = TF.compute (TF.refKey x) "record_type"
+instance s ~ s' => P.HasComputedName (TF.Ref s' (DomainSendingRecords s)) (TF.Expr s P.Text) where
+    computedName x =
+        TF.unsafeCompute TF.encodeAttr x "name"
 
-instance s ~ s' => P.HasComputedValid (TF.Ref s' (DomainSendingRecords s)) (TF.Attr s P.Text) where
-    computedValid x = TF.compute (TF.refKey x) "valid"
+instance s ~ s' => P.HasComputedRecordType (TF.Ref s' (DomainSendingRecords s)) (TF.Expr s P.Text) where
+    computedRecordType x =
+        TF.unsafeCompute TF.encodeAttr x "record_type"
 
-instance s ~ s' => P.HasComputedValue (TF.Ref s' (DomainSendingRecords s)) (TF.Attr s P.Text) where
-    computedValue x = TF.compute (TF.refKey x) "value"
+instance s ~ s' => P.HasComputedValid (TF.Ref s' (DomainSendingRecords s)) (TF.Expr s P.Text) where
+    computedValid x =
+        TF.unsafeCompute TF.encodeAttr x "valid"
+
+instance s ~ s' => P.HasComputedValue (TF.Ref s' (DomainSendingRecords s)) (TF.Expr s P.Text) where
+    computedValue x =
+        TF.unsafeCompute TF.encodeAttr x "value"

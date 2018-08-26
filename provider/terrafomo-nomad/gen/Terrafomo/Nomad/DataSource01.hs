@@ -1,7 +1,6 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -29,46 +28,47 @@ import GHC.Base (($))
 
 import Terrafomo.Nomad.Settings
 
+import qualified Data.Hashable            as P
+import qualified Data.HashMap.Strict      as P
+import qualified Data.HashMap.Strict      as HashMap
 import qualified Data.List.NonEmpty       as P
-import qualified Data.Map.Strict          as P
-import qualified Data.Map.Strict          as Map
 import qualified Data.Maybe               as P
-import qualified Data.Monoid              as P
-import qualified Data.Text                as P
+import qualified Data.Text.Lazy           as P
 import qualified GHC.Generics             as P
 import qualified Lens.Micro               as P
 import qualified Prelude                  as P
-import qualified Terrafomo.Attribute      as TF
+import qualified Terrafomo.Encode         as TF
 import qualified Terrafomo.HCL            as TF
-import qualified Terrafomo.Name           as TF
+import qualified Terrafomo.HIL            as TF
 import qualified Terrafomo.Nomad.Lens     as P
 import qualified Terrafomo.Nomad.Provider as P
 import qualified Terrafomo.Nomad.Types    as P
 import qualified Terrafomo.Schema         as TF
-import qualified Terrafomo.Validator      as TF
+import qualified Terrafomo.Validate       as TF
 
 -- | @nomad_regions@ DataSource.
 --
 -- See the <https://www.terraform.io/docs/providers/nomad/d/regions.html terraform documentation>
 -- for more information.
 data RegionsData s = RegionsData'
-    deriving (P.Show, P.Eq, P.Ord)
+    deriving (P.Show, P.Eq, P.Generic)
 
 -- | Define a new @nomad_regions@ datasource value.
 regionsData
     :: P.DataSource (RegionsData s)
 regionsData =
-    TF.unsafeDataSource "nomad_regions" TF.validator $
+    TF.unsafeDataSource "nomad_regions" P.defaultProvider
+        P.mempty
         RegionsData'
 
-instance TF.IsObject (RegionsData s) where
-    toObject _ = []
+instance P.Hashable (RegionsData s)
 
-instance TF.IsValid (RegionsData s) where
-    validator = P.mempty
+instance TF.HasValidator (RegionsData s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (RegionsData s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RegionsData s)) (TF.Expr s P.Text) where
+    computedId x =
+        TF.unsafeCompute TF.encodeAttr x "id"
 
-instance s ~ s' => P.HasComputedRegions (TF.Ref s' (RegionsData s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedRegions x = TF.compute (TF.refKey x) "regions"
+instance s ~ s' => P.HasComputedRegions (TF.Ref s' (RegionsData s)) (TF.Expr s [TF.Expr s P.Text]) where
+    computedRegions x =
+        TF.unsafeCompute TF.encodeAttr x "regions"

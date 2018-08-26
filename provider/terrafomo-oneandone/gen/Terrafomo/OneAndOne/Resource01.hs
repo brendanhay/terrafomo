@@ -1,7 +1,6 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -69,704 +68,706 @@ import GHC.Base (($))
 
 import Terrafomo.OneAndOne.Settings
 
+import qualified Data.Hashable                as P
+import qualified Data.HashMap.Strict          as P
+import qualified Data.HashMap.Strict          as HashMap
 import qualified Data.List.NonEmpty           as P
-import qualified Data.Map.Strict              as P
-import qualified Data.Map.Strict              as Map
 import qualified Data.Maybe                   as P
-import qualified Data.Monoid                  as P
-import qualified Data.Text                    as P
+import qualified Data.Text.Lazy               as P
 import qualified GHC.Generics                 as P
 import qualified Lens.Micro                   as P
 import qualified Prelude                      as P
-import qualified Terrafomo.Attribute          as TF
+import qualified Terrafomo.Encode             as TF
 import qualified Terrafomo.HCL                as TF
-import qualified Terrafomo.Name               as TF
+import qualified Terrafomo.HIL                as TF
 import qualified Terrafomo.OneAndOne.Lens     as P
 import qualified Terrafomo.OneAndOne.Provider as P
 import qualified Terrafomo.OneAndOne.Types    as P
 import qualified Terrafomo.Schema             as TF
-import qualified Terrafomo.Validator          as TF
+import qualified Terrafomo.Validate           as TF
 
 -- | @oneandone_block_storage@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/oneandone/r/block_storage.html terraform documentation>
 -- for more information.
 data BlockStorageResource s = BlockStorageResource'
-    { _datacenter  :: TF.Attr s P.Text
+    { _datacenter  :: TF.Expr s P.Text
     -- ^ @datacenter@ - (Required)
     --
-    , _description :: TF.Attr s P.Text
+    , _description :: P.Maybe (TF.Expr s P.Text)
     -- ^ @description@ - (Optional)
     --
-    , _name        :: TF.Attr s P.Text
+    , _name        :: TF.Expr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _serverId    :: TF.Attr s P.Text
+    , _serverId    :: P.Maybe (TF.Expr s P.Text)
     -- ^ @server_id@ - (Optional)
     --
-    , _size        :: TF.Attr s P.Int
+    , _size        :: TF.Expr s P.Int
     -- ^ @size@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Define a new @oneandone_block_storage@ resource value.
 blockStorageResource
-    :: TF.Attr s P.Text -- ^ @datacenter@ ('P._datacenter', 'P.datacenter')
-    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
-    -> TF.Attr s P.Int -- ^ @size@ ('P._size', 'P.size')
+    :: TF.Expr s P.Text -- ^ Lens: 'P.datacenter', Field: '_datacenter', HCL: @datacenter@
+    -> TF.Expr s P.Text -- ^ Lens: 'P.name', Field: '_name', HCL: @name@
+    -> TF.Expr s P.Int -- ^ Lens: 'P.size', Field: '_size', HCL: @size@
     -> P.Resource (BlockStorageResource s)
 blockStorageResource _datacenter _name _size =
-    TF.unsafeResource "oneandone_block_storage" TF.validator $
-        BlockStorageResource'
+    TF.unsafeResource "oneandone_block_storage" P.defaultProvider  TF.encodeLifecycle
+        (\BlockStorageResource'{..} -> P.mconcat
+            [ TF.pair "datacenter" _datacenter
+            , P.maybe P.mempty (TF.pair "description") _description
+            , TF.pair "name" _name
+            , P.maybe P.mempty (TF.pair "server_id") _serverId
+            , TF.pair "size" _size
+            ])
+        (BlockStorageResource'
             { _datacenter = _datacenter
-            , _description = TF.Nil
+            , _description = P.Nothing
             , _name = _name
-            , _serverId = TF.Nil
+            , _serverId = P.Nothing
             , _size = _size
-            }
+            })
 
-instance TF.IsObject (BlockStorageResource s) where
-    toObject BlockStorageResource'{..} = P.catMaybes
-        [ TF.assign "datacenter" <$> TF.attribute _datacenter
-        , TF.assign "description" <$> TF.attribute _description
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "server_id" <$> TF.attribute _serverId
-        , TF.assign "size" <$> TF.attribute _size
-        ]
+instance P.Hashable (BlockStorageResource s)
 
-instance TF.IsValid (BlockStorageResource s) where
+instance TF.HasValidator (BlockStorageResource s) where
     validator = P.mempty
 
-instance P.HasDatacenter (BlockStorageResource s) (TF.Attr s P.Text) where
+instance P.HasDatacenter (BlockStorageResource s) (TF.Expr s P.Text) where
     datacenter =
-        P.lens (_datacenter :: BlockStorageResource s -> TF.Attr s P.Text)
-               (\s a -> s { _datacenter = a } :: BlockStorageResource s)
+        P.lens (_datacenter :: BlockStorageResource s -> TF.Expr s P.Text)
+            (\s a -> s { _datacenter = a } :: BlockStorageResource s)
 
-instance P.HasDescription (BlockStorageResource s) (TF.Attr s P.Text) where
+instance P.HasDescription (BlockStorageResource s) (P.Maybe (TF.Expr s P.Text)) where
     description =
-        P.lens (_description :: BlockStorageResource s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a } :: BlockStorageResource s)
+        P.lens (_description :: BlockStorageResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _description = a } :: BlockStorageResource s)
 
-instance P.HasName (BlockStorageResource s) (TF.Attr s P.Text) where
+instance P.HasName (BlockStorageResource s) (TF.Expr s P.Text) where
     name =
-        P.lens (_name :: BlockStorageResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: BlockStorageResource s)
+        P.lens (_name :: BlockStorageResource s -> TF.Expr s P.Text)
+            (\s a -> s { _name = a } :: BlockStorageResource s)
 
-instance P.HasServerId (BlockStorageResource s) (TF.Attr s P.Text) where
+instance P.HasServerId (BlockStorageResource s) (P.Maybe (TF.Expr s P.Text)) where
     serverId =
-        P.lens (_serverId :: BlockStorageResource s -> TF.Attr s P.Text)
-               (\s a -> s { _serverId = a } :: BlockStorageResource s)
+        P.lens (_serverId :: BlockStorageResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _serverId = a } :: BlockStorageResource s)
 
-instance P.HasSize (BlockStorageResource s) (TF.Attr s P.Int) where
+instance P.HasSize (BlockStorageResource s) (TF.Expr s P.Int) where
     size =
-        P.lens (_size :: BlockStorageResource s -> TF.Attr s P.Int)
-               (\s a -> s { _size = a } :: BlockStorageResource s)
+        P.lens (_size :: BlockStorageResource s -> TF.Expr s P.Int)
+            (\s a -> s { _size = a } :: BlockStorageResource s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (BlockStorageResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (BlockStorageResource s)) (TF.Expr s P.Text) where
+    computedId x =
+        TF.unsafeCompute TF.encodeAttr x "id"
 
 -- | @oneandone_firewall_policy@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/oneandone/r/firewall_policy.html terraform documentation>
 -- for more information.
 data FirewallPolicyResource s = FirewallPolicyResource'
-    { _description :: TF.Attr s P.Text
+    { _description :: P.Maybe (TF.Expr s P.Text)
     -- ^ @description@ - (Optional)
     --
-    , _name        :: TF.Attr s P.Text
+    , _name        :: TF.Expr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _rules       :: TF.Attr s [TF.Attr s (FirewallPolicyRules s)]
+    , _rules       :: TF.Expr s [TF.Expr s (FirewallPolicyRules s)]
     -- ^ @rules@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Define a new @oneandone_firewall_policy@ resource value.
 firewallPolicyResource
-    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
-    -> TF.Attr s [TF.Attr s (FirewallPolicyRules s)] -- ^ @rules@ ('P._rules', 'P.rules')
+    :: TF.Expr s P.Text -- ^ Lens: 'P.name', Field: '_name', HCL: @name@
+    -> TF.Expr s [TF.Expr s (FirewallPolicyRules s)] -- ^ Lens: 'P.rules', Field: '_rules', HCL: @rules@
     -> P.Resource (FirewallPolicyResource s)
 firewallPolicyResource _name _rules =
-    TF.unsafeResource "oneandone_firewall_policy" TF.validator $
-        FirewallPolicyResource'
-            { _description = TF.Nil
+    TF.unsafeResource "oneandone_firewall_policy" P.defaultProvider  TF.encodeLifecycle
+        (\FirewallPolicyResource'{..} -> P.mconcat
+            [ P.maybe P.mempty (TF.pair "description") _description
+            , TF.pair "name" _name
+            , TF.pair "rules" _rules
+            ])
+        (FirewallPolicyResource'
+            { _description = P.Nothing
             , _name = _name
             , _rules = _rules
-            }
+            })
 
-instance TF.IsObject (FirewallPolicyResource s) where
-    toObject FirewallPolicyResource'{..} = P.catMaybes
-        [ TF.assign "description" <$> TF.attribute _description
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "rules" <$> TF.attribute _rules
-        ]
+instance P.Hashable (FirewallPolicyResource s)
 
-instance TF.IsValid (FirewallPolicyResource s) where
+instance TF.HasValidator (FirewallPolicyResource s) where
     validator = P.mempty
 
-instance P.HasDescription (FirewallPolicyResource s) (TF.Attr s P.Text) where
+instance P.HasDescription (FirewallPolicyResource s) (P.Maybe (TF.Expr s P.Text)) where
     description =
-        P.lens (_description :: FirewallPolicyResource s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a } :: FirewallPolicyResource s)
+        P.lens (_description :: FirewallPolicyResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _description = a } :: FirewallPolicyResource s)
 
-instance P.HasName (FirewallPolicyResource s) (TF.Attr s P.Text) where
+instance P.HasName (FirewallPolicyResource s) (TF.Expr s P.Text) where
     name =
-        P.lens (_name :: FirewallPolicyResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: FirewallPolicyResource s)
+        P.lens (_name :: FirewallPolicyResource s -> TF.Expr s P.Text)
+            (\s a -> s { _name = a } :: FirewallPolicyResource s)
 
-instance P.HasRules (FirewallPolicyResource s) (TF.Attr s [TF.Attr s (FirewallPolicyRules s)]) where
+instance P.HasRules (FirewallPolicyResource s) (TF.Expr s [TF.Expr s (FirewallPolicyRules s)]) where
     rules =
-        P.lens (_rules :: FirewallPolicyResource s -> TF.Attr s [TF.Attr s (FirewallPolicyRules s)])
-               (\s a -> s { _rules = a } :: FirewallPolicyResource s)
+        P.lens (_rules :: FirewallPolicyResource s -> TF.Expr s [TF.Expr s (FirewallPolicyRules s)])
+            (\s a -> s { _rules = a } :: FirewallPolicyResource s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (FirewallPolicyResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (FirewallPolicyResource s)) (TF.Expr s P.Text) where
+    computedId x =
+        TF.unsafeCompute TF.encodeAttr x "id"
 
 -- | @oneandone_image@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/oneandone/r/image.html terraform documentation>
 -- for more information.
 data ImageResource s = ImageResource'
-    { _datacenter  :: TF.Attr s P.Text
+    { _datacenter  :: P.Maybe (TF.Expr s P.Text)
     -- ^ @datacenter@ - (Optional)
     --
     -- Conflicts with:
     --
     -- * 'frequency'
-    , _description :: TF.Attr s P.Text
+    , _description :: P.Maybe (TF.Expr s P.Text)
     -- ^ @description@ - (Optional)
     --
-    , _frequency   :: TF.Attr s P.Text
+    , _frequency   :: P.Maybe (TF.Expr s P.Text)
     -- ^ @frequency@ - (Optional)
     --
     -- Conflicts with:
     --
     -- * 'datacenter'
-    , _name        :: TF.Attr s P.Text
+    , _name        :: TF.Expr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _numImages   :: TF.Attr s P.Int
+    , _numImages   :: P.Maybe (TF.Expr s P.Int)
     -- ^ @num_images@ - (Optional)
     --
-    , _osId        :: TF.Attr s P.Text
+    , _osId        :: P.Maybe (TF.Expr s P.Text)
     -- ^ @os_id@ - (Optional)
     --
-    , _serverId    :: TF.Attr s P.Text
+    , _serverId    :: P.Maybe (TF.Expr s P.Text)
     -- ^ @server_id@ - (Optional)
     --
-    , _source      :: TF.Attr s P.Text
+    , _source      :: P.Maybe (TF.Expr s P.Text)
     -- ^ @source@ - (Optional)
     --
-    , _type'       :: TF.Attr s P.Text
+    , _type'       :: P.Maybe (TF.Expr s P.Text)
     -- ^ @type@ - (Optional)
     --
-    , _url         :: TF.Attr s P.Text
+    , _url         :: P.Maybe (TF.Expr s P.Text)
     -- ^ @url@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Define a new @oneandone_image@ resource value.
 imageResource
-    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    :: TF.Expr s P.Text -- ^ Lens: 'P.name', Field: '_name', HCL: @name@
     -> P.Resource (ImageResource s)
 imageResource _name =
-    TF.unsafeResource "oneandone_image" TF.validator $
-        ImageResource'
-            { _datacenter = TF.Nil
-            , _description = TF.Nil
-            , _frequency = TF.Nil
+    TF.unsafeResource "oneandone_image" P.defaultProvider  TF.encodeLifecycle
+        (\ImageResource'{..} -> P.mconcat
+            [ P.maybe P.mempty (TF.pair "datacenter") _datacenter
+            , P.maybe P.mempty (TF.pair "description") _description
+            , P.maybe P.mempty (TF.pair "frequency") _frequency
+            , TF.pair "name" _name
+            , P.maybe P.mempty (TF.pair "num_images") _numImages
+            , P.maybe P.mempty (TF.pair "os_id") _osId
+            , P.maybe P.mempty (TF.pair "server_id") _serverId
+            , P.maybe P.mempty (TF.pair "source") _source
+            , P.maybe P.mempty (TF.pair "type") _type'
+            , P.maybe P.mempty (TF.pair "url") _url
+            ])
+        (ImageResource'
+            { _datacenter = P.Nothing
+            , _description = P.Nothing
+            , _frequency = P.Nothing
             , _name = _name
-            , _numImages = TF.Nil
-            , _osId = TF.Nil
-            , _serverId = TF.Nil
-            , _source = TF.Nil
-            , _type' = TF.Nil
-            , _url = TF.Nil
-            }
+            , _numImages = P.Nothing
+            , _osId = P.Nothing
+            , _serverId = P.Nothing
+            , _source = P.Nothing
+            , _type' = P.Nothing
+            , _url = P.Nothing
+            })
 
-instance TF.IsObject (ImageResource s) where
-    toObject ImageResource'{..} = P.catMaybes
-        [ TF.assign "datacenter" <$> TF.attribute _datacenter
-        , TF.assign "description" <$> TF.attribute _description
-        , TF.assign "frequency" <$> TF.attribute _frequency
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "num_images" <$> TF.attribute _numImages
-        , TF.assign "os_id" <$> TF.attribute _osId
-        , TF.assign "server_id" <$> TF.attribute _serverId
-        , TF.assign "source" <$> TF.attribute _source
-        , TF.assign "type" <$> TF.attribute _type'
-        , TF.assign "url" <$> TF.attribute _url
-        ]
+instance P.Hashable (ImageResource s)
 
-instance TF.IsValid (ImageResource s) where
-    validator = TF.fieldsValidator (\ImageResource'{..} -> Map.fromList $ P.catMaybes
-        [ if (_datacenter P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_datacenter",
-                            [ "_frequency"
-                            ])
-        , if (_frequency P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_frequency",
-                            [ "_datacenter"
-                            ])
+instance TF.HasValidator (ImageResource s) where
+    validator = TF.conflictValidator (\ImageResource'{..} -> HashMap.fromList $ P.catMaybes
+        [ TF.conflictsWith (_datacenter P.== P.Nothing) "_datacenter"
+            ["_frequency"]
+        , TF.conflictsWith (_frequency P.== P.Nothing) "_frequency"
+            ["_datacenter"]
         ])
 
-instance P.HasDatacenter (ImageResource s) (TF.Attr s P.Text) where
+instance P.HasDatacenter (ImageResource s) (P.Maybe (TF.Expr s P.Text)) where
     datacenter =
-        P.lens (_datacenter :: ImageResource s -> TF.Attr s P.Text)
-               (\s a -> s { _datacenter = a } :: ImageResource s)
+        P.lens (_datacenter :: ImageResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _datacenter = a } :: ImageResource s)
 
-instance P.HasDescription (ImageResource s) (TF.Attr s P.Text) where
+instance P.HasDescription (ImageResource s) (P.Maybe (TF.Expr s P.Text)) where
     description =
-        P.lens (_description :: ImageResource s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a } :: ImageResource s)
+        P.lens (_description :: ImageResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _description = a } :: ImageResource s)
 
-instance P.HasFrequency (ImageResource s) (TF.Attr s P.Text) where
+instance P.HasFrequency (ImageResource s) (P.Maybe (TF.Expr s P.Text)) where
     frequency =
-        P.lens (_frequency :: ImageResource s -> TF.Attr s P.Text)
-               (\s a -> s { _frequency = a } :: ImageResource s)
+        P.lens (_frequency :: ImageResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _frequency = a } :: ImageResource s)
 
-instance P.HasName (ImageResource s) (TF.Attr s P.Text) where
+instance P.HasName (ImageResource s) (TF.Expr s P.Text) where
     name =
-        P.lens (_name :: ImageResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: ImageResource s)
+        P.lens (_name :: ImageResource s -> TF.Expr s P.Text)
+            (\s a -> s { _name = a } :: ImageResource s)
 
-instance P.HasNumImages (ImageResource s) (TF.Attr s P.Int) where
+instance P.HasNumImages (ImageResource s) (P.Maybe (TF.Expr s P.Int)) where
     numImages =
-        P.lens (_numImages :: ImageResource s -> TF.Attr s P.Int)
-               (\s a -> s { _numImages = a } :: ImageResource s)
+        P.lens (_numImages :: ImageResource s -> P.Maybe (TF.Expr s P.Int))
+            (\s a -> s { _numImages = a } :: ImageResource s)
 
-instance P.HasOsId (ImageResource s) (TF.Attr s P.Text) where
+instance P.HasOsId (ImageResource s) (P.Maybe (TF.Expr s P.Text)) where
     osId =
-        P.lens (_osId :: ImageResource s -> TF.Attr s P.Text)
-               (\s a -> s { _osId = a } :: ImageResource s)
+        P.lens (_osId :: ImageResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _osId = a } :: ImageResource s)
 
-instance P.HasServerId (ImageResource s) (TF.Attr s P.Text) where
+instance P.HasServerId (ImageResource s) (P.Maybe (TF.Expr s P.Text)) where
     serverId =
-        P.lens (_serverId :: ImageResource s -> TF.Attr s P.Text)
-               (\s a -> s { _serverId = a } :: ImageResource s)
+        P.lens (_serverId :: ImageResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _serverId = a } :: ImageResource s)
 
-instance P.HasSource (ImageResource s) (TF.Attr s P.Text) where
+instance P.HasSource (ImageResource s) (P.Maybe (TF.Expr s P.Text)) where
     source =
-        P.lens (_source :: ImageResource s -> TF.Attr s P.Text)
-               (\s a -> s { _source = a } :: ImageResource s)
+        P.lens (_source :: ImageResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _source = a } :: ImageResource s)
 
-instance P.HasType' (ImageResource s) (TF.Attr s P.Text) where
+instance P.HasType' (ImageResource s) (P.Maybe (TF.Expr s P.Text)) where
     type' =
-        P.lens (_type' :: ImageResource s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a } :: ImageResource s)
+        P.lens (_type' :: ImageResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _type' = a } :: ImageResource s)
 
-instance P.HasUrl (ImageResource s) (TF.Attr s P.Text) where
+instance P.HasUrl (ImageResource s) (P.Maybe (TF.Expr s P.Text)) where
     url =
-        P.lens (_url :: ImageResource s -> TF.Attr s P.Text)
-               (\s a -> s { _url = a } :: ImageResource s)
+        P.lens (_url :: ImageResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _url = a } :: ImageResource s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (ImageResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ImageResource s)) (TF.Expr s P.Text) where
+    computedId x =
+        TF.unsafeCompute TF.encodeAttr x "id"
 
 -- | @oneandone_loadbalancer@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/oneandone/r/loadbalancer.html terraform documentation>
 -- for more information.
 data LoadbalancerResource s = LoadbalancerResource'
-    { _datacenter            :: TF.Attr s P.Text
+    { _datacenter            :: P.Maybe (TF.Expr s P.Text)
     -- ^ @datacenter@ - (Optional)
     --
-    , _description           :: TF.Attr s P.Text
+    , _description           :: P.Maybe (TF.Expr s P.Text)
     -- ^ @description@ - (Optional)
     --
-    , _healthCheckInterval   :: TF.Attr s P.Int
+    , _healthCheckInterval   :: P.Maybe (TF.Expr s P.Int)
     -- ^ @health_check_interval@ - (Optional)
     --
-    , _healthCheckPath       :: TF.Attr s P.Text
+    , _healthCheckPath       :: P.Maybe (TF.Expr s P.Text)
     -- ^ @health_check_path@ - (Optional)
     --
-    , _healthCheckPathParser :: TF.Attr s P.Text
+    , _healthCheckPathParser :: P.Maybe (TF.Expr s P.Text)
     -- ^ @health_check_path_parser@ - (Optional)
     --
-    , _healthCheckTest       :: TF.Attr s P.Text
+    , _healthCheckTest       :: P.Maybe (TF.Expr s P.Text)
     -- ^ @health_check_test@ - (Optional)
     --
-    , _method                :: TF.Attr s P.Text
+    , _method                :: TF.Expr s P.Text
     -- ^ @method@ - (Required)
     --
-    , _name                  :: TF.Attr s P.Text
+    , _name                  :: TF.Expr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _persistence           :: TF.Attr s P.Bool
+    , _persistence           :: P.Maybe (TF.Expr s P.Bool)
     -- ^ @persistence@ - (Optional)
     --
-    , _persistenceTime       :: TF.Attr s P.Int
+    , _persistenceTime       :: P.Maybe (TF.Expr s P.Int)
     -- ^ @persistence_time@ - (Optional)
     --
-    , _rules                 :: TF.Attr s [TF.Attr s (LoadbalancerRules s)]
+    , _rules                 :: TF.Expr s [TF.Expr s (LoadbalancerRules s)]
     -- ^ @rules@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Define a new @oneandone_loadbalancer@ resource value.
 loadbalancerResource
-    :: TF.Attr s P.Text -- ^ @method@ ('P._method', 'P.method')
-    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
-    -> TF.Attr s [TF.Attr s (LoadbalancerRules s)] -- ^ @rules@ ('P._rules', 'P.rules')
+    :: TF.Expr s P.Text -- ^ Lens: 'P.method', Field: '_method', HCL: @method@
+    -> TF.Expr s P.Text -- ^ Lens: 'P.name', Field: '_name', HCL: @name@
+    -> TF.Expr s [TF.Expr s (LoadbalancerRules s)] -- ^ Lens: 'P.rules', Field: '_rules', HCL: @rules@
     -> P.Resource (LoadbalancerResource s)
 loadbalancerResource _method _name _rules =
-    TF.unsafeResource "oneandone_loadbalancer" TF.validator $
-        LoadbalancerResource'
-            { _datacenter = TF.Nil
-            , _description = TF.Nil
-            , _healthCheckInterval = TF.Nil
-            , _healthCheckPath = TF.Nil
-            , _healthCheckPathParser = TF.Nil
-            , _healthCheckTest = TF.Nil
+    TF.unsafeResource "oneandone_loadbalancer" P.defaultProvider  TF.encodeLifecycle
+        (\LoadbalancerResource'{..} -> P.mconcat
+            [ P.maybe P.mempty (TF.pair "datacenter") _datacenter
+            , P.maybe P.mempty (TF.pair "description") _description
+            , P.maybe P.mempty (TF.pair "health_check_interval") _healthCheckInterval
+            , P.maybe P.mempty (TF.pair "health_check_path") _healthCheckPath
+            , P.maybe P.mempty (TF.pair "health_check_path_parser") _healthCheckPathParser
+            , P.maybe P.mempty (TF.pair "health_check_test") _healthCheckTest
+            , TF.pair "method" _method
+            , TF.pair "name" _name
+            , P.maybe P.mempty (TF.pair "persistence") _persistence
+            , P.maybe P.mempty (TF.pair "persistence_time") _persistenceTime
+            , TF.pair "rules" _rules
+            ])
+        (LoadbalancerResource'
+            { _datacenter = P.Nothing
+            , _description = P.Nothing
+            , _healthCheckInterval = P.Nothing
+            , _healthCheckPath = P.Nothing
+            , _healthCheckPathParser = P.Nothing
+            , _healthCheckTest = P.Nothing
             , _method = _method
             , _name = _name
-            , _persistence = TF.Nil
-            , _persistenceTime = TF.Nil
+            , _persistence = P.Nothing
+            , _persistenceTime = P.Nothing
             , _rules = _rules
-            }
+            })
 
-instance TF.IsObject (LoadbalancerResource s) where
-    toObject LoadbalancerResource'{..} = P.catMaybes
-        [ TF.assign "datacenter" <$> TF.attribute _datacenter
-        , TF.assign "description" <$> TF.attribute _description
-        , TF.assign "health_check_interval" <$> TF.attribute _healthCheckInterval
-        , TF.assign "health_check_path" <$> TF.attribute _healthCheckPath
-        , TF.assign "health_check_path_parser" <$> TF.attribute _healthCheckPathParser
-        , TF.assign "health_check_test" <$> TF.attribute _healthCheckTest
-        , TF.assign "method" <$> TF.attribute _method
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "persistence" <$> TF.attribute _persistence
-        , TF.assign "persistence_time" <$> TF.attribute _persistenceTime
-        , TF.assign "rules" <$> TF.attribute _rules
-        ]
+instance P.Hashable (LoadbalancerResource s)
 
-instance TF.IsValid (LoadbalancerResource s) where
+instance TF.HasValidator (LoadbalancerResource s) where
     validator = P.mempty
 
-instance P.HasDatacenter (LoadbalancerResource s) (TF.Attr s P.Text) where
+instance P.HasDatacenter (LoadbalancerResource s) (P.Maybe (TF.Expr s P.Text)) where
     datacenter =
-        P.lens (_datacenter :: LoadbalancerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _datacenter = a } :: LoadbalancerResource s)
+        P.lens (_datacenter :: LoadbalancerResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _datacenter = a } :: LoadbalancerResource s)
 
-instance P.HasDescription (LoadbalancerResource s) (TF.Attr s P.Text) where
+instance P.HasDescription (LoadbalancerResource s) (P.Maybe (TF.Expr s P.Text)) where
     description =
-        P.lens (_description :: LoadbalancerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a } :: LoadbalancerResource s)
+        P.lens (_description :: LoadbalancerResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _description = a } :: LoadbalancerResource s)
 
-instance P.HasHealthCheckInterval (LoadbalancerResource s) (TF.Attr s P.Int) where
+instance P.HasHealthCheckInterval (LoadbalancerResource s) (P.Maybe (TF.Expr s P.Int)) where
     healthCheckInterval =
-        P.lens (_healthCheckInterval :: LoadbalancerResource s -> TF.Attr s P.Int)
-               (\s a -> s { _healthCheckInterval = a } :: LoadbalancerResource s)
+        P.lens (_healthCheckInterval :: LoadbalancerResource s -> P.Maybe (TF.Expr s P.Int))
+            (\s a -> s { _healthCheckInterval = a } :: LoadbalancerResource s)
 
-instance P.HasHealthCheckPath (LoadbalancerResource s) (TF.Attr s P.Text) where
+instance P.HasHealthCheckPath (LoadbalancerResource s) (P.Maybe (TF.Expr s P.Text)) where
     healthCheckPath =
-        P.lens (_healthCheckPath :: LoadbalancerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _healthCheckPath = a } :: LoadbalancerResource s)
+        P.lens (_healthCheckPath :: LoadbalancerResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _healthCheckPath = a } :: LoadbalancerResource s)
 
-instance P.HasHealthCheckPathParser (LoadbalancerResource s) (TF.Attr s P.Text) where
+instance P.HasHealthCheckPathParser (LoadbalancerResource s) (P.Maybe (TF.Expr s P.Text)) where
     healthCheckPathParser =
-        P.lens (_healthCheckPathParser :: LoadbalancerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _healthCheckPathParser = a } :: LoadbalancerResource s)
+        P.lens (_healthCheckPathParser :: LoadbalancerResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _healthCheckPathParser = a } :: LoadbalancerResource s)
 
-instance P.HasHealthCheckTest (LoadbalancerResource s) (TF.Attr s P.Text) where
+instance P.HasHealthCheckTest (LoadbalancerResource s) (P.Maybe (TF.Expr s P.Text)) where
     healthCheckTest =
-        P.lens (_healthCheckTest :: LoadbalancerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _healthCheckTest = a } :: LoadbalancerResource s)
+        P.lens (_healthCheckTest :: LoadbalancerResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _healthCheckTest = a } :: LoadbalancerResource s)
 
-instance P.HasMethod (LoadbalancerResource s) (TF.Attr s P.Text) where
+instance P.HasMethod (LoadbalancerResource s) (TF.Expr s P.Text) where
     method =
-        P.lens (_method :: LoadbalancerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _method = a } :: LoadbalancerResource s)
+        P.lens (_method :: LoadbalancerResource s -> TF.Expr s P.Text)
+            (\s a -> s { _method = a } :: LoadbalancerResource s)
 
-instance P.HasName (LoadbalancerResource s) (TF.Attr s P.Text) where
+instance P.HasName (LoadbalancerResource s) (TF.Expr s P.Text) where
     name =
-        P.lens (_name :: LoadbalancerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: LoadbalancerResource s)
+        P.lens (_name :: LoadbalancerResource s -> TF.Expr s P.Text)
+            (\s a -> s { _name = a } :: LoadbalancerResource s)
 
-instance P.HasPersistence (LoadbalancerResource s) (TF.Attr s P.Bool) where
+instance P.HasPersistence (LoadbalancerResource s) (P.Maybe (TF.Expr s P.Bool)) where
     persistence =
-        P.lens (_persistence :: LoadbalancerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _persistence = a } :: LoadbalancerResource s)
+        P.lens (_persistence :: LoadbalancerResource s -> P.Maybe (TF.Expr s P.Bool))
+            (\s a -> s { _persistence = a } :: LoadbalancerResource s)
 
-instance P.HasPersistenceTime (LoadbalancerResource s) (TF.Attr s P.Int) where
+instance P.HasPersistenceTime (LoadbalancerResource s) (P.Maybe (TF.Expr s P.Int)) where
     persistenceTime =
-        P.lens (_persistenceTime :: LoadbalancerResource s -> TF.Attr s P.Int)
-               (\s a -> s { _persistenceTime = a } :: LoadbalancerResource s)
+        P.lens (_persistenceTime :: LoadbalancerResource s -> P.Maybe (TF.Expr s P.Int))
+            (\s a -> s { _persistenceTime = a } :: LoadbalancerResource s)
 
-instance P.HasRules (LoadbalancerResource s) (TF.Attr s [TF.Attr s (LoadbalancerRules s)]) where
+instance P.HasRules (LoadbalancerResource s) (TF.Expr s [TF.Expr s (LoadbalancerRules s)]) where
     rules =
-        P.lens (_rules :: LoadbalancerResource s -> TF.Attr s [TF.Attr s (LoadbalancerRules s)])
-               (\s a -> s { _rules = a } :: LoadbalancerResource s)
+        P.lens (_rules :: LoadbalancerResource s -> TF.Expr s [TF.Expr s (LoadbalancerRules s)])
+            (\s a -> s { _rules = a } :: LoadbalancerResource s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (LoadbalancerResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (LoadbalancerResource s)) (TF.Expr s P.Text) where
+    computedId x =
+        TF.unsafeCompute TF.encodeAttr x "id"
 
 -- | @oneandone_monitoring_policy@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/oneandone/r/monitoring_policy.html terraform documentation>
 -- for more information.
 data MonitoringPolicyResource s = MonitoringPolicyResource'
-    { _agent       :: TF.Attr s P.Bool
+    { _agent :: TF.Expr s P.Bool
     -- ^ @agent@ - (Required)
     --
-    , _description :: TF.Attr s P.Text
+    , _description :: P.Maybe (TF.Expr s P.Text)
     -- ^ @description@ - (Optional)
     --
-    , _email       :: TF.Attr s P.Text
+    , _email :: P.Maybe (TF.Expr s P.Text)
     -- ^ @email@ - (Optional)
     --
-    , _name        :: TF.Attr s P.Text
+    , _name :: TF.Expr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _ports       :: TF.Attr s [TF.Attr s (MonitoringPolicyPorts s)]
+    , _ports :: P.Maybe (TF.Expr s [TF.Expr s (MonitoringPolicyPorts s)])
     -- ^ @ports@ - (Optional)
     --
-    , _processes   :: TF.Attr s [TF.Attr s (MonitoringPolicyProcesses s)]
+    , _processes :: P.Maybe (TF.Expr s [TF.Expr s (MonitoringPolicyProcesses s)])
     -- ^ @processes@ - (Optional)
     --
-    , _thresholds  :: TF.Attr s [TF.Attr s (MonitoringPolicyThresholds s)]
+    , _thresholds :: TF.Expr s [TF.Expr s (MonitoringPolicyThresholds s)]
     -- ^ @thresholds@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Define a new @oneandone_monitoring_policy@ resource value.
 monitoringPolicyResource
-    :: TF.Attr s P.Bool -- ^ @agent@ ('P._agent', 'P.agent')
-    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
-    -> TF.Attr s [TF.Attr s (MonitoringPolicyThresholds s)] -- ^ @thresholds@ ('P._thresholds', 'P.thresholds')
+    :: TF.Expr s P.Bool -- ^ Lens: 'P.agent', Field: '_agent', HCL: @agent@
+    -> TF.Expr s P.Text -- ^ Lens: 'P.name', Field: '_name', HCL: @name@
+    -> TF.Expr s [TF.Expr s (MonitoringPolicyThresholds s)] -- ^ Lens: 'P.thresholds', Field: '_thresholds', HCL: @thresholds@
     -> P.Resource (MonitoringPolicyResource s)
 monitoringPolicyResource _agent _name _thresholds =
-    TF.unsafeResource "oneandone_monitoring_policy" TF.validator $
-        MonitoringPolicyResource'
+    TF.unsafeResource "oneandone_monitoring_policy" P.defaultProvider  TF.encodeLifecycle
+        (\MonitoringPolicyResource'{..} -> P.mconcat
+            [ TF.pair "agent" _agent
+            , P.maybe P.mempty (TF.pair "description") _description
+            , P.maybe P.mempty (TF.pair "email") _email
+            , TF.pair "name" _name
+            , P.maybe P.mempty (TF.pair "ports") _ports
+            , P.maybe P.mempty (TF.pair "processes") _processes
+            , TF.pair "thresholds" _thresholds
+            ])
+        (MonitoringPolicyResource'
             { _agent = _agent
-            , _description = TF.Nil
-            , _email = TF.Nil
+            , _description = P.Nothing
+            , _email = P.Nothing
             , _name = _name
-            , _ports = TF.Nil
-            , _processes = TF.Nil
+            , _ports = P.Nothing
+            , _processes = P.Nothing
             , _thresholds = _thresholds
-            }
+            })
 
-instance TF.IsObject (MonitoringPolicyResource s) where
-    toObject MonitoringPolicyResource'{..} = P.catMaybes
-        [ TF.assign "agent" <$> TF.attribute _agent
-        , TF.assign "description" <$> TF.attribute _description
-        , TF.assign "email" <$> TF.attribute _email
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "ports" <$> TF.attribute _ports
-        , TF.assign "processes" <$> TF.attribute _processes
-        , TF.assign "thresholds" <$> TF.attribute _thresholds
-        ]
+instance P.Hashable (MonitoringPolicyResource s)
 
-instance TF.IsValid (MonitoringPolicyResource s) where
+instance TF.HasValidator (MonitoringPolicyResource s) where
     validator = P.mempty
 
-instance P.HasAgent (MonitoringPolicyResource s) (TF.Attr s P.Bool) where
+instance P.HasAgent (MonitoringPolicyResource s) (TF.Expr s P.Bool) where
     agent =
-        P.lens (_agent :: MonitoringPolicyResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _agent = a } :: MonitoringPolicyResource s)
+        P.lens (_agent :: MonitoringPolicyResource s -> TF.Expr s P.Bool)
+            (\s a -> s { _agent = a } :: MonitoringPolicyResource s)
 
-instance P.HasDescription (MonitoringPolicyResource s) (TF.Attr s P.Text) where
+instance P.HasDescription (MonitoringPolicyResource s) (P.Maybe (TF.Expr s P.Text)) where
     description =
-        P.lens (_description :: MonitoringPolicyResource s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a } :: MonitoringPolicyResource s)
+        P.lens (_description :: MonitoringPolicyResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _description = a } :: MonitoringPolicyResource s)
 
-instance P.HasEmail (MonitoringPolicyResource s) (TF.Attr s P.Text) where
+instance P.HasEmail (MonitoringPolicyResource s) (P.Maybe (TF.Expr s P.Text)) where
     email =
-        P.lens (_email :: MonitoringPolicyResource s -> TF.Attr s P.Text)
-               (\s a -> s { _email = a } :: MonitoringPolicyResource s)
+        P.lens (_email :: MonitoringPolicyResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _email = a } :: MonitoringPolicyResource s)
 
-instance P.HasName (MonitoringPolicyResource s) (TF.Attr s P.Text) where
+instance P.HasName (MonitoringPolicyResource s) (TF.Expr s P.Text) where
     name =
-        P.lens (_name :: MonitoringPolicyResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: MonitoringPolicyResource s)
+        P.lens (_name :: MonitoringPolicyResource s -> TF.Expr s P.Text)
+            (\s a -> s { _name = a } :: MonitoringPolicyResource s)
 
-instance P.HasPorts (MonitoringPolicyResource s) (TF.Attr s [TF.Attr s (MonitoringPolicyPorts s)]) where
+instance P.HasPorts (MonitoringPolicyResource s) (P.Maybe (TF.Expr s [TF.Expr s (MonitoringPolicyPorts s)])) where
     ports =
-        P.lens (_ports :: MonitoringPolicyResource s -> TF.Attr s [TF.Attr s (MonitoringPolicyPorts s)])
-               (\s a -> s { _ports = a } :: MonitoringPolicyResource s)
+        P.lens (_ports :: MonitoringPolicyResource s -> P.Maybe (TF.Expr s [TF.Expr s (MonitoringPolicyPorts s)]))
+            (\s a -> s { _ports = a } :: MonitoringPolicyResource s)
 
-instance P.HasProcesses (MonitoringPolicyResource s) (TF.Attr s [TF.Attr s (MonitoringPolicyProcesses s)]) where
+instance P.HasProcesses (MonitoringPolicyResource s) (P.Maybe (TF.Expr s [TF.Expr s (MonitoringPolicyProcesses s)])) where
     processes =
-        P.lens (_processes :: MonitoringPolicyResource s -> TF.Attr s [TF.Attr s (MonitoringPolicyProcesses s)])
-               (\s a -> s { _processes = a } :: MonitoringPolicyResource s)
+        P.lens (_processes :: MonitoringPolicyResource s -> P.Maybe (TF.Expr s [TF.Expr s (MonitoringPolicyProcesses s)]))
+            (\s a -> s { _processes = a } :: MonitoringPolicyResource s)
 
-instance P.HasThresholds (MonitoringPolicyResource s) (TF.Attr s [TF.Attr s (MonitoringPolicyThresholds s)]) where
+instance P.HasThresholds (MonitoringPolicyResource s) (TF.Expr s [TF.Expr s (MonitoringPolicyThresholds s)]) where
     thresholds =
-        P.lens (_thresholds :: MonitoringPolicyResource s -> TF.Attr s [TF.Attr s (MonitoringPolicyThresholds s)])
-               (\s a -> s { _thresholds = a } :: MonitoringPolicyResource s)
+        P.lens (_thresholds :: MonitoringPolicyResource s -> TF.Expr s [TF.Expr s (MonitoringPolicyThresholds s)])
+            (\s a -> s { _thresholds = a } :: MonitoringPolicyResource s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (MonitoringPolicyResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (MonitoringPolicyResource s)) (TF.Expr s P.Text) where
+    computedId x =
+        TF.unsafeCompute TF.encodeAttr x "id"
 
 -- | @oneandone_private_network@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/oneandone/r/private_network.html terraform documentation>
 -- for more information.
 data PrivateNetworkResource s = PrivateNetworkResource'
-    { _datacenter     :: TF.Attr s P.Text
+    { _datacenter     :: P.Maybe (TF.Expr s P.Text)
     -- ^ @datacenter@ - (Optional)
     --
-    , _description    :: TF.Attr s P.Text
+    , _description    :: P.Maybe (TF.Expr s P.Text)
     -- ^ @description@ - (Optional)
     --
-    , _name           :: TF.Attr s P.Text
+    , _name           :: TF.Expr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _networkAddress :: TF.Attr s P.Text
+    , _networkAddress :: P.Maybe (TF.Expr s P.Text)
     -- ^ @network_address@ - (Optional)
     --
-    , _serverIds      :: TF.Attr s [TF.Attr s P.Text]
+    , _serverIds      :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
     -- ^ @server_ids@ - (Optional)
     --
-    , _subnetMask     :: TF.Attr s P.Text
+    , _subnetMask     :: P.Maybe (TF.Expr s P.Text)
     -- ^ @subnet_mask@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Define a new @oneandone_private_network@ resource value.
 privateNetworkResource
-    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    :: TF.Expr s P.Text -- ^ Lens: 'P.name', Field: '_name', HCL: @name@
     -> P.Resource (PrivateNetworkResource s)
 privateNetworkResource _name =
-    TF.unsafeResource "oneandone_private_network" TF.validator $
-        PrivateNetworkResource'
-            { _datacenter = TF.Nil
-            , _description = TF.Nil
+    TF.unsafeResource "oneandone_private_network" P.defaultProvider  TF.encodeLifecycle
+        (\PrivateNetworkResource'{..} -> P.mconcat
+            [ P.maybe P.mempty (TF.pair "datacenter") _datacenter
+            , P.maybe P.mempty (TF.pair "description") _description
+            , TF.pair "name" _name
+            , P.maybe P.mempty (TF.pair "network_address") _networkAddress
+            , P.maybe P.mempty (TF.pair "server_ids") _serverIds
+            , P.maybe P.mempty (TF.pair "subnet_mask") _subnetMask
+            ])
+        (PrivateNetworkResource'
+            { _datacenter = P.Nothing
+            , _description = P.Nothing
             , _name = _name
-            , _networkAddress = TF.Nil
-            , _serverIds = TF.Nil
-            , _subnetMask = TF.Nil
-            }
+            , _networkAddress = P.Nothing
+            , _serverIds = P.Nothing
+            , _subnetMask = P.Nothing
+            })
 
-instance TF.IsObject (PrivateNetworkResource s) where
-    toObject PrivateNetworkResource'{..} = P.catMaybes
-        [ TF.assign "datacenter" <$> TF.attribute _datacenter
-        , TF.assign "description" <$> TF.attribute _description
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "network_address" <$> TF.attribute _networkAddress
-        , TF.assign "server_ids" <$> TF.attribute _serverIds
-        , TF.assign "subnet_mask" <$> TF.attribute _subnetMask
-        ]
+instance P.Hashable (PrivateNetworkResource s)
 
-instance TF.IsValid (PrivateNetworkResource s) where
+instance TF.HasValidator (PrivateNetworkResource s) where
     validator = P.mempty
 
-instance P.HasDatacenter (PrivateNetworkResource s) (TF.Attr s P.Text) where
+instance P.HasDatacenter (PrivateNetworkResource s) (P.Maybe (TF.Expr s P.Text)) where
     datacenter =
-        P.lens (_datacenter :: PrivateNetworkResource s -> TF.Attr s P.Text)
-               (\s a -> s { _datacenter = a } :: PrivateNetworkResource s)
+        P.lens (_datacenter :: PrivateNetworkResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _datacenter = a } :: PrivateNetworkResource s)
 
-instance P.HasDescription (PrivateNetworkResource s) (TF.Attr s P.Text) where
+instance P.HasDescription (PrivateNetworkResource s) (P.Maybe (TF.Expr s P.Text)) where
     description =
-        P.lens (_description :: PrivateNetworkResource s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a } :: PrivateNetworkResource s)
+        P.lens (_description :: PrivateNetworkResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _description = a } :: PrivateNetworkResource s)
 
-instance P.HasName (PrivateNetworkResource s) (TF.Attr s P.Text) where
+instance P.HasName (PrivateNetworkResource s) (TF.Expr s P.Text) where
     name =
-        P.lens (_name :: PrivateNetworkResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: PrivateNetworkResource s)
+        P.lens (_name :: PrivateNetworkResource s -> TF.Expr s P.Text)
+            (\s a -> s { _name = a } :: PrivateNetworkResource s)
 
-instance P.HasNetworkAddress (PrivateNetworkResource s) (TF.Attr s P.Text) where
+instance P.HasNetworkAddress (PrivateNetworkResource s) (P.Maybe (TF.Expr s P.Text)) where
     networkAddress =
-        P.lens (_networkAddress :: PrivateNetworkResource s -> TF.Attr s P.Text)
-               (\s a -> s { _networkAddress = a } :: PrivateNetworkResource s)
+        P.lens (_networkAddress :: PrivateNetworkResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _networkAddress = a } :: PrivateNetworkResource s)
 
-instance P.HasServerIds (PrivateNetworkResource s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasServerIds (PrivateNetworkResource s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
     serverIds =
-        P.lens (_serverIds :: PrivateNetworkResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _serverIds = a } :: PrivateNetworkResource s)
+        P.lens (_serverIds :: PrivateNetworkResource s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
+            (\s a -> s { _serverIds = a } :: PrivateNetworkResource s)
 
-instance P.HasSubnetMask (PrivateNetworkResource s) (TF.Attr s P.Text) where
+instance P.HasSubnetMask (PrivateNetworkResource s) (P.Maybe (TF.Expr s P.Text)) where
     subnetMask =
-        P.lens (_subnetMask :: PrivateNetworkResource s -> TF.Attr s P.Text)
-               (\s a -> s { _subnetMask = a } :: PrivateNetworkResource s)
+        P.lens (_subnetMask :: PrivateNetworkResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _subnetMask = a } :: PrivateNetworkResource s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (PrivateNetworkResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (PrivateNetworkResource s)) (TF.Expr s P.Text) where
+    computedId x =
+        TF.unsafeCompute TF.encodeAttr x "id"
 
 -- | @oneandone_public_ip@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/oneandone/r/public_ip.html terraform documentation>
 -- for more information.
 data PublicIpResource s = PublicIpResource'
-    { _datacenter :: TF.Attr s P.Text
+    { _datacenter :: P.Maybe (TF.Expr s P.Text)
     -- ^ @datacenter@ - (Optional)
     --
-    , _ipType     :: TF.Attr s P.Text
+    , _ipType     :: TF.Expr s P.Text
     -- ^ @ip_type@ - (Required)
     --
-    , _reverseDns :: TF.Attr s P.Text
+    , _reverseDns :: P.Maybe (TF.Expr s P.Text)
     -- ^ @reverse_dns@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Define a new @oneandone_public_ip@ resource value.
 publicIpResource
-    :: TF.Attr s P.Text -- ^ @ip_type@ ('P._ipType', 'P.ipType')
+    :: TF.Expr s P.Text -- ^ Lens: 'P.ipType', Field: '_ipType', HCL: @ip_type@
     -> P.Resource (PublicIpResource s)
 publicIpResource _ipType =
-    TF.unsafeResource "oneandone_public_ip" TF.validator $
-        PublicIpResource'
-            { _datacenter = TF.Nil
+    TF.unsafeResource "oneandone_public_ip" P.defaultProvider  TF.encodeLifecycle
+        (\PublicIpResource'{..} -> P.mconcat
+            [ P.maybe P.mempty (TF.pair "datacenter") _datacenter
+            , TF.pair "ip_type" _ipType
+            , P.maybe P.mempty (TF.pair "reverse_dns") _reverseDns
+            ])
+        (PublicIpResource'
+            { _datacenter = P.Nothing
             , _ipType = _ipType
-            , _reverseDns = TF.Nil
-            }
+            , _reverseDns = P.Nothing
+            })
 
-instance TF.IsObject (PublicIpResource s) where
-    toObject PublicIpResource'{..} = P.catMaybes
-        [ TF.assign "datacenter" <$> TF.attribute _datacenter
-        , TF.assign "ip_type" <$> TF.attribute _ipType
-        , TF.assign "reverse_dns" <$> TF.attribute _reverseDns
-        ]
+instance P.Hashable (PublicIpResource s)
 
-instance TF.IsValid (PublicIpResource s) where
+instance TF.HasValidator (PublicIpResource s) where
     validator = P.mempty
 
-instance P.HasDatacenter (PublicIpResource s) (TF.Attr s P.Text) where
+instance P.HasDatacenter (PublicIpResource s) (P.Maybe (TF.Expr s P.Text)) where
     datacenter =
-        P.lens (_datacenter :: PublicIpResource s -> TF.Attr s P.Text)
-               (\s a -> s { _datacenter = a } :: PublicIpResource s)
+        P.lens (_datacenter :: PublicIpResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _datacenter = a } :: PublicIpResource s)
 
-instance P.HasIpType (PublicIpResource s) (TF.Attr s P.Text) where
+instance P.HasIpType (PublicIpResource s) (TF.Expr s P.Text) where
     ipType =
-        P.lens (_ipType :: PublicIpResource s -> TF.Attr s P.Text)
-               (\s a -> s { _ipType = a } :: PublicIpResource s)
+        P.lens (_ipType :: PublicIpResource s -> TF.Expr s P.Text)
+            (\s a -> s { _ipType = a } :: PublicIpResource s)
 
-instance P.HasReverseDns (PublicIpResource s) (TF.Attr s P.Text) where
+instance P.HasReverseDns (PublicIpResource s) (P.Maybe (TF.Expr s P.Text)) where
     reverseDns =
-        P.lens (_reverseDns :: PublicIpResource s -> TF.Attr s P.Text)
-               (\s a -> s { _reverseDns = a } :: PublicIpResource s)
+        P.lens (_reverseDns :: PublicIpResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _reverseDns = a } :: PublicIpResource s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (PublicIpResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (PublicIpResource s)) (TF.Expr s P.Text) where
+    computedId x =
+        TF.unsafeCompute TF.encodeAttr x "id"
 
-instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (PublicIpResource s)) (TF.Attr s P.Text) where
-    computedIpAddress x = TF.compute (TF.refKey x) "ip_address"
+instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (PublicIpResource s)) (TF.Expr s P.Text) where
+    computedIpAddress x =
+        TF.unsafeCompute TF.encodeAttr x "ip_address"
 
 -- | @oneandone_server@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/oneandone/r/server.html terraform documentation>
 -- for more information.
 data ServerResource s = ServerResource'
-    { _coresPerProcessor  :: TF.Attr s P.Int
+    { _coresPerProcessor  :: P.Maybe (TF.Expr s P.Int)
     -- ^ @cores_per_processor@ - (Optional)
     --
     -- Conflicts with:
     --
     -- * 'fixedInstanceSize'
-    , _datacenter         :: TF.Attr s P.Text
+    , _datacenter         :: P.Maybe (TF.Expr s P.Text)
     -- ^ @datacenter@ - (Optional)
     --
-    , _description        :: TF.Attr s P.Text
+    , _description        :: P.Maybe (TF.Expr s P.Text)
     -- ^ @description@ - (Optional)
     --
-    , _firewallPolicyId   :: TF.Attr s P.Text
+    , _firewallPolicyId   :: P.Maybe (TF.Expr s P.Text)
     -- ^ @firewall_policy_id@ - (Optional)
     --
-    , _fixedInstanceSize  :: TF.Attr s P.Text
+    , _fixedInstanceSize  :: P.Maybe (TF.Expr s P.Text)
     -- ^ @fixed_instance_size@ - (Optional, Forces New)
     --
     -- Conflicts with:
@@ -775,421 +776,411 @@ data ServerResource s = ServerResource'
     -- * 'hdds'
     -- * 'ram'
     -- * 'vcores'
-    , _hdds               :: TF.Attr s [TF.Attr s (ServerHdds s)]
+    , _hdds               :: P.Maybe (TF.Expr s [TF.Expr s (ServerHdds s)])
     -- ^ @hdds@ - (Optional)
     --
     -- Conflicts with:
     --
     -- * 'fixedInstanceSize'
-    , _image              :: TF.Attr s P.Text
+    , _image              :: TF.Expr s P.Text
     -- ^ @image@ - (Required, Forces New)
     --
-    , _ip                 :: TF.Attr s P.Text
+    , _ip                 :: P.Maybe (TF.Expr s P.Text)
     -- ^ @ip@ - (Optional)
     --
-    , _loadbalancerId     :: TF.Attr s P.Text
+    , _loadbalancerId     :: P.Maybe (TF.Expr s P.Text)
     -- ^ @loadbalancer_id@ - (Optional)
     --
-    , _monitoringPolicyId :: TF.Attr s P.Text
+    , _monitoringPolicyId :: P.Maybe (TF.Expr s P.Text)
     -- ^ @monitoring_policy_id@ - (Optional)
     --
-    , _name               :: TF.Attr s P.Text
+    , _name               :: TF.Expr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _password           :: TF.Attr s P.Text
+    , _password           :: P.Maybe (TF.Expr s P.Text)
     -- ^ @password@ - (Optional)
     --
-    , _ram                :: TF.Attr s P.Double
+    , _ram                :: P.Maybe (TF.Expr s P.Double)
     -- ^ @ram@ - (Optional)
     --
     -- Conflicts with:
     --
     -- * 'fixedInstanceSize'
-    , _sshKeyPath         :: TF.Attr s P.Text
+    , _sshKeyPath         :: P.Maybe (TF.Expr s P.Text)
     -- ^ @ssh_key_path@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
     -- * 'sshKeyPublic'
-    , _sshKeyPublic       :: TF.Attr s P.Text
+    , _sshKeyPublic       :: P.Maybe (TF.Expr s P.Text)
     -- ^ @ssh_key_public@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
     -- * 'sshKeyPath'
-    , _vcores             :: TF.Attr s P.Int
+    , _vcores             :: P.Maybe (TF.Expr s P.Int)
     -- ^ @vcores@ - (Optional)
     --
     -- Conflicts with:
     --
     -- * 'fixedInstanceSize'
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Define a new @oneandone_server@ resource value.
 serverResource
-    :: TF.Attr s P.Text -- ^ @image@ ('P._image', 'P.image')
-    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    :: TF.Expr s P.Text -- ^ Lens: 'P.image', Field: '_image', HCL: @image@
+    -> TF.Expr s P.Text -- ^ Lens: 'P.name', Field: '_name', HCL: @name@
     -> P.Resource (ServerResource s)
 serverResource _image _name =
-    TF.unsafeResource "oneandone_server" TF.validator $
-        ServerResource'
-            { _coresPerProcessor = TF.Nil
-            , _datacenter = TF.Nil
-            , _description = TF.Nil
-            , _firewallPolicyId = TF.Nil
-            , _fixedInstanceSize = TF.Nil
-            , _hdds = TF.Nil
+    TF.unsafeResource "oneandone_server" P.defaultProvider  TF.encodeLifecycle
+        (\ServerResource'{..} -> P.mconcat
+            [ P.maybe P.mempty (TF.pair "cores_per_processor") _coresPerProcessor
+            , P.maybe P.mempty (TF.pair "datacenter") _datacenter
+            , P.maybe P.mempty (TF.pair "description") _description
+            , P.maybe P.mempty (TF.pair "firewall_policy_id") _firewallPolicyId
+            , P.maybe P.mempty (TF.pair "fixed_instance_size") _fixedInstanceSize
+            , P.maybe P.mempty (TF.pair "hdds") _hdds
+            , TF.pair "image" _image
+            , P.maybe P.mempty (TF.pair "ip") _ip
+            , P.maybe P.mempty (TF.pair "loadbalancer_id") _loadbalancerId
+            , P.maybe P.mempty (TF.pair "monitoring_policy_id") _monitoringPolicyId
+            , TF.pair "name" _name
+            , P.maybe P.mempty (TF.pair "password") _password
+            , P.maybe P.mempty (TF.pair "ram") _ram
+            , P.maybe P.mempty (TF.pair "ssh_key_path") _sshKeyPath
+            , P.maybe P.mempty (TF.pair "ssh_key_public") _sshKeyPublic
+            , P.maybe P.mempty (TF.pair "vcores") _vcores
+            ])
+        (ServerResource'
+            { _coresPerProcessor = P.Nothing
+            , _datacenter = P.Nothing
+            , _description = P.Nothing
+            , _firewallPolicyId = P.Nothing
+            , _fixedInstanceSize = P.Nothing
+            , _hdds = P.Nothing
             , _image = _image
-            , _ip = TF.Nil
-            , _loadbalancerId = TF.Nil
-            , _monitoringPolicyId = TF.Nil
+            , _ip = P.Nothing
+            , _loadbalancerId = P.Nothing
+            , _monitoringPolicyId = P.Nothing
             , _name = _name
-            , _password = TF.Nil
-            , _ram = TF.Nil
-            , _sshKeyPath = TF.Nil
-            , _sshKeyPublic = TF.Nil
-            , _vcores = TF.Nil
-            }
+            , _password = P.Nothing
+            , _ram = P.Nothing
+            , _sshKeyPath = P.Nothing
+            , _sshKeyPublic = P.Nothing
+            , _vcores = P.Nothing
+            })
 
-instance TF.IsObject (ServerResource s) where
-    toObject ServerResource'{..} = P.catMaybes
-        [ TF.assign "cores_per_processor" <$> TF.attribute _coresPerProcessor
-        , TF.assign "datacenter" <$> TF.attribute _datacenter
-        , TF.assign "description" <$> TF.attribute _description
-        , TF.assign "firewall_policy_id" <$> TF.attribute _firewallPolicyId
-        , TF.assign "fixed_instance_size" <$> TF.attribute _fixedInstanceSize
-        , TF.assign "hdds" <$> TF.attribute _hdds
-        , TF.assign "image" <$> TF.attribute _image
-        , TF.assign "ip" <$> TF.attribute _ip
-        , TF.assign "loadbalancer_id" <$> TF.attribute _loadbalancerId
-        , TF.assign "monitoring_policy_id" <$> TF.attribute _monitoringPolicyId
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "password" <$> TF.attribute _password
-        , TF.assign "ram" <$> TF.attribute _ram
-        , TF.assign "ssh_key_path" <$> TF.attribute _sshKeyPath
-        , TF.assign "ssh_key_public" <$> TF.attribute _sshKeyPublic
-        , TF.assign "vcores" <$> TF.attribute _vcores
-        ]
+instance P.Hashable (ServerResource s)
 
-instance TF.IsValid (ServerResource s) where
-    validator = TF.fieldsValidator (\ServerResource'{..} -> Map.fromList $ P.catMaybes
-        [ if (_coresPerProcessor P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_coresPerProcessor",
-                            [ "_fixedInstanceSize"
-                            ])
-        , if (_fixedInstanceSize P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_fixedInstanceSize",
-                            [ "_coresPerProcessor"                            , "_hdds"                            , "_ram"                            , "_vcores"
-                            ])
-        , if (_hdds P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_hdds",
-                            [ "_fixedInstanceSize"
-                            ])
-        , if (_ram P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_ram",
-                            [ "_fixedInstanceSize"
-                            ])
-        , if (_sshKeyPath P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_sshKeyPath",
-                            [ "_sshKeyPublic"
-                            ])
-        , if (_sshKeyPublic P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_sshKeyPublic",
-                            [ "_sshKeyPath"
-                            ])
-        , if (_vcores P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_vcores",
-                            [ "_fixedInstanceSize"
-                            ])
+instance TF.HasValidator (ServerResource s) where
+    validator = TF.conflictValidator (\ServerResource'{..} -> HashMap.fromList $ P.catMaybes
+        [ TF.conflictsWith (_coresPerProcessor P.== P.Nothing) "_coresPerProcessor"
+            ["_fixedInstanceSize"]
+        , TF.conflictsWith (_fixedInstanceSize P.== P.Nothing) "_fixedInstanceSize"
+            ["_coresPerProcessor", "_hdds", "_ram", "_vcores"]
+        , TF.conflictsWith (_hdds P.== P.Nothing) "_hdds"
+            ["_fixedInstanceSize"]
+        , TF.conflictsWith (_ram P.== P.Nothing) "_ram"
+            ["_fixedInstanceSize"]
+        , TF.conflictsWith (_sshKeyPath P.== P.Nothing) "_sshKeyPath"
+            ["_sshKeyPublic"]
+        , TF.conflictsWith (_sshKeyPublic P.== P.Nothing) "_sshKeyPublic"
+            ["_sshKeyPath"]
+        , TF.conflictsWith (_vcores P.== P.Nothing) "_vcores"
+            ["_fixedInstanceSize"]
         ])
 
-instance P.HasCoresPerProcessor (ServerResource s) (TF.Attr s P.Int) where
+instance P.HasCoresPerProcessor (ServerResource s) (P.Maybe (TF.Expr s P.Int)) where
     coresPerProcessor =
-        P.lens (_coresPerProcessor :: ServerResource s -> TF.Attr s P.Int)
-               (\s a -> s { _coresPerProcessor = a } :: ServerResource s)
+        P.lens (_coresPerProcessor :: ServerResource s -> P.Maybe (TF.Expr s P.Int))
+            (\s a -> s { _coresPerProcessor = a } :: ServerResource s)
 
-instance P.HasDatacenter (ServerResource s) (TF.Attr s P.Text) where
+instance P.HasDatacenter (ServerResource s) (P.Maybe (TF.Expr s P.Text)) where
     datacenter =
-        P.lens (_datacenter :: ServerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _datacenter = a } :: ServerResource s)
+        P.lens (_datacenter :: ServerResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _datacenter = a } :: ServerResource s)
 
-instance P.HasDescription (ServerResource s) (TF.Attr s P.Text) where
+instance P.HasDescription (ServerResource s) (P.Maybe (TF.Expr s P.Text)) where
     description =
-        P.lens (_description :: ServerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a } :: ServerResource s)
+        P.lens (_description :: ServerResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _description = a } :: ServerResource s)
 
-instance P.HasFirewallPolicyId (ServerResource s) (TF.Attr s P.Text) where
+instance P.HasFirewallPolicyId (ServerResource s) (P.Maybe (TF.Expr s P.Text)) where
     firewallPolicyId =
-        P.lens (_firewallPolicyId :: ServerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _firewallPolicyId = a } :: ServerResource s)
+        P.lens (_firewallPolicyId :: ServerResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _firewallPolicyId = a } :: ServerResource s)
 
-instance P.HasFixedInstanceSize (ServerResource s) (TF.Attr s P.Text) where
+instance P.HasFixedInstanceSize (ServerResource s) (P.Maybe (TF.Expr s P.Text)) where
     fixedInstanceSize =
-        P.lens (_fixedInstanceSize :: ServerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _fixedInstanceSize = a } :: ServerResource s)
+        P.lens (_fixedInstanceSize :: ServerResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _fixedInstanceSize = a } :: ServerResource s)
 
-instance P.HasHdds (ServerResource s) (TF.Attr s [TF.Attr s (ServerHdds s)]) where
+instance P.HasHdds (ServerResource s) (P.Maybe (TF.Expr s [TF.Expr s (ServerHdds s)])) where
     hdds =
-        P.lens (_hdds :: ServerResource s -> TF.Attr s [TF.Attr s (ServerHdds s)])
-               (\s a -> s { _hdds = a } :: ServerResource s)
+        P.lens (_hdds :: ServerResource s -> P.Maybe (TF.Expr s [TF.Expr s (ServerHdds s)]))
+            (\s a -> s { _hdds = a } :: ServerResource s)
 
-instance P.HasImage (ServerResource s) (TF.Attr s P.Text) where
+instance P.HasImage (ServerResource s) (TF.Expr s P.Text) where
     image =
-        P.lens (_image :: ServerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _image = a } :: ServerResource s)
+        P.lens (_image :: ServerResource s -> TF.Expr s P.Text)
+            (\s a -> s { _image = a } :: ServerResource s)
 
-instance P.HasIp (ServerResource s) (TF.Attr s P.Text) where
+instance P.HasIp (ServerResource s) (P.Maybe (TF.Expr s P.Text)) where
     ip =
-        P.lens (_ip :: ServerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _ip = a } :: ServerResource s)
+        P.lens (_ip :: ServerResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _ip = a } :: ServerResource s)
 
-instance P.HasLoadbalancerId (ServerResource s) (TF.Attr s P.Text) where
+instance P.HasLoadbalancerId (ServerResource s) (P.Maybe (TF.Expr s P.Text)) where
     loadbalancerId =
-        P.lens (_loadbalancerId :: ServerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _loadbalancerId = a } :: ServerResource s)
+        P.lens (_loadbalancerId :: ServerResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _loadbalancerId = a } :: ServerResource s)
 
-instance P.HasMonitoringPolicyId (ServerResource s) (TF.Attr s P.Text) where
+instance P.HasMonitoringPolicyId (ServerResource s) (P.Maybe (TF.Expr s P.Text)) where
     monitoringPolicyId =
-        P.lens (_monitoringPolicyId :: ServerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _monitoringPolicyId = a } :: ServerResource s)
+        P.lens (_monitoringPolicyId :: ServerResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _monitoringPolicyId = a } :: ServerResource s)
 
-instance P.HasName (ServerResource s) (TF.Attr s P.Text) where
+instance P.HasName (ServerResource s) (TF.Expr s P.Text) where
     name =
-        P.lens (_name :: ServerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: ServerResource s)
+        P.lens (_name :: ServerResource s -> TF.Expr s P.Text)
+            (\s a -> s { _name = a } :: ServerResource s)
 
-instance P.HasPassword (ServerResource s) (TF.Attr s P.Text) where
+instance P.HasPassword (ServerResource s) (P.Maybe (TF.Expr s P.Text)) where
     password =
-        P.lens (_password :: ServerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _password = a } :: ServerResource s)
+        P.lens (_password :: ServerResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _password = a } :: ServerResource s)
 
-instance P.HasRam (ServerResource s) (TF.Attr s P.Double) where
+instance P.HasRam (ServerResource s) (P.Maybe (TF.Expr s P.Double)) where
     ram =
-        P.lens (_ram :: ServerResource s -> TF.Attr s P.Double)
-               (\s a -> s { _ram = a } :: ServerResource s)
+        P.lens (_ram :: ServerResource s -> P.Maybe (TF.Expr s P.Double))
+            (\s a -> s { _ram = a } :: ServerResource s)
 
-instance P.HasSshKeyPath (ServerResource s) (TF.Attr s P.Text) where
+instance P.HasSshKeyPath (ServerResource s) (P.Maybe (TF.Expr s P.Text)) where
     sshKeyPath =
-        P.lens (_sshKeyPath :: ServerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _sshKeyPath = a } :: ServerResource s)
+        P.lens (_sshKeyPath :: ServerResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _sshKeyPath = a } :: ServerResource s)
 
-instance P.HasSshKeyPublic (ServerResource s) (TF.Attr s P.Text) where
+instance P.HasSshKeyPublic (ServerResource s) (P.Maybe (TF.Expr s P.Text)) where
     sshKeyPublic =
-        P.lens (_sshKeyPublic :: ServerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _sshKeyPublic = a } :: ServerResource s)
+        P.lens (_sshKeyPublic :: ServerResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _sshKeyPublic = a } :: ServerResource s)
 
-instance P.HasVcores (ServerResource s) (TF.Attr s P.Int) where
+instance P.HasVcores (ServerResource s) (P.Maybe (TF.Expr s P.Int)) where
     vcores =
-        P.lens (_vcores :: ServerResource s -> TF.Attr s P.Int)
-               (\s a -> s { _vcores = a } :: ServerResource s)
+        P.lens (_vcores :: ServerResource s -> P.Maybe (TF.Expr s P.Int))
+            (\s a -> s { _vcores = a } :: ServerResource s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ServerResource s)) (TF.Expr s P.Text) where
+    computedId x =
+        TF.unsafeCompute TF.encodeAttr x "id"
 
-instance s ~ s' => P.HasComputedIps (TF.Ref s' (ServerResource s)) (TF.Attr s [TF.Attr s (ServerIps s)]) where
-    computedIps x = TF.compute (TF.refKey x) "ips"
+instance s ~ s' => P.HasComputedIps (TF.Ref s' (ServerResource s)) (TF.Expr s [TF.Expr s (ServerIps s)]) where
+    computedIps x =
+        TF.unsafeCompute TF.encodeAttr x "ips"
 
-instance s ~ s' => P.HasComputedPassword (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedPassword x = TF.compute (TF.refKey x) "password"
+instance s ~ s' => P.HasComputedPassword (TF.Ref s' (ServerResource s)) (TF.Expr s P.Text) where
+    computedPassword x =
+        TF.unsafeCompute TF.encodeAttr x "password"
 
 -- | @oneandone_shared_storage@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/oneandone/r/shared_storage.html terraform documentation>
 -- for more information.
 data SharedStorageResource s = SharedStorageResource'
-    { _datacenter     :: TF.Attr s P.Text
+    { _datacenter :: TF.Expr s P.Text
     -- ^ @datacenter@ - (Required)
     --
-    , _description    :: TF.Attr s P.Text
+    , _description :: P.Maybe (TF.Expr s P.Text)
     -- ^ @description@ - (Optional)
     --
-    , _name           :: TF.Attr s P.Text
+    , _name :: TF.Expr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _size           :: TF.Attr s P.Int
+    , _size :: TF.Expr s P.Int
     -- ^ @size@ - (Required)
     --
-    , _storageServers :: TF.Attr s [TF.Attr s (SharedStorageStorageServers s)]
+    , _storageServers :: P.Maybe (TF.Expr s [TF.Expr s (SharedStorageStorageServers s)])
     -- ^ @storage_servers@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Define a new @oneandone_shared_storage@ resource value.
 sharedStorageResource
-    :: TF.Attr s P.Text -- ^ @datacenter@ ('P._datacenter', 'P.datacenter')
-    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
-    -> TF.Attr s P.Int -- ^ @size@ ('P._size', 'P.size')
+    :: TF.Expr s P.Text -- ^ Lens: 'P.datacenter', Field: '_datacenter', HCL: @datacenter@
+    -> TF.Expr s P.Text -- ^ Lens: 'P.name', Field: '_name', HCL: @name@
+    -> TF.Expr s P.Int -- ^ Lens: 'P.size', Field: '_size', HCL: @size@
     -> P.Resource (SharedStorageResource s)
 sharedStorageResource _datacenter _name _size =
-    TF.unsafeResource "oneandone_shared_storage" TF.validator $
-        SharedStorageResource'
+    TF.unsafeResource "oneandone_shared_storage" P.defaultProvider  TF.encodeLifecycle
+        (\SharedStorageResource'{..} -> P.mconcat
+            [ TF.pair "datacenter" _datacenter
+            , P.maybe P.mempty (TF.pair "description") _description
+            , TF.pair "name" _name
+            , TF.pair "size" _size
+            , P.maybe P.mempty (TF.pair "storage_servers") _storageServers
+            ])
+        (SharedStorageResource'
             { _datacenter = _datacenter
-            , _description = TF.Nil
+            , _description = P.Nothing
             , _name = _name
             , _size = _size
-            , _storageServers = TF.Nil
-            }
+            , _storageServers = P.Nothing
+            })
 
-instance TF.IsObject (SharedStorageResource s) where
-    toObject SharedStorageResource'{..} = P.catMaybes
-        [ TF.assign "datacenter" <$> TF.attribute _datacenter
-        , TF.assign "description" <$> TF.attribute _description
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "size" <$> TF.attribute _size
-        , TF.assign "storage_servers" <$> TF.attribute _storageServers
-        ]
+instance P.Hashable (SharedStorageResource s)
 
-instance TF.IsValid (SharedStorageResource s) where
+instance TF.HasValidator (SharedStorageResource s) where
     validator = P.mempty
 
-instance P.HasDatacenter (SharedStorageResource s) (TF.Attr s P.Text) where
+instance P.HasDatacenter (SharedStorageResource s) (TF.Expr s P.Text) where
     datacenter =
-        P.lens (_datacenter :: SharedStorageResource s -> TF.Attr s P.Text)
-               (\s a -> s { _datacenter = a } :: SharedStorageResource s)
+        P.lens (_datacenter :: SharedStorageResource s -> TF.Expr s P.Text)
+            (\s a -> s { _datacenter = a } :: SharedStorageResource s)
 
-instance P.HasDescription (SharedStorageResource s) (TF.Attr s P.Text) where
+instance P.HasDescription (SharedStorageResource s) (P.Maybe (TF.Expr s P.Text)) where
     description =
-        P.lens (_description :: SharedStorageResource s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a } :: SharedStorageResource s)
+        P.lens (_description :: SharedStorageResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _description = a } :: SharedStorageResource s)
 
-instance P.HasName (SharedStorageResource s) (TF.Attr s P.Text) where
+instance P.HasName (SharedStorageResource s) (TF.Expr s P.Text) where
     name =
-        P.lens (_name :: SharedStorageResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: SharedStorageResource s)
+        P.lens (_name :: SharedStorageResource s -> TF.Expr s P.Text)
+            (\s a -> s { _name = a } :: SharedStorageResource s)
 
-instance P.HasSize (SharedStorageResource s) (TF.Attr s P.Int) where
+instance P.HasSize (SharedStorageResource s) (TF.Expr s P.Int) where
     size =
-        P.lens (_size :: SharedStorageResource s -> TF.Attr s P.Int)
-               (\s a -> s { _size = a } :: SharedStorageResource s)
+        P.lens (_size :: SharedStorageResource s -> TF.Expr s P.Int)
+            (\s a -> s { _size = a } :: SharedStorageResource s)
 
-instance P.HasStorageServers (SharedStorageResource s) (TF.Attr s [TF.Attr s (SharedStorageStorageServers s)]) where
+instance P.HasStorageServers (SharedStorageResource s) (P.Maybe (TF.Expr s [TF.Expr s (SharedStorageStorageServers s)])) where
     storageServers =
-        P.lens (_storageServers :: SharedStorageResource s -> TF.Attr s [TF.Attr s (SharedStorageStorageServers s)])
-               (\s a -> s { _storageServers = a } :: SharedStorageResource s)
+        P.lens (_storageServers :: SharedStorageResource s -> P.Maybe (TF.Expr s [TF.Expr s (SharedStorageStorageServers s)]))
+            (\s a -> s { _storageServers = a } :: SharedStorageResource s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (SharedStorageResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SharedStorageResource s)) (TF.Expr s P.Text) where
+    computedId x =
+        TF.unsafeCompute TF.encodeAttr x "id"
 
 -- | @oneandone_ssh_key@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/oneandone/r/ssh_key.html terraform documentation>
 -- for more information.
 data SshKeyResource s = SshKeyResource'
-    { _description :: TF.Attr s P.Text
+    { _description :: P.Maybe (TF.Expr s P.Text)
     -- ^ @description@ - (Optional)
     --
-    , _name        :: TF.Attr s P.Text
+    , _name        :: TF.Expr s P.Text
     -- ^ @name@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Define a new @oneandone_ssh_key@ resource value.
 sshKeyResource
-    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    :: TF.Expr s P.Text -- ^ Lens: 'P.name', Field: '_name', HCL: @name@
     -> P.Resource (SshKeyResource s)
 sshKeyResource _name =
-    TF.unsafeResource "oneandone_ssh_key" TF.validator $
-        SshKeyResource'
-            { _description = TF.Nil
+    TF.unsafeResource "oneandone_ssh_key" P.defaultProvider  TF.encodeLifecycle
+        (\SshKeyResource'{..} -> P.mconcat
+            [ P.maybe P.mempty (TF.pair "description") _description
+            , TF.pair "name" _name
+            ])
+        (SshKeyResource'
+            { _description = P.Nothing
             , _name = _name
-            }
+            })
 
-instance TF.IsObject (SshKeyResource s) where
-    toObject SshKeyResource'{..} = P.catMaybes
-        [ TF.assign "description" <$> TF.attribute _description
-        , TF.assign "name" <$> TF.attribute _name
-        ]
+instance P.Hashable (SshKeyResource s)
 
-instance TF.IsValid (SshKeyResource s) where
+instance TF.HasValidator (SshKeyResource s) where
     validator = P.mempty
 
-instance P.HasDescription (SshKeyResource s) (TF.Attr s P.Text) where
+instance P.HasDescription (SshKeyResource s) (P.Maybe (TF.Expr s P.Text)) where
     description =
-        P.lens (_description :: SshKeyResource s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a } :: SshKeyResource s)
+        P.lens (_description :: SshKeyResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _description = a } :: SshKeyResource s)
 
-instance P.HasName (SshKeyResource s) (TF.Attr s P.Text) where
+instance P.HasName (SshKeyResource s) (TF.Expr s P.Text) where
     name =
-        P.lens (_name :: SshKeyResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: SshKeyResource s)
+        P.lens (_name :: SshKeyResource s -> TF.Expr s P.Text)
+            (\s a -> s { _name = a } :: SshKeyResource s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (SshKeyResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SshKeyResource s)) (TF.Expr s P.Text) where
+    computedId x =
+        TF.unsafeCompute TF.encodeAttr x "id"
 
-instance s ~ s' => P.HasComputedMd5 (TF.Ref s' (SshKeyResource s)) (TF.Attr s P.Text) where
-    computedMd5 x = TF.compute (TF.refKey x) "md5"
+instance s ~ s' => P.HasComputedMd5 (TF.Ref s' (SshKeyResource s)) (TF.Expr s P.Text) where
+    computedMd5 x =
+        TF.unsafeCompute TF.encodeAttr x "md5"
 
-instance s ~ s' => P.HasComputedPublicKey (TF.Ref s' (SshKeyResource s)) (TF.Attr s P.Text) where
-    computedPublicKey x = TF.compute (TF.refKey x) "public_key"
+instance s ~ s' => P.HasComputedPublicKey (TF.Ref s' (SshKeyResource s)) (TF.Expr s P.Text) where
+    computedPublicKey x =
+        TF.unsafeCompute TF.encodeAttr x "public_key"
 
-instance s ~ s' => P.HasComputedServers (TF.Ref s' (SshKeyResource s)) (TF.Attr s [TF.Attr s (SshKeyServers s)]) where
-    computedServers x = TF.compute (TF.refKey x) "servers"
+instance s ~ s' => P.HasComputedServers (TF.Ref s' (SshKeyResource s)) (TF.Expr s [TF.Expr s (SshKeyServers s)]) where
+    computedServers x =
+        TF.unsafeCompute TF.encodeAttr x "servers"
 
 -- | @oneandone_vpn@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/oneandone/r/vpn.html terraform documentation>
 -- for more information.
 data VpnResource s = VpnResource'
-    { _datacenter  :: TF.Attr s P.Text
+    { _datacenter  :: P.Maybe (TF.Expr s P.Text)
     -- ^ @datacenter@ - (Optional)
     --
-    , _description :: TF.Attr s P.Text
+    , _description :: P.Maybe (TF.Expr s P.Text)
     -- ^ @description@ - (Optional)
     --
-    , _name        :: TF.Attr s P.Text
+    , _name        :: TF.Expr s P.Text
     -- ^ @name@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Define a new @oneandone_vpn@ resource value.
 vpnResource
-    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    :: TF.Expr s P.Text -- ^ Lens: 'P.name', Field: '_name', HCL: @name@
     -> P.Resource (VpnResource s)
 vpnResource _name =
-    TF.unsafeResource "oneandone_vpn" TF.validator $
-        VpnResource'
-            { _datacenter = TF.Nil
-            , _description = TF.Nil
+    TF.unsafeResource "oneandone_vpn" P.defaultProvider  TF.encodeLifecycle
+        (\VpnResource'{..} -> P.mconcat
+            [ P.maybe P.mempty (TF.pair "datacenter") _datacenter
+            , P.maybe P.mempty (TF.pair "description") _description
+            , TF.pair "name" _name
+            ])
+        (VpnResource'
+            { _datacenter = P.Nothing
+            , _description = P.Nothing
             , _name = _name
-            }
+            })
 
-instance TF.IsObject (VpnResource s) where
-    toObject VpnResource'{..} = P.catMaybes
-        [ TF.assign "datacenter" <$> TF.attribute _datacenter
-        , TF.assign "description" <$> TF.attribute _description
-        , TF.assign "name" <$> TF.attribute _name
-        ]
+instance P.Hashable (VpnResource s)
 
-instance TF.IsValid (VpnResource s) where
+instance TF.HasValidator (VpnResource s) where
     validator = P.mempty
 
-instance P.HasDatacenter (VpnResource s) (TF.Attr s P.Text) where
+instance P.HasDatacenter (VpnResource s) (P.Maybe (TF.Expr s P.Text)) where
     datacenter =
-        P.lens (_datacenter :: VpnResource s -> TF.Attr s P.Text)
-               (\s a -> s { _datacenter = a } :: VpnResource s)
+        P.lens (_datacenter :: VpnResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _datacenter = a } :: VpnResource s)
 
-instance P.HasDescription (VpnResource s) (TF.Attr s P.Text) where
+instance P.HasDescription (VpnResource s) (P.Maybe (TF.Expr s P.Text)) where
     description =
-        P.lens (_description :: VpnResource s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a } :: VpnResource s)
+        P.lens (_description :: VpnResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _description = a } :: VpnResource s)
 
-instance P.HasName (VpnResource s) (TF.Attr s P.Text) where
+instance P.HasName (VpnResource s) (TF.Expr s P.Text) where
     name =
-        P.lens (_name :: VpnResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: VpnResource s)
+        P.lens (_name :: VpnResource s -> TF.Expr s P.Text)
+            (\s a -> s { _name = a } :: VpnResource s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (VpnResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (VpnResource s)) (TF.Expr s P.Text) where
+    computedId x =
+        TF.unsafeCompute TF.encodeAttr x "id"
 
-instance s ~ s' => P.HasComputedDownloadPath (TF.Ref s' (VpnResource s)) (TF.Attr s P.Text) where
-    computedDownloadPath x = TF.compute (TF.refKey x) "download_path"
+instance s ~ s' => P.HasComputedDownloadPath (TF.Ref s' (VpnResource s)) (TF.Expr s P.Text) where
+    computedDownloadPath x =
+        TF.unsafeCompute TF.encodeAttr x "download_path"
 
-instance s ~ s' => P.HasComputedFileName (TF.Ref s' (VpnResource s)) (TF.Attr s P.Text) where
-    computedFileName x = TF.compute (TF.refKey x) "file_name"
+instance s ~ s' => P.HasComputedFileName (TF.Ref s' (VpnResource s)) (TF.Expr s P.Text) where
+    computedFileName x =
+        TF.unsafeCompute TF.encodeAttr x "file_name"

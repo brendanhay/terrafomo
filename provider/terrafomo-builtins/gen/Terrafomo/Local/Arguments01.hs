@@ -21,22 +21,23 @@ module Terrafomo.Local.Arguments01
 import GHC.Base ((.))
 
 import qualified Lens.Micro       as P
+import qualified Terrafomo.Lens   as TF
 import qualified Terrafomo.Schema as TF
 
 class HasContent a b | a -> b where
     content :: P.Lens' a b
 
-instance HasContent a b => HasContent (TF.Schema l p a) b where
+instance HasContent a b => HasContent (TF.Resource l p a) b where
     content = TF.configuration . content
 
 class HasFilename a b | a -> b where
     filename :: P.Lens' a b
 
-instance HasFilename a b => HasFilename (TF.Schema l p a) b where
+instance HasFilename a b => HasFilename (TF.Resource l p a) b where
     filename = TF.configuration . filename
 
 class HasSensitiveContent a b | a -> b where
     sensitiveContent :: P.Lens' a b
 
-instance HasSensitiveContent a b => HasSensitiveContent (TF.Schema l p a) b where
+instance HasSensitiveContent a b => HasSensitiveContent (TF.Resource l p a) b where
     sensitiveContent = TF.configuration . sensitiveContent

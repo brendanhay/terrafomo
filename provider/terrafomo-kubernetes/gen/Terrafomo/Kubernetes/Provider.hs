@@ -1,7 +1,6 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -18,8 +17,9 @@
 module Terrafomo.Kubernetes.Provider
     (
     -- * Kubernetes Provider Datatype
-      Provider (..)
+      Kubernetes (..)
     , newProvider
+    , defaultProvider
 
     -- * Kubernetes Specific Aliases
     , DataSource
@@ -34,32 +34,27 @@ import GHC.Base (($))
 
 import Terrafomo.Kubernetes.Settings
 
+import qualified Data.Hashable              as P
+import qualified Data.HashMap.Strict        as P
 import qualified Data.List.NonEmpty         as P
-import qualified Data.Map.Strict            as P
-import qualified Data.Map.Strict            as Map
 import qualified Data.Maybe                 as P
-import qualified Data.Monoid                as P
-import qualified Data.Text                  as P
+import qualified Data.Text.Lazy             as P
 import qualified GHC.Generics               as P
 import qualified Lens.Micro                 as P
 import qualified Prelude                    as P
 import qualified Terrafomo.HCL              as TF
 import qualified Terrafomo.Kubernetes.Lens  as P
 import qualified Terrafomo.Kubernetes.Types as P
-import qualified Terrafomo.Lifecycle        as TF
-import qualified Terrafomo.Name             as TF
-import qualified Terrafomo.Provider         as TF
 import qualified Terrafomo.Schema           as TF
-import qualified Terrafomo.Validator        as TF
 
-type DataSource a = TF.Schema ()               Provider a
-type Resource   a = TF.Schema (TF.Lifecycle a) Provider a
+type DataSource a = TF.Resource Kubernetes ()               a
+type Resource   a = TF.Resource Kubernetes (TF.Lifecycle a) a
 
 -- | The @kubernetes@ Terraform provider configuration.
 --
 -- See the <https://www.terraform.io/docs/providers/kubernetes/index.html terraform documentation>
 -- for more information.
-data Provider = Provider'
+data Kubernetes = Kubernetes'
     { _clientCertificate     :: P.Maybe P.Text
     -- ^ @client_certificate@ - (Optional)
     -- PEM-encoded client certificate for TLS authentication.
@@ -111,12 +106,15 @@ data Provider = Provider'
     -- The username to use for HTTP basic authentication when accessing the
     -- Kubernetes master endpoint.
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
+instance P.Hashable (Kubernetes)
+
+-- | Specify a new Kubernetes provider configuration.
 newProvider
-    :: Provider
+    :: Kubernetes
 newProvider =
-    Provider'
+    Kubernetes'
         { _clientCertificate = P.Nothing
         , _clientKey = P.Nothing
         , _clusterCaCertificate = P.Nothing
@@ -132,91 +130,116 @@ newProvider =
         , _username = P.Nothing
         }
 
-instance TF.IsProvider Provider where
-    type ProviderType Provider = "kubernetes"
+{- | The 'Kubernetes' provider with absent configuration that is used
+to instantiate new 'Resource's and 'DataSource's. Provider configuration can be
+overridden on a per-resource basis by using the 'Terrafomo.provider' lens, the
+'newProvider' constructor, and any of the applicable lenses.
 
-instance TF.IsObject Provider where
-    toObject Provider'{..} =
-        P.catMaybes
-            [ TF.assign "client_certificate" <$> _clientCertificate
-            , TF.assign "client_key" <$> _clientKey
-            , TF.assign "cluster_ca_certificate" <$> _clusterCaCertificate
-            , TF.assign "config_context" <$> _configContext
-            , TF.assign "config_context_auth_info" <$> _configContextAuthInfo
-            , TF.assign "config_context_cluster" <$> _configContextCluster
-            , TF.assign "config_path" <$> _configPath
-            , TF.assign "host" <$> _host
-            , TF.assign "insecure" <$> _insecure
-            , TF.assign "load_config_file" <$> _loadConfigFile
-            , TF.assign "password" <$> _password
-            , TF.assign "token" <$> _token
-            , TF.assign "username" <$> _username
-            ]
+For example:
 
-instance TF.IsValid (Provider) where
-    validator = P.mempty
+@
+import qualified Terrafomo as TF
+import qualified Terrafomo.Kubernetes.Provider as Kubernetes
 
-instance P.HasClientCertificate (Provider) (P.Maybe P.Text) where
+TF.newExampleResource "foo"
+    & TF.provider ?~
+          Kubernetes.(newProvider
+              -- Lenses
+              & Kubernetes.clientCertificate .~ Nothing -- 'P.Maybe P.Text'
+              & Kubernetes.clientKey .~ Nothing -- 'P.Maybe P.Text'
+              & Kubernetes.clusterCaCertificate .~ Nothing -- 'P.Maybe P.Text'
+              & Kubernetes.configContext .~ Nothing -- 'P.Maybe P.Text'
+              & Kubernetes.configContextAuthInfo .~ Nothing -- 'P.Maybe P.Text'
+              & Kubernetes.configContextCluster .~ Nothing -- 'P.Maybe P.Text'
+              & Kubernetes.configPath .~ Nothing -- 'P.Maybe P.Text'
+              & Kubernetes.host .~ Nothing -- 'P.Maybe P.Text'
+              & Kubernetes.insecure .~ Nothing -- 'P.Maybe P.Bool'
+              & Kubernetes.loadConfigFile .~ Nothing -- 'P.Maybe P.Bool'
+              & Kubernetes.password .~ Nothing -- 'P.Maybe P.Text'
+              & Kubernetes.token .~ Nothing -- 'P.Maybe P.Text'
+              & Kubernetes.username .~ Nothing -- 'P.Maybe P.Text'
+@
+-}
+defaultProvider :: TF.Provider Kubernetes
+defaultProvider =
+    TF.defaultProvider "kubernetes" (P.Just "~> 1.1")
+        (\Kubernetes'{..} -> P.mconcat
+            [ P.maybe P.mempty (TF.pair "client_certificate") _clientCertificate
+            , P.maybe P.mempty (TF.pair "client_key") _clientKey
+            , P.maybe P.mempty (TF.pair "cluster_ca_certificate") _clusterCaCertificate
+            , P.maybe P.mempty (TF.pair "config_context") _configContext
+            , P.maybe P.mempty (TF.pair "config_context_auth_info") _configContextAuthInfo
+            , P.maybe P.mempty (TF.pair "config_context_cluster") _configContextCluster
+            , P.maybe P.mempty (TF.pair "config_path") _configPath
+            , P.maybe P.mempty (TF.pair "host") _host
+            , P.maybe P.mempty (TF.pair "insecure") _insecure
+            , P.maybe P.mempty (TF.pair "load_config_file") _loadConfigFile
+            , P.maybe P.mempty (TF.pair "password") _password
+            , P.maybe P.mempty (TF.pair "token") _token
+            , P.maybe P.mempty (TF.pair "username") _username
+            ])
+
+instance P.HasClientCertificate (Kubernetes) (P.Maybe P.Text) where
     clientCertificate =
-        P.lens (_clientCertificate :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _clientCertificate = a } :: Provider)
+        P.lens (_clientCertificate :: Kubernetes -> P.Maybe P.Text)
+            (\s a -> s { _clientCertificate = a } :: Kubernetes)
 
-instance P.HasClientKey (Provider) (P.Maybe P.Text) where
+instance P.HasClientKey (Kubernetes) (P.Maybe P.Text) where
     clientKey =
-        P.lens (_clientKey :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _clientKey = a } :: Provider)
+        P.lens (_clientKey :: Kubernetes -> P.Maybe P.Text)
+            (\s a -> s { _clientKey = a } :: Kubernetes)
 
-instance P.HasClusterCaCertificate (Provider) (P.Maybe P.Text) where
+instance P.HasClusterCaCertificate (Kubernetes) (P.Maybe P.Text) where
     clusterCaCertificate =
-        P.lens (_clusterCaCertificate :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _clusterCaCertificate = a } :: Provider)
+        P.lens (_clusterCaCertificate :: Kubernetes -> P.Maybe P.Text)
+            (\s a -> s { _clusterCaCertificate = a } :: Kubernetes)
 
-instance P.HasConfigContext (Provider) (P.Maybe P.Text) where
+instance P.HasConfigContext (Kubernetes) (P.Maybe P.Text) where
     configContext =
-        P.lens (_configContext :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _configContext = a } :: Provider)
+        P.lens (_configContext :: Kubernetes -> P.Maybe P.Text)
+            (\s a -> s { _configContext = a } :: Kubernetes)
 
-instance P.HasConfigContextAuthInfo (Provider) (P.Maybe P.Text) where
+instance P.HasConfigContextAuthInfo (Kubernetes) (P.Maybe P.Text) where
     configContextAuthInfo =
-        P.lens (_configContextAuthInfo :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _configContextAuthInfo = a } :: Provider)
+        P.lens (_configContextAuthInfo :: Kubernetes -> P.Maybe P.Text)
+            (\s a -> s { _configContextAuthInfo = a } :: Kubernetes)
 
-instance P.HasConfigContextCluster (Provider) (P.Maybe P.Text) where
+instance P.HasConfigContextCluster (Kubernetes) (P.Maybe P.Text) where
     configContextCluster =
-        P.lens (_configContextCluster :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _configContextCluster = a } :: Provider)
+        P.lens (_configContextCluster :: Kubernetes -> P.Maybe P.Text)
+            (\s a -> s { _configContextCluster = a } :: Kubernetes)
 
-instance P.HasConfigPath (Provider) (P.Maybe P.Text) where
+instance P.HasConfigPath (Kubernetes) (P.Maybe P.Text) where
     configPath =
-        P.lens (_configPath :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _configPath = a } :: Provider)
+        P.lens (_configPath :: Kubernetes -> P.Maybe P.Text)
+            (\s a -> s { _configPath = a } :: Kubernetes)
 
-instance P.HasHost (Provider) (P.Maybe P.Text) where
+instance P.HasHost (Kubernetes) (P.Maybe P.Text) where
     host =
-        P.lens (_host :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _host = a } :: Provider)
+        P.lens (_host :: Kubernetes -> P.Maybe P.Text)
+            (\s a -> s { _host = a } :: Kubernetes)
 
-instance P.HasInsecure (Provider) (P.Maybe P.Bool) where
+instance P.HasInsecure (Kubernetes) (P.Maybe P.Bool) where
     insecure =
-        P.lens (_insecure :: Provider -> P.Maybe P.Bool)
-               (\s a -> s { _insecure = a } :: Provider)
+        P.lens (_insecure :: Kubernetes -> P.Maybe P.Bool)
+            (\s a -> s { _insecure = a } :: Kubernetes)
 
-instance P.HasLoadConfigFile (Provider) (P.Maybe P.Bool) where
+instance P.HasLoadConfigFile (Kubernetes) (P.Maybe P.Bool) where
     loadConfigFile =
-        P.lens (_loadConfigFile :: Provider -> P.Maybe P.Bool)
-               (\s a -> s { _loadConfigFile = a } :: Provider)
+        P.lens (_loadConfigFile :: Kubernetes -> P.Maybe P.Bool)
+            (\s a -> s { _loadConfigFile = a } :: Kubernetes)
 
-instance P.HasPassword (Provider) (P.Maybe P.Text) where
+instance P.HasPassword (Kubernetes) (P.Maybe P.Text) where
     password =
-        P.lens (_password :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _password = a } :: Provider)
+        P.lens (_password :: Kubernetes -> P.Maybe P.Text)
+            (\s a -> s { _password = a } :: Kubernetes)
 
-instance P.HasToken (Provider) (P.Maybe P.Text) where
+instance P.HasToken (Kubernetes) (P.Maybe P.Text) where
     token =
-        P.lens (_token :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _token = a } :: Provider)
+        P.lens (_token :: Kubernetes -> P.Maybe P.Text)
+            (\s a -> s { _token = a } :: Kubernetes)
 
-instance P.HasUsername (Provider) (P.Maybe P.Text) where
+instance P.HasUsername (Kubernetes) (P.Maybe P.Text) where
     username =
-        P.lens (_username :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _username = a } :: Provider)
+        P.lens (_username :: Kubernetes -> P.Maybe P.Text)
+            (\s a -> s { _username = a } :: Kubernetes)

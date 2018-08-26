@@ -21,22 +21,23 @@ module Terrafomo.External.Arguments01
 import GHC.Base ((.))
 
 import qualified Lens.Micro       as P
+import qualified Terrafomo.Lens   as TF
 import qualified Terrafomo.Schema as TF
 
 class HasProgram a b | a -> b where
     program :: P.Lens' a b
 
-instance HasProgram a b => HasProgram (TF.Schema l p a) b where
+instance HasProgram a b => HasProgram (TF.Resource l p a) b where
     program = TF.configuration . program
 
 class HasQuery a b | a -> b where
     query :: P.Lens' a b
 
-instance HasQuery a b => HasQuery (TF.Schema l p a) b where
+instance HasQuery a b => HasQuery (TF.Resource l p a) b where
     query = TF.configuration . query
 
 class HasWorkingDir a b | a -> b where
     workingDir :: P.Lens' a b
 
-instance HasWorkingDir a b => HasWorkingDir (TF.Schema l p a) b where
+instance HasWorkingDir a b => HasWorkingDir (TF.Resource l p a) b where
     workingDir = TF.configuration . workingDir

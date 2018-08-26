@@ -1,7 +1,6 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -33,98 +32,102 @@ import GHC.Base (($))
 
 import Terrafomo.NewRelic.Settings
 
+import qualified Data.Hashable               as P
+import qualified Data.HashMap.Strict         as P
+import qualified Data.HashMap.Strict         as HashMap
 import qualified Data.List.NonEmpty          as P
-import qualified Data.Map.Strict             as P
-import qualified Data.Map.Strict             as Map
 import qualified Data.Maybe                  as P
-import qualified Data.Monoid                 as P
-import qualified Data.Text                   as P
+import qualified Data.Text.Lazy              as P
 import qualified GHC.Generics                as P
 import qualified Lens.Micro                  as P
 import qualified Prelude                     as P
-import qualified Terrafomo.Attribute         as TF
+import qualified Terrafomo.Encode            as TF
 import qualified Terrafomo.HCL               as TF
-import qualified Terrafomo.Name              as TF
+import qualified Terrafomo.HIL               as TF
 import qualified Terrafomo.NewRelic.Lens     as P
 import qualified Terrafomo.NewRelic.Provider as P
 import qualified Terrafomo.NewRelic.Types    as P
 import qualified Terrafomo.Schema            as TF
-import qualified Terrafomo.Validator         as TF
+import qualified Terrafomo.Validate          as TF
 
 -- | @newrelic_application@ DataSource.
 --
 -- See the <https://www.terraform.io/docs/providers/newrelic/d/application.html terraform documentation>
 -- for more information.
 data ApplicationData s = ApplicationData'
-    { _name :: TF.Attr s P.Text
+    { _name :: TF.Expr s P.Text
     -- ^ @name@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Define a new @newrelic_application@ datasource value.
 applicationData
-    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    :: TF.Expr s P.Text -- ^ Lens: 'P.name', Field: '_name', HCL: @name@
     -> P.DataSource (ApplicationData s)
 applicationData _name =
-    TF.unsafeDataSource "newrelic_application" TF.validator $
-        ApplicationData'
+    TF.unsafeDataSource "newrelic_application" P.defaultProvider
+        (\ApplicationData'{..} -> P.mconcat
+            [ TF.pair "name" _name
+            ])
+        (ApplicationData'
             { _name = _name
-            }
+            })
 
-instance TF.IsObject (ApplicationData s) where
-    toObject ApplicationData'{..} = P.catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        ]
+instance P.Hashable (ApplicationData s)
 
-instance TF.IsValid (ApplicationData s) where
+instance TF.HasValidator (ApplicationData s) where
     validator = P.mempty
 
-instance P.HasName (ApplicationData s) (TF.Attr s P.Text) where
+instance P.HasName (ApplicationData s) (TF.Expr s P.Text) where
     name =
-        P.lens (_name :: ApplicationData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: ApplicationData s)
+        P.lens (_name :: ApplicationData s -> TF.Expr s P.Text)
+            (\s a -> s { _name = a } :: ApplicationData s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (ApplicationData s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ApplicationData s)) (TF.Expr s P.Text) where
+    computedId x =
+        TF.unsafeCompute TF.encodeAttr x "id"
 
-instance s ~ s' => P.HasComputedHostIds (TF.Ref s' (ApplicationData s)) (TF.Attr s [TF.Attr s P.Int]) where
-    computedHostIds x = TF.compute (TF.refKey x) "host_ids"
+instance s ~ s' => P.HasComputedHostIds (TF.Ref s' (ApplicationData s)) (TF.Expr s [TF.Expr s P.Int]) where
+    computedHostIds x =
+        TF.unsafeCompute TF.encodeAttr x "host_ids"
 
-instance s ~ s' => P.HasComputedInstanceIds (TF.Ref s' (ApplicationData s)) (TF.Attr s [TF.Attr s P.Int]) where
-    computedInstanceIds x = TF.compute (TF.refKey x) "instance_ids"
+instance s ~ s' => P.HasComputedInstanceIds (TF.Ref s' (ApplicationData s)) (TF.Expr s [TF.Expr s P.Int]) where
+    computedInstanceIds x =
+        TF.unsafeCompute TF.encodeAttr x "instance_ids"
 
 -- | @newrelic_key_transaction@ DataSource.
 --
 -- See the <https://www.terraform.io/docs/providers/newrelic/d/key_transaction.html terraform documentation>
 -- for more information.
 data KeyTransactionData s = KeyTransactionData'
-    { _name :: TF.Attr s P.Text
+    { _name :: TF.Expr s P.Text
     -- ^ @name@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Define a new @newrelic_key_transaction@ datasource value.
 keyTransactionData
-    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    :: TF.Expr s P.Text -- ^ Lens: 'P.name', Field: '_name', HCL: @name@
     -> P.DataSource (KeyTransactionData s)
 keyTransactionData _name =
-    TF.unsafeDataSource "newrelic_key_transaction" TF.validator $
-        KeyTransactionData'
+    TF.unsafeDataSource "newrelic_key_transaction" P.defaultProvider
+        (\KeyTransactionData'{..} -> P.mconcat
+            [ TF.pair "name" _name
+            ])
+        (KeyTransactionData'
             { _name = _name
-            }
+            })
 
-instance TF.IsObject (KeyTransactionData s) where
-    toObject KeyTransactionData'{..} = P.catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        ]
+instance P.Hashable (KeyTransactionData s)
 
-instance TF.IsValid (KeyTransactionData s) where
+instance TF.HasValidator (KeyTransactionData s) where
     validator = P.mempty
 
-instance P.HasName (KeyTransactionData s) (TF.Attr s P.Text) where
+instance P.HasName (KeyTransactionData s) (TF.Expr s P.Text) where
     name =
-        P.lens (_name :: KeyTransactionData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: KeyTransactionData s)
+        P.lens (_name :: KeyTransactionData s -> TF.Expr s P.Text)
+            (\s a -> s { _name = a } :: KeyTransactionData s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (KeyTransactionData s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (KeyTransactionData s)) (TF.Expr s P.Text) where
+    computedId x =
+        TF.unsafeCompute TF.encodeAttr x "id"

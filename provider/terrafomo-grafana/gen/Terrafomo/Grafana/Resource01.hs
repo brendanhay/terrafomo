@@ -1,7 +1,6 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -41,372 +40,378 @@ import GHC.Base (($))
 
 import Terrafomo.Grafana.Settings
 
+import qualified Data.Hashable              as P
+import qualified Data.HashMap.Strict        as P
+import qualified Data.HashMap.Strict        as HashMap
 import qualified Data.List.NonEmpty         as P
-import qualified Data.Map.Strict            as P
-import qualified Data.Map.Strict            as Map
 import qualified Data.Maybe                 as P
-import qualified Data.Monoid                as P
-import qualified Data.Text                  as P
+import qualified Data.Text.Lazy             as P
 import qualified GHC.Generics               as P
 import qualified Lens.Micro                 as P
 import qualified Prelude                    as P
-import qualified Terrafomo.Attribute        as TF
+import qualified Terrafomo.Encode           as TF
 import qualified Terrafomo.Grafana.Lens     as P
 import qualified Terrafomo.Grafana.Provider as P
 import qualified Terrafomo.Grafana.Types    as P
 import qualified Terrafomo.HCL              as TF
-import qualified Terrafomo.Name             as TF
+import qualified Terrafomo.HIL              as TF
 import qualified Terrafomo.Schema           as TF
-import qualified Terrafomo.Validator        as TF
+import qualified Terrafomo.Validate         as TF
 
 -- | @grafana_alert_notification@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/grafana/r/alert_notification.html terraform documentation>
 -- for more information.
 data AlertNotificationResource s = AlertNotificationResource'
-    { _isDefault :: TF.Attr s P.Bool
-    -- ^ @is_default@ - (Optional)
+    { _isDefault :: TF.Expr s P.Bool
+    -- ^ @is_default@ - (Default @false@)
     --
-    , _name      :: TF.Attr s P.Text
+    , _name      :: TF.Expr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _settings  :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _settings  :: P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text)))
     -- ^ @settings@ - (Optional)
     --
-    , _type'     :: TF.Attr s P.Text
+    , _type'     :: TF.Expr s P.Text
     -- ^ @type@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Define a new @grafana_alert_notification@ resource value.
 alertNotificationResource
-    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
-    -> TF.Attr s P.Text -- ^ @type@ ('P._type'', 'P.type'')
+    :: TF.Expr s P.Text -- ^ Lens: 'P.name', Field: '_name', HCL: @name@
+    -> TF.Expr s P.Text -- ^ Lens: 'P.type'', Field: '_type'', HCL: @type@
     -> P.Resource (AlertNotificationResource s)
 alertNotificationResource _name _type' =
-    TF.unsafeResource "grafana_alert_notification" TF.validator $
-        AlertNotificationResource'
+    TF.unsafeResource "grafana_alert_notification" P.defaultProvider  TF.encodeLifecycle
+        (\AlertNotificationResource'{..} -> P.mconcat
+            [ TF.pair "is_default" _isDefault
+            , TF.pair "name" _name
+            , P.maybe P.mempty (TF.pair "settings") _settings
+            , TF.pair "type" _type'
+            ])
+        (AlertNotificationResource'
             { _isDefault = TF.value P.False
             , _name = _name
-            , _settings = TF.Nil
+            , _settings = P.Nothing
             , _type' = _type'
-            }
+            })
 
-instance TF.IsObject (AlertNotificationResource s) where
-    toObject AlertNotificationResource'{..} = P.catMaybes
-        [ TF.assign "is_default" <$> TF.attribute _isDefault
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "settings" <$> TF.attribute _settings
-        , TF.assign "type" <$> TF.attribute _type'
-        ]
+instance P.Hashable (AlertNotificationResource s)
 
-instance TF.IsValid (AlertNotificationResource s) where
+instance TF.HasValidator (AlertNotificationResource s) where
     validator = P.mempty
 
-instance P.HasIsDefault (AlertNotificationResource s) (TF.Attr s P.Bool) where
+instance P.HasIsDefault (AlertNotificationResource s) (TF.Expr s P.Bool) where
     isDefault =
-        P.lens (_isDefault :: AlertNotificationResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _isDefault = a } :: AlertNotificationResource s)
+        P.lens (_isDefault :: AlertNotificationResource s -> TF.Expr s P.Bool)
+            (\s a -> s { _isDefault = a } :: AlertNotificationResource s)
 
-instance P.HasName (AlertNotificationResource s) (TF.Attr s P.Text) where
+instance P.HasName (AlertNotificationResource s) (TF.Expr s P.Text) where
     name =
-        P.lens (_name :: AlertNotificationResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: AlertNotificationResource s)
+        P.lens (_name :: AlertNotificationResource s -> TF.Expr s P.Text)
+            (\s a -> s { _name = a } :: AlertNotificationResource s)
 
-instance P.HasSettings (AlertNotificationResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+instance P.HasSettings (AlertNotificationResource s) (P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text)))) where
     settings =
-        P.lens (_settings :: AlertNotificationResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _settings = a } :: AlertNotificationResource s)
+        P.lens (_settings :: AlertNotificationResource s -> P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text))))
+            (\s a -> s { _settings = a } :: AlertNotificationResource s)
 
-instance P.HasType' (AlertNotificationResource s) (TF.Attr s P.Text) where
+instance P.HasType' (AlertNotificationResource s) (TF.Expr s P.Text) where
     type' =
-        P.lens (_type' :: AlertNotificationResource s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a } :: AlertNotificationResource s)
+        P.lens (_type' :: AlertNotificationResource s -> TF.Expr s P.Text)
+            (\s a -> s { _type' = a } :: AlertNotificationResource s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (AlertNotificationResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (AlertNotificationResource s)) (TF.Expr s P.Text) where
+    computedId x =
+        TF.unsafeCompute TF.encodeAttr x "id"
 
 -- | @grafana_dashboard@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/grafana/r/dashboard.html terraform documentation>
 -- for more information.
 data DashboardResource s = DashboardResource'
-    { _configJson :: TF.Attr s P.Text
+    { _configJson :: TF.Expr s P.Text
     -- ^ @config_json@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Define a new @grafana_dashboard@ resource value.
 dashboardResource
-    :: TF.Attr s P.Text -- ^ @config_json@ ('P._configJson', 'P.configJson')
+    :: TF.Expr s P.Text -- ^ Lens: 'P.configJson', Field: '_configJson', HCL: @config_json@
     -> P.Resource (DashboardResource s)
 dashboardResource _configJson =
-    TF.unsafeResource "grafana_dashboard" TF.validator $
-        DashboardResource'
+    TF.unsafeResource "grafana_dashboard" P.defaultProvider  TF.encodeLifecycle
+        (\DashboardResource'{..} -> P.mconcat
+            [ TF.pair "config_json" _configJson
+            ])
+        (DashboardResource'
             { _configJson = _configJson
-            }
+            })
 
-instance TF.IsObject (DashboardResource s) where
-    toObject DashboardResource'{..} = P.catMaybes
-        [ TF.assign "config_json" <$> TF.attribute _configJson
-        ]
+instance P.Hashable (DashboardResource s)
 
-instance TF.IsValid (DashboardResource s) where
+instance TF.HasValidator (DashboardResource s) where
     validator = P.mempty
 
-instance P.HasConfigJson (DashboardResource s) (TF.Attr s P.Text) where
+instance P.HasConfigJson (DashboardResource s) (TF.Expr s P.Text) where
     configJson =
-        P.lens (_configJson :: DashboardResource s -> TF.Attr s P.Text)
-               (\s a -> s { _configJson = a } :: DashboardResource s)
+        P.lens (_configJson :: DashboardResource s -> TF.Expr s P.Text)
+            (\s a -> s { _configJson = a } :: DashboardResource s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (DashboardResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DashboardResource s)) (TF.Expr s P.Text) where
+    computedId x =
+        TF.unsafeCompute TF.encodeAttr x "id"
 
-instance s ~ s' => P.HasComputedSlug (TF.Ref s' (DashboardResource s)) (TF.Attr s P.Text) where
-    computedSlug x = TF.compute (TF.refKey x) "slug"
+instance s ~ s' => P.HasComputedSlug (TF.Ref s' (DashboardResource s)) (TF.Expr s P.Text) where
+    computedSlug x =
+        TF.unsafeCompute TF.encodeAttr x "slug"
 
 -- | @grafana_data_source@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/grafana/r/data_source.html terraform documentation>
 -- for more information.
 data DataSourceResource s = DataSourceResource'
-    { _accessMode        :: TF.Attr s P.Text
-    -- ^ @access_mode@ - (Optional)
+    { _accessMode :: TF.Expr s P.Text
+    -- ^ @access_mode@ - (Default @proxy@)
     --
-    , _basicAuthEnabled  :: TF.Attr s P.Bool
-    -- ^ @basic_auth_enabled@ - (Optional)
+    , _basicAuthEnabled :: TF.Expr s P.Bool
+    -- ^ @basic_auth_enabled@ - (Default @false@)
     --
-    , _basicAuthPassword :: TF.Attr s P.Text
+    , _basicAuthPassword :: P.Maybe (TF.Expr s P.Text)
     -- ^ @basic_auth_password@ - (Optional)
     --
-    , _basicAuthUsername :: TF.Attr s P.Text
+    , _basicAuthUsername :: P.Maybe (TF.Expr s P.Text)
     -- ^ @basic_auth_username@ - (Optional)
     --
-    , _databaseName      :: TF.Attr s P.Text
+    , _databaseName :: P.Maybe (TF.Expr s P.Text)
     -- ^ @database_name@ - (Optional)
     --
-    , _isDefault         :: TF.Attr s P.Bool
-    -- ^ @is_default@ - (Optional)
+    , _isDefault :: TF.Expr s P.Bool
+    -- ^ @is_default@ - (Default @false@)
     --
-    , _jsonData          :: TF.Attr s [TF.Attr s (DataSourceJsonData s)]
+    , _jsonData :: P.Maybe (TF.Expr s [TF.Expr s (DataSourceJsonData s)])
     -- ^ @json_data@ - (Optional)
     --
-    , _name              :: TF.Attr s P.Text
+    , _name :: TF.Expr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _password          :: TF.Attr s P.Text
+    , _password :: P.Maybe (TF.Expr s P.Text)
     -- ^ @password@ - (Optional)
     --
-    , _secureJsonData    :: TF.Attr s [TF.Attr s (DataSourceSecureJsonData s)]
+    , _secureJsonData :: P.Maybe (TF.Expr s [TF.Expr s (DataSourceSecureJsonData s)])
     -- ^ @secure_json_data@ - (Optional)
     --
-    , _type'             :: TF.Attr s P.Text
+    , _type' :: TF.Expr s P.Text
     -- ^ @type@ - (Required)
     --
-    , _url               :: TF.Attr s P.Text
+    , _url :: P.Maybe (TF.Expr s P.Text)
     -- ^ @url@ - (Optional)
     --
-    , _username          :: TF.Attr s P.Text
+    , _username :: P.Maybe (TF.Expr s P.Text)
     -- ^ @username@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Define a new @grafana_data_source@ resource value.
 dataSourceResource
-    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
-    -> TF.Attr s P.Text -- ^ @type@ ('P._type'', 'P.type'')
+    :: TF.Expr s P.Text -- ^ Lens: 'P.name', Field: '_name', HCL: @name@
+    -> TF.Expr s P.Text -- ^ Lens: 'P.type'', Field: '_type'', HCL: @type@
     -> P.Resource (DataSourceResource s)
 dataSourceResource _name _type' =
-    TF.unsafeResource "grafana_data_source" TF.validator $
-        DataSourceResource'
+    TF.unsafeResource "grafana_data_source" P.defaultProvider  TF.encodeLifecycle
+        (\DataSourceResource'{..} -> P.mconcat
+            [ TF.pair "access_mode" _accessMode
+            , TF.pair "basic_auth_enabled" _basicAuthEnabled
+            , P.maybe P.mempty (TF.pair "basic_auth_password") _basicAuthPassword
+            , P.maybe P.mempty (TF.pair "basic_auth_username") _basicAuthUsername
+            , P.maybe P.mempty (TF.pair "database_name") _databaseName
+            , TF.pair "is_default" _isDefault
+            , P.maybe P.mempty (TF.pair "json_data") _jsonData
+            , TF.pair "name" _name
+            , P.maybe P.mempty (TF.pair "password") _password
+            , P.maybe P.mempty (TF.pair "secure_json_data") _secureJsonData
+            , TF.pair "type" _type'
+            , P.maybe P.mempty (TF.pair "url") _url
+            , P.maybe P.mempty (TF.pair "username") _username
+            ])
+        (DataSourceResource'
             { _accessMode = TF.value "proxy"
             , _basicAuthEnabled = TF.value P.False
-            , _basicAuthPassword = TF.Nil
-            , _basicAuthUsername = TF.Nil
-            , _databaseName = TF.Nil
+            , _basicAuthPassword = P.Nothing
+            , _basicAuthUsername = P.Nothing
+            , _databaseName = P.Nothing
             , _isDefault = TF.value P.False
-            , _jsonData = TF.Nil
+            , _jsonData = P.Nothing
             , _name = _name
-            , _password = TF.Nil
-            , _secureJsonData = TF.Nil
+            , _password = P.Nothing
+            , _secureJsonData = P.Nothing
             , _type' = _type'
-            , _url = TF.Nil
-            , _username = TF.Nil
-            }
+            , _url = P.Nothing
+            , _username = P.Nothing
+            })
 
-instance TF.IsObject (DataSourceResource s) where
-    toObject DataSourceResource'{..} = P.catMaybes
-        [ TF.assign "access_mode" <$> TF.attribute _accessMode
-        , TF.assign "basic_auth_enabled" <$> TF.attribute _basicAuthEnabled
-        , TF.assign "basic_auth_password" <$> TF.attribute _basicAuthPassword
-        , TF.assign "basic_auth_username" <$> TF.attribute _basicAuthUsername
-        , TF.assign "database_name" <$> TF.attribute _databaseName
-        , TF.assign "is_default" <$> TF.attribute _isDefault
-        , TF.assign "json_data" <$> TF.attribute _jsonData
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "password" <$> TF.attribute _password
-        , TF.assign "secure_json_data" <$> TF.attribute _secureJsonData
-        , TF.assign "type" <$> TF.attribute _type'
-        , TF.assign "url" <$> TF.attribute _url
-        , TF.assign "username" <$> TF.attribute _username
-        ]
+instance P.Hashable (DataSourceResource s)
 
-instance TF.IsValid (DataSourceResource s) where
+instance TF.HasValidator (DataSourceResource s) where
     validator = P.mempty
 
-instance P.HasAccessMode (DataSourceResource s) (TF.Attr s P.Text) where
+instance P.HasAccessMode (DataSourceResource s) (TF.Expr s P.Text) where
     accessMode =
-        P.lens (_accessMode :: DataSourceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _accessMode = a } :: DataSourceResource s)
+        P.lens (_accessMode :: DataSourceResource s -> TF.Expr s P.Text)
+            (\s a -> s { _accessMode = a } :: DataSourceResource s)
 
-instance P.HasBasicAuthEnabled (DataSourceResource s) (TF.Attr s P.Bool) where
+instance P.HasBasicAuthEnabled (DataSourceResource s) (TF.Expr s P.Bool) where
     basicAuthEnabled =
-        P.lens (_basicAuthEnabled :: DataSourceResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _basicAuthEnabled = a } :: DataSourceResource s)
+        P.lens (_basicAuthEnabled :: DataSourceResource s -> TF.Expr s P.Bool)
+            (\s a -> s { _basicAuthEnabled = a } :: DataSourceResource s)
 
-instance P.HasBasicAuthPassword (DataSourceResource s) (TF.Attr s P.Text) where
+instance P.HasBasicAuthPassword (DataSourceResource s) (P.Maybe (TF.Expr s P.Text)) where
     basicAuthPassword =
-        P.lens (_basicAuthPassword :: DataSourceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _basicAuthPassword = a } :: DataSourceResource s)
+        P.lens (_basicAuthPassword :: DataSourceResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _basicAuthPassword = a } :: DataSourceResource s)
 
-instance P.HasBasicAuthUsername (DataSourceResource s) (TF.Attr s P.Text) where
+instance P.HasBasicAuthUsername (DataSourceResource s) (P.Maybe (TF.Expr s P.Text)) where
     basicAuthUsername =
-        P.lens (_basicAuthUsername :: DataSourceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _basicAuthUsername = a } :: DataSourceResource s)
+        P.lens (_basicAuthUsername :: DataSourceResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _basicAuthUsername = a } :: DataSourceResource s)
 
-instance P.HasDatabaseName (DataSourceResource s) (TF.Attr s P.Text) where
+instance P.HasDatabaseName (DataSourceResource s) (P.Maybe (TF.Expr s P.Text)) where
     databaseName =
-        P.lens (_databaseName :: DataSourceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _databaseName = a } :: DataSourceResource s)
+        P.lens (_databaseName :: DataSourceResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _databaseName = a } :: DataSourceResource s)
 
-instance P.HasIsDefault (DataSourceResource s) (TF.Attr s P.Bool) where
+instance P.HasIsDefault (DataSourceResource s) (TF.Expr s P.Bool) where
     isDefault =
-        P.lens (_isDefault :: DataSourceResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _isDefault = a } :: DataSourceResource s)
+        P.lens (_isDefault :: DataSourceResource s -> TF.Expr s P.Bool)
+            (\s a -> s { _isDefault = a } :: DataSourceResource s)
 
-instance P.HasJsonData (DataSourceResource s) (TF.Attr s [TF.Attr s (DataSourceJsonData s)]) where
+instance P.HasJsonData (DataSourceResource s) (P.Maybe (TF.Expr s [TF.Expr s (DataSourceJsonData s)])) where
     jsonData =
-        P.lens (_jsonData :: DataSourceResource s -> TF.Attr s [TF.Attr s (DataSourceJsonData s)])
-               (\s a -> s { _jsonData = a } :: DataSourceResource s)
+        P.lens (_jsonData :: DataSourceResource s -> P.Maybe (TF.Expr s [TF.Expr s (DataSourceJsonData s)]))
+            (\s a -> s { _jsonData = a } :: DataSourceResource s)
 
-instance P.HasName (DataSourceResource s) (TF.Attr s P.Text) where
+instance P.HasName (DataSourceResource s) (TF.Expr s P.Text) where
     name =
-        P.lens (_name :: DataSourceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: DataSourceResource s)
+        P.lens (_name :: DataSourceResource s -> TF.Expr s P.Text)
+            (\s a -> s { _name = a } :: DataSourceResource s)
 
-instance P.HasPassword (DataSourceResource s) (TF.Attr s P.Text) where
+instance P.HasPassword (DataSourceResource s) (P.Maybe (TF.Expr s P.Text)) where
     password =
-        P.lens (_password :: DataSourceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _password = a } :: DataSourceResource s)
+        P.lens (_password :: DataSourceResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _password = a } :: DataSourceResource s)
 
-instance P.HasSecureJsonData (DataSourceResource s) (TF.Attr s [TF.Attr s (DataSourceSecureJsonData s)]) where
+instance P.HasSecureJsonData (DataSourceResource s) (P.Maybe (TF.Expr s [TF.Expr s (DataSourceSecureJsonData s)])) where
     secureJsonData =
-        P.lens (_secureJsonData :: DataSourceResource s -> TF.Attr s [TF.Attr s (DataSourceSecureJsonData s)])
-               (\s a -> s { _secureJsonData = a } :: DataSourceResource s)
+        P.lens (_secureJsonData :: DataSourceResource s -> P.Maybe (TF.Expr s [TF.Expr s (DataSourceSecureJsonData s)]))
+            (\s a -> s { _secureJsonData = a } :: DataSourceResource s)
 
-instance P.HasType' (DataSourceResource s) (TF.Attr s P.Text) where
+instance P.HasType' (DataSourceResource s) (TF.Expr s P.Text) where
     type' =
-        P.lens (_type' :: DataSourceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a } :: DataSourceResource s)
+        P.lens (_type' :: DataSourceResource s -> TF.Expr s P.Text)
+            (\s a -> s { _type' = a } :: DataSourceResource s)
 
-instance P.HasUrl (DataSourceResource s) (TF.Attr s P.Text) where
+instance P.HasUrl (DataSourceResource s) (P.Maybe (TF.Expr s P.Text)) where
     url =
-        P.lens (_url :: DataSourceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _url = a } :: DataSourceResource s)
+        P.lens (_url :: DataSourceResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _url = a } :: DataSourceResource s)
 
-instance P.HasUsername (DataSourceResource s) (TF.Attr s P.Text) where
+instance P.HasUsername (DataSourceResource s) (P.Maybe (TF.Expr s P.Text)) where
     username =
-        P.lens (_username :: DataSourceResource s -> TF.Attr s P.Text)
-               (\s a -> s { _username = a } :: DataSourceResource s)
+        P.lens (_username :: DataSourceResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _username = a } :: DataSourceResource s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (DataSourceResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DataSourceResource s)) (TF.Expr s P.Text) where
+    computedId x =
+        TF.unsafeCompute TF.encodeAttr x "id"
 
 -- | @grafana_organization@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/grafana/r/organization.html terraform documentation>
 -- for more information.
 data OrganizationResource s = OrganizationResource'
-    { _adminUser   :: TF.Attr s P.Text
-    -- ^ @admin_user@ - (Optional)
+    { _adminUser   :: TF.Expr s P.Text
+    -- ^ @admin_user@ - (Default @admin@)
     --
-    , _admins      :: TF.Attr s [TF.Attr s P.Text]
+    , _admins      :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
     -- ^ @admins@ - (Optional)
     --
-    , _createUsers :: TF.Attr s P.Bool
-    -- ^ @create_users@ - (Optional)
+    , _createUsers :: TF.Expr s P.Bool
+    -- ^ @create_users@ - (Default @true@)
     --
-    , _editors     :: TF.Attr s [TF.Attr s P.Text]
+    , _editors     :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
     -- ^ @editors@ - (Optional)
     --
-    , _name        :: TF.Attr s P.Text
+    , _name        :: TF.Expr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _viewers     :: TF.Attr s [TF.Attr s P.Text]
+    , _viewers     :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
     -- ^ @viewers@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Define a new @grafana_organization@ resource value.
 organizationResource
-    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    :: TF.Expr s P.Text -- ^ Lens: 'P.name', Field: '_name', HCL: @name@
     -> P.Resource (OrganizationResource s)
 organizationResource _name =
-    TF.unsafeResource "grafana_organization" TF.validator $
-        OrganizationResource'
+    TF.unsafeResource "grafana_organization" P.defaultProvider  TF.encodeLifecycle
+        (\OrganizationResource'{..} -> P.mconcat
+            [ TF.pair "admin_user" _adminUser
+            , P.maybe P.mempty (TF.pair "admins") _admins
+            , TF.pair "create_users" _createUsers
+            , P.maybe P.mempty (TF.pair "editors") _editors
+            , TF.pair "name" _name
+            , P.maybe P.mempty (TF.pair "viewers") _viewers
+            ])
+        (OrganizationResource'
             { _adminUser = TF.value "admin"
-            , _admins = TF.Nil
+            , _admins = P.Nothing
             , _createUsers = TF.value P.True
-            , _editors = TF.Nil
+            , _editors = P.Nothing
             , _name = _name
-            , _viewers = TF.Nil
-            }
+            , _viewers = P.Nothing
+            })
 
-instance TF.IsObject (OrganizationResource s) where
-    toObject OrganizationResource'{..} = P.catMaybes
-        [ TF.assign "admin_user" <$> TF.attribute _adminUser
-        , TF.assign "admins" <$> TF.attribute _admins
-        , TF.assign "create_users" <$> TF.attribute _createUsers
-        , TF.assign "editors" <$> TF.attribute _editors
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "viewers" <$> TF.attribute _viewers
-        ]
+instance P.Hashable (OrganizationResource s)
 
-instance TF.IsValid (OrganizationResource s) where
+instance TF.HasValidator (OrganizationResource s) where
     validator = P.mempty
 
-instance P.HasAdminUser (OrganizationResource s) (TF.Attr s P.Text) where
+instance P.HasAdminUser (OrganizationResource s) (TF.Expr s P.Text) where
     adminUser =
-        P.lens (_adminUser :: OrganizationResource s -> TF.Attr s P.Text)
-               (\s a -> s { _adminUser = a } :: OrganizationResource s)
+        P.lens (_adminUser :: OrganizationResource s -> TF.Expr s P.Text)
+            (\s a -> s { _adminUser = a } :: OrganizationResource s)
 
-instance P.HasAdmins (OrganizationResource s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasAdmins (OrganizationResource s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
     admins =
-        P.lens (_admins :: OrganizationResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _admins = a } :: OrganizationResource s)
+        P.lens (_admins :: OrganizationResource s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
+            (\s a -> s { _admins = a } :: OrganizationResource s)
 
-instance P.HasCreateUsers (OrganizationResource s) (TF.Attr s P.Bool) where
+instance P.HasCreateUsers (OrganizationResource s) (TF.Expr s P.Bool) where
     createUsers =
-        P.lens (_createUsers :: OrganizationResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _createUsers = a } :: OrganizationResource s)
+        P.lens (_createUsers :: OrganizationResource s -> TF.Expr s P.Bool)
+            (\s a -> s { _createUsers = a } :: OrganizationResource s)
 
-instance P.HasEditors (OrganizationResource s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasEditors (OrganizationResource s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
     editors =
-        P.lens (_editors :: OrganizationResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _editors = a } :: OrganizationResource s)
+        P.lens (_editors :: OrganizationResource s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
+            (\s a -> s { _editors = a } :: OrganizationResource s)
 
-instance P.HasName (OrganizationResource s) (TF.Attr s P.Text) where
+instance P.HasName (OrganizationResource s) (TF.Expr s P.Text) where
     name =
-        P.lens (_name :: OrganizationResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: OrganizationResource s)
+        P.lens (_name :: OrganizationResource s -> TF.Expr s P.Text)
+            (\s a -> s { _name = a } :: OrganizationResource s)
 
-instance P.HasViewers (OrganizationResource s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasViewers (OrganizationResource s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
     viewers =
-        P.lens (_viewers :: OrganizationResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _viewers = a } :: OrganizationResource s)
+        P.lens (_viewers :: OrganizationResource s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
+            (\s a -> s { _viewers = a } :: OrganizationResource s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (OrganizationResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (OrganizationResource s)) (TF.Expr s P.Text) where
+    computedId x =
+        TF.unsafeCompute TF.encodeAttr x "id"
 
-instance s ~ s' => P.HasComputedOrgId (TF.Ref s' (OrganizationResource s)) (TF.Attr s P.Int) where
-    computedOrgId x = TF.compute (TF.refKey x) "org_id"
+instance s ~ s' => P.HasComputedOrgId (TF.Ref s' (OrganizationResource s)) (TF.Expr s P.Int) where
+    computedOrgId x =
+        TF.unsafeCompute TF.encodeAttr x "org_id"

@@ -1,7 +1,6 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -18,8 +17,9 @@
 module Terrafomo.Spotinst.Provider
     (
     -- * Spotinst Provider Datatype
-      Provider (..)
+      Spotinst (..)
     , newProvider
+    , defaultProvider
 
     -- * Spotinst Specific Aliases
     , DataSource
@@ -34,32 +34,27 @@ import GHC.Base (($))
 
 import Terrafomo.Spotinst.Settings
 
+import qualified Data.Hashable            as P
+import qualified Data.HashMap.Strict      as P
 import qualified Data.List.NonEmpty       as P
-import qualified Data.Map.Strict          as P
-import qualified Data.Map.Strict          as Map
 import qualified Data.Maybe               as P
-import qualified Data.Monoid              as P
-import qualified Data.Text                as P
+import qualified Data.Text.Lazy           as P
 import qualified GHC.Generics             as P
 import qualified Lens.Micro               as P
 import qualified Prelude                  as P
 import qualified Terrafomo.HCL            as TF
-import qualified Terrafomo.Lifecycle      as TF
-import qualified Terrafomo.Name           as TF
-import qualified Terrafomo.Provider       as TF
 import qualified Terrafomo.Schema         as TF
 import qualified Terrafomo.Spotinst.Lens  as P
 import qualified Terrafomo.Spotinst.Types as P
-import qualified Terrafomo.Validator      as TF
 
-type DataSource a = TF.Schema ()               Provider a
-type Resource   a = TF.Schema (TF.Lifecycle a) Provider a
+type DataSource a = TF.Resource Spotinst ()               a
+type Resource   a = TF.Resource Spotinst (TF.Lifecycle a) a
 
 -- | The @spotinst@ Terraform provider configuration.
 --
 -- See the <https://www.terraform.io/docs/providers/spotinst/index.html terraform documentation>
 -- for more information.
-data Provider = Provider'
+data Spotinst = Spotinst'
     { _account :: P.Maybe P.Text
     -- ^ @account@ - (Optional)
     -- Spotinst Account ID
@@ -68,35 +63,52 @@ data Provider = Provider'
     -- ^ @token@ - (Optional)
     -- Spotinst Personal API Access Token
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
+instance P.Hashable (Spotinst)
+
+-- | Specify a new Spotinst provider configuration.
 newProvider
-    :: Provider
+    :: Spotinst
 newProvider =
-    Provider'
+    Spotinst'
         { _account = P.Nothing
         , _token = P.Nothing
         }
 
-instance TF.IsProvider Provider where
-    type ProviderType Provider = "spotinst"
+{- | The 'Spotinst' provider with absent configuration that is used
+to instantiate new 'Resource's and 'DataSource's. Provider configuration can be
+overridden on a per-resource basis by using the 'Terrafomo.provider' lens, the
+'newProvider' constructor, and any of the applicable lenses.
 
-instance TF.IsObject Provider where
-    toObject Provider'{..} =
-        P.catMaybes
-            [ TF.assign "account" <$> _account
-            , TF.assign "token" <$> _token
-            ]
+For example:
 
-instance TF.IsValid (Provider) where
-    validator = P.mempty
+@
+import qualified Terrafomo as TF
+import qualified Terrafomo.Spotinst.Provider as Spotinst
 
-instance P.HasAccount (Provider) (P.Maybe P.Text) where
+TF.newExampleResource "foo"
+    & TF.provider ?~
+          Spotinst.(newProvider
+              -- Lenses
+              & Spotinst.account .~ Nothing -- 'P.Maybe P.Text'
+              & Spotinst.token .~ Nothing -- 'P.Maybe P.Text'
+@
+-}
+defaultProvider :: TF.Provider Spotinst
+defaultProvider =
+    TF.defaultProvider "spotinst" (P.Just "~> 1.2")
+        (\Spotinst'{..} -> P.mconcat
+            [ P.maybe P.mempty (TF.pair "account") _account
+            , P.maybe P.mempty (TF.pair "token") _token
+            ])
+
+instance P.HasAccount (Spotinst) (P.Maybe P.Text) where
     account =
-        P.lens (_account :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _account = a } :: Provider)
+        P.lens (_account :: Spotinst -> P.Maybe P.Text)
+            (\s a -> s { _account = a } :: Spotinst)
 
-instance P.HasToken (Provider) (P.Maybe P.Text) where
+instance P.HasToken (Spotinst) (P.Maybe P.Text) where
     token =
-        P.lens (_token :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _token = a } :: Provider)
+        P.lens (_token :: Spotinst -> P.Maybe P.Text)
+            (\s a -> s { _token = a } :: Spotinst)

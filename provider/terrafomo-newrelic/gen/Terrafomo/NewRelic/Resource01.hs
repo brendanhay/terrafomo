@@ -1,7 +1,6 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -53,662 +52,663 @@ import GHC.Base (($))
 
 import Terrafomo.NewRelic.Settings
 
+import qualified Data.Hashable               as P
+import qualified Data.HashMap.Strict         as P
+import qualified Data.HashMap.Strict         as HashMap
 import qualified Data.List.NonEmpty          as P
-import qualified Data.Map.Strict             as P
-import qualified Data.Map.Strict             as Map
 import qualified Data.Maybe                  as P
-import qualified Data.Monoid                 as P
-import qualified Data.Text                   as P
+import qualified Data.Text.Lazy              as P
 import qualified GHC.Generics                as P
 import qualified Lens.Micro                  as P
 import qualified Prelude                     as P
-import qualified Terrafomo.Attribute         as TF
+import qualified Terrafomo.Encode            as TF
 import qualified Terrafomo.HCL               as TF
-import qualified Terrafomo.Name              as TF
+import qualified Terrafomo.HIL               as TF
 import qualified Terrafomo.NewRelic.Lens     as P
 import qualified Terrafomo.NewRelic.Provider as P
 import qualified Terrafomo.NewRelic.Types    as P
 import qualified Terrafomo.Schema            as TF
-import qualified Terrafomo.Validator         as TF
+import qualified Terrafomo.Validate          as TF
 
 -- | @newrelic_alert_channel@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/newrelic/r/alert_channel.html terraform documentation>
 -- for more information.
 data AlertChannelResource s = AlertChannelResource'
-    { _configuration :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    { _configuration :: TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text))
     -- ^ @configuration@ - (Required, Forces New)
     --
-    , _name          :: TF.Attr s P.Text
+    , _name          :: TF.Expr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    , _type'         :: TF.Attr s P.Text
+    , _type'         :: TF.Expr s P.Text
     -- ^ @type@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Define a new @newrelic_alert_channel@ resource value.
 alertChannelResource
-    :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text)) -- ^ @configuration@ ('P._configuration', 'P.configuration')
-    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
-    -> TF.Attr s P.Text -- ^ @type@ ('P._type'', 'P.type'')
+    :: TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text)) -- ^ Lens: 'P.configuration', Field: '_configuration', HCL: @configuration@
+    -> TF.Expr s P.Text -- ^ Lens: 'P.name', Field: '_name', HCL: @name@
+    -> TF.Expr s P.Text -- ^ Lens: 'P.type'', Field: '_type'', HCL: @type@
     -> P.Resource (AlertChannelResource s)
 alertChannelResource _configuration _name _type' =
-    TF.unsafeResource "newrelic_alert_channel" TF.validator $
-        AlertChannelResource'
+    TF.unsafeResource "newrelic_alert_channel" P.defaultProvider  TF.encodeLifecycle
+        (\AlertChannelResource'{..} -> P.mconcat
+            [ TF.pair "configuration" _configuration
+            , TF.pair "name" _name
+            , TF.pair "type" _type'
+            ])
+        (AlertChannelResource'
             { _configuration = _configuration
             , _name = _name
             , _type' = _type'
-            }
+            })
 
-instance TF.IsObject (AlertChannelResource s) where
-    toObject AlertChannelResource'{..} = P.catMaybes
-        [ TF.assign "configuration" <$> TF.attribute _configuration
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "type" <$> TF.attribute _type'
-        ]
+instance P.Hashable (AlertChannelResource s)
 
-instance TF.IsValid (AlertChannelResource s) where
+instance TF.HasValidator (AlertChannelResource s) where
     validator = P.mempty
 
-instance P.HasConfiguration (AlertChannelResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+instance P.HasConfiguration (AlertChannelResource s) (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text))) where
     configuration =
-        P.lens (_configuration :: AlertChannelResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _configuration = a } :: AlertChannelResource s)
+        P.lens (_configuration :: AlertChannelResource s -> TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text)))
+            (\s a -> s { _configuration = a } :: AlertChannelResource s)
 
-instance P.HasName (AlertChannelResource s) (TF.Attr s P.Text) where
+instance P.HasName (AlertChannelResource s) (TF.Expr s P.Text) where
     name =
-        P.lens (_name :: AlertChannelResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: AlertChannelResource s)
+        P.lens (_name :: AlertChannelResource s -> TF.Expr s P.Text)
+            (\s a -> s { _name = a } :: AlertChannelResource s)
 
-instance P.HasType' (AlertChannelResource s) (TF.Attr s P.Text) where
+instance P.HasType' (AlertChannelResource s) (TF.Expr s P.Text) where
     type' =
-        P.lens (_type' :: AlertChannelResource s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a } :: AlertChannelResource s)
+        P.lens (_type' :: AlertChannelResource s -> TF.Expr s P.Text)
+            (\s a -> s { _type' = a } :: AlertChannelResource s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (AlertChannelResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (AlertChannelResource s)) (TF.Expr s P.Text) where
+    computedId x =
+        TF.unsafeCompute TF.encodeAttr x "id"
 
 -- | @newrelic_alert_condition@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/newrelic/r/alert_condition.html terraform documentation>
 -- for more information.
 data AlertConditionResource s = AlertConditionResource'
-    { _conditionScope :: TF.Attr s P.Text
+    { _conditionScope :: P.Maybe (TF.Expr s P.Text)
     -- ^ @condition_scope@ - (Optional)
     --
-    , _entities :: TF.Attr s (P.NonEmpty (TF.Attr s P.Int))
+    , _entities :: TF.Expr s (P.NonEmpty (TF.Expr s P.Int))
     -- ^ @entities@ - (Required)
     --
-    , _gcMetric :: TF.Attr s P.Text
+    , _gcMetric :: P.Maybe (TF.Expr s P.Text)
     -- ^ @gc_metric@ - (Optional)
     --
-    , _metric :: TF.Attr s P.Text
+    , _metric :: TF.Expr s P.Text
     -- ^ @metric@ - (Required)
     --
-    , _name :: TF.Attr s P.Text
+    , _name :: TF.Expr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _policyId :: TF.Attr s P.Int
+    , _policyId :: TF.Expr s P.Int
     -- ^ @policy_id@ - (Required, Forces New)
     --
-    , _runbookUrl :: TF.Attr s P.Text
+    , _runbookUrl :: P.Maybe (TF.Expr s P.Text)
     -- ^ @runbook_url@ - (Optional)
     --
-    , _term :: TF.Attr s (P.NonEmpty (TF.Attr s (AlertConditionTerm s)))
+    , _term :: TF.Expr s (P.NonEmpty (TF.Expr s (AlertConditionTerm s)))
     -- ^ @term@ - (Required)
     --
-    , _type' :: TF.Attr s P.Text
+    , _type' :: TF.Expr s P.Text
     -- ^ @type@ - (Required)
     --
-    , _userDefinedMetric :: TF.Attr s P.Text
+    , _userDefinedMetric :: P.Maybe (TF.Expr s P.Text)
     -- ^ @user_defined_metric@ - (Optional)
     --
-    , _userDefinedValueFunction :: TF.Attr s P.Text
+    , _userDefinedValueFunction :: P.Maybe (TF.Expr s P.Text)
     -- ^ @user_defined_value_function@ - (Optional)
     --
-    , _violationCloseTimer :: TF.Attr s P.Int
+    , _violationCloseTimer :: P.Maybe (TF.Expr s P.Int)
     -- ^ @violation_close_timer@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Define a new @newrelic_alert_condition@ resource value.
 alertConditionResource
-    :: TF.Attr s (P.NonEmpty (TF.Attr s P.Int)) -- ^ @entities@ ('P._entities', 'P.entities')
-    -> TF.Attr s P.Int -- ^ @policy_id@ ('P._policyId', 'P.policyId')
-    -> TF.Attr s P.Text -- ^ @metric@ ('P._metric', 'P.metric')
-    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
-    -> TF.Attr s (P.NonEmpty (TF.Attr s (AlertConditionTerm s))) -- ^ @term@ ('P._term', 'P.term')
-    -> TF.Attr s P.Text -- ^ @type@ ('P._type'', 'P.type'')
+    :: TF.Expr s (P.NonEmpty (TF.Expr s P.Int)) -- ^ Lens: 'P.entities', Field: '_entities', HCL: @entities@
+    -> TF.Expr s P.Int -- ^ Lens: 'P.policyId', Field: '_policyId', HCL: @policy_id@
+    -> TF.Expr s P.Text -- ^ Lens: 'P.metric', Field: '_metric', HCL: @metric@
+    -> TF.Expr s P.Text -- ^ Lens: 'P.name', Field: '_name', HCL: @name@
+    -> TF.Expr s (P.NonEmpty (TF.Expr s (AlertConditionTerm s))) -- ^ Lens: 'P.term', Field: '_term', HCL: @term@
+    -> TF.Expr s P.Text -- ^ Lens: 'P.type'', Field: '_type'', HCL: @type@
     -> P.Resource (AlertConditionResource s)
 alertConditionResource _entities _policyId _metric _name _term _type' =
-    TF.unsafeResource "newrelic_alert_condition" TF.validator $
-        AlertConditionResource'
-            { _conditionScope = TF.Nil
+    TF.unsafeResource "newrelic_alert_condition" P.defaultProvider  TF.encodeLifecycle
+        (\AlertConditionResource'{..} -> P.mconcat
+            [ P.maybe P.mempty (TF.pair "condition_scope") _conditionScope
+            , TF.pair "entities" _entities
+            , P.maybe P.mempty (TF.pair "gc_metric") _gcMetric
+            , TF.pair "metric" _metric
+            , TF.pair "name" _name
+            , TF.pair "policy_id" _policyId
+            , P.maybe P.mempty (TF.pair "runbook_url") _runbookUrl
+            , TF.pair "term" _term
+            , TF.pair "type" _type'
+            , P.maybe P.mempty (TF.pair "user_defined_metric") _userDefinedMetric
+            , P.maybe P.mempty (TF.pair "user_defined_value_function") _userDefinedValueFunction
+            , P.maybe P.mempty (TF.pair "violation_close_timer") _violationCloseTimer
+            ])
+        (AlertConditionResource'
+            { _conditionScope = P.Nothing
             , _entities = _entities
-            , _gcMetric = TF.Nil
+            , _gcMetric = P.Nothing
             , _metric = _metric
             , _name = _name
             , _policyId = _policyId
-            , _runbookUrl = TF.Nil
+            , _runbookUrl = P.Nothing
             , _term = _term
             , _type' = _type'
-            , _userDefinedMetric = TF.Nil
-            , _userDefinedValueFunction = TF.Nil
-            , _violationCloseTimer = TF.Nil
-            }
+            , _userDefinedMetric = P.Nothing
+            , _userDefinedValueFunction = P.Nothing
+            , _violationCloseTimer = P.Nothing
+            })
 
-instance TF.IsObject (AlertConditionResource s) where
-    toObject AlertConditionResource'{..} = P.catMaybes
-        [ TF.assign "condition_scope" <$> TF.attribute _conditionScope
-        , TF.assign "entities" <$> TF.attribute _entities
-        , TF.assign "gc_metric" <$> TF.attribute _gcMetric
-        , TF.assign "metric" <$> TF.attribute _metric
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "policy_id" <$> TF.attribute _policyId
-        , TF.assign "runbook_url" <$> TF.attribute _runbookUrl
-        , TF.assign "term" <$> TF.attribute _term
-        , TF.assign "type" <$> TF.attribute _type'
-        , TF.assign "user_defined_metric" <$> TF.attribute _userDefinedMetric
-        , TF.assign "user_defined_value_function" <$> TF.attribute _userDefinedValueFunction
-        , TF.assign "violation_close_timer" <$> TF.attribute _violationCloseTimer
-        ]
+instance P.Hashable (AlertConditionResource s)
 
-instance TF.IsValid (AlertConditionResource s) where
+instance TF.HasValidator (AlertConditionResource s) where
     validator = P.mempty
 
-instance P.HasConditionScope (AlertConditionResource s) (TF.Attr s P.Text) where
+instance P.HasConditionScope (AlertConditionResource s) (P.Maybe (TF.Expr s P.Text)) where
     conditionScope =
-        P.lens (_conditionScope :: AlertConditionResource s -> TF.Attr s P.Text)
-               (\s a -> s { _conditionScope = a } :: AlertConditionResource s)
+        P.lens (_conditionScope :: AlertConditionResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _conditionScope = a } :: AlertConditionResource s)
 
-instance P.HasEntities (AlertConditionResource s) (TF.Attr s (P.NonEmpty (TF.Attr s P.Int))) where
+instance P.HasEntities (AlertConditionResource s) (TF.Expr s (P.NonEmpty (TF.Expr s P.Int))) where
     entities =
-        P.lens (_entities :: AlertConditionResource s -> TF.Attr s (P.NonEmpty (TF.Attr s P.Int)))
-               (\s a -> s { _entities = a } :: AlertConditionResource s)
+        P.lens (_entities :: AlertConditionResource s -> TF.Expr s (P.NonEmpty (TF.Expr s P.Int)))
+            (\s a -> s { _entities = a } :: AlertConditionResource s)
 
-instance P.HasGcMetric (AlertConditionResource s) (TF.Attr s P.Text) where
+instance P.HasGcMetric (AlertConditionResource s) (P.Maybe (TF.Expr s P.Text)) where
     gcMetric =
-        P.lens (_gcMetric :: AlertConditionResource s -> TF.Attr s P.Text)
-               (\s a -> s { _gcMetric = a } :: AlertConditionResource s)
+        P.lens (_gcMetric :: AlertConditionResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _gcMetric = a } :: AlertConditionResource s)
 
-instance P.HasMetric (AlertConditionResource s) (TF.Attr s P.Text) where
+instance P.HasMetric (AlertConditionResource s) (TF.Expr s P.Text) where
     metric =
-        P.lens (_metric :: AlertConditionResource s -> TF.Attr s P.Text)
-               (\s a -> s { _metric = a } :: AlertConditionResource s)
+        P.lens (_metric :: AlertConditionResource s -> TF.Expr s P.Text)
+            (\s a -> s { _metric = a } :: AlertConditionResource s)
 
-instance P.HasName (AlertConditionResource s) (TF.Attr s P.Text) where
+instance P.HasName (AlertConditionResource s) (TF.Expr s P.Text) where
     name =
-        P.lens (_name :: AlertConditionResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: AlertConditionResource s)
+        P.lens (_name :: AlertConditionResource s -> TF.Expr s P.Text)
+            (\s a -> s { _name = a } :: AlertConditionResource s)
 
-instance P.HasPolicyId (AlertConditionResource s) (TF.Attr s P.Int) where
+instance P.HasPolicyId (AlertConditionResource s) (TF.Expr s P.Int) where
     policyId =
-        P.lens (_policyId :: AlertConditionResource s -> TF.Attr s P.Int)
-               (\s a -> s { _policyId = a } :: AlertConditionResource s)
+        P.lens (_policyId :: AlertConditionResource s -> TF.Expr s P.Int)
+            (\s a -> s { _policyId = a } :: AlertConditionResource s)
 
-instance P.HasRunbookUrl (AlertConditionResource s) (TF.Attr s P.Text) where
+instance P.HasRunbookUrl (AlertConditionResource s) (P.Maybe (TF.Expr s P.Text)) where
     runbookUrl =
-        P.lens (_runbookUrl :: AlertConditionResource s -> TF.Attr s P.Text)
-               (\s a -> s { _runbookUrl = a } :: AlertConditionResource s)
+        P.lens (_runbookUrl :: AlertConditionResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _runbookUrl = a } :: AlertConditionResource s)
 
-instance P.HasTerm (AlertConditionResource s) (TF.Attr s (P.NonEmpty (TF.Attr s (AlertConditionTerm s)))) where
+instance P.HasTerm (AlertConditionResource s) (TF.Expr s (P.NonEmpty (TF.Expr s (AlertConditionTerm s)))) where
     term =
-        P.lens (_term :: AlertConditionResource s -> TF.Attr s (P.NonEmpty (TF.Attr s (AlertConditionTerm s))))
-               (\s a -> s { _term = a } :: AlertConditionResource s)
+        P.lens (_term :: AlertConditionResource s -> TF.Expr s (P.NonEmpty (TF.Expr s (AlertConditionTerm s))))
+            (\s a -> s { _term = a } :: AlertConditionResource s)
 
-instance P.HasType' (AlertConditionResource s) (TF.Attr s P.Text) where
+instance P.HasType' (AlertConditionResource s) (TF.Expr s P.Text) where
     type' =
-        P.lens (_type' :: AlertConditionResource s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a } :: AlertConditionResource s)
+        P.lens (_type' :: AlertConditionResource s -> TF.Expr s P.Text)
+            (\s a -> s { _type' = a } :: AlertConditionResource s)
 
-instance P.HasUserDefinedMetric (AlertConditionResource s) (TF.Attr s P.Text) where
+instance P.HasUserDefinedMetric (AlertConditionResource s) (P.Maybe (TF.Expr s P.Text)) where
     userDefinedMetric =
-        P.lens (_userDefinedMetric :: AlertConditionResource s -> TF.Attr s P.Text)
-               (\s a -> s { _userDefinedMetric = a } :: AlertConditionResource s)
+        P.lens (_userDefinedMetric :: AlertConditionResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _userDefinedMetric = a } :: AlertConditionResource s)
 
-instance P.HasUserDefinedValueFunction (AlertConditionResource s) (TF.Attr s P.Text) where
+instance P.HasUserDefinedValueFunction (AlertConditionResource s) (P.Maybe (TF.Expr s P.Text)) where
     userDefinedValueFunction =
-        P.lens (_userDefinedValueFunction :: AlertConditionResource s -> TF.Attr s P.Text)
-               (\s a -> s { _userDefinedValueFunction = a } :: AlertConditionResource s)
+        P.lens (_userDefinedValueFunction :: AlertConditionResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _userDefinedValueFunction = a } :: AlertConditionResource s)
 
-instance P.HasViolationCloseTimer (AlertConditionResource s) (TF.Attr s P.Int) where
+instance P.HasViolationCloseTimer (AlertConditionResource s) (P.Maybe (TF.Expr s P.Int)) where
     violationCloseTimer =
-        P.lens (_violationCloseTimer :: AlertConditionResource s -> TF.Attr s P.Int)
-               (\s a -> s { _violationCloseTimer = a } :: AlertConditionResource s)
+        P.lens (_violationCloseTimer :: AlertConditionResource s -> P.Maybe (TF.Expr s P.Int))
+            (\s a -> s { _violationCloseTimer = a } :: AlertConditionResource s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (AlertConditionResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (AlertConditionResource s)) (TF.Expr s P.Text) where
+    computedId x =
+        TF.unsafeCompute TF.encodeAttr x "id"
 
 -- | @newrelic_alert_policy_channel@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/newrelic/r/alert_policy_channel.html terraform documentation>
 -- for more information.
 data AlertPolicyChannelResource s = AlertPolicyChannelResource'
-    { _channelId :: TF.Attr s P.Int
+    { _channelId :: TF.Expr s P.Int
     -- ^ @channel_id@ - (Required, Forces New)
     --
-    , _policyId  :: TF.Attr s P.Int
+    , _policyId  :: TF.Expr s P.Int
     -- ^ @policy_id@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Define a new @newrelic_alert_policy_channel@ resource value.
 alertPolicyChannelResource
-    :: TF.Attr s P.Int -- ^ @channel_id@ ('P._channelId', 'P.channelId')
-    -> TF.Attr s P.Int -- ^ @policy_id@ ('P._policyId', 'P.policyId')
+    :: TF.Expr s P.Int -- ^ Lens: 'P.channelId', Field: '_channelId', HCL: @channel_id@
+    -> TF.Expr s P.Int -- ^ Lens: 'P.policyId', Field: '_policyId', HCL: @policy_id@
     -> P.Resource (AlertPolicyChannelResource s)
 alertPolicyChannelResource _channelId _policyId =
-    TF.unsafeResource "newrelic_alert_policy_channel" TF.validator $
-        AlertPolicyChannelResource'
+    TF.unsafeResource "newrelic_alert_policy_channel" P.defaultProvider  TF.encodeLifecycle
+        (\AlertPolicyChannelResource'{..} -> P.mconcat
+            [ TF.pair "channel_id" _channelId
+            , TF.pair "policy_id" _policyId
+            ])
+        (AlertPolicyChannelResource'
             { _channelId = _channelId
             , _policyId = _policyId
-            }
+            })
 
-instance TF.IsObject (AlertPolicyChannelResource s) where
-    toObject AlertPolicyChannelResource'{..} = P.catMaybes
-        [ TF.assign "channel_id" <$> TF.attribute _channelId
-        , TF.assign "policy_id" <$> TF.attribute _policyId
-        ]
+instance P.Hashable (AlertPolicyChannelResource s)
 
-instance TF.IsValid (AlertPolicyChannelResource s) where
+instance TF.HasValidator (AlertPolicyChannelResource s) where
     validator = P.mempty
 
-instance P.HasChannelId (AlertPolicyChannelResource s) (TF.Attr s P.Int) where
+instance P.HasChannelId (AlertPolicyChannelResource s) (TF.Expr s P.Int) where
     channelId =
-        P.lens (_channelId :: AlertPolicyChannelResource s -> TF.Attr s P.Int)
-               (\s a -> s { _channelId = a } :: AlertPolicyChannelResource s)
+        P.lens (_channelId :: AlertPolicyChannelResource s -> TF.Expr s P.Int)
+            (\s a -> s { _channelId = a } :: AlertPolicyChannelResource s)
 
-instance P.HasPolicyId (AlertPolicyChannelResource s) (TF.Attr s P.Int) where
+instance P.HasPolicyId (AlertPolicyChannelResource s) (TF.Expr s P.Int) where
     policyId =
-        P.lens (_policyId :: AlertPolicyChannelResource s -> TF.Attr s P.Int)
-               (\s a -> s { _policyId = a } :: AlertPolicyChannelResource s)
+        P.lens (_policyId :: AlertPolicyChannelResource s -> TF.Expr s P.Int)
+            (\s a -> s { _policyId = a } :: AlertPolicyChannelResource s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (AlertPolicyChannelResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (AlertPolicyChannelResource s)) (TF.Expr s P.Text) where
+    computedId x =
+        TF.unsafeCompute TF.encodeAttr x "id"
 
 -- | @newrelic_alert_policy@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/newrelic/r/alert_policy.html terraform documentation>
 -- for more information.
 data AlertPolicyResource s = AlertPolicyResource'
-    { _incidentPreference :: TF.Attr s P.Text
-    -- ^ @incident_preference@ - (Optional, Forces New)
+    { _incidentPreference :: TF.Expr s P.Text
+    -- ^ @incident_preference@ - (Default @PER_POLICY@, Forces New)
     --
-    , _name               :: TF.Attr s P.Text
+    , _name               :: TF.Expr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Define a new @newrelic_alert_policy@ resource value.
 alertPolicyResource
-    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    :: TF.Expr s P.Text -- ^ Lens: 'P.name', Field: '_name', HCL: @name@
     -> P.Resource (AlertPolicyResource s)
 alertPolicyResource _name =
-    TF.unsafeResource "newrelic_alert_policy" TF.validator $
-        AlertPolicyResource'
+    TF.unsafeResource "newrelic_alert_policy" P.defaultProvider  TF.encodeLifecycle
+        (\AlertPolicyResource'{..} -> P.mconcat
+            [ TF.pair "incident_preference" _incidentPreference
+            , TF.pair "name" _name
+            ])
+        (AlertPolicyResource'
             { _incidentPreference = TF.value "PER_POLICY"
             , _name = _name
-            }
+            })
 
-instance TF.IsObject (AlertPolicyResource s) where
-    toObject AlertPolicyResource'{..} = P.catMaybes
-        [ TF.assign "incident_preference" <$> TF.attribute _incidentPreference
-        , TF.assign "name" <$> TF.attribute _name
-        ]
+instance P.Hashable (AlertPolicyResource s)
 
-instance TF.IsValid (AlertPolicyResource s) where
+instance TF.HasValidator (AlertPolicyResource s) where
     validator = P.mempty
 
-instance P.HasIncidentPreference (AlertPolicyResource s) (TF.Attr s P.Text) where
+instance P.HasIncidentPreference (AlertPolicyResource s) (TF.Expr s P.Text) where
     incidentPreference =
-        P.lens (_incidentPreference :: AlertPolicyResource s -> TF.Attr s P.Text)
-               (\s a -> s { _incidentPreference = a } :: AlertPolicyResource s)
+        P.lens (_incidentPreference :: AlertPolicyResource s -> TF.Expr s P.Text)
+            (\s a -> s { _incidentPreference = a } :: AlertPolicyResource s)
 
-instance P.HasName (AlertPolicyResource s) (TF.Attr s P.Text) where
+instance P.HasName (AlertPolicyResource s) (TF.Expr s P.Text) where
     name =
-        P.lens (_name :: AlertPolicyResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: AlertPolicyResource s)
+        P.lens (_name :: AlertPolicyResource s -> TF.Expr s P.Text)
+            (\s a -> s { _name = a } :: AlertPolicyResource s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (AlertPolicyResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (AlertPolicyResource s)) (TF.Expr s P.Text) where
+    computedId x =
+        TF.unsafeCompute TF.encodeAttr x "id"
 
-instance s ~ s' => P.HasComputedCreatedAt (TF.Ref s' (AlertPolicyResource s)) (TF.Attr s P.Int) where
-    computedCreatedAt x = TF.compute (TF.refKey x) "created_at"
+instance s ~ s' => P.HasComputedCreatedAt (TF.Ref s' (AlertPolicyResource s)) (TF.Expr s P.Int) where
+    computedCreatedAt x =
+        TF.unsafeCompute TF.encodeAttr x "created_at"
 
-instance s ~ s' => P.HasComputedUpdatedAt (TF.Ref s' (AlertPolicyResource s)) (TF.Attr s P.Int) where
-    computedUpdatedAt x = TF.compute (TF.refKey x) "updated_at"
+instance s ~ s' => P.HasComputedUpdatedAt (TF.Ref s' (AlertPolicyResource s)) (TF.Expr s P.Int) where
+    computedUpdatedAt x =
+        TF.unsafeCompute TF.encodeAttr x "updated_at"
 
 -- | @newrelic_dashboard@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/newrelic/r/dashboard.html terraform documentation>
 -- for more information.
 data DashboardResource s = DashboardResource'
-    { _editable   :: TF.Attr s P.Text
-    -- ^ @editable@ - (Optional)
+    { _editable   :: TF.Expr s P.Text
+    -- ^ @editable@ - (Default @editable_by_all@)
     --
-    , _icon       :: TF.Attr s P.Text
-    -- ^ @icon@ - (Optional)
+    , _icon       :: TF.Expr s P.Text
+    -- ^ @icon@ - (Default @bar-chart@)
     --
-    , _title      :: TF.Attr s P.Text
+    , _title      :: TF.Expr s P.Text
     -- ^ @title@ - (Required)
     --
-    , _visibility :: TF.Attr s P.Text
-    -- ^ @visibility@ - (Optional)
+    , _visibility :: TF.Expr s P.Text
+    -- ^ @visibility@ - (Default @all@)
     --
-    , _widget     :: TF.Attr s [TF.Attr s (DashboardWidget s)]
+    , _widget     :: P.Maybe (TF.Expr s [TF.Expr s (DashboardWidget s)])
     -- ^ @widget@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Define a new @newrelic_dashboard@ resource value.
 dashboardResource
-    :: TF.Attr s P.Text -- ^ @title@ ('P._title', 'P.title')
+    :: TF.Expr s P.Text -- ^ Lens: 'P.title', Field: '_title', HCL: @title@
     -> P.Resource (DashboardResource s)
 dashboardResource _title =
-    TF.unsafeResource "newrelic_dashboard" TF.validator $
-        DashboardResource'
+    TF.unsafeResource "newrelic_dashboard" P.defaultProvider  TF.encodeLifecycle
+        (\DashboardResource'{..} -> P.mconcat
+            [ TF.pair "editable" _editable
+            , TF.pair "icon" _icon
+            , TF.pair "title" _title
+            , TF.pair "visibility" _visibility
+            , P.maybe P.mempty (TF.pair "widget") _widget
+            ])
+        (DashboardResource'
             { _editable = TF.value "editable_by_all"
             , _icon = TF.value "bar-chart"
             , _title = _title
             , _visibility = TF.value "all"
-            , _widget = TF.Nil
-            }
+            , _widget = P.Nothing
+            })
 
-instance TF.IsObject (DashboardResource s) where
-    toObject DashboardResource'{..} = P.catMaybes
-        [ TF.assign "editable" <$> TF.attribute _editable
-        , TF.assign "icon" <$> TF.attribute _icon
-        , TF.assign "title" <$> TF.attribute _title
-        , TF.assign "visibility" <$> TF.attribute _visibility
-        , TF.assign "widget" <$> TF.attribute _widget
-        ]
+instance P.Hashable (DashboardResource s)
 
-instance TF.IsValid (DashboardResource s) where
+instance TF.HasValidator (DashboardResource s) where
     validator = P.mempty
 
-instance P.HasEditable (DashboardResource s) (TF.Attr s P.Text) where
+instance P.HasEditable (DashboardResource s) (TF.Expr s P.Text) where
     editable =
-        P.lens (_editable :: DashboardResource s -> TF.Attr s P.Text)
-               (\s a -> s { _editable = a } :: DashboardResource s)
+        P.lens (_editable :: DashboardResource s -> TF.Expr s P.Text)
+            (\s a -> s { _editable = a } :: DashboardResource s)
 
-instance P.HasIcon (DashboardResource s) (TF.Attr s P.Text) where
+instance P.HasIcon (DashboardResource s) (TF.Expr s P.Text) where
     icon =
-        P.lens (_icon :: DashboardResource s -> TF.Attr s P.Text)
-               (\s a -> s { _icon = a } :: DashboardResource s)
+        P.lens (_icon :: DashboardResource s -> TF.Expr s P.Text)
+            (\s a -> s { _icon = a } :: DashboardResource s)
 
-instance P.HasTitle (DashboardResource s) (TF.Attr s P.Text) where
+instance P.HasTitle (DashboardResource s) (TF.Expr s P.Text) where
     title =
-        P.lens (_title :: DashboardResource s -> TF.Attr s P.Text)
-               (\s a -> s { _title = a } :: DashboardResource s)
+        P.lens (_title :: DashboardResource s -> TF.Expr s P.Text)
+            (\s a -> s { _title = a } :: DashboardResource s)
 
-instance P.HasVisibility (DashboardResource s) (TF.Attr s P.Text) where
+instance P.HasVisibility (DashboardResource s) (TF.Expr s P.Text) where
     visibility =
-        P.lens (_visibility :: DashboardResource s -> TF.Attr s P.Text)
-               (\s a -> s { _visibility = a } :: DashboardResource s)
+        P.lens (_visibility :: DashboardResource s -> TF.Expr s P.Text)
+            (\s a -> s { _visibility = a } :: DashboardResource s)
 
-instance P.HasWidget (DashboardResource s) (TF.Attr s [TF.Attr s (DashboardWidget s)]) where
+instance P.HasWidget (DashboardResource s) (P.Maybe (TF.Expr s [TF.Expr s (DashboardWidget s)])) where
     widget =
-        P.lens (_widget :: DashboardResource s -> TF.Attr s [TF.Attr s (DashboardWidget s)])
-               (\s a -> s { _widget = a } :: DashboardResource s)
+        P.lens (_widget :: DashboardResource s -> P.Maybe (TF.Expr s [TF.Expr s (DashboardWidget s)]))
+            (\s a -> s { _widget = a } :: DashboardResource s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (DashboardResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DashboardResource s)) (TF.Expr s P.Text) where
+    computedId x =
+        TF.unsafeCompute TF.encodeAttr x "id"
 
-instance s ~ s' => P.HasComputedDashboardUrl (TF.Ref s' (DashboardResource s)) (TF.Attr s P.Text) where
-    computedDashboardUrl x = TF.compute (TF.refKey x) "dashboard_url"
+instance s ~ s' => P.HasComputedDashboardUrl (TF.Ref s' (DashboardResource s)) (TF.Expr s P.Text) where
+    computedDashboardUrl x =
+        TF.unsafeCompute TF.encodeAttr x "dashboard_url"
 
 -- | @newrelic_infra_alert_condition@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/newrelic/r/infra_alert_condition.html terraform documentation>
 -- for more information.
 data InfraAlertConditionResource s = InfraAlertConditionResource'
-    { _comparison   :: TF.Attr s P.Text
+    { _comparison   :: P.Maybe (TF.Expr s P.Text)
     -- ^ @comparison@ - (Optional)
     --
-    , _critical     :: TF.Attr s (InfraAlertConditionCritical s)
+    , _critical     :: P.Maybe (TF.Expr s (InfraAlertConditionCritical s))
     -- ^ @critical@ - (Optional)
     --
-    , _enabled      :: TF.Attr s P.Bool
-    -- ^ @enabled@ - (Optional)
+    , _enabled      :: TF.Expr s P.Bool
+    -- ^ @enabled@ - (Default @true@)
     --
-    , _event        :: TF.Attr s P.Text
+    , _event        :: P.Maybe (TF.Expr s P.Text)
     -- ^ @event@ - (Optional)
     --
-    , _name         :: TF.Attr s P.Text
+    , _name         :: TF.Expr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _policyId     :: TF.Attr s P.Int
+    , _policyId     :: TF.Expr s P.Int
     -- ^ @policy_id@ - (Required, Forces New)
     --
-    , _processWhere :: TF.Attr s P.Text
+    , _processWhere :: P.Maybe (TF.Expr s P.Text)
     -- ^ @process_where@ - (Optional)
     --
-    , _select       :: TF.Attr s P.Text
+    , _select       :: P.Maybe (TF.Expr s P.Text)
     -- ^ @select@ - (Optional)
     --
-    , _type'        :: TF.Attr s P.Text
+    , _type'        :: TF.Expr s P.Text
     -- ^ @type@ - (Required, Forces New)
     --
-    , _warning      :: TF.Attr s (InfraAlertConditionWarning s)
+    , _warning      :: P.Maybe (TF.Expr s (InfraAlertConditionWarning s))
     -- ^ @warning@ - (Optional, Forces New)
     --
-    , _where'       :: TF.Attr s P.Text
+    , _where'       :: P.Maybe (TF.Expr s P.Text)
     -- ^ @where@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Define a new @newrelic_infra_alert_condition@ resource value.
 infraAlertConditionResource
-    :: TF.Attr s P.Int -- ^ @policy_id@ ('P._policyId', 'P.policyId')
-    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
-    -> TF.Attr s P.Text -- ^ @type@ ('P._type'', 'P.type'')
+    :: TF.Expr s P.Int -- ^ Lens: 'P.policyId', Field: '_policyId', HCL: @policy_id@
+    -> TF.Expr s P.Text -- ^ Lens: 'P.name', Field: '_name', HCL: @name@
+    -> TF.Expr s P.Text -- ^ Lens: 'P.type'', Field: '_type'', HCL: @type@
     -> P.Resource (InfraAlertConditionResource s)
 infraAlertConditionResource _policyId _name _type' =
-    TF.unsafeResource "newrelic_infra_alert_condition" TF.validator $
-        InfraAlertConditionResource'
-            { _comparison = TF.Nil
-            , _critical = TF.Nil
+    TF.unsafeResource "newrelic_infra_alert_condition" P.defaultProvider  TF.encodeLifecycle
+        (\InfraAlertConditionResource'{..} -> P.mconcat
+            [ P.maybe P.mempty (TF.pair "comparison") _comparison
+            , P.maybe P.mempty (TF.pair "critical") _critical
+            , TF.pair "enabled" _enabled
+            , P.maybe P.mempty (TF.pair "event") _event
+            , TF.pair "name" _name
+            , TF.pair "policy_id" _policyId
+            , P.maybe P.mempty (TF.pair "process_where") _processWhere
+            , P.maybe P.mempty (TF.pair "select") _select
+            , TF.pair "type" _type'
+            , P.maybe P.mempty (TF.pair "warning") _warning
+            , P.maybe P.mempty (TF.pair "where") _where'
+            ])
+        (InfraAlertConditionResource'
+            { _comparison = P.Nothing
+            , _critical = P.Nothing
             , _enabled = TF.value P.True
-            , _event = TF.Nil
+            , _event = P.Nothing
             , _name = _name
             , _policyId = _policyId
-            , _processWhere = TF.Nil
-            , _select = TF.Nil
+            , _processWhere = P.Nothing
+            , _select = P.Nothing
             , _type' = _type'
-            , _warning = TF.Nil
-            , _where' = TF.Nil
-            }
+            , _warning = P.Nothing
+            , _where' = P.Nothing
+            })
 
-instance TF.IsObject (InfraAlertConditionResource s) where
-    toObject InfraAlertConditionResource'{..} = P.catMaybes
-        [ TF.assign "comparison" <$> TF.attribute _comparison
-        , TF.assign "critical" <$> TF.attribute _critical
-        , TF.assign "enabled" <$> TF.attribute _enabled
-        , TF.assign "event" <$> TF.attribute _event
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "policy_id" <$> TF.attribute _policyId
-        , TF.assign "process_where" <$> TF.attribute _processWhere
-        , TF.assign "select" <$> TF.attribute _select
-        , TF.assign "type" <$> TF.attribute _type'
-        , TF.assign "warning" <$> TF.attribute _warning
-        , TF.assign "where" <$> TF.attribute _where'
-        ]
+instance P.Hashable (InfraAlertConditionResource s)
 
-instance TF.IsValid (InfraAlertConditionResource s) where
+instance TF.HasValidator (InfraAlertConditionResource s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_critical"
-                  (_critical
-                      :: InfraAlertConditionResource s -> TF.Attr s (InfraAlertConditionCritical s))
-                  TF.validator
-           P.<> TF.settingsValidator "_warning"
-                  (_warning
-                      :: InfraAlertConditionResource s -> TF.Attr s (InfraAlertConditionWarning s))
-                  TF.validator
 
-instance P.HasComparison (InfraAlertConditionResource s) (TF.Attr s P.Text) where
+instance P.HasComparison (InfraAlertConditionResource s) (P.Maybe (TF.Expr s P.Text)) where
     comparison =
-        P.lens (_comparison :: InfraAlertConditionResource s -> TF.Attr s P.Text)
-               (\s a -> s { _comparison = a } :: InfraAlertConditionResource s)
+        P.lens (_comparison :: InfraAlertConditionResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _comparison = a } :: InfraAlertConditionResource s)
 
-instance P.HasCritical (InfraAlertConditionResource s) (TF.Attr s (InfraAlertConditionCritical s)) where
+instance P.HasCritical (InfraAlertConditionResource s) (P.Maybe (TF.Expr s (InfraAlertConditionCritical s))) where
     critical =
-        P.lens (_critical :: InfraAlertConditionResource s -> TF.Attr s (InfraAlertConditionCritical s))
-               (\s a -> s { _critical = a } :: InfraAlertConditionResource s)
+        P.lens (_critical :: InfraAlertConditionResource s -> P.Maybe (TF.Expr s (InfraAlertConditionCritical s)))
+            (\s a -> s { _critical = a } :: InfraAlertConditionResource s)
 
-instance P.HasEnabled (InfraAlertConditionResource s) (TF.Attr s P.Bool) where
+instance P.HasEnabled (InfraAlertConditionResource s) (TF.Expr s P.Bool) where
     enabled =
-        P.lens (_enabled :: InfraAlertConditionResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _enabled = a } :: InfraAlertConditionResource s)
+        P.lens (_enabled :: InfraAlertConditionResource s -> TF.Expr s P.Bool)
+            (\s a -> s { _enabled = a } :: InfraAlertConditionResource s)
 
-instance P.HasEvent (InfraAlertConditionResource s) (TF.Attr s P.Text) where
+instance P.HasEvent (InfraAlertConditionResource s) (P.Maybe (TF.Expr s P.Text)) where
     event =
-        P.lens (_event :: InfraAlertConditionResource s -> TF.Attr s P.Text)
-               (\s a -> s { _event = a } :: InfraAlertConditionResource s)
+        P.lens (_event :: InfraAlertConditionResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _event = a } :: InfraAlertConditionResource s)
 
-instance P.HasName (InfraAlertConditionResource s) (TF.Attr s P.Text) where
+instance P.HasName (InfraAlertConditionResource s) (TF.Expr s P.Text) where
     name =
-        P.lens (_name :: InfraAlertConditionResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: InfraAlertConditionResource s)
+        P.lens (_name :: InfraAlertConditionResource s -> TF.Expr s P.Text)
+            (\s a -> s { _name = a } :: InfraAlertConditionResource s)
 
-instance P.HasPolicyId (InfraAlertConditionResource s) (TF.Attr s P.Int) where
+instance P.HasPolicyId (InfraAlertConditionResource s) (TF.Expr s P.Int) where
     policyId =
-        P.lens (_policyId :: InfraAlertConditionResource s -> TF.Attr s P.Int)
-               (\s a -> s { _policyId = a } :: InfraAlertConditionResource s)
+        P.lens (_policyId :: InfraAlertConditionResource s -> TF.Expr s P.Int)
+            (\s a -> s { _policyId = a } :: InfraAlertConditionResource s)
 
-instance P.HasProcessWhere (InfraAlertConditionResource s) (TF.Attr s P.Text) where
+instance P.HasProcessWhere (InfraAlertConditionResource s) (P.Maybe (TF.Expr s P.Text)) where
     processWhere =
-        P.lens (_processWhere :: InfraAlertConditionResource s -> TF.Attr s P.Text)
-               (\s a -> s { _processWhere = a } :: InfraAlertConditionResource s)
+        P.lens (_processWhere :: InfraAlertConditionResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _processWhere = a } :: InfraAlertConditionResource s)
 
-instance P.HasSelect (InfraAlertConditionResource s) (TF.Attr s P.Text) where
+instance P.HasSelect (InfraAlertConditionResource s) (P.Maybe (TF.Expr s P.Text)) where
     select =
-        P.lens (_select :: InfraAlertConditionResource s -> TF.Attr s P.Text)
-               (\s a -> s { _select = a } :: InfraAlertConditionResource s)
+        P.lens (_select :: InfraAlertConditionResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _select = a } :: InfraAlertConditionResource s)
 
-instance P.HasType' (InfraAlertConditionResource s) (TF.Attr s P.Text) where
+instance P.HasType' (InfraAlertConditionResource s) (TF.Expr s P.Text) where
     type' =
-        P.lens (_type' :: InfraAlertConditionResource s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a } :: InfraAlertConditionResource s)
+        P.lens (_type' :: InfraAlertConditionResource s -> TF.Expr s P.Text)
+            (\s a -> s { _type' = a } :: InfraAlertConditionResource s)
 
-instance P.HasWarning (InfraAlertConditionResource s) (TF.Attr s (InfraAlertConditionWarning s)) where
+instance P.HasWarning (InfraAlertConditionResource s) (P.Maybe (TF.Expr s (InfraAlertConditionWarning s))) where
     warning =
-        P.lens (_warning :: InfraAlertConditionResource s -> TF.Attr s (InfraAlertConditionWarning s))
-               (\s a -> s { _warning = a } :: InfraAlertConditionResource s)
+        P.lens (_warning :: InfraAlertConditionResource s -> P.Maybe (TF.Expr s (InfraAlertConditionWarning s)))
+            (\s a -> s { _warning = a } :: InfraAlertConditionResource s)
 
-instance P.HasWhere' (InfraAlertConditionResource s) (TF.Attr s P.Text) where
+instance P.HasWhere' (InfraAlertConditionResource s) (P.Maybe (TF.Expr s P.Text)) where
     where' =
-        P.lens (_where' :: InfraAlertConditionResource s -> TF.Attr s P.Text)
-               (\s a -> s { _where' = a } :: InfraAlertConditionResource s)
+        P.lens (_where' :: InfraAlertConditionResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _where' = a } :: InfraAlertConditionResource s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (InfraAlertConditionResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (InfraAlertConditionResource s)) (TF.Expr s P.Text) where
+    computedId x =
+        TF.unsafeCompute TF.encodeAttr x "id"
 
-instance s ~ s' => P.HasComputedCreatedAt (TF.Ref s' (InfraAlertConditionResource s)) (TF.Attr s P.Int) where
-    computedCreatedAt x = TF.compute (TF.refKey x) "created_at"
+instance s ~ s' => P.HasComputedCreatedAt (TF.Ref s' (InfraAlertConditionResource s)) (TF.Expr s P.Int) where
+    computedCreatedAt x =
+        TF.unsafeCompute TF.encodeAttr x "created_at"
 
-instance s ~ s' => P.HasComputedUpdatedAt (TF.Ref s' (InfraAlertConditionResource s)) (TF.Attr s P.Int) where
-    computedUpdatedAt x = TF.compute (TF.refKey x) "updated_at"
+instance s ~ s' => P.HasComputedUpdatedAt (TF.Ref s' (InfraAlertConditionResource s)) (TF.Expr s P.Int) where
+    computedUpdatedAt x =
+        TF.unsafeCompute TF.encodeAttr x "updated_at"
 
 -- | @newrelic_nrql_alert_condition@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/newrelic/r/nrql_alert_condition.html terraform documentation>
 -- for more information.
 data NrqlAlertConditionResource s = NrqlAlertConditionResource'
-    { _enabled :: TF.Attr s P.Bool
-    -- ^ @enabled@ - (Optional)
+    { _enabled :: TF.Expr s P.Bool
+    -- ^ @enabled@ - (Default @true@)
     --
-    , _name :: TF.Attr s P.Text
+    , _name :: TF.Expr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _nrql :: TF.Attr s (NrqlAlertConditionNrql s)
+    , _nrql :: TF.Expr s (NrqlAlertConditionNrql s)
     -- ^ @nrql@ - (Required)
     --
-    , _policyId :: TF.Attr s P.Int
+    , _policyId :: TF.Expr s P.Int
     -- ^ @policy_id@ - (Required, Forces New)
     --
-    , _runbookUrl :: TF.Attr s P.Text
+    , _runbookUrl :: P.Maybe (TF.Expr s P.Text)
     -- ^ @runbook_url@ - (Optional)
     --
-    , _term :: TF.Attr s (P.NonEmpty (TF.Attr s (NrqlAlertConditionTerm s)))
+    , _term :: TF.Expr s (P.NonEmpty (TF.Expr s (NrqlAlertConditionTerm s)))
     -- ^ @term@ - (Required)
     --
-    , _valueFunction :: TF.Attr s P.Text
-    -- ^ @value_function@ - (Optional)
+    , _valueFunction :: TF.Expr s P.Text
+    -- ^ @value_function@ - (Default @single_value@)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Define a new @newrelic_nrql_alert_condition@ resource value.
 nrqlAlertConditionResource
-    :: TF.Attr s P.Int -- ^ @policy_id@ ('P._policyId', 'P.policyId')
-    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
-    -> TF.Attr s (NrqlAlertConditionNrql s) -- ^ @nrql@ ('P._nrql', 'P.nrql')
-    -> TF.Attr s (P.NonEmpty (TF.Attr s (NrqlAlertConditionTerm s))) -- ^ @term@ ('P._term', 'P.term')
+    :: TF.Expr s P.Int -- ^ Lens: 'P.policyId', Field: '_policyId', HCL: @policy_id@
+    -> TF.Expr s P.Text -- ^ Lens: 'P.name', Field: '_name', HCL: @name@
+    -> TF.Expr s (NrqlAlertConditionNrql s) -- ^ Lens: 'P.nrql', Field: '_nrql', HCL: @nrql@
+    -> TF.Expr s (P.NonEmpty (TF.Expr s (NrqlAlertConditionTerm s))) -- ^ Lens: 'P.term', Field: '_term', HCL: @term@
     -> P.Resource (NrqlAlertConditionResource s)
 nrqlAlertConditionResource _policyId _name _nrql _term =
-    TF.unsafeResource "newrelic_nrql_alert_condition" TF.validator $
-        NrqlAlertConditionResource'
+    TF.unsafeResource "newrelic_nrql_alert_condition" P.defaultProvider  TF.encodeLifecycle
+        (\NrqlAlertConditionResource'{..} -> P.mconcat
+            [ TF.pair "enabled" _enabled
+            , TF.pair "name" _name
+            , TF.pair "nrql" _nrql
+            , TF.pair "policy_id" _policyId
+            , P.maybe P.mempty (TF.pair "runbook_url") _runbookUrl
+            , TF.pair "term" _term
+            , TF.pair "value_function" _valueFunction
+            ])
+        (NrqlAlertConditionResource'
             { _enabled = TF.value P.True
             , _name = _name
             , _nrql = _nrql
             , _policyId = _policyId
-            , _runbookUrl = TF.Nil
+            , _runbookUrl = P.Nothing
             , _term = _term
             , _valueFunction = TF.value "single_value"
-            }
+            })
 
-instance TF.IsObject (NrqlAlertConditionResource s) where
-    toObject NrqlAlertConditionResource'{..} = P.catMaybes
-        [ TF.assign "enabled" <$> TF.attribute _enabled
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "nrql" <$> TF.attribute _nrql
-        , TF.assign "policy_id" <$> TF.attribute _policyId
-        , TF.assign "runbook_url" <$> TF.attribute _runbookUrl
-        , TF.assign "term" <$> TF.attribute _term
-        , TF.assign "value_function" <$> TF.attribute _valueFunction
-        ]
+instance P.Hashable (NrqlAlertConditionResource s)
 
-instance TF.IsValid (NrqlAlertConditionResource s) where
+instance TF.HasValidator (NrqlAlertConditionResource s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_nrql"
-                  (_nrql
-                      :: NrqlAlertConditionResource s -> TF.Attr s (NrqlAlertConditionNrql s))
-                  TF.validator
+           P.<> TF.fieldValidator "_nrql" (_nrql :: NrqlAlertConditionResource s -> TF.Expr s (NrqlAlertConditionNrql s))
 
-instance P.HasEnabled (NrqlAlertConditionResource s) (TF.Attr s P.Bool) where
+instance P.HasEnabled (NrqlAlertConditionResource s) (TF.Expr s P.Bool) where
     enabled =
-        P.lens (_enabled :: NrqlAlertConditionResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _enabled = a } :: NrqlAlertConditionResource s)
+        P.lens (_enabled :: NrqlAlertConditionResource s -> TF.Expr s P.Bool)
+            (\s a -> s { _enabled = a } :: NrqlAlertConditionResource s)
 
-instance P.HasName (NrqlAlertConditionResource s) (TF.Attr s P.Text) where
+instance P.HasName (NrqlAlertConditionResource s) (TF.Expr s P.Text) where
     name =
-        P.lens (_name :: NrqlAlertConditionResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: NrqlAlertConditionResource s)
+        P.lens (_name :: NrqlAlertConditionResource s -> TF.Expr s P.Text)
+            (\s a -> s { _name = a } :: NrqlAlertConditionResource s)
 
-instance P.HasNrql (NrqlAlertConditionResource s) (TF.Attr s (NrqlAlertConditionNrql s)) where
+instance P.HasNrql (NrqlAlertConditionResource s) (TF.Expr s (NrqlAlertConditionNrql s)) where
     nrql =
-        P.lens (_nrql :: NrqlAlertConditionResource s -> TF.Attr s (NrqlAlertConditionNrql s))
-               (\s a -> s { _nrql = a } :: NrqlAlertConditionResource s)
+        P.lens (_nrql :: NrqlAlertConditionResource s -> TF.Expr s (NrqlAlertConditionNrql s))
+            (\s a -> s { _nrql = a } :: NrqlAlertConditionResource s)
 
-instance P.HasPolicyId (NrqlAlertConditionResource s) (TF.Attr s P.Int) where
+instance P.HasPolicyId (NrqlAlertConditionResource s) (TF.Expr s P.Int) where
     policyId =
-        P.lens (_policyId :: NrqlAlertConditionResource s -> TF.Attr s P.Int)
-               (\s a -> s { _policyId = a } :: NrqlAlertConditionResource s)
+        P.lens (_policyId :: NrqlAlertConditionResource s -> TF.Expr s P.Int)
+            (\s a -> s { _policyId = a } :: NrqlAlertConditionResource s)
 
-instance P.HasRunbookUrl (NrqlAlertConditionResource s) (TF.Attr s P.Text) where
+instance P.HasRunbookUrl (NrqlAlertConditionResource s) (P.Maybe (TF.Expr s P.Text)) where
     runbookUrl =
-        P.lens (_runbookUrl :: NrqlAlertConditionResource s -> TF.Attr s P.Text)
-               (\s a -> s { _runbookUrl = a } :: NrqlAlertConditionResource s)
+        P.lens (_runbookUrl :: NrqlAlertConditionResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _runbookUrl = a } :: NrqlAlertConditionResource s)
 
-instance P.HasTerm (NrqlAlertConditionResource s) (TF.Attr s (P.NonEmpty (TF.Attr s (NrqlAlertConditionTerm s)))) where
+instance P.HasTerm (NrqlAlertConditionResource s) (TF.Expr s (P.NonEmpty (TF.Expr s (NrqlAlertConditionTerm s)))) where
     term =
-        P.lens (_term :: NrqlAlertConditionResource s -> TF.Attr s (P.NonEmpty (TF.Attr s (NrqlAlertConditionTerm s))))
-               (\s a -> s { _term = a } :: NrqlAlertConditionResource s)
+        P.lens (_term :: NrqlAlertConditionResource s -> TF.Expr s (P.NonEmpty (TF.Expr s (NrqlAlertConditionTerm s))))
+            (\s a -> s { _term = a } :: NrqlAlertConditionResource s)
 
-instance P.HasValueFunction (NrqlAlertConditionResource s) (TF.Attr s P.Text) where
+instance P.HasValueFunction (NrqlAlertConditionResource s) (TF.Expr s P.Text) where
     valueFunction =
-        P.lens (_valueFunction :: NrqlAlertConditionResource s -> TF.Attr s P.Text)
-               (\s a -> s { _valueFunction = a } :: NrqlAlertConditionResource s)
+        P.lens (_valueFunction :: NrqlAlertConditionResource s -> TF.Expr s P.Text)
+            (\s a -> s { _valueFunction = a } :: NrqlAlertConditionResource s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (NrqlAlertConditionResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (NrqlAlertConditionResource s)) (TF.Expr s P.Text) where
+    computedId x =
+        TF.unsafeCompute TF.encodeAttr x "id"

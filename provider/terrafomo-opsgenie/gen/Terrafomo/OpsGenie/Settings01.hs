@@ -1,7 +1,6 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -27,36 +26,36 @@ import Data.Functor ((<$>))
 
 import GHC.Base (($))
 
-
+import qualified Data.Hashable            as P
+import qualified Data.HashMap.Strict      as P
+import qualified Data.HashMap.Strict      as HashMap
 import qualified Data.List.NonEmpty       as P
-import qualified Data.Map.Strict          as P
-import qualified Data.Map.Strict          as Map
 import qualified Data.Maybe               as P
-import qualified Data.Monoid              as P
-import qualified Data.Text                as P
+import qualified Data.Text.Lazy           as P
 import qualified GHC.Generics             as P
 import qualified Lens.Micro               as P
 import qualified Prelude                  as P
-import qualified Terrafomo.Attribute      as TF
+import qualified Terrafomo.Encode         as TF
 import qualified Terrafomo.HCL            as TF
-import qualified Terrafomo.Name           as TF
+import qualified Terrafomo.HIL            as TF
 import qualified Terrafomo.OpsGenie.Lens  as P
 import qualified Terrafomo.OpsGenie.Types as P
-import qualified Terrafomo.Validator      as TF
+import qualified Terrafomo.Schema         as TF
+import qualified Terrafomo.Validate       as TF
 
 -- | @member@ nested settings.
 data TeamMember s = TeamMember'
-    { _role     :: TF.Attr s P.Text
-    -- ^ @role@ - (Optional)
+    { _role     :: TF.Expr s P.Text
+    -- ^ @role@ - (Default @user@)
     --
-    , _username :: TF.Attr s P.Text
+    , _username :: TF.Expr s P.Text
     -- ^ @username@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @member@ settings value.
 newTeamMember
-    :: TF.Attr s P.Text -- ^ 'P._username': @username@
+    :: TF.Expr s P.Text -- ^ Lens: 'P.username', Field: '_username', HCL: @username@
     -> TeamMember s
 newTeamMember _username =
     TeamMember'
@@ -64,22 +63,23 @@ newTeamMember _username =
         , _username = _username
         }
 
-instance TF.IsValue  (TeamMember s)
-instance TF.IsObject (TeamMember s) where
-    toObject TeamMember'{..} = P.catMaybes
-        [ TF.assign "role" <$> TF.attribute _role
-        , TF.assign "username" <$> TF.attribute _username
+instance TF.ToHCL (TeamMember s) where
+     toHCL TeamMember'{..} = TF.pairs $ P.mconcat
+        [ TF.pair "role" _role
+        , TF.pair "username" _username
         ]
 
-instance TF.IsValid (TeamMember s) where
+instance P.Hashable (TeamMember s)
+
+instance TF.HasValidator (TeamMember s) where
     validator = P.mempty
 
-instance P.HasRole (TeamMember s) (TF.Attr s P.Text) where
+instance P.HasRole (TeamMember s) (TF.Expr s P.Text) where
     role =
-        P.lens (_role :: TeamMember s -> TF.Attr s P.Text)
-               (\s a -> s { _role = a } :: TeamMember s)
+        P.lens (_role :: TeamMember s -> TF.Expr s P.Text)
+            (\s a -> s { _role = a } :: TeamMember s)
 
-instance P.HasUsername (TeamMember s) (TF.Attr s P.Text) where
+instance P.HasUsername (TeamMember s) (TF.Expr s P.Text) where
     username =
-        P.lens (_username :: TeamMember s -> TF.Attr s P.Text)
-               (\s a -> s { _username = a } :: TeamMember s)
+        P.lens (_username :: TeamMember s -> TF.Expr s P.Text)
+            (\s a -> s { _username = a } :: TeamMember s)
