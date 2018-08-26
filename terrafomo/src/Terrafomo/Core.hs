@@ -7,7 +7,8 @@ module Terrafomo.Core
       Section   (..)
     , Node      (..)
 
-    -- ** Names
+    -- ** Named References
+    , Keyword   (..)
     , Type      (..)
     , Name      (..)
     , Attr      (..)
@@ -81,7 +82,7 @@ import qualified Terrafomo.Internal.Hash              as Hash
 -- | FIXME: Document
 --
 -- An intentionally restricted version of HCL's @ObjectItem@ struct.
-data Section = Section !Type ![Text] !Node
+data Section = Section !Keyword ![Text] !Node
     deriving (Show, Eq)
 
 -- | A HCL @Node@ which can be either a nested 'Section' or 'JSON.Object'.
@@ -92,9 +93,7 @@ data Node
 
 -- | A keyword type such as @backend@, @provider@, @data@, @resource@, @var@,
 -- or @output@.
---
--- Example: @TYPE@
-data Type
+data Keyword
    = TypeTerraform
    | TypeBackend
    | TypeProvider
@@ -103,17 +102,18 @@ data Type
    | TypeOutput
      deriving (Show, Eq, Ord, Generic)
 
+instance Hashable Keyword
+
+data Type = Type !Keyword !Text
+   deriving (Show, Eq, Ord, Generic)
+
 instance Hashable Type
 
--- | A top-level reference in the form @TYPE.NAME@.
 data Name = Name !Type !Text
    deriving (Show, Eq, Ord, Generic)
 
 instance Hashable Name
 
--- | A attribute reference in the form @TYPE.NAME.ATTR@.
---
--- Example: @"data.remote_state.foo"@ or @"aws_instance.bar"@
 data Attr = Attr !Name !Text
    deriving (Show, Eq, Ord, Generic)
 
@@ -121,7 +121,7 @@ instance Hashable Attr
 
 -- | A terrafomo-specific opaque, named, reference to a variable defined within
 -- a remote-state thread.
-newtype Ref s a = UnsafeRef Attr
+newtype Ref s a = UnsafeRef Name
     deriving (Show, Eq, Hashable)
 
 -- | An encoder is used to encode the a series of configuration pairs suitable
@@ -167,9 +167,9 @@ data Provider p = Provider
     }
 
 -- | FIXME: Document
-hashProvider :: Hashable p => Provider p -> Attr
+hashProvider :: Hashable p => Provider p -> Name
 hashProvider x =
-    Attr (Name TypeProvider (providerName x)) $
+    Name (Type TypeProvider (providerName x)) $
         Hash.human
             ( providerName    x
             , providerVersion x
@@ -259,9 +259,9 @@ instance Monoid (Lifecycle a) where
 -- and encapsulates the provider, dependencies and lifecycle configuration, as
 -- well as any typeclass-less validation and encoding functions.
 data Schema p l a = UnsafeSchema
-    { schemaName      :: !Name
+    { schemaType      :: !Type
     , schemaProvider  :: !(Provider p)
-    , schemaDependsOn :: !(HashSet Attr)
+    , schemaDependsOn :: !(HashSet Name)
     , schemaEncoder   :: !(Encoder (l, a))
     , schemaLifecycle :: !l
     , schemaConfig    :: !a
@@ -276,7 +276,7 @@ unsafeDataSource
     -> Schema p () a
 unsafeDataSource name provider encoder cfg =
     UnsafeSchema
-        { schemaName      = Name TypeData name
+        { schemaType      = Type TypeData name
         , schemaProvider  = provider
         , schemaDependsOn = mempty
         , schemaEncoder   = Divisible.divided mempty encoder
@@ -294,7 +294,7 @@ unsafeResource
     -> Schema p (Lifecycle a) a
 unsafeResource name provider lifecycle encoder cfg =
     UnsafeSchema
-        { schemaName      = Name TypeResource name
+        { schemaType      = Type TypeResource name
         , schemaProvider  = provider
         , schemaDependsOn = mempty
         , schemaEncoder   = Divisible.divided lifecycle encoder
@@ -345,7 +345,7 @@ cata psi = psi . fmap (cata psi) . unfix
 -- keyword @null@, a constant Haskell value, or a a computed attribute that is
 -- opaque and only known within the context of a terraform run.
 data Var s a
-    = Compute !Attr !Text
+    = Compute !Attr
     | Const   !a
     | Null
       deriving (Show, Eq, Generic)
@@ -414,7 +414,7 @@ ecata f g =
 
 -- | FIXME: Document
 unsafeComputed :: Ref s a -> Text -> Expr s b
-unsafeComputed (UnsafeRef attr) name = Fix (Var (Compute attr name))
+unsafeComputed (UnsafeRef name) attr = Fix (Var (Compute (Attr name attr)))
 -- (Compute k v (Name (typeName (keyType k) <> "_" <> fromName v))
 
 -- | Specify a constant Haskell value. Equivalent to 'Just'.
@@ -439,6 +439,6 @@ unsafeErase :: Expr s a -> Expr s' a
 unsafeErase = ecata (Fix . Var . var) (Fix . Quote)
   where
     var = \case
-        Compute attr name -> Compute attr name
-        Const   a         -> Const   a
-        Null              -> Null
+        Compute attr -> Compute attr
+        Const   a    -> Const   a
+        Null         -> Null

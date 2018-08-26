@@ -50,6 +50,20 @@ import qualified Terrafomo.HCL          as HCL
 data Zone = Zone !Region !Char
     deriving (Show, Eq, Ord, Generic)
 
+-- Orphan
+instance Hashable IPRange where
+    hashWithSalt s = \case
+        IP.IPv4Range x ->
+            let (ip4, mask) = IP.addrRangePair x
+            in s `hashWithSalt` (0 :: Int)
+                 `hashWithSalt` IP.fromIPv4 ip4
+                 `hashWithSalt` mask
+        IP.IPv6Range x ->
+            let (ip6, mask) = IP.addrRangePair x
+            in s `hashWithSalt` (0 :: Int)
+                 `hashWithSalt` IP.fromIPv6 ip6
+                 `hashWithSalt` mask
+
 instance IsValue Zone where
     toValue = HCL.toValue . Format.bprint fzone
 

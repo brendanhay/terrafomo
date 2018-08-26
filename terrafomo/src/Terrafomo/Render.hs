@@ -7,7 +7,7 @@ module Terrafomo.Render
 
     -- * Pretty Printers
     , prettySection
-    , prettyType
+    , prettyKeyword
     , prettyNode
     , prettyJSON
     , prettyObject
@@ -33,12 +33,12 @@ renderDocument =
         . PP.vsep . List.intersperse mempty . map prettySection
 
 prettySection :: Section -> Doc ann
-prettySection (Section typ keys node) =
-    Fold.foldl' (<+>) (prettyType typ) (map (PP.dquotes . pretty) keys)
+prettySection (Section kw keys node) =
+    Fold.foldl' (<+>) (prettyKeyword kw) (map (PP.dquotes . pretty) keys)
         <+> prettyNode node
 
-prettyType :: Type -> Doc ann
-prettyType = pretty . Encode.encodeType
+prettyKeyword :: Keyword -> Doc ann
+prettyKeyword = pretty . Encode.encodeKeyword
 
 prettyNode :: Node -> Doc ann
 prettyNode = \case

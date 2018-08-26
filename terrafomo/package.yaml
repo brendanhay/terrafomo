@@ -12,6 +12,9 @@ description: >
 <<: *options
 <<: *extensions
 
+data-files:
+  test/fixtures/*.tf
+
 dependencies:
   - base >= 4.9
 
@@ -28,6 +31,7 @@ library:
     - Terrafomo.Monad
     - Terrafomo.Render
     - Terrafomo.Validate
+    - Paths_terrafomo
 
   dependencies:
     - aeson
@@ -51,7 +55,5 @@ tests:
       - hspec
       - hspec-discover
       - microlens
-      - prettyprinter
       - terrafomo
       - text
-      - QuickCheck

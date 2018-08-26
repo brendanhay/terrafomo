@@ -47,12 +47,12 @@ dependOn
     :: Core.Ref s a
     -> Core.Schema p l b
     -> Core.Schema p l b
-dependOn (Core.UnsafeRef attr) =
-    Lens.over dependsOn (HashSet.insert attr)
+dependOn (Core.UnsafeRef name) =
+    Lens.over dependsOn (HashSet.insert name)
 
 -- | Explicit dependencies that this resource or datasource has. These
 -- dependencies will be created _before_.
-dependsOn :: Lens.Lens' (Core.Schema l p a) (HashSet Core.Attr)
+dependsOn :: Lens.Lens' (Core.Schema l p a) (HashSet Core.Name)
 dependsOn =
     Lens.lens Core.schemaDependsOn
         (\s a -> s { Core.schemaDependsOn = a })

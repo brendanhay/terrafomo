@@ -4,7 +4,7 @@ module Terrafomo.Encode
       lifecycleEncoder
 
     -- * Encoding Functions
-    , encodeType
+    , encodeKeyword
     , encodeName
     , encodeAttr
     , encodeVar
@@ -36,8 +36,8 @@ lifecycleEncoder :: Encoder (Lifecycle a)
 lifecycleEncoder = Encoder (maybeToList . encodeLifecycle)
 
 -- | FIXME: Document
-encodeType :: Type -> Text
-encodeType = \case
+encodeKeyword :: Keyword -> Text
+encodeKeyword = \case
     TypeTerraform -> "terraform"
     TypeBackend   -> "backend"
     TypeProvider  -> "provider"
@@ -46,10 +46,14 @@ encodeType = \case
     TypeOutput    -> "output"
 
 -- | FIXME: Document
+encodeType :: Type -> Text
+encodeType (Type kw typ)
+    | kw == TypeData = encodeKeyword kw <> "." <> typ
+    | otherwise      = typ
+
+-- | FIXME: Document
 encodeName :: Name -> Text
-encodeName (Name typ name)
-    | typ == TypeData = encodeType typ <> "." <> name
-    | otherwise       = name
+encodeName (Name typ name) = encodeType typ <> "." <> name
 
 -- | FIXME: Document
 encodeAttr :: Attr -> Text
@@ -58,9 +62,9 @@ encodeAttr (Attr name attr) = encodeName name <> "." <> attr
 -- | FIXME: Document
 encodeVar :: JSON.ToJSON a => Var s a -> JSON.Value
 encodeVar = \case
-    Compute attr name -> JSON.toJSON ("${" <> encodeAttr attr <> "." <> name <> "}")
-    Const   a         -> JSON.toJSON a
-    Null              -> JSON.Null
+    Compute attr -> JSON.toJSON ("${" <> encodeAttr attr <> "}")
+    Const   a    -> JSON.toJSON a
+    Null         -> JSON.Null
 
 -- | FIXME: Document
 encodeExpr :: Expr s a -> JSON.Value
@@ -97,7 +101,7 @@ encodeProvider :: Hashable p => Provider p -> Section
 encodeProvider x =
     Section TypeProvider [providerName x] $
         object $
-            let Attr _ alias = hashProvider x
+            let Name _ alias = hashProvider x
              in catMaybes
                 ( fmap ("version" .=) (providerVersion x)
                 : fmap ("alias"   .=) (Just alias)
@@ -107,15 +111,15 @@ encodeProvider x =
 -- | FIXME: Document
 encodeAlias :: Hashable p => Provider p -> Maybe JSON.Pair
 encodeAlias x = do
-    ("alias" .= encodeAttr (hashProvider x))
+    ("alias" .= encodeName (hashProvider x))
           <$ providerConfig x
 
 -- | FIXME: Document
 encodeSchema :: Hashable p => Text -> Schema p l a -> Section
-encodeSchema attr x =
-    case schemaName x of
-        Name typ name ->
-            Section typ [name, attr] $
+encodeSchema name x =
+    case schemaType x of
+        Type kw typ ->
+            Section kw [typ, name] $
                 object $ catMaybes
                     ( encodeAlias     (schemaProvider  x)
                     : encodeDependsOn (schemaDependsOn x)
@@ -138,10 +142,10 @@ encodeLifecycle x
             ]
 
 -- | FIXME: Document
-encodeDependsOn :: HashSet Attr -> Maybe JSON.Pair
+encodeDependsOn :: HashSet Name -> Maybe JSON.Pair
 encodeDependsOn xs
      | HashSet.null xs = Nothing
-     | otherwise       = Just ("depends_on" .= HashSet.map encodeAttr xs)
+     | otherwise       = Just ("depends_on" .= HashSet.map encodeName xs)
 
 -- | FIXME: Document
 encodeOutput :: Output a -> Section

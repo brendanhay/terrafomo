@@ -16,11 +16,11 @@ module Terrafomo
     , Monad.renderDocumentIO
 
     -- * Backend Configuration
-    , Core.Backend        (..)
+    , Core.Backend         (..)
     , Core.localBackend
 
     -- * Provider Configuration
-    , Core.Provider       (..)
+    , Core.Provider        (..)
     , Monad.withProvider
 
     -- * DataSource and Resources
@@ -37,7 +37,7 @@ module Terrafomo
     , Lens.dependOn
 
     -- ** Resource Lifecycle
-    , Core.Lifecycle      (..)
+    , Core.Lifecycle       (..)
     , Lens.preventDestroy
     , Lens.createBeforeDestroy
 
