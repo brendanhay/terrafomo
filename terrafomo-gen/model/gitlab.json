@@ -1,5 +1,6 @@
 {
   "name": "gitlab",
+  "version": "1.0.0-35-g596e2da",
   "schemas": [
     {
       "name": "base_url",

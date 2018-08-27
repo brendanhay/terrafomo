@@ -1,5 +1,6 @@
 {
   "name": "cobbler",
+  "version": "1.0.1-4-g8f2a8c6",
   "schemas": [
     {
       "name": "cacert_file",

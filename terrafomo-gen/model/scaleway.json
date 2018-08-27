@@ -1,5 +1,6 @@
 {
   "name": "scaleway",
+  "version": "1.5.1-26-g5ad41ed",
   "schemas": [
     {
       "name": "access_key",

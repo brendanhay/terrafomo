@@ -1,5 +1,6 @@
 {
   "name": "powerdns",
+  "version": "0.1.0-15-g883b07e",
   "schemas": [
     {
       "name": "api_key",

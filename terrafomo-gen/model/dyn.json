@@ -1,5 +1,6 @@
 {
   "name": "dyn",
+  "version": "1.1.0-8-g817169f",
   "schemas": [
     {
       "name": "customer_name",

@@ -1,5 +1,6 @@
 {
   "name": "docker",
+  "version": "1.0.1-1-g79c198a",
   "schemas": [
     {
       "name": "ca_material",

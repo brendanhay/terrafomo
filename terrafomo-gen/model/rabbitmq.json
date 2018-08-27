@@ -1,5 +1,6 @@
 {
   "name": "rabbitmq",
+  "version": "1.0.0-9-g45522bc",
   "schemas": [
     {
       "name": "cacert_file",

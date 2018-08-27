@@ -1,5 +1,6 @@
 {
   "name": "google",
+  "version": "1.16.2-28-gaa1f07c5",
   "schemas": [
     {
       "name": "credentials",

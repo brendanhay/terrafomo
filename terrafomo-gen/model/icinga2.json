@@ -1,5 +1,6 @@
 {
   "name": "icinga2",
+  "version": "0.1.1-24-gcf45b18",
   "schemas": [
     {
       "name": "api_password",

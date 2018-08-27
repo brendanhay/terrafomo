@@ -1,5 +1,6 @@
 {
   "name": "consul",
+  "version": "2.1.0-1-gab6ce56",
   "schemas": [
     {
       "name": "address",

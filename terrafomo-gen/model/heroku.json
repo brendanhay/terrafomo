@@ -1,5 +1,6 @@
 {
   "name": "heroku",
+  "version": "1.2.0-24-g474713d",
   "schemas": [
     {
       "name": "api_key",

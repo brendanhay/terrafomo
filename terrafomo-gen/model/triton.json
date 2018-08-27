@@ -1,5 +1,6 @@
 {
   "name": "triton",
+  "version": "0.5.1-8-gf788f1a",
   "schemas": [
     {
       "name": "account",

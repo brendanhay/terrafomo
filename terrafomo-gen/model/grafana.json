@@ -1,5 +1,6 @@
 {
   "name": "grafana",
+  "version": "1.2.0-1-g27a18a5",
   "schemas": [
     {
       "name": "auth",

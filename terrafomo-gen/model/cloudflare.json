@@ -1,5 +1,6 @@
 {
   "name": "cloudflare",
+  "version": "1.1.0-15-g863e647",
   "schemas": [
     {
       "name": "api_client_logging",

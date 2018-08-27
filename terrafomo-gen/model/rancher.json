@@ -1,5 +1,6 @@
 {
   "name": "rancher",
+  "version": "1.2.1-1-gf07bf69",
   "schemas": [
     {
       "name": "access_key",

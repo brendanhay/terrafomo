@@ -1,5 +1,6 @@
 {
   "name": "dme",
+  "version": "0.1.0-10-g5cec285",
   "schemas": [
     {
       "name": "akey",

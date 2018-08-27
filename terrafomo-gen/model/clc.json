@@ -1,5 +1,6 @@
 {
   "name": "clc",
+  "version": "0.1.0-18-g2ce71cb",
   "schemas": [
     {
       "name": "account",

@@ -1,5 +1,6 @@
 {
   "name": "datadog",
+  "version": "1.1.0-3-g69b41fe",
   "schemas": [
     {
       "name": "api_key",

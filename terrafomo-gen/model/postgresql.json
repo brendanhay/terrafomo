@@ -1,5 +1,6 @@
 {
   "name": "postgresql",
+  "version": "0.1.2-4-g47597c8",
   "schemas": [
     {
       "name": "connect_timeout",

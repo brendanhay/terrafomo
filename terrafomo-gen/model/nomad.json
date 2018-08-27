@@ -1,5 +1,6 @@
 {
   "name": "nomad",
+  "version": "1.2.0-4-g0fe3561",
   "schemas": [
     {
       "name": "address",

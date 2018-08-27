@@ -1,5 +1,6 @@
 {
   "name": "oneandone",
+  "version": "1.2.0-1-gad117c6",
   "schemas": [
     {
       "name": "endpoint",

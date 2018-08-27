@@ -1,5 +1,6 @@
 {
   "name": "ovh",
+  "version": "0.3.0-1-gd353dff",
   "schemas": [
     {
       "name": "application_key",

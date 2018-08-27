@@ -1,5 +1,6 @@
 {
   "name": "spotinst",
+  "version": "1.2.0-1-g1f7e75e",
   "schemas": [
     {
       "name": "account",
