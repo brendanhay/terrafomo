@@ -35,8 +35,8 @@ import qualified Data.Map.Strict            as Map
 import qualified Data.Set                   as Set
 import qualified Data.Text                  as Text
 import qualified Data.Text.Read             as Text
-import qualified Terrafomo.Gen.Diff         as Diff
 import qualified Data.Version               as Version
+import qualified Terrafomo.Gen.Diff         as Diff
 import qualified Terrafomo.Gen.Go           as Go
 import qualified Terrafomo.Gen.Name         as Name
 import qualified Terrafomo.Gen.Type         as Type

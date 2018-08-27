@@ -1,21 +1,14 @@
-{-# LANGUAGE UndecidableInstances #-}
-
 module Terrafomo.Core
     (
-    -- * HCL
-    -- ** Document Nodes
-      Section   (..)
-    , Node      (..)
-
-    -- ** Named References
-    , Keyword   (..)
+    -- * Identifiers
+      Keyword   (..)
     , Type      (..)
     , Name      (..)
     , Attr      (..)
-    , Ref       (..)
 
-    -- ** Encoding
-    , Encoder   (..)
+    -- * Named References
+    , Ref       (..)
+    , unsafeCompute
 
     -- * Providers
     , Provider  (..)
@@ -39,57 +32,24 @@ module Terrafomo.Core
     -- * Output Values
     , Output    (..)
     , outputValue
-
-    -- * Interpolation Expressions
-    , Fix       (..)
-    , cata
-
-    , Var       (..)
-    , ExprF     (..)
-    , Expr
-    , ecata
-
-    -- ** Primitives
-    , unsafeComputed
-    , value
-    , null
-
-    -- ** Utilities
-    , operator
-    , function
     ) where
 
-import Data.Aeson                           ((.=))
-import Data.Bifunctor                       (Bifunctor (..))
-import Data.Function                        (on)
-import Data.Functor.Contravariant           (Contravariant (..))
-import Data.Functor.Contravariant.Divisible (Decidable (..), Divisible (..))
-import Data.Hashable                        (Hashable)
-import Data.HashSet                         (HashSet)
-import Data.String                          (IsString (fromString))
-import Data.Text.Lazy                       (Text)
+import Data.Aeson     ((.=))
+import Data.Function  (on)
+import Data.Hashable  (Hashable)
+import Data.HashSet   (HashSet)
+import Data.Text.Lazy (Text)
 
 import GHC.Generics (Generic)
 
 import Prelude hiding (null)
 
-import qualified Data.Aeson.Types                     as JSON
-import qualified Data.Functor.Contravariant.Divisible as Divisible
-import qualified Data.Hashable                        as Hash
-import qualified Data.Void                            as Void
-import qualified Terrafomo.Internal.Hash              as Hash
+import Terrafomo.HIL (HIL)
 
--- | FIXME: Document
---
--- An intentionally restricted version of HCL's @ObjectItem@ struct.
-data Section = Section !Keyword ![Text] !Node
-    deriving (Show, Eq)
-
--- | A HCL @Node@ which can be either a nested 'Section' or 'JSON.Object'.
-data Node
-    = Nested !Section
-    | Object !JSON.Object
-      deriving (Show, Eq)
+import qualified Data.Aeson.Types        as JSON
+import qualified Data.Hashable           as Hash
+import qualified Terrafomo.HIL           as HIL
+import qualified Terrafomo.Internal.Hash as Hash
 
 -- | A keyword type such as @backend@, @provider@, @data@, @resource@, @var@,
 -- or @output@.
@@ -124,35 +84,14 @@ instance Hashable Attr
 newtype Ref s a = UnsafeRef Name
     deriving (Show, Eq, Hashable)
 
+-- | FIXME: Document
+unsafeCompute :: (Attr -> Text) -> Ref s a -> Text -> HIL s b
+unsafeCompute encode (UnsafeRef name) attr =
+    HIL.compute (encode (Attr name attr))
+
 -- | An encoder is used to encode the a series of configuration pairs suitable
 -- for embedding into a larger HCL structure.
-newtype Encoder a = Encoder
-    { encode :: a -> [JSON.Pair]
-    }
-
-instance Semigroup (Encoder a) where
-    (<>) f g = Encoder (\x -> encode f x <> encode g x)
-
-instance Monoid (Encoder a) where
-    mempty  = Encoder (const [])
-    mappend = (<>)
-
-instance Contravariant Encoder where
-    contramap f (Encoder g) = Encoder (g . f)
-
-instance Divisible Encoder where
-    conquer      = mempty
-    divide h f g =
-        Encoder $ \x ->
-            let (a, b) = h x
-             in encode f a
-             <> encode g b
-
-instance Decidable Encoder where
-    lose f           = Encoder (\x -> Void.absurd (f x))
-    choose split f g =
-        Encoder $ \x ->
-            either (encode f) (encode g) (split x)
+type Encoder a = a -> [JSON.Pair]
 
 -- | A provider name and configuration. The absence of the configuration
 -- indicates that the default provider for the given name should be used.
@@ -205,7 +144,7 @@ localBackend path =
     Backend
         { backendName    = "local"
         , backendConfig  = path
-        , backendEncoder = Encoder (\x -> ["path" .= x])
+        , backendEncoder = \x -> ["path" .= x]
         }
 
 -- | Ignored attribute names can be matched by their name, not state ID. For
@@ -279,7 +218,7 @@ unsafeDataSource name provider encoder cfg =
         { schemaType      = Type TypeData name
         , schemaProvider  = provider
         , schemaDependsOn = mempty
-        , schemaEncoder   = Divisible.divided mempty encoder
+        , schemaEncoder   = encoder . snd
         , schemaLifecycle = ()
         , schemaConfig    = cfg
         }
@@ -297,7 +236,7 @@ unsafeResource name provider lifecycle encoder cfg =
         { schemaType      = Type TypeResource name
         , schemaProvider  = provider
         , schemaDependsOn = mempty
-        , schemaEncoder   = Divisible.divided lifecycle encoder
+        , schemaEncoder   = \(l, x) -> lifecycle l <> encoder x
         , schemaLifecycle = mempty
         , schemaConfig    = cfg
         }
@@ -310,135 +249,9 @@ unsafeResource name provider lifecycle encoder cfg =
 data Output a where
     UnsafeOutput :: { outputName    :: !Text
                     , outputBackend :: !(Backend JSON.Object)
-                    , outputValue_  :: !(Expr s a)
+                    , outputValue_  :: !(HIL s a)
                     }
                  -> Output a
 
-outputValue :: Output a -> Expr s a
-outputValue (UnsafeOutput _ _ x) = unsafeErase x
-
--- Interpolation Expressions
-
--- | A fix-point type used for the 'Expr' expression and recursion schemes.
-newtype Fix f = Fix { unfix :: f (Fix f) }
-
-instance Show (f (Fix f)) => Show (Fix f) where
-    showsPrec d (Fix f) =
-        showParen (d > 10) $
-            showString "Fix " . showsPrec 11 f
-
-instance Eq (f (Fix f)) => Eq (Fix f) where
-    (==) = on (==) unfix
-
-instance Ord (f (Fix f)) => Ord (Fix f) where
-    compare = on compare unfix
-
-instance Hashable (f (Fix f)) => Hashable (Fix f) where
-    hashWithSalt s = Hash.hashWithSalt s . unfix
-
--- | A catamorphism, or generalized fold.
-cata :: Functor f => (f a -> a) -> (Fix f -> a)
-cata psi = psi . fmap (cata psi) . unfix
-
--- | An interpolation variable. This is paramterized over the current (remote)
--- state thread @s@ similar to 'Control.Monad.ST'.  It can be the special
--- keyword @null@, a constant Haskell value, or a a computed attribute that is
--- opaque and only known within the context of a terraform run.
-data Var s a
-    = Compute !Attr
-    | Const   !a
-    | Null
-      deriving (Show, Eq, Generic)
-
-instance Hashable a => Hashable (Var s a)
-
-instance IsString a => IsString (Var s a) where
-    fromString = Const . fromString
-
--- | The main terraform interpolation expression type. This is polymorphic so
--- that it can be made a functor, which allows us to traverse expressions and
--- map functions over them. The actual 'ExprF' type is a fixed point of this
--- functor, defined below.
-data ExprF a b r
-    = Var    !a
-    | Quote  !b
-    | Prefix !Text ![r]
-    | Infix  !Text !r !r
-      deriving (Show, Eq, Functor, Generic)
-
-instance (Hashable a, Hashable b, Hashable r) => Hashable (ExprF a b r)
-
-instance Bifunctor (ExprF a) where
-    second  = fmap
-    first f = \case
-        Var    x     -> Var    x
-        Quote  q     -> Quote  (f q)
-        Prefix n xs  -> Prefix n xs
-        Infix  n a b -> Infix  n a b
-
--- | The expression type is a fixed point of the polymorphic expression functor.
---
--- The variables are specialized to unquoted 'Var' or quoted JSON 'JSON.Value's.
--- This allows us to express well-typed expressions in Haskell's type-system, as
--- well as more dubiously typed HCL expressions when necessary.
-type Expr s a = Fix (ExprF (Var s a) JSON.Value)
-
-instance IsString a => IsString (Expr s a) where
-    fromString = Fix . Var . fromString
-
-instance Num a => Num (Expr s a) where
-    (+)         = operator "+"
-    (-)         = operator "-"
-    (*)         = operator "*"
-    abs         = function "abs"    . pure
-    signum      = function "signum" . pure
-    fromInteger = value . fromInteger
-
-instance JSON.ToJSON (Expr s a) where
-    toJSON = const $ JSON.String "${<expr>}"
-
--- | FIXME: Documentation
-ecata
-    :: (a -> Fix (ExprF a' b'))
-    -> (b -> Fix (ExprF a' b'))
-    -> Fix (ExprF a  b)
-    -> Fix (ExprF a' b')
-ecata f g =
-    cata $ \case
-        Var    a     -> f a
-        Quote  b     -> g b
-        Prefix n xs  -> Fix (Prefix n xs)
-        Infix  n a b -> Fix (Infix  n a b)
-
--- Primitives
-
--- | FIXME: Document
-unsafeComputed :: Ref s a -> Text -> Expr s b
-unsafeComputed (UnsafeRef name) attr = Fix (Var (Compute (Attr name attr)))
--- (Compute k v (Name (typeName (keyType k) <> "_" <> fromName v))
-
--- | Specify a constant Haskell value. Equivalent to 'Just'.
-value :: a -> Expr s a
-value x = Fix (Var (Const x))
-
--- | Omit an attribute. Equivalent to 'Nothing'.
-null :: Expr s a
-null = Fix (Var Null)
-
--- Utilities
-
--- | Construct an infix operator expression.
-operator :: Text -> Fix (ExprF a b) -> Fix (ExprF a b) -> Fix (ExprF a b)
-operator n a b = Fix (Infix n a b)
-
--- | Construct prefix (function application) expression.
-function :: Text -> [Fix (ExprF a b)] -> Fix (ExprF a b)
-function n = Fix . Prefix n
-
-unsafeErase :: Expr s a -> Expr s' a
-unsafeErase = ecata (Fix . Var . var) (Fix . Quote)
-  where
-    var = \case
-        Compute attr -> Compute attr
-        Const   a    -> Const   a
-        Null         -> Null
+outputValue :: Output a -> HIL s a
+outputValue (UnsafeOutput _ _ x) = HIL.unsafeErase x

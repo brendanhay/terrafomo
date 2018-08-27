@@ -6,8 +6,7 @@ module Terrafomo.Render
     , renderDocument
 
     -- * Pretty Printers
-    , prettySection
-    , prettyKeyword
+    , prettyHCL
     , prettyNode
     , prettyJSON
     , prettyObject
@@ -15,44 +14,47 @@ module Terrafomo.Render
     ) where
 
 import Data.Semigroup            ((<>))
+import Data.Text.Lazy            ()
 import Data.Text.Prettyprint.Doc (Doc, pretty, (<+>))
 
-import Terrafomo.Core
+import Terrafomo.Encode (HCL (..), Node (..))
 
 import qualified Data.Aeson                            as JSON
 import qualified Data.Foldable                         as Fold
 import qualified Data.HashMap.Strict                   as HashMap
 import qualified Data.List                             as List
+import qualified Data.Scientific                       as Sci
 import qualified Data.Text.Prettyprint.Doc             as PP
 import qualified Data.Text.Prettyprint.Doc.Render.Text as Render
-import qualified Terrafomo.Encode                      as Encode
 
-renderDocument :: [Section] -> PP.SimpleDocStream ann
+renderDocument :: [HCL] -> PP.SimpleDocStream ann
 renderDocument =
     PP.layoutPretty PP.defaultLayoutOptions
-        . PP.vsep . List.intersperse mempty . map prettySection
+        . PP.vsep . List.intersperse mempty . map prettyHCL
 
-prettySection :: Section -> Doc ann
-prettySection (Section kw keys node) =
-    Fold.foldl' (<+>) (prettyKeyword kw) (map (PP.dquotes . pretty) keys)
+prettyHCL :: HCL -> Doc ann
+prettyHCL (HCL kw keys node) =
+    Fold.foldl' (<+>) (pretty kw) (map (PP.dquotes . pretty) keys)
         <+> prettyNode node
 
-prettyKeyword :: Keyword -> Doc ann
-prettyKeyword = pretty . Encode.encodeKeyword
+-- prettyKeyword :: Keyword -> Doc ann
+-- prettyKeyword = pretty . Encode.encodeKeyword
 
 prettyNode :: Node -> Doc ann
 prettyNode = \case
-    Nested s -> object [prettySection s]
-    Object o -> prettyObject o
+    Section s -> object [prettyHCL s]
+    Object  o -> prettyObject o
 
 prettyJSON :: JSON.Value -> Doc ann
 prettyJSON = \case
     JSON.Object o -> prettyObject o
     JSON.Array  v -> prettyArray  v
     JSON.String s -> PP.dquotes (pretty s)
-    JSON.Number n -> pretty (show n) -- FIXME: scientific formatting
     JSON.Bool   b -> if b then "true" else "false"
     JSON.Null     -> "null"
+    JSON.Number n ->
+        either pretty pretty
+               (Sci.floatingOrInteger n :: Either Double Int)
 
 prettyObject :: JSON.Object -> Doc ann
 prettyObject =

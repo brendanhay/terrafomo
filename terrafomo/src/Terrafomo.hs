@@ -26,7 +26,7 @@ module Terrafomo
     -- * DataSource and Resources
     , Core.Schema
 
-    -- ** Creating References
+    -- ** Declaring Definitions
     , Core.Ref
     , Monad.define
 
@@ -51,22 +51,22 @@ module Terrafomo
     , Monad.output
     , Monad.remote
 
-    -- * Interpolation Expressions
-    , Core.Expr
+    -- * Interpolation Expression Language
+    , HIL.HIL
 
     -- ** Primitives
-    , Core.value
-    , Core.null
-    , Builtin.true
-    , Builtin.false
+    , HIL.value
+    , HIL.null
+    , HIL.true
+    , HIL.false
 
-    -- ** Builtin Functions
-    , Builtin.modulo
-    , Builtin.join
-    , Builtin.file
+    -- ** HIL Functions
+    , HIL.modulo
+    , HIL.join
+    , HIL.file
     ) where
 
-import qualified Terrafomo.Builtin as Builtin
-import qualified Terrafomo.Core    as Core
-import qualified Terrafomo.Lens    as Lens
-import qualified Terrafomo.Monad   as Monad
+import qualified Terrafomo.Core  as Core
+import qualified Terrafomo.HIL   as HIL
+import qualified Terrafomo.Lens  as Lens
+import qualified Terrafomo.Monad as Monad

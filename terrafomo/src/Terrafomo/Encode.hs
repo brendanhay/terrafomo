@@ -1,14 +1,13 @@
 module Terrafomo.Encode
     (
-    -- * Encoders
-      lifecycleEncoder
+    -- * Restricted HCL AST
+      HCL  (..)
+    , Node (..)
 
     -- * Encoding Functions
     , encodeKeyword
     , encodeName
     , encodeAttr
-    , encodeVar
-    , encodeExpr
     , encodeBackend
     , serializeBackend
     , encodeRemote
@@ -16,12 +15,16 @@ module Terrafomo.Encode
     , encodeSchema
     , encodeLifecycle
     , encodeOutput
+
+    -- * Utilities
+    , section
+    , object
     ) where
 
 import Data.Aeson     ((.=))
 import Data.Hashable  (Hashable)
 import Data.HashSet   (HashSet)
-import Data.Maybe     (catMaybes, maybeToList)
+import Data.Maybe     (catMaybes)
 import Data.Semigroup (Semigroup ((<>)))
 import Data.Text.Lazy (Text)
 
@@ -32,8 +35,18 @@ import qualified Data.Aeson.Types    as JSON
 import qualified Data.HashMap.Strict as HashMap
 import qualified Data.HashSet        as HashSet
 
-lifecycleEncoder :: Encoder (Lifecycle a)
-lifecycleEncoder = Encoder (maybeToList . encodeLifecycle)
+-- | FIXME: Document
+--
+-- A restricted version of HCL's @ObjectItem@ struct. Terraform-specific HCL
+-- documents are collections of these statements only.
+data HCL = HCL !Text ![Text] !Node
+    deriving (Show, Eq)
+
+-- | A HCL @Node@ which can be either a nested 'Section' or 'JSON.Object'.
+data Node
+    = Section !HCL
+    | Object  !JSON.Object
+      deriving (Show, Eq)
 
 -- | FIXME: Document
 encodeKeyword :: Keyword -> Text
@@ -60,52 +73,37 @@ encodeAttr :: Attr -> Text
 encodeAttr (Attr name attr) = encodeName name <> "." <> attr
 
 -- | FIXME: Document
-encodeVar :: JSON.ToJSON a => Var s a -> JSON.Value
-encodeVar = \case
-    Compute attr -> JSON.toJSON ("${" <> encodeAttr attr <> "}")
-    Const   a    -> JSON.toJSON a
-    Null         -> JSON.Null
-
--- | FIXME: Document
-encodeExpr :: Expr s a -> JSON.Value
-encodeExpr = const $ JSON.String "${<expr>}"
-
--- | FIXME: Document
-encodeBackend :: Backend b -> Section
+encodeBackend :: Backend b -> HCL
 encodeBackend x =
-    Section TypeTerraform [] $
-        Nested $
-            Section TypeBackend [backendName x] $
-                object $
-                    encode (backendEncoder x) (backendConfig x)
+    section TypeTerraform [] $ Section $
+        section TypeBackend [backendName x] $
+            object (backendEncoder x (backendConfig x))
 
 -- | FIXME: Document
 serializeBackend :: Backend b -> Backend JSON.Object
 serializeBackend x =
-    x { backendConfig  =
-          HashMap.fromList (encode (backendEncoder x) (backendConfig x))
-      , backendEncoder =
-          Encoder HashMap.toList
+    x { backendConfig  = HashMap.fromList (backendEncoder x (backendConfig x))
+      , backendEncoder = HashMap.toList
       }
 
 -- | FIXME: Document
-encodeRemote :: Text -> Backend b -> Section
+encodeRemote :: Text -> Backend b -> HCL
 encodeRemote name x =
-    Section TypeData ["terraform_remote_state", name] $
+    section TypeData ["terraform_remote_state", name] $
         object [ "backend" .= backendName x
-               , "config"  .= encode (backendEncoder x) (backendConfig x)
+               , "config"  .= backendEncoder x (backendConfig x)
                ]
 
 -- | FIXME: Document
-encodeProvider :: Hashable p => Provider p -> Section
+encodeProvider :: Hashable p => Provider p -> HCL
 encodeProvider x =
-    Section TypeProvider [providerName x] $
+    section TypeProvider [providerName x] $
         object $
             let Name _ alias = hashProvider x
              in catMaybes
                 ( fmap ("version" .=) (providerVersion x)
                 : fmap ("alias"   .=) (Just alias)
-                : maybe [] (map Just . encode (providerEncoder x)) (providerConfig x)
+                : maybe [] (map Just . providerEncoder x) (providerConfig x)
                 )
 
 -- | FIXME: Document
@@ -115,24 +113,23 @@ encodeAlias x = do
           <$ providerConfig x
 
 -- | FIXME: Document
-encodeSchema :: Hashable p => Text -> Schema p l a -> Section
+encodeSchema :: Hashable p => Text -> Schema p l a -> HCL
 encodeSchema name x =
     case schemaType x of
         Type kw typ ->
-            Section kw [typ, name] $
+            section kw [typ, name] $
                 object $ catMaybes
                     ( encodeAlias     (schemaProvider  x)
                     : encodeDependsOn (schemaDependsOn x)
-                    : map Just
-                        (encode (schemaEncoder x) (schemaLifecycle x, schemaConfig x))
+                    : map Just (schemaEncoder x (schemaLifecycle x, schemaConfig x))
                     )
 
 -- | FIXME: Document
-encodeLifecycle :: Lifecycle a -> Maybe JSON.Pair
+encodeLifecycle :: Lifecycle a -> [JSON.Pair]
 encodeLifecycle x
-    | x == mempty = Nothing
-    | otherwise   = Just $
-        "lifecycle" .= JSON.object
+    | x == mempty = []
+    | otherwise   =
+        [ "lifecycle" .= JSON.object
             [ "prevent_destroy"       .= preventDestroy x
             , "create_before_destroy" .= createBeforeDestroy x
             , "ignore_changes"        .=
@@ -140,6 +137,7 @@ encodeLifecycle x
                     Wildcard -> HashSet.singleton "*"
                     Match xs -> HashSet.map encodeName xs
             ]
+        ]
 
 -- | FIXME: Document
 encodeDependsOn :: HashSet Name -> Maybe JSON.Pair
@@ -148,11 +146,14 @@ encodeDependsOn xs
      | otherwise       = Just ("depends_on" .= HashSet.map encodeName xs)
 
 -- | FIXME: Document
-encodeOutput :: Output a -> Section
+encodeOutput :: JSON.ToJSON a => Output a -> HCL
 encodeOutput (UnsafeOutput name _ expr) =
-    Section TypeOutput [name] $
-        object [ "value" .= encodeExpr expr
+    section TypeOutput [name] $
+        object [ "value" .= expr
                ]
+
+section :: Keyword -> [Text] -> Node -> HCL
+section kw = HCL (encodeKeyword kw)
 
 object :: [JSON.Pair] -> Node
 object = Object . HashMap.fromList

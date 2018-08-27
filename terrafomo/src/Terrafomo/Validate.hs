@@ -8,19 +8,16 @@ module Terrafomo.Validate
     , fieldValidator
     ) where
 
-import Data.Bifunctor                       (first)
-import Data.Functor.Contravariant           (Contravariant (..))
-import Data.Functor.Contravariant.Divisible (Decidable (..), Divisible (..))
-import Data.HashMap.Strict                  (HashMap)
-import Data.HashSet                         (HashSet)
-import Data.Maybe                           (fromMaybe)
-import Data.Text.Lazy                       (Text)
+import Data.Bifunctor      (first)
+import Data.HashMap.Strict (HashMap)
+import Data.HashSet        (HashSet)
+import Data.Maybe          (fromMaybe)
+import Data.Text.Lazy      (Text)
 
-import Terrafomo.Core (Expr, ExprF (..), Var (..), cata)
+import Terrafomo.HIL (ExprF (Var), HIL, Var (..), cata)
 
 import qualified Data.HashMap.Strict as HashMap
 import qualified Data.HashSet        as HashSet
-import qualified Data.Void           as Void
 
 type ConflictsWith = HashMap Text (HashSet Text)
 
@@ -34,7 +31,7 @@ instance HasValidator a => HasValidator (Maybe a) where
             Just x  -> validate validator x
             Nothing -> mempty
 
-instance HasValidator a => HasValidator (Expr s a) where
+instance HasValidator a => HasValidator (HIL s a) where
     validator =
         Validator . cata $ \case
             Var (Const x) -> validate validator x
@@ -60,22 +57,22 @@ instance Monoid (Validator a) where
     mempty  = Validator (const Nothing)
     mappend = (<>)
 
-instance Contravariant Validator where
-    contramap f (Validator g) = Validator (g . f)
+-- instance Contravariant Validator where
+--     contramap f (Validator g) = Validator (g . f)
 
-instance Divisible Validator where
-    conquer      = mempty
-    divide h f g =
-        Validator $ \x ->
-            let (a, b) = h x
-             in validate f a
-             <> validate g b
+-- instance Divisible Validator where
+--     conquer      = mempty
+--     divide h f g =
+--         Validator $ \x ->
+--             let (a, b) = h x
+--              in validate f a
+--              <> validate g b
 
-instance Decidable Validator where
-    lose f           = Validator (\x -> Void.absurd (f x))
-    choose split f g =
-        Validator $ \x ->
-            either (validate f) (validate g) (split x)
+-- instance Decidable Validator where
+--     lose f           = Validator (\x -> Void.absurd (f x))
+--     choose split f g =
+--         Validator $ \x ->
+--             either (validate f) (validate g) (split x)
 
 conflictsWith
     :: Bool

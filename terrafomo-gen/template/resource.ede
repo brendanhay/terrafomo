@@ -52,7 +52,7 @@ data {{ resource.value.type }} = {{ resource.value.con.name }}
     :: P.{{ type }} ({{ resource.value.type }})
   {% endfor %}
 {{ resource.value.con.smart }}{% for param in resource.value.parameters %} {{ param.value.name }}{% endfor %} =
-    TF.unsafe{{ type }} "{{ resource.value.original }}" P.defaultProvider {% if type == "Resource" %} TF.lifecycleEncoder{% endif %}
+    TF.unsafe{{ type }} "{{ resource.value.original }}" P.defaultProvider {% if type == "Resource" %} TF.encodeLifecycle{% endif %}
       {% for field in resource.value.arguments %}
         {% if field.first %}(TF.Encoder $ \{{ resource.value.con.name }}{..} -> P.catMaybes
             [{% else %}    ,{% endif %} {{ field.value.encoder }} {{ field.value.name }}{% if field.last %}

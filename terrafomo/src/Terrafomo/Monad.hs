@@ -37,6 +37,9 @@ import Data.HashMap.Strict (HashMap)
 import Data.Text.Lazy      (Text)
 import Data.Typeable       (Typeable)
 
+import Terrafomo.Core
+import Terrafomo.Encode            (HCL)
+import Terrafomo.HIL               (HIL)
 import Terrafomo.Internal.ValueMap (ValueMap)
 
 import qualified Control.Monad.Trans.Except        as Except
@@ -52,7 +55,6 @@ import qualified Control.Monad.Trans.Writer.Strict as Writer
 import qualified Data.Aeson                        as JSON
 import qualified Data.HashMap.Strict               as HashMap
 import qualified System.IO                         as IO
-import qualified Terrafomo.Core                    as Core
 import qualified Terrafomo.Encode                  as Encode
 import qualified Terrafomo.Internal.Hash           as Hash
 import qualified Terrafomo.Internal.ValueMap       as ValueMap
@@ -61,25 +63,25 @@ import qualified Terrafomo.Validate                as Validate
 
 -- | FIXME: Document
 data Error
-    = DuplicateOutput   !Text      !Core.Section
-    | DuplicateResource !Core.Attr !Core.Section
-    | ConflictsWith     !Core.Attr !Validate.ConflictsWith
+    = DuplicateOutput   !Text      !HCL
+    | DuplicateResource !Name !HCL
+    | ConflictsWith     !Name !Validate.ConflictsWith
       deriving (Show, Eq, Typeable)
 
 instance Exception Error
 
 newtype Config = Config
-    { defaultProviders :: HashMap Text Core.Attr
+    { defaultProviders :: HashMap Text Name
     } deriving (Show, Eq)
 
 -- | Provides key uniquness invariants and ordering of output statements.
 data Document = UnsafeDocument
     { supply    :: !Int
-    , backend   :: !(Core.Backend JSON.Object)
-    , providers :: !(ValueMap Core.Attr Core.Section)
-    , remotes   :: !(ValueMap Text      Core.Section)
-    , resources :: !(ValueMap Core.Attr Core.Section)
-    , outputs   :: !(ValueMap Text      Core.Section)
+    , backend   :: !(Backend JSON.Object)
+    , providers :: !(ValueMap Name HCL)
+    , remotes   :: !(ValueMap Text      HCL)
+    , resources :: !(ValueMap Name HCL)
+    , outputs   :: !(ValueMap Text      HCL)
     }
 
 renderDocument :: Document -> Text
@@ -92,7 +94,7 @@ renderDocumentIO hd =
     Render.renderIO hd
         . Render.renderDocument . flatten
 
-flatten :: Document -> [Core.Section]
+flatten :: Document -> [HCL]
 flatten s =
     Encode.encodeBackend (backend s) :
         concat [ ValueMap.values (providers  s)
@@ -108,7 +110,7 @@ newtype Terraform s a = Terraform
     } deriving (Functor)
 
 runTerraform
-    :: Core.Backend b
+    :: Backend b
     -> (forall s. Terraform s a)
     -> Either Error (a, Document)
 runTerraform x m =
@@ -214,7 +216,7 @@ withProvider
     :: ( MonadTerraform s m
        , Hashable p
        )
-    => Core.Provider p
+    => Provider p
     -> m a
     -> m a
 withProvider p m =
@@ -223,7 +225,7 @@ withProvider p m =
         Just alias ->
             flip localTerraform m $ \s ->
                 s { defaultProviders =
-                      HashMap.insert (Core.providerName p) alias
+                      HashMap.insert (providerName p) alias
                           (defaultProviders s)
                   }
 
@@ -231,13 +233,13 @@ insertProvider
     :: ( MonadTerraform s m
        , Hashable p
        )
-    => Core.Provider p
-    -> m (Maybe Core.Attr)
+    => Provider p
+    -> m (Maybe Name)
 insertProvider x =
-    case Core.providerConfig x of
-        Nothing -> lookupProvider (Core.providerName x)
+    case providerConfig x of
+        Nothing -> lookupProvider (providerName x)
         Just _  ->
-            let alias = Core.hashProvider x
+            let alias = hashProvider x
                 value = Encode.encodeProvider x
 
              in insertValue alias value providers (\s w -> w { providers = s })
@@ -246,10 +248,9 @@ insertProvider x =
 lookupProvider
     :: MonadTerraform s m
     => Text
-    -> m (Maybe Core.Attr)
+    -> m (Maybe Name)
 lookupProvider name =
-    liftTerraform $
-         HashMap.lookup name . defaultProviders <$> ask
+    liftTerraform (HashMap.lookup name . defaultProviders <$> ask)
 
 -- Resources
 
@@ -261,28 +262,29 @@ define
     :: ( MonadTerraform s m
        , Hashable p
        , Validate.HasValidator a
+       , JSON.ToJSON a
        )
     => Text
-    -> Core.Schema p l a
-    -> m (Core.Ref s a)
-define name x =
+    -> Schema p l a
+    -> m (Ref s a)
+define key x =
     liftTerraform $ do
-        let attr  = Core.Attr (Core.schemaName x) name
-            value = Encode.encodeSchema name x
+        let name  = Name (schemaType x) key
+            value = Encode.encodeSchema key x
 
-        case Validate.validate Validate.validator (Core.schemaConfig x) of
+        case Validate.validate Validate.validator (schemaConfig x) of
             Nothing -> pure ()
-            Just es -> throwError (ConflictsWith attr es)
+            Just es -> throwError (ConflictsWith name es)
 
-        void $ insertProvider (Core.schemaProvider x)
+        void $ insertProvider (schemaProvider x)
 
         unique <-
-            insertValue attr value resources (\s w -> w { resources = s })
+            insertValue name value resources (\s w -> w { resources = s })
 
         unless unique $
-            throwError (DuplicateResource attr value)
+            throwError (DuplicateResource name value)
 
-        pure $! Core.UnsafeRef attr
+        pure $! UnsafeRef name
 
 -- | Emit an output variable to the remote state.
 --
@@ -292,15 +294,17 @@ define name x =
 --
 -- This effectively serializes an 'TF.Attr' into an 'TF.Output'.
 output
-    :: MonadTerraform s m
+    :: ( MonadTerraform s m
+       , JSON.ToJSON a
+       )
     => Text
-    -> Core.Expr s a
-    -> m (Core.Output a)
+    -> HIL s a
+    -> m (Output a)
 output name expr =
     liftTerraform $ do
         b <- backend <$> get
 
-        let out   = Core.UnsafeOutput name b expr
+        let out   = UnsafeOutput name b expr
             value = Encode.encodeOutput out
 
         unique <-
@@ -313,20 +317,20 @@ output name expr =
 
 -- | Refer to another terraform block of terraform's output variable, and
 -- introduce a new remote state datasource as required. This reifies an
--- 'Core.Output' into an 'Core.Expr' that can be used in the current context.
+-- 'Output' into an 'Expr' that can be used in the current context.
 remote
     :: MonadTerraform s m
-    => Core.Output a
-    -> m (Core.Expr s a)
+    => Output a
+    -> m (HIL s a)
 remote x =
     liftTerraform $ do
-        let b     = Core.outputBackend x
-            name  = Hash.human (Core.hashBackend b)
+        let b     = outputBackend x
+            name  = Hash.human (hashBackend b)
             value = Encode.encodeRemote name b
 
         void $ insertValue name value remotes (\s w -> w { remotes = s })
 
-        pure $! Core.outputValue x
+        pure $! outputValue x
 
 insertValue
     :: ( MonadTerraform s m

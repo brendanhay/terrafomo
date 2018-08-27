@@ -23,24 +23,24 @@ library:
     - src
 
   exposed-modules:
+    - Paths_terrafomo
     - Terrafomo
-    - Terrafomo.Builtin
     - Terrafomo.Core
     - Terrafomo.Encode
+    - Terrafomo.HIL
     - Terrafomo.Lens
     - Terrafomo.Monad
     - Terrafomo.Render
     - Terrafomo.Validate
-    - Paths_terrafomo
 
   dependencies:
     - aeson
-    - contravariant
     - hashable
     - microlens
     - mmorph
     - prettyprinter
     - random
+    - scientific
     - text
     - transformers
     - unordered-containers
@@ -52,8 +52,11 @@ tests:
     source-dirs: test
 
     dependencies:
+      - aeson
+      - hashable
       - hspec
       - hspec-discover
       - microlens
+      - pretty-show
       - terrafomo
       - text
