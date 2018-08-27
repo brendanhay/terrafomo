@@ -2,32 +2,32 @@ module Terrafomo.RenderSpec (spec) where
 
 import Control.Monad (unless)
 
+import Data.Aeson          ((.=))
+import Data.Function       ((&))
+import Data.Hashable       (Hashable)
 import Data.HashMap.Strict (HashMap)
-import Data.Aeson     ((.=))
-import Data.Function  ((&))
-import Data.Hashable  (Hashable)
-import Data.Maybe     (catMaybes)
-import Data.Text.Lazy (Text)
+import Data.Maybe          (catMaybes)
+import Data.Text.Lazy      (Text)
 
 import GHC.Generics (Generic)
 
 import Lens.Micro ((.~))
 
 import Terrafomo.Core
-import Terrafomo.HCL (HCL (..))
+import Terrafomo.HCL  (HCL (..))
 
 import Test.Hspec
 
+import qualified Data.Aeson          as JSON
+import qualified Data.Aeson.Types    as JSON (Pair)
 import qualified Data.HashMap.Strict as HashMap
-import qualified Data.Aeson        as JSON
-import qualified Data.Aeson.Types  as JSON (Pair)
-import qualified Data.Text.Lazy    as LText
-import qualified Data.Text.Lazy.IO as LText
-import qualified Paths_terrafomo   as Paths
-import qualified Terrafomo.HCL  as Encode
-import qualified Terrafomo.HIL     as HIL
-import qualified Terrafomo.Lens    as Lens
-import qualified Terrafomo.HCL  as Render
+import qualified Data.Text.Lazy      as LText
+import qualified Data.Text.Lazy.IO   as LText
+import qualified Paths_terrafomo     as Paths
+import qualified Terrafomo.HCL       as Encode
+import qualified Terrafomo.HCL       as Render
+import qualified Terrafomo.HIL       as HIL
+import qualified Terrafomo.Lens      as Lens
 
 data TestProvider = TestProvider !Int !Double !Bool ![Int] !TestSetting
     deriving (Show, Eq, Generic)

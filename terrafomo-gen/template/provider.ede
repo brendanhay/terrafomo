@@ -46,6 +46,8 @@ type Resource   a = TF.Schema {{ provider.schema.type }} (TF.Lifecycle a) a
 data {{ provider.schema.type }} = {{ provider.schema.con.name }}
 {% include "_include/record.ede" with arguments = provider.schema.arguments %}
 
+instance P.Hashable ({{ provider.schema.type }})
+
 -- | Specify a new {{provider.name }} provider configuration.
 {{ provider.schema.con.smart }}
   {% for param in provider.schema.parameters %}
@@ -95,7 +97,7 @@ defaultProvider =
       {% if provider.schema.arguments | empty %}
         P.mempty
       {% else %}
-        (TF.Encoder $ \{{ provider.schema.con.name }}{..} -> P.catMaybes
+        (\{{ provider.schema.con.name }}{..} -> P.catMaybes
           {% for field in provider.schema.arguments %}
             {% if field.first %}[ {% else %}, {% endif %}{{ field.value.encoder }} {{ field.value.name }}{% if field.last %}
             ]){% endif %}

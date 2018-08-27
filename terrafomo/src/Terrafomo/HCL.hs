@@ -26,24 +26,24 @@ module Terrafomo.HCL
     , object
     ) where
 
-import Data.Aeson     ((.=))
-import Data.HashSet   (HashSet)
-import Data.Maybe     (catMaybes)
-import Data.Semigroup (Semigroup ((<>)))
-import Data.Text.Lazy (Text)
-import Data.Text.Prettyprint.Doc             (Doc, (<+>), pretty)
+import Data.Aeson                ((.=))
+import Data.HashSet              (HashSet)
+import Data.Maybe                (catMaybes)
+import Data.Semigroup            (Semigroup ((<>)))
+import Data.Text.Lazy            (Text)
+import Data.Text.Prettyprint.Doc (Doc, pretty, (<+>))
 
 import Terrafomo.Core
 
-import qualified Data.List as List
-import qualified Data.Foldable as Fold
-import qualified Data.Aeson          as JSON
-import qualified Data.Aeson.Types    as JSON
-import qualified Data.HashMap.Strict as HashMap
-import qualified Data.HashSet        as HashSet
-import qualified Data.Text.Prettyprint.Doc.Render.Text as Render
+import qualified Data.Aeson                            as JSON
+import qualified Data.Aeson.Types                      as JSON
+import qualified Data.Foldable                         as Fold
+import qualified Data.HashMap.Strict                   as HashMap
+import qualified Data.HashSet                          as HashSet
+import qualified Data.List                             as List
 import qualified Data.Text.Prettyprint.Doc             as PP
-import qualified Terrafomo.JSON as JSON
+import qualified Data.Text.Prettyprint.Doc.Render.Text as Render
+import qualified Terrafomo.JSON                        as JSON
 
 -- | FIXME: Document
 --

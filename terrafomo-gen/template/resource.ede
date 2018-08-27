@@ -32,8 +32,8 @@ import qualified {{ import.value }} as P
 import qualified Data.Aeson as JSON
 import qualified Data.HashMap.Strict as HashMap
 import qualified Terrafomo.Core as TF
-import qualified Terrafomo.Encode as TF
-import qualified Terrafomo.Validate as TF
+import qualified Terrafomo.HCL as TF
+import qualified Terrafomo.HIL as TF
 {% for resource in resources %}
 
 -- | @{{ resource.value.original }}@ {{ type }}.
@@ -54,7 +54,7 @@ data {{ resource.value.type }} = {{ resource.value.con.name }}
 {{ resource.value.con.smart }}{% for param in resource.value.parameters %} {{ param.value.name }}{% endfor %} =
     TF.unsafe{{ type }} "{{ resource.value.original }}" P.defaultProvider {% if type == "Resource" %} TF.encodeLifecycle{% endif %}
       {% for field in resource.value.arguments %}
-        {% if field.first %}(TF.Encoder $ \{{ resource.value.con.name }}{..} -> P.catMaybes
+        {% if field.first %}(\{{ resource.value.con.name }}{..} -> P.catMaybes
             [{% else %}    ,{% endif %} {{ field.value.encoder }} {{ field.value.name }}{% if field.last %}
             ]){% endif %}
         {% else %}

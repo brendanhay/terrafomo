@@ -45,11 +45,11 @@ import GHC.Generics (Generic)
 
 import Prelude hiding (null)
 
-import qualified Data.Aeson              as JSON
-import qualified Data.Text.Lazy          as LText
-import qualified Terrafomo.JSON         as JSON
+import qualified Data.Aeson                            as JSON
+import qualified Data.Text.Lazy                        as LText
 import qualified Data.Text.Prettyprint.Doc             as PP
 import qualified Data.Text.Prettyprint.Doc.Render.Text as Render
+import qualified Terrafomo.JSON                        as JSON
 
 -- | A fix-point type used for the 'Expr' expression and recursion schemes.
 newtype Fix f = Fix { unfix :: f (Fix f) }

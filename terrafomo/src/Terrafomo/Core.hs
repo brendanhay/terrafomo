@@ -1,13 +1,13 @@
 module Terrafomo.Core
     (
     -- * Identifiers
-      Keyword   (..)
-    , Type      (..)
-    , Name      (..)
-    , Attr      (..)
+      Keyword      (..)
+    , Type         (..)
+    , Name         (..)
+    , Attr         (..)
 
     -- * Named References
-    , Ref       (..)
+    , Ref          (..)
     , unsafeCompute
 
     -- * K/V Encoding
@@ -15,41 +15,52 @@ module Terrafomo.Core
 
     -- * Providers
     , Alias
-    , Provider  (..)
+    , Provider     (..)
     , hashProvider
     , defaultProvider
 
     -- * Backends
-    , Backend   (..)
+    , Backend      (..)
     , hashBackend
     , localBackend
 
     -- * DataSources and Resources
-    , Schema    (..)
+    , Schema       (..)
     , unsafeDataSource
     , unsafeResource
 
     -- ** Resource Lifecycle
-    , Changes   (..)
-    , Lifecycle (..)
+    , Changes      (..)
+    , Lifecycle    (..)
 
     -- * Output Values
-    , Output    (..)
+    , Output       (..)
     , outputValue
+
+    -- * @conflicts_with@ Validation
+    , ConflictsWith
+    , HasValidator (..)
+    , Validator    (..)
+    , conflictsWith
+    , conflictValidator
+    , fieldValidator
     ) where
 
-import Data.Aeson     ((.=))
-import Data.Function  (on)
-import Data.Hashable  (Hashable)
-import Data.HashSet   (HashSet)
-import Data.Text.Lazy (Text)
+import Data.Aeson          ((.=))
+import Data.Bifunctor      (first)
+import Data.Function       (on)
+import Data.Hashable       (Hashable)
+import Data.HashMap.Strict (HashMap)
+import Data.HashSet        (HashSet)
+import Data.Maybe          (fromMaybe)
+import Data.Text.Lazy      (Text)
 
 import GHC.Generics (Generic)
 
-import Prelude hiding (null)
-
 import qualified Data.Aeson.Types        as JSON
 import qualified Data.Hashable           as Hash
+import qualified Data.HashMap.Strict     as HashMap
+import qualified Data.HashSet            as HashSet
 import qualified Terrafomo.HIL           as HIL
 import qualified Terrafomo.Internal.Hash as Hash
 
@@ -91,15 +102,17 @@ unsafeCompute :: (Attr -> Text) -> Ref s a -> Text -> HIL.Expr s b
 unsafeCompute encode (UnsafeRef name) attr =
     HIL.compute (encode (Attr name attr))
 
--- | An encoder is used to encode the a series of configuration pairs suitable
--- for embedding into a larger HCL structure.
+-- | An encoder should produce a series of configuration pairs suitable
+-- for embedding into a larger HCL structure or JSON object.
 type Encoder a = a -> [JSON.Pair]
 
--- | A function to generate a provider alias.
+-- | A function which produces a unique alias for any structurally
+-- equivalent 'Provider'.
 type Alias p = Provider p -> Name
 
--- | A provider name and configuration. The absence of the configuration
--- indicates that the default provider for the given name should be used.
+-- | A provider name, version, and @terraform-provider-*@ specific configuration.
+-- The absence of @providerConfig@ indicates that the default provider for the
+-- given @providerName@ should be used.
 --
 -- Multiple providers can be specified using an alias and the configurations
 -- must not contain interpolations.
@@ -140,6 +153,7 @@ data Backend b = Backend
     , backendEncoder :: !(Encoder b)
     }
 
+-- | FIXME: Document
 hashBackend :: Backend JSON.Object -> Int
 hashBackend x =
     Hash.hash (backendName x)
@@ -166,6 +180,7 @@ data Changes a
     | Match !(HashSet Name)
       deriving (Show, Eq, Generic)
 
+-- | FIXME: Document
 instance Hashable (Changes b)
 
 instance Semigroup (Changes a) where
@@ -263,3 +278,83 @@ data Output a where
 
 outputValue :: Output a -> HIL.Expr s a
 outputValue (UnsafeOutput _ _ x) = HIL.unsafeErase x
+
+-- Conflict Validation
+
+type ConflictsWith = HashMap Text (HashSet Text)
+
+class HasValidator a where
+    validator :: Validator a
+    validator = mempty
+
+instance HasValidator a => HasValidator (Maybe a) where
+    validator =
+        Validator $ \case
+            Just x  -> validate validator x
+            Nothing -> mempty
+
+instance HasValidator a => HasValidator (HIL.Expr s a) where
+    validator =
+        Validator . HIL.cata $ \case
+            HIL.Var (HIL.Const x) -> validate validator x
+            _                     -> mempty
+
+-- | A validator is used to validate which fields of schema @"conflicts_with"@
+-- invariants are violated. It returns a map of the set fields to their
+-- respective set conflicting fields.
+newtype Validator a = Validator
+    { validate :: a -> Maybe ConflictsWith
+    }
+
+instance Semigroup (Validator a) where
+    (<>) f g =
+        Validator $ \x ->
+            case (validate f x, validate g x) of
+                (Nothing, Nothing) -> Nothing
+                (a,       b)       -> Just $
+                     HashMap.unionWith (<>) (fromMaybe mempty a)
+                                            (fromMaybe mempty b)
+
+instance Monoid (Validator a) where
+    mempty  = Validator (const Nothing)
+    mappend = (<>)
+
+conflictsWith
+    :: Bool
+    -> Text
+    -> [Text]
+    -> Maybe (Text, HashSet Text)
+conflictsWith set name conflicts =
+    if not set || null conflicts
+        then Nothing
+        else Just (name, HashSet.fromList conflicts)
+
+conflictValidator
+    :: (a -> ConflictsWith)
+    -- ^ Fields mapped to whether they are set, and the fields they conflict with.
+    -> Validator a
+conflictValidator f =
+    Validator $ \x ->
+        let conflicts = f x
+            set       = HashSet.fromList (HashMap.keys conflicts)
+            errs      =
+                HashMap.filter (not . HashSet.null) $
+                    HashMap.map (HashSet.intersection set) conflicts
+
+         in if HashMap.null errs
+                then Nothing
+                else Just errs
+
+fieldValidator
+    :: HasValidator b
+    => Text     -- ^ The field name for error reporting.
+    -> (a -> b) -- ^ The settings field accessor.
+    -> Validator a
+fieldValidator name f =
+    Validator $ \x ->
+        case validate validator (f x) of
+            Nothing   -> Nothing
+            Just errs ->
+                Just . HashMap.fromList
+                     . map (first (\n -> name <> " . " <> n))
+                     $ HashMap.toList errs

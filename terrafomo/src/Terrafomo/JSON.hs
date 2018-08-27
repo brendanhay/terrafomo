@@ -12,11 +12,11 @@ module Terrafomo.JSON
 import Data.Semigroup            ((<>))
 import Data.Text.Prettyprint.Doc (Doc, pretty, (<+>))
 
-import qualified Data.Aeson                            as JSON
-import qualified Data.Foldable                         as Fold
-import qualified Data.HashMap.Strict                   as HashMap
-import qualified Data.Scientific                       as Sci
-import qualified Data.Text.Prettyprint.Doc             as PP
+import qualified Data.Aeson                as JSON
+import qualified Data.Foldable             as Fold
+import qualified Data.HashMap.Strict       as HashMap
+import qualified Data.Scientific           as Sci
+import qualified Data.Text.Prettyprint.Doc as PP
 
 prettyJSON :: JSON.Value -> Doc ann
 prettyJSON = \case

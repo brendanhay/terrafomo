@@ -26,12 +26,11 @@ library:
     - Paths_terrafomo
     - Terrafomo
     - Terrafomo.Core
-    - Terrafomo.Encode
+    - Terrafomo.HCL
     - Terrafomo.HIL
+    - Terrafomo.JSON
     - Terrafomo.Lens
     - Terrafomo.Monad
-    - Terrafomo.Render
-    - Terrafomo.Validate
 
   dependencies:
     - aeson

@@ -28,7 +28,8 @@ import qualified {{ import.value }} as P
 import qualified Data.Aeson as JSON
 import qualified Data.HashMap.Strict as HashMap
 import qualified Terrafomo.Core as TF
-import qualified Terrafomo.Validate as TF
+import qualified Terrafomo.HIL as TF
+import qualified Terrafomo.HCL as TF
 {% for setting in settings %}
 
 -- | @{{ setting.value.original }}@ nested settings.
