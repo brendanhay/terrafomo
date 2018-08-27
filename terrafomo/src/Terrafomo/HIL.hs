@@ -2,7 +2,38 @@
 
 -- | HIL (HashiCorp Interpolation Language) is a lightweight embedded language
 -- used for configuration interpolation.
-module Terrafomo.HIL where
+module Terrafomo.HIL
+    (
+    -- * Recusion Schemes
+      Fix   (..)
+    , cata
+
+    -- * Expressions
+    , Var (..)
+    , ExprF  (..)
+    , Expr
+
+    -- * Primitives
+    , compute
+    , value
+    , null
+    , true
+    , false
+    , string
+    , int
+    , float
+
+    -- * Terraform Builtins
+    , modulo
+    , join
+    , file
+
+    -- * Utilities
+    , quote
+    , operator
+    , function
+    , unsafeErase
+    ) where
 
 import Data.Bifunctor (Bifunctor (first, second))
 import Data.Function  (on)
@@ -11,6 +42,8 @@ import Data.String    (IsString (fromString))
 import Data.Text.Lazy (Text)
 
 import GHC.Generics (Generic)
+
+import Prelude hiding (null)
 
 import qualified Data.Aeson              as JSON
 import qualified Data.Text.Lazy          as LText
@@ -56,12 +89,12 @@ instance JSON.ToJSON a => JSON.ToJSON (Var s a) where
     toJSON = \case
         Compute v -> JSON.toJSON ("${" <> v <> "}")
         Const   x -> JSON.toJSON x
-        Null      -> JSON.String "null"
+        Null      -> JSON.Null
 
 -- | The main terraform interpolation expression type. This is polymorphic so
 -- that it can be made a functor, which allows us to traverse expressions and
--- map functions over them. The actual 'ExprF' type is a fixed point of this
--- functor, defined below.
+-- map functions over them. The actual 'Expr' expression type is a fixed point
+-- of this functor, defined below.
 data ExprF a b r
     = Var    !a
     | Quote  !b
@@ -81,15 +114,15 @@ instance Bifunctor (ExprF a) where
 
 -- | The expression type is a fixed point of the polymorphic expression functor.
 --
--- The variables are specialized to unquoted 'Var' or quoted JSON 'JSON.Value's.
--- This allows us to express well-typed expressions in Haskell's type-system, as
--- well as more dubiously typed HCL expressions when necessary.
-type HIL s a = Fix (ExprF (Var s a) JSON.Value)
+-- The variables are specialized to unquoted HIL 'Var' or quoted JSON
+-- 'JSON.Var's. This allows well-typed expressions using Haskell's types and
+-- the more dubiously typed HIL expressions when necessary.
+type Expr s a = Fix (ExprF (Var s a) JSON.Value)
 
-instance IsString a => IsString (HIL s a) where
-    fromString = Fix . Var . fromString
+instance IsString a => IsString (Expr s a) where
+    fromString = value . fromString
 
-instance Num a => Num (HIL s a) where
+instance Num a => Num (Expr s a) where
     (+)         = operator "+"
     (-)         = operator "-"
     (*)         = operator "*"
@@ -97,7 +130,7 @@ instance Num a => Num (HIL s a) where
     signum      = function "signum" . pure
     fromInteger = value . fromInteger
 
-instance JSON.ToJSON a => JSON.ToJSON (HIL s a) where
+instance JSON.ToJSON a => JSON.ToJSON (Expr s a) where
     toJSON =
         let text = LText.decodeUtf8 . JSON.encode
          in cata $ \case
@@ -110,39 +143,41 @@ instance JSON.ToJSON a => JSON.ToJSON (HIL s a) where
                     JSON.toJSON $
                         LText.unwords [text a, n, text b]
 
--- | FIXME: Documentation
-ecata
-    :: (a -> Fix (ExprF a' b'))
-    -> (b -> Fix (ExprF a' b'))
-    -> Fix (ExprF a  b)
-    -> Fix (ExprF a' b')
-ecata f g =
-    cata $ \case
-        Var    a     -> f a
-        Quote  b     -> g b
-        Prefix n xs  -> Fix (Prefix n xs)
-        Infix  n a b -> Fix (Infix  n a b)
-
 -- Primitives
 
-compute :: Text -> HIL s a
+-- | A computed value.
+compute :: Text -> Expr s a
 compute v = Fix (Var (Compute v))
 
--- | Specify a constant Haskell value. Equivalent to 'Just'.
-value :: a -> HIL s a
-value x = Fix (Var (Const x))
-
--- | Omit an attribute. Equivalent to 'Nothing'.
-null :: HIL s a
+-- | The special value @null@ can be assigned to any field to represent the
+-- absence of a value. This causes Terraform to omit the field from upstream API
+-- calls, which is important in some cases for triggering certain default
+-- behaviors.
+--
+-- This is specific to Terraform @>= 0.12@
+null :: Expr s a
 null = Fix (Var Null)
 
+-- | Specify a constant Haskell value.
+value :: a -> Expr s a
+value x = Fix (Var (Const x))
+
 -- | Specify a boolean attribute value. Equivalent to @value True@.
-true :: HIL s Bool
+true :: Expr s Bool
 true = value True
 
 -- | Specify a boolean attribute value. Equivalent to @value False@.
-false :: HIL s Bool
+false :: Expr s Bool
 false = value False
+
+string :: Text -> Expr s Text
+string = value
+
+int :: Int -> Expr s Int
+int = value
+
+float :: Double -> Expr s Double
+float = value
 
 -- Builtin Functions
 
@@ -151,31 +186,29 @@ false = value False
 -- | Integer modulo.
 --
 -- See: <https://www.terraform.io/docs/configuration/interpolation.html#math math>
-modulo :: Integral a => HIL s a -> HIL s a -> HIL s a
-modulo n d = function "%" [n, d]
+modulo :: Integral a => Expr s a -> Expr s a -> Expr s a
+modulo = operator "%"
 
 -- | Joins the list with the specified delimiter.
 --
 -- See: <https://www.terraform.io/docs/configuration/interpolation.html#join-delim-list- join(delim, list)>
-join :: JSON.ToJSON a => Text -> [HIL s a] -> HIL s Text
+join :: JSON.ToJSON a => Text -> [Expr s a] -> Expr s Text
 join sep xs = function "join" (value sep : map quote xs)
 
 -- | Read the contents of a file. The path is interpreted relative to the
 -- working directory.
 --
 -- See: <https://www.terraform.io/docs/configuration/interpolation.html#file-path- file(path)>
-file :: HIL s FilePath -> HIL s Text
+file :: Expr s FilePath -> Expr s Text
 file path = function "file" [quote path]
 
 -- Utilities
 
 -- FIXME:
-quote :: JSON.ToJSON a => HIL s a -> HIL s Text
-quote = ecata (f . JSON.toJSON) f
+quote :: JSON.ToJSON a => Expr s a -> Expr s Text
+quote = bicata (f . JSON.toJSON) f
   where
     f = Fix . Quote
-
--- Utilities
 
 -- | Construct an infix operator expression.
 operator :: Text -> Fix (ExprF a b) -> Fix (ExprF a b) -> Fix (ExprF a b)
@@ -185,10 +218,22 @@ operator n a b = Fix (Infix n a b)
 function :: Text -> [Fix (ExprF a b)] -> Fix (ExprF a b)
 function n = Fix . Prefix n
 
-unsafeErase :: HIL s a -> HIL s' a
-unsafeErase = ecata (Fix . Var . var) (Fix . Quote)
+unsafeErase :: Expr s a -> Expr s' a
+unsafeErase = bicata (Fix . Var . go) (Fix . Quote)
   where
-    var = \case
+    go = \case
         Compute v -> Compute v
         Const   x -> Const   x
         Null      -> Null
+
+bicata
+    :: (a -> Fix (ExprF a' b'))
+    -> (b -> Fix (ExprF a' b'))
+    -> Fix (ExprF a  b)
+    -> Fix (ExprF a' b')
+bicata f g =
+    cata $ \case
+        Var    a     -> f a
+        Quote  b     -> g b
+        Prefix n xs  -> Fix (Prefix n xs)
+        Infix  n a b -> Fix (Infix  n a b)

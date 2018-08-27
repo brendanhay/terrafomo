@@ -52,15 +52,15 @@ module Terrafomo
     , Monad.remote
 
     -- * Interpolation Expression Language
-    , HIL.HIL
+    , HIL.Var
 
     -- ** Primitives
-    , HIL.value
+    , HIL.var
     , HIL.null
     , HIL.true
     , HIL.false
 
-    -- ** HIL Functions
+    -- ** Builtin Functions
     , HIL.modulo
     , HIL.join
     , HIL.file

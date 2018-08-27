@@ -57,6 +57,5 @@ tests:
       - hspec
       - hspec-discover
       - microlens
-      - pretty-show
       - terrafomo
       - text

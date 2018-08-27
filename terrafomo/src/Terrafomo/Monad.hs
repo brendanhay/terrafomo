@@ -39,7 +39,6 @@ import Data.Typeable       (Typeable)
 
 import Terrafomo.Core
 import Terrafomo.Encode            (HCL)
-import Terrafomo.HIL               (HIL)
 import Terrafomo.Internal.ValueMap (ValueMap)
 
 import qualified Control.Monad.Trans.Except        as Except
@@ -56,6 +55,7 @@ import qualified Data.Aeson                        as JSON
 import qualified Data.HashMap.Strict               as HashMap
 import qualified System.IO                         as IO
 import qualified Terrafomo.Encode                  as Encode
+import qualified Terrafomo.HIL                     as HIL
 import qualified Terrafomo.Internal.Hash           as Hash
 import qualified Terrafomo.Internal.ValueMap       as ValueMap
 import qualified Terrafomo.Render                  as Render
@@ -292,13 +292,14 @@ define key x =
 -- output (nformat (freference % "_id") ref) (view R.computedId ref)
 -- @
 --
--- This effectively serializes an 'TF.Attr' into an 'TF.Output'.
+-- This in effect serializes a 'TF.Var' into an 'TF.Output' that is usable
+-- by another remote state-thread.
 output
     :: ( MonadTerraform s m
        , JSON.ToJSON a
        )
     => Text
-    -> HIL s a
+    -> HIL.Expr s a
     -> m (Output a)
 output name expr =
     liftTerraform $ do
@@ -315,13 +316,14 @@ output name expr =
 
         pure out
 
--- | Refer to another terraform block of terraform's output variable, and
--- introduce a new remote state datasource as required. This reifies an
--- 'Output' into an 'Expr' that can be used in the current context.
+-- | Refer to an output variable produced by a potentially different remote
+-- state-thread and introduce a new remote state datasource as required. This
+-- reifies an 'Output' into a 'Var' HIL expression that can be used within the
+-- current thread.
 remote
     :: MonadTerraform s m
     => Output a
-    -> m (HIL s a)
+    -> m (HIL.Expr s a)
 remote x =
     liftTerraform $ do
         let b     = outputBackend x

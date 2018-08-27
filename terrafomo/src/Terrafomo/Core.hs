@@ -10,6 +10,9 @@ module Terrafomo.Core
     , Ref       (..)
     , unsafeCompute
 
+    -- * K/V Encoding
+    , Encoder
+
     -- * Providers
     , Provider  (..)
     , hashProvider
@@ -43,8 +46,6 @@ import Data.Text.Lazy (Text)
 import GHC.Generics (Generic)
 
 import Prelude hiding (null)
-
-import Terrafomo.HIL (HIL)
 
 import qualified Data.Aeson.Types        as JSON
 import qualified Data.Hashable           as Hash
@@ -85,7 +86,7 @@ newtype Ref s a = UnsafeRef Name
     deriving (Show, Eq, Hashable)
 
 -- | FIXME: Document
-unsafeCompute :: (Attr -> Text) -> Ref s a -> Text -> HIL s b
+unsafeCompute :: (Attr -> Text) -> Ref s a -> Text -> HIL.Expr s b
 unsafeCompute encode (UnsafeRef name) attr =
     HIL.compute (encode (Attr name attr))
 
@@ -249,9 +250,9 @@ unsafeResource name provider lifecycle encoder cfg =
 data Output a where
     UnsafeOutput :: { outputName    :: !Text
                     , outputBackend :: !(Backend JSON.Object)
-                    , outputValue_  :: !(HIL s a)
+                    , outputValue_  :: !(HIL.Expr s a)
                     }
                  -> Output a
 
-outputValue :: Output a -> HIL s a
+outputValue :: Output a -> HIL.Expr s a
 outputValue (UnsafeOutput _ _ x) = HIL.unsafeErase x

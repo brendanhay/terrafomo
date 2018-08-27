@@ -2,13 +2,10 @@ module Terrafomo.Lens
     (
     -- * Provider
       provider
-
     -- * Configuration
     , configuration
-
     -- * Dependencies
     , dependOn
-
     -- * Lifecycle
     , preventDestroy
     , createBeforeDestroy

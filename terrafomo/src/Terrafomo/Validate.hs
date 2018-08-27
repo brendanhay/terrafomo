@@ -14,10 +14,9 @@ import Data.HashSet        (HashSet)
 import Data.Maybe          (fromMaybe)
 import Data.Text.Lazy      (Text)
 
-import Terrafomo.HIL (ExprF (Var), HIL, Var (..), cata)
-
 import qualified Data.HashMap.Strict as HashMap
 import qualified Data.HashSet        as HashSet
+import qualified Terrafomo.HIL       as HIL
 
 type ConflictsWith = HashMap Text (HashSet Text)
 
@@ -31,11 +30,11 @@ instance HasValidator a => HasValidator (Maybe a) where
             Just x  -> validate validator x
             Nothing -> mempty
 
-instance HasValidator a => HasValidator (HIL s a) where
+instance HasValidator a => HasValidator (HIL.Var s a) where
     validator =
-        Validator . cata $ \case
-            Var (Const x) -> validate validator x
-            _             -> mempty
+        Validator . HIL.cata $ \case
+            HIL.Value (HIL.Const x) -> validate validator x
+            _                       -> mempty
 
 -- | A validator is used to validate which fields of schema @"conflicts_with"@
 -- invariants are violated. It returns a map of the set fields to their

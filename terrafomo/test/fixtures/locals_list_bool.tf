@@ -1,0 +1,6 @@
+locals {
+  var = [
+    true,
+    false,
+  ]
+}
