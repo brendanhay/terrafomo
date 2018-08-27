@@ -1,8 +1,13 @@
-module Terrafomo.Encode
+module Terrafomo.HCL
     (
     -- * Restricted HCL AST
       HCL  (..)
     , Node (..)
+
+    -- * Rendering
+    , Render.renderLazy
+    , Render.renderIO
+    , renderDocument
 
     -- * Encoding Functions
     , encodeKeyword
@@ -22,18 +27,23 @@ module Terrafomo.Encode
     ) where
 
 import Data.Aeson     ((.=))
-import Data.Hashable  (Hashable)
 import Data.HashSet   (HashSet)
 import Data.Maybe     (catMaybes)
 import Data.Semigroup (Semigroup ((<>)))
 import Data.Text.Lazy (Text)
+import Data.Text.Prettyprint.Doc             (Doc, (<+>), pretty)
 
 import Terrafomo.Core
 
+import qualified Data.List as List
+import qualified Data.Foldable as Fold
 import qualified Data.Aeson          as JSON
 import qualified Data.Aeson.Types    as JSON
 import qualified Data.HashMap.Strict as HashMap
 import qualified Data.HashSet        as HashSet
+import qualified Data.Text.Prettyprint.Doc.Render.Text as Render
+import qualified Data.Text.Prettyprint.Doc             as PP
+import qualified Terrafomo.JSON as JSON
 
 -- | FIXME: Document
 --
@@ -47,6 +57,25 @@ data Node
     = Section !HCL
     | Object  !JSON.Object
       deriving (Show, Eq)
+
+-- Document Rendering
+
+renderDocument :: [HCL] -> PP.SimpleDocStream ann
+renderDocument =
+    PP.layoutPretty PP.defaultLayoutOptions
+        . PP.vsep . List.intersperse mempty . map prettyHCL
+
+prettyHCL :: HCL -> Doc ann
+prettyHCL (HCL kw keys node) =
+    Fold.foldl' (<+>) (pretty kw) (map (PP.dquotes . pretty) keys)
+        <+> prettyNode node
+
+prettyNode :: Node -> Doc ann
+prettyNode = \case
+    Section s -> JSON.encloseObject [prettyHCL s]
+    Object  o -> JSON.prettyObject o
+
+-- Statement Encoding
 
 -- | FIXME: Document
 encodeKeyword :: Keyword -> Text
@@ -95,11 +124,11 @@ encodeRemote name x =
                ]
 
 -- | FIXME: Document
-encodeProvider :: Hashable p => Provider p -> HCL
+encodeProvider :: Provider p -> HCL
 encodeProvider x =
     section TypeProvider [providerName x] $
         object $
-            let Name _ alias = hashProvider x
+            let Name _ alias = providerAlias x x
              in catMaybes
                 ( fmap ("version" .=) (providerVersion x)
                 : fmap ("alias"   .=) (Just alias)
@@ -107,13 +136,13 @@ encodeProvider x =
                 )
 
 -- | FIXME: Document
-encodeAlias :: Hashable p => Provider p -> Maybe JSON.Pair
+encodeAlias :: Provider p -> Maybe JSON.Pair
 encodeAlias x = do
-    ("alias" .= encodeName (hashProvider x))
+    ("alias" .= encodeName (providerAlias x x))
           <$ providerConfig x
 
 -- | FIXME: Document
-encodeSchema :: Hashable p => Text -> Schema p l a -> HCL
+encodeSchema :: Text -> Schema p l a -> HCL
 encodeSchema name x =
     case schemaType x of
         Type kw typ ->

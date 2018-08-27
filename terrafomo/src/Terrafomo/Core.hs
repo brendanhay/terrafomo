@@ -14,6 +14,7 @@ module Terrafomo.Core
     , Encoder
 
     -- * Providers
+    , Alias
     , Provider  (..)
     , hashProvider
     , defaultProvider
@@ -94,6 +95,9 @@ unsafeCompute encode (UnsafeRef name) attr =
 -- for embedding into a larger HCL structure.
 type Encoder a = a -> [JSON.Pair]
 
+-- | A function to generate a provider alias.
+type Alias p = Provider p -> Name
+
 -- | A provider name and configuration. The absence of the configuration
 -- indicates that the default provider for the given name should be used.
 --
@@ -102,27 +106,30 @@ type Encoder a = a -> [JSON.Pair]
 data Provider p = Provider
     { providerName    :: !Text
     , providerVersion :: !(Maybe Text)
-    , providerConfig  :: !(Maybe p)
+    , providerConfig  :: !(Maybe   p)
+    , providerAlias   :: !(Alias   p)
     , providerEncoder :: !(Encoder p)
     }
 
 -- | FIXME: Document
-hashProvider :: Hashable p => Provider p -> Name
+hashProvider :: Hashable p => Provider p -> Int
 hashProvider x =
-    Name (Type TypeProvider (providerName x)) $
-        Hash.human
-            ( providerName    x
-            , providerVersion x
-            , providerConfig  x
-            )
+    Hash.hash
+        ( providerName    x
+        , providerVersion x
+        , providerConfig  x
+        )
 
-defaultProvider :: Text -> Maybe Text -> Encoder p -> Provider p
+defaultProvider :: Hashable p => Text -> Maybe Text -> Encoder p -> Provider p
 defaultProvider name version encoder =
     Provider
         { providerName    = name
         , providerVersion = version
         , providerConfig  = Nothing
         , providerEncoder = encoder
+        , providerAlias   = \x ->
+            Name (Type TypeProvider (providerName x))
+                 (Hash.human (hashProvider x))
         }
 
 -- | Only a single backend may be specified and the configuration must not contain

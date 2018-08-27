@@ -59,3 +59,4 @@ tests:
       - microlens
       - terrafomo
       - text
+      - unordered-containers

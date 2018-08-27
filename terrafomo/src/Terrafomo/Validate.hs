@@ -30,11 +30,11 @@ instance HasValidator a => HasValidator (Maybe a) where
             Just x  -> validate validator x
             Nothing -> mempty
 
-instance HasValidator a => HasValidator (HIL.Var s a) where
+instance HasValidator a => HasValidator (HIL.Expr s a) where
     validator =
         Validator . HIL.cata $ \case
-            HIL.Value (HIL.Const x) -> validate validator x
-            _                       -> mempty
+            HIL.Var (HIL.Const x) -> validate validator x
+            _                     -> mempty
 
 -- | A validator is used to validate which fields of schema @"conflicts_with"@
 -- invariants are violated. It returns a map of the set fields to their

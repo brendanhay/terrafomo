@@ -52,13 +52,16 @@ module Terrafomo
     , Monad.remote
 
     -- * Interpolation Expression Language
-    , HIL.Var
+    , HIL.Expr
 
     -- ** Primitives
-    , HIL.var
+    , HIL.value
     , HIL.null
     , HIL.true
     , HIL.false
+    , HIL.int
+    , HIL.float
+    , HIL.string
 
     -- ** Builtin Functions
     , HIL.modulo

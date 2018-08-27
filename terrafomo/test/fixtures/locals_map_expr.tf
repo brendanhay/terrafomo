@@ -1,6 +1,6 @@
 locals {
   var = {
-    null = null,
-    file = "${file("/etc/foo")}",
+    null = null
+    file = "${file("/etc/foo")}"
   }
 }

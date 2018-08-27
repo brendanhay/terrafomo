@@ -47,7 +47,9 @@ import Prelude hiding (null)
 
 import qualified Data.Aeson              as JSON
 import qualified Data.Text.Lazy          as LText
-import qualified Data.Text.Lazy.Encoding as LText
+import qualified Terrafomo.JSON         as JSON
+import qualified Data.Text.Prettyprint.Doc             as PP
+import qualified Data.Text.Prettyprint.Doc.Render.Text as Render
 
 -- | A fix-point type used for the 'Expr' expression and recursion schemes.
 newtype Fix f = Fix { unfix :: f (Fix f) }
@@ -132,16 +134,16 @@ instance Num a => Num (Expr s a) where
 
 instance JSON.ToJSON a => JSON.ToJSON (Expr s a) where
     toJSON =
-        let text = LText.decodeUtf8 . JSON.encode
+        let text = Render.renderLazy . PP.layoutCompact . JSON.prettyJSON
          in cata $ \case
                 Var    v     -> JSON.toJSON v
                 Quote  q     -> q
                 Prefix n xs  ->
                     JSON.toJSON $
-                        mconcat [n, "(", LText.intercalate ", " (map text xs), ")"]
+                        mconcat ["${", n, "(", LText.intercalate ", " (map text xs), ")}"]
                 Infix  n a b ->
                     JSON.toJSON $
-                        LText.unwords [text a, n, text b]
+                        mconcat ["${", LText.unwords [text a, n, text b], "}"]
 
 -- Primitives
 

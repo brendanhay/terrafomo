@@ -38,7 +38,7 @@ import Data.Text.Lazy      (Text)
 import Data.Typeable       (Typeable)
 
 import Terrafomo.Core
-import Terrafomo.Encode            (HCL)
+import Terrafomo.Render            (HCL)
 import Terrafomo.Internal.ValueMap (ValueMap)
 
 import qualified Control.Monad.Trans.Except        as Except
@@ -213,9 +213,7 @@ instance ( MonadTerraform s m
 -- Providers
 
 withProvider
-    :: ( MonadTerraform s m
-       , Hashable p
-       )
+    :: MonadTerraform s m
     => Provider p
     -> m a
     -> m a
@@ -230,16 +228,14 @@ withProvider p m =
                   }
 
 insertProvider
-    :: ( MonadTerraform s m
-       , Hashable p
-       )
+    :: MonadTerraform s m
     => Provider p
     -> m (Maybe Name)
 insertProvider x =
     case providerConfig x of
         Nothing -> lookupProvider (providerName x)
         Just _  ->
-            let alias = hashProvider x
+            let alias = providerAlias x x
                 value = Encode.encodeProvider x
 
              in insertValue alias value providers (\s w -> w { providers = s })

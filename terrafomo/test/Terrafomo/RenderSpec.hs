@@ -14,7 +14,7 @@ import GHC.Generics (Generic)
 import Lens.Micro ((.~))
 
 import Terrafomo.Core
-import Terrafomo.Encode (HCL (..))
+import Terrafomo.HCL (HCL (..))
 
 import Test.Hspec
 
@@ -24,10 +24,10 @@ import qualified Data.Aeson.Types  as JSON (Pair)
 import qualified Data.Text.Lazy    as LText
 import qualified Data.Text.Lazy.IO as LText
 import qualified Paths_terrafomo   as Paths
-import qualified Terrafomo.Encode  as Encode
+import qualified Terrafomo.HCL  as Encode
 import qualified Terrafomo.HIL     as HIL
 import qualified Terrafomo.Lens    as Lens
-import qualified Terrafomo.Render  as Render
+import qualified Terrafomo.HCL  as Render
 
 data TestProvider = TestProvider !Int !Double !Bool ![Int] !TestSetting
     deriving (Show, Eq, Generic)
