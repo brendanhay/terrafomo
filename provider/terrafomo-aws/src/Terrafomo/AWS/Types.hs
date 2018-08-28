@@ -11,16 +11,16 @@
 module Terrafomo.AWS.Types
     (
     -- ** Regions and Availability Zones
-      Region                     (..)
+      Region             (..)
     , fregion
 
-    , Zone                       (..)
+    , Zone               (..)
     , fzone
     , fzonesuf
 
     , IPRange
-    , NetworkTraffic             (..)
-    , NetworkProtocol            (..)
+    , NetworkTraffic     (..)
+    , NetworkProtocol    (..)
 
     -- ** IAM
     , IAM.Document
@@ -30,6 +30,7 @@ module Terrafomo.AWS.Types
     , TableAttributeType (..)
     ) where
 
+import Data.Hashable (Hashable (hashWithSalt))
 import Data.IP (IPRange)
 
 import Formatting (Format, (%))
@@ -38,19 +39,13 @@ import GHC.Generics (Generic)
 
 import Network.AWS.Types (Region (..))
 
-import Terrafomo
+import qualified Amazonka.IAM.Policy   as IAM
+import qualified Data.IP               as IP
+import qualified Formatting            as Format
+import qualified Network.AWS.Data.Text as AWS
+import qualified Terrafomo.HCL         as HCL
 
-import qualified Amazonka.IAM.Policy    as IAM
-import qualified Data.Text.Lazy.Builder as Build
-import qualified Formatting             as Format
-import qualified Network.AWS.Data.Text  as AWS
-import qualified Terrafomo.HCL          as HCL
-
--- | A specific AWS availability zone.
-data Zone = Zone !Region !Char
-    deriving (Show, Eq, Ord, Generic)
-
--- Orphan
+-- Orphan - iproute
 instance Hashable IPRange where
     hashWithSalt s = \case
         IP.IPv4Range x ->
@@ -64,16 +59,31 @@ instance Hashable IPRange where
                  `hashWithSalt` IP.fromIPv6 ip6
                  `hashWithSalt` mask
 
-instance IsValue Zone where
-    toValue = HCL.toValue . Format.bprint fzone
+-- Orphan - iproute
+instance HCL.ToHCL IPRange where
+    toHCL = HCL.toHCL . show
+
+-- Orphan - amazonka-iam-policy
+instance HCL.ToHCL IAM.Document where
+    toHCL = HCL.toHCL . HCL.heredoc
+
+-- Orphan - amazonka-core
+instance HCL.ToHCL Region where
+    toHCL = HCL.toHCL . Format.sformat fregion
+
+-- | A specific AWS availability zone.
+data Zone = Zone !Region !Char
+    deriving (Show, Eq, Ord, Generic)
+
+instance Hashable Zone
+
+instance HCL.ToHCL Zone where
+    toHCL = HCL.toHCL . Format.sformat fzone
 
 -- | Format an AWS region name.
 fregion :: Format r (Region -> r)
-fregion = Format.later (Build.fromText . AWS.toText)
-
--- Orphan instance for amazonka type.
-instance IsValue Region where
-    toValue = HCL.toValue . Format.bprint fregion
+fregion =
+    Format.mapf AWS.toText Format.stext
 
 -- | Format an AWS availability zone name.
 fzone :: Format r (Zone -> r)
@@ -84,20 +94,17 @@ fzone =
 -- | Format an AWS availability zone suffix.
 fzonesuf :: Format r (Zone -> r)
 fzonesuf =
-    Format.later $ \(Zone _ suf) ->
-        Format.bprint Format.char suf
-
--- Orphan instance for amazonka-iam-policy type.
-instance IsValue IAM.Document where
-    toValue = HCL.json
+    Format.mapf (\(Zone _ suf) -> suf) Format.char
 
 data NetworkTraffic
     = TrafficIngress
     | TrafficEgress
       deriving (Show, Eq, Ord, Generic)
 
-instance IsValue NetworkTraffic where
-    toValue = HCL.string . \case
+instance Hashable NetworkTraffic
+
+instance HCL.ToHCL NetworkTraffic where
+    toHCL = \case
         TrafficIngress -> "ingress"
         TrafficEgress  -> "egress"
 
@@ -108,8 +115,10 @@ data NetworkProtocol
     | ProtocolAll
       deriving (Show, Eq, Ord, Generic)
 
-instance IsValue NetworkProtocol where
-    toValue = HCL.string . \case
+instance Hashable NetworkProtocol
+
+instance HCL.ToHCL NetworkProtocol where
+    toHCL = \case
         ProtocolICMP -> "icmp"
         ProtocolTCP  -> "tcp"
         ProtocolUDP  -> "udp"
@@ -117,15 +126,17 @@ instance IsValue NetworkProtocol where
 
 -- DynamoDB Specific
 
--- | One of: S, N, or B for (S)tring, (N)umber or (B)inary data.
+-- | One of: @S@, @N@, or @B@ for (S)tring, (N)umber or (B)inary data.
 data TableAttributeType
     = TypeString
     | TypeNumber
     | TypeBinary
       deriving (Show, Eq, Ord, Generic)
 
-instance IsValue TableAttributeType where
-    toValue = HCL.string . \case
-        TypeString -> "S"
+instance Hashable TableAttributeType
+
+instance HCL.ToHCL TableAttributeType where
+    toHCL = \case
+        TypeString -> "C"
         TypeNumber -> "N"
         TypeBinary -> "B"

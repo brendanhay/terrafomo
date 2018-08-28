@@ -12,5 +12,4 @@ module {{ namespace }} where
 {% for import in unqualified %}
 -- import {{ import.value }}
 {% endfor %}
--- import qualified Terrafomo.Core as TF
--- import qualified Terrafomo.Encode as TF
+-- import qualified Terrafomo.Schema as TF

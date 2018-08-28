@@ -31,9 +31,11 @@ import qualified {{ import.value }} as P
 {% endfor %}
 import qualified Data.Aeson as JSON
 import qualified Data.HashMap.Strict as HashMap
-import qualified Terrafomo.Core as TF
+import qualified Terrafomo.Encode as TF
 import qualified Terrafomo.HCL as TF
 import qualified Terrafomo.HIL as TF
+import qualified Terrafomo.Schema as TF
+import qualified Terrafomo.Validate as TF
 {% for resource in resources %}
 
 -- | @{{ resource.value.original }}@ {{ type }}.

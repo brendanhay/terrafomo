@@ -23,14 +23,14 @@ module {{ namespace }}
 import GHC.Base ((.))
 
 import qualified Lens.Micro as P
-import qualified Terrafomo.Core as TF
 import qualified Terrafomo.Lens as TF
+import qualified Terrafomo.Schema as TF
   {% endif %}
 
 class {{ class.value.name }} a b | a -> b where
     {{ class.value.method }} :: P.Lens' a b
 
-instance {{ class.value.name }} a b => {{ class.value.name }} (TF.Schema l p a) b where
+instance {{ class.value.name }} a b => {{ class.value.name }} (TF.Resource l p a) b where
     {{ class.value.method }} = TF.configuration . {{ class.value.method }}
 {% endfor %}
 {% for class in attributes %}

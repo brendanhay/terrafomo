@@ -163,9 +163,9 @@ fieldValidate = Type.settings . fieldType
 fieldEncoder :: Field a -> Text
 fieldEncoder Field'{fieldOriginal, fieldDefault}
     | DefaultNothing == fieldDefault =
-        "(" <> Text.quotes fieldOriginal <> " JSON..=) <$>"
+        "(" <> Text.quotes fieldOriginal <> " TF..=) <$>"
     | otherwise =
-        "P.Just $ " <> Text.quotes fieldOriginal <> " JSON..="
+        "P.Just $ " <> Text.quotes fieldOriginal <> " TF..="
 
 data Con = Con
     { conName  :: !ConName

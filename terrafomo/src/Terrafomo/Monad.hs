@@ -37,9 +37,8 @@ import Data.HashMap.Strict (HashMap)
 import Data.Text.Lazy      (Text)
 import Data.Typeable       (Typeable)
 
-import Terrafomo.Core
-import Terrafomo.HCL               (HCL)
 import Terrafomo.Internal.ValueMap (ValueMap)
+import Terrafomo.Schema
 
 import qualified Control.Monad.Trans.Except        as Except
 import qualified Control.Monad.Trans.Identity      as Identity
@@ -54,16 +53,19 @@ import qualified Control.Monad.Trans.Writer.Strict as Writer
 import qualified Data.Aeson                        as JSON
 import qualified Data.HashMap.Strict               as HashMap
 import qualified System.IO                         as IO
+import qualified Terrafomo.Encode                  as Encode
 import qualified Terrafomo.HCL                     as HCL
 import qualified Terrafomo.HIL                     as HIL
 import qualified Terrafomo.Internal.Hash           as Hash
 import qualified Terrafomo.Internal.ValueMap       as ValueMap
+import qualified Terrafomo.Pretty                  as Pretty
+import qualified Terrafomo.Validate                as Validate
 
 -- | FIXME: Document
 data Error
-    = DuplicateOutput   !Text !HCL
-    | DuplicateResource !Name !HCL
-    | ConflictsWith     !Name !ConflictsWith
+    = DuplicateOutput   !Text !HCL.Section
+    | DuplicateResource !Name !HCL.Section
+    | ConflictsWith     !Name !Validate.Conflicts
       deriving (Show, Eq, Typeable)
 
 instance Exception Error
@@ -76,23 +78,21 @@ newtype Config = Config
 data Document = UnsafeDocument
     { supply    :: !Int
     , backend   :: !(Backend JSON.Object)
-    , providers :: !(ValueMap Name HCL)
-    , remotes   :: !(ValueMap Text      HCL)
-    , resources :: !(ValueMap Name HCL)
-    , outputs   :: !(ValueMap Text      HCL)
+    , providers :: !(ValueMap Name HCL.Section)
+    , remotes   :: !(ValueMap Text HCL.Section)
+    , resources :: !(ValueMap Name HCL.Section)
+    , outputs   :: !(ValueMap Text HCL.Section)
     }
 
 renderDocument :: Document -> Text
-renderDocument =
-    HCL.renderLazy . HCL.renderDocument . flatten
+renderDocument = Pretty.renderDocument . flatten
 
 renderDocumentIO :: IO.Handle -> Document -> IO ()
-renderDocumentIO hd =
-    HCL.renderIO hd . HCL.renderDocument . flatten
+renderDocumentIO hd = Pretty.renderDocumentIO hd . flatten
 
-flatten :: Document -> [HCL]
+flatten :: Document -> [HCL.Section]
 flatten s =
-    HCL.encodeBackend (backend s) :
+    Encode.encodeBackend (backend s) :
         concat [ ValueMap.values (providers  s)
                , ValueMap.values (remotes    s)
                , ValueMap.values (resources s)
@@ -115,7 +115,7 @@ runTerraform x m =
             Config { defaultProviders = mempty }
             UnsafeDocument
                 { supply    = 100000
-                , backend   = HCL.serializeBackend x
+                , backend   = Encode.serializeBackend x
                 , providers = ValueMap.empty
                 , remotes   = ValueMap.empty
                 , resources = ValueMap.empty
@@ -232,7 +232,7 @@ insertProvider x =
         Nothing -> lookupProvider (providerName x)
         Just _  ->
             let alias = providerAlias x x
-                value = HCL.encodeProvider x
+                value = Encode.encodeProvider x
 
              in insertValue alias value providers (\s w -> w { providers = s })
              >> pure (Just alias)
@@ -252,21 +252,21 @@ lookupProvider name =
 -- attributes.
 define
     :: ( MonadTerraform s m
-       , HasValidator a
+       , Validate.HasValidator a
        )
     => Text
-    -> Schema p l a
+    -> Resource p l a
     -> m (Ref s a)
 define key x =
     liftTerraform $ do
-        let name  = Name (schemaType x) key
-            value = HCL.encodeSchema key x
+        let name  = Name (resourceType x) key
+            value = Encode.encodeResource key x
 
-        case validate validator (schemaConfig x) of
+        case Validate.validate (resourceConfig x) of
             Nothing -> pure ()
             Just es -> throwError (ConflictsWith name es)
 
-        void $ insertProvider (schemaProvider x)
+        void $ insertProvider (resourceProvider x)
 
         unique <-
             insertValue name value resources (\s w -> w { resources = s })
@@ -286,7 +286,7 @@ define key x =
 -- by another remote state-thread.
 output
     :: ( MonadTerraform s m
-       , JSON.ToJSON a
+       , HCL.ToHCL a
        )
     => Text
     -> HIL.Expr s a
@@ -296,7 +296,7 @@ output name expr =
         b <- backend <$> get
 
         let out   = UnsafeOutput name b expr
-            value = HCL.encodeOutput out
+            value = Encode.encodeOutput out
 
         unique <-
             insertValue name value outputs (\s w -> w { outputs = s })
@@ -318,7 +318,7 @@ remote x =
     liftTerraform $ do
         let b     = outputBackend x
             name  = Hash.human (hashBackend b)
-            value = HCL.encodeRemote name b
+            value = Encode.encodeRemote name b
 
         void $ insertValue name value remotes (\s w -> w { remotes = s })
 

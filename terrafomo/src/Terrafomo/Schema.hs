@@ -1,4 +1,4 @@
-module Terrafomo.Core
+module Terrafomo.Schema
     (
     -- * Identifiers
       Keyword      (..)
@@ -25,7 +25,7 @@ module Terrafomo.Core
     , localBackend
 
     -- * DataSources and Resources
-    , Schema       (..)
+    , Resource     (..)
     , unsafeDataSource
     , unsafeResource
 
@@ -36,35 +36,22 @@ module Terrafomo.Core
     -- * Output Values
     , Output       (..)
     , outputValue
-
-    -- * @conflicts_with@ Validation
-    , ConflictsWith
-    , HasValidator (..)
-    , Validator    (..)
-    , conflictsWith
-    , conflictValidator
-    , fieldValidator
     ) where
 
-import Data.Aeson          ((.=))
-import Data.Bifunctor      (first)
-import Data.Function       (on)
-import Data.Hashable       (Hashable)
-import Data.HashMap.Strict (HashMap)
-import Data.HashSet        (HashSet)
-import Data.Maybe          (fromMaybe)
-import Data.Text.Lazy      (Text)
+import Data.Aeson     ((.=))
+import Data.Function  (on)
+import Data.Hashable  (Hashable)
+import Data.HashSet   (HashSet)
+import Data.Text.Lazy (Text)
 
 import GHC.Generics (Generic)
 
 import qualified Data.Aeson.Types        as JSON
 import qualified Data.Hashable           as Hash
-import qualified Data.HashMap.Strict     as HashMap
-import qualified Data.HashSet            as HashSet
 import qualified Terrafomo.HIL           as HIL
 import qualified Terrafomo.Internal.Hash as Hash
 
--- | A keyword type such as @backend@, @provider@, @data@, @resource@, @var@,
+-- | A keyword type such as @backend@, @provider@, @data@, @resource@,
 -- or @output@.
 data Keyword
    = TypeTerraform
@@ -217,16 +204,16 @@ instance Monoid (Lifecycle a) where
     mempty  = Lifecycle False False mempty
     mappend = (<>)
 
--- | A schema represents the internal structure of a datasource or resource,
--- and encapsulates the provider, dependencies and lifecycle configuration, as
--- well as any typeclass-less validation and encoding functions.
-data Schema p l a = UnsafeSchema
-    { schemaType      :: !Type
-    , schemaProvider  :: !(Provider p)
-    , schemaDependsOn :: !(HashSet Name)
-    , schemaEncoder   :: !(Encoder (l, a))
-    , schemaLifecycle :: !l
-    , schemaConfig    :: !a
+-- | Represents the internal structure of a datasource or resource, and
+-- encapsulates the provider, dependencies and lifecycle configuration, as well
+-- as any typeclass-less validation and encoding functions.
+data Resource p l a = UnsafeResource
+    { resourceType      :: !Type
+    , resourceProvider  :: !(Provider p)
+    , resourceDependsOn :: !(HashSet Name)
+    , resourceEncoder   :: !(Encoder (l, a))
+    , resourceLifecycle :: !l
+    , resourceConfig    :: !a
     }
 
 -- | FIXME: Document
@@ -235,15 +222,15 @@ unsafeDataSource
     -> Provider p
     -> Encoder  a
     -> a
-    -> Schema p () a
+    -> Resource p () a
 unsafeDataSource name provider encoder cfg =
-    UnsafeSchema
-        { schemaType      = Type TypeData name
-        , schemaProvider  = provider
-        , schemaDependsOn = mempty
-        , schemaEncoder   = encoder . snd
-        , schemaLifecycle = ()
-        , schemaConfig    = cfg
+    UnsafeResource
+        { resourceType      = Type TypeData name
+        , resourceProvider  = provider
+        , resourceDependsOn = mempty
+        , resourceEncoder   = encoder . snd
+        , resourceLifecycle = ()
+        , resourceConfig    = cfg
         }
 
 -- | FIXME: Document
@@ -253,15 +240,15 @@ unsafeResource
     -> Encoder  (Lifecycle a)
     -> Encoder  a
     -> a
-    -> Schema p (Lifecycle a) a
+    -> Resource p (Lifecycle a) a
 unsafeResource name provider lifecycle encoder cfg =
-    UnsafeSchema
-        { schemaType      = Type TypeResource name
-        , schemaProvider  = provider
-        , schemaDependsOn = mempty
-        , schemaEncoder   = \(l, x) -> lifecycle l <> encoder x
-        , schemaLifecycle = mempty
-        , schemaConfig    = cfg
+    UnsafeResource
+        { resourceType      = Type TypeResource name
+        , resourceProvider  = provider
+        , resourceDependsOn = mempty
+        , resourceEncoder   = \(l, x) -> lifecycle l <> encoder x
+        , resourceLifecycle = mempty
+        , resourceConfig    = cfg
         }
 
 -- | An explicitly declared output variable of the form:
@@ -278,83 +265,3 @@ data Output a where
 
 outputValue :: Output a -> HIL.Expr s a
 outputValue (UnsafeOutput _ _ x) = HIL.unsafeErase x
-
--- Conflict Validation
-
-type ConflictsWith = HashMap Text (HashSet Text)
-
-class HasValidator a where
-    validator :: Validator a
-    validator = mempty
-
-instance HasValidator a => HasValidator (Maybe a) where
-    validator =
-        Validator $ \case
-            Just x  -> validate validator x
-            Nothing -> mempty
-
-instance HasValidator a => HasValidator (HIL.Expr s a) where
-    validator =
-        Validator . HIL.cata $ \case
-            HIL.Var (HIL.Const x) -> validate validator x
-            _                     -> mempty
-
--- | A validator is used to validate which fields of schema @"conflicts_with"@
--- invariants are violated. It returns a map of the set fields to their
--- respective set conflicting fields.
-newtype Validator a = Validator
-    { validate :: a -> Maybe ConflictsWith
-    }
-
-instance Semigroup (Validator a) where
-    (<>) f g =
-        Validator $ \x ->
-            case (validate f x, validate g x) of
-                (Nothing, Nothing) -> Nothing
-                (a,       b)       -> Just $
-                     HashMap.unionWith (<>) (fromMaybe mempty a)
-                                            (fromMaybe mempty b)
-
-instance Monoid (Validator a) where
-    mempty  = Validator (const Nothing)
-    mappend = (<>)
-
-conflictsWith
-    :: Bool
-    -> Text
-    -> [Text]
-    -> Maybe (Text, HashSet Text)
-conflictsWith set name conflicts =
-    if not set || null conflicts
-        then Nothing
-        else Just (name, HashSet.fromList conflicts)
-
-conflictValidator
-    :: (a -> ConflictsWith)
-    -- ^ Fields mapped to whether they are set, and the fields they conflict with.
-    -> Validator a
-conflictValidator f =
-    Validator $ \x ->
-        let conflicts = f x
-            set       = HashSet.fromList (HashMap.keys conflicts)
-            errs      =
-                HashMap.filter (not . HashSet.null) $
-                    HashMap.map (HashSet.intersection set) conflicts
-
-         in if HashMap.null errs
-                then Nothing
-                else Just errs
-
-fieldValidator
-    :: HasValidator b
-    => Text     -- ^ The field name for error reporting.
-    -> (a -> b) -- ^ The settings field accessor.
-    -> Validator a
-fieldValidator name f =
-    Validator $ \x ->
-        case validate validator (f x) of
-            Nothing   -> Nothing
-            Just errs ->
-                Just . HashMap.fromList
-                     . map (first (\n -> name <> " . " <> n))
-                     $ HashMap.toList errs

@@ -16,18 +16,18 @@ module Terrafomo
     , Monad.renderDocumentIO
 
     -- * Backend Configuration
-    , Core.Backend         (..)
-    , Core.localBackend
+    , Schema.Backend       (..)
+    , Schema.localBackend
 
     -- * Provider Configuration
-    , Core.Provider        (..)
+    , Schema.Provider      (..)
     , Monad.withProvider
 
     -- * DataSource and Resources
-    , Core.Schema
+    , Schema.Resource
 
     -- ** Declaring Definitions
-    , Core.Ref
+    , Schema.Ref
     , Monad.define
 
     -- ** Provider Aliases
@@ -37,17 +37,17 @@ module Terrafomo
     , Lens.dependOn
 
     -- ** Resource Lifecycle
-    , Core.Lifecycle       (..)
+    , Schema.Lifecycle     (..)
     , Lens.preventDestroy
     , Lens.createBeforeDestroy
 
     -- *** Ignored Attributes
-    , Core.Changes
+    , Schema.Changes
     , Lens.ignoreChanges
     , Lens.ignoreAllChanges
 
     -- * Outputs and Remote State
-    , Core.Output
+    , Schema.Output
     , Monad.output
     , Monad.remote
 
@@ -69,7 +69,7 @@ module Terrafomo
     , HIL.file
     ) where
 
-import qualified Terrafomo.Core  as Core
-import qualified Terrafomo.HIL   as HIL
-import qualified Terrafomo.Lens  as Lens
-import qualified Terrafomo.Monad as Monad
+import qualified Terrafomo.HIL    as HIL
+import qualified Terrafomo.Lens   as Lens
+import qualified Terrafomo.Monad  as Monad
+import qualified Terrafomo.Schema as Schema

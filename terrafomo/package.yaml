@@ -25,10 +25,12 @@ library:
   exposed-modules:
     - Paths_terrafomo
     - Terrafomo
-    - Terrafomo.Core
     - Terrafomo.HCL
     - Terrafomo.HIL
-    - Terrafomo.JSON
+    - Terrafomo.Schema
+    - Terrafomo.Pretty
+    - Terrafomo.Encode
+    - Terrafomo.Validate
     - Terrafomo.Lens
     - Terrafomo.Monad
 

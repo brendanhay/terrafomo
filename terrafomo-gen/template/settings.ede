@@ -27,9 +27,11 @@ import qualified {{ import.value }} as P
 {% endfor %}
 import qualified Data.Aeson as JSON
 import qualified Data.HashMap.Strict as HashMap
-import qualified Terrafomo.Core as TF
-import qualified Terrafomo.HIL as TF
+import qualified Terrafomo.Encode as TF
 import qualified Terrafomo.HCL as TF
+import qualified Terrafomo.HIL as TF
+import qualified Terrafomo.Schema as TF
+import qualified Terrafomo.Validate as TF
 {% for setting in settings %}
 
 -- | @{{ setting.value.original }}@ nested settings.
@@ -51,13 +53,13 @@ data {{ setting.value.type }} = {{ setting.value.con.name }}
         }{% endif %}
       {% endfor %}
 
-instance JSON.ToJSON ({{ setting.value.type }}) where
+instance TF.ToHCL ({{ setting.value.type }}) where
   {% for field in setting.value.arguments %}
-    {% if field.first %} toJSON {{ setting.value.con.name }}{..} = JSON.object $ P.catMaybes
+    {% if field.first %} toHCL {{ setting.value.con.name }}{..} = JSON.object $ P.catMaybes
         [{% else %}    ,{% endif %} {{ field.value.encoder }} {{ field.value.name }}{% if field.last %}
         ]{% endif %}
   {% else %}
-    toJSON {{ setting.value.con.name }} = JSON.object []
+    toHCL {{ setting.value.con.name }} = JSON.object []
   {% endfor %}
 
 instance P.Hashable ({{ setting.value.type }})

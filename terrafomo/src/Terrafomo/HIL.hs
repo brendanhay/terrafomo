@@ -45,11 +45,11 @@ import GHC.Generics (Generic)
 
 import Prelude hiding (null)
 
-import qualified Data.Aeson                            as JSON
-import qualified Data.Text.Lazy                        as LText
-import qualified Data.Text.Prettyprint.Doc             as PP
-import qualified Data.Text.Prettyprint.Doc.Render.Text as Render
-import qualified Terrafomo.JSON                        as JSON
+import Terrafomo.HCL (ToHCL (toHCL))
+
+import qualified Data.Aeson       as JSON
+import qualified Data.Text.Lazy   as LText
+import qualified Terrafomo.Pretty as Pretty
 
 -- | A fix-point type used for the 'Expr' expression and recursion schemes.
 newtype Fix f = Fix { unfix :: f (Fix f) }
@@ -87,10 +87,10 @@ instance Hashable a => Hashable (Var s a)
 instance IsString a => IsString (Var s a) where
     fromString = Const . fromString
 
-instance JSON.ToJSON a => JSON.ToJSON (Var s a) where
-    toJSON = \case
-        Compute v -> JSON.toJSON ("${" <> v <> "}")
-        Const   x -> JSON.toJSON x
+instance ToHCL a => ToHCL (Var s a) where
+    toHCL = \case
+        Compute v -> toHCL ("${" <> v <> "}")
+        Const   x -> toHCL x
         Null      -> JSON.Null
 
 -- | The main terraform interpolation expression type. This is polymorphic so
@@ -132,18 +132,16 @@ instance Num a => Num (Expr s a) where
     signum      = function "signum" . pure
     fromInteger = value . fromInteger
 
-instance JSON.ToJSON a => JSON.ToJSON (Expr s a) where
-    toJSON =
-        let text = Render.renderLazy . PP.layoutCompact . JSON.prettyJSON
+instance ToHCL a => ToHCL (Expr s a) where
+    toHCL =
+        let text = Pretty.renderCompact . Pretty.prettyJSON
          in cata $ \case
-                Var    v     -> JSON.toJSON v
-                Quote  q     -> q
-                Prefix n xs  ->
-                    JSON.toJSON $
-                        mconcat ["${", n, "(", LText.intercalate ", " (map text xs), ")}"]
-                Infix  n a b ->
-                    JSON.toJSON $
-                        mconcat ["${", LText.unwords [text a, n, text b], "}"]
+            Var    v     -> toHCL v
+            Quote  q     -> q
+            Prefix n xs  ->
+                toHCL ("${" <> n <> "(" <> LText.intercalate ", " (map text xs) <> ")}")
+            Infix  n a b ->
+                toHCL ("${" <> LText.unwords [text a, n, text b] <> "}")
 
 -- Primitives
 
@@ -194,7 +192,7 @@ modulo = operator "%"
 -- | Joins the list with the specified delimiter.
 --
 -- See: <https://www.terraform.io/docs/configuration/interpolation.html#join-delim-list- join(delim, list)>
-join :: JSON.ToJSON a => Text -> [Expr s a] -> Expr s Text
+join :: ToHCL a => Text -> [Expr s a] -> Expr s Text
 join sep xs = function "join" (value sep : map quote xs)
 
 -- | Read the contents of a file. The path is interpreted relative to the
@@ -207,8 +205,8 @@ file path = function "file" [quote path]
 -- Utilities
 
 -- FIXME:
-quote :: JSON.ToJSON a => Expr s a -> Expr s Text
-quote = bicata (f . JSON.toJSON) f
+quote :: ToHCL a => Expr s a -> Expr s Text
+quote = bicata (f . toHCL) f
   where
     f = Fix . Quote
 
