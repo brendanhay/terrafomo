@@ -1,6 +1,0 @@
-locals {
-  var = [
-    true,
-    false,
-  ]
-}

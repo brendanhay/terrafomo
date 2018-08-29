@@ -1,4 +1,6 @@
 resource "bar" "modified" {
+  name = "xyz-j982r"
+  enabled = false
   settings = [
     {
       name = "one"
@@ -13,16 +15,14 @@ resource "bar" "modified" {
       }
     },
   ]
-  enabled = false
-  alias = "test.uproot_accrue_shadow_vapor_fallout"
   lifecycle = {
+    prevent_destroy = false
     create_before_destroy = true
     ignore_changes = [
       "*",
     ]
-    prevent_destroy = false
   }
-  name = "xyz-j982r"
+  alias = "test.uproot_accrue_shadow_vapor_fallout"
   depends_on = [
     "data.foo.default",
   ]

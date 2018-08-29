@@ -1,4 +1,6 @@
 data "foo" "modified" {
+  name = "abc-i123d"
+  enabled = true
   settings = [
     {
       name = "something"
@@ -13,9 +15,7 @@ data "foo" "modified" {
       }
     },
   ]
-  enabled = true
   alias = "test.uproot_accrue_shadow_vapor_fallout"
-  name = "abc-i123d"
   depends_on = [
     "bar.default",
   ]

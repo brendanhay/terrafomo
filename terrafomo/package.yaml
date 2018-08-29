@@ -28,18 +28,18 @@ library:
     - Terrafomo.HCL
     - Terrafomo.HIL
     - Terrafomo.Schema
-    - Terrafomo.Pretty
     - Terrafomo.Encode
     - Terrafomo.Validate
-    - Terrafomo.Lens
     - Terrafomo.Monad
+    - Terrafomo.Lens
 
   dependencies:
     - aeson
+    - aeson-pretty
+    - bytestring
     - hashable
     - microlens
     - mmorph
-    - prettyprinter
     - random
     - scientific
     - text
@@ -53,11 +53,11 @@ tests:
     source-dirs: test
 
     dependencies:
-      - aeson
+      - amazonka-iam-policy
+      - bytestring
       - hashable
       - hspec
       - hspec-discover
       - microlens
       - terrafomo
-      - text
       - unordered-containers

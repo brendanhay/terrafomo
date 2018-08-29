@@ -38,7 +38,6 @@ module Terrafomo.Schema
     , outputValue
     ) where
 
-import Data.Aeson     ((.=))
 import Data.Function  (on)
 import Data.Hashable  (Hashable)
 import Data.HashSet   (HashSet)
@@ -46,8 +45,8 @@ import Data.Text.Lazy (Text)
 
 import GHC.Generics (Generic)
 
-import qualified Data.Aeson.Types        as JSON
 import qualified Data.Hashable           as Hash
+import qualified Terrafomo.HCL           as HCL
 import qualified Terrafomo.HIL           as HIL
 import qualified Terrafomo.Internal.Hash as Hash
 
@@ -91,7 +90,7 @@ unsafeCompute encode (UnsafeRef name) attr =
 
 -- | An encoder should produce a series of configuration pairs suitable
 -- for embedding into a larger HCL structure or JSON object.
-type Encoder a = a -> [JSON.Pair]
+type Encoder a = a -> HCL.Series
 
 -- | A function which produces a unique alias for any structurally
 -- equivalent 'Provider'.
@@ -141,11 +140,10 @@ data Backend b = Backend
     }
 
 -- | FIXME: Document
-hashBackend :: Backend JSON.Object -> Int
+hashBackend :: Hashable b => Backend b -> Int
 hashBackend x =
-    Hash.hash (backendName x)
-        `Hash.hashWithSalt`
-            backendConfig x
+    Hash.hash (backendConfig x)
+        `Hash.hashWithSalt` backendName x
 
 -- FIXME: Document
 localBackend :: FilePath -> Backend FilePath
@@ -153,7 +151,7 @@ localBackend path =
     Backend
         { backendName    = "local"
         , backendConfig  = path
-        , backendEncoder = \x -> ["path" .= x]
+        , backendEncoder = HCL.pair "path"
         }
 
 -- | Ignored attribute names can be matched by their name, not state ID. For
@@ -178,8 +176,7 @@ instance Semigroup (Changes a) where
             (Match xs, Match ys) -> Match (xs <> ys)
 
 instance Monoid (Changes a) where
-    mempty  = Match mempty
-    mappend = (<>)
+    mempty = Match mempty
 
 -- | Resources have a strict lifecycle, and can be thought of as basic state
 -- machines. Understanding this lifecycle can help better understand how Terraform
@@ -201,8 +198,7 @@ instance Semigroup (Lifecycle a) where
         }
 
 instance Monoid (Lifecycle a) where
-    mempty  = Lifecycle False False mempty
-    mappend = (<>)
+    mempty = Lifecycle False False mempty
 
 -- | Represents the internal structure of a datasource or resource, and
 -- encapsulates the provider, dependencies and lifecycle configuration, as well
@@ -246,7 +242,7 @@ unsafeResource name provider lifecycle encoder cfg =
         { resourceType      = Type TypeResource name
         , resourceProvider  = provider
         , resourceDependsOn = mempty
-        , resourceEncoder   = \(l, x) -> lifecycle l <> encoder x
+        , resourceEncoder   = \(l, x) -> encoder x <> lifecycle l
         , resourceLifecycle = mempty
         , resourceConfig    = cfg
         }
@@ -258,7 +254,7 @@ unsafeResource name provider lifecycle encoder cfg =
 -- > }
 data Output a where
     UnsafeOutput :: { outputName    :: !Text
-                    , outputBackend :: !(Backend JSON.Object)
+                    , outputBackend :: !(Backend HCL.Series)
                     , outputValue_  :: !(HIL.Expr s a)
                     }
                  -> Output a

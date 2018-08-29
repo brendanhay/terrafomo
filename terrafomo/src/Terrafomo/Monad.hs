@@ -32,10 +32,11 @@ import Control.Monad.Morph        (MFunctor (hoist))
 import Control.Monad.Trans.Class  (MonadTrans (lift))
 import Control.Monad.Trans.Except (Except)
 
-import Data.Hashable       (Hashable)
-import Data.HashMap.Strict (HashMap)
-import Data.Text.Lazy      (Text)
-import Data.Typeable       (Typeable)
+import Data.ByteString.Lazy (ByteString)
+import Data.Hashable        (Hashable)
+import Data.HashMap.Strict  (HashMap)
+import Data.Text.Lazy       (Text)
+import Data.Typeable        (Typeable)
 
 import Terrafomo.Internal.ValueMap (ValueMap)
 import Terrafomo.Schema
@@ -50,7 +51,6 @@ import qualified Control.Monad.Trans.State.Lazy    as LState
 import qualified Control.Monad.Trans.State.Strict  as State
 import qualified Control.Monad.Trans.Writer.Lazy   as LWriter
 import qualified Control.Monad.Trans.Writer.Strict as Writer
-import qualified Data.Aeson                        as JSON
 import qualified Data.HashMap.Strict               as HashMap
 import qualified System.IO                         as IO
 import qualified Terrafomo.Encode                  as Encode
@@ -58,7 +58,6 @@ import qualified Terrafomo.HCL                     as HCL
 import qualified Terrafomo.HIL                     as HIL
 import qualified Terrafomo.Internal.Hash           as Hash
 import qualified Terrafomo.Internal.ValueMap       as ValueMap
-import qualified Terrafomo.Pretty                  as Pretty
 import qualified Terrafomo.Validate                as Validate
 
 -- | FIXME: Document
@@ -66,7 +65,7 @@ data Error
     = DuplicateOutput   !Text !HCL.Section
     | DuplicateResource !Name !HCL.Section
     | ConflictsWith     !Name !Validate.Conflicts
-      deriving (Show, Eq, Typeable)
+      deriving (Show, Typeable)
 
 instance Exception Error
 
@@ -77,27 +76,28 @@ newtype Config = Config
 -- | Provides key uniquness invariants and ordering of output statements.
 data Document = UnsafeDocument
     { supply    :: !Int
-    , backend   :: !(Backend JSON.Object)
+    , backend   :: !(Backend  HCL.Series)
     , providers :: !(ValueMap Name HCL.Section)
     , remotes   :: !(ValueMap Text HCL.Section)
     , resources :: !(ValueMap Name HCL.Section)
     , outputs   :: !(ValueMap Text HCL.Section)
     }
 
-renderDocument :: Document -> Text
-renderDocument = Pretty.renderDocument . flatten
+renderDocument :: Document -> ByteString
+renderDocument = HCL.render . flatten
 
 renderDocumentIO :: IO.Handle -> Document -> IO ()
-renderDocumentIO hd = Pretty.renderDocumentIO hd . flatten
+renderDocumentIO hd = HCL.renderIO hd . flatten
 
-flatten :: Document -> [HCL.Section]
+flatten :: Document -> HCL.Encoding
 flatten s =
-    Encode.encodeBackend (backend s) :
-        concat [ ValueMap.values (providers  s)
-               , ValueMap.values (remotes    s)
-               , ValueMap.values (resources s)
-               , ValueMap.values (outputs    s)
-               ]
+    HCL.document $
+        Encode.encodeBackend (backend s) :
+            concat [ ValueMap.values (providers s)
+                   , ValueMap.values (remotes   s)
+                   , ValueMap.values (resources s)
+                   , ValueMap.values (outputs   s)
+                   ]
 
 -- Terraform CPS Monad
 

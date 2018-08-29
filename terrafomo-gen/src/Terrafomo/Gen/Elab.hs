@@ -20,8 +20,8 @@ import Data.Traversable (for)
 
 import Terrafomo.Gen.Config
 import Terrafomo.Gen.Haskell
-import Terrafomo.Gen.Name    (ConName, DataName, Key (Key), LabelName,
-                              ProviderName, VarName)
+import Terrafomo.Gen.Name    (ConName, DataName, Key, LabelName, ProviderName,
+                              VarName)
 import Terrafomo.Gen.Type    (Type)
 
 import Text.Show.Pretty (ppShow)

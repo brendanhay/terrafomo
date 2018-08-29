@@ -19,6 +19,7 @@ module Terrafomo.HIL
     , null
     , true
     , false
+    , heredoc
     , string
     , int
     , float
@@ -45,11 +46,8 @@ import GHC.Generics (Generic)
 
 import Prelude hiding (null)
 
-import Terrafomo.HCL (ToHCL (toHCL))
-
-import qualified Data.Aeson       as JSON
-import qualified Data.Text.Lazy   as LText
-import qualified Terrafomo.Pretty as Pretty
+import qualified Data.Aeson    as JSON
+import qualified Terrafomo.HCL as HCL
 
 -- | A fix-point type used for the 'Expr' expression and recursion schemes.
 newtype Fix f = Fix { unfix :: f (Fix f) }
@@ -87,11 +85,11 @@ instance Hashable a => Hashable (Var s a)
 instance IsString a => IsString (Var s a) where
     fromString = Const . fromString
 
-instance ToHCL a => ToHCL (Var s a) where
+instance HCL.ToHCL a => HCL.ToHCL (Var s a) where
     toHCL = \case
-        Compute v -> toHCL ("${" <> v <> "}")
-        Const   x -> toHCL x
-        Null      -> JSON.Null
+        Compute v -> HCL.toHCL ("${" <> v <> "}")
+        Const   x -> HCL.toHCL x
+        Null      -> HCL.null
 
 -- | The main terraform interpolation expression type. This is polymorphic so
 -- that it can be made a functor, which allows us to traverse expressions and
@@ -116,10 +114,10 @@ instance Bifunctor (ExprF a) where
 
 -- | The expression type is a fixed point of the polymorphic expression functor.
 --
--- The variables are specialized to unquoted HIL 'Var' or quoted JSON
--- 'JSON.Var's. This allows well-typed expressions using Haskell's types and
+-- The variables are specialized to unquoted HIL 'Var' or quoted HCL
+-- 'HCL.Value's.  This allows well-typed expressions using Haskell's types and
 -- the more dubiously typed HIL expressions when necessary.
-type Expr s a = Fix (ExprF (Var s a) JSON.Value)
+type Expr s a = Fix (ExprF (Var s a) HCL.Encoding)
 
 instance IsString a => IsString (Expr s a) where
     fromString = value . fromString
@@ -132,16 +130,12 @@ instance Num a => Num (Expr s a) where
     signum      = function "signum" . pure
     fromInteger = value . fromInteger
 
-instance ToHCL a => ToHCL (Expr s a) where
-    toHCL =
-        let text = Pretty.renderCompact . Pretty.prettyJSON
-         in cata $ \case
-            Var    v     -> toHCL v
-            Quote  q     -> q
-            Prefix n xs  ->
-                toHCL ("${" <> n <> "(" <> LText.intercalate ", " (map text xs) <> ")}")
-            Infix  n a b ->
-                toHCL ("${" <> LText.unwords [text a, n, text b] <> "}")
+instance HCL.ToHCL a => HCL.ToHCL (Expr s a) where
+    toHCL = cata $ \case
+        Var    v     -> HCL.toHCL v
+        Quote  q     -> q
+        Prefix n xs  -> HCL.function n xs
+        Infix  n a b -> HCL.operator n a b
 
 -- Primitives
 
@@ -170,6 +164,9 @@ true = value True
 false :: Expr s Bool
 false = value False
 
+heredoc :: JSON.ToJSON a => a -> Expr s Text
+heredoc x = Fix (Quote (HCL.heredoc x))
+
 string :: Text -> Expr s Text
 string = value
 
@@ -192,7 +189,7 @@ modulo = operator "%"
 -- | Joins the list with the specified delimiter.
 --
 -- See: <https://www.terraform.io/docs/configuration/interpolation.html#join-delim-list- join(delim, list)>
-join :: ToHCL a => Text -> [Expr s a] -> Expr s Text
+join :: HCL.ToHCL a => Text -> [Expr s a] -> Expr s Text
 join sep xs = function "join" (value sep : map quote xs)
 
 -- | Read the contents of a file. The path is interpreted relative to the
@@ -205,8 +202,8 @@ file path = function "file" [quote path]
 -- Utilities
 
 -- FIXME:
-quote :: ToHCL a => Expr s a -> Expr s Text
-quote = bicata (f . toHCL) f
+quote :: HCL.ToHCL a => Expr s a -> Expr s Text
+quote = bicata (f . HCL.toHCL) f
   where
     f = Fix . Quote
 

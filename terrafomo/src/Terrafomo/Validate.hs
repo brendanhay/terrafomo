@@ -62,8 +62,7 @@ instance Semigroup (Validator a) where
                                             (fromMaybe mempty b)
 
 instance Monoid (Validator a) where
-    mempty  = Validator (const Nothing)
-    mappend = (<>)
+    mempty = Validator (const Nothing)
 
 conflictsWith
     :: Bool

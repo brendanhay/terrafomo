@@ -1,4 +1,6 @@
 resource "bar" "default" {
+  name = "xyz-j982r"
+  enabled = false
   settings = [
     {
       name = "one"
@@ -13,6 +15,4 @@ resource "bar" "default" {
       }
     },
   ]
-  enabled = false
-  name = "xyz-j982r"
 }

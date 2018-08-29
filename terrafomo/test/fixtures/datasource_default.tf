@@ -1,4 +1,6 @@
 data "foo" "default" {
+  name = "abc-i123d"
+  enabled = true
   settings = [
     {
       name = "something"
@@ -13,6 +15,4 @@ data "foo" "default" {
       }
     },
   ]
-  enabled = true
-  name = "abc-i123d"
 }
