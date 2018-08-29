@@ -118,8 +118,8 @@ instance Show Encoding where
     show = show . render
 
 instance Eq Encoding where
-    (==) Empty Empty             = True
-    (==) Line  Line              = True
+    (==) Empty       Empty       = True
+    (==) Line        Line        = True
     (==) (Bytes i _) (Bytes j _) = i == j
     (==) (Nest  a)   (Nest  b)   = a == b
     (==) (Cat a b)   (Cat c d)   = a == c && b == d
