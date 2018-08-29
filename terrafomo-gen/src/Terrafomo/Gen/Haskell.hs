@@ -163,7 +163,7 @@ fieldValidate = Type.settings . fieldType
 fieldEncoder :: Field a -> Text
 fieldEncoder Field'{fieldOriginal, fieldDefault}
     | DefaultNothing == fieldDefault =
-        "maybe mempty (TF.pair " <> Text.quotes fieldOriginal <> ")"
+        "P.maybe P.mempty (TF.pair " <> Text.quotes fieldOriginal <> ")"
     | otherwise =
         "TF.pair " <> Text.quotes fieldOriginal
 

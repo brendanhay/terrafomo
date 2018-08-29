@@ -1,7 +1,6 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -33,7 +32,6 @@ import {{ import.value }}
 {% for import in qualified %}
 import qualified {{ import.value }} as P
 {% endfor %}
-import qualified Data.Aeson as JSON
 import qualified Terrafomo.HCL as TF
 import qualified Terrafomo.Schema as TF
 
@@ -98,7 +96,7 @@ defaultProvider =
       {% if provider.schema.arguments | empty %}
         P.mempty
       {% else %}
-        (\{{ provider.schema.con.name }}{..} -> P.catMaybes
+        (\{{ provider.schema.con.name }}{..} -> P.mconcat
           {% for field in provider.schema.arguments %}
             {% if field.first %}[ {% else %}, {% endif %}{{ field.value.encoder }} {{ field.value.name }}{% if field.last %}
             ]){% endif %}

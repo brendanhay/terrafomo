@@ -18,7 +18,6 @@ dependencies :: Set Text
 dependencies =
     Set.fromList
         [ "base"
-        , "aeson"
         , "hashable"
         , "microlens"
         , "terrafomo"

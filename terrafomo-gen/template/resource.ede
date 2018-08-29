@@ -1,7 +1,6 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -29,7 +28,6 @@ import {{ import.value }}
 {% for import in qualified %}
 import qualified {{ import.value }} as P
 {% endfor %}
-import qualified Data.Aeson as JSON
 import qualified Data.HashMap.Strict as HashMap
 import qualified Terrafomo.Encode as TF
 import qualified Terrafomo.HCL as TF
@@ -56,7 +54,7 @@ data {{ resource.value.type }} = {{ resource.value.con.name }}
 {{ resource.value.con.smart }}{% for param in resource.value.parameters %} {{ param.value.name }}{% endfor %} =
     TF.unsafe{{ type }} "{{ resource.value.original }}" P.defaultProvider {% if type == "Resource" %} TF.encodeLifecycle{% endif %}
       {% for field in resource.value.arguments %}
-        {% if field.first %}(\{{ resource.value.con.name }}{..} -> P.catMaybes
+        {% if field.first %}(\{{ resource.value.con.name }}{..} -> P.mconcat
             [{% else %}    ,{% endif %} {{ field.value.encoder }} {{ field.value.name }}{% if field.last %}
             ]){% endif %}
         {% else %}

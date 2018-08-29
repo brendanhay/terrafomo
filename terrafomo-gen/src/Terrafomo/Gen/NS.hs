@@ -23,7 +23,6 @@ prelude = Set.fromList
     , "Data.HashMap.Strict"
     , "Data.List.NonEmpty"
     , "Data.Maybe"
-    , "Data.Monoid"
     , "Data.Text.Lazy"
     , "GHC.Generics"
     , "Lens.Micro"
