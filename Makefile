@@ -21,7 +21,7 @@ gen: $(addprefix gen-,$(PROVIDERS))
 
 format: $(addprefix format-,$(PROVIDERS))
 	@echo -e '\nFormatting...'
-	@find $(wildcard terrafomo*/src) -type f -name '*.hs' -print0 | \
+	@-find $(wildcard terrafomo*/src) -type f -name '*.hs' -print0 | \
 	    xargs -0 -I % sh -c 'echo " -> %"; $(STYLISH) -i "%"'
 
 haddock: format
