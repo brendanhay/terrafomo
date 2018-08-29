@@ -59,6 +59,7 @@ module Terrafomo
     , HIL.null
     , HIL.true
     , HIL.false
+    , HIL.heredoc
     , HIL.int
     , HIL.float
     , HIL.string
