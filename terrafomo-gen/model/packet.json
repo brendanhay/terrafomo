@@ -1,5 +1,6 @@
 {
   "name": "packet",
+  "version": "1.2.4-4-gfa10f91",
   "schemas": [
     {
       "name": "auth_token",

@@ -6,6 +6,7 @@ import (
 	"github.com/hashicorp/terraform/helper/schema"
 	"github.com/terraform-providers/terraform-provider-replace_provider/replace_provider"
 	"log"
+	"os/exec"
 	"sort"
 	"strconv"
 	"strings"
@@ -46,6 +47,7 @@ func ignore(m map[string]map[string]bool, parent string, schema string) bool {
 
 type Provider struct {
 	Name        string      `json:"name"`
+	Version     string      `json:"version"`
 	Schemas     []*Schema   `json:"schemas"`
 	Resources   []*Resource `json:"resources"`
 	DataSources []*Resource `json:"dataSources"`
@@ -85,8 +87,14 @@ type Timeouts struct {
 }
 
 func newProvider(p *schema.Provider) *Provider {
+	ver, err := exec.Command("git", "describe").Output()
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	return &Provider{
 		Name:        "replace_provider",
+		Version:     strings.Trim(string(ver), "v\n"),
 		Schemas:     newSchemaSlice("replace_provider", p.Schema),
 		Resources:   newResourceSlice(p.ResourcesMap),
 		DataSources: newResourceSlice(p.DataSourcesMap),

@@ -2,8 +2,9 @@ module Terrafomo.Gen.Render where
 
 import Data.Aeson     ((.=))
 import Data.Bifunctor (second)
-import Data.Set       (Set)
+import Data.Maybe     (fromMaybe)
 import Data.Semigroup ((<>))
+import Data.Set       (Set)
 import Data.Text      (Text)
 
 import Terrafomo.Gen.Haskell
@@ -190,5 +191,6 @@ render :: EDE.Template -> [JSON.Pair] -> Either String LText.Text
 render tmpl = EDE.eitherRenderWith filters tmpl . EDE.fromPairs
   where
     filters = HashMap.fromList
-        [ "head" @: Text.take 1
+        [ "head"    @: Text.take 1
+        , "prelude" @: (\x -> fromMaybe x (Text.stripPrefix "P." x))
         ]

@@ -1,78 +1,76 @@
 module Terrafomo
     (
     -- * Terraform Monad
-      Error          (..)
-    , Config
-    , Document
-    , renderDocumentIO
-    , renderDocument
+      Monad.Terraform
+    , Monad.runTerraform
 
-    , Terraform
-    , runTerraform
+    -- ** Monad Homomorphism
+    , Monad.MonadTerraform (..)
 
-    -- ** Terraform Monad Class
-    , MonadTerraform (..)
+    -- ** Errors
+    , Monad.Error          (..)
 
-    -- * Backends
-    , Backend        (..)
-    , Local          (..)
-    , localBackend
+    -- ** Rendering Documents
+    , Monad.Document
+    , Monad.renderDocument
+    , Monad.renderDocumentIO
 
-    -- * Providers
-    , IsProvider     (..)
-    , withProvider
+    -- * Backend Configuration
+    , Schema.Backend       (..)
+    , Schema.localBackend
 
-    -- * Syntax
-    , Name           (..)
-    , Attr
-    , Key
+    -- * Provider Configuration
+    , Schema.Provider      (..)
+    , Monad.withProvider
 
-    -- ** Functions
-    , join
-    , file
+    -- * DataSource and Resources
+    , Schema.Resource
 
-    -- ** Values
-    , value
-    , nil
-    , true
-    , false
+    -- ** Declaring Definitions
+    , Schema.Ref
+    , Monad.define
 
-    -- * Declarations
-    , Schema
+    -- ** Provider Aliases
+    , Lens.provider
 
-    -- ** References
-    , Ref
-    , define
+    -- ** Resource Dependencies
+    , Lens.dependOn
 
-    -- ** Lifecycles
-    , HasLifecycle   (..)
-    , Lifecycle      (..)
+    -- ** Resource Lifecycle
+    , Schema.Lifecycle     (..)
+    , Lens.preventDestroy
+    , Lens.createBeforeDestroy
 
-    -- ** Ignored Attributes
-    , Changes
-    , ignoreAllChanges
+    -- *** Ignored Attributes
+    , Schema.Changes
+    , Lens.ignoreChanges
+    , Lens.ignoreAllChanges
 
-    -- ** Dependencies
-    , dependOn
+    -- * Outputs and Remote State
+    , Schema.Output
+    , Monad.output
+    , Monad.remote
 
-    -- ** Outputs and Remote State
-    , Output
-    , output
-    , remote
+    -- * Interpolation Expression Language
+    , HIL.Expr
 
-    -- * Serialization
-    , HCL.IsValue    (..)
-    , HCL.IsObject   (..)
-    , HCL.IsSection  (..)
+    -- ** Primitives
+    , HIL.value
+    , HIL.null
+    , HIL.true
+    , HIL.false
+    , HIL.heredoc
+    , HIL.int
+    , HIL.float
+    , HIL.string
+
+    -- ** Builtin Functions
+    , HIL.modulo
+    , HIL.join
+    , HIL.file
     ) where
 
-import Terrafomo.Attribute
-import Terrafomo.Backend
-import Terrafomo.Lifecycle
-import Terrafomo.Monad
-import Terrafomo.Name
-import Terrafomo.Output
-import Terrafomo.Provider
-import Terrafomo.Schema
-
-import qualified Terrafomo.HCL as HCL
+import qualified Terrafomo.HIL    as HIL
+import qualified Terrafomo.Lens   as Lens
+import qualified Terrafomo.Monad  as Monad
+import qualified Terrafomo.Schema as Schema

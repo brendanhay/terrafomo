@@ -1,19 +1,18 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 {% include "_include/license.ede" %}
---
 module {{ namespace }}
     (
     -- * {{ provider.name }} Provider Datatype
-      Provider (..)
+      {{ provider.schema.name }} (..)
     , {{ provider.schema.con.smart }}
+    , defaultProvider
 
     -- * {{ provider.name }} Specific Aliases
     , DataSource
@@ -33,52 +32,74 @@ import {{ import.value }}
 {% for import in qualified %}
 import qualified {{ import.value }} as P
 {% endfor %}
-import qualified Data.Map.Strict as Map
 import qualified Terrafomo.HCL as TF
-import qualified Terrafomo.Lifecycle as TF
-import qualified Terrafomo.Name as TF
-import qualified Terrafomo.Provider as TF
 import qualified Terrafomo.Schema as TF
-import qualified Terrafomo.Validator as TF
 
-type DataSource a = TF.Schema ()               Provider a
-type Resource   a = TF.Schema (TF.Lifecycle a) Provider a
+type DataSource a = TF.Resource {{ provider.schema.type }} ()               a
+type Resource   a = TF.Resource {{ provider.schema.type }} (TF.Lifecycle a) a
 
 -- | The @{{ provider.original }}@ Terraform provider configuration.
 --
 -- See the <{{ provider.url }} terraform documentation>
 -- for more information.
-data Provider = {{ provider.schema.con.name }}
+data {{ provider.schema.type }} = {{ provider.schema.con.name }}
 {% include "_include/record.ede" with arguments = provider.schema.arguments %}
 
+instance P.Hashable ({{ provider.schema.type }})
+
+-- | Specify a new {{provider.name }} provider configuration.
 {{ provider.schema.con.smart }}
   {% for param in provider.schema.parameters %}
-    {% if param.first %}::{% else %}->{% endif %} {{ param.value.type }} -- ^ @{{ param.value.original }}@ ('P.{{ param.value.name }}', 'P.{{ param.value.method }}'){% if param.last %}
-    -> Provider{% endif %}
+    {% if param.first %}::{% else %}->{% endif %} {{ param.value.type }} -- ^ Lens: 'P.{{ param.value.method }}', Field: '{{ param.value.name }}', HCL: @{{ param.value.original }}@{% if param.last %}
+    -> {{ provider.schema.type }}{% endif %}
   {% else %}
-    :: Provider
+    :: {{ provider.schema.type }}
   {% endfor %}
 {{ provider.schema.con.smart }}{% for param in provider.schema.parameters %} {{ param.value.name }}{% endfor %} =
     {{ provider.schema.con.name }}
       {% for field in provider.schema.arguments %}
         {% if field.first %}{ {% else %}, {% endif %}{{ field.value.name }} = {{ field.value.default }}{% if field.last %}
         }{% endif %}
-{% endfor %}
+      {% endfor %}
 
-instance TF.IsProvider Provider where
-    type ProviderType {{ provider.schema.name }} = "{{ provider.original }}"
+{- | The '{{ provider.name }}' provider with absent configuration that is used
+to instantiate new 'Resource's and 'DataSource's. Provider configuration can be
+overridden on a per-resource basis by using the 'Terrafomo.provider' lens, the
+'{{ provider.schema.con.smart }}' constructor, and any of the applicable lenses.
 
-instance TF.IsObject Provider where
-  {% if provider.schema.arguments | empty %}
-    toObject {{ provider.schema.con.name }} = []
-  {% else %}
-    toObject {{ provider.schema.con.name }}{..} =
-        P.catMaybes
+For example:
+
+@
+import qualified Terrafomo as TF
+import qualified {{ namespace }} as {{ provider.name }}
+
+TF.newExampleResource "foo"
+    & TF.provider ?~
+          {{ provider.name }}.({{ provider.schema.con.smart }}
+          {% if !(provider.schema.parameters | empty) %}
+              -- Required arguments
+          {% endif %}
+          {% for param in provider.schema.parameters %}
+              {{ param.value.name }} -- (Required) '{{ param.value.type }}'
+          {% endfor %}
+          {% if !(provider.schema.arguments | empty) %}
+              -- Lenses
+          {% endif %}
+          {% for field in provider.schema.arguments %}
+              & {{ provider.name }}.{{ field.value.method }} .~ {{ field.value.default | prelude }} -- '{{ field.value.type }}'
+          {% endfor %}
+@
+-}
+defaultProvider :: TF.Provider {{ provider.schema.type }}
+defaultProvider =
+    TF.defaultProvider "{{ provider.original }}" (P.Just "~> {{ provider.version }}")
+      {% if provider.schema.arguments | empty %}
+        P.mempty
+      {% else %}
+        (\{{ provider.schema.con.name }}{..} -> P.mconcat
           {% for field in provider.schema.arguments %}
             {% if field.first %}[ {% else %}, {% endif %}{{ field.value.encoder }} {{ field.value.name }}{% if field.last %}
-            ]{% endif %}
+            ]){% endif %}
           {% endfor %}
-  {% endif %}
-
-{% include "_include/validator.ede" with schema = provider.schema %}
+      {% endif %}
 {% include "_include/lenses.ede" with schema = provider.schema %}

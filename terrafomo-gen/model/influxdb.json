@@ -1,5 +1,6 @@
 {
   "name": "influxdb",
+  "version": "1.0.1-1-g6ac30d0",
   "schemas": [
     {
       "name": "password",

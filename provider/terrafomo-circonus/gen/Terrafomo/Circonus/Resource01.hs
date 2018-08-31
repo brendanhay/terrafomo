@@ -1,7 +1,6 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -49,989 +48,972 @@ import GHC.Base (($))
 
 import Terrafomo.Circonus.Settings
 
+import qualified Data.Hashable               as P
+import qualified Data.HashMap.Strict         as P
+import qualified Data.HashMap.Strict         as HashMap
 import qualified Data.List.NonEmpty          as P
-import qualified Data.Map.Strict             as P
-import qualified Data.Map.Strict             as Map
 import qualified Data.Maybe                  as P
-import qualified Data.Monoid                 as P
-import qualified Data.Text                   as P
+import qualified Data.Text.Lazy              as P
 import qualified GHC.Generics                as P
 import qualified Lens.Micro                  as P
 import qualified Prelude                     as P
-import qualified Terrafomo.Attribute         as TF
 import qualified Terrafomo.Circonus.Lens     as P
 import qualified Terrafomo.Circonus.Provider as P
 import qualified Terrafomo.Circonus.Types    as P
+import qualified Terrafomo.Encode            as TF
 import qualified Terrafomo.HCL               as TF
-import qualified Terrafomo.Name              as TF
+import qualified Terrafomo.HIL               as TF
 import qualified Terrafomo.Schema            as TF
-import qualified Terrafomo.Validator         as TF
+import qualified Terrafomo.Validate          as TF
 
 -- | @circonus_check@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/circonus/r/check.html terraform documentation>
 -- for more information.
 data CheckResource s = CheckResource'
-    { _active      :: TF.Attr s P.Bool
-    -- ^ @active@ - (Optional)
+    { _active :: TF.Expr s P.Bool
+    -- ^ @active@ - (Default @true@)
     -- If the check is activate or disabled
     --
-    , _caql        :: TF.Attr s (CheckCaql s)
+    , _caql :: P.Maybe (TF.Expr s (CheckCaql s))
     -- ^ @caql@ - (Optional)
     -- CAQL check configuration
     --
-    , _cloudwatch  :: TF.Attr s (CheckCloudwatch s)
+    , _cloudwatch :: P.Maybe (TF.Expr s (CheckCloudwatch s))
     -- ^ @cloudwatch@ - (Optional)
     -- CloudWatch check configuration
     --
-    , _collector   :: TF.Attr s (P.NonEmpty (TF.Attr s (CheckCollector s)))
+    , _collector :: P.Maybe (TF.Expr s (P.NonEmpty (TF.Expr s (CheckCollector s))))
     -- ^ @collector@ - (Optional)
     -- The collector(s) that are responsible for gathering the metrics
     --
-    , _consul      :: TF.Attr s (CheckConsul s)
+    , _consul :: P.Maybe (TF.Expr s (CheckConsul s))
     -- ^ @consul@ - (Optional)
     -- Consul check configuration
     --
-    , _http        :: TF.Attr s (CheckHttp s)
+    , _http :: P.Maybe (TF.Expr s (CheckHttp s))
     -- ^ @http@ - (Optional)
     -- HTTP check configuration
     --
-    , _httptrap    :: TF.Attr s (CheckHttptrap s)
+    , _httptrap :: P.Maybe (TF.Expr s (CheckHttptrap s))
     -- ^ @httptrap@ - (Optional)
     -- HTTP Trap check configuration
     --
-    , _icmpPing    :: TF.Attr s (CheckIcmpPing s)
+    , _icmpPing :: P.Maybe (TF.Expr s (CheckIcmpPing s))
     -- ^ @icmp_ping@ - (Optional)
     -- ICMP ping check configuration
     --
-    , _json        :: TF.Attr s (CheckJson s)
+    , _json :: P.Maybe (TF.Expr s (CheckJson s))
     -- ^ @json@ - (Optional)
     -- JSON check configuration
     --
-    , _metric      :: TF.Attr s (P.NonEmpty (TF.Attr s (CheckMetric s)))
+    , _metric :: P.Maybe (TF.Expr s (P.NonEmpty (TF.Expr s (CheckMetric s))))
     -- ^ @metric@ - (Optional)
     -- Configuration for a stream of metrics
     --
-    , _metricLimit :: TF.Attr s P.Int
+    , _metricLimit :: P.Maybe (TF.Expr s P.Int)
     -- ^ @metric_limit@ - (Optional)
     -- Setting a metric_limit will enable all (-1), disable (0), or allow up to the
     -- specified limit of metrics for this check ("N+", where N is a positive
     -- integer)
     --
-    , _mysql       :: TF.Attr s (CheckMysql s)
+    , _mysql :: P.Maybe (TF.Expr s (CheckMysql s))
     -- ^ @mysql@ - (Optional)
     -- MySQL check configuration
     --
-    , _name        :: TF.Attr s P.Text
+    , _name :: P.Maybe (TF.Expr s P.Text)
     -- ^ @name@ - (Optional)
     -- The name of the check bundle that will be displayed in the web interface
     --
-    , _notes       :: TF.Attr s P.Text
+    , _notes :: P.Maybe (TF.Expr s P.Text)
     -- ^ @notes@ - (Optional)
     -- Notes about this check bundle
     --
-    , _period      :: TF.Attr s P.Text
+    , _period :: P.Maybe (TF.Expr s P.Text)
     -- ^ @period@ - (Optional)
     -- The period between each time the check is made
     --
-    , _postgresql  :: TF.Attr s (CheckPostgresql s)
+    , _postgresql :: P.Maybe (TF.Expr s (CheckPostgresql s))
     -- ^ @postgresql@ - (Optional)
     -- PostgreSQL check configuration
     --
-    , _statsd      :: TF.Attr s (CheckStatsd s)
+    , _statsd :: P.Maybe (TF.Expr s (CheckStatsd s))
     -- ^ @statsd@ - (Optional)
     -- Statsd check configuration
     --
-    , _tags        :: TF.Attr s [TF.Attr s P.Text]
+    , _tags :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
     -- ^ @tags@ - (Optional)
     -- A list of tags assigned to the check
     --
-    , _target      :: TF.Attr s P.Text
+    , _target :: P.Maybe (TF.Expr s P.Text)
     -- ^ @target@ - (Optional)
     -- The target of the check (e.g. hostname, URL, IP, etc)
     --
-    , _tcp         :: TF.Attr s (CheckTcp s)
+    , _tcp :: P.Maybe (TF.Expr s (CheckTcp s))
     -- ^ @tcp@ - (Optional)
     -- TCP check configuration
     --
-    , _timeout     :: TF.Attr s P.Text
+    , _timeout :: P.Maybe (TF.Expr s P.Text)
     -- ^ @timeout@ - (Optional)
     -- The length of time in seconds (and fractions of a second) before the check
     -- will timeout if no response is returned to the collector
     --
-    , _type'       :: TF.Attr s P.Text
+    , _type' :: P.Maybe (TF.Expr s P.Text)
     -- ^ @type@ - (Optional, Forces New)
     -- The check type
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Define a new @circonus_check@ resource value.
 checkResource
     :: P.Resource (CheckResource s)
 checkResource =
-    TF.unsafeResource "circonus_check" TF.validator $
-        CheckResource'
+    TF.unsafeResource "circonus_check" P.defaultProvider  TF.encodeLifecycle
+        (\CheckResource'{..} -> P.mconcat
+            [ TF.pair "active" _active
+            , P.maybe P.mempty (TF.pair "caql") _caql
+            , P.maybe P.mempty (TF.pair "cloudwatch") _cloudwatch
+            , P.maybe P.mempty (TF.pair "collector") _collector
+            , P.maybe P.mempty (TF.pair "consul") _consul
+            , P.maybe P.mempty (TF.pair "http") _http
+            , P.maybe P.mempty (TF.pair "httptrap") _httptrap
+            , P.maybe P.mempty (TF.pair "icmp_ping") _icmpPing
+            , P.maybe P.mempty (TF.pair "json") _json
+            , P.maybe P.mempty (TF.pair "metric") _metric
+            , P.maybe P.mempty (TF.pair "metric_limit") _metricLimit
+            , P.maybe P.mempty (TF.pair "mysql") _mysql
+            , P.maybe P.mempty (TF.pair "name") _name
+            , P.maybe P.mempty (TF.pair "notes") _notes
+            , P.maybe P.mempty (TF.pair "period") _period
+            , P.maybe P.mempty (TF.pair "postgresql") _postgresql
+            , P.maybe P.mempty (TF.pair "statsd") _statsd
+            , P.maybe P.mempty (TF.pair "tags") _tags
+            , P.maybe P.mempty (TF.pair "target") _target
+            , P.maybe P.mempty (TF.pair "tcp") _tcp
+            , P.maybe P.mempty (TF.pair "timeout") _timeout
+            , P.maybe P.mempty (TF.pair "type") _type'
+            ])
+        (CheckResource'
             { _active = TF.value P.True
-            , _caql = TF.Nil
-            , _cloudwatch = TF.Nil
-            , _collector = TF.Nil
-            , _consul = TF.Nil
-            , _http = TF.Nil
-            , _httptrap = TF.Nil
-            , _icmpPing = TF.Nil
-            , _json = TF.Nil
-            , _metric = TF.Nil
-            , _metricLimit = TF.Nil
-            , _mysql = TF.Nil
-            , _name = TF.Nil
-            , _notes = TF.Nil
-            , _period = TF.Nil
-            , _postgresql = TF.Nil
-            , _statsd = TF.Nil
-            , _tags = TF.Nil
-            , _target = TF.Nil
-            , _tcp = TF.Nil
-            , _timeout = TF.Nil
-            , _type' = TF.Nil
-            }
+            , _caql = P.Nothing
+            , _cloudwatch = P.Nothing
+            , _collector = P.Nothing
+            , _consul = P.Nothing
+            , _http = P.Nothing
+            , _httptrap = P.Nothing
+            , _icmpPing = P.Nothing
+            , _json = P.Nothing
+            , _metric = P.Nothing
+            , _metricLimit = P.Nothing
+            , _mysql = P.Nothing
+            , _name = P.Nothing
+            , _notes = P.Nothing
+            , _period = P.Nothing
+            , _postgresql = P.Nothing
+            , _statsd = P.Nothing
+            , _tags = P.Nothing
+            , _target = P.Nothing
+            , _tcp = P.Nothing
+            , _timeout = P.Nothing
+            , _type' = P.Nothing
+            })
 
-instance TF.IsObject (CheckResource s) where
-    toObject CheckResource'{..} = P.catMaybes
-        [ TF.assign "active" <$> TF.attribute _active
-        , TF.assign "caql" <$> TF.attribute _caql
-        , TF.assign "cloudwatch" <$> TF.attribute _cloudwatch
-        , TF.assign "collector" <$> TF.attribute _collector
-        , TF.assign "consul" <$> TF.attribute _consul
-        , TF.assign "http" <$> TF.attribute _http
-        , TF.assign "httptrap" <$> TF.attribute _httptrap
-        , TF.assign "icmp_ping" <$> TF.attribute _icmpPing
-        , TF.assign "json" <$> TF.attribute _json
-        , TF.assign "metric" <$> TF.attribute _metric
-        , TF.assign "metric_limit" <$> TF.attribute _metricLimit
-        , TF.assign "mysql" <$> TF.attribute _mysql
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "notes" <$> TF.attribute _notes
-        , TF.assign "period" <$> TF.attribute _period
-        , TF.assign "postgresql" <$> TF.attribute _postgresql
-        , TF.assign "statsd" <$> TF.attribute _statsd
-        , TF.assign "tags" <$> TF.attribute _tags
-        , TF.assign "target" <$> TF.attribute _target
-        , TF.assign "tcp" <$> TF.attribute _tcp
-        , TF.assign "timeout" <$> TF.attribute _timeout
-        , TF.assign "type" <$> TF.attribute _type'
-        ]
+instance P.Hashable (CheckResource s)
 
-instance TF.IsValid (CheckResource s) where
+instance TF.HasValidator (CheckResource s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_caql"
-                  (_caql
-                      :: CheckResource s -> TF.Attr s (CheckCaql s))
-                  TF.validator
-           P.<> TF.settingsValidator "_cloudwatch"
-                  (_cloudwatch
-                      :: CheckResource s -> TF.Attr s (CheckCloudwatch s))
-                  TF.validator
-           P.<> TF.settingsValidator "_consul"
-                  (_consul
-                      :: CheckResource s -> TF.Attr s (CheckConsul s))
-                  TF.validator
-           P.<> TF.settingsValidator "_http"
-                  (_http
-                      :: CheckResource s -> TF.Attr s (CheckHttp s))
-                  TF.validator
-           P.<> TF.settingsValidator "_httptrap"
-                  (_httptrap
-                      :: CheckResource s -> TF.Attr s (CheckHttptrap s))
-                  TF.validator
-           P.<> TF.settingsValidator "_icmpPing"
-                  (_icmpPing
-                      :: CheckResource s -> TF.Attr s (CheckIcmpPing s))
-                  TF.validator
-           P.<> TF.settingsValidator "_json"
-                  (_json
-                      :: CheckResource s -> TF.Attr s (CheckJson s))
-                  TF.validator
-           P.<> TF.settingsValidator "_mysql"
-                  (_mysql
-                      :: CheckResource s -> TF.Attr s (CheckMysql s))
-                  TF.validator
-           P.<> TF.settingsValidator "_postgresql"
-                  (_postgresql
-                      :: CheckResource s -> TF.Attr s (CheckPostgresql s))
-                  TF.validator
-           P.<> TF.settingsValidator "_statsd"
-                  (_statsd
-                      :: CheckResource s -> TF.Attr s (CheckStatsd s))
-                  TF.validator
-           P.<> TF.settingsValidator "_tcp"
-                  (_tcp
-                      :: CheckResource s -> TF.Attr s (CheckTcp s))
-                  TF.validator
 
-instance P.HasActive (CheckResource s) (TF.Attr s P.Bool) where
+instance P.HasActive (CheckResource s) (TF.Expr s P.Bool) where
     active =
-        P.lens (_active :: CheckResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _active = a } :: CheckResource s)
+        P.lens (_active :: CheckResource s -> TF.Expr s P.Bool)
+            (\s a -> s { _active = a } :: CheckResource s)
 
-instance P.HasCaql (CheckResource s) (TF.Attr s (CheckCaql s)) where
+instance P.HasCaql (CheckResource s) (P.Maybe (TF.Expr s (CheckCaql s))) where
     caql =
-        P.lens (_caql :: CheckResource s -> TF.Attr s (CheckCaql s))
-               (\s a -> s { _caql = a } :: CheckResource s)
+        P.lens (_caql :: CheckResource s -> P.Maybe (TF.Expr s (CheckCaql s)))
+            (\s a -> s { _caql = a } :: CheckResource s)
 
-instance P.HasCloudwatch (CheckResource s) (TF.Attr s (CheckCloudwatch s)) where
+instance P.HasCloudwatch (CheckResource s) (P.Maybe (TF.Expr s (CheckCloudwatch s))) where
     cloudwatch =
-        P.lens (_cloudwatch :: CheckResource s -> TF.Attr s (CheckCloudwatch s))
-               (\s a -> s { _cloudwatch = a } :: CheckResource s)
+        P.lens (_cloudwatch :: CheckResource s -> P.Maybe (TF.Expr s (CheckCloudwatch s)))
+            (\s a -> s { _cloudwatch = a } :: CheckResource s)
 
-instance P.HasCollector (CheckResource s) (TF.Attr s (P.NonEmpty (TF.Attr s (CheckCollector s)))) where
+instance P.HasCollector (CheckResource s) (P.Maybe (TF.Expr s (P.NonEmpty (TF.Expr s (CheckCollector s))))) where
     collector =
-        P.lens (_collector :: CheckResource s -> TF.Attr s (P.NonEmpty (TF.Attr s (CheckCollector s))))
-               (\s a -> s { _collector = a } :: CheckResource s)
+        P.lens (_collector :: CheckResource s -> P.Maybe (TF.Expr s (P.NonEmpty (TF.Expr s (CheckCollector s)))))
+            (\s a -> s { _collector = a } :: CheckResource s)
 
-instance P.HasConsul (CheckResource s) (TF.Attr s (CheckConsul s)) where
+instance P.HasConsul (CheckResource s) (P.Maybe (TF.Expr s (CheckConsul s))) where
     consul =
-        P.lens (_consul :: CheckResource s -> TF.Attr s (CheckConsul s))
-               (\s a -> s { _consul = a } :: CheckResource s)
+        P.lens (_consul :: CheckResource s -> P.Maybe (TF.Expr s (CheckConsul s)))
+            (\s a -> s { _consul = a } :: CheckResource s)
 
-instance P.HasHttp (CheckResource s) (TF.Attr s (CheckHttp s)) where
+instance P.HasHttp (CheckResource s) (P.Maybe (TF.Expr s (CheckHttp s))) where
     http =
-        P.lens (_http :: CheckResource s -> TF.Attr s (CheckHttp s))
-               (\s a -> s { _http = a } :: CheckResource s)
+        P.lens (_http :: CheckResource s -> P.Maybe (TF.Expr s (CheckHttp s)))
+            (\s a -> s { _http = a } :: CheckResource s)
 
-instance P.HasHttptrap (CheckResource s) (TF.Attr s (CheckHttptrap s)) where
+instance P.HasHttptrap (CheckResource s) (P.Maybe (TF.Expr s (CheckHttptrap s))) where
     httptrap =
-        P.lens (_httptrap :: CheckResource s -> TF.Attr s (CheckHttptrap s))
-               (\s a -> s { _httptrap = a } :: CheckResource s)
+        P.lens (_httptrap :: CheckResource s -> P.Maybe (TF.Expr s (CheckHttptrap s)))
+            (\s a -> s { _httptrap = a } :: CheckResource s)
 
-instance P.HasIcmpPing (CheckResource s) (TF.Attr s (CheckIcmpPing s)) where
+instance P.HasIcmpPing (CheckResource s) (P.Maybe (TF.Expr s (CheckIcmpPing s))) where
     icmpPing =
-        P.lens (_icmpPing :: CheckResource s -> TF.Attr s (CheckIcmpPing s))
-               (\s a -> s { _icmpPing = a } :: CheckResource s)
+        P.lens (_icmpPing :: CheckResource s -> P.Maybe (TF.Expr s (CheckIcmpPing s)))
+            (\s a -> s { _icmpPing = a } :: CheckResource s)
 
-instance P.HasJson (CheckResource s) (TF.Attr s (CheckJson s)) where
+instance P.HasJson (CheckResource s) (P.Maybe (TF.Expr s (CheckJson s))) where
     json =
-        P.lens (_json :: CheckResource s -> TF.Attr s (CheckJson s))
-               (\s a -> s { _json = a } :: CheckResource s)
+        P.lens (_json :: CheckResource s -> P.Maybe (TF.Expr s (CheckJson s)))
+            (\s a -> s { _json = a } :: CheckResource s)
 
-instance P.HasMetric (CheckResource s) (TF.Attr s (P.NonEmpty (TF.Attr s (CheckMetric s)))) where
+instance P.HasMetric (CheckResource s) (P.Maybe (TF.Expr s (P.NonEmpty (TF.Expr s (CheckMetric s))))) where
     metric =
-        P.lens (_metric :: CheckResource s -> TF.Attr s (P.NonEmpty (TF.Attr s (CheckMetric s))))
-               (\s a -> s { _metric = a } :: CheckResource s)
+        P.lens (_metric :: CheckResource s -> P.Maybe (TF.Expr s (P.NonEmpty (TF.Expr s (CheckMetric s)))))
+            (\s a -> s { _metric = a } :: CheckResource s)
 
-instance P.HasMetricLimit (CheckResource s) (TF.Attr s P.Int) where
+instance P.HasMetricLimit (CheckResource s) (P.Maybe (TF.Expr s P.Int)) where
     metricLimit =
-        P.lens (_metricLimit :: CheckResource s -> TF.Attr s P.Int)
-               (\s a -> s { _metricLimit = a } :: CheckResource s)
+        P.lens (_metricLimit :: CheckResource s -> P.Maybe (TF.Expr s P.Int))
+            (\s a -> s { _metricLimit = a } :: CheckResource s)
 
-instance P.HasMysql (CheckResource s) (TF.Attr s (CheckMysql s)) where
+instance P.HasMysql (CheckResource s) (P.Maybe (TF.Expr s (CheckMysql s))) where
     mysql =
-        P.lens (_mysql :: CheckResource s -> TF.Attr s (CheckMysql s))
-               (\s a -> s { _mysql = a } :: CheckResource s)
+        P.lens (_mysql :: CheckResource s -> P.Maybe (TF.Expr s (CheckMysql s)))
+            (\s a -> s { _mysql = a } :: CheckResource s)
 
-instance P.HasName (CheckResource s) (TF.Attr s P.Text) where
+instance P.HasName (CheckResource s) (P.Maybe (TF.Expr s P.Text)) where
     name =
-        P.lens (_name :: CheckResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: CheckResource s)
+        P.lens (_name :: CheckResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _name = a } :: CheckResource s)
 
-instance P.HasNotes (CheckResource s) (TF.Attr s P.Text) where
+instance P.HasNotes (CheckResource s) (P.Maybe (TF.Expr s P.Text)) where
     notes =
-        P.lens (_notes :: CheckResource s -> TF.Attr s P.Text)
-               (\s a -> s { _notes = a } :: CheckResource s)
+        P.lens (_notes :: CheckResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _notes = a } :: CheckResource s)
 
-instance P.HasPeriod (CheckResource s) (TF.Attr s P.Text) where
+instance P.HasPeriod (CheckResource s) (P.Maybe (TF.Expr s P.Text)) where
     period =
-        P.lens (_period :: CheckResource s -> TF.Attr s P.Text)
-               (\s a -> s { _period = a } :: CheckResource s)
+        P.lens (_period :: CheckResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _period = a } :: CheckResource s)
 
-instance P.HasPostgresql (CheckResource s) (TF.Attr s (CheckPostgresql s)) where
+instance P.HasPostgresql (CheckResource s) (P.Maybe (TF.Expr s (CheckPostgresql s))) where
     postgresql =
-        P.lens (_postgresql :: CheckResource s -> TF.Attr s (CheckPostgresql s))
-               (\s a -> s { _postgresql = a } :: CheckResource s)
+        P.lens (_postgresql :: CheckResource s -> P.Maybe (TF.Expr s (CheckPostgresql s)))
+            (\s a -> s { _postgresql = a } :: CheckResource s)
 
-instance P.HasStatsd (CheckResource s) (TF.Attr s (CheckStatsd s)) where
+instance P.HasStatsd (CheckResource s) (P.Maybe (TF.Expr s (CheckStatsd s))) where
     statsd =
-        P.lens (_statsd :: CheckResource s -> TF.Attr s (CheckStatsd s))
-               (\s a -> s { _statsd = a } :: CheckResource s)
+        P.lens (_statsd :: CheckResource s -> P.Maybe (TF.Expr s (CheckStatsd s)))
+            (\s a -> s { _statsd = a } :: CheckResource s)
 
-instance P.HasTags (CheckResource s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasTags (CheckResource s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
     tags =
-        P.lens (_tags :: CheckResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _tags = a } :: CheckResource s)
+        P.lens (_tags :: CheckResource s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
+            (\s a -> s { _tags = a } :: CheckResource s)
 
-instance P.HasTarget (CheckResource s) (TF.Attr s P.Text) where
+instance P.HasTarget (CheckResource s) (P.Maybe (TF.Expr s P.Text)) where
     target =
-        P.lens (_target :: CheckResource s -> TF.Attr s P.Text)
-               (\s a -> s { _target = a } :: CheckResource s)
+        P.lens (_target :: CheckResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _target = a } :: CheckResource s)
 
-instance P.HasTcp (CheckResource s) (TF.Attr s (CheckTcp s)) where
+instance P.HasTcp (CheckResource s) (P.Maybe (TF.Expr s (CheckTcp s))) where
     tcp =
-        P.lens (_tcp :: CheckResource s -> TF.Attr s (CheckTcp s))
-               (\s a -> s { _tcp = a } :: CheckResource s)
+        P.lens (_tcp :: CheckResource s -> P.Maybe (TF.Expr s (CheckTcp s)))
+            (\s a -> s { _tcp = a } :: CheckResource s)
 
-instance P.HasTimeout (CheckResource s) (TF.Attr s P.Text) where
+instance P.HasTimeout (CheckResource s) (P.Maybe (TF.Expr s P.Text)) where
     timeout =
-        P.lens (_timeout :: CheckResource s -> TF.Attr s P.Text)
-               (\s a -> s { _timeout = a } :: CheckResource s)
+        P.lens (_timeout :: CheckResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _timeout = a } :: CheckResource s)
 
-instance P.HasType' (CheckResource s) (TF.Attr s P.Text) where
+instance P.HasType' (CheckResource s) (P.Maybe (TF.Expr s P.Text)) where
     type' =
-        P.lens (_type' :: CheckResource s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a } :: CheckResource s)
+        P.lens (_type' :: CheckResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _type' = a } :: CheckResource s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (CheckResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (CheckResource s)) (TF.Expr s P.Text) where
+    computedId x =
+        TF.unsafeCompute TF.encodeAttr x "id"
 
-instance s ~ s' => P.HasComputedCheckByCollector (TF.Ref s' (CheckResource s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
-    computedCheckByCollector x = TF.compute (TF.refKey x) "check_by_collector"
+instance s ~ s' => P.HasComputedCheckByCollector (TF.Ref s' (CheckResource s)) (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text))) where
+    computedCheckByCollector x =
+        TF.unsafeCompute TF.encodeAttr x "check_by_collector"
 
-instance s ~ s' => P.HasComputedCheckId (TF.Ref s' (CheckResource s)) (TF.Attr s P.Text) where
-    computedCheckId x = TF.compute (TF.refKey x) "check_id"
+instance s ~ s' => P.HasComputedCheckId (TF.Ref s' (CheckResource s)) (TF.Expr s P.Text) where
+    computedCheckId x =
+        TF.unsafeCompute TF.encodeAttr x "check_id"
 
-instance s ~ s' => P.HasComputedChecks (TF.Ref s' (CheckResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedChecks x = TF.compute (TF.refKey x) "checks"
+instance s ~ s' => P.HasComputedChecks (TF.Ref s' (CheckResource s)) (TF.Expr s [TF.Expr s P.Text]) where
+    computedChecks x =
+        TF.unsafeCompute TF.encodeAttr x "checks"
 
-instance s ~ s' => P.HasComputedCreated (TF.Ref s' (CheckResource s)) (TF.Attr s P.Int) where
-    computedCreated x = TF.compute (TF.refKey x) "created"
+instance s ~ s' => P.HasComputedCreated (TF.Ref s' (CheckResource s)) (TF.Expr s P.Int) where
+    computedCreated x =
+        TF.unsafeCompute TF.encodeAttr x "created"
 
-instance s ~ s' => P.HasComputedLastModified (TF.Ref s' (CheckResource s)) (TF.Attr s P.Int) where
-    computedLastModified x = TF.compute (TF.refKey x) "last_modified"
+instance s ~ s' => P.HasComputedLastModified (TF.Ref s' (CheckResource s)) (TF.Expr s P.Int) where
+    computedLastModified x =
+        TF.unsafeCompute TF.encodeAttr x "last_modified"
 
-instance s ~ s' => P.HasComputedLastModifiedBy (TF.Ref s' (CheckResource s)) (TF.Attr s P.Text) where
-    computedLastModifiedBy x = TF.compute (TF.refKey x) "last_modified_by"
+instance s ~ s' => P.HasComputedLastModifiedBy (TF.Ref s' (CheckResource s)) (TF.Expr s P.Text) where
+    computedLastModifiedBy x =
+        TF.unsafeCompute TF.encodeAttr x "last_modified_by"
 
-instance s ~ s' => P.HasComputedMetricLimit (TF.Ref s' (CheckResource s)) (TF.Attr s P.Int) where
-    computedMetricLimit x = TF.compute (TF.refKey x) "metric_limit"
+instance s ~ s' => P.HasComputedMetricLimit (TF.Ref s' (CheckResource s)) (TF.Expr s P.Int) where
+    computedMetricLimit x =
+        TF.unsafeCompute TF.encodeAttr x "metric_limit"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (CheckResource s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+instance s ~ s' => P.HasComputedName (TF.Ref s' (CheckResource s)) (TF.Expr s P.Text) where
+    computedName x =
+        TF.unsafeCompute TF.encodeAttr x "name"
 
-instance s ~ s' => P.HasComputedNotes (TF.Ref s' (CheckResource s)) (TF.Attr s P.Text) where
-    computedNotes x = TF.compute (TF.refKey x) "notes"
+instance s ~ s' => P.HasComputedNotes (TF.Ref s' (CheckResource s)) (TF.Expr s P.Text) where
+    computedNotes x =
+        TF.unsafeCompute TF.encodeAttr x "notes"
 
-instance s ~ s' => P.HasComputedPeriod (TF.Ref s' (CheckResource s)) (TF.Attr s P.Text) where
-    computedPeriod x = TF.compute (TF.refKey x) "period"
+instance s ~ s' => P.HasComputedPeriod (TF.Ref s' (CheckResource s)) (TF.Expr s P.Text) where
+    computedPeriod x =
+        TF.unsafeCompute TF.encodeAttr x "period"
 
-instance s ~ s' => P.HasComputedReverseConnectUrls (TF.Ref s' (CheckResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedReverseConnectUrls x = TF.compute (TF.refKey x) "reverse_connect_urls"
+instance s ~ s' => P.HasComputedReverseConnectUrls (TF.Ref s' (CheckResource s)) (TF.Expr s [TF.Expr s P.Text]) where
+    computedReverseConnectUrls x =
+        TF.unsafeCompute TF.encodeAttr x "reverse_connect_urls"
 
-instance s ~ s' => P.HasComputedTarget (TF.Ref s' (CheckResource s)) (TF.Attr s P.Text) where
-    computedTarget x = TF.compute (TF.refKey x) "target"
+instance s ~ s' => P.HasComputedTarget (TF.Ref s' (CheckResource s)) (TF.Expr s P.Text) where
+    computedTarget x =
+        TF.unsafeCompute TF.encodeAttr x "target"
 
-instance s ~ s' => P.HasComputedTimeout (TF.Ref s' (CheckResource s)) (TF.Attr s P.Text) where
-    computedTimeout x = TF.compute (TF.refKey x) "timeout"
+instance s ~ s' => P.HasComputedTimeout (TF.Ref s' (CheckResource s)) (TF.Expr s P.Text) where
+    computedTimeout x =
+        TF.unsafeCompute TF.encodeAttr x "timeout"
 
-instance s ~ s' => P.HasComputedType (TF.Ref s' (CheckResource s)) (TF.Attr s P.Text) where
-    computedType x = TF.compute (TF.refKey x) "type"
+instance s ~ s' => P.HasComputedType (TF.Ref s' (CheckResource s)) (TF.Expr s P.Text) where
+    computedType x =
+        TF.unsafeCompute TF.encodeAttr x "type"
 
-instance s ~ s' => P.HasComputedUuids (TF.Ref s' (CheckResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedUuids x = TF.compute (TF.refKey x) "uuids"
+instance s ~ s' => P.HasComputedUuids (TF.Ref s' (CheckResource s)) (TF.Expr s [TF.Expr s P.Text]) where
+    computedUuids x =
+        TF.unsafeCompute TF.encodeAttr x "uuids"
 
 -- | @circonus_contact_group@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/circonus/r/contact_group.html terraform documentation>
 -- for more information.
 data ContactGroupResource s = ContactGroupResource'
-    { _aggregationWindow :: TF.Attr s P.Text
-    -- ^ @aggregation_window@ - (Optional)
+    { _aggregationWindow :: TF.Expr s P.Text
+    -- ^ @aggregation_window@ - (Default @300s@)
     --
-    , _alertOption       :: TF.Attr s [TF.Attr s (ContactGroupAlertOption s)]
+    , _alertOption :: P.Maybe (TF.Expr s [TF.Expr s (ContactGroupAlertOption s)])
     -- ^ @alert_option@ - (Optional)
     --
-    , _email             :: TF.Attr s [TF.Attr s (ContactGroupEmail s)]
+    , _email :: P.Maybe (TF.Expr s [TF.Expr s (ContactGroupEmail s)])
     -- ^ @email@ - (Optional)
     --
-    , _http              :: TF.Attr s [TF.Attr s (ContactGroupHttp s)]
+    , _http :: P.Maybe (TF.Expr s [TF.Expr s (ContactGroupHttp s)])
     -- ^ @http@ - (Optional)
     --
-    , _irc               :: TF.Attr s [TF.Attr s (ContactGroupIrc s)]
+    , _irc :: P.Maybe (TF.Expr s [TF.Expr s (ContactGroupIrc s)])
     -- ^ @irc@ - (Optional)
     --
-    , _longMessage       :: TF.Attr s P.Text
+    , _longMessage :: P.Maybe (TF.Expr s P.Text)
     -- ^ @long_message@ - (Optional)
     --
-    , _longSubject       :: TF.Attr s P.Text
+    , _longSubject :: P.Maybe (TF.Expr s P.Text)
     -- ^ @long_subject@ - (Optional)
     --
-    , _longSummary       :: TF.Attr s P.Text
+    , _longSummary :: P.Maybe (TF.Expr s P.Text)
     -- ^ @long_summary@ - (Optional)
     --
-    , _name              :: TF.Attr s P.Text
+    , _name :: TF.Expr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _pagerDuty         :: TF.Attr s [TF.Attr s (ContactGroupPagerDuty s)]
+    , _pagerDuty :: P.Maybe (TF.Expr s [TF.Expr s (ContactGroupPagerDuty s)])
     -- ^ @pager_duty@ - (Optional)
     --
-    , _shortMessage      :: TF.Attr s P.Text
+    , _shortMessage :: P.Maybe (TF.Expr s P.Text)
     -- ^ @short_message@ - (Optional)
     --
-    , _shortSummary      :: TF.Attr s P.Text
+    , _shortSummary :: P.Maybe (TF.Expr s P.Text)
     -- ^ @short_summary@ - (Optional)
     --
-    , _slack             :: TF.Attr s [TF.Attr s (ContactGroupSlack s)]
+    , _slack :: P.Maybe (TF.Expr s [TF.Expr s (ContactGroupSlack s)])
     -- ^ @slack@ - (Optional)
     --
-    , _sms               :: TF.Attr s [TF.Attr s (ContactGroupSms s)]
+    , _sms :: P.Maybe (TF.Expr s [TF.Expr s (ContactGroupSms s)])
     -- ^ @sms@ - (Optional)
     --
-    , _tags              :: TF.Attr s [TF.Attr s P.Text]
+    , _tags :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
     -- ^ @tags@ - (Optional)
     --
-    , _victorops         :: TF.Attr s [TF.Attr s (ContactGroupVictorops s)]
+    , _victorops :: P.Maybe (TF.Expr s [TF.Expr s (ContactGroupVictorops s)])
     -- ^ @victorops@ - (Optional)
     --
-    , _xmpp              :: TF.Attr s [TF.Attr s (ContactGroupXmpp s)]
+    , _xmpp :: P.Maybe (TF.Expr s [TF.Expr s (ContactGroupXmpp s)])
     -- ^ @xmpp@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Define a new @circonus_contact_group@ resource value.
 contactGroupResource
-    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    :: TF.Expr s P.Text -- ^ Lens: 'P.name', Field: '_name', HCL: @name@
     -> P.Resource (ContactGroupResource s)
 contactGroupResource _name =
-    TF.unsafeResource "circonus_contact_group" TF.validator $
-        ContactGroupResource'
+    TF.unsafeResource "circonus_contact_group" P.defaultProvider  TF.encodeLifecycle
+        (\ContactGroupResource'{..} -> P.mconcat
+            [ TF.pair "aggregation_window" _aggregationWindow
+            , P.maybe P.mempty (TF.pair "alert_option") _alertOption
+            , P.maybe P.mempty (TF.pair "email") _email
+            , P.maybe P.mempty (TF.pair "http") _http
+            , P.maybe P.mempty (TF.pair "irc") _irc
+            , P.maybe P.mempty (TF.pair "long_message") _longMessage
+            , P.maybe P.mempty (TF.pair "long_subject") _longSubject
+            , P.maybe P.mempty (TF.pair "long_summary") _longSummary
+            , TF.pair "name" _name
+            , P.maybe P.mempty (TF.pair "pager_duty") _pagerDuty
+            , P.maybe P.mempty (TF.pair "short_message") _shortMessage
+            , P.maybe P.mempty (TF.pair "short_summary") _shortSummary
+            , P.maybe P.mempty (TF.pair "slack") _slack
+            , P.maybe P.mempty (TF.pair "sms") _sms
+            , P.maybe P.mempty (TF.pair "tags") _tags
+            , P.maybe P.mempty (TF.pair "victorops") _victorops
+            , P.maybe P.mempty (TF.pair "xmpp") _xmpp
+            ])
+        (ContactGroupResource'
             { _aggregationWindow = TF.value "300s"
-            , _alertOption = TF.Nil
-            , _email = TF.Nil
-            , _http = TF.Nil
-            , _irc = TF.Nil
-            , _longMessage = TF.Nil
-            , _longSubject = TF.Nil
-            , _longSummary = TF.Nil
+            , _alertOption = P.Nothing
+            , _email = P.Nothing
+            , _http = P.Nothing
+            , _irc = P.Nothing
+            , _longMessage = P.Nothing
+            , _longSubject = P.Nothing
+            , _longSummary = P.Nothing
             , _name = _name
-            , _pagerDuty = TF.Nil
-            , _shortMessage = TF.Nil
-            , _shortSummary = TF.Nil
-            , _slack = TF.Nil
-            , _sms = TF.Nil
-            , _tags = TF.Nil
-            , _victorops = TF.Nil
-            , _xmpp = TF.Nil
-            }
+            , _pagerDuty = P.Nothing
+            , _shortMessage = P.Nothing
+            , _shortSummary = P.Nothing
+            , _slack = P.Nothing
+            , _sms = P.Nothing
+            , _tags = P.Nothing
+            , _victorops = P.Nothing
+            , _xmpp = P.Nothing
+            })
 
-instance TF.IsObject (ContactGroupResource s) where
-    toObject ContactGroupResource'{..} = P.catMaybes
-        [ TF.assign "aggregation_window" <$> TF.attribute _aggregationWindow
-        , TF.assign "alert_option" <$> TF.attribute _alertOption
-        , TF.assign "email" <$> TF.attribute _email
-        , TF.assign "http" <$> TF.attribute _http
-        , TF.assign "irc" <$> TF.attribute _irc
-        , TF.assign "long_message" <$> TF.attribute _longMessage
-        , TF.assign "long_subject" <$> TF.attribute _longSubject
-        , TF.assign "long_summary" <$> TF.attribute _longSummary
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "pager_duty" <$> TF.attribute _pagerDuty
-        , TF.assign "short_message" <$> TF.attribute _shortMessage
-        , TF.assign "short_summary" <$> TF.attribute _shortSummary
-        , TF.assign "slack" <$> TF.attribute _slack
-        , TF.assign "sms" <$> TF.attribute _sms
-        , TF.assign "tags" <$> TF.attribute _tags
-        , TF.assign "victorops" <$> TF.attribute _victorops
-        , TF.assign "xmpp" <$> TF.attribute _xmpp
-        ]
+instance P.Hashable (ContactGroupResource s)
 
-instance TF.IsValid (ContactGroupResource s) where
+instance TF.HasValidator (ContactGroupResource s) where
     validator = P.mempty
 
-instance P.HasAggregationWindow (ContactGroupResource s) (TF.Attr s P.Text) where
+instance P.HasAggregationWindow (ContactGroupResource s) (TF.Expr s P.Text) where
     aggregationWindow =
-        P.lens (_aggregationWindow :: ContactGroupResource s -> TF.Attr s P.Text)
-               (\s a -> s { _aggregationWindow = a } :: ContactGroupResource s)
+        P.lens (_aggregationWindow :: ContactGroupResource s -> TF.Expr s P.Text)
+            (\s a -> s { _aggregationWindow = a } :: ContactGroupResource s)
 
-instance P.HasAlertOption (ContactGroupResource s) (TF.Attr s [TF.Attr s (ContactGroupAlertOption s)]) where
+instance P.HasAlertOption (ContactGroupResource s) (P.Maybe (TF.Expr s [TF.Expr s (ContactGroupAlertOption s)])) where
     alertOption =
-        P.lens (_alertOption :: ContactGroupResource s -> TF.Attr s [TF.Attr s (ContactGroupAlertOption s)])
-               (\s a -> s { _alertOption = a } :: ContactGroupResource s)
+        P.lens (_alertOption :: ContactGroupResource s -> P.Maybe (TF.Expr s [TF.Expr s (ContactGroupAlertOption s)]))
+            (\s a -> s { _alertOption = a } :: ContactGroupResource s)
 
-instance P.HasEmail (ContactGroupResource s) (TF.Attr s [TF.Attr s (ContactGroupEmail s)]) where
+instance P.HasEmail (ContactGroupResource s) (P.Maybe (TF.Expr s [TF.Expr s (ContactGroupEmail s)])) where
     email =
-        P.lens (_email :: ContactGroupResource s -> TF.Attr s [TF.Attr s (ContactGroupEmail s)])
-               (\s a -> s { _email = a } :: ContactGroupResource s)
+        P.lens (_email :: ContactGroupResource s -> P.Maybe (TF.Expr s [TF.Expr s (ContactGroupEmail s)]))
+            (\s a -> s { _email = a } :: ContactGroupResource s)
 
-instance P.HasHttp (ContactGroupResource s) (TF.Attr s [TF.Attr s (ContactGroupHttp s)]) where
+instance P.HasHttp (ContactGroupResource s) (P.Maybe (TF.Expr s [TF.Expr s (ContactGroupHttp s)])) where
     http =
-        P.lens (_http :: ContactGroupResource s -> TF.Attr s [TF.Attr s (ContactGroupHttp s)])
-               (\s a -> s { _http = a } :: ContactGroupResource s)
+        P.lens (_http :: ContactGroupResource s -> P.Maybe (TF.Expr s [TF.Expr s (ContactGroupHttp s)]))
+            (\s a -> s { _http = a } :: ContactGroupResource s)
 
-instance P.HasIrc (ContactGroupResource s) (TF.Attr s [TF.Attr s (ContactGroupIrc s)]) where
+instance P.HasIrc (ContactGroupResource s) (P.Maybe (TF.Expr s [TF.Expr s (ContactGroupIrc s)])) where
     irc =
-        P.lens (_irc :: ContactGroupResource s -> TF.Attr s [TF.Attr s (ContactGroupIrc s)])
-               (\s a -> s { _irc = a } :: ContactGroupResource s)
+        P.lens (_irc :: ContactGroupResource s -> P.Maybe (TF.Expr s [TF.Expr s (ContactGroupIrc s)]))
+            (\s a -> s { _irc = a } :: ContactGroupResource s)
 
-instance P.HasLongMessage (ContactGroupResource s) (TF.Attr s P.Text) where
+instance P.HasLongMessage (ContactGroupResource s) (P.Maybe (TF.Expr s P.Text)) where
     longMessage =
-        P.lens (_longMessage :: ContactGroupResource s -> TF.Attr s P.Text)
-               (\s a -> s { _longMessage = a } :: ContactGroupResource s)
+        P.lens (_longMessage :: ContactGroupResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _longMessage = a } :: ContactGroupResource s)
 
-instance P.HasLongSubject (ContactGroupResource s) (TF.Attr s P.Text) where
+instance P.HasLongSubject (ContactGroupResource s) (P.Maybe (TF.Expr s P.Text)) where
     longSubject =
-        P.lens (_longSubject :: ContactGroupResource s -> TF.Attr s P.Text)
-               (\s a -> s { _longSubject = a } :: ContactGroupResource s)
+        P.lens (_longSubject :: ContactGroupResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _longSubject = a } :: ContactGroupResource s)
 
-instance P.HasLongSummary (ContactGroupResource s) (TF.Attr s P.Text) where
+instance P.HasLongSummary (ContactGroupResource s) (P.Maybe (TF.Expr s P.Text)) where
     longSummary =
-        P.lens (_longSummary :: ContactGroupResource s -> TF.Attr s P.Text)
-               (\s a -> s { _longSummary = a } :: ContactGroupResource s)
+        P.lens (_longSummary :: ContactGroupResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _longSummary = a } :: ContactGroupResource s)
 
-instance P.HasName (ContactGroupResource s) (TF.Attr s P.Text) where
+instance P.HasName (ContactGroupResource s) (TF.Expr s P.Text) where
     name =
-        P.lens (_name :: ContactGroupResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: ContactGroupResource s)
+        P.lens (_name :: ContactGroupResource s -> TF.Expr s P.Text)
+            (\s a -> s { _name = a } :: ContactGroupResource s)
 
-instance P.HasPagerDuty (ContactGroupResource s) (TF.Attr s [TF.Attr s (ContactGroupPagerDuty s)]) where
+instance P.HasPagerDuty (ContactGroupResource s) (P.Maybe (TF.Expr s [TF.Expr s (ContactGroupPagerDuty s)])) where
     pagerDuty =
-        P.lens (_pagerDuty :: ContactGroupResource s -> TF.Attr s [TF.Attr s (ContactGroupPagerDuty s)])
-               (\s a -> s { _pagerDuty = a } :: ContactGroupResource s)
+        P.lens (_pagerDuty :: ContactGroupResource s -> P.Maybe (TF.Expr s [TF.Expr s (ContactGroupPagerDuty s)]))
+            (\s a -> s { _pagerDuty = a } :: ContactGroupResource s)
 
-instance P.HasShortMessage (ContactGroupResource s) (TF.Attr s P.Text) where
+instance P.HasShortMessage (ContactGroupResource s) (P.Maybe (TF.Expr s P.Text)) where
     shortMessage =
-        P.lens (_shortMessage :: ContactGroupResource s -> TF.Attr s P.Text)
-               (\s a -> s { _shortMessage = a } :: ContactGroupResource s)
+        P.lens (_shortMessage :: ContactGroupResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _shortMessage = a } :: ContactGroupResource s)
 
-instance P.HasShortSummary (ContactGroupResource s) (TF.Attr s P.Text) where
+instance P.HasShortSummary (ContactGroupResource s) (P.Maybe (TF.Expr s P.Text)) where
     shortSummary =
-        P.lens (_shortSummary :: ContactGroupResource s -> TF.Attr s P.Text)
-               (\s a -> s { _shortSummary = a } :: ContactGroupResource s)
+        P.lens (_shortSummary :: ContactGroupResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _shortSummary = a } :: ContactGroupResource s)
 
-instance P.HasSlack (ContactGroupResource s) (TF.Attr s [TF.Attr s (ContactGroupSlack s)]) where
+instance P.HasSlack (ContactGroupResource s) (P.Maybe (TF.Expr s [TF.Expr s (ContactGroupSlack s)])) where
     slack =
-        P.lens (_slack :: ContactGroupResource s -> TF.Attr s [TF.Attr s (ContactGroupSlack s)])
-               (\s a -> s { _slack = a } :: ContactGroupResource s)
+        P.lens (_slack :: ContactGroupResource s -> P.Maybe (TF.Expr s [TF.Expr s (ContactGroupSlack s)]))
+            (\s a -> s { _slack = a } :: ContactGroupResource s)
 
-instance P.HasSms (ContactGroupResource s) (TF.Attr s [TF.Attr s (ContactGroupSms s)]) where
+instance P.HasSms (ContactGroupResource s) (P.Maybe (TF.Expr s [TF.Expr s (ContactGroupSms s)])) where
     sms =
-        P.lens (_sms :: ContactGroupResource s -> TF.Attr s [TF.Attr s (ContactGroupSms s)])
-               (\s a -> s { _sms = a } :: ContactGroupResource s)
+        P.lens (_sms :: ContactGroupResource s -> P.Maybe (TF.Expr s [TF.Expr s (ContactGroupSms s)]))
+            (\s a -> s { _sms = a } :: ContactGroupResource s)
 
-instance P.HasTags (ContactGroupResource s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasTags (ContactGroupResource s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
     tags =
-        P.lens (_tags :: ContactGroupResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _tags = a } :: ContactGroupResource s)
+        P.lens (_tags :: ContactGroupResource s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
+            (\s a -> s { _tags = a } :: ContactGroupResource s)
 
-instance P.HasVictorops (ContactGroupResource s) (TF.Attr s [TF.Attr s (ContactGroupVictorops s)]) where
+instance P.HasVictorops (ContactGroupResource s) (P.Maybe (TF.Expr s [TF.Expr s (ContactGroupVictorops s)])) where
     victorops =
-        P.lens (_victorops :: ContactGroupResource s -> TF.Attr s [TF.Attr s (ContactGroupVictorops s)])
-               (\s a -> s { _victorops = a } :: ContactGroupResource s)
+        P.lens (_victorops :: ContactGroupResource s -> P.Maybe (TF.Expr s [TF.Expr s (ContactGroupVictorops s)]))
+            (\s a -> s { _victorops = a } :: ContactGroupResource s)
 
-instance P.HasXmpp (ContactGroupResource s) (TF.Attr s [TF.Attr s (ContactGroupXmpp s)]) where
+instance P.HasXmpp (ContactGroupResource s) (P.Maybe (TF.Expr s [TF.Expr s (ContactGroupXmpp s)])) where
     xmpp =
-        P.lens (_xmpp :: ContactGroupResource s -> TF.Attr s [TF.Attr s (ContactGroupXmpp s)])
-               (\s a -> s { _xmpp = a } :: ContactGroupResource s)
+        P.lens (_xmpp :: ContactGroupResource s -> P.Maybe (TF.Expr s [TF.Expr s (ContactGroupXmpp s)]))
+            (\s a -> s { _xmpp = a } :: ContactGroupResource s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (ContactGroupResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ContactGroupResource s)) (TF.Expr s P.Text) where
+    computedId x =
+        TF.unsafeCompute TF.encodeAttr x "id"
 
-instance s ~ s' => P.HasComputedLastModified (TF.Ref s' (ContactGroupResource s)) (TF.Attr s P.Int) where
-    computedLastModified x = TF.compute (TF.refKey x) "last_modified"
+instance s ~ s' => P.HasComputedLastModified (TF.Ref s' (ContactGroupResource s)) (TF.Expr s P.Int) where
+    computedLastModified x =
+        TF.unsafeCompute TF.encodeAttr x "last_modified"
 
-instance s ~ s' => P.HasComputedLastModifiedBy (TF.Ref s' (ContactGroupResource s)) (TF.Attr s P.Text) where
-    computedLastModifiedBy x = TF.compute (TF.refKey x) "last_modified_by"
+instance s ~ s' => P.HasComputedLastModifiedBy (TF.Ref s' (ContactGroupResource s)) (TF.Expr s P.Text) where
+    computedLastModifiedBy x =
+        TF.unsafeCompute TF.encodeAttr x "last_modified_by"
 
 -- | @circonus_graph@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/circonus/r/graph.html terraform documentation>
 -- for more information.
 data GraphResource s = GraphResource'
-    { _description :: TF.Attr s P.Text
+    { _description :: P.Maybe (TF.Expr s P.Text)
     -- ^ @description@ - (Optional)
     --
-    , _graphStyle :: TF.Attr s P.Text
-    -- ^ @graph_style@ - (Optional)
+    , _graphStyle :: TF.Expr s P.Text
+    -- ^ @graph_style@ - (Default @line@)
     --
-    , _left :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _left :: P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text)))
     -- ^ @left@ - (Optional)
     --
-    , _lineStyle :: TF.Attr s P.Text
-    -- ^ @line_style@ - (Optional)
+    , _lineStyle :: TF.Expr s P.Text
+    -- ^ @line_style@ - (Default @stepped@)
     -- How the line should change between point. A string containing either
     -- 'stepped', 'interpolated' or null.
     --
-    , _metric :: TF.Attr s (P.NonEmpty (TF.Attr s (GraphMetric s)))
+    , _metric :: P.Maybe (TF.Expr s (P.NonEmpty (TF.Expr s (GraphMetric s))))
     -- ^ @metric@ - (Optional)
     --
-    , _metricCluster :: TF.Attr s (P.NonEmpty (TF.Attr s (GraphMetricCluster s)))
+    , _metricCluster :: P.Maybe (TF.Expr s (P.NonEmpty (TF.Expr s (GraphMetricCluster s))))
     -- ^ @metric_cluster@ - (Optional)
     --
-    , _name :: TF.Attr s P.Text
+    , _name :: TF.Expr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _notes :: TF.Attr s P.Text
+    , _notes :: P.Maybe (TF.Expr s P.Text)
     -- ^ @notes@ - (Optional)
     --
-    , _right :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _right :: P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text)))
     -- ^ @right@ - (Optional)
     --
-    , _tags :: TF.Attr s [TF.Attr s P.Text]
+    , _tags :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
     -- ^ @tags@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Define a new @circonus_graph@ resource value.
 graphResource
-    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    :: TF.Expr s P.Text -- ^ Lens: 'P.name', Field: '_name', HCL: @name@
     -> P.Resource (GraphResource s)
 graphResource _name =
-    TF.unsafeResource "circonus_graph" TF.validator $
-        GraphResource'
-            { _description = TF.Nil
+    TF.unsafeResource "circonus_graph" P.defaultProvider  TF.encodeLifecycle
+        (\GraphResource'{..} -> P.mconcat
+            [ P.maybe P.mempty (TF.pair "description") _description
+            , TF.pair "graph_style" _graphStyle
+            , P.maybe P.mempty (TF.pair "left") _left
+            , TF.pair "line_style" _lineStyle
+            , P.maybe P.mempty (TF.pair "metric") _metric
+            , P.maybe P.mempty (TF.pair "metric_cluster") _metricCluster
+            , TF.pair "name" _name
+            , P.maybe P.mempty (TF.pair "notes") _notes
+            , P.maybe P.mempty (TF.pair "right") _right
+            , P.maybe P.mempty (TF.pair "tags") _tags
+            ])
+        (GraphResource'
+            { _description = P.Nothing
             , _graphStyle = TF.value "line"
-            , _left = TF.Nil
+            , _left = P.Nothing
             , _lineStyle = TF.value "stepped"
-            , _metric = TF.Nil
-            , _metricCluster = TF.Nil
+            , _metric = P.Nothing
+            , _metricCluster = P.Nothing
             , _name = _name
-            , _notes = TF.Nil
-            , _right = TF.Nil
-            , _tags = TF.Nil
-            }
+            , _notes = P.Nothing
+            , _right = P.Nothing
+            , _tags = P.Nothing
+            })
 
-instance TF.IsObject (GraphResource s) where
-    toObject GraphResource'{..} = P.catMaybes
-        [ TF.assign "description" <$> TF.attribute _description
-        , TF.assign "graph_style" <$> TF.attribute _graphStyle
-        , TF.assign "left" <$> TF.attribute _left
-        , TF.assign "line_style" <$> TF.attribute _lineStyle
-        , TF.assign "metric" <$> TF.attribute _metric
-        , TF.assign "metric_cluster" <$> TF.attribute _metricCluster
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "notes" <$> TF.attribute _notes
-        , TF.assign "right" <$> TF.attribute _right
-        , TF.assign "tags" <$> TF.attribute _tags
-        ]
+instance P.Hashable (GraphResource s)
 
-instance TF.IsValid (GraphResource s) where
+instance TF.HasValidator (GraphResource s) where
     validator = P.mempty
 
-instance P.HasDescription (GraphResource s) (TF.Attr s P.Text) where
+instance P.HasDescription (GraphResource s) (P.Maybe (TF.Expr s P.Text)) where
     description =
-        P.lens (_description :: GraphResource s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a } :: GraphResource s)
+        P.lens (_description :: GraphResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _description = a } :: GraphResource s)
 
-instance P.HasGraphStyle (GraphResource s) (TF.Attr s P.Text) where
+instance P.HasGraphStyle (GraphResource s) (TF.Expr s P.Text) where
     graphStyle =
-        P.lens (_graphStyle :: GraphResource s -> TF.Attr s P.Text)
-               (\s a -> s { _graphStyle = a } :: GraphResource s)
+        P.lens (_graphStyle :: GraphResource s -> TF.Expr s P.Text)
+            (\s a -> s { _graphStyle = a } :: GraphResource s)
 
-instance P.HasLeft (GraphResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+instance P.HasLeft (GraphResource s) (P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text)))) where
     left =
-        P.lens (_left :: GraphResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _left = a } :: GraphResource s)
+        P.lens (_left :: GraphResource s -> P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text))))
+            (\s a -> s { _left = a } :: GraphResource s)
 
-instance P.HasLineStyle (GraphResource s) (TF.Attr s P.Text) where
+instance P.HasLineStyle (GraphResource s) (TF.Expr s P.Text) where
     lineStyle =
-        P.lens (_lineStyle :: GraphResource s -> TF.Attr s P.Text)
-               (\s a -> s { _lineStyle = a } :: GraphResource s)
+        P.lens (_lineStyle :: GraphResource s -> TF.Expr s P.Text)
+            (\s a -> s { _lineStyle = a } :: GraphResource s)
 
-instance P.HasMetric (GraphResource s) (TF.Attr s (P.NonEmpty (TF.Attr s (GraphMetric s)))) where
+instance P.HasMetric (GraphResource s) (P.Maybe (TF.Expr s (P.NonEmpty (TF.Expr s (GraphMetric s))))) where
     metric =
-        P.lens (_metric :: GraphResource s -> TF.Attr s (P.NonEmpty (TF.Attr s (GraphMetric s))))
-               (\s a -> s { _metric = a } :: GraphResource s)
+        P.lens (_metric :: GraphResource s -> P.Maybe (TF.Expr s (P.NonEmpty (TF.Expr s (GraphMetric s)))))
+            (\s a -> s { _metric = a } :: GraphResource s)
 
-instance P.HasMetricCluster (GraphResource s) (TF.Attr s (P.NonEmpty (TF.Attr s (GraphMetricCluster s)))) where
+instance P.HasMetricCluster (GraphResource s) (P.Maybe (TF.Expr s (P.NonEmpty (TF.Expr s (GraphMetricCluster s))))) where
     metricCluster =
-        P.lens (_metricCluster :: GraphResource s -> TF.Attr s (P.NonEmpty (TF.Attr s (GraphMetricCluster s))))
-               (\s a -> s { _metricCluster = a } :: GraphResource s)
+        P.lens (_metricCluster :: GraphResource s -> P.Maybe (TF.Expr s (P.NonEmpty (TF.Expr s (GraphMetricCluster s)))))
+            (\s a -> s { _metricCluster = a } :: GraphResource s)
 
-instance P.HasName (GraphResource s) (TF.Attr s P.Text) where
+instance P.HasName (GraphResource s) (TF.Expr s P.Text) where
     name =
-        P.lens (_name :: GraphResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: GraphResource s)
+        P.lens (_name :: GraphResource s -> TF.Expr s P.Text)
+            (\s a -> s { _name = a } :: GraphResource s)
 
-instance P.HasNotes (GraphResource s) (TF.Attr s P.Text) where
+instance P.HasNotes (GraphResource s) (P.Maybe (TF.Expr s P.Text)) where
     notes =
-        P.lens (_notes :: GraphResource s -> TF.Attr s P.Text)
-               (\s a -> s { _notes = a } :: GraphResource s)
+        P.lens (_notes :: GraphResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _notes = a } :: GraphResource s)
 
-instance P.HasRight (GraphResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+instance P.HasRight (GraphResource s) (P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text)))) where
     right =
-        P.lens (_right :: GraphResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _right = a } :: GraphResource s)
+        P.lens (_right :: GraphResource s -> P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text))))
+            (\s a -> s { _right = a } :: GraphResource s)
 
-instance P.HasTags (GraphResource s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasTags (GraphResource s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
     tags =
-        P.lens (_tags :: GraphResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _tags = a } :: GraphResource s)
+        P.lens (_tags :: GraphResource s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
+            (\s a -> s { _tags = a } :: GraphResource s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (GraphResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (GraphResource s)) (TF.Expr s P.Text) where
+    computedId x =
+        TF.unsafeCompute TF.encodeAttr x "id"
 
 -- | @circonus_metric_cluster@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/circonus/r/metric_cluster.html terraform documentation>
 -- for more information.
 data MetricClusterResource s = MetricClusterResource'
-    { _description :: TF.Attr s P.Text
+    { _description :: P.Maybe (TF.Expr s P.Text)
     -- ^ @description@ - (Optional)
     -- A description of the metric cluster
     --
-    , _name        :: TF.Attr s P.Text
+    , _name :: TF.Expr s P.Text
     -- ^ @name@ - (Required)
     -- The name of the metric cluster
     --
-    , _query       :: TF.Attr s (P.NonEmpty (TF.Attr s (MetricClusterQuery s)))
+    , _query :: P.Maybe (TF.Expr s (P.NonEmpty (TF.Expr s (MetricClusterQuery s))))
     -- ^ @query@ - (Optional)
     -- A metric cluster query definition
     --
-    , _tags        :: TF.Attr s [TF.Attr s P.Text]
+    , _tags :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
     -- ^ @tags@ - (Optional)
     -- A list of tags assigned to the metric cluster
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Define a new @circonus_metric_cluster@ resource value.
 metricClusterResource
-    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    :: TF.Expr s P.Text -- ^ Lens: 'P.name', Field: '_name', HCL: @name@
     -> P.Resource (MetricClusterResource s)
 metricClusterResource _name =
-    TF.unsafeResource "circonus_metric_cluster" TF.validator $
-        MetricClusterResource'
-            { _description = TF.Nil
+    TF.unsafeResource "circonus_metric_cluster" P.defaultProvider  TF.encodeLifecycle
+        (\MetricClusterResource'{..} -> P.mconcat
+            [ P.maybe P.mempty (TF.pair "description") _description
+            , TF.pair "name" _name
+            , P.maybe P.mempty (TF.pair "query") _query
+            , P.maybe P.mempty (TF.pair "tags") _tags
+            ])
+        (MetricClusterResource'
+            { _description = P.Nothing
             , _name = _name
-            , _query = TF.Nil
-            , _tags = TF.Nil
-            }
+            , _query = P.Nothing
+            , _tags = P.Nothing
+            })
 
-instance TF.IsObject (MetricClusterResource s) where
-    toObject MetricClusterResource'{..} = P.catMaybes
-        [ TF.assign "description" <$> TF.attribute _description
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "query" <$> TF.attribute _query
-        , TF.assign "tags" <$> TF.attribute _tags
-        ]
+instance P.Hashable (MetricClusterResource s)
 
-instance TF.IsValid (MetricClusterResource s) where
+instance TF.HasValidator (MetricClusterResource s) where
     validator = P.mempty
 
-instance P.HasDescription (MetricClusterResource s) (TF.Attr s P.Text) where
+instance P.HasDescription (MetricClusterResource s) (P.Maybe (TF.Expr s P.Text)) where
     description =
-        P.lens (_description :: MetricClusterResource s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a } :: MetricClusterResource s)
+        P.lens (_description :: MetricClusterResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _description = a } :: MetricClusterResource s)
 
-instance P.HasName (MetricClusterResource s) (TF.Attr s P.Text) where
+instance P.HasName (MetricClusterResource s) (TF.Expr s P.Text) where
     name =
-        P.lens (_name :: MetricClusterResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: MetricClusterResource s)
+        P.lens (_name :: MetricClusterResource s -> TF.Expr s P.Text)
+            (\s a -> s { _name = a } :: MetricClusterResource s)
 
-instance P.HasQuery (MetricClusterResource s) (TF.Attr s (P.NonEmpty (TF.Attr s (MetricClusterQuery s)))) where
+instance P.HasQuery (MetricClusterResource s) (P.Maybe (TF.Expr s (P.NonEmpty (TF.Expr s (MetricClusterQuery s))))) where
     query =
-        P.lens (_query :: MetricClusterResource s -> TF.Attr s (P.NonEmpty (TF.Attr s (MetricClusterQuery s))))
-               (\s a -> s { _query = a } :: MetricClusterResource s)
+        P.lens (_query :: MetricClusterResource s -> P.Maybe (TF.Expr s (P.NonEmpty (TF.Expr s (MetricClusterQuery s)))))
+            (\s a -> s { _query = a } :: MetricClusterResource s)
 
-instance P.HasTags (MetricClusterResource s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasTags (MetricClusterResource s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
     tags =
-        P.lens (_tags :: MetricClusterResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _tags = a } :: MetricClusterResource s)
+        P.lens (_tags :: MetricClusterResource s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
+            (\s a -> s { _tags = a } :: MetricClusterResource s)
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (MetricClusterResource s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "description"
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (MetricClusterResource s)) (TF.Expr s P.Text) where
+    computedDescription x =
+        TF.unsafeCompute TF.encodeAttr x "description"
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (MetricClusterResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (MetricClusterResource s)) (TF.Expr s P.Text) where
+    computedId x =
+        TF.unsafeCompute TF.encodeAttr x "id"
 
 -- | @circonus_metric@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/circonus/r/metric.html terraform documentation>
 -- for more information.
 data MetricResource s = MetricResource'
-    { _active :: TF.Attr s P.Bool
-    -- ^ @active@ - (Optional)
+    { _active :: TF.Expr s P.Bool
+    -- ^ @active@ - (Default @true@)
     -- Enables or disables the metric
     --
-    , _name   :: TF.Attr s P.Text
+    , _name   :: TF.Expr s P.Text
     -- ^ @name@ - (Required)
     -- Name of the metric
     --
-    , _tags   :: TF.Attr s [TF.Attr s P.Text]
+    , _tags   :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
     -- ^ @tags@ - (Optional)
     -- Tags assigned to the metric
     --
-    , _type'  :: TF.Attr s P.Text
+    , _type'  :: TF.Expr s P.Text
     -- ^ @type@ - (Required)
     -- Type of metric (e.g. numeric, histogram, text)
     --
-    , _unit   :: TF.Attr s P.Text
+    , _unit   :: P.Maybe (TF.Expr s P.Text)
     -- ^ @unit@ - (Optional)
     -- The unit of measurement for a metric
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Define a new @circonus_metric@ resource value.
 metricResource
-    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
-    -> TF.Attr s P.Text -- ^ @type@ ('P._type'', 'P.type'')
+    :: TF.Expr s P.Text -- ^ Lens: 'P.name', Field: '_name', HCL: @name@
+    -> TF.Expr s P.Text -- ^ Lens: 'P.type'', Field: '_type'', HCL: @type@
     -> P.Resource (MetricResource s)
 metricResource _name _type' =
-    TF.unsafeResource "circonus_metric" TF.validator $
-        MetricResource'
+    TF.unsafeResource "circonus_metric" P.defaultProvider  TF.encodeLifecycle
+        (\MetricResource'{..} -> P.mconcat
+            [ TF.pair "active" _active
+            , TF.pair "name" _name
+            , P.maybe P.mempty (TF.pair "tags") _tags
+            , TF.pair "type" _type'
+            , P.maybe P.mempty (TF.pair "unit") _unit
+            ])
+        (MetricResource'
             { _active = TF.value P.True
             , _name = _name
-            , _tags = TF.Nil
+            , _tags = P.Nothing
             , _type' = _type'
-            , _unit = TF.Nil
-            }
+            , _unit = P.Nothing
+            })
 
-instance TF.IsObject (MetricResource s) where
-    toObject MetricResource'{..} = P.catMaybes
-        [ TF.assign "active" <$> TF.attribute _active
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "tags" <$> TF.attribute _tags
-        , TF.assign "type" <$> TF.attribute _type'
-        , TF.assign "unit" <$> TF.attribute _unit
-        ]
+instance P.Hashable (MetricResource s)
 
-instance TF.IsValid (MetricResource s) where
+instance TF.HasValidator (MetricResource s) where
     validator = P.mempty
 
-instance P.HasActive (MetricResource s) (TF.Attr s P.Bool) where
+instance P.HasActive (MetricResource s) (TF.Expr s P.Bool) where
     active =
-        P.lens (_active :: MetricResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _active = a } :: MetricResource s)
+        P.lens (_active :: MetricResource s -> TF.Expr s P.Bool)
+            (\s a -> s { _active = a } :: MetricResource s)
 
-instance P.HasName (MetricResource s) (TF.Attr s P.Text) where
+instance P.HasName (MetricResource s) (TF.Expr s P.Text) where
     name =
-        P.lens (_name :: MetricResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: MetricResource s)
+        P.lens (_name :: MetricResource s -> TF.Expr s P.Text)
+            (\s a -> s { _name = a } :: MetricResource s)
 
-instance P.HasTags (MetricResource s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasTags (MetricResource s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
     tags =
-        P.lens (_tags :: MetricResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _tags = a } :: MetricResource s)
+        P.lens (_tags :: MetricResource s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
+            (\s a -> s { _tags = a } :: MetricResource s)
 
-instance P.HasType' (MetricResource s) (TF.Attr s P.Text) where
+instance P.HasType' (MetricResource s) (TF.Expr s P.Text) where
     type' =
-        P.lens (_type' :: MetricResource s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a } :: MetricResource s)
+        P.lens (_type' :: MetricResource s -> TF.Expr s P.Text)
+            (\s a -> s { _type' = a } :: MetricResource s)
 
-instance P.HasUnit (MetricResource s) (TF.Attr s P.Text) where
+instance P.HasUnit (MetricResource s) (P.Maybe (TF.Expr s P.Text)) where
     unit =
-        P.lens (_unit :: MetricResource s -> TF.Attr s P.Text)
-               (\s a -> s { _unit = a } :: MetricResource s)
+        P.lens (_unit :: MetricResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _unit = a } :: MetricResource s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (MetricResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (MetricResource s)) (TF.Expr s P.Text) where
+    computedId x =
+        TF.unsafeCompute TF.encodeAttr x "id"
 
 -- | @circonus_rule_set@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/circonus/r/rule_set.html terraform documentation>
 -- for more information.
 data RuleSetResource s = RuleSetResource'
-    { _check      :: TF.Attr s P.Text
+    { _check      :: TF.Expr s P.Text
     -- ^ @check@ - (Required, Forces New)
     -- The CID of the check that contains the metric for this rule set
     --
-    , _if'        :: TF.Attr s (P.NonEmpty (TF.Attr s (RuleSetIf s)))
+    , _if'        :: TF.Expr s (P.NonEmpty (TF.Expr s (RuleSetIf s)))
     -- ^ @if@ - (Required)
     -- A rule to execute for this rule set
     --
-    , _link       :: TF.Attr s P.Text
+    , _link       :: P.Maybe (TF.Expr s P.Text)
     -- ^ @link@ - (Optional)
     -- URL to show users when this rule set is active (e.g. wiki)
     --
-    , _metricName :: TF.Attr s P.Text
+    , _metricName :: TF.Expr s P.Text
     -- ^ @metric_name@ - (Required, Forces New)
     -- The name of the metric stream within a check to register the rule set with
     --
-    , _metricType :: TF.Attr s P.Text
-    -- ^ @metric_type@ - (Optional)
+    , _metricType :: TF.Expr s P.Text
+    -- ^ @metric_type@ - (Default @numeric@)
     -- The type of data flowing through the specified metric stream
     --
-    , _notes      :: TF.Attr s P.Text
+    , _notes      :: P.Maybe (TF.Expr s P.Text)
     -- ^ @notes@ - (Optional)
     -- Notes describing this rule set
     --
-    , _parent     :: TF.Attr s P.Text
+    , _parent     :: P.Maybe (TF.Expr s P.Text)
     -- ^ @parent@ - (Optional)
     -- Parent CID that must be healthy for this rule set to be active
     --
-    , _tags       :: TF.Attr s [TF.Attr s P.Text]
+    , _tags       :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
     -- ^ @tags@ - (Optional)
     -- Tags associated with this rule set
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Define a new @circonus_rule_set@ resource value.
 ruleSetResource
-    :: TF.Attr s P.Text -- ^ @check@ ('P._check', 'P.check')
-    -> TF.Attr s (P.NonEmpty (TF.Attr s (RuleSetIf s))) -- ^ @if@ ('P._if'', 'P.if'')
-    -> TF.Attr s P.Text -- ^ @metric_name@ ('P._metricName', 'P.metricName')
+    :: TF.Expr s P.Text -- ^ Lens: 'P.check', Field: '_check', HCL: @check@
+    -> TF.Expr s (P.NonEmpty (TF.Expr s (RuleSetIf s))) -- ^ Lens: 'P.if'', Field: '_if'', HCL: @if@
+    -> TF.Expr s P.Text -- ^ Lens: 'P.metricName', Field: '_metricName', HCL: @metric_name@
     -> P.Resource (RuleSetResource s)
 ruleSetResource _check _if' _metricName =
-    TF.unsafeResource "circonus_rule_set" TF.validator $
-        RuleSetResource'
+    TF.unsafeResource "circonus_rule_set" P.defaultProvider  TF.encodeLifecycle
+        (\RuleSetResource'{..} -> P.mconcat
+            [ TF.pair "check" _check
+            , TF.pair "if" _if'
+            , P.maybe P.mempty (TF.pair "link") _link
+            , TF.pair "metric_name" _metricName
+            , TF.pair "metric_type" _metricType
+            , P.maybe P.mempty (TF.pair "notes") _notes
+            , P.maybe P.mempty (TF.pair "parent") _parent
+            , P.maybe P.mempty (TF.pair "tags") _tags
+            ])
+        (RuleSetResource'
             { _check = _check
             , _if' = _if'
-            , _link = TF.Nil
+            , _link = P.Nothing
             , _metricName = _metricName
             , _metricType = TF.value "numeric"
-            , _notes = TF.Nil
-            , _parent = TF.Nil
-            , _tags = TF.Nil
-            }
+            , _notes = P.Nothing
+            , _parent = P.Nothing
+            , _tags = P.Nothing
+            })
 
-instance TF.IsObject (RuleSetResource s) where
-    toObject RuleSetResource'{..} = P.catMaybes
-        [ TF.assign "check" <$> TF.attribute _check
-        , TF.assign "if" <$> TF.attribute _if'
-        , TF.assign "link" <$> TF.attribute _link
-        , TF.assign "metric_name" <$> TF.attribute _metricName
-        , TF.assign "metric_type" <$> TF.attribute _metricType
-        , TF.assign "notes" <$> TF.attribute _notes
-        , TF.assign "parent" <$> TF.attribute _parent
-        , TF.assign "tags" <$> TF.attribute _tags
-        ]
+instance P.Hashable (RuleSetResource s)
 
-instance TF.IsValid (RuleSetResource s) where
+instance TF.HasValidator (RuleSetResource s) where
     validator = P.mempty
 
-instance P.HasCheck (RuleSetResource s) (TF.Attr s P.Text) where
+instance P.HasCheck (RuleSetResource s) (TF.Expr s P.Text) where
     check =
-        P.lens (_check :: RuleSetResource s -> TF.Attr s P.Text)
-               (\s a -> s { _check = a } :: RuleSetResource s)
+        P.lens (_check :: RuleSetResource s -> TF.Expr s P.Text)
+            (\s a -> s { _check = a } :: RuleSetResource s)
 
-instance P.HasIf' (RuleSetResource s) (TF.Attr s (P.NonEmpty (TF.Attr s (RuleSetIf s)))) where
+instance P.HasIf' (RuleSetResource s) (TF.Expr s (P.NonEmpty (TF.Expr s (RuleSetIf s)))) where
     if' =
-        P.lens (_if' :: RuleSetResource s -> TF.Attr s (P.NonEmpty (TF.Attr s (RuleSetIf s))))
-               (\s a -> s { _if' = a } :: RuleSetResource s)
+        P.lens (_if' :: RuleSetResource s -> TF.Expr s (P.NonEmpty (TF.Expr s (RuleSetIf s))))
+            (\s a -> s { _if' = a } :: RuleSetResource s)
 
-instance P.HasLink (RuleSetResource s) (TF.Attr s P.Text) where
+instance P.HasLink (RuleSetResource s) (P.Maybe (TF.Expr s P.Text)) where
     link =
-        P.lens (_link :: RuleSetResource s -> TF.Attr s P.Text)
-               (\s a -> s { _link = a } :: RuleSetResource s)
+        P.lens (_link :: RuleSetResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _link = a } :: RuleSetResource s)
 
-instance P.HasMetricName (RuleSetResource s) (TF.Attr s P.Text) where
+instance P.HasMetricName (RuleSetResource s) (TF.Expr s P.Text) where
     metricName =
-        P.lens (_metricName :: RuleSetResource s -> TF.Attr s P.Text)
-               (\s a -> s { _metricName = a } :: RuleSetResource s)
+        P.lens (_metricName :: RuleSetResource s -> TF.Expr s P.Text)
+            (\s a -> s { _metricName = a } :: RuleSetResource s)
 
-instance P.HasMetricType (RuleSetResource s) (TF.Attr s P.Text) where
+instance P.HasMetricType (RuleSetResource s) (TF.Expr s P.Text) where
     metricType =
-        P.lens (_metricType :: RuleSetResource s -> TF.Attr s P.Text)
-               (\s a -> s { _metricType = a } :: RuleSetResource s)
+        P.lens (_metricType :: RuleSetResource s -> TF.Expr s P.Text)
+            (\s a -> s { _metricType = a } :: RuleSetResource s)
 
-instance P.HasNotes (RuleSetResource s) (TF.Attr s P.Text) where
+instance P.HasNotes (RuleSetResource s) (P.Maybe (TF.Expr s P.Text)) where
     notes =
-        P.lens (_notes :: RuleSetResource s -> TF.Attr s P.Text)
-               (\s a -> s { _notes = a } :: RuleSetResource s)
+        P.lens (_notes :: RuleSetResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _notes = a } :: RuleSetResource s)
 
-instance P.HasParent (RuleSetResource s) (TF.Attr s P.Text) where
+instance P.HasParent (RuleSetResource s) (P.Maybe (TF.Expr s P.Text)) where
     parent =
-        P.lens (_parent :: RuleSetResource s -> TF.Attr s P.Text)
-               (\s a -> s { _parent = a } :: RuleSetResource s)
+        P.lens (_parent :: RuleSetResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _parent = a } :: RuleSetResource s)
 
-instance P.HasTags (RuleSetResource s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasTags (RuleSetResource s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
     tags =
-        P.lens (_tags :: RuleSetResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _tags = a } :: RuleSetResource s)
+        P.lens (_tags :: RuleSetResource s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
+            (\s a -> s { _tags = a } :: RuleSetResource s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (RuleSetResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (RuleSetResource s)) (TF.Expr s P.Text) where
+    computedId x =
+        TF.unsafeCompute TF.encodeAttr x "id"
 
-instance s ~ s' => P.HasComputedLink (TF.Ref s' (RuleSetResource s)) (TF.Attr s P.Text) where
-    computedLink x = TF.compute (TF.refKey x) "link"
+instance s ~ s' => P.HasComputedLink (TF.Ref s' (RuleSetResource s)) (TF.Expr s P.Text) where
+    computedLink x =
+        TF.unsafeCompute TF.encodeAttr x "link"
 
-instance s ~ s' => P.HasComputedNotes (TF.Ref s' (RuleSetResource s)) (TF.Attr s P.Text) where
-    computedNotes x = TF.compute (TF.refKey x) "notes"
+instance s ~ s' => P.HasComputedNotes (TF.Ref s' (RuleSetResource s)) (TF.Expr s P.Text) where
+    computedNotes x =
+        TF.unsafeCompute TF.encodeAttr x "notes"
 
-instance s ~ s' => P.HasComputedParent (TF.Ref s' (RuleSetResource s)) (TF.Attr s P.Text) where
-    computedParent x = TF.compute (TF.refKey x) "parent"
+instance s ~ s' => P.HasComputedParent (TF.Ref s' (RuleSetResource s)) (TF.Expr s P.Text) where
+    computedParent x =
+        TF.unsafeCompute TF.encodeAttr x "parent"

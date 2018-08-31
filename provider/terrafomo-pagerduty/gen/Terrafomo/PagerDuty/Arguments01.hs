@@ -76,352 +76,353 @@ module Terrafomo.PagerDuty.Arguments01
 import GHC.Base ((.))
 
 import qualified Lens.Micro       as P
+import qualified Terrafomo.Lens   as TF
 import qualified Terrafomo.Schema as TF
 
 class HasAcknowledgementTimeout a b | a -> b where
     acknowledgementTimeout :: P.Lens' a b
 
-instance HasAcknowledgementTimeout a b => HasAcknowledgementTimeout (TF.Schema l p a) b where
+instance HasAcknowledgementTimeout a b => HasAcknowledgementTimeout (TF.Resource l p a) b where
     acknowledgementTimeout = TF.configuration . acknowledgementTimeout
 
 class HasAddress a b | a -> b where
     address :: P.Lens' a b
 
-instance HasAddress a b => HasAddress (TF.Schema l p a) b where
+instance HasAddress a b => HasAddress (TF.Resource l p a) b where
     address = TF.configuration . address
 
 class HasAlertCreation a b | a -> b where
     alertCreation :: P.Lens' a b
 
-instance HasAlertCreation a b => HasAlertCreation (TF.Schema l p a) b where
+instance HasAlertCreation a b => HasAlertCreation (TF.Resource l p a) b where
     alertCreation = TF.configuration . alertCreation
 
 class HasAt a b | a -> b where
     at :: P.Lens' a b
 
-instance HasAt a b => HasAt (TF.Schema l p a) b where
+instance HasAt a b => HasAt (TF.Resource l p a) b where
     at = TF.configuration . at
 
 class HasAutoResolveTimeout a b | a -> b where
     autoResolveTimeout :: P.Lens' a b
 
-instance HasAutoResolveTimeout a b => HasAutoResolveTimeout (TF.Schema l p a) b where
+instance HasAutoResolveTimeout a b => HasAutoResolveTimeout (TF.Resource l p a) b where
     autoResolveTimeout = TF.configuration . autoResolveTimeout
 
 class HasColor a b | a -> b where
     color :: P.Lens' a b
 
-instance HasColor a b => HasColor (TF.Schema l p a) b where
+instance HasColor a b => HasColor (TF.Resource l p a) b where
     color = TF.configuration . color
 
 class HasCountryCode a b | a -> b where
     countryCode :: P.Lens' a b
 
-instance HasCountryCode a b => HasCountryCode (TF.Schema l p a) b where
+instance HasCountryCode a b => HasCountryCode (TF.Resource l p a) b where
     countryCode = TF.configuration . countryCode
 
 class HasDaysOfWeek a b | a -> b where
     daysOfWeek :: P.Lens' a b
 
-instance HasDaysOfWeek a b => HasDaysOfWeek (TF.Schema l p a) b where
+instance HasDaysOfWeek a b => HasDaysOfWeek (TF.Resource l p a) b where
     daysOfWeek = TF.configuration . daysOfWeek
 
 class HasDescription a b | a -> b where
     description :: P.Lens' a b
 
-instance HasDescription a b => HasDescription (TF.Schema l p a) b where
+instance HasDescription a b => HasDescription (TF.Resource l p a) b where
     description = TF.configuration . description
 
 class HasDurationSeconds a b | a -> b where
     durationSeconds :: P.Lens' a b
 
-instance HasDurationSeconds a b => HasDurationSeconds (TF.Schema l p a) b where
+instance HasDurationSeconds a b => HasDurationSeconds (TF.Resource l p a) b where
     durationSeconds = TF.configuration . durationSeconds
 
 class HasDuringSupportHours a b | a -> b where
     duringSupportHours :: P.Lens' a b
 
-instance HasDuringSupportHours a b => HasDuringSupportHours (TF.Schema l p a) b where
+instance HasDuringSupportHours a b => HasDuringSupportHours (TF.Resource l p a) b where
     duringSupportHours = TF.configuration . duringSupportHours
 
 class HasEmail a b | a -> b where
     email :: P.Lens' a b
 
-instance HasEmail a b => HasEmail (TF.Schema l p a) b where
+instance HasEmail a b => HasEmail (TF.Resource l p a) b where
     email = TF.configuration . email
 
 class HasEnd a b | a -> b where
     end :: P.Lens' a b
 
-instance HasEnd a b => HasEnd (TF.Schema l p a) b where
+instance HasEnd a b => HasEnd (TF.Resource l p a) b where
     end = TF.configuration . end
 
 class HasEndTime a b | a -> b where
     endTime :: P.Lens' a b
 
-instance HasEndTime a b => HasEndTime (TF.Schema l p a) b where
+instance HasEndTime a b => HasEndTime (TF.Resource l p a) b where
     endTime = TF.configuration . endTime
 
 class HasEndpointUrl a b | a -> b where
     endpointUrl :: P.Lens' a b
 
-instance HasEndpointUrl a b => HasEndpointUrl (TF.Schema l p a) b where
+instance HasEndpointUrl a b => HasEndpointUrl (TF.Resource l p a) b where
     endpointUrl = TF.configuration . endpointUrl
 
 class HasEscalationDelayInMinutes a b | a -> b where
     escalationDelayInMinutes :: P.Lens' a b
 
-instance HasEscalationDelayInMinutes a b => HasEscalationDelayInMinutes (TF.Schema l p a) b where
+instance HasEscalationDelayInMinutes a b => HasEscalationDelayInMinutes (TF.Resource l p a) b where
     escalationDelayInMinutes = TF.configuration . escalationDelayInMinutes
 
 class HasEscalationPolicy a b | a -> b where
     escalationPolicy :: P.Lens' a b
 
-instance HasEscalationPolicy a b => HasEscalationPolicy (TF.Schema l p a) b where
+instance HasEscalationPolicy a b => HasEscalationPolicy (TF.Resource l p a) b where
     escalationPolicy = TF.configuration . escalationPolicy
 
 class HasExtensionObjects a b | a -> b where
     extensionObjects :: P.Lens' a b
 
-instance HasExtensionObjects a b => HasExtensionObjects (TF.Schema l p a) b where
+instance HasExtensionObjects a b => HasExtensionObjects (TF.Resource l p a) b where
     extensionObjects = TF.configuration . extensionObjects
 
 class HasExtensionSchema a b | a -> b where
     extensionSchema :: P.Lens' a b
 
-instance HasExtensionSchema a b => HasExtensionSchema (TF.Schema l p a) b where
+instance HasExtensionSchema a b => HasExtensionSchema (TF.Resource l p a) b where
     extensionSchema = TF.configuration . extensionSchema
 
 class HasId a b | a -> b where
     id :: P.Lens' a b
 
-instance HasId a b => HasId (TF.Schema l p a) b where
+instance HasId a b => HasId (TF.Resource l p a) b where
     id = TF.configuration . id
 
 class HasIncidentUrgencyRule a b | a -> b where
     incidentUrgencyRule :: P.Lens' a b
 
-instance HasIncidentUrgencyRule a b => HasIncidentUrgencyRule (TF.Schema l p a) b where
+instance HasIncidentUrgencyRule a b => HasIncidentUrgencyRule (TF.Resource l p a) b where
     incidentUrgencyRule = TF.configuration . incidentUrgencyRule
 
 class HasIntegrationEmail a b | a -> b where
     integrationEmail :: P.Lens' a b
 
-instance HasIntegrationEmail a b => HasIntegrationEmail (TF.Schema l p a) b where
+instance HasIntegrationEmail a b => HasIntegrationEmail (TF.Resource l p a) b where
     integrationEmail = TF.configuration . integrationEmail
 
 class HasIntegrationKey a b | a -> b where
     integrationKey :: P.Lens' a b
 
-instance HasIntegrationKey a b => HasIntegrationKey (TF.Schema l p a) b where
+instance HasIntegrationKey a b => HasIntegrationKey (TF.Resource l p a) b where
     integrationKey = TF.configuration . integrationKey
 
 class HasJobTitle a b | a -> b where
     jobTitle :: P.Lens' a b
 
-instance HasJobTitle a b => HasJobTitle (TF.Schema l p a) b where
+instance HasJobTitle a b => HasJobTitle (TF.Resource l p a) b where
     jobTitle = TF.configuration . jobTitle
 
 class HasLabel a b | a -> b where
     label :: P.Lens' a b
 
-instance HasLabel a b => HasLabel (TF.Schema l p a) b where
+instance HasLabel a b => HasLabel (TF.Resource l p a) b where
     label = TF.configuration . label
 
 class HasLayer a b | a -> b where
     layer :: P.Lens' a b
 
-instance HasLayer a b => HasLayer (TF.Schema l p a) b where
+instance HasLayer a b => HasLayer (TF.Resource l p a) b where
     layer = TF.configuration . layer
 
 class HasName a b | a -> b where
     name :: P.Lens' a b
 
-instance HasName a b => HasName (TF.Schema l p a) b where
+instance HasName a b => HasName (TF.Resource l p a) b where
     name = TF.configuration . name
 
 class HasNameRegex a b | a -> b where
     nameRegex :: P.Lens' a b
 
-instance HasNameRegex a b => HasNameRegex (TF.Schema l p a) b where
+instance HasNameRegex a b => HasNameRegex (TF.Resource l p a) b where
     nameRegex = TF.configuration . nameRegex
 
 class HasNumLoops a b | a -> b where
     numLoops :: P.Lens' a b
 
-instance HasNumLoops a b => HasNumLoops (TF.Schema l p a) b where
+instance HasNumLoops a b => HasNumLoops (TF.Resource l p a) b where
     numLoops = TF.configuration . numLoops
 
 class HasOutsideSupportHours a b | a -> b where
     outsideSupportHours :: P.Lens' a b
 
-instance HasOutsideSupportHours a b => HasOutsideSupportHours (TF.Schema l p a) b where
+instance HasOutsideSupportHours a b => HasOutsideSupportHours (TF.Resource l p a) b where
     outsideSupportHours = TF.configuration . outsideSupportHours
 
 class HasOverflow a b | a -> b where
     overflow :: P.Lens' a b
 
-instance HasOverflow a b => HasOverflow (TF.Schema l p a) b where
+instance HasOverflow a b => HasOverflow (TF.Resource l p a) b where
     overflow = TF.configuration . overflow
 
 class HasRestriction a b | a -> b where
     restriction :: P.Lens' a b
 
-instance HasRestriction a b => HasRestriction (TF.Schema l p a) b where
+instance HasRestriction a b => HasRestriction (TF.Resource l p a) b where
     restriction = TF.configuration . restriction
 
 class HasRole a b | a -> b where
     role :: P.Lens' a b
 
-instance HasRole a b => HasRole (TF.Schema l p a) b where
+instance HasRole a b => HasRole (TF.Resource l p a) b where
     role = TF.configuration . role
 
 class HasRotationTurnLengthSeconds a b | a -> b where
     rotationTurnLengthSeconds :: P.Lens' a b
 
-instance HasRotationTurnLengthSeconds a b => HasRotationTurnLengthSeconds (TF.Schema l p a) b where
+instance HasRotationTurnLengthSeconds a b => HasRotationTurnLengthSeconds (TF.Resource l p a) b where
     rotationTurnLengthSeconds = TF.configuration . rotationTurnLengthSeconds
 
 class HasRotationVirtualStart a b | a -> b where
     rotationVirtualStart :: P.Lens' a b
 
-instance HasRotationVirtualStart a b => HasRotationVirtualStart (TF.Schema l p a) b where
+instance HasRotationVirtualStart a b => HasRotationVirtualStart (TF.Resource l p a) b where
     rotationVirtualStart = TF.configuration . rotationVirtualStart
 
 class HasRule a b | a -> b where
     rule :: P.Lens' a b
 
-instance HasRule a b => HasRule (TF.Schema l p a) b where
+instance HasRule a b => HasRule (TF.Resource l p a) b where
     rule = TF.configuration . rule
 
 class HasScheduledActions a b | a -> b where
     scheduledActions :: P.Lens' a b
 
-instance HasScheduledActions a b => HasScheduledActions (TF.Schema l p a) b where
+instance HasScheduledActions a b => HasScheduledActions (TF.Resource l p a) b where
     scheduledActions = TF.configuration . scheduledActions
 
 class HasSendShortEmail a b | a -> b where
     sendShortEmail :: P.Lens' a b
 
-instance HasSendShortEmail a b => HasSendShortEmail (TF.Schema l p a) b where
+instance HasSendShortEmail a b => HasSendShortEmail (TF.Resource l p a) b where
     sendShortEmail = TF.configuration . sendShortEmail
 
 class HasService a b | a -> b where
     service :: P.Lens' a b
 
-instance HasService a b => HasService (TF.Schema l p a) b where
+instance HasService a b => HasService (TF.Resource l p a) b where
     service = TF.configuration . service
 
 class HasServices a b | a -> b where
     services :: P.Lens' a b
 
-instance HasServices a b => HasServices (TF.Schema l p a) b where
+instance HasServices a b => HasServices (TF.Resource l p a) b where
     services = TF.configuration . services
 
 class HasSkipCredentialsValidation a b | a -> b where
     skipCredentialsValidation :: P.Lens' a b
 
-instance HasSkipCredentialsValidation a b => HasSkipCredentialsValidation (TF.Schema l p a) b where
+instance HasSkipCredentialsValidation a b => HasSkipCredentialsValidation (TF.Resource l p a) b where
     skipCredentialsValidation = TF.configuration . skipCredentialsValidation
 
 class HasSrc a b | a -> b where
     src :: P.Lens' a b
 
-instance HasSrc a b => HasSrc (TF.Schema l p a) b where
+instance HasSrc a b => HasSrc (TF.Resource l p a) b where
     src = TF.configuration . src
 
 class HasStart a b | a -> b where
     start :: P.Lens' a b
 
-instance HasStart a b => HasStart (TF.Schema l p a) b where
+instance HasStart a b => HasStart (TF.Resource l p a) b where
     start = TF.configuration . start
 
 class HasStartDayOfWeek a b | a -> b where
     startDayOfWeek :: P.Lens' a b
 
-instance HasStartDayOfWeek a b => HasStartDayOfWeek (TF.Schema l p a) b where
+instance HasStartDayOfWeek a b => HasStartDayOfWeek (TF.Resource l p a) b where
     startDayOfWeek = TF.configuration . startDayOfWeek
 
 class HasStartTime a b | a -> b where
     startTime :: P.Lens' a b
 
-instance HasStartTime a b => HasStartTime (TF.Schema l p a) b where
+instance HasStartTime a b => HasStartTime (TF.Resource l p a) b where
     startTime = TF.configuration . startTime
 
 class HasStartTimeOfDay a b | a -> b where
     startTimeOfDay :: P.Lens' a b
 
-instance HasStartTimeOfDay a b => HasStartTimeOfDay (TF.Schema l p a) b where
+instance HasStartTimeOfDay a b => HasStartTimeOfDay (TF.Resource l p a) b where
     startTimeOfDay = TF.configuration . startTimeOfDay
 
 class HasSupportHours a b | a -> b where
     supportHours :: P.Lens' a b
 
-instance HasSupportHours a b => HasSupportHours (TF.Schema l p a) b where
+instance HasSupportHours a b => HasSupportHours (TF.Resource l p a) b where
     supportHours = TF.configuration . supportHours
 
 class HasTarget a b | a -> b where
     target :: P.Lens' a b
 
-instance HasTarget a b => HasTarget (TF.Schema l p a) b where
+instance HasTarget a b => HasTarget (TF.Resource l p a) b where
     target = TF.configuration . target
 
 class HasTeamId a b | a -> b where
     teamId :: P.Lens' a b
 
-instance HasTeamId a b => HasTeamId (TF.Schema l p a) b where
+instance HasTeamId a b => HasTeamId (TF.Resource l p a) b where
     teamId = TF.configuration . teamId
 
 class HasTeams a b | a -> b where
     teams :: P.Lens' a b
 
-instance HasTeams a b => HasTeams (TF.Schema l p a) b where
+instance HasTeams a b => HasTeams (TF.Resource l p a) b where
     teams = TF.configuration . teams
 
 class HasTimeZone a b | a -> b where
     timeZone :: P.Lens' a b
 
-instance HasTimeZone a b => HasTimeZone (TF.Schema l p a) b where
+instance HasTimeZone a b => HasTimeZone (TF.Resource l p a) b where
     timeZone = TF.configuration . timeZone
 
 class HasToUrgency a b | a -> b where
     toUrgency :: P.Lens' a b
 
-instance HasToUrgency a b => HasToUrgency (TF.Schema l p a) b where
+instance HasToUrgency a b => HasToUrgency (TF.Resource l p a) b where
     toUrgency = TF.configuration . toUrgency
 
 class HasToken a b | a -> b where
     token :: P.Lens' a b
 
-instance HasToken a b => HasToken (TF.Schema l p a) b where
+instance HasToken a b => HasToken (TF.Resource l p a) b where
     token = TF.configuration . token
 
 class HasType' a b | a -> b where
     type' :: P.Lens' a b
 
-instance HasType' a b => HasType' (TF.Schema l p a) b where
+instance HasType' a b => HasType' (TF.Resource l p a) b where
     type' = TF.configuration . type'
 
 class HasUrgency a b | a -> b where
     urgency :: P.Lens' a b
 
-instance HasUrgency a b => HasUrgency (TF.Schema l p a) b where
+instance HasUrgency a b => HasUrgency (TF.Resource l p a) b where
     urgency = TF.configuration . urgency
 
 class HasUserId a b | a -> b where
     userId :: P.Lens' a b
 
-instance HasUserId a b => HasUserId (TF.Schema l p a) b where
+instance HasUserId a b => HasUserId (TF.Resource l p a) b where
     userId = TF.configuration . userId
 
 class HasUsers a b | a -> b where
     users :: P.Lens' a b
 
-instance HasUsers a b => HasUsers (TF.Schema l p a) b where
+instance HasUsers a b => HasUsers (TF.Resource l p a) b where
     users = TF.configuration . users
 
 class HasVendor a b | a -> b where
     vendor :: P.Lens' a b
 
-instance HasVendor a b => HasVendor (TF.Schema l p a) b where
+instance HasVendor a b => HasVendor (TF.Resource l p a) b where
     vendor = TF.configuration . vendor

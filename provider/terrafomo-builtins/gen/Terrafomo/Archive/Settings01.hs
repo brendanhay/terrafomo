@@ -1,7 +1,6 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -27,37 +26,37 @@ import Data.Functor ((<$>))
 
 import GHC.Base (($))
 
-
+import qualified Data.Hashable           as P
+import qualified Data.HashMap.Strict     as P
+import qualified Data.HashMap.Strict     as HashMap
 import qualified Data.List.NonEmpty      as P
-import qualified Data.Map.Strict         as P
-import qualified Data.Map.Strict         as Map
 import qualified Data.Maybe              as P
-import qualified Data.Monoid             as P
-import qualified Data.Text               as P
+import qualified Data.Text.Lazy          as P
 import qualified GHC.Generics            as P
 import qualified Lens.Micro              as P
 import qualified Prelude                 as P
 import qualified Terrafomo.Archive.Lens  as P
 import qualified Terrafomo.Archive.Types as P
-import qualified Terrafomo.Attribute     as TF
+import qualified Terrafomo.Encode        as TF
 import qualified Terrafomo.HCL           as TF
-import qualified Terrafomo.Name          as TF
-import qualified Terrafomo.Validator     as TF
+import qualified Terrafomo.HIL           as TF
+import qualified Terrafomo.Schema        as TF
+import qualified Terrafomo.Validate      as TF
 
 -- | @source@ nested settings.
 data FileSource s = FileSource'
-    { _content  :: TF.Attr s P.Text
+    { _content  :: TF.Expr s P.Text
     -- ^ @content@ - (Required, Forces New)
     --
-    , _filename :: TF.Attr s P.Text
+    , _filename :: TF.Expr s P.Text
     -- ^ @filename@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @source@ settings value.
 newFileSource
-    :: TF.Attr s P.Text -- ^ 'P._content': @content@
-    -> TF.Attr s P.Text -- ^ 'P._filename': @filename@
+    :: TF.Expr s P.Text -- ^ Lens: 'P.content', Field: '_content', HCL: @content@
+    -> TF.Expr s P.Text -- ^ Lens: 'P.filename', Field: '_filename', HCL: @filename@
     -> FileSource s
 newFileSource _content _filename =
     FileSource'
@@ -65,22 +64,23 @@ newFileSource _content _filename =
         , _filename = _filename
         }
 
-instance TF.IsValue  (FileSource s)
-instance TF.IsObject (FileSource s) where
-    toObject FileSource'{..} = P.catMaybes
-        [ TF.assign "content" <$> TF.attribute _content
-        , TF.assign "filename" <$> TF.attribute _filename
+instance TF.ToHCL (FileSource s) where
+     toHCL FileSource'{..} = TF.pairs $ P.mconcat
+        [ TF.pair "content" _content
+        , TF.pair "filename" _filename
         ]
 
-instance TF.IsValid (FileSource s) where
+instance P.Hashable (FileSource s)
+
+instance TF.HasValidator (FileSource s) where
     validator = P.mempty
 
-instance P.HasContent (FileSource s) (TF.Attr s P.Text) where
+instance P.HasContent (FileSource s) (TF.Expr s P.Text) where
     content =
-        P.lens (_content :: FileSource s -> TF.Attr s P.Text)
-               (\s a -> s { _content = a } :: FileSource s)
+        P.lens (_content :: FileSource s -> TF.Expr s P.Text)
+            (\s a -> s { _content = a } :: FileSource s)
 
-instance P.HasFilename (FileSource s) (TF.Attr s P.Text) where
+instance P.HasFilename (FileSource s) (TF.Expr s P.Text) where
     filename =
-        P.lens (_filename :: FileSource s -> TF.Attr s P.Text)
-               (\s a -> s { _filename = a } :: FileSource s)
+        P.lens (_filename :: FileSource s -> TF.Expr s P.Text)
+            (\s a -> s { _filename = a } :: FileSource s)

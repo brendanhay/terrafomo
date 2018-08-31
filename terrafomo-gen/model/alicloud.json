@@ -1,5 +1,6 @@
 {
   "name": "alicloud",
+  "version": "1.12.0-1-gaa5ba51",
   "schemas": [
     {
       "name": "access_key",
@@ -8444,7 +8445,7 @@
           "sensitive": false,
           "minItems": 0,
           "maxItems": 0,
-          "default": "tf-lb-20180825183614011700000001"
+          "default": "tf-lb-20180826104050244800000001"
         },
         {
           "name": "specification",

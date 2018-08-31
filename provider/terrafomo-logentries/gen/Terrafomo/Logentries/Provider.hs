@@ -1,7 +1,6 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -18,8 +17,9 @@
 module Terrafomo.Logentries.Provider
     (
     -- * Logentries Provider Datatype
-      Provider (..)
+      Logentries (..)
     , newProvider
+    , defaultProvider
 
     -- * Logentries Specific Aliases
     , DataSource
@@ -34,59 +34,72 @@ import GHC.Base (($))
 
 import Terrafomo.Logentries.Settings
 
+import qualified Data.Hashable              as P
+import qualified Data.HashMap.Strict        as P
 import qualified Data.List.NonEmpty         as P
-import qualified Data.Map.Strict            as P
-import qualified Data.Map.Strict            as Map
 import qualified Data.Maybe                 as P
-import qualified Data.Monoid                as P
-import qualified Data.Text                  as P
+import qualified Data.Text.Lazy             as P
 import qualified GHC.Generics               as P
 import qualified Lens.Micro                 as P
 import qualified Prelude                    as P
 import qualified Terrafomo.HCL              as TF
-import qualified Terrafomo.Lifecycle        as TF
 import qualified Terrafomo.Logentries.Lens  as P
 import qualified Terrafomo.Logentries.Types as P
-import qualified Terrafomo.Name             as TF
-import qualified Terrafomo.Provider         as TF
 import qualified Terrafomo.Schema           as TF
-import qualified Terrafomo.Validator        as TF
 
-type DataSource a = TF.Schema ()               Provider a
-type Resource   a = TF.Schema (TF.Lifecycle a) Provider a
+type DataSource a = TF.Resource Logentries ()               a
+type Resource   a = TF.Resource Logentries (TF.Lifecycle a) a
 
 -- | The @logentries@ Terraform provider configuration.
 --
 -- See the <https://www.terraform.io/docs/providers/logentries/index.html terraform documentation>
 -- for more information.
-data Provider = Provider'
+data Logentries = Logentries'
     { _accountKey :: P.Text
     -- ^ @account_key@ - (Required)
     -- The Log Entries account key.
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
+instance P.Hashable (Logentries)
+
+-- | Specify a new Logentries provider configuration.
 newProvider
-    :: P.Text -- ^ @account_key@ ('P._accountKey', 'P.accountKey')
-    -> Provider
+    :: P.Text -- ^ Lens: 'P.accountKey', Field: '_accountKey', HCL: @account_key@
+    -> Logentries
 newProvider _accountKey =
-    Provider'
+    Logentries'
         { _accountKey = _accountKey
         }
 
-instance TF.IsProvider Provider where
-    type ProviderType Provider = "logentries"
+{- | The 'Logentries' provider with absent configuration that is used
+to instantiate new 'Resource's and 'DataSource's. Provider configuration can be
+overridden on a per-resource basis by using the 'Terrafomo.provider' lens, the
+'newProvider' constructor, and any of the applicable lenses.
 
-instance TF.IsObject Provider where
-    toObject Provider'{..} =
-        P.catMaybes
-            [ P.Just $ TF.assign "account_key" _accountKey
-            ]
+For example:
 
-instance TF.IsValid (Provider) where
-    validator = P.mempty
+@
+import qualified Terrafomo as TF
+import qualified Terrafomo.Logentries.Provider as Logentries
 
-instance P.HasAccountKey (Provider) (P.Text) where
+TF.newExampleResource "foo"
+    & TF.provider ?~
+          Logentries.(newProvider
+              -- Required arguments
+              _accountKey -- (Required) 'P.Text'
+              -- Lenses
+              & Logentries.accountKey .~ _accountKey -- 'P.Text'
+@
+-}
+defaultProvider :: TF.Provider Logentries
+defaultProvider =
+    TF.defaultProvider "logentries" (P.Just "~> 1.0")
+        (\Logentries'{..} -> P.mconcat
+            [ TF.pair "account_key" _accountKey
+            ])
+
+instance P.HasAccountKey (Logentries) (P.Text) where
     accountKey =
-        P.lens (_accountKey :: Provider -> P.Text)
-               (\s a -> s { _accountKey = a } :: Provider)
+        P.lens (_accountKey :: Logentries -> P.Text)
+            (\s a -> s { _accountKey = a } :: Logentries)

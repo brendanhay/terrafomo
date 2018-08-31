@@ -1,14 +1,12 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 {% include "_include/license.ede" %}
---
 module {{ namespace }}
     (
     {% for setting in settings %}
@@ -23,18 +21,15 @@ import Data.Functor ((<$>))
 
 import GHC.Base (($))
 
-{% for import in unqualified %}
-import {{ import.value }}
-{% endfor %}
-
 {% for import in qualified %}
 import qualified {{ import.value }} as P
 {% endfor %}
-import qualified Data.Map.Strict as Map
-import qualified Terrafomo.Attribute as TF
+import qualified Data.HashMap.Strict as HashMap
+import qualified Terrafomo.Encode as TF
 import qualified Terrafomo.HCL as TF
-import qualified Terrafomo.Name as TF
-import qualified Terrafomo.Validator as TF
+import qualified Terrafomo.HIL as TF
+import qualified Terrafomo.Schema as TF
+import qualified Terrafomo.Validate as TF
 {% for setting in settings %}
 
 -- | @{{ setting.value.original }}@ nested settings.
@@ -44,7 +39,7 @@ data {{ setting.value.type }} = {{ setting.value.con.name }}
 -- | Construct a new @{{ setting.value.original }}@ settings value.
 {{ setting.value.con.smart }}
   {% for param in setting.value.parameters %}
-    {% if param.first %}::{% else %}->{% endif %} {{ param.value.type }} -- ^ 'P.{{ param.value.name }}': @{{ param.value.original }}@{% if param.last %}
+    {% if param.first %}::{% else %}->{% endif %} {{ param.value.type }} -- ^ Lens: 'P.{{ param.value.method }}', Field: '{{ param.value.name }}', HCL: @{{ param.value.original }}@{% if param.last %}
     -> {{ setting.value.type }}{% endif %}
   {% else %}
     :: {{ setting.value.type }}
@@ -56,15 +51,16 @@ data {{ setting.value.type }} = {{ setting.value.con.name }}
         }{% endif %}
       {% endfor %}
 
-instance TF.IsValue  ({{ setting.value.type }})
-instance TF.IsObject ({{ setting.value.type }}) where
+instance TF.ToHCL ({{ setting.value.type }}) where
   {% for field in setting.value.arguments %}
-    {% if field.first %}toObject {{ setting.value.con.name }}{..} = P.catMaybes
+    {% if field.first %} toHCL {{ setting.value.con.name }}{..} = TF.pairs $ P.mconcat
         [{% else %}    ,{% endif %} {{ field.value.encoder }} {{ field.value.name }}{% if field.last %}
         ]{% endif %}
   {% else %}
-    toObject {{ setting.value.name }}' = []
+    toHCL {{ setting.value.con.name }} = P.mempty
   {% endfor %}
+
+instance P.Hashable ({{ setting.value.type }})
 
 {% include "_include/validator.ede" with schema = setting.value %}
 {% include "_include/lenses.ede" with schema = setting.value %}

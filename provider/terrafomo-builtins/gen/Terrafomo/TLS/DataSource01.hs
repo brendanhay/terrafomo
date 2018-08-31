@@ -1,7 +1,6 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -29,66 +28,70 @@ import GHC.Base (($))
 
 import Terrafomo.TLS.Settings
 
+import qualified Data.Hashable          as P
+import qualified Data.HashMap.Strict    as P
+import qualified Data.HashMap.Strict    as HashMap
 import qualified Data.List.NonEmpty     as P
-import qualified Data.Map.Strict        as P
-import qualified Data.Map.Strict        as Map
 import qualified Data.Maybe             as P
-import qualified Data.Monoid            as P
-import qualified Data.Text              as P
+import qualified Data.Text.Lazy         as P
 import qualified GHC.Generics           as P
 import qualified Lens.Micro             as P
 import qualified Prelude                as P
-import qualified Terrafomo.Attribute    as TF
+import qualified Terrafomo.Encode       as TF
 import qualified Terrafomo.HCL          as TF
-import qualified Terrafomo.Name         as TF
+import qualified Terrafomo.HIL          as TF
 import qualified Terrafomo.Schema       as TF
 import qualified Terrafomo.TLS.Lens     as P
 import qualified Terrafomo.TLS.Provider as P
 import qualified Terrafomo.TLS.Types    as P
-import qualified Terrafomo.Validator    as TF
+import qualified Terrafomo.Validate     as TF
 
 -- | @tls_public_key@ DataSource.
 --
 -- See the <https://www.terraform.io/docs/providers/tls/d/public_key.html terraform documentation>
 -- for more information.
 data PublicKeyData s = PublicKeyData'
-    { _privateKeyPem :: TF.Attr s P.Text
+    { _privateKeyPem :: TF.Expr s P.Text
     -- ^ @private_key_pem@ - (Required)
     -- PEM formatted string to use as the private key
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Define a new @tls_public_key@ datasource value.
 publicKeyData
-    :: TF.Attr s P.Text -- ^ @private_key_pem@ ('P._privateKeyPem', 'P.privateKeyPem')
+    :: TF.Expr s P.Text -- ^ Lens: 'P.privateKeyPem', Field: '_privateKeyPem', HCL: @private_key_pem@
     -> P.DataSource (PublicKeyData s)
 publicKeyData _privateKeyPem =
-    TF.unsafeDataSource "tls_public_key" TF.validator $
-        PublicKeyData'
+    TF.unsafeDataSource "tls_public_key" P.defaultProvider
+        (\PublicKeyData'{..} -> P.mconcat
+            [ TF.pair "private_key_pem" _privateKeyPem
+            ])
+        (PublicKeyData'
             { _privateKeyPem = _privateKeyPem
-            }
+            })
 
-instance TF.IsObject (PublicKeyData s) where
-    toObject PublicKeyData'{..} = P.catMaybes
-        [ TF.assign "private_key_pem" <$> TF.attribute _privateKeyPem
-        ]
+instance P.Hashable (PublicKeyData s)
 
-instance TF.IsValid (PublicKeyData s) where
+instance TF.HasValidator (PublicKeyData s) where
     validator = P.mempty
 
-instance P.HasPrivateKeyPem (PublicKeyData s) (TF.Attr s P.Text) where
+instance P.HasPrivateKeyPem (PublicKeyData s) (TF.Expr s P.Text) where
     privateKeyPem =
-        P.lens (_privateKeyPem :: PublicKeyData s -> TF.Attr s P.Text)
-               (\s a -> s { _privateKeyPem = a } :: PublicKeyData s)
+        P.lens (_privateKeyPem :: PublicKeyData s -> TF.Expr s P.Text)
+            (\s a -> s { _privateKeyPem = a } :: PublicKeyData s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (PublicKeyData s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (PublicKeyData s)) (TF.Expr s P.Text) where
+    computedId x =
+        TF.unsafeCompute TF.encodeAttr x "id"
 
-instance s ~ s' => P.HasComputedAlgorithm (TF.Ref s' (PublicKeyData s)) (TF.Attr s P.Text) where
-    computedAlgorithm x = TF.compute (TF.refKey x) "algorithm"
+instance s ~ s' => P.HasComputedAlgorithm (TF.Ref s' (PublicKeyData s)) (TF.Expr s P.Text) where
+    computedAlgorithm x =
+        TF.unsafeCompute TF.encodeAttr x "algorithm"
 
-instance s ~ s' => P.HasComputedPublicKeyOpenssh (TF.Ref s' (PublicKeyData s)) (TF.Attr s P.Text) where
-    computedPublicKeyOpenssh x = TF.compute (TF.refKey x) "public_key_openssh"
+instance s ~ s' => P.HasComputedPublicKeyOpenssh (TF.Ref s' (PublicKeyData s)) (TF.Expr s P.Text) where
+    computedPublicKeyOpenssh x =
+        TF.unsafeCompute TF.encodeAttr x "public_key_openssh"
 
-instance s ~ s' => P.HasComputedPublicKeyPem (TF.Ref s' (PublicKeyData s)) (TF.Attr s P.Text) where
-    computedPublicKeyPem x = TF.compute (TF.refKey x) "public_key_pem"
+instance s ~ s' => P.HasComputedPublicKeyPem (TF.Ref s' (PublicKeyData s)) (TF.Expr s P.Text) where
+    computedPublicKeyPem x =
+        TF.unsafeCompute TF.encodeAttr x "public_key_pem"

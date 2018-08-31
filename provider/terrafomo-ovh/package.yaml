@@ -8,12 +8,12 @@ name: terrafomo-ovh
 <<: *extensions
 
 dependencies:
-  - aeson
   - base
-  - containers
+  - hashable
   - microlens
   - terrafomo
   - text
+  - unordered-containers
 
 library:
   source-dirs:
@@ -30,5 +30,4 @@ library:
     - Terrafomo.OVH.Types
 
   reexported-modules: >
-    terrafomo:Terrafomo,
-    terrafomo:Terrafomo.Format
+    terrafomo:Terrafomo

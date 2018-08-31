@@ -1,7 +1,6 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -45,277 +44,282 @@ import GHC.Base (($))
 
 import Terrafomo.ProfitBricks.Settings
 
+import qualified Data.Hashable                   as P
+import qualified Data.HashMap.Strict             as P
+import qualified Data.HashMap.Strict             as HashMap
 import qualified Data.List.NonEmpty              as P
-import qualified Data.Map.Strict                 as P
-import qualified Data.Map.Strict                 as Map
 import qualified Data.Maybe                      as P
-import qualified Data.Monoid                     as P
-import qualified Data.Text                       as P
+import qualified Data.Text.Lazy                  as P
 import qualified GHC.Generics                    as P
 import qualified Lens.Micro                      as P
 import qualified Prelude                         as P
-import qualified Terrafomo.Attribute             as TF
+import qualified Terrafomo.Encode                as TF
 import qualified Terrafomo.HCL                   as TF
-import qualified Terrafomo.Name                  as TF
+import qualified Terrafomo.HIL                   as TF
 import qualified Terrafomo.ProfitBricks.Lens     as P
 import qualified Terrafomo.ProfitBricks.Provider as P
 import qualified Terrafomo.ProfitBricks.Types    as P
 import qualified Terrafomo.Schema                as TF
-import qualified Terrafomo.Validator             as TF
+import qualified Terrafomo.Validate              as TF
 
 -- | @profitbricks_datacenter@ DataSource.
 --
 -- See the <https://www.terraform.io/docs/providers/profitbricks/d/datacenter.html terraform documentation>
 -- for more information.
 data DatacenterData s = DatacenterData'
-    { _location :: TF.Attr s P.Text
+    { _location :: P.Maybe (TF.Expr s P.Text)
     -- ^ @location@ - (Optional)
     --
-    , _name     :: TF.Attr s P.Text
+    , _name     :: TF.Expr s P.Text
     -- ^ @name@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Define a new @profitbricks_datacenter@ datasource value.
 datacenterData
-    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    :: TF.Expr s P.Text -- ^ Lens: 'P.name', Field: '_name', HCL: @name@
     -> P.DataSource (DatacenterData s)
 datacenterData _name =
-    TF.unsafeDataSource "profitbricks_datacenter" TF.validator $
-        DatacenterData'
-            { _location = TF.Nil
+    TF.unsafeDataSource "profitbricks_datacenter" P.defaultProvider
+        (\DatacenterData'{..} -> P.mconcat
+            [ P.maybe P.mempty (TF.pair "location") _location
+            , TF.pair "name" _name
+            ])
+        (DatacenterData'
+            { _location = P.Nothing
             , _name = _name
-            }
+            })
 
-instance TF.IsObject (DatacenterData s) where
-    toObject DatacenterData'{..} = P.catMaybes
-        [ TF.assign "location" <$> TF.attribute _location
-        , TF.assign "name" <$> TF.attribute _name
-        ]
+instance P.Hashable (DatacenterData s)
 
-instance TF.IsValid (DatacenterData s) where
+instance TF.HasValidator (DatacenterData s) where
     validator = P.mempty
 
-instance P.HasLocation (DatacenterData s) (TF.Attr s P.Text) where
+instance P.HasLocation (DatacenterData s) (P.Maybe (TF.Expr s P.Text)) where
     location =
-        P.lens (_location :: DatacenterData s -> TF.Attr s P.Text)
-               (\s a -> s { _location = a } :: DatacenterData s)
+        P.lens (_location :: DatacenterData s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _location = a } :: DatacenterData s)
 
-instance P.HasName (DatacenterData s) (TF.Attr s P.Text) where
+instance P.HasName (DatacenterData s) (TF.Expr s P.Text) where
     name =
-        P.lens (_name :: DatacenterData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: DatacenterData s)
+        P.lens (_name :: DatacenterData s -> TF.Expr s P.Text)
+            (\s a -> s { _name = a } :: DatacenterData s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (DatacenterData s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DatacenterData s)) (TF.Expr s P.Text) where
+    computedId x =
+        TF.unsafeCompute TF.encodeAttr x "id"
 
 -- | @profitbricks_image@ DataSource.
 --
 -- See the <https://www.terraform.io/docs/providers/profitbricks/d/image.html terraform documentation>
 -- for more information.
 data ImageData s = ImageData'
-    { _location :: TF.Attr s P.Text
+    { _location :: P.Maybe (TF.Expr s P.Text)
     -- ^ @location@ - (Optional)
     --
-    , _name     :: TF.Attr s P.Text
+    , _name     :: P.Maybe (TF.Expr s P.Text)
     -- ^ @name@ - (Optional)
     --
-    , _type'    :: TF.Attr s P.Text
+    , _type'    :: P.Maybe (TF.Expr s P.Text)
     -- ^ @type@ - (Optional)
     --
-    , _version  :: TF.Attr s P.Text
+    , _version  :: P.Maybe (TF.Expr s P.Text)
     -- ^ @version@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Define a new @profitbricks_image@ datasource value.
 imageData
     :: P.DataSource (ImageData s)
 imageData =
-    TF.unsafeDataSource "profitbricks_image" TF.validator $
-        ImageData'
-            { _location = TF.Nil
-            , _name = TF.Nil
-            , _type' = TF.Nil
-            , _version = TF.Nil
-            }
+    TF.unsafeDataSource "profitbricks_image" P.defaultProvider
+        (\ImageData'{..} -> P.mconcat
+            [ P.maybe P.mempty (TF.pair "location") _location
+            , P.maybe P.mempty (TF.pair "name") _name
+            , P.maybe P.mempty (TF.pair "type") _type'
+            , P.maybe P.mempty (TF.pair "version") _version
+            ])
+        (ImageData'
+            { _location = P.Nothing
+            , _name = P.Nothing
+            , _type' = P.Nothing
+            , _version = P.Nothing
+            })
 
-instance TF.IsObject (ImageData s) where
-    toObject ImageData'{..} = P.catMaybes
-        [ TF.assign "location" <$> TF.attribute _location
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "type" <$> TF.attribute _type'
-        , TF.assign "version" <$> TF.attribute _version
-        ]
+instance P.Hashable (ImageData s)
 
-instance TF.IsValid (ImageData s) where
+instance TF.HasValidator (ImageData s) where
     validator = P.mempty
 
-instance P.HasLocation (ImageData s) (TF.Attr s P.Text) where
+instance P.HasLocation (ImageData s) (P.Maybe (TF.Expr s P.Text)) where
     location =
-        P.lens (_location :: ImageData s -> TF.Attr s P.Text)
-               (\s a -> s { _location = a } :: ImageData s)
+        P.lens (_location :: ImageData s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _location = a } :: ImageData s)
 
-instance P.HasName (ImageData s) (TF.Attr s P.Text) where
+instance P.HasName (ImageData s) (P.Maybe (TF.Expr s P.Text)) where
     name =
-        P.lens (_name :: ImageData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: ImageData s)
+        P.lens (_name :: ImageData s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _name = a } :: ImageData s)
 
-instance P.HasType' (ImageData s) (TF.Attr s P.Text) where
+instance P.HasType' (ImageData s) (P.Maybe (TF.Expr s P.Text)) where
     type' =
-        P.lens (_type' :: ImageData s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a } :: ImageData s)
+        P.lens (_type' :: ImageData s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _type' = a } :: ImageData s)
 
-instance P.HasVersion (ImageData s) (TF.Attr s P.Text) where
+instance P.HasVersion (ImageData s) (P.Maybe (TF.Expr s P.Text)) where
     version =
-        P.lens (_version :: ImageData s -> TF.Attr s P.Text)
-               (\s a -> s { _version = a } :: ImageData s)
+        P.lens (_version :: ImageData s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _version = a } :: ImageData s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (ImageData s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ImageData s)) (TF.Expr s P.Text) where
+    computedId x =
+        TF.unsafeCompute TF.encodeAttr x "id"
 
 -- | @profitbricks_location@ DataSource.
 --
 -- See the <https://www.terraform.io/docs/providers/profitbricks/d/location.html terraform documentation>
 -- for more information.
 data LocationData s = LocationData'
-    { _feature :: TF.Attr s P.Text
+    { _feature :: P.Maybe (TF.Expr s P.Text)
     -- ^ @feature@ - (Optional)
     --
-    , _name    :: TF.Attr s P.Text
+    , _name    :: P.Maybe (TF.Expr s P.Text)
     -- ^ @name@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Define a new @profitbricks_location@ datasource value.
 locationData
     :: P.DataSource (LocationData s)
 locationData =
-    TF.unsafeDataSource "profitbricks_location" TF.validator $
-        LocationData'
-            { _feature = TF.Nil
-            , _name = TF.Nil
-            }
+    TF.unsafeDataSource "profitbricks_location" P.defaultProvider
+        (\LocationData'{..} -> P.mconcat
+            [ P.maybe P.mempty (TF.pair "feature") _feature
+            , P.maybe P.mempty (TF.pair "name") _name
+            ])
+        (LocationData'
+            { _feature = P.Nothing
+            , _name = P.Nothing
+            })
 
-instance TF.IsObject (LocationData s) where
-    toObject LocationData'{..} = P.catMaybes
-        [ TF.assign "feature" <$> TF.attribute _feature
-        , TF.assign "name" <$> TF.attribute _name
-        ]
+instance P.Hashable (LocationData s)
 
-instance TF.IsValid (LocationData s) where
+instance TF.HasValidator (LocationData s) where
     validator = P.mempty
 
-instance P.HasFeature (LocationData s) (TF.Attr s P.Text) where
+instance P.HasFeature (LocationData s) (P.Maybe (TF.Expr s P.Text)) where
     feature =
-        P.lens (_feature :: LocationData s -> TF.Attr s P.Text)
-               (\s a -> s { _feature = a } :: LocationData s)
+        P.lens (_feature :: LocationData s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _feature = a } :: LocationData s)
 
-instance P.HasName (LocationData s) (TF.Attr s P.Text) where
+instance P.HasName (LocationData s) (P.Maybe (TF.Expr s P.Text)) where
     name =
-        P.lens (_name :: LocationData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: LocationData s)
+        P.lens (_name :: LocationData s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _name = a } :: LocationData s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (LocationData s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (LocationData s)) (TF.Expr s P.Text) where
+    computedId x =
+        TF.unsafeCompute TF.encodeAttr x "id"
 
 -- | @profitbricks_resource@ DataSource.
 --
 -- See the <https://www.terraform.io/docs/providers/profitbricks/d/resource.html terraform documentation>
 -- for more information.
 data ResourceData s = ResourceData'
-    { _resourceId   :: TF.Attr s P.Text
+    { _resourceId   :: P.Maybe (TF.Expr s P.Text)
     -- ^ @resource_id@ - (Optional)
     --
-    , _resourceType :: TF.Attr s P.Text
+    , _resourceType :: P.Maybe (TF.Expr s P.Text)
     -- ^ @resource_type@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Define a new @profitbricks_resource@ datasource value.
 resourceData
     :: P.DataSource (ResourceData s)
 resourceData =
-    TF.unsafeDataSource "profitbricks_resource" TF.validator $
-        ResourceData'
-            { _resourceId = TF.Nil
-            , _resourceType = TF.Nil
-            }
+    TF.unsafeDataSource "profitbricks_resource" P.defaultProvider
+        (\ResourceData'{..} -> P.mconcat
+            [ P.maybe P.mempty (TF.pair "resource_id") _resourceId
+            , P.maybe P.mempty (TF.pair "resource_type") _resourceType
+            ])
+        (ResourceData'
+            { _resourceId = P.Nothing
+            , _resourceType = P.Nothing
+            })
 
-instance TF.IsObject (ResourceData s) where
-    toObject ResourceData'{..} = P.catMaybes
-        [ TF.assign "resource_id" <$> TF.attribute _resourceId
-        , TF.assign "resource_type" <$> TF.attribute _resourceType
-        ]
+instance P.Hashable (ResourceData s)
 
-instance TF.IsValid (ResourceData s) where
+instance TF.HasValidator (ResourceData s) where
     validator = P.mempty
 
-instance P.HasResourceId (ResourceData s) (TF.Attr s P.Text) where
+instance P.HasResourceId (ResourceData s) (P.Maybe (TF.Expr s P.Text)) where
     resourceId =
-        P.lens (_resourceId :: ResourceData s -> TF.Attr s P.Text)
-               (\s a -> s { _resourceId = a } :: ResourceData s)
+        P.lens (_resourceId :: ResourceData s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _resourceId = a } :: ResourceData s)
 
-instance P.HasResourceType (ResourceData s) (TF.Attr s P.Text) where
+instance P.HasResourceType (ResourceData s) (P.Maybe (TF.Expr s P.Text)) where
     resourceType =
-        P.lens (_resourceType :: ResourceData s -> TF.Attr s P.Text)
-               (\s a -> s { _resourceType = a } :: ResourceData s)
+        P.lens (_resourceType :: ResourceData s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _resourceType = a } :: ResourceData s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourceData s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ResourceData s)) (TF.Expr s P.Text) where
+    computedId x =
+        TF.unsafeCompute TF.encodeAttr x "id"
 
 -- | @profitbricks_snapshot@ DataSource.
 --
 -- See the <https://www.terraform.io/docs/providers/profitbricks/d/snapshot.html terraform documentation>
 -- for more information.
 data SnapshotData s = SnapshotData'
-    { _location :: TF.Attr s P.Text
+    { _location :: P.Maybe (TF.Expr s P.Text)
     -- ^ @location@ - (Optional)
     --
-    , _name     :: TF.Attr s P.Text
+    , _name     :: TF.Expr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _size     :: TF.Attr s P.Int
+    , _size     :: P.Maybe (TF.Expr s P.Int)
     -- ^ @size@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Define a new @profitbricks_snapshot@ datasource value.
 snapshotData
-    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    :: TF.Expr s P.Text -- ^ Lens: 'P.name', Field: '_name', HCL: @name@
     -> P.DataSource (SnapshotData s)
 snapshotData _name =
-    TF.unsafeDataSource "profitbricks_snapshot" TF.validator $
-        SnapshotData'
-            { _location = TF.Nil
+    TF.unsafeDataSource "profitbricks_snapshot" P.defaultProvider
+        (\SnapshotData'{..} -> P.mconcat
+            [ P.maybe P.mempty (TF.pair "location") _location
+            , TF.pair "name" _name
+            , P.maybe P.mempty (TF.pair "size") _size
+            ])
+        (SnapshotData'
+            { _location = P.Nothing
             , _name = _name
-            , _size = TF.Nil
-            }
+            , _size = P.Nothing
+            })
 
-instance TF.IsObject (SnapshotData s) where
-    toObject SnapshotData'{..} = P.catMaybes
-        [ TF.assign "location" <$> TF.attribute _location
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "size" <$> TF.attribute _size
-        ]
+instance P.Hashable (SnapshotData s)
 
-instance TF.IsValid (SnapshotData s) where
+instance TF.HasValidator (SnapshotData s) where
     validator = P.mempty
 
-instance P.HasLocation (SnapshotData s) (TF.Attr s P.Text) where
+instance P.HasLocation (SnapshotData s) (P.Maybe (TF.Expr s P.Text)) where
     location =
-        P.lens (_location :: SnapshotData s -> TF.Attr s P.Text)
-               (\s a -> s { _location = a } :: SnapshotData s)
+        P.lens (_location :: SnapshotData s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _location = a } :: SnapshotData s)
 
-instance P.HasName (SnapshotData s) (TF.Attr s P.Text) where
+instance P.HasName (SnapshotData s) (TF.Expr s P.Text) where
     name =
-        P.lens (_name :: SnapshotData s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: SnapshotData s)
+        P.lens (_name :: SnapshotData s -> TF.Expr s P.Text)
+            (\s a -> s { _name = a } :: SnapshotData s)
 
-instance P.HasSize (SnapshotData s) (TF.Attr s P.Int) where
+instance P.HasSize (SnapshotData s) (P.Maybe (TF.Expr s P.Int)) where
     size =
-        P.lens (_size :: SnapshotData s -> TF.Attr s P.Int)
-               (\s a -> s { _size = a } :: SnapshotData s)
+        P.lens (_size :: SnapshotData s -> P.Maybe (TF.Expr s P.Int))
+            (\s a -> s { _size = a } :: SnapshotData s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (SnapshotData s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SnapshotData s)) (TF.Expr s P.Text) where
+    computedId x =
+        TF.unsafeCompute TF.encodeAttr x "id"

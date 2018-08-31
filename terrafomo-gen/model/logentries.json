@@ -1,5 +1,6 @@
 {
   "name": "logentries",
+  "version": "1.0.0-4-g2e826de",
   "schemas": [
     {
       "name": "account_key",

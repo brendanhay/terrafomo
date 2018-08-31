@@ -1,5 +1,6 @@
 {
   "name": "opc",
+  "version": "1.2.1-1-g67c5202",
   "schemas": [
     {
       "name": "endpoint",

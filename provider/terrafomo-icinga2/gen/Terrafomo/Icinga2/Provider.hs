@@ -1,7 +1,6 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -18,8 +17,9 @@
 module Terrafomo.Icinga2.Provider
     (
     -- * Icinga2 Provider Datatype
-      Provider (..)
+      Icinga2 (..)
     , newProvider
+    , defaultProvider
 
     -- * Icinga2 Specific Aliases
     , DataSource
@@ -34,32 +34,27 @@ import GHC.Base (($))
 
 import Terrafomo.Icinga2.Settings
 
+import qualified Data.Hashable           as P
+import qualified Data.HashMap.Strict     as P
 import qualified Data.List.NonEmpty      as P
-import qualified Data.Map.Strict         as P
-import qualified Data.Map.Strict         as Map
 import qualified Data.Maybe              as P
-import qualified Data.Monoid             as P
-import qualified Data.Text               as P
+import qualified Data.Text.Lazy          as P
 import qualified GHC.Generics            as P
 import qualified Lens.Micro              as P
 import qualified Prelude                 as P
 import qualified Terrafomo.HCL           as TF
 import qualified Terrafomo.Icinga2.Lens  as P
 import qualified Terrafomo.Icinga2.Types as P
-import qualified Terrafomo.Lifecycle     as TF
-import qualified Terrafomo.Name          as TF
-import qualified Terrafomo.Provider      as TF
 import qualified Terrafomo.Schema        as TF
-import qualified Terrafomo.Validator     as TF
 
-type DataSource a = TF.Schema ()               Provider a
-type Resource   a = TF.Schema (TF.Lifecycle a) Provider a
+type DataSource a = TF.Resource Icinga2 ()               a
+type Resource   a = TF.Resource Icinga2 (TF.Lifecycle a) a
 
 -- | The @icinga2@ Terraform provider configuration.
 --
 -- See the <https://www.terraform.io/docs/providers/icinga2/index.html terraform documentation>
 -- for more information.
-data Provider = Provider'
+data Icinga2 = Icinga2'
     { _apiPassword           :: P.Text
     -- ^ @api_password@ - (Required)
     -- The password for authenticating to the Icinga2 server.
@@ -76,52 +71,75 @@ data Provider = Provider'
     -- ^ @insecure_skip_tls_verify@ - (Optional)
     -- Disable TLS verify when connecting to Icinga2 Server
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
+instance P.Hashable (Icinga2)
+
+-- | Specify a new Icinga2 provider configuration.
 newProvider
-    :: P.Text -- ^ @api_password@ ('P._apiPassword', 'P.apiPassword')
-    -> P.Text -- ^ @api_url@ ('P._apiUrl', 'P.apiUrl')
-    -> P.Text -- ^ @api_user@ ('P._apiUser', 'P.apiUser')
-    -> Provider
+    :: P.Text -- ^ Lens: 'P.apiPassword', Field: '_apiPassword', HCL: @api_password@
+    -> P.Text -- ^ Lens: 'P.apiUrl', Field: '_apiUrl', HCL: @api_url@
+    -> P.Text -- ^ Lens: 'P.apiUser', Field: '_apiUser', HCL: @api_user@
+    -> Icinga2
 newProvider _apiPassword _apiUrl _apiUser =
-    Provider'
+    Icinga2'
         { _apiPassword = _apiPassword
         , _apiUrl = _apiUrl
         , _apiUser = _apiUser
         , _insecureSkipTlsVerify = P.Nothing
         }
 
-instance TF.IsProvider Provider where
-    type ProviderType Provider = "icinga2"
+{- | The 'Icinga2' provider with absent configuration that is used
+to instantiate new 'Resource's and 'DataSource's. Provider configuration can be
+overridden on a per-resource basis by using the 'Terrafomo.provider' lens, the
+'newProvider' constructor, and any of the applicable lenses.
 
-instance TF.IsObject Provider where
-    toObject Provider'{..} =
-        P.catMaybes
-            [ P.Just $ TF.assign "api_password" _apiPassword
-            , P.Just $ TF.assign "api_url" _apiUrl
-            , P.Just $ TF.assign "api_user" _apiUser
-            , TF.assign "insecure_skip_tls_verify" <$> _insecureSkipTlsVerify
-            ]
+For example:
 
-instance TF.IsValid (Provider) where
-    validator = P.mempty
+@
+import qualified Terrafomo as TF
+import qualified Terrafomo.Icinga2.Provider as Icinga2
 
-instance P.HasApiPassword (Provider) (P.Text) where
+TF.newExampleResource "foo"
+    & TF.provider ?~
+          Icinga2.(newProvider
+              -- Required arguments
+              _apiPassword -- (Required) 'P.Text'
+              _apiUrl -- (Required) 'P.Text'
+              _apiUser -- (Required) 'P.Text'
+              -- Lenses
+              & Icinga2.apiPassword .~ _apiPassword -- 'P.Text'
+              & Icinga2.apiUrl .~ _apiUrl -- 'P.Text'
+              & Icinga2.apiUser .~ _apiUser -- 'P.Text'
+              & Icinga2.insecureSkipTlsVerify .~ Nothing -- 'P.Maybe P.Bool'
+@
+-}
+defaultProvider :: TF.Provider Icinga2
+defaultProvider =
+    TF.defaultProvider "icinga2" (P.Just "~> 0.1")
+        (\Icinga2'{..} -> P.mconcat
+            [ TF.pair "api_password" _apiPassword
+            , TF.pair "api_url" _apiUrl
+            , TF.pair "api_user" _apiUser
+            , P.maybe P.mempty (TF.pair "insecure_skip_tls_verify") _insecureSkipTlsVerify
+            ])
+
+instance P.HasApiPassword (Icinga2) (P.Text) where
     apiPassword =
-        P.lens (_apiPassword :: Provider -> P.Text)
-               (\s a -> s { _apiPassword = a } :: Provider)
+        P.lens (_apiPassword :: Icinga2 -> P.Text)
+            (\s a -> s { _apiPassword = a } :: Icinga2)
 
-instance P.HasApiUrl (Provider) (P.Text) where
+instance P.HasApiUrl (Icinga2) (P.Text) where
     apiUrl =
-        P.lens (_apiUrl :: Provider -> P.Text)
-               (\s a -> s { _apiUrl = a } :: Provider)
+        P.lens (_apiUrl :: Icinga2 -> P.Text)
+            (\s a -> s { _apiUrl = a } :: Icinga2)
 
-instance P.HasApiUser (Provider) (P.Text) where
+instance P.HasApiUser (Icinga2) (P.Text) where
     apiUser =
-        P.lens (_apiUser :: Provider -> P.Text)
-               (\s a -> s { _apiUser = a } :: Provider)
+        P.lens (_apiUser :: Icinga2 -> P.Text)
+            (\s a -> s { _apiUser = a } :: Icinga2)
 
-instance P.HasInsecureSkipTlsVerify (Provider) (P.Maybe P.Bool) where
+instance P.HasInsecureSkipTlsVerify (Icinga2) (P.Maybe P.Bool) where
     insecureSkipTlsVerify =
-        P.lens (_insecureSkipTlsVerify :: Provider -> P.Maybe P.Bool)
-               (\s a -> s { _insecureSkipTlsVerify = a } :: Provider)
+        P.lens (_insecureSkipTlsVerify :: Icinga2 -> P.Maybe P.Bool)
+            (\s a -> s { _insecureSkipTlsVerify = a } :: Icinga2)

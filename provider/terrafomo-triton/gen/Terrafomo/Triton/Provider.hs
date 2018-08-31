@@ -1,7 +1,6 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -18,8 +17,9 @@
 module Terrafomo.Triton.Provider
     (
     -- * Triton Provider Datatype
-      Provider (..)
+      Triton (..)
     , newProvider
+    , defaultProvider
 
     -- * Triton Specific Aliases
     , DataSource
@@ -34,32 +34,27 @@ import GHC.Base (($))
 
 import Terrafomo.Triton.Settings
 
+import qualified Data.Hashable          as P
+import qualified Data.HashMap.Strict    as P
 import qualified Data.List.NonEmpty     as P
-import qualified Data.Map.Strict        as P
-import qualified Data.Map.Strict        as Map
 import qualified Data.Maybe             as P
-import qualified Data.Monoid            as P
-import qualified Data.Text              as P
+import qualified Data.Text.Lazy         as P
 import qualified GHC.Generics           as P
 import qualified Lens.Micro             as P
 import qualified Prelude                as P
 import qualified Terrafomo.HCL          as TF
-import qualified Terrafomo.Lifecycle    as TF
-import qualified Terrafomo.Name         as TF
-import qualified Terrafomo.Provider     as TF
 import qualified Terrafomo.Schema       as TF
 import qualified Terrafomo.Triton.Lens  as P
 import qualified Terrafomo.Triton.Types as P
-import qualified Terrafomo.Validator    as TF
 
-type DataSource a = TF.Schema ()               Provider a
-type Resource   a = TF.Schema (TF.Lifecycle a) Provider a
+type DataSource a = TF.Resource Triton ()               a
+type Resource   a = TF.Resource Triton (TF.Lifecycle a) a
 
 -- | The @triton@ Terraform provider configuration.
 --
 -- See the <https://www.terraform.io/docs/providers/triton/index.html terraform documentation>
 -- for more information.
-data Provider = Provider'
+data Triton = Triton'
     { _account               :: P.Text
     -- ^ @account@ - (Required)
     --
@@ -78,16 +73,19 @@ data Provider = Provider'
     , _user                  :: P.Text
     -- ^ @user@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
+instance P.Hashable (Triton)
+
+-- | Specify a new Triton provider configuration.
 newProvider
-    :: P.Text -- ^ @account@ ('P._account', 'P.account')
-    -> P.Text -- ^ @key_id@ ('P._keyId', 'P.keyId')
-    -> P.Text -- ^ @url@ ('P._url', 'P.url')
-    -> P.Text -- ^ @user@ ('P._user', 'P.user')
-    -> Provider
+    :: P.Text -- ^ Lens: 'P.account', Field: '_account', HCL: @account@
+    -> P.Text -- ^ Lens: 'P.keyId', Field: '_keyId', HCL: @key_id@
+    -> P.Text -- ^ Lens: 'P.url', Field: '_url', HCL: @url@
+    -> P.Text -- ^ Lens: 'P.user', Field: '_user', HCL: @user@
+    -> Triton
 newProvider _account _keyId _url _user =
-    Provider'
+    Triton'
         { _account = _account
         , _insecureSkipTlsVerify = P.Nothing
         , _keyId = _keyId
@@ -96,49 +94,72 @@ newProvider _account _keyId _url _user =
         , _user = _user
         }
 
-instance TF.IsProvider Provider where
-    type ProviderType Provider = "triton"
+{- | The 'Triton' provider with absent configuration that is used
+to instantiate new 'Resource's and 'DataSource's. Provider configuration can be
+overridden on a per-resource basis by using the 'Terrafomo.provider' lens, the
+'newProvider' constructor, and any of the applicable lenses.
 
-instance TF.IsObject Provider where
-    toObject Provider'{..} =
-        P.catMaybes
-            [ P.Just $ TF.assign "account" _account
-            , TF.assign "insecure_skip_tls_verify" <$> _insecureSkipTlsVerify
-            , P.Just $ TF.assign "key_id" _keyId
-            , TF.assign "key_material" <$> _keyMaterial
-            , P.Just $ TF.assign "url" _url
-            , P.Just $ TF.assign "user" _user
-            ]
+For example:
 
-instance TF.IsValid (Provider) where
-    validator = P.mempty
+@
+import qualified Terrafomo as TF
+import qualified Terrafomo.Triton.Provider as Triton
 
-instance P.HasAccount (Provider) (P.Text) where
+TF.newExampleResource "foo"
+    & TF.provider ?~
+          Triton.(newProvider
+              -- Required arguments
+              _account -- (Required) 'P.Text'
+              _keyId -- (Required) 'P.Text'
+              _url -- (Required) 'P.Text'
+              _user -- (Required) 'P.Text'
+              -- Lenses
+              & Triton.account .~ _account -- 'P.Text'
+              & Triton.insecureSkipTlsVerify .~ Nothing -- 'P.Maybe P.Bool'
+              & Triton.keyId .~ _keyId -- 'P.Text'
+              & Triton.keyMaterial .~ Nothing -- 'P.Maybe P.Text'
+              & Triton.url .~ _url -- 'P.Text'
+              & Triton.user .~ _user -- 'P.Text'
+@
+-}
+defaultProvider :: TF.Provider Triton
+defaultProvider =
+    TF.defaultProvider "triton" (P.Just "~> 0.5")
+        (\Triton'{..} -> P.mconcat
+            [ TF.pair "account" _account
+            , P.maybe P.mempty (TF.pair "insecure_skip_tls_verify") _insecureSkipTlsVerify
+            , TF.pair "key_id" _keyId
+            , P.maybe P.mempty (TF.pair "key_material") _keyMaterial
+            , TF.pair "url" _url
+            , TF.pair "user" _user
+            ])
+
+instance P.HasAccount (Triton) (P.Text) where
     account =
-        P.lens (_account :: Provider -> P.Text)
-               (\s a -> s { _account = a } :: Provider)
+        P.lens (_account :: Triton -> P.Text)
+            (\s a -> s { _account = a } :: Triton)
 
-instance P.HasInsecureSkipTlsVerify (Provider) (P.Maybe P.Bool) where
+instance P.HasInsecureSkipTlsVerify (Triton) (P.Maybe P.Bool) where
     insecureSkipTlsVerify =
-        P.lens (_insecureSkipTlsVerify :: Provider -> P.Maybe P.Bool)
-               (\s a -> s { _insecureSkipTlsVerify = a } :: Provider)
+        P.lens (_insecureSkipTlsVerify :: Triton -> P.Maybe P.Bool)
+            (\s a -> s { _insecureSkipTlsVerify = a } :: Triton)
 
-instance P.HasKeyId (Provider) (P.Text) where
+instance P.HasKeyId (Triton) (P.Text) where
     keyId =
-        P.lens (_keyId :: Provider -> P.Text)
-               (\s a -> s { _keyId = a } :: Provider)
+        P.lens (_keyId :: Triton -> P.Text)
+            (\s a -> s { _keyId = a } :: Triton)
 
-instance P.HasKeyMaterial (Provider) (P.Maybe P.Text) where
+instance P.HasKeyMaterial (Triton) (P.Maybe P.Text) where
     keyMaterial =
-        P.lens (_keyMaterial :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _keyMaterial = a } :: Provider)
+        P.lens (_keyMaterial :: Triton -> P.Maybe P.Text)
+            (\s a -> s { _keyMaterial = a } :: Triton)
 
-instance P.HasUrl (Provider) (P.Text) where
+instance P.HasUrl (Triton) (P.Text) where
     url =
-        P.lens (_url :: Provider -> P.Text)
-               (\s a -> s { _url = a } :: Provider)
+        P.lens (_url :: Triton -> P.Text)
+            (\s a -> s { _url = a } :: Triton)
 
-instance P.HasUser (Provider) (P.Text) where
+instance P.HasUser (Triton) (P.Text) where
     user =
-        P.lens (_user :: Provider -> P.Text)
-               (\s a -> s { _user = a } :: Provider)
+        P.lens (_user :: Triton -> P.Text)
+            (\s a -> s { _user = a } :: Triton)

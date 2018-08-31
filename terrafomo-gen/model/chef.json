@@ -1,5 +1,6 @@
 {
   "name": "chef",
+  "version": "0.1.0-21-g61b906f",
   "schemas": [
     {
       "name": "allow_unverified_ssl",

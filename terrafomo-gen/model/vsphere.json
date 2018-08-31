@@ -1,5 +1,6 @@
 {
   "name": "vsphere",
+  "version": "1.6.0-38-g8a73b0e",
   "schemas": [
     {
       "name": "allow_unverified_ssl",

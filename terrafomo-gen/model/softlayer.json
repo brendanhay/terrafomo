@@ -1,5 +1,6 @@
 {
   "name": "softlayer",
+  "version": "0.0.1-15-ge8ee70f",
   "schemas": [
     {
       "name": "api_key",

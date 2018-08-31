@@ -1,5 +1,6 @@
 {
   "name": "mysql",
+  "version": "1.1.0-4-g7234a32",
   "schemas": [
     {
       "name": "endpoint",

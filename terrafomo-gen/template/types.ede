@@ -1,7 +1,6 @@
 -- This module was auto-generated. If it is modified, it will not be overwritten.
 
 {% include "_include/license.ede" %}
---
 module {{ namespace }} where
 
 -- import Data.Text (Text)
@@ -13,8 +12,4 @@ module {{ namespace }} where
 {% for import in unqualified %}
 -- import {{ import.value }}
 {% endfor %}
--- import qualified Terrafomo.Attribute as TF
--- import qualified Terrafomo.HCL as TF
--- import qualified Terrafomo.Name as TF
--- import qualified Terrafomo.Provider as TF
 -- import qualified Terrafomo.Schema as TF

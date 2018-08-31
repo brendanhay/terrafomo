@@ -20,7 +20,8 @@ import Data.Traversable (for)
 
 import Terrafomo.Gen.Config
 import Terrafomo.Gen.Haskell
-import Terrafomo.Gen.Name    (ConName, DataName, Key, LabelName, VarName)
+import Terrafomo.Gen.Name    (ConName, DataName, Key, LabelName, ProviderName,
+                              VarName)
 import Terrafomo.Gen.Type    (Type)
 
 import Text.Show.Pretty (ppShow)
@@ -34,13 +35,12 @@ import qualified Data.Map.Strict            as Map
 import qualified Data.Set                   as Set
 import qualified Data.Text                  as Text
 import qualified Data.Text.Read             as Text
+import qualified Data.Version               as Version
 import qualified Terrafomo.Gen.Diff         as Diff
 import qualified Terrafomo.Gen.Go           as Go
 import qualified Terrafomo.Gen.Name         as Name
 import qualified Terrafomo.Gen.Type         as Type
 import qualified Terrafomo.Gen.URL          as URL
-
-import Debug.Trace (trace)
 
 data Env = Env
     { _config :: !Config
@@ -74,7 +74,7 @@ run cfg provider =
                            (Go.resourceName x) (Go.resourceSchemas x)
 
                schema      <-
-                    elabSettings "provider"
+                    elabProvider (configProviderName cfg) original
                         (Go.providerSchemas provider)
 
                Result
@@ -85,10 +85,16 @@ run cfg provider =
                let settings =
                        Map.elems (Map.delete (schemaName (fromSettings schema)) _settings)
 
+               let version = Version.makeVersion
+                           . take 2
+                           . Version.versionBranch
+                           $ Go.providerVersion provider
+
                validate provider $ Provider'
                    { providerName         = configProviderName cfg
                    , providerPackage      = configPackage      cfg
                    , providerDependencies = configDependencies cfg
+                   , providerVersion      = version
                    , providerOriginal     = original
                    , providerUrl          = URL.provider original
                    , providerResources    = resources
@@ -140,6 +146,10 @@ elabDataSource provider original schemas =
         x <- elabSchema original (Name.dataSourceNames original) schemas
         Resource' (URL.datasource provider original)
             <$> elabIdAttribute x
+
+elabProvider :: ProviderName -> Text -> [Go.Schema] -> Elab Settings
+elabProvider provider original schemas =
+    Settings' <$> elabSchema original (Name.providerNames provider) schemas
 
 elabSettings :: Text -> [Go.Schema] -> Elab Settings
 elabSettings original schemas = do
@@ -242,12 +252,12 @@ elabSchema
     -> Elab (Schema Conflict)
 elabSchema original (data_, con, smart) schemas =
     descend original $ do
+        cfg    <- Reader.asks _config
         key    <- getCurrentKey
         thread <- isThreaded
         args   <- elabArguments  schemas
-        attrs  <- elabAttributes schemas
+        attrs  <- elabExpributes schemas
         typ    <- elabData data_
-        cfg    <- Reader.asks _config
 
         pure $! overrideSchema (configOverrides cfg)
               $ Schema'
@@ -263,7 +273,7 @@ elabSchema original (data_, con, smart) schemas =
 
 elabArguments :: [Go.Schema] -> Elab [Field Conflict]
 elabArguments =
-    let unAttribute x =
+  let unAttribute x =
             x { Go.schemaComputed = False
               }
      in fmap applyConflicts
@@ -271,8 +281,8 @@ elabArguments =
       . filter Go.schemaArgument
       . filter (isNothing . Go.schemaDeprecated)
 
-elabAttributes :: [Go.Schema] -> Elab [Field LabelName]
-elabAttributes =
+elabExpributes :: [Go.Schema] -> Elab [Field LabelName]
+elabExpributes =
     let unArgument x =
            x { Go.schemaRequired = False
              , Go.schemaOptional = False
@@ -315,37 +325,36 @@ elabIdAttribute schema =
                     { schemaAttributes = field : attrs
                     }
 
-elabType :: Go.Schema -> Elab (Type, Maybe ConName)
+elabType :: Go.Schema -> Elab Type
 elabType schema
     | Just x <- Go.schemaSchema schema =
         fmap fieldType (elabField x)
-            >>= fmap (,Nothing) . elabAttr
+            >>= elabExpr
 
     | Just x <- Go.schemaResource schema =
         fmap (schemaType . fromSettings)
-                 (elabSettings (Go.resourceName x) (Go.resourceSchemas x))
-            >>= fmap (,Nothing) . elabAttr
+             (elabSettings (Go.resourceName x) (Go.resourceSchemas x))
+            >>= elabExpr
 
     -- | Go.schemaArgument schema
     --     || Go.schemaPrimitive schema == Just True =
     | otherwise =
-             fmap (,Nothing) $
-                 case Go.schemaType schema of
-                     Go.TypeString -> elabAttr Type.Text
-                     Go.TypeInt    -> elabAttr Type.Integer
-                     Go.TypeFloat  -> elabAttr Type.Double
-                     Go.TypeBool   -> elabAttr Type.Bool
-                     typ           ->
-                         Except.throwError $
-                             unlines [ "Unable to elaborate primitive from "
-                                    ++ show typ
-                                     , ppShow schema
-                                     ]
+         case Go.schemaType schema of
+             Go.TypeString -> elabExpr Type.Text
+             Go.TypeInt    -> elabExpr Type.Integer
+             Go.TypeFloat  -> elabExpr Type.Double
+             Go.TypeBool   -> elabExpr Type.Bool
+             typ           ->
+                 Except.throwError $
+                     unlines [ "Unable to elaborate primitive from "
+                            ++ show typ
+                             , ppShow schema
+                             ]
 
     -- | otherwise = do
     --     prim <- elabPrim schema
     --     (, Just . conName . schemaCon $ primitiveSchema prim)
-    --         <$> elabAttr (schemaType (primitiveSchema prim))
+    --         <$> elabExpr (schemaType (primitiveSchema prim))
 
 elabField :: Go.Schema -> Elab (Field LabelName)
 elabField schema = do
@@ -359,24 +368,22 @@ elabField schema = do
     let primitive =
             fromMaybe False (Go.schemaPrimitive schema)
 
-        optional  =
-            case default_ of
-                DefaultNil{}
-                    | primitive  -> id
-                    | not thread -> Type.typeMaybe
-                _                -> id
+        required
+            | Go.schemaComputed schema   = id
+            | default_ /= DefaultNothing = id
+            | otherwise                  = Type.typeMaybe
 
         repeated
             | Go.schemaMaxItems schema == 1 = id
             | Go.schemaMinItems schema > 0  = Type.typeList1
             | otherwise                     = Type.typeList
 
-    (typ, typDefault) <-
+    typ <-
         case Go.schemaType schema of
             Go.TypeString -> elabType schema
             Go.TypeInt    -> elabType schema
             Go.TypeFloat  -> elabType schema
-            Go.TypeBool   -> (,Nothing) <$> elabAttr Type.Bool
+            Go.TypeBool   -> elabExpr Type.Bool
 
             _ | primitive ->
                   Except.throwError $
@@ -384,23 +391,18 @@ elabField schema = do
                           ++ ppShow schema
 
             Go.TypeSet    -> do
-                (s, d) <- elabType schema
+                s <- elabType schema
                 if Go.schemaMaxItems schema == 1
-                    then pure (s, d)
-                    else (,d) <$> elabAttr (repeated s)
+                    then pure s
+                    else elabExpr (repeated s)
 
-            Go.TypeList   -> do
-                (s, d) <- elabType schema
-
-                if original == "logging"
-                    then (,d) <$> elabAttr (trace (ppShow (repeated s)) (repeated s))
-                    else (,d) <$> elabAttr (repeated s)
+            Go.TypeList   ->
+                elabType schema
+                    >>= elabExpr . repeated
 
             Go.TypeMap    ->
-                    (do (s, d) <- elabType schema
-                        (,d) <$> elabAttr (Type.typeMap s))
-                <|> (elabAttr Type.Text
-                        >>= fmap (,Nothing) . elabAttr . Type.typeMap)
+                (elabType schema <|> elabExpr Type.Text)
+                    >>= elabExpr . Type.typeMap
 
     pure $! Field'
         { fieldName      = label
@@ -408,14 +410,13 @@ elabField schema = do
         , fieldHelp      = newHelp (Go.schemaDescription schema)
         , fieldClass     = class_
         , fieldMethod    = method
-        , fieldType      = optional typ
+        , fieldType      = required typ
         , fieldThreaded  = thread
-        , fieldOptional  = Go.schemaOptional schema
         , fieldRequired  = Go.schemaRequired schema
         , fieldComputed  = Go.schemaComputed schema
         , fieldForceNew  = Go.schemaForceNew schema
-        , fieldDefault   =
-            maybe default_ (`DefaultPrim` default_) typDefault
+        , fieldDefault   = default_
+        , fieldDefaults  = Go.schemaDefault schema
         , fieldConflicts =
             Set.map Name.conflictName (Go.schemaConflictsWith schema)
         }
@@ -430,11 +431,10 @@ elabDefault label schema = do
         >>= pure . go thread (Go.schemaRequired schema)
   where
     go thread required = \case
-        Just x  | thread    -> DefaultAttr x
+        Just x  | thread    -> DefaultExpr x
                 | otherwise -> x
         Nothing | required  -> DefaultParam label
-                | thread    -> DefaultNil "TF.Nil"
-                | otherwise -> DefaultNil "P.Nothing"
+                | otherwise -> DefaultNothing
 
     parseType value =
         case Go.schemaType schema of
@@ -473,7 +473,7 @@ elabDefault label schema = do
 
 -- Overrides
 
-overrideSchema :: Map DataName (Map VarName Text) -> Schema a -> Schema a
+overrideSchema :: Overrides -> Schema a -> Schema a
 overrideSchema m x =
     case Map.lookup (schemaName x) m of
         Nothing -> x
@@ -482,15 +482,22 @@ overrideSchema m x =
             , schemaAttributes = overrideFields n (schemaAttributes x)
             }
 
-overrideFields :: Map VarName Text -> [Field a] -> [Field a]
+overrideFields :: Map VarName Override -> [Field a] -> [Field a]
 overrideFields m = map field
   where
     field x =
-        case Map.lookup (fieldMethod x) m of
-            Nothing  -> x
-            Just typ -> x
-                { fieldType = Type.Free typ
-                }
+        x { fieldType =
+              case Map.lookup (fieldMethod x) m of
+                  Nothing              -> fieldType x
+                  Just (Verbatim free) -> Type.Free free
+                  Just (Leaf     name) -> replace ("P." <> name) (fieldType x)
+          }
+
+    replace name = \case
+        Type.Free   _ -> Type.Free name
+        Type.Data t _ -> Type.Data t (Name.Name name)
+        Type.Expr x   -> Type.Expr   (replace name x)
+        Type.App  a b -> Type.App  a (replace name b)
 
 -- Conflicts
 
@@ -532,12 +539,12 @@ conflictIndex conflicts mk xs =
 
 -- Types + State Threading
 
-elabAttr :: Type -> Elab Type
-elabAttr = \case
-    x@Type.Attr{} -> pure x
+elabExpr :: Type -> Elab Type
+elabExpr = \case
+    x@Type.Expr{} -> pure (Type.reduce x)
     x             ->
-        isThreaded >>= pure . \case
-            True  -> Type.Attr x
+        isThreaded >>= pure . Type.reduce . \case
+            True  -> Type.Expr x
             False -> x
 
 elabData :: DataName -> Elab Type
@@ -547,6 +554,10 @@ elabData x =
 isThreaded :: Elab Bool
 isThreaded =
     Reader.asks _thread
+
+-- withoutThreaded :: Elab a -> Elab a
+-- withoutThreaded =
+--     Reader.local (\env -> env { _thread = False })
 
 withThreaded :: Elab a -> Elab a
 withThreaded =

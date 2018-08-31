@@ -7,7 +7,7 @@ import Data.Maybe    (isJust)
 import Data.Text     (Text)
 
 import Terrafomo.Gen.Haskell (Con, Conflict, Field, Schema, Settings)
-import Terrafomo.Gen.Name    (DataName, Key (Key), LabelName)
+import Terrafomo.Gen.Name    (DataName, Key, LabelName)
 import Terrafomo.Gen.Type    (Type)
 
 import qualified Data.List             as List

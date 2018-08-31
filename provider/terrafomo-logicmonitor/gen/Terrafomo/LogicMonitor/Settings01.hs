@@ -1,7 +1,6 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -31,137 +30,139 @@ import Data.Functor ((<$>))
 
 import GHC.Base (($))
 
-
+import qualified Data.Hashable                as P
+import qualified Data.HashMap.Strict          as P
+import qualified Data.HashMap.Strict          as HashMap
 import qualified Data.List.NonEmpty           as P
-import qualified Data.Map.Strict              as P
-import qualified Data.Map.Strict              as Map
 import qualified Data.Maybe                   as P
-import qualified Data.Monoid                  as P
-import qualified Data.Text                    as P
+import qualified Data.Text.Lazy               as P
 import qualified GHC.Generics                 as P
 import qualified Lens.Micro                   as P
 import qualified Prelude                      as P
-import qualified Terrafomo.Attribute          as TF
+import qualified Terrafomo.Encode             as TF
 import qualified Terrafomo.HCL                as TF
+import qualified Terrafomo.HIL                as TF
 import qualified Terrafomo.LogicMonitor.Lens  as P
 import qualified Terrafomo.LogicMonitor.Types as P
-import qualified Terrafomo.Name               as TF
-import qualified Terrafomo.Validator          as TF
+import qualified Terrafomo.Schema             as TF
+import qualified Terrafomo.Validate           as TF
 
 -- | @filters@ nested settings.
 data CollectorsFilters s = CollectorsFilters'
-    { _operator :: TF.Attr s P.Text
+    { _operator :: P.Maybe (TF.Expr s P.Text)
     -- ^ @operator@ - (Optional)
     --
-    , _property :: TF.Attr s P.Text
+    , _property :: P.Maybe (TF.Expr s P.Text)
     -- ^ @property@ - (Optional)
     --
-    , _value    :: TF.Attr s P.Text
+    , _value    :: P.Maybe (TF.Expr s P.Text)
     -- ^ @value@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @filters@ settings value.
 newCollectorsFilters
     :: CollectorsFilters s
 newCollectorsFilters =
     CollectorsFilters'
-        { _operator = TF.Nil
-        , _property = TF.Nil
-        , _value = TF.Nil
+        { _operator = P.Nothing
+        , _property = P.Nothing
+        , _value = P.Nothing
         }
 
-instance TF.IsValue  (CollectorsFilters s)
-instance TF.IsObject (CollectorsFilters s) where
-    toObject CollectorsFilters'{..} = P.catMaybes
-        [ TF.assign "operator" <$> TF.attribute _operator
-        , TF.assign "property" <$> TF.attribute _property
-        , TF.assign "value" <$> TF.attribute _value
+instance TF.ToHCL (CollectorsFilters s) where
+     toHCL CollectorsFilters'{..} = TF.pairs $ P.mconcat
+        [ P.maybe P.mempty (TF.pair "operator") _operator
+        , P.maybe P.mempty (TF.pair "property") _property
+        , P.maybe P.mempty (TF.pair "value") _value
         ]
 
-instance TF.IsValid (CollectorsFilters s) where
+instance P.Hashable (CollectorsFilters s)
+
+instance TF.HasValidator (CollectorsFilters s) where
     validator = P.mempty
 
-instance P.HasOperator (CollectorsFilters s) (TF.Attr s P.Text) where
+instance P.HasOperator (CollectorsFilters s) (P.Maybe (TF.Expr s P.Text)) where
     operator =
-        P.lens (_operator :: CollectorsFilters s -> TF.Attr s P.Text)
-               (\s a -> s { _operator = a } :: CollectorsFilters s)
+        P.lens (_operator :: CollectorsFilters s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _operator = a } :: CollectorsFilters s)
 
-instance P.HasProperty (CollectorsFilters s) (TF.Attr s P.Text) where
+instance P.HasProperty (CollectorsFilters s) (P.Maybe (TF.Expr s P.Text)) where
     property =
-        P.lens (_property :: CollectorsFilters s -> TF.Attr s P.Text)
-               (\s a -> s { _property = a } :: CollectorsFilters s)
+        P.lens (_property :: CollectorsFilters s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _property = a } :: CollectorsFilters s)
 
-instance P.HasValue (CollectorsFilters s) (TF.Attr s P.Text) where
+instance P.HasValue (CollectorsFilters s) (P.Maybe (TF.Expr s P.Text)) where
     value =
-        P.lens (_value :: CollectorsFilters s -> TF.Attr s P.Text)
-               (\s a -> s { _value = a } :: CollectorsFilters s)
+        P.lens (_value :: CollectorsFilters s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _value = a } :: CollectorsFilters s)
 
 -- | @filters@ nested settings.
 data DeviceGroupFilters s = DeviceGroupFilters'
-    { _customPropertyName  :: TF.Attr s P.Text
+    { _customPropertyName  :: P.Maybe (TF.Expr s P.Text)
     -- ^ @custom_property_name@ - (Optional)
     --
-    , _customPropertyValue :: TF.Attr s P.Text
+    , _customPropertyValue :: P.Maybe (TF.Expr s P.Text)
     -- ^ @custom_property_value@ - (Optional)
     --
-    , _operator            :: TF.Attr s P.Text
+    , _operator            :: P.Maybe (TF.Expr s P.Text)
     -- ^ @operator@ - (Optional)
     --
-    , _property            :: TF.Attr s P.Text
+    , _property            :: P.Maybe (TF.Expr s P.Text)
     -- ^ @property@ - (Optional)
     --
-    , _value               :: TF.Attr s P.Text
+    , _value               :: P.Maybe (TF.Expr s P.Text)
     -- ^ @value@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @filters@ settings value.
 newDeviceGroupFilters
     :: DeviceGroupFilters s
 newDeviceGroupFilters =
     DeviceGroupFilters'
-        { _customPropertyName = TF.Nil
-        , _customPropertyValue = TF.Nil
-        , _operator = TF.Nil
-        , _property = TF.Nil
-        , _value = TF.Nil
+        { _customPropertyName = P.Nothing
+        , _customPropertyValue = P.Nothing
+        , _operator = P.Nothing
+        , _property = P.Nothing
+        , _value = P.Nothing
         }
 
-instance TF.IsValue  (DeviceGroupFilters s)
-instance TF.IsObject (DeviceGroupFilters s) where
-    toObject DeviceGroupFilters'{..} = P.catMaybes
-        [ TF.assign "custom_property_name" <$> TF.attribute _customPropertyName
-        , TF.assign "custom_property_value" <$> TF.attribute _customPropertyValue
-        , TF.assign "operator" <$> TF.attribute _operator
-        , TF.assign "property" <$> TF.attribute _property
-        , TF.assign "value" <$> TF.attribute _value
+instance TF.ToHCL (DeviceGroupFilters s) where
+     toHCL DeviceGroupFilters'{..} = TF.pairs $ P.mconcat
+        [ P.maybe P.mempty (TF.pair "custom_property_name") _customPropertyName
+        , P.maybe P.mempty (TF.pair "custom_property_value") _customPropertyValue
+        , P.maybe P.mempty (TF.pair "operator") _operator
+        , P.maybe P.mempty (TF.pair "property") _property
+        , P.maybe P.mempty (TF.pair "value") _value
         ]
 
-instance TF.IsValid (DeviceGroupFilters s) where
+instance P.Hashable (DeviceGroupFilters s)
+
+instance TF.HasValidator (DeviceGroupFilters s) where
     validator = P.mempty
 
-instance P.HasCustomPropertyName (DeviceGroupFilters s) (TF.Attr s P.Text) where
+instance P.HasCustomPropertyName (DeviceGroupFilters s) (P.Maybe (TF.Expr s P.Text)) where
     customPropertyName =
-        P.lens (_customPropertyName :: DeviceGroupFilters s -> TF.Attr s P.Text)
-               (\s a -> s { _customPropertyName = a } :: DeviceGroupFilters s)
+        P.lens (_customPropertyName :: DeviceGroupFilters s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _customPropertyName = a } :: DeviceGroupFilters s)
 
-instance P.HasCustomPropertyValue (DeviceGroupFilters s) (TF.Attr s P.Text) where
+instance P.HasCustomPropertyValue (DeviceGroupFilters s) (P.Maybe (TF.Expr s P.Text)) where
     customPropertyValue =
-        P.lens (_customPropertyValue :: DeviceGroupFilters s -> TF.Attr s P.Text)
-               (\s a -> s { _customPropertyValue = a } :: DeviceGroupFilters s)
+        P.lens (_customPropertyValue :: DeviceGroupFilters s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _customPropertyValue = a } :: DeviceGroupFilters s)
 
-instance P.HasOperator (DeviceGroupFilters s) (TF.Attr s P.Text) where
+instance P.HasOperator (DeviceGroupFilters s) (P.Maybe (TF.Expr s P.Text)) where
     operator =
-        P.lens (_operator :: DeviceGroupFilters s -> TF.Attr s P.Text)
-               (\s a -> s { _operator = a } :: DeviceGroupFilters s)
+        P.lens (_operator :: DeviceGroupFilters s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _operator = a } :: DeviceGroupFilters s)
 
-instance P.HasProperty (DeviceGroupFilters s) (TF.Attr s P.Text) where
+instance P.HasProperty (DeviceGroupFilters s) (P.Maybe (TF.Expr s P.Text)) where
     property =
-        P.lens (_property :: DeviceGroupFilters s -> TF.Attr s P.Text)
-               (\s a -> s { _property = a } :: DeviceGroupFilters s)
+        P.lens (_property :: DeviceGroupFilters s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _property = a } :: DeviceGroupFilters s)
 
-instance P.HasValue (DeviceGroupFilters s) (TF.Attr s P.Text) where
+instance P.HasValue (DeviceGroupFilters s) (P.Maybe (TF.Expr s P.Text)) where
     value =
-        P.lens (_value :: DeviceGroupFilters s -> TF.Attr s P.Text)
-               (\s a -> s { _value = a } :: DeviceGroupFilters s)
+        P.lens (_value :: DeviceGroupFilters s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _value = a } :: DeviceGroupFilters s)

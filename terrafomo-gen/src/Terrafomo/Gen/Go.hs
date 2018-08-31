@@ -9,8 +9,9 @@ module Terrafomo.Gen.Go
     , schemaArgument
     ) where
 
-import Data.Set  (Set)
-import Data.Text (Text)
+import Data.Set     (Set)
+import Data.Text    (Text)
+import Data.Version (Version)
 
 import GHC.Generics (Generic)
 
@@ -52,6 +53,7 @@ hungarian = \case
 
 data Provider = Provider
     { providerName        :: !Text
+    , providerVersion     :: !Version
     , providerSchemas     :: ![Schema]
     , providerResources   :: ![Resource]
     , providerDataSources :: ![Resource]

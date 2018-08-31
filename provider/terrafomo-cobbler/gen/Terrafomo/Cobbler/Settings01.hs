@@ -1,7 +1,6 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -27,309 +26,330 @@ import Data.Functor ((<$>))
 
 import GHC.Base (($))
 
-
+import qualified Data.Hashable           as P
+import qualified Data.HashMap.Strict     as P
+import qualified Data.HashMap.Strict     as HashMap
 import qualified Data.List.NonEmpty      as P
-import qualified Data.Map.Strict         as P
-import qualified Data.Map.Strict         as Map
 import qualified Data.Maybe              as P
-import qualified Data.Monoid             as P
-import qualified Data.Text               as P
+import qualified Data.Text.Lazy          as P
 import qualified GHC.Generics            as P
 import qualified Lens.Micro              as P
 import qualified Prelude                 as P
-import qualified Terrafomo.Attribute     as TF
 import qualified Terrafomo.Cobbler.Lens  as P
 import qualified Terrafomo.Cobbler.Types as P
+import qualified Terrafomo.Encode        as TF
 import qualified Terrafomo.HCL           as TF
-import qualified Terrafomo.Name          as TF
-import qualified Terrafomo.Validator     as TF
+import qualified Terrafomo.HIL           as TF
+import qualified Terrafomo.Schema        as TF
+import qualified Terrafomo.Validate      as TF
 
 -- | @interface@ nested settings.
 data SystemInterface s = SystemInterface'
-    { _bondingOpts        :: TF.Attr s P.Text
+    { _bondingOpts        :: P.Maybe (TF.Expr s P.Text)
     -- ^ @bonding_opts@ - (Optional)
     --
-    , _bridgeOpts         :: TF.Attr s P.Text
+    , _bridgeOpts         :: P.Maybe (TF.Expr s P.Text)
     -- ^ @bridge_opts@ - (Optional)
     --
-    , _cnames             :: TF.Attr s [TF.Attr s P.Text]
+    , _cnames             :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
     -- ^ @cnames@ - (Optional)
     --
-    , _dhcpTag            :: TF.Attr s P.Text
+    , _dhcpTag            :: P.Maybe (TF.Expr s P.Text)
     -- ^ @dhcp_tag@ - (Optional)
     --
-    , _dnsName            :: TF.Attr s P.Text
+    , _dnsName            :: P.Maybe (TF.Expr s P.Text)
     -- ^ @dns_name@ - (Optional)
     --
-    , _gateway            :: TF.Attr s P.Text
+    , _gateway            :: P.Maybe (TF.Expr s P.Text)
     -- ^ @gateway@ - (Optional)
     --
-    , _interfaceMaster    :: TF.Attr s P.Text
+    , _interfaceMaster    :: P.Maybe (TF.Expr s P.Text)
     -- ^ @interface_master@ - (Optional)
     --
-    , _interfaceType      :: TF.Attr s P.Text
+    , _interfaceType      :: P.Maybe (TF.Expr s P.Text)
     -- ^ @interface_type@ - (Optional)
     --
-    , _ipAddress          :: TF.Attr s P.Text
+    , _ipAddress          :: P.Maybe (TF.Expr s P.Text)
     -- ^ @ip_address@ - (Optional)
     --
-    , _ipv6Address        :: TF.Attr s P.Text
+    , _ipv6Address        :: P.Maybe (TF.Expr s P.Text)
     -- ^ @ipv6_address@ - (Optional)
     --
-    , _ipv6DefaultGateway :: TF.Attr s P.Text
+    , _ipv6DefaultGateway :: P.Maybe (TF.Expr s P.Text)
     -- ^ @ipv6_default_gateway@ - (Optional)
     --
-    , _ipv6Mtu            :: TF.Attr s P.Text
+    , _ipv6Mtu            :: P.Maybe (TF.Expr s P.Text)
     -- ^ @ipv6_mtu@ - (Optional)
     --
-    , _ipv6Secondaries    :: TF.Attr s [TF.Attr s P.Text]
+    , _ipv6Secondaries    :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
     -- ^ @ipv6_secondaries@ - (Optional)
     --
-    , _ipv6StaticRoutes   :: TF.Attr s [TF.Attr s P.Text]
+    , _ipv6StaticRoutes   :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
     -- ^ @ipv6_static_routes@ - (Optional)
     --
-    , _macAddress         :: TF.Attr s P.Text
+    , _macAddress         :: P.Maybe (TF.Expr s P.Text)
     -- ^ @mac_address@ - (Optional)
     --
-    , _management         :: TF.Attr s P.Bool
+    , _management         :: P.Maybe (TF.Expr s P.Bool)
     -- ^ @management@ - (Optional)
     --
-    , _name               :: TF.Attr s P.Text
+    , _name               :: TF.Expr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _netmask            :: TF.Attr s P.Text
+    , _netmask            :: P.Maybe (TF.Expr s P.Text)
     -- ^ @netmask@ - (Optional)
     --
-    , _static             :: TF.Attr s P.Bool
+    , _static             :: P.Maybe (TF.Expr s P.Bool)
     -- ^ @static@ - (Optional)
     --
-    , _staticRoutes       :: TF.Attr s [TF.Attr s P.Text]
+    , _staticRoutes       :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
     -- ^ @static_routes@ - (Optional)
     --
-    , _virtBridge         :: TF.Attr s P.Text
+    , _virtBridge         :: P.Maybe (TF.Expr s P.Text)
     -- ^ @virt_bridge@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @interface@ settings value.
 newSystemInterface
-    :: TF.Attr s P.Text -- ^ 'P._name': @name@
+    :: TF.Expr s P.Text -- ^ Lens: 'P.name', Field: '_name', HCL: @name@
     -> SystemInterface s
 newSystemInterface _name =
     SystemInterface'
-        { _bondingOpts = TF.Nil
-        , _bridgeOpts = TF.Nil
-        , _cnames = TF.Nil
-        , _dhcpTag = TF.Nil
-        , _dnsName = TF.Nil
-        , _gateway = TF.Nil
-        , _interfaceMaster = TF.Nil
-        , _interfaceType = TF.Nil
-        , _ipAddress = TF.Nil
-        , _ipv6Address = TF.Nil
-        , _ipv6DefaultGateway = TF.Nil
-        , _ipv6Mtu = TF.Nil
-        , _ipv6Secondaries = TF.Nil
-        , _ipv6StaticRoutes = TF.Nil
-        , _macAddress = TF.Nil
-        , _management = TF.Nil
+        { _bondingOpts = P.Nothing
+        , _bridgeOpts = P.Nothing
+        , _cnames = P.Nothing
+        , _dhcpTag = P.Nothing
+        , _dnsName = P.Nothing
+        , _gateway = P.Nothing
+        , _interfaceMaster = P.Nothing
+        , _interfaceType = P.Nothing
+        , _ipAddress = P.Nothing
+        , _ipv6Address = P.Nothing
+        , _ipv6DefaultGateway = P.Nothing
+        , _ipv6Mtu = P.Nothing
+        , _ipv6Secondaries = P.Nothing
+        , _ipv6StaticRoutes = P.Nothing
+        , _macAddress = P.Nothing
+        , _management = P.Nothing
         , _name = _name
-        , _netmask = TF.Nil
-        , _static = TF.Nil
-        , _staticRoutes = TF.Nil
-        , _virtBridge = TF.Nil
+        , _netmask = P.Nothing
+        , _static = P.Nothing
+        , _staticRoutes = P.Nothing
+        , _virtBridge = P.Nothing
         }
 
-instance TF.IsValue  (SystemInterface s)
-instance TF.IsObject (SystemInterface s) where
-    toObject SystemInterface'{..} = P.catMaybes
-        [ TF.assign "bonding_opts" <$> TF.attribute _bondingOpts
-        , TF.assign "bridge_opts" <$> TF.attribute _bridgeOpts
-        , TF.assign "cnames" <$> TF.attribute _cnames
-        , TF.assign "dhcp_tag" <$> TF.attribute _dhcpTag
-        , TF.assign "dns_name" <$> TF.attribute _dnsName
-        , TF.assign "gateway" <$> TF.attribute _gateway
-        , TF.assign "interface_master" <$> TF.attribute _interfaceMaster
-        , TF.assign "interface_type" <$> TF.attribute _interfaceType
-        , TF.assign "ip_address" <$> TF.attribute _ipAddress
-        , TF.assign "ipv6_address" <$> TF.attribute _ipv6Address
-        , TF.assign "ipv6_default_gateway" <$> TF.attribute _ipv6DefaultGateway
-        , TF.assign "ipv6_mtu" <$> TF.attribute _ipv6Mtu
-        , TF.assign "ipv6_secondaries" <$> TF.attribute _ipv6Secondaries
-        , TF.assign "ipv6_static_routes" <$> TF.attribute _ipv6StaticRoutes
-        , TF.assign "mac_address" <$> TF.attribute _macAddress
-        , TF.assign "management" <$> TF.attribute _management
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "netmask" <$> TF.attribute _netmask
-        , TF.assign "static" <$> TF.attribute _static
-        , TF.assign "static_routes" <$> TF.attribute _staticRoutes
-        , TF.assign "virt_bridge" <$> TF.attribute _virtBridge
+instance TF.ToHCL (SystemInterface s) where
+     toHCL SystemInterface'{..} = TF.pairs $ P.mconcat
+        [ P.maybe P.mempty (TF.pair "bonding_opts") _bondingOpts
+        , P.maybe P.mempty (TF.pair "bridge_opts") _bridgeOpts
+        , P.maybe P.mempty (TF.pair "cnames") _cnames
+        , P.maybe P.mempty (TF.pair "dhcp_tag") _dhcpTag
+        , P.maybe P.mempty (TF.pair "dns_name") _dnsName
+        , P.maybe P.mempty (TF.pair "gateway") _gateway
+        , P.maybe P.mempty (TF.pair "interface_master") _interfaceMaster
+        , P.maybe P.mempty (TF.pair "interface_type") _interfaceType
+        , P.maybe P.mempty (TF.pair "ip_address") _ipAddress
+        , P.maybe P.mempty (TF.pair "ipv6_address") _ipv6Address
+        , P.maybe P.mempty (TF.pair "ipv6_default_gateway") _ipv6DefaultGateway
+        , P.maybe P.mempty (TF.pair "ipv6_mtu") _ipv6Mtu
+        , P.maybe P.mempty (TF.pair "ipv6_secondaries") _ipv6Secondaries
+        , P.maybe P.mempty (TF.pair "ipv6_static_routes") _ipv6StaticRoutes
+        , P.maybe P.mempty (TF.pair "mac_address") _macAddress
+        , P.maybe P.mempty (TF.pair "management") _management
+        , TF.pair "name" _name
+        , P.maybe P.mempty (TF.pair "netmask") _netmask
+        , P.maybe P.mempty (TF.pair "static") _static
+        , P.maybe P.mempty (TF.pair "static_routes") _staticRoutes
+        , P.maybe P.mempty (TF.pair "virt_bridge") _virtBridge
         ]
 
-instance TF.IsValid (SystemInterface s) where
+instance P.Hashable (SystemInterface s)
+
+instance TF.HasValidator (SystemInterface s) where
     validator = P.mempty
 
-instance P.HasBondingOpts (SystemInterface s) (TF.Attr s P.Text) where
+instance P.HasBondingOpts (SystemInterface s) (P.Maybe (TF.Expr s P.Text)) where
     bondingOpts =
-        P.lens (_bondingOpts :: SystemInterface s -> TF.Attr s P.Text)
-               (\s a -> s { _bondingOpts = a } :: SystemInterface s)
+        P.lens (_bondingOpts :: SystemInterface s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _bondingOpts = a } :: SystemInterface s)
 
-instance P.HasBridgeOpts (SystemInterface s) (TF.Attr s P.Text) where
+instance P.HasBridgeOpts (SystemInterface s) (P.Maybe (TF.Expr s P.Text)) where
     bridgeOpts =
-        P.lens (_bridgeOpts :: SystemInterface s -> TF.Attr s P.Text)
-               (\s a -> s { _bridgeOpts = a } :: SystemInterface s)
+        P.lens (_bridgeOpts :: SystemInterface s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _bridgeOpts = a } :: SystemInterface s)
 
-instance P.HasCnames (SystemInterface s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasCnames (SystemInterface s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
     cnames =
-        P.lens (_cnames :: SystemInterface s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _cnames = a } :: SystemInterface s)
+        P.lens (_cnames :: SystemInterface s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
+            (\s a -> s { _cnames = a } :: SystemInterface s)
 
-instance P.HasDhcpTag (SystemInterface s) (TF.Attr s P.Text) where
+instance P.HasDhcpTag (SystemInterface s) (P.Maybe (TF.Expr s P.Text)) where
     dhcpTag =
-        P.lens (_dhcpTag :: SystemInterface s -> TF.Attr s P.Text)
-               (\s a -> s { _dhcpTag = a } :: SystemInterface s)
+        P.lens (_dhcpTag :: SystemInterface s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _dhcpTag = a } :: SystemInterface s)
 
-instance P.HasDnsName (SystemInterface s) (TF.Attr s P.Text) where
+instance P.HasDnsName (SystemInterface s) (P.Maybe (TF.Expr s P.Text)) where
     dnsName =
-        P.lens (_dnsName :: SystemInterface s -> TF.Attr s P.Text)
-               (\s a -> s { _dnsName = a } :: SystemInterface s)
+        P.lens (_dnsName :: SystemInterface s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _dnsName = a } :: SystemInterface s)
 
-instance P.HasGateway (SystemInterface s) (TF.Attr s P.Text) where
+instance P.HasGateway (SystemInterface s) (P.Maybe (TF.Expr s P.Text)) where
     gateway =
-        P.lens (_gateway :: SystemInterface s -> TF.Attr s P.Text)
-               (\s a -> s { _gateway = a } :: SystemInterface s)
+        P.lens (_gateway :: SystemInterface s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _gateway = a } :: SystemInterface s)
 
-instance P.HasInterfaceMaster (SystemInterface s) (TF.Attr s P.Text) where
+instance P.HasInterfaceMaster (SystemInterface s) (P.Maybe (TF.Expr s P.Text)) where
     interfaceMaster =
-        P.lens (_interfaceMaster :: SystemInterface s -> TF.Attr s P.Text)
-               (\s a -> s { _interfaceMaster = a } :: SystemInterface s)
+        P.lens (_interfaceMaster :: SystemInterface s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _interfaceMaster = a } :: SystemInterface s)
 
-instance P.HasInterfaceType (SystemInterface s) (TF.Attr s P.Text) where
+instance P.HasInterfaceType (SystemInterface s) (P.Maybe (TF.Expr s P.Text)) where
     interfaceType =
-        P.lens (_interfaceType :: SystemInterface s -> TF.Attr s P.Text)
-               (\s a -> s { _interfaceType = a } :: SystemInterface s)
+        P.lens (_interfaceType :: SystemInterface s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _interfaceType = a } :: SystemInterface s)
 
-instance P.HasIpAddress (SystemInterface s) (TF.Attr s P.Text) where
+instance P.HasIpAddress (SystemInterface s) (P.Maybe (TF.Expr s P.Text)) where
     ipAddress =
-        P.lens (_ipAddress :: SystemInterface s -> TF.Attr s P.Text)
-               (\s a -> s { _ipAddress = a } :: SystemInterface s)
+        P.lens (_ipAddress :: SystemInterface s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _ipAddress = a } :: SystemInterface s)
 
-instance P.HasIpv6Address (SystemInterface s) (TF.Attr s P.Text) where
+instance P.HasIpv6Address (SystemInterface s) (P.Maybe (TF.Expr s P.Text)) where
     ipv6Address =
-        P.lens (_ipv6Address :: SystemInterface s -> TF.Attr s P.Text)
-               (\s a -> s { _ipv6Address = a } :: SystemInterface s)
+        P.lens (_ipv6Address :: SystemInterface s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _ipv6Address = a } :: SystemInterface s)
 
-instance P.HasIpv6DefaultGateway (SystemInterface s) (TF.Attr s P.Text) where
+instance P.HasIpv6DefaultGateway (SystemInterface s) (P.Maybe (TF.Expr s P.Text)) where
     ipv6DefaultGateway =
-        P.lens (_ipv6DefaultGateway :: SystemInterface s -> TF.Attr s P.Text)
-               (\s a -> s { _ipv6DefaultGateway = a } :: SystemInterface s)
+        P.lens (_ipv6DefaultGateway :: SystemInterface s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _ipv6DefaultGateway = a } :: SystemInterface s)
 
-instance P.HasIpv6Mtu (SystemInterface s) (TF.Attr s P.Text) where
+instance P.HasIpv6Mtu (SystemInterface s) (P.Maybe (TF.Expr s P.Text)) where
     ipv6Mtu =
-        P.lens (_ipv6Mtu :: SystemInterface s -> TF.Attr s P.Text)
-               (\s a -> s { _ipv6Mtu = a } :: SystemInterface s)
+        P.lens (_ipv6Mtu :: SystemInterface s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _ipv6Mtu = a } :: SystemInterface s)
 
-instance P.HasIpv6Secondaries (SystemInterface s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasIpv6Secondaries (SystemInterface s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
     ipv6Secondaries =
-        P.lens (_ipv6Secondaries :: SystemInterface s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _ipv6Secondaries = a } :: SystemInterface s)
+        P.lens (_ipv6Secondaries :: SystemInterface s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
+            (\s a -> s { _ipv6Secondaries = a } :: SystemInterface s)
 
-instance P.HasIpv6StaticRoutes (SystemInterface s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasIpv6StaticRoutes (SystemInterface s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
     ipv6StaticRoutes =
-        P.lens (_ipv6StaticRoutes :: SystemInterface s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _ipv6StaticRoutes = a } :: SystemInterface s)
+        P.lens (_ipv6StaticRoutes :: SystemInterface s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
+            (\s a -> s { _ipv6StaticRoutes = a } :: SystemInterface s)
 
-instance P.HasMacAddress (SystemInterface s) (TF.Attr s P.Text) where
+instance P.HasMacAddress (SystemInterface s) (P.Maybe (TF.Expr s P.Text)) where
     macAddress =
-        P.lens (_macAddress :: SystemInterface s -> TF.Attr s P.Text)
-               (\s a -> s { _macAddress = a } :: SystemInterface s)
+        P.lens (_macAddress :: SystemInterface s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _macAddress = a } :: SystemInterface s)
 
-instance P.HasManagement (SystemInterface s) (TF.Attr s P.Bool) where
+instance P.HasManagement (SystemInterface s) (P.Maybe (TF.Expr s P.Bool)) where
     management =
-        P.lens (_management :: SystemInterface s -> TF.Attr s P.Bool)
-               (\s a -> s { _management = a } :: SystemInterface s)
+        P.lens (_management :: SystemInterface s -> P.Maybe (TF.Expr s P.Bool))
+            (\s a -> s { _management = a } :: SystemInterface s)
 
-instance P.HasName (SystemInterface s) (TF.Attr s P.Text) where
+instance P.HasName (SystemInterface s) (TF.Expr s P.Text) where
     name =
-        P.lens (_name :: SystemInterface s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: SystemInterface s)
+        P.lens (_name :: SystemInterface s -> TF.Expr s P.Text)
+            (\s a -> s { _name = a } :: SystemInterface s)
 
-instance P.HasNetmask (SystemInterface s) (TF.Attr s P.Text) where
+instance P.HasNetmask (SystemInterface s) (P.Maybe (TF.Expr s P.Text)) where
     netmask =
-        P.lens (_netmask :: SystemInterface s -> TF.Attr s P.Text)
-               (\s a -> s { _netmask = a } :: SystemInterface s)
+        P.lens (_netmask :: SystemInterface s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _netmask = a } :: SystemInterface s)
 
-instance P.HasStatic (SystemInterface s) (TF.Attr s P.Bool) where
+instance P.HasStatic (SystemInterface s) (P.Maybe (TF.Expr s P.Bool)) where
     static =
-        P.lens (_static :: SystemInterface s -> TF.Attr s P.Bool)
-               (\s a -> s { _static = a } :: SystemInterface s)
+        P.lens (_static :: SystemInterface s -> P.Maybe (TF.Expr s P.Bool))
+            (\s a -> s { _static = a } :: SystemInterface s)
 
-instance P.HasStaticRoutes (SystemInterface s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasStaticRoutes (SystemInterface s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
     staticRoutes =
-        P.lens (_staticRoutes :: SystemInterface s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _staticRoutes = a } :: SystemInterface s)
+        P.lens (_staticRoutes :: SystemInterface s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
+            (\s a -> s { _staticRoutes = a } :: SystemInterface s)
 
-instance P.HasVirtBridge (SystemInterface s) (TF.Attr s P.Text) where
+instance P.HasVirtBridge (SystemInterface s) (P.Maybe (TF.Expr s P.Text)) where
     virtBridge =
-        P.lens (_virtBridge :: SystemInterface s -> TF.Attr s P.Text)
-               (\s a -> s { _virtBridge = a } :: SystemInterface s)
+        P.lens (_virtBridge :: SystemInterface s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _virtBridge = a } :: SystemInterface s)
 
-instance s ~ s' => P.HasComputedBondingOpts (TF.Ref s' (SystemInterface s)) (TF.Attr s P.Text) where
-    computedBondingOpts x = TF.compute (TF.refKey x) "bonding_opts"
+instance s ~ s' => P.HasComputedBondingOpts (TF.Ref s' (SystemInterface s)) (TF.Expr s P.Text) where
+    computedBondingOpts x =
+        TF.unsafeCompute TF.encodeAttr x "bonding_opts"
 
-instance s ~ s' => P.HasComputedBridgeOpts (TF.Ref s' (SystemInterface s)) (TF.Attr s P.Text) where
-    computedBridgeOpts x = TF.compute (TF.refKey x) "bridge_opts"
+instance s ~ s' => P.HasComputedBridgeOpts (TF.Ref s' (SystemInterface s)) (TF.Expr s P.Text) where
+    computedBridgeOpts x =
+        TF.unsafeCompute TF.encodeAttr x "bridge_opts"
 
-instance s ~ s' => P.HasComputedCnames (TF.Ref s' (SystemInterface s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedCnames x = TF.compute (TF.refKey x) "cnames"
+instance s ~ s' => P.HasComputedCnames (TF.Ref s' (SystemInterface s)) (TF.Expr s [TF.Expr s P.Text]) where
+    computedCnames x =
+        TF.unsafeCompute TF.encodeAttr x "cnames"
 
-instance s ~ s' => P.HasComputedDhcpTag (TF.Ref s' (SystemInterface s)) (TF.Attr s P.Text) where
-    computedDhcpTag x = TF.compute (TF.refKey x) "dhcp_tag"
+instance s ~ s' => P.HasComputedDhcpTag (TF.Ref s' (SystemInterface s)) (TF.Expr s P.Text) where
+    computedDhcpTag x =
+        TF.unsafeCompute TF.encodeAttr x "dhcp_tag"
 
-instance s ~ s' => P.HasComputedDnsName (TF.Ref s' (SystemInterface s)) (TF.Attr s P.Text) where
-    computedDnsName x = TF.compute (TF.refKey x) "dns_name"
+instance s ~ s' => P.HasComputedDnsName (TF.Ref s' (SystemInterface s)) (TF.Expr s P.Text) where
+    computedDnsName x =
+        TF.unsafeCompute TF.encodeAttr x "dns_name"
 
-instance s ~ s' => P.HasComputedGateway (TF.Ref s' (SystemInterface s)) (TF.Attr s P.Text) where
-    computedGateway x = TF.compute (TF.refKey x) "gateway"
+instance s ~ s' => P.HasComputedGateway (TF.Ref s' (SystemInterface s)) (TF.Expr s P.Text) where
+    computedGateway x =
+        TF.unsafeCompute TF.encodeAttr x "gateway"
 
-instance s ~ s' => P.HasComputedInterfaceMaster (TF.Ref s' (SystemInterface s)) (TF.Attr s P.Text) where
-    computedInterfaceMaster x = TF.compute (TF.refKey x) "interface_master"
+instance s ~ s' => P.HasComputedInterfaceMaster (TF.Ref s' (SystemInterface s)) (TF.Expr s P.Text) where
+    computedInterfaceMaster x =
+        TF.unsafeCompute TF.encodeAttr x "interface_master"
 
-instance s ~ s' => P.HasComputedInterfaceType (TF.Ref s' (SystemInterface s)) (TF.Attr s P.Text) where
-    computedInterfaceType x = TF.compute (TF.refKey x) "interface_type"
+instance s ~ s' => P.HasComputedInterfaceType (TF.Ref s' (SystemInterface s)) (TF.Expr s P.Text) where
+    computedInterfaceType x =
+        TF.unsafeCompute TF.encodeAttr x "interface_type"
 
-instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (SystemInterface s)) (TF.Attr s P.Text) where
-    computedIpAddress x = TF.compute (TF.refKey x) "ip_address"
+instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (SystemInterface s)) (TF.Expr s P.Text) where
+    computedIpAddress x =
+        TF.unsafeCompute TF.encodeAttr x "ip_address"
 
-instance s ~ s' => P.HasComputedIpv6Address (TF.Ref s' (SystemInterface s)) (TF.Attr s P.Text) where
-    computedIpv6Address x = TF.compute (TF.refKey x) "ipv6_address"
+instance s ~ s' => P.HasComputedIpv6Address (TF.Ref s' (SystemInterface s)) (TF.Expr s P.Text) where
+    computedIpv6Address x =
+        TF.unsafeCompute TF.encodeAttr x "ipv6_address"
 
-instance s ~ s' => P.HasComputedIpv6DefaultGateway (TF.Ref s' (SystemInterface s)) (TF.Attr s P.Text) where
-    computedIpv6DefaultGateway x = TF.compute (TF.refKey x) "ipv6_default_gateway"
+instance s ~ s' => P.HasComputedIpv6DefaultGateway (TF.Ref s' (SystemInterface s)) (TF.Expr s P.Text) where
+    computedIpv6DefaultGateway x =
+        TF.unsafeCompute TF.encodeAttr x "ipv6_default_gateway"
 
-instance s ~ s' => P.HasComputedIpv6Mtu (TF.Ref s' (SystemInterface s)) (TF.Attr s P.Text) where
-    computedIpv6Mtu x = TF.compute (TF.refKey x) "ipv6_mtu"
+instance s ~ s' => P.HasComputedIpv6Mtu (TF.Ref s' (SystemInterface s)) (TF.Expr s P.Text) where
+    computedIpv6Mtu x =
+        TF.unsafeCompute TF.encodeAttr x "ipv6_mtu"
 
-instance s ~ s' => P.HasComputedIpv6Secondaries (TF.Ref s' (SystemInterface s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedIpv6Secondaries x = TF.compute (TF.refKey x) "ipv6_secondaries"
+instance s ~ s' => P.HasComputedIpv6Secondaries (TF.Ref s' (SystemInterface s)) (TF.Expr s [TF.Expr s P.Text]) where
+    computedIpv6Secondaries x =
+        TF.unsafeCompute TF.encodeAttr x "ipv6_secondaries"
 
-instance s ~ s' => P.HasComputedIpv6StaticRoutes (TF.Ref s' (SystemInterface s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedIpv6StaticRoutes x = TF.compute (TF.refKey x) "ipv6_static_routes"
+instance s ~ s' => P.HasComputedIpv6StaticRoutes (TF.Ref s' (SystemInterface s)) (TF.Expr s [TF.Expr s P.Text]) where
+    computedIpv6StaticRoutes x =
+        TF.unsafeCompute TF.encodeAttr x "ipv6_static_routes"
 
-instance s ~ s' => P.HasComputedMacAddress (TF.Ref s' (SystemInterface s)) (TF.Attr s P.Text) where
-    computedMacAddress x = TF.compute (TF.refKey x) "mac_address"
+instance s ~ s' => P.HasComputedMacAddress (TF.Ref s' (SystemInterface s)) (TF.Expr s P.Text) where
+    computedMacAddress x =
+        TF.unsafeCompute TF.encodeAttr x "mac_address"
 
-instance s ~ s' => P.HasComputedManagement (TF.Ref s' (SystemInterface s)) (TF.Attr s P.Bool) where
-    computedManagement x = TF.compute (TF.refKey x) "management"
+instance s ~ s' => P.HasComputedManagement (TF.Ref s' (SystemInterface s)) (TF.Expr s P.Bool) where
+    computedManagement x =
+        TF.unsafeCompute TF.encodeAttr x "management"
 
-instance s ~ s' => P.HasComputedNetmask (TF.Ref s' (SystemInterface s)) (TF.Attr s P.Text) where
-    computedNetmask x = TF.compute (TF.refKey x) "netmask"
+instance s ~ s' => P.HasComputedNetmask (TF.Ref s' (SystemInterface s)) (TF.Expr s P.Text) where
+    computedNetmask x =
+        TF.unsafeCompute TF.encodeAttr x "netmask"
 
-instance s ~ s' => P.HasComputedStatic (TF.Ref s' (SystemInterface s)) (TF.Attr s P.Bool) where
-    computedStatic x = TF.compute (TF.refKey x) "static"
+instance s ~ s' => P.HasComputedStatic (TF.Ref s' (SystemInterface s)) (TF.Expr s P.Bool) where
+    computedStatic x =
+        TF.unsafeCompute TF.encodeAttr x "static"
 
-instance s ~ s' => P.HasComputedStaticRoutes (TF.Ref s' (SystemInterface s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedStaticRoutes x = TF.compute (TF.refKey x) "static_routes"
+instance s ~ s' => P.HasComputedStaticRoutes (TF.Ref s' (SystemInterface s)) (TF.Expr s [TF.Expr s P.Text]) where
+    computedStaticRoutes x =
+        TF.unsafeCompute TF.encodeAttr x "static_routes"
 
-instance s ~ s' => P.HasComputedVirtBridge (TF.Ref s' (SystemInterface s)) (TF.Attr s P.Text) where
-    computedVirtBridge x = TF.compute (TF.refKey x) "virt_bridge"
+instance s ~ s' => P.HasComputedVirtBridge (TF.Ref s' (SystemInterface s)) (TF.Expr s P.Text) where
+    computedVirtBridge x =
+        TF.unsafeCompute TF.encodeAttr x "virt_bridge"

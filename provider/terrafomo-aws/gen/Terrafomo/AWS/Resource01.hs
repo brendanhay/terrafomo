@@ -1,7 +1,6 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -33,142 +32,147 @@ import GHC.Base (($))
 
 import Terrafomo.AWS.Settings
 
+import qualified Data.Hashable          as P
+import qualified Data.HashMap.Strict    as P
+import qualified Data.HashMap.Strict    as HashMap
 import qualified Data.List.NonEmpty     as P
-import qualified Data.Map.Strict        as P
-import qualified Data.Map.Strict        as Map
 import qualified Data.Maybe             as P
-import qualified Data.Monoid            as P
-import qualified Data.Text              as P
+import qualified Data.Text.Lazy         as P
 import qualified GHC.Generics           as P
 import qualified Lens.Micro             as P
 import qualified Prelude                as P
-import qualified Terrafomo.Attribute    as TF
 import qualified Terrafomo.AWS.Lens     as P
 import qualified Terrafomo.AWS.Provider as P
 import qualified Terrafomo.AWS.Types    as P
+import qualified Terrafomo.Encode       as TF
 import qualified Terrafomo.HCL          as TF
-import qualified Terrafomo.Name         as TF
+import qualified Terrafomo.HIL          as TF
 import qualified Terrafomo.Schema       as TF
-import qualified Terrafomo.Validator    as TF
+import qualified Terrafomo.Validate     as TF
 
 -- | @aws_acm_certificate@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/aws/r/acm_certificate.html terraform documentation>
 -- for more information.
 data AcmCertificateResource s = AcmCertificateResource'
-    { _domainName              :: TF.Attr s P.Text
+    { _domainName :: TF.Expr s P.Text
     -- ^ @domain_name@ - (Required, Forces New)
     --
-    , _subjectAlternativeNames :: TF.Attr s [TF.Attr s P.Text]
+    , _subjectAlternativeNames :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
     -- ^ @subject_alternative_names@ - (Optional, Forces New)
     --
-    , _tags                    :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _tags :: P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text)))
     -- ^ @tags@ - (Optional)
     --
-    , _validationMethod        :: TF.Attr s P.Text
+    , _validationMethod :: TF.Expr s P.Text
     -- ^ @validation_method@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Define a new @aws_acm_certificate@ resource value.
 acmCertificateResource
-    :: TF.Attr s P.Text -- ^ @validation_method@ ('P._validationMethod', 'P.validationMethod')
-    -> TF.Attr s P.Text -- ^ @domain_name@ ('P._domainName', 'P.domainName')
+    :: TF.Expr s P.Text -- ^ Lens: 'P.validationMethod', Field: '_validationMethod', HCL: @validation_method@
+    -> TF.Expr s P.Text -- ^ Lens: 'P.domainName', Field: '_domainName', HCL: @domain_name@
     -> P.Resource (AcmCertificateResource s)
 acmCertificateResource _validationMethod _domainName =
-    TF.unsafeResource "aws_acm_certificate" TF.validator $
-        AcmCertificateResource'
+    TF.unsafeResource "aws_acm_certificate" P.defaultProvider  TF.encodeLifecycle
+        (\AcmCertificateResource'{..} -> P.mconcat
+            [ TF.pair "domain_name" _domainName
+            , P.maybe P.mempty (TF.pair "subject_alternative_names") _subjectAlternativeNames
+            , P.maybe P.mempty (TF.pair "tags") _tags
+            , TF.pair "validation_method" _validationMethod
+            ])
+        (AcmCertificateResource'
             { _domainName = _domainName
-            , _subjectAlternativeNames = TF.Nil
-            , _tags = TF.Nil
+            , _subjectAlternativeNames = P.Nothing
+            , _tags = P.Nothing
             , _validationMethod = _validationMethod
-            }
+            })
 
-instance TF.IsObject (AcmCertificateResource s) where
-    toObject AcmCertificateResource'{..} = P.catMaybes
-        [ TF.assign "domain_name" <$> TF.attribute _domainName
-        , TF.assign "subject_alternative_names" <$> TF.attribute _subjectAlternativeNames
-        , TF.assign "tags" <$> TF.attribute _tags
-        , TF.assign "validation_method" <$> TF.attribute _validationMethod
-        ]
+instance P.Hashable (AcmCertificateResource s)
 
-instance TF.IsValid (AcmCertificateResource s) where
+instance TF.HasValidator (AcmCertificateResource s) where
     validator = P.mempty
 
-instance P.HasDomainName (AcmCertificateResource s) (TF.Attr s P.Text) where
+instance P.HasDomainName (AcmCertificateResource s) (TF.Expr s P.Text) where
     domainName =
-        P.lens (_domainName :: AcmCertificateResource s -> TF.Attr s P.Text)
-               (\s a -> s { _domainName = a } :: AcmCertificateResource s)
+        P.lens (_domainName :: AcmCertificateResource s -> TF.Expr s P.Text)
+            (\s a -> s { _domainName = a } :: AcmCertificateResource s)
 
-instance P.HasSubjectAlternativeNames (AcmCertificateResource s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasSubjectAlternativeNames (AcmCertificateResource s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
     subjectAlternativeNames =
-        P.lens (_subjectAlternativeNames :: AcmCertificateResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _subjectAlternativeNames = a } :: AcmCertificateResource s)
+        P.lens (_subjectAlternativeNames :: AcmCertificateResource s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
+            (\s a -> s { _subjectAlternativeNames = a } :: AcmCertificateResource s)
 
-instance P.HasTags (AcmCertificateResource s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+instance P.HasTags (AcmCertificateResource s) (P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text)))) where
     tags =
-        P.lens (_tags :: AcmCertificateResource s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _tags = a } :: AcmCertificateResource s)
+        P.lens (_tags :: AcmCertificateResource s -> P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text))))
+            (\s a -> s { _tags = a } :: AcmCertificateResource s)
 
-instance P.HasValidationMethod (AcmCertificateResource s) (TF.Attr s P.Text) where
+instance P.HasValidationMethod (AcmCertificateResource s) (TF.Expr s P.Text) where
     validationMethod =
-        P.lens (_validationMethod :: AcmCertificateResource s -> TF.Attr s P.Text)
-               (\s a -> s { _validationMethod = a } :: AcmCertificateResource s)
+        P.lens (_validationMethod :: AcmCertificateResource s -> TF.Expr s P.Text)
+            (\s a -> s { _validationMethod = a } :: AcmCertificateResource s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (AcmCertificateResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (AcmCertificateResource s)) (TF.Expr s P.Text) where
+    computedId x =
+        TF.unsafeCompute TF.encodeAttr x "id"
 
-instance s ~ s' => P.HasComputedArn (TF.Ref s' (AcmCertificateResource s)) (TF.Attr s P.Text) where
-    computedArn x = TF.compute (TF.refKey x) "arn"
+instance s ~ s' => P.HasComputedArn (TF.Ref s' (AcmCertificateResource s)) (TF.Expr s P.Text) where
+    computedArn x =
+        TF.unsafeCompute TF.encodeAttr x "arn"
 
-instance s ~ s' => P.HasComputedDomainValidationOptions (TF.Ref s' (AcmCertificateResource s)) (TF.Attr s [TF.Attr s (AcmCertificateDomainValidationOptions s)]) where
-    computedDomainValidationOptions x = TF.compute (TF.refKey x) "domain_validation_options"
+instance s ~ s' => P.HasComputedDomainValidationOptions (TF.Ref s' (AcmCertificateResource s)) (TF.Expr s [TF.Expr s (AcmCertificateDomainValidationOptions s)]) where
+    computedDomainValidationOptions x =
+        TF.unsafeCompute TF.encodeAttr x "domain_validation_options"
 
-instance s ~ s' => P.HasComputedValidationEmails (TF.Ref s' (AcmCertificateResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedValidationEmails x = TF.compute (TF.refKey x) "validation_emails"
+instance s ~ s' => P.HasComputedValidationEmails (TF.Ref s' (AcmCertificateResource s)) (TF.Expr s [TF.Expr s P.Text]) where
+    computedValidationEmails x =
+        TF.unsafeCompute TF.encodeAttr x "validation_emails"
 
 -- | @aws_acm_certificate_validation@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/aws/r/acm_certificate_validation.html terraform documentation>
 -- for more information.
 data AcmCertificateValidationResource s = AcmCertificateValidationResource'
-    { _certificateArn        :: TF.Attr s P.Text
+    { _certificateArn        :: TF.Expr s P.Text
     -- ^ @certificate_arn@ - (Required, Forces New)
     --
-    , _validationRecordFqdns :: TF.Attr s [TF.Attr s P.Text]
+    , _validationRecordFqdns :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
     -- ^ @validation_record_fqdns@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Define a new @aws_acm_certificate_validation@ resource value.
 acmCertificateValidationResource
-    :: TF.Attr s P.Text -- ^ @certificate_arn@ ('P._certificateArn', 'P.certificateArn')
+    :: TF.Expr s P.Text -- ^ Lens: 'P.certificateArn', Field: '_certificateArn', HCL: @certificate_arn@
     -> P.Resource (AcmCertificateValidationResource s)
 acmCertificateValidationResource _certificateArn =
-    TF.unsafeResource "aws_acm_certificate_validation" TF.validator $
-        AcmCertificateValidationResource'
+    TF.unsafeResource "aws_acm_certificate_validation" P.defaultProvider  TF.encodeLifecycle
+        (\AcmCertificateValidationResource'{..} -> P.mconcat
+            [ TF.pair "certificate_arn" _certificateArn
+            , P.maybe P.mempty (TF.pair "validation_record_fqdns") _validationRecordFqdns
+            ])
+        (AcmCertificateValidationResource'
             { _certificateArn = _certificateArn
-            , _validationRecordFqdns = TF.Nil
-            }
+            , _validationRecordFqdns = P.Nothing
+            })
 
-instance TF.IsObject (AcmCertificateValidationResource s) where
-    toObject AcmCertificateValidationResource'{..} = P.catMaybes
-        [ TF.assign "certificate_arn" <$> TF.attribute _certificateArn
-        , TF.assign "validation_record_fqdns" <$> TF.attribute _validationRecordFqdns
-        ]
+instance P.Hashable (AcmCertificateValidationResource s)
 
-instance TF.IsValid (AcmCertificateValidationResource s) where
+instance TF.HasValidator (AcmCertificateValidationResource s) where
     validator = P.mempty
 
-instance P.HasCertificateArn (AcmCertificateValidationResource s) (TF.Attr s P.Text) where
+instance P.HasCertificateArn (AcmCertificateValidationResource s) (TF.Expr s P.Text) where
     certificateArn =
-        P.lens (_certificateArn :: AcmCertificateValidationResource s -> TF.Attr s P.Text)
-               (\s a -> s { _certificateArn = a } :: AcmCertificateValidationResource s)
+        P.lens (_certificateArn :: AcmCertificateValidationResource s -> TF.Expr s P.Text)
+            (\s a -> s { _certificateArn = a } :: AcmCertificateValidationResource s)
 
-instance P.HasValidationRecordFqdns (AcmCertificateValidationResource s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasValidationRecordFqdns (AcmCertificateValidationResource s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
     validationRecordFqdns =
-        P.lens (_validationRecordFqdns :: AcmCertificateValidationResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _validationRecordFqdns = a } :: AcmCertificateValidationResource s)
+        P.lens (_validationRecordFqdns :: AcmCertificateValidationResource s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
+            (\s a -> s { _validationRecordFqdns = a } :: AcmCertificateValidationResource s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (AcmCertificateValidationResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (AcmCertificateValidationResource s)) (TF.Expr s P.Text) where
+    computedId x =
+        TF.unsafeCompute TF.encodeAttr x "id"

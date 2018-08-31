@@ -24,40 +24,41 @@ module Terrafomo.Lailgun.Arguments01
 import GHC.Base ((.))
 
 import qualified Lens.Micro       as P
+import qualified Terrafomo.Lens   as TF
 import qualified Terrafomo.Schema as TF
 
 class HasApiKey a b | a -> b where
     apiKey :: P.Lens' a b
 
-instance HasApiKey a b => HasApiKey (TF.Schema l p a) b where
+instance HasApiKey a b => HasApiKey (TF.Resource l p a) b where
     apiKey = TF.configuration . apiKey
 
 class HasName a b | a -> b where
     name :: P.Lens' a b
 
-instance HasName a b => HasName (TF.Schema l p a) b where
+instance HasName a b => HasName (TF.Resource l p a) b where
     name = TF.configuration . name
 
 class HasSmtpLogin a b | a -> b where
     smtpLogin :: P.Lens' a b
 
-instance HasSmtpLogin a b => HasSmtpLogin (TF.Schema l p a) b where
+instance HasSmtpLogin a b => HasSmtpLogin (TF.Resource l p a) b where
     smtpLogin = TF.configuration . smtpLogin
 
 class HasSmtpPassword a b | a -> b where
     smtpPassword :: P.Lens' a b
 
-instance HasSmtpPassword a b => HasSmtpPassword (TF.Schema l p a) b where
+instance HasSmtpPassword a b => HasSmtpPassword (TF.Resource l p a) b where
     smtpPassword = TF.configuration . smtpPassword
 
 class HasSpamAction a b | a -> b where
     spamAction :: P.Lens' a b
 
-instance HasSpamAction a b => HasSpamAction (TF.Schema l p a) b where
+instance HasSpamAction a b => HasSpamAction (TF.Resource l p a) b where
     spamAction = TF.configuration . spamAction
 
 class HasWildcard a b | a -> b where
     wildcard :: P.Lens' a b
 
-instance HasWildcard a b => HasWildcard (TF.Schema l p a) b where
+instance HasWildcard a b => HasWildcard (TF.Resource l p a) b where
     wildcard = TF.configuration . wildcard

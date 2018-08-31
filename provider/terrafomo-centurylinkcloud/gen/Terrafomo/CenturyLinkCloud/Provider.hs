@@ -1,7 +1,6 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -18,8 +17,9 @@
 module Terrafomo.CenturyLinkCloud.Provider
     (
     -- * CenturyLinkCloud Provider Datatype
-      Provider (..)
+      CenturyLinkCloud (..)
     , newProvider
+    , defaultProvider
 
     -- * CenturyLinkCloud Specific Aliases
     , DataSource
@@ -34,32 +34,27 @@ import GHC.Base (($))
 
 import Terrafomo.CenturyLinkCloud.Settings
 
+import qualified Data.Hashable                    as P
+import qualified Data.HashMap.Strict              as P
 import qualified Data.List.NonEmpty               as P
-import qualified Data.Map.Strict                  as P
-import qualified Data.Map.Strict                  as Map
 import qualified Data.Maybe                       as P
-import qualified Data.Monoid                      as P
-import qualified Data.Text                        as P
+import qualified Data.Text.Lazy                   as P
 import qualified GHC.Generics                     as P
 import qualified Lens.Micro                       as P
 import qualified Prelude                          as P
 import qualified Terrafomo.CenturyLinkCloud.Lens  as P
 import qualified Terrafomo.CenturyLinkCloud.Types as P
 import qualified Terrafomo.HCL                    as TF
-import qualified Terrafomo.Lifecycle              as TF
-import qualified Terrafomo.Name                   as TF
-import qualified Terrafomo.Provider               as TF
 import qualified Terrafomo.Schema                 as TF
-import qualified Terrafomo.Validator              as TF
 
-type DataSource a = TF.Schema ()               Provider a
-type Resource   a = TF.Schema (TF.Lifecycle a) Provider a
+type DataSource a = TF.Resource CenturyLinkCloud ()               a
+type Resource   a = TF.Resource CenturyLinkCloud (TF.Lifecycle a) a
 
 -- | The @clc@ Terraform provider configuration.
 --
 -- See the <https://www.terraform.io/docs/providers/clc/index.html terraform documentation>
 -- for more information.
-data Provider = Provider'
+data CenturyLinkCloud = CenturyLinkCloud'
     { _account  :: P.Maybe P.Text
     -- ^ @account@ - (Optional)
     -- Account alias override
@@ -72,44 +67,65 @@ data Provider = Provider'
     -- ^ @username@ - (Required)
     -- Your CLC username
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
+instance P.Hashable (CenturyLinkCloud)
+
+-- | Specify a new CenturyLinkCloud provider configuration.
 newProvider
-    :: P.Text -- ^ @password@ ('P._password', 'P.password')
-    -> P.Text -- ^ @username@ ('P._username', 'P.username')
-    -> Provider
+    :: P.Text -- ^ Lens: 'P.password', Field: '_password', HCL: @password@
+    -> P.Text -- ^ Lens: 'P.username', Field: '_username', HCL: @username@
+    -> CenturyLinkCloud
 newProvider _password _username =
-    Provider'
+    CenturyLinkCloud'
         { _account = P.Nothing
         , _password = _password
         , _username = _username
         }
 
-instance TF.IsProvider Provider where
-    type ProviderType Provider = "clc"
+{- | The 'CenturyLinkCloud' provider with absent configuration that is used
+to instantiate new 'Resource's and 'DataSource's. Provider configuration can be
+overridden on a per-resource basis by using the 'Terrafomo.provider' lens, the
+'newProvider' constructor, and any of the applicable lenses.
 
-instance TF.IsObject Provider where
-    toObject Provider'{..} =
-        P.catMaybes
-            [ TF.assign "account" <$> _account
-            , P.Just $ TF.assign "password" _password
-            , P.Just $ TF.assign "username" _username
-            ]
+For example:
 
-instance TF.IsValid (Provider) where
-    validator = P.mempty
+@
+import qualified Terrafomo as TF
+import qualified Terrafomo.CenturyLinkCloud.Provider as CenturyLinkCloud
 
-instance P.HasAccount (Provider) (P.Maybe P.Text) where
+TF.newExampleResource "foo"
+    & TF.provider ?~
+          CenturyLinkCloud.(newProvider
+              -- Required arguments
+              _password -- (Required) 'P.Text'
+              _username -- (Required) 'P.Text'
+              -- Lenses
+              & CenturyLinkCloud.account .~ Nothing -- 'P.Maybe P.Text'
+              & CenturyLinkCloud.password .~ _password -- 'P.Text'
+              & CenturyLinkCloud.username .~ _username -- 'P.Text'
+@
+-}
+defaultProvider :: TF.Provider CenturyLinkCloud
+defaultProvider =
+    TF.defaultProvider "clc" (P.Just "~> 0.1")
+        (\CenturyLinkCloud'{..} -> P.mconcat
+            [ P.maybe P.mempty (TF.pair "account") _account
+            , TF.pair "password" _password
+            , TF.pair "username" _username
+            ])
+
+instance P.HasAccount (CenturyLinkCloud) (P.Maybe P.Text) where
     account =
-        P.lens (_account :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _account = a } :: Provider)
+        P.lens (_account :: CenturyLinkCloud -> P.Maybe P.Text)
+            (\s a -> s { _account = a } :: CenturyLinkCloud)
 
-instance P.HasPassword (Provider) (P.Text) where
+instance P.HasPassword (CenturyLinkCloud) (P.Text) where
     password =
-        P.lens (_password :: Provider -> P.Text)
-               (\s a -> s { _password = a } :: Provider)
+        P.lens (_password :: CenturyLinkCloud -> P.Text)
+            (\s a -> s { _password = a } :: CenturyLinkCloud)
 
-instance P.HasUsername (Provider) (P.Text) where
+instance P.HasUsername (CenturyLinkCloud) (P.Text) where
     username =
-        P.lens (_username :: Provider -> P.Text)
-               (\s a -> s { _username = a } :: Provider)
+        P.lens (_username :: CenturyLinkCloud -> P.Text)
+            (\s a -> s { _username = a } :: CenturyLinkCloud)

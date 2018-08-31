@@ -6,6 +6,7 @@ import Data.Function  (on)
 import Data.Semigroup (Semigroup ((<>)))
 import Data.Set       (Set)
 import Data.Text      (Text)
+import Data.Version   (Version)
 
 import GHC.Generics (Generic)
 
@@ -31,6 +32,7 @@ data Provider = Provider'
     { providerName         :: !ProviderName
     , providerPackage      :: !Text
     , providerDependencies :: !(Set Text)
+    , providerVersion      :: !Version
     , providerOriginal     :: !Text
     , providerUrl          :: !Text
     , providerResources    :: ![Resource]
@@ -39,29 +41,6 @@ data Provider = Provider'
     , providerPrimitives   :: ![Primitive]
     , providerSchema       :: !Settings
     } deriving (Show, Eq, Ord, Generic)
-
--- emptyProvider = Provider'
---     { providerName         = "Provider"
---     , providerPackage      = "terrafaomo-provider"
---     , providerDependencies = mempty
---     , providerOriginal     = "provider"
---     , providerUrl          = "url"
---     , providerResources    = [Resource' "url" emptySchema]
---     , providerDataSources  = [Resource' "url" emptySchema]
---     , providerSettings     = [Settings' emptySchema]
---     , providerSchema       = Settings' emptySchema
---     }
-
--- emptySchema = Schema'
---     { schemaName       = "Foo"
---     , schemaOriginal   = "foo"
---     , schemaKey        = Key ["foo"]
---     , schemaType       = Type.Free "Foo"
---     , schemaCon        = Con "Foo" "newFoo"
---     , schemaThreaded   = True
---     , schemaArguments  = []
---     , schemaAttributes = []
---     }
 
 instance JSON.ToJSON Provider where
     toJSON = JSON.genericToJSON (JSON.options "provider")
@@ -121,17 +100,14 @@ instance JSON.ToJSON a => JSON.ToJSON (Schema a) where
             ]
 
 schemaParameters :: Schema a -> [Field a]
-schemaParameters = sort . filter (go . fieldDefault) . schemaArguments
+schemaParameters =
+      map snd
+    . List.sortBy (on compare fst)
+    . map (\x -> (keySuffix x, x))
+    . filter (defaultParameter . fieldDefault)
+    . schemaArguments
   where
-    go = \case
-        DefaultParam {}  -> True
-        DefaultPrim  _ x -> go x
-        DefaultAttr    x -> go x
-        _                -> False
-
-    sort = map snd . List.sortBy (on compare fst) . map (\x -> (key x, x))
-
-    key x =
+    keySuffix x =
         ( Text.takeWhileEnd (/= '_') (fieldOriginal x)
         , fieldOriginal x
         )
@@ -154,11 +130,11 @@ data Field a = Field'
     , fieldType      :: !Type
     , fieldConflicts :: !(Set a)
     , fieldThreaded  :: !Bool
-    , fieldOptional  :: !Bool
     , fieldRequired  :: !Bool
     , fieldComputed  :: !Bool
     , fieldForceNew  :: !Bool
     , fieldDefault   :: !Default
+    , fieldDefaults  :: !(Maybe Text)
     } deriving (Show, Eq, Ord, Generic)
 
 instance JSON.ToJSON a => JSON.ToJSON (Field a) where
@@ -172,11 +148,11 @@ instance JSON.ToJSON a => JSON.ToJSON (Field a) where
             , "type"      .= fieldType
             , "conflicts" .= fieldConflicts
             , "threaded"  .= fieldThreaded
-            , "optional"  .= fieldOptional
             , "required"  .= fieldRequired
             , "computed"  .= fieldComputed
             , "forceNew"  .= fieldForceNew
             , "default"   .= fieldDefault
+            , "defaults"  .= fieldDefaults
             , "validate"  .= fieldValidate x
             , "encoder"   .= fieldEncoder  x
             ]
@@ -185,18 +161,11 @@ fieldValidate :: Field a -> Bool
 fieldValidate = Type.settings . fieldType
 
 fieldEncoder :: Field a -> Text
-fieldEncoder Field'{fieldOriginal, fieldThreaded, fieldDefault}
-    | default_ fieldDefault && not fieldThreaded
-        = "TF.assign " <> Text.quotes fieldOriginal <> " <$>"
-    | fieldThreaded
-        = "TF.assign " <> Text.quotes fieldOriginal <> " <$> TF.attribute"
-    | otherwise
-        = "P.Just $ TF.assign " <> Text.quotes fieldOriginal
-  where
-    default_ = \case
-        DefaultNil   {} -> True
-        DefaultPrim _ x -> default_ x
-        _               -> False
+fieldEncoder Field'{fieldOriginal, fieldDefault}
+    | DefaultNothing == fieldDefault =
+        "P.maybe P.mempty (TF.pair " <> Text.quotes fieldOriginal <> ")"
+    | otherwise =
+        "TF.pair " <> Text.quotes fieldOriginal
 
 data Con = Con
     { conName  :: !ConName
@@ -216,10 +185,10 @@ instance JSON.ToJSON Conflict where
     toJSON = JSON.genericToJSON (JSON.options "conflict")
 
 data Default
-    = DefaultNil     !Text
+    = DefaultNothing
     | DefaultParam   !LabelName
     | DefaultPrim    !ConName !Default
-    | DefaultAttr    !Default
+    | DefaultExpr    !Default
     | DefaultText    !Text
     | DefaultBool    !Bool
     | DefaultInteger !Integer
@@ -230,12 +199,12 @@ instance JSON.ToJSON Default where
     toJSON = JSON.String . go
       where
         go = \case
-            DefaultNil     x     -> x
-            DefaultParam   l     -> fromName l
-            DefaultAttr    x     -> "TF.value " <> go x
-            DefaultText    x     -> Text.quotes (Text.escape x)
-            DefaultBool    True  -> "P.True"
-            DefaultBool    False -> "P.False"
+            DefaultNothing     -> "P.Nothing"
+            DefaultParam l     -> fromName l
+            DefaultExpr  x     -> "TF.value " <> go x
+            DefaultText  x     -> Text.quotes (Text.escape x)
+            DefaultBool  True  -> "P.True"
+            DefaultBool  False -> "P.False"
 
             DefaultInteger x ->
                 (if x < 0
@@ -251,17 +220,26 @@ instance JSON.ToJSON Default where
 
             DefaultPrim c x ->
                 case x of
-                  DefaultNil   {} -> go x
+                  DefaultNothing  -> go x
                   DefaultParam {} -> go x
-                  DefaultAttr  {} ->
+                  DefaultExpr  {} ->
                       "TF.value " <> Text.parens (fromName c <> " " <> go (unwrap x))
                   _               -> fromName c <> " " <> go x
 
         unwrap = \case
-            DefaultAttr x -> unwrap x
+            DefaultExpr x -> unwrap x
             x             -> x
 
         build = LText.toStrict . Build.toLazyText
+
+defaultParameter :: Default -> Bool
+defaultParameter = go
+  where
+    go = \case
+        DefaultParam {}  -> True
+        DefaultPrim  _ x -> go x
+        DefaultExpr    x -> go x
+        _                -> False
 
 data Class = Class'
     { className     :: !DataName

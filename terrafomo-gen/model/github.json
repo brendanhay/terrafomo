@@ -1,5 +1,6 @@
 {
   "name": "github",
+  "version": "1.1.0-66-g2c7d1c3",
   "schemas": [
     {
       "name": "base_url",

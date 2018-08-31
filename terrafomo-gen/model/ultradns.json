@@ -1,5 +1,6 @@
 {
   "name": "ultradns",
+  "version": "0.1.0-17-g8ddb98b",
   "schemas": [
     {
       "name": "baseurl",

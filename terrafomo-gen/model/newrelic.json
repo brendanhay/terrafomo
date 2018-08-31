@@ -1,5 +1,6 @@
 {
   "name": "newrelic",
+  "version": "1.0.1-1-g51875a5",
   "schemas": [
     {
       "name": "api_key",

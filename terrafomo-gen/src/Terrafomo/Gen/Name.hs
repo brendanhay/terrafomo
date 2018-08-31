@@ -87,39 +87,19 @@ settingsNames x (Key xs) =
         , Name ("new" <> txt)
         )
 
--- -- FIXME: avoid special casing provider
--- settingsNames :: Text -> (DataName, ConName, VarName)
--- settingsNames = \case
---     "provider" -> (Name "Provider", Name "Provider'", Name "newProvider")
---     x          ->
---         let name = rename x
---          in ( name
---             , unsafeRename (`Text.snoc` '\'') name
---             , unsafeRename (mappend "new")    name
---             )
---   where
---     rename =
---         unsafeRename suffix . dataName
+providerNames :: ProviderName -> (DataName, ConName, VarName)
+providerNames name =
+    ( unsafeRename id                 name
+    , unsafeRename (`Text.snoc` '\'') name
+    , Name "newProvider"
+    )
 
---     -- FIXME: Revisit use of keys to guide disambiguation. Elab needs to
---     -- support retrying via (<|>) to try to first insert with no key,
---     -- then by taking a prefix from the key if the schemas aren't equivalent.
 
---     -- prefix x =
---     --     case xs of
---     --         y:_ -> resourceName y <> x
---     --         []  -> x
-
---     suffix x
---         | Text.isSuffixOf "Settings" x = x
---         | Text.isSuffixOf "Setting"  x = x
---         | otherwise                    = x <> "Setting"
-
--- FIXME: replace provider case with overrides
-primitiveNames :: Text -> (DataName, ConName, VarName)
-primitiveNames = \case
-    "provider" -> primitiveNames "provider_name"
-    x          -> datatypeNames (dataName x)
+-- -- FIXME: replace provider case with overrides
+-- primitiveNames :: Text -> (DataName, ConName, VarName)
+-- primitiveNames = \case
+--     "provider" -> primitiveNames "provider_name"
+--     x          -> datatypeNames (dataName x)
 
 datatypeNames :: DataName -> (DataName, ConName, VarName)
 datatypeNames x =

@@ -17,10 +17,10 @@ package-yaml: false
 #     type: 'P.Int'
 #   - mode: exact
 #     match: ip_addresses
-#     type: '[TF.Attr s P.Text]'
+#     type: '[TF.Expr s P.Text]'
 #   - mode: exact
 #     match: dns_names
-#     type: '[TF.Attr s P.Text]'
+#     type: '[TF.Expr s P.Text]'
 #   - mode: exact
 #     match: allowed_uses
-#     type: '[TF.Attr s P.Text]'
+#     type: '[TF.Expr s P.Text]'

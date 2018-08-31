@@ -20,7 +20,7 @@ install:
   - stack --no-terminal --install-ghc build --test --only-dependencies --fast
 
 script:
-  - stack --no-terminal --skip-ghc-check build --fast $PACKAGE
+  - stack --no-terminal --skip-ghc-check build --fast --pedantic $PACKAGE
 
 matrix:
   include:

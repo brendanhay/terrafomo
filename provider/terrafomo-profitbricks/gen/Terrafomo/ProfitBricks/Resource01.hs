@@ -1,7 +1,6 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -77,1189 +76,1212 @@ import GHC.Base (($))
 
 import Terrafomo.ProfitBricks.Settings
 
+import qualified Data.Hashable                   as P
+import qualified Data.HashMap.Strict             as P
+import qualified Data.HashMap.Strict             as HashMap
 import qualified Data.List.NonEmpty              as P
-import qualified Data.Map.Strict                 as P
-import qualified Data.Map.Strict                 as Map
 import qualified Data.Maybe                      as P
-import qualified Data.Monoid                     as P
-import qualified Data.Text                       as P
+import qualified Data.Text.Lazy                  as P
 import qualified GHC.Generics                    as P
 import qualified Lens.Micro                      as P
 import qualified Prelude                         as P
-import qualified Terrafomo.Attribute             as TF
+import qualified Terrafomo.Encode                as TF
 import qualified Terrafomo.HCL                   as TF
-import qualified Terrafomo.Name                  as TF
+import qualified Terrafomo.HIL                   as TF
 import qualified Terrafomo.ProfitBricks.Lens     as P
 import qualified Terrafomo.ProfitBricks.Provider as P
 import qualified Terrafomo.ProfitBricks.Types    as P
 import qualified Terrafomo.Schema                as TF
-import qualified Terrafomo.Validator             as TF
+import qualified Terrafomo.Validate              as TF
 
 -- | @profitbricks_datacenter@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/profitbricks/r/datacenter.html terraform documentation>
 -- for more information.
 data DatacenterResource s = DatacenterResource'
-    { _description :: TF.Attr s P.Text
+    { _description :: P.Maybe (TF.Expr s P.Text)
     -- ^ @description@ - (Optional)
     --
-    , _location    :: TF.Attr s P.Text
+    , _location    :: TF.Expr s P.Text
     -- ^ @location@ - (Required)
     --
-    , _name        :: TF.Attr s P.Text
+    , _name        :: TF.Expr s P.Text
     -- ^ @name@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Define a new @profitbricks_datacenter@ resource value.
 datacenterResource
-    :: TF.Attr s P.Text -- ^ @location@ ('P._location', 'P.location')
-    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    :: TF.Expr s P.Text -- ^ Lens: 'P.location', Field: '_location', HCL: @location@
+    -> TF.Expr s P.Text -- ^ Lens: 'P.name', Field: '_name', HCL: @name@
     -> P.Resource (DatacenterResource s)
 datacenterResource _location _name =
-    TF.unsafeResource "profitbricks_datacenter" TF.validator $
-        DatacenterResource'
-            { _description = TF.Nil
+    TF.unsafeResource "profitbricks_datacenter" P.defaultProvider  TF.encodeLifecycle
+        (\DatacenterResource'{..} -> P.mconcat
+            [ P.maybe P.mempty (TF.pair "description") _description
+            , TF.pair "location" _location
+            , TF.pair "name" _name
+            ])
+        (DatacenterResource'
+            { _description = P.Nothing
             , _location = _location
             , _name = _name
-            }
+            })
 
-instance TF.IsObject (DatacenterResource s) where
-    toObject DatacenterResource'{..} = P.catMaybes
-        [ TF.assign "description" <$> TF.attribute _description
-        , TF.assign "location" <$> TF.attribute _location
-        , TF.assign "name" <$> TF.attribute _name
-        ]
+instance P.Hashable (DatacenterResource s)
 
-instance TF.IsValid (DatacenterResource s) where
+instance TF.HasValidator (DatacenterResource s) where
     validator = P.mempty
 
-instance P.HasDescription (DatacenterResource s) (TF.Attr s P.Text) where
+instance P.HasDescription (DatacenterResource s) (P.Maybe (TF.Expr s P.Text)) where
     description =
-        P.lens (_description :: DatacenterResource s -> TF.Attr s P.Text)
-               (\s a -> s { _description = a } :: DatacenterResource s)
+        P.lens (_description :: DatacenterResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _description = a } :: DatacenterResource s)
 
-instance P.HasLocation (DatacenterResource s) (TF.Attr s P.Text) where
+instance P.HasLocation (DatacenterResource s) (TF.Expr s P.Text) where
     location =
-        P.lens (_location :: DatacenterResource s -> TF.Attr s P.Text)
-               (\s a -> s { _location = a } :: DatacenterResource s)
+        P.lens (_location :: DatacenterResource s -> TF.Expr s P.Text)
+            (\s a -> s { _location = a } :: DatacenterResource s)
 
-instance P.HasName (DatacenterResource s) (TF.Attr s P.Text) where
+instance P.HasName (DatacenterResource s) (TF.Expr s P.Text) where
     name =
-        P.lens (_name :: DatacenterResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: DatacenterResource s)
+        P.lens (_name :: DatacenterResource s -> TF.Expr s P.Text)
+            (\s a -> s { _name = a } :: DatacenterResource s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (DatacenterResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DatacenterResource s)) (TF.Expr s P.Text) where
+    computedId x =
+        TF.unsafeCompute TF.encodeAttr x "id"
 
-instance s ~ s' => P.HasComputedDescription (TF.Ref s' (DatacenterResource s)) (TF.Attr s P.Text) where
-    computedDescription x = TF.compute (TF.refKey x) "description"
+instance s ~ s' => P.HasComputedDescription (TF.Ref s' (DatacenterResource s)) (TF.Expr s P.Text) where
+    computedDescription x =
+        TF.unsafeCompute TF.encodeAttr x "description"
 
 -- | @profitbricks_firewall@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/profitbricks/r/firewall.html terraform documentation>
 -- for more information.
 data FirewallResource s = FirewallResource'
-    { _datacenterId   :: TF.Attr s P.Text
+    { _datacenterId   :: TF.Expr s P.Text
     -- ^ @datacenter_id@ - (Required)
     --
-    , _icmpCode       :: TF.Attr s P.Text
+    , _icmpCode       :: P.Maybe (TF.Expr s P.Text)
     -- ^ @icmp_code@ - (Optional)
     --
-    , _icmpType       :: TF.Attr s P.Text
+    , _icmpType       :: P.Maybe (TF.Expr s P.Text)
     -- ^ @icmp_type@ - (Optional)
     --
-    , _name           :: TF.Attr s P.Text
+    , _name           :: P.Maybe (TF.Expr s P.Text)
     -- ^ @name@ - (Optional)
     --
-    , _nicId          :: TF.Attr s P.Text
+    , _nicId          :: TF.Expr s P.Text
     -- ^ @nic_id@ - (Required)
     --
-    , _portRangeEnd   :: TF.Attr s P.Int
+    , _portRangeEnd   :: P.Maybe (TF.Expr s P.Int)
     -- ^ @port_range_end@ - (Optional)
     --
-    , _portRangeStart :: TF.Attr s P.Int
+    , _portRangeStart :: P.Maybe (TF.Expr s P.Int)
     -- ^ @port_range_start@ - (Optional)
     --
-    , _protocol       :: TF.Attr s P.Text
+    , _protocol       :: TF.Expr s P.Text
     -- ^ @protocol@ - (Required)
     --
-    , _serverId       :: TF.Attr s P.Text
+    , _serverId       :: TF.Expr s P.Text
     -- ^ @server_id@ - (Required)
     --
-    , _sourceIp       :: TF.Attr s P.Text
+    , _sourceIp       :: P.Maybe (TF.Expr s P.Text)
     -- ^ @source_ip@ - (Optional)
     --
-    , _sourceMac      :: TF.Attr s P.Text
+    , _sourceMac      :: P.Maybe (TF.Expr s P.Text)
     -- ^ @source_mac@ - (Optional)
     --
-    , _targetIp       :: TF.Attr s P.Text
+    , _targetIp       :: P.Maybe (TF.Expr s P.Text)
     -- ^ @target_ip@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Define a new @profitbricks_firewall@ resource value.
 firewallResource
-    :: TF.Attr s P.Text -- ^ @datacenter_id@ ('P._datacenterId', 'P.datacenterId')
-    -> TF.Attr s P.Text -- ^ @nic_id@ ('P._nicId', 'P.nicId')
-    -> TF.Attr s P.Text -- ^ @server_id@ ('P._serverId', 'P.serverId')
-    -> TF.Attr s P.Text -- ^ @protocol@ ('P._protocol', 'P.protocol')
+    :: TF.Expr s P.Text -- ^ Lens: 'P.datacenterId', Field: '_datacenterId', HCL: @datacenter_id@
+    -> TF.Expr s P.Text -- ^ Lens: 'P.nicId', Field: '_nicId', HCL: @nic_id@
+    -> TF.Expr s P.Text -- ^ Lens: 'P.serverId', Field: '_serverId', HCL: @server_id@
+    -> TF.Expr s P.Text -- ^ Lens: 'P.protocol', Field: '_protocol', HCL: @protocol@
     -> P.Resource (FirewallResource s)
 firewallResource _datacenterId _nicId _serverId _protocol =
-    TF.unsafeResource "profitbricks_firewall" TF.validator $
-        FirewallResource'
+    TF.unsafeResource "profitbricks_firewall" P.defaultProvider  TF.encodeLifecycle
+        (\FirewallResource'{..} -> P.mconcat
+            [ TF.pair "datacenter_id" _datacenterId
+            , P.maybe P.mempty (TF.pair "icmp_code") _icmpCode
+            , P.maybe P.mempty (TF.pair "icmp_type") _icmpType
+            , P.maybe P.mempty (TF.pair "name") _name
+            , TF.pair "nic_id" _nicId
+            , P.maybe P.mempty (TF.pair "port_range_end") _portRangeEnd
+            , P.maybe P.mempty (TF.pair "port_range_start") _portRangeStart
+            , TF.pair "protocol" _protocol
+            , TF.pair "server_id" _serverId
+            , P.maybe P.mempty (TF.pair "source_ip") _sourceIp
+            , P.maybe P.mempty (TF.pair "source_mac") _sourceMac
+            , P.maybe P.mempty (TF.pair "target_ip") _targetIp
+            ])
+        (FirewallResource'
             { _datacenterId = _datacenterId
-            , _icmpCode = TF.Nil
-            , _icmpType = TF.Nil
-            , _name = TF.Nil
+            , _icmpCode = P.Nothing
+            , _icmpType = P.Nothing
+            , _name = P.Nothing
             , _nicId = _nicId
-            , _portRangeEnd = TF.Nil
-            , _portRangeStart = TF.Nil
+            , _portRangeEnd = P.Nothing
+            , _portRangeStart = P.Nothing
             , _protocol = _protocol
             , _serverId = _serverId
-            , _sourceIp = TF.Nil
-            , _sourceMac = TF.Nil
-            , _targetIp = TF.Nil
-            }
+            , _sourceIp = P.Nothing
+            , _sourceMac = P.Nothing
+            , _targetIp = P.Nothing
+            })
 
-instance TF.IsObject (FirewallResource s) where
-    toObject FirewallResource'{..} = P.catMaybes
-        [ TF.assign "datacenter_id" <$> TF.attribute _datacenterId
-        , TF.assign "icmp_code" <$> TF.attribute _icmpCode
-        , TF.assign "icmp_type" <$> TF.attribute _icmpType
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "nic_id" <$> TF.attribute _nicId
-        , TF.assign "port_range_end" <$> TF.attribute _portRangeEnd
-        , TF.assign "port_range_start" <$> TF.attribute _portRangeStart
-        , TF.assign "protocol" <$> TF.attribute _protocol
-        , TF.assign "server_id" <$> TF.attribute _serverId
-        , TF.assign "source_ip" <$> TF.attribute _sourceIp
-        , TF.assign "source_mac" <$> TF.attribute _sourceMac
-        , TF.assign "target_ip" <$> TF.attribute _targetIp
-        ]
+instance P.Hashable (FirewallResource s)
 
-instance TF.IsValid (FirewallResource s) where
+instance TF.HasValidator (FirewallResource s) where
     validator = P.mempty
 
-instance P.HasDatacenterId (FirewallResource s) (TF.Attr s P.Text) where
+instance P.HasDatacenterId (FirewallResource s) (TF.Expr s P.Text) where
     datacenterId =
-        P.lens (_datacenterId :: FirewallResource s -> TF.Attr s P.Text)
-               (\s a -> s { _datacenterId = a } :: FirewallResource s)
+        P.lens (_datacenterId :: FirewallResource s -> TF.Expr s P.Text)
+            (\s a -> s { _datacenterId = a } :: FirewallResource s)
 
-instance P.HasIcmpCode (FirewallResource s) (TF.Attr s P.Text) where
+instance P.HasIcmpCode (FirewallResource s) (P.Maybe (TF.Expr s P.Text)) where
     icmpCode =
-        P.lens (_icmpCode :: FirewallResource s -> TF.Attr s P.Text)
-               (\s a -> s { _icmpCode = a } :: FirewallResource s)
+        P.lens (_icmpCode :: FirewallResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _icmpCode = a } :: FirewallResource s)
 
-instance P.HasIcmpType (FirewallResource s) (TF.Attr s P.Text) where
+instance P.HasIcmpType (FirewallResource s) (P.Maybe (TF.Expr s P.Text)) where
     icmpType =
-        P.lens (_icmpType :: FirewallResource s -> TF.Attr s P.Text)
-               (\s a -> s { _icmpType = a } :: FirewallResource s)
+        P.lens (_icmpType :: FirewallResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _icmpType = a } :: FirewallResource s)
 
-instance P.HasName (FirewallResource s) (TF.Attr s P.Text) where
+instance P.HasName (FirewallResource s) (P.Maybe (TF.Expr s P.Text)) where
     name =
-        P.lens (_name :: FirewallResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: FirewallResource s)
+        P.lens (_name :: FirewallResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _name = a } :: FirewallResource s)
 
-instance P.HasNicId (FirewallResource s) (TF.Attr s P.Text) where
+instance P.HasNicId (FirewallResource s) (TF.Expr s P.Text) where
     nicId =
-        P.lens (_nicId :: FirewallResource s -> TF.Attr s P.Text)
-               (\s a -> s { _nicId = a } :: FirewallResource s)
+        P.lens (_nicId :: FirewallResource s -> TF.Expr s P.Text)
+            (\s a -> s { _nicId = a } :: FirewallResource s)
 
-instance P.HasPortRangeEnd (FirewallResource s) (TF.Attr s P.Int) where
+instance P.HasPortRangeEnd (FirewallResource s) (P.Maybe (TF.Expr s P.Int)) where
     portRangeEnd =
-        P.lens (_portRangeEnd :: FirewallResource s -> TF.Attr s P.Int)
-               (\s a -> s { _portRangeEnd = a } :: FirewallResource s)
+        P.lens (_portRangeEnd :: FirewallResource s -> P.Maybe (TF.Expr s P.Int))
+            (\s a -> s { _portRangeEnd = a } :: FirewallResource s)
 
-instance P.HasPortRangeStart (FirewallResource s) (TF.Attr s P.Int) where
+instance P.HasPortRangeStart (FirewallResource s) (P.Maybe (TF.Expr s P.Int)) where
     portRangeStart =
-        P.lens (_portRangeStart :: FirewallResource s -> TF.Attr s P.Int)
-               (\s a -> s { _portRangeStart = a } :: FirewallResource s)
+        P.lens (_portRangeStart :: FirewallResource s -> P.Maybe (TF.Expr s P.Int))
+            (\s a -> s { _portRangeStart = a } :: FirewallResource s)
 
-instance P.HasProtocol (FirewallResource s) (TF.Attr s P.Text) where
+instance P.HasProtocol (FirewallResource s) (TF.Expr s P.Text) where
     protocol =
-        P.lens (_protocol :: FirewallResource s -> TF.Attr s P.Text)
-               (\s a -> s { _protocol = a } :: FirewallResource s)
+        P.lens (_protocol :: FirewallResource s -> TF.Expr s P.Text)
+            (\s a -> s { _protocol = a } :: FirewallResource s)
 
-instance P.HasServerId (FirewallResource s) (TF.Attr s P.Text) where
+instance P.HasServerId (FirewallResource s) (TF.Expr s P.Text) where
     serverId =
-        P.lens (_serverId :: FirewallResource s -> TF.Attr s P.Text)
-               (\s a -> s { _serverId = a } :: FirewallResource s)
+        P.lens (_serverId :: FirewallResource s -> TF.Expr s P.Text)
+            (\s a -> s { _serverId = a } :: FirewallResource s)
 
-instance P.HasSourceIp (FirewallResource s) (TF.Attr s P.Text) where
+instance P.HasSourceIp (FirewallResource s) (P.Maybe (TF.Expr s P.Text)) where
     sourceIp =
-        P.lens (_sourceIp :: FirewallResource s -> TF.Attr s P.Text)
-               (\s a -> s { _sourceIp = a } :: FirewallResource s)
+        P.lens (_sourceIp :: FirewallResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _sourceIp = a } :: FirewallResource s)
 
-instance P.HasSourceMac (FirewallResource s) (TF.Attr s P.Text) where
+instance P.HasSourceMac (FirewallResource s) (P.Maybe (TF.Expr s P.Text)) where
     sourceMac =
-        P.lens (_sourceMac :: FirewallResource s -> TF.Attr s P.Text)
-               (\s a -> s { _sourceMac = a } :: FirewallResource s)
+        P.lens (_sourceMac :: FirewallResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _sourceMac = a } :: FirewallResource s)
 
-instance P.HasTargetIp (FirewallResource s) (TF.Attr s P.Text) where
+instance P.HasTargetIp (FirewallResource s) (P.Maybe (TF.Expr s P.Text)) where
     targetIp =
-        P.lens (_targetIp :: FirewallResource s -> TF.Attr s P.Text)
-               (\s a -> s { _targetIp = a } :: FirewallResource s)
+        P.lens (_targetIp :: FirewallResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _targetIp = a } :: FirewallResource s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (FirewallResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (FirewallResource s)) (TF.Expr s P.Text) where
+    computedId x =
+        TF.unsafeCompute TF.encodeAttr x "id"
 
 -- | @profitbricks_group@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/profitbricks/r/group.html terraform documentation>
 -- for more information.
 data GroupResource s = GroupResource'
-    { _accessActivityLog :: TF.Attr s P.Bool
+    { _accessActivityLog :: P.Maybe (TF.Expr s P.Bool)
     -- ^ @access_activity_log@ - (Optional)
     --
-    , _createDatacenter  :: TF.Attr s P.Bool
+    , _createDatacenter  :: P.Maybe (TF.Expr s P.Bool)
     -- ^ @create_datacenter@ - (Optional)
     --
-    , _createSnapshot    :: TF.Attr s P.Bool
+    , _createSnapshot    :: P.Maybe (TF.Expr s P.Bool)
     -- ^ @create_snapshot@ - (Optional)
     --
-    , _name              :: TF.Attr s P.Text
+    , _name              :: TF.Expr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _reserveIp         :: TF.Attr s P.Bool
+    , _reserveIp         :: P.Maybe (TF.Expr s P.Bool)
     -- ^ @reserve_ip@ - (Optional)
     --
-    , _userId            :: TF.Attr s P.Text
+    , _userId            :: P.Maybe (TF.Expr s P.Text)
     -- ^ @user_id@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Define a new @profitbricks_group@ resource value.
 groupResource
-    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    :: TF.Expr s P.Text -- ^ Lens: 'P.name', Field: '_name', HCL: @name@
     -> P.Resource (GroupResource s)
 groupResource _name =
-    TF.unsafeResource "profitbricks_group" TF.validator $
-        GroupResource'
-            { _accessActivityLog = TF.Nil
-            , _createDatacenter = TF.Nil
-            , _createSnapshot = TF.Nil
+    TF.unsafeResource "profitbricks_group" P.defaultProvider  TF.encodeLifecycle
+        (\GroupResource'{..} -> P.mconcat
+            [ P.maybe P.mempty (TF.pair "access_activity_log") _accessActivityLog
+            , P.maybe P.mempty (TF.pair "create_datacenter") _createDatacenter
+            , P.maybe P.mempty (TF.pair "create_snapshot") _createSnapshot
+            , TF.pair "name" _name
+            , P.maybe P.mempty (TF.pair "reserve_ip") _reserveIp
+            , P.maybe P.mempty (TF.pair "user_id") _userId
+            ])
+        (GroupResource'
+            { _accessActivityLog = P.Nothing
+            , _createDatacenter = P.Nothing
+            , _createSnapshot = P.Nothing
             , _name = _name
-            , _reserveIp = TF.Nil
-            , _userId = TF.Nil
-            }
+            , _reserveIp = P.Nothing
+            , _userId = P.Nothing
+            })
 
-instance TF.IsObject (GroupResource s) where
-    toObject GroupResource'{..} = P.catMaybes
-        [ TF.assign "access_activity_log" <$> TF.attribute _accessActivityLog
-        , TF.assign "create_datacenter" <$> TF.attribute _createDatacenter
-        , TF.assign "create_snapshot" <$> TF.attribute _createSnapshot
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "reserve_ip" <$> TF.attribute _reserveIp
-        , TF.assign "user_id" <$> TF.attribute _userId
-        ]
+instance P.Hashable (GroupResource s)
 
-instance TF.IsValid (GroupResource s) where
+instance TF.HasValidator (GroupResource s) where
     validator = P.mempty
 
-instance P.HasAccessActivityLog (GroupResource s) (TF.Attr s P.Bool) where
+instance P.HasAccessActivityLog (GroupResource s) (P.Maybe (TF.Expr s P.Bool)) where
     accessActivityLog =
-        P.lens (_accessActivityLog :: GroupResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _accessActivityLog = a } :: GroupResource s)
+        P.lens (_accessActivityLog :: GroupResource s -> P.Maybe (TF.Expr s P.Bool))
+            (\s a -> s { _accessActivityLog = a } :: GroupResource s)
 
-instance P.HasCreateDatacenter (GroupResource s) (TF.Attr s P.Bool) where
+instance P.HasCreateDatacenter (GroupResource s) (P.Maybe (TF.Expr s P.Bool)) where
     createDatacenter =
-        P.lens (_createDatacenter :: GroupResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _createDatacenter = a } :: GroupResource s)
+        P.lens (_createDatacenter :: GroupResource s -> P.Maybe (TF.Expr s P.Bool))
+            (\s a -> s { _createDatacenter = a } :: GroupResource s)
 
-instance P.HasCreateSnapshot (GroupResource s) (TF.Attr s P.Bool) where
+instance P.HasCreateSnapshot (GroupResource s) (P.Maybe (TF.Expr s P.Bool)) where
     createSnapshot =
-        P.lens (_createSnapshot :: GroupResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _createSnapshot = a } :: GroupResource s)
+        P.lens (_createSnapshot :: GroupResource s -> P.Maybe (TF.Expr s P.Bool))
+            (\s a -> s { _createSnapshot = a } :: GroupResource s)
 
-instance P.HasName (GroupResource s) (TF.Attr s P.Text) where
+instance P.HasName (GroupResource s) (TF.Expr s P.Text) where
     name =
-        P.lens (_name :: GroupResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: GroupResource s)
+        P.lens (_name :: GroupResource s -> TF.Expr s P.Text)
+            (\s a -> s { _name = a } :: GroupResource s)
 
-instance P.HasReserveIp (GroupResource s) (TF.Attr s P.Bool) where
+instance P.HasReserveIp (GroupResource s) (P.Maybe (TF.Expr s P.Bool)) where
     reserveIp =
-        P.lens (_reserveIp :: GroupResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _reserveIp = a } :: GroupResource s)
+        P.lens (_reserveIp :: GroupResource s -> P.Maybe (TF.Expr s P.Bool))
+            (\s a -> s { _reserveIp = a } :: GroupResource s)
 
-instance P.HasUserId (GroupResource s) (TF.Attr s P.Text) where
+instance P.HasUserId (GroupResource s) (P.Maybe (TF.Expr s P.Text)) where
     userId =
-        P.lens (_userId :: GroupResource s -> TF.Attr s P.Text)
-               (\s a -> s { _userId = a } :: GroupResource s)
+        P.lens (_userId :: GroupResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _userId = a } :: GroupResource s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (GroupResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (GroupResource s)) (TF.Expr s P.Text) where
+    computedId x =
+        TF.unsafeCompute TF.encodeAttr x "id"
 
-instance s ~ s' => P.HasComputedUsers (TF.Ref s' (GroupResource s)) (TF.Attr s [TF.Attr s (GroupUsers s)]) where
-    computedUsers x = TF.compute (TF.refKey x) "users"
+instance s ~ s' => P.HasComputedUsers (TF.Ref s' (GroupResource s)) (TF.Expr s [TF.Expr s (GroupUsers s)]) where
+    computedUsers x =
+        TF.unsafeCompute TF.encodeAttr x "users"
 
 -- | @profitbricks_ipblock@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/profitbricks/r/ipblock.html terraform documentation>
 -- for more information.
 data IpblockResource s = IpblockResource'
-    { _location :: TF.Attr s P.Text
+    { _location :: TF.Expr s P.Text
     -- ^ @location@ - (Required, Forces New)
     --
-    , _name     :: TF.Attr s P.Text
+    , _name     :: P.Maybe (TF.Expr s P.Text)
     -- ^ @name@ - (Optional)
     --
-    , _size     :: TF.Attr s P.Int
+    , _size     :: TF.Expr s P.Int
     -- ^ @size@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Define a new @profitbricks_ipblock@ resource value.
 ipblockResource
-    :: TF.Attr s P.Text -- ^ @location@ ('P._location', 'P.location')
-    -> TF.Attr s P.Int -- ^ @size@ ('P._size', 'P.size')
+    :: TF.Expr s P.Text -- ^ Lens: 'P.location', Field: '_location', HCL: @location@
+    -> TF.Expr s P.Int -- ^ Lens: 'P.size', Field: '_size', HCL: @size@
     -> P.Resource (IpblockResource s)
 ipblockResource _location _size =
-    TF.unsafeResource "profitbricks_ipblock" TF.validator $
-        IpblockResource'
+    TF.unsafeResource "profitbricks_ipblock" P.defaultProvider  TF.encodeLifecycle
+        (\IpblockResource'{..} -> P.mconcat
+            [ TF.pair "location" _location
+            , P.maybe P.mempty (TF.pair "name") _name
+            , TF.pair "size" _size
+            ])
+        (IpblockResource'
             { _location = _location
-            , _name = TF.Nil
+            , _name = P.Nothing
             , _size = _size
-            }
+            })
 
-instance TF.IsObject (IpblockResource s) where
-    toObject IpblockResource'{..} = P.catMaybes
-        [ TF.assign "location" <$> TF.attribute _location
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "size" <$> TF.attribute _size
-        ]
+instance P.Hashable (IpblockResource s)
 
-instance TF.IsValid (IpblockResource s) where
+instance TF.HasValidator (IpblockResource s) where
     validator = P.mempty
 
-instance P.HasLocation (IpblockResource s) (TF.Attr s P.Text) where
+instance P.HasLocation (IpblockResource s) (TF.Expr s P.Text) where
     location =
-        P.lens (_location :: IpblockResource s -> TF.Attr s P.Text)
-               (\s a -> s { _location = a } :: IpblockResource s)
+        P.lens (_location :: IpblockResource s -> TF.Expr s P.Text)
+            (\s a -> s { _location = a } :: IpblockResource s)
 
-instance P.HasName (IpblockResource s) (TF.Attr s P.Text) where
+instance P.HasName (IpblockResource s) (P.Maybe (TF.Expr s P.Text)) where
     name =
-        P.lens (_name :: IpblockResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: IpblockResource s)
+        P.lens (_name :: IpblockResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _name = a } :: IpblockResource s)
 
-instance P.HasSize (IpblockResource s) (TF.Attr s P.Int) where
+instance P.HasSize (IpblockResource s) (TF.Expr s P.Int) where
     size =
-        P.lens (_size :: IpblockResource s -> TF.Attr s P.Int)
-               (\s a -> s { _size = a } :: IpblockResource s)
+        P.lens (_size :: IpblockResource s -> TF.Expr s P.Int)
+            (\s a -> s { _size = a } :: IpblockResource s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (IpblockResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (IpblockResource s)) (TF.Expr s P.Text) where
+    computedId x =
+        TF.unsafeCompute TF.encodeAttr x "id"
 
-instance s ~ s' => P.HasComputedIps (TF.Ref s' (IpblockResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedIps x = TF.compute (TF.refKey x) "ips"
+instance s ~ s' => P.HasComputedIps (TF.Ref s' (IpblockResource s)) (TF.Expr s [TF.Expr s P.Text]) where
+    computedIps x =
+        TF.unsafeCompute TF.encodeAttr x "ips"
 
 -- | @profitbricks_ipfailover@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/profitbricks/r/ipfailover.html terraform documentation>
 -- for more information.
 data IpfailoverResource s = IpfailoverResource'
-    { _datacenterId :: TF.Attr s P.Text
+    { _datacenterId :: TF.Expr s P.Text
     -- ^ @datacenter_id@ - (Required)
     --
-    , _ip           :: TF.Attr s P.Text
+    , _ip           :: TF.Expr s P.Text
     -- ^ @ip@ - (Required)
     --
-    , _lanId        :: TF.Attr s P.Text
+    , _lanId        :: TF.Expr s P.Text
     -- ^ @lan_id@ - (Required)
     --
-    , _nicuuid      :: TF.Attr s P.Text
+    , _nicuuid      :: TF.Expr s P.Text
     -- ^ @nicuuid@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Define a new @profitbricks_ipfailover@ resource value.
 ipfailoverResource
-    :: TF.Attr s P.Text -- ^ @datacenter_id@ ('P._datacenterId', 'P.datacenterId')
-    -> TF.Attr s P.Text -- ^ @lan_id@ ('P._lanId', 'P.lanId')
-    -> TF.Attr s P.Text -- ^ @ip@ ('P._ip', 'P.ip')
-    -> TF.Attr s P.Text -- ^ @nicuuid@ ('P._nicuuid', 'P.nicuuid')
+    :: TF.Expr s P.Text -- ^ Lens: 'P.datacenterId', Field: '_datacenterId', HCL: @datacenter_id@
+    -> TF.Expr s P.Text -- ^ Lens: 'P.lanId', Field: '_lanId', HCL: @lan_id@
+    -> TF.Expr s P.Text -- ^ Lens: 'P.ip', Field: '_ip', HCL: @ip@
+    -> TF.Expr s P.Text -- ^ Lens: 'P.nicuuid', Field: '_nicuuid', HCL: @nicuuid@
     -> P.Resource (IpfailoverResource s)
 ipfailoverResource _datacenterId _lanId _ip _nicuuid =
-    TF.unsafeResource "profitbricks_ipfailover" TF.validator $
-        IpfailoverResource'
+    TF.unsafeResource "profitbricks_ipfailover" P.defaultProvider  TF.encodeLifecycle
+        (\IpfailoverResource'{..} -> P.mconcat
+            [ TF.pair "datacenter_id" _datacenterId
+            , TF.pair "ip" _ip
+            , TF.pair "lan_id" _lanId
+            , TF.pair "nicuuid" _nicuuid
+            ])
+        (IpfailoverResource'
             { _datacenterId = _datacenterId
             , _ip = _ip
             , _lanId = _lanId
             , _nicuuid = _nicuuid
-            }
+            })
 
-instance TF.IsObject (IpfailoverResource s) where
-    toObject IpfailoverResource'{..} = P.catMaybes
-        [ TF.assign "datacenter_id" <$> TF.attribute _datacenterId
-        , TF.assign "ip" <$> TF.attribute _ip
-        , TF.assign "lan_id" <$> TF.attribute _lanId
-        , TF.assign "nicuuid" <$> TF.attribute _nicuuid
-        ]
+instance P.Hashable (IpfailoverResource s)
 
-instance TF.IsValid (IpfailoverResource s) where
+instance TF.HasValidator (IpfailoverResource s) where
     validator = P.mempty
 
-instance P.HasDatacenterId (IpfailoverResource s) (TF.Attr s P.Text) where
+instance P.HasDatacenterId (IpfailoverResource s) (TF.Expr s P.Text) where
     datacenterId =
-        P.lens (_datacenterId :: IpfailoverResource s -> TF.Attr s P.Text)
-               (\s a -> s { _datacenterId = a } :: IpfailoverResource s)
+        P.lens (_datacenterId :: IpfailoverResource s -> TF.Expr s P.Text)
+            (\s a -> s { _datacenterId = a } :: IpfailoverResource s)
 
-instance P.HasIp (IpfailoverResource s) (TF.Attr s P.Text) where
+instance P.HasIp (IpfailoverResource s) (TF.Expr s P.Text) where
     ip =
-        P.lens (_ip :: IpfailoverResource s -> TF.Attr s P.Text)
-               (\s a -> s { _ip = a } :: IpfailoverResource s)
+        P.lens (_ip :: IpfailoverResource s -> TF.Expr s P.Text)
+            (\s a -> s { _ip = a } :: IpfailoverResource s)
 
-instance P.HasLanId (IpfailoverResource s) (TF.Attr s P.Text) where
+instance P.HasLanId (IpfailoverResource s) (TF.Expr s P.Text) where
     lanId =
-        P.lens (_lanId :: IpfailoverResource s -> TF.Attr s P.Text)
-               (\s a -> s { _lanId = a } :: IpfailoverResource s)
+        P.lens (_lanId :: IpfailoverResource s -> TF.Expr s P.Text)
+            (\s a -> s { _lanId = a } :: IpfailoverResource s)
 
-instance P.HasNicuuid (IpfailoverResource s) (TF.Attr s P.Text) where
+instance P.HasNicuuid (IpfailoverResource s) (TF.Expr s P.Text) where
     nicuuid =
-        P.lens (_nicuuid :: IpfailoverResource s -> TF.Attr s P.Text)
-               (\s a -> s { _nicuuid = a } :: IpfailoverResource s)
+        P.lens (_nicuuid :: IpfailoverResource s -> TF.Expr s P.Text)
+            (\s a -> s { _nicuuid = a } :: IpfailoverResource s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (IpfailoverResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (IpfailoverResource s)) (TF.Expr s P.Text) where
+    computedId x =
+        TF.unsafeCompute TF.encodeAttr x "id"
 
 -- | @profitbricks_lan@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/profitbricks/r/lan.html terraform documentation>
 -- for more information.
 data LanResource s = LanResource'
-    { _datacenterId :: TF.Attr s P.Text
+    { _datacenterId :: TF.Expr s P.Text
     -- ^ @datacenter_id@ - (Required)
     --
-    , _name         :: TF.Attr s P.Text
+    , _name         :: P.Maybe (TF.Expr s P.Text)
     -- ^ @name@ - (Optional)
     --
-    , _public       :: TF.Attr s P.Bool
+    , _public       :: TF.Expr s P.Bool
     -- ^ @public@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Define a new @profitbricks_lan@ resource value.
 lanResource
-    :: TF.Attr s P.Text -- ^ @datacenter_id@ ('P._datacenterId', 'P.datacenterId')
-    -> TF.Attr s P.Bool -- ^ @public@ ('P._public', 'P.public')
+    :: TF.Expr s P.Text -- ^ Lens: 'P.datacenterId', Field: '_datacenterId', HCL: @datacenter_id@
+    -> TF.Expr s P.Bool -- ^ Lens: 'P.public', Field: '_public', HCL: @public@
     -> P.Resource (LanResource s)
 lanResource _datacenterId _public =
-    TF.unsafeResource "profitbricks_lan" TF.validator $
-        LanResource'
+    TF.unsafeResource "profitbricks_lan" P.defaultProvider  TF.encodeLifecycle
+        (\LanResource'{..} -> P.mconcat
+            [ TF.pair "datacenter_id" _datacenterId
+            , P.maybe P.mempty (TF.pair "name") _name
+            , TF.pair "public" _public
+            ])
+        (LanResource'
             { _datacenterId = _datacenterId
-            , _name = TF.Nil
+            , _name = P.Nothing
             , _public = _public
-            }
+            })
 
-instance TF.IsObject (LanResource s) where
-    toObject LanResource'{..} = P.catMaybes
-        [ TF.assign "datacenter_id" <$> TF.attribute _datacenterId
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "public" <$> TF.attribute _public
-        ]
+instance P.Hashable (LanResource s)
 
-instance TF.IsValid (LanResource s) where
+instance TF.HasValidator (LanResource s) where
     validator = P.mempty
 
-instance P.HasDatacenterId (LanResource s) (TF.Attr s P.Text) where
+instance P.HasDatacenterId (LanResource s) (TF.Expr s P.Text) where
     datacenterId =
-        P.lens (_datacenterId :: LanResource s -> TF.Attr s P.Text)
-               (\s a -> s { _datacenterId = a } :: LanResource s)
+        P.lens (_datacenterId :: LanResource s -> TF.Expr s P.Text)
+            (\s a -> s { _datacenterId = a } :: LanResource s)
 
-instance P.HasName (LanResource s) (TF.Attr s P.Text) where
+instance P.HasName (LanResource s) (P.Maybe (TF.Expr s P.Text)) where
     name =
-        P.lens (_name :: LanResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: LanResource s)
+        P.lens (_name :: LanResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _name = a } :: LanResource s)
 
-instance P.HasPublic (LanResource s) (TF.Attr s P.Bool) where
+instance P.HasPublic (LanResource s) (TF.Expr s P.Bool) where
     public =
-        P.lens (_public :: LanResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _public = a } :: LanResource s)
+        P.lens (_public :: LanResource s -> TF.Expr s P.Bool)
+            (\s a -> s { _public = a } :: LanResource s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (LanResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (LanResource s)) (TF.Expr s P.Text) where
+    computedId x =
+        TF.unsafeCompute TF.encodeAttr x "id"
 
 -- | @profitbricks_loadbalancer@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/profitbricks/r/loadbalancer.html terraform documentation>
 -- for more information.
 data LoadbalancerResource s = LoadbalancerResource'
-    { _datacenterId :: TF.Attr s P.Text
+    { _datacenterId :: TF.Expr s P.Text
     -- ^ @datacenter_id@ - (Required)
     --
-    , _dhcp         :: TF.Attr s P.Bool
+    , _dhcp         :: P.Maybe (TF.Expr s P.Bool)
     -- ^ @dhcp@ - (Optional)
     --
-    , _ip           :: TF.Attr s P.Text
+    , _ip           :: P.Maybe (TF.Expr s P.Text)
     -- ^ @ip@ - (Optional)
     --
-    , _name         :: TF.Attr s P.Text
+    , _name         :: TF.Expr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _nicIds       :: TF.Attr s [TF.Attr s P.Text]
+    , _nicIds       :: TF.Expr s [TF.Expr s P.Text]
     -- ^ @nic_ids@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Define a new @profitbricks_loadbalancer@ resource value.
 loadbalancerResource
-    :: TF.Attr s P.Text -- ^ @datacenter_id@ ('P._datacenterId', 'P.datacenterId')
-    -> TF.Attr s [TF.Attr s P.Text] -- ^ @nic_ids@ ('P._nicIds', 'P.nicIds')
-    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    :: TF.Expr s P.Text -- ^ Lens: 'P.datacenterId', Field: '_datacenterId', HCL: @datacenter_id@
+    -> TF.Expr s [TF.Expr s P.Text] -- ^ Lens: 'P.nicIds', Field: '_nicIds', HCL: @nic_ids@
+    -> TF.Expr s P.Text -- ^ Lens: 'P.name', Field: '_name', HCL: @name@
     -> P.Resource (LoadbalancerResource s)
 loadbalancerResource _datacenterId _nicIds _name =
-    TF.unsafeResource "profitbricks_loadbalancer" TF.validator $
-        LoadbalancerResource'
+    TF.unsafeResource "profitbricks_loadbalancer" P.defaultProvider  TF.encodeLifecycle
+        (\LoadbalancerResource'{..} -> P.mconcat
+            [ TF.pair "datacenter_id" _datacenterId
+            , P.maybe P.mempty (TF.pair "dhcp") _dhcp
+            , P.maybe P.mempty (TF.pair "ip") _ip
+            , TF.pair "name" _name
+            , TF.pair "nic_ids" _nicIds
+            ])
+        (LoadbalancerResource'
             { _datacenterId = _datacenterId
-            , _dhcp = TF.Nil
-            , _ip = TF.Nil
+            , _dhcp = P.Nothing
+            , _ip = P.Nothing
             , _name = _name
             , _nicIds = _nicIds
-            }
+            })
 
-instance TF.IsObject (LoadbalancerResource s) where
-    toObject LoadbalancerResource'{..} = P.catMaybes
-        [ TF.assign "datacenter_id" <$> TF.attribute _datacenterId
-        , TF.assign "dhcp" <$> TF.attribute _dhcp
-        , TF.assign "ip" <$> TF.attribute _ip
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "nic_ids" <$> TF.attribute _nicIds
-        ]
+instance P.Hashable (LoadbalancerResource s)
 
-instance TF.IsValid (LoadbalancerResource s) where
+instance TF.HasValidator (LoadbalancerResource s) where
     validator = P.mempty
 
-instance P.HasDatacenterId (LoadbalancerResource s) (TF.Attr s P.Text) where
+instance P.HasDatacenterId (LoadbalancerResource s) (TF.Expr s P.Text) where
     datacenterId =
-        P.lens (_datacenterId :: LoadbalancerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _datacenterId = a } :: LoadbalancerResource s)
+        P.lens (_datacenterId :: LoadbalancerResource s -> TF.Expr s P.Text)
+            (\s a -> s { _datacenterId = a } :: LoadbalancerResource s)
 
-instance P.HasDhcp (LoadbalancerResource s) (TF.Attr s P.Bool) where
+instance P.HasDhcp (LoadbalancerResource s) (P.Maybe (TF.Expr s P.Bool)) where
     dhcp =
-        P.lens (_dhcp :: LoadbalancerResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _dhcp = a } :: LoadbalancerResource s)
+        P.lens (_dhcp :: LoadbalancerResource s -> P.Maybe (TF.Expr s P.Bool))
+            (\s a -> s { _dhcp = a } :: LoadbalancerResource s)
 
-instance P.HasIp (LoadbalancerResource s) (TF.Attr s P.Text) where
+instance P.HasIp (LoadbalancerResource s) (P.Maybe (TF.Expr s P.Text)) where
     ip =
-        P.lens (_ip :: LoadbalancerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _ip = a } :: LoadbalancerResource s)
+        P.lens (_ip :: LoadbalancerResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _ip = a } :: LoadbalancerResource s)
 
-instance P.HasName (LoadbalancerResource s) (TF.Attr s P.Text) where
+instance P.HasName (LoadbalancerResource s) (TF.Expr s P.Text) where
     name =
-        P.lens (_name :: LoadbalancerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: LoadbalancerResource s)
+        P.lens (_name :: LoadbalancerResource s -> TF.Expr s P.Text)
+            (\s a -> s { _name = a } :: LoadbalancerResource s)
 
-instance P.HasNicIds (LoadbalancerResource s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasNicIds (LoadbalancerResource s) (TF.Expr s [TF.Expr s P.Text]) where
     nicIds =
-        P.lens (_nicIds :: LoadbalancerResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _nicIds = a } :: LoadbalancerResource s)
+        P.lens (_nicIds :: LoadbalancerResource s -> TF.Expr s [TF.Expr s P.Text])
+            (\s a -> s { _nicIds = a } :: LoadbalancerResource s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (LoadbalancerResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (LoadbalancerResource s)) (TF.Expr s P.Text) where
+    computedId x =
+        TF.unsafeCompute TF.encodeAttr x "id"
 
 -- | @profitbricks_nic@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/profitbricks/r/nic.html terraform documentation>
 -- for more information.
 data NicResource s = NicResource'
-    { _datacenterId   :: TF.Attr s P.Text
+    { _datacenterId   :: TF.Expr s P.Text
     -- ^ @datacenter_id@ - (Required)
     --
-    , _dhcp           :: TF.Attr s P.Bool
+    , _dhcp           :: P.Maybe (TF.Expr s P.Bool)
     -- ^ @dhcp@ - (Optional)
     --
-    , _firewallActive :: TF.Attr s P.Bool
+    , _firewallActive :: P.Maybe (TF.Expr s P.Bool)
     -- ^ @firewall_active@ - (Optional)
     --
-    , _ip             :: TF.Attr s P.Text
+    , _ip             :: P.Maybe (TF.Expr s P.Text)
     -- ^ @ip@ - (Optional)
     --
-    , _lan            :: TF.Attr s P.Int
+    , _lan            :: TF.Expr s P.Int
     -- ^ @lan@ - (Required)
     --
-    , _name           :: TF.Attr s P.Text
+    , _name           :: P.Maybe (TF.Expr s P.Text)
     -- ^ @name@ - (Optional)
     --
-    , _nat            :: TF.Attr s P.Bool
+    , _nat            :: P.Maybe (TF.Expr s P.Bool)
     -- ^ @nat@ - (Optional)
     --
-    , _serverId       :: TF.Attr s P.Text
+    , _serverId       :: TF.Expr s P.Text
     -- ^ @server_id@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Define a new @profitbricks_nic@ resource value.
 nicResource
-    :: TF.Attr s P.Text -- ^ @datacenter_id@ ('P._datacenterId', 'P.datacenterId')
-    -> TF.Attr s P.Text -- ^ @server_id@ ('P._serverId', 'P.serverId')
-    -> TF.Attr s P.Int -- ^ @lan@ ('P._lan', 'P.lan')
+    :: TF.Expr s P.Text -- ^ Lens: 'P.datacenterId', Field: '_datacenterId', HCL: @datacenter_id@
+    -> TF.Expr s P.Text -- ^ Lens: 'P.serverId', Field: '_serverId', HCL: @server_id@
+    -> TF.Expr s P.Int -- ^ Lens: 'P.lan', Field: '_lan', HCL: @lan@
     -> P.Resource (NicResource s)
 nicResource _datacenterId _serverId _lan =
-    TF.unsafeResource "profitbricks_nic" TF.validator $
-        NicResource'
+    TF.unsafeResource "profitbricks_nic" P.defaultProvider  TF.encodeLifecycle
+        (\NicResource'{..} -> P.mconcat
+            [ TF.pair "datacenter_id" _datacenterId
+            , P.maybe P.mempty (TF.pair "dhcp") _dhcp
+            , P.maybe P.mempty (TF.pair "firewall_active") _firewallActive
+            , P.maybe P.mempty (TF.pair "ip") _ip
+            , TF.pair "lan" _lan
+            , P.maybe P.mempty (TF.pair "name") _name
+            , P.maybe P.mempty (TF.pair "nat") _nat
+            , TF.pair "server_id" _serverId
+            ])
+        (NicResource'
             { _datacenterId = _datacenterId
-            , _dhcp = TF.Nil
-            , _firewallActive = TF.Nil
-            , _ip = TF.Nil
+            , _dhcp = P.Nothing
+            , _firewallActive = P.Nothing
+            , _ip = P.Nothing
             , _lan = _lan
-            , _name = TF.Nil
-            , _nat = TF.Nil
+            , _name = P.Nothing
+            , _nat = P.Nothing
             , _serverId = _serverId
-            }
+            })
 
-instance TF.IsObject (NicResource s) where
-    toObject NicResource'{..} = P.catMaybes
-        [ TF.assign "datacenter_id" <$> TF.attribute _datacenterId
-        , TF.assign "dhcp" <$> TF.attribute _dhcp
-        , TF.assign "firewall_active" <$> TF.attribute _firewallActive
-        , TF.assign "ip" <$> TF.attribute _ip
-        , TF.assign "lan" <$> TF.attribute _lan
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "nat" <$> TF.attribute _nat
-        , TF.assign "server_id" <$> TF.attribute _serverId
-        ]
+instance P.Hashable (NicResource s)
 
-instance TF.IsValid (NicResource s) where
+instance TF.HasValidator (NicResource s) where
     validator = P.mempty
 
-instance P.HasDatacenterId (NicResource s) (TF.Attr s P.Text) where
+instance P.HasDatacenterId (NicResource s) (TF.Expr s P.Text) where
     datacenterId =
-        P.lens (_datacenterId :: NicResource s -> TF.Attr s P.Text)
-               (\s a -> s { _datacenterId = a } :: NicResource s)
+        P.lens (_datacenterId :: NicResource s -> TF.Expr s P.Text)
+            (\s a -> s { _datacenterId = a } :: NicResource s)
 
-instance P.HasDhcp (NicResource s) (TF.Attr s P.Bool) where
+instance P.HasDhcp (NicResource s) (P.Maybe (TF.Expr s P.Bool)) where
     dhcp =
-        P.lens (_dhcp :: NicResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _dhcp = a } :: NicResource s)
+        P.lens (_dhcp :: NicResource s -> P.Maybe (TF.Expr s P.Bool))
+            (\s a -> s { _dhcp = a } :: NicResource s)
 
-instance P.HasFirewallActive (NicResource s) (TF.Attr s P.Bool) where
+instance P.HasFirewallActive (NicResource s) (P.Maybe (TF.Expr s P.Bool)) where
     firewallActive =
-        P.lens (_firewallActive :: NicResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _firewallActive = a } :: NicResource s)
+        P.lens (_firewallActive :: NicResource s -> P.Maybe (TF.Expr s P.Bool))
+            (\s a -> s { _firewallActive = a } :: NicResource s)
 
-instance P.HasIp (NicResource s) (TF.Attr s P.Text) where
+instance P.HasIp (NicResource s) (P.Maybe (TF.Expr s P.Text)) where
     ip =
-        P.lens (_ip :: NicResource s -> TF.Attr s P.Text)
-               (\s a -> s { _ip = a } :: NicResource s)
+        P.lens (_ip :: NicResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _ip = a } :: NicResource s)
 
-instance P.HasLan (NicResource s) (TF.Attr s P.Int) where
+instance P.HasLan (NicResource s) (TF.Expr s P.Int) where
     lan =
-        P.lens (_lan :: NicResource s -> TF.Attr s P.Int)
-               (\s a -> s { _lan = a } :: NicResource s)
+        P.lens (_lan :: NicResource s -> TF.Expr s P.Int)
+            (\s a -> s { _lan = a } :: NicResource s)
 
-instance P.HasName (NicResource s) (TF.Attr s P.Text) where
+instance P.HasName (NicResource s) (P.Maybe (TF.Expr s P.Text)) where
     name =
-        P.lens (_name :: NicResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: NicResource s)
+        P.lens (_name :: NicResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _name = a } :: NicResource s)
 
-instance P.HasNat (NicResource s) (TF.Attr s P.Bool) where
+instance P.HasNat (NicResource s) (P.Maybe (TF.Expr s P.Bool)) where
     nat =
-        P.lens (_nat :: NicResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _nat = a } :: NicResource s)
+        P.lens (_nat :: NicResource s -> P.Maybe (TF.Expr s P.Bool))
+            (\s a -> s { _nat = a } :: NicResource s)
 
-instance P.HasServerId (NicResource s) (TF.Attr s P.Text) where
+instance P.HasServerId (NicResource s) (TF.Expr s P.Text) where
     serverId =
-        P.lens (_serverId :: NicResource s -> TF.Attr s P.Text)
-               (\s a -> s { _serverId = a } :: NicResource s)
+        P.lens (_serverId :: NicResource s -> TF.Expr s P.Text)
+            (\s a -> s { _serverId = a } :: NicResource s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (NicResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (NicResource s)) (TF.Expr s P.Text) where
+    computedId x =
+        TF.unsafeCompute TF.encodeAttr x "id"
 
-instance s ~ s' => P.HasComputedIps (TF.Ref s' (NicResource s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedIps x = TF.compute (TF.refKey x) "ips"
+instance s ~ s' => P.HasComputedIps (TF.Ref s' (NicResource s)) (TF.Expr s [TF.Expr s P.Text]) where
+    computedIps x =
+        TF.unsafeCompute TF.encodeAttr x "ips"
 
 -- | @profitbricks_server@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/profitbricks/r/server.html terraform documentation>
 -- for more information.
 data ServerResource s = ServerResource'
-    { _availabilityZone :: TF.Attr s P.Text
+    { _availabilityZone :: P.Maybe (TF.Expr s P.Text)
     -- ^ @availability_zone@ - (Optional)
     --
-    , _cores            :: TF.Attr s P.Int
+    , _cores            :: TF.Expr s P.Int
     -- ^ @cores@ - (Required)
     --
-    , _cpuFamily        :: TF.Attr s P.Text
+    , _cpuFamily        :: P.Maybe (TF.Expr s P.Text)
     -- ^ @cpu_family@ - (Optional)
     --
-    , _datacenterId     :: TF.Attr s P.Text
+    , _datacenterId     :: TF.Expr s P.Text
     -- ^ @datacenter_id@ - (Required)
     --
-    , _licenceType      :: TF.Attr s P.Text
+    , _licenceType      :: P.Maybe (TF.Expr s P.Text)
     -- ^ @licence_type@ - (Optional)
     --
-    , _name             :: TF.Attr s P.Text
+    , _name             :: TF.Expr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _nic              :: TF.Attr s [TF.Attr s (ServerNic s)]
+    , _nic              :: TF.Expr s [TF.Expr s (ServerNic s)]
     -- ^ @nic@ - (Required)
     --
-    , _ram              :: TF.Attr s P.Int
+    , _ram              :: TF.Expr s P.Int
     -- ^ @ram@ - (Required)
     --
-    , _volume           :: TF.Attr s [TF.Attr s (ServerVolume s)]
+    , _volume           :: TF.Expr s [TF.Expr s (ServerVolume s)]
     -- ^ @volume@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Define a new @profitbricks_server@ resource value.
 serverResource
-    :: TF.Attr s P.Int -- ^ @cores@ ('P._cores', 'P.cores')
-    -> TF.Attr s P.Text -- ^ @datacenter_id@ ('P._datacenterId', 'P.datacenterId')
-    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
-    -> TF.Attr s [TF.Attr s (ServerNic s)] -- ^ @nic@ ('P._nic', 'P.nic')
-    -> TF.Attr s P.Int -- ^ @ram@ ('P._ram', 'P.ram')
-    -> TF.Attr s [TF.Attr s (ServerVolume s)] -- ^ @volume@ ('P._volume', 'P.volume')
+    :: TF.Expr s P.Int -- ^ Lens: 'P.cores', Field: '_cores', HCL: @cores@
+    -> TF.Expr s P.Text -- ^ Lens: 'P.datacenterId', Field: '_datacenterId', HCL: @datacenter_id@
+    -> TF.Expr s P.Text -- ^ Lens: 'P.name', Field: '_name', HCL: @name@
+    -> TF.Expr s [TF.Expr s (ServerNic s)] -- ^ Lens: 'P.nic', Field: '_nic', HCL: @nic@
+    -> TF.Expr s P.Int -- ^ Lens: 'P.ram', Field: '_ram', HCL: @ram@
+    -> TF.Expr s [TF.Expr s (ServerVolume s)] -- ^ Lens: 'P.volume', Field: '_volume', HCL: @volume@
     -> P.Resource (ServerResource s)
 serverResource _cores _datacenterId _name _nic _ram _volume =
-    TF.unsafeResource "profitbricks_server" TF.validator $
-        ServerResource'
-            { _availabilityZone = TF.Nil
+    TF.unsafeResource "profitbricks_server" P.defaultProvider  TF.encodeLifecycle
+        (\ServerResource'{..} -> P.mconcat
+            [ P.maybe P.mempty (TF.pair "availability_zone") _availabilityZone
+            , TF.pair "cores" _cores
+            , P.maybe P.mempty (TF.pair "cpu_family") _cpuFamily
+            , TF.pair "datacenter_id" _datacenterId
+            , P.maybe P.mempty (TF.pair "licence_type") _licenceType
+            , TF.pair "name" _name
+            , TF.pair "nic" _nic
+            , TF.pair "ram" _ram
+            , TF.pair "volume" _volume
+            ])
+        (ServerResource'
+            { _availabilityZone = P.Nothing
             , _cores = _cores
-            , _cpuFamily = TF.Nil
+            , _cpuFamily = P.Nothing
             , _datacenterId = _datacenterId
-            , _licenceType = TF.Nil
+            , _licenceType = P.Nothing
             , _name = _name
             , _nic = _nic
             , _ram = _ram
             , _volume = _volume
-            }
+            })
 
-instance TF.IsObject (ServerResource s) where
-    toObject ServerResource'{..} = P.catMaybes
-        [ TF.assign "availability_zone" <$> TF.attribute _availabilityZone
-        , TF.assign "cores" <$> TF.attribute _cores
-        , TF.assign "cpu_family" <$> TF.attribute _cpuFamily
-        , TF.assign "datacenter_id" <$> TF.attribute _datacenterId
-        , TF.assign "licence_type" <$> TF.attribute _licenceType
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "nic" <$> TF.attribute _nic
-        , TF.assign "ram" <$> TF.attribute _ram
-        , TF.assign "volume" <$> TF.attribute _volume
-        ]
+instance P.Hashable (ServerResource s)
 
-instance TF.IsValid (ServerResource s) where
+instance TF.HasValidator (ServerResource s) where
     validator = P.mempty
 
-instance P.HasAvailabilityZone (ServerResource s) (TF.Attr s P.Text) where
+instance P.HasAvailabilityZone (ServerResource s) (P.Maybe (TF.Expr s P.Text)) where
     availabilityZone =
-        P.lens (_availabilityZone :: ServerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _availabilityZone = a } :: ServerResource s)
+        P.lens (_availabilityZone :: ServerResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _availabilityZone = a } :: ServerResource s)
 
-instance P.HasCores (ServerResource s) (TF.Attr s P.Int) where
+instance P.HasCores (ServerResource s) (TF.Expr s P.Int) where
     cores =
-        P.lens (_cores :: ServerResource s -> TF.Attr s P.Int)
-               (\s a -> s { _cores = a } :: ServerResource s)
+        P.lens (_cores :: ServerResource s -> TF.Expr s P.Int)
+            (\s a -> s { _cores = a } :: ServerResource s)
 
-instance P.HasCpuFamily (ServerResource s) (TF.Attr s P.Text) where
+instance P.HasCpuFamily (ServerResource s) (P.Maybe (TF.Expr s P.Text)) where
     cpuFamily =
-        P.lens (_cpuFamily :: ServerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _cpuFamily = a } :: ServerResource s)
+        P.lens (_cpuFamily :: ServerResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _cpuFamily = a } :: ServerResource s)
 
-instance P.HasDatacenterId (ServerResource s) (TF.Attr s P.Text) where
+instance P.HasDatacenterId (ServerResource s) (TF.Expr s P.Text) where
     datacenterId =
-        P.lens (_datacenterId :: ServerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _datacenterId = a } :: ServerResource s)
+        P.lens (_datacenterId :: ServerResource s -> TF.Expr s P.Text)
+            (\s a -> s { _datacenterId = a } :: ServerResource s)
 
-instance P.HasLicenceType (ServerResource s) (TF.Attr s P.Text) where
+instance P.HasLicenceType (ServerResource s) (P.Maybe (TF.Expr s P.Text)) where
     licenceType =
-        P.lens (_licenceType :: ServerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _licenceType = a } :: ServerResource s)
+        P.lens (_licenceType :: ServerResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _licenceType = a } :: ServerResource s)
 
-instance P.HasName (ServerResource s) (TF.Attr s P.Text) where
+instance P.HasName (ServerResource s) (TF.Expr s P.Text) where
     name =
-        P.lens (_name :: ServerResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: ServerResource s)
+        P.lens (_name :: ServerResource s -> TF.Expr s P.Text)
+            (\s a -> s { _name = a } :: ServerResource s)
 
-instance P.HasNic (ServerResource s) (TF.Attr s [TF.Attr s (ServerNic s)]) where
+instance P.HasNic (ServerResource s) (TF.Expr s [TF.Expr s (ServerNic s)]) where
     nic =
-        P.lens (_nic :: ServerResource s -> TF.Attr s [TF.Attr s (ServerNic s)])
-               (\s a -> s { _nic = a } :: ServerResource s)
+        P.lens (_nic :: ServerResource s -> TF.Expr s [TF.Expr s (ServerNic s)])
+            (\s a -> s { _nic = a } :: ServerResource s)
 
-instance P.HasRam (ServerResource s) (TF.Attr s P.Int) where
+instance P.HasRam (ServerResource s) (TF.Expr s P.Int) where
     ram =
-        P.lens (_ram :: ServerResource s -> TF.Attr s P.Int)
-               (\s a -> s { _ram = a } :: ServerResource s)
+        P.lens (_ram :: ServerResource s -> TF.Expr s P.Int)
+            (\s a -> s { _ram = a } :: ServerResource s)
 
-instance P.HasVolume (ServerResource s) (TF.Attr s [TF.Attr s (ServerVolume s)]) where
+instance P.HasVolume (ServerResource s) (TF.Expr s [TF.Expr s (ServerVolume s)]) where
     volume =
-        P.lens (_volume :: ServerResource s -> TF.Attr s [TF.Attr s (ServerVolume s)])
-               (\s a -> s { _volume = a } :: ServerResource s)
+        P.lens (_volume :: ServerResource s -> TF.Expr s [TF.Expr s (ServerVolume s)])
+            (\s a -> s { _volume = a } :: ServerResource s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ServerResource s)) (TF.Expr s P.Text) where
+    computedId x =
+        TF.unsafeCompute TF.encodeAttr x "id"
 
-instance s ~ s' => P.HasComputedBootCdrom (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedBootCdrom x = TF.compute (TF.refKey x) "boot_cdrom"
+instance s ~ s' => P.HasComputedBootCdrom (TF.Ref s' (ServerResource s)) (TF.Expr s P.Text) where
+    computedBootCdrom x =
+        TF.unsafeCompute TF.encodeAttr x "boot_cdrom"
 
-instance s ~ s' => P.HasComputedBootImage (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedBootImage x = TF.compute (TF.refKey x) "boot_image"
+instance s ~ s' => P.HasComputedBootImage (TF.Ref s' (ServerResource s)) (TF.Expr s P.Text) where
+    computedBootImage x =
+        TF.unsafeCompute TF.encodeAttr x "boot_image"
 
-instance s ~ s' => P.HasComputedBootVolume (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedBootVolume x = TF.compute (TF.refKey x) "boot_volume"
+instance s ~ s' => P.HasComputedBootVolume (TF.Ref s' (ServerResource s)) (TF.Expr s P.Text) where
+    computedBootVolume x =
+        TF.unsafeCompute TF.encodeAttr x "boot_volume"
 
-instance s ~ s' => P.HasComputedPrimaryIp (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedPrimaryIp x = TF.compute (TF.refKey x) "primary_ip"
+instance s ~ s' => P.HasComputedPrimaryIp (TF.Ref s' (ServerResource s)) (TF.Expr s P.Text) where
+    computedPrimaryIp x =
+        TF.unsafeCompute TF.encodeAttr x "primary_ip"
 
-instance s ~ s' => P.HasComputedPrimaryNic (TF.Ref s' (ServerResource s)) (TF.Attr s P.Text) where
-    computedPrimaryNic x = TF.compute (TF.refKey x) "primary_nic"
+instance s ~ s' => P.HasComputedPrimaryNic (TF.Ref s' (ServerResource s)) (TF.Expr s P.Text) where
+    computedPrimaryNic x =
+        TF.unsafeCompute TF.encodeAttr x "primary_nic"
 
 -- | @profitbricks_share@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/profitbricks/r/share.html terraform documentation>
 -- for more information.
 data ShareResource s = ShareResource'
-    { _editPrivilege  :: TF.Attr s P.Bool
+    { _editPrivilege  :: TF.Expr s P.Bool
     -- ^ @edit_privilege@ - (Required)
     --
-    , _groupId        :: TF.Attr s P.Text
+    , _groupId        :: TF.Expr s P.Text
     -- ^ @group_id@ - (Required)
     --
-    , _resourceId     :: TF.Attr s P.Text
+    , _resourceId     :: TF.Expr s P.Text
     -- ^ @resource_id@ - (Required)
     --
-    , _sharePrivilege :: TF.Attr s P.Bool
+    , _sharePrivilege :: TF.Expr s P.Bool
     -- ^ @share_privilege@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Define a new @profitbricks_share@ resource value.
 shareResource
-    :: TF.Attr s P.Text -- ^ @group_id@ ('P._groupId', 'P.groupId')
-    -> TF.Attr s P.Text -- ^ @resource_id@ ('P._resourceId', 'P.resourceId')
-    -> TF.Attr s P.Bool -- ^ @edit_privilege@ ('P._editPrivilege', 'P.editPrivilege')
-    -> TF.Attr s P.Bool -- ^ @share_privilege@ ('P._sharePrivilege', 'P.sharePrivilege')
+    :: TF.Expr s P.Text -- ^ Lens: 'P.groupId', Field: '_groupId', HCL: @group_id@
+    -> TF.Expr s P.Text -- ^ Lens: 'P.resourceId', Field: '_resourceId', HCL: @resource_id@
+    -> TF.Expr s P.Bool -- ^ Lens: 'P.editPrivilege', Field: '_editPrivilege', HCL: @edit_privilege@
+    -> TF.Expr s P.Bool -- ^ Lens: 'P.sharePrivilege', Field: '_sharePrivilege', HCL: @share_privilege@
     -> P.Resource (ShareResource s)
 shareResource _groupId _resourceId _editPrivilege _sharePrivilege =
-    TF.unsafeResource "profitbricks_share" TF.validator $
-        ShareResource'
+    TF.unsafeResource "profitbricks_share" P.defaultProvider  TF.encodeLifecycle
+        (\ShareResource'{..} -> P.mconcat
+            [ TF.pair "edit_privilege" _editPrivilege
+            , TF.pair "group_id" _groupId
+            , TF.pair "resource_id" _resourceId
+            , TF.pair "share_privilege" _sharePrivilege
+            ])
+        (ShareResource'
             { _editPrivilege = _editPrivilege
             , _groupId = _groupId
             , _resourceId = _resourceId
             , _sharePrivilege = _sharePrivilege
-            }
+            })
 
-instance TF.IsObject (ShareResource s) where
-    toObject ShareResource'{..} = P.catMaybes
-        [ TF.assign "edit_privilege" <$> TF.attribute _editPrivilege
-        , TF.assign "group_id" <$> TF.attribute _groupId
-        , TF.assign "resource_id" <$> TF.attribute _resourceId
-        , TF.assign "share_privilege" <$> TF.attribute _sharePrivilege
-        ]
+instance P.Hashable (ShareResource s)
 
-instance TF.IsValid (ShareResource s) where
+instance TF.HasValidator (ShareResource s) where
     validator = P.mempty
 
-instance P.HasEditPrivilege (ShareResource s) (TF.Attr s P.Bool) where
+instance P.HasEditPrivilege (ShareResource s) (TF.Expr s P.Bool) where
     editPrivilege =
-        P.lens (_editPrivilege :: ShareResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _editPrivilege = a } :: ShareResource s)
+        P.lens (_editPrivilege :: ShareResource s -> TF.Expr s P.Bool)
+            (\s a -> s { _editPrivilege = a } :: ShareResource s)
 
-instance P.HasGroupId (ShareResource s) (TF.Attr s P.Text) where
+instance P.HasGroupId (ShareResource s) (TF.Expr s P.Text) where
     groupId =
-        P.lens (_groupId :: ShareResource s -> TF.Attr s P.Text)
-               (\s a -> s { _groupId = a } :: ShareResource s)
+        P.lens (_groupId :: ShareResource s -> TF.Expr s P.Text)
+            (\s a -> s { _groupId = a } :: ShareResource s)
 
-instance P.HasResourceId (ShareResource s) (TF.Attr s P.Text) where
+instance P.HasResourceId (ShareResource s) (TF.Expr s P.Text) where
     resourceId =
-        P.lens (_resourceId :: ShareResource s -> TF.Attr s P.Text)
-               (\s a -> s { _resourceId = a } :: ShareResource s)
+        P.lens (_resourceId :: ShareResource s -> TF.Expr s P.Text)
+            (\s a -> s { _resourceId = a } :: ShareResource s)
 
-instance P.HasSharePrivilege (ShareResource s) (TF.Attr s P.Bool) where
+instance P.HasSharePrivilege (ShareResource s) (TF.Expr s P.Bool) where
     sharePrivilege =
-        P.lens (_sharePrivilege :: ShareResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _sharePrivilege = a } :: ShareResource s)
+        P.lens (_sharePrivilege :: ShareResource s -> TF.Expr s P.Bool)
+            (\s a -> s { _sharePrivilege = a } :: ShareResource s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (ShareResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (ShareResource s)) (TF.Expr s P.Text) where
+    computedId x =
+        TF.unsafeCompute TF.encodeAttr x "id"
 
 -- | @profitbricks_snapshot@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/profitbricks/r/snapshot.html terraform documentation>
 -- for more information.
 data SnapshotResource s = SnapshotResource'
-    { _datacenterId :: TF.Attr s P.Text
+    { _datacenterId :: TF.Expr s P.Text
     -- ^ @datacenter_id@ - (Required)
     --
-    , _name         :: TF.Attr s P.Text
+    , _name         :: TF.Expr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _volumeId     :: TF.Attr s P.Text
+    , _volumeId     :: TF.Expr s P.Text
     -- ^ @volume_id@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Define a new @profitbricks_snapshot@ resource value.
 snapshotResource
-    :: TF.Attr s P.Text -- ^ @datacenter_id@ ('P._datacenterId', 'P.datacenterId')
-    -> TF.Attr s P.Text -- ^ @volume_id@ ('P._volumeId', 'P.volumeId')
-    -> TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    :: TF.Expr s P.Text -- ^ Lens: 'P.datacenterId', Field: '_datacenterId', HCL: @datacenter_id@
+    -> TF.Expr s P.Text -- ^ Lens: 'P.volumeId', Field: '_volumeId', HCL: @volume_id@
+    -> TF.Expr s P.Text -- ^ Lens: 'P.name', Field: '_name', HCL: @name@
     -> P.Resource (SnapshotResource s)
 snapshotResource _datacenterId _volumeId _name =
-    TF.unsafeResource "profitbricks_snapshot" TF.validator $
-        SnapshotResource'
+    TF.unsafeResource "profitbricks_snapshot" P.defaultProvider  TF.encodeLifecycle
+        (\SnapshotResource'{..} -> P.mconcat
+            [ TF.pair "datacenter_id" _datacenterId
+            , TF.pair "name" _name
+            , TF.pair "volume_id" _volumeId
+            ])
+        (SnapshotResource'
             { _datacenterId = _datacenterId
             , _name = _name
             , _volumeId = _volumeId
-            }
+            })
 
-instance TF.IsObject (SnapshotResource s) where
-    toObject SnapshotResource'{..} = P.catMaybes
-        [ TF.assign "datacenter_id" <$> TF.attribute _datacenterId
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "volume_id" <$> TF.attribute _volumeId
-        ]
+instance P.Hashable (SnapshotResource s)
 
-instance TF.IsValid (SnapshotResource s) where
+instance TF.HasValidator (SnapshotResource s) where
     validator = P.mempty
 
-instance P.HasDatacenterId (SnapshotResource s) (TF.Attr s P.Text) where
+instance P.HasDatacenterId (SnapshotResource s) (TF.Expr s P.Text) where
     datacenterId =
-        P.lens (_datacenterId :: SnapshotResource s -> TF.Attr s P.Text)
-               (\s a -> s { _datacenterId = a } :: SnapshotResource s)
+        P.lens (_datacenterId :: SnapshotResource s -> TF.Expr s P.Text)
+            (\s a -> s { _datacenterId = a } :: SnapshotResource s)
 
-instance P.HasName (SnapshotResource s) (TF.Attr s P.Text) where
+instance P.HasName (SnapshotResource s) (TF.Expr s P.Text) where
     name =
-        P.lens (_name :: SnapshotResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: SnapshotResource s)
+        P.lens (_name :: SnapshotResource s -> TF.Expr s P.Text)
+            (\s a -> s { _name = a } :: SnapshotResource s)
 
-instance P.HasVolumeId (SnapshotResource s) (TF.Attr s P.Text) where
+instance P.HasVolumeId (SnapshotResource s) (TF.Expr s P.Text) where
     volumeId =
-        P.lens (_volumeId :: SnapshotResource s -> TF.Attr s P.Text)
-               (\s a -> s { _volumeId = a } :: SnapshotResource s)
+        P.lens (_volumeId :: SnapshotResource s -> TF.Expr s P.Text)
+            (\s a -> s { _volumeId = a } :: SnapshotResource s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (SnapshotResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (SnapshotResource s)) (TF.Expr s P.Text) where
+    computedId x =
+        TF.unsafeCompute TF.encodeAttr x "id"
 
 -- | @profitbricks_user@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/profitbricks/r/user.html terraform documentation>
 -- for more information.
 data UserResource s = UserResource'
-    { _administrator :: TF.Attr s P.Bool
+    { _administrator :: TF.Expr s P.Bool
     -- ^ @administrator@ - (Required)
     --
-    , _email         :: TF.Attr s P.Text
+    , _email         :: TF.Expr s P.Text
     -- ^ @email@ - (Required)
     --
-    , _firstName     :: TF.Attr s P.Text
+    , _firstName     :: TF.Expr s P.Text
     -- ^ @first_name@ - (Required)
     --
-    , _forceSecAuth  :: TF.Attr s P.Bool
+    , _forceSecAuth  :: TF.Expr s P.Bool
     -- ^ @force_sec_auth@ - (Required)
     --
-    , _lastName      :: TF.Attr s P.Text
+    , _lastName      :: TF.Expr s P.Text
     -- ^ @last_name@ - (Required)
     --
-    , _password      :: TF.Attr s P.Text
+    , _password      :: TF.Expr s P.Text
     -- ^ @password@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Define a new @profitbricks_user@ resource value.
 userResource
-    :: TF.Attr s P.Bool -- ^ @administrator@ ('P._administrator', 'P.administrator')
-    -> TF.Attr s P.Bool -- ^ @force_sec_auth@ ('P._forceSecAuth', 'P.forceSecAuth')
-    -> TF.Attr s P.Text -- ^ @email@ ('P._email', 'P.email')
-    -> TF.Attr s P.Text -- ^ @first_name@ ('P._firstName', 'P.firstName')
-    -> TF.Attr s P.Text -- ^ @last_name@ ('P._lastName', 'P.lastName')
-    -> TF.Attr s P.Text -- ^ @password@ ('P._password', 'P.password')
+    :: TF.Expr s P.Bool -- ^ Lens: 'P.administrator', Field: '_administrator', HCL: @administrator@
+    -> TF.Expr s P.Bool -- ^ Lens: 'P.forceSecAuth', Field: '_forceSecAuth', HCL: @force_sec_auth@
+    -> TF.Expr s P.Text -- ^ Lens: 'P.email', Field: '_email', HCL: @email@
+    -> TF.Expr s P.Text -- ^ Lens: 'P.firstName', Field: '_firstName', HCL: @first_name@
+    -> TF.Expr s P.Text -- ^ Lens: 'P.lastName', Field: '_lastName', HCL: @last_name@
+    -> TF.Expr s P.Text -- ^ Lens: 'P.password', Field: '_password', HCL: @password@
     -> P.Resource (UserResource s)
 userResource _administrator _forceSecAuth _email _firstName _lastName _password =
-    TF.unsafeResource "profitbricks_user" TF.validator $
-        UserResource'
+    TF.unsafeResource "profitbricks_user" P.defaultProvider  TF.encodeLifecycle
+        (\UserResource'{..} -> P.mconcat
+            [ TF.pair "administrator" _administrator
+            , TF.pair "email" _email
+            , TF.pair "first_name" _firstName
+            , TF.pair "force_sec_auth" _forceSecAuth
+            , TF.pair "last_name" _lastName
+            , TF.pair "password" _password
+            ])
+        (UserResource'
             { _administrator = _administrator
             , _email = _email
             , _firstName = _firstName
             , _forceSecAuth = _forceSecAuth
             , _lastName = _lastName
             , _password = _password
-            }
+            })
 
-instance TF.IsObject (UserResource s) where
-    toObject UserResource'{..} = P.catMaybes
-        [ TF.assign "administrator" <$> TF.attribute _administrator
-        , TF.assign "email" <$> TF.attribute _email
-        , TF.assign "first_name" <$> TF.attribute _firstName
-        , TF.assign "force_sec_auth" <$> TF.attribute _forceSecAuth
-        , TF.assign "last_name" <$> TF.attribute _lastName
-        , TF.assign "password" <$> TF.attribute _password
-        ]
+instance P.Hashable (UserResource s)
 
-instance TF.IsValid (UserResource s) where
+instance TF.HasValidator (UserResource s) where
     validator = P.mempty
 
-instance P.HasAdministrator (UserResource s) (TF.Attr s P.Bool) where
+instance P.HasAdministrator (UserResource s) (TF.Expr s P.Bool) where
     administrator =
-        P.lens (_administrator :: UserResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _administrator = a } :: UserResource s)
+        P.lens (_administrator :: UserResource s -> TF.Expr s P.Bool)
+            (\s a -> s { _administrator = a } :: UserResource s)
 
-instance P.HasEmail (UserResource s) (TF.Attr s P.Text) where
+instance P.HasEmail (UserResource s) (TF.Expr s P.Text) where
     email =
-        P.lens (_email :: UserResource s -> TF.Attr s P.Text)
-               (\s a -> s { _email = a } :: UserResource s)
+        P.lens (_email :: UserResource s -> TF.Expr s P.Text)
+            (\s a -> s { _email = a } :: UserResource s)
 
-instance P.HasFirstName (UserResource s) (TF.Attr s P.Text) where
+instance P.HasFirstName (UserResource s) (TF.Expr s P.Text) where
     firstName =
-        P.lens (_firstName :: UserResource s -> TF.Attr s P.Text)
-               (\s a -> s { _firstName = a } :: UserResource s)
+        P.lens (_firstName :: UserResource s -> TF.Expr s P.Text)
+            (\s a -> s { _firstName = a } :: UserResource s)
 
-instance P.HasForceSecAuth (UserResource s) (TF.Attr s P.Bool) where
+instance P.HasForceSecAuth (UserResource s) (TF.Expr s P.Bool) where
     forceSecAuth =
-        P.lens (_forceSecAuth :: UserResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _forceSecAuth = a } :: UserResource s)
+        P.lens (_forceSecAuth :: UserResource s -> TF.Expr s P.Bool)
+            (\s a -> s { _forceSecAuth = a } :: UserResource s)
 
-instance P.HasLastName (UserResource s) (TF.Attr s P.Text) where
+instance P.HasLastName (UserResource s) (TF.Expr s P.Text) where
     lastName =
-        P.lens (_lastName :: UserResource s -> TF.Attr s P.Text)
-               (\s a -> s { _lastName = a } :: UserResource s)
+        P.lens (_lastName :: UserResource s -> TF.Expr s P.Text)
+            (\s a -> s { _lastName = a } :: UserResource s)
 
-instance P.HasPassword (UserResource s) (TF.Attr s P.Text) where
+instance P.HasPassword (UserResource s) (TF.Expr s P.Text) where
     password =
-        P.lens (_password :: UserResource s -> TF.Attr s P.Text)
-               (\s a -> s { _password = a } :: UserResource s)
+        P.lens (_password :: UserResource s -> TF.Expr s P.Text)
+            (\s a -> s { _password = a } :: UserResource s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (UserResource s)) (TF.Expr s P.Text) where
+    computedId x =
+        TF.unsafeCompute TF.encodeAttr x "id"
 
 -- | @profitbricks_volume@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/profitbricks/r/volume.html terraform documentation>
 -- for more information.
 data VolumeResource s = VolumeResource'
-    { _availabilityZone :: TF.Attr s P.Text
+    { _availabilityZone :: P.Maybe (TF.Expr s P.Text)
     -- ^ @availability_zone@ - (Optional)
     --
-    , _bus              :: TF.Attr s P.Text
+    , _bus              :: P.Maybe (TF.Expr s P.Text)
     -- ^ @bus@ - (Optional)
     --
-    , _datacenterId     :: TF.Attr s P.Text
+    , _datacenterId     :: TF.Expr s P.Text
     -- ^ @datacenter_id@ - (Required)
     --
-    , _diskType         :: TF.Attr s P.Text
+    , _diskType         :: TF.Expr s P.Text
     -- ^ @disk_type@ - (Required)
     --
-    , _imageName        :: TF.Attr s P.Text
+    , _imageName        :: P.Maybe (TF.Expr s P.Text)
     -- ^ @image_name@ - (Optional)
     --
-    , _imagePassword    :: TF.Attr s P.Text
+    , _imagePassword    :: P.Maybe (TF.Expr s P.Text)
     -- ^ @image_password@ - (Optional)
     --
-    , _licenceType      :: TF.Attr s P.Text
+    , _licenceType      :: P.Maybe (TF.Expr s P.Text)
     -- ^ @licence_type@ - (Optional)
     --
-    , _name             :: TF.Attr s P.Text
+    , _name             :: P.Maybe (TF.Expr s P.Text)
     -- ^ @name@ - (Optional)
     --
-    , _serverId         :: TF.Attr s P.Text
+    , _serverId         :: TF.Expr s P.Text
     -- ^ @server_id@ - (Required)
     --
-    , _size             :: TF.Attr s P.Int
+    , _size             :: TF.Expr s P.Int
     -- ^ @size@ - (Required)
     --
-    , _sshKeyPath       :: TF.Attr s [TF.Attr s P.Text]
+    , _sshKeyPath       :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
     -- ^ @ssh_key_path@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Define a new @profitbricks_volume@ resource value.
 volumeResource
-    :: TF.Attr s P.Text -- ^ @datacenter_id@ ('P._datacenterId', 'P.datacenterId')
-    -> TF.Attr s P.Text -- ^ @server_id@ ('P._serverId', 'P.serverId')
-    -> TF.Attr s P.Int -- ^ @size@ ('P._size', 'P.size')
-    -> TF.Attr s P.Text -- ^ @disk_type@ ('P._diskType', 'P.diskType')
+    :: TF.Expr s P.Text -- ^ Lens: 'P.datacenterId', Field: '_datacenterId', HCL: @datacenter_id@
+    -> TF.Expr s P.Text -- ^ Lens: 'P.serverId', Field: '_serverId', HCL: @server_id@
+    -> TF.Expr s P.Int -- ^ Lens: 'P.size', Field: '_size', HCL: @size@
+    -> TF.Expr s P.Text -- ^ Lens: 'P.diskType', Field: '_diskType', HCL: @disk_type@
     -> P.Resource (VolumeResource s)
 volumeResource _datacenterId _serverId _size _diskType =
-    TF.unsafeResource "profitbricks_volume" TF.validator $
-        VolumeResource'
-            { _availabilityZone = TF.Nil
-            , _bus = TF.Nil
+    TF.unsafeResource "profitbricks_volume" P.defaultProvider  TF.encodeLifecycle
+        (\VolumeResource'{..} -> P.mconcat
+            [ P.maybe P.mempty (TF.pair "availability_zone") _availabilityZone
+            , P.maybe P.mempty (TF.pair "bus") _bus
+            , TF.pair "datacenter_id" _datacenterId
+            , TF.pair "disk_type" _diskType
+            , P.maybe P.mempty (TF.pair "image_name") _imageName
+            , P.maybe P.mempty (TF.pair "image_password") _imagePassword
+            , P.maybe P.mempty (TF.pair "licence_type") _licenceType
+            , P.maybe P.mempty (TF.pair "name") _name
+            , TF.pair "server_id" _serverId
+            , TF.pair "size" _size
+            , P.maybe P.mempty (TF.pair "ssh_key_path") _sshKeyPath
+            ])
+        (VolumeResource'
+            { _availabilityZone = P.Nothing
+            , _bus = P.Nothing
             , _datacenterId = _datacenterId
             , _diskType = _diskType
-            , _imageName = TF.Nil
-            , _imagePassword = TF.Nil
-            , _licenceType = TF.Nil
-            , _name = TF.Nil
+            , _imageName = P.Nothing
+            , _imagePassword = P.Nothing
+            , _licenceType = P.Nothing
+            , _name = P.Nothing
             , _serverId = _serverId
             , _size = _size
-            , _sshKeyPath = TF.Nil
-            }
+            , _sshKeyPath = P.Nothing
+            })
 
-instance TF.IsObject (VolumeResource s) where
-    toObject VolumeResource'{..} = P.catMaybes
-        [ TF.assign "availability_zone" <$> TF.attribute _availabilityZone
-        , TF.assign "bus" <$> TF.attribute _bus
-        , TF.assign "datacenter_id" <$> TF.attribute _datacenterId
-        , TF.assign "disk_type" <$> TF.attribute _diskType
-        , TF.assign "image_name" <$> TF.attribute _imageName
-        , TF.assign "image_password" <$> TF.attribute _imagePassword
-        , TF.assign "licence_type" <$> TF.attribute _licenceType
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "server_id" <$> TF.attribute _serverId
-        , TF.assign "size" <$> TF.attribute _size
-        , TF.assign "ssh_key_path" <$> TF.attribute _sshKeyPath
-        ]
+instance P.Hashable (VolumeResource s)
 
-instance TF.IsValid (VolumeResource s) where
+instance TF.HasValidator (VolumeResource s) where
     validator = P.mempty
 
-instance P.HasAvailabilityZone (VolumeResource s) (TF.Attr s P.Text) where
+instance P.HasAvailabilityZone (VolumeResource s) (P.Maybe (TF.Expr s P.Text)) where
     availabilityZone =
-        P.lens (_availabilityZone :: VolumeResource s -> TF.Attr s P.Text)
-               (\s a -> s { _availabilityZone = a } :: VolumeResource s)
+        P.lens (_availabilityZone :: VolumeResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _availabilityZone = a } :: VolumeResource s)
 
-instance P.HasBus (VolumeResource s) (TF.Attr s P.Text) where
+instance P.HasBus (VolumeResource s) (P.Maybe (TF.Expr s P.Text)) where
     bus =
-        P.lens (_bus :: VolumeResource s -> TF.Attr s P.Text)
-               (\s a -> s { _bus = a } :: VolumeResource s)
+        P.lens (_bus :: VolumeResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _bus = a } :: VolumeResource s)
 
-instance P.HasDatacenterId (VolumeResource s) (TF.Attr s P.Text) where
+instance P.HasDatacenterId (VolumeResource s) (TF.Expr s P.Text) where
     datacenterId =
-        P.lens (_datacenterId :: VolumeResource s -> TF.Attr s P.Text)
-               (\s a -> s { _datacenterId = a } :: VolumeResource s)
+        P.lens (_datacenterId :: VolumeResource s -> TF.Expr s P.Text)
+            (\s a -> s { _datacenterId = a } :: VolumeResource s)
 
-instance P.HasDiskType (VolumeResource s) (TF.Attr s P.Text) where
+instance P.HasDiskType (VolumeResource s) (TF.Expr s P.Text) where
     diskType =
-        P.lens (_diskType :: VolumeResource s -> TF.Attr s P.Text)
-               (\s a -> s { _diskType = a } :: VolumeResource s)
+        P.lens (_diskType :: VolumeResource s -> TF.Expr s P.Text)
+            (\s a -> s { _diskType = a } :: VolumeResource s)
 
-instance P.HasImageName (VolumeResource s) (TF.Attr s P.Text) where
+instance P.HasImageName (VolumeResource s) (P.Maybe (TF.Expr s P.Text)) where
     imageName =
-        P.lens (_imageName :: VolumeResource s -> TF.Attr s P.Text)
-               (\s a -> s { _imageName = a } :: VolumeResource s)
+        P.lens (_imageName :: VolumeResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _imageName = a } :: VolumeResource s)
 
-instance P.HasImagePassword (VolumeResource s) (TF.Attr s P.Text) where
+instance P.HasImagePassword (VolumeResource s) (P.Maybe (TF.Expr s P.Text)) where
     imagePassword =
-        P.lens (_imagePassword :: VolumeResource s -> TF.Attr s P.Text)
-               (\s a -> s { _imagePassword = a } :: VolumeResource s)
+        P.lens (_imagePassword :: VolumeResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _imagePassword = a } :: VolumeResource s)
 
-instance P.HasLicenceType (VolumeResource s) (TF.Attr s P.Text) where
+instance P.HasLicenceType (VolumeResource s) (P.Maybe (TF.Expr s P.Text)) where
     licenceType =
-        P.lens (_licenceType :: VolumeResource s -> TF.Attr s P.Text)
-               (\s a -> s { _licenceType = a } :: VolumeResource s)
+        P.lens (_licenceType :: VolumeResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _licenceType = a } :: VolumeResource s)
 
-instance P.HasName (VolumeResource s) (TF.Attr s P.Text) where
+instance P.HasName (VolumeResource s) (P.Maybe (TF.Expr s P.Text)) where
     name =
-        P.lens (_name :: VolumeResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: VolumeResource s)
+        P.lens (_name :: VolumeResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _name = a } :: VolumeResource s)
 
-instance P.HasServerId (VolumeResource s) (TF.Attr s P.Text) where
+instance P.HasServerId (VolumeResource s) (TF.Expr s P.Text) where
     serverId =
-        P.lens (_serverId :: VolumeResource s -> TF.Attr s P.Text)
-               (\s a -> s { _serverId = a } :: VolumeResource s)
+        P.lens (_serverId :: VolumeResource s -> TF.Expr s P.Text)
+            (\s a -> s { _serverId = a } :: VolumeResource s)
 
-instance P.HasSize (VolumeResource s) (TF.Attr s P.Int) where
+instance P.HasSize (VolumeResource s) (TF.Expr s P.Int) where
     size =
-        P.lens (_size :: VolumeResource s -> TF.Attr s P.Int)
-               (\s a -> s { _size = a } :: VolumeResource s)
+        P.lens (_size :: VolumeResource s -> TF.Expr s P.Int)
+            (\s a -> s { _size = a } :: VolumeResource s)
 
-instance P.HasSshKeyPath (VolumeResource s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasSshKeyPath (VolumeResource s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
     sshKeyPath =
-        P.lens (_sshKeyPath :: VolumeResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _sshKeyPath = a } :: VolumeResource s)
+        P.lens (_sshKeyPath :: VolumeResource s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
+            (\s a -> s { _sshKeyPath = a } :: VolumeResource s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (VolumeResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (VolumeResource s)) (TF.Expr s P.Text) where
+    computedId x =
+        TF.unsafeCompute TF.encodeAttr x "id"
 
-instance s ~ s' => P.HasComputedSshkey (TF.Ref s' (VolumeResource s)) (TF.Attr s P.Text) where
-    computedSshkey x = TF.compute (TF.refKey x) "sshkey"
+instance s ~ s' => P.HasComputedSshkey (TF.Ref s' (VolumeResource s)) (TF.Expr s P.Text) where
+    computedSshkey x =
+        TF.unsafeCompute TF.encodeAttr x "sshkey"

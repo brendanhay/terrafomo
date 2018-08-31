@@ -1,5 +1,6 @@
 {
   "name": "bitbucket",
+  "version": "1.0.0-10-g10368b2",
   "schemas": [
     {
       "name": "password",

@@ -1,136 +1,263 @@
-{-# LANGUAGE RecordWildCards #-}
-
--- | Shared type representing datasources and resources.
 module Terrafomo.Schema
-    ( Dependency (..)
+    (
+    -- * Identifiers
+      Keyword      (..)
+    , Type         (..)
+    , Name         (..)
+    , Attr         (..)
 
-    , Schema     (..)
+    -- * Named References
+    , Ref          (..)
+    , unsafeCompute
+
+    -- * K/V Encoding
+    , Encoder
+
+    -- * Providers
+    , Alias
+    , Provider     (..)
+    , hashProvider
+    , defaultProvider
+
+    -- * Backends
+    , Backend      (..)
+    , hashBackend
+    , localBackend
+
+    -- * DataSources and Resources
+    , Resource     (..)
     , unsafeDataSource
     , unsafeResource
 
-    , provider
-    , configuration
-    , dependencies
-    , dependOn
+    -- ** Resource Lifecycle
+    , Changes      (..)
+    , Lifecycle    (..)
+
+    -- * Output Values
+    , Output       (..)
+    , outputValue
     ) where
 
-import Data.Function       ((&))
-import Data.List.NonEmpty  (NonEmpty ((:|)))
-import Data.Maybe          (catMaybes)
-import Data.Set            (Set)
-import Data.Text           (Text)
+import Data.Function  (on)
+import Data.Hashable  (Hashable)
+import Data.HashSet   (HashSet)
+import Data.Text.Lazy (Text)
 
-import Lens.Micro (Lens', lens)
+import GHC.Generics (Generic)
 
-import Terrafomo.Lifecycle
-import Terrafomo.Name
-import Terrafomo.Provider
-import Terrafomo.Validator (Validator)
+import qualified Data.Hashable           as Hash
+import qualified Terrafomo.HCL           as HCL
+import qualified Terrafomo.HIL           as HIL
+import qualified Terrafomo.Internal.Hash as Hash
 
-import qualified Data.Set  as Set
-import qualified Lens.Micro    as Lens
-import qualified Terrafomo.HCL as HCL
+-- | A keyword type such as @backend@, @provider@, @data@, @resource@,
+-- or @output@.
+data Keyword
+   = TypeTerraform
+   | TypeBackend
+   | TypeProvider
+   | TypeData
+   | TypeResource
+   | TypeOutput
+     deriving (Show, Eq, Ord, Generic)
 
--- Dependencies
+instance Hashable Keyword
 
-newtype Dependency = Dependency Key
-   deriving (Show, Eq, Ord)
+data Type = Type !Keyword !Text
+   deriving (Show, Eq, Ord, Generic)
 
-instance HCL.IsValue Dependency where
-    toValue (Dependency k) = HCL.toValue k
+instance Hashable Type
 
--- Schema Types
+data Name = Name !Type !Text
+   deriving (Show, Eq, Ord, Generic)
 
-data Schema l p a where
-    Schema
-        :: (Eq l, Monoid l, HCL.IsObject l, HCL.IsObject a)
-        => { _schemaProvider    :: !(Maybe p)
-           , _schemaLifecycle   :: !l
-           , _schemaDependsOn   :: !(Set Dependency)
-           , _schemaKeywords    :: !(NonEmpty HCL.Id)
-           , _schemaType        :: !Type
-           , _schemaConfig      :: !a
-           , _schemaValidator   :: !(Validator a)
-           }
-        -> Schema l p a
+instance Hashable Name
 
-instance HasLifecycle (Schema (Lifecycle a) p a) a where
-    lifecycle = lens _schemaLifecycle (\s a -> s { _schemaLifecycle = a })
+data Attr = Attr !Name !Text
+   deriving (Show, Eq, Ord, Generic)
 
-instance ( HCL.IsObject l
-         , HCL.IsObject a
-         ) => HCL.IsSection (Schema l Key a) where
-    toSection Schema{..} =
-        let k :| ks = _schemaKeywords
-            common  = catMaybes
-                [ HCL.assign "provider" <$> _schemaProvider
-                , if _schemaDependsOn == mempty
-                    then Nothing
-                    else Just (HCL.assign "depends_on" (HCL.list _schemaDependsOn))
-                , if _schemaLifecycle == mempty
-                    then Nothing
-                    else Just (HCL.block "lifecycle" _schemaLifecycle)
-                ]
+instance Hashable Attr
 
-         in HCL.section k ks
-                & HCL.pairs (HCL.toObject _schemaConfig ++ common)
+-- | A terrafomo-specific opaque, named, reference to a variable defined within
+-- a remote-state thread.
+newtype Ref s a = UnsafeRef Name
+    deriving (Show, Eq, Hashable)
 
+-- | FIXME: Document
+unsafeCompute :: (Attr -> Text) -> Ref s a -> Text -> HIL.Expr s b
+unsafeCompute encode (UnsafeRef name) attr =
+    HIL.compute (encode (Attr name attr))
+
+-- | An encoder should produce a series of configuration pairs suitable
+-- for embedding into a larger HCL structure or JSON object.
+type Encoder a = a -> HCL.Series
+
+-- | A function which produces a unique alias for any structurally
+-- equivalent 'Provider'.
+type Alias p = Provider p -> Name
+
+-- | A provider name, version, and @terraform-provider-*@ specific configuration.
+-- The absence of @providerConfig@ indicates that the default provider for the
+-- given @providerName@ should be used.
+--
+-- Multiple providers can be specified using an alias and the configurations
+-- must not contain interpolations.
+data Provider p = Provider
+    { providerName    :: !Text
+    , providerVersion :: !(Maybe Text)
+    , providerConfig  :: !(Maybe   p)
+    , providerAlias   :: !(Alias   p)
+    , providerEncoder :: !(Encoder p)
+    }
+
+-- | FIXME: Document
+hashProvider :: Hashable p => Provider p -> Int
+hashProvider x =
+    Hash.hash
+        ( providerName    x
+        , providerVersion x
+        , providerConfig  x
+        )
+
+defaultProvider :: Hashable p => Text -> Maybe Text -> Encoder p -> Provider p
+defaultProvider name version encoder =
+    Provider
+        { providerName    = name
+        , providerVersion = version
+        , providerConfig  = Nothing
+        , providerEncoder = encoder
+        , providerAlias   = \x ->
+            Name (Type TypeProvider (providerName x))
+                 (Hash.human (hashProvider x))
+        }
+
+-- | Only a single backend may be specified and the configuration must not contain
+-- interpolations.
+data Backend b = Backend
+    { backendName    :: !Text
+    , backendConfig  :: !b
+    , backendEncoder :: !(Encoder b)
+    }
+
+-- | FIXME: Document
+hashBackend :: Hashable b => Backend b -> Int
+hashBackend x =
+    Hash.hash (backendConfig x)
+        `Hash.hashWithSalt` backendName x
+
+-- FIXME: Document
+localBackend :: FilePath -> Backend FilePath
+localBackend path =
+    Backend
+        { backendName    = "local"
+        , backendConfig  = path
+        , backendEncoder = HCL.pair "path"
+        }
+
+-- | Ignored attribute names can be matched by their name, not state ID. For
+-- example, if an aws_route_table has two routes defined and the ignore_changes
+-- list contains "route", both routes will be ignored. Additionally you can
+-- also use a single entry with a wildcard (e.g. "*") which will match all
+-- attribute names. Using a partial string together with a wildcard
+-- (e.g. "rout*") is not supported.
+data Changes a
+    = Wildcard -- '*'
+    | Match !(HashSet Name)
+      deriving (Show, Eq, Generic)
+
+-- | FIXME: Document
+instance Hashable (Changes b)
+
+instance Semigroup (Changes a) where
+    (<>) a b =
+        case (a, b) of
+            (Wildcard, _)        -> Wildcard
+            (_,        Wildcard) -> Wildcard
+            (Match xs, Match ys) -> Match (xs <> ys)
+
+instance Monoid (Changes a) where
+    mempty = Match mempty
+
+-- | Resources have a strict lifecycle, and can be thought of as basic state
+-- machines. Understanding this lifecycle can help better understand how Terraform
+-- generates an execution plan, how it safely executes that plan, and what the
+-- resource provider is doing throughout all of this.
+data Lifecycle a = Lifecycle
+    { preventDestroy      :: !Bool
+    , createBeforeDestroy :: !Bool
+    , ignoreChanges       :: !(Changes a)
+    } deriving (Show, Eq, Generic)
+
+instance Hashable (Lifecycle a)
+
+instance Semigroup (Lifecycle a) where
+    (<>) a b = Lifecycle
+        { preventDestroy      = on (||) preventDestroy      a b
+        , createBeforeDestroy = on (||) createBeforeDestroy a b
+        , ignoreChanges       = on (<>) ignoreChanges       a b
+        }
+
+instance Monoid (Lifecycle a) where
+    mempty = Lifecycle False False mempty
+
+-- | Represents the internal structure of a datasource or resource, and
+-- encapsulates the provider, dependencies and lifecycle configuration, as well
+-- as any typeclass-less validation and encoding functions.
+data Resource p l a = UnsafeResource
+    { resourceType      :: !Type
+    , resourceProvider  :: !(Provider p)
+    , resourceDependsOn :: !(HashSet Name)
+    , resourceEncoder   :: !(Encoder (l, a))
+    , resourceLifecycle :: !l
+    , resourceConfig    :: !a
+    }
+
+-- | FIXME: Document
 unsafeDataSource
-    :: HCL.IsObject a
-    => Text
-    -> Validator a
+    :: Text
+    -> Provider p
+    -> Encoder  a
     -> a
-    -> Schema () p a
-unsafeDataSource name validator cfg =
-    Schema { _schemaProvider  = Nothing
-           , _schemaLifecycle = ()
-           , _schemaDependsOn = mempty
-           , _schemaKeywords  = pure (HCL.Unquoted "data")
-           , _schemaType      = Type (Just "data") name
-           , _schemaConfig    = cfg
-           , _schemaValidator = validator
-           }
+    -> Resource p () a
+unsafeDataSource name provider encoder cfg =
+    UnsafeResource
+        { resourceType      = Type TypeData name
+        , resourceProvider  = provider
+        , resourceDependsOn = mempty
+        , resourceEncoder   = encoder . snd
+        , resourceLifecycle = ()
+        , resourceConfig    = cfg
+        }
 
+-- | FIXME: Document
 unsafeResource
-    :: HCL.IsObject a
-    => Text
-    -> Validator a
+    :: Text
+    -> Provider p
+    -> Encoder  (Lifecycle a)
+    -> Encoder  a
     -> a
-    -> Schema (Lifecycle a) p a
-unsafeResource name validator cfg =
-    Schema { _schemaProvider  = Nothing
-           , _schemaLifecycle = mempty
-           , _schemaDependsOn = mempty
-           , _schemaKeywords  = pure (HCL.Unquoted "resource")
-           , _schemaType      = Type Nothing name
-           , _schemaConfig    = cfg
-           , _schemaValidator = validator
-           }
+    -> Resource p (Lifecycle a) a
+unsafeResource name provider lifecycle encoder cfg =
+    UnsafeResource
+        { resourceType      = Type TypeResource name
+        , resourceProvider  = provider
+        , resourceDependsOn = mempty
+        , resourceEncoder   = \(l, x) -> encoder x <> lifecycle l
+        , resourceLifecycle = mempty
+        , resourceConfig    = cfg
+        }
 
--- Lenses
+-- | An explicitly declared output variable of the form:
+--
+-- > output "ip" {
+-- >   value = "${aws_eip.ip.public_ip}"
+-- > }
+data Output a where
+    UnsafeOutput :: { outputName    :: !Text
+                    , outputBackend :: !(Backend HCL.Series)
+                    , outputValue_  :: !(HIL.Expr s a)
+                    }
+                 -> Output a
 
--- | The specific provider configuration to use for this resource or
--- datasource. If none is specified an inferred default will be used.
-provider :: Lens' (Schema l p a) (Maybe p)
-provider =
-    lens _schemaProvider (\s a -> s { _schemaProvider = a })
-
--- | The underlying type/data config representing the specific resource or
--- datasource configuration.
-configuration :: Lens' (Schema l p a) a
-configuration =
-    lens _schemaConfig (\s a -> s { _schemaConfig = a })
-
--- | Explicit dependencies that this resource or datasource has. These
--- dependencies will be created _before_.
-dependencies :: Lens' (Schema l p a) (Set Dependency)
-dependencies =
-    lens _schemaDependsOn (\s a -> s { _schemaDependsOn = a })
-
--- | Helper for explicitly depending upon a ref.
-dependOn
-    :: Ref s a
-    -> Schema l p b
-    -> Schema l p b
-dependOn x =
-    Lens.over dependencies $ Set.insert (Dependency (refKey x))
+outputValue :: Output a -> HIL.Expr s a
+outputValue (UnsafeOutput _ _ x) = HIL.unsafeErase x

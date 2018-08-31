@@ -12,6 +12,9 @@ description: >
 <<: *options
 <<: *extensions
 
+data-files:
+  test/fixtures/*.tf
+
 dependencies:
   - base >= 4.9
 
@@ -20,33 +23,28 @@ library:
     - src
 
   exposed-modules:
+    - Paths_terrafomo
     - Terrafomo
-    - Terrafomo.Attribute
-    - Terrafomo.Backend
-    - Terrafomo.Format
     - Terrafomo.HCL
-    - Terrafomo.Lifecycle
-    - Terrafomo.Monad
-    - Terrafomo.Name
-    - Terrafomo.Output
-    - Terrafomo.Provider
-    - Terrafomo.RemoteState
+    - Terrafomo.HIL
     - Terrafomo.Schema
-    - Terrafomo.Validator
+    - Terrafomo.Encode
+    - Terrafomo.Validate
+    - Terrafomo.Monad
+    - Terrafomo.Lens
 
   dependencies:
     - aeson
     - aeson-pretty
-    - containers
-    - formatting >= 6.2.5
-    - iproute
+    - bytestring
+    - hashable
     - microlens
     - mmorph
-    - mtl
-    - prettyprinter
     - random
+    - scientific
     - text
     - transformers
+    - unordered-containers
 
 tests:
   hspec:
@@ -55,10 +53,11 @@ tests:
     source-dirs: test
 
     dependencies:
+      - amazonka-iam-policy
+      - bytestring
+      - hashable
       - hspec
       - hspec-discover
       - microlens
-      - prettyprinter
       - terrafomo
-      - text
-      - QuickCheck
+      - unordered-containers

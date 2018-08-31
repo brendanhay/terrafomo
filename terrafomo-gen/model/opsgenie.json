@@ -1,5 +1,6 @@
 {
   "name": "opsgenie",
+  "version": "0.1.0-18-g54eb1ca",
   "schemas": [
     {
       "name": "api_key",

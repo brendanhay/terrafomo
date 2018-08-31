@@ -1,5 +1,6 @@
 {
   "name": "circonus",
+  "version": "0.1.0-24-g3054a7a",
   "schemas": [
     {
       "name": "api_url",

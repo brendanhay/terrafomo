@@ -1,5 +1,6 @@
 {
   "name": "fastly",
+  "version": "0.3.0-1-g5c18a8b",
   "schemas": [
     {
       "name": "api_key",

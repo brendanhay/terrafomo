@@ -1,7 +1,6 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -319,334 +318,349 @@ import Data.Functor ((<$>))
 
 import GHC.Base (($))
 
-
+import qualified Data.Hashable          as P
+import qualified Data.HashMap.Strict    as P
+import qualified Data.HashMap.Strict    as HashMap
 import qualified Data.List.NonEmpty     as P
-import qualified Data.Map.Strict        as P
-import qualified Data.Map.Strict        as Map
 import qualified Data.Maybe             as P
-import qualified Data.Monoid            as P
-import qualified Data.Text              as P
+import qualified Data.Text.Lazy         as P
 import qualified GHC.Generics           as P
 import qualified Lens.Micro             as P
 import qualified Prelude                as P
-import qualified Terrafomo.Attribute    as TF
+import qualified Terrafomo.Encode       as TF
 import qualified Terrafomo.Google.Lens  as P
 import qualified Terrafomo.Google.Types as P
 import qualified Terrafomo.HCL          as TF
-import qualified Terrafomo.Name         as TF
-import qualified Terrafomo.Validator    as TF
+import qualified Terrafomo.HIL          as TF
+import qualified Terrafomo.Schema       as TF
+import qualified Terrafomo.Validate     as TF
 
 -- | @cidr_blocks@ nested settings.
 data ContainerClusterCidrBlocks s = ContainerClusterCidrBlocks'
-    { _cidrBlock   :: TF.Attr s P.Text
+    { _cidrBlock   :: TF.Expr s P.Text
     -- ^ @cidr_block@ - (Required)
     --
-    , _displayName :: TF.Attr s P.Text
+    , _displayName :: P.Maybe (TF.Expr s P.Text)
     -- ^ @display_name@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @cidr_blocks@ settings value.
 newContainerClusterCidrBlocks
-    :: TF.Attr s P.Text -- ^ 'P._cidrBlock': @cidr_block@
+    :: TF.Expr s P.Text -- ^ Lens: 'P.cidrBlock', Field: '_cidrBlock', HCL: @cidr_block@
     -> ContainerClusterCidrBlocks s
 newContainerClusterCidrBlocks _cidrBlock =
     ContainerClusterCidrBlocks'
         { _cidrBlock = _cidrBlock
-        , _displayName = TF.Nil
+        , _displayName = P.Nothing
         }
 
-instance TF.IsValue  (ContainerClusterCidrBlocks s)
-instance TF.IsObject (ContainerClusterCidrBlocks s) where
-    toObject ContainerClusterCidrBlocks'{..} = P.catMaybes
-        [ TF.assign "cidr_block" <$> TF.attribute _cidrBlock
-        , TF.assign "display_name" <$> TF.attribute _displayName
+instance TF.ToHCL (ContainerClusterCidrBlocks s) where
+     toHCL ContainerClusterCidrBlocks'{..} = TF.pairs $ P.mconcat
+        [ TF.pair "cidr_block" _cidrBlock
+        , P.maybe P.mempty (TF.pair "display_name") _displayName
         ]
 
-instance TF.IsValid (ContainerClusterCidrBlocks s) where
+instance P.Hashable (ContainerClusterCidrBlocks s)
+
+instance TF.HasValidator (ContainerClusterCidrBlocks s) where
     validator = P.mempty
 
-instance P.HasCidrBlock (ContainerClusterCidrBlocks s) (TF.Attr s P.Text) where
+instance P.HasCidrBlock (ContainerClusterCidrBlocks s) (TF.Expr s P.Text) where
     cidrBlock =
-        P.lens (_cidrBlock :: ContainerClusterCidrBlocks s -> TF.Attr s P.Text)
-               (\s a -> s { _cidrBlock = a } :: ContainerClusterCidrBlocks s)
+        P.lens (_cidrBlock :: ContainerClusterCidrBlocks s -> TF.Expr s P.Text)
+            (\s a -> s { _cidrBlock = a } :: ContainerClusterCidrBlocks s)
 
-instance P.HasDisplayName (ContainerClusterCidrBlocks s) (TF.Attr s P.Text) where
+instance P.HasDisplayName (ContainerClusterCidrBlocks s) (P.Maybe (TF.Expr s P.Text)) where
     displayName =
-        P.lens (_displayName :: ContainerClusterCidrBlocks s -> TF.Attr s P.Text)
-               (\s a -> s { _displayName = a } :: ContainerClusterCidrBlocks s)
+        P.lens (_displayName :: ContainerClusterCidrBlocks s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _displayName = a } :: ContainerClusterCidrBlocks s)
 
-instance s ~ s' => P.HasComputedCidrBlock (TF.Ref s' (ContainerClusterCidrBlocks s)) (TF.Attr s P.Text) where
-    computedCidrBlock x = TF.compute (TF.refKey x) "cidr_block"
+instance s ~ s' => P.HasComputedCidrBlock (TF.Ref s' (ContainerClusterCidrBlocks s)) (TF.Expr s P.Text) where
+    computedCidrBlock x =
+        TF.unsafeCompute TF.encodeAttr x "cidr_block"
 
-instance s ~ s' => P.HasComputedDisplayName (TF.Ref s' (ContainerClusterCidrBlocks s)) (TF.Attr s P.Text) where
-    computedDisplayName x = TF.compute (TF.refKey x) "display_name"
+instance s ~ s' => P.HasComputedDisplayName (TF.Ref s' (ContainerClusterCidrBlocks s)) (TF.Expr s P.Text) where
+    computedDisplayName x =
+        TF.unsafeCompute TF.encodeAttr x "display_name"
 
 -- | @master_authorized_networks_config@ nested settings.
 data ContainerClusterMasterAuthorizedNetworksConfig s = ContainerClusterMasterAuthorizedNetworksConfig'
-    { _cidrBlocks :: TF.Attr s [TF.Attr s (ContainerClusterCidrBlocks s)]
+    { _cidrBlocks :: P.Maybe (TF.Expr s [TF.Expr s (ContainerClusterCidrBlocks s)])
     -- ^ @cidr_blocks@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @master_authorized_networks_config@ settings value.
 newContainerClusterMasterAuthorizedNetworksConfig
     :: ContainerClusterMasterAuthorizedNetworksConfig s
 newContainerClusterMasterAuthorizedNetworksConfig =
     ContainerClusterMasterAuthorizedNetworksConfig'
-        { _cidrBlocks = TF.Nil
+        { _cidrBlocks = P.Nothing
         }
 
-instance TF.IsValue  (ContainerClusterMasterAuthorizedNetworksConfig s)
-instance TF.IsObject (ContainerClusterMasterAuthorizedNetworksConfig s) where
-    toObject ContainerClusterMasterAuthorizedNetworksConfig'{..} = P.catMaybes
-        [ TF.assign "cidr_blocks" <$> TF.attribute _cidrBlocks
+instance TF.ToHCL (ContainerClusterMasterAuthorizedNetworksConfig s) where
+     toHCL ContainerClusterMasterAuthorizedNetworksConfig'{..} = TF.pairs $ P.mconcat
+        [ P.maybe P.mempty (TF.pair "cidr_blocks") _cidrBlocks
         ]
 
-instance TF.IsValid (ContainerClusterMasterAuthorizedNetworksConfig s) where
+instance P.Hashable (ContainerClusterMasterAuthorizedNetworksConfig s)
+
+instance TF.HasValidator (ContainerClusterMasterAuthorizedNetworksConfig s) where
     validator = P.mempty
 
-instance P.HasCidrBlocks (ContainerClusterMasterAuthorizedNetworksConfig s) (TF.Attr s [TF.Attr s (ContainerClusterCidrBlocks s)]) where
+instance P.HasCidrBlocks (ContainerClusterMasterAuthorizedNetworksConfig s) (P.Maybe (TF.Expr s [TF.Expr s (ContainerClusterCidrBlocks s)])) where
     cidrBlocks =
-        P.lens (_cidrBlocks :: ContainerClusterMasterAuthorizedNetworksConfig s -> TF.Attr s [TF.Attr s (ContainerClusterCidrBlocks s)])
-               (\s a -> s { _cidrBlocks = a } :: ContainerClusterMasterAuthorizedNetworksConfig s)
+        P.lens (_cidrBlocks :: ContainerClusterMasterAuthorizedNetworksConfig s -> P.Maybe (TF.Expr s [TF.Expr s (ContainerClusterCidrBlocks s)]))
+            (\s a -> s { _cidrBlocks = a } :: ContainerClusterMasterAuthorizedNetworksConfig s)
 
-instance s ~ s' => P.HasComputedCidrBlocks (TF.Ref s' (ContainerClusterMasterAuthorizedNetworksConfig s)) (TF.Attr s [TF.Attr s (ContainerClusterCidrBlocks s)]) where
-    computedCidrBlocks x = TF.compute (TF.refKey x) "cidr_blocks"
+instance s ~ s' => P.HasComputedCidrBlocks (TF.Ref s' (ContainerClusterMasterAuthorizedNetworksConfig s)) (TF.Expr s [TF.Expr s (ContainerClusterCidrBlocks s)]) where
+    computedCidrBlocks x =
+        TF.unsafeCompute TF.encodeAttr x "cidr_blocks"
 
 -- | @client_certificate_config@ nested settings.
 data ContainerClusterClientCertificateConfig s = ContainerClusterClientCertificateConfig'
-    { _issueClientCertificate :: TF.Attr s P.Bool
+    { _issueClientCertificate :: TF.Expr s P.Bool
     -- ^ @issue_client_certificate@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @client_certificate_config@ settings value.
 newContainerClusterClientCertificateConfig
-    :: TF.Attr s P.Bool -- ^ 'P._issueClientCertificate': @issue_client_certificate@
+    :: TF.Expr s P.Bool -- ^ Lens: 'P.issueClientCertificate', Field: '_issueClientCertificate', HCL: @issue_client_certificate@
     -> ContainerClusterClientCertificateConfig s
 newContainerClusterClientCertificateConfig _issueClientCertificate =
     ContainerClusterClientCertificateConfig'
         { _issueClientCertificate = _issueClientCertificate
         }
 
-instance TF.IsValue  (ContainerClusterClientCertificateConfig s)
-instance TF.IsObject (ContainerClusterClientCertificateConfig s) where
-    toObject ContainerClusterClientCertificateConfig'{..} = P.catMaybes
-        [ TF.assign "issue_client_certificate" <$> TF.attribute _issueClientCertificate
+instance TF.ToHCL (ContainerClusterClientCertificateConfig s) where
+     toHCL ContainerClusterClientCertificateConfig'{..} = TF.pairs $ P.mconcat
+        [ TF.pair "issue_client_certificate" _issueClientCertificate
         ]
 
-instance TF.IsValid (ContainerClusterClientCertificateConfig s) where
+instance P.Hashable (ContainerClusterClientCertificateConfig s)
+
+instance TF.HasValidator (ContainerClusterClientCertificateConfig s) where
     validator = P.mempty
 
-instance P.HasIssueClientCertificate (ContainerClusterClientCertificateConfig s) (TF.Attr s P.Bool) where
+instance P.HasIssueClientCertificate (ContainerClusterClientCertificateConfig s) (TF.Expr s P.Bool) where
     issueClientCertificate =
-        P.lens (_issueClientCertificate :: ContainerClusterClientCertificateConfig s -> TF.Attr s P.Bool)
-               (\s a -> s { _issueClientCertificate = a } :: ContainerClusterClientCertificateConfig s)
+        P.lens (_issueClientCertificate :: ContainerClusterClientCertificateConfig s -> TF.Expr s P.Bool)
+            (\s a -> s { _issueClientCertificate = a } :: ContainerClusterClientCertificateConfig s)
 
-instance s ~ s' => P.HasComputedIssueClientCertificate (TF.Ref s' (ContainerClusterClientCertificateConfig s)) (TF.Attr s P.Bool) where
-    computedIssueClientCertificate x = TF.compute (TF.refKey x) "issue_client_certificate"
+instance s ~ s' => P.HasComputedIssueClientCertificate (TF.Ref s' (ContainerClusterClientCertificateConfig s)) (TF.Expr s P.Bool) where
+    computedIssueClientCertificate x =
+        TF.unsafeCompute TF.encodeAttr x "issue_client_certificate"
 
 -- | @master_auth@ nested settings.
 data ContainerClusterMasterAuth s = ContainerClusterMasterAuth'
-    { _clientCertificateConfig :: TF.Attr s (ContainerClusterClientCertificateConfig s)
+    { _clientCertificateConfig :: P.Maybe (TF.Expr s (ContainerClusterClientCertificateConfig s))
     -- ^ @client_certificate_config@ - (Optional, Forces New)
     --
-    , _password :: TF.Attr s P.Text
+    , _password :: TF.Expr s P.Text
     -- ^ @password@ - (Required, Forces New)
     --
-    , _username :: TF.Attr s P.Text
+    , _username :: TF.Expr s P.Text
     -- ^ @username@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @master_auth@ settings value.
 newContainerClusterMasterAuth
-    :: TF.Attr s P.Text -- ^ 'P._password': @password@
-    -> TF.Attr s P.Text -- ^ 'P._username': @username@
+    :: TF.Expr s P.Text -- ^ Lens: 'P.password', Field: '_password', HCL: @password@
+    -> TF.Expr s P.Text -- ^ Lens: 'P.username', Field: '_username', HCL: @username@
     -> ContainerClusterMasterAuth s
 newContainerClusterMasterAuth _password _username =
     ContainerClusterMasterAuth'
-        { _clientCertificateConfig = TF.Nil
+        { _clientCertificateConfig = P.Nothing
         , _password = _password
         , _username = _username
         }
 
-instance TF.IsValue  (ContainerClusterMasterAuth s)
-instance TF.IsObject (ContainerClusterMasterAuth s) where
-    toObject ContainerClusterMasterAuth'{..} = P.catMaybes
-        [ TF.assign "client_certificate_config" <$> TF.attribute _clientCertificateConfig
-        , TF.assign "password" <$> TF.attribute _password
-        , TF.assign "username" <$> TF.attribute _username
+instance TF.ToHCL (ContainerClusterMasterAuth s) where
+     toHCL ContainerClusterMasterAuth'{..} = TF.pairs $ P.mconcat
+        [ P.maybe P.mempty (TF.pair "client_certificate_config") _clientCertificateConfig
+        , TF.pair "password" _password
+        , TF.pair "username" _username
         ]
 
-instance TF.IsValid (ContainerClusterMasterAuth s) where
+instance P.Hashable (ContainerClusterMasterAuth s)
+
+instance TF.HasValidator (ContainerClusterMasterAuth s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_clientCertificateConfig"
-                  (_clientCertificateConfig
-                      :: ContainerClusterMasterAuth s -> TF.Attr s (ContainerClusterClientCertificateConfig s))
-                  TF.validator
 
-instance P.HasClientCertificateConfig (ContainerClusterMasterAuth s) (TF.Attr s (ContainerClusterClientCertificateConfig s)) where
+instance P.HasClientCertificateConfig (ContainerClusterMasterAuth s) (P.Maybe (TF.Expr s (ContainerClusterClientCertificateConfig s))) where
     clientCertificateConfig =
-        P.lens (_clientCertificateConfig :: ContainerClusterMasterAuth s -> TF.Attr s (ContainerClusterClientCertificateConfig s))
-               (\s a -> s { _clientCertificateConfig = a } :: ContainerClusterMasterAuth s)
+        P.lens (_clientCertificateConfig :: ContainerClusterMasterAuth s -> P.Maybe (TF.Expr s (ContainerClusterClientCertificateConfig s)))
+            (\s a -> s { _clientCertificateConfig = a } :: ContainerClusterMasterAuth s)
 
-instance P.HasPassword (ContainerClusterMasterAuth s) (TF.Attr s P.Text) where
+instance P.HasPassword (ContainerClusterMasterAuth s) (TF.Expr s P.Text) where
     password =
-        P.lens (_password :: ContainerClusterMasterAuth s -> TF.Attr s P.Text)
-               (\s a -> s { _password = a } :: ContainerClusterMasterAuth s)
+        P.lens (_password :: ContainerClusterMasterAuth s -> TF.Expr s P.Text)
+            (\s a -> s { _password = a } :: ContainerClusterMasterAuth s)
 
-instance P.HasUsername (ContainerClusterMasterAuth s) (TF.Attr s P.Text) where
+instance P.HasUsername (ContainerClusterMasterAuth s) (TF.Expr s P.Text) where
     username =
-        P.lens (_username :: ContainerClusterMasterAuth s -> TF.Attr s P.Text)
-               (\s a -> s { _username = a } :: ContainerClusterMasterAuth s)
+        P.lens (_username :: ContainerClusterMasterAuth s -> TF.Expr s P.Text)
+            (\s a -> s { _username = a } :: ContainerClusterMasterAuth s)
 
-instance s ~ s' => P.HasComputedClientCertificate (TF.Ref s' (ContainerClusterMasterAuth s)) (TF.Attr s P.Text) where
-    computedClientCertificate x = TF.compute (TF.refKey x) "client_certificate"
+instance s ~ s' => P.HasComputedClientCertificate (TF.Ref s' (ContainerClusterMasterAuth s)) (TF.Expr s P.Text) where
+    computedClientCertificate x =
+        TF.unsafeCompute TF.encodeAttr x "client_certificate"
 
-instance s ~ s' => P.HasComputedClientCertificateConfig (TF.Ref s' (ContainerClusterMasterAuth s)) (TF.Attr s [TF.Attr s (ContainerClusterClientCertificateConfig s)]) where
-    computedClientCertificateConfig x = TF.compute (TF.refKey x) "client_certificate_config"
+instance s ~ s' => P.HasComputedClientCertificateConfig (TF.Ref s' (ContainerClusterMasterAuth s)) (TF.Expr s [TF.Expr s (ContainerClusterClientCertificateConfig s)]) where
+    computedClientCertificateConfig x =
+        TF.unsafeCompute TF.encodeAttr x "client_certificate_config"
 
-instance s ~ s' => P.HasComputedClientKey (TF.Ref s' (ContainerClusterMasterAuth s)) (TF.Attr s P.Text) where
-    computedClientKey x = TF.compute (TF.refKey x) "client_key"
+instance s ~ s' => P.HasComputedClientKey (TF.Ref s' (ContainerClusterMasterAuth s)) (TF.Expr s P.Text) where
+    computedClientKey x =
+        TF.unsafeCompute TF.encodeAttr x "client_key"
 
-instance s ~ s' => P.HasComputedClusterCaCertificate (TF.Ref s' (ContainerClusterMasterAuth s)) (TF.Attr s P.Text) where
-    computedClusterCaCertificate x = TF.compute (TF.refKey x) "cluster_ca_certificate"
+instance s ~ s' => P.HasComputedClusterCaCertificate (TF.Ref s' (ContainerClusterMasterAuth s)) (TF.Expr s P.Text) where
+    computedClusterCaCertificate x =
+        TF.unsafeCompute TF.encodeAttr x "cluster_ca_certificate"
 
-instance s ~ s' => P.HasComputedPassword (TF.Ref s' (ContainerClusterMasterAuth s)) (TF.Attr s P.Text) where
-    computedPassword x = TF.compute (TF.refKey x) "password"
+instance s ~ s' => P.HasComputedPassword (TF.Ref s' (ContainerClusterMasterAuth s)) (TF.Expr s P.Text) where
+    computedPassword x =
+        TF.unsafeCompute TF.encodeAttr x "password"
 
-instance s ~ s' => P.HasComputedUsername (TF.Ref s' (ContainerClusterMasterAuth s)) (TF.Attr s P.Text) where
-    computedUsername x = TF.compute (TF.refKey x) "username"
+instance s ~ s' => P.HasComputedUsername (TF.Ref s' (ContainerClusterMasterAuth s)) (TF.Expr s P.Text) where
+    computedUsername x =
+        TF.unsafeCompute TF.encodeAttr x "username"
 
 -- | @daily_maintenance_window@ nested settings.
 data ContainerClusterDailyMaintenanceWindow s = ContainerClusterDailyMaintenanceWindow'
-    { _startTime :: TF.Attr s P.Text
+    { _startTime :: TF.Expr s P.Text
     -- ^ @start_time@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @daily_maintenance_window@ settings value.
 newContainerClusterDailyMaintenanceWindow
-    :: TF.Attr s P.Text -- ^ 'P._startTime': @start_time@
+    :: TF.Expr s P.Text -- ^ Lens: 'P.startTime', Field: '_startTime', HCL: @start_time@
     -> ContainerClusterDailyMaintenanceWindow s
 newContainerClusterDailyMaintenanceWindow _startTime =
     ContainerClusterDailyMaintenanceWindow'
         { _startTime = _startTime
         }
 
-instance TF.IsValue  (ContainerClusterDailyMaintenanceWindow s)
-instance TF.IsObject (ContainerClusterDailyMaintenanceWindow s) where
-    toObject ContainerClusterDailyMaintenanceWindow'{..} = P.catMaybes
-        [ TF.assign "start_time" <$> TF.attribute _startTime
+instance TF.ToHCL (ContainerClusterDailyMaintenanceWindow s) where
+     toHCL ContainerClusterDailyMaintenanceWindow'{..} = TF.pairs $ P.mconcat
+        [ TF.pair "start_time" _startTime
         ]
 
-instance TF.IsValid (ContainerClusterDailyMaintenanceWindow s) where
+instance P.Hashable (ContainerClusterDailyMaintenanceWindow s)
+
+instance TF.HasValidator (ContainerClusterDailyMaintenanceWindow s) where
     validator = P.mempty
 
-instance P.HasStartTime (ContainerClusterDailyMaintenanceWindow s) (TF.Attr s P.Text) where
+instance P.HasStartTime (ContainerClusterDailyMaintenanceWindow s) (TF.Expr s P.Text) where
     startTime =
-        P.lens (_startTime :: ContainerClusterDailyMaintenanceWindow s -> TF.Attr s P.Text)
-               (\s a -> s { _startTime = a } :: ContainerClusterDailyMaintenanceWindow s)
+        P.lens (_startTime :: ContainerClusterDailyMaintenanceWindow s -> TF.Expr s P.Text)
+            (\s a -> s { _startTime = a } :: ContainerClusterDailyMaintenanceWindow s)
 
-instance s ~ s' => P.HasComputedDuration (TF.Ref s' (ContainerClusterDailyMaintenanceWindow s)) (TF.Attr s P.Text) where
-    computedDuration x = TF.compute (TF.refKey x) "duration"
+instance s ~ s' => P.HasComputedDuration (TF.Ref s' (ContainerClusterDailyMaintenanceWindow s)) (TF.Expr s P.Text) where
+    computedDuration x =
+        TF.unsafeCompute TF.encodeAttr x "duration"
 
-instance s ~ s' => P.HasComputedStartTime (TF.Ref s' (ContainerClusterDailyMaintenanceWindow s)) (TF.Attr s P.Text) where
-    computedStartTime x = TF.compute (TF.refKey x) "start_time"
+instance s ~ s' => P.HasComputedStartTime (TF.Ref s' (ContainerClusterDailyMaintenanceWindow s)) (TF.Expr s P.Text) where
+    computedStartTime x =
+        TF.unsafeCompute TF.encodeAttr x "start_time"
 
 -- | @maintenance_policy@ nested settings.
 data ContainerClusterMaintenancePolicy s = ContainerClusterMaintenancePolicy'
-    { _dailyMaintenanceWindow :: TF.Attr s (ContainerClusterDailyMaintenanceWindow s)
+    { _dailyMaintenanceWindow :: TF.Expr s (ContainerClusterDailyMaintenanceWindow s)
     -- ^ @daily_maintenance_window@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @maintenance_policy@ settings value.
 newContainerClusterMaintenancePolicy
-    :: TF.Attr s (ContainerClusterDailyMaintenanceWindow s) -- ^ 'P._dailyMaintenanceWindow': @daily_maintenance_window@
+    :: TF.Expr s (ContainerClusterDailyMaintenanceWindow s) -- ^ Lens: 'P.dailyMaintenanceWindow', Field: '_dailyMaintenanceWindow', HCL: @daily_maintenance_window@
     -> ContainerClusterMaintenancePolicy s
 newContainerClusterMaintenancePolicy _dailyMaintenanceWindow =
     ContainerClusterMaintenancePolicy'
         { _dailyMaintenanceWindow = _dailyMaintenanceWindow
         }
 
-instance TF.IsValue  (ContainerClusterMaintenancePolicy s)
-instance TF.IsObject (ContainerClusterMaintenancePolicy s) where
-    toObject ContainerClusterMaintenancePolicy'{..} = P.catMaybes
-        [ TF.assign "daily_maintenance_window" <$> TF.attribute _dailyMaintenanceWindow
+instance TF.ToHCL (ContainerClusterMaintenancePolicy s) where
+     toHCL ContainerClusterMaintenancePolicy'{..} = TF.pairs $ P.mconcat
+        [ TF.pair "daily_maintenance_window" _dailyMaintenanceWindow
         ]
 
-instance TF.IsValid (ContainerClusterMaintenancePolicy s) where
+instance P.Hashable (ContainerClusterMaintenancePolicy s)
+
+instance TF.HasValidator (ContainerClusterMaintenancePolicy s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_dailyMaintenanceWindow"
-                  (_dailyMaintenanceWindow
-                      :: ContainerClusterMaintenancePolicy s -> TF.Attr s (ContainerClusterDailyMaintenanceWindow s))
-                  TF.validator
+           P.<> TF.fieldValidator "_dailyMaintenanceWindow" (_dailyMaintenanceWindow :: ContainerClusterMaintenancePolicy s -> TF.Expr s (ContainerClusterDailyMaintenanceWindow s))
 
-instance P.HasDailyMaintenanceWindow (ContainerClusterMaintenancePolicy s) (TF.Attr s (ContainerClusterDailyMaintenanceWindow s)) where
+instance P.HasDailyMaintenanceWindow (ContainerClusterMaintenancePolicy s) (TF.Expr s (ContainerClusterDailyMaintenanceWindow s)) where
     dailyMaintenanceWindow =
-        P.lens (_dailyMaintenanceWindow :: ContainerClusterMaintenancePolicy s -> TF.Attr s (ContainerClusterDailyMaintenanceWindow s))
-               (\s a -> s { _dailyMaintenanceWindow = a } :: ContainerClusterMaintenancePolicy s)
+        P.lens (_dailyMaintenanceWindow :: ContainerClusterMaintenancePolicy s -> TF.Expr s (ContainerClusterDailyMaintenanceWindow s))
+            (\s a -> s { _dailyMaintenanceWindow = a } :: ContainerClusterMaintenancePolicy s)
 
-instance s ~ s' => P.HasComputedDailyMaintenanceWindow (TF.Ref s' (ContainerClusterMaintenancePolicy s)) (TF.Attr s [TF.Attr s (ContainerClusterDailyMaintenanceWindow s)]) where
-    computedDailyMaintenanceWindow x = TF.compute (TF.refKey x) "daily_maintenance_window"
+instance s ~ s' => P.HasComputedDailyMaintenanceWindow (TF.Ref s' (ContainerClusterMaintenancePolicy s)) (TF.Expr s [TF.Expr s (ContainerClusterDailyMaintenanceWindow s)]) where
+    computedDailyMaintenanceWindow x =
+        TF.unsafeCompute TF.encodeAttr x "daily_maintenance_window"
 
 -- | @ip_allocation_policy@ nested settings.
 data ContainerClusterIpAllocationPolicy s = ContainerClusterIpAllocationPolicy'
-    { _clusterSecondaryRangeName  :: TF.Attr s P.Text
+    { _clusterSecondaryRangeName  :: P.Maybe (TF.Expr s P.Text)
     -- ^ @cluster_secondary_range_name@ - (Optional, Forces New)
     --
-    , _servicesSecondaryRangeName :: TF.Attr s P.Text
+    , _servicesSecondaryRangeName :: P.Maybe (TF.Expr s P.Text)
     -- ^ @services_secondary_range_name@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @ip_allocation_policy@ settings value.
 newContainerClusterIpAllocationPolicy
     :: ContainerClusterIpAllocationPolicy s
 newContainerClusterIpAllocationPolicy =
     ContainerClusterIpAllocationPolicy'
-        { _clusterSecondaryRangeName = TF.Nil
-        , _servicesSecondaryRangeName = TF.Nil
+        { _clusterSecondaryRangeName = P.Nothing
+        , _servicesSecondaryRangeName = P.Nothing
         }
 
-instance TF.IsValue  (ContainerClusterIpAllocationPolicy s)
-instance TF.IsObject (ContainerClusterIpAllocationPolicy s) where
-    toObject ContainerClusterIpAllocationPolicy'{..} = P.catMaybes
-        [ TF.assign "cluster_secondary_range_name" <$> TF.attribute _clusterSecondaryRangeName
-        , TF.assign "services_secondary_range_name" <$> TF.attribute _servicesSecondaryRangeName
+instance TF.ToHCL (ContainerClusterIpAllocationPolicy s) where
+     toHCL ContainerClusterIpAllocationPolicy'{..} = TF.pairs $ P.mconcat
+        [ P.maybe P.mempty (TF.pair "cluster_secondary_range_name") _clusterSecondaryRangeName
+        , P.maybe P.mempty (TF.pair "services_secondary_range_name") _servicesSecondaryRangeName
         ]
 
-instance TF.IsValid (ContainerClusterIpAllocationPolicy s) where
+instance P.Hashable (ContainerClusterIpAllocationPolicy s)
+
+instance TF.HasValidator (ContainerClusterIpAllocationPolicy s) where
     validator = P.mempty
 
-instance P.HasClusterSecondaryRangeName (ContainerClusterIpAllocationPolicy s) (TF.Attr s P.Text) where
+instance P.HasClusterSecondaryRangeName (ContainerClusterIpAllocationPolicy s) (P.Maybe (TF.Expr s P.Text)) where
     clusterSecondaryRangeName =
-        P.lens (_clusterSecondaryRangeName :: ContainerClusterIpAllocationPolicy s -> TF.Attr s P.Text)
-               (\s a -> s { _clusterSecondaryRangeName = a } :: ContainerClusterIpAllocationPolicy s)
+        P.lens (_clusterSecondaryRangeName :: ContainerClusterIpAllocationPolicy s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _clusterSecondaryRangeName = a } :: ContainerClusterIpAllocationPolicy s)
 
-instance P.HasServicesSecondaryRangeName (ContainerClusterIpAllocationPolicy s) (TF.Attr s P.Text) where
+instance P.HasServicesSecondaryRangeName (ContainerClusterIpAllocationPolicy s) (P.Maybe (TF.Expr s P.Text)) where
     servicesSecondaryRangeName =
-        P.lens (_servicesSecondaryRangeName :: ContainerClusterIpAllocationPolicy s -> TF.Attr s P.Text)
-               (\s a -> s { _servicesSecondaryRangeName = a } :: ContainerClusterIpAllocationPolicy s)
+        P.lens (_servicesSecondaryRangeName :: ContainerClusterIpAllocationPolicy s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _servicesSecondaryRangeName = a } :: ContainerClusterIpAllocationPolicy s)
 
-instance s ~ s' => P.HasComputedClusterSecondaryRangeName (TF.Ref s' (ContainerClusterIpAllocationPolicy s)) (TF.Attr s P.Text) where
-    computedClusterSecondaryRangeName x = TF.compute (TF.refKey x) "cluster_secondary_range_name"
+instance s ~ s' => P.HasComputedClusterSecondaryRangeName (TF.Ref s' (ContainerClusterIpAllocationPolicy s)) (TF.Expr s P.Text) where
+    computedClusterSecondaryRangeName x =
+        TF.unsafeCompute TF.encodeAttr x "cluster_secondary_range_name"
 
-instance s ~ s' => P.HasComputedServicesSecondaryRangeName (TF.Ref s' (ContainerClusterIpAllocationPolicy s)) (TF.Attr s P.Text) where
-    computedServicesSecondaryRangeName x = TF.compute (TF.refKey x) "services_secondary_range_name"
+instance s ~ s' => P.HasComputedServicesSecondaryRangeName (TF.Ref s' (ContainerClusterIpAllocationPolicy s)) (TF.Expr s P.Text) where
+    computedServicesSecondaryRangeName x =
+        TF.unsafeCompute TF.encodeAttr x "services_secondary_range_name"
 
 -- | @network_policy@ nested settings.
 data ContainerClusterNetworkPolicy s = ContainerClusterNetworkPolicy'
-    { _enabled   :: TF.Attr s P.Bool
-    -- ^ @enabled@ - (Optional)
+    { _enabled   :: TF.Expr s P.Bool
+    -- ^ @enabled@ - (Default @false@)
     --
-    , _provider' :: TF.Attr s P.Text
-    -- ^ @provider@ - (Optional)
+    , _provider' :: TF.Expr s P.Text
+    -- ^ @provider@ - (Default @PROVIDER_UNSPECIFIED@)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @network_policy@ settings value.
 newContainerClusterNetworkPolicy
@@ -657,79 +671,84 @@ newContainerClusterNetworkPolicy =
         , _provider' = TF.value "PROVIDER_UNSPECIFIED"
         }
 
-instance TF.IsValue  (ContainerClusterNetworkPolicy s)
-instance TF.IsObject (ContainerClusterNetworkPolicy s) where
-    toObject ContainerClusterNetworkPolicy'{..} = P.catMaybes
-        [ TF.assign "enabled" <$> TF.attribute _enabled
-        , TF.assign "provider" <$> TF.attribute _provider'
+instance TF.ToHCL (ContainerClusterNetworkPolicy s) where
+     toHCL ContainerClusterNetworkPolicy'{..} = TF.pairs $ P.mconcat
+        [ TF.pair "enabled" _enabled
+        , TF.pair "provider" _provider'
         ]
 
-instance TF.IsValid (ContainerClusterNetworkPolicy s) where
+instance P.Hashable (ContainerClusterNetworkPolicy s)
+
+instance TF.HasValidator (ContainerClusterNetworkPolicy s) where
     validator = P.mempty
 
-instance P.HasEnabled (ContainerClusterNetworkPolicy s) (TF.Attr s P.Bool) where
+instance P.HasEnabled (ContainerClusterNetworkPolicy s) (TF.Expr s P.Bool) where
     enabled =
-        P.lens (_enabled :: ContainerClusterNetworkPolicy s -> TF.Attr s P.Bool)
-               (\s a -> s { _enabled = a } :: ContainerClusterNetworkPolicy s)
+        P.lens (_enabled :: ContainerClusterNetworkPolicy s -> TF.Expr s P.Bool)
+            (\s a -> s { _enabled = a } :: ContainerClusterNetworkPolicy s)
 
-instance P.HasProvider' (ContainerClusterNetworkPolicy s) (TF.Attr s P.Text) where
+instance P.HasProvider' (ContainerClusterNetworkPolicy s) (TF.Expr s P.Text) where
     provider' =
-        P.lens (_provider' :: ContainerClusterNetworkPolicy s -> TF.Attr s P.Text)
-               (\s a -> s { _provider' = a } :: ContainerClusterNetworkPolicy s)
+        P.lens (_provider' :: ContainerClusterNetworkPolicy s -> TF.Expr s P.Text)
+            (\s a -> s { _provider' = a } :: ContainerClusterNetworkPolicy s)
 
-instance s ~ s' => P.HasComputedEnabled (TF.Ref s' (ContainerClusterNetworkPolicy s)) (TF.Attr s P.Bool) where
-    computedEnabled x = TF.compute (TF.refKey x) "enabled"
+instance s ~ s' => P.HasComputedEnabled (TF.Ref s' (ContainerClusterNetworkPolicy s)) (TF.Expr s P.Bool) where
+    computedEnabled x =
+        TF.unsafeCompute TF.encodeAttr x "enabled"
 
-instance s ~ s' => P.HasComputedProvider (TF.Ref s' (ContainerClusterNetworkPolicy s)) (TF.Attr s P.Text) where
-    computedProvider x = TF.compute (TF.refKey x) "provider"
+instance s ~ s' => P.HasComputedProvider (TF.Ref s' (ContainerClusterNetworkPolicy s)) (TF.Expr s P.Text) where
+    computedProvider x =
+        TF.unsafeCompute TF.encodeAttr x "provider"
 
 -- | @pod_security_policy_config@ nested settings.
 data ContainerClusterPodSecurityPolicyConfig s = ContainerClusterPodSecurityPolicyConfig'
-    { _enabled :: TF.Attr s P.Bool
+    { _enabled :: TF.Expr s P.Bool
     -- ^ @enabled@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @pod_security_policy_config@ settings value.
 newContainerClusterPodSecurityPolicyConfig
-    :: TF.Attr s P.Bool -- ^ 'P._enabled': @enabled@
+    :: TF.Expr s P.Bool -- ^ Lens: 'P.enabled', Field: '_enabled', HCL: @enabled@
     -> ContainerClusterPodSecurityPolicyConfig s
 newContainerClusterPodSecurityPolicyConfig _enabled =
     ContainerClusterPodSecurityPolicyConfig'
         { _enabled = _enabled
         }
 
-instance TF.IsValue  (ContainerClusterPodSecurityPolicyConfig s)
-instance TF.IsObject (ContainerClusterPodSecurityPolicyConfig s) where
-    toObject ContainerClusterPodSecurityPolicyConfig'{..} = P.catMaybes
-        [ TF.assign "enabled" <$> TF.attribute _enabled
+instance TF.ToHCL (ContainerClusterPodSecurityPolicyConfig s) where
+     toHCL ContainerClusterPodSecurityPolicyConfig'{..} = TF.pairs $ P.mconcat
+        [ TF.pair "enabled" _enabled
         ]
 
-instance TF.IsValid (ContainerClusterPodSecurityPolicyConfig s) where
+instance P.Hashable (ContainerClusterPodSecurityPolicyConfig s)
+
+instance TF.HasValidator (ContainerClusterPodSecurityPolicyConfig s) where
     validator = P.mempty
 
-instance P.HasEnabled (ContainerClusterPodSecurityPolicyConfig s) (TF.Attr s P.Bool) where
+instance P.HasEnabled (ContainerClusterPodSecurityPolicyConfig s) (TF.Expr s P.Bool) where
     enabled =
-        P.lens (_enabled :: ContainerClusterPodSecurityPolicyConfig s -> TF.Attr s P.Bool)
-               (\s a -> s { _enabled = a } :: ContainerClusterPodSecurityPolicyConfig s)
+        P.lens (_enabled :: ContainerClusterPodSecurityPolicyConfig s -> TF.Expr s P.Bool)
+            (\s a -> s { _enabled = a } :: ContainerClusterPodSecurityPolicyConfig s)
 
-instance s ~ s' => P.HasComputedEnabled (TF.Ref s' (ContainerClusterPodSecurityPolicyConfig s)) (TF.Attr s P.Bool) where
-    computedEnabled x = TF.compute (TF.refKey x) "enabled"
+instance s ~ s' => P.HasComputedEnabled (TF.Ref s' (ContainerClusterPodSecurityPolicyConfig s)) (TF.Expr s P.Bool) where
+    computedEnabled x =
+        TF.unsafeCompute TF.encodeAttr x "enabled"
 
 -- | @autoscaling@ nested settings.
 data ContainerNodePoolAutoscaling s = ContainerNodePoolAutoscaling'
-    { _maxNodeCount :: TF.Attr s P.Int
+    { _maxNodeCount :: TF.Expr s P.Int
     -- ^ @max_node_count@ - (Required)
     --
-    , _minNodeCount :: TF.Attr s P.Int
+    , _minNodeCount :: TF.Expr s P.Int
     -- ^ @min_node_count@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @autoscaling@ settings value.
 newContainerNodePoolAutoscaling
-    :: TF.Attr s P.Int -- ^ 'P._maxNodeCount': @max_node_count@
-    -> TF.Attr s P.Int -- ^ 'P._minNodeCount': @min_node_count@
+    :: TF.Expr s P.Int -- ^ Lens: 'P.maxNodeCount', Field: '_maxNodeCount', HCL: @max_node_count@
+    -> TF.Expr s P.Int -- ^ Lens: 'P.minNodeCount', Field: '_minNodeCount', HCL: @min_node_count@
     -> ContainerNodePoolAutoscaling s
 newContainerNodePoolAutoscaling _maxNodeCount _minNodeCount =
     ContainerNodePoolAutoscaling'
@@ -737,40 +756,41 @@ newContainerNodePoolAutoscaling _maxNodeCount _minNodeCount =
         , _minNodeCount = _minNodeCount
         }
 
-instance TF.IsValue  (ContainerNodePoolAutoscaling s)
-instance TF.IsObject (ContainerNodePoolAutoscaling s) where
-    toObject ContainerNodePoolAutoscaling'{..} = P.catMaybes
-        [ TF.assign "max_node_count" <$> TF.attribute _maxNodeCount
-        , TF.assign "min_node_count" <$> TF.attribute _minNodeCount
+instance TF.ToHCL (ContainerNodePoolAutoscaling s) where
+     toHCL ContainerNodePoolAutoscaling'{..} = TF.pairs $ P.mconcat
+        [ TF.pair "max_node_count" _maxNodeCount
+        , TF.pair "min_node_count" _minNodeCount
         ]
 
-instance TF.IsValid (ContainerNodePoolAutoscaling s) where
+instance P.Hashable (ContainerNodePoolAutoscaling s)
+
+instance TF.HasValidator (ContainerNodePoolAutoscaling s) where
     validator = P.mempty
 
-instance P.HasMaxNodeCount (ContainerNodePoolAutoscaling s) (TF.Attr s P.Int) where
+instance P.HasMaxNodeCount (ContainerNodePoolAutoscaling s) (TF.Expr s P.Int) where
     maxNodeCount =
-        P.lens (_maxNodeCount :: ContainerNodePoolAutoscaling s -> TF.Attr s P.Int)
-               (\s a -> s { _maxNodeCount = a } :: ContainerNodePoolAutoscaling s)
+        P.lens (_maxNodeCount :: ContainerNodePoolAutoscaling s -> TF.Expr s P.Int)
+            (\s a -> s { _maxNodeCount = a } :: ContainerNodePoolAutoscaling s)
 
-instance P.HasMinNodeCount (ContainerNodePoolAutoscaling s) (TF.Attr s P.Int) where
+instance P.HasMinNodeCount (ContainerNodePoolAutoscaling s) (TF.Expr s P.Int) where
     minNodeCount =
-        P.lens (_minNodeCount :: ContainerNodePoolAutoscaling s -> TF.Attr s P.Int)
-               (\s a -> s { _minNodeCount = a } :: ContainerNodePoolAutoscaling s)
+        P.lens (_minNodeCount :: ContainerNodePoolAutoscaling s -> TF.Expr s P.Int)
+            (\s a -> s { _minNodeCount = a } :: ContainerNodePoolAutoscaling s)
 
 -- | @guest_accelerator@ nested settings.
 data ContainerNodePoolGuestAccelerator s = ContainerNodePoolGuestAccelerator'
-    { _count :: TF.Attr s P.Int
+    { _count :: TF.Expr s P.Int
     -- ^ @count@ - (Required, Forces New)
     --
-    , _type' :: TF.Attr s P.Text
+    , _type' :: TF.Expr s P.Text
     -- ^ @type@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @guest_accelerator@ settings value.
 newContainerNodePoolGuestAccelerator
-    :: TF.Attr s P.Int -- ^ 'P._count': @count@
-    -> TF.Attr s P.Text -- ^ 'P._type'': @type@
+    :: TF.Expr s P.Int -- ^ Lens: 'P.count', Field: '_count', HCL: @count@
+    -> TF.Expr s P.Text -- ^ Lens: 'P.type'', Field: '_type'', HCL: @type@
     -> ContainerNodePoolGuestAccelerator s
 newContainerNodePoolGuestAccelerator _count _type' =
     ContainerNodePoolGuestAccelerator'
@@ -778,271 +798,278 @@ newContainerNodePoolGuestAccelerator _count _type' =
         , _type' = _type'
         }
 
-instance TF.IsValue  (ContainerNodePoolGuestAccelerator s)
-instance TF.IsObject (ContainerNodePoolGuestAccelerator s) where
-    toObject ContainerNodePoolGuestAccelerator'{..} = P.catMaybes
-        [ TF.assign "count" <$> TF.attribute _count
-        , TF.assign "type" <$> TF.attribute _type'
+instance TF.ToHCL (ContainerNodePoolGuestAccelerator s) where
+     toHCL ContainerNodePoolGuestAccelerator'{..} = TF.pairs $ P.mconcat
+        [ TF.pair "count" _count
+        , TF.pair "type" _type'
         ]
 
-instance TF.IsValid (ContainerNodePoolGuestAccelerator s) where
+instance P.Hashable (ContainerNodePoolGuestAccelerator s)
+
+instance TF.HasValidator (ContainerNodePoolGuestAccelerator s) where
     validator = P.mempty
 
-instance P.HasCount (ContainerNodePoolGuestAccelerator s) (TF.Attr s P.Int) where
+instance P.HasCount (ContainerNodePoolGuestAccelerator s) (TF.Expr s P.Int) where
     count =
-        P.lens (_count :: ContainerNodePoolGuestAccelerator s -> TF.Attr s P.Int)
-               (\s a -> s { _count = a } :: ContainerNodePoolGuestAccelerator s)
+        P.lens (_count :: ContainerNodePoolGuestAccelerator s -> TF.Expr s P.Int)
+            (\s a -> s { _count = a } :: ContainerNodePoolGuestAccelerator s)
 
-instance P.HasType' (ContainerNodePoolGuestAccelerator s) (TF.Attr s P.Text) where
+instance P.HasType' (ContainerNodePoolGuestAccelerator s) (TF.Expr s P.Text) where
     type' =
-        P.lens (_type' :: ContainerNodePoolGuestAccelerator s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a } :: ContainerNodePoolGuestAccelerator s)
+        P.lens (_type' :: ContainerNodePoolGuestAccelerator s -> TF.Expr s P.Text)
+            (\s a -> s { _type' = a } :: ContainerNodePoolGuestAccelerator s)
 
 -- | @node_config@ nested settings.
 data ContainerNodePoolNodeConfig s = ContainerNodePoolNodeConfig'
-    { _diskSizeGb :: TF.Attr s P.Int
+    { _diskSizeGb :: P.Maybe (TF.Expr s P.Int)
     -- ^ @disk_size_gb@ - (Optional, Forces New)
     --
-    , _diskType :: TF.Attr s P.Text
+    , _diskType :: P.Maybe (TF.Expr s P.Text)
     -- ^ @disk_type@ - (Optional, Forces New)
     --
-    , _guestAccelerator :: TF.Attr s [TF.Attr s (ContainerNodePoolGuestAccelerator s)]
+    , _guestAccelerator :: P.Maybe (TF.Expr s [TF.Expr s (ContainerNodePoolGuestAccelerator s)])
     -- ^ @guest_accelerator@ - (Optional, Forces New)
     --
-    , _imageType :: TF.Attr s P.Text
+    , _imageType :: P.Maybe (TF.Expr s P.Text)
     -- ^ @image_type@ - (Optional)
     --
-    , _labels :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _labels :: P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text)))
     -- ^ @labels@ - (Optional, Forces New)
     --
-    , _localSsdCount :: TF.Attr s P.Int
+    , _localSsdCount :: P.Maybe (TF.Expr s P.Int)
     -- ^ @local_ssd_count@ - (Optional, Forces New)
     --
-    , _machineType :: TF.Attr s P.Text
+    , _machineType :: P.Maybe (TF.Expr s P.Text)
     -- ^ @machine_type@ - (Optional, Forces New)
     --
-    , _metadata :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _metadata :: P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text)))
     -- ^ @metadata@ - (Optional, Forces New)
     --
-    , _minCpuPlatform :: TF.Attr s P.Text
+    , _minCpuPlatform :: P.Maybe (TF.Expr s P.Text)
     -- ^ @min_cpu_platform@ - (Optional, Forces New)
     --
-    , _oauthScopes :: TF.Attr s [TF.Attr s P.Text]
+    , _oauthScopes :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
     -- ^ @oauth_scopes@ - (Optional, Forces New)
     --
-    , _preemptible :: TF.Attr s P.Bool
-    -- ^ @preemptible@ - (Optional, Forces New)
+    , _preemptible :: TF.Expr s P.Bool
+    -- ^ @preemptible@ - (Default @false@, Forces New)
     --
-    , _serviceAccount :: TF.Attr s P.Text
+    , _serviceAccount :: P.Maybe (TF.Expr s P.Text)
     -- ^ @service_account@ - (Optional, Forces New)
     --
-    , _tags :: TF.Attr s [TF.Attr s P.Text]
+    , _tags :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
     -- ^ @tags@ - (Optional, Forces New)
     --
-    , _taint :: TF.Attr s [TF.Attr s (ContainerNodePoolTaint s)]
+    , _taint :: P.Maybe (TF.Expr s [TF.Expr s (ContainerNodePoolTaint s)])
     -- ^ @taint@ - (Optional, Forces New)
     --
-    , _workloadMetadataConfig :: TF.Attr s (ContainerNodePoolWorkloadMetadataConfig s)
+    , _workloadMetadataConfig :: P.Maybe (TF.Expr s (ContainerNodePoolWorkloadMetadataConfig s))
     -- ^ @workload_metadata_config@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @node_config@ settings value.
 newContainerNodePoolNodeConfig
     :: ContainerNodePoolNodeConfig s
 newContainerNodePoolNodeConfig =
     ContainerNodePoolNodeConfig'
-        { _diskSizeGb = TF.Nil
-        , _diskType = TF.Nil
-        , _guestAccelerator = TF.Nil
-        , _imageType = TF.Nil
-        , _labels = TF.Nil
-        , _localSsdCount = TF.Nil
-        , _machineType = TF.Nil
-        , _metadata = TF.Nil
-        , _minCpuPlatform = TF.Nil
-        , _oauthScopes = TF.Nil
+        { _diskSizeGb = P.Nothing
+        , _diskType = P.Nothing
+        , _guestAccelerator = P.Nothing
+        , _imageType = P.Nothing
+        , _labels = P.Nothing
+        , _localSsdCount = P.Nothing
+        , _machineType = P.Nothing
+        , _metadata = P.Nothing
+        , _minCpuPlatform = P.Nothing
+        , _oauthScopes = P.Nothing
         , _preemptible = TF.value P.False
-        , _serviceAccount = TF.Nil
-        , _tags = TF.Nil
-        , _taint = TF.Nil
-        , _workloadMetadataConfig = TF.Nil
+        , _serviceAccount = P.Nothing
+        , _tags = P.Nothing
+        , _taint = P.Nothing
+        , _workloadMetadataConfig = P.Nothing
         }
 
-instance TF.IsValue  (ContainerNodePoolNodeConfig s)
-instance TF.IsObject (ContainerNodePoolNodeConfig s) where
-    toObject ContainerNodePoolNodeConfig'{..} = P.catMaybes
-        [ TF.assign "disk_size_gb" <$> TF.attribute _diskSizeGb
-        , TF.assign "disk_type" <$> TF.attribute _diskType
-        , TF.assign "guest_accelerator" <$> TF.attribute _guestAccelerator
-        , TF.assign "image_type" <$> TF.attribute _imageType
-        , TF.assign "labels" <$> TF.attribute _labels
-        , TF.assign "local_ssd_count" <$> TF.attribute _localSsdCount
-        , TF.assign "machine_type" <$> TF.attribute _machineType
-        , TF.assign "metadata" <$> TF.attribute _metadata
-        , TF.assign "min_cpu_platform" <$> TF.attribute _minCpuPlatform
-        , TF.assign "oauth_scopes" <$> TF.attribute _oauthScopes
-        , TF.assign "preemptible" <$> TF.attribute _preemptible
-        , TF.assign "service_account" <$> TF.attribute _serviceAccount
-        , TF.assign "tags" <$> TF.attribute _tags
-        , TF.assign "taint" <$> TF.attribute _taint
-        , TF.assign "workload_metadata_config" <$> TF.attribute _workloadMetadataConfig
+instance TF.ToHCL (ContainerNodePoolNodeConfig s) where
+     toHCL ContainerNodePoolNodeConfig'{..} = TF.pairs $ P.mconcat
+        [ P.maybe P.mempty (TF.pair "disk_size_gb") _diskSizeGb
+        , P.maybe P.mempty (TF.pair "disk_type") _diskType
+        , P.maybe P.mempty (TF.pair "guest_accelerator") _guestAccelerator
+        , P.maybe P.mempty (TF.pair "image_type") _imageType
+        , P.maybe P.mempty (TF.pair "labels") _labels
+        , P.maybe P.mempty (TF.pair "local_ssd_count") _localSsdCount
+        , P.maybe P.mempty (TF.pair "machine_type") _machineType
+        , P.maybe P.mempty (TF.pair "metadata") _metadata
+        , P.maybe P.mempty (TF.pair "min_cpu_platform") _minCpuPlatform
+        , P.maybe P.mempty (TF.pair "oauth_scopes") _oauthScopes
+        , TF.pair "preemptible" _preemptible
+        , P.maybe P.mempty (TF.pair "service_account") _serviceAccount
+        , P.maybe P.mempty (TF.pair "tags") _tags
+        , P.maybe P.mempty (TF.pair "taint") _taint
+        , P.maybe P.mempty (TF.pair "workload_metadata_config") _workloadMetadataConfig
         ]
 
-instance TF.IsValid (ContainerNodePoolNodeConfig s) where
+instance P.Hashable (ContainerNodePoolNodeConfig s)
+
+instance TF.HasValidator (ContainerNodePoolNodeConfig s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_workloadMetadataConfig"
-                  (_workloadMetadataConfig
-                      :: ContainerNodePoolNodeConfig s -> TF.Attr s (ContainerNodePoolWorkloadMetadataConfig s))
-                  TF.validator
 
-instance P.HasDiskSizeGb (ContainerNodePoolNodeConfig s) (TF.Attr s P.Int) where
+instance P.HasDiskSizeGb (ContainerNodePoolNodeConfig s) (P.Maybe (TF.Expr s P.Int)) where
     diskSizeGb =
-        P.lens (_diskSizeGb :: ContainerNodePoolNodeConfig s -> TF.Attr s P.Int)
-               (\s a -> s { _diskSizeGb = a } :: ContainerNodePoolNodeConfig s)
+        P.lens (_diskSizeGb :: ContainerNodePoolNodeConfig s -> P.Maybe (TF.Expr s P.Int))
+            (\s a -> s { _diskSizeGb = a } :: ContainerNodePoolNodeConfig s)
 
-instance P.HasDiskType (ContainerNodePoolNodeConfig s) (TF.Attr s P.Text) where
+instance P.HasDiskType (ContainerNodePoolNodeConfig s) (P.Maybe (TF.Expr s P.Text)) where
     diskType =
-        P.lens (_diskType :: ContainerNodePoolNodeConfig s -> TF.Attr s P.Text)
-               (\s a -> s { _diskType = a } :: ContainerNodePoolNodeConfig s)
+        P.lens (_diskType :: ContainerNodePoolNodeConfig s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _diskType = a } :: ContainerNodePoolNodeConfig s)
 
-instance P.HasGuestAccelerator (ContainerNodePoolNodeConfig s) (TF.Attr s [TF.Attr s (ContainerNodePoolGuestAccelerator s)]) where
+instance P.HasGuestAccelerator (ContainerNodePoolNodeConfig s) (P.Maybe (TF.Expr s [TF.Expr s (ContainerNodePoolGuestAccelerator s)])) where
     guestAccelerator =
-        P.lens (_guestAccelerator :: ContainerNodePoolNodeConfig s -> TF.Attr s [TF.Attr s (ContainerNodePoolGuestAccelerator s)])
-               (\s a -> s { _guestAccelerator = a } :: ContainerNodePoolNodeConfig s)
+        P.lens (_guestAccelerator :: ContainerNodePoolNodeConfig s -> P.Maybe (TF.Expr s [TF.Expr s (ContainerNodePoolGuestAccelerator s)]))
+            (\s a -> s { _guestAccelerator = a } :: ContainerNodePoolNodeConfig s)
 
-instance P.HasImageType (ContainerNodePoolNodeConfig s) (TF.Attr s P.Text) where
+instance P.HasImageType (ContainerNodePoolNodeConfig s) (P.Maybe (TF.Expr s P.Text)) where
     imageType =
-        P.lens (_imageType :: ContainerNodePoolNodeConfig s -> TF.Attr s P.Text)
-               (\s a -> s { _imageType = a } :: ContainerNodePoolNodeConfig s)
+        P.lens (_imageType :: ContainerNodePoolNodeConfig s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _imageType = a } :: ContainerNodePoolNodeConfig s)
 
-instance P.HasLabels (ContainerNodePoolNodeConfig s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+instance P.HasLabels (ContainerNodePoolNodeConfig s) (P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text)))) where
     labels =
-        P.lens (_labels :: ContainerNodePoolNodeConfig s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _labels = a } :: ContainerNodePoolNodeConfig s)
+        P.lens (_labels :: ContainerNodePoolNodeConfig s -> P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text))))
+            (\s a -> s { _labels = a } :: ContainerNodePoolNodeConfig s)
 
-instance P.HasLocalSsdCount (ContainerNodePoolNodeConfig s) (TF.Attr s P.Int) where
+instance P.HasLocalSsdCount (ContainerNodePoolNodeConfig s) (P.Maybe (TF.Expr s P.Int)) where
     localSsdCount =
-        P.lens (_localSsdCount :: ContainerNodePoolNodeConfig s -> TF.Attr s P.Int)
-               (\s a -> s { _localSsdCount = a } :: ContainerNodePoolNodeConfig s)
+        P.lens (_localSsdCount :: ContainerNodePoolNodeConfig s -> P.Maybe (TF.Expr s P.Int))
+            (\s a -> s { _localSsdCount = a } :: ContainerNodePoolNodeConfig s)
 
-instance P.HasMachineType (ContainerNodePoolNodeConfig s) (TF.Attr s P.Text) where
+instance P.HasMachineType (ContainerNodePoolNodeConfig s) (P.Maybe (TF.Expr s P.Text)) where
     machineType =
-        P.lens (_machineType :: ContainerNodePoolNodeConfig s -> TF.Attr s P.Text)
-               (\s a -> s { _machineType = a } :: ContainerNodePoolNodeConfig s)
+        P.lens (_machineType :: ContainerNodePoolNodeConfig s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _machineType = a } :: ContainerNodePoolNodeConfig s)
 
-instance P.HasMetadata (ContainerNodePoolNodeConfig s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+instance P.HasMetadata (ContainerNodePoolNodeConfig s) (P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text)))) where
     metadata =
-        P.lens (_metadata :: ContainerNodePoolNodeConfig s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _metadata = a } :: ContainerNodePoolNodeConfig s)
+        P.lens (_metadata :: ContainerNodePoolNodeConfig s -> P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text))))
+            (\s a -> s { _metadata = a } :: ContainerNodePoolNodeConfig s)
 
-instance P.HasMinCpuPlatform (ContainerNodePoolNodeConfig s) (TF.Attr s P.Text) where
+instance P.HasMinCpuPlatform (ContainerNodePoolNodeConfig s) (P.Maybe (TF.Expr s P.Text)) where
     minCpuPlatform =
-        P.lens (_minCpuPlatform :: ContainerNodePoolNodeConfig s -> TF.Attr s P.Text)
-               (\s a -> s { _minCpuPlatform = a } :: ContainerNodePoolNodeConfig s)
+        P.lens (_minCpuPlatform :: ContainerNodePoolNodeConfig s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _minCpuPlatform = a } :: ContainerNodePoolNodeConfig s)
 
-instance P.HasOauthScopes (ContainerNodePoolNodeConfig s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasOauthScopes (ContainerNodePoolNodeConfig s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
     oauthScopes =
-        P.lens (_oauthScopes :: ContainerNodePoolNodeConfig s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _oauthScopes = a } :: ContainerNodePoolNodeConfig s)
+        P.lens (_oauthScopes :: ContainerNodePoolNodeConfig s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
+            (\s a -> s { _oauthScopes = a } :: ContainerNodePoolNodeConfig s)
 
-instance P.HasPreemptible (ContainerNodePoolNodeConfig s) (TF.Attr s P.Bool) where
+instance P.HasPreemptible (ContainerNodePoolNodeConfig s) (TF.Expr s P.Bool) where
     preemptible =
-        P.lens (_preemptible :: ContainerNodePoolNodeConfig s -> TF.Attr s P.Bool)
-               (\s a -> s { _preemptible = a } :: ContainerNodePoolNodeConfig s)
+        P.lens (_preemptible :: ContainerNodePoolNodeConfig s -> TF.Expr s P.Bool)
+            (\s a -> s { _preemptible = a } :: ContainerNodePoolNodeConfig s)
 
-instance P.HasServiceAccount (ContainerNodePoolNodeConfig s) (TF.Attr s P.Text) where
+instance P.HasServiceAccount (ContainerNodePoolNodeConfig s) (P.Maybe (TF.Expr s P.Text)) where
     serviceAccount =
-        P.lens (_serviceAccount :: ContainerNodePoolNodeConfig s -> TF.Attr s P.Text)
-               (\s a -> s { _serviceAccount = a } :: ContainerNodePoolNodeConfig s)
+        P.lens (_serviceAccount :: ContainerNodePoolNodeConfig s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _serviceAccount = a } :: ContainerNodePoolNodeConfig s)
 
-instance P.HasTags (ContainerNodePoolNodeConfig s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasTags (ContainerNodePoolNodeConfig s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
     tags =
-        P.lens (_tags :: ContainerNodePoolNodeConfig s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _tags = a } :: ContainerNodePoolNodeConfig s)
+        P.lens (_tags :: ContainerNodePoolNodeConfig s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
+            (\s a -> s { _tags = a } :: ContainerNodePoolNodeConfig s)
 
-instance P.HasTaint (ContainerNodePoolNodeConfig s) (TF.Attr s [TF.Attr s (ContainerNodePoolTaint s)]) where
+instance P.HasTaint (ContainerNodePoolNodeConfig s) (P.Maybe (TF.Expr s [TF.Expr s (ContainerNodePoolTaint s)])) where
     taint =
-        P.lens (_taint :: ContainerNodePoolNodeConfig s -> TF.Attr s [TF.Attr s (ContainerNodePoolTaint s)])
-               (\s a -> s { _taint = a } :: ContainerNodePoolNodeConfig s)
+        P.lens (_taint :: ContainerNodePoolNodeConfig s -> P.Maybe (TF.Expr s [TF.Expr s (ContainerNodePoolTaint s)]))
+            (\s a -> s { _taint = a } :: ContainerNodePoolNodeConfig s)
 
-instance P.HasWorkloadMetadataConfig (ContainerNodePoolNodeConfig s) (TF.Attr s (ContainerNodePoolWorkloadMetadataConfig s)) where
+instance P.HasWorkloadMetadataConfig (ContainerNodePoolNodeConfig s) (P.Maybe (TF.Expr s (ContainerNodePoolWorkloadMetadataConfig s))) where
     workloadMetadataConfig =
-        P.lens (_workloadMetadataConfig :: ContainerNodePoolNodeConfig s -> TF.Attr s (ContainerNodePoolWorkloadMetadataConfig s))
-               (\s a -> s { _workloadMetadataConfig = a } :: ContainerNodePoolNodeConfig s)
+        P.lens (_workloadMetadataConfig :: ContainerNodePoolNodeConfig s -> P.Maybe (TF.Expr s (ContainerNodePoolWorkloadMetadataConfig s)))
+            (\s a -> s { _workloadMetadataConfig = a } :: ContainerNodePoolNodeConfig s)
 
-instance s ~ s' => P.HasComputedDiskSizeGb (TF.Ref s' (ContainerNodePoolNodeConfig s)) (TF.Attr s P.Int) where
-    computedDiskSizeGb x = TF.compute (TF.refKey x) "disk_size_gb"
+instance s ~ s' => P.HasComputedDiskSizeGb (TF.Ref s' (ContainerNodePoolNodeConfig s)) (TF.Expr s P.Int) where
+    computedDiskSizeGb x =
+        TF.unsafeCompute TF.encodeAttr x "disk_size_gb"
 
-instance s ~ s' => P.HasComputedDiskType (TF.Ref s' (ContainerNodePoolNodeConfig s)) (TF.Attr s P.Text) where
-    computedDiskType x = TF.compute (TF.refKey x) "disk_type"
+instance s ~ s' => P.HasComputedDiskType (TF.Ref s' (ContainerNodePoolNodeConfig s)) (TF.Expr s P.Text) where
+    computedDiskType x =
+        TF.unsafeCompute TF.encodeAttr x "disk_type"
 
-instance s ~ s' => P.HasComputedGuestAccelerator (TF.Ref s' (ContainerNodePoolNodeConfig s)) (TF.Attr s [TF.Attr s (ContainerNodePoolGuestAccelerator s)]) where
-    computedGuestAccelerator x = TF.compute (TF.refKey x) "guest_accelerator"
+instance s ~ s' => P.HasComputedGuestAccelerator (TF.Ref s' (ContainerNodePoolNodeConfig s)) (TF.Expr s [TF.Expr s (ContainerNodePoolGuestAccelerator s)]) where
+    computedGuestAccelerator x =
+        TF.unsafeCompute TF.encodeAttr x "guest_accelerator"
 
-instance s ~ s' => P.HasComputedImageType (TF.Ref s' (ContainerNodePoolNodeConfig s)) (TF.Attr s P.Text) where
-    computedImageType x = TF.compute (TF.refKey x) "image_type"
+instance s ~ s' => P.HasComputedImageType (TF.Ref s' (ContainerNodePoolNodeConfig s)) (TF.Expr s P.Text) where
+    computedImageType x =
+        TF.unsafeCompute TF.encodeAttr x "image_type"
 
-instance s ~ s' => P.HasComputedLocalSsdCount (TF.Ref s' (ContainerNodePoolNodeConfig s)) (TF.Attr s P.Int) where
-    computedLocalSsdCount x = TF.compute (TF.refKey x) "local_ssd_count"
+instance s ~ s' => P.HasComputedLocalSsdCount (TF.Ref s' (ContainerNodePoolNodeConfig s)) (TF.Expr s P.Int) where
+    computedLocalSsdCount x =
+        TF.unsafeCompute TF.encodeAttr x "local_ssd_count"
 
-instance s ~ s' => P.HasComputedMachineType (TF.Ref s' (ContainerNodePoolNodeConfig s)) (TF.Attr s P.Text) where
-    computedMachineType x = TF.compute (TF.refKey x) "machine_type"
+instance s ~ s' => P.HasComputedMachineType (TF.Ref s' (ContainerNodePoolNodeConfig s)) (TF.Expr s P.Text) where
+    computedMachineType x =
+        TF.unsafeCompute TF.encodeAttr x "machine_type"
 
-instance s ~ s' => P.HasComputedOauthScopes (TF.Ref s' (ContainerNodePoolNodeConfig s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedOauthScopes x = TF.compute (TF.refKey x) "oauth_scopes"
+instance s ~ s' => P.HasComputedOauthScopes (TF.Ref s' (ContainerNodePoolNodeConfig s)) (TF.Expr s [TF.Expr s P.Text]) where
+    computedOauthScopes x =
+        TF.unsafeCompute TF.encodeAttr x "oauth_scopes"
 
-instance s ~ s' => P.HasComputedServiceAccount (TF.Ref s' (ContainerNodePoolNodeConfig s)) (TF.Attr s P.Text) where
-    computedServiceAccount x = TF.compute (TF.refKey x) "service_account"
+instance s ~ s' => P.HasComputedServiceAccount (TF.Ref s' (ContainerNodePoolNodeConfig s)) (TF.Expr s P.Text) where
+    computedServiceAccount x =
+        TF.unsafeCompute TF.encodeAttr x "service_account"
 
 -- | @workload_metadata_config@ nested settings.
 data ContainerNodePoolWorkloadMetadataConfig s = ContainerNodePoolWorkloadMetadataConfig'
-    { _nodeMetadata :: TF.Attr s P.Text
+    { _nodeMetadata :: TF.Expr s P.Text
     -- ^ @node_metadata@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @workload_metadata_config@ settings value.
 newContainerNodePoolWorkloadMetadataConfig
-    :: TF.Attr s P.Text -- ^ 'P._nodeMetadata': @node_metadata@
+    :: TF.Expr s P.Text -- ^ Lens: 'P.nodeMetadata', Field: '_nodeMetadata', HCL: @node_metadata@
     -> ContainerNodePoolWorkloadMetadataConfig s
 newContainerNodePoolWorkloadMetadataConfig _nodeMetadata =
     ContainerNodePoolWorkloadMetadataConfig'
         { _nodeMetadata = _nodeMetadata
         }
 
-instance TF.IsValue  (ContainerNodePoolWorkloadMetadataConfig s)
-instance TF.IsObject (ContainerNodePoolWorkloadMetadataConfig s) where
-    toObject ContainerNodePoolWorkloadMetadataConfig'{..} = P.catMaybes
-        [ TF.assign "node_metadata" <$> TF.attribute _nodeMetadata
+instance TF.ToHCL (ContainerNodePoolWorkloadMetadataConfig s) where
+     toHCL ContainerNodePoolWorkloadMetadataConfig'{..} = TF.pairs $ P.mconcat
+        [ TF.pair "node_metadata" _nodeMetadata
         ]
 
-instance TF.IsValid (ContainerNodePoolWorkloadMetadataConfig s) where
+instance P.Hashable (ContainerNodePoolWorkloadMetadataConfig s)
+
+instance TF.HasValidator (ContainerNodePoolWorkloadMetadataConfig s) where
     validator = P.mempty
 
-instance P.HasNodeMetadata (ContainerNodePoolWorkloadMetadataConfig s) (TF.Attr s P.Text) where
+instance P.HasNodeMetadata (ContainerNodePoolWorkloadMetadataConfig s) (TF.Expr s P.Text) where
     nodeMetadata =
-        P.lens (_nodeMetadata :: ContainerNodePoolWorkloadMetadataConfig s -> TF.Attr s P.Text)
-               (\s a -> s { _nodeMetadata = a } :: ContainerNodePoolWorkloadMetadataConfig s)
+        P.lens (_nodeMetadata :: ContainerNodePoolWorkloadMetadataConfig s -> TF.Expr s P.Text)
+            (\s a -> s { _nodeMetadata = a } :: ContainerNodePoolWorkloadMetadataConfig s)
 
 -- | @taint@ nested settings.
 data ContainerNodePoolTaint s = ContainerNodePoolTaint'
-    { _effect :: TF.Attr s P.Text
+    { _effect :: TF.Expr s P.Text
     -- ^ @effect@ - (Required, Forces New)
     --
-    , _key    :: TF.Attr s P.Text
+    , _key    :: TF.Expr s P.Text
     -- ^ @key@ - (Required, Forces New)
     --
-    , _value  :: TF.Attr s P.Text
+    , _value  :: TF.Expr s P.Text
     -- ^ @value@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @taint@ settings value.
 newContainerNodePoolTaint
-    :: TF.Attr s P.Text -- ^ 'P._effect': @effect@
-    -> TF.Attr s P.Text -- ^ 'P._key': @key@
-    -> TF.Attr s P.Text -- ^ 'P._value': @value@
+    :: TF.Expr s P.Text -- ^ Lens: 'P.effect', Field: '_effect', HCL: @effect@
+    -> TF.Expr s P.Text -- ^ Lens: 'P.key', Field: '_key', HCL: @key@
+    -> TF.Expr s P.Text -- ^ Lens: 'P.value', Field: '_value', HCL: @value@
     -> ContainerNodePoolTaint s
 newContainerNodePoolTaint _effect _key _value =
     ContainerNodePoolTaint'
@@ -1051,41 +1078,42 @@ newContainerNodePoolTaint _effect _key _value =
         , _value = _value
         }
 
-instance TF.IsValue  (ContainerNodePoolTaint s)
-instance TF.IsObject (ContainerNodePoolTaint s) where
-    toObject ContainerNodePoolTaint'{..} = P.catMaybes
-        [ TF.assign "effect" <$> TF.attribute _effect
-        , TF.assign "key" <$> TF.attribute _key
-        , TF.assign "value" <$> TF.attribute _value
+instance TF.ToHCL (ContainerNodePoolTaint s) where
+     toHCL ContainerNodePoolTaint'{..} = TF.pairs $ P.mconcat
+        [ TF.pair "effect" _effect
+        , TF.pair "key" _key
+        , TF.pair "value" _value
         ]
 
-instance TF.IsValid (ContainerNodePoolTaint s) where
+instance P.Hashable (ContainerNodePoolTaint s)
+
+instance TF.HasValidator (ContainerNodePoolTaint s) where
     validator = P.mempty
 
-instance P.HasEffect (ContainerNodePoolTaint s) (TF.Attr s P.Text) where
+instance P.HasEffect (ContainerNodePoolTaint s) (TF.Expr s P.Text) where
     effect =
-        P.lens (_effect :: ContainerNodePoolTaint s -> TF.Attr s P.Text)
-               (\s a -> s { _effect = a } :: ContainerNodePoolTaint s)
+        P.lens (_effect :: ContainerNodePoolTaint s -> TF.Expr s P.Text)
+            (\s a -> s { _effect = a } :: ContainerNodePoolTaint s)
 
-instance P.HasKey (ContainerNodePoolTaint s) (TF.Attr s P.Text) where
+instance P.HasKey (ContainerNodePoolTaint s) (TF.Expr s P.Text) where
     key =
-        P.lens (_key :: ContainerNodePoolTaint s -> TF.Attr s P.Text)
-               (\s a -> s { _key = a } :: ContainerNodePoolTaint s)
+        P.lens (_key :: ContainerNodePoolTaint s -> TF.Expr s P.Text)
+            (\s a -> s { _key = a } :: ContainerNodePoolTaint s)
 
-instance P.HasValue (ContainerNodePoolTaint s) (TF.Attr s P.Text) where
+instance P.HasValue (ContainerNodePoolTaint s) (TF.Expr s P.Text) where
     value =
-        P.lens (_value :: ContainerNodePoolTaint s -> TF.Attr s P.Text)
-               (\s a -> s { _value = a } :: ContainerNodePoolTaint s)
+        P.lens (_value :: ContainerNodePoolTaint s -> TF.Expr s P.Text)
+            (\s a -> s { _value = a } :: ContainerNodePoolTaint s)
 
 -- | @management@ nested settings.
 data ContainerNodePoolManagement s = ContainerNodePoolManagement'
-    { _autoRepair  :: TF.Attr s P.Bool
-    -- ^ @auto_repair@ - (Optional)
+    { _autoRepair  :: TF.Expr s P.Bool
+    -- ^ @auto_repair@ - (Default @false@)
     --
-    , _autoUpgrade :: TF.Attr s P.Bool
-    -- ^ @auto_upgrade@ - (Optional)
+    , _autoUpgrade :: TF.Expr s P.Bool
+    -- ^ @auto_upgrade@ - (Default @false@)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @management@ settings value.
 newContainerNodePoolManagement
@@ -1096,458 +1124,454 @@ newContainerNodePoolManagement =
         , _autoUpgrade = TF.value P.False
         }
 
-instance TF.IsValue  (ContainerNodePoolManagement s)
-instance TF.IsObject (ContainerNodePoolManagement s) where
-    toObject ContainerNodePoolManagement'{..} = P.catMaybes
-        [ TF.assign "auto_repair" <$> TF.attribute _autoRepair
-        , TF.assign "auto_upgrade" <$> TF.attribute _autoUpgrade
+instance TF.ToHCL (ContainerNodePoolManagement s) where
+     toHCL ContainerNodePoolManagement'{..} = TF.pairs $ P.mconcat
+        [ TF.pair "auto_repair" _autoRepair
+        , TF.pair "auto_upgrade" _autoUpgrade
         ]
 
-instance TF.IsValid (ContainerNodePoolManagement s) where
+instance P.Hashable (ContainerNodePoolManagement s)
+
+instance TF.HasValidator (ContainerNodePoolManagement s) where
     validator = P.mempty
 
-instance P.HasAutoRepair (ContainerNodePoolManagement s) (TF.Attr s P.Bool) where
+instance P.HasAutoRepair (ContainerNodePoolManagement s) (TF.Expr s P.Bool) where
     autoRepair =
-        P.lens (_autoRepair :: ContainerNodePoolManagement s -> TF.Attr s P.Bool)
-               (\s a -> s { _autoRepair = a } :: ContainerNodePoolManagement s)
+        P.lens (_autoRepair :: ContainerNodePoolManagement s -> TF.Expr s P.Bool)
+            (\s a -> s { _autoRepair = a } :: ContainerNodePoolManagement s)
 
-instance P.HasAutoUpgrade (ContainerNodePoolManagement s) (TF.Attr s P.Bool) where
+instance P.HasAutoUpgrade (ContainerNodePoolManagement s) (TF.Expr s P.Bool) where
     autoUpgrade =
-        P.lens (_autoUpgrade :: ContainerNodePoolManagement s -> TF.Attr s P.Bool)
-               (\s a -> s { _autoUpgrade = a } :: ContainerNodePoolManagement s)
+        P.lens (_autoUpgrade :: ContainerNodePoolManagement s -> TF.Expr s P.Bool)
+            (\s a -> s { _autoUpgrade = a } :: ContainerNodePoolManagement s)
 
 -- | @cluster_config@ nested settings.
 data DataprocClusterClusterConfig s = DataprocClusterClusterConfig'
-    { _gceClusterConfig :: TF.Attr s (DataprocClusterGceClusterConfig s)
+    { _gceClusterConfig :: P.Maybe (TF.Expr s (DataprocClusterGceClusterConfig s))
     -- ^ @gce_cluster_config@ - (Optional)
     --
-    , _initializationAction :: TF.Attr s [TF.Attr s (DataprocClusterInitializationAction s)]
+    , _initializationAction :: P.Maybe (TF.Expr s [TF.Expr s (DataprocClusterInitializationAction s)])
     -- ^ @initialization_action@ - (Optional, Forces New)
     --
-    , _masterConfig :: TF.Attr s (DataprocClusterMasterConfig s)
+    , _masterConfig :: P.Maybe (TF.Expr s (DataprocClusterMasterConfig s))
     -- ^ @master_config@ - (Optional)
     --
-    , _preemptibleWorkerConfig :: TF.Attr s (DataprocClusterPreemptibleWorkerConfig s)
+    , _preemptibleWorkerConfig :: P.Maybe (TF.Expr s (DataprocClusterPreemptibleWorkerConfig s))
     -- ^ @preemptible_worker_config@ - (Optional)
     --
-    , _softwareConfig :: TF.Attr s (DataprocClusterSoftwareConfig s)
+    , _softwareConfig :: P.Maybe (TF.Expr s (DataprocClusterSoftwareConfig s))
     -- ^ @software_config@ - (Optional)
     --
-    , _stagingBucket :: TF.Attr s P.Text
+    , _stagingBucket :: P.Maybe (TF.Expr s P.Text)
     -- ^ @staging_bucket@ - (Optional, Forces New)
     --
-    , _workerConfig :: TF.Attr s (DataprocClusterWorkerConfig s)
+    , _workerConfig :: P.Maybe (TF.Expr s (DataprocClusterWorkerConfig s))
     -- ^ @worker_config@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @cluster_config@ settings value.
 newDataprocClusterClusterConfig
     :: DataprocClusterClusterConfig s
 newDataprocClusterClusterConfig =
     DataprocClusterClusterConfig'
-        { _gceClusterConfig = TF.Nil
-        , _initializationAction = TF.Nil
-        , _masterConfig = TF.Nil
-        , _preemptibleWorkerConfig = TF.Nil
-        , _softwareConfig = TF.Nil
-        , _stagingBucket = TF.Nil
-        , _workerConfig = TF.Nil
+        { _gceClusterConfig = P.Nothing
+        , _initializationAction = P.Nothing
+        , _masterConfig = P.Nothing
+        , _preemptibleWorkerConfig = P.Nothing
+        , _softwareConfig = P.Nothing
+        , _stagingBucket = P.Nothing
+        , _workerConfig = P.Nothing
         }
 
-instance TF.IsValue  (DataprocClusterClusterConfig s)
-instance TF.IsObject (DataprocClusterClusterConfig s) where
-    toObject DataprocClusterClusterConfig'{..} = P.catMaybes
-        [ TF.assign "gce_cluster_config" <$> TF.attribute _gceClusterConfig
-        , TF.assign "initialization_action" <$> TF.attribute _initializationAction
-        , TF.assign "master_config" <$> TF.attribute _masterConfig
-        , TF.assign "preemptible_worker_config" <$> TF.attribute _preemptibleWorkerConfig
-        , TF.assign "software_config" <$> TF.attribute _softwareConfig
-        , TF.assign "staging_bucket" <$> TF.attribute _stagingBucket
-        , TF.assign "worker_config" <$> TF.attribute _workerConfig
+instance TF.ToHCL (DataprocClusterClusterConfig s) where
+     toHCL DataprocClusterClusterConfig'{..} = TF.pairs $ P.mconcat
+        [ P.maybe P.mempty (TF.pair "gce_cluster_config") _gceClusterConfig
+        , P.maybe P.mempty (TF.pair "initialization_action") _initializationAction
+        , P.maybe P.mempty (TF.pair "master_config") _masterConfig
+        , P.maybe P.mempty (TF.pair "preemptible_worker_config") _preemptibleWorkerConfig
+        , P.maybe P.mempty (TF.pair "software_config") _softwareConfig
+        , P.maybe P.mempty (TF.pair "staging_bucket") _stagingBucket
+        , P.maybe P.mempty (TF.pair "worker_config") _workerConfig
         ]
 
-instance TF.IsValid (DataprocClusterClusterConfig s) where
+instance P.Hashable (DataprocClusterClusterConfig s)
+
+instance TF.HasValidator (DataprocClusterClusterConfig s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_gceClusterConfig"
-                  (_gceClusterConfig
-                      :: DataprocClusterClusterConfig s -> TF.Attr s (DataprocClusterGceClusterConfig s))
-                  TF.validator
-           P.<> TF.settingsValidator "_masterConfig"
-                  (_masterConfig
-                      :: DataprocClusterClusterConfig s -> TF.Attr s (DataprocClusterMasterConfig s))
-                  TF.validator
-           P.<> TF.settingsValidator "_preemptibleWorkerConfig"
-                  (_preemptibleWorkerConfig
-                      :: DataprocClusterClusterConfig s -> TF.Attr s (DataprocClusterPreemptibleWorkerConfig s))
-                  TF.validator
-           P.<> TF.settingsValidator "_softwareConfig"
-                  (_softwareConfig
-                      :: DataprocClusterClusterConfig s -> TF.Attr s (DataprocClusterSoftwareConfig s))
-                  TF.validator
-           P.<> TF.settingsValidator "_workerConfig"
-                  (_workerConfig
-                      :: DataprocClusterClusterConfig s -> TF.Attr s (DataprocClusterWorkerConfig s))
-                  TF.validator
 
-instance P.HasGceClusterConfig (DataprocClusterClusterConfig s) (TF.Attr s (DataprocClusterGceClusterConfig s)) where
+instance P.HasGceClusterConfig (DataprocClusterClusterConfig s) (P.Maybe (TF.Expr s (DataprocClusterGceClusterConfig s))) where
     gceClusterConfig =
-        P.lens (_gceClusterConfig :: DataprocClusterClusterConfig s -> TF.Attr s (DataprocClusterGceClusterConfig s))
-               (\s a -> s { _gceClusterConfig = a } :: DataprocClusterClusterConfig s)
+        P.lens (_gceClusterConfig :: DataprocClusterClusterConfig s -> P.Maybe (TF.Expr s (DataprocClusterGceClusterConfig s)))
+            (\s a -> s { _gceClusterConfig = a } :: DataprocClusterClusterConfig s)
 
-instance P.HasInitializationAction (DataprocClusterClusterConfig s) (TF.Attr s [TF.Attr s (DataprocClusterInitializationAction s)]) where
+instance P.HasInitializationAction (DataprocClusterClusterConfig s) (P.Maybe (TF.Expr s [TF.Expr s (DataprocClusterInitializationAction s)])) where
     initializationAction =
-        P.lens (_initializationAction :: DataprocClusterClusterConfig s -> TF.Attr s [TF.Attr s (DataprocClusterInitializationAction s)])
-               (\s a -> s { _initializationAction = a } :: DataprocClusterClusterConfig s)
+        P.lens (_initializationAction :: DataprocClusterClusterConfig s -> P.Maybe (TF.Expr s [TF.Expr s (DataprocClusterInitializationAction s)]))
+            (\s a -> s { _initializationAction = a } :: DataprocClusterClusterConfig s)
 
-instance P.HasMasterConfig (DataprocClusterClusterConfig s) (TF.Attr s (DataprocClusterMasterConfig s)) where
+instance P.HasMasterConfig (DataprocClusterClusterConfig s) (P.Maybe (TF.Expr s (DataprocClusterMasterConfig s))) where
     masterConfig =
-        P.lens (_masterConfig :: DataprocClusterClusterConfig s -> TF.Attr s (DataprocClusterMasterConfig s))
-               (\s a -> s { _masterConfig = a } :: DataprocClusterClusterConfig s)
+        P.lens (_masterConfig :: DataprocClusterClusterConfig s -> P.Maybe (TF.Expr s (DataprocClusterMasterConfig s)))
+            (\s a -> s { _masterConfig = a } :: DataprocClusterClusterConfig s)
 
-instance P.HasPreemptibleWorkerConfig (DataprocClusterClusterConfig s) (TF.Attr s (DataprocClusterPreemptibleWorkerConfig s)) where
+instance P.HasPreemptibleWorkerConfig (DataprocClusterClusterConfig s) (P.Maybe (TF.Expr s (DataprocClusterPreemptibleWorkerConfig s))) where
     preemptibleWorkerConfig =
-        P.lens (_preemptibleWorkerConfig :: DataprocClusterClusterConfig s -> TF.Attr s (DataprocClusterPreemptibleWorkerConfig s))
-               (\s a -> s { _preemptibleWorkerConfig = a } :: DataprocClusterClusterConfig s)
+        P.lens (_preemptibleWorkerConfig :: DataprocClusterClusterConfig s -> P.Maybe (TF.Expr s (DataprocClusterPreemptibleWorkerConfig s)))
+            (\s a -> s { _preemptibleWorkerConfig = a } :: DataprocClusterClusterConfig s)
 
-instance P.HasSoftwareConfig (DataprocClusterClusterConfig s) (TF.Attr s (DataprocClusterSoftwareConfig s)) where
+instance P.HasSoftwareConfig (DataprocClusterClusterConfig s) (P.Maybe (TF.Expr s (DataprocClusterSoftwareConfig s))) where
     softwareConfig =
-        P.lens (_softwareConfig :: DataprocClusterClusterConfig s -> TF.Attr s (DataprocClusterSoftwareConfig s))
-               (\s a -> s { _softwareConfig = a } :: DataprocClusterClusterConfig s)
+        P.lens (_softwareConfig :: DataprocClusterClusterConfig s -> P.Maybe (TF.Expr s (DataprocClusterSoftwareConfig s)))
+            (\s a -> s { _softwareConfig = a } :: DataprocClusterClusterConfig s)
 
-instance P.HasStagingBucket (DataprocClusterClusterConfig s) (TF.Attr s P.Text) where
+instance P.HasStagingBucket (DataprocClusterClusterConfig s) (P.Maybe (TF.Expr s P.Text)) where
     stagingBucket =
-        P.lens (_stagingBucket :: DataprocClusterClusterConfig s -> TF.Attr s P.Text)
-               (\s a -> s { _stagingBucket = a } :: DataprocClusterClusterConfig s)
+        P.lens (_stagingBucket :: DataprocClusterClusterConfig s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _stagingBucket = a } :: DataprocClusterClusterConfig s)
 
-instance P.HasWorkerConfig (DataprocClusterClusterConfig s) (TF.Attr s (DataprocClusterWorkerConfig s)) where
+instance P.HasWorkerConfig (DataprocClusterClusterConfig s) (P.Maybe (TF.Expr s (DataprocClusterWorkerConfig s))) where
     workerConfig =
-        P.lens (_workerConfig :: DataprocClusterClusterConfig s -> TF.Attr s (DataprocClusterWorkerConfig s))
-               (\s a -> s { _workerConfig = a } :: DataprocClusterClusterConfig s)
+        P.lens (_workerConfig :: DataprocClusterClusterConfig s -> P.Maybe (TF.Expr s (DataprocClusterWorkerConfig s)))
+            (\s a -> s { _workerConfig = a } :: DataprocClusterClusterConfig s)
 
-instance s ~ s' => P.HasComputedBucket (TF.Ref s' (DataprocClusterClusterConfig s)) (TF.Attr s P.Text) where
-    computedBucket x = TF.compute (TF.refKey x) "bucket"
+instance s ~ s' => P.HasComputedBucket (TF.Ref s' (DataprocClusterClusterConfig s)) (TF.Expr s P.Text) where
+    computedBucket x =
+        TF.unsafeCompute TF.encodeAttr x "bucket"
 
-instance s ~ s' => P.HasComputedGceClusterConfig (TF.Ref s' (DataprocClusterClusterConfig s)) (TF.Attr s (DataprocClusterGceClusterConfig s)) where
-    computedGceClusterConfig x = TF.compute (TF.refKey x) "gce_cluster_config"
+instance s ~ s' => P.HasComputedGceClusterConfig (TF.Ref s' (DataprocClusterClusterConfig s)) (TF.Expr s (DataprocClusterGceClusterConfig s)) where
+    computedGceClusterConfig x =
+        TF.unsafeCompute TF.encodeAttr x "gce_cluster_config"
 
-instance s ~ s' => P.HasComputedMasterConfig (TF.Ref s' (DataprocClusterClusterConfig s)) (TF.Attr s (DataprocClusterMasterConfig s)) where
-    computedMasterConfig x = TF.compute (TF.refKey x) "master_config"
+instance s ~ s' => P.HasComputedMasterConfig (TF.Ref s' (DataprocClusterClusterConfig s)) (TF.Expr s (DataprocClusterMasterConfig s)) where
+    computedMasterConfig x =
+        TF.unsafeCompute TF.encodeAttr x "master_config"
 
-instance s ~ s' => P.HasComputedPreemptibleWorkerConfig (TF.Ref s' (DataprocClusterClusterConfig s)) (TF.Attr s (DataprocClusterPreemptibleWorkerConfig s)) where
-    computedPreemptibleWorkerConfig x = TF.compute (TF.refKey x) "preemptible_worker_config"
+instance s ~ s' => P.HasComputedPreemptibleWorkerConfig (TF.Ref s' (DataprocClusterClusterConfig s)) (TF.Expr s (DataprocClusterPreemptibleWorkerConfig s)) where
+    computedPreemptibleWorkerConfig x =
+        TF.unsafeCompute TF.encodeAttr x "preemptible_worker_config"
 
-instance s ~ s' => P.HasComputedSoftwareConfig (TF.Ref s' (DataprocClusterClusterConfig s)) (TF.Attr s (DataprocClusterSoftwareConfig s)) where
-    computedSoftwareConfig x = TF.compute (TF.refKey x) "software_config"
+instance s ~ s' => P.HasComputedSoftwareConfig (TF.Ref s' (DataprocClusterClusterConfig s)) (TF.Expr s (DataprocClusterSoftwareConfig s)) where
+    computedSoftwareConfig x =
+        TF.unsafeCompute TF.encodeAttr x "software_config"
 
-instance s ~ s' => P.HasComputedWorkerConfig (TF.Ref s' (DataprocClusterClusterConfig s)) (TF.Attr s (DataprocClusterWorkerConfig s)) where
-    computedWorkerConfig x = TF.compute (TF.refKey x) "worker_config"
+instance s ~ s' => P.HasComputedWorkerConfig (TF.Ref s' (DataprocClusterClusterConfig s)) (TF.Expr s (DataprocClusterWorkerConfig s)) where
+    computedWorkerConfig x =
+        TF.unsafeCompute TF.encodeAttr x "worker_config"
 
 -- | @worker_config@ nested settings.
 data DataprocClusterWorkerConfig s = DataprocClusterWorkerConfig'
-    { _diskConfig   :: TF.Attr s (DataprocClusterDiskConfig s)
+    { _diskConfig   :: P.Maybe (TF.Expr s (DataprocClusterDiskConfig s))
     -- ^ @disk_config@ - (Optional)
     --
-    , _machineType  :: TF.Attr s P.Text
+    , _machineType  :: P.Maybe (TF.Expr s P.Text)
     -- ^ @machine_type@ - (Optional, Forces New)
     --
-    , _numInstances :: TF.Attr s P.Int
+    , _numInstances :: P.Maybe (TF.Expr s P.Int)
     -- ^ @num_instances@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @worker_config@ settings value.
 newDataprocClusterWorkerConfig
     :: DataprocClusterWorkerConfig s
 newDataprocClusterWorkerConfig =
     DataprocClusterWorkerConfig'
-        { _diskConfig = TF.Nil
-        , _machineType = TF.Nil
-        , _numInstances = TF.Nil
+        { _diskConfig = P.Nothing
+        , _machineType = P.Nothing
+        , _numInstances = P.Nothing
         }
 
-instance TF.IsValue  (DataprocClusterWorkerConfig s)
-instance TF.IsObject (DataprocClusterWorkerConfig s) where
-    toObject DataprocClusterWorkerConfig'{..} = P.catMaybes
-        [ TF.assign "disk_config" <$> TF.attribute _diskConfig
-        , TF.assign "machine_type" <$> TF.attribute _machineType
-        , TF.assign "num_instances" <$> TF.attribute _numInstances
+instance TF.ToHCL (DataprocClusterWorkerConfig s) where
+     toHCL DataprocClusterWorkerConfig'{..} = TF.pairs $ P.mconcat
+        [ P.maybe P.mempty (TF.pair "disk_config") _diskConfig
+        , P.maybe P.mempty (TF.pair "machine_type") _machineType
+        , P.maybe P.mempty (TF.pair "num_instances") _numInstances
         ]
 
-instance TF.IsValid (DataprocClusterWorkerConfig s) where
+instance P.Hashable (DataprocClusterWorkerConfig s)
+
+instance TF.HasValidator (DataprocClusterWorkerConfig s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_diskConfig"
-                  (_diskConfig
-                      :: DataprocClusterWorkerConfig s -> TF.Attr s (DataprocClusterDiskConfig s))
-                  TF.validator
 
-instance P.HasDiskConfig (DataprocClusterWorkerConfig s) (TF.Attr s (DataprocClusterDiskConfig s)) where
+instance P.HasDiskConfig (DataprocClusterWorkerConfig s) (P.Maybe (TF.Expr s (DataprocClusterDiskConfig s))) where
     diskConfig =
-        P.lens (_diskConfig :: DataprocClusterWorkerConfig s -> TF.Attr s (DataprocClusterDiskConfig s))
-               (\s a -> s { _diskConfig = a } :: DataprocClusterWorkerConfig s)
+        P.lens (_diskConfig :: DataprocClusterWorkerConfig s -> P.Maybe (TF.Expr s (DataprocClusterDiskConfig s)))
+            (\s a -> s { _diskConfig = a } :: DataprocClusterWorkerConfig s)
 
-instance P.HasMachineType (DataprocClusterWorkerConfig s) (TF.Attr s P.Text) where
+instance P.HasMachineType (DataprocClusterWorkerConfig s) (P.Maybe (TF.Expr s P.Text)) where
     machineType =
-        P.lens (_machineType :: DataprocClusterWorkerConfig s -> TF.Attr s P.Text)
-               (\s a -> s { _machineType = a } :: DataprocClusterWorkerConfig s)
+        P.lens (_machineType :: DataprocClusterWorkerConfig s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _machineType = a } :: DataprocClusterWorkerConfig s)
 
-instance P.HasNumInstances (DataprocClusterWorkerConfig s) (TF.Attr s P.Int) where
+instance P.HasNumInstances (DataprocClusterWorkerConfig s) (P.Maybe (TF.Expr s P.Int)) where
     numInstances =
-        P.lens (_numInstances :: DataprocClusterWorkerConfig s -> TF.Attr s P.Int)
-               (\s a -> s { _numInstances = a } :: DataprocClusterWorkerConfig s)
+        P.lens (_numInstances :: DataprocClusterWorkerConfig s -> P.Maybe (TF.Expr s P.Int))
+            (\s a -> s { _numInstances = a } :: DataprocClusterWorkerConfig s)
 
-instance s ~ s' => P.HasComputedDiskConfig (TF.Ref s' (DataprocClusterWorkerConfig s)) (TF.Attr s (DataprocClusterDiskConfig s)) where
-    computedDiskConfig x = TF.compute (TF.refKey x) "disk_config"
+instance s ~ s' => P.HasComputedDiskConfig (TF.Ref s' (DataprocClusterWorkerConfig s)) (TF.Expr s (DataprocClusterDiskConfig s)) where
+    computedDiskConfig x =
+        TF.unsafeCompute TF.encodeAttr x "disk_config"
 
-instance s ~ s' => P.HasComputedInstanceNames (TF.Ref s' (DataprocClusterWorkerConfig s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedInstanceNames x = TF.compute (TF.refKey x) "instance_names"
+instance s ~ s' => P.HasComputedInstanceNames (TF.Ref s' (DataprocClusterWorkerConfig s)) (TF.Expr s [TF.Expr s P.Text]) where
+    computedInstanceNames x =
+        TF.unsafeCompute TF.encodeAttr x "instance_names"
 
-instance s ~ s' => P.HasComputedMachineType (TF.Ref s' (DataprocClusterWorkerConfig s)) (TF.Attr s P.Text) where
-    computedMachineType x = TF.compute (TF.refKey x) "machine_type"
+instance s ~ s' => P.HasComputedMachineType (TF.Ref s' (DataprocClusterWorkerConfig s)) (TF.Expr s P.Text) where
+    computedMachineType x =
+        TF.unsafeCompute TF.encodeAttr x "machine_type"
 
-instance s ~ s' => P.HasComputedNumInstances (TF.Ref s' (DataprocClusterWorkerConfig s)) (TF.Attr s P.Int) where
-    computedNumInstances x = TF.compute (TF.refKey x) "num_instances"
+instance s ~ s' => P.HasComputedNumInstances (TF.Ref s' (DataprocClusterWorkerConfig s)) (TF.Expr s P.Int) where
+    computedNumInstances x =
+        TF.unsafeCompute TF.encodeAttr x "num_instances"
 
 -- | @disk_config@ nested settings.
 data DataprocClusterDiskConfig s = DataprocClusterDiskConfig'
-    { _bootDiskSizeGb :: TF.Attr s P.Int
+    { _bootDiskSizeGb :: P.Maybe (TF.Expr s P.Int)
     -- ^ @boot_disk_size_gb@ - (Optional, Forces New)
     --
-    , _numLocalSsds   :: TF.Attr s P.Int
+    , _numLocalSsds   :: P.Maybe (TF.Expr s P.Int)
     -- ^ @num_local_ssds@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @disk_config@ settings value.
 newDataprocClusterDiskConfig
     :: DataprocClusterDiskConfig s
 newDataprocClusterDiskConfig =
     DataprocClusterDiskConfig'
-        { _bootDiskSizeGb = TF.Nil
-        , _numLocalSsds = TF.Nil
+        { _bootDiskSizeGb = P.Nothing
+        , _numLocalSsds = P.Nothing
         }
 
-instance TF.IsValue  (DataprocClusterDiskConfig s)
-instance TF.IsObject (DataprocClusterDiskConfig s) where
-    toObject DataprocClusterDiskConfig'{..} = P.catMaybes
-        [ TF.assign "boot_disk_size_gb" <$> TF.attribute _bootDiskSizeGb
-        , TF.assign "num_local_ssds" <$> TF.attribute _numLocalSsds
+instance TF.ToHCL (DataprocClusterDiskConfig s) where
+     toHCL DataprocClusterDiskConfig'{..} = TF.pairs $ P.mconcat
+        [ P.maybe P.mempty (TF.pair "boot_disk_size_gb") _bootDiskSizeGb
+        , P.maybe P.mempty (TF.pair "num_local_ssds") _numLocalSsds
         ]
 
-instance TF.IsValid (DataprocClusterDiskConfig s) where
+instance P.Hashable (DataprocClusterDiskConfig s)
+
+instance TF.HasValidator (DataprocClusterDiskConfig s) where
     validator = P.mempty
 
-instance P.HasBootDiskSizeGb (DataprocClusterDiskConfig s) (TF.Attr s P.Int) where
+instance P.HasBootDiskSizeGb (DataprocClusterDiskConfig s) (P.Maybe (TF.Expr s P.Int)) where
     bootDiskSizeGb =
-        P.lens (_bootDiskSizeGb :: DataprocClusterDiskConfig s -> TF.Attr s P.Int)
-               (\s a -> s { _bootDiskSizeGb = a } :: DataprocClusterDiskConfig s)
+        P.lens (_bootDiskSizeGb :: DataprocClusterDiskConfig s -> P.Maybe (TF.Expr s P.Int))
+            (\s a -> s { _bootDiskSizeGb = a } :: DataprocClusterDiskConfig s)
 
-instance P.HasNumLocalSsds (DataprocClusterDiskConfig s) (TF.Attr s P.Int) where
+instance P.HasNumLocalSsds (DataprocClusterDiskConfig s) (P.Maybe (TF.Expr s P.Int)) where
     numLocalSsds =
-        P.lens (_numLocalSsds :: DataprocClusterDiskConfig s -> TF.Attr s P.Int)
-               (\s a -> s { _numLocalSsds = a } :: DataprocClusterDiskConfig s)
+        P.lens (_numLocalSsds :: DataprocClusterDiskConfig s -> P.Maybe (TF.Expr s P.Int))
+            (\s a -> s { _numLocalSsds = a } :: DataprocClusterDiskConfig s)
 
-instance s ~ s' => P.HasComputedBootDiskSizeGb (TF.Ref s' (DataprocClusterDiskConfig s)) (TF.Attr s P.Int) where
-    computedBootDiskSizeGb x = TF.compute (TF.refKey x) "boot_disk_size_gb"
+instance s ~ s' => P.HasComputedBootDiskSizeGb (TF.Ref s' (DataprocClusterDiskConfig s)) (TF.Expr s P.Int) where
+    computedBootDiskSizeGb x =
+        TF.unsafeCompute TF.encodeAttr x "boot_disk_size_gb"
 
-instance s ~ s' => P.HasComputedNumLocalSsds (TF.Ref s' (DataprocClusterDiskConfig s)) (TF.Attr s P.Int) where
-    computedNumLocalSsds x = TF.compute (TF.refKey x) "num_local_ssds"
+instance s ~ s' => P.HasComputedNumLocalSsds (TF.Ref s' (DataprocClusterDiskConfig s)) (TF.Expr s P.Int) where
+    computedNumLocalSsds x =
+        TF.unsafeCompute TF.encodeAttr x "num_local_ssds"
 
 -- | @preemptible_worker_config@ nested settings.
 data DataprocClusterPreemptibleWorkerConfig s = DataprocClusterPreemptibleWorkerConfig'
-    { _diskConfig   :: TF.Attr s (DataprocClusterDiskConfig s)
+    { _diskConfig   :: P.Maybe (TF.Expr s (DataprocClusterDiskConfig s))
     -- ^ @disk_config@ - (Optional)
     --
-    , _numInstances :: TF.Attr s P.Int
+    , _numInstances :: P.Maybe (TF.Expr s P.Int)
     -- ^ @num_instances@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @preemptible_worker_config@ settings value.
 newDataprocClusterPreemptibleWorkerConfig
     :: DataprocClusterPreemptibleWorkerConfig s
 newDataprocClusterPreemptibleWorkerConfig =
     DataprocClusterPreemptibleWorkerConfig'
-        { _diskConfig = TF.Nil
-        , _numInstances = TF.Nil
+        { _diskConfig = P.Nothing
+        , _numInstances = P.Nothing
         }
 
-instance TF.IsValue  (DataprocClusterPreemptibleWorkerConfig s)
-instance TF.IsObject (DataprocClusterPreemptibleWorkerConfig s) where
-    toObject DataprocClusterPreemptibleWorkerConfig'{..} = P.catMaybes
-        [ TF.assign "disk_config" <$> TF.attribute _diskConfig
-        , TF.assign "num_instances" <$> TF.attribute _numInstances
+instance TF.ToHCL (DataprocClusterPreemptibleWorkerConfig s) where
+     toHCL DataprocClusterPreemptibleWorkerConfig'{..} = TF.pairs $ P.mconcat
+        [ P.maybe P.mempty (TF.pair "disk_config") _diskConfig
+        , P.maybe P.mempty (TF.pair "num_instances") _numInstances
         ]
 
-instance TF.IsValid (DataprocClusterPreemptibleWorkerConfig s) where
+instance P.Hashable (DataprocClusterPreemptibleWorkerConfig s)
+
+instance TF.HasValidator (DataprocClusterPreemptibleWorkerConfig s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_diskConfig"
-                  (_diskConfig
-                      :: DataprocClusterPreemptibleWorkerConfig s -> TF.Attr s (DataprocClusterDiskConfig s))
-                  TF.validator
 
-instance P.HasDiskConfig (DataprocClusterPreemptibleWorkerConfig s) (TF.Attr s (DataprocClusterDiskConfig s)) where
+instance P.HasDiskConfig (DataprocClusterPreemptibleWorkerConfig s) (P.Maybe (TF.Expr s (DataprocClusterDiskConfig s))) where
     diskConfig =
-        P.lens (_diskConfig :: DataprocClusterPreemptibleWorkerConfig s -> TF.Attr s (DataprocClusterDiskConfig s))
-               (\s a -> s { _diskConfig = a } :: DataprocClusterPreemptibleWorkerConfig s)
+        P.lens (_diskConfig :: DataprocClusterPreemptibleWorkerConfig s -> P.Maybe (TF.Expr s (DataprocClusterDiskConfig s)))
+            (\s a -> s { _diskConfig = a } :: DataprocClusterPreemptibleWorkerConfig s)
 
-instance P.HasNumInstances (DataprocClusterPreemptibleWorkerConfig s) (TF.Attr s P.Int) where
+instance P.HasNumInstances (DataprocClusterPreemptibleWorkerConfig s) (P.Maybe (TF.Expr s P.Int)) where
     numInstances =
-        P.lens (_numInstances :: DataprocClusterPreemptibleWorkerConfig s -> TF.Attr s P.Int)
-               (\s a -> s { _numInstances = a } :: DataprocClusterPreemptibleWorkerConfig s)
+        P.lens (_numInstances :: DataprocClusterPreemptibleWorkerConfig s -> P.Maybe (TF.Expr s P.Int))
+            (\s a -> s { _numInstances = a } :: DataprocClusterPreemptibleWorkerConfig s)
 
-instance s ~ s' => P.HasComputedDiskConfig (TF.Ref s' (DataprocClusterPreemptibleWorkerConfig s)) (TF.Attr s (DataprocClusterDiskConfig s)) where
-    computedDiskConfig x = TF.compute (TF.refKey x) "disk_config"
+instance s ~ s' => P.HasComputedDiskConfig (TF.Ref s' (DataprocClusterPreemptibleWorkerConfig s)) (TF.Expr s (DataprocClusterDiskConfig s)) where
+    computedDiskConfig x =
+        TF.unsafeCompute TF.encodeAttr x "disk_config"
 
-instance s ~ s' => P.HasComputedInstanceNames (TF.Ref s' (DataprocClusterPreemptibleWorkerConfig s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedInstanceNames x = TF.compute (TF.refKey x) "instance_names"
+instance s ~ s' => P.HasComputedInstanceNames (TF.Ref s' (DataprocClusterPreemptibleWorkerConfig s)) (TF.Expr s [TF.Expr s P.Text]) where
+    computedInstanceNames x =
+        TF.unsafeCompute TF.encodeAttr x "instance_names"
 
-instance s ~ s' => P.HasComputedNumInstances (TF.Ref s' (DataprocClusterPreemptibleWorkerConfig s)) (TF.Attr s P.Int) where
-    computedNumInstances x = TF.compute (TF.refKey x) "num_instances"
+instance s ~ s' => P.HasComputedNumInstances (TF.Ref s' (DataprocClusterPreemptibleWorkerConfig s)) (TF.Expr s P.Int) where
+    computedNumInstances x =
+        TF.unsafeCompute TF.encodeAttr x "num_instances"
 
 -- | @master_config@ nested settings.
 data DataprocClusterMasterConfig s = DataprocClusterMasterConfig'
-    { _diskConfig   :: TF.Attr s (DataprocClusterDiskConfig s)
+    { _diskConfig   :: P.Maybe (TF.Expr s (DataprocClusterDiskConfig s))
     -- ^ @disk_config@ - (Optional)
     --
-    , _machineType  :: TF.Attr s P.Text
+    , _machineType  :: P.Maybe (TF.Expr s P.Text)
     -- ^ @machine_type@ - (Optional, Forces New)
     --
-    , _numInstances :: TF.Attr s P.Int
+    , _numInstances :: P.Maybe (TF.Expr s P.Int)
     -- ^ @num_instances@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @master_config@ settings value.
 newDataprocClusterMasterConfig
     :: DataprocClusterMasterConfig s
 newDataprocClusterMasterConfig =
     DataprocClusterMasterConfig'
-        { _diskConfig = TF.Nil
-        , _machineType = TF.Nil
-        , _numInstances = TF.Nil
+        { _diskConfig = P.Nothing
+        , _machineType = P.Nothing
+        , _numInstances = P.Nothing
         }
 
-instance TF.IsValue  (DataprocClusterMasterConfig s)
-instance TF.IsObject (DataprocClusterMasterConfig s) where
-    toObject DataprocClusterMasterConfig'{..} = P.catMaybes
-        [ TF.assign "disk_config" <$> TF.attribute _diskConfig
-        , TF.assign "machine_type" <$> TF.attribute _machineType
-        , TF.assign "num_instances" <$> TF.attribute _numInstances
+instance TF.ToHCL (DataprocClusterMasterConfig s) where
+     toHCL DataprocClusterMasterConfig'{..} = TF.pairs $ P.mconcat
+        [ P.maybe P.mempty (TF.pair "disk_config") _diskConfig
+        , P.maybe P.mempty (TF.pair "machine_type") _machineType
+        , P.maybe P.mempty (TF.pair "num_instances") _numInstances
         ]
 
-instance TF.IsValid (DataprocClusterMasterConfig s) where
+instance P.Hashable (DataprocClusterMasterConfig s)
+
+instance TF.HasValidator (DataprocClusterMasterConfig s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_diskConfig"
-                  (_diskConfig
-                      :: DataprocClusterMasterConfig s -> TF.Attr s (DataprocClusterDiskConfig s))
-                  TF.validator
 
-instance P.HasDiskConfig (DataprocClusterMasterConfig s) (TF.Attr s (DataprocClusterDiskConfig s)) where
+instance P.HasDiskConfig (DataprocClusterMasterConfig s) (P.Maybe (TF.Expr s (DataprocClusterDiskConfig s))) where
     diskConfig =
-        P.lens (_diskConfig :: DataprocClusterMasterConfig s -> TF.Attr s (DataprocClusterDiskConfig s))
-               (\s a -> s { _diskConfig = a } :: DataprocClusterMasterConfig s)
+        P.lens (_diskConfig :: DataprocClusterMasterConfig s -> P.Maybe (TF.Expr s (DataprocClusterDiskConfig s)))
+            (\s a -> s { _diskConfig = a } :: DataprocClusterMasterConfig s)
 
-instance P.HasMachineType (DataprocClusterMasterConfig s) (TF.Attr s P.Text) where
+instance P.HasMachineType (DataprocClusterMasterConfig s) (P.Maybe (TF.Expr s P.Text)) where
     machineType =
-        P.lens (_machineType :: DataprocClusterMasterConfig s -> TF.Attr s P.Text)
-               (\s a -> s { _machineType = a } :: DataprocClusterMasterConfig s)
+        P.lens (_machineType :: DataprocClusterMasterConfig s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _machineType = a } :: DataprocClusterMasterConfig s)
 
-instance P.HasNumInstances (DataprocClusterMasterConfig s) (TF.Attr s P.Int) where
+instance P.HasNumInstances (DataprocClusterMasterConfig s) (P.Maybe (TF.Expr s P.Int)) where
     numInstances =
-        P.lens (_numInstances :: DataprocClusterMasterConfig s -> TF.Attr s P.Int)
-               (\s a -> s { _numInstances = a } :: DataprocClusterMasterConfig s)
+        P.lens (_numInstances :: DataprocClusterMasterConfig s -> P.Maybe (TF.Expr s P.Int))
+            (\s a -> s { _numInstances = a } :: DataprocClusterMasterConfig s)
 
-instance s ~ s' => P.HasComputedDiskConfig (TF.Ref s' (DataprocClusterMasterConfig s)) (TF.Attr s (DataprocClusterDiskConfig s)) where
-    computedDiskConfig x = TF.compute (TF.refKey x) "disk_config"
+instance s ~ s' => P.HasComputedDiskConfig (TF.Ref s' (DataprocClusterMasterConfig s)) (TF.Expr s (DataprocClusterDiskConfig s)) where
+    computedDiskConfig x =
+        TF.unsafeCompute TF.encodeAttr x "disk_config"
 
-instance s ~ s' => P.HasComputedInstanceNames (TF.Ref s' (DataprocClusterMasterConfig s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedInstanceNames x = TF.compute (TF.refKey x) "instance_names"
+instance s ~ s' => P.HasComputedInstanceNames (TF.Ref s' (DataprocClusterMasterConfig s)) (TF.Expr s [TF.Expr s P.Text]) where
+    computedInstanceNames x =
+        TF.unsafeCompute TF.encodeAttr x "instance_names"
 
-instance s ~ s' => P.HasComputedMachineType (TF.Ref s' (DataprocClusterMasterConfig s)) (TF.Attr s P.Text) where
-    computedMachineType x = TF.compute (TF.refKey x) "machine_type"
+instance s ~ s' => P.HasComputedMachineType (TF.Ref s' (DataprocClusterMasterConfig s)) (TF.Expr s P.Text) where
+    computedMachineType x =
+        TF.unsafeCompute TF.encodeAttr x "machine_type"
 
-instance s ~ s' => P.HasComputedNumInstances (TF.Ref s' (DataprocClusterMasterConfig s)) (TF.Attr s P.Int) where
-    computedNumInstances x = TF.compute (TF.refKey x) "num_instances"
+instance s ~ s' => P.HasComputedNumInstances (TF.Ref s' (DataprocClusterMasterConfig s)) (TF.Expr s P.Int) where
+    computedNumInstances x =
+        TF.unsafeCompute TF.encodeAttr x "num_instances"
 
 -- | @software_config@ nested settings.
 data DataprocClusterSoftwareConfig s = DataprocClusterSoftwareConfig'
-    { _imageVersion       :: TF.Attr s P.Text
+    { _imageVersion :: P.Maybe (TF.Expr s P.Text)
     -- ^ @image_version@ - (Optional, Forces New)
     --
-    , _overrideProperties :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _overrideProperties :: P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text)))
     -- ^ @override_properties@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @software_config@ settings value.
 newDataprocClusterSoftwareConfig
     :: DataprocClusterSoftwareConfig s
 newDataprocClusterSoftwareConfig =
     DataprocClusterSoftwareConfig'
-        { _imageVersion = TF.Nil
-        , _overrideProperties = TF.Nil
+        { _imageVersion = P.Nothing
+        , _overrideProperties = P.Nothing
         }
 
-instance TF.IsValue  (DataprocClusterSoftwareConfig s)
-instance TF.IsObject (DataprocClusterSoftwareConfig s) where
-    toObject DataprocClusterSoftwareConfig'{..} = P.catMaybes
-        [ TF.assign "image_version" <$> TF.attribute _imageVersion
-        , TF.assign "override_properties" <$> TF.attribute _overrideProperties
+instance TF.ToHCL (DataprocClusterSoftwareConfig s) where
+     toHCL DataprocClusterSoftwareConfig'{..} = TF.pairs $ P.mconcat
+        [ P.maybe P.mempty (TF.pair "image_version") _imageVersion
+        , P.maybe P.mempty (TF.pair "override_properties") _overrideProperties
         ]
 
-instance TF.IsValid (DataprocClusterSoftwareConfig s) where
+instance P.Hashable (DataprocClusterSoftwareConfig s)
+
+instance TF.HasValidator (DataprocClusterSoftwareConfig s) where
     validator = P.mempty
 
-instance P.HasImageVersion (DataprocClusterSoftwareConfig s) (TF.Attr s P.Text) where
+instance P.HasImageVersion (DataprocClusterSoftwareConfig s) (P.Maybe (TF.Expr s P.Text)) where
     imageVersion =
-        P.lens (_imageVersion :: DataprocClusterSoftwareConfig s -> TF.Attr s P.Text)
-               (\s a -> s { _imageVersion = a } :: DataprocClusterSoftwareConfig s)
+        P.lens (_imageVersion :: DataprocClusterSoftwareConfig s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _imageVersion = a } :: DataprocClusterSoftwareConfig s)
 
-instance P.HasOverrideProperties (DataprocClusterSoftwareConfig s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+instance P.HasOverrideProperties (DataprocClusterSoftwareConfig s) (P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text)))) where
     overrideProperties =
-        P.lens (_overrideProperties :: DataprocClusterSoftwareConfig s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _overrideProperties = a } :: DataprocClusterSoftwareConfig s)
+        P.lens (_overrideProperties :: DataprocClusterSoftwareConfig s -> P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text))))
+            (\s a -> s { _overrideProperties = a } :: DataprocClusterSoftwareConfig s)
 
-instance s ~ s' => P.HasComputedImageVersion (TF.Ref s' (DataprocClusterSoftwareConfig s)) (TF.Attr s P.Text) where
-    computedImageVersion x = TF.compute (TF.refKey x) "image_version"
+instance s ~ s' => P.HasComputedImageVersion (TF.Ref s' (DataprocClusterSoftwareConfig s)) (TF.Expr s P.Text) where
+    computedImageVersion x =
+        TF.unsafeCompute TF.encodeAttr x "image_version"
 
-instance s ~ s' => P.HasComputedProperties (TF.Ref s' (DataprocClusterSoftwareConfig s)) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
-    computedProperties x = TF.compute (TF.refKey x) "properties"
+instance s ~ s' => P.HasComputedProperties (TF.Ref s' (DataprocClusterSoftwareConfig s)) (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text))) where
+    computedProperties x =
+        TF.unsafeCompute TF.encodeAttr x "properties"
 
 -- | @gce_cluster_config@ nested settings.
 data DataprocClusterGceClusterConfig s = DataprocClusterGceClusterConfig'
-    { _internalIpOnly       :: TF.Attr s P.Bool
-    -- ^ @internal_ip_only@ - (Optional, Forces New)
+    { _internalIpOnly :: TF.Expr s P.Bool
+    -- ^ @internal_ip_only@ - (Default @false@, Forces New)
     --
-    , _metadata             :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _metadata :: P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text)))
     -- ^ @metadata@ - (Optional, Forces New)
     --
-    , _network              :: TF.Attr s P.Text
+    , _network :: P.Maybe (TF.Expr s P.Text)
     -- ^ @network@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
     -- * 'subnetwork'
-    , _serviceAccount       :: TF.Attr s P.Text
+    , _serviceAccount :: P.Maybe (TF.Expr s P.Text)
     -- ^ @service_account@ - (Optional, Forces New)
     --
-    , _serviceAccountScopes :: TF.Attr s [TF.Attr s P.Text]
+    , _serviceAccountScopes :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
     -- ^ @service_account_scopes@ - (Optional, Forces New)
     --
-    , _subnetwork           :: TF.Attr s P.Text
+    , _subnetwork :: P.Maybe (TF.Expr s P.Text)
     -- ^ @subnetwork@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
     -- * 'network'
-    , _tags                 :: TF.Attr s [TF.Attr s P.Text]
+    , _tags :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
     -- ^ @tags@ - (Optional, Forces New)
     --
-    , _zone                 :: TF.Attr s P.Text
+    , _zone :: P.Maybe (TF.Expr s P.Text)
     -- ^ @zone@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @gce_cluster_config@ settings value.
 newDataprocClusterGceClusterConfig
@@ -1555,104 +1579,102 @@ newDataprocClusterGceClusterConfig
 newDataprocClusterGceClusterConfig =
     DataprocClusterGceClusterConfig'
         { _internalIpOnly = TF.value P.False
-        , _metadata = TF.Nil
-        , _network = TF.Nil
-        , _serviceAccount = TF.Nil
-        , _serviceAccountScopes = TF.Nil
-        , _subnetwork = TF.Nil
-        , _tags = TF.Nil
-        , _zone = TF.Nil
+        , _metadata = P.Nothing
+        , _network = P.Nothing
+        , _serviceAccount = P.Nothing
+        , _serviceAccountScopes = P.Nothing
+        , _subnetwork = P.Nothing
+        , _tags = P.Nothing
+        , _zone = P.Nothing
         }
 
-instance TF.IsValue  (DataprocClusterGceClusterConfig s)
-instance TF.IsObject (DataprocClusterGceClusterConfig s) where
-    toObject DataprocClusterGceClusterConfig'{..} = P.catMaybes
-        [ TF.assign "internal_ip_only" <$> TF.attribute _internalIpOnly
-        , TF.assign "metadata" <$> TF.attribute _metadata
-        , TF.assign "network" <$> TF.attribute _network
-        , TF.assign "service_account" <$> TF.attribute _serviceAccount
-        , TF.assign "service_account_scopes" <$> TF.attribute _serviceAccountScopes
-        , TF.assign "subnetwork" <$> TF.attribute _subnetwork
-        , TF.assign "tags" <$> TF.attribute _tags
-        , TF.assign "zone" <$> TF.attribute _zone
+instance TF.ToHCL (DataprocClusterGceClusterConfig s) where
+     toHCL DataprocClusterGceClusterConfig'{..} = TF.pairs $ P.mconcat
+        [ TF.pair "internal_ip_only" _internalIpOnly
+        , P.maybe P.mempty (TF.pair "metadata") _metadata
+        , P.maybe P.mempty (TF.pair "network") _network
+        , P.maybe P.mempty (TF.pair "service_account") _serviceAccount
+        , P.maybe P.mempty (TF.pair "service_account_scopes") _serviceAccountScopes
+        , P.maybe P.mempty (TF.pair "subnetwork") _subnetwork
+        , P.maybe P.mempty (TF.pair "tags") _tags
+        , P.maybe P.mempty (TF.pair "zone") _zone
         ]
 
-instance TF.IsValid (DataprocClusterGceClusterConfig s) where
-    validator = TF.fieldsValidator (\DataprocClusterGceClusterConfig'{..} -> Map.fromList $ P.catMaybes
-        [ if (_network P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_network",
-                            [ "_subnetwork"
-                            ])
-        , if (_subnetwork P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_subnetwork",
-                            [ "_network"
-                            ])
+instance P.Hashable (DataprocClusterGceClusterConfig s)
+
+instance TF.HasValidator (DataprocClusterGceClusterConfig s) where
+    validator = TF.conflictValidator (\DataprocClusterGceClusterConfig'{..} -> HashMap.fromList $ P.catMaybes
+        [ TF.conflictsWith (_network P.== P.Nothing) "_network"
+            ["_subnetwork"]
+        , TF.conflictsWith (_subnetwork P.== P.Nothing) "_subnetwork"
+            ["_network"]
         ])
 
-instance P.HasInternalIpOnly (DataprocClusterGceClusterConfig s) (TF.Attr s P.Bool) where
+instance P.HasInternalIpOnly (DataprocClusterGceClusterConfig s) (TF.Expr s P.Bool) where
     internalIpOnly =
-        P.lens (_internalIpOnly :: DataprocClusterGceClusterConfig s -> TF.Attr s P.Bool)
-               (\s a -> s { _internalIpOnly = a } :: DataprocClusterGceClusterConfig s)
+        P.lens (_internalIpOnly :: DataprocClusterGceClusterConfig s -> TF.Expr s P.Bool)
+            (\s a -> s { _internalIpOnly = a } :: DataprocClusterGceClusterConfig s)
 
-instance P.HasMetadata (DataprocClusterGceClusterConfig s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+instance P.HasMetadata (DataprocClusterGceClusterConfig s) (P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text)))) where
     metadata =
-        P.lens (_metadata :: DataprocClusterGceClusterConfig s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _metadata = a } :: DataprocClusterGceClusterConfig s)
+        P.lens (_metadata :: DataprocClusterGceClusterConfig s -> P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text))))
+            (\s a -> s { _metadata = a } :: DataprocClusterGceClusterConfig s)
 
-instance P.HasNetwork (DataprocClusterGceClusterConfig s) (TF.Attr s P.Text) where
+instance P.HasNetwork (DataprocClusterGceClusterConfig s) (P.Maybe (TF.Expr s P.Text)) where
     network =
-        P.lens (_network :: DataprocClusterGceClusterConfig s -> TF.Attr s P.Text)
-               (\s a -> s { _network = a } :: DataprocClusterGceClusterConfig s)
+        P.lens (_network :: DataprocClusterGceClusterConfig s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _network = a } :: DataprocClusterGceClusterConfig s)
 
-instance P.HasServiceAccount (DataprocClusterGceClusterConfig s) (TF.Attr s P.Text) where
+instance P.HasServiceAccount (DataprocClusterGceClusterConfig s) (P.Maybe (TF.Expr s P.Text)) where
     serviceAccount =
-        P.lens (_serviceAccount :: DataprocClusterGceClusterConfig s -> TF.Attr s P.Text)
-               (\s a -> s { _serviceAccount = a } :: DataprocClusterGceClusterConfig s)
+        P.lens (_serviceAccount :: DataprocClusterGceClusterConfig s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _serviceAccount = a } :: DataprocClusterGceClusterConfig s)
 
-instance P.HasServiceAccountScopes (DataprocClusterGceClusterConfig s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasServiceAccountScopes (DataprocClusterGceClusterConfig s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
     serviceAccountScopes =
-        P.lens (_serviceAccountScopes :: DataprocClusterGceClusterConfig s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _serviceAccountScopes = a } :: DataprocClusterGceClusterConfig s)
+        P.lens (_serviceAccountScopes :: DataprocClusterGceClusterConfig s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
+            (\s a -> s { _serviceAccountScopes = a } :: DataprocClusterGceClusterConfig s)
 
-instance P.HasSubnetwork (DataprocClusterGceClusterConfig s) (TF.Attr s P.Text) where
+instance P.HasSubnetwork (DataprocClusterGceClusterConfig s) (P.Maybe (TF.Expr s P.Text)) where
     subnetwork =
-        P.lens (_subnetwork :: DataprocClusterGceClusterConfig s -> TF.Attr s P.Text)
-               (\s a -> s { _subnetwork = a } :: DataprocClusterGceClusterConfig s)
+        P.lens (_subnetwork :: DataprocClusterGceClusterConfig s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _subnetwork = a } :: DataprocClusterGceClusterConfig s)
 
-instance P.HasTags (DataprocClusterGceClusterConfig s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasTags (DataprocClusterGceClusterConfig s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
     tags =
-        P.lens (_tags :: DataprocClusterGceClusterConfig s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _tags = a } :: DataprocClusterGceClusterConfig s)
+        P.lens (_tags :: DataprocClusterGceClusterConfig s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
+            (\s a -> s { _tags = a } :: DataprocClusterGceClusterConfig s)
 
-instance P.HasZone (DataprocClusterGceClusterConfig s) (TF.Attr s P.Text) where
+instance P.HasZone (DataprocClusterGceClusterConfig s) (P.Maybe (TF.Expr s P.Text)) where
     zone =
-        P.lens (_zone :: DataprocClusterGceClusterConfig s -> TF.Attr s P.Text)
-               (\s a -> s { _zone = a } :: DataprocClusterGceClusterConfig s)
+        P.lens (_zone :: DataprocClusterGceClusterConfig s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _zone = a } :: DataprocClusterGceClusterConfig s)
 
-instance s ~ s' => P.HasComputedNetwork (TF.Ref s' (DataprocClusterGceClusterConfig s)) (TF.Attr s P.Text) where
-    computedNetwork x = TF.compute (TF.refKey x) "network"
+instance s ~ s' => P.HasComputedNetwork (TF.Ref s' (DataprocClusterGceClusterConfig s)) (TF.Expr s P.Text) where
+    computedNetwork x =
+        TF.unsafeCompute TF.encodeAttr x "network"
 
-instance s ~ s' => P.HasComputedServiceAccountScopes (TF.Ref s' (DataprocClusterGceClusterConfig s)) (TF.Attr s [TF.Attr s P.Text]) where
-    computedServiceAccountScopes x = TF.compute (TF.refKey x) "service_account_scopes"
+instance s ~ s' => P.HasComputedServiceAccountScopes (TF.Ref s' (DataprocClusterGceClusterConfig s)) (TF.Expr s [TF.Expr s P.Text]) where
+    computedServiceAccountScopes x =
+        TF.unsafeCompute TF.encodeAttr x "service_account_scopes"
 
-instance s ~ s' => P.HasComputedZone (TF.Ref s' (DataprocClusterGceClusterConfig s)) (TF.Attr s P.Text) where
-    computedZone x = TF.compute (TF.refKey x) "zone"
+instance s ~ s' => P.HasComputedZone (TF.Ref s' (DataprocClusterGceClusterConfig s)) (TF.Expr s P.Text) where
+    computedZone x =
+        TF.unsafeCompute TF.encodeAttr x "zone"
 
 -- | @initialization_action@ nested settings.
 data DataprocClusterInitializationAction s = DataprocClusterInitializationAction'
-    { _script     :: TF.Attr s P.Text
+    { _script     :: TF.Expr s P.Text
     -- ^ @script@ - (Required, Forces New)
     --
-    , _timeoutSec :: TF.Attr s P.Int
-    -- ^ @timeout_sec@ - (Optional, Forces New)
+    , _timeoutSec :: TF.Expr s P.Int
+    -- ^ @timeout_sec@ - (Default @300@, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @initialization_action@ settings value.
 newDataprocClusterInitializationAction
-    :: TF.Attr s P.Text -- ^ 'P._script': @script@
+    :: TF.Expr s P.Text -- ^ Lens: 'P.script', Field: '_script', HCL: @script@
     -> DataprocClusterInitializationAction s
 newDataprocClusterInitializationAction _script =
     DataprocClusterInitializationAction'
@@ -1660,848 +1682,816 @@ newDataprocClusterInitializationAction _script =
         , _timeoutSec = TF.value 300
         }
 
-instance TF.IsValue  (DataprocClusterInitializationAction s)
-instance TF.IsObject (DataprocClusterInitializationAction s) where
-    toObject DataprocClusterInitializationAction'{..} = P.catMaybes
-        [ TF.assign "script" <$> TF.attribute _script
-        , TF.assign "timeout_sec" <$> TF.attribute _timeoutSec
+instance TF.ToHCL (DataprocClusterInitializationAction s) where
+     toHCL DataprocClusterInitializationAction'{..} = TF.pairs $ P.mconcat
+        [ TF.pair "script" _script
+        , TF.pair "timeout_sec" _timeoutSec
         ]
 
-instance TF.IsValid (DataprocClusterInitializationAction s) where
+instance P.Hashable (DataprocClusterInitializationAction s)
+
+instance TF.HasValidator (DataprocClusterInitializationAction s) where
     validator = P.mempty
 
-instance P.HasScript (DataprocClusterInitializationAction s) (TF.Attr s P.Text) where
+instance P.HasScript (DataprocClusterInitializationAction s) (TF.Expr s P.Text) where
     script =
-        P.lens (_script :: DataprocClusterInitializationAction s -> TF.Attr s P.Text)
-               (\s a -> s { _script = a } :: DataprocClusterInitializationAction s)
+        P.lens (_script :: DataprocClusterInitializationAction s -> TF.Expr s P.Text)
+            (\s a -> s { _script = a } :: DataprocClusterInitializationAction s)
 
-instance P.HasTimeoutSec (DataprocClusterInitializationAction s) (TF.Attr s P.Int) where
+instance P.HasTimeoutSec (DataprocClusterInitializationAction s) (TF.Expr s P.Int) where
     timeoutSec =
-        P.lens (_timeoutSec :: DataprocClusterInitializationAction s -> TF.Attr s P.Int)
-               (\s a -> s { _timeoutSec = a } :: DataprocClusterInitializationAction s)
+        P.lens (_timeoutSec :: DataprocClusterInitializationAction s -> TF.Expr s P.Int)
+            (\s a -> s { _timeoutSec = a } :: DataprocClusterInitializationAction s)
 
 -- | @hadoop_config@ nested settings.
 data DataprocJobHadoopConfig s = DataprocJobHadoopConfig'
-    { _archiveUris    :: TF.Attr s [TF.Attr s P.Text]
+    { _archiveUris :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
     -- ^ @archive_uris@ - (Optional, Forces New)
     --
-    , _args           :: TF.Attr s [TF.Attr s P.Text]
+    , _args :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
     -- ^ @args@ - (Optional, Forces New)
     --
-    , _fileUris       :: TF.Attr s [TF.Attr s P.Text]
+    , _fileUris :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
     -- ^ @file_uris@ - (Optional, Forces New)
     --
-    , _jarFileUris    :: TF.Attr s [TF.Attr s P.Text]
+    , _jarFileUris :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
     -- ^ @jar_file_uris@ - (Optional, Forces New)
     --
-    , _loggingConfig  :: TF.Attr s (DataprocJobLoggingConfig s)
+    , _loggingConfig :: P.Maybe (TF.Expr s (DataprocJobLoggingConfig s))
     -- ^ @logging_config@ - (Optional)
     -- The runtime logging config of the job
     --
-    , _mainClass      :: TF.Attr s P.Text
+    , _mainClass :: P.Maybe (TF.Expr s P.Text)
     -- ^ @main_class@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
     -- * 'mainJarFileUri'
-    , _mainJarFileUri :: TF.Attr s P.Text
+    , _mainJarFileUri :: P.Maybe (TF.Expr s P.Text)
     -- ^ @main_jar_file_uri@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
     -- * 'mainClass'
-    , _properties     :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _properties :: P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text)))
     -- ^ @properties@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @hadoop_config@ settings value.
 newDataprocJobHadoopConfig
     :: DataprocJobHadoopConfig s
 newDataprocJobHadoopConfig =
     DataprocJobHadoopConfig'
-        { _archiveUris = TF.Nil
-        , _args = TF.Nil
-        , _fileUris = TF.Nil
-        , _jarFileUris = TF.Nil
-        , _loggingConfig = TF.Nil
-        , _mainClass = TF.Nil
-        , _mainJarFileUri = TF.Nil
-        , _properties = TF.Nil
+        { _archiveUris = P.Nothing
+        , _args = P.Nothing
+        , _fileUris = P.Nothing
+        , _jarFileUris = P.Nothing
+        , _loggingConfig = P.Nothing
+        , _mainClass = P.Nothing
+        , _mainJarFileUri = P.Nothing
+        , _properties = P.Nothing
         }
 
-instance TF.IsValue  (DataprocJobHadoopConfig s)
-instance TF.IsObject (DataprocJobHadoopConfig s) where
-    toObject DataprocJobHadoopConfig'{..} = P.catMaybes
-        [ TF.assign "archive_uris" <$> TF.attribute _archiveUris
-        , TF.assign "args" <$> TF.attribute _args
-        , TF.assign "file_uris" <$> TF.attribute _fileUris
-        , TF.assign "jar_file_uris" <$> TF.attribute _jarFileUris
-        , TF.assign "logging_config" <$> TF.attribute _loggingConfig
-        , TF.assign "main_class" <$> TF.attribute _mainClass
-        , TF.assign "main_jar_file_uri" <$> TF.attribute _mainJarFileUri
-        , TF.assign "properties" <$> TF.attribute _properties
+instance TF.ToHCL (DataprocJobHadoopConfig s) where
+     toHCL DataprocJobHadoopConfig'{..} = TF.pairs $ P.mconcat
+        [ P.maybe P.mempty (TF.pair "archive_uris") _archiveUris
+        , P.maybe P.mempty (TF.pair "args") _args
+        , P.maybe P.mempty (TF.pair "file_uris") _fileUris
+        , P.maybe P.mempty (TF.pair "jar_file_uris") _jarFileUris
+        , P.maybe P.mempty (TF.pair "logging_config") _loggingConfig
+        , P.maybe P.mempty (TF.pair "main_class") _mainClass
+        , P.maybe P.mempty (TF.pair "main_jar_file_uri") _mainJarFileUri
+        , P.maybe P.mempty (TF.pair "properties") _properties
         ]
 
-instance TF.IsValid (DataprocJobHadoopConfig s) where
-    validator = TF.fieldsValidator (\DataprocJobHadoopConfig'{..} -> Map.fromList $ P.catMaybes
-        [ if (_mainClass P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_mainClass",
-                            [ "_mainJarFileUri"
-                            ])
-        , if (_mainJarFileUri P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_mainJarFileUri",
-                            [ "_mainClass"
-                            ])
+instance P.Hashable (DataprocJobHadoopConfig s)
+
+instance TF.HasValidator (DataprocJobHadoopConfig s) where
+    validator = TF.conflictValidator (\DataprocJobHadoopConfig'{..} -> HashMap.fromList $ P.catMaybes
+        [ TF.conflictsWith (_mainClass P.== P.Nothing) "_mainClass"
+            ["_mainJarFileUri"]
+        , TF.conflictsWith (_mainJarFileUri P.== P.Nothing) "_mainJarFileUri"
+            ["_mainClass"]
         ])
-           P.<> TF.settingsValidator "_loggingConfig"
-                  (_loggingConfig
-                      :: DataprocJobHadoopConfig s -> TF.Attr s (DataprocJobLoggingConfig s))
-                  TF.validator
 
-instance P.HasArchiveUris (DataprocJobHadoopConfig s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasArchiveUris (DataprocJobHadoopConfig s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
     archiveUris =
-        P.lens (_archiveUris :: DataprocJobHadoopConfig s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _archiveUris = a } :: DataprocJobHadoopConfig s)
+        P.lens (_archiveUris :: DataprocJobHadoopConfig s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
+            (\s a -> s { _archiveUris = a } :: DataprocJobHadoopConfig s)
 
-instance P.HasArgs (DataprocJobHadoopConfig s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasArgs (DataprocJobHadoopConfig s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
     args =
-        P.lens (_args :: DataprocJobHadoopConfig s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _args = a } :: DataprocJobHadoopConfig s)
+        P.lens (_args :: DataprocJobHadoopConfig s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
+            (\s a -> s { _args = a } :: DataprocJobHadoopConfig s)
 
-instance P.HasFileUris (DataprocJobHadoopConfig s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasFileUris (DataprocJobHadoopConfig s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
     fileUris =
-        P.lens (_fileUris :: DataprocJobHadoopConfig s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _fileUris = a } :: DataprocJobHadoopConfig s)
+        P.lens (_fileUris :: DataprocJobHadoopConfig s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
+            (\s a -> s { _fileUris = a } :: DataprocJobHadoopConfig s)
 
-instance P.HasJarFileUris (DataprocJobHadoopConfig s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasJarFileUris (DataprocJobHadoopConfig s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
     jarFileUris =
-        P.lens (_jarFileUris :: DataprocJobHadoopConfig s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _jarFileUris = a } :: DataprocJobHadoopConfig s)
+        P.lens (_jarFileUris :: DataprocJobHadoopConfig s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
+            (\s a -> s { _jarFileUris = a } :: DataprocJobHadoopConfig s)
 
-instance P.HasLoggingConfig (DataprocJobHadoopConfig s) (TF.Attr s (DataprocJobLoggingConfig s)) where
+instance P.HasLoggingConfig (DataprocJobHadoopConfig s) (P.Maybe (TF.Expr s (DataprocJobLoggingConfig s))) where
     loggingConfig =
-        P.lens (_loggingConfig :: DataprocJobHadoopConfig s -> TF.Attr s (DataprocJobLoggingConfig s))
-               (\s a -> s { _loggingConfig = a } :: DataprocJobHadoopConfig s)
+        P.lens (_loggingConfig :: DataprocJobHadoopConfig s -> P.Maybe (TF.Expr s (DataprocJobLoggingConfig s)))
+            (\s a -> s { _loggingConfig = a } :: DataprocJobHadoopConfig s)
 
-instance P.HasMainClass (DataprocJobHadoopConfig s) (TF.Attr s P.Text) where
+instance P.HasMainClass (DataprocJobHadoopConfig s) (P.Maybe (TF.Expr s P.Text)) where
     mainClass =
-        P.lens (_mainClass :: DataprocJobHadoopConfig s -> TF.Attr s P.Text)
-               (\s a -> s { _mainClass = a } :: DataprocJobHadoopConfig s)
+        P.lens (_mainClass :: DataprocJobHadoopConfig s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _mainClass = a } :: DataprocJobHadoopConfig s)
 
-instance P.HasMainJarFileUri (DataprocJobHadoopConfig s) (TF.Attr s P.Text) where
+instance P.HasMainJarFileUri (DataprocJobHadoopConfig s) (P.Maybe (TF.Expr s P.Text)) where
     mainJarFileUri =
-        P.lens (_mainJarFileUri :: DataprocJobHadoopConfig s -> TF.Attr s P.Text)
-               (\s a -> s { _mainJarFileUri = a } :: DataprocJobHadoopConfig s)
+        P.lens (_mainJarFileUri :: DataprocJobHadoopConfig s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _mainJarFileUri = a } :: DataprocJobHadoopConfig s)
 
-instance P.HasProperties (DataprocJobHadoopConfig s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+instance P.HasProperties (DataprocJobHadoopConfig s) (P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text)))) where
     properties =
-        P.lens (_properties :: DataprocJobHadoopConfig s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _properties = a } :: DataprocJobHadoopConfig s)
+        P.lens (_properties :: DataprocJobHadoopConfig s -> P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text))))
+            (\s a -> s { _properties = a } :: DataprocJobHadoopConfig s)
 
-instance s ~ s' => P.HasComputedLoggingConfig (TF.Ref s' (DataprocJobHadoopConfig s)) (TF.Attr s (DataprocJobLoggingConfig s)) where
-    computedLoggingConfig x = TF.compute (TF.refKey x) "logging_config"
+instance s ~ s' => P.HasComputedLoggingConfig (TF.Ref s' (DataprocJobHadoopConfig s)) (TF.Expr s (DataprocJobLoggingConfig s)) where
+    computedLoggingConfig x =
+        TF.unsafeCompute TF.encodeAttr x "logging_config"
 
 -- | @logging_config@ nested settings.
 data DataprocJobLoggingConfig s = DataprocJobLoggingConfig'
-    { _driverLogLevels :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    { _driverLogLevels :: P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text)))
     -- ^ @driver_log_levels@ - (Optional, Forces New)
     -- Optional. The per-package log levels for the driver. This may include 'root'
     -- package name to configure rootLogger. Examples: 'com.google = FATAL', 'root
     -- = INFO', 'org.apache = DEBUG'.
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @logging_config@ settings value.
 newDataprocJobLoggingConfig
     :: DataprocJobLoggingConfig s
 newDataprocJobLoggingConfig =
     DataprocJobLoggingConfig'
-        { _driverLogLevels = TF.Nil
+        { _driverLogLevels = P.Nothing
         }
 
-instance TF.IsValue  (DataprocJobLoggingConfig s)
-instance TF.IsObject (DataprocJobLoggingConfig s) where
-    toObject DataprocJobLoggingConfig'{..} = P.catMaybes
-        [ TF.assign "driver_log_levels" <$> TF.attribute _driverLogLevels
+instance TF.ToHCL (DataprocJobLoggingConfig s) where
+     toHCL DataprocJobLoggingConfig'{..} = TF.pairs $ P.mconcat
+        [ P.maybe P.mempty (TF.pair "driver_log_levels") _driverLogLevels
         ]
 
-instance TF.IsValid (DataprocJobLoggingConfig s) where
+instance P.Hashable (DataprocJobLoggingConfig s)
+
+instance TF.HasValidator (DataprocJobLoggingConfig s) where
     validator = P.mempty
 
-instance P.HasDriverLogLevels (DataprocJobLoggingConfig s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+instance P.HasDriverLogLevels (DataprocJobLoggingConfig s) (P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text)))) where
     driverLogLevels =
-        P.lens (_driverLogLevels :: DataprocJobLoggingConfig s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _driverLogLevels = a } :: DataprocJobLoggingConfig s)
+        P.lens (_driverLogLevels :: DataprocJobLoggingConfig s -> P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text))))
+            (\s a -> s { _driverLogLevels = a } :: DataprocJobLoggingConfig s)
 
 -- | @sparksql_config@ nested settings.
 data DataprocJobSparksqlConfig s = DataprocJobSparksqlConfig'
-    { _jarFileUris     :: TF.Attr s [TF.Attr s P.Text]
+    { _jarFileUris :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
     -- ^ @jar_file_uris@ - (Optional, Forces New)
     --
-    , _loggingConfig   :: TF.Attr s (DataprocJobLoggingConfig s)
+    , _loggingConfig :: P.Maybe (TF.Expr s (DataprocJobLoggingConfig s))
     -- ^ @logging_config@ - (Optional)
     -- The runtime logging config of the job
     --
-    , _properties      :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _properties :: P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text)))
     -- ^ @properties@ - (Optional, Forces New)
     --
-    , _queryFileUri    :: TF.Attr s P.Text
+    , _queryFileUri :: P.Maybe (TF.Expr s P.Text)
     -- ^ @query_file_uri@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
     -- * 'queryList'
-    , _queryList       :: TF.Attr s [TF.Attr s P.Text]
+    , _queryList :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
     -- ^ @query_list@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
     -- * 'queryFileUri'
-    , _scriptVariables :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _scriptVariables :: P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text)))
     -- ^ @script_variables@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @sparksql_config@ settings value.
 newDataprocJobSparksqlConfig
     :: DataprocJobSparksqlConfig s
 newDataprocJobSparksqlConfig =
     DataprocJobSparksqlConfig'
-        { _jarFileUris = TF.Nil
-        , _loggingConfig = TF.Nil
-        , _properties = TF.Nil
-        , _queryFileUri = TF.Nil
-        , _queryList = TF.Nil
-        , _scriptVariables = TF.Nil
+        { _jarFileUris = P.Nothing
+        , _loggingConfig = P.Nothing
+        , _properties = P.Nothing
+        , _queryFileUri = P.Nothing
+        , _queryList = P.Nothing
+        , _scriptVariables = P.Nothing
         }
 
-instance TF.IsValue  (DataprocJobSparksqlConfig s)
-instance TF.IsObject (DataprocJobSparksqlConfig s) where
-    toObject DataprocJobSparksqlConfig'{..} = P.catMaybes
-        [ TF.assign "jar_file_uris" <$> TF.attribute _jarFileUris
-        , TF.assign "logging_config" <$> TF.attribute _loggingConfig
-        , TF.assign "properties" <$> TF.attribute _properties
-        , TF.assign "query_file_uri" <$> TF.attribute _queryFileUri
-        , TF.assign "query_list" <$> TF.attribute _queryList
-        , TF.assign "script_variables" <$> TF.attribute _scriptVariables
+instance TF.ToHCL (DataprocJobSparksqlConfig s) where
+     toHCL DataprocJobSparksqlConfig'{..} = TF.pairs $ P.mconcat
+        [ P.maybe P.mempty (TF.pair "jar_file_uris") _jarFileUris
+        , P.maybe P.mempty (TF.pair "logging_config") _loggingConfig
+        , P.maybe P.mempty (TF.pair "properties") _properties
+        , P.maybe P.mempty (TF.pair "query_file_uri") _queryFileUri
+        , P.maybe P.mempty (TF.pair "query_list") _queryList
+        , P.maybe P.mempty (TF.pair "script_variables") _scriptVariables
         ]
 
-instance TF.IsValid (DataprocJobSparksqlConfig s) where
-    validator = TF.fieldsValidator (\DataprocJobSparksqlConfig'{..} -> Map.fromList $ P.catMaybes
-        [ if (_queryFileUri P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_queryFileUri",
-                            [ "_queryList"
-                            ])
-        , if (_queryList P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_queryList",
-                            [ "_queryFileUri"
-                            ])
+instance P.Hashable (DataprocJobSparksqlConfig s)
+
+instance TF.HasValidator (DataprocJobSparksqlConfig s) where
+    validator = TF.conflictValidator (\DataprocJobSparksqlConfig'{..} -> HashMap.fromList $ P.catMaybes
+        [ TF.conflictsWith (_queryFileUri P.== P.Nothing) "_queryFileUri"
+            ["_queryList"]
+        , TF.conflictsWith (_queryList P.== P.Nothing) "_queryList"
+            ["_queryFileUri"]
         ])
-           P.<> TF.settingsValidator "_loggingConfig"
-                  (_loggingConfig
-                      :: DataprocJobSparksqlConfig s -> TF.Attr s (DataprocJobLoggingConfig s))
-                  TF.validator
 
-instance P.HasJarFileUris (DataprocJobSparksqlConfig s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasJarFileUris (DataprocJobSparksqlConfig s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
     jarFileUris =
-        P.lens (_jarFileUris :: DataprocJobSparksqlConfig s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _jarFileUris = a } :: DataprocJobSparksqlConfig s)
+        P.lens (_jarFileUris :: DataprocJobSparksqlConfig s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
+            (\s a -> s { _jarFileUris = a } :: DataprocJobSparksqlConfig s)
 
-instance P.HasLoggingConfig (DataprocJobSparksqlConfig s) (TF.Attr s (DataprocJobLoggingConfig s)) where
+instance P.HasLoggingConfig (DataprocJobSparksqlConfig s) (P.Maybe (TF.Expr s (DataprocJobLoggingConfig s))) where
     loggingConfig =
-        P.lens (_loggingConfig :: DataprocJobSparksqlConfig s -> TF.Attr s (DataprocJobLoggingConfig s))
-               (\s a -> s { _loggingConfig = a } :: DataprocJobSparksqlConfig s)
+        P.lens (_loggingConfig :: DataprocJobSparksqlConfig s -> P.Maybe (TF.Expr s (DataprocJobLoggingConfig s)))
+            (\s a -> s { _loggingConfig = a } :: DataprocJobSparksqlConfig s)
 
-instance P.HasProperties (DataprocJobSparksqlConfig s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+instance P.HasProperties (DataprocJobSparksqlConfig s) (P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text)))) where
     properties =
-        P.lens (_properties :: DataprocJobSparksqlConfig s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _properties = a } :: DataprocJobSparksqlConfig s)
+        P.lens (_properties :: DataprocJobSparksqlConfig s -> P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text))))
+            (\s a -> s { _properties = a } :: DataprocJobSparksqlConfig s)
 
-instance P.HasQueryFileUri (DataprocJobSparksqlConfig s) (TF.Attr s P.Text) where
+instance P.HasQueryFileUri (DataprocJobSparksqlConfig s) (P.Maybe (TF.Expr s P.Text)) where
     queryFileUri =
-        P.lens (_queryFileUri :: DataprocJobSparksqlConfig s -> TF.Attr s P.Text)
-               (\s a -> s { _queryFileUri = a } :: DataprocJobSparksqlConfig s)
+        P.lens (_queryFileUri :: DataprocJobSparksqlConfig s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _queryFileUri = a } :: DataprocJobSparksqlConfig s)
 
-instance P.HasQueryList (DataprocJobSparksqlConfig s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasQueryList (DataprocJobSparksqlConfig s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
     queryList =
-        P.lens (_queryList :: DataprocJobSparksqlConfig s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _queryList = a } :: DataprocJobSparksqlConfig s)
+        P.lens (_queryList :: DataprocJobSparksqlConfig s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
+            (\s a -> s { _queryList = a } :: DataprocJobSparksqlConfig s)
 
-instance P.HasScriptVariables (DataprocJobSparksqlConfig s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+instance P.HasScriptVariables (DataprocJobSparksqlConfig s) (P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text)))) where
     scriptVariables =
-        P.lens (_scriptVariables :: DataprocJobSparksqlConfig s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _scriptVariables = a } :: DataprocJobSparksqlConfig s)
+        P.lens (_scriptVariables :: DataprocJobSparksqlConfig s -> P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text))))
+            (\s a -> s { _scriptVariables = a } :: DataprocJobSparksqlConfig s)
 
-instance s ~ s' => P.HasComputedLoggingConfig (TF.Ref s' (DataprocJobSparksqlConfig s)) (TF.Attr s (DataprocJobLoggingConfig s)) where
-    computedLoggingConfig x = TF.compute (TF.refKey x) "logging_config"
+instance s ~ s' => P.HasComputedLoggingConfig (TF.Ref s' (DataprocJobSparksqlConfig s)) (TF.Expr s (DataprocJobLoggingConfig s)) where
+    computedLoggingConfig x =
+        TF.unsafeCompute TF.encodeAttr x "logging_config"
 
 -- | @spark_config@ nested settings.
 data DataprocJobSparkConfig s = DataprocJobSparkConfig'
-    { _archiveUris    :: TF.Attr s [TF.Attr s P.Text]
+    { _archiveUris :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
     -- ^ @archive_uris@ - (Optional, Forces New)
     --
-    , _args           :: TF.Attr s [TF.Attr s P.Text]
+    , _args :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
     -- ^ @args@ - (Optional, Forces New)
     --
-    , _fileUris       :: TF.Attr s [TF.Attr s P.Text]
+    , _fileUris :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
     -- ^ @file_uris@ - (Optional, Forces New)
     --
-    , _jarFileUris    :: TF.Attr s [TF.Attr s P.Text]
+    , _jarFileUris :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
     -- ^ @jar_file_uris@ - (Optional, Forces New)
     --
-    , _loggingConfig  :: TF.Attr s (DataprocJobLoggingConfig s)
+    , _loggingConfig :: P.Maybe (TF.Expr s (DataprocJobLoggingConfig s))
     -- ^ @logging_config@ - (Optional)
     -- The runtime logging config of the job
     --
-    , _mainClass      :: TF.Attr s P.Text
+    , _mainClass :: P.Maybe (TF.Expr s P.Text)
     -- ^ @main_class@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
     -- * 'mainJarFileUri'
-    , _mainJarFileUri :: TF.Attr s P.Text
+    , _mainJarFileUri :: P.Maybe (TF.Expr s P.Text)
     -- ^ @main_jar_file_uri@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
     -- * 'mainClass'
-    , _properties     :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _properties :: P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text)))
     -- ^ @properties@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @spark_config@ settings value.
 newDataprocJobSparkConfig
     :: DataprocJobSparkConfig s
 newDataprocJobSparkConfig =
     DataprocJobSparkConfig'
-        { _archiveUris = TF.Nil
-        , _args = TF.Nil
-        , _fileUris = TF.Nil
-        , _jarFileUris = TF.Nil
-        , _loggingConfig = TF.Nil
-        , _mainClass = TF.Nil
-        , _mainJarFileUri = TF.Nil
-        , _properties = TF.Nil
+        { _archiveUris = P.Nothing
+        , _args = P.Nothing
+        , _fileUris = P.Nothing
+        , _jarFileUris = P.Nothing
+        , _loggingConfig = P.Nothing
+        , _mainClass = P.Nothing
+        , _mainJarFileUri = P.Nothing
+        , _properties = P.Nothing
         }
 
-instance TF.IsValue  (DataprocJobSparkConfig s)
-instance TF.IsObject (DataprocJobSparkConfig s) where
-    toObject DataprocJobSparkConfig'{..} = P.catMaybes
-        [ TF.assign "archive_uris" <$> TF.attribute _archiveUris
-        , TF.assign "args" <$> TF.attribute _args
-        , TF.assign "file_uris" <$> TF.attribute _fileUris
-        , TF.assign "jar_file_uris" <$> TF.attribute _jarFileUris
-        , TF.assign "logging_config" <$> TF.attribute _loggingConfig
-        , TF.assign "main_class" <$> TF.attribute _mainClass
-        , TF.assign "main_jar_file_uri" <$> TF.attribute _mainJarFileUri
-        , TF.assign "properties" <$> TF.attribute _properties
+instance TF.ToHCL (DataprocJobSparkConfig s) where
+     toHCL DataprocJobSparkConfig'{..} = TF.pairs $ P.mconcat
+        [ P.maybe P.mempty (TF.pair "archive_uris") _archiveUris
+        , P.maybe P.mempty (TF.pair "args") _args
+        , P.maybe P.mempty (TF.pair "file_uris") _fileUris
+        , P.maybe P.mempty (TF.pair "jar_file_uris") _jarFileUris
+        , P.maybe P.mempty (TF.pair "logging_config") _loggingConfig
+        , P.maybe P.mempty (TF.pair "main_class") _mainClass
+        , P.maybe P.mempty (TF.pair "main_jar_file_uri") _mainJarFileUri
+        , P.maybe P.mempty (TF.pair "properties") _properties
         ]
 
-instance TF.IsValid (DataprocJobSparkConfig s) where
-    validator = TF.fieldsValidator (\DataprocJobSparkConfig'{..} -> Map.fromList $ P.catMaybes
-        [ if (_mainClass P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_mainClass",
-                            [ "_mainJarFileUri"
-                            ])
-        , if (_mainJarFileUri P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_mainJarFileUri",
-                            [ "_mainClass"
-                            ])
+instance P.Hashable (DataprocJobSparkConfig s)
+
+instance TF.HasValidator (DataprocJobSparkConfig s) where
+    validator = TF.conflictValidator (\DataprocJobSparkConfig'{..} -> HashMap.fromList $ P.catMaybes
+        [ TF.conflictsWith (_mainClass P.== P.Nothing) "_mainClass"
+            ["_mainJarFileUri"]
+        , TF.conflictsWith (_mainJarFileUri P.== P.Nothing) "_mainJarFileUri"
+            ["_mainClass"]
         ])
-           P.<> TF.settingsValidator "_loggingConfig"
-                  (_loggingConfig
-                      :: DataprocJobSparkConfig s -> TF.Attr s (DataprocJobLoggingConfig s))
-                  TF.validator
 
-instance P.HasArchiveUris (DataprocJobSparkConfig s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasArchiveUris (DataprocJobSparkConfig s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
     archiveUris =
-        P.lens (_archiveUris :: DataprocJobSparkConfig s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _archiveUris = a } :: DataprocJobSparkConfig s)
+        P.lens (_archiveUris :: DataprocJobSparkConfig s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
+            (\s a -> s { _archiveUris = a } :: DataprocJobSparkConfig s)
 
-instance P.HasArgs (DataprocJobSparkConfig s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasArgs (DataprocJobSparkConfig s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
     args =
-        P.lens (_args :: DataprocJobSparkConfig s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _args = a } :: DataprocJobSparkConfig s)
+        P.lens (_args :: DataprocJobSparkConfig s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
+            (\s a -> s { _args = a } :: DataprocJobSparkConfig s)
 
-instance P.HasFileUris (DataprocJobSparkConfig s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasFileUris (DataprocJobSparkConfig s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
     fileUris =
-        P.lens (_fileUris :: DataprocJobSparkConfig s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _fileUris = a } :: DataprocJobSparkConfig s)
+        P.lens (_fileUris :: DataprocJobSparkConfig s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
+            (\s a -> s { _fileUris = a } :: DataprocJobSparkConfig s)
 
-instance P.HasJarFileUris (DataprocJobSparkConfig s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasJarFileUris (DataprocJobSparkConfig s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
     jarFileUris =
-        P.lens (_jarFileUris :: DataprocJobSparkConfig s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _jarFileUris = a } :: DataprocJobSparkConfig s)
+        P.lens (_jarFileUris :: DataprocJobSparkConfig s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
+            (\s a -> s { _jarFileUris = a } :: DataprocJobSparkConfig s)
 
-instance P.HasLoggingConfig (DataprocJobSparkConfig s) (TF.Attr s (DataprocJobLoggingConfig s)) where
+instance P.HasLoggingConfig (DataprocJobSparkConfig s) (P.Maybe (TF.Expr s (DataprocJobLoggingConfig s))) where
     loggingConfig =
-        P.lens (_loggingConfig :: DataprocJobSparkConfig s -> TF.Attr s (DataprocJobLoggingConfig s))
-               (\s a -> s { _loggingConfig = a } :: DataprocJobSparkConfig s)
+        P.lens (_loggingConfig :: DataprocJobSparkConfig s -> P.Maybe (TF.Expr s (DataprocJobLoggingConfig s)))
+            (\s a -> s { _loggingConfig = a } :: DataprocJobSparkConfig s)
 
-instance P.HasMainClass (DataprocJobSparkConfig s) (TF.Attr s P.Text) where
+instance P.HasMainClass (DataprocJobSparkConfig s) (P.Maybe (TF.Expr s P.Text)) where
     mainClass =
-        P.lens (_mainClass :: DataprocJobSparkConfig s -> TF.Attr s P.Text)
-               (\s a -> s { _mainClass = a } :: DataprocJobSparkConfig s)
+        P.lens (_mainClass :: DataprocJobSparkConfig s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _mainClass = a } :: DataprocJobSparkConfig s)
 
-instance P.HasMainJarFileUri (DataprocJobSparkConfig s) (TF.Attr s P.Text) where
+instance P.HasMainJarFileUri (DataprocJobSparkConfig s) (P.Maybe (TF.Expr s P.Text)) where
     mainJarFileUri =
-        P.lens (_mainJarFileUri :: DataprocJobSparkConfig s -> TF.Attr s P.Text)
-               (\s a -> s { _mainJarFileUri = a } :: DataprocJobSparkConfig s)
+        P.lens (_mainJarFileUri :: DataprocJobSparkConfig s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _mainJarFileUri = a } :: DataprocJobSparkConfig s)
 
-instance P.HasProperties (DataprocJobSparkConfig s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+instance P.HasProperties (DataprocJobSparkConfig s) (P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text)))) where
     properties =
-        P.lens (_properties :: DataprocJobSparkConfig s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _properties = a } :: DataprocJobSparkConfig s)
+        P.lens (_properties :: DataprocJobSparkConfig s -> P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text))))
+            (\s a -> s { _properties = a } :: DataprocJobSparkConfig s)
 
-instance s ~ s' => P.HasComputedLoggingConfig (TF.Ref s' (DataprocJobSparkConfig s)) (TF.Attr s (DataprocJobLoggingConfig s)) where
-    computedLoggingConfig x = TF.compute (TF.refKey x) "logging_config"
+instance s ~ s' => P.HasComputedLoggingConfig (TF.Ref s' (DataprocJobSparkConfig s)) (TF.Expr s (DataprocJobLoggingConfig s)) where
+    computedLoggingConfig x =
+        TF.unsafeCompute TF.encodeAttr x "logging_config"
 
 -- | @pyspark_config@ nested settings.
 data DataprocJobPysparkConfig s = DataprocJobPysparkConfig'
-    { _archiveUris       :: TF.Attr s [TF.Attr s P.Text]
+    { _archiveUris :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
     -- ^ @archive_uris@ - (Optional, Forces New)
     -- Optional. HCFS URIs of archives to be extracted in the working directory of
     -- .jar, .tar, .tar.gz, .tgz, and .zip
     --
-    , _args              :: TF.Attr s [TF.Attr s P.Text]
+    , _args :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
     -- ^ @args@ - (Optional, Forces New)
     -- Optional. The arguments to pass to the driver. Do not include arguments,
     -- such as --conf, that can be set as job properties, since a collision may
     -- occur that causes an incorrect job submission
     --
-    , _fileUris          :: TF.Attr s [TF.Attr s P.Text]
+    , _fileUris :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
     -- ^ @file_uris@ - (Optional, Forces New)
     -- Optional. HCFS URIs of files to be copied to the working directory of Python
     -- drivers and distributed tasks. Useful for naively parallel tasks
     --
-    , _jarFileUris       :: TF.Attr s [TF.Attr s P.Text]
+    , _jarFileUris :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
     -- ^ @jar_file_uris@ - (Optional, Forces New)
     -- Optional. HCFS URIs of jar files to add to the CLASSPATHs of the Python
     -- driver and tasks
     --
-    , _loggingConfig     :: TF.Attr s (DataprocJobLoggingConfig s)
+    , _loggingConfig :: P.Maybe (TF.Expr s (DataprocJobLoggingConfig s))
     -- ^ @logging_config@ - (Optional)
     -- The runtime logging config of the job
     --
-    , _mainPythonFileUri :: TF.Attr s P.Text
+    , _mainPythonFileUri :: TF.Expr s P.Text
     -- ^ @main_python_file_uri@ - (Required, Forces New)
     -- Required. The HCFS URI of the main Python file to use as the driver. Must be
     -- a .py file
     --
-    , _properties        :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _properties :: P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text)))
     -- ^ @properties@ - (Optional, Forces New)
     -- Optional. A mapping of property names to values, used to configure PySpark.
     -- Properties that conflict with values set by the Cloud Dataproc API may be
     -- overwritten. Can include properties set in
     -- /etc/spark/conf/spark-defaults.conf and classes in user code
     --
-    , _pythonFileUris    :: TF.Attr s [TF.Attr s P.Text]
+    , _pythonFileUris :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
     -- ^ @python_file_uris@ - (Optional, Forces New)
     -- Optional. HCFS file URIs of Python files to pass to the PySpark framework.
     -- Supported file types: .py, .egg, and .zip
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @pyspark_config@ settings value.
 newDataprocJobPysparkConfig
-    :: TF.Attr s P.Text -- ^ 'P._mainPythonFileUri': @main_python_file_uri@
+    :: TF.Expr s P.Text -- ^ Lens: 'P.mainPythonFileUri', Field: '_mainPythonFileUri', HCL: @main_python_file_uri@
     -> DataprocJobPysparkConfig s
 newDataprocJobPysparkConfig _mainPythonFileUri =
     DataprocJobPysparkConfig'
-        { _archiveUris = TF.Nil
-        , _args = TF.Nil
-        , _fileUris = TF.Nil
-        , _jarFileUris = TF.Nil
-        , _loggingConfig = TF.Nil
+        { _archiveUris = P.Nothing
+        , _args = P.Nothing
+        , _fileUris = P.Nothing
+        , _jarFileUris = P.Nothing
+        , _loggingConfig = P.Nothing
         , _mainPythonFileUri = _mainPythonFileUri
-        , _properties = TF.Nil
-        , _pythonFileUris = TF.Nil
+        , _properties = P.Nothing
+        , _pythonFileUris = P.Nothing
         }
 
-instance TF.IsValue  (DataprocJobPysparkConfig s)
-instance TF.IsObject (DataprocJobPysparkConfig s) where
-    toObject DataprocJobPysparkConfig'{..} = P.catMaybes
-        [ TF.assign "archive_uris" <$> TF.attribute _archiveUris
-        , TF.assign "args" <$> TF.attribute _args
-        , TF.assign "file_uris" <$> TF.attribute _fileUris
-        , TF.assign "jar_file_uris" <$> TF.attribute _jarFileUris
-        , TF.assign "logging_config" <$> TF.attribute _loggingConfig
-        , TF.assign "main_python_file_uri" <$> TF.attribute _mainPythonFileUri
-        , TF.assign "properties" <$> TF.attribute _properties
-        , TF.assign "python_file_uris" <$> TF.attribute _pythonFileUris
+instance TF.ToHCL (DataprocJobPysparkConfig s) where
+     toHCL DataprocJobPysparkConfig'{..} = TF.pairs $ P.mconcat
+        [ P.maybe P.mempty (TF.pair "archive_uris") _archiveUris
+        , P.maybe P.mempty (TF.pair "args") _args
+        , P.maybe P.mempty (TF.pair "file_uris") _fileUris
+        , P.maybe P.mempty (TF.pair "jar_file_uris") _jarFileUris
+        , P.maybe P.mempty (TF.pair "logging_config") _loggingConfig
+        , TF.pair "main_python_file_uri" _mainPythonFileUri
+        , P.maybe P.mempty (TF.pair "properties") _properties
+        , P.maybe P.mempty (TF.pair "python_file_uris") _pythonFileUris
         ]
 
-instance TF.IsValid (DataprocJobPysparkConfig s) where
+instance P.Hashable (DataprocJobPysparkConfig s)
+
+instance TF.HasValidator (DataprocJobPysparkConfig s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_loggingConfig"
-                  (_loggingConfig
-                      :: DataprocJobPysparkConfig s -> TF.Attr s (DataprocJobLoggingConfig s))
-                  TF.validator
 
-instance P.HasArchiveUris (DataprocJobPysparkConfig s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasArchiveUris (DataprocJobPysparkConfig s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
     archiveUris =
-        P.lens (_archiveUris :: DataprocJobPysparkConfig s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _archiveUris = a } :: DataprocJobPysparkConfig s)
+        P.lens (_archiveUris :: DataprocJobPysparkConfig s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
+            (\s a -> s { _archiveUris = a } :: DataprocJobPysparkConfig s)
 
-instance P.HasArgs (DataprocJobPysparkConfig s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasArgs (DataprocJobPysparkConfig s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
     args =
-        P.lens (_args :: DataprocJobPysparkConfig s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _args = a } :: DataprocJobPysparkConfig s)
+        P.lens (_args :: DataprocJobPysparkConfig s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
+            (\s a -> s { _args = a } :: DataprocJobPysparkConfig s)
 
-instance P.HasFileUris (DataprocJobPysparkConfig s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasFileUris (DataprocJobPysparkConfig s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
     fileUris =
-        P.lens (_fileUris :: DataprocJobPysparkConfig s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _fileUris = a } :: DataprocJobPysparkConfig s)
+        P.lens (_fileUris :: DataprocJobPysparkConfig s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
+            (\s a -> s { _fileUris = a } :: DataprocJobPysparkConfig s)
 
-instance P.HasJarFileUris (DataprocJobPysparkConfig s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasJarFileUris (DataprocJobPysparkConfig s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
     jarFileUris =
-        P.lens (_jarFileUris :: DataprocJobPysparkConfig s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _jarFileUris = a } :: DataprocJobPysparkConfig s)
+        P.lens (_jarFileUris :: DataprocJobPysparkConfig s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
+            (\s a -> s { _jarFileUris = a } :: DataprocJobPysparkConfig s)
 
-instance P.HasLoggingConfig (DataprocJobPysparkConfig s) (TF.Attr s (DataprocJobLoggingConfig s)) where
+instance P.HasLoggingConfig (DataprocJobPysparkConfig s) (P.Maybe (TF.Expr s (DataprocJobLoggingConfig s))) where
     loggingConfig =
-        P.lens (_loggingConfig :: DataprocJobPysparkConfig s -> TF.Attr s (DataprocJobLoggingConfig s))
-               (\s a -> s { _loggingConfig = a } :: DataprocJobPysparkConfig s)
+        P.lens (_loggingConfig :: DataprocJobPysparkConfig s -> P.Maybe (TF.Expr s (DataprocJobLoggingConfig s)))
+            (\s a -> s { _loggingConfig = a } :: DataprocJobPysparkConfig s)
 
-instance P.HasMainPythonFileUri (DataprocJobPysparkConfig s) (TF.Attr s P.Text) where
+instance P.HasMainPythonFileUri (DataprocJobPysparkConfig s) (TF.Expr s P.Text) where
     mainPythonFileUri =
-        P.lens (_mainPythonFileUri :: DataprocJobPysparkConfig s -> TF.Attr s P.Text)
-               (\s a -> s { _mainPythonFileUri = a } :: DataprocJobPysparkConfig s)
+        P.lens (_mainPythonFileUri :: DataprocJobPysparkConfig s -> TF.Expr s P.Text)
+            (\s a -> s { _mainPythonFileUri = a } :: DataprocJobPysparkConfig s)
 
-instance P.HasProperties (DataprocJobPysparkConfig s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+instance P.HasProperties (DataprocJobPysparkConfig s) (P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text)))) where
     properties =
-        P.lens (_properties :: DataprocJobPysparkConfig s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _properties = a } :: DataprocJobPysparkConfig s)
+        P.lens (_properties :: DataprocJobPysparkConfig s -> P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text))))
+            (\s a -> s { _properties = a } :: DataprocJobPysparkConfig s)
 
-instance P.HasPythonFileUris (DataprocJobPysparkConfig s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasPythonFileUris (DataprocJobPysparkConfig s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
     pythonFileUris =
-        P.lens (_pythonFileUris :: DataprocJobPysparkConfig s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _pythonFileUris = a } :: DataprocJobPysparkConfig s)
+        P.lens (_pythonFileUris :: DataprocJobPysparkConfig s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
+            (\s a -> s { _pythonFileUris = a } :: DataprocJobPysparkConfig s)
 
-instance s ~ s' => P.HasComputedLoggingConfig (TF.Ref s' (DataprocJobPysparkConfig s)) (TF.Attr s (DataprocJobLoggingConfig s)) where
-    computedLoggingConfig x = TF.compute (TF.refKey x) "logging_config"
+instance s ~ s' => P.HasComputedLoggingConfig (TF.Ref s' (DataprocJobPysparkConfig s)) (TF.Expr s (DataprocJobLoggingConfig s)) where
+    computedLoggingConfig x =
+        TF.unsafeCompute TF.encodeAttr x "logging_config"
 
 -- | @pig_config@ nested settings.
 data DataprocJobPigConfig s = DataprocJobPigConfig'
-    { _continueOnFailure :: TF.Attr s P.Bool
+    { _continueOnFailure :: P.Maybe (TF.Expr s P.Bool)
     -- ^ @continue_on_failure@ - (Optional, Forces New)
     --
-    , _jarFileUris       :: TF.Attr s [TF.Attr s P.Text]
+    , _jarFileUris :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
     -- ^ @jar_file_uris@ - (Optional, Forces New)
     --
-    , _loggingConfig     :: TF.Attr s (DataprocJobLoggingConfig s)
+    , _loggingConfig :: P.Maybe (TF.Expr s (DataprocJobLoggingConfig s))
     -- ^ @logging_config@ - (Optional)
     -- The runtime logging config of the job
     --
-    , _properties        :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _properties :: P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text)))
     -- ^ @properties@ - (Optional, Forces New)
     --
-    , _queryFileUri      :: TF.Attr s P.Text
+    , _queryFileUri :: P.Maybe (TF.Expr s P.Text)
     -- ^ @query_file_uri@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
     -- * 'queryList'
-    , _queryList         :: TF.Attr s [TF.Attr s P.Text]
+    , _queryList :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
     -- ^ @query_list@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
     -- * 'queryFileUri'
-    , _scriptVariables   :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _scriptVariables :: P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text)))
     -- ^ @script_variables@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @pig_config@ settings value.
 newDataprocJobPigConfig
     :: DataprocJobPigConfig s
 newDataprocJobPigConfig =
     DataprocJobPigConfig'
-        { _continueOnFailure = TF.Nil
-        , _jarFileUris = TF.Nil
-        , _loggingConfig = TF.Nil
-        , _properties = TF.Nil
-        , _queryFileUri = TF.Nil
-        , _queryList = TF.Nil
-        , _scriptVariables = TF.Nil
+        { _continueOnFailure = P.Nothing
+        , _jarFileUris = P.Nothing
+        , _loggingConfig = P.Nothing
+        , _properties = P.Nothing
+        , _queryFileUri = P.Nothing
+        , _queryList = P.Nothing
+        , _scriptVariables = P.Nothing
         }
 
-instance TF.IsValue  (DataprocJobPigConfig s)
-instance TF.IsObject (DataprocJobPigConfig s) where
-    toObject DataprocJobPigConfig'{..} = P.catMaybes
-        [ TF.assign "continue_on_failure" <$> TF.attribute _continueOnFailure
-        , TF.assign "jar_file_uris" <$> TF.attribute _jarFileUris
-        , TF.assign "logging_config" <$> TF.attribute _loggingConfig
-        , TF.assign "properties" <$> TF.attribute _properties
-        , TF.assign "query_file_uri" <$> TF.attribute _queryFileUri
-        , TF.assign "query_list" <$> TF.attribute _queryList
-        , TF.assign "script_variables" <$> TF.attribute _scriptVariables
+instance TF.ToHCL (DataprocJobPigConfig s) where
+     toHCL DataprocJobPigConfig'{..} = TF.pairs $ P.mconcat
+        [ P.maybe P.mempty (TF.pair "continue_on_failure") _continueOnFailure
+        , P.maybe P.mempty (TF.pair "jar_file_uris") _jarFileUris
+        , P.maybe P.mempty (TF.pair "logging_config") _loggingConfig
+        , P.maybe P.mempty (TF.pair "properties") _properties
+        , P.maybe P.mempty (TF.pair "query_file_uri") _queryFileUri
+        , P.maybe P.mempty (TF.pair "query_list") _queryList
+        , P.maybe P.mempty (TF.pair "script_variables") _scriptVariables
         ]
 
-instance TF.IsValid (DataprocJobPigConfig s) where
-    validator = TF.fieldsValidator (\DataprocJobPigConfig'{..} -> Map.fromList $ P.catMaybes
-        [ if (_queryFileUri P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_queryFileUri",
-                            [ "_queryList"
-                            ])
-        , if (_queryList P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_queryList",
-                            [ "_queryFileUri"
-                            ])
+instance P.Hashable (DataprocJobPigConfig s)
+
+instance TF.HasValidator (DataprocJobPigConfig s) where
+    validator = TF.conflictValidator (\DataprocJobPigConfig'{..} -> HashMap.fromList $ P.catMaybes
+        [ TF.conflictsWith (_queryFileUri P.== P.Nothing) "_queryFileUri"
+            ["_queryList"]
+        , TF.conflictsWith (_queryList P.== P.Nothing) "_queryList"
+            ["_queryFileUri"]
         ])
-           P.<> TF.settingsValidator "_loggingConfig"
-                  (_loggingConfig
-                      :: DataprocJobPigConfig s -> TF.Attr s (DataprocJobLoggingConfig s))
-                  TF.validator
 
-instance P.HasContinueOnFailure (DataprocJobPigConfig s) (TF.Attr s P.Bool) where
+instance P.HasContinueOnFailure (DataprocJobPigConfig s) (P.Maybe (TF.Expr s P.Bool)) where
     continueOnFailure =
-        P.lens (_continueOnFailure :: DataprocJobPigConfig s -> TF.Attr s P.Bool)
-               (\s a -> s { _continueOnFailure = a } :: DataprocJobPigConfig s)
+        P.lens (_continueOnFailure :: DataprocJobPigConfig s -> P.Maybe (TF.Expr s P.Bool))
+            (\s a -> s { _continueOnFailure = a } :: DataprocJobPigConfig s)
 
-instance P.HasJarFileUris (DataprocJobPigConfig s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasJarFileUris (DataprocJobPigConfig s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
     jarFileUris =
-        P.lens (_jarFileUris :: DataprocJobPigConfig s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _jarFileUris = a } :: DataprocJobPigConfig s)
+        P.lens (_jarFileUris :: DataprocJobPigConfig s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
+            (\s a -> s { _jarFileUris = a } :: DataprocJobPigConfig s)
 
-instance P.HasLoggingConfig (DataprocJobPigConfig s) (TF.Attr s (DataprocJobLoggingConfig s)) where
+instance P.HasLoggingConfig (DataprocJobPigConfig s) (P.Maybe (TF.Expr s (DataprocJobLoggingConfig s))) where
     loggingConfig =
-        P.lens (_loggingConfig :: DataprocJobPigConfig s -> TF.Attr s (DataprocJobLoggingConfig s))
-               (\s a -> s { _loggingConfig = a } :: DataprocJobPigConfig s)
+        P.lens (_loggingConfig :: DataprocJobPigConfig s -> P.Maybe (TF.Expr s (DataprocJobLoggingConfig s)))
+            (\s a -> s { _loggingConfig = a } :: DataprocJobPigConfig s)
 
-instance P.HasProperties (DataprocJobPigConfig s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+instance P.HasProperties (DataprocJobPigConfig s) (P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text)))) where
     properties =
-        P.lens (_properties :: DataprocJobPigConfig s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _properties = a } :: DataprocJobPigConfig s)
+        P.lens (_properties :: DataprocJobPigConfig s -> P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text))))
+            (\s a -> s { _properties = a } :: DataprocJobPigConfig s)
 
-instance P.HasQueryFileUri (DataprocJobPigConfig s) (TF.Attr s P.Text) where
+instance P.HasQueryFileUri (DataprocJobPigConfig s) (P.Maybe (TF.Expr s P.Text)) where
     queryFileUri =
-        P.lens (_queryFileUri :: DataprocJobPigConfig s -> TF.Attr s P.Text)
-               (\s a -> s { _queryFileUri = a } :: DataprocJobPigConfig s)
+        P.lens (_queryFileUri :: DataprocJobPigConfig s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _queryFileUri = a } :: DataprocJobPigConfig s)
 
-instance P.HasQueryList (DataprocJobPigConfig s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasQueryList (DataprocJobPigConfig s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
     queryList =
-        P.lens (_queryList :: DataprocJobPigConfig s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _queryList = a } :: DataprocJobPigConfig s)
+        P.lens (_queryList :: DataprocJobPigConfig s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
+            (\s a -> s { _queryList = a } :: DataprocJobPigConfig s)
 
-instance P.HasScriptVariables (DataprocJobPigConfig s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+instance P.HasScriptVariables (DataprocJobPigConfig s) (P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text)))) where
     scriptVariables =
-        P.lens (_scriptVariables :: DataprocJobPigConfig s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _scriptVariables = a } :: DataprocJobPigConfig s)
+        P.lens (_scriptVariables :: DataprocJobPigConfig s -> P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text))))
+            (\s a -> s { _scriptVariables = a } :: DataprocJobPigConfig s)
 
-instance s ~ s' => P.HasComputedLoggingConfig (TF.Ref s' (DataprocJobPigConfig s)) (TF.Attr s (DataprocJobLoggingConfig s)) where
-    computedLoggingConfig x = TF.compute (TF.refKey x) "logging_config"
+instance s ~ s' => P.HasComputedLoggingConfig (TF.Ref s' (DataprocJobPigConfig s)) (TF.Expr s (DataprocJobLoggingConfig s)) where
+    computedLoggingConfig x =
+        TF.unsafeCompute TF.encodeAttr x "logging_config"
 
 -- | @hive_config@ nested settings.
 data DataprocJobHiveConfig s = DataprocJobHiveConfig'
-    { _continueOnFailure :: TF.Attr s P.Bool
+    { _continueOnFailure :: P.Maybe (TF.Expr s P.Bool)
     -- ^ @continue_on_failure@ - (Optional, Forces New)
     --
-    , _jarFileUris       :: TF.Attr s [TF.Attr s P.Text]
+    , _jarFileUris :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
     -- ^ @jar_file_uris@ - (Optional, Forces New)
     --
-    , _properties        :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _properties :: P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text)))
     -- ^ @properties@ - (Optional, Forces New)
     --
-    , _queryFileUri      :: TF.Attr s P.Text
+    , _queryFileUri :: P.Maybe (TF.Expr s P.Text)
     -- ^ @query_file_uri@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
     -- * 'queryList'
-    , _queryList         :: TF.Attr s [TF.Attr s P.Text]
+    , _queryList :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
     -- ^ @query_list@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
     -- * 'queryFileUri'
-    , _scriptVariables   :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _scriptVariables :: P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text)))
     -- ^ @script_variables@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @hive_config@ settings value.
 newDataprocJobHiveConfig
     :: DataprocJobHiveConfig s
 newDataprocJobHiveConfig =
     DataprocJobHiveConfig'
-        { _continueOnFailure = TF.Nil
-        , _jarFileUris = TF.Nil
-        , _properties = TF.Nil
-        , _queryFileUri = TF.Nil
-        , _queryList = TF.Nil
-        , _scriptVariables = TF.Nil
+        { _continueOnFailure = P.Nothing
+        , _jarFileUris = P.Nothing
+        , _properties = P.Nothing
+        , _queryFileUri = P.Nothing
+        , _queryList = P.Nothing
+        , _scriptVariables = P.Nothing
         }
 
-instance TF.IsValue  (DataprocJobHiveConfig s)
-instance TF.IsObject (DataprocJobHiveConfig s) where
-    toObject DataprocJobHiveConfig'{..} = P.catMaybes
-        [ TF.assign "continue_on_failure" <$> TF.attribute _continueOnFailure
-        , TF.assign "jar_file_uris" <$> TF.attribute _jarFileUris
-        , TF.assign "properties" <$> TF.attribute _properties
-        , TF.assign "query_file_uri" <$> TF.attribute _queryFileUri
-        , TF.assign "query_list" <$> TF.attribute _queryList
-        , TF.assign "script_variables" <$> TF.attribute _scriptVariables
+instance TF.ToHCL (DataprocJobHiveConfig s) where
+     toHCL DataprocJobHiveConfig'{..} = TF.pairs $ P.mconcat
+        [ P.maybe P.mempty (TF.pair "continue_on_failure") _continueOnFailure
+        , P.maybe P.mempty (TF.pair "jar_file_uris") _jarFileUris
+        , P.maybe P.mempty (TF.pair "properties") _properties
+        , P.maybe P.mempty (TF.pair "query_file_uri") _queryFileUri
+        , P.maybe P.mempty (TF.pair "query_list") _queryList
+        , P.maybe P.mempty (TF.pair "script_variables") _scriptVariables
         ]
 
-instance TF.IsValid (DataprocJobHiveConfig s) where
-    validator = TF.fieldsValidator (\DataprocJobHiveConfig'{..} -> Map.fromList $ P.catMaybes
-        [ if (_queryFileUri P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_queryFileUri",
-                            [ "_queryList"
-                            ])
-        , if (_queryList P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_queryList",
-                            [ "_queryFileUri"
-                            ])
+instance P.Hashable (DataprocJobHiveConfig s)
+
+instance TF.HasValidator (DataprocJobHiveConfig s) where
+    validator = TF.conflictValidator (\DataprocJobHiveConfig'{..} -> HashMap.fromList $ P.catMaybes
+        [ TF.conflictsWith (_queryFileUri P.== P.Nothing) "_queryFileUri"
+            ["_queryList"]
+        , TF.conflictsWith (_queryList P.== P.Nothing) "_queryList"
+            ["_queryFileUri"]
         ])
 
-instance P.HasContinueOnFailure (DataprocJobHiveConfig s) (TF.Attr s P.Bool) where
+instance P.HasContinueOnFailure (DataprocJobHiveConfig s) (P.Maybe (TF.Expr s P.Bool)) where
     continueOnFailure =
-        P.lens (_continueOnFailure :: DataprocJobHiveConfig s -> TF.Attr s P.Bool)
-               (\s a -> s { _continueOnFailure = a } :: DataprocJobHiveConfig s)
+        P.lens (_continueOnFailure :: DataprocJobHiveConfig s -> P.Maybe (TF.Expr s P.Bool))
+            (\s a -> s { _continueOnFailure = a } :: DataprocJobHiveConfig s)
 
-instance P.HasJarFileUris (DataprocJobHiveConfig s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasJarFileUris (DataprocJobHiveConfig s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
     jarFileUris =
-        P.lens (_jarFileUris :: DataprocJobHiveConfig s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _jarFileUris = a } :: DataprocJobHiveConfig s)
+        P.lens (_jarFileUris :: DataprocJobHiveConfig s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
+            (\s a -> s { _jarFileUris = a } :: DataprocJobHiveConfig s)
 
-instance P.HasProperties (DataprocJobHiveConfig s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+instance P.HasProperties (DataprocJobHiveConfig s) (P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text)))) where
     properties =
-        P.lens (_properties :: DataprocJobHiveConfig s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _properties = a } :: DataprocJobHiveConfig s)
+        P.lens (_properties :: DataprocJobHiveConfig s -> P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text))))
+            (\s a -> s { _properties = a } :: DataprocJobHiveConfig s)
 
-instance P.HasQueryFileUri (DataprocJobHiveConfig s) (TF.Attr s P.Text) where
+instance P.HasQueryFileUri (DataprocJobHiveConfig s) (P.Maybe (TF.Expr s P.Text)) where
     queryFileUri =
-        P.lens (_queryFileUri :: DataprocJobHiveConfig s -> TF.Attr s P.Text)
-               (\s a -> s { _queryFileUri = a } :: DataprocJobHiveConfig s)
+        P.lens (_queryFileUri :: DataprocJobHiveConfig s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _queryFileUri = a } :: DataprocJobHiveConfig s)
 
-instance P.HasQueryList (DataprocJobHiveConfig s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasQueryList (DataprocJobHiveConfig s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
     queryList =
-        P.lens (_queryList :: DataprocJobHiveConfig s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _queryList = a } :: DataprocJobHiveConfig s)
+        P.lens (_queryList :: DataprocJobHiveConfig s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
+            (\s a -> s { _queryList = a } :: DataprocJobHiveConfig s)
 
-instance P.HasScriptVariables (DataprocJobHiveConfig s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+instance P.HasScriptVariables (DataprocJobHiveConfig s) (P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text)))) where
     scriptVariables =
-        P.lens (_scriptVariables :: DataprocJobHiveConfig s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _scriptVariables = a } :: DataprocJobHiveConfig s)
+        P.lens (_scriptVariables :: DataprocJobHiveConfig s -> P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text))))
+            (\s a -> s { _scriptVariables = a } :: DataprocJobHiveConfig s)
 
 -- | @placement@ nested settings.
 data DataprocJobPlacement s = DataprocJobPlacement'
-    { _clusterName :: TF.Attr s P.Text
+    { _clusterName :: TF.Expr s P.Text
     -- ^ @cluster_name@ - (Required, Forces New)
     -- The name of the cluster where the job will be submitted
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @placement@ settings value.
 newDataprocJobPlacement
-    :: TF.Attr s P.Text -- ^ 'P._clusterName': @cluster_name@
+    :: TF.Expr s P.Text -- ^ Lens: 'P.clusterName', Field: '_clusterName', HCL: @cluster_name@
     -> DataprocJobPlacement s
 newDataprocJobPlacement _clusterName =
     DataprocJobPlacement'
         { _clusterName = _clusterName
         }
 
-instance TF.IsValue  (DataprocJobPlacement s)
-instance TF.IsObject (DataprocJobPlacement s) where
-    toObject DataprocJobPlacement'{..} = P.catMaybes
-        [ TF.assign "cluster_name" <$> TF.attribute _clusterName
+instance TF.ToHCL (DataprocJobPlacement s) where
+     toHCL DataprocJobPlacement'{..} = TF.pairs $ P.mconcat
+        [ TF.pair "cluster_name" _clusterName
         ]
 
-instance TF.IsValid (DataprocJobPlacement s) where
+instance P.Hashable (DataprocJobPlacement s)
+
+instance TF.HasValidator (DataprocJobPlacement s) where
     validator = P.mempty
 
-instance P.HasClusterName (DataprocJobPlacement s) (TF.Attr s P.Text) where
+instance P.HasClusterName (DataprocJobPlacement s) (TF.Expr s P.Text) where
     clusterName =
-        P.lens (_clusterName :: DataprocJobPlacement s -> TF.Attr s P.Text)
-               (\s a -> s { _clusterName = a } :: DataprocJobPlacement s)
+        P.lens (_clusterName :: DataprocJobPlacement s -> TF.Expr s P.Text)
+            (\s a -> s { _clusterName = a } :: DataprocJobPlacement s)
 
-instance s ~ s' => P.HasComputedClusterUuid (TF.Ref s' (DataprocJobPlacement s)) (TF.Attr s P.Text) where
-    computedClusterUuid x = TF.compute (TF.refKey x) "cluster_uuid"
+instance s ~ s' => P.HasComputedClusterUuid (TF.Ref s' (DataprocJobPlacement s)) (TF.Expr s P.Text) where
+    computedClusterUuid x =
+        TF.unsafeCompute TF.encodeAttr x "cluster_uuid"
 
 -- | @reference@ nested settings.
 data DataprocJobReference s = DataprocJobReference'
-    { _jobId :: TF.Attr s P.Text
+    { _jobId :: P.Maybe (TF.Expr s P.Text)
     -- ^ @job_id@ - (Optional, Forces New)
     -- The job ID, which must be unique within the project. The job ID is generated
     -- by the server upon job submission or provided by the user as a means to
     -- perform retries without creating duplicate jobs
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @reference@ settings value.
 newDataprocJobReference
     :: DataprocJobReference s
 newDataprocJobReference =
     DataprocJobReference'
-        { _jobId = TF.Nil
+        { _jobId = P.Nothing
         }
 
-instance TF.IsValue  (DataprocJobReference s)
-instance TF.IsObject (DataprocJobReference s) where
-    toObject DataprocJobReference'{..} = P.catMaybes
-        [ TF.assign "job_id" <$> TF.attribute _jobId
+instance TF.ToHCL (DataprocJobReference s) where
+     toHCL DataprocJobReference'{..} = TF.pairs $ P.mconcat
+        [ P.maybe P.mempty (TF.pair "job_id") _jobId
         ]
 
-instance TF.IsValid (DataprocJobReference s) where
+instance P.Hashable (DataprocJobReference s)
+
+instance TF.HasValidator (DataprocJobReference s) where
     validator = P.mempty
 
-instance P.HasJobId (DataprocJobReference s) (TF.Attr s P.Text) where
+instance P.HasJobId (DataprocJobReference s) (P.Maybe (TF.Expr s P.Text)) where
     jobId =
-        P.lens (_jobId :: DataprocJobReference s -> TF.Attr s P.Text)
-               (\s a -> s { _jobId = a } :: DataprocJobReference s)
+        P.lens (_jobId :: DataprocJobReference s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _jobId = a } :: DataprocJobReference s)
 
-instance s ~ s' => P.HasComputedJobId (TF.Ref s' (DataprocJobReference s)) (TF.Attr s P.Text) where
-    computedJobId x = TF.compute (TF.refKey x) "job_id"
+instance s ~ s' => P.HasComputedJobId (TF.Ref s' (DataprocJobReference s)) (TF.Expr s P.Text) where
+    computedJobId x =
+        TF.unsafeCompute TF.encodeAttr x "job_id"
 
 -- | @scheduling@ nested settings.
 data DataprocJobScheduling s = DataprocJobScheduling'
-    { _maxFailuresPerHour :: TF.Attr s P.Int
+    { _maxFailuresPerHour :: P.Maybe (TF.Expr s P.Int)
     -- ^ @max_failures_per_hour@ - (Optional, Forces New)
     -- Maximum number of times per hour a driver may be restarted as a result of
     -- driver terminating with non-zero code before job is reported failed.
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @scheduling@ settings value.
 newDataprocJobScheduling
     :: DataprocJobScheduling s
 newDataprocJobScheduling =
     DataprocJobScheduling'
-        { _maxFailuresPerHour = TF.Nil
+        { _maxFailuresPerHour = P.Nothing
         }
 
-instance TF.IsValue  (DataprocJobScheduling s)
-instance TF.IsObject (DataprocJobScheduling s) where
-    toObject DataprocJobScheduling'{..} = P.catMaybes
-        [ TF.assign "max_failures_per_hour" <$> TF.attribute _maxFailuresPerHour
+instance TF.ToHCL (DataprocJobScheduling s) where
+     toHCL DataprocJobScheduling'{..} = TF.pairs $ P.mconcat
+        [ P.maybe P.mempty (TF.pair "max_failures_per_hour") _maxFailuresPerHour
         ]
 
-instance TF.IsValid (DataprocJobScheduling s) where
+instance P.Hashable (DataprocJobScheduling s)
+
+instance TF.HasValidator (DataprocJobScheduling s) where
     validator = P.mempty
 
-instance P.HasMaxFailuresPerHour (DataprocJobScheduling s) (TF.Attr s P.Int) where
+instance P.HasMaxFailuresPerHour (DataprocJobScheduling s) (P.Maybe (TF.Expr s P.Int)) where
     maxFailuresPerHour =
-        P.lens (_maxFailuresPerHour :: DataprocJobScheduling s -> TF.Attr s P.Int)
-               (\s a -> s { _maxFailuresPerHour = a } :: DataprocJobScheduling s)
+        P.lens (_maxFailuresPerHour :: DataprocJobScheduling s -> P.Maybe (TF.Expr s P.Int))
+            (\s a -> s { _maxFailuresPerHour = a } :: DataprocJobScheduling s)
 
 -- | @status@ nested settings.
 data DataprocJobStatus s = DataprocJobStatus'
-    deriving (P.Show, P.Eq, P.Ord)
+    deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @status@ settings value.
 newDataprocJobStatus
@@ -2509,28 +2499,32 @@ newDataprocJobStatus
 newDataprocJobStatus =
     DataprocJobStatus'
 
-instance TF.IsValue  (DataprocJobStatus s)
-instance TF.IsObject (DataprocJobStatus s) where
-    toObject DataprocJobStatus' = []
+instance TF.ToHCL (DataprocJobStatus s) where
+    toHCL DataprocJobStatus' = P.mempty
 
-instance TF.IsValid (DataprocJobStatus s) where
-    validator = P.mempty
+instance P.Hashable (DataprocJobStatus s)
 
-instance s ~ s' => P.HasComputedDetails (TF.Ref s' (DataprocJobStatus s)) (TF.Attr s P.Text) where
-    computedDetails x = TF.compute (TF.refKey x) "details"
+instance TF.HasValidator (DataprocJobStatus s)
 
-instance s ~ s' => P.HasComputedState (TF.Ref s' (DataprocJobStatus s)) (TF.Attr s P.Text) where
-    computedState x = TF.compute (TF.refKey x) "state"
+instance s ~ s' => P.HasComputedDetails (TF.Ref s' (DataprocJobStatus s)) (TF.Expr s P.Text) where
+    computedDetails x =
+        TF.unsafeCompute TF.encodeAttr x "details"
 
-instance s ~ s' => P.HasComputedStateStartTime (TF.Ref s' (DataprocJobStatus s)) (TF.Attr s P.Text) where
-    computedStateStartTime x = TF.compute (TF.refKey x) "state_start_time"
+instance s ~ s' => P.HasComputedState (TF.Ref s' (DataprocJobStatus s)) (TF.Expr s P.Text) where
+    computedState x =
+        TF.unsafeCompute TF.encodeAttr x "state"
 
-instance s ~ s' => P.HasComputedSubstate (TF.Ref s' (DataprocJobStatus s)) (TF.Attr s P.Text) where
-    computedSubstate x = TF.compute (TF.refKey x) "substate"
+instance s ~ s' => P.HasComputedStateStartTime (TF.Ref s' (DataprocJobStatus s)) (TF.Expr s P.Text) where
+    computedStateStartTime x =
+        TF.unsafeCompute TF.encodeAttr x "state_start_time"
+
+instance s ~ s' => P.HasComputedSubstate (TF.Ref s' (DataprocJobStatus s)) (TF.Expr s P.Text) where
+    computedSubstate x =
+        TF.unsafeCompute TF.encodeAttr x "substate"
 
 -- | @apis@ nested settings.
 data EndpointsServiceApis s = EndpointsServiceApis'
-    deriving (P.Show, P.Eq, P.Ord)
+    deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @apis@ settings value.
 newEndpointsServiceApis
@@ -2538,28 +2532,32 @@ newEndpointsServiceApis
 newEndpointsServiceApis =
     EndpointsServiceApis'
 
-instance TF.IsValue  (EndpointsServiceApis s)
-instance TF.IsObject (EndpointsServiceApis s) where
-    toObject EndpointsServiceApis' = []
+instance TF.ToHCL (EndpointsServiceApis s) where
+    toHCL EndpointsServiceApis' = P.mempty
 
-instance TF.IsValid (EndpointsServiceApis s) where
-    validator = P.mempty
+instance P.Hashable (EndpointsServiceApis s)
 
-instance s ~ s' => P.HasComputedMethods (TF.Ref s' (EndpointsServiceApis s)) (TF.Attr s [TF.Attr s (EndpointsServiceMethods s)]) where
-    computedMethods x = TF.compute (TF.refKey x) "methods"
+instance TF.HasValidator (EndpointsServiceApis s)
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (EndpointsServiceApis s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+instance s ~ s' => P.HasComputedMethods (TF.Ref s' (EndpointsServiceApis s)) (TF.Expr s [TF.Expr s (EndpointsServiceMethods s)]) where
+    computedMethods x =
+        TF.unsafeCompute TF.encodeAttr x "methods"
 
-instance s ~ s' => P.HasComputedSyntax (TF.Ref s' (EndpointsServiceApis s)) (TF.Attr s P.Text) where
-    computedSyntax x = TF.compute (TF.refKey x) "syntax"
+instance s ~ s' => P.HasComputedName (TF.Ref s' (EndpointsServiceApis s)) (TF.Expr s P.Text) where
+    computedName x =
+        TF.unsafeCompute TF.encodeAttr x "name"
 
-instance s ~ s' => P.HasComputedVersion (TF.Ref s' (EndpointsServiceApis s)) (TF.Attr s P.Text) where
-    computedVersion x = TF.compute (TF.refKey x) "version"
+instance s ~ s' => P.HasComputedSyntax (TF.Ref s' (EndpointsServiceApis s)) (TF.Expr s P.Text) where
+    computedSyntax x =
+        TF.unsafeCompute TF.encodeAttr x "syntax"
+
+instance s ~ s' => P.HasComputedVersion (TF.Ref s' (EndpointsServiceApis s)) (TF.Expr s P.Text) where
+    computedVersion x =
+        TF.unsafeCompute TF.encodeAttr x "version"
 
 -- | @methods@ nested settings.
 data EndpointsServiceMethods s = EndpointsServiceMethods'
-    deriving (P.Show, P.Eq, P.Ord)
+    deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @methods@ settings value.
 newEndpointsServiceMethods
@@ -2567,28 +2565,32 @@ newEndpointsServiceMethods
 newEndpointsServiceMethods =
     EndpointsServiceMethods'
 
-instance TF.IsValue  (EndpointsServiceMethods s)
-instance TF.IsObject (EndpointsServiceMethods s) where
-    toObject EndpointsServiceMethods' = []
+instance TF.ToHCL (EndpointsServiceMethods s) where
+    toHCL EndpointsServiceMethods' = P.mempty
 
-instance TF.IsValid (EndpointsServiceMethods s) where
-    validator = P.mempty
+instance P.Hashable (EndpointsServiceMethods s)
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (EndpointsServiceMethods s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+instance TF.HasValidator (EndpointsServiceMethods s)
 
-instance s ~ s' => P.HasComputedRequestType (TF.Ref s' (EndpointsServiceMethods s)) (TF.Attr s P.Text) where
-    computedRequestType x = TF.compute (TF.refKey x) "request_type"
+instance s ~ s' => P.HasComputedName (TF.Ref s' (EndpointsServiceMethods s)) (TF.Expr s P.Text) where
+    computedName x =
+        TF.unsafeCompute TF.encodeAttr x "name"
 
-instance s ~ s' => P.HasComputedResponseType (TF.Ref s' (EndpointsServiceMethods s)) (TF.Attr s P.Text) where
-    computedResponseType x = TF.compute (TF.refKey x) "response_type"
+instance s ~ s' => P.HasComputedRequestType (TF.Ref s' (EndpointsServiceMethods s)) (TF.Expr s P.Text) where
+    computedRequestType x =
+        TF.unsafeCompute TF.encodeAttr x "request_type"
 
-instance s ~ s' => P.HasComputedSyntax (TF.Ref s' (EndpointsServiceMethods s)) (TF.Attr s P.Text) where
-    computedSyntax x = TF.compute (TF.refKey x) "syntax"
+instance s ~ s' => P.HasComputedResponseType (TF.Ref s' (EndpointsServiceMethods s)) (TF.Expr s P.Text) where
+    computedResponseType x =
+        TF.unsafeCompute TF.encodeAttr x "response_type"
+
+instance s ~ s' => P.HasComputedSyntax (TF.Ref s' (EndpointsServiceMethods s)) (TF.Expr s P.Text) where
+    computedSyntax x =
+        TF.unsafeCompute TF.encodeAttr x "syntax"
 
 -- | @endpoints@ nested settings.
 data EndpointsServiceEndpoints s = EndpointsServiceEndpoints'
-    deriving (P.Show, P.Eq, P.Ord)
+    deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @endpoints@ settings value.
 newEndpointsServiceEndpoints
@@ -2596,34 +2598,36 @@ newEndpointsServiceEndpoints
 newEndpointsServiceEndpoints =
     EndpointsServiceEndpoints'
 
-instance TF.IsValue  (EndpointsServiceEndpoints s)
-instance TF.IsObject (EndpointsServiceEndpoints s) where
-    toObject EndpointsServiceEndpoints' = []
+instance TF.ToHCL (EndpointsServiceEndpoints s) where
+    toHCL EndpointsServiceEndpoints' = P.mempty
 
-instance TF.IsValid (EndpointsServiceEndpoints s) where
-    validator = P.mempty
+instance P.Hashable (EndpointsServiceEndpoints s)
 
-instance s ~ s' => P.HasComputedAddress (TF.Ref s' (EndpointsServiceEndpoints s)) (TF.Attr s P.Text) where
-    computedAddress x = TF.compute (TF.refKey x) "address"
+instance TF.HasValidator (EndpointsServiceEndpoints s)
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (EndpointsServiceEndpoints s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+instance s ~ s' => P.HasComputedAddress (TF.Ref s' (EndpointsServiceEndpoints s)) (TF.Expr s P.Text) where
+    computedAddress x =
+        TF.unsafeCompute TF.encodeAttr x "address"
+
+instance s ~ s' => P.HasComputedName (TF.Ref s' (EndpointsServiceEndpoints s)) (TF.Expr s P.Text) where
+    computedName x =
+        TF.unsafeCompute TF.encodeAttr x "name"
 
 -- | @allow@ nested settings.
 data FolderOrganizationPolicyAllow s = FolderOrganizationPolicyAllow'
-    { _all    :: TF.Attr s P.Bool
-    -- ^ @all@ - (Optional)
+    { _all    :: TF.Expr s P.Bool
+    -- ^ @all@ - (Default @false@)
     --
     -- Conflicts with:
     --
     -- * 'values'
-    , _values :: TF.Attr s [TF.Attr s P.Text]
+    , _values :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
     -- ^ @values@ - (Optional)
     --
     -- Conflicts with:
     --
     -- * 'all'
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @allow@ settings value.
 newFolderOrganizationPolicyAllow
@@ -2631,132 +2635,115 @@ newFolderOrganizationPolicyAllow
 newFolderOrganizationPolicyAllow =
     FolderOrganizationPolicyAllow'
         { _all = TF.value P.False
-        , _values = TF.Nil
+        , _values = P.Nothing
         }
 
-instance TF.IsValue  (FolderOrganizationPolicyAllow s)
-instance TF.IsObject (FolderOrganizationPolicyAllow s) where
-    toObject FolderOrganizationPolicyAllow'{..} = P.catMaybes
-        [ TF.assign "all" <$> TF.attribute _all
-        , TF.assign "values" <$> TF.attribute _values
+instance TF.ToHCL (FolderOrganizationPolicyAllow s) where
+     toHCL FolderOrganizationPolicyAllow'{..} = TF.pairs $ P.mconcat
+        [ TF.pair "all" _all
+        , P.maybe P.mempty (TF.pair "values") _values
         ]
 
-instance TF.IsValid (FolderOrganizationPolicyAllow s) where
-    validator = TF.fieldsValidator (\FolderOrganizationPolicyAllow'{..} -> Map.fromList $ P.catMaybes
-        [ if (_all P.== TF.value P.False)
-              then P.Nothing
-              else P.Just ("_all",
-                            [ "_values"
-                            ])
-        , if (_values P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_values",
-                            [ "_all"
-                            ])
+instance P.Hashable (FolderOrganizationPolicyAllow s)
+
+instance TF.HasValidator (FolderOrganizationPolicyAllow s) where
+    validator = TF.conflictValidator (\FolderOrganizationPolicyAllow'{..} -> HashMap.fromList $ P.catMaybes
+        [ TF.conflictsWith (_all P.== TF.value P.False) "_all"
+            ["_values"]
+        , TF.conflictsWith (_values P.== P.Nothing) "_values"
+            ["_all"]
         ])
 
-instance P.HasAll (FolderOrganizationPolicyAllow s) (TF.Attr s P.Bool) where
+instance P.HasAll (FolderOrganizationPolicyAllow s) (TF.Expr s P.Bool) where
     all =
-        P.lens (_all :: FolderOrganizationPolicyAllow s -> TF.Attr s P.Bool)
-               (\s a -> s { _all = a } :: FolderOrganizationPolicyAllow s)
+        P.lens (_all :: FolderOrganizationPolicyAllow s -> TF.Expr s P.Bool)
+            (\s a -> s { _all = a } :: FolderOrganizationPolicyAllow s)
 
-instance P.HasValues (FolderOrganizationPolicyAllow s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasValues (FolderOrganizationPolicyAllow s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
     values =
-        P.lens (_values :: FolderOrganizationPolicyAllow s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _values = a } :: FolderOrganizationPolicyAllow s)
+        P.lens (_values :: FolderOrganizationPolicyAllow s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
+            (\s a -> s { _values = a } :: FolderOrganizationPolicyAllow s)
 
 -- | @list_policy@ nested settings.
 data FolderOrganizationPolicyListPolicy s = FolderOrganizationPolicyListPolicy'
-    { _allow          :: TF.Attr s (FolderOrganizationPolicyAllow s)
+    { _allow          :: P.Maybe (TF.Expr s (FolderOrganizationPolicyAllow s))
     -- ^ @allow@ - (Optional)
     --
     -- Conflicts with:
     --
     -- * 'deny'
-    , _deny           :: TF.Attr s (FolderOrganizationPolicyDeny s)
+    , _deny           :: P.Maybe (TF.Expr s (FolderOrganizationPolicyDeny s))
     -- ^ @deny@ - (Optional)
     --
     -- Conflicts with:
     --
     -- * 'allow'
-    , _suggestedValue :: TF.Attr s P.Text
+    , _suggestedValue :: P.Maybe (TF.Expr s P.Text)
     -- ^ @suggested_value@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @list_policy@ settings value.
 newFolderOrganizationPolicyListPolicy
     :: FolderOrganizationPolicyListPolicy s
 newFolderOrganizationPolicyListPolicy =
     FolderOrganizationPolicyListPolicy'
-        { _allow = TF.Nil
-        , _deny = TF.Nil
-        , _suggestedValue = TF.Nil
+        { _allow = P.Nothing
+        , _deny = P.Nothing
+        , _suggestedValue = P.Nothing
         }
 
-instance TF.IsValue  (FolderOrganizationPolicyListPolicy s)
-instance TF.IsObject (FolderOrganizationPolicyListPolicy s) where
-    toObject FolderOrganizationPolicyListPolicy'{..} = P.catMaybes
-        [ TF.assign "allow" <$> TF.attribute _allow
-        , TF.assign "deny" <$> TF.attribute _deny
-        , TF.assign "suggested_value" <$> TF.attribute _suggestedValue
+instance TF.ToHCL (FolderOrganizationPolicyListPolicy s) where
+     toHCL FolderOrganizationPolicyListPolicy'{..} = TF.pairs $ P.mconcat
+        [ P.maybe P.mempty (TF.pair "allow") _allow
+        , P.maybe P.mempty (TF.pair "deny") _deny
+        , P.maybe P.mempty (TF.pair "suggested_value") _suggestedValue
         ]
 
-instance TF.IsValid (FolderOrganizationPolicyListPolicy s) where
-    validator = TF.fieldsValidator (\FolderOrganizationPolicyListPolicy'{..} -> Map.fromList $ P.catMaybes
-        [ if (_allow P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_allow",
-                            [ "_deny"
-                            ])
-        , if (_deny P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_deny",
-                            [ "_allow"
-                            ])
+instance P.Hashable (FolderOrganizationPolicyListPolicy s)
+
+instance TF.HasValidator (FolderOrganizationPolicyListPolicy s) where
+    validator = TF.conflictValidator (\FolderOrganizationPolicyListPolicy'{..} -> HashMap.fromList $ P.catMaybes
+        [ TF.conflictsWith (_allow P.== P.Nothing) "_allow"
+            ["_deny"]
+        , TF.conflictsWith (_deny P.== P.Nothing) "_deny"
+            ["_allow"]
         ])
-           P.<> TF.settingsValidator "_allow"
-                  (_allow
-                      :: FolderOrganizationPolicyListPolicy s -> TF.Attr s (FolderOrganizationPolicyAllow s))
-                  TF.validator
-           P.<> TF.settingsValidator "_deny"
-                  (_deny
-                      :: FolderOrganizationPolicyListPolicy s -> TF.Attr s (FolderOrganizationPolicyDeny s))
-                  TF.validator
 
-instance P.HasAllow (FolderOrganizationPolicyListPolicy s) (TF.Attr s (FolderOrganizationPolicyAllow s)) where
+instance P.HasAllow (FolderOrganizationPolicyListPolicy s) (P.Maybe (TF.Expr s (FolderOrganizationPolicyAllow s))) where
     allow =
-        P.lens (_allow :: FolderOrganizationPolicyListPolicy s -> TF.Attr s (FolderOrganizationPolicyAllow s))
-               (\s a -> s { _allow = a } :: FolderOrganizationPolicyListPolicy s)
+        P.lens (_allow :: FolderOrganizationPolicyListPolicy s -> P.Maybe (TF.Expr s (FolderOrganizationPolicyAllow s)))
+            (\s a -> s { _allow = a } :: FolderOrganizationPolicyListPolicy s)
 
-instance P.HasDeny (FolderOrganizationPolicyListPolicy s) (TF.Attr s (FolderOrganizationPolicyDeny s)) where
+instance P.HasDeny (FolderOrganizationPolicyListPolicy s) (P.Maybe (TF.Expr s (FolderOrganizationPolicyDeny s))) where
     deny =
-        P.lens (_deny :: FolderOrganizationPolicyListPolicy s -> TF.Attr s (FolderOrganizationPolicyDeny s))
-               (\s a -> s { _deny = a } :: FolderOrganizationPolicyListPolicy s)
+        P.lens (_deny :: FolderOrganizationPolicyListPolicy s -> P.Maybe (TF.Expr s (FolderOrganizationPolicyDeny s)))
+            (\s a -> s { _deny = a } :: FolderOrganizationPolicyListPolicy s)
 
-instance P.HasSuggestedValue (FolderOrganizationPolicyListPolicy s) (TF.Attr s P.Text) where
+instance P.HasSuggestedValue (FolderOrganizationPolicyListPolicy s) (P.Maybe (TF.Expr s P.Text)) where
     suggestedValue =
-        P.lens (_suggestedValue :: FolderOrganizationPolicyListPolicy s -> TF.Attr s P.Text)
-               (\s a -> s { _suggestedValue = a } :: FolderOrganizationPolicyListPolicy s)
+        P.lens (_suggestedValue :: FolderOrganizationPolicyListPolicy s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _suggestedValue = a } :: FolderOrganizationPolicyListPolicy s)
 
-instance s ~ s' => P.HasComputedSuggestedValue (TF.Ref s' (FolderOrganizationPolicyListPolicy s)) (TF.Attr s P.Text) where
-    computedSuggestedValue x = TF.compute (TF.refKey x) "suggested_value"
+instance s ~ s' => P.HasComputedSuggestedValue (TF.Ref s' (FolderOrganizationPolicyListPolicy s)) (TF.Expr s P.Text) where
+    computedSuggestedValue x =
+        TF.unsafeCompute TF.encodeAttr x "suggested_value"
 
 -- | @deny@ nested settings.
 data FolderOrganizationPolicyDeny s = FolderOrganizationPolicyDeny'
-    { _all    :: TF.Attr s P.Bool
-    -- ^ @all@ - (Optional)
+    { _all    :: TF.Expr s P.Bool
+    -- ^ @all@ - (Default @false@)
     --
     -- Conflicts with:
     --
     -- * 'values'
-    , _values :: TF.Attr s [TF.Attr s P.Text]
+    , _values :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
     -- ^ @values@ - (Optional)
     --
     -- Conflicts with:
     --
     -- * 'all'
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @deny@ settings value.
 newFolderOrganizationPolicyDeny
@@ -2764,114 +2751,111 @@ newFolderOrganizationPolicyDeny
 newFolderOrganizationPolicyDeny =
     FolderOrganizationPolicyDeny'
         { _all = TF.value P.False
-        , _values = TF.Nil
+        , _values = P.Nothing
         }
 
-instance TF.IsValue  (FolderOrganizationPolicyDeny s)
-instance TF.IsObject (FolderOrganizationPolicyDeny s) where
-    toObject FolderOrganizationPolicyDeny'{..} = P.catMaybes
-        [ TF.assign "all" <$> TF.attribute _all
-        , TF.assign "values" <$> TF.attribute _values
+instance TF.ToHCL (FolderOrganizationPolicyDeny s) where
+     toHCL FolderOrganizationPolicyDeny'{..} = TF.pairs $ P.mconcat
+        [ TF.pair "all" _all
+        , P.maybe P.mempty (TF.pair "values") _values
         ]
 
-instance TF.IsValid (FolderOrganizationPolicyDeny s) where
-    validator = TF.fieldsValidator (\FolderOrganizationPolicyDeny'{..} -> Map.fromList $ P.catMaybes
-        [ if (_all P.== TF.value P.False)
-              then P.Nothing
-              else P.Just ("_all",
-                            [ "_values"
-                            ])
-        , if (_values P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_values",
-                            [ "_all"
-                            ])
+instance P.Hashable (FolderOrganizationPolicyDeny s)
+
+instance TF.HasValidator (FolderOrganizationPolicyDeny s) where
+    validator = TF.conflictValidator (\FolderOrganizationPolicyDeny'{..} -> HashMap.fromList $ P.catMaybes
+        [ TF.conflictsWith (_all P.== TF.value P.False) "_all"
+            ["_values"]
+        , TF.conflictsWith (_values P.== P.Nothing) "_values"
+            ["_all"]
         ])
 
-instance P.HasAll (FolderOrganizationPolicyDeny s) (TF.Attr s P.Bool) where
+instance P.HasAll (FolderOrganizationPolicyDeny s) (TF.Expr s P.Bool) where
     all =
-        P.lens (_all :: FolderOrganizationPolicyDeny s -> TF.Attr s P.Bool)
-               (\s a -> s { _all = a } :: FolderOrganizationPolicyDeny s)
+        P.lens (_all :: FolderOrganizationPolicyDeny s -> TF.Expr s P.Bool)
+            (\s a -> s { _all = a } :: FolderOrganizationPolicyDeny s)
 
-instance P.HasValues (FolderOrganizationPolicyDeny s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasValues (FolderOrganizationPolicyDeny s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
     values =
-        P.lens (_values :: FolderOrganizationPolicyDeny s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _values = a } :: FolderOrganizationPolicyDeny s)
+        P.lens (_values :: FolderOrganizationPolicyDeny s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
+            (\s a -> s { _values = a } :: FolderOrganizationPolicyDeny s)
 
 -- | @boolean_policy@ nested settings.
 data FolderOrganizationPolicyBooleanPolicy s = FolderOrganizationPolicyBooleanPolicy'
-    { _enforced :: TF.Attr s P.Bool
+    { _enforced :: TF.Expr s P.Bool
     -- ^ @enforced@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @boolean_policy@ settings value.
 newFolderOrganizationPolicyBooleanPolicy
-    :: TF.Attr s P.Bool -- ^ 'P._enforced': @enforced@
+    :: TF.Expr s P.Bool -- ^ Lens: 'P.enforced', Field: '_enforced', HCL: @enforced@
     -> FolderOrganizationPolicyBooleanPolicy s
 newFolderOrganizationPolicyBooleanPolicy _enforced =
     FolderOrganizationPolicyBooleanPolicy'
         { _enforced = _enforced
         }
 
-instance TF.IsValue  (FolderOrganizationPolicyBooleanPolicy s)
-instance TF.IsObject (FolderOrganizationPolicyBooleanPolicy s) where
-    toObject FolderOrganizationPolicyBooleanPolicy'{..} = P.catMaybes
-        [ TF.assign "enforced" <$> TF.attribute _enforced
+instance TF.ToHCL (FolderOrganizationPolicyBooleanPolicy s) where
+     toHCL FolderOrganizationPolicyBooleanPolicy'{..} = TF.pairs $ P.mconcat
+        [ TF.pair "enforced" _enforced
         ]
 
-instance TF.IsValid (FolderOrganizationPolicyBooleanPolicy s) where
+instance P.Hashable (FolderOrganizationPolicyBooleanPolicy s)
+
+instance TF.HasValidator (FolderOrganizationPolicyBooleanPolicy s) where
     validator = P.mempty
 
-instance P.HasEnforced (FolderOrganizationPolicyBooleanPolicy s) (TF.Attr s P.Bool) where
+instance P.HasEnforced (FolderOrganizationPolicyBooleanPolicy s) (TF.Expr s P.Bool) where
     enforced =
-        P.lens (_enforced :: FolderOrganizationPolicyBooleanPolicy s -> TF.Attr s P.Bool)
-               (\s a -> s { _enforced = a } :: FolderOrganizationPolicyBooleanPolicy s)
+        P.lens (_enforced :: FolderOrganizationPolicyBooleanPolicy s -> TF.Expr s P.Bool)
+            (\s a -> s { _enforced = a } :: FolderOrganizationPolicyBooleanPolicy s)
 
 -- | @restore_policy@ nested settings.
 data FolderOrganizationPolicyRestorePolicy s = FolderOrganizationPolicyRestorePolicy'
-    { _default' :: TF.Attr s P.Bool
+    { _default' :: TF.Expr s P.Bool
     -- ^ @default@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @restore_policy@ settings value.
 newFolderOrganizationPolicyRestorePolicy
-    :: TF.Attr s P.Bool -- ^ 'P._default'': @default@
+    :: TF.Expr s P.Bool -- ^ Lens: 'P.default'', Field: '_default'', HCL: @default@
     -> FolderOrganizationPolicyRestorePolicy s
 newFolderOrganizationPolicyRestorePolicy _default' =
     FolderOrganizationPolicyRestorePolicy'
         { _default' = _default'
         }
 
-instance TF.IsValue  (FolderOrganizationPolicyRestorePolicy s)
-instance TF.IsObject (FolderOrganizationPolicyRestorePolicy s) where
-    toObject FolderOrganizationPolicyRestorePolicy'{..} = P.catMaybes
-        [ TF.assign "default" <$> TF.attribute _default'
+instance TF.ToHCL (FolderOrganizationPolicyRestorePolicy s) where
+     toHCL FolderOrganizationPolicyRestorePolicy'{..} = TF.pairs $ P.mconcat
+        [ TF.pair "default" _default'
         ]
 
-instance TF.IsValid (FolderOrganizationPolicyRestorePolicy s) where
+instance P.Hashable (FolderOrganizationPolicyRestorePolicy s)
+
+instance TF.HasValidator (FolderOrganizationPolicyRestorePolicy s) where
     validator = P.mempty
 
-instance P.HasDefault' (FolderOrganizationPolicyRestorePolicy s) (TF.Attr s P.Bool) where
+instance P.HasDefault' (FolderOrganizationPolicyRestorePolicy s) (TF.Expr s P.Bool) where
     default' =
-        P.lens (_default' :: FolderOrganizationPolicyRestorePolicy s -> TF.Attr s P.Bool)
-               (\s a -> s { _default' = a } :: FolderOrganizationPolicyRestorePolicy s)
+        P.lens (_default' :: FolderOrganizationPolicyRestorePolicy s -> TF.Expr s P.Bool)
+            (\s a -> s { _default' = a } :: FolderOrganizationPolicyRestorePolicy s)
 
 -- | @binding@ nested settings.
 data IamPolicyBinding s = IamPolicyBinding'
-    { _members :: TF.Attr s [TF.Attr s P.Text]
+    { _members :: TF.Expr s [TF.Expr s P.Text]
     -- ^ @members@ - (Required)
     --
-    , _role    :: TF.Attr s P.Text
+    , _role    :: TF.Expr s P.Text
     -- ^ @role@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @binding@ settings value.
 newIamPolicyBinding
-    :: TF.Attr s [TF.Attr s P.Text] -- ^ 'P._members': @members@
-    -> TF.Attr s P.Text -- ^ 'P._role': @role@
+    :: TF.Expr s [TF.Expr s P.Text] -- ^ Lens: 'P.members', Field: '_members', HCL: @members@
+    -> TF.Expr s P.Text -- ^ Lens: 'P.role', Field: '_role', HCL: @role@
     -> IamPolicyBinding s
 newIamPolicyBinding _members _role =
     IamPolicyBinding'
@@ -2879,41 +2863,42 @@ newIamPolicyBinding _members _role =
         , _role = _role
         }
 
-instance TF.IsValue  (IamPolicyBinding s)
-instance TF.IsObject (IamPolicyBinding s) where
-    toObject IamPolicyBinding'{..} = P.catMaybes
-        [ TF.assign "members" <$> TF.attribute _members
-        , TF.assign "role" <$> TF.attribute _role
+instance TF.ToHCL (IamPolicyBinding s) where
+     toHCL IamPolicyBinding'{..} = TF.pairs $ P.mconcat
+        [ TF.pair "members" _members
+        , TF.pair "role" _role
         ]
 
-instance TF.IsValid (IamPolicyBinding s) where
+instance P.Hashable (IamPolicyBinding s)
+
+instance TF.HasValidator (IamPolicyBinding s) where
     validator = P.mempty
 
-instance P.HasMembers (IamPolicyBinding s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasMembers (IamPolicyBinding s) (TF.Expr s [TF.Expr s P.Text]) where
     members =
-        P.lens (_members :: IamPolicyBinding s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _members = a } :: IamPolicyBinding s)
+        P.lens (_members :: IamPolicyBinding s -> TF.Expr s [TF.Expr s P.Text])
+            (\s a -> s { _members = a } :: IamPolicyBinding s)
 
-instance P.HasRole (IamPolicyBinding s) (TF.Attr s P.Text) where
+instance P.HasRole (IamPolicyBinding s) (TF.Expr s P.Text) where
     role =
-        P.lens (_role :: IamPolicyBinding s -> TF.Attr s P.Text)
-               (\s a -> s { _role = a } :: IamPolicyBinding s)
+        P.lens (_role :: IamPolicyBinding s -> TF.Expr s P.Text)
+            (\s a -> s { _role = a } :: IamPolicyBinding s)
 
 -- | @allow@ nested settings.
 data OrganizationPolicyAllow s = OrganizationPolicyAllow'
-    { _all    :: TF.Attr s P.Bool
-    -- ^ @all@ - (Optional)
+    { _all    :: TF.Expr s P.Bool
+    -- ^ @all@ - (Default @false@)
     --
     -- Conflicts with:
     --
     -- * 'values'
-    , _values :: TF.Attr s [TF.Attr s P.Text]
+    , _values :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
     -- ^ @values@ - (Optional)
     --
     -- Conflicts with:
     --
     -- * 'all'
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @allow@ settings value.
 newOrganizationPolicyAllow
@@ -2921,132 +2906,115 @@ newOrganizationPolicyAllow
 newOrganizationPolicyAllow =
     OrganizationPolicyAllow'
         { _all = TF.value P.False
-        , _values = TF.Nil
+        , _values = P.Nothing
         }
 
-instance TF.IsValue  (OrganizationPolicyAllow s)
-instance TF.IsObject (OrganizationPolicyAllow s) where
-    toObject OrganizationPolicyAllow'{..} = P.catMaybes
-        [ TF.assign "all" <$> TF.attribute _all
-        , TF.assign "values" <$> TF.attribute _values
+instance TF.ToHCL (OrganizationPolicyAllow s) where
+     toHCL OrganizationPolicyAllow'{..} = TF.pairs $ P.mconcat
+        [ TF.pair "all" _all
+        , P.maybe P.mempty (TF.pair "values") _values
         ]
 
-instance TF.IsValid (OrganizationPolicyAllow s) where
-    validator = TF.fieldsValidator (\OrganizationPolicyAllow'{..} -> Map.fromList $ P.catMaybes
-        [ if (_all P.== TF.value P.False)
-              then P.Nothing
-              else P.Just ("_all",
-                            [ "_values"
-                            ])
-        , if (_values P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_values",
-                            [ "_all"
-                            ])
+instance P.Hashable (OrganizationPolicyAllow s)
+
+instance TF.HasValidator (OrganizationPolicyAllow s) where
+    validator = TF.conflictValidator (\OrganizationPolicyAllow'{..} -> HashMap.fromList $ P.catMaybes
+        [ TF.conflictsWith (_all P.== TF.value P.False) "_all"
+            ["_values"]
+        , TF.conflictsWith (_values P.== P.Nothing) "_values"
+            ["_all"]
         ])
 
-instance P.HasAll (OrganizationPolicyAllow s) (TF.Attr s P.Bool) where
+instance P.HasAll (OrganizationPolicyAllow s) (TF.Expr s P.Bool) where
     all =
-        P.lens (_all :: OrganizationPolicyAllow s -> TF.Attr s P.Bool)
-               (\s a -> s { _all = a } :: OrganizationPolicyAllow s)
+        P.lens (_all :: OrganizationPolicyAllow s -> TF.Expr s P.Bool)
+            (\s a -> s { _all = a } :: OrganizationPolicyAllow s)
 
-instance P.HasValues (OrganizationPolicyAllow s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasValues (OrganizationPolicyAllow s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
     values =
-        P.lens (_values :: OrganizationPolicyAllow s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _values = a } :: OrganizationPolicyAllow s)
+        P.lens (_values :: OrganizationPolicyAllow s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
+            (\s a -> s { _values = a } :: OrganizationPolicyAllow s)
 
 -- | @list_policy@ nested settings.
 data OrganizationPolicyListPolicy s = OrganizationPolicyListPolicy'
-    { _allow          :: TF.Attr s (OrganizationPolicyAllow s)
+    { _allow          :: P.Maybe (TF.Expr s (OrganizationPolicyAllow s))
     -- ^ @allow@ - (Optional)
     --
     -- Conflicts with:
     --
     -- * 'deny'
-    , _deny           :: TF.Attr s (OrganizationPolicyDeny s)
+    , _deny           :: P.Maybe (TF.Expr s (OrganizationPolicyDeny s))
     -- ^ @deny@ - (Optional)
     --
     -- Conflicts with:
     --
     -- * 'allow'
-    , _suggestedValue :: TF.Attr s P.Text
+    , _suggestedValue :: P.Maybe (TF.Expr s P.Text)
     -- ^ @suggested_value@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @list_policy@ settings value.
 newOrganizationPolicyListPolicy
     :: OrganizationPolicyListPolicy s
 newOrganizationPolicyListPolicy =
     OrganizationPolicyListPolicy'
-        { _allow = TF.Nil
-        , _deny = TF.Nil
-        , _suggestedValue = TF.Nil
+        { _allow = P.Nothing
+        , _deny = P.Nothing
+        , _suggestedValue = P.Nothing
         }
 
-instance TF.IsValue  (OrganizationPolicyListPolicy s)
-instance TF.IsObject (OrganizationPolicyListPolicy s) where
-    toObject OrganizationPolicyListPolicy'{..} = P.catMaybes
-        [ TF.assign "allow" <$> TF.attribute _allow
-        , TF.assign "deny" <$> TF.attribute _deny
-        , TF.assign "suggested_value" <$> TF.attribute _suggestedValue
+instance TF.ToHCL (OrganizationPolicyListPolicy s) where
+     toHCL OrganizationPolicyListPolicy'{..} = TF.pairs $ P.mconcat
+        [ P.maybe P.mempty (TF.pair "allow") _allow
+        , P.maybe P.mempty (TF.pair "deny") _deny
+        , P.maybe P.mempty (TF.pair "suggested_value") _suggestedValue
         ]
 
-instance TF.IsValid (OrganizationPolicyListPolicy s) where
-    validator = TF.fieldsValidator (\OrganizationPolicyListPolicy'{..} -> Map.fromList $ P.catMaybes
-        [ if (_allow P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_allow",
-                            [ "_deny"
-                            ])
-        , if (_deny P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_deny",
-                            [ "_allow"
-                            ])
+instance P.Hashable (OrganizationPolicyListPolicy s)
+
+instance TF.HasValidator (OrganizationPolicyListPolicy s) where
+    validator = TF.conflictValidator (\OrganizationPolicyListPolicy'{..} -> HashMap.fromList $ P.catMaybes
+        [ TF.conflictsWith (_allow P.== P.Nothing) "_allow"
+            ["_deny"]
+        , TF.conflictsWith (_deny P.== P.Nothing) "_deny"
+            ["_allow"]
         ])
-           P.<> TF.settingsValidator "_allow"
-                  (_allow
-                      :: OrganizationPolicyListPolicy s -> TF.Attr s (OrganizationPolicyAllow s))
-                  TF.validator
-           P.<> TF.settingsValidator "_deny"
-                  (_deny
-                      :: OrganizationPolicyListPolicy s -> TF.Attr s (OrganizationPolicyDeny s))
-                  TF.validator
 
-instance P.HasAllow (OrganizationPolicyListPolicy s) (TF.Attr s (OrganizationPolicyAllow s)) where
+instance P.HasAllow (OrganizationPolicyListPolicy s) (P.Maybe (TF.Expr s (OrganizationPolicyAllow s))) where
     allow =
-        P.lens (_allow :: OrganizationPolicyListPolicy s -> TF.Attr s (OrganizationPolicyAllow s))
-               (\s a -> s { _allow = a } :: OrganizationPolicyListPolicy s)
+        P.lens (_allow :: OrganizationPolicyListPolicy s -> P.Maybe (TF.Expr s (OrganizationPolicyAllow s)))
+            (\s a -> s { _allow = a } :: OrganizationPolicyListPolicy s)
 
-instance P.HasDeny (OrganizationPolicyListPolicy s) (TF.Attr s (OrganizationPolicyDeny s)) where
+instance P.HasDeny (OrganizationPolicyListPolicy s) (P.Maybe (TF.Expr s (OrganizationPolicyDeny s))) where
     deny =
-        P.lens (_deny :: OrganizationPolicyListPolicy s -> TF.Attr s (OrganizationPolicyDeny s))
-               (\s a -> s { _deny = a } :: OrganizationPolicyListPolicy s)
+        P.lens (_deny :: OrganizationPolicyListPolicy s -> P.Maybe (TF.Expr s (OrganizationPolicyDeny s)))
+            (\s a -> s { _deny = a } :: OrganizationPolicyListPolicy s)
 
-instance P.HasSuggestedValue (OrganizationPolicyListPolicy s) (TF.Attr s P.Text) where
+instance P.HasSuggestedValue (OrganizationPolicyListPolicy s) (P.Maybe (TF.Expr s P.Text)) where
     suggestedValue =
-        P.lens (_suggestedValue :: OrganizationPolicyListPolicy s -> TF.Attr s P.Text)
-               (\s a -> s { _suggestedValue = a } :: OrganizationPolicyListPolicy s)
+        P.lens (_suggestedValue :: OrganizationPolicyListPolicy s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _suggestedValue = a } :: OrganizationPolicyListPolicy s)
 
-instance s ~ s' => P.HasComputedSuggestedValue (TF.Ref s' (OrganizationPolicyListPolicy s)) (TF.Attr s P.Text) where
-    computedSuggestedValue x = TF.compute (TF.refKey x) "suggested_value"
+instance s ~ s' => P.HasComputedSuggestedValue (TF.Ref s' (OrganizationPolicyListPolicy s)) (TF.Expr s P.Text) where
+    computedSuggestedValue x =
+        TF.unsafeCompute TF.encodeAttr x "suggested_value"
 
 -- | @deny@ nested settings.
 data OrganizationPolicyDeny s = OrganizationPolicyDeny'
-    { _all    :: TF.Attr s P.Bool
-    -- ^ @all@ - (Optional)
+    { _all    :: TF.Expr s P.Bool
+    -- ^ @all@ - (Default @false@)
     --
     -- Conflicts with:
     --
     -- * 'values'
-    , _values :: TF.Attr s [TF.Attr s P.Text]
+    , _values :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
     -- ^ @values@ - (Optional)
     --
     -- Conflicts with:
     --
     -- * 'all'
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @deny@ settings value.
 newOrganizationPolicyDeny
@@ -3054,196 +3022,200 @@ newOrganizationPolicyDeny
 newOrganizationPolicyDeny =
     OrganizationPolicyDeny'
         { _all = TF.value P.False
-        , _values = TF.Nil
+        , _values = P.Nothing
         }
 
-instance TF.IsValue  (OrganizationPolicyDeny s)
-instance TF.IsObject (OrganizationPolicyDeny s) where
-    toObject OrganizationPolicyDeny'{..} = P.catMaybes
-        [ TF.assign "all" <$> TF.attribute _all
-        , TF.assign "values" <$> TF.attribute _values
+instance TF.ToHCL (OrganizationPolicyDeny s) where
+     toHCL OrganizationPolicyDeny'{..} = TF.pairs $ P.mconcat
+        [ TF.pair "all" _all
+        , P.maybe P.mempty (TF.pair "values") _values
         ]
 
-instance TF.IsValid (OrganizationPolicyDeny s) where
-    validator = TF.fieldsValidator (\OrganizationPolicyDeny'{..} -> Map.fromList $ P.catMaybes
-        [ if (_all P.== TF.value P.False)
-              then P.Nothing
-              else P.Just ("_all",
-                            [ "_values"
-                            ])
-        , if (_values P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_values",
-                            [ "_all"
-                            ])
+instance P.Hashable (OrganizationPolicyDeny s)
+
+instance TF.HasValidator (OrganizationPolicyDeny s) where
+    validator = TF.conflictValidator (\OrganizationPolicyDeny'{..} -> HashMap.fromList $ P.catMaybes
+        [ TF.conflictsWith (_all P.== TF.value P.False) "_all"
+            ["_values"]
+        , TF.conflictsWith (_values P.== P.Nothing) "_values"
+            ["_all"]
         ])
 
-instance P.HasAll (OrganizationPolicyDeny s) (TF.Attr s P.Bool) where
+instance P.HasAll (OrganizationPolicyDeny s) (TF.Expr s P.Bool) where
     all =
-        P.lens (_all :: OrganizationPolicyDeny s -> TF.Attr s P.Bool)
-               (\s a -> s { _all = a } :: OrganizationPolicyDeny s)
+        P.lens (_all :: OrganizationPolicyDeny s -> TF.Expr s P.Bool)
+            (\s a -> s { _all = a } :: OrganizationPolicyDeny s)
 
-instance P.HasValues (OrganizationPolicyDeny s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasValues (OrganizationPolicyDeny s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
     values =
-        P.lens (_values :: OrganizationPolicyDeny s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _values = a } :: OrganizationPolicyDeny s)
+        P.lens (_values :: OrganizationPolicyDeny s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
+            (\s a -> s { _values = a } :: OrganizationPolicyDeny s)
 
 -- | @boolean_policy@ nested settings.
 data OrganizationPolicyBooleanPolicy s = OrganizationPolicyBooleanPolicy'
-    { _enforced :: TF.Attr s P.Bool
+    { _enforced :: TF.Expr s P.Bool
     -- ^ @enforced@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @boolean_policy@ settings value.
 newOrganizationPolicyBooleanPolicy
-    :: TF.Attr s P.Bool -- ^ 'P._enforced': @enforced@
+    :: TF.Expr s P.Bool -- ^ Lens: 'P.enforced', Field: '_enforced', HCL: @enforced@
     -> OrganizationPolicyBooleanPolicy s
 newOrganizationPolicyBooleanPolicy _enforced =
     OrganizationPolicyBooleanPolicy'
         { _enforced = _enforced
         }
 
-instance TF.IsValue  (OrganizationPolicyBooleanPolicy s)
-instance TF.IsObject (OrganizationPolicyBooleanPolicy s) where
-    toObject OrganizationPolicyBooleanPolicy'{..} = P.catMaybes
-        [ TF.assign "enforced" <$> TF.attribute _enforced
+instance TF.ToHCL (OrganizationPolicyBooleanPolicy s) where
+     toHCL OrganizationPolicyBooleanPolicy'{..} = TF.pairs $ P.mconcat
+        [ TF.pair "enforced" _enforced
         ]
 
-instance TF.IsValid (OrganizationPolicyBooleanPolicy s) where
+instance P.Hashable (OrganizationPolicyBooleanPolicy s)
+
+instance TF.HasValidator (OrganizationPolicyBooleanPolicy s) where
     validator = P.mempty
 
-instance P.HasEnforced (OrganizationPolicyBooleanPolicy s) (TF.Attr s P.Bool) where
+instance P.HasEnforced (OrganizationPolicyBooleanPolicy s) (TF.Expr s P.Bool) where
     enforced =
-        P.lens (_enforced :: OrganizationPolicyBooleanPolicy s -> TF.Attr s P.Bool)
-               (\s a -> s { _enforced = a } :: OrganizationPolicyBooleanPolicy s)
+        P.lens (_enforced :: OrganizationPolicyBooleanPolicy s -> TF.Expr s P.Bool)
+            (\s a -> s { _enforced = a } :: OrganizationPolicyBooleanPolicy s)
 
 -- | @restore_policy@ nested settings.
 data OrganizationPolicyRestorePolicy s = OrganizationPolicyRestorePolicy'
-    { _default' :: TF.Attr s P.Bool
+    { _default' :: TF.Expr s P.Bool
     -- ^ @default@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @restore_policy@ settings value.
 newOrganizationPolicyRestorePolicy
-    :: TF.Attr s P.Bool -- ^ 'P._default'': @default@
+    :: TF.Expr s P.Bool -- ^ Lens: 'P.default'', Field: '_default'', HCL: @default@
     -> OrganizationPolicyRestorePolicy s
 newOrganizationPolicyRestorePolicy _default' =
     OrganizationPolicyRestorePolicy'
         { _default' = _default'
         }
 
-instance TF.IsValue  (OrganizationPolicyRestorePolicy s)
-instance TF.IsObject (OrganizationPolicyRestorePolicy s) where
-    toObject OrganizationPolicyRestorePolicy'{..} = P.catMaybes
-        [ TF.assign "default" <$> TF.attribute _default'
+instance TF.ToHCL (OrganizationPolicyRestorePolicy s) where
+     toHCL OrganizationPolicyRestorePolicy'{..} = TF.pairs $ P.mconcat
+        [ TF.pair "default" _default'
         ]
 
-instance TF.IsValid (OrganizationPolicyRestorePolicy s) where
+instance P.Hashable (OrganizationPolicyRestorePolicy s)
+
+instance TF.HasValidator (OrganizationPolicyRestorePolicy s) where
     validator = P.mempty
 
-instance P.HasDefault' (OrganizationPolicyRestorePolicy s) (TF.Attr s P.Bool) where
+instance P.HasDefault' (OrganizationPolicyRestorePolicy s) (TF.Expr s P.Bool) where
     default' =
-        P.lens (_default' :: OrganizationPolicyRestorePolicy s -> TF.Attr s P.Bool)
-               (\s a -> s { _default' = a } :: OrganizationPolicyRestorePolicy s)
+        P.lens (_default' :: OrganizationPolicyRestorePolicy s -> TF.Expr s P.Bool)
+            (\s a -> s { _default' = a } :: OrganizationPolicyRestorePolicy s)
 
 -- | @app_engine@ nested settings.
 data ProjectAppEngine s = ProjectAppEngine'
-    { _authDomain      :: TF.Attr s P.Text
+    { _authDomain      :: P.Maybe (TF.Expr s P.Text)
     -- ^ @auth_domain@ - (Optional)
     --
-    , _featureSettings :: TF.Attr s (ProjectFeatureSettings s)
+    , _featureSettings :: P.Maybe (TF.Expr s (ProjectFeatureSettings s))
     -- ^ @feature_settings@ - (Optional)
     --
-    , _locationId      :: TF.Attr s P.Text
+    , _locationId      :: P.Maybe (TF.Expr s P.Text)
     -- ^ @location_id@ - (Optional)
     --
-    , _servingStatus   :: TF.Attr s P.Text
+    , _servingStatus   :: P.Maybe (TF.Expr s P.Text)
     -- ^ @serving_status@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @app_engine@ settings value.
 newProjectAppEngine
     :: ProjectAppEngine s
 newProjectAppEngine =
     ProjectAppEngine'
-        { _authDomain = TF.Nil
-        , _featureSettings = TF.Nil
-        , _locationId = TF.Nil
-        , _servingStatus = TF.Nil
+        { _authDomain = P.Nothing
+        , _featureSettings = P.Nothing
+        , _locationId = P.Nothing
+        , _servingStatus = P.Nothing
         }
 
-instance TF.IsValue  (ProjectAppEngine s)
-instance TF.IsObject (ProjectAppEngine s) where
-    toObject ProjectAppEngine'{..} = P.catMaybes
-        [ TF.assign "auth_domain" <$> TF.attribute _authDomain
-        , TF.assign "feature_settings" <$> TF.attribute _featureSettings
-        , TF.assign "location_id" <$> TF.attribute _locationId
-        , TF.assign "serving_status" <$> TF.attribute _servingStatus
+instance TF.ToHCL (ProjectAppEngine s) where
+     toHCL ProjectAppEngine'{..} = TF.pairs $ P.mconcat
+        [ P.maybe P.mempty (TF.pair "auth_domain") _authDomain
+        , P.maybe P.mempty (TF.pair "feature_settings") _featureSettings
+        , P.maybe P.mempty (TF.pair "location_id") _locationId
+        , P.maybe P.mempty (TF.pair "serving_status") _servingStatus
         ]
 
-instance TF.IsValid (ProjectAppEngine s) where
+instance P.Hashable (ProjectAppEngine s)
+
+instance TF.HasValidator (ProjectAppEngine s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_featureSettings"
-                  (_featureSettings
-                      :: ProjectAppEngine s -> TF.Attr s (ProjectFeatureSettings s))
-                  TF.validator
 
-instance P.HasAuthDomain (ProjectAppEngine s) (TF.Attr s P.Text) where
+instance P.HasAuthDomain (ProjectAppEngine s) (P.Maybe (TF.Expr s P.Text)) where
     authDomain =
-        P.lens (_authDomain :: ProjectAppEngine s -> TF.Attr s P.Text)
-               (\s a -> s { _authDomain = a } :: ProjectAppEngine s)
+        P.lens (_authDomain :: ProjectAppEngine s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _authDomain = a } :: ProjectAppEngine s)
 
-instance P.HasFeatureSettings (ProjectAppEngine s) (TF.Attr s (ProjectFeatureSettings s)) where
+instance P.HasFeatureSettings (ProjectAppEngine s) (P.Maybe (TF.Expr s (ProjectFeatureSettings s))) where
     featureSettings =
-        P.lens (_featureSettings :: ProjectAppEngine s -> TF.Attr s (ProjectFeatureSettings s))
-               (\s a -> s { _featureSettings = a } :: ProjectAppEngine s)
+        P.lens (_featureSettings :: ProjectAppEngine s -> P.Maybe (TF.Expr s (ProjectFeatureSettings s)))
+            (\s a -> s { _featureSettings = a } :: ProjectAppEngine s)
 
-instance P.HasLocationId (ProjectAppEngine s) (TF.Attr s P.Text) where
+instance P.HasLocationId (ProjectAppEngine s) (P.Maybe (TF.Expr s P.Text)) where
     locationId =
-        P.lens (_locationId :: ProjectAppEngine s -> TF.Attr s P.Text)
-               (\s a -> s { _locationId = a } :: ProjectAppEngine s)
+        P.lens (_locationId :: ProjectAppEngine s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _locationId = a } :: ProjectAppEngine s)
 
-instance P.HasServingStatus (ProjectAppEngine s) (TF.Attr s P.Text) where
+instance P.HasServingStatus (ProjectAppEngine s) (P.Maybe (TF.Expr s P.Text)) where
     servingStatus =
-        P.lens (_servingStatus :: ProjectAppEngine s -> TF.Attr s P.Text)
-               (\s a -> s { _servingStatus = a } :: ProjectAppEngine s)
+        P.lens (_servingStatus :: ProjectAppEngine s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _servingStatus = a } :: ProjectAppEngine s)
 
-instance s ~ s' => P.HasComputedAuthDomain (TF.Ref s' (ProjectAppEngine s)) (TF.Attr s P.Text) where
-    computedAuthDomain x = TF.compute (TF.refKey x) "auth_domain"
+instance s ~ s' => P.HasComputedAuthDomain (TF.Ref s' (ProjectAppEngine s)) (TF.Expr s P.Text) where
+    computedAuthDomain x =
+        TF.unsafeCompute TF.encodeAttr x "auth_domain"
 
-instance s ~ s' => P.HasComputedCodeBucket (TF.Ref s' (ProjectAppEngine s)) (TF.Attr s P.Text) where
-    computedCodeBucket x = TF.compute (TF.refKey x) "code_bucket"
+instance s ~ s' => P.HasComputedCodeBucket (TF.Ref s' (ProjectAppEngine s)) (TF.Expr s P.Text) where
+    computedCodeBucket x =
+        TF.unsafeCompute TF.encodeAttr x "code_bucket"
 
-instance s ~ s' => P.HasComputedDefaultBucket (TF.Ref s' (ProjectAppEngine s)) (TF.Attr s P.Text) where
-    computedDefaultBucket x = TF.compute (TF.refKey x) "default_bucket"
+instance s ~ s' => P.HasComputedDefaultBucket (TF.Ref s' (ProjectAppEngine s)) (TF.Expr s P.Text) where
+    computedDefaultBucket x =
+        TF.unsafeCompute TF.encodeAttr x "default_bucket"
 
-instance s ~ s' => P.HasComputedDefaultHostname (TF.Ref s' (ProjectAppEngine s)) (TF.Attr s P.Text) where
-    computedDefaultHostname x = TF.compute (TF.refKey x) "default_hostname"
+instance s ~ s' => P.HasComputedDefaultHostname (TF.Ref s' (ProjectAppEngine s)) (TF.Expr s P.Text) where
+    computedDefaultHostname x =
+        TF.unsafeCompute TF.encodeAttr x "default_hostname"
 
-instance s ~ s' => P.HasComputedFeatureSettings (TF.Ref s' (ProjectAppEngine s)) (TF.Attr s [TF.Attr s (ProjectFeatureSettings s)]) where
-    computedFeatureSettings x = TF.compute (TF.refKey x) "feature_settings"
+instance s ~ s' => P.HasComputedFeatureSettings (TF.Ref s' (ProjectAppEngine s)) (TF.Expr s [TF.Expr s (ProjectFeatureSettings s)]) where
+    computedFeatureSettings x =
+        TF.unsafeCompute TF.encodeAttr x "feature_settings"
 
-instance s ~ s' => P.HasComputedGcrDomain (TF.Ref s' (ProjectAppEngine s)) (TF.Attr s P.Text) where
-    computedGcrDomain x = TF.compute (TF.refKey x) "gcr_domain"
+instance s ~ s' => P.HasComputedGcrDomain (TF.Ref s' (ProjectAppEngine s)) (TF.Expr s P.Text) where
+    computedGcrDomain x =
+        TF.unsafeCompute TF.encodeAttr x "gcr_domain"
 
-instance s ~ s' => P.HasComputedLocationId (TF.Ref s' (ProjectAppEngine s)) (TF.Attr s P.Text) where
-    computedLocationId x = TF.compute (TF.refKey x) "location_id"
+instance s ~ s' => P.HasComputedLocationId (TF.Ref s' (ProjectAppEngine s)) (TF.Expr s P.Text) where
+    computedLocationId x =
+        TF.unsafeCompute TF.encodeAttr x "location_id"
 
-instance s ~ s' => P.HasComputedName (TF.Ref s' (ProjectAppEngine s)) (TF.Attr s P.Text) where
-    computedName x = TF.compute (TF.refKey x) "name"
+instance s ~ s' => P.HasComputedName (TF.Ref s' (ProjectAppEngine s)) (TF.Expr s P.Text) where
+    computedName x =
+        TF.unsafeCompute TF.encodeAttr x "name"
 
-instance s ~ s' => P.HasComputedServingStatus (TF.Ref s' (ProjectAppEngine s)) (TF.Attr s P.Text) where
-    computedServingStatus x = TF.compute (TF.refKey x) "serving_status"
+instance s ~ s' => P.HasComputedServingStatus (TF.Ref s' (ProjectAppEngine s)) (TF.Expr s P.Text) where
+    computedServingStatus x =
+        TF.unsafeCompute TF.encodeAttr x "serving_status"
 
-instance s ~ s' => P.HasComputedUrlDispatchRule (TF.Ref s' (ProjectAppEngine s)) (TF.Attr s [TF.Attr s (ProjectUrlDispatchRule s)]) where
-    computedUrlDispatchRule x = TF.compute (TF.refKey x) "url_dispatch_rule"
+instance s ~ s' => P.HasComputedUrlDispatchRule (TF.Ref s' (ProjectAppEngine s)) (TF.Expr s [TF.Expr s (ProjectUrlDispatchRule s)]) where
+    computedUrlDispatchRule x =
+        TF.unsafeCompute TF.encodeAttr x "url_dispatch_rule"
 
 -- | @url_dispatch_rule@ nested settings.
 data ProjectUrlDispatchRule s = ProjectUrlDispatchRule'
-    deriving (P.Show, P.Eq, P.Ord)
+    deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @url_dispatch_rule@ settings value.
 newProjectUrlDispatchRule
@@ -3251,69 +3223,74 @@ newProjectUrlDispatchRule
 newProjectUrlDispatchRule =
     ProjectUrlDispatchRule'
 
-instance TF.IsValue  (ProjectUrlDispatchRule s)
-instance TF.IsObject (ProjectUrlDispatchRule s) where
-    toObject ProjectUrlDispatchRule' = []
+instance TF.ToHCL (ProjectUrlDispatchRule s) where
+    toHCL ProjectUrlDispatchRule' = P.mempty
 
-instance TF.IsValid (ProjectUrlDispatchRule s) where
-    validator = P.mempty
+instance P.Hashable (ProjectUrlDispatchRule s)
 
-instance s ~ s' => P.HasComputedDomain (TF.Ref s' (ProjectUrlDispatchRule s)) (TF.Attr s P.Text) where
-    computedDomain x = TF.compute (TF.refKey x) "domain"
+instance TF.HasValidator (ProjectUrlDispatchRule s)
 
-instance s ~ s' => P.HasComputedPath (TF.Ref s' (ProjectUrlDispatchRule s)) (TF.Attr s P.Text) where
-    computedPath x = TF.compute (TF.refKey x) "path"
+instance s ~ s' => P.HasComputedDomain (TF.Ref s' (ProjectUrlDispatchRule s)) (TF.Expr s P.Text) where
+    computedDomain x =
+        TF.unsafeCompute TF.encodeAttr x "domain"
 
-instance s ~ s' => P.HasComputedService (TF.Ref s' (ProjectUrlDispatchRule s)) (TF.Attr s P.Text) where
-    computedService x = TF.compute (TF.refKey x) "service"
+instance s ~ s' => P.HasComputedPath (TF.Ref s' (ProjectUrlDispatchRule s)) (TF.Expr s P.Text) where
+    computedPath x =
+        TF.unsafeCompute TF.encodeAttr x "path"
+
+instance s ~ s' => P.HasComputedService (TF.Ref s' (ProjectUrlDispatchRule s)) (TF.Expr s P.Text) where
+    computedService x =
+        TF.unsafeCompute TF.encodeAttr x "service"
 
 -- | @feature_settings@ nested settings.
 data ProjectFeatureSettings s = ProjectFeatureSettings'
-    { _splitHealthChecks :: TF.Attr s P.Bool
+    { _splitHealthChecks :: P.Maybe (TF.Expr s P.Bool)
     -- ^ @split_health_checks@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @feature_settings@ settings value.
 newProjectFeatureSettings
     :: ProjectFeatureSettings s
 newProjectFeatureSettings =
     ProjectFeatureSettings'
-        { _splitHealthChecks = TF.Nil
+        { _splitHealthChecks = P.Nothing
         }
 
-instance TF.IsValue  (ProjectFeatureSettings s)
-instance TF.IsObject (ProjectFeatureSettings s) where
-    toObject ProjectFeatureSettings'{..} = P.catMaybes
-        [ TF.assign "split_health_checks" <$> TF.attribute _splitHealthChecks
+instance TF.ToHCL (ProjectFeatureSettings s) where
+     toHCL ProjectFeatureSettings'{..} = TF.pairs $ P.mconcat
+        [ P.maybe P.mempty (TF.pair "split_health_checks") _splitHealthChecks
         ]
 
-instance TF.IsValid (ProjectFeatureSettings s) where
+instance P.Hashable (ProjectFeatureSettings s)
+
+instance TF.HasValidator (ProjectFeatureSettings s) where
     validator = P.mempty
 
-instance P.HasSplitHealthChecks (ProjectFeatureSettings s) (TF.Attr s P.Bool) where
+instance P.HasSplitHealthChecks (ProjectFeatureSettings s) (P.Maybe (TF.Expr s P.Bool)) where
     splitHealthChecks =
-        P.lens (_splitHealthChecks :: ProjectFeatureSettings s -> TF.Attr s P.Bool)
-               (\s a -> s { _splitHealthChecks = a } :: ProjectFeatureSettings s)
+        P.lens (_splitHealthChecks :: ProjectFeatureSettings s -> P.Maybe (TF.Expr s P.Bool))
+            (\s a -> s { _splitHealthChecks = a } :: ProjectFeatureSettings s)
 
-instance s ~ s' => P.HasComputedSplitHealthChecks (TF.Ref s' (ProjectFeatureSettings s)) (TF.Attr s P.Bool) where
-    computedSplitHealthChecks x = TF.compute (TF.refKey x) "split_health_checks"
+instance s ~ s' => P.HasComputedSplitHealthChecks (TF.Ref s' (ProjectFeatureSettings s)) (TF.Expr s P.Bool) where
+    computedSplitHealthChecks x =
+        TF.unsafeCompute TF.encodeAttr x "split_health_checks"
 
 -- | @allow@ nested settings.
 data ProjectOrganizationPolicyAllow s = ProjectOrganizationPolicyAllow'
-    { _all    :: TF.Attr s P.Bool
-    -- ^ @all@ - (Optional)
+    { _all    :: TF.Expr s P.Bool
+    -- ^ @all@ - (Default @false@)
     --
     -- Conflicts with:
     --
     -- * 'values'
-    , _values :: TF.Attr s [TF.Attr s P.Text]
+    , _values :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
     -- ^ @values@ - (Optional)
     --
     -- Conflicts with:
     --
     -- * 'all'
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @allow@ settings value.
 newProjectOrganizationPolicyAllow
@@ -3321,132 +3298,115 @@ newProjectOrganizationPolicyAllow
 newProjectOrganizationPolicyAllow =
     ProjectOrganizationPolicyAllow'
         { _all = TF.value P.False
-        , _values = TF.Nil
+        , _values = P.Nothing
         }
 
-instance TF.IsValue  (ProjectOrganizationPolicyAllow s)
-instance TF.IsObject (ProjectOrganizationPolicyAllow s) where
-    toObject ProjectOrganizationPolicyAllow'{..} = P.catMaybes
-        [ TF.assign "all" <$> TF.attribute _all
-        , TF.assign "values" <$> TF.attribute _values
+instance TF.ToHCL (ProjectOrganizationPolicyAllow s) where
+     toHCL ProjectOrganizationPolicyAllow'{..} = TF.pairs $ P.mconcat
+        [ TF.pair "all" _all
+        , P.maybe P.mempty (TF.pair "values") _values
         ]
 
-instance TF.IsValid (ProjectOrganizationPolicyAllow s) where
-    validator = TF.fieldsValidator (\ProjectOrganizationPolicyAllow'{..} -> Map.fromList $ P.catMaybes
-        [ if (_all P.== TF.value P.False)
-              then P.Nothing
-              else P.Just ("_all",
-                            [ "_values"
-                            ])
-        , if (_values P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_values",
-                            [ "_all"
-                            ])
+instance P.Hashable (ProjectOrganizationPolicyAllow s)
+
+instance TF.HasValidator (ProjectOrganizationPolicyAllow s) where
+    validator = TF.conflictValidator (\ProjectOrganizationPolicyAllow'{..} -> HashMap.fromList $ P.catMaybes
+        [ TF.conflictsWith (_all P.== TF.value P.False) "_all"
+            ["_values"]
+        , TF.conflictsWith (_values P.== P.Nothing) "_values"
+            ["_all"]
         ])
 
-instance P.HasAll (ProjectOrganizationPolicyAllow s) (TF.Attr s P.Bool) where
+instance P.HasAll (ProjectOrganizationPolicyAllow s) (TF.Expr s P.Bool) where
     all =
-        P.lens (_all :: ProjectOrganizationPolicyAllow s -> TF.Attr s P.Bool)
-               (\s a -> s { _all = a } :: ProjectOrganizationPolicyAllow s)
+        P.lens (_all :: ProjectOrganizationPolicyAllow s -> TF.Expr s P.Bool)
+            (\s a -> s { _all = a } :: ProjectOrganizationPolicyAllow s)
 
-instance P.HasValues (ProjectOrganizationPolicyAllow s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasValues (ProjectOrganizationPolicyAllow s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
     values =
-        P.lens (_values :: ProjectOrganizationPolicyAllow s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _values = a } :: ProjectOrganizationPolicyAllow s)
+        P.lens (_values :: ProjectOrganizationPolicyAllow s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
+            (\s a -> s { _values = a } :: ProjectOrganizationPolicyAllow s)
 
 -- | @list_policy@ nested settings.
 data ProjectOrganizationPolicyListPolicy s = ProjectOrganizationPolicyListPolicy'
-    { _allow          :: TF.Attr s (ProjectOrganizationPolicyAllow s)
+    { _allow          :: P.Maybe (TF.Expr s (ProjectOrganizationPolicyAllow s))
     -- ^ @allow@ - (Optional)
     --
     -- Conflicts with:
     --
     -- * 'deny'
-    , _deny           :: TF.Attr s (ProjectOrganizationPolicyDeny s)
+    , _deny           :: P.Maybe (TF.Expr s (ProjectOrganizationPolicyDeny s))
     -- ^ @deny@ - (Optional)
     --
     -- Conflicts with:
     --
     -- * 'allow'
-    , _suggestedValue :: TF.Attr s P.Text
+    , _suggestedValue :: P.Maybe (TF.Expr s P.Text)
     -- ^ @suggested_value@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @list_policy@ settings value.
 newProjectOrganizationPolicyListPolicy
     :: ProjectOrganizationPolicyListPolicy s
 newProjectOrganizationPolicyListPolicy =
     ProjectOrganizationPolicyListPolicy'
-        { _allow = TF.Nil
-        , _deny = TF.Nil
-        , _suggestedValue = TF.Nil
+        { _allow = P.Nothing
+        , _deny = P.Nothing
+        , _suggestedValue = P.Nothing
         }
 
-instance TF.IsValue  (ProjectOrganizationPolicyListPolicy s)
-instance TF.IsObject (ProjectOrganizationPolicyListPolicy s) where
-    toObject ProjectOrganizationPolicyListPolicy'{..} = P.catMaybes
-        [ TF.assign "allow" <$> TF.attribute _allow
-        , TF.assign "deny" <$> TF.attribute _deny
-        , TF.assign "suggested_value" <$> TF.attribute _suggestedValue
+instance TF.ToHCL (ProjectOrganizationPolicyListPolicy s) where
+     toHCL ProjectOrganizationPolicyListPolicy'{..} = TF.pairs $ P.mconcat
+        [ P.maybe P.mempty (TF.pair "allow") _allow
+        , P.maybe P.mempty (TF.pair "deny") _deny
+        , P.maybe P.mempty (TF.pair "suggested_value") _suggestedValue
         ]
 
-instance TF.IsValid (ProjectOrganizationPolicyListPolicy s) where
-    validator = TF.fieldsValidator (\ProjectOrganizationPolicyListPolicy'{..} -> Map.fromList $ P.catMaybes
-        [ if (_allow P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_allow",
-                            [ "_deny"
-                            ])
-        , if (_deny P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_deny",
-                            [ "_allow"
-                            ])
+instance P.Hashable (ProjectOrganizationPolicyListPolicy s)
+
+instance TF.HasValidator (ProjectOrganizationPolicyListPolicy s) where
+    validator = TF.conflictValidator (\ProjectOrganizationPolicyListPolicy'{..} -> HashMap.fromList $ P.catMaybes
+        [ TF.conflictsWith (_allow P.== P.Nothing) "_allow"
+            ["_deny"]
+        , TF.conflictsWith (_deny P.== P.Nothing) "_deny"
+            ["_allow"]
         ])
-           P.<> TF.settingsValidator "_allow"
-                  (_allow
-                      :: ProjectOrganizationPolicyListPolicy s -> TF.Attr s (ProjectOrganizationPolicyAllow s))
-                  TF.validator
-           P.<> TF.settingsValidator "_deny"
-                  (_deny
-                      :: ProjectOrganizationPolicyListPolicy s -> TF.Attr s (ProjectOrganizationPolicyDeny s))
-                  TF.validator
 
-instance P.HasAllow (ProjectOrganizationPolicyListPolicy s) (TF.Attr s (ProjectOrganizationPolicyAllow s)) where
+instance P.HasAllow (ProjectOrganizationPolicyListPolicy s) (P.Maybe (TF.Expr s (ProjectOrganizationPolicyAllow s))) where
     allow =
-        P.lens (_allow :: ProjectOrganizationPolicyListPolicy s -> TF.Attr s (ProjectOrganizationPolicyAllow s))
-               (\s a -> s { _allow = a } :: ProjectOrganizationPolicyListPolicy s)
+        P.lens (_allow :: ProjectOrganizationPolicyListPolicy s -> P.Maybe (TF.Expr s (ProjectOrganizationPolicyAllow s)))
+            (\s a -> s { _allow = a } :: ProjectOrganizationPolicyListPolicy s)
 
-instance P.HasDeny (ProjectOrganizationPolicyListPolicy s) (TF.Attr s (ProjectOrganizationPolicyDeny s)) where
+instance P.HasDeny (ProjectOrganizationPolicyListPolicy s) (P.Maybe (TF.Expr s (ProjectOrganizationPolicyDeny s))) where
     deny =
-        P.lens (_deny :: ProjectOrganizationPolicyListPolicy s -> TF.Attr s (ProjectOrganizationPolicyDeny s))
-               (\s a -> s { _deny = a } :: ProjectOrganizationPolicyListPolicy s)
+        P.lens (_deny :: ProjectOrganizationPolicyListPolicy s -> P.Maybe (TF.Expr s (ProjectOrganizationPolicyDeny s)))
+            (\s a -> s { _deny = a } :: ProjectOrganizationPolicyListPolicy s)
 
-instance P.HasSuggestedValue (ProjectOrganizationPolicyListPolicy s) (TF.Attr s P.Text) where
+instance P.HasSuggestedValue (ProjectOrganizationPolicyListPolicy s) (P.Maybe (TF.Expr s P.Text)) where
     suggestedValue =
-        P.lens (_suggestedValue :: ProjectOrganizationPolicyListPolicy s -> TF.Attr s P.Text)
-               (\s a -> s { _suggestedValue = a } :: ProjectOrganizationPolicyListPolicy s)
+        P.lens (_suggestedValue :: ProjectOrganizationPolicyListPolicy s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _suggestedValue = a } :: ProjectOrganizationPolicyListPolicy s)
 
-instance s ~ s' => P.HasComputedSuggestedValue (TF.Ref s' (ProjectOrganizationPolicyListPolicy s)) (TF.Attr s P.Text) where
-    computedSuggestedValue x = TF.compute (TF.refKey x) "suggested_value"
+instance s ~ s' => P.HasComputedSuggestedValue (TF.Ref s' (ProjectOrganizationPolicyListPolicy s)) (TF.Expr s P.Text) where
+    computedSuggestedValue x =
+        TF.unsafeCompute TF.encodeAttr x "suggested_value"
 
 -- | @deny@ nested settings.
 data ProjectOrganizationPolicyDeny s = ProjectOrganizationPolicyDeny'
-    { _all    :: TF.Attr s P.Bool
-    -- ^ @all@ - (Optional)
+    { _all    :: TF.Expr s P.Bool
+    -- ^ @all@ - (Default @false@)
     --
     -- Conflicts with:
     --
     -- * 'values'
-    , _values :: TF.Attr s [TF.Attr s P.Text]
+    , _values :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
     -- ^ @values@ - (Optional)
     --
     -- Conflicts with:
     --
     -- * 'all'
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @deny@ settings value.
 newProjectOrganizationPolicyDeny
@@ -3454,810 +3414,814 @@ newProjectOrganizationPolicyDeny
 newProjectOrganizationPolicyDeny =
     ProjectOrganizationPolicyDeny'
         { _all = TF.value P.False
-        , _values = TF.Nil
+        , _values = P.Nothing
         }
 
-instance TF.IsValue  (ProjectOrganizationPolicyDeny s)
-instance TF.IsObject (ProjectOrganizationPolicyDeny s) where
-    toObject ProjectOrganizationPolicyDeny'{..} = P.catMaybes
-        [ TF.assign "all" <$> TF.attribute _all
-        , TF.assign "values" <$> TF.attribute _values
+instance TF.ToHCL (ProjectOrganizationPolicyDeny s) where
+     toHCL ProjectOrganizationPolicyDeny'{..} = TF.pairs $ P.mconcat
+        [ TF.pair "all" _all
+        , P.maybe P.mempty (TF.pair "values") _values
         ]
 
-instance TF.IsValid (ProjectOrganizationPolicyDeny s) where
-    validator = TF.fieldsValidator (\ProjectOrganizationPolicyDeny'{..} -> Map.fromList $ P.catMaybes
-        [ if (_all P.== TF.value P.False)
-              then P.Nothing
-              else P.Just ("_all",
-                            [ "_values"
-                            ])
-        , if (_values P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_values",
-                            [ "_all"
-                            ])
+instance P.Hashable (ProjectOrganizationPolicyDeny s)
+
+instance TF.HasValidator (ProjectOrganizationPolicyDeny s) where
+    validator = TF.conflictValidator (\ProjectOrganizationPolicyDeny'{..} -> HashMap.fromList $ P.catMaybes
+        [ TF.conflictsWith (_all P.== TF.value P.False) "_all"
+            ["_values"]
+        , TF.conflictsWith (_values P.== P.Nothing) "_values"
+            ["_all"]
         ])
 
-instance P.HasAll (ProjectOrganizationPolicyDeny s) (TF.Attr s P.Bool) where
+instance P.HasAll (ProjectOrganizationPolicyDeny s) (TF.Expr s P.Bool) where
     all =
-        P.lens (_all :: ProjectOrganizationPolicyDeny s -> TF.Attr s P.Bool)
-               (\s a -> s { _all = a } :: ProjectOrganizationPolicyDeny s)
+        P.lens (_all :: ProjectOrganizationPolicyDeny s -> TF.Expr s P.Bool)
+            (\s a -> s { _all = a } :: ProjectOrganizationPolicyDeny s)
 
-instance P.HasValues (ProjectOrganizationPolicyDeny s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasValues (ProjectOrganizationPolicyDeny s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
     values =
-        P.lens (_values :: ProjectOrganizationPolicyDeny s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _values = a } :: ProjectOrganizationPolicyDeny s)
+        P.lens (_values :: ProjectOrganizationPolicyDeny s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
+            (\s a -> s { _values = a } :: ProjectOrganizationPolicyDeny s)
 
 -- | @boolean_policy@ nested settings.
 data ProjectOrganizationPolicyBooleanPolicy s = ProjectOrganizationPolicyBooleanPolicy'
-    { _enforced :: TF.Attr s P.Bool
+    { _enforced :: TF.Expr s P.Bool
     -- ^ @enforced@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @boolean_policy@ settings value.
 newProjectOrganizationPolicyBooleanPolicy
-    :: TF.Attr s P.Bool -- ^ 'P._enforced': @enforced@
+    :: TF.Expr s P.Bool -- ^ Lens: 'P.enforced', Field: '_enforced', HCL: @enforced@
     -> ProjectOrganizationPolicyBooleanPolicy s
 newProjectOrganizationPolicyBooleanPolicy _enforced =
     ProjectOrganizationPolicyBooleanPolicy'
         { _enforced = _enforced
         }
 
-instance TF.IsValue  (ProjectOrganizationPolicyBooleanPolicy s)
-instance TF.IsObject (ProjectOrganizationPolicyBooleanPolicy s) where
-    toObject ProjectOrganizationPolicyBooleanPolicy'{..} = P.catMaybes
-        [ TF.assign "enforced" <$> TF.attribute _enforced
+instance TF.ToHCL (ProjectOrganizationPolicyBooleanPolicy s) where
+     toHCL ProjectOrganizationPolicyBooleanPolicy'{..} = TF.pairs $ P.mconcat
+        [ TF.pair "enforced" _enforced
         ]
 
-instance TF.IsValid (ProjectOrganizationPolicyBooleanPolicy s) where
+instance P.Hashable (ProjectOrganizationPolicyBooleanPolicy s)
+
+instance TF.HasValidator (ProjectOrganizationPolicyBooleanPolicy s) where
     validator = P.mempty
 
-instance P.HasEnforced (ProjectOrganizationPolicyBooleanPolicy s) (TF.Attr s P.Bool) where
+instance P.HasEnforced (ProjectOrganizationPolicyBooleanPolicy s) (TF.Expr s P.Bool) where
     enforced =
-        P.lens (_enforced :: ProjectOrganizationPolicyBooleanPolicy s -> TF.Attr s P.Bool)
-               (\s a -> s { _enforced = a } :: ProjectOrganizationPolicyBooleanPolicy s)
+        P.lens (_enforced :: ProjectOrganizationPolicyBooleanPolicy s -> TF.Expr s P.Bool)
+            (\s a -> s { _enforced = a } :: ProjectOrganizationPolicyBooleanPolicy s)
 
 -- | @restore_policy@ nested settings.
 data ProjectOrganizationPolicyRestorePolicy s = ProjectOrganizationPolicyRestorePolicy'
-    { _default' :: TF.Attr s P.Bool
+    { _default' :: TF.Expr s P.Bool
     -- ^ @default@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @restore_policy@ settings value.
 newProjectOrganizationPolicyRestorePolicy
-    :: TF.Attr s P.Bool -- ^ 'P._default'': @default@
+    :: TF.Expr s P.Bool -- ^ Lens: 'P.default'', Field: '_default'', HCL: @default@
     -> ProjectOrganizationPolicyRestorePolicy s
 newProjectOrganizationPolicyRestorePolicy _default' =
     ProjectOrganizationPolicyRestorePolicy'
         { _default' = _default'
         }
 
-instance TF.IsValue  (ProjectOrganizationPolicyRestorePolicy s)
-instance TF.IsObject (ProjectOrganizationPolicyRestorePolicy s) where
-    toObject ProjectOrganizationPolicyRestorePolicy'{..} = P.catMaybes
-        [ TF.assign "default" <$> TF.attribute _default'
+instance TF.ToHCL (ProjectOrganizationPolicyRestorePolicy s) where
+     toHCL ProjectOrganizationPolicyRestorePolicy'{..} = TF.pairs $ P.mconcat
+        [ TF.pair "default" _default'
         ]
 
-instance TF.IsValid (ProjectOrganizationPolicyRestorePolicy s) where
+instance P.Hashable (ProjectOrganizationPolicyRestorePolicy s)
+
+instance TF.HasValidator (ProjectOrganizationPolicyRestorePolicy s) where
     validator = P.mempty
 
-instance P.HasDefault' (ProjectOrganizationPolicyRestorePolicy s) (TF.Attr s P.Bool) where
+instance P.HasDefault' (ProjectOrganizationPolicyRestorePolicy s) (TF.Expr s P.Bool) where
     default' =
-        P.lens (_default' :: ProjectOrganizationPolicyRestorePolicy s -> TF.Attr s P.Bool)
-               (\s a -> s { _default' = a } :: ProjectOrganizationPolicyRestorePolicy s)
+        P.lens (_default' :: ProjectOrganizationPolicyRestorePolicy s -> TF.Expr s P.Bool)
+            (\s a -> s { _default' = a } :: ProjectOrganizationPolicyRestorePolicy s)
 
 -- | @push_config@ nested settings.
 data PubsubSubscriptionPushConfig s = PubsubSubscriptionPushConfig'
-    { _attributes   :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    { _attributes   :: P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text)))
     -- ^ @attributes@ - (Optional)
     --
-    , _pushEndpoint :: TF.Attr s P.Text
+    , _pushEndpoint :: TF.Expr s P.Text
     -- ^ @push_endpoint@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @push_config@ settings value.
 newPubsubSubscriptionPushConfig
-    :: TF.Attr s P.Text -- ^ 'P._pushEndpoint': @push_endpoint@
+    :: TF.Expr s P.Text -- ^ Lens: 'P.pushEndpoint', Field: '_pushEndpoint', HCL: @push_endpoint@
     -> PubsubSubscriptionPushConfig s
 newPubsubSubscriptionPushConfig _pushEndpoint =
     PubsubSubscriptionPushConfig'
-        { _attributes = TF.Nil
+        { _attributes = P.Nothing
         , _pushEndpoint = _pushEndpoint
         }
 
-instance TF.IsValue  (PubsubSubscriptionPushConfig s)
-instance TF.IsObject (PubsubSubscriptionPushConfig s) where
-    toObject PubsubSubscriptionPushConfig'{..} = P.catMaybes
-        [ TF.assign "attributes" <$> TF.attribute _attributes
-        , TF.assign "push_endpoint" <$> TF.attribute _pushEndpoint
+instance TF.ToHCL (PubsubSubscriptionPushConfig s) where
+     toHCL PubsubSubscriptionPushConfig'{..} = TF.pairs $ P.mconcat
+        [ P.maybe P.mempty (TF.pair "attributes") _attributes
+        , TF.pair "push_endpoint" _pushEndpoint
         ]
 
-instance TF.IsValid (PubsubSubscriptionPushConfig s) where
+instance P.Hashable (PubsubSubscriptionPushConfig s)
+
+instance TF.HasValidator (PubsubSubscriptionPushConfig s) where
     validator = P.mempty
 
-instance P.HasAttributes (PubsubSubscriptionPushConfig s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+instance P.HasAttributes (PubsubSubscriptionPushConfig s) (P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text)))) where
     attributes =
-        P.lens (_attributes :: PubsubSubscriptionPushConfig s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _attributes = a } :: PubsubSubscriptionPushConfig s)
+        P.lens (_attributes :: PubsubSubscriptionPushConfig s -> P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text))))
+            (\s a -> s { _attributes = a } :: PubsubSubscriptionPushConfig s)
 
-instance P.HasPushEndpoint (PubsubSubscriptionPushConfig s) (TF.Attr s P.Text) where
+instance P.HasPushEndpoint (PubsubSubscriptionPushConfig s) (TF.Expr s P.Text) where
     pushEndpoint =
-        P.lens (_pushEndpoint :: PubsubSubscriptionPushConfig s -> TF.Attr s P.Text)
-               (\s a -> s { _pushEndpoint = a } :: PubsubSubscriptionPushConfig s)
+        P.lens (_pushEndpoint :: PubsubSubscriptionPushConfig s -> TF.Expr s P.Text)
+            (\s a -> s { _pushEndpoint = a } :: PubsubSubscriptionPushConfig s)
 
 -- | @authorized_networks@ nested settings.
 data SqlDatabaseInstanceAuthorizedNetworks s = SqlDatabaseInstanceAuthorizedNetworks'
-    { _expirationTime :: TF.Attr s P.Text
+    { _expirationTime :: P.Maybe (TF.Expr s P.Text)
     -- ^ @expiration_time@ - (Optional)
     --
-    , _name           :: TF.Attr s P.Text
+    , _name           :: P.Maybe (TF.Expr s P.Text)
     -- ^ @name@ - (Optional)
     --
-    , _value          :: TF.Attr s P.Text
+    , _value          :: P.Maybe (TF.Expr s P.Text)
     -- ^ @value@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @authorized_networks@ settings value.
 newSqlDatabaseInstanceAuthorizedNetworks
     :: SqlDatabaseInstanceAuthorizedNetworks s
 newSqlDatabaseInstanceAuthorizedNetworks =
     SqlDatabaseInstanceAuthorizedNetworks'
-        { _expirationTime = TF.Nil
-        , _name = TF.Nil
-        , _value = TF.Nil
+        { _expirationTime = P.Nothing
+        , _name = P.Nothing
+        , _value = P.Nothing
         }
 
-instance TF.IsValue  (SqlDatabaseInstanceAuthorizedNetworks s)
-instance TF.IsObject (SqlDatabaseInstanceAuthorizedNetworks s) where
-    toObject SqlDatabaseInstanceAuthorizedNetworks'{..} = P.catMaybes
-        [ TF.assign "expiration_time" <$> TF.attribute _expirationTime
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "value" <$> TF.attribute _value
+instance TF.ToHCL (SqlDatabaseInstanceAuthorizedNetworks s) where
+     toHCL SqlDatabaseInstanceAuthorizedNetworks'{..} = TF.pairs $ P.mconcat
+        [ P.maybe P.mempty (TF.pair "expiration_time") _expirationTime
+        , P.maybe P.mempty (TF.pair "name") _name
+        , P.maybe P.mempty (TF.pair "value") _value
         ]
 
-instance TF.IsValid (SqlDatabaseInstanceAuthorizedNetworks s) where
+instance P.Hashable (SqlDatabaseInstanceAuthorizedNetworks s)
+
+instance TF.HasValidator (SqlDatabaseInstanceAuthorizedNetworks s) where
     validator = P.mempty
 
-instance P.HasExpirationTime (SqlDatabaseInstanceAuthorizedNetworks s) (TF.Attr s P.Text) where
+instance P.HasExpirationTime (SqlDatabaseInstanceAuthorizedNetworks s) (P.Maybe (TF.Expr s P.Text)) where
     expirationTime =
-        P.lens (_expirationTime :: SqlDatabaseInstanceAuthorizedNetworks s -> TF.Attr s P.Text)
-               (\s a -> s { _expirationTime = a } :: SqlDatabaseInstanceAuthorizedNetworks s)
+        P.lens (_expirationTime :: SqlDatabaseInstanceAuthorizedNetworks s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _expirationTime = a } :: SqlDatabaseInstanceAuthorizedNetworks s)
 
-instance P.HasName (SqlDatabaseInstanceAuthorizedNetworks s) (TF.Attr s P.Text) where
+instance P.HasName (SqlDatabaseInstanceAuthorizedNetworks s) (P.Maybe (TF.Expr s P.Text)) where
     name =
-        P.lens (_name :: SqlDatabaseInstanceAuthorizedNetworks s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: SqlDatabaseInstanceAuthorizedNetworks s)
+        P.lens (_name :: SqlDatabaseInstanceAuthorizedNetworks s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _name = a } :: SqlDatabaseInstanceAuthorizedNetworks s)
 
-instance P.HasValue (SqlDatabaseInstanceAuthorizedNetworks s) (TF.Attr s P.Text) where
+instance P.HasValue (SqlDatabaseInstanceAuthorizedNetworks s) (P.Maybe (TF.Expr s P.Text)) where
     value =
-        P.lens (_value :: SqlDatabaseInstanceAuthorizedNetworks s -> TF.Attr s P.Text)
-               (\s a -> s { _value = a } :: SqlDatabaseInstanceAuthorizedNetworks s)
+        P.lens (_value :: SqlDatabaseInstanceAuthorizedNetworks s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _value = a } :: SqlDatabaseInstanceAuthorizedNetworks s)
 
 -- | @ip_configuration@ nested settings.
 data SqlDatabaseInstanceIpConfiguration s = SqlDatabaseInstanceIpConfiguration'
-    { _authorizedNetworks :: TF.Attr s [TF.Attr s (SqlDatabaseInstanceAuthorizedNetworks s)]
+    { _authorizedNetworks :: P.Maybe (TF.Expr s [TF.Expr s (SqlDatabaseInstanceAuthorizedNetworks s)])
     -- ^ @authorized_networks@ - (Optional)
     --
-    , _ipv4Enabled :: TF.Attr s P.Bool
+    , _ipv4Enabled :: P.Maybe (TF.Expr s P.Bool)
     -- ^ @ipv4_enabled@ - (Optional)
     --
-    , _requireSsl :: TF.Attr s P.Bool
+    , _requireSsl :: P.Maybe (TF.Expr s P.Bool)
     -- ^ @require_ssl@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @ip_configuration@ settings value.
 newSqlDatabaseInstanceIpConfiguration
     :: SqlDatabaseInstanceIpConfiguration s
 newSqlDatabaseInstanceIpConfiguration =
     SqlDatabaseInstanceIpConfiguration'
-        { _authorizedNetworks = TF.Nil
-        , _ipv4Enabled = TF.Nil
-        , _requireSsl = TF.Nil
+        { _authorizedNetworks = P.Nothing
+        , _ipv4Enabled = P.Nothing
+        , _requireSsl = P.Nothing
         }
 
-instance TF.IsValue  (SqlDatabaseInstanceIpConfiguration s)
-instance TF.IsObject (SqlDatabaseInstanceIpConfiguration s) where
-    toObject SqlDatabaseInstanceIpConfiguration'{..} = P.catMaybes
-        [ TF.assign "authorized_networks" <$> TF.attribute _authorizedNetworks
-        , TF.assign "ipv4_enabled" <$> TF.attribute _ipv4Enabled
-        , TF.assign "require_ssl" <$> TF.attribute _requireSsl
+instance TF.ToHCL (SqlDatabaseInstanceIpConfiguration s) where
+     toHCL SqlDatabaseInstanceIpConfiguration'{..} = TF.pairs $ P.mconcat
+        [ P.maybe P.mempty (TF.pair "authorized_networks") _authorizedNetworks
+        , P.maybe P.mempty (TF.pair "ipv4_enabled") _ipv4Enabled
+        , P.maybe P.mempty (TF.pair "require_ssl") _requireSsl
         ]
 
-instance TF.IsValid (SqlDatabaseInstanceIpConfiguration s) where
+instance P.Hashable (SqlDatabaseInstanceIpConfiguration s)
+
+instance TF.HasValidator (SqlDatabaseInstanceIpConfiguration s) where
     validator = P.mempty
 
-instance P.HasAuthorizedNetworks (SqlDatabaseInstanceIpConfiguration s) (TF.Attr s [TF.Attr s (SqlDatabaseInstanceAuthorizedNetworks s)]) where
+instance P.HasAuthorizedNetworks (SqlDatabaseInstanceIpConfiguration s) (P.Maybe (TF.Expr s [TF.Expr s (SqlDatabaseInstanceAuthorizedNetworks s)])) where
     authorizedNetworks =
-        P.lens (_authorizedNetworks :: SqlDatabaseInstanceIpConfiguration s -> TF.Attr s [TF.Attr s (SqlDatabaseInstanceAuthorizedNetworks s)])
-               (\s a -> s { _authorizedNetworks = a } :: SqlDatabaseInstanceIpConfiguration s)
+        P.lens (_authorizedNetworks :: SqlDatabaseInstanceIpConfiguration s -> P.Maybe (TF.Expr s [TF.Expr s (SqlDatabaseInstanceAuthorizedNetworks s)]))
+            (\s a -> s { _authorizedNetworks = a } :: SqlDatabaseInstanceIpConfiguration s)
 
-instance P.HasIpv4Enabled (SqlDatabaseInstanceIpConfiguration s) (TF.Attr s P.Bool) where
+instance P.HasIpv4Enabled (SqlDatabaseInstanceIpConfiguration s) (P.Maybe (TF.Expr s P.Bool)) where
     ipv4Enabled =
-        P.lens (_ipv4Enabled :: SqlDatabaseInstanceIpConfiguration s -> TF.Attr s P.Bool)
-               (\s a -> s { _ipv4Enabled = a } :: SqlDatabaseInstanceIpConfiguration s)
+        P.lens (_ipv4Enabled :: SqlDatabaseInstanceIpConfiguration s -> P.Maybe (TF.Expr s P.Bool))
+            (\s a -> s { _ipv4Enabled = a } :: SqlDatabaseInstanceIpConfiguration s)
 
-instance P.HasRequireSsl (SqlDatabaseInstanceIpConfiguration s) (TF.Attr s P.Bool) where
+instance P.HasRequireSsl (SqlDatabaseInstanceIpConfiguration s) (P.Maybe (TF.Expr s P.Bool)) where
     requireSsl =
-        P.lens (_requireSsl :: SqlDatabaseInstanceIpConfiguration s -> TF.Attr s P.Bool)
-               (\s a -> s { _requireSsl = a } :: SqlDatabaseInstanceIpConfiguration s)
+        P.lens (_requireSsl :: SqlDatabaseInstanceIpConfiguration s -> P.Maybe (TF.Expr s P.Bool))
+            (\s a -> s { _requireSsl = a } :: SqlDatabaseInstanceIpConfiguration s)
 
-instance s ~ s' => P.HasComputedIpv4Enabled (TF.Ref s' (SqlDatabaseInstanceIpConfiguration s)) (TF.Attr s P.Bool) where
-    computedIpv4Enabled x = TF.compute (TF.refKey x) "ipv4_enabled"
+instance s ~ s' => P.HasComputedIpv4Enabled (TF.Ref s' (SqlDatabaseInstanceIpConfiguration s)) (TF.Expr s P.Bool) where
+    computedIpv4Enabled x =
+        TF.unsafeCompute TF.encodeAttr x "ipv4_enabled"
 
 -- | @settings@ nested settings.
 data SqlDatabaseInstanceSettings s = SqlDatabaseInstanceSettings'
-    { _activationPolicy :: TF.Attr s P.Text
+    { _activationPolicy :: P.Maybe (TF.Expr s P.Text)
     -- ^ @activation_policy@ - (Optional)
     --
-    , _authorizedGaeApplications :: TF.Attr s [TF.Attr s P.Text]
+    , _authorizedGaeApplications :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
     -- ^ @authorized_gae_applications@ - (Optional)
     --
-    , _availabilityType :: TF.Attr s P.Text
+    , _availabilityType :: P.Maybe (TF.Expr s P.Text)
     -- ^ @availability_type@ - (Optional)
     --
-    , _backupConfiguration :: TF.Attr s (SqlDatabaseInstanceBackupConfiguration s)
+    , _backupConfiguration :: P.Maybe (TF.Expr s (SqlDatabaseInstanceBackupConfiguration s))
     -- ^ @backup_configuration@ - (Optional)
     --
-    , _crashSafeReplication :: TF.Attr s P.Bool
+    , _crashSafeReplication :: P.Maybe (TF.Expr s P.Bool)
     -- ^ @crash_safe_replication@ - (Optional)
     --
-    , _databaseFlags :: TF.Attr s [TF.Attr s (SqlDatabaseInstanceDatabaseFlags s)]
+    , _databaseFlags :: P.Maybe (TF.Expr s [TF.Expr s (SqlDatabaseInstanceDatabaseFlags s)])
     -- ^ @database_flags@ - (Optional)
     --
-    , _diskAutoresize :: TF.Attr s P.Bool
-    -- ^ @disk_autoresize@ - (Optional)
+    , _diskAutoresize :: TF.Expr s P.Bool
+    -- ^ @disk_autoresize@ - (Default @true@)
     --
-    , _diskSize :: TF.Attr s P.Int
+    , _diskSize :: P.Maybe (TF.Expr s P.Int)
     -- ^ @disk_size@ - (Optional)
     --
-    , _diskType :: TF.Attr s P.Text
+    , _diskType :: P.Maybe (TF.Expr s P.Text)
     -- ^ @disk_type@ - (Optional)
     --
-    , _ipConfiguration :: TF.Attr s (SqlDatabaseInstanceIpConfiguration s)
+    , _ipConfiguration :: P.Maybe (TF.Expr s (SqlDatabaseInstanceIpConfiguration s))
     -- ^ @ip_configuration@ - (Optional)
     --
-    , _locationPreference :: TF.Attr s (SqlDatabaseInstanceLocationPreference s)
+    , _locationPreference :: P.Maybe (TF.Expr s (SqlDatabaseInstanceLocationPreference s))
     -- ^ @location_preference@ - (Optional)
     --
-    , _maintenanceWindow :: TF.Attr s (SqlDatabaseInstanceMaintenanceWindow s)
+    , _maintenanceWindow :: P.Maybe (TF.Expr s (SqlDatabaseInstanceMaintenanceWindow s))
     -- ^ @maintenance_window@ - (Optional)
     --
-    , _pricingPlan :: TF.Attr s P.Text
-    -- ^ @pricing_plan@ - (Optional)
+    , _pricingPlan :: TF.Expr s P.Text
+    -- ^ @pricing_plan@ - (Default @PER_USE@)
     --
-    , _replicationType :: TF.Attr s P.Text
-    -- ^ @replication_type@ - (Optional)
+    , _replicationType :: TF.Expr s P.Text
+    -- ^ @replication_type@ - (Default @SYNCHRONOUS@)
     --
-    , _tier :: TF.Attr s P.Text
+    , _tier :: TF.Expr s P.Text
     -- ^ @tier@ - (Required)
     --
-    , _userLabels :: TF.Attr s (P.Map P.Text (TF.Attr s P.Text))
+    , _userLabels :: P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text)))
     -- ^ @user_labels@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @settings@ settings value.
 newSqlDatabaseInstanceSettings
-    :: TF.Attr s P.Text -- ^ 'P._tier': @tier@
+    :: TF.Expr s P.Text -- ^ Lens: 'P.tier', Field: '_tier', HCL: @tier@
     -> SqlDatabaseInstanceSettings s
 newSqlDatabaseInstanceSettings _tier =
     SqlDatabaseInstanceSettings'
-        { _activationPolicy = TF.Nil
-        , _authorizedGaeApplications = TF.Nil
-        , _availabilityType = TF.Nil
-        , _backupConfiguration = TF.Nil
-        , _crashSafeReplication = TF.Nil
-        , _databaseFlags = TF.Nil
+        { _activationPolicy = P.Nothing
+        , _authorizedGaeApplications = P.Nothing
+        , _availabilityType = P.Nothing
+        , _backupConfiguration = P.Nothing
+        , _crashSafeReplication = P.Nothing
+        , _databaseFlags = P.Nothing
         , _diskAutoresize = TF.value P.True
-        , _diskSize = TF.Nil
-        , _diskType = TF.Nil
-        , _ipConfiguration = TF.Nil
-        , _locationPreference = TF.Nil
-        , _maintenanceWindow = TF.Nil
+        , _diskSize = P.Nothing
+        , _diskType = P.Nothing
+        , _ipConfiguration = P.Nothing
+        , _locationPreference = P.Nothing
+        , _maintenanceWindow = P.Nothing
         , _pricingPlan = TF.value "PER_USE"
         , _replicationType = TF.value "SYNCHRONOUS"
         , _tier = _tier
-        , _userLabels = TF.Nil
+        , _userLabels = P.Nothing
         }
 
-instance TF.IsValue  (SqlDatabaseInstanceSettings s)
-instance TF.IsObject (SqlDatabaseInstanceSettings s) where
-    toObject SqlDatabaseInstanceSettings'{..} = P.catMaybes
-        [ TF.assign "activation_policy" <$> TF.attribute _activationPolicy
-        , TF.assign "authorized_gae_applications" <$> TF.attribute _authorizedGaeApplications
-        , TF.assign "availability_type" <$> TF.attribute _availabilityType
-        , TF.assign "backup_configuration" <$> TF.attribute _backupConfiguration
-        , TF.assign "crash_safe_replication" <$> TF.attribute _crashSafeReplication
-        , TF.assign "database_flags" <$> TF.attribute _databaseFlags
-        , TF.assign "disk_autoresize" <$> TF.attribute _diskAutoresize
-        , TF.assign "disk_size" <$> TF.attribute _diskSize
-        , TF.assign "disk_type" <$> TF.attribute _diskType
-        , TF.assign "ip_configuration" <$> TF.attribute _ipConfiguration
-        , TF.assign "location_preference" <$> TF.attribute _locationPreference
-        , TF.assign "maintenance_window" <$> TF.attribute _maintenanceWindow
-        , TF.assign "pricing_plan" <$> TF.attribute _pricingPlan
-        , TF.assign "replication_type" <$> TF.attribute _replicationType
-        , TF.assign "tier" <$> TF.attribute _tier
-        , TF.assign "user_labels" <$> TF.attribute _userLabels
+instance TF.ToHCL (SqlDatabaseInstanceSettings s) where
+     toHCL SqlDatabaseInstanceSettings'{..} = TF.pairs $ P.mconcat
+        [ P.maybe P.mempty (TF.pair "activation_policy") _activationPolicy
+        , P.maybe P.mempty (TF.pair "authorized_gae_applications") _authorizedGaeApplications
+        , P.maybe P.mempty (TF.pair "availability_type") _availabilityType
+        , P.maybe P.mempty (TF.pair "backup_configuration") _backupConfiguration
+        , P.maybe P.mempty (TF.pair "crash_safe_replication") _crashSafeReplication
+        , P.maybe P.mempty (TF.pair "database_flags") _databaseFlags
+        , TF.pair "disk_autoresize" _diskAutoresize
+        , P.maybe P.mempty (TF.pair "disk_size") _diskSize
+        , P.maybe P.mempty (TF.pair "disk_type") _diskType
+        , P.maybe P.mempty (TF.pair "ip_configuration") _ipConfiguration
+        , P.maybe P.mempty (TF.pair "location_preference") _locationPreference
+        , P.maybe P.mempty (TF.pair "maintenance_window") _maintenanceWindow
+        , TF.pair "pricing_plan" _pricingPlan
+        , TF.pair "replication_type" _replicationType
+        , TF.pair "tier" _tier
+        , P.maybe P.mempty (TF.pair "user_labels") _userLabels
         ]
 
-instance TF.IsValid (SqlDatabaseInstanceSettings s) where
+instance P.Hashable (SqlDatabaseInstanceSettings s)
+
+instance TF.HasValidator (SqlDatabaseInstanceSettings s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_backupConfiguration"
-                  (_backupConfiguration
-                      :: SqlDatabaseInstanceSettings s -> TF.Attr s (SqlDatabaseInstanceBackupConfiguration s))
-                  TF.validator
-           P.<> TF.settingsValidator "_ipConfiguration"
-                  (_ipConfiguration
-                      :: SqlDatabaseInstanceSettings s -> TF.Attr s (SqlDatabaseInstanceIpConfiguration s))
-                  TF.validator
-           P.<> TF.settingsValidator "_locationPreference"
-                  (_locationPreference
-                      :: SqlDatabaseInstanceSettings s -> TF.Attr s (SqlDatabaseInstanceLocationPreference s))
-                  TF.validator
-           P.<> TF.settingsValidator "_maintenanceWindow"
-                  (_maintenanceWindow
-                      :: SqlDatabaseInstanceSettings s -> TF.Attr s (SqlDatabaseInstanceMaintenanceWindow s))
-                  TF.validator
 
-instance P.HasActivationPolicy (SqlDatabaseInstanceSettings s) (TF.Attr s P.Text) where
+instance P.HasActivationPolicy (SqlDatabaseInstanceSettings s) (P.Maybe (TF.Expr s P.Text)) where
     activationPolicy =
-        P.lens (_activationPolicy :: SqlDatabaseInstanceSettings s -> TF.Attr s P.Text)
-               (\s a -> s { _activationPolicy = a } :: SqlDatabaseInstanceSettings s)
+        P.lens (_activationPolicy :: SqlDatabaseInstanceSettings s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _activationPolicy = a } :: SqlDatabaseInstanceSettings s)
 
-instance P.HasAuthorizedGaeApplications (SqlDatabaseInstanceSettings s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasAuthorizedGaeApplications (SqlDatabaseInstanceSettings s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
     authorizedGaeApplications =
-        P.lens (_authorizedGaeApplications :: SqlDatabaseInstanceSettings s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _authorizedGaeApplications = a } :: SqlDatabaseInstanceSettings s)
+        P.lens (_authorizedGaeApplications :: SqlDatabaseInstanceSettings s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
+            (\s a -> s { _authorizedGaeApplications = a } :: SqlDatabaseInstanceSettings s)
 
-instance P.HasAvailabilityType (SqlDatabaseInstanceSettings s) (TF.Attr s P.Text) where
+instance P.HasAvailabilityType (SqlDatabaseInstanceSettings s) (P.Maybe (TF.Expr s P.Text)) where
     availabilityType =
-        P.lens (_availabilityType :: SqlDatabaseInstanceSettings s -> TF.Attr s P.Text)
-               (\s a -> s { _availabilityType = a } :: SqlDatabaseInstanceSettings s)
+        P.lens (_availabilityType :: SqlDatabaseInstanceSettings s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _availabilityType = a } :: SqlDatabaseInstanceSettings s)
 
-instance P.HasBackupConfiguration (SqlDatabaseInstanceSettings s) (TF.Attr s (SqlDatabaseInstanceBackupConfiguration s)) where
+instance P.HasBackupConfiguration (SqlDatabaseInstanceSettings s) (P.Maybe (TF.Expr s (SqlDatabaseInstanceBackupConfiguration s))) where
     backupConfiguration =
-        P.lens (_backupConfiguration :: SqlDatabaseInstanceSettings s -> TF.Attr s (SqlDatabaseInstanceBackupConfiguration s))
-               (\s a -> s { _backupConfiguration = a } :: SqlDatabaseInstanceSettings s)
+        P.lens (_backupConfiguration :: SqlDatabaseInstanceSettings s -> P.Maybe (TF.Expr s (SqlDatabaseInstanceBackupConfiguration s)))
+            (\s a -> s { _backupConfiguration = a } :: SqlDatabaseInstanceSettings s)
 
-instance P.HasCrashSafeReplication (SqlDatabaseInstanceSettings s) (TF.Attr s P.Bool) where
+instance P.HasCrashSafeReplication (SqlDatabaseInstanceSettings s) (P.Maybe (TF.Expr s P.Bool)) where
     crashSafeReplication =
-        P.lens (_crashSafeReplication :: SqlDatabaseInstanceSettings s -> TF.Attr s P.Bool)
-               (\s a -> s { _crashSafeReplication = a } :: SqlDatabaseInstanceSettings s)
+        P.lens (_crashSafeReplication :: SqlDatabaseInstanceSettings s -> P.Maybe (TF.Expr s P.Bool))
+            (\s a -> s { _crashSafeReplication = a } :: SqlDatabaseInstanceSettings s)
 
-instance P.HasDatabaseFlags (SqlDatabaseInstanceSettings s) (TF.Attr s [TF.Attr s (SqlDatabaseInstanceDatabaseFlags s)]) where
+instance P.HasDatabaseFlags (SqlDatabaseInstanceSettings s) (P.Maybe (TF.Expr s [TF.Expr s (SqlDatabaseInstanceDatabaseFlags s)])) where
     databaseFlags =
-        P.lens (_databaseFlags :: SqlDatabaseInstanceSettings s -> TF.Attr s [TF.Attr s (SqlDatabaseInstanceDatabaseFlags s)])
-               (\s a -> s { _databaseFlags = a } :: SqlDatabaseInstanceSettings s)
+        P.lens (_databaseFlags :: SqlDatabaseInstanceSettings s -> P.Maybe (TF.Expr s [TF.Expr s (SqlDatabaseInstanceDatabaseFlags s)]))
+            (\s a -> s { _databaseFlags = a } :: SqlDatabaseInstanceSettings s)
 
-instance P.HasDiskAutoresize (SqlDatabaseInstanceSettings s) (TF.Attr s P.Bool) where
+instance P.HasDiskAutoresize (SqlDatabaseInstanceSettings s) (TF.Expr s P.Bool) where
     diskAutoresize =
-        P.lens (_diskAutoresize :: SqlDatabaseInstanceSettings s -> TF.Attr s P.Bool)
-               (\s a -> s { _diskAutoresize = a } :: SqlDatabaseInstanceSettings s)
+        P.lens (_diskAutoresize :: SqlDatabaseInstanceSettings s -> TF.Expr s P.Bool)
+            (\s a -> s { _diskAutoresize = a } :: SqlDatabaseInstanceSettings s)
 
-instance P.HasDiskSize (SqlDatabaseInstanceSettings s) (TF.Attr s P.Int) where
+instance P.HasDiskSize (SqlDatabaseInstanceSettings s) (P.Maybe (TF.Expr s P.Int)) where
     diskSize =
-        P.lens (_diskSize :: SqlDatabaseInstanceSettings s -> TF.Attr s P.Int)
-               (\s a -> s { _diskSize = a } :: SqlDatabaseInstanceSettings s)
+        P.lens (_diskSize :: SqlDatabaseInstanceSettings s -> P.Maybe (TF.Expr s P.Int))
+            (\s a -> s { _diskSize = a } :: SqlDatabaseInstanceSettings s)
 
-instance P.HasDiskType (SqlDatabaseInstanceSettings s) (TF.Attr s P.Text) where
+instance P.HasDiskType (SqlDatabaseInstanceSettings s) (P.Maybe (TF.Expr s P.Text)) where
     diskType =
-        P.lens (_diskType :: SqlDatabaseInstanceSettings s -> TF.Attr s P.Text)
-               (\s a -> s { _diskType = a } :: SqlDatabaseInstanceSettings s)
+        P.lens (_diskType :: SqlDatabaseInstanceSettings s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _diskType = a } :: SqlDatabaseInstanceSettings s)
 
-instance P.HasIpConfiguration (SqlDatabaseInstanceSettings s) (TF.Attr s (SqlDatabaseInstanceIpConfiguration s)) where
+instance P.HasIpConfiguration (SqlDatabaseInstanceSettings s) (P.Maybe (TF.Expr s (SqlDatabaseInstanceIpConfiguration s))) where
     ipConfiguration =
-        P.lens (_ipConfiguration :: SqlDatabaseInstanceSettings s -> TF.Attr s (SqlDatabaseInstanceIpConfiguration s))
-               (\s a -> s { _ipConfiguration = a } :: SqlDatabaseInstanceSettings s)
+        P.lens (_ipConfiguration :: SqlDatabaseInstanceSettings s -> P.Maybe (TF.Expr s (SqlDatabaseInstanceIpConfiguration s)))
+            (\s a -> s { _ipConfiguration = a } :: SqlDatabaseInstanceSettings s)
 
-instance P.HasLocationPreference (SqlDatabaseInstanceSettings s) (TF.Attr s (SqlDatabaseInstanceLocationPreference s)) where
+instance P.HasLocationPreference (SqlDatabaseInstanceSettings s) (P.Maybe (TF.Expr s (SqlDatabaseInstanceLocationPreference s))) where
     locationPreference =
-        P.lens (_locationPreference :: SqlDatabaseInstanceSettings s -> TF.Attr s (SqlDatabaseInstanceLocationPreference s))
-               (\s a -> s { _locationPreference = a } :: SqlDatabaseInstanceSettings s)
+        P.lens (_locationPreference :: SqlDatabaseInstanceSettings s -> P.Maybe (TF.Expr s (SqlDatabaseInstanceLocationPreference s)))
+            (\s a -> s { _locationPreference = a } :: SqlDatabaseInstanceSettings s)
 
-instance P.HasMaintenanceWindow (SqlDatabaseInstanceSettings s) (TF.Attr s (SqlDatabaseInstanceMaintenanceWindow s)) where
+instance P.HasMaintenanceWindow (SqlDatabaseInstanceSettings s) (P.Maybe (TF.Expr s (SqlDatabaseInstanceMaintenanceWindow s))) where
     maintenanceWindow =
-        P.lens (_maintenanceWindow :: SqlDatabaseInstanceSettings s -> TF.Attr s (SqlDatabaseInstanceMaintenanceWindow s))
-               (\s a -> s { _maintenanceWindow = a } :: SqlDatabaseInstanceSettings s)
+        P.lens (_maintenanceWindow :: SqlDatabaseInstanceSettings s -> P.Maybe (TF.Expr s (SqlDatabaseInstanceMaintenanceWindow s)))
+            (\s a -> s { _maintenanceWindow = a } :: SqlDatabaseInstanceSettings s)
 
-instance P.HasPricingPlan (SqlDatabaseInstanceSettings s) (TF.Attr s P.Text) where
+instance P.HasPricingPlan (SqlDatabaseInstanceSettings s) (TF.Expr s P.Text) where
     pricingPlan =
-        P.lens (_pricingPlan :: SqlDatabaseInstanceSettings s -> TF.Attr s P.Text)
-               (\s a -> s { _pricingPlan = a } :: SqlDatabaseInstanceSettings s)
+        P.lens (_pricingPlan :: SqlDatabaseInstanceSettings s -> TF.Expr s P.Text)
+            (\s a -> s { _pricingPlan = a } :: SqlDatabaseInstanceSettings s)
 
-instance P.HasReplicationType (SqlDatabaseInstanceSettings s) (TF.Attr s P.Text) where
+instance P.HasReplicationType (SqlDatabaseInstanceSettings s) (TF.Expr s P.Text) where
     replicationType =
-        P.lens (_replicationType :: SqlDatabaseInstanceSettings s -> TF.Attr s P.Text)
-               (\s a -> s { _replicationType = a } :: SqlDatabaseInstanceSettings s)
+        P.lens (_replicationType :: SqlDatabaseInstanceSettings s -> TF.Expr s P.Text)
+            (\s a -> s { _replicationType = a } :: SqlDatabaseInstanceSettings s)
 
-instance P.HasTier (SqlDatabaseInstanceSettings s) (TF.Attr s P.Text) where
+instance P.HasTier (SqlDatabaseInstanceSettings s) (TF.Expr s P.Text) where
     tier =
-        P.lens (_tier :: SqlDatabaseInstanceSettings s -> TF.Attr s P.Text)
-               (\s a -> s { _tier = a } :: SqlDatabaseInstanceSettings s)
+        P.lens (_tier :: SqlDatabaseInstanceSettings s -> TF.Expr s P.Text)
+            (\s a -> s { _tier = a } :: SqlDatabaseInstanceSettings s)
 
-instance P.HasUserLabels (SqlDatabaseInstanceSettings s) (TF.Attr s (P.Map P.Text (TF.Attr s P.Text))) where
+instance P.HasUserLabels (SqlDatabaseInstanceSettings s) (P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text)))) where
     userLabels =
-        P.lens (_userLabels :: SqlDatabaseInstanceSettings s -> TF.Attr s (P.Map P.Text (TF.Attr s P.Text)))
-               (\s a -> s { _userLabels = a } :: SqlDatabaseInstanceSettings s)
+        P.lens (_userLabels :: SqlDatabaseInstanceSettings s -> P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text))))
+            (\s a -> s { _userLabels = a } :: SqlDatabaseInstanceSettings s)
 
-instance s ~ s' => P.HasComputedActivationPolicy (TF.Ref s' (SqlDatabaseInstanceSettings s)) (TF.Attr s P.Text) where
-    computedActivationPolicy x = TF.compute (TF.refKey x) "activation_policy"
+instance s ~ s' => P.HasComputedActivationPolicy (TF.Ref s' (SqlDatabaseInstanceSettings s)) (TF.Expr s P.Text) where
+    computedActivationPolicy x =
+        TF.unsafeCompute TF.encodeAttr x "activation_policy"
 
-instance s ~ s' => P.HasComputedAvailabilityType (TF.Ref s' (SqlDatabaseInstanceSettings s)) (TF.Attr s P.Text) where
-    computedAvailabilityType x = TF.compute (TF.refKey x) "availability_type"
+instance s ~ s' => P.HasComputedAvailabilityType (TF.Ref s' (SqlDatabaseInstanceSettings s)) (TF.Expr s P.Text) where
+    computedAvailabilityType x =
+        TF.unsafeCompute TF.encodeAttr x "availability_type"
 
-instance s ~ s' => P.HasComputedBackupConfiguration (TF.Ref s' (SqlDatabaseInstanceSettings s)) (TF.Attr s (SqlDatabaseInstanceBackupConfiguration s)) where
-    computedBackupConfiguration x = TF.compute (TF.refKey x) "backup_configuration"
+instance s ~ s' => P.HasComputedBackupConfiguration (TF.Ref s' (SqlDatabaseInstanceSettings s)) (TF.Expr s (SqlDatabaseInstanceBackupConfiguration s)) where
+    computedBackupConfiguration x =
+        TF.unsafeCompute TF.encodeAttr x "backup_configuration"
 
-instance s ~ s' => P.HasComputedCrashSafeReplication (TF.Ref s' (SqlDatabaseInstanceSettings s)) (TF.Attr s P.Bool) where
-    computedCrashSafeReplication x = TF.compute (TF.refKey x) "crash_safe_replication"
+instance s ~ s' => P.HasComputedCrashSafeReplication (TF.Ref s' (SqlDatabaseInstanceSettings s)) (TF.Expr s P.Bool) where
+    computedCrashSafeReplication x =
+        TF.unsafeCompute TF.encodeAttr x "crash_safe_replication"
 
-instance s ~ s' => P.HasComputedDiskSize (TF.Ref s' (SqlDatabaseInstanceSettings s)) (TF.Attr s P.Int) where
-    computedDiskSize x = TF.compute (TF.refKey x) "disk_size"
+instance s ~ s' => P.HasComputedDiskSize (TF.Ref s' (SqlDatabaseInstanceSettings s)) (TF.Expr s P.Int) where
+    computedDiskSize x =
+        TF.unsafeCompute TF.encodeAttr x "disk_size"
 
-instance s ~ s' => P.HasComputedDiskType (TF.Ref s' (SqlDatabaseInstanceSettings s)) (TF.Attr s P.Text) where
-    computedDiskType x = TF.compute (TF.refKey x) "disk_type"
+instance s ~ s' => P.HasComputedDiskType (TF.Ref s' (SqlDatabaseInstanceSettings s)) (TF.Expr s P.Text) where
+    computedDiskType x =
+        TF.unsafeCompute TF.encodeAttr x "disk_type"
 
-instance s ~ s' => P.HasComputedIpConfiguration (TF.Ref s' (SqlDatabaseInstanceSettings s)) (TF.Attr s (SqlDatabaseInstanceIpConfiguration s)) where
-    computedIpConfiguration x = TF.compute (TF.refKey x) "ip_configuration"
+instance s ~ s' => P.HasComputedIpConfiguration (TF.Ref s' (SqlDatabaseInstanceSettings s)) (TF.Expr s (SqlDatabaseInstanceIpConfiguration s)) where
+    computedIpConfiguration x =
+        TF.unsafeCompute TF.encodeAttr x "ip_configuration"
 
-instance s ~ s' => P.HasComputedLocationPreference (TF.Ref s' (SqlDatabaseInstanceSettings s)) (TF.Attr s (SqlDatabaseInstanceLocationPreference s)) where
-    computedLocationPreference x = TF.compute (TF.refKey x) "location_preference"
+instance s ~ s' => P.HasComputedLocationPreference (TF.Ref s' (SqlDatabaseInstanceSettings s)) (TF.Expr s (SqlDatabaseInstanceLocationPreference s)) where
+    computedLocationPreference x =
+        TF.unsafeCompute TF.encodeAttr x "location_preference"
 
-instance s ~ s' => P.HasComputedVersion (TF.Ref s' (SqlDatabaseInstanceSettings s)) (TF.Attr s P.Int) where
-    computedVersion x = TF.compute (TF.refKey x) "version"
+instance s ~ s' => P.HasComputedVersion (TF.Ref s' (SqlDatabaseInstanceSettings s)) (TF.Expr s P.Int) where
+    computedVersion x =
+        TF.unsafeCompute TF.encodeAttr x "version"
 
 -- | @location_preference@ nested settings.
 data SqlDatabaseInstanceLocationPreference s = SqlDatabaseInstanceLocationPreference'
-    { _followGaeApplication :: TF.Attr s P.Text
+    { _followGaeApplication :: P.Maybe (TF.Expr s P.Text)
     -- ^ @follow_gae_application@ - (Optional)
     --
-    , _zone                 :: TF.Attr s P.Text
+    , _zone                 :: P.Maybe (TF.Expr s P.Text)
     -- ^ @zone@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @location_preference@ settings value.
 newSqlDatabaseInstanceLocationPreference
     :: SqlDatabaseInstanceLocationPreference s
 newSqlDatabaseInstanceLocationPreference =
     SqlDatabaseInstanceLocationPreference'
-        { _followGaeApplication = TF.Nil
-        , _zone = TF.Nil
+        { _followGaeApplication = P.Nothing
+        , _zone = P.Nothing
         }
 
-instance TF.IsValue  (SqlDatabaseInstanceLocationPreference s)
-instance TF.IsObject (SqlDatabaseInstanceLocationPreference s) where
-    toObject SqlDatabaseInstanceLocationPreference'{..} = P.catMaybes
-        [ TF.assign "follow_gae_application" <$> TF.attribute _followGaeApplication
-        , TF.assign "zone" <$> TF.attribute _zone
+instance TF.ToHCL (SqlDatabaseInstanceLocationPreference s) where
+     toHCL SqlDatabaseInstanceLocationPreference'{..} = TF.pairs $ P.mconcat
+        [ P.maybe P.mempty (TF.pair "follow_gae_application") _followGaeApplication
+        , P.maybe P.mempty (TF.pair "zone") _zone
         ]
 
-instance TF.IsValid (SqlDatabaseInstanceLocationPreference s) where
+instance P.Hashable (SqlDatabaseInstanceLocationPreference s)
+
+instance TF.HasValidator (SqlDatabaseInstanceLocationPreference s) where
     validator = P.mempty
 
-instance P.HasFollowGaeApplication (SqlDatabaseInstanceLocationPreference s) (TF.Attr s P.Text) where
+instance P.HasFollowGaeApplication (SqlDatabaseInstanceLocationPreference s) (P.Maybe (TF.Expr s P.Text)) where
     followGaeApplication =
-        P.lens (_followGaeApplication :: SqlDatabaseInstanceLocationPreference s -> TF.Attr s P.Text)
-               (\s a -> s { _followGaeApplication = a } :: SqlDatabaseInstanceLocationPreference s)
+        P.lens (_followGaeApplication :: SqlDatabaseInstanceLocationPreference s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _followGaeApplication = a } :: SqlDatabaseInstanceLocationPreference s)
 
-instance P.HasZone (SqlDatabaseInstanceLocationPreference s) (TF.Attr s P.Text) where
+instance P.HasZone (SqlDatabaseInstanceLocationPreference s) (P.Maybe (TF.Expr s P.Text)) where
     zone =
-        P.lens (_zone :: SqlDatabaseInstanceLocationPreference s -> TF.Attr s P.Text)
-               (\s a -> s { _zone = a } :: SqlDatabaseInstanceLocationPreference s)
+        P.lens (_zone :: SqlDatabaseInstanceLocationPreference s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _zone = a } :: SqlDatabaseInstanceLocationPreference s)
 
 -- | @backup_configuration@ nested settings.
 data SqlDatabaseInstanceBackupConfiguration s = SqlDatabaseInstanceBackupConfiguration'
-    { _binaryLogEnabled :: TF.Attr s P.Bool
+    { _binaryLogEnabled :: P.Maybe (TF.Expr s P.Bool)
     -- ^ @binary_log_enabled@ - (Optional)
     --
-    , _enabled          :: TF.Attr s P.Bool
+    , _enabled          :: P.Maybe (TF.Expr s P.Bool)
     -- ^ @enabled@ - (Optional)
     --
-    , _startTime        :: TF.Attr s P.Text
+    , _startTime        :: P.Maybe (TF.Expr s P.Text)
     -- ^ @start_time@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @backup_configuration@ settings value.
 newSqlDatabaseInstanceBackupConfiguration
     :: SqlDatabaseInstanceBackupConfiguration s
 newSqlDatabaseInstanceBackupConfiguration =
     SqlDatabaseInstanceBackupConfiguration'
-        { _binaryLogEnabled = TF.Nil
-        , _enabled = TF.Nil
-        , _startTime = TF.Nil
+        { _binaryLogEnabled = P.Nothing
+        , _enabled = P.Nothing
+        , _startTime = P.Nothing
         }
 
-instance TF.IsValue  (SqlDatabaseInstanceBackupConfiguration s)
-instance TF.IsObject (SqlDatabaseInstanceBackupConfiguration s) where
-    toObject SqlDatabaseInstanceBackupConfiguration'{..} = P.catMaybes
-        [ TF.assign "binary_log_enabled" <$> TF.attribute _binaryLogEnabled
-        , TF.assign "enabled" <$> TF.attribute _enabled
-        , TF.assign "start_time" <$> TF.attribute _startTime
+instance TF.ToHCL (SqlDatabaseInstanceBackupConfiguration s) where
+     toHCL SqlDatabaseInstanceBackupConfiguration'{..} = TF.pairs $ P.mconcat
+        [ P.maybe P.mempty (TF.pair "binary_log_enabled") _binaryLogEnabled
+        , P.maybe P.mempty (TF.pair "enabled") _enabled
+        , P.maybe P.mempty (TF.pair "start_time") _startTime
         ]
 
-instance TF.IsValid (SqlDatabaseInstanceBackupConfiguration s) where
+instance P.Hashable (SqlDatabaseInstanceBackupConfiguration s)
+
+instance TF.HasValidator (SqlDatabaseInstanceBackupConfiguration s) where
     validator = P.mempty
 
-instance P.HasBinaryLogEnabled (SqlDatabaseInstanceBackupConfiguration s) (TF.Attr s P.Bool) where
+instance P.HasBinaryLogEnabled (SqlDatabaseInstanceBackupConfiguration s) (P.Maybe (TF.Expr s P.Bool)) where
     binaryLogEnabled =
-        P.lens (_binaryLogEnabled :: SqlDatabaseInstanceBackupConfiguration s -> TF.Attr s P.Bool)
-               (\s a -> s { _binaryLogEnabled = a } :: SqlDatabaseInstanceBackupConfiguration s)
+        P.lens (_binaryLogEnabled :: SqlDatabaseInstanceBackupConfiguration s -> P.Maybe (TF.Expr s P.Bool))
+            (\s a -> s { _binaryLogEnabled = a } :: SqlDatabaseInstanceBackupConfiguration s)
 
-instance P.HasEnabled (SqlDatabaseInstanceBackupConfiguration s) (TF.Attr s P.Bool) where
+instance P.HasEnabled (SqlDatabaseInstanceBackupConfiguration s) (P.Maybe (TF.Expr s P.Bool)) where
     enabled =
-        P.lens (_enabled :: SqlDatabaseInstanceBackupConfiguration s -> TF.Attr s P.Bool)
-               (\s a -> s { _enabled = a } :: SqlDatabaseInstanceBackupConfiguration s)
+        P.lens (_enabled :: SqlDatabaseInstanceBackupConfiguration s -> P.Maybe (TF.Expr s P.Bool))
+            (\s a -> s { _enabled = a } :: SqlDatabaseInstanceBackupConfiguration s)
 
-instance P.HasStartTime (SqlDatabaseInstanceBackupConfiguration s) (TF.Attr s P.Text) where
+instance P.HasStartTime (SqlDatabaseInstanceBackupConfiguration s) (P.Maybe (TF.Expr s P.Text)) where
     startTime =
-        P.lens (_startTime :: SqlDatabaseInstanceBackupConfiguration s -> TF.Attr s P.Text)
-               (\s a -> s { _startTime = a } :: SqlDatabaseInstanceBackupConfiguration s)
+        P.lens (_startTime :: SqlDatabaseInstanceBackupConfiguration s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _startTime = a } :: SqlDatabaseInstanceBackupConfiguration s)
 
-instance s ~ s' => P.HasComputedStartTime (TF.Ref s' (SqlDatabaseInstanceBackupConfiguration s)) (TF.Attr s P.Text) where
-    computedStartTime x = TF.compute (TF.refKey x) "start_time"
+instance s ~ s' => P.HasComputedStartTime (TF.Ref s' (SqlDatabaseInstanceBackupConfiguration s)) (TF.Expr s P.Text) where
+    computedStartTime x =
+        TF.unsafeCompute TF.encodeAttr x "start_time"
 
 -- | @maintenance_window@ nested settings.
 data SqlDatabaseInstanceMaintenanceWindow s = SqlDatabaseInstanceMaintenanceWindow'
-    { _day         :: TF.Attr s P.Int
+    { _day         :: P.Maybe (TF.Expr s P.Int)
     -- ^ @day@ - (Optional)
     --
-    , _hour        :: TF.Attr s P.Int
+    , _hour        :: P.Maybe (TF.Expr s P.Int)
     -- ^ @hour@ - (Optional)
     --
-    , _updateTrack :: TF.Attr s P.Text
+    , _updateTrack :: P.Maybe (TF.Expr s P.Text)
     -- ^ @update_track@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @maintenance_window@ settings value.
 newSqlDatabaseInstanceMaintenanceWindow
     :: SqlDatabaseInstanceMaintenanceWindow s
 newSqlDatabaseInstanceMaintenanceWindow =
     SqlDatabaseInstanceMaintenanceWindow'
-        { _day = TF.Nil
-        , _hour = TF.Nil
-        , _updateTrack = TF.Nil
+        { _day = P.Nothing
+        , _hour = P.Nothing
+        , _updateTrack = P.Nothing
         }
 
-instance TF.IsValue  (SqlDatabaseInstanceMaintenanceWindow s)
-instance TF.IsObject (SqlDatabaseInstanceMaintenanceWindow s) where
-    toObject SqlDatabaseInstanceMaintenanceWindow'{..} = P.catMaybes
-        [ TF.assign "day" <$> TF.attribute _day
-        , TF.assign "hour" <$> TF.attribute _hour
-        , TF.assign "update_track" <$> TF.attribute _updateTrack
+instance TF.ToHCL (SqlDatabaseInstanceMaintenanceWindow s) where
+     toHCL SqlDatabaseInstanceMaintenanceWindow'{..} = TF.pairs $ P.mconcat
+        [ P.maybe P.mempty (TF.pair "day") _day
+        , P.maybe P.mempty (TF.pair "hour") _hour
+        , P.maybe P.mempty (TF.pair "update_track") _updateTrack
         ]
 
-instance TF.IsValid (SqlDatabaseInstanceMaintenanceWindow s) where
+instance P.Hashable (SqlDatabaseInstanceMaintenanceWindow s)
+
+instance TF.HasValidator (SqlDatabaseInstanceMaintenanceWindow s) where
     validator = P.mempty
 
-instance P.HasDay (SqlDatabaseInstanceMaintenanceWindow s) (TF.Attr s P.Int) where
+instance P.HasDay (SqlDatabaseInstanceMaintenanceWindow s) (P.Maybe (TF.Expr s P.Int)) where
     day =
-        P.lens (_day :: SqlDatabaseInstanceMaintenanceWindow s -> TF.Attr s P.Int)
-               (\s a -> s { _day = a } :: SqlDatabaseInstanceMaintenanceWindow s)
+        P.lens (_day :: SqlDatabaseInstanceMaintenanceWindow s -> P.Maybe (TF.Expr s P.Int))
+            (\s a -> s { _day = a } :: SqlDatabaseInstanceMaintenanceWindow s)
 
-instance P.HasHour (SqlDatabaseInstanceMaintenanceWindow s) (TF.Attr s P.Int) where
+instance P.HasHour (SqlDatabaseInstanceMaintenanceWindow s) (P.Maybe (TF.Expr s P.Int)) where
     hour =
-        P.lens (_hour :: SqlDatabaseInstanceMaintenanceWindow s -> TF.Attr s P.Int)
-               (\s a -> s { _hour = a } :: SqlDatabaseInstanceMaintenanceWindow s)
+        P.lens (_hour :: SqlDatabaseInstanceMaintenanceWindow s -> P.Maybe (TF.Expr s P.Int))
+            (\s a -> s { _hour = a } :: SqlDatabaseInstanceMaintenanceWindow s)
 
-instance P.HasUpdateTrack (SqlDatabaseInstanceMaintenanceWindow s) (TF.Attr s P.Text) where
+instance P.HasUpdateTrack (SqlDatabaseInstanceMaintenanceWindow s) (P.Maybe (TF.Expr s P.Text)) where
     updateTrack =
-        P.lens (_updateTrack :: SqlDatabaseInstanceMaintenanceWindow s -> TF.Attr s P.Text)
-               (\s a -> s { _updateTrack = a } :: SqlDatabaseInstanceMaintenanceWindow s)
+        P.lens (_updateTrack :: SqlDatabaseInstanceMaintenanceWindow s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _updateTrack = a } :: SqlDatabaseInstanceMaintenanceWindow s)
 
 -- | @database_flags@ nested settings.
 data SqlDatabaseInstanceDatabaseFlags s = SqlDatabaseInstanceDatabaseFlags'
-    { _name  :: TF.Attr s P.Text
+    { _name  :: P.Maybe (TF.Expr s P.Text)
     -- ^ @name@ - (Optional)
     --
-    , _value :: TF.Attr s P.Text
+    , _value :: P.Maybe (TF.Expr s P.Text)
     -- ^ @value@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @database_flags@ settings value.
 newSqlDatabaseInstanceDatabaseFlags
     :: SqlDatabaseInstanceDatabaseFlags s
 newSqlDatabaseInstanceDatabaseFlags =
     SqlDatabaseInstanceDatabaseFlags'
-        { _name = TF.Nil
-        , _value = TF.Nil
+        { _name = P.Nothing
+        , _value = P.Nothing
         }
 
-instance TF.IsValue  (SqlDatabaseInstanceDatabaseFlags s)
-instance TF.IsObject (SqlDatabaseInstanceDatabaseFlags s) where
-    toObject SqlDatabaseInstanceDatabaseFlags'{..} = P.catMaybes
-        [ TF.assign "name" <$> TF.attribute _name
-        , TF.assign "value" <$> TF.attribute _value
+instance TF.ToHCL (SqlDatabaseInstanceDatabaseFlags s) where
+     toHCL SqlDatabaseInstanceDatabaseFlags'{..} = TF.pairs $ P.mconcat
+        [ P.maybe P.mempty (TF.pair "name") _name
+        , P.maybe P.mempty (TF.pair "value") _value
         ]
 
-instance TF.IsValid (SqlDatabaseInstanceDatabaseFlags s) where
+instance P.Hashable (SqlDatabaseInstanceDatabaseFlags s)
+
+instance TF.HasValidator (SqlDatabaseInstanceDatabaseFlags s) where
     validator = P.mempty
 
-instance P.HasName (SqlDatabaseInstanceDatabaseFlags s) (TF.Attr s P.Text) where
+instance P.HasName (SqlDatabaseInstanceDatabaseFlags s) (P.Maybe (TF.Expr s P.Text)) where
     name =
-        P.lens (_name :: SqlDatabaseInstanceDatabaseFlags s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: SqlDatabaseInstanceDatabaseFlags s)
+        P.lens (_name :: SqlDatabaseInstanceDatabaseFlags s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _name = a } :: SqlDatabaseInstanceDatabaseFlags s)
 
-instance P.HasValue (SqlDatabaseInstanceDatabaseFlags s) (TF.Attr s P.Text) where
+instance P.HasValue (SqlDatabaseInstanceDatabaseFlags s) (P.Maybe (TF.Expr s P.Text)) where
     value =
-        P.lens (_value :: SqlDatabaseInstanceDatabaseFlags s -> TF.Attr s P.Text)
-               (\s a -> s { _value = a } :: SqlDatabaseInstanceDatabaseFlags s)
+        P.lens (_value :: SqlDatabaseInstanceDatabaseFlags s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _value = a } :: SqlDatabaseInstanceDatabaseFlags s)
 
 -- | @ip_address@ nested settings.
 data SqlDatabaseInstanceIpAddress s = SqlDatabaseInstanceIpAddress'
-    { _timeToRetire :: TF.Attr s P.Text
+    { _timeToRetire :: P.Maybe (TF.Expr s P.Text)
     -- ^ @time_to_retire@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @ip_address@ settings value.
 newSqlDatabaseInstanceIpAddress
     :: SqlDatabaseInstanceIpAddress s
 newSqlDatabaseInstanceIpAddress =
     SqlDatabaseInstanceIpAddress'
-        { _timeToRetire = TF.Nil
+        { _timeToRetire = P.Nothing
         }
 
-instance TF.IsValue  (SqlDatabaseInstanceIpAddress s)
-instance TF.IsObject (SqlDatabaseInstanceIpAddress s) where
-    toObject SqlDatabaseInstanceIpAddress'{..} = P.catMaybes
-        [ TF.assign "time_to_retire" <$> TF.attribute _timeToRetire
+instance TF.ToHCL (SqlDatabaseInstanceIpAddress s) where
+     toHCL SqlDatabaseInstanceIpAddress'{..} = TF.pairs $ P.mconcat
+        [ P.maybe P.mempty (TF.pair "time_to_retire") _timeToRetire
         ]
 
-instance TF.IsValid (SqlDatabaseInstanceIpAddress s) where
+instance P.Hashable (SqlDatabaseInstanceIpAddress s)
+
+instance TF.HasValidator (SqlDatabaseInstanceIpAddress s) where
     validator = P.mempty
 
-instance P.HasTimeToRetire (SqlDatabaseInstanceIpAddress s) (TF.Attr s P.Text) where
+instance P.HasTimeToRetire (SqlDatabaseInstanceIpAddress s) (P.Maybe (TF.Expr s P.Text)) where
     timeToRetire =
-        P.lens (_timeToRetire :: SqlDatabaseInstanceIpAddress s -> TF.Attr s P.Text)
-               (\s a -> s { _timeToRetire = a } :: SqlDatabaseInstanceIpAddress s)
+        P.lens (_timeToRetire :: SqlDatabaseInstanceIpAddress s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _timeToRetire = a } :: SqlDatabaseInstanceIpAddress s)
 
-instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (SqlDatabaseInstanceIpAddress s)) (TF.Attr s P.Text) where
-    computedIpAddress x = TF.compute (TF.refKey x) "ip_address"
+instance s ~ s' => P.HasComputedIpAddress (TF.Ref s' (SqlDatabaseInstanceIpAddress s)) (TF.Expr s P.Text) where
+    computedIpAddress x =
+        TF.unsafeCompute TF.encodeAttr x "ip_address"
 
-instance s ~ s' => P.HasComputedTimeToRetire (TF.Ref s' (SqlDatabaseInstanceIpAddress s)) (TF.Attr s P.Text) where
-    computedTimeToRetire x = TF.compute (TF.refKey x) "time_to_retire"
+instance s ~ s' => P.HasComputedTimeToRetire (TF.Ref s' (SqlDatabaseInstanceIpAddress s)) (TF.Expr s P.Text) where
+    computedTimeToRetire x =
+        TF.unsafeCompute TF.encodeAttr x "time_to_retire"
 
 -- | @replica_configuration@ nested settings.
 data SqlDatabaseInstanceReplicaConfiguration s = SqlDatabaseInstanceReplicaConfiguration'
-    { _caCertificate           :: TF.Attr s P.Text
+    { _caCertificate           :: P.Maybe (TF.Expr s P.Text)
     -- ^ @ca_certificate@ - (Optional, Forces New)
     --
-    , _clientCertificate       :: TF.Attr s P.Text
+    , _clientCertificate       :: P.Maybe (TF.Expr s P.Text)
     -- ^ @client_certificate@ - (Optional, Forces New)
     --
-    , _clientKey               :: TF.Attr s P.Text
+    , _clientKey               :: P.Maybe (TF.Expr s P.Text)
     -- ^ @client_key@ - (Optional, Forces New)
     --
-    , _connectRetryInterval    :: TF.Attr s P.Int
+    , _connectRetryInterval    :: P.Maybe (TF.Expr s P.Int)
     -- ^ @connect_retry_interval@ - (Optional, Forces New)
     --
-    , _dumpFilePath            :: TF.Attr s P.Text
+    , _dumpFilePath            :: P.Maybe (TF.Expr s P.Text)
     -- ^ @dump_file_path@ - (Optional, Forces New)
     --
-    , _failoverTarget          :: TF.Attr s P.Bool
+    , _failoverTarget          :: P.Maybe (TF.Expr s P.Bool)
     -- ^ @failover_target@ - (Optional, Forces New)
     --
-    , _masterHeartbeatPeriod   :: TF.Attr s P.Int
+    , _masterHeartbeatPeriod   :: P.Maybe (TF.Expr s P.Int)
     -- ^ @master_heartbeat_period@ - (Optional, Forces New)
     --
-    , _password                :: TF.Attr s P.Text
+    , _password                :: P.Maybe (TF.Expr s P.Text)
     -- ^ @password@ - (Optional, Forces New)
     --
-    , _sslCipher               :: TF.Attr s P.Text
+    , _sslCipher               :: P.Maybe (TF.Expr s P.Text)
     -- ^ @ssl_cipher@ - (Optional, Forces New)
     --
-    , _username                :: TF.Attr s P.Text
+    , _username                :: P.Maybe (TF.Expr s P.Text)
     -- ^ @username@ - (Optional, Forces New)
     --
-    , _verifyServerCertificate :: TF.Attr s P.Bool
+    , _verifyServerCertificate :: P.Maybe (TF.Expr s P.Bool)
     -- ^ @verify_server_certificate@ - (Optional, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @replica_configuration@ settings value.
 newSqlDatabaseInstanceReplicaConfiguration
     :: SqlDatabaseInstanceReplicaConfiguration s
 newSqlDatabaseInstanceReplicaConfiguration =
     SqlDatabaseInstanceReplicaConfiguration'
-        { _caCertificate = TF.Nil
-        , _clientCertificate = TF.Nil
-        , _clientKey = TF.Nil
-        , _connectRetryInterval = TF.Nil
-        , _dumpFilePath = TF.Nil
-        , _failoverTarget = TF.Nil
-        , _masterHeartbeatPeriod = TF.Nil
-        , _password = TF.Nil
-        , _sslCipher = TF.Nil
-        , _username = TF.Nil
-        , _verifyServerCertificate = TF.Nil
+        { _caCertificate = P.Nothing
+        , _clientCertificate = P.Nothing
+        , _clientKey = P.Nothing
+        , _connectRetryInterval = P.Nothing
+        , _dumpFilePath = P.Nothing
+        , _failoverTarget = P.Nothing
+        , _masterHeartbeatPeriod = P.Nothing
+        , _password = P.Nothing
+        , _sslCipher = P.Nothing
+        , _username = P.Nothing
+        , _verifyServerCertificate = P.Nothing
         }
 
-instance TF.IsValue  (SqlDatabaseInstanceReplicaConfiguration s)
-instance TF.IsObject (SqlDatabaseInstanceReplicaConfiguration s) where
-    toObject SqlDatabaseInstanceReplicaConfiguration'{..} = P.catMaybes
-        [ TF.assign "ca_certificate" <$> TF.attribute _caCertificate
-        , TF.assign "client_certificate" <$> TF.attribute _clientCertificate
-        , TF.assign "client_key" <$> TF.attribute _clientKey
-        , TF.assign "connect_retry_interval" <$> TF.attribute _connectRetryInterval
-        , TF.assign "dump_file_path" <$> TF.attribute _dumpFilePath
-        , TF.assign "failover_target" <$> TF.attribute _failoverTarget
-        , TF.assign "master_heartbeat_period" <$> TF.attribute _masterHeartbeatPeriod
-        , TF.assign "password" <$> TF.attribute _password
-        , TF.assign "ssl_cipher" <$> TF.attribute _sslCipher
-        , TF.assign "username" <$> TF.attribute _username
-        , TF.assign "verify_server_certificate" <$> TF.attribute _verifyServerCertificate
+instance TF.ToHCL (SqlDatabaseInstanceReplicaConfiguration s) where
+     toHCL SqlDatabaseInstanceReplicaConfiguration'{..} = TF.pairs $ P.mconcat
+        [ P.maybe P.mempty (TF.pair "ca_certificate") _caCertificate
+        , P.maybe P.mempty (TF.pair "client_certificate") _clientCertificate
+        , P.maybe P.mempty (TF.pair "client_key") _clientKey
+        , P.maybe P.mempty (TF.pair "connect_retry_interval") _connectRetryInterval
+        , P.maybe P.mempty (TF.pair "dump_file_path") _dumpFilePath
+        , P.maybe P.mempty (TF.pair "failover_target") _failoverTarget
+        , P.maybe P.mempty (TF.pair "master_heartbeat_period") _masterHeartbeatPeriod
+        , P.maybe P.mempty (TF.pair "password") _password
+        , P.maybe P.mempty (TF.pair "ssl_cipher") _sslCipher
+        , P.maybe P.mempty (TF.pair "username") _username
+        , P.maybe P.mempty (TF.pair "verify_server_certificate") _verifyServerCertificate
         ]
 
-instance TF.IsValid (SqlDatabaseInstanceReplicaConfiguration s) where
+instance P.Hashable (SqlDatabaseInstanceReplicaConfiguration s)
+
+instance TF.HasValidator (SqlDatabaseInstanceReplicaConfiguration s) where
     validator = P.mempty
 
-instance P.HasCaCertificate (SqlDatabaseInstanceReplicaConfiguration s) (TF.Attr s P.Text) where
+instance P.HasCaCertificate (SqlDatabaseInstanceReplicaConfiguration s) (P.Maybe (TF.Expr s P.Text)) where
     caCertificate =
-        P.lens (_caCertificate :: SqlDatabaseInstanceReplicaConfiguration s -> TF.Attr s P.Text)
-               (\s a -> s { _caCertificate = a } :: SqlDatabaseInstanceReplicaConfiguration s)
+        P.lens (_caCertificate :: SqlDatabaseInstanceReplicaConfiguration s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _caCertificate = a } :: SqlDatabaseInstanceReplicaConfiguration s)
 
-instance P.HasClientCertificate (SqlDatabaseInstanceReplicaConfiguration s) (TF.Attr s P.Text) where
+instance P.HasClientCertificate (SqlDatabaseInstanceReplicaConfiguration s) (P.Maybe (TF.Expr s P.Text)) where
     clientCertificate =
-        P.lens (_clientCertificate :: SqlDatabaseInstanceReplicaConfiguration s -> TF.Attr s P.Text)
-               (\s a -> s { _clientCertificate = a } :: SqlDatabaseInstanceReplicaConfiguration s)
+        P.lens (_clientCertificate :: SqlDatabaseInstanceReplicaConfiguration s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _clientCertificate = a } :: SqlDatabaseInstanceReplicaConfiguration s)
 
-instance P.HasClientKey (SqlDatabaseInstanceReplicaConfiguration s) (TF.Attr s P.Text) where
+instance P.HasClientKey (SqlDatabaseInstanceReplicaConfiguration s) (P.Maybe (TF.Expr s P.Text)) where
     clientKey =
-        P.lens (_clientKey :: SqlDatabaseInstanceReplicaConfiguration s -> TF.Attr s P.Text)
-               (\s a -> s { _clientKey = a } :: SqlDatabaseInstanceReplicaConfiguration s)
+        P.lens (_clientKey :: SqlDatabaseInstanceReplicaConfiguration s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _clientKey = a } :: SqlDatabaseInstanceReplicaConfiguration s)
 
-instance P.HasConnectRetryInterval (SqlDatabaseInstanceReplicaConfiguration s) (TF.Attr s P.Int) where
+instance P.HasConnectRetryInterval (SqlDatabaseInstanceReplicaConfiguration s) (P.Maybe (TF.Expr s P.Int)) where
     connectRetryInterval =
-        P.lens (_connectRetryInterval :: SqlDatabaseInstanceReplicaConfiguration s -> TF.Attr s P.Int)
-               (\s a -> s { _connectRetryInterval = a } :: SqlDatabaseInstanceReplicaConfiguration s)
+        P.lens (_connectRetryInterval :: SqlDatabaseInstanceReplicaConfiguration s -> P.Maybe (TF.Expr s P.Int))
+            (\s a -> s { _connectRetryInterval = a } :: SqlDatabaseInstanceReplicaConfiguration s)
 
-instance P.HasDumpFilePath (SqlDatabaseInstanceReplicaConfiguration s) (TF.Attr s P.Text) where
+instance P.HasDumpFilePath (SqlDatabaseInstanceReplicaConfiguration s) (P.Maybe (TF.Expr s P.Text)) where
     dumpFilePath =
-        P.lens (_dumpFilePath :: SqlDatabaseInstanceReplicaConfiguration s -> TF.Attr s P.Text)
-               (\s a -> s { _dumpFilePath = a } :: SqlDatabaseInstanceReplicaConfiguration s)
+        P.lens (_dumpFilePath :: SqlDatabaseInstanceReplicaConfiguration s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _dumpFilePath = a } :: SqlDatabaseInstanceReplicaConfiguration s)
 
-instance P.HasFailoverTarget (SqlDatabaseInstanceReplicaConfiguration s) (TF.Attr s P.Bool) where
+instance P.HasFailoverTarget (SqlDatabaseInstanceReplicaConfiguration s) (P.Maybe (TF.Expr s P.Bool)) where
     failoverTarget =
-        P.lens (_failoverTarget :: SqlDatabaseInstanceReplicaConfiguration s -> TF.Attr s P.Bool)
-               (\s a -> s { _failoverTarget = a } :: SqlDatabaseInstanceReplicaConfiguration s)
+        P.lens (_failoverTarget :: SqlDatabaseInstanceReplicaConfiguration s -> P.Maybe (TF.Expr s P.Bool))
+            (\s a -> s { _failoverTarget = a } :: SqlDatabaseInstanceReplicaConfiguration s)
 
-instance P.HasMasterHeartbeatPeriod (SqlDatabaseInstanceReplicaConfiguration s) (TF.Attr s P.Int) where
+instance P.HasMasterHeartbeatPeriod (SqlDatabaseInstanceReplicaConfiguration s) (P.Maybe (TF.Expr s P.Int)) where
     masterHeartbeatPeriod =
-        P.lens (_masterHeartbeatPeriod :: SqlDatabaseInstanceReplicaConfiguration s -> TF.Attr s P.Int)
-               (\s a -> s { _masterHeartbeatPeriod = a } :: SqlDatabaseInstanceReplicaConfiguration s)
+        P.lens (_masterHeartbeatPeriod :: SqlDatabaseInstanceReplicaConfiguration s -> P.Maybe (TF.Expr s P.Int))
+            (\s a -> s { _masterHeartbeatPeriod = a } :: SqlDatabaseInstanceReplicaConfiguration s)
 
-instance P.HasPassword (SqlDatabaseInstanceReplicaConfiguration s) (TF.Attr s P.Text) where
+instance P.HasPassword (SqlDatabaseInstanceReplicaConfiguration s) (P.Maybe (TF.Expr s P.Text)) where
     password =
-        P.lens (_password :: SqlDatabaseInstanceReplicaConfiguration s -> TF.Attr s P.Text)
-               (\s a -> s { _password = a } :: SqlDatabaseInstanceReplicaConfiguration s)
+        P.lens (_password :: SqlDatabaseInstanceReplicaConfiguration s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _password = a } :: SqlDatabaseInstanceReplicaConfiguration s)
 
-instance P.HasSslCipher (SqlDatabaseInstanceReplicaConfiguration s) (TF.Attr s P.Text) where
+instance P.HasSslCipher (SqlDatabaseInstanceReplicaConfiguration s) (P.Maybe (TF.Expr s P.Text)) where
     sslCipher =
-        P.lens (_sslCipher :: SqlDatabaseInstanceReplicaConfiguration s -> TF.Attr s P.Text)
-               (\s a -> s { _sslCipher = a } :: SqlDatabaseInstanceReplicaConfiguration s)
+        P.lens (_sslCipher :: SqlDatabaseInstanceReplicaConfiguration s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _sslCipher = a } :: SqlDatabaseInstanceReplicaConfiguration s)
 
-instance P.HasUsername (SqlDatabaseInstanceReplicaConfiguration s) (TF.Attr s P.Text) where
+instance P.HasUsername (SqlDatabaseInstanceReplicaConfiguration s) (P.Maybe (TF.Expr s P.Text)) where
     username =
-        P.lens (_username :: SqlDatabaseInstanceReplicaConfiguration s -> TF.Attr s P.Text)
-               (\s a -> s { _username = a } :: SqlDatabaseInstanceReplicaConfiguration s)
+        P.lens (_username :: SqlDatabaseInstanceReplicaConfiguration s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _username = a } :: SqlDatabaseInstanceReplicaConfiguration s)
 
-instance P.HasVerifyServerCertificate (SqlDatabaseInstanceReplicaConfiguration s) (TF.Attr s P.Bool) where
+instance P.HasVerifyServerCertificate (SqlDatabaseInstanceReplicaConfiguration s) (P.Maybe (TF.Expr s P.Bool)) where
     verifyServerCertificate =
-        P.lens (_verifyServerCertificate :: SqlDatabaseInstanceReplicaConfiguration s -> TF.Attr s P.Bool)
-               (\s a -> s { _verifyServerCertificate = a } :: SqlDatabaseInstanceReplicaConfiguration s)
+        P.lens (_verifyServerCertificate :: SqlDatabaseInstanceReplicaConfiguration s -> P.Maybe (TF.Expr s P.Bool))
+            (\s a -> s { _verifyServerCertificate = a } :: SqlDatabaseInstanceReplicaConfiguration s)
 
 -- | @server_ca_cert@ nested settings.
 data SqlDatabaseInstanceServerCaCert s = SqlDatabaseInstanceServerCaCert'
-    deriving (P.Show, P.Eq, P.Ord)
+    deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @server_ca_cert@ settings value.
 newSqlDatabaseInstanceServerCaCert
@@ -4265,82 +4229,88 @@ newSqlDatabaseInstanceServerCaCert
 newSqlDatabaseInstanceServerCaCert =
     SqlDatabaseInstanceServerCaCert'
 
-instance TF.IsValue  (SqlDatabaseInstanceServerCaCert s)
-instance TF.IsObject (SqlDatabaseInstanceServerCaCert s) where
-    toObject SqlDatabaseInstanceServerCaCert' = []
+instance TF.ToHCL (SqlDatabaseInstanceServerCaCert s) where
+    toHCL SqlDatabaseInstanceServerCaCert' = P.mempty
 
-instance TF.IsValid (SqlDatabaseInstanceServerCaCert s) where
-    validator = P.mempty
+instance P.Hashable (SqlDatabaseInstanceServerCaCert s)
 
-instance s ~ s' => P.HasComputedCert (TF.Ref s' (SqlDatabaseInstanceServerCaCert s)) (TF.Attr s P.Text) where
-    computedCert x = TF.compute (TF.refKey x) "cert"
+instance TF.HasValidator (SqlDatabaseInstanceServerCaCert s)
 
-instance s ~ s' => P.HasComputedCommonName (TF.Ref s' (SqlDatabaseInstanceServerCaCert s)) (TF.Attr s P.Text) where
-    computedCommonName x = TF.compute (TF.refKey x) "common_name"
+instance s ~ s' => P.HasComputedCert (TF.Ref s' (SqlDatabaseInstanceServerCaCert s)) (TF.Expr s P.Text) where
+    computedCert x =
+        TF.unsafeCompute TF.encodeAttr x "cert"
 
-instance s ~ s' => P.HasComputedCreateTime (TF.Ref s' (SqlDatabaseInstanceServerCaCert s)) (TF.Attr s P.Text) where
-    computedCreateTime x = TF.compute (TF.refKey x) "create_time"
+instance s ~ s' => P.HasComputedCommonName (TF.Ref s' (SqlDatabaseInstanceServerCaCert s)) (TF.Expr s P.Text) where
+    computedCommonName x =
+        TF.unsafeCompute TF.encodeAttr x "common_name"
 
-instance s ~ s' => P.HasComputedExpirationTime (TF.Ref s' (SqlDatabaseInstanceServerCaCert s)) (TF.Attr s P.Text) where
-    computedExpirationTime x = TF.compute (TF.refKey x) "expiration_time"
+instance s ~ s' => P.HasComputedCreateTime (TF.Ref s' (SqlDatabaseInstanceServerCaCert s)) (TF.Expr s P.Text) where
+    computedCreateTime x =
+        TF.unsafeCompute TF.encodeAttr x "create_time"
 
-instance s ~ s' => P.HasComputedSha1Fingerprint (TF.Ref s' (SqlDatabaseInstanceServerCaCert s)) (TF.Attr s P.Text) where
-    computedSha1Fingerprint x = TF.compute (TF.refKey x) "sha1_fingerprint"
+instance s ~ s' => P.HasComputedExpirationTime (TF.Ref s' (SqlDatabaseInstanceServerCaCert s)) (TF.Expr s P.Text) where
+    computedExpirationTime x =
+        TF.unsafeCompute TF.encodeAttr x "expiration_time"
+
+instance s ~ s' => P.HasComputedSha1Fingerprint (TF.Ref s' (SqlDatabaseInstanceServerCaCert s)) (TF.Expr s P.Text) where
+    computedSha1Fingerprint x =
+        TF.unsafeCompute TF.encodeAttr x "sha1_fingerprint"
 
 -- | @action@ nested settings.
 data StorageBucketAction s = StorageBucketAction'
-    { _storageClass :: TF.Attr s P.Text
+    { _storageClass :: P.Maybe (TF.Expr s P.Text)
     -- ^ @storage_class@ - (Optional)
     --
-    , _type'        :: TF.Attr s P.Text
+    , _type'        :: TF.Expr s P.Text
     -- ^ @type@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @action@ settings value.
 newStorageBucketAction
-    :: TF.Attr s P.Text -- ^ 'P._type'': @type@
+    :: TF.Expr s P.Text -- ^ Lens: 'P.type'', Field: '_type'', HCL: @type@
     -> StorageBucketAction s
 newStorageBucketAction _type' =
     StorageBucketAction'
-        { _storageClass = TF.Nil
+        { _storageClass = P.Nothing
         , _type' = _type'
         }
 
-instance TF.IsValue  (StorageBucketAction s)
-instance TF.IsObject (StorageBucketAction s) where
-    toObject StorageBucketAction'{..} = P.catMaybes
-        [ TF.assign "storage_class" <$> TF.attribute _storageClass
-        , TF.assign "type" <$> TF.attribute _type'
+instance TF.ToHCL (StorageBucketAction s) where
+     toHCL StorageBucketAction'{..} = TF.pairs $ P.mconcat
+        [ P.maybe P.mempty (TF.pair "storage_class") _storageClass
+        , TF.pair "type" _type'
         ]
 
-instance TF.IsValid (StorageBucketAction s) where
+instance P.Hashable (StorageBucketAction s)
+
+instance TF.HasValidator (StorageBucketAction s) where
     validator = P.mempty
 
-instance P.HasStorageClass (StorageBucketAction s) (TF.Attr s P.Text) where
+instance P.HasStorageClass (StorageBucketAction s) (P.Maybe (TF.Expr s P.Text)) where
     storageClass =
-        P.lens (_storageClass :: StorageBucketAction s -> TF.Attr s P.Text)
-               (\s a -> s { _storageClass = a } :: StorageBucketAction s)
+        P.lens (_storageClass :: StorageBucketAction s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _storageClass = a } :: StorageBucketAction s)
 
-instance P.HasType' (StorageBucketAction s) (TF.Attr s P.Text) where
+instance P.HasType' (StorageBucketAction s) (TF.Expr s P.Text) where
     type' =
-        P.lens (_type' :: StorageBucketAction s -> TF.Attr s P.Text)
-               (\s a -> s { _type' = a } :: StorageBucketAction s)
+        P.lens (_type' :: StorageBucketAction s -> TF.Expr s P.Text)
+            (\s a -> s { _type' = a } :: StorageBucketAction s)
 
 -- | @lifecycle_rule@ nested settings.
 data StorageBucketLifecycleRule s = StorageBucketLifecycleRule'
-    { _action    :: TF.Attr s (StorageBucketAction s)
+    { _action    :: TF.Expr s (StorageBucketAction s)
     -- ^ @action@ - (Required)
     --
-    , _condition :: TF.Attr s (StorageBucketCondition s)
+    , _condition :: TF.Expr s (StorageBucketCondition s)
     -- ^ @condition@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @lifecycle_rule@ settings value.
 newStorageBucketLifecycleRule
-    :: TF.Attr s (StorageBucketAction s) -- ^ 'P._action': @action@
-    -> TF.Attr s (StorageBucketCondition s) -- ^ 'P._condition': @condition@
+    :: TF.Expr s (StorageBucketAction s) -- ^ Lens: 'P.action', Field: '_action', HCL: @action@
+    -> TF.Expr s (StorageBucketCondition s) -- ^ Lens: 'P.condition', Field: '_condition', HCL: @condition@
     -> StorageBucketLifecycleRule s
 newStorageBucketLifecycleRule _action _condition =
     StorageBucketLifecycleRule'
@@ -4348,211 +4318,210 @@ newStorageBucketLifecycleRule _action _condition =
         , _condition = _condition
         }
 
-instance TF.IsValue  (StorageBucketLifecycleRule s)
-instance TF.IsObject (StorageBucketLifecycleRule s) where
-    toObject StorageBucketLifecycleRule'{..} = P.catMaybes
-        [ TF.assign "action" <$> TF.attribute _action
-        , TF.assign "condition" <$> TF.attribute _condition
+instance TF.ToHCL (StorageBucketLifecycleRule s) where
+     toHCL StorageBucketLifecycleRule'{..} = TF.pairs $ P.mconcat
+        [ TF.pair "action" _action
+        , TF.pair "condition" _condition
         ]
 
-instance TF.IsValid (StorageBucketLifecycleRule s) where
+instance P.Hashable (StorageBucketLifecycleRule s)
+
+instance TF.HasValidator (StorageBucketLifecycleRule s) where
     validator = P.mempty
-           P.<> TF.settingsValidator "_action"
-                  (_action
-                      :: StorageBucketLifecycleRule s -> TF.Attr s (StorageBucketAction s))
-                  TF.validator
-           P.<> TF.settingsValidator "_condition"
-                  (_condition
-                      :: StorageBucketLifecycleRule s -> TF.Attr s (StorageBucketCondition s))
-                  TF.validator
+           P.<> TF.fieldValidator "_action" (_action :: StorageBucketLifecycleRule s -> TF.Expr s (StorageBucketAction s))
+           P.<> TF.fieldValidator "_condition" (_condition :: StorageBucketLifecycleRule s -> TF.Expr s (StorageBucketCondition s))
 
-instance P.HasAction (StorageBucketLifecycleRule s) (TF.Attr s (StorageBucketAction s)) where
+instance P.HasAction (StorageBucketLifecycleRule s) (TF.Expr s (StorageBucketAction s)) where
     action =
-        P.lens (_action :: StorageBucketLifecycleRule s -> TF.Attr s (StorageBucketAction s))
-               (\s a -> s { _action = a } :: StorageBucketLifecycleRule s)
+        P.lens (_action :: StorageBucketLifecycleRule s -> TF.Expr s (StorageBucketAction s))
+            (\s a -> s { _action = a } :: StorageBucketLifecycleRule s)
 
-instance P.HasCondition (StorageBucketLifecycleRule s) (TF.Attr s (StorageBucketCondition s)) where
+instance P.HasCondition (StorageBucketLifecycleRule s) (TF.Expr s (StorageBucketCondition s)) where
     condition =
-        P.lens (_condition :: StorageBucketLifecycleRule s -> TF.Attr s (StorageBucketCondition s))
-               (\s a -> s { _condition = a } :: StorageBucketLifecycleRule s)
+        P.lens (_condition :: StorageBucketLifecycleRule s -> TF.Expr s (StorageBucketCondition s))
+            (\s a -> s { _condition = a } :: StorageBucketLifecycleRule s)
 
 -- | @condition@ nested settings.
 data StorageBucketCondition s = StorageBucketCondition'
-    { _age                 :: TF.Attr s P.Int
+    { _age :: P.Maybe (TF.Expr s P.Int)
     -- ^ @age@ - (Optional)
     --
-    , _createdBefore       :: TF.Attr s P.Text
+    , _createdBefore :: P.Maybe (TF.Expr s P.Text)
     -- ^ @created_before@ - (Optional)
     --
-    , _isLive              :: TF.Attr s P.Bool
+    , _isLive :: P.Maybe (TF.Expr s P.Bool)
     -- ^ @is_live@ - (Optional)
     --
-    , _matchesStorageClass :: TF.Attr s (P.NonEmpty (TF.Attr s P.Text))
+    , _matchesStorageClass :: P.Maybe (TF.Expr s (P.NonEmpty (TF.Expr s P.Text)))
     -- ^ @matches_storage_class@ - (Optional)
     --
-    , _numNewerVersions    :: TF.Attr s P.Int
+    , _numNewerVersions :: P.Maybe (TF.Expr s P.Int)
     -- ^ @num_newer_versions@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @condition@ settings value.
 newStorageBucketCondition
     :: StorageBucketCondition s
 newStorageBucketCondition =
     StorageBucketCondition'
-        { _age = TF.Nil
-        , _createdBefore = TF.Nil
-        , _isLive = TF.Nil
-        , _matchesStorageClass = TF.Nil
-        , _numNewerVersions = TF.Nil
+        { _age = P.Nothing
+        , _createdBefore = P.Nothing
+        , _isLive = P.Nothing
+        , _matchesStorageClass = P.Nothing
+        , _numNewerVersions = P.Nothing
         }
 
-instance TF.IsValue  (StorageBucketCondition s)
-instance TF.IsObject (StorageBucketCondition s) where
-    toObject StorageBucketCondition'{..} = P.catMaybes
-        [ TF.assign "age" <$> TF.attribute _age
-        , TF.assign "created_before" <$> TF.attribute _createdBefore
-        , TF.assign "is_live" <$> TF.attribute _isLive
-        , TF.assign "matches_storage_class" <$> TF.attribute _matchesStorageClass
-        , TF.assign "num_newer_versions" <$> TF.attribute _numNewerVersions
+instance TF.ToHCL (StorageBucketCondition s) where
+     toHCL StorageBucketCondition'{..} = TF.pairs $ P.mconcat
+        [ P.maybe P.mempty (TF.pair "age") _age
+        , P.maybe P.mempty (TF.pair "created_before") _createdBefore
+        , P.maybe P.mempty (TF.pair "is_live") _isLive
+        , P.maybe P.mempty (TF.pair "matches_storage_class") _matchesStorageClass
+        , P.maybe P.mempty (TF.pair "num_newer_versions") _numNewerVersions
         ]
 
-instance TF.IsValid (StorageBucketCondition s) where
+instance P.Hashable (StorageBucketCondition s)
+
+instance TF.HasValidator (StorageBucketCondition s) where
     validator = P.mempty
 
-instance P.HasAge (StorageBucketCondition s) (TF.Attr s P.Int) where
+instance P.HasAge (StorageBucketCondition s) (P.Maybe (TF.Expr s P.Int)) where
     age =
-        P.lens (_age :: StorageBucketCondition s -> TF.Attr s P.Int)
-               (\s a -> s { _age = a } :: StorageBucketCondition s)
+        P.lens (_age :: StorageBucketCondition s -> P.Maybe (TF.Expr s P.Int))
+            (\s a -> s { _age = a } :: StorageBucketCondition s)
 
-instance P.HasCreatedBefore (StorageBucketCondition s) (TF.Attr s P.Text) where
+instance P.HasCreatedBefore (StorageBucketCondition s) (P.Maybe (TF.Expr s P.Text)) where
     createdBefore =
-        P.lens (_createdBefore :: StorageBucketCondition s -> TF.Attr s P.Text)
-               (\s a -> s { _createdBefore = a } :: StorageBucketCondition s)
+        P.lens (_createdBefore :: StorageBucketCondition s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _createdBefore = a } :: StorageBucketCondition s)
 
-instance P.HasIsLive (StorageBucketCondition s) (TF.Attr s P.Bool) where
+instance P.HasIsLive (StorageBucketCondition s) (P.Maybe (TF.Expr s P.Bool)) where
     isLive =
-        P.lens (_isLive :: StorageBucketCondition s -> TF.Attr s P.Bool)
-               (\s a -> s { _isLive = a } :: StorageBucketCondition s)
+        P.lens (_isLive :: StorageBucketCondition s -> P.Maybe (TF.Expr s P.Bool))
+            (\s a -> s { _isLive = a } :: StorageBucketCondition s)
 
-instance P.HasMatchesStorageClass (StorageBucketCondition s) (TF.Attr s (P.NonEmpty (TF.Attr s P.Text))) where
+instance P.HasMatchesStorageClass (StorageBucketCondition s) (P.Maybe (TF.Expr s (P.NonEmpty (TF.Expr s P.Text)))) where
     matchesStorageClass =
-        P.lens (_matchesStorageClass :: StorageBucketCondition s -> TF.Attr s (P.NonEmpty (TF.Attr s P.Text)))
-               (\s a -> s { _matchesStorageClass = a } :: StorageBucketCondition s)
+        P.lens (_matchesStorageClass :: StorageBucketCondition s -> P.Maybe (TF.Expr s (P.NonEmpty (TF.Expr s P.Text))))
+            (\s a -> s { _matchesStorageClass = a } :: StorageBucketCondition s)
 
-instance P.HasNumNewerVersions (StorageBucketCondition s) (TF.Attr s P.Int) where
+instance P.HasNumNewerVersions (StorageBucketCondition s) (P.Maybe (TF.Expr s P.Int)) where
     numNewerVersions =
-        P.lens (_numNewerVersions :: StorageBucketCondition s -> TF.Attr s P.Int)
-               (\s a -> s { _numNewerVersions = a } :: StorageBucketCondition s)
+        P.lens (_numNewerVersions :: StorageBucketCondition s -> P.Maybe (TF.Expr s P.Int))
+            (\s a -> s { _numNewerVersions = a } :: StorageBucketCondition s)
 
 -- | @cors@ nested settings.
 data StorageBucketCors s = StorageBucketCors'
-    { _maxAgeSeconds  :: TF.Attr s P.Int
+    { _maxAgeSeconds  :: P.Maybe (TF.Expr s P.Int)
     -- ^ @max_age_seconds@ - (Optional)
     --
-    , _method         :: TF.Attr s [TF.Attr s P.Text]
+    , _method         :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
     -- ^ @method@ - (Optional)
     --
-    , _origin         :: TF.Attr s [TF.Attr s P.Text]
+    , _origin         :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
     -- ^ @origin@ - (Optional)
     --
-    , _responseHeader :: TF.Attr s [TF.Attr s P.Text]
+    , _responseHeader :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
     -- ^ @response_header@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @cors@ settings value.
 newStorageBucketCors
     :: StorageBucketCors s
 newStorageBucketCors =
     StorageBucketCors'
-        { _maxAgeSeconds = TF.Nil
-        , _method = TF.Nil
-        , _origin = TF.Nil
-        , _responseHeader = TF.Nil
+        { _maxAgeSeconds = P.Nothing
+        , _method = P.Nothing
+        , _origin = P.Nothing
+        , _responseHeader = P.Nothing
         }
 
-instance TF.IsValue  (StorageBucketCors s)
-instance TF.IsObject (StorageBucketCors s) where
-    toObject StorageBucketCors'{..} = P.catMaybes
-        [ TF.assign "max_age_seconds" <$> TF.attribute _maxAgeSeconds
-        , TF.assign "method" <$> TF.attribute _method
-        , TF.assign "origin" <$> TF.attribute _origin
-        , TF.assign "response_header" <$> TF.attribute _responseHeader
+instance TF.ToHCL (StorageBucketCors s) where
+     toHCL StorageBucketCors'{..} = TF.pairs $ P.mconcat
+        [ P.maybe P.mempty (TF.pair "max_age_seconds") _maxAgeSeconds
+        , P.maybe P.mempty (TF.pair "method") _method
+        , P.maybe P.mempty (TF.pair "origin") _origin
+        , P.maybe P.mempty (TF.pair "response_header") _responseHeader
         ]
 
-instance TF.IsValid (StorageBucketCors s) where
+instance P.Hashable (StorageBucketCors s)
+
+instance TF.HasValidator (StorageBucketCors s) where
     validator = P.mempty
 
-instance P.HasMaxAgeSeconds (StorageBucketCors s) (TF.Attr s P.Int) where
+instance P.HasMaxAgeSeconds (StorageBucketCors s) (P.Maybe (TF.Expr s P.Int)) where
     maxAgeSeconds =
-        P.lens (_maxAgeSeconds :: StorageBucketCors s -> TF.Attr s P.Int)
-               (\s a -> s { _maxAgeSeconds = a } :: StorageBucketCors s)
+        P.lens (_maxAgeSeconds :: StorageBucketCors s -> P.Maybe (TF.Expr s P.Int))
+            (\s a -> s { _maxAgeSeconds = a } :: StorageBucketCors s)
 
-instance P.HasMethod (StorageBucketCors s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasMethod (StorageBucketCors s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
     method =
-        P.lens (_method :: StorageBucketCors s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _method = a } :: StorageBucketCors s)
+        P.lens (_method :: StorageBucketCors s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
+            (\s a -> s { _method = a } :: StorageBucketCors s)
 
-instance P.HasOrigin (StorageBucketCors s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasOrigin (StorageBucketCors s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
     origin =
-        P.lens (_origin :: StorageBucketCors s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _origin = a } :: StorageBucketCors s)
+        P.lens (_origin :: StorageBucketCors s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
+            (\s a -> s { _origin = a } :: StorageBucketCors s)
 
-instance P.HasResponseHeader (StorageBucketCors s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasResponseHeader (StorageBucketCors s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
     responseHeader =
-        P.lens (_responseHeader :: StorageBucketCors s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _responseHeader = a } :: StorageBucketCors s)
+        P.lens (_responseHeader :: StorageBucketCors s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
+            (\s a -> s { _responseHeader = a } :: StorageBucketCors s)
 
 -- | @logging@ nested settings.
 data StorageBucketLogging s = StorageBucketLogging'
-    { _logBucket       :: TF.Attr s P.Text
+    { _logBucket       :: TF.Expr s P.Text
     -- ^ @log_bucket@ - (Required)
     --
-    , _logObjectPrefix :: TF.Attr s P.Text
+    , _logObjectPrefix :: P.Maybe (TF.Expr s P.Text)
     -- ^ @log_object_prefix@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @logging@ settings value.
 newStorageBucketLogging
-    :: TF.Attr s P.Text -- ^ 'P._logBucket': @log_bucket@
+    :: TF.Expr s P.Text -- ^ Lens: 'P.logBucket', Field: '_logBucket', HCL: @log_bucket@
     -> StorageBucketLogging s
 newStorageBucketLogging _logBucket =
     StorageBucketLogging'
         { _logBucket = _logBucket
-        , _logObjectPrefix = TF.Nil
+        , _logObjectPrefix = P.Nothing
         }
 
-instance TF.IsValue  (StorageBucketLogging s)
-instance TF.IsObject (StorageBucketLogging s) where
-    toObject StorageBucketLogging'{..} = P.catMaybes
-        [ TF.assign "log_bucket" <$> TF.attribute _logBucket
-        , TF.assign "log_object_prefix" <$> TF.attribute _logObjectPrefix
+instance TF.ToHCL (StorageBucketLogging s) where
+     toHCL StorageBucketLogging'{..} = TF.pairs $ P.mconcat
+        [ TF.pair "log_bucket" _logBucket
+        , P.maybe P.mempty (TF.pair "log_object_prefix") _logObjectPrefix
         ]
 
-instance TF.IsValid (StorageBucketLogging s) where
+instance P.Hashable (StorageBucketLogging s)
+
+instance TF.HasValidator (StorageBucketLogging s) where
     validator = P.mempty
 
-instance P.HasLogBucket (StorageBucketLogging s) (TF.Attr s P.Text) where
+instance P.HasLogBucket (StorageBucketLogging s) (TF.Expr s P.Text) where
     logBucket =
-        P.lens (_logBucket :: StorageBucketLogging s -> TF.Attr s P.Text)
-               (\s a -> s { _logBucket = a } :: StorageBucketLogging s)
+        P.lens (_logBucket :: StorageBucketLogging s -> TF.Expr s P.Text)
+            (\s a -> s { _logBucket = a } :: StorageBucketLogging s)
 
-instance P.HasLogObjectPrefix (StorageBucketLogging s) (TF.Attr s P.Text) where
+instance P.HasLogObjectPrefix (StorageBucketLogging s) (P.Maybe (TF.Expr s P.Text)) where
     logObjectPrefix =
-        P.lens (_logObjectPrefix :: StorageBucketLogging s -> TF.Attr s P.Text)
-               (\s a -> s { _logObjectPrefix = a } :: StorageBucketLogging s)
+        P.lens (_logObjectPrefix :: StorageBucketLogging s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _logObjectPrefix = a } :: StorageBucketLogging s)
 
-instance s ~ s' => P.HasComputedLogObjectPrefix (TF.Ref s' (StorageBucketLogging s)) (TF.Attr s P.Text) where
-    computedLogObjectPrefix x = TF.compute (TF.refKey x) "log_object_prefix"
+instance s ~ s' => P.HasComputedLogObjectPrefix (TF.Ref s' (StorageBucketLogging s)) (TF.Expr s P.Text) where
+    computedLogObjectPrefix x =
+        TF.unsafeCompute TF.encodeAttr x "log_object_prefix"
 
 -- | @versioning@ nested settings.
 data StorageBucketVersioning s = StorageBucketVersioning'
-    { _enabled :: TF.Attr s P.Bool
-    -- ^ @enabled@ - (Optional)
+    { _enabled :: TF.Expr s P.Bool
+    -- ^ @enabled@ - (Default @false@)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @versioning@ settings value.
 newStorageBucketVersioning
@@ -4562,55 +4531,57 @@ newStorageBucketVersioning =
         { _enabled = TF.value P.False
         }
 
-instance TF.IsValue  (StorageBucketVersioning s)
-instance TF.IsObject (StorageBucketVersioning s) where
-    toObject StorageBucketVersioning'{..} = P.catMaybes
-        [ TF.assign "enabled" <$> TF.attribute _enabled
+instance TF.ToHCL (StorageBucketVersioning s) where
+     toHCL StorageBucketVersioning'{..} = TF.pairs $ P.mconcat
+        [ TF.pair "enabled" _enabled
         ]
 
-instance TF.IsValid (StorageBucketVersioning s) where
+instance P.Hashable (StorageBucketVersioning s)
+
+instance TF.HasValidator (StorageBucketVersioning s) where
     validator = P.mempty
 
-instance P.HasEnabled (StorageBucketVersioning s) (TF.Attr s P.Bool) where
+instance P.HasEnabled (StorageBucketVersioning s) (TF.Expr s P.Bool) where
     enabled =
-        P.lens (_enabled :: StorageBucketVersioning s -> TF.Attr s P.Bool)
-               (\s a -> s { _enabled = a } :: StorageBucketVersioning s)
+        P.lens (_enabled :: StorageBucketVersioning s -> TF.Expr s P.Bool)
+            (\s a -> s { _enabled = a } :: StorageBucketVersioning s)
 
 -- | @website@ nested settings.
 data StorageBucketWebsite s = StorageBucketWebsite'
-    { _mainPageSuffix :: TF.Attr s P.Text
+    { _mainPageSuffix :: P.Maybe (TF.Expr s P.Text)
     -- ^ @main_page_suffix@ - (Optional)
     --
-    , _notFoundPage   :: TF.Attr s P.Text
+    , _notFoundPage   :: P.Maybe (TF.Expr s P.Text)
     -- ^ @not_found_page@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @website@ settings value.
 newStorageBucketWebsite
     :: StorageBucketWebsite s
 newStorageBucketWebsite =
     StorageBucketWebsite'
-        { _mainPageSuffix = TF.Nil
-        , _notFoundPage = TF.Nil
+        { _mainPageSuffix = P.Nothing
+        , _notFoundPage = P.Nothing
         }
 
-instance TF.IsValue  (StorageBucketWebsite s)
-instance TF.IsObject (StorageBucketWebsite s) where
-    toObject StorageBucketWebsite'{..} = P.catMaybes
-        [ TF.assign "main_page_suffix" <$> TF.attribute _mainPageSuffix
-        , TF.assign "not_found_page" <$> TF.attribute _notFoundPage
+instance TF.ToHCL (StorageBucketWebsite s) where
+     toHCL StorageBucketWebsite'{..} = TF.pairs $ P.mconcat
+        [ P.maybe P.mempty (TF.pair "main_page_suffix") _mainPageSuffix
+        , P.maybe P.mempty (TF.pair "not_found_page") _notFoundPage
         ]
 
-instance TF.IsValid (StorageBucketWebsite s) where
+instance P.Hashable (StorageBucketWebsite s)
+
+instance TF.HasValidator (StorageBucketWebsite s) where
     validator = P.mempty
 
-instance P.HasMainPageSuffix (StorageBucketWebsite s) (TF.Attr s P.Text) where
+instance P.HasMainPageSuffix (StorageBucketWebsite s) (P.Maybe (TF.Expr s P.Text)) where
     mainPageSuffix =
-        P.lens (_mainPageSuffix :: StorageBucketWebsite s -> TF.Attr s P.Text)
-               (\s a -> s { _mainPageSuffix = a } :: StorageBucketWebsite s)
+        P.lens (_mainPageSuffix :: StorageBucketWebsite s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _mainPageSuffix = a } :: StorageBucketWebsite s)
 
-instance P.HasNotFoundPage (StorageBucketWebsite s) (TF.Attr s P.Text) where
+instance P.HasNotFoundPage (StorageBucketWebsite s) (P.Maybe (TF.Expr s P.Text)) where
     notFoundPage =
-        P.lens (_notFoundPage :: StorageBucketWebsite s -> TF.Attr s P.Text)
-               (\s a -> s { _notFoundPage = a } :: StorageBucketWebsite s)
+        P.lens (_notFoundPage :: StorageBucketWebsite s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _notFoundPage = a } :: StorageBucketWebsite s)

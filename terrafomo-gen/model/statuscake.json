@@ -1,5 +1,6 @@
 {
   "name": "statuscake",
+  "version": "0.2.0-1-ga6ddc0c",
   "schemas": [
     {
       "name": "apikey",

@@ -1,7 +1,6 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -71,193 +70,196 @@ import Data.Functor ((<$>))
 
 import GHC.Base (($))
 
-
+import qualified Data.Hashable            as P
+import qualified Data.HashMap.Strict      as P
+import qualified Data.HashMap.Strict      as HashMap
 import qualified Data.List.NonEmpty       as P
-import qualified Data.Map.Strict          as P
-import qualified Data.Map.Strict          as Map
 import qualified Data.Maybe               as P
-import qualified Data.Monoid              as P
-import qualified Data.Text                as P
+import qualified Data.Text.Lazy           as P
 import qualified GHC.Generics             as P
 import qualified Lens.Micro               as P
 import qualified Prelude                  as P
-import qualified Terrafomo.Attribute      as TF
+import qualified Terrafomo.Encode         as TF
 import qualified Terrafomo.HCL            as TF
-import qualified Terrafomo.Name           as TF
+import qualified Terrafomo.HIL            as TF
+import qualified Terrafomo.Schema         as TF
 import qualified Terrafomo.UltraDNS.Lens  as P
 import qualified Terrafomo.UltraDNS.Types as P
-import qualified Terrafomo.Validator      as TF
+import qualified Terrafomo.Validate       as TF
 
 -- | @geo_info@ nested settings.
 data DirpoolGeoInfo s = DirpoolGeoInfo'
-    { _codes          :: TF.Attr s [TF.Attr s P.Text]
+    { _codes          :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
     -- ^ @codes@ - (Optional)
     --
-    , _isAccountLevel :: TF.Attr s P.Bool
-    -- ^ @is_account_level@ - (Optional)
+    , _isAccountLevel :: TF.Expr s P.Bool
+    -- ^ @is_account_level@ - (Default @false@)
     --
-    , _name           :: TF.Attr s P.Text
+    , _name           :: P.Maybe (TF.Expr s P.Text)
     -- ^ @name@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @geo_info@ settings value.
 newDirpoolGeoInfo
     :: DirpoolGeoInfo s
 newDirpoolGeoInfo =
     DirpoolGeoInfo'
-        { _codes = TF.Nil
+        { _codes = P.Nothing
         , _isAccountLevel = TF.value P.False
-        , _name = TF.Nil
+        , _name = P.Nothing
         }
 
-instance TF.IsValue  (DirpoolGeoInfo s)
-instance TF.IsObject (DirpoolGeoInfo s) where
-    toObject DirpoolGeoInfo'{..} = P.catMaybes
-        [ TF.assign "codes" <$> TF.attribute _codes
-        , TF.assign "is_account_level" <$> TF.attribute _isAccountLevel
-        , TF.assign "name" <$> TF.attribute _name
+instance TF.ToHCL (DirpoolGeoInfo s) where
+     toHCL DirpoolGeoInfo'{..} = TF.pairs $ P.mconcat
+        [ P.maybe P.mempty (TF.pair "codes") _codes
+        , TF.pair "is_account_level" _isAccountLevel
+        , P.maybe P.mempty (TF.pair "name") _name
         ]
 
-instance TF.IsValid (DirpoolGeoInfo s) where
+instance P.Hashable (DirpoolGeoInfo s)
+
+instance TF.HasValidator (DirpoolGeoInfo s) where
     validator = P.mempty
 
-instance P.HasCodes (DirpoolGeoInfo s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasCodes (DirpoolGeoInfo s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
     codes =
-        P.lens (_codes :: DirpoolGeoInfo s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _codes = a } :: DirpoolGeoInfo s)
+        P.lens (_codes :: DirpoolGeoInfo s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
+            (\s a -> s { _codes = a } :: DirpoolGeoInfo s)
 
-instance P.HasIsAccountLevel (DirpoolGeoInfo s) (TF.Attr s P.Bool) where
+instance P.HasIsAccountLevel (DirpoolGeoInfo s) (TF.Expr s P.Bool) where
     isAccountLevel =
-        P.lens (_isAccountLevel :: DirpoolGeoInfo s -> TF.Attr s P.Bool)
-               (\s a -> s { _isAccountLevel = a } :: DirpoolGeoInfo s)
+        P.lens (_isAccountLevel :: DirpoolGeoInfo s -> TF.Expr s P.Bool)
+            (\s a -> s { _isAccountLevel = a } :: DirpoolGeoInfo s)
 
-instance P.HasName (DirpoolGeoInfo s) (TF.Attr s P.Text) where
+instance P.HasName (DirpoolGeoInfo s) (P.Maybe (TF.Expr s P.Text)) where
     name =
-        P.lens (_name :: DirpoolGeoInfo s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: DirpoolGeoInfo s)
+        P.lens (_name :: DirpoolGeoInfo s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _name = a } :: DirpoolGeoInfo s)
 
 -- | @rdata@ nested settings.
 data DirpoolRdata s = DirpoolRdata'
-    { _allNonConfigured :: TF.Attr s P.Bool
-    -- ^ @all_non_configured@ - (Optional)
+    { _allNonConfigured :: TF.Expr s P.Bool
+    -- ^ @all_non_configured@ - (Default @false@)
     --
-    , _geoInfo          :: TF.Attr s [TF.Attr s (DirpoolGeoInfo s)]
+    , _geoInfo          :: P.Maybe (TF.Expr s [TF.Expr s (DirpoolGeoInfo s)])
     -- ^ @geo_info@ - (Optional)
     --
-    , _host             :: TF.Attr s P.Text
+    , _host             :: TF.Expr s P.Text
     -- ^ @host@ - (Required)
     --
-    , _ipInfo           :: TF.Attr s [TF.Attr s (DirpoolIpInfo s)]
+    , _ipInfo           :: P.Maybe (TF.Expr s [TF.Expr s (DirpoolIpInfo s)])
     -- ^ @ip_info@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @rdata@ settings value.
 newDirpoolRdata
-    :: TF.Attr s P.Text -- ^ 'P._host': @host@
+    :: TF.Expr s P.Text -- ^ Lens: 'P.host', Field: '_host', HCL: @host@
     -> DirpoolRdata s
 newDirpoolRdata _host =
     DirpoolRdata'
         { _allNonConfigured = TF.value P.False
-        , _geoInfo = TF.Nil
+        , _geoInfo = P.Nothing
         , _host = _host
-        , _ipInfo = TF.Nil
+        , _ipInfo = P.Nothing
         }
 
-instance TF.IsValue  (DirpoolRdata s)
-instance TF.IsObject (DirpoolRdata s) where
-    toObject DirpoolRdata'{..} = P.catMaybes
-        [ TF.assign "all_non_configured" <$> TF.attribute _allNonConfigured
-        , TF.assign "geo_info" <$> TF.attribute _geoInfo
-        , TF.assign "host" <$> TF.attribute _host
-        , TF.assign "ip_info" <$> TF.attribute _ipInfo
+instance TF.ToHCL (DirpoolRdata s) where
+     toHCL DirpoolRdata'{..} = TF.pairs $ P.mconcat
+        [ TF.pair "all_non_configured" _allNonConfigured
+        , P.maybe P.mempty (TF.pair "geo_info") _geoInfo
+        , TF.pair "host" _host
+        , P.maybe P.mempty (TF.pair "ip_info") _ipInfo
         ]
 
-instance TF.IsValid (DirpoolRdata s) where
+instance P.Hashable (DirpoolRdata s)
+
+instance TF.HasValidator (DirpoolRdata s) where
     validator = P.mempty
 
-instance P.HasAllNonConfigured (DirpoolRdata s) (TF.Attr s P.Bool) where
+instance P.HasAllNonConfigured (DirpoolRdata s) (TF.Expr s P.Bool) where
     allNonConfigured =
-        P.lens (_allNonConfigured :: DirpoolRdata s -> TF.Attr s P.Bool)
-               (\s a -> s { _allNonConfigured = a } :: DirpoolRdata s)
+        P.lens (_allNonConfigured :: DirpoolRdata s -> TF.Expr s P.Bool)
+            (\s a -> s { _allNonConfigured = a } :: DirpoolRdata s)
 
-instance P.HasGeoInfo (DirpoolRdata s) (TF.Attr s [TF.Attr s (DirpoolGeoInfo s)]) where
+instance P.HasGeoInfo (DirpoolRdata s) (P.Maybe (TF.Expr s [TF.Expr s (DirpoolGeoInfo s)])) where
     geoInfo =
-        P.lens (_geoInfo :: DirpoolRdata s -> TF.Attr s [TF.Attr s (DirpoolGeoInfo s)])
-               (\s a -> s { _geoInfo = a } :: DirpoolRdata s)
+        P.lens (_geoInfo :: DirpoolRdata s -> P.Maybe (TF.Expr s [TF.Expr s (DirpoolGeoInfo s)]))
+            (\s a -> s { _geoInfo = a } :: DirpoolRdata s)
 
-instance P.HasHost (DirpoolRdata s) (TF.Attr s P.Text) where
+instance P.HasHost (DirpoolRdata s) (TF.Expr s P.Text) where
     host =
-        P.lens (_host :: DirpoolRdata s -> TF.Attr s P.Text)
-               (\s a -> s { _host = a } :: DirpoolRdata s)
+        P.lens (_host :: DirpoolRdata s -> TF.Expr s P.Text)
+            (\s a -> s { _host = a } :: DirpoolRdata s)
 
-instance P.HasIpInfo (DirpoolRdata s) (TF.Attr s [TF.Attr s (DirpoolIpInfo s)]) where
+instance P.HasIpInfo (DirpoolRdata s) (P.Maybe (TF.Expr s [TF.Expr s (DirpoolIpInfo s)])) where
     ipInfo =
-        P.lens (_ipInfo :: DirpoolRdata s -> TF.Attr s [TF.Attr s (DirpoolIpInfo s)])
-               (\s a -> s { _ipInfo = a } :: DirpoolRdata s)
+        P.lens (_ipInfo :: DirpoolRdata s -> P.Maybe (TF.Expr s [TF.Expr s (DirpoolIpInfo s)]))
+            (\s a -> s { _ipInfo = a } :: DirpoolRdata s)
 
 -- | @ip_info@ nested settings.
 data DirpoolIpInfo s = DirpoolIpInfo'
-    { _ips            :: TF.Attr s [TF.Attr s (DirpoolIps s)]
+    { _ips            :: P.Maybe (TF.Expr s [TF.Expr s (DirpoolIps s)])
     -- ^ @ips@ - (Optional)
     --
-    , _isAccountLevel :: TF.Attr s P.Bool
-    -- ^ @is_account_level@ - (Optional)
+    , _isAccountLevel :: TF.Expr s P.Bool
+    -- ^ @is_account_level@ - (Default @false@)
     --
-    , _name           :: TF.Attr s P.Text
+    , _name           :: P.Maybe (TF.Expr s P.Text)
     -- ^ @name@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @ip_info@ settings value.
 newDirpoolIpInfo
     :: DirpoolIpInfo s
 newDirpoolIpInfo =
     DirpoolIpInfo'
-        { _ips = TF.Nil
+        { _ips = P.Nothing
         , _isAccountLevel = TF.value P.False
-        , _name = TF.Nil
+        , _name = P.Nothing
         }
 
-instance TF.IsValue  (DirpoolIpInfo s)
-instance TF.IsObject (DirpoolIpInfo s) where
-    toObject DirpoolIpInfo'{..} = P.catMaybes
-        [ TF.assign "ips" <$> TF.attribute _ips
-        , TF.assign "is_account_level" <$> TF.attribute _isAccountLevel
-        , TF.assign "name" <$> TF.attribute _name
+instance TF.ToHCL (DirpoolIpInfo s) where
+     toHCL DirpoolIpInfo'{..} = TF.pairs $ P.mconcat
+        [ P.maybe P.mempty (TF.pair "ips") _ips
+        , TF.pair "is_account_level" _isAccountLevel
+        , P.maybe P.mempty (TF.pair "name") _name
         ]
 
-instance TF.IsValid (DirpoolIpInfo s) where
+instance P.Hashable (DirpoolIpInfo s)
+
+instance TF.HasValidator (DirpoolIpInfo s) where
     validator = P.mempty
 
-instance P.HasIps (DirpoolIpInfo s) (TF.Attr s [TF.Attr s (DirpoolIps s)]) where
+instance P.HasIps (DirpoolIpInfo s) (P.Maybe (TF.Expr s [TF.Expr s (DirpoolIps s)])) where
     ips =
-        P.lens (_ips :: DirpoolIpInfo s -> TF.Attr s [TF.Attr s (DirpoolIps s)])
-               (\s a -> s { _ips = a } :: DirpoolIpInfo s)
+        P.lens (_ips :: DirpoolIpInfo s -> P.Maybe (TF.Expr s [TF.Expr s (DirpoolIps s)]))
+            (\s a -> s { _ips = a } :: DirpoolIpInfo s)
 
-instance P.HasIsAccountLevel (DirpoolIpInfo s) (TF.Attr s P.Bool) where
+instance P.HasIsAccountLevel (DirpoolIpInfo s) (TF.Expr s P.Bool) where
     isAccountLevel =
-        P.lens (_isAccountLevel :: DirpoolIpInfo s -> TF.Attr s P.Bool)
-               (\s a -> s { _isAccountLevel = a } :: DirpoolIpInfo s)
+        P.lens (_isAccountLevel :: DirpoolIpInfo s -> TF.Expr s P.Bool)
+            (\s a -> s { _isAccountLevel = a } :: DirpoolIpInfo s)
 
-instance P.HasName (DirpoolIpInfo s) (TF.Attr s P.Text) where
+instance P.HasName (DirpoolIpInfo s) (P.Maybe (TF.Expr s P.Text)) where
     name =
-        P.lens (_name :: DirpoolIpInfo s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: DirpoolIpInfo s)
+        P.lens (_name :: DirpoolIpInfo s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _name = a } :: DirpoolIpInfo s)
 
 -- | @no_response@ nested settings.
 data DirpoolNoResponse s = DirpoolNoResponse'
-    { _allNonConfigured :: TF.Attr s P.Bool
-    -- ^ @all_non_configured@ - (Optional)
+    { _allNonConfigured :: TF.Expr s P.Bool
+    -- ^ @all_non_configured@ - (Default @false@)
     --
-    , _geoInfo          :: TF.Attr s [TF.Attr s (DirpoolGeoInfo s)]
+    , _geoInfo          :: P.Maybe (TF.Expr s [TF.Expr s (DirpoolGeoInfo s)])
     -- ^ @geo_info@ - (Optional)
     --
-    , _ipInfo           :: TF.Attr s [TF.Attr s (DirpoolIpInfo s)]
+    , _ipInfo           :: P.Maybe (TF.Expr s [TF.Expr s (DirpoolIpInfo s)])
     -- ^ @ip_info@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @no_response@ settings value.
 newDirpoolNoResponse
@@ -265,227 +267,231 @@ newDirpoolNoResponse
 newDirpoolNoResponse =
     DirpoolNoResponse'
         { _allNonConfigured = TF.value P.False
-        , _geoInfo = TF.Nil
-        , _ipInfo = TF.Nil
+        , _geoInfo = P.Nothing
+        , _ipInfo = P.Nothing
         }
 
-instance TF.IsValue  (DirpoolNoResponse s)
-instance TF.IsObject (DirpoolNoResponse s) where
-    toObject DirpoolNoResponse'{..} = P.catMaybes
-        [ TF.assign "all_non_configured" <$> TF.attribute _allNonConfigured
-        , TF.assign "geo_info" <$> TF.attribute _geoInfo
-        , TF.assign "ip_info" <$> TF.attribute _ipInfo
+instance TF.ToHCL (DirpoolNoResponse s) where
+     toHCL DirpoolNoResponse'{..} = TF.pairs $ P.mconcat
+        [ TF.pair "all_non_configured" _allNonConfigured
+        , P.maybe P.mempty (TF.pair "geo_info") _geoInfo
+        , P.maybe P.mempty (TF.pair "ip_info") _ipInfo
         ]
 
-instance TF.IsValid (DirpoolNoResponse s) where
+instance P.Hashable (DirpoolNoResponse s)
+
+instance TF.HasValidator (DirpoolNoResponse s) where
     validator = P.mempty
 
-instance P.HasAllNonConfigured (DirpoolNoResponse s) (TF.Attr s P.Bool) where
+instance P.HasAllNonConfigured (DirpoolNoResponse s) (TF.Expr s P.Bool) where
     allNonConfigured =
-        P.lens (_allNonConfigured :: DirpoolNoResponse s -> TF.Attr s P.Bool)
-               (\s a -> s { _allNonConfigured = a } :: DirpoolNoResponse s)
+        P.lens (_allNonConfigured :: DirpoolNoResponse s -> TF.Expr s P.Bool)
+            (\s a -> s { _allNonConfigured = a } :: DirpoolNoResponse s)
 
-instance P.HasGeoInfo (DirpoolNoResponse s) (TF.Attr s [TF.Attr s (DirpoolGeoInfo s)]) where
+instance P.HasGeoInfo (DirpoolNoResponse s) (P.Maybe (TF.Expr s [TF.Expr s (DirpoolGeoInfo s)])) where
     geoInfo =
-        P.lens (_geoInfo :: DirpoolNoResponse s -> TF.Attr s [TF.Attr s (DirpoolGeoInfo s)])
-               (\s a -> s { _geoInfo = a } :: DirpoolNoResponse s)
+        P.lens (_geoInfo :: DirpoolNoResponse s -> P.Maybe (TF.Expr s [TF.Expr s (DirpoolGeoInfo s)]))
+            (\s a -> s { _geoInfo = a } :: DirpoolNoResponse s)
 
-instance P.HasIpInfo (DirpoolNoResponse s) (TF.Attr s [TF.Attr s (DirpoolIpInfo s)]) where
+instance P.HasIpInfo (DirpoolNoResponse s) (P.Maybe (TF.Expr s [TF.Expr s (DirpoolIpInfo s)])) where
     ipInfo =
-        P.lens (_ipInfo :: DirpoolNoResponse s -> TF.Attr s [TF.Attr s (DirpoolIpInfo s)])
-               (\s a -> s { _ipInfo = a } :: DirpoolNoResponse s)
+        P.lens (_ipInfo :: DirpoolNoResponse s -> P.Maybe (TF.Expr s [TF.Expr s (DirpoolIpInfo s)]))
+            (\s a -> s { _ipInfo = a } :: DirpoolNoResponse s)
 
 -- | @ips@ nested settings.
 data DirpoolIps s = DirpoolIps'
-    { _address :: TF.Attr s P.Text
+    { _address :: P.Maybe (TF.Expr s P.Text)
     -- ^ @address@ - (Optional)
     --
-    , _cidr    :: TF.Attr s P.Text
+    , _cidr    :: P.Maybe (TF.Expr s P.Text)
     -- ^ @cidr@ - (Optional)
     --
-    , _end     :: TF.Attr s P.Text
+    , _end     :: P.Maybe (TF.Expr s P.Text)
     -- ^ @end@ - (Optional)
     --
-    , _start   :: TF.Attr s P.Text
+    , _start   :: P.Maybe (TF.Expr s P.Text)
     -- ^ @start@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @ips@ settings value.
 newDirpoolIps
     :: DirpoolIps s
 newDirpoolIps =
     DirpoolIps'
-        { _address = TF.Nil
-        , _cidr = TF.Nil
-        , _end = TF.Nil
-        , _start = TF.Nil
+        { _address = P.Nothing
+        , _cidr = P.Nothing
+        , _end = P.Nothing
+        , _start = P.Nothing
         }
 
-instance TF.IsValue  (DirpoolIps s)
-instance TF.IsObject (DirpoolIps s) where
-    toObject DirpoolIps'{..} = P.catMaybes
-        [ TF.assign "address" <$> TF.attribute _address
-        , TF.assign "cidr" <$> TF.attribute _cidr
-        , TF.assign "end" <$> TF.attribute _end
-        , TF.assign "start" <$> TF.attribute _start
+instance TF.ToHCL (DirpoolIps s) where
+     toHCL DirpoolIps'{..} = TF.pairs $ P.mconcat
+        [ P.maybe P.mempty (TF.pair "address") _address
+        , P.maybe P.mempty (TF.pair "cidr") _cidr
+        , P.maybe P.mempty (TF.pair "end") _end
+        , P.maybe P.mempty (TF.pair "start") _start
         ]
 
-instance TF.IsValid (DirpoolIps s) where
+instance P.Hashable (DirpoolIps s)
+
+instance TF.HasValidator (DirpoolIps s) where
     validator = P.mempty
 
-instance P.HasAddress (DirpoolIps s) (TF.Attr s P.Text) where
+instance P.HasAddress (DirpoolIps s) (P.Maybe (TF.Expr s P.Text)) where
     address =
-        P.lens (_address :: DirpoolIps s -> TF.Attr s P.Text)
-               (\s a -> s { _address = a } :: DirpoolIps s)
+        P.lens (_address :: DirpoolIps s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _address = a } :: DirpoolIps s)
 
-instance P.HasCidr (DirpoolIps s) (TF.Attr s P.Text) where
+instance P.HasCidr (DirpoolIps s) (P.Maybe (TF.Expr s P.Text)) where
     cidr =
-        P.lens (_cidr :: DirpoolIps s -> TF.Attr s P.Text)
-               (\s a -> s { _cidr = a } :: DirpoolIps s)
+        P.lens (_cidr :: DirpoolIps s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _cidr = a } :: DirpoolIps s)
 
-instance P.HasEnd (DirpoolIps s) (TF.Attr s P.Text) where
+instance P.HasEnd (DirpoolIps s) (P.Maybe (TF.Expr s P.Text)) where
     end =
-        P.lens (_end :: DirpoolIps s -> TF.Attr s P.Text)
-               (\s a -> s { _end = a } :: DirpoolIps s)
+        P.lens (_end :: DirpoolIps s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _end = a } :: DirpoolIps s)
 
-instance P.HasStart (DirpoolIps s) (TF.Attr s P.Text) where
+instance P.HasStart (DirpoolIps s) (P.Maybe (TF.Expr s P.Text)) where
     start =
-        P.lens (_start :: DirpoolIps s -> TF.Attr s P.Text)
-               (\s a -> s { _start = a } :: DirpoolIps s)
+        P.lens (_start :: DirpoolIps s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _start = a } :: DirpoolIps s)
 
 -- | @http_probe@ nested settings.
 data ProbeHttpHttpProbe s = ProbeHttpHttpProbe'
-    { _totalLimits :: TF.Attr s [TF.Attr s (ProbeHttpTotalLimits s)]
+    { _totalLimits :: P.Maybe (TF.Expr s [TF.Expr s (ProbeHttpTotalLimits s)])
     -- ^ @total_limits@ - (Optional)
     --
-    , _transaction :: TF.Attr s [TF.Attr s (ProbeHttpTransaction s)]
+    , _transaction :: P.Maybe (TF.Expr s [TF.Expr s (ProbeHttpTransaction s)])
     -- ^ @transaction@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @http_probe@ settings value.
 newProbeHttpHttpProbe
     :: ProbeHttpHttpProbe s
 newProbeHttpHttpProbe =
     ProbeHttpHttpProbe'
-        { _totalLimits = TF.Nil
-        , _transaction = TF.Nil
+        { _totalLimits = P.Nothing
+        , _transaction = P.Nothing
         }
 
-instance TF.IsValue  (ProbeHttpHttpProbe s)
-instance TF.IsObject (ProbeHttpHttpProbe s) where
-    toObject ProbeHttpHttpProbe'{..} = P.catMaybes
-        [ TF.assign "total_limits" <$> TF.attribute _totalLimits
-        , TF.assign "transaction" <$> TF.attribute _transaction
+instance TF.ToHCL (ProbeHttpHttpProbe s) where
+     toHCL ProbeHttpHttpProbe'{..} = TF.pairs $ P.mconcat
+        [ P.maybe P.mempty (TF.pair "total_limits") _totalLimits
+        , P.maybe P.mempty (TF.pair "transaction") _transaction
         ]
 
-instance TF.IsValid (ProbeHttpHttpProbe s) where
+instance P.Hashable (ProbeHttpHttpProbe s)
+
+instance TF.HasValidator (ProbeHttpHttpProbe s) where
     validator = P.mempty
 
-instance P.HasTotalLimits (ProbeHttpHttpProbe s) (TF.Attr s [TF.Attr s (ProbeHttpTotalLimits s)]) where
+instance P.HasTotalLimits (ProbeHttpHttpProbe s) (P.Maybe (TF.Expr s [TF.Expr s (ProbeHttpTotalLimits s)])) where
     totalLimits =
-        P.lens (_totalLimits :: ProbeHttpHttpProbe s -> TF.Attr s [TF.Attr s (ProbeHttpTotalLimits s)])
-               (\s a -> s { _totalLimits = a } :: ProbeHttpHttpProbe s)
+        P.lens (_totalLimits :: ProbeHttpHttpProbe s -> P.Maybe (TF.Expr s [TF.Expr s (ProbeHttpTotalLimits s)]))
+            (\s a -> s { _totalLimits = a } :: ProbeHttpHttpProbe s)
 
-instance P.HasTransaction (ProbeHttpHttpProbe s) (TF.Attr s [TF.Attr s (ProbeHttpTransaction s)]) where
+instance P.HasTransaction (ProbeHttpHttpProbe s) (P.Maybe (TF.Expr s [TF.Expr s (ProbeHttpTransaction s)])) where
     transaction =
-        P.lens (_transaction :: ProbeHttpHttpProbe s -> TF.Attr s [TF.Attr s (ProbeHttpTransaction s)])
-               (\s a -> s { _transaction = a } :: ProbeHttpHttpProbe s)
+        P.lens (_transaction :: ProbeHttpHttpProbe s -> P.Maybe (TF.Expr s [TF.Expr s (ProbeHttpTransaction s)]))
+            (\s a -> s { _transaction = a } :: ProbeHttpHttpProbe s)
 
 -- | @transaction@ nested settings.
 data ProbeHttpTransaction s = ProbeHttpTransaction'
-    { _followRedirects :: TF.Attr s P.Bool
-    -- ^ @follow_redirects@ - (Optional)
+    { _followRedirects :: TF.Expr s P.Bool
+    -- ^ @follow_redirects@ - (Default @false@)
     --
-    , _limit           :: TF.Attr s [TF.Attr s (ProbeHttpLimit s)]
+    , _limit           :: P.Maybe (TF.Expr s [TF.Expr s (ProbeHttpLimit s)])
     -- ^ @limit@ - (Optional)
     --
-    , _method          :: TF.Attr s P.Text
+    , _method          :: TF.Expr s P.Text
     -- ^ @method@ - (Required)
     --
-    , _transmittedData :: TF.Attr s P.Text
+    , _transmittedData :: P.Maybe (TF.Expr s P.Text)
     -- ^ @transmitted_data@ - (Optional)
     --
-    , _url             :: TF.Attr s P.Text
+    , _url             :: TF.Expr s P.Text
     -- ^ @url@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @transaction@ settings value.
 newProbeHttpTransaction
-    :: TF.Attr s P.Text -- ^ 'P._method': @method@
-    -> TF.Attr s P.Text -- ^ 'P._url': @url@
+    :: TF.Expr s P.Text -- ^ Lens: 'P.method', Field: '_method', HCL: @method@
+    -> TF.Expr s P.Text -- ^ Lens: 'P.url', Field: '_url', HCL: @url@
     -> ProbeHttpTransaction s
 newProbeHttpTransaction _method _url =
     ProbeHttpTransaction'
         { _followRedirects = TF.value P.False
-        , _limit = TF.Nil
+        , _limit = P.Nothing
         , _method = _method
-        , _transmittedData = TF.Nil
+        , _transmittedData = P.Nothing
         , _url = _url
         }
 
-instance TF.IsValue  (ProbeHttpTransaction s)
-instance TF.IsObject (ProbeHttpTransaction s) where
-    toObject ProbeHttpTransaction'{..} = P.catMaybes
-        [ TF.assign "follow_redirects" <$> TF.attribute _followRedirects
-        , TF.assign "limit" <$> TF.attribute _limit
-        , TF.assign "method" <$> TF.attribute _method
-        , TF.assign "transmitted_data" <$> TF.attribute _transmittedData
-        , TF.assign "url" <$> TF.attribute _url
+instance TF.ToHCL (ProbeHttpTransaction s) where
+     toHCL ProbeHttpTransaction'{..} = TF.pairs $ P.mconcat
+        [ TF.pair "follow_redirects" _followRedirects
+        , P.maybe P.mempty (TF.pair "limit") _limit
+        , TF.pair "method" _method
+        , P.maybe P.mempty (TF.pair "transmitted_data") _transmittedData
+        , TF.pair "url" _url
         ]
 
-instance TF.IsValid (ProbeHttpTransaction s) where
+instance P.Hashable (ProbeHttpTransaction s)
+
+instance TF.HasValidator (ProbeHttpTransaction s) where
     validator = P.mempty
 
-instance P.HasFollowRedirects (ProbeHttpTransaction s) (TF.Attr s P.Bool) where
+instance P.HasFollowRedirects (ProbeHttpTransaction s) (TF.Expr s P.Bool) where
     followRedirects =
-        P.lens (_followRedirects :: ProbeHttpTransaction s -> TF.Attr s P.Bool)
-               (\s a -> s { _followRedirects = a } :: ProbeHttpTransaction s)
+        P.lens (_followRedirects :: ProbeHttpTransaction s -> TF.Expr s P.Bool)
+            (\s a -> s { _followRedirects = a } :: ProbeHttpTransaction s)
 
-instance P.HasLimit (ProbeHttpTransaction s) (TF.Attr s [TF.Attr s (ProbeHttpLimit s)]) where
+instance P.HasLimit (ProbeHttpTransaction s) (P.Maybe (TF.Expr s [TF.Expr s (ProbeHttpLimit s)])) where
     limit =
-        P.lens (_limit :: ProbeHttpTransaction s -> TF.Attr s [TF.Attr s (ProbeHttpLimit s)])
-               (\s a -> s { _limit = a } :: ProbeHttpTransaction s)
+        P.lens (_limit :: ProbeHttpTransaction s -> P.Maybe (TF.Expr s [TF.Expr s (ProbeHttpLimit s)]))
+            (\s a -> s { _limit = a } :: ProbeHttpTransaction s)
 
-instance P.HasMethod (ProbeHttpTransaction s) (TF.Attr s P.Text) where
+instance P.HasMethod (ProbeHttpTransaction s) (TF.Expr s P.Text) where
     method =
-        P.lens (_method :: ProbeHttpTransaction s -> TF.Attr s P.Text)
-               (\s a -> s { _method = a } :: ProbeHttpTransaction s)
+        P.lens (_method :: ProbeHttpTransaction s -> TF.Expr s P.Text)
+            (\s a -> s { _method = a } :: ProbeHttpTransaction s)
 
-instance P.HasTransmittedData (ProbeHttpTransaction s) (TF.Attr s P.Text) where
+instance P.HasTransmittedData (ProbeHttpTransaction s) (P.Maybe (TF.Expr s P.Text)) where
     transmittedData =
-        P.lens (_transmittedData :: ProbeHttpTransaction s -> TF.Attr s P.Text)
-               (\s a -> s { _transmittedData = a } :: ProbeHttpTransaction s)
+        P.lens (_transmittedData :: ProbeHttpTransaction s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _transmittedData = a } :: ProbeHttpTransaction s)
 
-instance P.HasUrl (ProbeHttpTransaction s) (TF.Attr s P.Text) where
+instance P.HasUrl (ProbeHttpTransaction s) (TF.Expr s P.Text) where
     url =
-        P.lens (_url :: ProbeHttpTransaction s -> TF.Attr s P.Text)
-               (\s a -> s { _url = a } :: ProbeHttpTransaction s)
+        P.lens (_url :: ProbeHttpTransaction s -> TF.Expr s P.Text)
+            (\s a -> s { _url = a } :: ProbeHttpTransaction s)
 
 -- | @limit@ nested settings.
 data ProbeHttpLimit s = ProbeHttpLimit'
-    { _critical :: TF.Attr s P.Int
+    { _critical :: TF.Expr s P.Int
     -- ^ @critical@ - (Required)
     --
-    , _fail     :: TF.Attr s P.Int
+    , _fail     :: TF.Expr s P.Int
     -- ^ @fail@ - (Required)
     --
-    , _name     :: TF.Attr s P.Text
+    , _name     :: TF.Expr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _warning  :: TF.Attr s P.Int
+    , _warning  :: TF.Expr s P.Int
     -- ^ @warning@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @limit@ settings value.
 newProbeHttpLimit
-    :: TF.Attr s P.Int -- ^ 'P._critical': @critical@
-    -> TF.Attr s P.Int -- ^ 'P._fail': @fail@
-    -> TF.Attr s P.Text -- ^ 'P._name': @name@
-    -> TF.Attr s P.Int -- ^ 'P._warning': @warning@
+    :: TF.Expr s P.Int -- ^ Lens: 'P.critical', Field: '_critical', HCL: @critical@
+    -> TF.Expr s P.Int -- ^ Lens: 'P.fail', Field: '_fail', HCL: @fail@
+    -> TF.Expr s P.Text -- ^ Lens: 'P.name', Field: '_name', HCL: @name@
+    -> TF.Expr s P.Int -- ^ Lens: 'P.warning', Field: '_warning', HCL: @warning@
     -> ProbeHttpLimit s
 newProbeHttpLimit _critical _fail _name _warning =
     ProbeHttpLimit'
@@ -495,109 +501,111 @@ newProbeHttpLimit _critical _fail _name _warning =
         , _warning = _warning
         }
 
-instance TF.IsValue  (ProbeHttpLimit s)
-instance TF.IsObject (ProbeHttpLimit s) where
-    toObject ProbeHttpLimit'{..} = P.catMaybes
-        [ TF.assign "critical" <$> TF.attribute _critical
-        , TF.assign "fail" <$> TF.attribute _fail
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "warning" <$> TF.attribute _warning
+instance TF.ToHCL (ProbeHttpLimit s) where
+     toHCL ProbeHttpLimit'{..} = TF.pairs $ P.mconcat
+        [ TF.pair "critical" _critical
+        , TF.pair "fail" _fail
+        , TF.pair "name" _name
+        , TF.pair "warning" _warning
         ]
 
-instance TF.IsValid (ProbeHttpLimit s) where
+instance P.Hashable (ProbeHttpLimit s)
+
+instance TF.HasValidator (ProbeHttpLimit s) where
     validator = P.mempty
 
-instance P.HasCritical (ProbeHttpLimit s) (TF.Attr s P.Int) where
+instance P.HasCritical (ProbeHttpLimit s) (TF.Expr s P.Int) where
     critical =
-        P.lens (_critical :: ProbeHttpLimit s -> TF.Attr s P.Int)
-               (\s a -> s { _critical = a } :: ProbeHttpLimit s)
+        P.lens (_critical :: ProbeHttpLimit s -> TF.Expr s P.Int)
+            (\s a -> s { _critical = a } :: ProbeHttpLimit s)
 
-instance P.HasFail (ProbeHttpLimit s) (TF.Attr s P.Int) where
+instance P.HasFail (ProbeHttpLimit s) (TF.Expr s P.Int) where
     fail =
-        P.lens (_fail :: ProbeHttpLimit s -> TF.Attr s P.Int)
-               (\s a -> s { _fail = a } :: ProbeHttpLimit s)
+        P.lens (_fail :: ProbeHttpLimit s -> TF.Expr s P.Int)
+            (\s a -> s { _fail = a } :: ProbeHttpLimit s)
 
-instance P.HasName (ProbeHttpLimit s) (TF.Attr s P.Text) where
+instance P.HasName (ProbeHttpLimit s) (TF.Expr s P.Text) where
     name =
-        P.lens (_name :: ProbeHttpLimit s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: ProbeHttpLimit s)
+        P.lens (_name :: ProbeHttpLimit s -> TF.Expr s P.Text)
+            (\s a -> s { _name = a } :: ProbeHttpLimit s)
 
-instance P.HasWarning (ProbeHttpLimit s) (TF.Attr s P.Int) where
+instance P.HasWarning (ProbeHttpLimit s) (TF.Expr s P.Int) where
     warning =
-        P.lens (_warning :: ProbeHttpLimit s -> TF.Attr s P.Int)
-               (\s a -> s { _warning = a } :: ProbeHttpLimit s)
+        P.lens (_warning :: ProbeHttpLimit s -> TF.Expr s P.Int)
+            (\s a -> s { _warning = a } :: ProbeHttpLimit s)
 
 -- | @total_limits@ nested settings.
 data ProbeHttpTotalLimits s = ProbeHttpTotalLimits'
-    { _critical :: TF.Attr s P.Int
+    { _critical :: P.Maybe (TF.Expr s P.Int)
     -- ^ @critical@ - (Optional)
     --
-    , _fail     :: TF.Attr s P.Int
+    , _fail     :: P.Maybe (TF.Expr s P.Int)
     -- ^ @fail@ - (Optional)
     --
-    , _warning  :: TF.Attr s P.Int
+    , _warning  :: P.Maybe (TF.Expr s P.Int)
     -- ^ @warning@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @total_limits@ settings value.
 newProbeHttpTotalLimits
     :: ProbeHttpTotalLimits s
 newProbeHttpTotalLimits =
     ProbeHttpTotalLimits'
-        { _critical = TF.Nil
-        , _fail = TF.Nil
-        , _warning = TF.Nil
+        { _critical = P.Nothing
+        , _fail = P.Nothing
+        , _warning = P.Nothing
         }
 
-instance TF.IsValue  (ProbeHttpTotalLimits s)
-instance TF.IsObject (ProbeHttpTotalLimits s) where
-    toObject ProbeHttpTotalLimits'{..} = P.catMaybes
-        [ TF.assign "critical" <$> TF.attribute _critical
-        , TF.assign "fail" <$> TF.attribute _fail
-        , TF.assign "warning" <$> TF.attribute _warning
+instance TF.ToHCL (ProbeHttpTotalLimits s) where
+     toHCL ProbeHttpTotalLimits'{..} = TF.pairs $ P.mconcat
+        [ P.maybe P.mempty (TF.pair "critical") _critical
+        , P.maybe P.mempty (TF.pair "fail") _fail
+        , P.maybe P.mempty (TF.pair "warning") _warning
         ]
 
-instance TF.IsValid (ProbeHttpTotalLimits s) where
+instance P.Hashable (ProbeHttpTotalLimits s)
+
+instance TF.HasValidator (ProbeHttpTotalLimits s) where
     validator = P.mempty
 
-instance P.HasCritical (ProbeHttpTotalLimits s) (TF.Attr s P.Int) where
+instance P.HasCritical (ProbeHttpTotalLimits s) (P.Maybe (TF.Expr s P.Int)) where
     critical =
-        P.lens (_critical :: ProbeHttpTotalLimits s -> TF.Attr s P.Int)
-               (\s a -> s { _critical = a } :: ProbeHttpTotalLimits s)
+        P.lens (_critical :: ProbeHttpTotalLimits s -> P.Maybe (TF.Expr s P.Int))
+            (\s a -> s { _critical = a } :: ProbeHttpTotalLimits s)
 
-instance P.HasFail (ProbeHttpTotalLimits s) (TF.Attr s P.Int) where
+instance P.HasFail (ProbeHttpTotalLimits s) (P.Maybe (TF.Expr s P.Int)) where
     fail =
-        P.lens (_fail :: ProbeHttpTotalLimits s -> TF.Attr s P.Int)
-               (\s a -> s { _fail = a } :: ProbeHttpTotalLimits s)
+        P.lens (_fail :: ProbeHttpTotalLimits s -> P.Maybe (TF.Expr s P.Int))
+            (\s a -> s { _fail = a } :: ProbeHttpTotalLimits s)
 
-instance P.HasWarning (ProbeHttpTotalLimits s) (TF.Attr s P.Int) where
+instance P.HasWarning (ProbeHttpTotalLimits s) (P.Maybe (TF.Expr s P.Int)) where
     warning =
-        P.lens (_warning :: ProbeHttpTotalLimits s -> TF.Attr s P.Int)
-               (\s a -> s { _warning = a } :: ProbeHttpTotalLimits s)
+        P.lens (_warning :: ProbeHttpTotalLimits s -> P.Maybe (TF.Expr s P.Int))
+            (\s a -> s { _warning = a } :: ProbeHttpTotalLimits s)
 
 -- | @limit@ nested settings.
 data ProbePingLimit s = ProbePingLimit'
-    { _critical :: TF.Attr s P.Int
+    { _critical :: TF.Expr s P.Int
     -- ^ @critical@ - (Required)
     --
-    , _fail     :: TF.Attr s P.Int
+    , _fail     :: TF.Expr s P.Int
     -- ^ @fail@ - (Required)
     --
-    , _name     :: TF.Attr s P.Text
+    , _name     :: TF.Expr s P.Text
     -- ^ @name@ - (Required)
     --
-    , _warning  :: TF.Attr s P.Int
+    , _warning  :: TF.Expr s P.Int
     -- ^ @warning@ - (Required)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @limit@ settings value.
 newProbePingLimit
-    :: TF.Attr s P.Int -- ^ 'P._critical': @critical@
-    -> TF.Attr s P.Int -- ^ 'P._fail': @fail@
-    -> TF.Attr s P.Text -- ^ 'P._name': @name@
-    -> TF.Attr s P.Int -- ^ 'P._warning': @warning@
+    :: TF.Expr s P.Int -- ^ Lens: 'P.critical', Field: '_critical', HCL: @critical@
+    -> TF.Expr s P.Int -- ^ Lens: 'P.fail', Field: '_fail', HCL: @fail@
+    -> TF.Expr s P.Text -- ^ Lens: 'P.name', Field: '_name', HCL: @name@
+    -> TF.Expr s P.Int -- ^ Lens: 'P.warning', Field: '_warning', HCL: @warning@
     -> ProbePingLimit s
 newProbePingLimit _critical _fail _name _warning =
     ProbePingLimit'
@@ -607,115 +615,117 @@ newProbePingLimit _critical _fail _name _warning =
         , _warning = _warning
         }
 
-instance TF.IsValue  (ProbePingLimit s)
-instance TF.IsObject (ProbePingLimit s) where
-    toObject ProbePingLimit'{..} = P.catMaybes
-        [ TF.assign "critical" <$> TF.attribute _critical
-        , TF.assign "fail" <$> TF.attribute _fail
-        , TF.assign "name" <$> TF.attribute _name
-        , TF.assign "warning" <$> TF.attribute _warning
+instance TF.ToHCL (ProbePingLimit s) where
+     toHCL ProbePingLimit'{..} = TF.pairs $ P.mconcat
+        [ TF.pair "critical" _critical
+        , TF.pair "fail" _fail
+        , TF.pair "name" _name
+        , TF.pair "warning" _warning
         ]
 
-instance TF.IsValid (ProbePingLimit s) where
+instance P.Hashable (ProbePingLimit s)
+
+instance TF.HasValidator (ProbePingLimit s) where
     validator = P.mempty
 
-instance P.HasCritical (ProbePingLimit s) (TF.Attr s P.Int) where
+instance P.HasCritical (ProbePingLimit s) (TF.Expr s P.Int) where
     critical =
-        P.lens (_critical :: ProbePingLimit s -> TF.Attr s P.Int)
-               (\s a -> s { _critical = a } :: ProbePingLimit s)
+        P.lens (_critical :: ProbePingLimit s -> TF.Expr s P.Int)
+            (\s a -> s { _critical = a } :: ProbePingLimit s)
 
-instance P.HasFail (ProbePingLimit s) (TF.Attr s P.Int) where
+instance P.HasFail (ProbePingLimit s) (TF.Expr s P.Int) where
     fail =
-        P.lens (_fail :: ProbePingLimit s -> TF.Attr s P.Int)
-               (\s a -> s { _fail = a } :: ProbePingLimit s)
+        P.lens (_fail :: ProbePingLimit s -> TF.Expr s P.Int)
+            (\s a -> s { _fail = a } :: ProbePingLimit s)
 
-instance P.HasName (ProbePingLimit s) (TF.Attr s P.Text) where
+instance P.HasName (ProbePingLimit s) (TF.Expr s P.Text) where
     name =
-        P.lens (_name :: ProbePingLimit s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: ProbePingLimit s)
+        P.lens (_name :: ProbePingLimit s -> TF.Expr s P.Text)
+            (\s a -> s { _name = a } :: ProbePingLimit s)
 
-instance P.HasWarning (ProbePingLimit s) (TF.Attr s P.Int) where
+instance P.HasWarning (ProbePingLimit s) (TF.Expr s P.Int) where
     warning =
-        P.lens (_warning :: ProbePingLimit s -> TF.Attr s P.Int)
-               (\s a -> s { _warning = a } :: ProbePingLimit s)
+        P.lens (_warning :: ProbePingLimit s -> TF.Expr s P.Int)
+            (\s a -> s { _warning = a } :: ProbePingLimit s)
 
 -- | @ping_probe@ nested settings.
 data ProbePingPingProbe s = ProbePingPingProbe'
-    { _limit      :: TF.Attr s [TF.Attr s (ProbePingLimit s)]
+    { _limit      :: P.Maybe (TF.Expr s [TF.Expr s (ProbePingLimit s)])
     -- ^ @limit@ - (Optional)
     --
-    , _packetSize :: TF.Attr s P.Int
-    -- ^ @packet_size@ - (Optional)
+    , _packetSize :: TF.Expr s P.Int
+    -- ^ @packet_size@ - (Default @56@)
     --
-    , _packets    :: TF.Attr s P.Int
-    -- ^ @packets@ - (Optional)
+    , _packets    :: TF.Expr s P.Int
+    -- ^ @packets@ - (Default @3@)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @ping_probe@ settings value.
 newProbePingPingProbe
     :: ProbePingPingProbe s
 newProbePingPingProbe =
     ProbePingPingProbe'
-        { _limit = TF.Nil
+        { _limit = P.Nothing
         , _packetSize = TF.value 56
         , _packets = TF.value 3
         }
 
-instance TF.IsValue  (ProbePingPingProbe s)
-instance TF.IsObject (ProbePingPingProbe s) where
-    toObject ProbePingPingProbe'{..} = P.catMaybes
-        [ TF.assign "limit" <$> TF.attribute _limit
-        , TF.assign "packet_size" <$> TF.attribute _packetSize
-        , TF.assign "packets" <$> TF.attribute _packets
+instance TF.ToHCL (ProbePingPingProbe s) where
+     toHCL ProbePingPingProbe'{..} = TF.pairs $ P.mconcat
+        [ P.maybe P.mempty (TF.pair "limit") _limit
+        , TF.pair "packet_size" _packetSize
+        , TF.pair "packets" _packets
         ]
 
-instance TF.IsValid (ProbePingPingProbe s) where
+instance P.Hashable (ProbePingPingProbe s)
+
+instance TF.HasValidator (ProbePingPingProbe s) where
     validator = P.mempty
 
-instance P.HasLimit (ProbePingPingProbe s) (TF.Attr s [TF.Attr s (ProbePingLimit s)]) where
+instance P.HasLimit (ProbePingPingProbe s) (P.Maybe (TF.Expr s [TF.Expr s (ProbePingLimit s)])) where
     limit =
-        P.lens (_limit :: ProbePingPingProbe s -> TF.Attr s [TF.Attr s (ProbePingLimit s)])
-               (\s a -> s { _limit = a } :: ProbePingPingProbe s)
+        P.lens (_limit :: ProbePingPingProbe s -> P.Maybe (TF.Expr s [TF.Expr s (ProbePingLimit s)]))
+            (\s a -> s { _limit = a } :: ProbePingPingProbe s)
 
-instance P.HasPacketSize (ProbePingPingProbe s) (TF.Attr s P.Int) where
+instance P.HasPacketSize (ProbePingPingProbe s) (TF.Expr s P.Int) where
     packetSize =
-        P.lens (_packetSize :: ProbePingPingProbe s -> TF.Attr s P.Int)
-               (\s a -> s { _packetSize = a } :: ProbePingPingProbe s)
+        P.lens (_packetSize :: ProbePingPingProbe s -> TF.Expr s P.Int)
+            (\s a -> s { _packetSize = a } :: ProbePingPingProbe s)
 
-instance P.HasPackets (ProbePingPingProbe s) (TF.Attr s P.Int) where
+instance P.HasPackets (ProbePingPingProbe s) (TF.Expr s P.Int) where
     packets =
-        P.lens (_packets :: ProbePingPingProbe s -> TF.Attr s P.Int)
-               (\s a -> s { _packets = a } :: ProbePingPingProbe s)
+        P.lens (_packets :: ProbePingPingProbe s -> TF.Expr s P.Int)
+            (\s a -> s { _packets = a } :: ProbePingPingProbe s)
 
 -- | @rdata@ nested settings.
 data TcpoolRdata s = TcpoolRdata'
-    { _failoverDelay :: TF.Attr s P.Int
-    -- ^ @failover_delay@ - (Optional)
+    { _failoverDelay :: TF.Expr s P.Int
+    -- ^ @failover_delay@ - (Default @0@)
     --
-    , _host          :: TF.Attr s P.Text
+    , _host          :: TF.Expr s P.Text
     -- ^ @host@ - (Required)
     --
-    , _priority      :: TF.Attr s P.Int
-    -- ^ @priority@ - (Optional)
+    , _priority      :: TF.Expr s P.Int
+    -- ^ @priority@ - (Default @1@)
     --
-    , _runProbes     :: TF.Attr s P.Bool
-    -- ^ @run_probes@ - (Optional)
+    , _runProbes     :: TF.Expr s P.Bool
+    -- ^ @run_probes@ - (Default @true@)
     --
-    , _state         :: TF.Attr s P.Text
-    -- ^ @state@ - (Optional)
+    , _state         :: TF.Expr s P.Text
+    -- ^ @state@ - (Default @NORMAL@)
     --
-    , _threshold     :: TF.Attr s P.Int
-    -- ^ @threshold@ - (Optional)
+    , _threshold     :: TF.Expr s P.Int
+    -- ^ @threshold@ - (Default @1@)
     --
-    , _weight        :: TF.Attr s P.Int
-    -- ^ @weight@ - (Optional)
+    , _weight        :: TF.Expr s P.Int
+    -- ^ @weight@ - (Default @2@)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @rdata@ settings value.
 newTcpoolRdata
-    :: TF.Attr s P.Text -- ^ 'P._host': @host@
+    :: TF.Expr s P.Text -- ^ Lens: 'P.host', Field: '_host', HCL: @host@
     -> TcpoolRdata s
 newTcpoolRdata _host =
     TcpoolRdata'
@@ -728,52 +738,53 @@ newTcpoolRdata _host =
         , _weight = TF.value 2
         }
 
-instance TF.IsValue  (TcpoolRdata s)
-instance TF.IsObject (TcpoolRdata s) where
-    toObject TcpoolRdata'{..} = P.catMaybes
-        [ TF.assign "failover_delay" <$> TF.attribute _failoverDelay
-        , TF.assign "host" <$> TF.attribute _host
-        , TF.assign "priority" <$> TF.attribute _priority
-        , TF.assign "run_probes" <$> TF.attribute _runProbes
-        , TF.assign "state" <$> TF.attribute _state
-        , TF.assign "threshold" <$> TF.attribute _threshold
-        , TF.assign "weight" <$> TF.attribute _weight
+instance TF.ToHCL (TcpoolRdata s) where
+     toHCL TcpoolRdata'{..} = TF.pairs $ P.mconcat
+        [ TF.pair "failover_delay" _failoverDelay
+        , TF.pair "host" _host
+        , TF.pair "priority" _priority
+        , TF.pair "run_probes" _runProbes
+        , TF.pair "state" _state
+        , TF.pair "threshold" _threshold
+        , TF.pair "weight" _weight
         ]
 
-instance TF.IsValid (TcpoolRdata s) where
+instance P.Hashable (TcpoolRdata s)
+
+instance TF.HasValidator (TcpoolRdata s) where
     validator = P.mempty
 
-instance P.HasFailoverDelay (TcpoolRdata s) (TF.Attr s P.Int) where
+instance P.HasFailoverDelay (TcpoolRdata s) (TF.Expr s P.Int) where
     failoverDelay =
-        P.lens (_failoverDelay :: TcpoolRdata s -> TF.Attr s P.Int)
-               (\s a -> s { _failoverDelay = a } :: TcpoolRdata s)
+        P.lens (_failoverDelay :: TcpoolRdata s -> TF.Expr s P.Int)
+            (\s a -> s { _failoverDelay = a } :: TcpoolRdata s)
 
-instance P.HasHost (TcpoolRdata s) (TF.Attr s P.Text) where
+instance P.HasHost (TcpoolRdata s) (TF.Expr s P.Text) where
     host =
-        P.lens (_host :: TcpoolRdata s -> TF.Attr s P.Text)
-               (\s a -> s { _host = a } :: TcpoolRdata s)
+        P.lens (_host :: TcpoolRdata s -> TF.Expr s P.Text)
+            (\s a -> s { _host = a } :: TcpoolRdata s)
 
-instance P.HasPriority (TcpoolRdata s) (TF.Attr s P.Int) where
+instance P.HasPriority (TcpoolRdata s) (TF.Expr s P.Int) where
     priority =
-        P.lens (_priority :: TcpoolRdata s -> TF.Attr s P.Int)
-               (\s a -> s { _priority = a } :: TcpoolRdata s)
+        P.lens (_priority :: TcpoolRdata s -> TF.Expr s P.Int)
+            (\s a -> s { _priority = a } :: TcpoolRdata s)
 
-instance P.HasRunProbes (TcpoolRdata s) (TF.Attr s P.Bool) where
+instance P.HasRunProbes (TcpoolRdata s) (TF.Expr s P.Bool) where
     runProbes =
-        P.lens (_runProbes :: TcpoolRdata s -> TF.Attr s P.Bool)
-               (\s a -> s { _runProbes = a } :: TcpoolRdata s)
+        P.lens (_runProbes :: TcpoolRdata s -> TF.Expr s P.Bool)
+            (\s a -> s { _runProbes = a } :: TcpoolRdata s)
 
-instance P.HasState (TcpoolRdata s) (TF.Attr s P.Text) where
+instance P.HasState (TcpoolRdata s) (TF.Expr s P.Text) where
     state =
-        P.lens (_state :: TcpoolRdata s -> TF.Attr s P.Text)
-               (\s a -> s { _state = a } :: TcpoolRdata s)
+        P.lens (_state :: TcpoolRdata s -> TF.Expr s P.Text)
+            (\s a -> s { _state = a } :: TcpoolRdata s)
 
-instance P.HasThreshold (TcpoolRdata s) (TF.Attr s P.Int) where
+instance P.HasThreshold (TcpoolRdata s) (TF.Expr s P.Int) where
     threshold =
-        P.lens (_threshold :: TcpoolRdata s -> TF.Attr s P.Int)
-               (\s a -> s { _threshold = a } :: TcpoolRdata s)
+        P.lens (_threshold :: TcpoolRdata s -> TF.Expr s P.Int)
+            (\s a -> s { _threshold = a } :: TcpoolRdata s)
 
-instance P.HasWeight (TcpoolRdata s) (TF.Attr s P.Int) where
+instance P.HasWeight (TcpoolRdata s) (TF.Expr s P.Int) where
     weight =
-        P.lens (_weight :: TcpoolRdata s -> TF.Attr s P.Int)
-               (\s a -> s { _weight = a } :: TcpoolRdata s)
+        P.lens (_weight :: TcpoolRdata s -> TF.Expr s P.Int)
+            (\s a -> s { _weight = a } :: TcpoolRdata s)

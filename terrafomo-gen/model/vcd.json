@@ -1,5 +1,6 @@
 {
   "name": "vcd",
+  "version": "1.0.0-25-g704012e",
   "schemas": [
     {
       "name": "allow_unverified_ssl",

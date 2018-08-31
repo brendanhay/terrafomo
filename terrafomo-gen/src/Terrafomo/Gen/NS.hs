@@ -19,11 +19,11 @@ import qualified Data.Text        as Text
 
 prelude :: Set NS
 prelude = Set.fromList
-    [ "Data.Map.Strict"
+    [ "Data.Hashable"
+    , "Data.HashMap.Strict"
     , "Data.List.NonEmpty"
     , "Data.Maybe"
-    , "Data.Monoid"
-    , "Data.Text"
+    , "Data.Text.Lazy"
     , "GHC.Generics"
     , "Lens.Micro"
     , "Prelude"
@@ -53,14 +53,14 @@ toPath = fromNS '/'
 
 -- Package Namespaces
 
-contents
-  , provider
-  , datasources
-  , resources
-  , settings
-  , primitives
-  , types
-  , lenses :: ProviderName -> NS
+contents,
+  provider,
+  datasources,
+  resources,
+  settings,
+  primitives,
+  types,
+  lenses :: ProviderName -> NS
 contents    p = "Terrafomo" <> NS (pure (fromName p))
 provider    p = contents p  <> "Provider"
 datasources p = contents p  <> "DataSources"

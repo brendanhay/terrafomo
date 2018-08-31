@@ -1,7 +1,6 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -18,8 +17,9 @@
 module Terrafomo.Circonus.Provider
     (
     -- * Circonus Provider Datatype
-      Provider (..)
+      Circonus (..)
     , newProvider
+    , defaultProvider
 
     -- * Circonus Specific Aliases
     , DataSource
@@ -34,38 +34,33 @@ import GHC.Base (($))
 
 import Terrafomo.Circonus.Settings
 
+import qualified Data.Hashable            as P
+import qualified Data.HashMap.Strict      as P
 import qualified Data.List.NonEmpty       as P
-import qualified Data.Map.Strict          as P
-import qualified Data.Map.Strict          as Map
 import qualified Data.Maybe               as P
-import qualified Data.Monoid              as P
-import qualified Data.Text                as P
+import qualified Data.Text.Lazy           as P
 import qualified GHC.Generics             as P
 import qualified Lens.Micro               as P
 import qualified Prelude                  as P
 import qualified Terrafomo.Circonus.Lens  as P
 import qualified Terrafomo.Circonus.Types as P
 import qualified Terrafomo.HCL            as TF
-import qualified Terrafomo.Lifecycle      as TF
-import qualified Terrafomo.Name           as TF
-import qualified Terrafomo.Provider       as TF
 import qualified Terrafomo.Schema         as TF
-import qualified Terrafomo.Validator      as TF
 
-type DataSource a = TF.Schema ()               Provider a
-type Resource   a = TF.Schema (TF.Lifecycle a) Provider a
+type DataSource a = TF.Resource Circonus ()               a
+type Resource   a = TF.Resource Circonus (TF.Lifecycle a) a
 
 -- | The @circonus@ Terraform provider configuration.
 --
 -- See the <https://www.terraform.io/docs/providers/circonus/index.html terraform documentation>
 -- for more information.
-data Provider = Provider'
+data Circonus = Circonus'
     { _apiUrl  :: P.Text
-    -- ^ @api_url@ - (Optional)
+    -- ^ @api_url@ - (Default @https://api.circonus.com/v2@)
     -- URL of the Circonus API
     --
     , _autoTag :: P.Bool
-    -- ^ @auto_tag@ - (Optional)
+    -- ^ @auto_tag@ - (Default @false@)
     -- Signals that the provider should automatically add a tag to all API calls
     -- denoting that the resource was created by Terraform
     --
@@ -73,43 +68,63 @@ data Provider = Provider'
     -- ^ @key@ - (Required)
     -- API token used to authenticate with the Circonus API
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
+instance P.Hashable (Circonus)
+
+-- | Specify a new Circonus provider configuration.
 newProvider
-    :: P.Text -- ^ @key@ ('P._key', 'P.key')
-    -> Provider
+    :: P.Text -- ^ Lens: 'P.key', Field: '_key', HCL: @key@
+    -> Circonus
 newProvider _key =
-    Provider'
+    Circonus'
         { _apiUrl = "https://api.circonus.com/v2"
         , _autoTag = P.False
         , _key = _key
         }
 
-instance TF.IsProvider Provider where
-    type ProviderType Provider = "circonus"
+{- | The 'Circonus' provider with absent configuration that is used
+to instantiate new 'Resource's and 'DataSource's. Provider configuration can be
+overridden on a per-resource basis by using the 'Terrafomo.provider' lens, the
+'newProvider' constructor, and any of the applicable lenses.
 
-instance TF.IsObject Provider where
-    toObject Provider'{..} =
-        P.catMaybes
-            [ P.Just $ TF.assign "api_url" _apiUrl
-            , P.Just $ TF.assign "auto_tag" _autoTag
-            , P.Just $ TF.assign "key" _key
-            ]
+For example:
 
-instance TF.IsValid (Provider) where
-    validator = P.mempty
+@
+import qualified Terrafomo as TF
+import qualified Terrafomo.Circonus.Provider as Circonus
 
-instance P.HasApiUrl (Provider) (P.Text) where
+TF.newExampleResource "foo"
+    & TF.provider ?~
+          Circonus.(newProvider
+              -- Required arguments
+              _key -- (Required) 'P.Text'
+              -- Lenses
+              & Circonus.apiUrl .~ "https://api.circonus.com/v2" -- 'P.Text'
+              & Circonus.autoTag .~ False -- 'P.Bool'
+              & Circonus.key .~ _key -- 'P.Text'
+@
+-}
+defaultProvider :: TF.Provider Circonus
+defaultProvider =
+    TF.defaultProvider "circonus" (P.Just "~> 0.1")
+        (\Circonus'{..} -> P.mconcat
+            [ TF.pair "api_url" _apiUrl
+            , TF.pair "auto_tag" _autoTag
+            , TF.pair "key" _key
+            ])
+
+instance P.HasApiUrl (Circonus) (P.Text) where
     apiUrl =
-        P.lens (_apiUrl :: Provider -> P.Text)
-               (\s a -> s { _apiUrl = a } :: Provider)
+        P.lens (_apiUrl :: Circonus -> P.Text)
+            (\s a -> s { _apiUrl = a } :: Circonus)
 
-instance P.HasAutoTag (Provider) (P.Bool) where
+instance P.HasAutoTag (Circonus) (P.Bool) where
     autoTag =
-        P.lens (_autoTag :: Provider -> P.Bool)
-               (\s a -> s { _autoTag = a } :: Provider)
+        P.lens (_autoTag :: Circonus -> P.Bool)
+            (\s a -> s { _autoTag = a } :: Circonus)
 
-instance P.HasKey (Provider) (P.Text) where
+instance P.HasKey (Circonus) (P.Text) where
     key =
-        P.lens (_key :: Provider -> P.Text)
-               (\s a -> s { _key = a } :: Provider)
+        P.lens (_key :: Circonus -> P.Text)
+            (\s a -> s { _key = a } :: Circonus)

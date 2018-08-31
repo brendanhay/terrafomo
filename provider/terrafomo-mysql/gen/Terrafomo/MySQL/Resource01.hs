@@ -1,7 +1,6 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -37,237 +36,234 @@ import GHC.Base (($))
 
 import Terrafomo.MySQL.Settings
 
+import qualified Data.Hashable            as P
+import qualified Data.HashMap.Strict      as P
+import qualified Data.HashMap.Strict      as HashMap
 import qualified Data.List.NonEmpty       as P
-import qualified Data.Map.Strict          as P
-import qualified Data.Map.Strict          as Map
 import qualified Data.Maybe               as P
-import qualified Data.Monoid              as P
-import qualified Data.Text                as P
+import qualified Data.Text.Lazy           as P
 import qualified GHC.Generics             as P
 import qualified Lens.Micro               as P
 import qualified Prelude                  as P
-import qualified Terrafomo.Attribute      as TF
+import qualified Terrafomo.Encode         as TF
 import qualified Terrafomo.HCL            as TF
+import qualified Terrafomo.HIL            as TF
 import qualified Terrafomo.MySQL.Lens     as P
 import qualified Terrafomo.MySQL.Provider as P
 import qualified Terrafomo.MySQL.Types    as P
-import qualified Terrafomo.Name           as TF
 import qualified Terrafomo.Schema         as TF
-import qualified Terrafomo.Validator      as TF
+import qualified Terrafomo.Validate       as TF
 
 -- | @mysql_database@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/mysql/r/database.html terraform documentation>
 -- for more information.
 data DatabaseResource s = DatabaseResource'
-    { _defaultCharacterSet :: TF.Attr s P.Text
-    -- ^ @default_character_set@ - (Optional)
+    { _defaultCharacterSet :: TF.Expr s P.Text
+    -- ^ @default_character_set@ - (Default @utf8@)
     --
-    , _defaultCollation    :: TF.Attr s P.Text
-    -- ^ @default_collation@ - (Optional)
+    , _defaultCollation    :: TF.Expr s P.Text
+    -- ^ @default_collation@ - (Default @utf8_general_ci@)
     --
-    , _name                :: TF.Attr s P.Text
+    , _name                :: TF.Expr s P.Text
     -- ^ @name@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Define a new @mysql_database@ resource value.
 databaseResource
-    :: TF.Attr s P.Text -- ^ @name@ ('P._name', 'P.name')
+    :: TF.Expr s P.Text -- ^ Lens: 'P.name', Field: '_name', HCL: @name@
     -> P.Resource (DatabaseResource s)
 databaseResource _name =
-    TF.unsafeResource "mysql_database" TF.validator $
-        DatabaseResource'
+    TF.unsafeResource "mysql_database" P.defaultProvider  TF.encodeLifecycle
+        (\DatabaseResource'{..} -> P.mconcat
+            [ TF.pair "default_character_set" _defaultCharacterSet
+            , TF.pair "default_collation" _defaultCollation
+            , TF.pair "name" _name
+            ])
+        (DatabaseResource'
             { _defaultCharacterSet = TF.value "utf8"
             , _defaultCollation = TF.value "utf8_general_ci"
             , _name = _name
-            }
+            })
 
-instance TF.IsObject (DatabaseResource s) where
-    toObject DatabaseResource'{..} = P.catMaybes
-        [ TF.assign "default_character_set" <$> TF.attribute _defaultCharacterSet
-        , TF.assign "default_collation" <$> TF.attribute _defaultCollation
-        , TF.assign "name" <$> TF.attribute _name
-        ]
+instance P.Hashable (DatabaseResource s)
 
-instance TF.IsValid (DatabaseResource s) where
+instance TF.HasValidator (DatabaseResource s) where
     validator = P.mempty
 
-instance P.HasDefaultCharacterSet (DatabaseResource s) (TF.Attr s P.Text) where
+instance P.HasDefaultCharacterSet (DatabaseResource s) (TF.Expr s P.Text) where
     defaultCharacterSet =
-        P.lens (_defaultCharacterSet :: DatabaseResource s -> TF.Attr s P.Text)
-               (\s a -> s { _defaultCharacterSet = a } :: DatabaseResource s)
+        P.lens (_defaultCharacterSet :: DatabaseResource s -> TF.Expr s P.Text)
+            (\s a -> s { _defaultCharacterSet = a } :: DatabaseResource s)
 
-instance P.HasDefaultCollation (DatabaseResource s) (TF.Attr s P.Text) where
+instance P.HasDefaultCollation (DatabaseResource s) (TF.Expr s P.Text) where
     defaultCollation =
-        P.lens (_defaultCollation :: DatabaseResource s -> TF.Attr s P.Text)
-               (\s a -> s { _defaultCollation = a } :: DatabaseResource s)
+        P.lens (_defaultCollation :: DatabaseResource s -> TF.Expr s P.Text)
+            (\s a -> s { _defaultCollation = a } :: DatabaseResource s)
 
-instance P.HasName (DatabaseResource s) (TF.Attr s P.Text) where
+instance P.HasName (DatabaseResource s) (TF.Expr s P.Text) where
     name =
-        P.lens (_name :: DatabaseResource s -> TF.Attr s P.Text)
-               (\s a -> s { _name = a } :: DatabaseResource s)
+        P.lens (_name :: DatabaseResource s -> TF.Expr s P.Text)
+            (\s a -> s { _name = a } :: DatabaseResource s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (DatabaseResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (DatabaseResource s)) (TF.Expr s P.Text) where
+    computedId x =
+        TF.unsafeCompute TF.encodeAttr x "id"
 
 -- | @mysql_grant@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/mysql/r/grant.html terraform documentation>
 -- for more information.
 data GrantResource s = GrantResource'
-    { _database   :: TF.Attr s P.Text
+    { _database   :: TF.Expr s P.Text
     -- ^ @database@ - (Required, Forces New)
     --
-    , _grant      :: TF.Attr s P.Bool
-    -- ^ @grant@ - (Optional, Forces New)
+    , _grant      :: TF.Expr s P.Bool
+    -- ^ @grant@ - (Default @false@, Forces New)
     --
-    , _host       :: TF.Attr s P.Text
-    -- ^ @host@ - (Optional, Forces New)
+    , _host       :: TF.Expr s P.Text
+    -- ^ @host@ - (Default @localhost@, Forces New)
     --
-    , _privileges :: TF.Attr s [TF.Attr s P.Text]
+    , _privileges :: TF.Expr s [TF.Expr s P.Text]
     -- ^ @privileges@ - (Required, Forces New)
     --
-    , _user       :: TF.Attr s P.Text
+    , _user       :: TF.Expr s P.Text
     -- ^ @user@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Define a new @mysql_grant@ resource value.
 grantResource
-    :: TF.Attr s P.Text -- ^ @database@ ('P._database', 'P.database')
-    -> TF.Attr s [TF.Attr s P.Text] -- ^ @privileges@ ('P._privileges', 'P.privileges')
-    -> TF.Attr s P.Text -- ^ @user@ ('P._user', 'P.user')
+    :: TF.Expr s P.Text -- ^ Lens: 'P.database', Field: '_database', HCL: @database@
+    -> TF.Expr s [TF.Expr s P.Text] -- ^ Lens: 'P.privileges', Field: '_privileges', HCL: @privileges@
+    -> TF.Expr s P.Text -- ^ Lens: 'P.user', Field: '_user', HCL: @user@
     -> P.Resource (GrantResource s)
 grantResource _database _privileges _user =
-    TF.unsafeResource "mysql_grant" TF.validator $
-        GrantResource'
+    TF.unsafeResource "mysql_grant" P.defaultProvider  TF.encodeLifecycle
+        (\GrantResource'{..} -> P.mconcat
+            [ TF.pair "database" _database
+            , TF.pair "grant" _grant
+            , TF.pair "host" _host
+            , TF.pair "privileges" _privileges
+            , TF.pair "user" _user
+            ])
+        (GrantResource'
             { _database = _database
             , _grant = TF.value P.False
             , _host = TF.value "localhost"
             , _privileges = _privileges
             , _user = _user
-            }
+            })
 
-instance TF.IsObject (GrantResource s) where
-    toObject GrantResource'{..} = P.catMaybes
-        [ TF.assign "database" <$> TF.attribute _database
-        , TF.assign "grant" <$> TF.attribute _grant
-        , TF.assign "host" <$> TF.attribute _host
-        , TF.assign "privileges" <$> TF.attribute _privileges
-        , TF.assign "user" <$> TF.attribute _user
-        ]
+instance P.Hashable (GrantResource s)
 
-instance TF.IsValid (GrantResource s) where
+instance TF.HasValidator (GrantResource s) where
     validator = P.mempty
 
-instance P.HasDatabase (GrantResource s) (TF.Attr s P.Text) where
+instance P.HasDatabase (GrantResource s) (TF.Expr s P.Text) where
     database =
-        P.lens (_database :: GrantResource s -> TF.Attr s P.Text)
-               (\s a -> s { _database = a } :: GrantResource s)
+        P.lens (_database :: GrantResource s -> TF.Expr s P.Text)
+            (\s a -> s { _database = a } :: GrantResource s)
 
-instance P.HasGrant (GrantResource s) (TF.Attr s P.Bool) where
+instance P.HasGrant (GrantResource s) (TF.Expr s P.Bool) where
     grant =
-        P.lens (_grant :: GrantResource s -> TF.Attr s P.Bool)
-               (\s a -> s { _grant = a } :: GrantResource s)
+        P.lens (_grant :: GrantResource s -> TF.Expr s P.Bool)
+            (\s a -> s { _grant = a } :: GrantResource s)
 
-instance P.HasHost (GrantResource s) (TF.Attr s P.Text) where
+instance P.HasHost (GrantResource s) (TF.Expr s P.Text) where
     host =
-        P.lens (_host :: GrantResource s -> TF.Attr s P.Text)
-               (\s a -> s { _host = a } :: GrantResource s)
+        P.lens (_host :: GrantResource s -> TF.Expr s P.Text)
+            (\s a -> s { _host = a } :: GrantResource s)
 
-instance P.HasPrivileges (GrantResource s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasPrivileges (GrantResource s) (TF.Expr s [TF.Expr s P.Text]) where
     privileges =
-        P.lens (_privileges :: GrantResource s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _privileges = a } :: GrantResource s)
+        P.lens (_privileges :: GrantResource s -> TF.Expr s [TF.Expr s P.Text])
+            (\s a -> s { _privileges = a } :: GrantResource s)
 
-instance P.HasUser (GrantResource s) (TF.Attr s P.Text) where
+instance P.HasUser (GrantResource s) (TF.Expr s P.Text) where
     user =
-        P.lens (_user :: GrantResource s -> TF.Attr s P.Text)
-               (\s a -> s { _user = a } :: GrantResource s)
+        P.lens (_user :: GrantResource s -> TF.Expr s P.Text)
+            (\s a -> s { _user = a } :: GrantResource s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (GrantResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (GrantResource s)) (TF.Expr s P.Text) where
+    computedId x =
+        TF.unsafeCompute TF.encodeAttr x "id"
 
 -- | @mysql_user@ Resource.
 --
 -- See the <https://www.terraform.io/docs/providers/mysql/r/user.html terraform documentation>
 -- for more information.
 data UserResource s = UserResource'
-    { _authPlugin        :: TF.Attr s P.Text
+    { _authPlugin        :: P.Maybe (TF.Expr s P.Text)
     -- ^ @auth_plugin@ - (Optional, Forces New)
     --
     -- Conflicts with:
     --
     -- * 'plaintextPassword'
-    , _host              :: TF.Attr s P.Text
-    -- ^ @host@ - (Optional, Forces New)
+    , _host              :: TF.Expr s P.Text
+    -- ^ @host@ - (Default @localhost@, Forces New)
     --
-    , _plaintextPassword :: TF.Attr s P.Text
+    , _plaintextPassword :: P.Maybe (TF.Expr s P.Text)
     -- ^ @plaintext_password@ - (Optional)
     --
     -- Conflicts with:
     --
     -- * 'authPlugin'
-    , _user              :: TF.Attr s P.Text
+    , _user              :: TF.Expr s P.Text
     -- ^ @user@ - (Required, Forces New)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Define a new @mysql_user@ resource value.
 userResource
-    :: TF.Attr s P.Text -- ^ @user@ ('P._user', 'P.user')
+    :: TF.Expr s P.Text -- ^ Lens: 'P.user', Field: '_user', HCL: @user@
     -> P.Resource (UserResource s)
 userResource _user =
-    TF.unsafeResource "mysql_user" TF.validator $
-        UserResource'
-            { _authPlugin = TF.Nil
+    TF.unsafeResource "mysql_user" P.defaultProvider  TF.encodeLifecycle
+        (\UserResource'{..} -> P.mconcat
+            [ P.maybe P.mempty (TF.pair "auth_plugin") _authPlugin
+            , TF.pair "host" _host
+            , P.maybe P.mempty (TF.pair "plaintext_password") _plaintextPassword
+            , TF.pair "user" _user
+            ])
+        (UserResource'
+            { _authPlugin = P.Nothing
             , _host = TF.value "localhost"
-            , _plaintextPassword = TF.Nil
+            , _plaintextPassword = P.Nothing
             , _user = _user
-            }
+            })
 
-instance TF.IsObject (UserResource s) where
-    toObject UserResource'{..} = P.catMaybes
-        [ TF.assign "auth_plugin" <$> TF.attribute _authPlugin
-        , TF.assign "host" <$> TF.attribute _host
-        , TF.assign "plaintext_password" <$> TF.attribute _plaintextPassword
-        , TF.assign "user" <$> TF.attribute _user
-        ]
+instance P.Hashable (UserResource s)
 
-instance TF.IsValid (UserResource s) where
-    validator = TF.fieldsValidator (\UserResource'{..} -> Map.fromList $ P.catMaybes
-        [ if (_authPlugin P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_authPlugin",
-                            [ "_plaintextPassword"
-                            ])
-        , if (_plaintextPassword P.== TF.Nil)
-              then P.Nothing
-              else P.Just ("_plaintextPassword",
-                            [ "_authPlugin"
-                            ])
+instance TF.HasValidator (UserResource s) where
+    validator = TF.conflictValidator (\UserResource'{..} -> HashMap.fromList $ P.catMaybes
+        [ TF.conflictsWith (_authPlugin P.== P.Nothing) "_authPlugin"
+            ["_plaintextPassword"]
+        , TF.conflictsWith (_plaintextPassword P.== P.Nothing) "_plaintextPassword"
+            ["_authPlugin"]
         ])
 
-instance P.HasAuthPlugin (UserResource s) (TF.Attr s P.Text) where
+instance P.HasAuthPlugin (UserResource s) (P.Maybe (TF.Expr s P.Text)) where
     authPlugin =
-        P.lens (_authPlugin :: UserResource s -> TF.Attr s P.Text)
-               (\s a -> s { _authPlugin = a } :: UserResource s)
+        P.lens (_authPlugin :: UserResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _authPlugin = a } :: UserResource s)
 
-instance P.HasHost (UserResource s) (TF.Attr s P.Text) where
+instance P.HasHost (UserResource s) (TF.Expr s P.Text) where
     host =
-        P.lens (_host :: UserResource s -> TF.Attr s P.Text)
-               (\s a -> s { _host = a } :: UserResource s)
+        P.lens (_host :: UserResource s -> TF.Expr s P.Text)
+            (\s a -> s { _host = a } :: UserResource s)
 
-instance P.HasPlaintextPassword (UserResource s) (TF.Attr s P.Text) where
+instance P.HasPlaintextPassword (UserResource s) (P.Maybe (TF.Expr s P.Text)) where
     plaintextPassword =
-        P.lens (_plaintextPassword :: UserResource s -> TF.Attr s P.Text)
-               (\s a -> s { _plaintextPassword = a } :: UserResource s)
+        P.lens (_plaintextPassword :: UserResource s -> P.Maybe (TF.Expr s P.Text))
+            (\s a -> s { _plaintextPassword = a } :: UserResource s)
 
-instance P.HasUser (UserResource s) (TF.Attr s P.Text) where
+instance P.HasUser (UserResource s) (TF.Expr s P.Text) where
     user =
-        P.lens (_user :: UserResource s -> TF.Attr s P.Text)
-               (\s a -> s { _user = a } :: UserResource s)
+        P.lens (_user :: UserResource s -> TF.Expr s P.Text)
+            (\s a -> s { _user = a } :: UserResource s)
 
-instance s ~ s' => P.HasComputedId (TF.Ref s' (UserResource s)) (TF.Attr s P.Text) where
-    computedId x = TF.compute (TF.refKey x) "id"
+instance s ~ s' => P.HasComputedId (TF.Ref s' (UserResource s)) (TF.Expr s P.Text) where
+    computedId x =
+        TF.unsafeCompute TF.encodeAttr x "id"

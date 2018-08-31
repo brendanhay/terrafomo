@@ -1,7 +1,6 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -18,8 +17,9 @@
 module Terrafomo.Vault.Provider
     (
     -- * Vault Provider Datatype
-      Provider (..)
+      Vault (..)
     , newProvider
+    , defaultProvider
 
     -- * Vault Specific Aliases
     , DataSource
@@ -34,32 +34,27 @@ import GHC.Base (($))
 
 import Terrafomo.Vault.Settings
 
+import qualified Data.Hashable         as P
+import qualified Data.HashMap.Strict   as P
 import qualified Data.List.NonEmpty    as P
-import qualified Data.Map.Strict       as P
-import qualified Data.Map.Strict       as Map
 import qualified Data.Maybe            as P
-import qualified Data.Monoid           as P
-import qualified Data.Text             as P
+import qualified Data.Text.Lazy        as P
 import qualified GHC.Generics          as P
 import qualified Lens.Micro            as P
 import qualified Prelude               as P
 import qualified Terrafomo.HCL         as TF
-import qualified Terrafomo.Lifecycle   as TF
-import qualified Terrafomo.Name        as TF
-import qualified Terrafomo.Provider    as TF
 import qualified Terrafomo.Schema      as TF
-import qualified Terrafomo.Validator   as TF
 import qualified Terrafomo.Vault.Lens  as P
 import qualified Terrafomo.Vault.Types as P
 
-type DataSource a = TF.Schema ()               Provider a
-type Resource   a = TF.Schema (TF.Lifecycle a) Provider a
+type DataSource a = TF.Resource Vault ()               a
+type Resource   a = TF.Resource Vault (TF.Lifecycle a) a
 
 -- | The @vault@ Terraform provider configuration.
 --
 -- See the <https://www.terraform.io/docs/providers/vault/index.html terraform documentation>
 -- for more information.
-data Provider = Provider'
+data Vault = Vault'
     { _address            :: P.Text
     -- ^ @address@ - (Required)
     -- URL of the root of the target Vault server.
@@ -90,14 +85,17 @@ data Provider = Provider'
     -- ^ @token@ - (Required)
     -- Token to use to authenticate to Vault.
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
+instance P.Hashable (Vault)
+
+-- | Specify a new Vault provider configuration.
 newProvider
-    :: P.Text -- ^ @address@ ('P._address', 'P.address')
-    -> P.Text -- ^ @token@ ('P._token', 'P.token')
-    -> Provider
+    :: P.Text -- ^ Lens: 'P.address', Field: '_address', HCL: @address@
+    -> P.Text -- ^ Lens: 'P.token', Field: '_token', HCL: @token@
+    -> Vault
 newProvider _address _token =
-    Provider'
+    Vault'
         { _address = _address
         , _caCertDir = P.Nothing
         , _caCertFile = P.Nothing
@@ -107,55 +105,77 @@ newProvider _address _token =
         , _token = _token
         }
 
-instance TF.IsProvider Provider where
-    type ProviderType Provider = "vault"
+{- | The 'Vault' provider with absent configuration that is used
+to instantiate new 'Resource's and 'DataSource's. Provider configuration can be
+overridden on a per-resource basis by using the 'Terrafomo.provider' lens, the
+'newProvider' constructor, and any of the applicable lenses.
 
-instance TF.IsObject Provider where
-    toObject Provider'{..} =
-        P.catMaybes
-            [ P.Just $ TF.assign "address" _address
-            , TF.assign "ca_cert_dir" <$> _caCertDir
-            , TF.assign "ca_cert_file" <$> _caCertFile
-            , TF.assign "client_auth" <$> _clientAuth
-            , TF.assign "max_lease_ttl_seconds" <$> _maxLeaseTtlSeconds
-            , TF.assign "skip_tls_verify" <$> _skipTlsVerify
-            , P.Just $ TF.assign "token" _token
-            ]
+For example:
 
-instance TF.IsValid (Provider) where
-    validator = P.mempty
+@
+import qualified Terrafomo as TF
+import qualified Terrafomo.Vault.Provider as Vault
 
-instance P.HasAddress (Provider) (P.Text) where
+TF.newExampleResource "foo"
+    & TF.provider ?~
+          Vault.(newProvider
+              -- Required arguments
+              _address -- (Required) 'P.Text'
+              _token -- (Required) 'P.Text'
+              -- Lenses
+              & Vault.address .~ _address -- 'P.Text'
+              & Vault.caCertDir .~ Nothing -- 'P.Maybe P.Text'
+              & Vault.caCertFile .~ Nothing -- 'P.Maybe P.Text'
+              & Vault.clientAuth .~ Nothing -- 'P.Maybe [ClientAuth]'
+              & Vault.maxLeaseTtlSeconds .~ Nothing -- 'P.Maybe P.Int'
+              & Vault.skipTlsVerify .~ Nothing -- 'P.Maybe P.Bool'
+              & Vault.token .~ _token -- 'P.Text'
+@
+-}
+defaultProvider :: TF.Provider Vault
+defaultProvider =
+    TF.defaultProvider "vault" (P.Just "~> 1.1")
+        (\Vault'{..} -> P.mconcat
+            [ TF.pair "address" _address
+            , P.maybe P.mempty (TF.pair "ca_cert_dir") _caCertDir
+            , P.maybe P.mempty (TF.pair "ca_cert_file") _caCertFile
+            , P.maybe P.mempty (TF.pair "client_auth") _clientAuth
+            , P.maybe P.mempty (TF.pair "max_lease_ttl_seconds") _maxLeaseTtlSeconds
+            , P.maybe P.mempty (TF.pair "skip_tls_verify") _skipTlsVerify
+            , TF.pair "token" _token
+            ])
+
+instance P.HasAddress (Vault) (P.Text) where
     address =
-        P.lens (_address :: Provider -> P.Text)
-               (\s a -> s { _address = a } :: Provider)
+        P.lens (_address :: Vault -> P.Text)
+            (\s a -> s { _address = a } :: Vault)
 
-instance P.HasCaCertDir (Provider) (P.Maybe P.Text) where
+instance P.HasCaCertDir (Vault) (P.Maybe P.Text) where
     caCertDir =
-        P.lens (_caCertDir :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _caCertDir = a } :: Provider)
+        P.lens (_caCertDir :: Vault -> P.Maybe P.Text)
+            (\s a -> s { _caCertDir = a } :: Vault)
 
-instance P.HasCaCertFile (Provider) (P.Maybe P.Text) where
+instance P.HasCaCertFile (Vault) (P.Maybe P.Text) where
     caCertFile =
-        P.lens (_caCertFile :: Provider -> P.Maybe P.Text)
-               (\s a -> s { _caCertFile = a } :: Provider)
+        P.lens (_caCertFile :: Vault -> P.Maybe P.Text)
+            (\s a -> s { _caCertFile = a } :: Vault)
 
-instance P.HasClientAuth (Provider) (P.Maybe [ClientAuth]) where
+instance P.HasClientAuth (Vault) (P.Maybe [ClientAuth]) where
     clientAuth =
-        P.lens (_clientAuth :: Provider -> P.Maybe [ClientAuth])
-               (\s a -> s { _clientAuth = a } :: Provider)
+        P.lens (_clientAuth :: Vault -> P.Maybe [ClientAuth])
+            (\s a -> s { _clientAuth = a } :: Vault)
 
-instance P.HasMaxLeaseTtlSeconds (Provider) (P.Maybe P.Int) where
+instance P.HasMaxLeaseTtlSeconds (Vault) (P.Maybe P.Int) where
     maxLeaseTtlSeconds =
-        P.lens (_maxLeaseTtlSeconds :: Provider -> P.Maybe P.Int)
-               (\s a -> s { _maxLeaseTtlSeconds = a } :: Provider)
+        P.lens (_maxLeaseTtlSeconds :: Vault -> P.Maybe P.Int)
+            (\s a -> s { _maxLeaseTtlSeconds = a } :: Vault)
 
-instance P.HasSkipTlsVerify (Provider) (P.Maybe P.Bool) where
+instance P.HasSkipTlsVerify (Vault) (P.Maybe P.Bool) where
     skipTlsVerify =
-        P.lens (_skipTlsVerify :: Provider -> P.Maybe P.Bool)
-               (\s a -> s { _skipTlsVerify = a } :: Provider)
+        P.lens (_skipTlsVerify :: Vault -> P.Maybe P.Bool)
+            (\s a -> s { _skipTlsVerify = a } :: Vault)
 
-instance P.HasToken (Provider) (P.Text) where
+instance P.HasToken (Vault) (P.Text) where
     token =
-        P.lens (_token :: Provider -> P.Text)
-               (\s a -> s { _token = a } :: Provider)
+        P.lens (_token :: Vault -> P.Text)
+            (\s a -> s { _token = a } :: Vault)

@@ -4,7 +4,6 @@
 {-# OPTIONS_GHC -fno-warn-dodgy-exports  #-}
 
 {% include "_include/license.ede" %}
---
 module {{ namespace }}
     (
     -- * Provider

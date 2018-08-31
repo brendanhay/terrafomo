@@ -1,7 +1,6 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -18,8 +17,9 @@
 module Terrafomo.DNSMadeEasy.Provider
     (
     -- * DNSMadeEasy Provider Datatype
-      Provider (..)
+      DNSMadeEasy (..)
     , newProvider
+    , defaultProvider
 
     -- * DNSMadeEasy Specific Aliases
     , DataSource
@@ -34,32 +34,27 @@ import GHC.Base (($))
 
 import Terrafomo.DNSMadeEasy.Settings
 
+import qualified Data.Hashable               as P
+import qualified Data.HashMap.Strict         as P
 import qualified Data.List.NonEmpty          as P
-import qualified Data.Map.Strict             as P
-import qualified Data.Map.Strict             as Map
 import qualified Data.Maybe                  as P
-import qualified Data.Monoid                 as P
-import qualified Data.Text                   as P
+import qualified Data.Text.Lazy              as P
 import qualified GHC.Generics                as P
 import qualified Lens.Micro                  as P
 import qualified Prelude                     as P
 import qualified Terrafomo.DNSMadeEasy.Lens  as P
 import qualified Terrafomo.DNSMadeEasy.Types as P
 import qualified Terrafomo.HCL               as TF
-import qualified Terrafomo.Lifecycle         as TF
-import qualified Terrafomo.Name              as TF
-import qualified Terrafomo.Provider          as TF
 import qualified Terrafomo.Schema            as TF
-import qualified Terrafomo.Validator         as TF
 
-type DataSource a = TF.Schema ()               Provider a
-type Resource   a = TF.Schema (TF.Lifecycle a) Provider a
+type DataSource a = TF.Resource DNSMadeEasy ()               a
+type Resource   a = TF.Resource DNSMadeEasy (TF.Lifecycle a) a
 
 -- | The @dme@ Terraform provider configuration.
 --
 -- See the <https://www.terraform.io/docs/providers/dme/index.html terraform documentation>
 -- for more information.
-data Provider = Provider'
+data DNSMadeEasy = DNSMadeEasy'
     { _akey       :: P.Text
     -- ^ @akey@ - (Required)
     -- A DNSMadeEasy API Key.
@@ -72,45 +67,67 @@ data Provider = Provider'
     -- ^ @usesandbox@ - (Required)
     -- If true, use the DME Sandbox.
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
+instance P.Hashable (DNSMadeEasy)
+
+-- | Specify a new DNSMadeEasy provider configuration.
 newProvider
-    :: P.Text -- ^ @akey@ ('P._akey', 'P.akey')
-    -> P.Text -- ^ @skey@ ('P._skey', 'P.skey')
-    -> P.Bool -- ^ @usesandbox@ ('P._usesandbox', 'P.usesandbox')
-    -> Provider
+    :: P.Text -- ^ Lens: 'P.akey', Field: '_akey', HCL: @akey@
+    -> P.Text -- ^ Lens: 'P.skey', Field: '_skey', HCL: @skey@
+    -> P.Bool -- ^ Lens: 'P.usesandbox', Field: '_usesandbox', HCL: @usesandbox@
+    -> DNSMadeEasy
 newProvider _akey _skey _usesandbox =
-    Provider'
+    DNSMadeEasy'
         { _akey = _akey
         , _skey = _skey
         , _usesandbox = _usesandbox
         }
 
-instance TF.IsProvider Provider where
-    type ProviderType Provider = "dme"
+{- | The 'DNSMadeEasy' provider with absent configuration that is used
+to instantiate new 'Resource's and 'DataSource's. Provider configuration can be
+overridden on a per-resource basis by using the 'Terrafomo.provider' lens, the
+'newProvider' constructor, and any of the applicable lenses.
 
-instance TF.IsObject Provider where
-    toObject Provider'{..} =
-        P.catMaybes
-            [ P.Just $ TF.assign "akey" _akey
-            , P.Just $ TF.assign "skey" _skey
-            , P.Just $ TF.assign "usesandbox" _usesandbox
-            ]
+For example:
 
-instance TF.IsValid (Provider) where
-    validator = P.mempty
+@
+import qualified Terrafomo as TF
+import qualified Terrafomo.DNSMadeEasy.Provider as DNSMadeEasy
 
-instance P.HasAkey (Provider) (P.Text) where
+TF.newExampleResource "foo"
+    & TF.provider ?~
+          DNSMadeEasy.(newProvider
+              -- Required arguments
+              _akey -- (Required) 'P.Text'
+              _skey -- (Required) 'P.Text'
+              _usesandbox -- (Required) 'P.Bool'
+              -- Lenses
+              & DNSMadeEasy.akey .~ _akey -- 'P.Text'
+              & DNSMadeEasy.skey .~ _skey -- 'P.Text'
+              & DNSMadeEasy.usesandbox .~ _usesandbox -- 'P.Bool'
+@
+-}
+defaultProvider :: TF.Provider DNSMadeEasy
+defaultProvider =
+    TF.defaultProvider "dme" (P.Just "~> 0.1")
+        (\DNSMadeEasy'{..} -> P.mconcat
+            [ TF.pair "akey" _akey
+            , TF.pair "skey" _skey
+            , TF.pair "usesandbox" _usesandbox
+            ])
+
+instance P.HasAkey (DNSMadeEasy) (P.Text) where
     akey =
-        P.lens (_akey :: Provider -> P.Text)
-               (\s a -> s { _akey = a } :: Provider)
+        P.lens (_akey :: DNSMadeEasy -> P.Text)
+            (\s a -> s { _akey = a } :: DNSMadeEasy)
 
-instance P.HasSkey (Provider) (P.Text) where
+instance P.HasSkey (DNSMadeEasy) (P.Text) where
     skey =
-        P.lens (_skey :: Provider -> P.Text)
-               (\s a -> s { _skey = a } :: Provider)
+        P.lens (_skey :: DNSMadeEasy -> P.Text)
+            (\s a -> s { _skey = a } :: DNSMadeEasy)
 
-instance P.HasUsesandbox (Provider) (P.Bool) where
+instance P.HasUsesandbox (DNSMadeEasy) (P.Bool) where
     usesandbox =
-        P.lens (_usesandbox :: Provider -> P.Bool)
-               (\s a -> s { _usesandbox = a } :: Provider)
+        P.lens (_usesandbox :: DNSMadeEasy -> P.Bool)
+            (\s a -> s { _usesandbox = a } :: DNSMadeEasy)

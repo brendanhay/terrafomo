@@ -1,7 +1,6 @@
 -- This module is auto-generated.
 
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE RecordWildCards   #-}
 {-# LANGUAGE StrictData        #-}
 
@@ -35,38 +34,38 @@ import Data.Functor ((<$>))
 
 import GHC.Base (($))
 
-
+import qualified Data.Hashable          as P
+import qualified Data.HashMap.Strict    as P
+import qualified Data.HashMap.Strict    as HashMap
 import qualified Data.List.NonEmpty     as P
-import qualified Data.Map.Strict        as P
-import qualified Data.Map.Strict        as Map
 import qualified Data.Maybe             as P
-import qualified Data.Monoid            as P
-import qualified Data.Text              as P
+import qualified Data.Text.Lazy         as P
 import qualified GHC.Generics           as P
 import qualified Lens.Micro             as P
 import qualified Prelude                as P
-import qualified Terrafomo.Attribute    as TF
+import qualified Terrafomo.Encode       as TF
 import qualified Terrafomo.GitHub.Lens  as P
 import qualified Terrafomo.GitHub.Types as P
 import qualified Terrafomo.HCL          as TF
-import qualified Terrafomo.Name         as TF
-import qualified Terrafomo.Validator    as TF
+import qualified Terrafomo.HIL          as TF
+import qualified Terrafomo.Schema       as TF
+import qualified Terrafomo.Validate     as TF
 
 -- | @required_pull_request_reviews@ nested settings.
 data BranchProtectionRequiredPullRequestReviews s = BranchProtectionRequiredPullRequestReviews'
-    { _dismissStaleReviews     :: TF.Attr s P.Bool
-    -- ^ @dismiss_stale_reviews@ - (Optional)
+    { _dismissStaleReviews     :: TF.Expr s P.Bool
+    -- ^ @dismiss_stale_reviews@ - (Default @false@)
     --
-    , _dismissalTeams          :: TF.Attr s [TF.Attr s P.Text]
+    , _dismissalTeams          :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
     -- ^ @dismissal_teams@ - (Optional)
     --
-    , _dismissalUsers          :: TF.Attr s [TF.Attr s P.Text]
+    , _dismissalUsers          :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
     -- ^ @dismissal_users@ - (Optional)
     --
-    , _requireCodeOwnerReviews :: TF.Attr s P.Bool
+    , _requireCodeOwnerReviews :: P.Maybe (TF.Expr s P.Bool)
     -- ^ @require_code_owner_reviews@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @required_pull_request_reviews@ settings value.
 newBranchProtectionRequiredPullRequestReviews
@@ -74,117 +73,120 @@ newBranchProtectionRequiredPullRequestReviews
 newBranchProtectionRequiredPullRequestReviews =
     BranchProtectionRequiredPullRequestReviews'
         { _dismissStaleReviews = TF.value P.False
-        , _dismissalTeams = TF.Nil
-        , _dismissalUsers = TF.Nil
-        , _requireCodeOwnerReviews = TF.Nil
+        , _dismissalTeams = P.Nothing
+        , _dismissalUsers = P.Nothing
+        , _requireCodeOwnerReviews = P.Nothing
         }
 
-instance TF.IsValue  (BranchProtectionRequiredPullRequestReviews s)
-instance TF.IsObject (BranchProtectionRequiredPullRequestReviews s) where
-    toObject BranchProtectionRequiredPullRequestReviews'{..} = P.catMaybes
-        [ TF.assign "dismiss_stale_reviews" <$> TF.attribute _dismissStaleReviews
-        , TF.assign "dismissal_teams" <$> TF.attribute _dismissalTeams
-        , TF.assign "dismissal_users" <$> TF.attribute _dismissalUsers
-        , TF.assign "require_code_owner_reviews" <$> TF.attribute _requireCodeOwnerReviews
+instance TF.ToHCL (BranchProtectionRequiredPullRequestReviews s) where
+     toHCL BranchProtectionRequiredPullRequestReviews'{..} = TF.pairs $ P.mconcat
+        [ TF.pair "dismiss_stale_reviews" _dismissStaleReviews
+        , P.maybe P.mempty (TF.pair "dismissal_teams") _dismissalTeams
+        , P.maybe P.mempty (TF.pair "dismissal_users") _dismissalUsers
+        , P.maybe P.mempty (TF.pair "require_code_owner_reviews") _requireCodeOwnerReviews
         ]
 
-instance TF.IsValid (BranchProtectionRequiredPullRequestReviews s) where
+instance P.Hashable (BranchProtectionRequiredPullRequestReviews s)
+
+instance TF.HasValidator (BranchProtectionRequiredPullRequestReviews s) where
     validator = P.mempty
 
-instance P.HasDismissStaleReviews (BranchProtectionRequiredPullRequestReviews s) (TF.Attr s P.Bool) where
+instance P.HasDismissStaleReviews (BranchProtectionRequiredPullRequestReviews s) (TF.Expr s P.Bool) where
     dismissStaleReviews =
-        P.lens (_dismissStaleReviews :: BranchProtectionRequiredPullRequestReviews s -> TF.Attr s P.Bool)
-               (\s a -> s { _dismissStaleReviews = a } :: BranchProtectionRequiredPullRequestReviews s)
+        P.lens (_dismissStaleReviews :: BranchProtectionRequiredPullRequestReviews s -> TF.Expr s P.Bool)
+            (\s a -> s { _dismissStaleReviews = a } :: BranchProtectionRequiredPullRequestReviews s)
 
-instance P.HasDismissalTeams (BranchProtectionRequiredPullRequestReviews s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasDismissalTeams (BranchProtectionRequiredPullRequestReviews s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
     dismissalTeams =
-        P.lens (_dismissalTeams :: BranchProtectionRequiredPullRequestReviews s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _dismissalTeams = a } :: BranchProtectionRequiredPullRequestReviews s)
+        P.lens (_dismissalTeams :: BranchProtectionRequiredPullRequestReviews s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
+            (\s a -> s { _dismissalTeams = a } :: BranchProtectionRequiredPullRequestReviews s)
 
-instance P.HasDismissalUsers (BranchProtectionRequiredPullRequestReviews s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasDismissalUsers (BranchProtectionRequiredPullRequestReviews s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
     dismissalUsers =
-        P.lens (_dismissalUsers :: BranchProtectionRequiredPullRequestReviews s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _dismissalUsers = a } :: BranchProtectionRequiredPullRequestReviews s)
+        P.lens (_dismissalUsers :: BranchProtectionRequiredPullRequestReviews s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
+            (\s a -> s { _dismissalUsers = a } :: BranchProtectionRequiredPullRequestReviews s)
 
-instance P.HasRequireCodeOwnerReviews (BranchProtectionRequiredPullRequestReviews s) (TF.Attr s P.Bool) where
+instance P.HasRequireCodeOwnerReviews (BranchProtectionRequiredPullRequestReviews s) (P.Maybe (TF.Expr s P.Bool)) where
     requireCodeOwnerReviews =
-        P.lens (_requireCodeOwnerReviews :: BranchProtectionRequiredPullRequestReviews s -> TF.Attr s P.Bool)
-               (\s a -> s { _requireCodeOwnerReviews = a } :: BranchProtectionRequiredPullRequestReviews s)
+        P.lens (_requireCodeOwnerReviews :: BranchProtectionRequiredPullRequestReviews s -> P.Maybe (TF.Expr s P.Bool))
+            (\s a -> s { _requireCodeOwnerReviews = a } :: BranchProtectionRequiredPullRequestReviews s)
 
 -- | @required_status_checks@ nested settings.
 data BranchProtectionRequiredStatusChecks s = BranchProtectionRequiredStatusChecks'
-    { _contexts :: TF.Attr s [TF.Attr s P.Text]
+    { _contexts :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
     -- ^ @contexts@ - (Optional)
     --
-    , _strict   :: TF.Attr s P.Bool
-    -- ^ @strict@ - (Optional)
+    , _strict   :: TF.Expr s P.Bool
+    -- ^ @strict@ - (Default @false@)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @required_status_checks@ settings value.
 newBranchProtectionRequiredStatusChecks
     :: BranchProtectionRequiredStatusChecks s
 newBranchProtectionRequiredStatusChecks =
     BranchProtectionRequiredStatusChecks'
-        { _contexts = TF.Nil
+        { _contexts = P.Nothing
         , _strict = TF.value P.False
         }
 
-instance TF.IsValue  (BranchProtectionRequiredStatusChecks s)
-instance TF.IsObject (BranchProtectionRequiredStatusChecks s) where
-    toObject BranchProtectionRequiredStatusChecks'{..} = P.catMaybes
-        [ TF.assign "contexts" <$> TF.attribute _contexts
-        , TF.assign "strict" <$> TF.attribute _strict
+instance TF.ToHCL (BranchProtectionRequiredStatusChecks s) where
+     toHCL BranchProtectionRequiredStatusChecks'{..} = TF.pairs $ P.mconcat
+        [ P.maybe P.mempty (TF.pair "contexts") _contexts
+        , TF.pair "strict" _strict
         ]
 
-instance TF.IsValid (BranchProtectionRequiredStatusChecks s) where
+instance P.Hashable (BranchProtectionRequiredStatusChecks s)
+
+instance TF.HasValidator (BranchProtectionRequiredStatusChecks s) where
     validator = P.mempty
 
-instance P.HasContexts (BranchProtectionRequiredStatusChecks s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasContexts (BranchProtectionRequiredStatusChecks s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
     contexts =
-        P.lens (_contexts :: BranchProtectionRequiredStatusChecks s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _contexts = a } :: BranchProtectionRequiredStatusChecks s)
+        P.lens (_contexts :: BranchProtectionRequiredStatusChecks s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
+            (\s a -> s { _contexts = a } :: BranchProtectionRequiredStatusChecks s)
 
-instance P.HasStrict (BranchProtectionRequiredStatusChecks s) (TF.Attr s P.Bool) where
+instance P.HasStrict (BranchProtectionRequiredStatusChecks s) (TF.Expr s P.Bool) where
     strict =
-        P.lens (_strict :: BranchProtectionRequiredStatusChecks s -> TF.Attr s P.Bool)
-               (\s a -> s { _strict = a } :: BranchProtectionRequiredStatusChecks s)
+        P.lens (_strict :: BranchProtectionRequiredStatusChecks s -> TF.Expr s P.Bool)
+            (\s a -> s { _strict = a } :: BranchProtectionRequiredStatusChecks s)
 
 -- | @restrictions@ nested settings.
 data BranchProtectionRestrictions s = BranchProtectionRestrictions'
-    { _teams :: TF.Attr s [TF.Attr s P.Text]
+    { _teams :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
     -- ^ @teams@ - (Optional)
     --
-    , _users :: TF.Attr s [TF.Attr s P.Text]
+    , _users :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
     -- ^ @users@ - (Optional)
     --
-    } deriving (P.Show, P.Eq, P.Ord)
+    } deriving (P.Show, P.Eq, P.Generic)
 
 -- | Construct a new @restrictions@ settings value.
 newBranchProtectionRestrictions
     :: BranchProtectionRestrictions s
 newBranchProtectionRestrictions =
     BranchProtectionRestrictions'
-        { _teams = TF.Nil
-        , _users = TF.Nil
+        { _teams = P.Nothing
+        , _users = P.Nothing
         }
 
-instance TF.IsValue  (BranchProtectionRestrictions s)
-instance TF.IsObject (BranchProtectionRestrictions s) where
-    toObject BranchProtectionRestrictions'{..} = P.catMaybes
-        [ TF.assign "teams" <$> TF.attribute _teams
-        , TF.assign "users" <$> TF.attribute _users
+instance TF.ToHCL (BranchProtectionRestrictions s) where
+     toHCL BranchProtectionRestrictions'{..} = TF.pairs $ P.mconcat
+        [ P.maybe P.mempty (TF.pair "teams") _teams
+        , P.maybe P.mempty (TF.pair "users") _users
         ]
 
-instance TF.IsValid (BranchProtectionRestrictions s) where
+instance P.Hashable (BranchProtectionRestrictions s)
+
+instance TF.HasValidator (BranchProtectionRestrictions s) where
     validator = P.mempty
 
-instance P.HasTeams (BranchProtectionRestrictions s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasTeams (BranchProtectionRestrictions s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
     teams =
-        P.lens (_teams :: BranchProtectionRestrictions s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _teams = a } :: BranchProtectionRestrictions s)
+        P.lens (_teams :: BranchProtectionRestrictions s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
+            (\s a -> s { _teams = a } :: BranchProtectionRestrictions s)
 
-instance P.HasUsers (BranchProtectionRestrictions s) (TF.Attr s [TF.Attr s P.Text]) where
+instance P.HasUsers (BranchProtectionRestrictions s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
     users =
-        P.lens (_users :: BranchProtectionRestrictions s -> TF.Attr s [TF.Attr s P.Text])
-               (\s a -> s { _users = a } :: BranchProtectionRestrictions s)
+        P.lens (_users :: BranchProtectionRestrictions s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
+            (\s a -> s { _users = a } :: BranchProtectionRestrictions s)

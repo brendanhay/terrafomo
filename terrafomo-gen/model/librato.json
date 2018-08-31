@@ -1,5 +1,6 @@
 {
   "name": "librato",
+  "version": "0.1.0-17-ga471ef9",
   "schemas": [
     {
       "name": "email",
