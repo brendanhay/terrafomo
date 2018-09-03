@@ -1,6 +1,6 @@
 package-name: terrafomo-builtins
 provider-name: Random
-package-yaml: false
+cabal-file: false
 
 # rules:
 #   - mode: exact

@@ -1,77 +1,148 @@
 module Terrafomo
     (
-    -- -- * Terraform Monad
-    --   Monad.Terraform
-    -- , Monad.runTerraform
+    -- * Errors
+      Plan.PlanError    (..)
+    , State.StateError  (..)
+    , Doc.DocumentError (..)
 
-    -- -- ** Monad Homomorphism
-    -- , Monad.MonadTerraform (..)
+    -- * Planning and Combining States
+    , Stage.StageName   (..)
+    , Stage.Stage       (..)
 
-    -- -- ** Errors
-    -- , Monad.Error          (..)
+    -- ** The Plan Monad
+    , Plan.Plan
+    , Plan.runPlan
 
-    -- -- ** Rendering Documents
-    -- , HCL.Encoding
-    -- , HCL.render
-    -- , HCL.renderIO
+    -- ** The Plan Monad Transformer
+    , Plan.PlanT
+    , Plan.runPlanT
 
-    -- -- * Backend Configuration
-    -- , Schema.Backend       (..)
-    -- , Schema.localBackend
+    -- * Local and Remote States
 
-    -- -- * Provider Configuration
-    -- , Schema.Provider      (..)
-    -- , Monad.withProvider
+    -- ** The State Monad
+    , State.State
+    , Plan.addState
 
-    -- -- * DataSource and Resources
-    -- , Schema.Resource
+    -- ** The State Monad Transformer
+    , State.StateT
+    , Plan.addStateT
 
-    -- -- ** Declaring Definitions
-    -- , Schema.Ref
-    -- , Monad.define
+    -- * Backend Configuration
+    , Schema.Backend    (..)
+    , Schema.localBackend
 
-    -- -- ** Provider Aliases
-    -- , Lens.provider
+    -- * Provider Configuration
+    , Schema.Provider
+    , State.withProvider
 
-    -- -- ** Resource Dependencies
-    -- , Lens.dependOn
+    -- * Names
+    , State.scope
 
-    -- -- ** Resource Lifecycle
-    -- , Schema.Lifecycle     (..)
-    -- , Lens.preventDestroy
-    -- , Lens.createBeforeDestroy
+    -- * DataSource and Resources
+    , Schema.Resource
 
-    -- -- *** Ignored Attributes
-    -- , Schema.Changes
-    -- , Lens.ignoreChanges
-    -- , Lens.ignoreAllChanges
+    -- ** Resource Definitions
+    , Schema.Ref
+    , State.resource
+    , State.resource_
 
-    -- -- * Outputs and Remote State
-    -- , Schema.Output
-    -- , Monad.output
-    -- , Monad.remote
+    -- * Dependencies
+    , Schema.Depends
+    , Schema.depends
 
-    -- -- * Interpolation Expression Language
-    -- , HIL.Expr
+    -- ** Lifecycle
+    , Schema.Lifecycle
 
-    -- -- ** Primitives
-    -- , HIL.value
-    -- , HIL.null
-    -- , HIL.true
-    -- , HIL.false
-    -- , HIL.heredoc
-    -- , HIL.int
-    -- , HIL.float
-    -- , HIL.string
+    -- ** Ignored Attributes
+    , Schema.Changes
+    , Schema.wildcard
+    , Schema.match
 
-    -- -- ** Builtin Functions
-    -- , HIL.modulo
-    -- , HIL.join
-    -- , HIL.file
+    -- * Inputs, Outputs and Remote State
+    , Schema.Output
+    , State.input
+    , State.outputText
+    , State.outputList
+    , State.outputMap
+    , State.remote
+
+    -- * Interpolation Expression Language
+    , Schema.Id         (..)
+
+    , HCL.ToHCL         (..)
+    , HIL.Expr
+
+    -- ** Primitives
+    , HIL.expr
+    , HIL.fexpr
+    , HIL.null
+
+    -- ** Specializations
+    , HIL.true
+    , HIL.false
+    , HIL.double
+    , HIL.int
+    , HIL.text
+    , HIL.heredoc
+
+    -- ** Builtin Functions
+    , HIL.modulo
+    , HIL.file
     ) where
 
--- import qualified Terrafomo.HCL    as HCL
--- import qualified Terrafomo.HIL    as HIL
--- import qualified Terrafomo.Lens   as Lens
--- import qualified Terrafomo.Monad  as Monad
--- import qualified Terrafomo.Schema as Schema
+import qualified Terrafomo.Document as Doc
+import qualified Terrafomo.HCL      as HCL
+import qualified Terrafomo.HIL      as HIL
+import qualified Terrafomo.Plan     as Plan
+import qualified Terrafomo.Schema   as Schema
+import qualified Terrafomo.Stage    as Stage
+import qualified Terrafomo.State    as State
+
+-- README:
+
+-- Building, cabal new-build, etc.
+
+-- Module Documentation:
+
+-- * Introduction
+--   - Why
+--   - Who is it for
+--   - Caveats
+
+-- * Terminology, Lexicon, Nomenclature
+--   - Similarities and differences from Terraform, HCL, HIL proper
+--   - Arguments
+--   - Attributes
+--   - Providers
+--   - Resources and DataSources
+--   - Lifecycle
+--   - Stage
+--   - State
+--   - Plan
+
+--   - Call out terraform's inconsistencies (such as use of attribute to mean anything)
+--     and our interpretation of it.
+
+-- * Organizing your Infrastructure
+--   - How the DSL/library suggests/enforces/promotes this
+
+-- * HIL Expressions
+--   - Composition
+--   - Strings
+--   - Numbers
+--   - High-order fexpr, Maps, Lists
+
+-- * State, Plan, and Documents
+
+-- * Resource field lenses
+--   - HasField instances and how to read them, find them, their purpose
+--   - OverloadedLabels vs field @"typeapplication"
+
+-- * Style-guide
+--   - Naming, layout, formatting
+--   - Structure of stages, module structure
+
+-- * Notes
+--   - If you need to import something other than 'Terrafomo.hs' then the library
+--     has a flaw - raise the issue along with the motivation so the authors can
+--     better design their API

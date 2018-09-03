@@ -1,12 +1,18 @@
-{% for field in arguments %}
-    {% if field.first %}{ {% else %}, {% endif %}{{ field.value.name }} :: {{ field.value.type }}
-    -- ^ @{{ field.value.original }}@ - ({% if field.value.required %}Required{% elif field.value.defaults %}Default @{{ field.value.defaults }}@{% else %}Optional{% endif %}{% if field.value.forceNew %}, Forces New{% endif %}){% for line in field.value.help %}
-    -- {{ line.value }}{% endfor %}
-    {% for conflict in field.value.conflicts %}{% if conflict.first %}--
-    -- Conflicts with:
-    --{% endif %}
-    -- * '{{ conflict.value.method }}'{% else %}--{% endfor %}{% if field.last %}
-    } deriving (P.Show, P.Eq, P.Generic){% endif %}
+{% if (schema.arguments | length) == 1 %}
+newtype {{ schema.type }} = {{ schema.con.name }}
 {% else %}
-    deriving (P.Show, P.Eq, P.Generic)
+data {{ schema.type }} = {{ schema.con.name }}
+{% endif %}
+{% for field in schema.arguments %}
+    {% if field.first %}{ {% else %}, {% endif %}{{ field.value.name }} :: {{ field.value.type }}
+    {% if field.value.variant %}
+    -- ^ one of {% for conflict in field.value.conflicts %}@{{ conflict.value.original }}@{% if !conflict.last %}, or {% endif %}{% endfor %}
+    {% else %}
+    -- ^ @{{ field.value.original }}@
+    {% endif %}
+    -- - ({% if field.value.required %}Required{% elif field.value.defaults %}Default __@{{ field.value.defaults }}@__{% else %}Optional{% endif %}{% if field.value.forceNew %}, Forces New{% endif %}){% for line in field.value.help %}
+    -- {{ line.value }}{% endfor %}{% if field.last %}
+    } deriving (P.Show){% endif %}
+{% else %}
+    deriving (P.Show)
 {% endfor %}

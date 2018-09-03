@@ -1,0 +1,5 @@
+{% for field in schema.attributes %}
+
+instance Lens.HasField "{{ field.value.original }}" (P.Const r) (TF.Ref {{ schema.name }} s) ({{ field.value.type }}) where
+    field = Lens.to (TF.unsafeComputed Encode.attribute (proxy# :: Proxy# "{{ field.value.original }}"))
+{% endfor %}

@@ -1,0 +1,12 @@
+with-compiler: ghc-8.4.3
+
+optimization: False
+
+packages:
+  terrafomo/
+  terrafomo-cli/
+  terrafomo-gen/
+  terrafomo-example/
+
+optional-packages:
+  provider/terrafomo-*/*.cabal

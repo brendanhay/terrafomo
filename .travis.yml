@@ -1,268 +1,285 @@
+language: c
 sudo: false
+dist: trusty
 
-language: nix
+branches:
+  except:
+  - gh-pages
 
 git:
-  depth: 1
+  submodules: false
 
 cache:
   directories:
-    - $HOME/.ghc
-    - $HOME/.stack
+    - $HOME/.cabal/packages
+    - $HOME/.cabal/store
+
+before_cache:
+  - rm -fv $HOME/.cabal/packages/hackage.haskell.org/build-reports.log
+  - rm -fv $HOME/.cabal/packages/hackage.haskell.org/00-index.*
+  - rm -fv $HOME/.cabal/packages/hackage.haskell.org/*.json
+  - rm -fv $HOME/.cabal/packages/hackage.haskell.org/01-index.cache
+  - rm -fv $HOME/.cabal/packages/hackage.haskell.org/01-index.tar
+  - rm -fv $HOME/.cabal/packages/hackage.haskell.org/01-index.tar.idx
 
 before_install:
-  - unset CC
-  - mkdir -p $HOME/.local/bin $HOME/.go
-  - export PATH=$HOME/.local/bin:$PATH
-  - travis_retry curl -L https://www.stackage.org/stack/linux-x86_64 | tar xz --wildcards --strip-components=1 -C ~/.local/bin '*/stack'
+ - source script/travis.sh
+ - terrafomo_trap terrafomo_before_install
 
 install:
-  - stack --no-terminal --install-ghc build --test --only-dependencies --fast
+ - terrafomo_trap terrafomo_install
 
 script:
-  - stack --no-terminal --skip-ghc-check build --fast --pedantic $PACKAGE
+ - terrafomo_trap terrafomo_script
+
+after_script:
+ - terrafomo_trap terrafomo_after_script
+
+before_cache:
+  - rm -fv $HOME/.cabal/packages/hackage.haskell.org/build-reports.log
+  - rm -fv $HOME/.cabal/packages/hackage.haskell.org/00-index.tar
 
 matrix:
   include:
 # GENERATED
-    - env: PACKAGE=terrafomo STACK_YAML=stack-8.4.3.yaml
-      compiler: ": #stack 8.4.3"
-      addons: {apt: {packages: [libgmp-dev]}}
+    - env: CABALVER=2.2 GHCVER=8.4.3 PACKAGE=terrafomo
+      compiler: ": #GHC 8.4.3"
+      addons: {apt: {packages: [cabal-install-2.2,ghc-8.4.3,alex-3.1.7,happy-1.19.5], sources: [hvr-ghc]}}
 
-    - env: PACKAGE=terrafomo-gen STACK_YAML=stack-8.4.3.yaml
-      compiler: ": #stack 8.4.3"
-      addons: {apt: {packages: [libgmp-dev]}}
+    - env: CABALVER=2.2 GHCVER=8.4.3 PACKAGE=terrafomo-gen
+      compiler: ": #GHC 8.4.3"
+      addons: {apt: {packages: [cabal-install-2.2,ghc-8.4.3,alex-3.1.7,happy-1.19.5], sources: [hvr-ghc]}}
 
-    - env: PACKAGE=provider/terrafomo-alicloud STACK_YAML=stack-8.4.3.yaml
-      compiler: ": #stack 8.4.3"
-      addons: {apt: {packages: [libgmp-dev]}}
+    - env: CABALVER=2.2 GHCVER=8.4.3 PACKAGE=terrafomo-example
+      compiler: ": #GHC 8.4.3"
+      addons: {apt: {packages: [cabal-install-2.2,ghc-8.4.3,alex-3.1.7,happy-1.19.5], sources: [hvr-ghc]}}
 
-    - env: PACKAGE=provider/terrafomo-aws STACK_YAML=stack-8.4.3.yaml
-      compiler: ": #stack 8.4.3"
-      addons: {apt: {packages: [libgmp-dev]}}
+    - env: CABALVER=2.2 GHCVER=8.4.3 PACKAGE=provider/terrafomo-alicloud
+      compiler: ": #GHC 8.4.3"
+      addons: {apt: {packages: [cabal-install-2.2,ghc-8.4.3,alex-3.1.7,happy-1.19.5], sources: [hvr-ghc]}}
 
-    - env: PACKAGE=provider/terrafomo-azurerm STACK_YAML=stack-8.4.3.yaml
-      compiler: ": #stack 8.4.3"
-      addons: {apt: {packages: [libgmp-dev]}}
+    - env: CABALVER=2.2 GHCVER=8.4.3 PACKAGE=provider/terrafomo-aws
+      compiler: ": #GHC 8.4.3"
+      addons: {apt: {packages: [cabal-install-2.2,ghc-8.4.3,alex-3.1.7,happy-1.19.5], sources: [hvr-ghc]}}
 
-    - env: PACKAGE=provider/terrafomo-bitbucket STACK_YAML=stack-8.4.3.yaml
-      compiler: ": #stack 8.4.3"
-      addons: {apt: {packages: [libgmp-dev]}}
+    - env: CABALVER=2.2 GHCVER=8.4.3 PACKAGE=provider/terrafomo-azurerm
+      compiler: ": #GHC 8.4.3"
+      addons: {apt: {packages: [cabal-install-2.2,ghc-8.4.3,alex-3.1.7,happy-1.19.5], sources: [hvr-ghc]}}
 
-    - env: PACKAGE=provider/terrafomo-builtins STACK_YAML=stack-8.4.3.yaml
-      compiler: ": #stack 8.4.3"
-      addons: {apt: {packages: [libgmp-dev]}}
+    - env: CABALVER=2.2 GHCVER=8.4.3 PACKAGE=provider/terrafomo-bitbucket
+      compiler: ": #GHC 8.4.3"
+      addons: {apt: {packages: [cabal-install-2.2,ghc-8.4.3,alex-3.1.7,happy-1.19.5], sources: [hvr-ghc]}}
 
-    - env: PACKAGE=provider/terrafomo-centurylinkcloud STACK_YAML=stack-8.4.3.yaml
-      compiler: ": #stack 8.4.3"
-      addons: {apt: {packages: [libgmp-dev]}}
+    - env: CABALVER=2.2 GHCVER=8.4.3 PACKAGE=provider/terrafomo-centurylinkcloud
+      compiler: ": #GHC 8.4.3"
+      addons: {apt: {packages: [cabal-install-2.2,ghc-8.4.3,alex-3.1.7,happy-1.19.5], sources: [hvr-ghc]}}
 
-    - env: PACKAGE=provider/terrafomo-chef STACK_YAML=stack-8.4.3.yaml
-      compiler: ": #stack 8.4.3"
-      addons: {apt: {packages: [libgmp-dev]}}
+    - env: CABALVER=2.2 GHCVER=8.4.3 PACKAGE=provider/terrafomo-chef
+      compiler: ": #GHC 8.4.3"
+      addons: {apt: {packages: [cabal-install-2.2,ghc-8.4.3,alex-3.1.7,happy-1.19.5], sources: [hvr-ghc]}}
 
-    - env: PACKAGE=provider/terrafomo-circonus STACK_YAML=stack-8.4.3.yaml
-      compiler: ": #stack 8.4.3"
-      addons: {apt: {packages: [libgmp-dev]}}
+    - env: CABALVER=2.2 GHCVER=8.4.3 PACKAGE=provider/terrafomo-circonus
+      compiler: ": #GHC 8.4.3"
+      addons: {apt: {packages: [cabal-install-2.2,ghc-8.4.3,alex-3.1.7,happy-1.19.5], sources: [hvr-ghc]}}
 
-    - env: PACKAGE=provider/terrafomo-cloudflare STACK_YAML=stack-8.4.3.yaml
-      compiler: ": #stack 8.4.3"
-      addons: {apt: {packages: [libgmp-dev]}}
+    - env: CABALVER=2.2 GHCVER=8.4.3 PACKAGE=provider/terrafomo-cloudflare
+      compiler: ": #GHC 8.4.3"
+      addons: {apt: {packages: [cabal-install-2.2,ghc-8.4.3,alex-3.1.7,happy-1.19.5], sources: [hvr-ghc]}}
 
-    - env: PACKAGE=provider/terrafomo-cloudstack STACK_YAML=stack-8.4.3.yaml
-      compiler: ": #stack 8.4.3"
-      addons: {apt: {packages: [libgmp-dev]}}
+    - env: CABALVER=2.2 GHCVER=8.4.3 PACKAGE=provider/terrafomo-cloudstack
+      compiler: ": #GHC 8.4.3"
+      addons: {apt: {packages: [cabal-install-2.2,ghc-8.4.3,alex-3.1.7,happy-1.19.5], sources: [hvr-ghc]}}
 
-    - env: PACKAGE=provider/terrafomo-cobbler STACK_YAML=stack-8.4.3.yaml
-      compiler: ": #stack 8.4.3"
-      addons: {apt: {packages: [libgmp-dev]}}
+    - env: CABALVER=2.2 GHCVER=8.4.3 PACKAGE=provider/terrafomo-cobbler
+      compiler: ": #GHC 8.4.3"
+      addons: {apt: {packages: [cabal-install-2.2,ghc-8.4.3,alex-3.1.7,happy-1.19.5], sources: [hvr-ghc]}}
 
-    - env: PACKAGE=provider/terrafomo-consul STACK_YAML=stack-8.4.3.yaml
-      compiler: ": #stack 8.4.3"
-      addons: {apt: {packages: [libgmp-dev]}}
+    - env: CABALVER=2.2 GHCVER=8.4.3 PACKAGE=provider/terrafomo-consul
+      compiler: ": #GHC 8.4.3"
+      addons: {apt: {packages: [cabal-install-2.2,ghc-8.4.3,alex-3.1.7,happy-1.19.5], sources: [hvr-ghc]}}
 
-    - env: PACKAGE=provider/terrafomo-datadog STACK_YAML=stack-8.4.3.yaml
-      compiler: ": #stack 8.4.3"
-      addons: {apt: {packages: [libgmp-dev]}}
+    - env: CABALVER=2.2 GHCVER=8.4.3 PACKAGE=provider/terrafomo-datadog
+      compiler: ": #GHC 8.4.3"
+      addons: {apt: {packages: [cabal-install-2.2,ghc-8.4.3,alex-3.1.7,happy-1.19.5], sources: [hvr-ghc]}}
 
-    - env: PACKAGE=provider/terrafomo-digitalocean STACK_YAML=stack-8.4.3.yaml
-      compiler: ": #stack 8.4.3"
-      addons: {apt: {packages: [libgmp-dev]}}
+    - env: CABALVER=2.2 GHCVER=8.4.3 PACKAGE=provider/terrafomo-digitalocean
+      compiler: ": #GHC 8.4.3"
+      addons: {apt: {packages: [cabal-install-2.2,ghc-8.4.3,alex-3.1.7,happy-1.19.5], sources: [hvr-ghc]}}
 
-    - env: PACKAGE=provider/terrafomo-dnsimple STACK_YAML=stack-8.4.3.yaml
-      compiler: ": #stack 8.4.3"
-      addons: {apt: {packages: [libgmp-dev]}}
+    - env: CABALVER=2.2 GHCVER=8.4.3 PACKAGE=provider/terrafomo-dnsimple
+      compiler: ": #GHC 8.4.3"
+      addons: {apt: {packages: [cabal-install-2.2,ghc-8.4.3,alex-3.1.7,happy-1.19.5], sources: [hvr-ghc]}}
 
-    - env: PACKAGE=provider/terrafomo-dnsmadeeasy STACK_YAML=stack-8.4.3.yaml
-      compiler: ": #stack 8.4.3"
-      addons: {apt: {packages: [libgmp-dev]}}
+    - env: CABALVER=2.2 GHCVER=8.4.3 PACKAGE=provider/terrafomo-dnsmadeeasy
+      compiler: ": #GHC 8.4.3"
+      addons: {apt: {packages: [cabal-install-2.2,ghc-8.4.3,alex-3.1.7,happy-1.19.5], sources: [hvr-ghc]}}
 
-    - env: PACKAGE=provider/terrafomo-docker STACK_YAML=stack-8.4.3.yaml
-      compiler: ": #stack 8.4.3"
-      addons: {apt: {packages: [libgmp-dev]}}
+    - env: CABALVER=2.2 GHCVER=8.4.3 PACKAGE=provider/terrafomo-docker
+      compiler: ": #GHC 8.4.3"
+      addons: {apt: {packages: [cabal-install-2.2,ghc-8.4.3,alex-3.1.7,happy-1.19.5], sources: [hvr-ghc]}}
 
-    - env: PACKAGE=provider/terrafomo-dyn STACK_YAML=stack-8.4.3.yaml
-      compiler: ": #stack 8.4.3"
-      addons: {apt: {packages: [libgmp-dev]}}
+    - env: CABALVER=2.2 GHCVER=8.4.3 PACKAGE=provider/terrafomo-dyn
+      compiler: ": #GHC 8.4.3"
+      addons: {apt: {packages: [cabal-install-2.2,ghc-8.4.3,alex-3.1.7,happy-1.19.5], sources: [hvr-ghc]}}
 
-    - env: PACKAGE=provider/terrafomo-fastly STACK_YAML=stack-8.4.3.yaml
-      compiler: ": #stack 8.4.3"
-      addons: {apt: {packages: [libgmp-dev]}}
+    - env: CABALVER=2.2 GHCVER=8.4.3 PACKAGE=provider/terrafomo-fastly
+      compiler: ": #GHC 8.4.3"
+      addons: {apt: {packages: [cabal-install-2.2,ghc-8.4.3,alex-3.1.7,happy-1.19.5], sources: [hvr-ghc]}}
 
-    - env: PACKAGE=provider/terrafomo-github STACK_YAML=stack-8.4.3.yaml
-      compiler: ": #stack 8.4.3"
-      addons: {apt: {packages: [libgmp-dev]}}
+    - env: CABALVER=2.2 GHCVER=8.4.3 PACKAGE=provider/terrafomo-github
+      compiler: ": #GHC 8.4.3"
+      addons: {apt: {packages: [cabal-install-2.2,ghc-8.4.3,alex-3.1.7,happy-1.19.5], sources: [hvr-ghc]}}
 
-    - env: PACKAGE=provider/terrafomo-gitlab STACK_YAML=stack-8.4.3.yaml
-      compiler: ": #stack 8.4.3"
-      addons: {apt: {packages: [libgmp-dev]}}
+    - env: CABALVER=2.2 GHCVER=8.4.3 PACKAGE=provider/terrafomo-gitlab
+      compiler: ": #GHC 8.4.3"
+      addons: {apt: {packages: [cabal-install-2.2,ghc-8.4.3,alex-3.1.7,happy-1.19.5], sources: [hvr-ghc]}}
 
-    - env: PACKAGE=provider/terrafomo-google STACK_YAML=stack-8.4.3.yaml
-      compiler: ": #stack 8.4.3"
-      addons: {apt: {packages: [libgmp-dev]}}
+    - env: CABALVER=2.2 GHCVER=8.4.3 PACKAGE=provider/terrafomo-google
+      compiler: ": #GHC 8.4.3"
+      addons: {apt: {packages: [cabal-install-2.2,ghc-8.4.3,alex-3.1.7,happy-1.19.5], sources: [hvr-ghc]}}
 
-    - env: PACKAGE=provider/terrafomo-grafana STACK_YAML=stack-8.4.3.yaml
-      compiler: ": #stack 8.4.3"
-      addons: {apt: {packages: [libgmp-dev]}}
+    - env: CABALVER=2.2 GHCVER=8.4.3 PACKAGE=provider/terrafomo-grafana
+      compiler: ": #GHC 8.4.3"
+      addons: {apt: {packages: [cabal-install-2.2,ghc-8.4.3,alex-3.1.7,happy-1.19.5], sources: [hvr-ghc]}}
 
-    - env: PACKAGE=provider/terrafomo-heroku STACK_YAML=stack-8.4.3.yaml
-      compiler: ": #stack 8.4.3"
-      addons: {apt: {packages: [libgmp-dev]}}
+    - env: CABALVER=2.2 GHCVER=8.4.3 PACKAGE=provider/terrafomo-heroku
+      compiler: ": #GHC 8.4.3"
+      addons: {apt: {packages: [cabal-install-2.2,ghc-8.4.3,alex-3.1.7,happy-1.19.5], sources: [hvr-ghc]}}
 
-    - env: PACKAGE=provider/terrafomo-icinga2 STACK_YAML=stack-8.4.3.yaml
-      compiler: ": #stack 8.4.3"
-      addons: {apt: {packages: [libgmp-dev]}}
+    - env: CABALVER=2.2 GHCVER=8.4.3 PACKAGE=provider/terrafomo-icinga2
+      compiler: ": #GHC 8.4.3"
+      addons: {apt: {packages: [cabal-install-2.2,ghc-8.4.3,alex-3.1.7,happy-1.19.5], sources: [hvr-ghc]}}
 
-    - env: PACKAGE=provider/terrafomo-ignition STACK_YAML=stack-8.4.3.yaml
-      compiler: ": #stack 8.4.3"
-      addons: {apt: {packages: [libgmp-dev]}}
+    - env: CABALVER=2.2 GHCVER=8.4.3 PACKAGE=provider/terrafomo-ignition
+      compiler: ": #GHC 8.4.3"
+      addons: {apt: {packages: [cabal-install-2.2,ghc-8.4.3,alex-3.1.7,happy-1.19.5], sources: [hvr-ghc]}}
 
-    - env: PACKAGE=provider/terrafomo-influxdb STACK_YAML=stack-8.4.3.yaml
-      compiler: ": #stack 8.4.3"
-      addons: {apt: {packages: [libgmp-dev]}}
+    - env: CABALVER=2.2 GHCVER=8.4.3 PACKAGE=provider/terrafomo-influxdb
+      compiler: ": #GHC 8.4.3"
+      addons: {apt: {packages: [cabal-install-2.2,ghc-8.4.3,alex-3.1.7,happy-1.19.5], sources: [hvr-ghc]}}
 
-    - env: PACKAGE=provider/terrafomo-kubernetes STACK_YAML=stack-8.4.3.yaml
-      compiler: ": #stack 8.4.3"
-      addons: {apt: {packages: [libgmp-dev]}}
+    - env: CABALVER=2.2 GHCVER=8.4.3 PACKAGE=provider/terrafomo-kubernetes
+      compiler: ": #GHC 8.4.3"
+      addons: {apt: {packages: [cabal-install-2.2,ghc-8.4.3,alex-3.1.7,happy-1.19.5], sources: [hvr-ghc]}}
 
-    - env: PACKAGE=provider/terrafomo-librato STACK_YAML=stack-8.4.3.yaml
-      compiler: ": #stack 8.4.3"
-      addons: {apt: {packages: [libgmp-dev]}}
+    - env: CABALVER=2.2 GHCVER=8.4.3 PACKAGE=provider/terrafomo-librato
+      compiler: ": #GHC 8.4.3"
+      addons: {apt: {packages: [cabal-install-2.2,ghc-8.4.3,alex-3.1.7,happy-1.19.5], sources: [hvr-ghc]}}
 
-    - env: PACKAGE=provider/terrafomo-logentries STACK_YAML=stack-8.4.3.yaml
-      compiler: ": #stack 8.4.3"
-      addons: {apt: {packages: [libgmp-dev]}}
+    - env: CABALVER=2.2 GHCVER=8.4.3 PACKAGE=provider/terrafomo-logentries
+      compiler: ": #GHC 8.4.3"
+      addons: {apt: {packages: [cabal-install-2.2,ghc-8.4.3,alex-3.1.7,happy-1.19.5], sources: [hvr-ghc]}}
 
-    - env: PACKAGE=provider/terrafomo-logicmonitor STACK_YAML=stack-8.4.3.yaml
-      compiler: ": #stack 8.4.3"
-      addons: {apt: {packages: [libgmp-dev]}}
+    - env: CABALVER=2.2 GHCVER=8.4.3 PACKAGE=provider/terrafomo-logicmonitor
+      compiler: ": #GHC 8.4.3"
+      addons: {apt: {packages: [cabal-install-2.2,ghc-8.4.3,alex-3.1.7,happy-1.19.5], sources: [hvr-ghc]}}
 
-    - env: PACKAGE=provider/terrafomo-mailgun STACK_YAML=stack-8.4.3.yaml
-      compiler: ": #stack 8.4.3"
-      addons: {apt: {packages: [libgmp-dev]}}
+    - env: CABALVER=2.2 GHCVER=8.4.3 PACKAGE=provider/terrafomo-mailgun
+      compiler: ": #GHC 8.4.3"
+      addons: {apt: {packages: [cabal-install-2.2,ghc-8.4.3,alex-3.1.7,happy-1.19.5], sources: [hvr-ghc]}}
 
-    - env: PACKAGE=provider/terrafomo-mysql STACK_YAML=stack-8.4.3.yaml
-      compiler: ": #stack 8.4.3"
-      addons: {apt: {packages: [libgmp-dev]}}
+    - env: CABALVER=2.2 GHCVER=8.4.3 PACKAGE=provider/terrafomo-mysql
+      compiler: ": #GHC 8.4.3"
+      addons: {apt: {packages: [cabal-install-2.2,ghc-8.4.3,alex-3.1.7,happy-1.19.5], sources: [hvr-ghc]}}
 
-    - env: PACKAGE=provider/terrafomo-newrelic STACK_YAML=stack-8.4.3.yaml
-      compiler: ": #stack 8.4.3"
-      addons: {apt: {packages: [libgmp-dev]}}
+    - env: CABALVER=2.2 GHCVER=8.4.3 PACKAGE=provider/terrafomo-newrelic
+      compiler: ": #GHC 8.4.3"
+      addons: {apt: {packages: [cabal-install-2.2,ghc-8.4.3,alex-3.1.7,happy-1.19.5], sources: [hvr-ghc]}}
 
-    - env: PACKAGE=provider/terrafomo-nomad STACK_YAML=stack-8.4.3.yaml
-      compiler: ": #stack 8.4.3"
-      addons: {apt: {packages: [libgmp-dev]}}
+    - env: CABALVER=2.2 GHCVER=8.4.3 PACKAGE=provider/terrafomo-nomad
+      compiler: ": #GHC 8.4.3"
+      addons: {apt: {packages: [cabal-install-2.2,ghc-8.4.3,alex-3.1.7,happy-1.19.5], sources: [hvr-ghc]}}
 
-    - env: PACKAGE=provider/terrafomo-ns1 STACK_YAML=stack-8.4.3.yaml
-      compiler: ": #stack 8.4.3"
-      addons: {apt: {packages: [libgmp-dev]}}
+    - env: CABALVER=2.2 GHCVER=8.4.3 PACKAGE=provider/terrafomo-ns1
+      compiler: ": #GHC 8.4.3"
+      addons: {apt: {packages: [cabal-install-2.2,ghc-8.4.3,alex-3.1.7,happy-1.19.5], sources: [hvr-ghc]}}
 
-    - env: PACKAGE=provider/terrafomo-oneandone STACK_YAML=stack-8.4.3.yaml
-      compiler: ": #stack 8.4.3"
-      addons: {apt: {packages: [libgmp-dev]}}
+    - env: CABALVER=2.2 GHCVER=8.4.3 PACKAGE=provider/terrafomo-oneandone
+      compiler: ": #GHC 8.4.3"
+      addons: {apt: {packages: [cabal-install-2.2,ghc-8.4.3,alex-3.1.7,happy-1.19.5], sources: [hvr-ghc]}}
 
-    - env: PACKAGE=provider/terrafomo-opc STACK_YAML=stack-8.4.3.yaml
-      compiler: ": #stack 8.4.3"
-      addons: {apt: {packages: [libgmp-dev]}}
+    - env: CABALVER=2.2 GHCVER=8.4.3 PACKAGE=provider/terrafomo-opc
+      compiler: ": #GHC 8.4.3"
+      addons: {apt: {packages: [cabal-install-2.2,ghc-8.4.3,alex-3.1.7,happy-1.19.5], sources: [hvr-ghc]}}
 
-    - env: PACKAGE=provider/terrafomo-openstack STACK_YAML=stack-8.4.3.yaml
-      compiler: ": #stack 8.4.3"
-      addons: {apt: {packages: [libgmp-dev]}}
+    - env: CABALVER=2.2 GHCVER=8.4.3 PACKAGE=provider/terrafomo-openstack
+      compiler: ": #GHC 8.4.3"
+      addons: {apt: {packages: [cabal-install-2.2,ghc-8.4.3,alex-3.1.7,happy-1.19.5], sources: [hvr-ghc]}}
 
-    - env: PACKAGE=provider/terrafomo-opsgenie STACK_YAML=stack-8.4.3.yaml
-      compiler: ": #stack 8.4.3"
-      addons: {apt: {packages: [libgmp-dev]}}
+    - env: CABALVER=2.2 GHCVER=8.4.3 PACKAGE=provider/terrafomo-opsgenie
+      compiler: ": #GHC 8.4.3"
+      addons: {apt: {packages: [cabal-install-2.2,ghc-8.4.3,alex-3.1.7,happy-1.19.5], sources: [hvr-ghc]}}
 
-    - env: PACKAGE=provider/terrafomo-ovh STACK_YAML=stack-8.4.3.yaml
-      compiler: ": #stack 8.4.3"
-      addons: {apt: {packages: [libgmp-dev]}}
+    - env: CABALVER=2.2 GHCVER=8.4.3 PACKAGE=provider/terrafomo-ovh
+      compiler: ": #GHC 8.4.3"
+      addons: {apt: {packages: [cabal-install-2.2,ghc-8.4.3,alex-3.1.7,happy-1.19.5], sources: [hvr-ghc]}}
 
-    - env: PACKAGE=provider/terrafomo-packet STACK_YAML=stack-8.4.3.yaml
-      compiler: ": #stack 8.4.3"
-      addons: {apt: {packages: [libgmp-dev]}}
+    - env: CABALVER=2.2 GHCVER=8.4.3 PACKAGE=provider/terrafomo-packet
+      compiler: ": #GHC 8.4.3"
+      addons: {apt: {packages: [cabal-install-2.2,ghc-8.4.3,alex-3.1.7,happy-1.19.5], sources: [hvr-ghc]}}
 
-    - env: PACKAGE=provider/terrafomo-pagerduty STACK_YAML=stack-8.4.3.yaml
-      compiler: ": #stack 8.4.3"
-      addons: {apt: {packages: [libgmp-dev]}}
+    - env: CABALVER=2.2 GHCVER=8.4.3 PACKAGE=provider/terrafomo-pagerduty
+      compiler: ": #GHC 8.4.3"
+      addons: {apt: {packages: [cabal-install-2.2,ghc-8.4.3,alex-3.1.7,happy-1.19.5], sources: [hvr-ghc]}}
 
-    - env: PACKAGE=provider/terrafomo-postgresql STACK_YAML=stack-8.4.3.yaml
-      compiler: ": #stack 8.4.3"
-      addons: {apt: {packages: [libgmp-dev]}}
+    - env: CABALVER=2.2 GHCVER=8.4.3 PACKAGE=provider/terrafomo-postgresql
+      compiler: ": #GHC 8.4.3"
+      addons: {apt: {packages: [cabal-install-2.2,ghc-8.4.3,alex-3.1.7,happy-1.19.5], sources: [hvr-ghc]}}
 
-    - env: PACKAGE=provider/terrafomo-powerdns STACK_YAML=stack-8.4.3.yaml
-      compiler: ": #stack 8.4.3"
-      addons: {apt: {packages: [libgmp-dev]}}
+    - env: CABALVER=2.2 GHCVER=8.4.3 PACKAGE=provider/terrafomo-powerdns
+      compiler: ": #GHC 8.4.3"
+      addons: {apt: {packages: [cabal-install-2.2,ghc-8.4.3,alex-3.1.7,happy-1.19.5], sources: [hvr-ghc]}}
 
-    - env: PACKAGE=provider/terrafomo-profitbricks STACK_YAML=stack-8.4.3.yaml
-      compiler: ": #stack 8.4.3"
-      addons: {apt: {packages: [libgmp-dev]}}
+    - env: CABALVER=2.2 GHCVER=8.4.3 PACKAGE=provider/terrafomo-profitbricks
+      compiler: ": #GHC 8.4.3"
+      addons: {apt: {packages: [cabal-install-2.2,ghc-8.4.3,alex-3.1.7,happy-1.19.5], sources: [hvr-ghc]}}
 
-    - env: PACKAGE=provider/terrafomo-rabbitmq STACK_YAML=stack-8.4.3.yaml
-      compiler: ": #stack 8.4.3"
-      addons: {apt: {packages: [libgmp-dev]}}
+    - env: CABALVER=2.2 GHCVER=8.4.3 PACKAGE=provider/terrafomo-rabbitmq
+      compiler: ": #GHC 8.4.3"
+      addons: {apt: {packages: [cabal-install-2.2,ghc-8.4.3,alex-3.1.7,happy-1.19.5], sources: [hvr-ghc]}}
 
-    - env: PACKAGE=provider/terrafomo-rancher STACK_YAML=stack-8.4.3.yaml
-      compiler: ": #stack 8.4.3"
-      addons: {apt: {packages: [libgmp-dev]}}
+    - env: CABALVER=2.2 GHCVER=8.4.3 PACKAGE=provider/terrafomo-rancher
+      compiler: ": #GHC 8.4.3"
+      addons: {apt: {packages: [cabal-install-2.2,ghc-8.4.3,alex-3.1.7,happy-1.19.5], sources: [hvr-ghc]}}
 
-    - env: PACKAGE=provider/terrafomo-rundeck STACK_YAML=stack-8.4.3.yaml
-      compiler: ": #stack 8.4.3"
-      addons: {apt: {packages: [libgmp-dev]}}
+    - env: CABALVER=2.2 GHCVER=8.4.3 PACKAGE=provider/terrafomo-rundeck
+      compiler: ": #GHC 8.4.3"
+      addons: {apt: {packages: [cabal-install-2.2,ghc-8.4.3,alex-3.1.7,happy-1.19.5], sources: [hvr-ghc]}}
 
-    - env: PACKAGE=provider/terrafomo-scaleway STACK_YAML=stack-8.4.3.yaml
-      compiler: ": #stack 8.4.3"
-      addons: {apt: {packages: [libgmp-dev]}}
+    - env: CABALVER=2.2 GHCVER=8.4.3 PACKAGE=provider/terrafomo-scaleway
+      compiler: ": #GHC 8.4.3"
+      addons: {apt: {packages: [cabal-install-2.2,ghc-8.4.3,alex-3.1.7,happy-1.19.5], sources: [hvr-ghc]}}
 
-    - env: PACKAGE=provider/terrafomo-softlayer STACK_YAML=stack-8.4.3.yaml
-      compiler: ": #stack 8.4.3"
-      addons: {apt: {packages: [libgmp-dev]}}
+    - env: CABALVER=2.2 GHCVER=8.4.3 PACKAGE=provider/terrafomo-softlayer
+      compiler: ": #GHC 8.4.3"
+      addons: {apt: {packages: [cabal-install-2.2,ghc-8.4.3,alex-3.1.7,happy-1.19.5], sources: [hvr-ghc]}}
 
-    - env: PACKAGE=provider/terrafomo-spotinst STACK_YAML=stack-8.4.3.yaml
-      compiler: ": #stack 8.4.3"
-      addons: {apt: {packages: [libgmp-dev]}}
+    - env: CABALVER=2.2 GHCVER=8.4.3 PACKAGE=provider/terrafomo-spotinst
+      compiler: ": #GHC 8.4.3"
+      addons: {apt: {packages: [cabal-install-2.2,ghc-8.4.3,alex-3.1.7,happy-1.19.5], sources: [hvr-ghc]}}
 
-    - env: PACKAGE=provider/terrafomo-statuscake STACK_YAML=stack-8.4.3.yaml
-      compiler: ": #stack 8.4.3"
-      addons: {apt: {packages: [libgmp-dev]}}
+    - env: CABALVER=2.2 GHCVER=8.4.3 PACKAGE=provider/terrafomo-statuscake
+      compiler: ": #GHC 8.4.3"
+      addons: {apt: {packages: [cabal-install-2.2,ghc-8.4.3,alex-3.1.7,happy-1.19.5], sources: [hvr-ghc]}}
 
-    - env: PACKAGE=provider/terrafomo-triton STACK_YAML=stack-8.4.3.yaml
-      compiler: ": #stack 8.4.3"
-      addons: {apt: {packages: [libgmp-dev]}}
+    - env: CABALVER=2.2 GHCVER=8.4.3 PACKAGE=provider/terrafomo-triton
+      compiler: ": #GHC 8.4.3"
+      addons: {apt: {packages: [cabal-install-2.2,ghc-8.4.3,alex-3.1.7,happy-1.19.5], sources: [hvr-ghc]}}
 
-    - env: PACKAGE=provider/terrafomo-ultradns STACK_YAML=stack-8.4.3.yaml
-      compiler: ": #stack 8.4.3"
-      addons: {apt: {packages: [libgmp-dev]}}
+    - env: CABALVER=2.2 GHCVER=8.4.3 PACKAGE=provider/terrafomo-ultradns
+      compiler: ": #GHC 8.4.3"
+      addons: {apt: {packages: [cabal-install-2.2,ghc-8.4.3,alex-3.1.7,happy-1.19.5], sources: [hvr-ghc]}}
 
-    - env: PACKAGE=provider/terrafomo-vault STACK_YAML=stack-8.4.3.yaml
-      compiler: ": #stack 8.4.3"
-      addons: {apt: {packages: [libgmp-dev]}}
+    - env: CABALVER=2.2 GHCVER=8.4.3 PACKAGE=provider/terrafomo-vault
+      compiler: ": #GHC 8.4.3"
+      addons: {apt: {packages: [cabal-install-2.2,ghc-8.4.3,alex-3.1.7,happy-1.19.5], sources: [hvr-ghc]}}
 
-    - env: PACKAGE=provider/terrafomo-vcloud-director STACK_YAML=stack-8.4.3.yaml
-      compiler: ": #stack 8.4.3"
-      addons: {apt: {packages: [libgmp-dev]}}
+    - env: CABALVER=2.2 GHCVER=8.4.3 PACKAGE=provider/terrafomo-vcloud-director
+      compiler: ": #GHC 8.4.3"
+      addons: {apt: {packages: [cabal-install-2.2,ghc-8.4.3,alex-3.1.7,happy-1.19.5], sources: [hvr-ghc]}}
 
-    - env: PACKAGE=provider/terrafomo-vsphere STACK_YAML=stack-8.4.3.yaml
-      compiler: ": #stack 8.4.3"
-      addons: {apt: {packages: [libgmp-dev]}}
+    - env: CABALVER=2.2 GHCVER=8.4.3 PACKAGE=provider/terrafomo-vsphere
+      compiler: ": #GHC 8.4.3"
+      addons: {apt: {packages: [cabal-install-2.2,ghc-8.4.3,alex-3.1.7,happy-1.19.5], sources: [hvr-ghc]}}
 
 # END GENERATED

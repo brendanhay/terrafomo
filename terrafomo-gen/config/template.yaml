@@ -1,3 +1,3 @@
 package-name: terrafomo-builtins
 provider-name: Template
-package-yaml: false
+cabal-file: false

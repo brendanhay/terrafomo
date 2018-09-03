@@ -1,0 +1,13 @@
+{% if schema.mode == "recordcondata" %}
+
+-- | The required arguments for '{{ schema.con.smart }}'.
+data {{ schema.required.type }} = {{ schema.required.con }}
+  {% for param in schema.parameters %}
+    {% if param.first %}{ {% else %}, {% endif %}{{ param.value.name }} :: {{ param.value.type }}
+    -- ^ ({% if param.value.required %}Required{% elif param.value.defaults %}Default @{{ param.value.defaults }}@{% else %}Optional{% endif %}{% if param.value.forceNew %}, Forces New{% endif %}){% for line in param.value.help %}
+    -- {{ line.value }}{% endfor %}{% if param.last %}
+    } deriving (P.Show){% endif %}
+  {% else %}
+    deriving (P.Show)
+  {% endfor %}
+{% endif %}

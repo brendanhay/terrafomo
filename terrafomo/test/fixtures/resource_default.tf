@@ -1,4 +1,5 @@
 resource "bar" "default" {
+  provider = "provider.1"
   name = "xyz-j982r"
   enabled = false
   settings = [
@@ -13,6 +14,6 @@ resource "bar" "default" {
       configuration = {
         name = "parameters"
       }
-    },
+    }
   ]
 }

@@ -1,109 +1,90 @@
--- | HIL (HashiCorp Interpolation Language) is an embedded language used for
--- configuration interpolation.
+{-|
+HIL (HashiCorp Interpolation Language) is an embedded language used for
+configuration interpolation.
+
+This module defines the Haskell AST, combinators, and utilities for
+constructing and manipulating HIL expressions.
+-}
 module Terrafomo.HIL
     (
     -- * Expressions
-      Var (..)
-    , ExprF  (..)
+      Var   (..)
+    , ExprF (..)
     , Expr
 
     -- * Primitives
-    , compute
-    , value
+    , expr
+    , fexpr
     , null
+
+    -- ** Specializations
     , true
     , false
-    , heredoc
-    , string
+    , double
     , int
-    , float
+    , text
+    , heredoc
+    , json
 
     -- * Terraform Builtins
     , modulo
-    , join
     , file
 
     -- * Utilities
+    , name
+    , interpolate
+    , layout
     , quote
     , operator
     , function
     ) where
 
-import Data.Hashable  (Hashable)
+import Data.Fix       (Fix (Fix))
 import Data.String    (IsString (fromString))
 import Data.Text.Lazy (Text)
-import Data.Functor.Classes (Show1 (liftShowsPrec))
-
-import GHC.Show (showSpace)
-import GHC.Generics (Generic)
 
 import Prelude hiding (null)
 
-import qualified Data.Aeson                as JSON
-import qualified Terrafomo.HCL             as HCL
-import qualified Control.Monad.Free as Free
+import Terrafomo.Pretty (Layout)
+
+import qualified Data.Aeson       as Aeson
+import qualified Data.Fix         as Fix
+import qualified Terrafomo.HCL    as HCL
+import qualified Terrafomo.Pretty as Pretty
 
 -- | An interpolation variable. This is paramterized over the current (remote)
 -- state thread @s@ similar to 'Control.Monad.ST'.  It can be the special
--- keyword @null@, a constant Haskell value, or a a computed attribute that is
+-- keyword @null@, a constant Haskell value, or a computed attribute that is
 -- opaque and only known within the context of a terraform run.
 data Var s a
-    = Quote !HCL.Encoding
+    = Name  !Text
+    | Quote !HCL.Encoding
     | Const !a
     | Null
-      deriving (Show, Eq, Generic)
-
-instance Hashable a => Hashable (Var s a)
+      deriving (Show)
 
 instance IsString a => IsString (Var s a) where
     fromString = Const . fromString
-
-instance HCL.ToHCL a => HCL.ToHCL (Var s a) where
-    toHCL = \case
-        Quote q -> q
-        Const x -> HCL.toHCL x
-        Null    -> HCL.null
 
 -- | The main terraform interpolation expression type. This is polymorphic so
 -- that it can be made a functor, which allows us to traverse expressions and
 -- map functions over them. The actual 'Expr' expression type is a fixed point
 -- of this functor, defined below.
-data ExprF r
-    = Prefix !Text ![r]
+data ExprF a r
+    = Var    !a
+    | Prefix !Text ![r]
     | Infix  !Text !r !r
-      deriving (Show, Eq, Functor, Foldable, Traversable, Generic)
-
-instance Hashable r => Hashable (ExprF r)
-
-instance Show1 ExprF where
-    liftShowsPrec f fs prec = \case
-        Prefix n xs ->
-            showParen (prec > 10)
-               ( showString "Prefix "
-               . showsPrec 11 n
-               . showSpace
-               . fs xs
-               )
-
-        Infix op a b ->
-            showParen (prec > 10)
-                ( showString "Infix "
-                . showsPrec 11 op
-                . showSpace
-                . f 11 a
-                . showSpace
-                . f 11 b
-                )
+      deriving (Show, Functor, Foldable, Traversable)
 
 -- | The expression type is a fixed point of the polymorphic expression functor.
 --
 -- The variables are specialized to unquoted HIL 'Var' or quoted HCL
--- 'HCL.Value's.  This allows well-typed expressions using Haskell's types and
+-- 'HCL.Var's.  This allows well-typed expressions using Haskell's types and
 -- the more dubiously typed HIL expressions when necessary.
-type Expr s a = Free.Free ExprF (Var s a)
+type Expr s a = Fix (ExprF (Var s a))
 
 instance IsString a => IsString (Expr s a) where
-    fromString = value . fromString
+    fromString = expr . fromString
 
 instance Num a => Num (Expr s a) where
     (+)         = operator "+"
@@ -111,53 +92,60 @@ instance Num a => Num (Expr s a) where
     (*)         = operator "*"
     abs         = function "abs"    . pure
     signum      = function "signum" . pure
-    fromInteger = value . fromInteger
+    fromInteger = expr . fromInteger
 
 instance HCL.ToHCL a => HCL.ToHCL (Expr s a) where
-    toHCL = Free.iter go . fmap HCL.toHCL
-      where
-        go = \case
-            Prefix n xs  -> HCL.function n xs
-            Infix  n a b -> HCL.operator n a b
+    toHCL = interpolate
 
 -- Primitives
 
--- | A computed value.
-compute :: Text -> Expr s a
-compute v = pure (Quote (HCL.interpolate (HCL.toHCL v)))
+-- | Specify a constant Haskell value.
+expr :: a -> Expr s a
+expr x = Fix (Var (Const x))
 
--- | The special value @null@ can be assigned to any field to represent the
--- absence of a value. This causes Terraform to omit the field from upstream API
+-- | Lift 'expr' through the type constructor.
+fexpr :: Functor f => f a -> Expr s (f (Expr s a))
+fexpr = expr . fmap expr
+
+-- | The special var @null@ can be assigned to any field to represent the
+-- absence of a var. This causes Terraform to omit the field from upstream API
 -- calls, which is important in some cases for triggering certain default
 -- behaviors.
 --
 -- This is specific to Terraform @>= 0.12@
 null :: Expr s a
-null = pure Null
+null = Fix (Var Null)
 
--- | Specify a constant Haskell value.
-value :: a -> Expr s a
-value x = pure (Const x)
+-- Specialized
 
--- | Specify a boolean attribute value. Equivalent to @value True@.
+-- | Specify a boolean attribute var. Equivalent to @var True@.
 true :: Expr s Bool
-true = value True
+true = expr True
 
--- | Specify a boolean attribute value. Equivalent to @value False@.
+-- | Specify a boolean attribute expr. Equivalent to @expr False@.
 false :: Expr s Bool
-false = value False
-
-heredoc :: JSON.ToJSON a => a -> Expr s Text
-heredoc x = quote (HCL.heredoc x)
-
-string :: Text -> Expr s Text
-string = value
+false = expr False
 
 int :: Int -> Expr s Int
-int = value
+int = expr
 
-float :: Double -> Expr s Double
-float = value
+double :: Double -> Expr s Double
+double = expr
+
+text :: Text -> Expr s Text
+text = expr
+
+heredoc :: Text -> Expr s Text
+heredoc = quote . HCL.Encoding . Pretty.heredoc
+
+json :: Aeson.ToJSON a => a -> Expr s Text
+json = heredoc . HCL.render (HCL.layout { Pretty.pairs = pairs }) . HCL.fromJSON
+  where
+    pairs =
+        HCL.fromEncoding . HCL.pairs
+            . foldMap (uncurry pair)
+
+    pair k v = HCL.Value (Pretty.string k <> ": " <> HCL.encode v)
 
 -- Builtin Functions
 
@@ -169,38 +157,50 @@ float = value
 modulo :: Integral a => Expr s a -> Expr s a -> Expr s a
 modulo = operator "%"
 
--- | Joins the list with the specified delimiter.
---
--- See: <https://www.terraform.io/docs/configuration/interpolation.html#join-delim-list- join(delim, list)>
-join :: HCL.ToHCL a => Text -> [Expr s a] -> Expr s Text
-join sep xs = function "join" (value sep : map quote xs)
-
 -- | Read the contents of a file. The path is interpreted relative to the
 -- working directory.
 --
 -- See: <https://www.terraform.io/docs/configuration/interpolation.html#file-path- file(path)>
 file :: Expr s FilePath -> Expr s Text
-file path = function "file" [quote path]
+file path = function "file" [quote (HCL.toHCL path)]
 
 -- Utilities
 
--- | FIXME:
-quote :: HCL.ToHCL a => a -> Expr s b
-quote x = pure (Quote (HCL.toHCL x))
+name :: Text -> Expr s a
+name x = Fix (Var (Name x))
+
+-- Interpolate takes an expression and gives you an HCL value
+interpolate :: HCL.ToHCL a => Expr s a -> HCL.Encoding
+interpolate = Fix.cata go
+  where
+    go = \case
+        Var Null      -> HCL.toHCL ()
+        Var (Quote v) -> v
+        Var (Const x) -> HCL.toHCL x
+        Var (Name  n) -> interp $ Pretty.text n
+        Prefix n xs   -> interp $ Pretty.function n (map HCL.encode xs)
+        Infix  n a b  -> interp $ Pretty.operator n (HCL.encode a) (HCL.encode b)
+
+    interp =
+        HCL.Encoding . Pretty.group layout . Pretty.quotes . Pretty.escape
+
+layout :: Layout
+layout = HCL.layout
+    { Pretty.newline = const mempty
+    , Pretty.items   = Pretty.function "list"
+    , Pretty.pairs   =
+        Pretty.function "map"
+            . concatMap (\(k, v) -> [Pretty.string k, v])
+    }
+
+-- Quote takes an HCL value and returns an expression.
+quote :: HCL.Encoding -> Expr s a
+quote x = Fix (Var (Quote x))
 
 -- | Construct an infix operator expression.
-operator
-    :: Text
-    -> Expr s a
-    -> Expr s a
-    -> Expr s a
-operator n a b = do
-    x <- a
-    y <- b
-    Free.liftF (Infix n x y)
+operator :: Text -> Expr s a -> Expr s a -> Expr s a
+operator n a b = Fix (Infix n a b)
 
 -- | Construct prefix (function application) expression.
 function :: Text -> [Expr s a] -> Expr s a
-function n args = do
-    xs <- sequenceA args
-    Free.liftF (Prefix n xs)
+function n xs = Fix (Prefix n xs)

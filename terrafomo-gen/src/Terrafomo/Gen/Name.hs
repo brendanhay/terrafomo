@@ -71,79 +71,97 @@ type VarName  = Name "Var"
 type ProviderName = Name "Provider"
 type LabelName    = Name "Label"
 
-dataSourceNames, resourceNames :: Text -> (DataName, ConName, VarName)
-dataSourceNames x = datatypeNames (Name (resourceName x <> "Data"))
-resourceNames   x = datatypeNames (Name (resourceName x <> "Resource"))
+dataSourceNames :: Text -> (DataName, ConName, VarName)
+dataSourceNames =
+--    dataTypeNames (Text.cons 'D') (Text.cons 'D') (mappend "newD")
+    dataTypeNames (<> "D") (<> "D") (mappend "new" . (<> "D"))
+
+resourceNames :: Text -> (DataName, ConName, VarName)
+resourceNames =
+--    dataTypeNames (Text.cons R) (Text.cons R) (mappend "newR")
+    dataTypeNames (<> "R") (<> "R") (mappend "new" . (<> "R"))
+
+dataTypeNames
+    :: (Text -> Text)
+    -> (Text -> Text)
+    -> (Text -> Text)
+    -> Text
+    -> (DataName, ConName, VarName)
+dataTypeNames f g h (resourceName -> x) =
+    ( Name (f x)
+    , Name (g x)
+    , Name (h x)
+    )
 
 settingsNames :: Text -> Key -> (DataName, ConName, VarName)
-settingsNames x (Key xs) =
-    case x of
-        "provider" -> (Name "Provider", Name "Provider'", Name "newProvider")
-        _          -> names (minimize x xs)
+settingsNames x (Key xs) = names (minimize x xs)
   where
     names txt =
         ( Name txt
-        , Name (txt `Text.snoc` '\'')
+        , Name txt
         , Name ("new" <> txt)
         )
 
 providerNames :: ProviderName -> (DataName, ConName, VarName)
 providerNames name =
-    ( unsafeRename id                 name
-    , unsafeRename (`Text.snoc` '\'') name
+    ( unsafeRename id name
+    , unsafeRename id name
     , Name "newProvider"
     )
 
-
--- -- FIXME: replace provider case with overrides
--- primitiveNames :: Text -> (DataName, ConName, VarName)
--- primitiveNames = \case
---     "provider" -> primitiveNames "provider_name"
---     x          -> datatypeNames (dataName x)
-
-datatypeNames :: DataName -> (DataName, ConName, VarName)
-datatypeNames x =
-    ( x
-    , unsafeRename (`Text.snoc` '\'') x
-    , unsafeRename (Text.unreserved . Text.lowerHead) x
-    )
-
-fieldNames :: Bool -> Text -> (LabelName, DataName, VarName)
+fieldNames :: Bool -> Text -> (LabelName, VarName)
 fieldNames computed x =
     let name  = (if computed then mappend "computed_" else id) x
-        vname = varName name
-     in ( unsafeRename (Text.cons '_') vname
-        , className name
-        , vname
+     in ( labelName name
+        , varName   name
         )
 
 resourceName :: Text -> Text
 resourceName x =
     case split x of
         []   -> x
-        _:xs -> foldMap Text.upperHead xs
+        [y]  -> Text.upperHead y
+        _:ys -> foldMap Text.upperHead ys
+
+requiredNames :: DataName -> (DataName, ConName)
+requiredNames typ =
+    ( unsafeRename (<> "_Required") typ
+    , unsafeRename id typ
+    )
+
+variantNames :: DataName -> [LabelName] -> (DataName, LabelName, VarName, Text)
+variantNames typ (map fromName -> xs) =
+    let dname = Text.intercalate "Or" (concatMap (map Text.upperHead . split) xs)
+        name  = Text.intercalate "_or_" xs
+     in ( unsafeRename (<> "_" <> dname) typ
+        , labelName      name
+        , varName        name
+        , Text.lowerHead name
+        )
+
+variantCon :: DataName -> LabelName -> ConName
+variantCon (Name x) (Name y) = unsafeRename (mappend (x <> "_")) (dataName y)
 
 conflictName :: Text -> LabelName
 conflictName x =
-    let (name, _, _) =
-            fieldNames False $
-                case Text.split (== '.') x of
-                    []  -> x
-                    [_] -> x
-                    xs  -> last xs
+    let (name, _) = fieldNames False $
+            case Text.split (== '.') x of
+                []  -> x
+                [_] -> x
+                xs  -> last xs
      in name
 
-className :: Text -> DataName
-className = unsafeRename (mappend "Has") . dataName
+labelName :: Text -> LabelName
+labelName = Name . Text.unreserved . Text.lowerHead . Text.intercalate "_" . split
 
 varName :: Text -> VarName
-varName = Name . Text.lowerHead . originalName
+varName = Name . Text.unreserved . Text.lowerHead . fromOriginalName
 
 dataName :: Text -> DataName
-dataName = Name . Text.upperHead . originalName
+dataName = Name . Text.unreserved . Text.upperHead . fromOriginalName
 
-originalName :: Text -> Text
-originalName (Text.unreserved -> x) =
+fromOriginalName :: Text -> Text
+fromOriginalName (Text.dropWhile (== '_') -> x) =
     case split x of
         []   -> x
         z:zs -> camel (z:zs)
@@ -168,5 +186,7 @@ minimize original =
 
     valid = \case
         "configuration" -> False
+        "config"        -> False
         "options"       -> False
+        "settings"      -> False
         _               -> True

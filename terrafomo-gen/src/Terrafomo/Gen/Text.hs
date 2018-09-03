@@ -35,7 +35,7 @@ escape =
 
 unreserved :: Text -> Text
 unreserved x
-     | x `Set.member` reserved = x `Text.snoc` '\''
+     | x `Set.member` reserved = x `Text.snoc` '_'
      | otherwise               = x
   where
     reserved = Set.fromList

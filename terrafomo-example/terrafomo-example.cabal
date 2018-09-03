@@ -1,0 +1,87 @@
+cabal-version:  2.2
+name:           terrafomo-example
+category:       Language, Cloud
+version:        0.1.0.0
+license:        MPL-2.0
+author:         Brendan Hay
+maintainer:     Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
+stability:      provisional
+homepage:       https://github.com/brendanhay/terrafomo
+bug-reports:    https://github.com/brendanhay/terrafomo/issues
+copyright:      Copyright (c) 2017-2018 Brendan Hay
+build-type:     Simple
+synopsis:       Pending
+description:    Pending
+
+source-repository head
+    type: git
+    location: https://github.com/brendanhay/terrafomo
+    subdir: terrafomo-example
+
+common base
+    default-language: Haskell2010
+    ghc-options:
+        -Wall
+        -Wincomplete-uni-patterns
+        -Wincomplete-record-updates
+        -Wcompat
+        -Wnoncanonical-monad-instances
+        -Wnoncanonical-monadfail-instances
+    build-depends:
+        base >= 4.10 && < 5
+    default-extensions:
+        BangPatterns
+        ConstraintKinds
+        DataKinds
+        DefaultSignatures
+        DeriveFoldable
+        DeriveFunctor
+        DeriveGeneric
+        DeriveTraversable
+        DuplicateRecordFields
+        ExplicitNamespaces
+        FlexibleContexts
+        FlexibleInstances
+        FunctionalDependencies
+        GADTs
+        GeneralizedNewtypeDeriving
+        InstanceSigs
+        KindSignatures
+        LambdaCase
+        MagicHash
+        MultiParamTypeClasses
+        MultiWayIf
+        NamedFieldPuns
+        OverloadedStrings
+        PatternSynonyms
+        RankNTypes
+        ScopedTypeVariables
+        StandaloneDeriving
+        TupleSections
+        TypeApplications
+        TypeFamilies
+        TypeOperators
+        ViewPatterns
+
+common formatting    { build-depends: formatting    }
+common microlens     { build-depends: microlens     }
+common mtl           { build-depends: mtl           }
+common terrafomo-cli { build-depends: terrafomo-cli }
+common terrafomo-aws { build-depends: terrafomo-aws }
+common bifunctors    { build-depends: bifunctors    }
+common text          { build-depends: text          }
+
+library example
+    import: base, bifunctors, formatting, terrafomo-aws, text, microlens, mtl
+    hs-source-dirs: src
+    exposed-modules:
+        Example.Config
+        Example.Network
+
+executable terrafomo-example
+    import: base, terrafomo-aws, terrafomo-cli, microlens, mtl
+    ghc-options: -threaded
+    main-is: Main.hs
+    hs-source-dirs: app
+    build-depends:
+        example

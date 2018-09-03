@@ -57,8 +57,6 @@ type Schema struct {
 	Name          string    `json:"name"`
 	Type          string    `json:"type"`
 	Description   *string   `json:"description,omitempty"`
-	Deprecated    *string   `json:"deprecated,omitempty"`
-	Removed       *string   `json:"removed,omitempty"`
 	ConflictsWith []string  `json:"conflictsWith"`
 	Optional      bool      `json:"optional"`
 	Required      bool      `json:"required"`
@@ -139,7 +137,9 @@ func newSchemaSlice(parent string, s map[string]*schema.Schema) []*Schema {
 	ss := make([]*Schema, 0, len(s))
 
 	for k, v := range s {
-		ss = append(ss, newSchema(parent, k, v))
+		if v.Deprecated == "" && v.Removed == "" {
+			ss = append(ss, newSchema(parent, k, v))
+		}
 	}
 
 	sort.Slice(ss, func(i, j int) bool {
@@ -164,19 +164,15 @@ func newSchema(parent string, k string, v *schema.Schema) *Schema {
 	}
 
 	if v.ConflictsWith != nil {
-		s.ConflictsWith = v.ConflictsWith
+		for _, c := range v.ConflictsWith {
+			if !strings.ContainsAny(c, "0.") {
+				s.ConflictsWith = append(s.ConflictsWith, c)
+			}
+		}
 	}
 
 	if v.Description != "" {
 		s.Description = &v.Description
-	}
-
-	if v.Deprecated != "" {
-		s.Deprecated = &v.Deprecated
-	}
-
-	if v.Removed != "" {
-		s.Removed = &v.Removed
 	}
 
 	if !ignore(ignoredSchemaDefaults, parent, k) {

@@ -1,10 +1,9 @@
+# Emacs
 *~
 .projectile
-.stack-work
+
+# Go
 /vendor
-/bin
-/terrafomo-gen/schema
-*.rej
 
 # Profiling
 *.prof
@@ -13,11 +12,17 @@
 *.ps
 *.pdf
 
-# Hpack
-*.cabal
+# Cabal
+dist*
+.ghc*
+cabal.project.local*
 
-# Generator IR
+# Stack
+.stack-work
+
+# Generator
 /terrafomo-gen/ir
+/terrafomo-gen/model
 
 # Terraform
 .terraform

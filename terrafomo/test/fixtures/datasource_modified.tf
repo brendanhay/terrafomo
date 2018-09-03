@@ -1,7 +1,7 @@
 data "foo" "modified" {
-  name    = "abc-i123d"
+  provider = "provider.1"
+  name = "abc-i123d"
   enabled = true
-
   settings = [
     {
       name = "something"
@@ -11,16 +11,12 @@ data "foo" "modified" {
     },
     {
       name = "options"
-
       configuration = {
         name = "parameters"
       }
-    },
+    }
   ]
-
-  alias = "test.uproot_accrue_shadow_vapor_fallout"
-
   depends_on = [
-    "bar.default",
+    "bar.default"
   ]
 }

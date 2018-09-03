@@ -19,13 +19,11 @@ import qualified Data.Text        as Text
 
 prelude :: Set NS
 prelude = Set.fromList
-    [ "Data.Hashable"
-    , "Data.HashMap.Strict"
+    [ "Data.Functor.Const"
     , "Data.List.NonEmpty"
+    , "Data.Map.Strict"
     , "Data.Maybe"
     , "Data.Text.Lazy"
-    , "GHC.Generics"
-    , "Lens.Micro"
     , "Prelude"
     ]
 
@@ -71,6 +69,9 @@ types       p = contents p  <> "Types"
 lenses      p = contents p  <> "Lens"
 
 assign :: ProviderName -> String -> [a] -> [(NS, a)]
-assign (contents -> ns) name = zipWith go [1 :: Int ..]
-  where
-    go n x = (ns <> fromString (printf "%s%02d" name n), x)
+assign (contents -> ns) name = \case
+    []  -> []
+    [x] -> [(ns <> fromString name, x)]
+    xs  -> zipWith go [1 :: Int ..] xs
+      where
+        go n x = (ns <> fromString (printf "%s%02d" name n), x)

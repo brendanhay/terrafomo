@@ -17,10 +17,6 @@ git add -A terrafomo-gen/config    \
     && ! git diff --cached --quiet \
     && git commit -m "Updating provider generator configuration"
 
-git add -A terrafomo-gen/model     \
-    && ! git diff --cached --quiet \
-    && git commit -m "Updating provider models"
-
 git add -A provider                \
     && ! git diff --cached --quiet \
     && git commit -m "Regenerating provider packages"

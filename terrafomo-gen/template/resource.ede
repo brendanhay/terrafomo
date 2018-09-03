@@ -1,25 +1,28 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE RecordWildCards   #-}
-{-# LANGUAGE StrictData        #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE StrictData           #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 {% include "_include/license.ede" %}
 module {{ namespace }}
     (
-    {% for resource in resources %}
-    -- ** {{ resource.value.original }}
-    {% if resource.first %} {% else %},{% endif %} {{ resource.value.name }} (..)
-    , {{ resource.value.con.smart }}
+  {% for resource in resources %}
+    -- * {{ resource.value.original }}
+    {% if resource.first %}  {% else %}, {% endif %}{{ resource.value.con.smart }}
+    , {{ resource.value.name }} (..)
+{% include "_include/mode-exports.ede" with schema = resource.value %}
 
   {% endfor %}
     ) where
 
-import Data.Functor ((<$>))
+import Data.Functor   ((<$>))
+import Data.Semigroup ((<>))
 
-import GHC.Base (($))
+import GHC.Base (($), Proxy#, proxy#)
 
 {% for import in unqualified %}
 import {{ import.value }}
@@ -28,48 +31,119 @@ import {{ import.value }}
 {% for import in qualified %}
 import qualified {{ import.value }} as P
 {% endfor %}
-import qualified Data.HashMap.Strict as HashMap
-import qualified Terrafomo.Encode as TF
+import qualified Terrafomo.Encode as Encode
 import qualified Terrafomo.HCL as TF
 import qualified Terrafomo.HIL as TF
+import qualified Terrafomo.Lens as Lens
 import qualified Terrafomo.Schema as TF
-import qualified Terrafomo.Validate as TF
 {% for resource in resources %}
 
--- | @{{ resource.value.original }}@ {{ type }}.
---
--- See the <{{ resource.value.url }} terraform documentation>
--- for more information.
-data {{ resource.value.type }} = {{ resource.value.con.name }}
-{% include "_include/record.ede" with arguments = resource.value.arguments %}
+-- | The main @{{ resource.value.original }}@ {{ type | toLower }} definition.
+{% include "_include/record.ede" with schema = resource.value %}
 
--- | Define a new @{{ resource.value.original }}@ {{ type | toLower }} value.
-{{ resource.value.con.smart }}
-  {% for param in resource.value.parameters %}
-    {% if param.first %}::{% else %}->{% endif %} {{ param.value.type }} -- ^ Lens: 'P.{{ param.value.method }}', Field: '{{ param.value.name }}', HCL: @{{ param.value.original }}@{% if param.last %}
-    -> P.{{ type }} ({{ resource.value.type }}){% endif %}
-  {% else %}
-    :: P.{{ type }} ({{ resource.value.type }})
-  {% endfor %}
-{{ resource.value.con.smart }}{% for param in resource.value.parameters %} {{ param.value.name }}{% endfor %} =
-    TF.unsafe{{ type }} "{{ resource.value.original }}" P.defaultProvider {% if type == "Resource" %} TF.encodeLifecycle{% endif %}
-      {% for field in resource.value.arguments %}
-        {% if field.first %}(\{{ resource.value.con.name }}{..} -> P.mconcat
-            [{% else %}    ,{% endif %} {{ field.value.encoder }} {{ field.value.name }}{% if field.last %}
-            ]){% endif %}
-        {% else %}
-        P.mempty
+{- | Construct a new @{{ resource.value.original }}@ {{ type | toLower }}. The
+available argument lenses and computed attribute getters are documented below.
+See the <{{ resource.value.url }} terraform documentation> for more information.
+
+=== Example Usage
+
+You can define a minimal @{{ resource.value.original }}@ via:
+
+@
+{% case resource.value.mode %}
+{% when "recordcon" %}
+{{ resource.value.provider }}.{{ resource.value.con.smart }}
+{% else %}
+{{ resource.value.provider }}.{{ resource.value.con.smart }}
+  ({{ resource.value.provider }}.{{ resource.value.required.con }}
+      {% for field in resource.value.parameters %}
+        {% if field.first %}{ {% else %}, {% endif %}{{ resource.value.provider }}.{{ field.value.name }} = {{ field.value.default }} -- {{ field.value.type | unqualify }}{% if field.last %}
+        }){% endif %}
       {% endfor %}
+{% endcase %}
+@
+{% for field in resource.value.arguments %}
+{% if field.first %}
+
+=== Argument Reference
+
+The following arguments are supported:
+
+@
+{% endif %}
+#{{ field.value.original | pad }} :: Lens' ({{ type }} {{ resource.value.name }} s) ({{ field.value.type | unqualify }})
+{% if field.last %}
+@
+{% endif %}
+{% endfor %}
+{% for field in resource.value.attributes %}
+{% if field.first %}
+
+=== Attributes Reference
+
+In addition to the arguments above, the following computed attributes are available:
+
+@
+{% endif %}
+#{{ field.value.original | pad }} :: Getting r (Ref {{ resource.value.name }} s) ({{ field.value.type | unqualify }})
+{% if field.last %}
+@
+{% endif %}
+{% endfor %}
+
+=== Configuring Meta-parameters
+
+The following additional configuration is supported:
+
+@
+{% if type == "Resource" %}
+#{{ "prevent_destroy"       | pad }} :: Lens' ({{ type }} {{ resource.value.name }} s) Bool
+#{{ "create_before_destroy" | pad }} :: Lens' ({{ type }} {{ resource.value.name }} s) Bool
+#{{ "ignore_changes"        | pad }} :: Lens' ({{ type }} {{ resource.value.name }} s) (Changes s)
+{% endif %}
+#{{ "depends_on"            | pad }} :: Lens' ({{ type }} {{ resource.value.name }} s) (Set (Depends s))
+#{{ "provider"              | pad }} :: Lens' ({{ type }} {{ resource.value.name }} s) (Maybe {{ resource.value.provider }})
+@
+-}
+{{ resource.value.con.smart }}
+{% case resource.value.mode %}
+{% when "record" %}
+    :: {{ resource.value.type }} -- ^ The minimal/required arguments.
+    -> P.{{ type }} {{ resource.value.type }}
+{{ resource.value.con.smart }} =
+{% when "recordcon" %}
+    :: P.{{ type }} {{ resource.value.type }}
+{{ resource.value.con.smart }} =
+{% when "recordcondata" %}
+    :: {{ resource.value.required.type }} -- ^ The minimal/required arguments.
+    -> P.{{ type }} {{ resource.value.type }}
+{{ resource.value.con.smart }} x =
+{% endcase %}
+    TF.unsafe{{ type }} "{{ resource.value.original }}" {% if type == "Resource" %} Encode.lifecycle{% endif %}
+      {% if resource.value.arguments | empty %}
+        P.mempty
+      {% else %}
+        (\{{ resource.value.con.name }}{..} ->
+{% include "_include/conflicts-encode.ede" with schema = resource.value %}
+        )
+      {% endif %}
+    {% if resource.value.mode != "record" %}
       {% for field in resource.value.arguments %}
-        {% if field.first %}({{ resource.value.con.name }}
+        {% if field.first %}({% if !(resource.value.parameters | empty) %}let {{ resource.value.required.con }}{..} = x in {% endif %}{{ resource.value.con.name }}
             { {% else %}    , {% endif %}{{ field.value.name }} = {{ field.value.default }}{% if field.last %}
             }){% endif %}
       {% else %}
         {{ resource.value.con.name }}
       {% endfor %}
+    {% endif %}
+{% include "_include/required.ede" with schema = resource.value %}
+{% include "_include/conflicts.ede" with schema = resource.value %}
+{% for field in resource.value.arguments %}
 
-instance P.Hashable ({{ resource.value.type }})
-
-{% include "_include/validator.ede" with schema = resource.value %}
-{% include "_include/lenses.ede" with schema = resource.value %}
+instance Lens.HasField "{{ field.value.original }}" f (P.Resource {{ resource.value.name }} s) ({{ field.value.type }}) where
+    field = Lens.resourceLens P.. Lens.lens'
+        ({{ field.value.name }} :: {{ resource.value.type }} -> {{ field.value.type }})
+        (\s a -> s { {{ field.value.name }} = a } :: {{ resource.value.type }})
+{% endfor %}
+{% include "_include/attributes.ede" with schema = resource.value %}
 {% endfor %}

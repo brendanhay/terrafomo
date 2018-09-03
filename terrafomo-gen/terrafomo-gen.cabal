@@ -1,0 +1,102 @@
+cabal-version:  2.2
+name:           terrafomo-gen
+category:       Language, Cloud
+version:        0.0.0.0
+license:        MPL-2.0
+author:         Brendan Hay
+maintainer:     Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
+stability:      provisional
+homepage:       https://github.com/brendanhay/terrafomo
+bug-reports:    https://github.com/brendanhay/terrafomo/issues
+copyright:      Copyright (c) 2017-2018 Brendan Hay
+build-type:     Simple
+synopsis:       Pending
+description:    Pending
+
+source-repository head
+    type: git
+    location: https://github.com/brendanhay/terrafomo
+    subdir: terrafomo-gen
+
+common base
+    default-language: Haskell2010
+    ghc-options:
+        -Wall
+        -Wincomplete-uni-patterns
+        -Wincomplete-record-updates
+        -Wcompat
+        -Wnoncanonical-monad-instances
+        -Wnoncanonical-monadfail-instances
+    build-depends:
+        base >= 4.10 && < 5
+    default-extensions:
+        BangPatterns
+        ConstraintKinds
+        DataKinds
+        DefaultSignatures
+        DeriveFoldable
+        DeriveFunctor
+        DeriveGeneric
+        DeriveTraversable
+        DuplicateRecordFields
+        ExplicitNamespaces
+        FlexibleContexts
+        FlexibleInstances
+        FunctionalDependencies
+        GADTs
+        GeneralizedNewtypeDeriving
+        InstanceSigs
+        KindSignatures
+        LambdaCase
+        MagicHash
+        MultiParamTypeClasses
+        MultiWayIf
+        NamedFieldPuns
+        OverloadedStrings
+        PatternSynonyms
+        RankNTypes
+        ScopedTypeVariables
+        StandaloneDeriving
+        TupleSections
+        TypeApplications
+        TypeFamilies
+        TypeOperators
+        ViewPatterns
+
+executable terrafomo-gen
+  import: base
+  main-is: Main.hs
+  hs-source-dirs: src
+  other-modules:
+      Terrafomo.Gen.Config
+      Terrafomo.Gen.Diff
+      Terrafomo.Gen.Elab
+      Terrafomo.Gen.Go
+      Terrafomo.Gen.Graph
+      Terrafomo.Gen.Haskell
+      Terrafomo.Gen.JSON
+      Terrafomo.Gen.NS
+      Terrafomo.Gen.Name
+      Terrafomo.Gen.Partition
+      Terrafomo.Gen.Render
+      Terrafomo.Gen.Text
+      Terrafomo.Gen.Type
+      Terrafomo.Gen.URL
+  build-depends:
+      aeson >= 1.3,
+      aeson-pretty,
+      bytestring,
+      containers,
+      directory,
+      ede,
+      errors,
+      filepath,
+      mtl,
+      optparse-applicative,
+      pretty-show,
+      split,
+      text,
+      time,
+      unordered-containers,
+      word-wrap,
+      yaml

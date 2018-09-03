@@ -1,3 +1,3 @@
 package-name: terrafomo-builtins
-package-yaml: false
+cabal-file: false
 provider-name: Archive

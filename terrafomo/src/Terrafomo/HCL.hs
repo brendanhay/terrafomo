@@ -1,295 +1,166 @@
+{- |
+HCL (HashiCorp Configuration Language) is a structured configuration language
+that is both human and machine friendly for use with command-line tools, but
+specifically targeted towards DevOps tools, servers, etc.
+
+This module defines direct-encoding and overloading of Haskell values to HCL
+encoding.
+-}
 module Terrafomo.HCL
-    (
-    -- * Overloading
-      ToHCL   (..)
-
-    -- * Documents
-    , Encoding
-    , Series
-
-    -- ** Rendering + Layout
-    , render
-    , renderIO
+    ( Encoding (..)
     , layout
+    , render
+    , encode
 
-    -- * Encoding
-    , document
-    , section
-    , nested
-    , function
-    , operator
-    , null
-    , heredoc
-    , interpolate
+    , Encoder
+    , Series (..)
     , pairs
     , pair
+
+    , ToHCL (..)
+    , fromJSON
+    , (<\>)
     ) where
 
-import Data.ByteString.Builder (Builder)
-import Data.ByteString.Lazy    (ByteString)
-import Data.Hashable           (Hashable (hashWithSalt))
-import Data.HashMap.Strict     (HashMap)
-import Data.HashSet            (HashSet)
-import Data.List.NonEmpty      (NonEmpty)
-import Data.Scientific         (Scientific)
-import Data.Semigroup          (Semigroup ((<>)))
-import Data.String             (IsString (fromString))
-import Data.Text.Lazy          (Text)
-import Data.Version            (Version)
-
-import GHC.Generics (Generic)
+import Data.Bifunctor         (bimap, first, second)
+import Data.List.NonEmpty     (NonEmpty)
+import Data.Map.Strict        (Map)
+import Data.Set               (Set)
+import Data.String            (IsString (fromString))
+import Data.Text.Lazy         (Text)
+import Data.Text.Lazy.Builder (Builder)
+import Data.Version           (Version)
 
 import Numeric.Natural (Natural)
 
-import Prelude hiding (null)
+import Terrafomo.Pretty (Doc, Layout)
 
-import qualified Data.Aeson                 as JSON
-import qualified Data.Aeson.Encode.Pretty   as JSON
-import qualified Data.ByteString.Builder    as Build
-import qualified Data.ByteString.Lazy.Char8 as LBS8
-import qualified Data.Foldable              as Fold
-import qualified Data.Hashable              as Hash
-import qualified Data.HashMap.Strict        as HashMap
-import qualified Data.HashSet               as HashSet
-import qualified Data.List                  as List
-import qualified Data.Scientific            as Sci
-import qualified Data.Text                  as Text
-import qualified Data.Text.Lazy             as LText
-import qualified Data.Text.Lazy.Encoding    as LText
-import qualified GHC.Exts                   as Exts
-import qualified System.IO                  as IO
+import qualified Data.Aeson             as Aeson
+import qualified Data.List.NonEmpty     as NonEmpty
+import qualified Data.Map.Strict        as Map
+import qualified Data.Scientific        as Sci
+import qualified Data.Set               as Set
+import qualified Data.Text              as Text
+import qualified Data.Text.Lazy         as LText
+import qualified Data.Text.Lazy.Builder as Build
+import qualified GHC.Exts               as Exts
+import qualified Terrafomo.Pretty       as Pretty
 
--- Pairs Encoding
+newtype Encoding = Encoding { fromEncoding :: Doc Builder }
+    deriving (Semigroup, Monoid)
 
--- | FIXME: Document
+instance IsString Encoding where
+    fromString = toHCL . LText.pack -- Quoted text
+
+instance Show Encoding where
+    show = show
+         . Pretty.render (layout { Pretty.newline = const mempty })
+         . fromEncoding
+
+render :: Layout -> Encoding -> Text
+render l x = Pretty.render l (fromEncoding x)
+
+layout :: Layout
+layout = Pretty.Layout
+    { Pretty.column  = 0
+    , Pretty.newline = \n -> "\n" <> Build.fromLazyText (LText.replicate n " ")
+    , Pretty.items   = Pretty.enclose "[" "]" ","
+    , Pretty.pairs   = fromEncoding . pairs . foldMap (uncurry pair)
+    }
+
+-- | An encoder should produce a series of configuration pairs suitable
+-- for embedding into a larger HCL structure or JSON object.
+type Encoder a = a -> Series
+
 data Series
-    = Value !Encoding
+    = Value !(Doc Builder)
     | None
-      deriving (Show, Generic)
 
 instance Semigroup Series where
     (<>) None      b         = b
     (<>) a         None      = a
-    (<>) (Value a) (Value b) = Value (a <> Line <> b)
+    (<>) (Value a) (Value b) = Value (a <> Pretty.line <> b)
+    {-# INLINEABLE (<>) #-}
 
 instance Monoid Series where
     mempty = None
+    {-# INLINE mempty #-}
 
-instance Hashable Series
+pairs :: Series -> Encoding
+pairs = \case
+    Value x -> Encoding (Pretty.object x)
+    None    -> "{}"
 
--- Document Encoding
-
--- | FIXME: Document
-data Encoding
-    = Empty
-    | Line
-    | Bytes {-# UNPACK #-} !Int !Builder
-    | Nest  !Encoding
-    | Cat   !Encoding !Encoding
-
-instance Semigroup Encoding where
-    (<>) a           Empty       = a
-    (<>) (Bytes i a) (Bytes j b) = Bytes (hashWithSalt i j) (a <> b)
-    (<>) (Nest    a) (Nest    b) = Nest (a <> b)
-    (<>) a           b           = Cat a b
-    {-# INLINEABLE (<>) #-}
-
-instance Monoid Encoding where
-    mempty = Empty
-    {-# INLINEABLE mempty #-}
-
-instance IsString Encoding where
-    fromString = bytes fromString
-    {-# INLINEABLE fromString #-}
-
-instance Show Encoding where
-    show = show . render
-
-instance Eq Encoding where
-    (==) Empty       Empty       = True
-    (==) Line        Line        = True
-    (==) (Bytes i _) (Bytes j _) = i == j
-    (==) (Nest  a)   (Nest  b)   = a == b
-    (==) (Cat a b)   (Cat c d)   = a == c && b == d
-    (==) _           _           = False
-    {-# INLINEABLE (==) #-}
-
-instance Hashable Encoding where
-    hashWithSalt s = \case
-        Empty     -> s `hashWithSalt` (0 :: Int)
-        Line      -> s `hashWithSalt` (1 :: Int)
-        Bytes h _ -> s `hashWithSalt` (2 :: Int) `hashWithSalt` h
-        Nest  a   -> s `hashWithSalt` (3 :: Int) `hashWithSalt` a
-        Cat   a b -> s `hashWithSalt` (4 :: Int) `hashWithSalt` a `hashWithSalt` b
-    {-# INLINEABLE hashWithSalt #-}
-
--- Rendering + Layout
-
-render :: Encoding -> ByteString
-render = Build.toLazyByteString . layout id
-
-renderIO :: Encoding -> IO.Handle -> IO ()
-renderIO x hd = layout (Build.hPutBuilder hd) x
-
-layout :: Monoid m => (Builder -> m) -> Encoding -> m
-layout f = go 0
-  where
-    go !i = \case
-        Empty     -> mempty
-        Line      -> f ("\n" <> Build.lazyByteString (LBS8.replicate i ' '))
-        Bytes _ b -> f b
-        Nest  x   -> go (i + 2) x
-        Cat   a b -> go i a <> go i b
-
--- Overloading
+pair :: ToHCL a => Text -> a -> Series
+pair k v = Value (Pretty.text k <> " = " <> encode v)
 
 class ToHCL a where
-    toHCL :: a -> Encoding
-
-    default toHCL :: JSON.ToJSON a => a -> Encoding
-    toHCL = json . JSON.toJSON
-
+    toHCL     :: a   -> Encoding
     toHCLList :: [a] -> Encoding
-    toHCLList = list toHCL
 
-instance ToHCL ()
-instance ToHCL Bool
-instance ToHCL Double
-instance ToHCL Scientific
-instance ToHCL Int
-instance ToHCL Integer
-instance ToHCL Natural
-instance ToHCL Text
-instance ToHCL Text.Text
-instance ToHCL Version
-instance ToHCL JSON.Value
+    toHCLList = Encoding . Pretty.list . map encode
+    {-# INLINEABLE toHCLList #-}
+
+encode :: ToHCL a => a -> Doc Builder
+encode = fromEncoding . toHCL
 
 instance ToHCL Encoding where
     toHCL = id
 
-instance ToHCL Series where
-    toHCL = pairs
+instance ToHCL (Doc Builder) where
+    toHCL = Encoding
+
+instance ToHCL () where
+    toHCL () = Encoding Pretty.null
+
+instance ToHCL Bool where
+    toHCL = Encoding . Pretty.bool
+
+instance ToHCL Double    where toHCL = Encoding . Pretty.float
+instance ToHCL Int       where toHCL = Encoding . Pretty.decimal
+instance ToHCL Integer   where toHCL = Encoding . Pretty.decimal
+instance ToHCL Natural   where toHCL = Encoding . Pretty.decimal
+instance ToHCL Text      where toHCL = Encoding . Pretty.string
+instance ToHCL Text.Text where toHCL = toHCL . LText.fromStrict
 
 instance ToHCL Char where
+    toHCL     = Encoding . Pretty.char
     toHCLList = toHCL . LText.pack
+
+instance ToHCL Version where
+    toHCL = fromJSON
+
+instance ToHCL Aeson.Value where
+    toHCL = fromJSON
 
 instance ToHCL a => ToHCL [a] where
     toHCL = toHCLList
 
+instance ToHCL a => ToHCL (Set a) where
+    toHCL = toHCLList . Set.toList
+
 instance ToHCL a => ToHCL (NonEmpty a) where
-    toHCL = toHCLList . Exts.toList
+    toHCL = toHCLList . NonEmpty.toList
 
-instance ToHCL a => ToHCL (HashSet a) where
-    toHCL = toHCLList . HashSet.toList
+instance ToHCL a => ToHCL (Map Text a) where
+    toHCL = toHCLMap . Map.toList
 
-instance ToHCL a => ToHCL (HashMap Text a) where
-    toHCL = dict id toHCL
+instance ToHCL a => ToHCL (Map Text.Text a) where
+    toHCL = toHCLMap . map (first LText.fromStrict) . Map.toList
 
--- HCL Encoding
+toHCLMap :: ToHCL a => [(Text, a)] -> Encoding
+toHCLMap = Encoding . Pretty.map_ . map (second encode)
 
-document :: [Encoding] -> Encoding
-document = vsep . List.intersperse Empty
-
-section :: Text -> [Text] -> Encoding -> Encoding
-section kw keys node =
-    Fold.foldl' (<+>) (text kw) (map (quotes . text) keys) <+> node
-
-nested :: Encoding -> Encoding
-nested s = Nest ("{" <> Line <> s) <> Line <> "}"
-
-function :: Text -> [Encoding] -> Encoding
-function name args = interpolate (text name <> tuple args)
-
-operator :: Text -> Encoding -> Encoding -> Encoding
-operator op a b = interpolate (a <+> text op <+> b)
-
-null :: Encoding
-null = "null"
-
-heredoc :: JSON.ToJSON a => a -> Encoding
-heredoc x =
-    Nest ( "<<HEREDOC"
-          <> Line
-          <> bytes Build.lazyByteString (JSON.encodePretty x)
-           ) <> Line
-             <> "HEREDOC"
-
-json :: JSON.Value -> Encoding
-json = \case
-    JSON.Object o -> dict LText.fromStrict json o
-    JSON.Array  v -> list json (Exts.toList v)
-    JSON.String t -> quotes (text (LText.fromStrict t))
-    JSON.Number n -> either double int (Sci.floatingOrInteger n)
-    JSON.Bool   b -> if b then "true" else "false"
-    JSON.Null     -> "null"
-
-dict :: (k -> Text) -> (v -> Encoding) -> HashMap k v -> Encoding
-dict f g = pairs . HashMap.foldrWithKey (\k v s -> pair (f k) (g v) <> s) mempty
-
-pairs :: Series -> Encoding
-pairs = \case
-    Value v -> object v
-    None    -> "{}"
-
-pair :: ToHCL a => Text -> a -> Series
-pair k v = Value (text k <> " = " <> toHCL v)
-
--- Primitives
-
-double :: Double -> Encoding
-double = bytes Build.doubleDec
-
-int :: Int -> Encoding
-int = bytes Build.intDec
-
-text :: Text -> Encoding
-text = bytes (Build.lazyByteString . LText.encodeUtf8)
-
-char :: Char -> Encoding
-char = bytes Build.charUtf8
-
-bytes :: Hashable a => (a -> Builder) -> a -> Encoding
-bytes f x = Bytes (Hash.hash x) (f x)
-
--- Combinators
-
-object :: Encoding -> Encoding
-object x = Nest (char '{' <> Line <> x) <> Line <> char '}'
-
-list :: (a -> Encoding) -> [a] -> Encoding
-list f xs = Nest (vsep (char '[' : map sep xs)) <> Line <> char ']'
-  where
-    sep x = f x <> char ','
-
-tuple :: [Encoding] -> Encoding
-tuple = enclose (char '(') (char ')') ", "
-
-quotes :: Encoding -> Encoding
-quotes = between (char '\"') (char '\"')
-
-interpolate :: Encoding -> Encoding
-interpolate = between "\"${" "}\"" . group
-
-group :: Encoding -> Encoding
-group = go
+fromJSON :: Aeson.ToJSON a => a -> Encoding
+fromJSON = go . Aeson.toJSON
   where
     go = \case
-        Empty     -> Empty
-        Line      -> Empty
-        x@Bytes{} -> x
-        Nest x    -> x
-        Cat  a b  -> Cat (go a) (go b)
+        Aeson.Null      -> toHCL ()
+        Aeson.Bool   x  -> toHCL x
+        Aeson.String x  -> toHCL x
+        Aeson.Number x  -> either toHCL toHCL (Sci.floatingOrInteger x :: Either Double Int)
+        Aeson.Array  xs -> toHCL (Exts.toList xs)
+        Aeson.Object xs -> toHCLMap $ map (bimap LText.fromStrict go) $ Exts.toList xs
 
-vsep :: [Encoding] -> Encoding
-vsep = enclose Empty Empty Line
-
-(<+>) :: Encoding -> Encoding -> Encoding
-(<+>) a b = a <> " " <> b
-
-between :: Encoding -> Encoding -> Encoding -> Encoding
-between open close x = open <> x <> close
-
-enclose :: Encoding -> Encoding -> Encoding -> [Encoding] -> Encoding
-enclose open close sep = \case
-    []   -> open <> close
-    x:xs -> open <> Fold.foldl' (\a b -> a <> sep <> b) x xs <> close
+(<\>) :: Encoding -> Encoding -> Encoding
+(<\>) a b = a <> Encoding Pretty.line <> b

@@ -1,67 +1,89 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE RecordWildCards   #-}
-{-# LANGUAGE StrictData        #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE StrictData           #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 {% include "_include/license.ede" %}
+
 module {{ namespace }}
     (
-    {% for setting in settings %}
-    -- ** {{ setting.value.original }}
-    {% if setting.first %} {% else %},{% endif %} {{ setting.value.name }} (..)
-    , {{ setting.value.con.smart }}
+  {% for setting in settings %}
+    -- * {{ setting.value.name }}
+    {% if setting.value.mode != "record" %}
+    {% if setting.first %}  {% else %}, {% endif %}{{ setting.value.con.smart }}
+    , {{ setting.value.name }} (..)
+    {% else %}
+    {% if setting.first %}  {% else %}, {% endif %}{{ setting.value.name }} (..)
+    {% endif %}
+{% include "_include/mode-exports.ede" with schema = setting.value %}
 
   {% endfor %}
     ) where
 
-import Data.Functor ((<$>))
+import Data.Functor   ((<$>))
+import Data.Semigroup ((<>))
 
-import GHC.Base (($))
+import GHC.Base (($), Proxy#, proxy#)
 
 {% for import in qualified %}
 import qualified {{ import.value }} as P
 {% endfor %}
-import qualified Data.HashMap.Strict as HashMap
-import qualified Terrafomo.Encode as TF
+import qualified Terrafomo.Encode as Encode
 import qualified Terrafomo.HCL as TF
 import qualified Terrafomo.HIL as TF
+import qualified Terrafomo.Lens as Lens
 import qualified Terrafomo.Schema as TF
-import qualified Terrafomo.Validate as TF
 {% for setting in settings %}
 
--- | @{{ setting.value.original }}@ nested settings.
-data {{ setting.value.type }} = {{ setting.value.con.name }}
-{% include "_include/record.ede" with arguments = setting.value.arguments %}
+-- | The @{{ setting.value.original }}@ nested settings definition.
+{% include "_include/record.ede" with schema = setting.value %}
+{% case setting.value.mode %}
+{% when "recordcon" %}
 
 -- | Construct a new @{{ setting.value.original }}@ settings value.
 {{ setting.value.con.smart }}
-  {% for param in setting.value.parameters %}
-    {% if param.first %}::{% else %}->{% endif %} {{ param.value.type }} -- ^ Lens: 'P.{{ param.value.method }}', Field: '{{ param.value.name }}', HCL: @{{ param.value.original }}@{% if param.last %}
-    -> {{ setting.value.type }}{% endif %}
-  {% else %}
     :: {{ setting.value.type }}
-  {% endfor %}
-{{ setting.value.con.smart }}{% for param in setting.value.parameters %} {{ param.value.name }}{% endfor %} =
+{{ setting.value.con.smart }} =
     {{ setting.value.con.name }}
       {% for field in setting.value.arguments %}
         {% if field.first %}{ {% else %}, {% endif %}{{ field.value.name }} = {{ field.value.default }}{% if field.last %}
         }{% endif %}
       {% endfor %}
+{% when "recordcondata" %}
+
+-- | Construct a new @{{ setting.value.original }}@ settings value.
+{{ setting.value.con.smart }}
+    :: {{ setting.value.required.type }}
+    -> {{ setting.value.type }}
+{{ setting.value.con.smart }} {{ setting.value.required.con }}{..} =
+    {{ setting.value.con.name }}
+      {% for field in setting.value.arguments %}
+        {% if field.first %}{ {% else %}, {% endif %}{{ field.value.name }} = {{ field.value.default }}{% if field.last %}
+        }{% endif %}
+      {% endfor %}
+{% endcase %}
+{% include "_include/required.ede" with schema = setting.value %}
+{% include "_include/conflicts.ede" with schema = setting.value %}
+{% for field in setting.value.arguments %}
+
+instance Lens.HasField "{{ field.value.original }}" f ({{ setting.value.type }}) ({{ field.value.type }}) where
+    field = Lens.lens'
+        ({{ field.value.name }} :: {{ setting.value.type }} -> {{ field.value.type }})
+        (\s a -> s { {{ field.value.name }} = a } :: {{ setting.value.type }})
+{% endfor %}
+{% include "_include/attributes.ede" with schema = setting.value %}
+  {% if setting.value.arguments | empty %}
 
 instance TF.ToHCL ({{ setting.value.type }}) where
-  {% for field in setting.value.arguments %}
-    {% if field.first %} toHCL {{ setting.value.con.name }}{..} = TF.pairs $ P.mconcat
-        [{% else %}    ,{% endif %} {{ field.value.encoder }} {{ field.value.name }}{% if field.last %}
-        ]{% endif %}
-  {% else %}
     toHCL {{ setting.value.con.name }} = P.mempty
-  {% endfor %}
+  {% else %}
 
-instance P.Hashable ({{ setting.value.type }})
-
-{% include "_include/validator.ede" with schema = setting.value %}
-{% include "_include/lenses.ede" with schema = setting.value %}
+instance TF.ToHCL ({{ setting.value.type }}) where
+    toHCL {{ setting.value.con.name }}{..} = TF.pairs $
+{% include "_include/conflicts-encode.ede" with schema = setting.value %}
+  {% endif %}
 {% endfor %}

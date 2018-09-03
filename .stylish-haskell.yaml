@@ -238,6 +238,7 @@ language_extensions:
   - InstanceSigs
   - KindSignatures
   - LambdaCase
+  - MagicHash
   - MultiParamTypeClasses
   - MultiWayIf
   - NamedFieldPuns
@@ -252,5 +253,5 @@ language_extensions:
   - TypeApplications
   - TypeFamilies
   - TypeOperators
-  - ViewPatterns
   - UnicodeSyntax
+  - ViewPatterns

@@ -3,45 +3,41 @@ module Terrafomo.Gen.Partition
     , schemas
     ) where
 
-import Data.Bifunctor (second)
-import Data.Set       (Set)
+import Data.Set (Set)
 
 import Terrafomo.Gen.Haskell
 import Terrafomo.Gen.Name    (ProviderName)
 import Terrafomo.Gen.NS      (NS)
 
-import qualified Data.List           as List
 import qualified Data.Set            as Set
 import qualified Terrafomo.Gen.Graph as Graph
 import qualified Terrafomo.Gen.NS    as NS
 
 lenses
-    :: Int
-    -> Provider
+    :: Provider
     -> [(NS, (Set Class, Set Class))]
-lenses c p = arguments ++ attributes
+lenses p = arguments ++ attributes
   where
     name = providerName p
 
     arguments =
-       map (second ((,mempty) . Set.fromList))
-           . NS.assign name "Arguments"
-           . Graph.partition c
-           . Graph.new className (const [])
-           $ List.nub (map (mk False) (concatMap schemaArguments xs))
+        NS.assign name "Arguments" $
+            [ ( Set.fromList $ map (newClass False) (concatMap schemaArguments xs)
+              , mempty
+              )
+            ]
 
-    -- Attribute classes are considerably less intensive to compile.
     attributes =
-       map (second ((mempty,) . Set.fromList))
-           . NS.assign name "Attributes"
-           . Graph.partition (c * 3)
-           . Graph.new className (const [])
-           $ List.nub (map (mk True) (concatMap schemaAttributes xs))
+        NS.assign name "Attributes"
+            [ ( mempty
+              , Set.fromList $ map (newClass True) (concatMap schemaAttributes xs)
+              )
+            ]
 
-    mk b x = Class'
-        { className     = fieldClass  x
-        , classMethod   = fieldMethod x
-        , classComputed = b
+    newClass computed x = Class'
+        { classOriginal = fieldOriginal x
+        , classMethod   = fieldMethod   x
+        , classComputed = computed
         }
 
     xs = map resourceSchema (providerResources   p)
@@ -52,7 +48,7 @@ schemas
     :: Int
     -> ProviderName
     -> String
-    -> (a -> Schema Conflict)
+    -> (a -> Schema b)
     -> [a]
     -> [(NS, [a])]
 schemas c provider name f =

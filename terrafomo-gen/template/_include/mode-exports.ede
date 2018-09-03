@@ -1,0 +1,9 @@
+    {% case schema.mode %}
+    {% when "recordcondata" %}
+    , {{ schema.required.name }} (..)
+    {% endcase %}
+    {% if schema.conflicts %}
+      {% for conflict in schema.conflicts %}
+    , {{ conflict.value.name }} (..)
+      {% endfor %}
+    {% endif %}
