@@ -125,10 +125,10 @@ data Stage = Stage
     , stageDocument :: !HCL.Encoding
     }
 
-type Plan env = PlanT env Identity
+type Plan cfg = PlanT cfg Identity
 
-newtype PlanT env m a = PlanT
-    { unPlanT :: ReaderT env (State.StateT [Stage] (ExceptT Error m)) a
+newtype PlanT cfg m a = PlanT
+    { unPlanT :: ReaderT cfg (State.StateT [Stage] (ExceptT Error m)) a
     } deriving
         ( Functor
         , Applicative
@@ -139,67 +139,67 @@ newtype PlanT env m a = PlanT
         , MonadIO
         )
 
-instance MonadTrans (PlanT env) where
+instance MonadTrans (PlanT config) where
     lift = PlanT . lift . lift . lift
     {-# INLINE lift #-}
 
-instance MFunctor (PlanT env) where
+instance MFunctor (PlanT config) where
     hoist f = PlanT . hoist (hoist (hoist f)) . unPlanT
     {-# INLINE hoist #-}
 
 runPlan
-    :: env
-    -- ^ The custom environment or configuration to make available.
-    -> Plan env a
+    :: cfg
+    -- ^ The custom configuration to make available.
+    -> Plan cfg a
     -- ^ The plan to topologically sort.
     -> Either Error (a, [Stage])
-runPlan env =
-    runIdentity . runPlanT env
+runPlan cfg =
+    runIdentity . runPlanT cfg
 
 runPlanT
-    :: env
-    -- ^ The custom environment or configuration to make available.
-    -> PlanT env m a
+    :: cfg
+    -- ^ The custom configuration to make available.
+    -> PlanT cfg m a
     -- ^ The plan to topologically sort.
     -> m (Either Error (a, [Stage]))
-runPlanT env m =
+runPlanT cfg m =
     Except.runExceptT
         $ flip State.runStateT []
-            $ Reader.runReaderT (unPlanT m) env
+            $ Reader.runReaderT (unPlanT m) cfg
 
 addState
-    :: forall b p env stage a.
+    :: forall b p cfg stage a.
        KnownSymbol stage
-    => (Proxy stage -> env -> Backend  b)
-    -- ^ Specify the backend for the state\'s stage and environment.
-    -> (Proxy stage -> env -> Provider p)
-    -- ^ Specify the provider for the state\'s stage and environment.
-    -> (forall s. State env stage s a)
+    => (Proxy stage -> cfg -> Backend  b)
+    -- ^ Specify the backend for the state\'s stage and cfgironment.
+    -> (Proxy stage -> cfg -> Provider p)
+    -- ^ Specify the provider for the state\'s stage and cfgironment.
+    -> (forall s. State cfg stage s a)
     -- ^ The local or remote state to add to the plan.
-    -> Plan env a
+    -> Plan cfg a
 addState backend provider =
     addStateT backend provider
 
 addStateT
-    :: forall b p env stage m a.
+    :: forall b p cfg stage m a.
        ( Monad m
        , KnownSymbol stage
        )
-    => (Proxy stage -> env -> Backend  b)
-    -- ^ Specify the backend for the state\'s stage and environment.
-    -> (Proxy stage -> env -> Provider p)
-    -- ^ Specify the provider for the state\'s stage and environment.
-    -> (forall s. StateT env stage s m a)
+    => (Proxy stage -> cfg -> Backend  b)
+    -- ^ Specify the backend for the state\'s stage and cfgironment.
+    -> (Proxy stage -> cfg -> Provider p)
+    -- ^ Specify the provider for the state\'s stage and cfgironment.
+    -> (forall s. StateT cfg stage s m a)
     -- ^ The local or remote state to add to the plan.
-    -> PlanT env m a
+    -> PlanT cfg m a
 addStateT backend provider m = do
     let proxy = Proxy @stage
         stage = LText.pack (symbolVal proxy)
 
-    env <- PlanT Reader.ask
+    cfg <- PlanT Reader.ask
     run <- lift $
-        runStateT env (backend proxy env)
-            (withProvider (provider proxy env) m)
+        runStateT cfg (backend proxy cfg)
+            (withProvider (provider proxy cfg) m)
 
     PlanT $ case run of
         Left  err    -> Except.throwError err
@@ -216,10 +216,10 @@ addStateT backend provider m = do
 -- Configuration
 
 data Config a = Config
-    { _backend     :: !(Backend HCL.Series)
-    , _aliases     :: !(HashMap Text Name)
-    , _rename      :: !(Text -> Text)
-    , _environment :: !a
+    { _backend :: !(Backend HCL.Series)
+    , _aliases :: !(HashMap Text Name)
+    , _rename  :: !(Text -> Text)
+    , _config  :: !a
     } deriving (Functor)
 
 -- HCL Intermediate Document
@@ -244,11 +244,11 @@ encodeDocument backend doc =
 
 -- Terraform Local/Remote State
 
-type State env stage s = StateT env stage s Identity
+type State cfg stage s = StateT cfg stage s Identity
 
 -- | Represents a single terraform local\/remote state path\/key.
-newtype StateT env (stage :: Symbol) s m a = StateT
-    { unStateT :: ReaderT (Config env) (State.StateT Document (ExceptT Error m)) a
+newtype StateT cfg (stage :: Symbol) s m a = StateT
+    { unStateT :: ReaderT (Config cfg) (State.StateT Document (ExceptT Error m)) a
     } deriving
         ( Functor
         , Applicative
@@ -268,32 +268,32 @@ instance MFunctor (StateT env stage s) where
     {-# INLINE hoist #-}
 
 instance Monad m => MonadReader env (StateT env stage s m) where
-    ask = StateT $ Reader.asks _environment
+    ask = StateT $ Reader.asks _config
     {-# INLINE ask #-}
 
     local f m = StateT $ Reader.local (fmap f) (unStateT m)
     {-# INLINE local #-}
 
 runStateT
-    :: forall env stage f b a.
+    :: forall cfg stage f b a.
        ( Functor f
        , KnownSymbol stage
        )
-    => env
-    -- ^ The custom environment or configuration to make available.
+    => cfg
+    -- ^ The custom configuration to make available.
     -> Backend b
     -- ^ The backend configuration to use for this state.
-    -> (forall s. StateT env stage s f a)
+    -> (forall s. StateT cfg stage s f a)
     -- ^ The state declarations to encode into a single HCL document.
     -> f (Either Error (a, Stage))
-runStateT env back m =
+runStateT cfg back m =
     let stage    = LText.pack (symbolVal (Proxy @stage))
         backend  = Encode.serializeBackend back
         config   = Config
-            { _backend     = backend
-            , _aliases     = mempty
-            , _environment = env
-            , _rename      = id
+            { _backend = backend
+            , _aliases = mempty
+            , _config  = cfg
+            , _rename  = id
             }
         document = Document
             { _providers = ValueMap.empty
@@ -418,7 +418,7 @@ input
     => Text
     -> Maybe a
     -> StateT env stage s m (Output a) -- (Input a)
-input name _value =
+input name value =
     undefined
 
 -- | Write an output variable to the current local or remote state. This
@@ -458,10 +458,10 @@ output stage expr = do
 remote
     :: Monad m
     => Output a
-    -> StateT env stage s m (HIL.Expr s a)
+    -> StateT cfg stage s m (HIL.Expr s a)
 remote out = do
     let backend = outputBackend out
-        stage    = Hash.human (hashBackend backend)
+        stage   = Hash.human (hashBackend backend)
         value   = Encode.encodeRemote stage backend
 
     void $ insertValue stage value _remotes (\s doc -> doc { _remotes = s })
@@ -481,7 +481,7 @@ insertValue
     -- ^ Get the affected value map from the state. (The lens getter.)
     -> (ValueMap k v -> Document -> Document)
     -- ^ Modify the state with the updated value map. (The lens setter.)
-    -> StateT env stage s m Bool
+    -> StateT cfg stage s m Bool
 insertValue key value state update = do
     doc <- StateT State.get
     case ValueMap.insert key value (state doc) of

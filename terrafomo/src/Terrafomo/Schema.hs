@@ -260,4 +260,8 @@ data Output a where
                  -> Output a
 
 outputValue :: Output a -> HIL.Expr s a
-outputValue (UnsafeOutput _ _ x) = HIL.unsafeErase x
+outputValue (UnsafeOutput _ _ o) =
+    flip fmap o $ \case
+        HIL.Quote q -> HIL.Quote q
+        HIL.Const x -> HIL.Const x
+        HIL.Null    -> HIL.Null

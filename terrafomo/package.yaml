@@ -33,10 +33,13 @@ library:
     - Terrafomo.Schema
     - Terrafomo.Validate
 
+    - Terrafomo.CLI
+
   dependencies:
     - aeson
     - aeson-pretty
     - bytestring
+    - free
     - hashable
     - microlens
     - mmorph
@@ -46,10 +49,11 @@ library:
     - text
     - unordered-containers
 
+    # Terrafomo.CLI:
+    - directory
+    - filepath
     - optparse-applicative
     - process
-
-    - free
 
 tests:
   hspec:

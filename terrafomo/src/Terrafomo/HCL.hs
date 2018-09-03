@@ -20,6 +20,7 @@ module Terrafomo.HCL
     , operator
     , null
     , heredoc
+    , interpolate
     , pairs
     , pair
     ) where
@@ -127,8 +128,8 @@ instance Hashable Encoding where
 render :: Encoding -> ByteString
 render = Build.toLazyByteString . layout id
 
-renderIO :: IO.Handle -> Encoding -> IO ()
-renderIO hd = layout (Build.hPutBuilder hd)
+renderIO :: Encoding -> IO.Handle -> IO ()
+renderIO x hd = layout (Build.hPutBuilder hd) x
 
 layout :: Monoid m => (Builder -> m) -> Encoding -> m
 layout f = go 0
