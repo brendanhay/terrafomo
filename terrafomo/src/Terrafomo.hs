@@ -1,76 +1,77 @@
 module Terrafomo
     (
-    -- * Terraform Monad
-      Monad.Terraform
-    , Monad.runTerraform
+    -- -- * Terraform Monad
+    --   Monad.Terraform
+    -- , Monad.runTerraform
 
-    -- ** Monad Homomorphism
-    , Monad.MonadTerraform (..)
+    -- -- ** Monad Homomorphism
+    -- , Monad.MonadTerraform (..)
 
-    -- ** Errors
-    , Monad.Error          (..)
+    -- -- ** Errors
+    -- , Monad.Error          (..)
 
-    -- ** Rendering Documents
-    , Monad.Document
-    , Monad.renderDocument
-    , Monad.renderDocumentIO
+    -- -- ** Rendering Documents
+    -- , HCL.Encoding
+    -- , HCL.render
+    -- , HCL.renderIO
 
-    -- * Backend Configuration
-    , Schema.Backend       (..)
-    , Schema.localBackend
+    -- -- * Backend Configuration
+    -- , Schema.Backend       (..)
+    -- , Schema.localBackend
 
-    -- * Provider Configuration
-    , Schema.Provider      (..)
-    , Monad.withProvider
+    -- -- * Provider Configuration
+    -- , Schema.Provider      (..)
+    -- , Monad.withProvider
 
-    -- * DataSource and Resources
-    , Schema.Resource
+    -- -- * DataSource and Resources
+    -- , Schema.Resource
 
-    -- ** Declaring Definitions
-    , Schema.Ref
-    , Monad.define
+    -- -- ** Declaring Definitions
+    -- , Schema.Ref
+    -- , Monad.define
 
-    -- ** Provider Aliases
-    , Lens.provider
+    -- -- ** Provider Aliases
+    -- , Lens.provider
 
-    -- ** Resource Dependencies
-    , Lens.dependOn
+    -- -- ** Resource Dependencies
+    -- , Lens.dependOn
 
-    -- ** Resource Lifecycle
-    , Schema.Lifecycle     (..)
-    , Lens.preventDestroy
-    , Lens.createBeforeDestroy
+    -- -- ** Resource Lifecycle
+    -- , Schema.Lifecycle     (..)
+    -- , Lens.preventDestroy
+    -- , Lens.createBeforeDestroy
 
-    -- *** Ignored Attributes
-    , Schema.Changes
-    , Lens.ignoreChanges
-    , Lens.ignoreAllChanges
+    -- -- *** Ignored Attributes
+    -- , Schema.Changes
+    -- , Lens.ignoreChanges
+    -- , Lens.ignoreAllChanges
 
-    -- * Outputs and Remote State
-    , Schema.Output
-    , Monad.output
-    , Monad.remote
+    -- -- * Outputs and Remote State
+    -- , Schema.Output
+    -- , Monad.output
+    -- , Monad.remote
 
-    -- * Interpolation Expression Language
-    , HIL.Expr
+    -- -- * Interpolation Expression Language
+    -- , HIL.Expr
 
-    -- ** Primitives
-    , HIL.value
-    , HIL.null
-    , HIL.true
-    , HIL.false
-    , HIL.heredoc
-    , HIL.int
-    , HIL.float
-    , HIL.string
+    -- -- ** Primitives
+    -- , HIL.value
+    -- , HIL.null
+    -- , HIL.true
+    -- , HIL.false
+    -- , HIL.heredoc
+    -- , HIL.int
+    -- , HIL.float
+    -- , HIL.string
 
-    -- ** Builtin Functions
-    , HIL.modulo
-    , HIL.join
-    , HIL.file
+    -- -- ** Builtin Functions
+    -- , HIL.modulo
+    -- , HIL.join
+    -- , HIL.file
     ) where
 
-import qualified Terrafomo.HIL    as HIL
-import qualified Terrafomo.Lens   as Lens
-import qualified Terrafomo.Monad  as Monad
-import qualified Terrafomo.Schema as Schema
+-- import qualified Terrafomo.HCL    as HCL
+-- import qualified Terrafomo.HIL    as HIL
+-- import qualified Terrafomo.Lens   as Lens
+-- import qualified Terrafomo.Monad  as Monad
+-- import qualified Terrafomo.Schema as Schema

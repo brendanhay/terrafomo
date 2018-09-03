@@ -3,10 +3,6 @@ module Terrafomo.HCL
     -- * Overloading
       ToHCL   (..)
 
-    -- * Restricted AST
-    , Section (..)
-    , Node    (..)
-
     -- * Documents
     , Encoding
     , Series
@@ -19,7 +15,7 @@ module Terrafomo.HCL
     -- * Encoding
     , document
     , section
-    , node
+    , nested
     , function
     , operator
     , null
@@ -62,19 +58,9 @@ import qualified Data.Text.Lazy.Encoding    as LText
 import qualified GHC.Exts                   as Exts
 import qualified System.IO                  as IO
 
+-- Pairs Encoding
+
 -- | FIXME: Document
---
--- A restricted version of HCL's @ObjectItem@ struct. Terraform-specific HCL
--- documents are collections of these statements only.
-data Section = Section !Text ![Text] !Node
-    deriving (Show)
-
--- | A HCL @Node@ which can be either a Nested 'Section' or 'JSON.Object'.
-data Node
-    = Nested !Section
-    | Object !Series
-      deriving (Show)
-
 data Series
     = Value !Encoding
     | None
@@ -92,6 +78,7 @@ instance Hashable Series
 
 -- Document Encoding
 
+-- | FIXME: Document
 data Encoding
     = Empty
     | Line
@@ -199,17 +186,15 @@ instance ToHCL a => ToHCL (HashMap Text a) where
 
 -- HCL Encoding
 
-document :: [Section] -> Encoding
-document = vsep . List.intersperse Empty . map section
+document :: [Encoding] -> Encoding
+document = vsep . List.intersperse Empty
 
-section :: Section -> Encoding
-section (Section kw keys n) =
-    Fold.foldl' (<+>) (text kw) (map (quotes . text) keys) <+> node n
+section :: Text -> [Text] -> Encoding -> Encoding
+section kw keys node =
+    Fold.foldl' (<+>) (text kw) (map (quotes . text) keys) <+> node
 
-node :: Node -> Encoding
-node = \case
-    Nested s -> Nest ("{" <> Line <> section s) <> Line <> "}"
-    Object v -> pairs v
+nested :: Encoding -> Encoding
+nested s = Nest ("{" <> Line <> s) <> Line <> "}"
 
 function :: Text -> [Encoding] -> Encoding
 function name args = interpolate (text name <> tuple args)

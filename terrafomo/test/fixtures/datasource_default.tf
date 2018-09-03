@@ -1,6 +1,7 @@
 data "foo" "default" {
-  name = "abc-i123d"
+  name    = "abc-i123d"
   enabled = true
+
   settings = [
     {
       name = "something"
@@ -10,6 +11,7 @@ data "foo" "default" {
     },
     {
       name = "options"
+
       configuration = {
         name = "parameters"
       }

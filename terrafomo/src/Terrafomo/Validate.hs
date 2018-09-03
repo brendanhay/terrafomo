@@ -20,6 +20,7 @@ import Data.Text.Lazy      (Text)
 
 import qualified Data.HashMap.Strict as HashMap
 import qualified Data.HashSet        as HashSet
+import qualified Terrafomo.Fix       as Fix
 import qualified Terrafomo.HIL       as HIL
 
 -- Conflict Validation
@@ -41,7 +42,7 @@ instance HasValidator a => HasValidator (Maybe a) where
 
 instance HasValidator a => HasValidator (HIL.Expr s a) where
     validator =
-        Validator . HIL.cata $ \case
+        Validator . Fix.cata $ \case
             HIL.Var (HIL.Const x) -> validate x
             _                     -> mempty
 

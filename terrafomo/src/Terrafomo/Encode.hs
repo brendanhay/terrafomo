@@ -14,7 +14,6 @@ module Terrafomo.Encode
 
     -- * Utilities
     , section
-    , object
     ) where
 
 import Data.HashSet   (HashSet)
@@ -54,11 +53,11 @@ encodeAttr :: Attr -> Text
 encodeAttr (Attr name attr) = encodeName name <> "." <> attr
 
 -- | FIXME: Document
-encodeBackend :: Backend b -> HCL.Section
+encodeBackend :: Backend b -> HCL.Encoding
 encodeBackend x =
     section TypeTerraform [] $
-        nested . section TypeBackend [backendName x] $
-            object (backendEncoder x (backendConfig x))
+        nested TypeBackend [backendName x] $
+            HCL.pairs (backendEncoder x (backendConfig x))
 
 -- | FIXME: Document
 serializeBackend :: Backend b -> Backend HCL.Series
@@ -68,18 +67,18 @@ serializeBackend x =
       }
 
 -- | FIXME: Document
-encodeRemote :: Text -> Backend b -> HCL.Section
+encodeRemote :: Text -> Backend b -> HCL.Encoding
 encodeRemote name x =
     section TypeData ["terraform_remote_state", name] $
-        object ( HCL.pair "backend" (backendName x)
-              <> HCL.pair "config"  (backendEncoder x (backendConfig x))
-               )
+        HCL.pairs ( HCL.pair "backend" (backendName x)
+                 <> HCL.pair "config"  (backendEncoder x (backendConfig x))
+                  )
 
 -- | FIXME: Document
-encodeProvider :: Provider p -> HCL.Section
+encodeProvider :: Provider p -> HCL.Encoding
 encodeProvider x =
     section TypeProvider [providerName x] $
-        object $
+        HCL.pairs $
             let Name _ alias = providerAlias x x
              in ( HCL.pair "alias" alias
                <> maybe mempty (HCL.pair "version") (providerVersion x)
@@ -94,12 +93,12 @@ encodeAlias x =
               <$ providerConfig x
 
 -- | FIXME: Document
-encodeResource :: Text -> Resource p l a -> HCL.Section
+encodeResource :: Text -> Resource p l a -> HCL.Encoding
 encodeResource name x =
     case resourceType x of
         Type kw typ ->
             section kw [typ, name] $
-                object
+                HCL.pairs
                     ( resourceEncoder x (resourceLifecycle x, resourceConfig x)
                    <> encodeAlias     (resourceProvider  x)
                    <> encodeDependsOn (resourceDependsOn x)
@@ -126,18 +125,15 @@ encodeDependsOn xs
      | otherwise       = HCL.pair "depends_on" (HashSet.map encodeName xs)
 
 -- | FIXME: Document
-encodeOutput :: HCL.ToHCL a => Output a -> HCL.Section
+encodeOutput :: HCL.ToHCL a => Output a -> HCL.Encoding
 encodeOutput (UnsafeOutput name _ expr) =
     section TypeOutput [name] $
-        object (HCL.pair "value" (HCL.toHCL expr))
+        HCL.pairs (HCL.pair "value" (HCL.toHCL expr))
 
 -- Utilities
 
-section :: Keyword -> [Text] -> HCL.Node -> HCL.Section
-section kw = HCL.Section (encodeKeyword kw)
+section :: Keyword -> [Text] -> HCL.Encoding -> HCL.Encoding
+section kw = HCL.section (encodeKeyword kw)
 
-nested :: HCL.Section -> HCL.Node
-nested = HCL.Nested
-
-object :: HCL.Series -> HCL.Node
-object = HCL.Object
+nested :: Keyword -> [Text] -> HCL.Encoding -> HCL.Encoding
+nested kw keys = HCL.nested . section kw keys

@@ -1,15 +1,9 @@
-{-# LANGUAGE UndecidableInstances #-}
-
 -- | HIL (HashiCorp Interpolation Language) is a lightweight embedded language
 -- used for configuration interpolation.
 module Terrafomo.HIL
     (
-    -- * Recusion Schemes
-      Fix   (..)
-    , cata
-
     -- * Expressions
-    , Var (..)
+      Var (..)
     , ExprF  (..)
     , Expr
 
@@ -36,9 +30,7 @@ module Terrafomo.HIL
     , unsafeErase
     ) where
 
-import Data.Bifunctor (Bifunctor (first, second))
-import Data.Function  (on)
-import Data.Hashable  (Hashable (hashWithSalt))
+import Data.Hashable  (Hashable)
 import Data.String    (IsString (fromString))
 import Data.Text.Lazy (Text)
 
@@ -46,29 +38,11 @@ import GHC.Generics (Generic)
 
 import Prelude hiding (null)
 
+import Terrafomo.Fix (Fix (Fix))
+
 import qualified Data.Aeson    as JSON
+import qualified Terrafomo.Fix as Fix
 import qualified Terrafomo.HCL as HCL
-
--- | A fix-point type used for the 'Expr' expression and recursion schemes.
-newtype Fix f = Fix { unfix :: f (Fix f) }
-
-instance Show (f (Fix f)) => Show (Fix f) where
-    showsPrec d (Fix f) =
-        showParen (d > 10) $
-            showString "Fix " . showsPrec 11 f
-
-instance Eq (f (Fix f)) => Eq (Fix f) where
-    (==) = on (==) unfix
-
-instance Ord (f (Fix f)) => Ord (Fix f) where
-    compare = on compare unfix
-
-instance Hashable (f (Fix f)) => Hashable (Fix f) where
-    hashWithSalt s = hashWithSalt s . unfix
-
--- | A catamorphism, or generalized fold.
-cata :: Functor f => (f a -> a) -> Fix f -> a
-cata psi = psi . fmap (cata psi) . unfix
 
 -- | An interpolation variable. This is paramterized over the current (remote)
 -- state thread @s@ similar to 'Control.Monad.ST'.  It can be the special
@@ -104,20 +78,14 @@ data ExprF a b r
 
 instance (Hashable a, Hashable b, Hashable r) => Hashable (ExprF a b r)
 
-instance Bifunctor (ExprF a) where
-    second  = fmap
-    first f = \case
-        Var    x     -> Var    x
-        Quote  q     -> Quote  (f q)
-        Prefix n xs  -> Prefix n xs
-        Infix  n a b -> Infix  n a b
-
 -- | The expression type is a fixed point of the polymorphic expression functor.
 --
 -- The variables are specialized to unquoted HIL 'Var' or quoted HCL
 -- 'HCL.Value's.  This allows well-typed expressions using Haskell's types and
 -- the more dubiously typed HIL expressions when necessary.
 type Expr s a = Fix (ExprF (Var s a) HCL.Encoding)
+
+type Expr s a = Free (ExprF (Var s a) HCL.Encoding)
 
 instance IsString a => IsString (Expr s a) where
     fromString = value . fromString
@@ -131,7 +99,7 @@ instance Num a => Num (Expr s a) where
     fromInteger = value . fromInteger
 
 instance HCL.ToHCL a => HCL.ToHCL (Expr s a) where
-    toHCL = cata $ \case
+    toHCL = Fix.cata $ \case
         Var    v     -> HCL.toHCL v
         Quote  q     -> q
         Prefix n xs  -> HCL.function n xs
@@ -229,7 +197,7 @@ bicata
     -> Fix (ExprF a  b)
     -> Fix (ExprF a' b')
 bicata f g =
-    cata $ \case
+    Fix.cata $ \case
         Var    a     -> f a
         Quote  b     -> g b
         Prefix n xs  -> Fix (Prefix n xs)

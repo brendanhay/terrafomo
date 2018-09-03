@@ -25,13 +25,13 @@ library:
   exposed-modules:
     - Paths_terrafomo
     - Terrafomo
+    - Terrafomo.DSL
+    - Terrafomo.Encode
     - Terrafomo.HCL
     - Terrafomo.HIL
-    - Terrafomo.Schema
-    - Terrafomo.Encode
-    - Terrafomo.Validate
-    - Terrafomo.Monad
     - Terrafomo.Lens
+    - Terrafomo.Schema
+    - Terrafomo.Validate
 
   dependencies:
     - aeson
@@ -40,11 +40,16 @@ library:
     - hashable
     - microlens
     - mmorph
+    - mtl
     - random
     - scientific
     - text
-    - transformers
     - unordered-containers
+
+    - optparse-applicative
+    - process
+
+    - free
 
 tests:
   hspec:
