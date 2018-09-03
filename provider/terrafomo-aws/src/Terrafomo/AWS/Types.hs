@@ -137,6 +137,6 @@ instance Hashable TableAttributeType
 
 instance HCL.ToHCL TableAttributeType where
     toHCL = \case
-        TypeString -> "C"
+        TypeString -> "S"
         TypeNumber -> "N"
         TypeBinary -> "B"
