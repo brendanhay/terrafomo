@@ -28,12 +28,9 @@ module Terrafomo.Docker
     -- * Settings
     , module Terrafomo.Docker.Settings
 
-    -- * Overloaded Lenses
-    , module Terrafomo.Docker.Lens
     ) where
 
 import Terrafomo.Docker.DataSources
-import Terrafomo.Docker.Lens
 import Terrafomo.Docker.Provider
 import Terrafomo.Docker.Resources
 import Terrafomo.Docker.Settings

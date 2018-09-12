@@ -28,12 +28,9 @@ module Terrafomo.Fastly
     -- * Settings
     , module Terrafomo.Fastly.Settings
 
-    -- * Overloaded Lenses
-    , module Terrafomo.Fastly.Lens
     ) where
 
 import Terrafomo.Fastly.DataSources
-import Terrafomo.Fastly.Lens
 import Terrafomo.Fastly.Provider
 import Terrafomo.Fastly.Resources
 import Terrafomo.Fastly.Settings

@@ -19,22 +19,11 @@ module Terrafomo.External
     -- * Types
     , module Terrafomo.External.Types
 
-    -- * Resources
-    , module Terrafomo.External.Resources
-
     -- * DataSources
     , module Terrafomo.External.DataSources
 
-    -- * Settings
-    , module Terrafomo.External.Settings
-
-    -- * Overloaded Lenses
-    , module Terrafomo.External.Lens
     ) where
 
 import Terrafomo.External.DataSources
-import Terrafomo.External.Lens
 import Terrafomo.External.Provider
-import Terrafomo.External.Resources
-import Terrafomo.External.Settings
 import Terrafomo.External.Types

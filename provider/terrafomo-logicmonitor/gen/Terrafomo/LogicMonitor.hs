@@ -28,12 +28,9 @@ module Terrafomo.LogicMonitor
     -- * Settings
     , module Terrafomo.LogicMonitor.Settings
 
-    -- * Overloaded Lenses
-    , module Terrafomo.LogicMonitor.Lens
     ) where
 
 import Terrafomo.LogicMonitor.DataSources
-import Terrafomo.LogicMonitor.Lens
 import Terrafomo.LogicMonitor.Provider
 import Terrafomo.LogicMonitor.Resources
 import Terrafomo.LogicMonitor.Settings

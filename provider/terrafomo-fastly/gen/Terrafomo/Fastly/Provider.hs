@@ -16,99 +16,85 @@
 --
 module Terrafomo.Fastly.Provider
     (
-    -- * Fastly Provider Datatype
-      Fastly (..)
-    , newProvider
-    , defaultProvider
-
     -- * Fastly Specific Aliases
+      Provider
     , DataSource
     , Resource
+
+    -- * Fastly Configuration
+    , currentVersion
+    , newProvider
+    , Fastly (..)
     ) where
 
-import Data.Function ((&))
-import Data.Functor  ((<$>))
-import Data.Proxy    (Proxy (Proxy))
+import Data.Function  ((&))
+import Data.Functor   ((<$>))
+import Data.Semigroup ((<>))
+import Data.Version   (Version, makeVersion, showVersion)
 
 import GHC.Base (($))
 
 import Terrafomo.Fastly.Settings
 
-import qualified Data.Hashable          as P
-import qualified Data.HashMap.Strict    as P
+import qualified Data.Functor.Const     as P
 import qualified Data.List.NonEmpty     as P
+import qualified Data.Map.Strict        as P
 import qualified Data.Maybe             as P
 import qualified Data.Text.Lazy         as P
-import qualified GHC.Generics           as P
-import qualified Lens.Micro             as P
 import qualified Prelude                as P
-import qualified Terrafomo.Fastly.Lens  as P
 import qualified Terrafomo.Fastly.Types as P
 import qualified Terrafomo.HCL          as TF
+import qualified Terrafomo.Lens         as Lens
 import qualified Terrafomo.Schema       as TF
 
-type DataSource a = TF.Resource Fastly ()               a
-type Resource   a = TF.Resource Fastly (TF.Lifecycle a) a
+type Provider   = TF.Provider Fastly
+type DataSource = TF.Resource Fastly TF.Ignored
+type Resource   = TF.Resource Fastly TF.Meta
+
+type instance TF.ProviderName Fastly = "fastly"
+
+currentVersion :: Version
+currentVersion = makeVersion [0, 3, 0]
 
 -- | The @fastly@ Terraform provider configuration.
---
--- See the <https://www.terraform.io/docs/providers/fastly/index.html terraform documentation>
--- for more information.
-data Fastly = Fastly'
-    { _apiKey  :: P.Maybe P.Text
-    -- ^ @api_key@ - (Optional)
+data Fastly = Fastly_Internal
+    { api_key  :: P.Maybe P.Text
+    -- ^ @api_key@
+    -- - (Optional)
     -- Fastly API Key from https://app.fastly.com/#account
-    --
-    , _baseUrl :: P.Maybe P.Text
-    -- ^ @base_url@ - (Optional)
+    , base_url :: P.Maybe P.Text
+    -- ^ @base_url@
+    -- - (Optional)
     -- Fastly API URL
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show)
 
-instance P.Hashable (Fastly)
-
--- | Specify a new Fastly provider configuration.
+{- | Specify a new Fastly provider configuration.
+See the <https://www.terraform.io/docs/providers/fastly/index.html terraform documentation> for more information.
+-}
 newProvider
-    :: Fastly
+    :: Provider
 newProvider =
-    Fastly'
-        { _apiKey = P.Nothing
-        , _baseUrl = P.Nothing
+    TF.Provider
+        { TF.providerVersion = P.Just ("~> " P.++ showVersion currentVersion)
+        , TF.providerConfig  =
+            (Fastly_Internal
+                { api_key = P.Nothing
+                , base_url = P.Nothing
+                })
+        , TF.providerEncoder =
+            (\Fastly_Internal{..} ->
+          P.mempty
+       <> P.maybe P.mempty (TF.pair "api_key") api_key
+       <> P.maybe P.mempty (TF.pair "base_url") base_url
+            )
         }
 
-{- | The 'Fastly' provider with absent configuration that is used
-to instantiate new 'Resource's and 'DataSource's. Provider configuration can be
-overridden on a per-resource basis by using the 'Terrafomo.provider' lens, the
-'newProvider' constructor, and any of the applicable lenses.
+instance Lens.HasField "api_key" f Provider (P.Maybe P.Text) where
+    field = Lens.providerLens P.. Lens.lens'
+        (api_key :: Fastly -> P.Maybe P.Text)
+        (\s a -> s { api_key = a } :: Fastly)
 
-For example:
-
-@
-import qualified Terrafomo as TF
-import qualified Terrafomo.Fastly.Provider as Fastly
-
-TF.newExampleResource "foo"
-    & TF.provider ?~
-          Fastly.(newProvider
-              -- Lenses
-              & Fastly.apiKey .~ Nothing -- 'P.Maybe P.Text'
-              & Fastly.baseUrl .~ Nothing -- 'P.Maybe P.Text'
-@
--}
-defaultProvider :: TF.Provider Fastly
-defaultProvider =
-    TF.defaultProvider "fastly" (P.Just "~> 0.3")
-        (\Fastly'{..} -> P.mconcat
-            [ P.maybe P.mempty (TF.pair "api_key") _apiKey
-            , P.maybe P.mempty (TF.pair "base_url") _baseUrl
-            ])
-
-instance P.HasApiKey (Fastly) (P.Maybe P.Text) where
-    apiKey =
-        P.lens (_apiKey :: Fastly -> P.Maybe P.Text)
-            (\s a -> s { _apiKey = a } :: Fastly)
-
-instance P.HasBaseUrl (Fastly) (P.Maybe P.Text) where
-    baseUrl =
-        P.lens (_baseUrl :: Fastly -> P.Maybe P.Text)
-            (\s a -> s { _baseUrl = a } :: Fastly)
+instance Lens.HasField "base_url" f Provider (P.Maybe P.Text) where
+    field = Lens.providerLens P.. Lens.lens'
+        (base_url :: Fastly -> P.Maybe P.Text)
+        (\s a -> s { base_url = a } :: Fastly)

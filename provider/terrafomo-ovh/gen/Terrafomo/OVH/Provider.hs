@@ -16,126 +16,116 @@
 --
 module Terrafomo.OVH.Provider
     (
-    -- * OVH Provider Datatype
-      OVH (..)
-    , newProvider
-    , defaultProvider
-
     -- * OVH Specific Aliases
+      Provider
     , DataSource
     , Resource
+
+    -- * OVH Configuration
+    , currentVersion
+    , newProvider
+    , OVH (..)
+    , OVH_Required (..)
     ) where
 
-import Data.Function ((&))
-import Data.Functor  ((<$>))
-import Data.Proxy    (Proxy (Proxy))
+import Data.Function  ((&))
+import Data.Functor   ((<$>))
+import Data.Semigroup ((<>))
+import Data.Version   (Version, makeVersion, showVersion)
 
 import GHC.Base (($))
 
 import Terrafomo.OVH.Settings
 
-import qualified Data.Hashable       as P
-import qualified Data.HashMap.Strict as P
+import qualified Data.Functor.Const  as P
 import qualified Data.List.NonEmpty  as P
+import qualified Data.Map.Strict     as P
 import qualified Data.Maybe          as P
 import qualified Data.Text.Lazy      as P
-import qualified GHC.Generics        as P
-import qualified Lens.Micro          as P
 import qualified Prelude             as P
 import qualified Terrafomo.HCL       as TF
-import qualified Terrafomo.OVH.Lens  as P
+import qualified Terrafomo.Lens      as Lens
 import qualified Terrafomo.OVH.Types as P
 import qualified Terrafomo.Schema    as TF
 
-type DataSource a = TF.Resource OVH ()               a
-type Resource   a = TF.Resource OVH (TF.Lifecycle a) a
+type Provider   = TF.Provider OVH
+type DataSource = TF.Resource OVH TF.Ignored
+type Resource   = TF.Resource OVH TF.Meta
+
+type instance TF.ProviderName OVH = "ovh"
+
+currentVersion :: Version
+currentVersion = makeVersion [0, 3, 0]
 
 -- | The @ovh@ Terraform provider configuration.
---
--- See the <https://www.terraform.io/docs/providers/ovh/index.html terraform documentation>
--- for more information.
-data OVH = OVH'
-    { _applicationKey    :: P.Maybe P.Text
-    -- ^ @application_key@ - (Optional)
+data OVH = OVH_Internal
+    { application_key    :: P.Maybe P.Text
+    -- ^ @application_key@
+    -- - (Optional)
     -- The OVH API Application Key.
-    --
-    , _applicationSecret :: P.Maybe P.Text
-    -- ^ @application_secret@ - (Optional)
+    , application_secret :: P.Maybe P.Text
+    -- ^ @application_secret@
+    -- - (Optional)
     -- The OVH API Application Secret.
-    --
-    , _consumerKey       :: P.Maybe P.Text
-    -- ^ @consumer_key@ - (Optional)
+    , consumer_key       :: P.Maybe P.Text
+    -- ^ @consumer_key@
+    -- - (Optional)
     -- The OVH API Consumer key.
-    --
-    , _endpoint          :: P.Text
-    -- ^ @endpoint@ - (Required)
+    , endpoint           :: P.Text
+    -- ^ @endpoint@
+    -- - (Required)
     -- The OVH API endpoint to target (ex: "ovh-eu").
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show)
 
-instance P.Hashable (OVH)
-
--- | Specify a new OVH provider configuration.
+{- | Specify a new OVH provider configuration.
+See the <https://www.terraform.io/docs/providers/ovh/index.html terraform documentation> for more information.
+-}
 newProvider
-    :: P.Text -- ^ Lens: 'P.endpoint', Field: '_endpoint', HCL: @endpoint@
-    -> OVH
-newProvider _endpoint =
-    OVH'
-        { _applicationKey = P.Nothing
-        , _applicationSecret = P.Nothing
-        , _consumerKey = P.Nothing
-        , _endpoint = _endpoint
+    :: OVH_Required -- ^ The minimal/required arguments.
+    -> Provider
+newProvider x =
+    TF.Provider
+        { TF.providerVersion = P.Just ("~> " P.++ showVersion currentVersion)
+        , TF.providerConfig  =
+            (let OVH{..} = x in OVH_Internal
+                { application_key = P.Nothing
+                , application_secret = P.Nothing
+                , consumer_key = P.Nothing
+                , endpoint = endpoint
+                })
+        , TF.providerEncoder =
+            (\OVH_Internal{..} ->
+          P.mempty
+       <> P.maybe P.mempty (TF.pair "application_key") application_key
+       <> P.maybe P.mempty (TF.pair "application_secret") application_secret
+       <> P.maybe P.mempty (TF.pair "consumer_key") consumer_key
+       <> TF.pair "endpoint" endpoint
+            )
         }
 
-{- | The 'OVH' provider with absent configuration that is used
-to instantiate new 'Resource's and 'DataSource's. Provider configuration can be
-overridden on a per-resource basis by using the 'Terrafomo.provider' lens, the
-'newProvider' constructor, and any of the applicable lenses.
+-- | The required arguments for 'newProvider'.
+data OVH_Required = OVH
+    { endpoint :: P.Text
+    -- ^ (Required)
+    -- The OVH API endpoint to target (ex: "ovh-eu").
+    } deriving (P.Show)
 
-For example:
+instance Lens.HasField "application_key" f Provider (P.Maybe P.Text) where
+    field = Lens.providerLens P.. Lens.lens'
+        (application_key :: OVH -> P.Maybe P.Text)
+        (\s a -> s { application_key = a } :: OVH)
 
-@
-import qualified Terrafomo as TF
-import qualified Terrafomo.OVH.Provider as OVH
+instance Lens.HasField "application_secret" f Provider (P.Maybe P.Text) where
+    field = Lens.providerLens P.. Lens.lens'
+        (application_secret :: OVH -> P.Maybe P.Text)
+        (\s a -> s { application_secret = a } :: OVH)
 
-TF.newExampleResource "foo"
-    & TF.provider ?~
-          OVH.(newProvider
-              -- Required arguments
-              _endpoint -- (Required) 'P.Text'
-              -- Lenses
-              & OVH.applicationKey .~ Nothing -- 'P.Maybe P.Text'
-              & OVH.applicationSecret .~ Nothing -- 'P.Maybe P.Text'
-              & OVH.consumerKey .~ Nothing -- 'P.Maybe P.Text'
-              & OVH.endpoint .~ _endpoint -- 'P.Text'
-@
--}
-defaultProvider :: TF.Provider OVH
-defaultProvider =
-    TF.defaultProvider "ovh" (P.Just "~> 0.3")
-        (\OVH'{..} -> P.mconcat
-            [ P.maybe P.mempty (TF.pair "application_key") _applicationKey
-            , P.maybe P.mempty (TF.pair "application_secret") _applicationSecret
-            , P.maybe P.mempty (TF.pair "consumer_key") _consumerKey
-            , TF.pair "endpoint" _endpoint
-            ])
+instance Lens.HasField "consumer_key" f Provider (P.Maybe P.Text) where
+    field = Lens.providerLens P.. Lens.lens'
+        (consumer_key :: OVH -> P.Maybe P.Text)
+        (\s a -> s { consumer_key = a } :: OVH)
 
-instance P.HasApplicationKey (OVH) (P.Maybe P.Text) where
-    applicationKey =
-        P.lens (_applicationKey :: OVH -> P.Maybe P.Text)
-            (\s a -> s { _applicationKey = a } :: OVH)
-
-instance P.HasApplicationSecret (OVH) (P.Maybe P.Text) where
-    applicationSecret =
-        P.lens (_applicationSecret :: OVH -> P.Maybe P.Text)
-            (\s a -> s { _applicationSecret = a } :: OVH)
-
-instance P.HasConsumerKey (OVH) (P.Maybe P.Text) where
-    consumerKey =
-        P.lens (_consumerKey :: OVH -> P.Maybe P.Text)
-            (\s a -> s { _consumerKey = a } :: OVH)
-
-instance P.HasEndpoint (OVH) (P.Text) where
-    endpoint =
-        P.lens (_endpoint :: OVH -> P.Text)
-            (\s a -> s { _endpoint = a } :: OVH)
+instance Lens.HasField "endpoint" f Provider (P.Text) where
+    field = Lens.providerLens P.. Lens.lens'
+        (endpoint :: OVH -> P.Text)
+        (\s a -> s { endpoint = a } :: OVH)

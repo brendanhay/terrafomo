@@ -10,10 +10,9 @@
 --
 module Terrafomo.AWS.DataSources
     (
-    -- * DataSources
-      module Terrafomo.AWS.DataSource01
-    , module Terrafomo.AWS.DataSource02
+      module Terrafomo.AWS.DataSources01
+    , module Terrafomo.AWS.DataSources02
     ) where
 
-import Terrafomo.AWS.DataSource01
-import Terrafomo.AWS.DataSource02
+import Terrafomo.AWS.DataSources01
+import Terrafomo.AWS.DataSources02

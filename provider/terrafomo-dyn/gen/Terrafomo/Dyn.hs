@@ -22,19 +22,8 @@ module Terrafomo.Dyn
     -- * Resources
     , module Terrafomo.Dyn.Resources
 
-    -- * DataSources
-    , module Terrafomo.Dyn.DataSources
-
-    -- * Settings
-    , module Terrafomo.Dyn.Settings
-
-    -- * Overloaded Lenses
-    , module Terrafomo.Dyn.Lens
     ) where
 
-import Terrafomo.Dyn.DataSources
-import Terrafomo.Dyn.Lens
 import Terrafomo.Dyn.Provider
 import Terrafomo.Dyn.Resources
-import Terrafomo.Dyn.Settings
 import Terrafomo.Dyn.Types

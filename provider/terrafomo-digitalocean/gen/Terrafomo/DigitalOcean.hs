@@ -28,12 +28,9 @@ module Terrafomo.DigitalOcean
     -- * Settings
     , module Terrafomo.DigitalOcean.Settings
 
-    -- * Overloaded Lenses
-    , module Terrafomo.DigitalOcean.Lens
     ) where
 
 import Terrafomo.DigitalOcean.DataSources
-import Terrafomo.DigitalOcean.Lens
 import Terrafomo.DigitalOcean.Provider
 import Terrafomo.DigitalOcean.Resources
 import Terrafomo.DigitalOcean.Settings

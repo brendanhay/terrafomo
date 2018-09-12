@@ -25,16 +25,9 @@ module Terrafomo.Gitlab
     -- * DataSources
     , module Terrafomo.Gitlab.DataSources
 
-    -- * Settings
-    , module Terrafomo.Gitlab.Settings
-
-    -- * Overloaded Lenses
-    , module Terrafomo.Gitlab.Lens
     ) where
 
 import Terrafomo.Gitlab.DataSources
-import Terrafomo.Gitlab.Lens
 import Terrafomo.Gitlab.Provider
 import Terrafomo.Gitlab.Resources
-import Terrafomo.Gitlab.Settings
 import Terrafomo.Gitlab.Types

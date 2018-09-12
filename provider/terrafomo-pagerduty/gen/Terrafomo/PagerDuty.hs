@@ -28,12 +28,9 @@ module Terrafomo.PagerDuty
     -- * Settings
     , module Terrafomo.PagerDuty.Settings
 
-    -- * Overloaded Lenses
-    , module Terrafomo.PagerDuty.Lens
     ) where
 
 import Terrafomo.PagerDuty.DataSources
-import Terrafomo.PagerDuty.Lens
 import Terrafomo.PagerDuty.Provider
 import Terrafomo.PagerDuty.Resources
 import Terrafomo.PagerDuty.Settings

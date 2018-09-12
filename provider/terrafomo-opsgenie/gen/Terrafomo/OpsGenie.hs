@@ -28,12 +28,9 @@ module Terrafomo.OpsGenie
     -- * Settings
     , module Terrafomo.OpsGenie.Settings
 
-    -- * Overloaded Lenses
-    , module Terrafomo.OpsGenie.Lens
     ) where
 
 import Terrafomo.OpsGenie.DataSources
-import Terrafomo.OpsGenie.Lens
 import Terrafomo.OpsGenie.Provider
 import Terrafomo.OpsGenie.Resources
 import Terrafomo.OpsGenie.Settings

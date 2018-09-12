@@ -28,12 +28,9 @@ module Terrafomo.Circonus
     -- * Settings
     , module Terrafomo.Circonus.Settings
 
-    -- * Overloaded Lenses
-    , module Terrafomo.Circonus.Lens
     ) where
 
 import Terrafomo.Circonus.DataSources
-import Terrafomo.Circonus.Lens
 import Terrafomo.Circonus.Provider
 import Terrafomo.Circonus.Resources
 import Terrafomo.Circonus.Settings

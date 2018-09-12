@@ -28,12 +28,9 @@ module Terrafomo.Google
     -- * Settings
     , module Terrafomo.Google.Settings
 
-    -- * Overloaded Lenses
-    , module Terrafomo.Google.Lens
     ) where
 
 import Terrafomo.Google.DataSources
-import Terrafomo.Google.Lens
 import Terrafomo.Google.Provider
 import Terrafomo.Google.Resources
 import Terrafomo.Google.Settings

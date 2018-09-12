@@ -16,112 +16,103 @@
 --
 module Terrafomo.OneAndOne.Provider
     (
-    -- * OneAndOne Provider Datatype
-      OneAndOne (..)
-    , newProvider
-    , defaultProvider
-
     -- * OneAndOne Specific Aliases
+      Provider
     , DataSource
     , Resource
+
+    -- * OneAndOne Configuration
+    , currentVersion
+    , newProvider
+    , OneAndOne (..)
+    , OneAndOne_Required (..)
     ) where
 
-import Data.Function ((&))
-import Data.Functor  ((<$>))
-import Data.Proxy    (Proxy (Proxy))
+import Data.Function  ((&))
+import Data.Functor   ((<$>))
+import Data.Semigroup ((<>))
+import Data.Version   (Version, makeVersion, showVersion)
 
 import GHC.Base (($))
 
 import Terrafomo.OneAndOne.Settings
 
-import qualified Data.Hashable             as P
-import qualified Data.HashMap.Strict       as P
+import qualified Data.Functor.Const        as P
 import qualified Data.List.NonEmpty        as P
+import qualified Data.Map.Strict           as P
 import qualified Data.Maybe                as P
 import qualified Data.Text.Lazy            as P
-import qualified GHC.Generics              as P
-import qualified Lens.Micro                as P
 import qualified Prelude                   as P
 import qualified Terrafomo.HCL             as TF
-import qualified Terrafomo.OneAndOne.Lens  as P
+import qualified Terrafomo.Lens            as Lens
 import qualified Terrafomo.OneAndOne.Types as P
 import qualified Terrafomo.Schema          as TF
 
-type DataSource a = TF.Resource OneAndOne ()               a
-type Resource   a = TF.Resource OneAndOne (TF.Lifecycle a) a
+type Provider   = TF.Provider OneAndOne
+type DataSource = TF.Resource OneAndOne TF.Ignored
+type Resource   = TF.Resource OneAndOne TF.Meta
+
+type instance TF.ProviderName OneAndOne = "oneandone"
+
+currentVersion :: Version
+currentVersion = makeVersion [1, 3, 0]
 
 -- | The @oneandone@ Terraform provider configuration.
---
--- See the <https://www.terraform.io/docs/providers/oneandone/index.html terraform documentation>
--- for more information.
-data OneAndOne = OneAndOne'
-    { _endpoint :: P.Text
-    -- ^ @endpoint@ - (Default @https://cloudpanel-api.1and1.com/v1@)
-    --
-    , _retries  :: P.Int
-    -- ^ @retries@ - (Default @50@)
-    --
-    , _token    :: P.Text
-    -- ^ @token@ - (Required)
+data OneAndOne = OneAndOne_Internal
+    { endpoint :: P.Text
+    -- ^ @endpoint@
+    -- - (Default __@https://cloudpanel-api.1and1.com/v1@__)
+    , retries  :: P.Int
+    -- ^ @retries@
+    -- - (Default __@50@__)
+    , token    :: P.Text
+    -- ^ @token@
+    -- - (Required)
     -- 1&1 token for API operations.
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show)
 
-instance P.Hashable (OneAndOne)
-
--- | Specify a new OneAndOne provider configuration.
+{- | Specify a new OneAndOne provider configuration.
+See the <https://www.terraform.io/docs/providers/oneandone/index.html terraform documentation> for more information.
+-}
 newProvider
-    :: P.Text -- ^ Lens: 'P.token', Field: '_token', HCL: @token@
-    -> OneAndOne
-newProvider _token =
-    OneAndOne'
-        { _endpoint = "https://cloudpanel-api.1and1.com/v1"
-        , _retries = 50
-        , _token = _token
+    :: OneAndOne_Required -- ^ The minimal/required arguments.
+    -> Provider
+newProvider x =
+    TF.Provider
+        { TF.providerVersion = P.Just ("~> " P.++ showVersion currentVersion)
+        , TF.providerConfig  =
+            (let OneAndOne{..} = x in OneAndOne_Internal
+                { endpoint = "https://cloudpanel-api.1and1.com/v1"
+                , retries = 50
+                , token = token
+                })
+        , TF.providerEncoder =
+            (\OneAndOne_Internal{..} ->
+          P.mempty
+       <> TF.pair "endpoint" endpoint
+       <> TF.pair "retries" retries
+       <> TF.pair "token" token
+            )
         }
 
-{- | The 'OneAndOne' provider with absent configuration that is used
-to instantiate new 'Resource's and 'DataSource's. Provider configuration can be
-overridden on a per-resource basis by using the 'Terrafomo.provider' lens, the
-'newProvider' constructor, and any of the applicable lenses.
+-- | The required arguments for 'newProvider'.
+data OneAndOne_Required = OneAndOne
+    { token :: P.Text
+    -- ^ (Required)
+    -- 1&1 token for API operations.
+    } deriving (P.Show)
 
-For example:
+instance Lens.HasField "endpoint" f Provider (P.Text) where
+    field = Lens.providerLens P.. Lens.lens'
+        (endpoint :: OneAndOne -> P.Text)
+        (\s a -> s { endpoint = a } :: OneAndOne)
 
-@
-import qualified Terrafomo as TF
-import qualified Terrafomo.OneAndOne.Provider as OneAndOne
+instance Lens.HasField "retries" f Provider (P.Int) where
+    field = Lens.providerLens P.. Lens.lens'
+        (retries :: OneAndOne -> P.Int)
+        (\s a -> s { retries = a } :: OneAndOne)
 
-TF.newExampleResource "foo"
-    & TF.provider ?~
-          OneAndOne.(newProvider
-              -- Required arguments
-              _token -- (Required) 'P.Text'
-              -- Lenses
-              & OneAndOne.endpoint .~ "https://cloudpanel-api.1and1.com/v1" -- 'P.Text'
-              & OneAndOne.retries .~ 50 -- 'P.Int'
-              & OneAndOne.token .~ _token -- 'P.Text'
-@
--}
-defaultProvider :: TF.Provider OneAndOne
-defaultProvider =
-    TF.defaultProvider "oneandone" (P.Just "~> 1.2")
-        (\OneAndOne'{..} -> P.mconcat
-            [ TF.pair "endpoint" _endpoint
-            , TF.pair "retries" _retries
-            , TF.pair "token" _token
-            ])
-
-instance P.HasEndpoint (OneAndOne) (P.Text) where
-    endpoint =
-        P.lens (_endpoint :: OneAndOne -> P.Text)
-            (\s a -> s { _endpoint = a } :: OneAndOne)
-
-instance P.HasRetries (OneAndOne) (P.Int) where
-    retries =
-        P.lens (_retries :: OneAndOne -> P.Int)
-            (\s a -> s { _retries = a } :: OneAndOne)
-
-instance P.HasToken (OneAndOne) (P.Text) where
-    token =
-        P.lens (_token :: OneAndOne -> P.Text)
-            (\s a -> s { _token = a } :: OneAndOne)
+instance Lens.HasField "token" f Provider (P.Text) where
+    field = Lens.providerLens P.. Lens.lens'
+        (token :: OneAndOne -> P.Text)
+        (\s a -> s { token = a } :: OneAndOne)

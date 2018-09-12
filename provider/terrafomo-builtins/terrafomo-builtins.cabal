@@ -1,0 +1,80 @@
+cabal-version:  2.2
+name:           terrafomo-builtins
+category:       Language, Cloud
+version:        0.2.0.0
+license:        MPL-2.0
+author:         Brendan Hay
+maintainer:     Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
+stability:      provisional
+homepage:       https://github.com/brendanhay/terrafomo
+bug-reports:    https://github.com/brendanhay/terrafomo/issues
+copyright:      Copyright (c) 2017-2018 Brendan Hay
+build-type:     Simple
+synopsis:       Pending - builtins - 1.0.0
+description:    Pending
+
+source-repository head
+    type: git
+    location: https://github.com/brendanhay/terrafomo
+    subdir: provider/terrafomo-builtins
+
+library
+    default-language: Haskell2010
+    ghc-options:
+        -Wall
+        -Wincomplete-uni-patterns
+        -Wincomplete-record-updates
+        -Wcompat
+        -Wnoncanonical-monad-instances
+        -Wnoncanonical-monadfail-instances
+    default-extensions:
+        BangPatterns
+        ConstraintKinds
+        DataKinds
+        DefaultSignatures
+        DeriveFoldable
+        DeriveFunctor
+        DeriveGeneric
+        DeriveTraversable
+        DuplicateRecordFields
+        ExplicitNamespaces
+        FlexibleContexts
+        FlexibleInstances
+        FunctionalDependencies
+        GADTs
+        GeneralizedNewtypeDeriving
+        InstanceSigs
+        KindSignatures
+        LambdaCase
+        MagicHash
+        MultiParamTypeClasses
+        MultiWayIf
+        NamedFieldPuns
+        OverloadedStrings
+        PatternSynonyms
+        RankNTypes
+        ScopedTypeVariables
+        StandaloneDeriving
+        TupleSections
+        TypeApplications
+        TypeFamilies
+        TypeOperators
+        ViewPatterns
+    hs-source-dirs: src gen
+    exposed-modules:
+        Terrafomo.Archive
+        Terrafomo.External
+        Terrafomo.HTTP
+        Terrafomo.Local
+        Terrafomo.Null
+        Terrafomo.Random
+        Terrafomo.TLS
+        Terrafomo.Template
+    other-modules:
+    reexported-modules:
+        terrafomo:Terrafomo, terrafomo:Terrafomo.Lens.Labels
+    build-depends:
+        base >= 4.10 && < 5,
+        terrafomo ^>= 0.1.0.0,
+        text,
+        containers,

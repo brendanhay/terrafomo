@@ -22,19 +22,8 @@ module Terrafomo.Random
     -- * Resources
     , module Terrafomo.Random.Resources
 
-    -- * DataSources
-    , module Terrafomo.Random.DataSources
-
-    -- * Settings
-    , module Terrafomo.Random.Settings
-
-    -- * Overloaded Lenses
-    , module Terrafomo.Random.Lens
     ) where
 
-import Terrafomo.Random.DataSources
-import Terrafomo.Random.Lens
 import Terrafomo.Random.Provider
 import Terrafomo.Random.Resources
-import Terrafomo.Random.Settings
 import Terrafomo.Random.Types

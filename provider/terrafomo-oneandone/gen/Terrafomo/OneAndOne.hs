@@ -28,12 +28,9 @@ module Terrafomo.OneAndOne
     -- * Settings
     , module Terrafomo.OneAndOne.Settings
 
-    -- * Overloaded Lenses
-    , module Terrafomo.OneAndOne.Lens
     ) where
 
 import Terrafomo.OneAndOne.DataSources
-import Terrafomo.OneAndOne.Lens
 import Terrafomo.OneAndOne.Provider
 import Terrafomo.OneAndOne.Resources
 import Terrafomo.OneAndOne.Settings

@@ -22,18 +22,11 @@ module Terrafomo.Cobbler
     -- * Resources
     , module Terrafomo.Cobbler.Resources
 
-    -- * DataSources
-    , module Terrafomo.Cobbler.DataSources
-
     -- * Settings
     , module Terrafomo.Cobbler.Settings
 
-    -- * Overloaded Lenses
-    , module Terrafomo.Cobbler.Lens
     ) where
 
-import Terrafomo.Cobbler.DataSources
-import Terrafomo.Cobbler.Lens
 import Terrafomo.Cobbler.Provider
 import Terrafomo.Cobbler.Resources
 import Terrafomo.Cobbler.Settings

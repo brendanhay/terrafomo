@@ -22,18 +22,11 @@ module Terrafomo.VCloudDirector
     -- * Resources
     , module Terrafomo.VCloudDirector.Resources
 
-    -- * DataSources
-    , module Terrafomo.VCloudDirector.DataSources
-
     -- * Settings
     , module Terrafomo.VCloudDirector.Settings
 
-    -- * Overloaded Lenses
-    , module Terrafomo.VCloudDirector.Lens
     ) where
 
-import Terrafomo.VCloudDirector.DataSources
-import Terrafomo.VCloudDirector.Lens
 import Terrafomo.VCloudDirector.Provider
 import Terrafomo.VCloudDirector.Resources
 import Terrafomo.VCloudDirector.Settings

@@ -22,18 +22,11 @@ module Terrafomo.Grafana
     -- * Resources
     , module Terrafomo.Grafana.Resources
 
-    -- * DataSources
-    , module Terrafomo.Grafana.DataSources
-
     -- * Settings
     , module Terrafomo.Grafana.Settings
 
-    -- * Overloaded Lenses
-    , module Terrafomo.Grafana.Lens
     ) where
 
-import Terrafomo.Grafana.DataSources
-import Terrafomo.Grafana.Lens
 import Terrafomo.Grafana.Provider
 import Terrafomo.Grafana.Resources
 import Terrafomo.Grafana.Settings

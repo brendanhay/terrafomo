@@ -28,12 +28,9 @@ module Terrafomo.AzureRM
     -- * Settings
     , module Terrafomo.AzureRM.Settings
 
-    -- * Overloaded Lenses
-    , module Terrafomo.AzureRM.Lens
     ) where
 
 import Terrafomo.AzureRM.DataSources
-import Terrafomo.AzureRM.Lens
 import Terrafomo.AzureRM.Provider
 import Terrafomo.AzureRM.Resources
 import Terrafomo.AzureRM.Settings

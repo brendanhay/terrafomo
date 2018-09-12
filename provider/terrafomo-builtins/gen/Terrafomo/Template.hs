@@ -28,12 +28,9 @@ module Terrafomo.Template
     -- * Settings
     , module Terrafomo.Template.Settings
 
-    -- * Overloaded Lenses
-    , module Terrafomo.Template.Lens
     ) where
 
 import Terrafomo.Template.DataSources
-import Terrafomo.Template.Lens
 import Terrafomo.Template.Provider
 import Terrafomo.Template.Resources
 import Terrafomo.Template.Settings

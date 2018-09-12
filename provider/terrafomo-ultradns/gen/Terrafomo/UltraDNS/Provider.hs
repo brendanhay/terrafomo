@@ -16,116 +16,108 @@
 --
 module Terrafomo.UltraDNS.Provider
     (
-    -- * UltraDNS Provider Datatype
-      UltraDNS (..)
-    , newProvider
-    , defaultProvider
-
     -- * UltraDNS Specific Aliases
+      Provider
     , DataSource
     , Resource
+
+    -- * UltraDNS Configuration
+    , currentVersion
+    , newProvider
+    , UltraDNS (..)
+    , UltraDNS_Required (..)
     ) where
 
-import Data.Function ((&))
-import Data.Functor  ((<$>))
-import Data.Proxy    (Proxy (Proxy))
+import Data.Function  ((&))
+import Data.Functor   ((<$>))
+import Data.Semigroup ((<>))
+import Data.Version   (Version, makeVersion, showVersion)
 
 import GHC.Base (($))
 
 import Terrafomo.UltraDNS.Settings
 
-import qualified Data.Hashable            as P
-import qualified Data.HashMap.Strict      as P
+import qualified Data.Functor.Const       as P
 import qualified Data.List.NonEmpty       as P
+import qualified Data.Map.Strict          as P
 import qualified Data.Maybe               as P
 import qualified Data.Text.Lazy           as P
-import qualified GHC.Generics             as P
-import qualified Lens.Micro               as P
 import qualified Prelude                  as P
 import qualified Terrafomo.HCL            as TF
+import qualified Terrafomo.Lens           as Lens
 import qualified Terrafomo.Schema         as TF
-import qualified Terrafomo.UltraDNS.Lens  as P
 import qualified Terrafomo.UltraDNS.Types as P
 
-type DataSource a = TF.Resource UltraDNS ()               a
-type Resource   a = TF.Resource UltraDNS (TF.Lifecycle a) a
+type Provider   = TF.Provider UltraDNS
+type DataSource = TF.Resource UltraDNS TF.Ignored
+type Resource   = TF.Resource UltraDNS TF.Meta
+
+type instance TF.ProviderName UltraDNS = "ultradns"
+
+currentVersion :: Version
+currentVersion = makeVersion [0, 1, 0]
 
 -- | The @ultradns@ Terraform provider configuration.
---
--- See the <https://www.terraform.io/docs/providers/ultradns/index.html terraform documentation>
--- for more information.
-data UltraDNS = UltraDNS'
-    { _baseurl  :: P.Text
-    -- ^ @baseurl@ - (Default @https://restapi.ultradns.com/@)
+data UltraDNS = UltraDNS_Internal
+    { baseurl  :: P.Text
+    -- ^ @baseurl@
+    -- - (Default __@https://restapi.ultradns.com/@__)
     -- UltraDNS Base URL
-    --
-    , _password :: P.Text
-    -- ^ @password@ - (Required)
+    , password :: P.Text
+    -- ^ @password@
+    -- - (Required)
     -- UltraDNS User Password
-    --
-    , _username :: P.Text
-    -- ^ @username@ - (Required)
+    , username :: P.Text
+    -- ^ @username@
+    -- - (Required)
     -- UltraDNS Username.
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show)
 
-instance P.Hashable (UltraDNS)
-
--- | Specify a new UltraDNS provider configuration.
+{- | Specify a new UltraDNS provider configuration.
+See the <https://www.terraform.io/docs/providers/ultradns/index.html terraform documentation> for more information.
+-}
 newProvider
-    :: P.Text -- ^ Lens: 'P.password', Field: '_password', HCL: @password@
-    -> P.Text -- ^ Lens: 'P.username', Field: '_username', HCL: @username@
-    -> UltraDNS
-newProvider _password _username =
-    UltraDNS'
-        { _baseurl = "https://restapi.ultradns.com/"
-        , _password = _password
-        , _username = _username
+    :: UltraDNS_Required -- ^ The minimal/required arguments.
+    -> Provider
+newProvider x =
+    TF.Provider
+        { TF.providerVersion = P.Just ("~> " P.++ showVersion currentVersion)
+        , TF.providerConfig  =
+            (let UltraDNS{..} = x in UltraDNS_Internal
+                { baseurl = "https://restapi.ultradns.com/"
+                , password = password
+                , username = username
+                })
+        , TF.providerEncoder =
+            (\UltraDNS_Internal{..} ->
+          P.mempty
+       <> TF.pair "baseurl" baseurl
+       <> TF.pair "password" password
+       <> TF.pair "username" username
+            )
         }
 
-{- | The 'UltraDNS' provider with absent configuration that is used
-to instantiate new 'Resource's and 'DataSource's. Provider configuration can be
-overridden on a per-resource basis by using the 'Terrafomo.provider' lens, the
-'newProvider' constructor, and any of the applicable lenses.
+-- | The required arguments for 'newProvider'.
+data UltraDNS_Required = UltraDNS
+    { password :: P.Text
+    -- ^ (Required)
+    -- UltraDNS User Password
+    , username :: P.Text
+    -- ^ (Required)
+    -- UltraDNS Username.
+    } deriving (P.Show)
 
-For example:
+instance Lens.HasField "baseurl" f Provider (P.Text) where
+    field = Lens.providerLens P.. Lens.lens'
+        (baseurl :: UltraDNS -> P.Text)
+        (\s a -> s { baseurl = a } :: UltraDNS)
 
-@
-import qualified Terrafomo as TF
-import qualified Terrafomo.UltraDNS.Provider as UltraDNS
+instance Lens.HasField "password" f Provider (P.Text) where
+    field = Lens.providerLens P.. Lens.lens'
+        (password :: UltraDNS -> P.Text)
+        (\s a -> s { password = a } :: UltraDNS)
 
-TF.newExampleResource "foo"
-    & TF.provider ?~
-          UltraDNS.(newProvider
-              -- Required arguments
-              _password -- (Required) 'P.Text'
-              _username -- (Required) 'P.Text'
-              -- Lenses
-              & UltraDNS.baseurl .~ "https://restapi.ultradns.com/" -- 'P.Text'
-              & UltraDNS.password .~ _password -- 'P.Text'
-              & UltraDNS.username .~ _username -- 'P.Text'
-@
--}
-defaultProvider :: TF.Provider UltraDNS
-defaultProvider =
-    TF.defaultProvider "ultradns" (P.Just "~> 0.1")
-        (\UltraDNS'{..} -> P.mconcat
-            [ TF.pair "baseurl" _baseurl
-            , TF.pair "password" _password
-            , TF.pair "username" _username
-            ])
-
-instance P.HasBaseurl (UltraDNS) (P.Text) where
-    baseurl =
-        P.lens (_baseurl :: UltraDNS -> P.Text)
-            (\s a -> s { _baseurl = a } :: UltraDNS)
-
-instance P.HasPassword (UltraDNS) (P.Text) where
-    password =
-        P.lens (_password :: UltraDNS -> P.Text)
-            (\s a -> s { _password = a } :: UltraDNS)
-
-instance P.HasUsername (UltraDNS) (P.Text) where
-    username =
-        P.lens (_username :: UltraDNS -> P.Text)
-            (\s a -> s { _username = a } :: UltraDNS)
+instance Lens.HasField "username" f Provider (P.Text) where
+    field = Lens.providerLens P.. Lens.lens'
+        (username :: UltraDNS -> P.Text)
+        (\s a -> s { username = a } :: UltraDNS)

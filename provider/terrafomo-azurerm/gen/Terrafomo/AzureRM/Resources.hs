@@ -10,10 +10,9 @@
 --
 module Terrafomo.AzureRM.Resources
     (
-    -- * Resources
-      module Terrafomo.AzureRM.Resource01
-    , module Terrafomo.AzureRM.Resource02
+      module Terrafomo.AzureRM.Resources01
+    , module Terrafomo.AzureRM.Resources02
     ) where
 
-import Terrafomo.AzureRM.Resource01
-import Terrafomo.AzureRM.Resource02
+import Terrafomo.AzureRM.Resources01
+import Terrafomo.AzureRM.Resources02

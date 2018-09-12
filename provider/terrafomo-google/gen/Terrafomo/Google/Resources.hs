@@ -10,10 +10,9 @@
 --
 module Terrafomo.Google.Resources
     (
-    -- * Resources
-      module Terrafomo.Google.Resource01
-    , module Terrafomo.Google.Resource02
+      module Terrafomo.Google.Resources01
+    , module Terrafomo.Google.Resources02
     ) where
 
-import Terrafomo.Google.Resource01
-import Terrafomo.Google.Resource02
+import Terrafomo.Google.Resources01
+import Terrafomo.Google.Resources02

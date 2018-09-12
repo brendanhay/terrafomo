@@ -16,9 +16,4 @@ module Terrafomo.AzureRM.Types where
 
 -- import Formatting (Format, (%))
 
--- import Terrafomo.AzureRM.Lens
--- import qualified Terrafomo.Attribute as TF
--- import qualified Terrafomo.HCL as TF
--- import qualified Terrafomo.Name as TF
--- import qualified Terrafomo.Provider as TF
 -- import qualified Terrafomo.Schema as TF

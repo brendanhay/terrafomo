@@ -1,0 +1,97 @@
+cabal-version:  2.2
+name:           terrafomo-aws
+category:       Language, Cloud
+version:        0.2.37.0
+license:        MPL-2.0
+author:         Brendan Hay
+maintainer:     Brendan Hay <brendan.g.hay+terrafomo@gmail.com>
+stability:      provisional
+homepage:       https://github.com/brendanhay/terrafomo
+bug-reports:    https://github.com/brendanhay/terrafomo/issues
+copyright:      Copyright (c) 2017-2018 Brendan Hay
+build-type:     Simple
+synopsis:       Pending - aws - 1.37.0
+description:    Pending
+
+source-repository head
+    type: git
+    location: https://github.com/brendanhay/terrafomo
+    subdir: provider/terrafomo-aws
+
+library
+    default-language: Haskell2010
+    ghc-options:
+        -Wall
+        -Wincomplete-uni-patterns
+        -Wincomplete-record-updates
+        -Wcompat
+        -Wnoncanonical-monad-instances
+        -Wnoncanonical-monadfail-instances
+    default-extensions:
+        BangPatterns
+        ConstraintKinds
+        DataKinds
+        DefaultSignatures
+        DeriveFoldable
+        DeriveFunctor
+        DeriveGeneric
+        DeriveTraversable
+        DuplicateRecordFields
+        ExplicitNamespaces
+        FlexibleContexts
+        FlexibleInstances
+        FunctionalDependencies
+        GADTs
+        GeneralizedNewtypeDeriving
+        InstanceSigs
+        KindSignatures
+        LambdaCase
+        MagicHash
+        MultiParamTypeClasses
+        MultiWayIf
+        NamedFieldPuns
+        OverloadedStrings
+        PatternSynonyms
+        RankNTypes
+        ScopedTypeVariables
+        StandaloneDeriving
+        TupleSections
+        TypeApplications
+        TypeFamilies
+        TypeOperators
+        ViewPatterns
+    hs-source-dirs: src gen
+    exposed-modules:
+        Terrafomo.AWS
+        Terrafomo.AWS.DataSources
+        Terrafomo.AWS.Provider
+        Terrafomo.AWS.Resources
+        Terrafomo.AWS.Settings
+        Terrafomo.AWS.Types
+    other-modules:
+        Terrafomo.AWS.DataSources01
+        Terrafomo.AWS.DataSources02
+        Terrafomo.AWS.Resources01
+        Terrafomo.AWS.Resources02
+        Terrafomo.AWS.Resources03
+        Terrafomo.AWS.Resources04
+        Terrafomo.AWS.Resources05
+        Terrafomo.AWS.Resources06
+        Terrafomo.AWS.Resources07
+        Terrafomo.AWS.Resources08
+        Terrafomo.AWS.Settings01
+        Terrafomo.AWS.Settings02
+        Terrafomo.AWS.Settings03
+        Terrafomo.AWS.Settings04
+        Terrafomo.AWS.Settings05
+    reexported-modules:
+        terrafomo:Terrafomo, terrafomo:Terrafomo.Lens.Labels
+    build-depends:
+        amazonka-core,
+        amazonka-iam-policy ^>= 0.0.4,
+        base >= 4.10 && < 5,
+        containers,
+        formatting,
+        iproute,
+        terrafomo ^>= 0.1.0.0,
+        text

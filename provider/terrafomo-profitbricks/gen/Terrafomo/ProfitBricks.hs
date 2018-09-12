@@ -28,12 +28,9 @@ module Terrafomo.ProfitBricks
     -- * Settings
     , module Terrafomo.ProfitBricks.Settings
 
-    -- * Overloaded Lenses
-    , module Terrafomo.ProfitBricks.Lens
     ) where
 
 import Terrafomo.ProfitBricks.DataSources
-import Terrafomo.ProfitBricks.Lens
 import Terrafomo.ProfitBricks.Provider
 import Terrafomo.ProfitBricks.Resources
 import Terrafomo.ProfitBricks.Settings

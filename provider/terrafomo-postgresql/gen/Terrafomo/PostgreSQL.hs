@@ -22,18 +22,11 @@ module Terrafomo.PostgreSQL
     -- * Resources
     , module Terrafomo.PostgreSQL.Resources
 
-    -- * DataSources
-    , module Terrafomo.PostgreSQL.DataSources
-
     -- * Settings
     , module Terrafomo.PostgreSQL.Settings
 
-    -- * Overloaded Lenses
-    , module Terrafomo.PostgreSQL.Lens
     ) where
 
-import Terrafomo.PostgreSQL.DataSources
-import Terrafomo.PostgreSQL.Lens
 import Terrafomo.PostgreSQL.Provider
 import Terrafomo.PostgreSQL.Resources
 import Terrafomo.PostgreSQL.Settings

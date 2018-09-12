@@ -16,113 +16,102 @@
 --
 module Terrafomo.MySQL.Provider
     (
-    -- * MySQL Provider Datatype
-      MySQL (..)
-    , newProvider
-    , defaultProvider
-
     -- * MySQL Specific Aliases
+      Provider
     , DataSource
     , Resource
+
+    -- * MySQL Configuration
+    , currentVersion
+    , newProvider
+    , MySQL (..)
+    , MySQL_Required (..)
     ) where
 
-import Data.Function ((&))
-import Data.Functor  ((<$>))
-import Data.Proxy    (Proxy (Proxy))
+import Data.Function  ((&))
+import Data.Functor   ((<$>))
+import Data.Semigroup ((<>))
+import Data.Version   (Version, makeVersion, showVersion)
 
 import GHC.Base (($))
 
-import Terrafomo.MySQL.Settings
 
-import qualified Data.Hashable         as P
-import qualified Data.HashMap.Strict   as P
+import qualified Data.Functor.Const    as P
 import qualified Data.List.NonEmpty    as P
+import qualified Data.Map.Strict       as P
 import qualified Data.Maybe            as P
 import qualified Data.Text.Lazy        as P
-import qualified GHC.Generics          as P
-import qualified Lens.Micro            as P
 import qualified Prelude               as P
 import qualified Terrafomo.HCL         as TF
-import qualified Terrafomo.MySQL.Lens  as P
+import qualified Terrafomo.Lens        as Lens
 import qualified Terrafomo.MySQL.Types as P
 import qualified Terrafomo.Schema      as TF
 
-type DataSource a = TF.Resource MySQL ()               a
-type Resource   a = TF.Resource MySQL (TF.Lifecycle a) a
+type Provider   = TF.Provider MySQL
+type DataSource = TF.Resource MySQL TF.Ignored
+type Resource   = TF.Resource MySQL TF.Meta
+
+type instance TF.ProviderName MySQL = "mysql"
+
+currentVersion :: Version
+currentVersion = makeVersion [1, 1, 0]
 
 -- | The @mysql@ Terraform provider configuration.
---
--- See the <https://www.terraform.io/docs/providers/mysql/index.html terraform documentation>
--- for more information.
-data MySQL = MySQL'
-    { _endpoint :: P.Text
-    -- ^ @endpoint@ - (Required)
-    --
-    , _password :: P.Maybe P.Text
-    -- ^ @password@ - (Optional)
-    --
-    , _username :: P.Text
-    -- ^ @username@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
+data MySQL = MySQL_Internal
+    { endpoint :: P.Text
+    -- ^ @endpoint@
+    -- - (Required)
+    , password :: P.Maybe P.Text
+    -- ^ @password@
+    -- - (Optional)
+    , username :: P.Text
+    -- ^ @username@
+    -- - (Required)
+    } deriving (P.Show)
 
-instance P.Hashable (MySQL)
-
--- | Specify a new MySQL provider configuration.
+{- | Specify a new MySQL provider configuration.
+See the <https://www.terraform.io/docs/providers/mysql/index.html terraform documentation> for more information.
+-}
 newProvider
-    :: P.Text -- ^ Lens: 'P.endpoint', Field: '_endpoint', HCL: @endpoint@
-    -> P.Text -- ^ Lens: 'P.username', Field: '_username', HCL: @username@
-    -> MySQL
-newProvider _endpoint _username =
-    MySQL'
-        { _endpoint = _endpoint
-        , _password = P.Nothing
-        , _username = _username
+    :: MySQL_Required -- ^ The minimal/required arguments.
+    -> Provider
+newProvider x =
+    TF.Provider
+        { TF.providerVersion = P.Just ("~> " P.++ showVersion currentVersion)
+        , TF.providerConfig  =
+            (let MySQL{..} = x in MySQL_Internal
+                { endpoint = endpoint
+                , password = P.Nothing
+                , username = username
+                })
+        , TF.providerEncoder =
+            (\MySQL_Internal{..} ->
+          P.mempty
+       <> TF.pair "endpoint" endpoint
+       <> P.maybe P.mempty (TF.pair "password") password
+       <> TF.pair "username" username
+            )
         }
 
-{- | The 'MySQL' provider with absent configuration that is used
-to instantiate new 'Resource's and 'DataSource's. Provider configuration can be
-overridden on a per-resource basis by using the 'Terrafomo.provider' lens, the
-'newProvider' constructor, and any of the applicable lenses.
+-- | The required arguments for 'newProvider'.
+data MySQL_Required = MySQL
+    { endpoint :: P.Text
+    -- ^ (Required)
+    , username :: P.Text
+    -- ^ (Required)
+    } deriving (P.Show)
 
-For example:
+instance Lens.HasField "endpoint" f Provider (P.Text) where
+    field = Lens.providerLens P.. Lens.lens'
+        (endpoint :: MySQL -> P.Text)
+        (\s a -> s { endpoint = a } :: MySQL)
 
-@
-import qualified Terrafomo as TF
-import qualified Terrafomo.MySQL.Provider as MySQL
+instance Lens.HasField "password" f Provider (P.Maybe P.Text) where
+    field = Lens.providerLens P.. Lens.lens'
+        (password :: MySQL -> P.Maybe P.Text)
+        (\s a -> s { password = a } :: MySQL)
 
-TF.newExampleResource "foo"
-    & TF.provider ?~
-          MySQL.(newProvider
-              -- Required arguments
-              _endpoint -- (Required) 'P.Text'
-              _username -- (Required) 'P.Text'
-              -- Lenses
-              & MySQL.endpoint .~ _endpoint -- 'P.Text'
-              & MySQL.password .~ Nothing -- 'P.Maybe P.Text'
-              & MySQL.username .~ _username -- 'P.Text'
-@
--}
-defaultProvider :: TF.Provider MySQL
-defaultProvider =
-    TF.defaultProvider "mysql" (P.Just "~> 1.1")
-        (\MySQL'{..} -> P.mconcat
-            [ TF.pair "endpoint" _endpoint
-            , P.maybe P.mempty (TF.pair "password") _password
-            , TF.pair "username" _username
-            ])
-
-instance P.HasEndpoint (MySQL) (P.Text) where
-    endpoint =
-        P.lens (_endpoint :: MySQL -> P.Text)
-            (\s a -> s { _endpoint = a } :: MySQL)
-
-instance P.HasPassword (MySQL) (P.Maybe P.Text) where
-    password =
-        P.lens (_password :: MySQL -> P.Maybe P.Text)
-            (\s a -> s { _password = a } :: MySQL)
-
-instance P.HasUsername (MySQL) (P.Text) where
-    username =
-        P.lens (_username :: MySQL -> P.Text)
-            (\s a -> s { _username = a } :: MySQL)
+instance Lens.HasField "username" f Provider (P.Text) where
+    field = Lens.providerLens P.. Lens.lens'
+        (username :: MySQL -> P.Text)
+        (\s a -> s { username = a } :: MySQL)

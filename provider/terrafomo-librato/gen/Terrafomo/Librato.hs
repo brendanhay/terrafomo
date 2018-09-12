@@ -22,18 +22,11 @@ module Terrafomo.Librato
     -- * Resources
     , module Terrafomo.Librato.Resources
 
-    -- * DataSources
-    , module Terrafomo.Librato.DataSources
-
     -- * Settings
     , module Terrafomo.Librato.Settings
 
-    -- * Overloaded Lenses
-    , module Terrafomo.Librato.Lens
     ) where
 
-import Terrafomo.Librato.DataSources
-import Terrafomo.Librato.Lens
 import Terrafomo.Librato.Provider
 import Terrafomo.Librato.Resources
 import Terrafomo.Librato.Settings

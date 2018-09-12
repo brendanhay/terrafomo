@@ -16,200 +16,185 @@
 --
 module Terrafomo.VSphere.Provider
     (
-    -- * VSphere Provider Datatype
-      VSphere (..)
-    , newProvider
-    , defaultProvider
-
     -- * VSphere Specific Aliases
+      Provider
     , DataSource
     , Resource
+
+    -- * VSphere Configuration
+    , currentVersion
+    , newProvider
+    , VSphere (..)
+    , VSphere_Required (..)
     ) where
 
-import Data.Function ((&))
-import Data.Functor  ((<$>))
-import Data.Proxy    (Proxy (Proxy))
+import Data.Function  ((&))
+import Data.Functor   ((<$>))
+import Data.Semigroup ((<>))
+import Data.Version   (Version, makeVersion, showVersion)
 
 import GHC.Base (($))
 
 import Terrafomo.VSphere.Settings
 
-import qualified Data.Hashable           as P
-import qualified Data.HashMap.Strict     as P
+import qualified Data.Functor.Const      as P
 import qualified Data.List.NonEmpty      as P
+import qualified Data.Map.Strict         as P
 import qualified Data.Maybe              as P
 import qualified Data.Text.Lazy          as P
-import qualified GHC.Generics            as P
-import qualified Lens.Micro              as P
 import qualified Prelude                 as P
 import qualified Terrafomo.HCL           as TF
+import qualified Terrafomo.Lens          as Lens
 import qualified Terrafomo.Schema        as TF
-import qualified Terrafomo.VSphere.Lens  as P
 import qualified Terrafomo.VSphere.Types as P
 
-type DataSource a = TF.Resource VSphere ()               a
-type Resource   a = TF.Resource VSphere (TF.Lifecycle a) a
+type Provider   = TF.Provider VSphere
+type DataSource = TF.Resource VSphere TF.Ignored
+type Resource   = TF.Resource VSphere TF.Meta
+
+type instance TF.ProviderName VSphere = "vsphere"
+
+currentVersion :: Version
+currentVersion = makeVersion [1, 8, 1]
 
 -- | The @vsphere@ Terraform provider configuration.
---
--- See the <https://www.terraform.io/docs/providers/vsphere/index.html terraform documentation>
--- for more information.
-data VSphere = VSphere'
-    { _allowUnverifiedSsl :: P.Maybe P.Bool
-    -- ^ @allow_unverified_ssl@ - (Optional)
+data VSphere = VSphere_Internal
+    { allow_unverified_ssl  :: P.Maybe P.Bool
+    -- ^ @allow_unverified_ssl@
+    -- - (Optional)
     -- If set, VMware vSphere client will permit unverifiable SSL certificates.
-    --
-    , _clientDebug        :: P.Maybe P.Bool
-    -- ^ @client_debug@ - (Optional)
+    , client_debug          :: P.Maybe P.Bool
+    -- ^ @client_debug@
+    -- - (Optional)
     -- Govmomi debug
-    --
-    , _clientDebugPath    :: P.Maybe P.Text
-    -- ^ @client_debug_path@ - (Optional)
+    , client_debug_path     :: P.Maybe P.Text
+    -- ^ @client_debug_path@
+    -- - (Optional)
     -- Govmomi debug path for debug
-    --
-    , _clientDebugPathRun :: P.Maybe P.Text
-    -- ^ @client_debug_path_run@ - (Optional)
+    , client_debug_path_run :: P.Maybe P.Text
+    -- ^ @client_debug_path_run@
+    -- - (Optional)
     -- Govmomi debug path for a single run
-    --
-    , _password           :: P.Text
-    -- ^ @password@ - (Required)
+    , password              :: P.Text
+    -- ^ @password@
+    -- - (Required)
     -- The user password for vSphere API operations.
-    --
-    , _persistSession     :: P.Maybe P.Bool
-    -- ^ @persist_session@ - (Optional)
+    , persist_session       :: P.Maybe P.Bool
+    -- ^ @persist_session@
+    -- - (Optional)
     -- Persist vSphere client sessions to disk
-    --
-    , _restSessionPath    :: P.Maybe P.Text
-    -- ^ @rest_session_path@ - (Optional)
+    , rest_session_path     :: P.Maybe P.Text
+    -- ^ @rest_session_path@
+    -- - (Optional)
     -- The directory to save vSphere REST API sessions to
-    --
-    , _user               :: P.Text
-    -- ^ @user@ - (Required)
+    , user                  :: P.Text
+    -- ^ @user@
+    -- - (Required)
     -- The user name for vSphere API operations.
-    --
-    , _vimSessionPath     :: P.Maybe P.Text
-    -- ^ @vim_session_path@ - (Optional)
+    , vim_session_path      :: P.Maybe P.Text
+    -- ^ @vim_session_path@
+    -- - (Optional)
     -- The directory to save vSphere SOAP API sessions to
-    --
-    , _vsphereServer      :: P.Maybe P.Text
-    -- ^ @vsphere_server@ - (Optional)
+    , vsphere_server        :: P.Maybe P.Text
+    -- ^ @vsphere_server@
+    -- - (Optional)
     -- The vSphere Server name for vSphere API operations.
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show)
 
-instance P.Hashable (VSphere)
-
--- | Specify a new VSphere provider configuration.
+{- | Specify a new VSphere provider configuration.
+See the <https://www.terraform.io/docs/providers/vsphere/index.html terraform documentation> for more information.
+-}
 newProvider
-    :: P.Text -- ^ Lens: 'P.password', Field: '_password', HCL: @password@
-    -> P.Text -- ^ Lens: 'P.user', Field: '_user', HCL: @user@
-    -> VSphere
-newProvider _password _user =
-    VSphere'
-        { _allowUnverifiedSsl = P.Nothing
-        , _clientDebug = P.Nothing
-        , _clientDebugPath = P.Nothing
-        , _clientDebugPathRun = P.Nothing
-        , _password = _password
-        , _persistSession = P.Nothing
-        , _restSessionPath = P.Nothing
-        , _user = _user
-        , _vimSessionPath = P.Nothing
-        , _vsphereServer = P.Nothing
+    :: VSphere_Required -- ^ The minimal/required arguments.
+    -> Provider
+newProvider x =
+    TF.Provider
+        { TF.providerVersion = P.Just ("~> " P.++ showVersion currentVersion)
+        , TF.providerConfig  =
+            (let VSphere{..} = x in VSphere_Internal
+                { allow_unverified_ssl = P.Nothing
+                , client_debug = P.Nothing
+                , client_debug_path = P.Nothing
+                , client_debug_path_run = P.Nothing
+                , password = password
+                , persist_session = P.Nothing
+                , rest_session_path = P.Nothing
+                , user = user
+                , vim_session_path = P.Nothing
+                , vsphere_server = P.Nothing
+                })
+        , TF.providerEncoder =
+            (\VSphere_Internal{..} ->
+          P.mempty
+       <> P.maybe P.mempty (TF.pair "allow_unverified_ssl") allow_unverified_ssl
+       <> P.maybe P.mempty (TF.pair "client_debug") client_debug
+       <> P.maybe P.mempty (TF.pair "client_debug_path") client_debug_path
+       <> P.maybe P.mempty (TF.pair "client_debug_path_run") client_debug_path_run
+       <> TF.pair "password" password
+       <> P.maybe P.mempty (TF.pair "persist_session") persist_session
+       <> P.maybe P.mempty (TF.pair "rest_session_path") rest_session_path
+       <> TF.pair "user" user
+       <> P.maybe P.mempty (TF.pair "vim_session_path") vim_session_path
+       <> P.maybe P.mempty (TF.pair "vsphere_server") vsphere_server
+            )
         }
 
-{- | The 'VSphere' provider with absent configuration that is used
-to instantiate new 'Resource's and 'DataSource's. Provider configuration can be
-overridden on a per-resource basis by using the 'Terrafomo.provider' lens, the
-'newProvider' constructor, and any of the applicable lenses.
+-- | The required arguments for 'newProvider'.
+data VSphere_Required = VSphere
+    { password :: P.Text
+    -- ^ (Required)
+    -- The user password for vSphere API operations.
+    , user     :: P.Text
+    -- ^ (Required)
+    -- The user name for vSphere API operations.
+    } deriving (P.Show)
 
-For example:
+instance Lens.HasField "allow_unverified_ssl" f Provider (P.Maybe P.Bool) where
+    field = Lens.providerLens P.. Lens.lens'
+        (allow_unverified_ssl :: VSphere -> P.Maybe P.Bool)
+        (\s a -> s { allow_unverified_ssl = a } :: VSphere)
 
-@
-import qualified Terrafomo as TF
-import qualified Terrafomo.VSphere.Provider as VSphere
+instance Lens.HasField "client_debug" f Provider (P.Maybe P.Bool) where
+    field = Lens.providerLens P.. Lens.lens'
+        (client_debug :: VSphere -> P.Maybe P.Bool)
+        (\s a -> s { client_debug = a } :: VSphere)
 
-TF.newExampleResource "foo"
-    & TF.provider ?~
-          VSphere.(newProvider
-              -- Required arguments
-              _password -- (Required) 'P.Text'
-              _user -- (Required) 'P.Text'
-              -- Lenses
-              & VSphere.allowUnverifiedSsl .~ Nothing -- 'P.Maybe P.Bool'
-              & VSphere.clientDebug .~ Nothing -- 'P.Maybe P.Bool'
-              & VSphere.clientDebugPath .~ Nothing -- 'P.Maybe P.Text'
-              & VSphere.clientDebugPathRun .~ Nothing -- 'P.Maybe P.Text'
-              & VSphere.password .~ _password -- 'P.Text'
-              & VSphere.persistSession .~ Nothing -- 'P.Maybe P.Bool'
-              & VSphere.restSessionPath .~ Nothing -- 'P.Maybe P.Text'
-              & VSphere.user .~ _user -- 'P.Text'
-              & VSphere.vimSessionPath .~ Nothing -- 'P.Maybe P.Text'
-              & VSphere.vsphereServer .~ Nothing -- 'P.Maybe P.Text'
-@
--}
-defaultProvider :: TF.Provider VSphere
-defaultProvider =
-    TF.defaultProvider "vsphere" (P.Just "~> 1.6")
-        (\VSphere'{..} -> P.mconcat
-            [ P.maybe P.mempty (TF.pair "allow_unverified_ssl") _allowUnverifiedSsl
-            , P.maybe P.mempty (TF.pair "client_debug") _clientDebug
-            , P.maybe P.mempty (TF.pair "client_debug_path") _clientDebugPath
-            , P.maybe P.mempty (TF.pair "client_debug_path_run") _clientDebugPathRun
-            , TF.pair "password" _password
-            , P.maybe P.mempty (TF.pair "persist_session") _persistSession
-            , P.maybe P.mempty (TF.pair "rest_session_path") _restSessionPath
-            , TF.pair "user" _user
-            , P.maybe P.mempty (TF.pair "vim_session_path") _vimSessionPath
-            , P.maybe P.mempty (TF.pair "vsphere_server") _vsphereServer
-            ])
+instance Lens.HasField "client_debug_path" f Provider (P.Maybe P.Text) where
+    field = Lens.providerLens P.. Lens.lens'
+        (client_debug_path :: VSphere -> P.Maybe P.Text)
+        (\s a -> s { client_debug_path = a } :: VSphere)
 
-instance P.HasAllowUnverifiedSsl (VSphere) (P.Maybe P.Bool) where
-    allowUnverifiedSsl =
-        P.lens (_allowUnverifiedSsl :: VSphere -> P.Maybe P.Bool)
-            (\s a -> s { _allowUnverifiedSsl = a } :: VSphere)
+instance Lens.HasField "client_debug_path_run" f Provider (P.Maybe P.Text) where
+    field = Lens.providerLens P.. Lens.lens'
+        (client_debug_path_run :: VSphere -> P.Maybe P.Text)
+        (\s a -> s { client_debug_path_run = a } :: VSphere)
 
-instance P.HasClientDebug (VSphere) (P.Maybe P.Bool) where
-    clientDebug =
-        P.lens (_clientDebug :: VSphere -> P.Maybe P.Bool)
-            (\s a -> s { _clientDebug = a } :: VSphere)
+instance Lens.HasField "password" f Provider (P.Text) where
+    field = Lens.providerLens P.. Lens.lens'
+        (password :: VSphere -> P.Text)
+        (\s a -> s { password = a } :: VSphere)
 
-instance P.HasClientDebugPath (VSphere) (P.Maybe P.Text) where
-    clientDebugPath =
-        P.lens (_clientDebugPath :: VSphere -> P.Maybe P.Text)
-            (\s a -> s { _clientDebugPath = a } :: VSphere)
+instance Lens.HasField "persist_session" f Provider (P.Maybe P.Bool) where
+    field = Lens.providerLens P.. Lens.lens'
+        (persist_session :: VSphere -> P.Maybe P.Bool)
+        (\s a -> s { persist_session = a } :: VSphere)
 
-instance P.HasClientDebugPathRun (VSphere) (P.Maybe P.Text) where
-    clientDebugPathRun =
-        P.lens (_clientDebugPathRun :: VSphere -> P.Maybe P.Text)
-            (\s a -> s { _clientDebugPathRun = a } :: VSphere)
+instance Lens.HasField "rest_session_path" f Provider (P.Maybe P.Text) where
+    field = Lens.providerLens P.. Lens.lens'
+        (rest_session_path :: VSphere -> P.Maybe P.Text)
+        (\s a -> s { rest_session_path = a } :: VSphere)
 
-instance P.HasPassword (VSphere) (P.Text) where
-    password =
-        P.lens (_password :: VSphere -> P.Text)
-            (\s a -> s { _password = a } :: VSphere)
+instance Lens.HasField "user" f Provider (P.Text) where
+    field = Lens.providerLens P.. Lens.lens'
+        (user :: VSphere -> P.Text)
+        (\s a -> s { user = a } :: VSphere)
 
-instance P.HasPersistSession (VSphere) (P.Maybe P.Bool) where
-    persistSession =
-        P.lens (_persistSession :: VSphere -> P.Maybe P.Bool)
-            (\s a -> s { _persistSession = a } :: VSphere)
+instance Lens.HasField "vim_session_path" f Provider (P.Maybe P.Text) where
+    field = Lens.providerLens P.. Lens.lens'
+        (vim_session_path :: VSphere -> P.Maybe P.Text)
+        (\s a -> s { vim_session_path = a } :: VSphere)
 
-instance P.HasRestSessionPath (VSphere) (P.Maybe P.Text) where
-    restSessionPath =
-        P.lens (_restSessionPath :: VSphere -> P.Maybe P.Text)
-            (\s a -> s { _restSessionPath = a } :: VSphere)
-
-instance P.HasUser (VSphere) (P.Text) where
-    user =
-        P.lens (_user :: VSphere -> P.Text)
-            (\s a -> s { _user = a } :: VSphere)
-
-instance P.HasVimSessionPath (VSphere) (P.Maybe P.Text) where
-    vimSessionPath =
-        P.lens (_vimSessionPath :: VSphere -> P.Maybe P.Text)
-            (\s a -> s { _vimSessionPath = a } :: VSphere)
-
-instance P.HasVsphereServer (VSphere) (P.Maybe P.Text) where
-    vsphereServer =
-        P.lens (_vsphereServer :: VSphere -> P.Maybe P.Text)
-            (\s a -> s { _vsphereServer = a } :: VSphere)
+instance Lens.HasField "vsphere_server" f Provider (P.Maybe P.Text) where
+    field = Lens.providerLens P.. Lens.lens'
+        (vsphere_server :: VSphere -> P.Maybe P.Text)
+        (\s a -> s { vsphere_server = a } :: VSphere)

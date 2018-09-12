@@ -16,177 +16,161 @@
 --
 module Terrafomo.AzureRM.Provider
     (
-    -- * AzureRM Provider Datatype
-      AzureRM (..)
-    , newProvider
-    , defaultProvider
-
     -- * AzureRM Specific Aliases
+      Provider
     , DataSource
     , Resource
+
+    -- * AzureRM Configuration
+    , currentVersion
+    , newProvider
+    , AzureRM (..)
+    , AzureRM_Required (..)
     ) where
 
-import Data.Function ((&))
-import Data.Functor  ((<$>))
-import Data.Proxy    (Proxy (Proxy))
+import Data.Function  ((&))
+import Data.Functor   ((<$>))
+import Data.Semigroup ((<>))
+import Data.Version   (Version, makeVersion, showVersion)
 
 import GHC.Base (($))
 
 import Terrafomo.AzureRM.Settings
 
-import qualified Data.Hashable           as P
-import qualified Data.HashMap.Strict     as P
+import qualified Data.Functor.Const      as P
 import qualified Data.List.NonEmpty      as P
+import qualified Data.Map.Strict         as P
 import qualified Data.Maybe              as P
 import qualified Data.Text.Lazy          as P
-import qualified GHC.Generics            as P
-import qualified Lens.Micro              as P
 import qualified Prelude                 as P
-import qualified Terrafomo.AzureRM.Lens  as P
 import qualified Terrafomo.AzureRM.Types as P
 import qualified Terrafomo.HCL           as TF
+import qualified Terrafomo.Lens          as Lens
 import qualified Terrafomo.Schema        as TF
 
-type DataSource a = TF.Resource AzureRM ()               a
-type Resource   a = TF.Resource AzureRM (TF.Lifecycle a) a
+type Provider   = TF.Provider AzureRM
+type DataSource = TF.Resource AzureRM TF.Ignored
+type Resource   = TF.Resource AzureRM TF.Meta
+
+type instance TF.ProviderName AzureRM = "azurerm"
+
+currentVersion :: Version
+currentVersion = makeVersion [1, 15, 0]
 
 -- | The @azurerm@ Terraform provider configuration.
---
--- See the <https://www.terraform.io/docs/providers/azurerm/index.html terraform documentation>
--- for more information.
-data AzureRM = AzureRM'
-    { _clientId                  :: P.Maybe P.Text
-    -- ^ @client_id@ - (Optional)
-    --
-    , _clientSecret              :: P.Maybe P.Text
-    -- ^ @client_secret@ - (Optional)
-    --
-    , _environment               :: P.Text
-    -- ^ @environment@ - (Required)
-    --
-    , _msiEndpoint               :: P.Maybe P.Text
-    -- ^ @msi_endpoint@ - (Optional)
-    --
-    , _skipCredentialsValidation :: P.Maybe P.Bool
-    -- ^ @skip_credentials_validation@ - (Optional)
-    --
-    , _skipProviderRegistration  :: P.Maybe P.Bool
-    -- ^ @skip_provider_registration@ - (Optional)
-    --
-    , _subscriptionId            :: P.Maybe P.Text
-    -- ^ @subscription_id@ - (Optional)
-    --
-    , _tenantId                  :: P.Maybe P.Text
-    -- ^ @tenant_id@ - (Optional)
-    --
-    , _useMsi                    :: P.Maybe P.Bool
-    -- ^ @use_msi@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
+data AzureRM = AzureRM_Internal
+    { client_id                   :: P.Maybe TF.Id
+    -- ^ @client_id@
+    -- - (Optional)
+    , client_secret               :: P.Maybe P.Text
+    -- ^ @client_secret@
+    -- - (Optional)
+    , environment                 :: P.Text
+    -- ^ @environment@
+    -- - (Required)
+    , msi_endpoint                :: P.Maybe P.Text
+    -- ^ @msi_endpoint@
+    -- - (Optional)
+    , skip_credentials_validation :: P.Maybe P.Bool
+    -- ^ @skip_credentials_validation@
+    -- - (Optional)
+    , skip_provider_registration  :: P.Maybe P.Bool
+    -- ^ @skip_provider_registration@
+    -- - (Optional)
+    , subscription_id             :: P.Maybe TF.Id
+    -- ^ @subscription_id@
+    -- - (Optional)
+    , tenant_id                   :: P.Maybe TF.Id
+    -- ^ @tenant_id@
+    -- - (Optional)
+    , use_msi                     :: P.Maybe P.Bool
+    -- ^ @use_msi@
+    -- - (Optional)
+    } deriving (P.Show)
 
-instance P.Hashable (AzureRM)
-
--- | Specify a new AzureRM provider configuration.
+{- | Specify a new AzureRM provider configuration.
+See the <https://www.terraform.io/docs/providers/azurerm/index.html terraform documentation> for more information.
+-}
 newProvider
-    :: P.Text -- ^ Lens: 'P.environment', Field: '_environment', HCL: @environment@
-    -> AzureRM
-newProvider _environment =
-    AzureRM'
-        { _clientId = P.Nothing
-        , _clientSecret = P.Nothing
-        , _environment = _environment
-        , _msiEndpoint = P.Nothing
-        , _skipCredentialsValidation = P.Nothing
-        , _skipProviderRegistration = P.Nothing
-        , _subscriptionId = P.Nothing
-        , _tenantId = P.Nothing
-        , _useMsi = P.Nothing
+    :: AzureRM_Required -- ^ The minimal/required arguments.
+    -> Provider
+newProvider x =
+    TF.Provider
+        { TF.providerVersion = P.Just ("~> " P.++ showVersion currentVersion)
+        , TF.providerConfig  =
+            (let AzureRM{..} = x in AzureRM_Internal
+                { client_id = P.Nothing
+                , client_secret = P.Nothing
+                , environment = environment
+                , msi_endpoint = P.Nothing
+                , skip_credentials_validation = P.Nothing
+                , skip_provider_registration = P.Nothing
+                , subscription_id = P.Nothing
+                , tenant_id = P.Nothing
+                , use_msi = P.Nothing
+                })
+        , TF.providerEncoder =
+            (\AzureRM_Internal{..} ->
+          P.mempty
+       <> P.maybe P.mempty (TF.pair "client_id") client_id
+       <> P.maybe P.mempty (TF.pair "client_secret") client_secret
+       <> TF.pair "environment" environment
+       <> P.maybe P.mempty (TF.pair "msi_endpoint") msi_endpoint
+       <> P.maybe P.mempty (TF.pair "skip_credentials_validation") skip_credentials_validation
+       <> P.maybe P.mempty (TF.pair "skip_provider_registration") skip_provider_registration
+       <> P.maybe P.mempty (TF.pair "subscription_id") subscription_id
+       <> P.maybe P.mempty (TF.pair "tenant_id") tenant_id
+       <> P.maybe P.mempty (TF.pair "use_msi") use_msi
+            )
         }
 
-{- | The 'AzureRM' provider with absent configuration that is used
-to instantiate new 'Resource's and 'DataSource's. Provider configuration can be
-overridden on a per-resource basis by using the 'Terrafomo.provider' lens, the
-'newProvider' constructor, and any of the applicable lenses.
+-- | The required arguments for 'newProvider'.
+data AzureRM_Required = AzureRM
+    { environment :: P.Text
+    -- ^ (Required)
+    } deriving (P.Show)
 
-For example:
+instance Lens.HasField "client_id" f Provider (P.Maybe TF.Id) where
+    field = Lens.providerLens P.. Lens.lens'
+        (client_id :: AzureRM -> P.Maybe TF.Id)
+        (\s a -> s { client_id = a } :: AzureRM)
 
-@
-import qualified Terrafomo as TF
-import qualified Terrafomo.AzureRM.Provider as AzureRM
+instance Lens.HasField "client_secret" f Provider (P.Maybe P.Text) where
+    field = Lens.providerLens P.. Lens.lens'
+        (client_secret :: AzureRM -> P.Maybe P.Text)
+        (\s a -> s { client_secret = a } :: AzureRM)
 
-TF.newExampleResource "foo"
-    & TF.provider ?~
-          AzureRM.(newProvider
-              -- Required arguments
-              _environment -- (Required) 'P.Text'
-              -- Lenses
-              & AzureRM.clientId .~ Nothing -- 'P.Maybe P.Text'
-              & AzureRM.clientSecret .~ Nothing -- 'P.Maybe P.Text'
-              & AzureRM.environment .~ _environment -- 'P.Text'
-              & AzureRM.msiEndpoint .~ Nothing -- 'P.Maybe P.Text'
-              & AzureRM.skipCredentialsValidation .~ Nothing -- 'P.Maybe P.Bool'
-              & AzureRM.skipProviderRegistration .~ Nothing -- 'P.Maybe P.Bool'
-              & AzureRM.subscriptionId .~ Nothing -- 'P.Maybe P.Text'
-              & AzureRM.tenantId .~ Nothing -- 'P.Maybe P.Text'
-              & AzureRM.useMsi .~ Nothing -- 'P.Maybe P.Bool'
-@
--}
-defaultProvider :: TF.Provider AzureRM
-defaultProvider =
-    TF.defaultProvider "azurerm" (P.Just "~> 1.12")
-        (\AzureRM'{..} -> P.mconcat
-            [ P.maybe P.mempty (TF.pair "client_id") _clientId
-            , P.maybe P.mempty (TF.pair "client_secret") _clientSecret
-            , TF.pair "environment" _environment
-            , P.maybe P.mempty (TF.pair "msi_endpoint") _msiEndpoint
-            , P.maybe P.mempty (TF.pair "skip_credentials_validation") _skipCredentialsValidation
-            , P.maybe P.mempty (TF.pair "skip_provider_registration") _skipProviderRegistration
-            , P.maybe P.mempty (TF.pair "subscription_id") _subscriptionId
-            , P.maybe P.mempty (TF.pair "tenant_id") _tenantId
-            , P.maybe P.mempty (TF.pair "use_msi") _useMsi
-            ])
+instance Lens.HasField "environment" f Provider (P.Text) where
+    field = Lens.providerLens P.. Lens.lens'
+        (environment :: AzureRM -> P.Text)
+        (\s a -> s { environment = a } :: AzureRM)
 
-instance P.HasClientId (AzureRM) (P.Maybe P.Text) where
-    clientId =
-        P.lens (_clientId :: AzureRM -> P.Maybe P.Text)
-            (\s a -> s { _clientId = a } :: AzureRM)
+instance Lens.HasField "msi_endpoint" f Provider (P.Maybe P.Text) where
+    field = Lens.providerLens P.. Lens.lens'
+        (msi_endpoint :: AzureRM -> P.Maybe P.Text)
+        (\s a -> s { msi_endpoint = a } :: AzureRM)
 
-instance P.HasClientSecret (AzureRM) (P.Maybe P.Text) where
-    clientSecret =
-        P.lens (_clientSecret :: AzureRM -> P.Maybe P.Text)
-            (\s a -> s { _clientSecret = a } :: AzureRM)
+instance Lens.HasField "skip_credentials_validation" f Provider (P.Maybe P.Bool) where
+    field = Lens.providerLens P.. Lens.lens'
+        (skip_credentials_validation :: AzureRM -> P.Maybe P.Bool)
+        (\s a -> s { skip_credentials_validation = a } :: AzureRM)
 
-instance P.HasEnvironment (AzureRM) (P.Text) where
-    environment =
-        P.lens (_environment :: AzureRM -> P.Text)
-            (\s a -> s { _environment = a } :: AzureRM)
+instance Lens.HasField "skip_provider_registration" f Provider (P.Maybe P.Bool) where
+    field = Lens.providerLens P.. Lens.lens'
+        (skip_provider_registration :: AzureRM -> P.Maybe P.Bool)
+        (\s a -> s { skip_provider_registration = a } :: AzureRM)
 
-instance P.HasMsiEndpoint (AzureRM) (P.Maybe P.Text) where
-    msiEndpoint =
-        P.lens (_msiEndpoint :: AzureRM -> P.Maybe P.Text)
-            (\s a -> s { _msiEndpoint = a } :: AzureRM)
+instance Lens.HasField "subscription_id" f Provider (P.Maybe TF.Id) where
+    field = Lens.providerLens P.. Lens.lens'
+        (subscription_id :: AzureRM -> P.Maybe TF.Id)
+        (\s a -> s { subscription_id = a } :: AzureRM)
 
-instance P.HasSkipCredentialsValidation (AzureRM) (P.Maybe P.Bool) where
-    skipCredentialsValidation =
-        P.lens (_skipCredentialsValidation :: AzureRM -> P.Maybe P.Bool)
-            (\s a -> s { _skipCredentialsValidation = a } :: AzureRM)
+instance Lens.HasField "tenant_id" f Provider (P.Maybe TF.Id) where
+    field = Lens.providerLens P.. Lens.lens'
+        (tenant_id :: AzureRM -> P.Maybe TF.Id)
+        (\s a -> s { tenant_id = a } :: AzureRM)
 
-instance P.HasSkipProviderRegistration (AzureRM) (P.Maybe P.Bool) where
-    skipProviderRegistration =
-        P.lens (_skipProviderRegistration :: AzureRM -> P.Maybe P.Bool)
-            (\s a -> s { _skipProviderRegistration = a } :: AzureRM)
-
-instance P.HasSubscriptionId (AzureRM) (P.Maybe P.Text) where
-    subscriptionId =
-        P.lens (_subscriptionId :: AzureRM -> P.Maybe P.Text)
-            (\s a -> s { _subscriptionId = a } :: AzureRM)
-
-instance P.HasTenantId (AzureRM) (P.Maybe P.Text) where
-    tenantId =
-        P.lens (_tenantId :: AzureRM -> P.Maybe P.Text)
-            (\s a -> s { _tenantId = a } :: AzureRM)
-
-instance P.HasUseMsi (AzureRM) (P.Maybe P.Bool) where
-    useMsi =
-        P.lens (_useMsi :: AzureRM -> P.Maybe P.Bool)
-            (\s a -> s { _useMsi = a } :: AzureRM)
+instance Lens.HasField "use_msi" f Provider (P.Maybe P.Bool) where
+    field = Lens.providerLens P.. Lens.lens'
+        (use_msi :: AzureRM -> P.Maybe P.Bool)
+        (\s a -> s { use_msi = a } :: AzureRM)

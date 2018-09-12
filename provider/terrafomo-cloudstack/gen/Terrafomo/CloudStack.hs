@@ -28,12 +28,9 @@ module Terrafomo.CloudStack
     -- * Settings
     , module Terrafomo.CloudStack.Settings
 
-    -- * Overloaded Lenses
-    , module Terrafomo.CloudStack.Lens
     ) where
 
 import Terrafomo.CloudStack.DataSources
-import Terrafomo.CloudStack.Lens
 import Terrafomo.CloudStack.Provider
 import Terrafomo.CloudStack.Resources
 import Terrafomo.CloudStack.Settings

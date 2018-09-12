@@ -22,18 +22,11 @@ module Terrafomo.InfluxDB
     -- * Resources
     , module Terrafomo.InfluxDB.Resources
 
-    -- * DataSources
-    , module Terrafomo.InfluxDB.DataSources
-
     -- * Settings
     , module Terrafomo.InfluxDB.Settings
 
-    -- * Overloaded Lenses
-    , module Terrafomo.InfluxDB.Lens
     ) where
 
-import Terrafomo.InfluxDB.DataSources
-import Terrafomo.InfluxDB.Lens
 import Terrafomo.InfluxDB.Provider
 import Terrafomo.InfluxDB.Resources
 import Terrafomo.InfluxDB.Settings

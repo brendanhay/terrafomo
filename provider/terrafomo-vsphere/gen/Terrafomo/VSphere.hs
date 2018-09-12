@@ -28,12 +28,9 @@ module Terrafomo.VSphere
     -- * Settings
     , module Terrafomo.VSphere.Settings
 
-    -- * Overloaded Lenses
-    , module Terrafomo.VSphere.Lens
     ) where
 
 import Terrafomo.VSphere.DataSources
-import Terrafomo.VSphere.Lens
 import Terrafomo.VSphere.Provider
 import Terrafomo.VSphere.Resources
 import Terrafomo.VSphere.Settings

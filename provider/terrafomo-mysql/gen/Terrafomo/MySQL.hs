@@ -22,19 +22,8 @@ module Terrafomo.MySQL
     -- * Resources
     , module Terrafomo.MySQL.Resources
 
-    -- * DataSources
-    , module Terrafomo.MySQL.DataSources
-
-    -- * Settings
-    , module Terrafomo.MySQL.Settings
-
-    -- * Overloaded Lenses
-    , module Terrafomo.MySQL.Lens
     ) where
 
-import Terrafomo.MySQL.DataSources
-import Terrafomo.MySQL.Lens
 import Terrafomo.MySQL.Provider
 import Terrafomo.MySQL.Resources
-import Terrafomo.MySQL.Settings
 import Terrafomo.MySQL.Types

@@ -28,12 +28,9 @@ module Terrafomo.Cloudflare
     -- * Settings
     , module Terrafomo.Cloudflare.Settings
 
-    -- * Overloaded Lenses
-    , module Terrafomo.Cloudflare.Lens
     ) where
 
 import Terrafomo.Cloudflare.DataSources
-import Terrafomo.Cloudflare.Lens
 import Terrafomo.Cloudflare.Provider
 import Terrafomo.Cloudflare.Resources
 import Terrafomo.Cloudflare.Settings

@@ -28,12 +28,9 @@ module Terrafomo.OVH
     -- * Settings
     , module Terrafomo.OVH.Settings
 
-    -- * Overloaded Lenses
-    , module Terrafomo.OVH.Lens
     ) where
 
 import Terrafomo.OVH.DataSources
-import Terrafomo.OVH.Lens
 import Terrafomo.OVH.Provider
 import Terrafomo.OVH.Resources
 import Terrafomo.OVH.Settings
