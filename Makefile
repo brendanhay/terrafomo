@@ -27,8 +27,7 @@ haddock: format
 	cabal new-haddock --disable-optimization all
 
 clean: $(addprefix clean-,$(PROVIDERS))
-	rm -f $(shell find provider -type f -name 'package.yaml' | grep -v terrafomo-builtins)
-	rm -f $(wildcard provider/terrafomo-*/*.cabal)
+	rm -f $(shell find provider -type f -name '*.cabal' | grep -v terrafomo-builtins)
 	rm -rf $(wildcard provider/*/gen)
 
 commit:
