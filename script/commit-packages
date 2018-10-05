@@ -17,7 +17,7 @@ git add -A terrafomo-gen/config    \
     && ! git diff --cached --quiet \
     && git commit -m "Updating provider generator configuration"
 
-git add -A provider                \
+git add -A provider .travis.yml    \
     && ! git diff --cached --quiet \
     && git commit -m "Regenerating provider packages"
 
