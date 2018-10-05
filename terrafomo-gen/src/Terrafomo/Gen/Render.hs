@@ -76,12 +76,12 @@ prelude tmpls p =
     let name = providerName p
         ns   = NS.contents name
      in second (ns,) $ render (preludeTemplate tmpls)
-        [ "namespace"  .= ns
-        , "provider"   .= NS.provider name
-        , "types"      .= NS.types    name
-        , "settings"   .= just (providerSettings    p) (NS.settings    name)
-        , "dataources" .= just (providerDataSources p) (NS.datasources name)
-        , "resources"  .= just (providerResources   p) (NS.resources   name)
+        [ "namespace"   .= ns
+        , "provider"    .= NS.provider name
+        , "types"       .= NS.types    name
+        , "settings"    .= just (providerSettings    p) (NS.settings    name)
+        , "datasources" .= just (providerDataSources p) (NS.datasources name)
+        , "resources"   .= just (providerResources   p) (NS.resources   name)
         ]
 
 provider
