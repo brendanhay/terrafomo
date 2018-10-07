@@ -12,6 +12,7 @@ import Terrafomo.CLI.Options (Options (..))
 import Terrafomo.CLI.Path    (HomeDir (..), OutputDir, StageDir (..))
 
 import qualified Control.Monad.Except as Except
+import qualified Data.Fix             as Fix
 import qualified Data.Foldable        as Fold
 import qualified Data.Text.Lazy.IO    as LText
 import qualified System.Directory     as Dir
@@ -20,7 +21,6 @@ import qualified System.IO            as IO
 import qualified System.Process       as Process
 import qualified Terrafomo            as TF
 import qualified Terrafomo.CLI.Path   as Path
-import qualified Terrafomo.Fix        as Fix
 
 data ProcessError = ProcessError !Process.CreateProcess !Exit.ExitCode
     deriving (Show)

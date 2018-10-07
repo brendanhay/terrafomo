@@ -61,9 +61,7 @@ module Terrafomo
     -- * Inputs, Outputs and Remote State
     , Schema.Output
     , State.input
-    , State.outputText
-    , State.outputList
-    , State.outputMap
+    , State.output
     , State.remote
 
     -- * Interpolation Expression Language

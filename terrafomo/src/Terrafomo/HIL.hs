@@ -33,15 +33,17 @@ module Terrafomo.HIL
     -- * Utilities
     , name
     , interpolate
+    , output
     , layout
     , quote
     , operator
     , function
     ) where
 
-import Data.Fix       (Fix (Fix))
-import Data.String    (IsString (fromString))
-import Data.Text.Lazy (Text)
+import Data.Fix               (Fix (Fix))
+import Data.String            (IsString (fromString))
+import Data.Text.Lazy         (Text)
+import Data.Text.Lazy.Builder (Builder)
 
 import Prelude hiding (null)
 
@@ -177,12 +179,23 @@ interpolate = Fix.cata go
         Var Null      -> HCL.toHCL ()
         Var (Quote v) -> v
         Var (Const x) -> HCL.toHCL x
-        Var (Name  n) -> interp $ Pretty.text n
-        Prefix n xs   -> interp $ Pretty.function n (map HCL.encode xs)
-        Infix  n a b  -> interp $ Pretty.operator n (HCL.encode a) (HCL.encode b)
+        Var (Name  n) -> escape $ Pretty.text n
+        Prefix n xs   -> escape $ Pretty.function n (map HCL.encode xs)
+        Infix  n a b  -> escape $ Pretty.operator n (HCL.encode a) (HCL.encode b)
 
-    interp =
-        HCL.Encoding . Pretty.group layout . Pretty.quotes . Pretty.escape
+output :: HCL.ToHCL a => Expr s a -> HCL.Encoding
+output = Fix.cata go
+  where
+    go = \case
+        Var Null      -> HCL.toHCL ()
+        Var (Quote v) -> escape $ HCL.fromEncoding v
+        Var (Const x) -> escape $ HCL.fromEncoding $ HCL.toHCL x
+        Var (Name  n) -> escape $ Pretty.text n
+        Prefix n xs   -> escape $ Pretty.function n (map HCL.encode xs)
+        Infix  n a b  -> escape $ Pretty.operator n (HCL.encode a) (HCL.encode b)
+
+escape :: Pretty.Doc Builder -> HCL.Encoding
+escape = HCL.Encoding . Pretty.group layout . Pretty.quotes . Pretty.escape
 
 layout :: Layout
 layout = HCL.layout

@@ -70,6 +70,7 @@ library
     import: base
     hs-source-dirs: src
     build-depends:
+        data-fix,
         directory,
         filepath,
         mtl,

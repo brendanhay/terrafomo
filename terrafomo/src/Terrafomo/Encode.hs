@@ -33,6 +33,7 @@ import qualified Data.Set                   as Set
 import qualified Data.Text.Lazy.Builder     as Build
 import qualified Data.Text.Lazy.Builder.Int as Build
 import qualified Terrafomo.HCL              as HCL
+import qualified Terrafomo.HIL              as HIL
 import qualified Terrafomo.Pretty           as Pretty
 import qualified Terrafomo.Schema           as Schema
 
@@ -131,7 +132,7 @@ output
 output (Schema.UnsafeOutput _ _ name expr) =
     section Output [name]
         $ HCL.pairs
-            ( HCL.pair "value" expr
+            ( HCL.pair "value" (HIL.output expr)
             )
 
 resource

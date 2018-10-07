@@ -9,7 +9,7 @@ module Terrafomo.CLI.Command
     , destroy
     ) where
 
-import Terrafomo.Fix (Fix (Fix))
+import Data.Fix (Fix (Fix))
 
 type Command a = Fix (CommandF a)
 

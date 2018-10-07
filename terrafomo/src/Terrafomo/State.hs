@@ -45,9 +45,6 @@ module Terrafomo.State
 
     -- * Input and Output Variables
     , input
-    , outputText
-    , outputList
-    , outputMap
     , output
     , remote
 
@@ -317,29 +314,6 @@ input name def =
         State.put (s { document = doc })
 
         pure expr
-
-
-outputText
-    :: Monad m
-    => HIL.Expr s Text
-    -> StateT cfg stage s m (Output Text)
-outputText = output
-
-outputList
-    :: ( Monad m
-       , HCL.ToHCL a
-       )
-    => HIL.Expr s [a]
-    -> StateT cfg stage s m (Output [a])
-outputList = output
-
-outputMap
-    :: ( Monad m
-       , HCL.ToHCL a
-       )
-    => HIL.Expr s (Map Text a)
-    -> StateT cfg stage s m (Output (Map Text a))
-outputMap = output
 
 -- | Write an output variable to the current local or remote state. This
 -- serializes a 'HIL.Expr' into an 'TF.Output' that is usable by another state

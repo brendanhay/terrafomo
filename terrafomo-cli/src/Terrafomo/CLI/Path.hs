@@ -9,7 +9,6 @@ import Terrafomo (Stage)
 import qualified Data.Text.Lazy   as LText
 import qualified System.Directory as Dir
 import qualified Terrafomo        as TF
-import qualified Terrafomo.Plan   as Plan
 import qualified Text.Printf      as Print
 
 newtype HomeDir = HomeDir FilePath

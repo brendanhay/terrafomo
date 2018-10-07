@@ -120,8 +120,12 @@ instance ToHCL Double    where toHCL = Encoding . Pretty.float
 instance ToHCL Int       where toHCL = Encoding . Pretty.decimal
 instance ToHCL Integer   where toHCL = Encoding . Pretty.decimal
 instance ToHCL Natural   where toHCL = Encoding . Pretty.decimal
-instance ToHCL Text      where toHCL = Encoding . Pretty.string
-instance ToHCL Text.Text where toHCL = toHCL . LText.fromStrict
+
+instance ToHCL Text where
+    toHCL = Encoding . Pretty.string
+
+instance ToHCL Text.Text where
+    toHCL = toHCL . LText.fromStrict
 
 instance ToHCL Char where
     toHCL     = Encoding . Pretty.char

@@ -36,8 +36,8 @@ bootstrap :: TF.State Config "bootstrap" s ()
 bootstrap = do
     cfg <- Reader.ask
 
-    TF.resource_ $
-        AWS.newDynamodbTableR
+    TF.resource_
+        $ AWS.newDynamodbTableR
             (AWS.DynamodbTableR
                 { AWS.name           = TF.expr (configLockTable cfg)
                 , AWS.read_capacity  = 4
@@ -51,8 +51,8 @@ bootstrap = do
                              ]
                 })
 
-    TF.resource_ $
-        AWS.newS3BucketR
+    TF.resource_
+        $ AWS.newS3BucketR
             & #region                  ?~ TF.expr (configBucketRegion cfg)
             & #acl                     .~ "private"
             & #bucket_or_bucket_prefix ?~
@@ -62,7 +62,7 @@ network :: TF.State Config "network" s (Network (TF.Output TF.Id) (TF.Output TF.
 network = do
     net <- Network.defineNetwork
 
-    TF.output (TF.expr (1 :: Int))
+    TF.output (TF.expr (1     :: Int))
     TF.output (TF.expr ("foo" :: String))
     TF.output (TF.expr (["foo", "bar"] :: [String]))
 
