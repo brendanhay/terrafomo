@@ -30,7 +30,6 @@ import GHC.TypeLits (KnownSymbol)
 
 import Terrafomo.HCL    ((<\>))
 import Terrafomo.Schema
-import Terrafomo.Stage
 
 import qualified Data.Set         as Set
 import qualified Terrafomo.Encode as Encode

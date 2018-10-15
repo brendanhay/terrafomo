@@ -40,17 +40,17 @@ module Terrafomo.HIL
     , function
     ) where
 
-import Data.Fix               (Fix (Fix))
 import Data.String            (IsString (fromString))
 import Data.Text.Lazy         (Text)
 import Data.Text.Lazy.Builder (Builder)
 
 import Prelude hiding (null)
 
+import Terrafomo.Fix    (Fix (Fix))
 import Terrafomo.Pretty (Layout)
 
 import qualified Data.Aeson       as Aeson
-import qualified Data.Fix         as Fix
+import qualified Terrafomo.Fix    as Fix
 import qualified Terrafomo.HCL    as HCL
 import qualified Terrafomo.Pretty as Pretty
 
@@ -163,7 +163,7 @@ modulo = operator "%"
 -- working directory.
 --
 -- See: <https://www.terraform.io/docs/configuration/interpolation.html#file-path- file(path)>
-file :: Expr s FilePath -> Expr s Text
+file :: Expr s FilePath -> Expr s ByteString
 file path = function "file" [quote (HCL.toHCL path)]
 
 -- Utilities

@@ -57,6 +57,8 @@ bootstrap = do
             & #acl                     .~ "private"
             & #bucket_or_bucket_prefix ?~
                 AWS.S3BucketR_Bucket (TF.expr (configBucket cfg))
+            & #connection  ?~ TF.ConnectSSH TF.newSSH
+            & #provisioner ?~ TF.ProvisionLocal (TF.newLocalExec "foo")
 
 network :: TF.State Config "network" s (Network (TF.Output TF.Id) (TF.Output TF.Id))
 network = do

@@ -33,8 +33,7 @@ test_sections =
             localBackend "/etc/terraform/local.tfstate"
 
         settings =
-            TestSetting "options" $
-                Just (TestSetting "parameters" Nothing)
+            TestSetting "options" $ Just (TestSetting "parameters" Nothing)
 
         provider =
             (newTestProvider (TestProvider 3 25.985 False [5,9,12] settings))
@@ -42,16 +41,16 @@ test_sections =
                 }
 
         datasource =
-           unsafeDataSource "foo" encodeTestResource $
-               TestResource "abc-i123d" True
+           unsafeDataSource "foo" encodeTestResource
+               $ TestResource "abc-i123d" True
                    [ TestSetting "something" Nothing
                    , TestSetting "else"      Nothing
                    , settings
                    ]
 
         resource =
-            unsafeResource "bar" Encode.lifecycle encodeTestResource $
-                TestResource "xyz-j982r" False
+            unsafeResource "bar" Encode.metadata encodeTestResource
+                $ TestResource "xyz-j982r" False
                     [ TestSetting "one" Nothing
                     , TestSetting "two" Nothing
                     , settings
@@ -62,45 +61,45 @@ test_sections =
         bar      = ResourceName (Resource "bar") "default"
 
      in testGroup "section encoding"
-        [ testEncode "provider_default.tf" $
-            Encode.provider 1 provider
+        [ testEncode "provider_default.tf"
+            $ Encode.provider 1 provider
 
-        , testEncode "backend_local.tf" $
-            Encode.backend backend
+        , testEncode "backend_local.tf"
+            $ Encode.backend backend
 
-        , testEncode "datasource_default.tf" $
-            snd (Encode.resource alias "default" datasource)
+        , testEncode "datasource_default.tf"
+            $ snd (Encode.resource alias "default" datasource)
 
-        , testEncode "datasource_modified.tf" $
-            snd $ Encode.resource alias "modified" $
-                datasource
-                    & #provider   ?~ provider
-                    & #depends_on .~ depends (UnsafeRef bar)
+        , testEncode "datasource_modified.tf"
+            $ snd $ Encode.resource alias "modified"
+                  $ datasource
+                      & #provider   ?~ provider
+                      & #depends_on .~ depends (UnsafeRef bar)
 
-        , testEncode "resource_default.tf" $
-            snd (Encode.resource alias "default" resource)
+        , testEncode "resource_default.tf"
+            $ snd (Encode.resource alias "default" resource)
 
-        , testEncode "resource_modified.tf" $
-            snd $ Encode.resource alias "modified" $
-                resource
-                    & #provider              ?~ provider
-                    & #prevent_destroy       .~ False
-                    & #create_before_destroy .~ True
-                    & #ignore_changes        .~ wildcard
-                    & #depends_on            .~ depends (UnsafeRef foo)
+        , testEncode "resource_modified.tf"
+            $ snd $ Encode.resource alias "modified"
+                  $ resource
+                      & #provider              ?~ provider
+                      & #prevent_destroy       .~ False
+                      & #create_before_destroy .~ True
+                      & #ignore_changes        .~ wildcard
+                      & #depends_on            .~ depends (UnsafeRef foo)
 
-        , testEncode "output_computed.tf" $
-            Encode.output $
-                UnsafeOutput
+        , testEncode "output_computed.tf"
+            $ Encode.output
+                $ UnsafeOutput
                     { outputBackend = serializeBackend backend
                     , outputStage   = "stage"
                     , outputName    = "computed"
                     , outputExpr    = HIL.name "var.name.attr" :: HIL.Expr s Int
                     }
 
-        , testEncode "output_list.tf" $
-            Encode.output $
-                UnsafeOutput
+        , testEncode "output_list.tf"
+            $ Encode.output
+                $ UnsafeOutput
                     { outputBackend = serializeBackend backend
                     , outputStage   = "stage"
                     , outputName    = "list"
@@ -108,11 +107,105 @@ test_sections =
                     }
         ]
 
+test_connections :: TestTree
+test_connections =
+    let alias    = ProviderAlias "connection" 2
+        resource =
+            unsafeResource "connections" Encode.metadata encodeTestResource
+                $ TestResource "lpq-381" False []
+
+     in testGroup "connections"
+        [ testEncode "connection_ssh.tf"
+            $ snd $ Encode.resource alias "ssh"
+                  $ resource
+                      & #connection ?~ ConnectSSH (newSSH
+                          { user           = "bob"
+                          , password       = Just "secret"
+                          , host           = Just "123.abc.net"
+                          , port           = 9513
+                          , timeout        = "90s"
+                          , script_path    = Just "/etc/saucy.sh"
+                          , private_key    = Just "12930asdb!@#213asdaA"
+                          , agent          = Just HIL.true
+                          , agent_identity = Just "alice"
+                          , host_key       = Just "1239asdkjbC!@#12"
+                          })
+
+        , testEncode "connection_ssh_bastion.tf"
+            $ snd $ Encode.resource alias "bastion"
+                  $ resource
+                      & #connection ?~ ConnectSSH (newSSH
+                          { bastion = Just $ newBastion
+                              { bastion_host        = Just "www.bastion.net"
+                              , bastion_host_key    = Just "key1"
+                              , bastion_port        = Just 1600
+                              , bastion_user        = Just "bob"
+                              , bastion_password    = Just "secret"
+                              , bastion_private_key = Just "key2"
+                              }
+                          })
+
+        , testEncode "connection_winrm.tf"
+            $ snd $ Encode.resource alias "winrm"
+                  $ resource
+                      & #connection ?~ ConnectWinRM (newWinRM
+                          { user        = "alice"
+                          , password    = Just "secret"
+                          , host        = Just "example.org"
+                          , port        = 9182
+                          , timeout     = "1h"
+                          , script_path = Just "C:\\Foo.pshell"
+                          , https       = HIL.false
+                          , insecure    = HIL.true
+                          , use_ntlm    = HIL.true
+                          , cacert      = Just "10djDDasd123!@!#a1"
+                          })
+        ]
+
+test_provisioners :: TestTree
+test_provisioners =
+    let alias    = ProviderAlias "provisioner" 3
+        resource =
+            unsafeResource "provisioners" Encode.metadata encodeTestResource
+                $ TestResource "nvw-001" False []
+
+     in testGroup "provisioners"
+        [ testEncode "provisioner_local_exec.tf"
+            $ snd $ Encode.resource alias "local_exec"
+                  $ resource
+                      & #provisioner ?~ ProvisionLocal (newLocalExec "yes")
+
+        , testEncode "provisioner_remote_exec_inline.tf"
+            $ snd $ Encode.resource alias "remote_exec_inline"
+                  $ resource
+                      & #provisioner ?~ ProvisionRemoteInline (HIL.fexpr ["inline.sh"])
+
+        , testEncode "provisioner_remote_exec_script.tf"
+            $ snd $ Encode.resource alias "remote_exec_script"
+                  $ resource
+                      & #provisioner ?~ ProvisionRemoteScript "/etc/script.sh"
+
+        , testEncode "provisioner_remote_exec_scripts.tf"
+            $ snd $ Encode.resource alias "remote_exec_scripts"
+                  $ resource
+                      & #provisioner ?~ ProvisionRemoteScripts (HIL.fexpr ["/etc/script.sh"])
+
+        , testEncode "provisioner_file_source.tf"
+            $ snd $ Encode.resource alias "file_source"
+                  $ resource
+                      & #provisioner ?~ ProvisionFileSource "/etc/source" "/etc/destination"
+
+        , testEncode "provisioner_file_content.tf"
+            $ snd $ Encode.resource alias "file_content"
+                  $ resource
+                      & #provisioner ?~ ProvisionFileContent "contents" "/etc/baz"
+        ]
+
 test_primitives :: TestTree
 test_primitives =
     testGroup "primitive encoding"
-        [ testLocals "locals_iam_policy.tf" $
-            HCL.pair "var" $ HIL.json
+        [ testLocals "locals_iam_policy.tf"
+            $ HCL.pair "var" $ HIL.json
                 ( Policy.singleton
                     (Policy.allow
                         { Policy.action   =
@@ -171,7 +264,7 @@ test_primitives =
             , HCL.pair "list_int"    (HIL.fexpr [1, 2 :: Int])
             , HCL.pair "list_float"  (HIL.fexpr [3.333, 5.5 :: Double])
             , HCL.pair "list_string" (HIL.fexpr ["Foo", "Bar", "Baz" :: Text])
-            , HCL.pair "list_expr"   (HIL.expr   [HIL.null, HIL.file "/etc/foo"])
+            , HCL.pair "list_expr"   (HIL.expr  [HIL.null, HIL.file "/etc/foo"])
             , HCL.pair "list_list"   (HIL.fexpr [[HIL.true, HIL.false], [HIL.false]])
             , HCL.pair "list_map"
                 (HIL.fexpr [ map_ [("true" :: Text, HIL.true)]
@@ -194,7 +287,7 @@ map_ ::  [(Text, a)] -> HIL.Expr s (Map Text (HIL.Expr s a))
 map_ = HIL.fexpr . Map.fromList
 
 testLocals :: TestName -> HCL.Series -> TestTree
-testLocals name = testEncode name . Encode.section Encode.Locals [] . HCL.pairs
+testLocals name = testEncode name . Encode.section "locals" [] . HCL.pairs
 
 testEncode :: TestName -> HCL.Encoding -> TestTree
 testEncode name =

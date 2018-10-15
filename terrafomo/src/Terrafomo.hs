@@ -6,8 +6,8 @@ module Terrafomo
     , Doc.DocumentError (..)
 
     -- * Planning and Combining States
-    , Stage.StageName   (..)
-    , Stage.Stage       (..)
+    , Schema.StageName  (..)
+    , Schema.Stage      (..)
 
     -- ** The Plan Monad
     , Plan.Plan
@@ -49,6 +49,17 @@ module Terrafomo
     -- * Dependencies
     , Schema.Depends
     , Schema.depends
+
+    -- ** Provisioners
+    , Schema.Connection  (..)
+    , Schema.SSH         (..)
+    , Schema.newSSH
+    , Schema.WinRM       (..)
+    , Schema.newWinRM
+
+    , Schema.Provisioner (..)
+    , Schema.LocalExec   (..)
+    , Schema.newLocalExec
 
     -- ** Lifecycle
     , Schema.Lifecycle
@@ -93,7 +104,6 @@ import qualified Terrafomo.HCL      as HCL
 import qualified Terrafomo.HIL      as HIL
 import qualified Terrafomo.Plan     as Plan
 import qualified Terrafomo.Schema   as Schema
-import qualified Terrafomo.Stage    as Stage
 import qualified Terrafomo.State    as State
 
 -- README:

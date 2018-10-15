@@ -116,7 +116,7 @@ object :: Doc Builder -> Doc Builder
 object x = nest ("{" <> line <> x) <> line <> "}"
 
 heredoc :: Text -> Doc Builder
-heredoc x = pure $ "<<HEREDOC\n" <> Build.fromLazyText x <> "\nHEREDOC"
+heredoc x = pure $ "<<EOF\n" <> Build.fromLazyText x <> "\nEOF"
 
 escape :: Doc Builder -> Doc Builder
 escape = between "${" "}"

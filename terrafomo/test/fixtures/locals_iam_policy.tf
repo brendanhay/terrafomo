@@ -1,5 +1,5 @@
 locals {
-  var = <<HEREDOC
+  var = <<EOF
 {
   "Statement": [
     {
@@ -24,5 +24,5 @@ locals {
   ]
   "Version": "2012-10-17"
 }
-HEREDOC
+EOF
 }

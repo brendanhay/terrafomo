@@ -119,7 +119,7 @@ The following additional configuration is supported:
     -> P.{{ type }} {{ resource.value.type }}
 {{ resource.value.con.smart }} x =
 {% endcase %}
-    TF.unsafe{{ type }} "{{ resource.value.original }}" {% if type == "Resource" %} Encode.lifecycle{% endif %}
+    TF.unsafe{{ type }} "{{ resource.value.original }}" {% if type == "Resource" %} Encode.metadata{% endif %}
       {% if resource.value.arguments | empty %}
         P.mempty
       {% else %}

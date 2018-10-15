@@ -40,8 +40,8 @@ import qualified Terrafomo.Lens as Lens
 import qualified Terrafomo.Schema as TF
 
 type Provider   = TF.Provider {{ provider.schema.type }}
-type DataSource = TF.Resource {{ provider.schema.type }} (P.Const ())
-type Resource   = TF.Resource {{ provider.schema.type }} TF.Lifecycle
+type DataSource = TF.Resource {{ provider.schema.type }} TF.Ignored
+type Resource   = TF.Resource {{ provider.schema.type }} TF.Meta
 
 type instance TF.ProviderName {{ provider.schema.type }} = "{{ provider.original }}"
 

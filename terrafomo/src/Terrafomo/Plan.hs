@@ -26,7 +26,6 @@ import Control.Monad          (MonadPlus, when)
 import Control.Monad.Except   (ExceptT)
 import Control.Monad.Fix      (MonadFix)
 import Control.Monad.IO.Class (MonadIO)
-import Control.Monad.Morph    (MFunctor (hoist))
 import Control.Monad.Reader   (MonadReader, ReaderT)
 import Control.Monad.Trans    (MonadTrans (lift))
 
@@ -39,7 +38,6 @@ import GHC.Base     (Proxy#, proxy#)
 import GHC.TypeLits (KnownSymbol, symbolVal')
 
 import Terrafomo.Schema
-import Terrafomo.Stage  (Stage (stageName), StageName)
 import Terrafomo.State
 
 import qualified Control.Monad.Except       as Except
@@ -82,9 +80,9 @@ instance MonadTrans (PlanT cfg) where
     lift = PlanT . lift . lift . lift
     {-# INLINE lift #-}
 
-instance MFunctor (PlanT cfg) where
-    hoist f = PlanT . hoist (hoist (hoist f)) . unPlanT
-    {-# INLINE hoist #-}
+-- instance MFunctor (PlanT cfg) where
+--     hoist f = PlanT . hoist (hoist (hoist f)) . unPlanT
+--     {-# INLINE hoist #-}
 
 runPlan
     :: cfg

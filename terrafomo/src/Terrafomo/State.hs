@@ -58,7 +58,6 @@ import Control.Monad          (MonadPlus, void)
 import Control.Monad.Except   (ExceptT, MonadError)
 import Control.Monad.Fix      (MonadFix)
 import Control.Monad.IO.Class (MonadIO)
-import Control.Monad.Morph    (MFunctor (hoist))
 import Control.Monad.Reader   (MonadReader, ReaderT)
 import Control.Monad.Trans    (MonadTrans (lift))
 
@@ -74,7 +73,6 @@ import GHC.TypeLits (KnownSymbol, Symbol, symbolVal')
 
 import Terrafomo.Document (Document, DocumentError)
 import Terrafomo.Schema
-import Terrafomo.Stage    (Stage)
 
 import qualified Control.Monad.Except       as Except
 import qualified Control.Monad.Reader       as Reader
@@ -135,9 +133,9 @@ instance MonadTrans (StateT cfg stage s) where
     lift = StateT . lift . lift . lift
     {-# INLINE lift #-}
 
-instance MFunctor (StateT cfg stage s) where
-    hoist f = StateT . hoist (hoist (hoist f)) . unStateT
-    {-# INLINE hoist #-}
+-- instance MFunctor (StateT cfg stage s) where
+--     hoist f = StateT . hoist (hoist (hoist f)) . unStateT
+--     {-# INLINE hoist #-}
 
 instance Monad m => MonadReader cfg (StateT cfg stage s m) where
     ask = StateT $ Reader.asks config

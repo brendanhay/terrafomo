@@ -73,8 +73,6 @@ library
         aeson,
         bytestring,
         containers,
-        data-fix,
-        mmorph,
         mtl,
         scientific,
         text,
@@ -82,6 +80,7 @@ library
         Terrafomo
         Terrafomo.Document
         Terrafomo.Encode
+        Terrafomo.Fix
         Terrafomo.HCL
         Terrafomo.HIL
         Terrafomo.Lens
@@ -89,7 +88,6 @@ library
         Terrafomo.Plan
         Terrafomo.Pretty
         Terrafomo.Schema
-        Terrafomo.Stage
         Terrafomo.State
 
 test-suite tests

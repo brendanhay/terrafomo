@@ -23,6 +23,7 @@ module Terrafomo.HCL
     ) where
 
 import Data.Bifunctor         (bimap, first, second)
+import Data.ByteString.Lazy   (ByteString)
 import Data.List.NonEmpty     (NonEmpty)
 import Data.Map.Strict        (Map)
 import Data.Set               (Set)
@@ -35,16 +36,17 @@ import Numeric.Natural (Natural)
 
 import Terrafomo.Pretty (Doc, Layout)
 
-import qualified Data.Aeson             as Aeson
-import qualified Data.List.NonEmpty     as NonEmpty
-import qualified Data.Map.Strict        as Map
-import qualified Data.Scientific        as Sci
-import qualified Data.Set               as Set
-import qualified Data.Text              as Text
-import qualified Data.Text.Lazy         as LText
-import qualified Data.Text.Lazy.Builder as Build
-import qualified GHC.Exts               as Exts
-import qualified Terrafomo.Pretty       as Pretty
+import qualified Data.Aeson              as Aeson
+import qualified Data.List.NonEmpty      as NonEmpty
+import qualified Data.Map.Strict         as Map
+import qualified Data.Scientific         as Sci
+import qualified Data.Set                as Set
+import qualified Data.Text               as Text
+import qualified Data.Text.Lazy          as LText
+import qualified Data.Text.Lazy.Builder  as Build
+import qualified Data.Text.Lazy.Encoding as LText
+import qualified GHC.Exts                as Exts
+import qualified Terrafomo.Pretty        as Pretty
 
 newtype Encoding = Encoding { fromEncoding :: Doc Builder }
     deriving (Semigroup, Monoid)
@@ -126,6 +128,9 @@ instance ToHCL Text where
 
 instance ToHCL Text.Text where
     toHCL = toHCL . LText.fromStrict
+
+instance ToHCL ByteString where
+    toHCL = Encoding . Pretty.heredoc . LText.decodeUtf8
 
 instance ToHCL Char where
     toHCL     = Encoding . Pretty.char
