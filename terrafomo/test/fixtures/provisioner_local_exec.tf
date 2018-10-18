@@ -3,7 +3,7 @@ resource "provisioners" "local_exec" {
   name = "nvw-001"
   enabled = false
   settings = []
-  provisioner "remote-exec" {
+  provisioner "local-exec" {
     command = "yes"
   }
 }

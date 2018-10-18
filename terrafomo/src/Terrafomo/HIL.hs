@@ -40,17 +40,18 @@ module Terrafomo.HIL
     , function
     ) where
 
+import Data.ByteString.Lazy (ByteString)
 import Data.String            (IsString (fromString))
 import Data.Text.Lazy         (Text)
 import Data.Text.Lazy.Builder (Builder)
 
 import Prelude hiding (null)
 
-import Terrafomo.Fix    (Fix (Fix))
 import Terrafomo.Pretty (Layout)
+import Terrafomo.Fix    (Fix (Fix))
 
 import qualified Data.Aeson       as Aeson
-import qualified Terrafomo.Fix    as Fix
+import qualified Terrafomo.Fix         as Fix
 import qualified Terrafomo.HCL    as HCL
 import qualified Terrafomo.Pretty as Pretty
 

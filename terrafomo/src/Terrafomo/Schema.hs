@@ -490,6 +490,9 @@ newLocalExec cmd = LocalExec
 --     -- executed in the order they are provided.
 --       deriving (Show)
 
+data Ignored (schema :: * -> *) (s :: *) = Ignored
+    deriving (Show)
+
 -- FIXME: resource timeouts
 --
 -- Meta-parameters.
@@ -498,21 +501,6 @@ data Meta (schema :: * -> *) (s :: *) = Meta
     , metaConnection  :: !(Maybe (Connection  s))
     , metaLifecycle   :: !(Lifecycle (schema  s))
     } deriving (Show)
-
-data Ignored (schema :: * -> *) (s :: *) = Ignored
-    deriving (Show)
-
--- FIXME: resource timeouts
---
--- Meta-parameters.
-data Meta (schema :: * -> *) (s :: *) = ResourceMeta
-    { metaConnection  :: !(Connection s)
-    , metaProvisioner :: !(Provisioner s)
-    , metaLifecycle   :: !(Lifecycle (schema s))
-    } deriving (Show)
-
-data Ignored (schema :: * -> *) (s :: *) = Ignored
-    deriving (Show)
 
 -- | Represents the internal structure of a datasource or resource, and
 -- encapsulates the provider, dependencies and lifecycle configuration, as well
