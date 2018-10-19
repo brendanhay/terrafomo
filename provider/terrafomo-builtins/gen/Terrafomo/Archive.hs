@@ -28,12 +28,9 @@ module Terrafomo.Archive
     -- * Settings
     , module Terrafomo.Archive.Settings
 
-    -- * Overloaded Lenses
-    , module Terrafomo.Archive.Lens
     ) where
 
 import Terrafomo.Archive.DataSources
-import Terrafomo.Archive.Lens
 import Terrafomo.Archive.Provider
 import Terrafomo.Archive.Resources
 import Terrafomo.Archive.Settings

@@ -7,7 +7,7 @@ import Data.Maybe    (isJust)
 import Data.Text     (Text)
 
 import Terrafomo.Gen.Haskell (Con, Conflict, Field, Schema, Settings)
-import Terrafomo.Gen.Name    (DataName, Key, LabelName)
+import Terrafomo.Gen.Name    (DataName, Key)
 import Terrafomo.Gen.Type    (Type)
 
 import qualified Data.List             as List
@@ -49,7 +49,7 @@ data SchemaDiff = SchemaDiff
     , schemaCon        :: !(Diff Con)
     , schemaThreaded   :: !(Diff Bool)
     , schemaArguments  :: !(Diff [Field Conflict])
-    , schemaAttributes :: !(Diff [Field LabelName])
+    , schemaAttributes :: !(Diff [Field Conflict])
     }
 
 instance Show SchemaDiff where

@@ -1,126 +1,93 @@
-{-# LANGUAGE UndecidableInstances #-}
+{-|
+HIL (HashiCorp Interpolation Language) is an embedded language used for
+configuration interpolation.
 
--- | HIL (HashiCorp Interpolation Language) is a lightweight embedded language
--- used for configuration interpolation.
+This module defines the Haskell AST, combinators, and utilities for
+constructing and manipulating HIL expressions.
+-}
 module Terrafomo.HIL
     (
-    -- * Recusion Schemes
-      Fix   (..)
-    , cata
-
     -- * Expressions
-    , Var (..)
-    , ExprF  (..)
+      Var   (..)
+    , ExprF (..)
     , Expr
 
     -- * Primitives
-    , compute
-    , value
+    , expr
+    , fexpr
     , null
+
+    -- ** Specializations
     , true
     , false
-    , heredoc
-    , string
+    , double
     , int
-    , float
+    , text
+    , heredoc
+    , json
 
     -- * Terraform Builtins
     , modulo
-    , join
     , file
 
     -- * Utilities
+    , name
+    , interpolate
+    , output
+    , layout
     , quote
     , operator
     , function
-    , unsafeErase
     ) where
 
-import Data.Bifunctor (Bifunctor (first, second))
-import Data.Function  (on)
-import Data.Hashable  (Hashable (hashWithSalt))
-import Data.String    (IsString (fromString))
-import Data.Text.Lazy (Text)
-
-import GHC.Generics (Generic)
+import Data.ByteString.Lazy (ByteString)
+import Data.String            (IsString (fromString))
+import Data.Text.Lazy         (Text)
+import Data.Text.Lazy.Builder (Builder)
 
 import Prelude hiding (null)
 
-import qualified Data.Aeson    as JSON
-import qualified Terrafomo.HCL as HCL
+import Terrafomo.Pretty (Layout)
+import Terrafomo.Fix    (Fix (Fix))
 
--- | A fix-point type used for the 'Expr' expression and recursion schemes.
-newtype Fix f = Fix { unfix :: f (Fix f) }
-
-instance Show (f (Fix f)) => Show (Fix f) where
-    showsPrec d (Fix f) =
-        showParen (d > 10) $
-            showString "Fix " . showsPrec 11 f
-
-instance Eq (f (Fix f)) => Eq (Fix f) where
-    (==) = on (==) unfix
-
-instance Ord (f (Fix f)) => Ord (Fix f) where
-    compare = on compare unfix
-
-instance Hashable (f (Fix f)) => Hashable (Fix f) where
-    hashWithSalt s = hashWithSalt s . unfix
-
--- | A catamorphism, or generalized fold.
-cata :: Functor f => (f a -> a) -> Fix f -> a
-cata psi = psi . fmap (cata psi) . unfix
+import qualified Data.Aeson       as Aeson
+import qualified Terrafomo.Fix         as Fix
+import qualified Terrafomo.HCL    as HCL
+import qualified Terrafomo.Pretty as Pretty
 
 -- | An interpolation variable. This is paramterized over the current (remote)
 -- state thread @s@ similar to 'Control.Monad.ST'.  It can be the special
--- keyword @null@, a constant Haskell value, or a a computed attribute that is
+-- keyword @null@, a constant Haskell value, or a computed attribute that is
 -- opaque and only known within the context of a terraform run.
 data Var s a
-    = Compute !Text
-    | Const   !a
+    = Name  !Text
+    | Quote !HCL.Encoding
+    | Const !a
     | Null
-      deriving (Show, Eq, Generic)
-
-instance Hashable a => Hashable (Var s a)
+      deriving (Show)
 
 instance IsString a => IsString (Var s a) where
     fromString = Const . fromString
-
-instance HCL.ToHCL a => HCL.ToHCL (Var s a) where
-    toHCL = \case
-        Compute v -> HCL.toHCL ("${" <> v <> "}")
-        Const   x -> HCL.toHCL x
-        Null      -> HCL.null
 
 -- | The main terraform interpolation expression type. This is polymorphic so
 -- that it can be made a functor, which allows us to traverse expressions and
 -- map functions over them. The actual 'Expr' expression type is a fixed point
 -- of this functor, defined below.
-data ExprF a b r
+data ExprF a r
     = Var    !a
-    | Quote  !b
     | Prefix !Text ![r]
     | Infix  !Text !r !r
-      deriving (Show, Eq, Functor, Generic)
-
-instance (Hashable a, Hashable b, Hashable r) => Hashable (ExprF a b r)
-
-instance Bifunctor (ExprF a) where
-    second  = fmap
-    first f = \case
-        Var    x     -> Var    x
-        Quote  q     -> Quote  (f q)
-        Prefix n xs  -> Prefix n xs
-        Infix  n a b -> Infix  n a b
+      deriving (Show, Functor, Foldable, Traversable)
 
 -- | The expression type is a fixed point of the polymorphic expression functor.
 --
 -- The variables are specialized to unquoted HIL 'Var' or quoted HCL
--- 'HCL.Value's.  This allows well-typed expressions using Haskell's types and
+-- 'HCL.Var's.  This allows well-typed expressions using Haskell's types and
 -- the more dubiously typed HIL expressions when necessary.
-type Expr s a = Fix (ExprF (Var s a) HCL.Encoding)
+type Expr s a = Fix (ExprF (Var s a))
 
 instance IsString a => IsString (Expr s a) where
-    fromString = value . fromString
+    fromString = expr . fromString
 
 instance Num a => Num (Expr s a) where
     (+)         = operator "+"
@@ -128,23 +95,23 @@ instance Num a => Num (Expr s a) where
     (*)         = operator "*"
     abs         = function "abs"    . pure
     signum      = function "signum" . pure
-    fromInteger = value . fromInteger
+    fromInteger = expr . fromInteger
 
 instance HCL.ToHCL a => HCL.ToHCL (Expr s a) where
-    toHCL = cata $ \case
-        Var    v     -> HCL.toHCL v
-        Quote  q     -> q
-        Prefix n xs  -> HCL.function n xs
-        Infix  n a b -> HCL.operator n a b
+    toHCL = interpolate
 
 -- Primitives
 
--- | A computed value.
-compute :: Text -> Expr s a
-compute v = Fix (Var (Compute v))
+-- | Specify a constant Haskell value.
+expr :: a -> Expr s a
+expr x = Fix (Var (Const x))
 
--- | The special value @null@ can be assigned to any field to represent the
--- absence of a value. This causes Terraform to omit the field from upstream API
+-- | Lift 'expr' through the type constructor.
+fexpr :: Functor f => f a -> Expr s (f (Expr s a))
+fexpr = expr . fmap expr
+
+-- | The special var @null@ can be assigned to any field to represent the
+-- absence of a var. This causes Terraform to omit the field from upstream API
 -- calls, which is important in some cases for triggering certain default
 -- behaviors.
 --
@@ -152,29 +119,36 @@ compute v = Fix (Var (Compute v))
 null :: Expr s a
 null = Fix (Var Null)
 
--- | Specify a constant Haskell value.
-value :: a -> Expr s a
-value x = Fix (Var (Const x))
+-- Specialized
 
--- | Specify a boolean attribute value. Equivalent to @value True@.
+-- | Specify a boolean attribute var. Equivalent to @var True@.
 true :: Expr s Bool
-true = value True
+true = expr True
 
--- | Specify a boolean attribute value. Equivalent to @value False@.
+-- | Specify a boolean attribute expr. Equivalent to @expr False@.
 false :: Expr s Bool
-false = value False
-
-heredoc :: JSON.ToJSON a => a -> Expr s Text
-heredoc x = Fix (Quote (HCL.heredoc x))
-
-string :: Text -> Expr s Text
-string = value
+false = expr False
 
 int :: Int -> Expr s Int
-int = value
+int = expr
 
-float :: Double -> Expr s Double
-float = value
+double :: Double -> Expr s Double
+double = expr
+
+text :: Text -> Expr s Text
+text = expr
+
+heredoc :: Text -> Expr s Text
+heredoc = quote . HCL.Encoding . Pretty.heredoc
+
+json :: Aeson.ToJSON a => a -> Expr s Text
+json = heredoc . HCL.render (HCL.layout { Pretty.pairs = pairs }) . HCL.fromJSON
+  where
+    pairs =
+        HCL.fromEncoding . HCL.pairs
+            . foldMap (uncurry pair)
+
+    pair k v = HCL.Value (Pretty.string k <> ": " <> HCL.encode v)
 
 -- Builtin Functions
 
@@ -186,51 +160,61 @@ float = value
 modulo :: Integral a => Expr s a -> Expr s a -> Expr s a
 modulo = operator "%"
 
--- | Joins the list with the specified delimiter.
---
--- See: <https://www.terraform.io/docs/configuration/interpolation.html#join-delim-list- join(delim, list)>
-join :: HCL.ToHCL a => Text -> [Expr s a] -> Expr s Text
-join sep xs = function "join" (value sep : map quote xs)
-
 -- | Read the contents of a file. The path is interpreted relative to the
 -- working directory.
 --
 -- See: <https://www.terraform.io/docs/configuration/interpolation.html#file-path- file(path)>
-file :: Expr s FilePath -> Expr s Text
-file path = function "file" [quote path]
+file :: Expr s FilePath -> Expr s ByteString
+file path = function "file" [quote (HCL.toHCL path)]
 
 -- Utilities
 
--- FIXME:
-quote :: HCL.ToHCL a => Expr s a -> Expr s Text
-quote = bicata (f . HCL.toHCL) f
+name :: Text -> Expr s a
+name x = Fix (Var (Name x))
+
+-- Interpolate takes an expression and gives you an HCL value
+interpolate :: HCL.ToHCL a => Expr s a -> HCL.Encoding
+interpolate = Fix.cata go
   where
-    f = Fix . Quote
+    go = \case
+        Var Null      -> HCL.toHCL ()
+        Var (Quote v) -> v
+        Var (Const x) -> HCL.toHCL x
+        Var (Name  n) -> escape $ Pretty.text n
+        Prefix n xs   -> escape $ Pretty.function n (map HCL.encode xs)
+        Infix  n a b  -> escape $ Pretty.operator n (HCL.encode a) (HCL.encode b)
+
+output :: HCL.ToHCL a => Expr s a -> HCL.Encoding
+output = Fix.cata go
+  where
+    go = \case
+        Var Null      -> HCL.toHCL ()
+        Var (Quote v) -> escape $ HCL.fromEncoding v
+        Var (Const x) -> escape $ HCL.fromEncoding $ HCL.toHCL x
+        Var (Name  n) -> escape $ Pretty.text n
+        Prefix n xs   -> escape $ Pretty.function n (map HCL.encode xs)
+        Infix  n a b  -> escape $ Pretty.operator n (HCL.encode a) (HCL.encode b)
+
+escape :: Pretty.Doc Builder -> HCL.Encoding
+escape = HCL.Encoding . Pretty.group layout . Pretty.quotes . Pretty.escape
+
+layout :: Layout
+layout = HCL.layout
+    { Pretty.newline = const mempty
+    , Pretty.items   = Pretty.function "list"
+    , Pretty.pairs   =
+        Pretty.function "map"
+            . concatMap (\(k, v) -> [Pretty.string k, v])
+    }
+
+-- Quote takes an HCL value and returns an expression.
+quote :: HCL.Encoding -> Expr s a
+quote x = Fix (Var (Quote x))
 
 -- | Construct an infix operator expression.
-operator :: Text -> Fix (ExprF a b) -> Fix (ExprF a b) -> Fix (ExprF a b)
+operator :: Text -> Expr s a -> Expr s a -> Expr s a
 operator n a b = Fix (Infix n a b)
 
 -- | Construct prefix (function application) expression.
-function :: Text -> [Fix (ExprF a b)] -> Fix (ExprF a b)
-function n = Fix . Prefix n
-
-unsafeErase :: Expr s a -> Expr s' a
-unsafeErase = bicata (Fix . Var . go) (Fix . Quote)
-  where
-    go = \case
-        Compute v -> Compute v
-        Const   x -> Const   x
-        Null      -> Null
-
-bicata
-    :: (a -> Fix (ExprF a' b'))
-    -> (b -> Fix (ExprF a' b'))
-    -> Fix (ExprF a  b)
-    -> Fix (ExprF a' b')
-bicata f g =
-    cata $ \case
-        Var    a     -> f a
-        Quote  b     -> g b
-        Prefix n xs  -> Fix (Prefix n xs)
-        Infix  n a b -> Fix (Infix  n a b)
+function :: Text -> [Expr s a] -> Expr s a
+function n xs = Fix (Prefix n xs)

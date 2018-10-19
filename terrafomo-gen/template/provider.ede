@@ -9,19 +9,22 @@
 {% include "_include/license.ede" %}
 module {{ namespace }}
     (
-    -- * {{ provider.name }} Provider Datatype
-      {{ provider.schema.name }} (..)
-    , {{ provider.schema.con.smart }}
-    , defaultProvider
-
     -- * {{ provider.name }} Specific Aliases
+      Provider
     , DataSource
     , Resource
+
+    -- * {{ provider.name }} Configuration
+    , currentVersion
+    , {{ provider.schema.con.smart }}
+    , {{ provider.schema.type }} (..)
+{% include "_include/mode-exports.ede" with schema = provider.schema %}
     ) where
 
-import Data.Functor  ((<$>))
-import Data.Function ((&))
-import Data.Proxy    (Proxy (Proxy))
+import Data.Function  ((&))
+import Data.Functor   ((<$>))
+import Data.Semigroup ((<>))
+import Data.Version   (Version, makeVersion, showVersion)
 
 import GHC.Base (($))
 
@@ -33,73 +36,67 @@ import {{ import.value }}
 import qualified {{ import.value }} as P
 {% endfor %}
 import qualified Terrafomo.HCL as TF
+import qualified Terrafomo.Lens as Lens
 import qualified Terrafomo.Schema as TF
 
-type DataSource a = TF.Resource {{ provider.schema.type }} ()               a
-type Resource   a = TF.Resource {{ provider.schema.type }} (TF.Lifecycle a) a
+type Provider   = TF.Provider {{ provider.schema.type }}
+type DataSource = TF.Resource {{ provider.schema.type }} TF.Ignored
+type Resource   = TF.Resource {{ provider.schema.type }} TF.Meta
+
+type instance TF.ProviderName {{ provider.schema.type }} = "{{ provider.original }}"
+
+currentVersion :: Version
+currentVersion = makeVersion [{% for branch in provider.version %}{{ branch.value }}{% if !branch.last %}, {% endif %}{% endfor %}]
 
 -- | The @{{ provider.original }}@ Terraform provider configuration.
---
--- See the <{{ provider.url }} terraform documentation>
--- for more information.
-data {{ provider.schema.type }} = {{ provider.schema.con.name }}
-{% include "_include/record.ede" with arguments = provider.schema.arguments %}
+{% include "_include/record.ede" with schema = provider.schema %}
 
-instance P.Hashable ({{ provider.schema.type }})
-
--- | Specify a new {{provider.name }} provider configuration.
-{{ provider.schema.con.smart }}
-  {% for param in provider.schema.parameters %}
-    {% if param.first %}::{% else %}->{% endif %} {{ param.value.type }} -- ^ Lens: 'P.{{ param.value.method }}', Field: '{{ param.value.name }}', HCL: @{{ param.value.original }}@{% if param.last %}
-    -> {{ provider.schema.type }}{% endif %}
-  {% else %}
-    :: {{ provider.schema.type }}
-  {% endfor %}
-{{ provider.schema.con.smart }}{% for param in provider.schema.parameters %} {{ param.value.name }}{% endfor %} =
-    {{ provider.schema.con.name }}
-      {% for field in provider.schema.arguments %}
-        {% if field.first %}{ {% else %}, {% endif %}{{ field.value.name }} = {{ field.value.default }}{% if field.last %}
-        }{% endif %}
-      {% endfor %}
-
-{- | The '{{ provider.name }}' provider with absent configuration that is used
-to instantiate new 'Resource's and 'DataSource's. Provider configuration can be
-overridden on a per-resource basis by using the 'Terrafomo.provider' lens, the
-'{{ provider.schema.con.smart }}' constructor, and any of the applicable lenses.
-
-For example:
-
-@
-import qualified Terrafomo as TF
-import qualified {{ namespace }} as {{ provider.name }}
-
-TF.newExampleResource "foo"
-    & TF.provider ?~
-          {{ provider.name }}.({{ provider.schema.con.smart }}
-          {% if !(provider.schema.parameters | empty) %}
-              -- Required arguments
-          {% endif %}
-          {% for param in provider.schema.parameters %}
-              {{ param.value.name }} -- (Required) '{{ param.value.type }}'
-          {% endfor %}
-          {% if !(provider.schema.arguments | empty) %}
-              -- Lenses
-          {% endif %}
-          {% for field in provider.schema.arguments %}
-              & {{ provider.name }}.{{ field.value.method }} .~ {{ field.value.default | prelude }} -- '{{ field.value.type }}'
-          {% endfor %}
-@
+{- | Specify a new {{ provider.name }} provider configuration.
+See the <{{ provider.url }} terraform documentation> for more information.
 -}
-defaultProvider :: TF.Provider {{ provider.schema.type }}
-defaultProvider =
-    TF.defaultProvider "{{ provider.original }}" (P.Just "~> {{ provider.version }}")
-      {% if provider.schema.arguments | empty %}
-        P.mempty
-      {% else %}
-        (\{{ provider.schema.con.name }}{..} -> P.mconcat
+{{ provider.schema.con.smart }}
+{% case provider.schema.mode %}
+{% when "record" %}
+    :: {{ provider.schema.type }} -- ^ The minimal/required arguments.
+    -> Provider
+{{ provider.schema.con.smart }} x =
+{% when "recordcon" %}
+    :: Provider
+{{ provider.schema.con.smart }} =
+{% when "recordcondata" %}
+    :: {{ provider.schema.required.type }} -- ^ The minimal/required arguments.
+    -> Provider
+{{ provider.schema.con.smart }} x =
+{% endcase %}
+    TF.Provider
+        { TF.providerVersion = P.Just ("~> " P.++ showVersion currentVersion)
+        , TF.providerConfig  =
+        {% if provider.schema.mode != "record" %}
           {% for field in provider.schema.arguments %}
-            {% if field.first %}[ {% else %}, {% endif %}{{ field.value.encoder }} {{ field.value.name }}{% if field.last %}
-            ]){% endif %}
+            {% if field.first %}({% if !(provider.schema.parameters | empty) %}let {{ provider.schema.required.con }}{..} = x in {% endif %}{{ provider.schema.con.name }}
+                { {% else %}    , {% endif %}{{ field.value.name }} = {{ field.value.default }}{% if field.last %}
+                }){% endif %}
+          {% else %}
+            {{ provider.schema.con.name }}
           {% endfor %}
-      {% endif %}
-{% include "_include/lenses.ede" with schema = provider.schema %}
+        {% else %}
+            x
+        {% endif %}
+        , TF.providerEncoder =
+          {% if provider.schema.arguments | empty %}
+            P.mempty
+          {% else %}
+            (\{{ provider.schema.con.name }}{..} ->
+{% include "_include/conflicts-encode.ede" with schema = provider.schema %}
+            )
+          {% endif %}
+        }
+{% include "_include/required.ede" with schema = provider.schema %}
+{% include "_include/conflicts.ede" with schema = provider.schema %}
+{% for field in provider.schema.arguments %}
+
+instance Lens.HasField "{{ field.value.original }}" f Provider ({{ field.value.type }}) where
+    field = Lens.providerLens P.. Lens.lens'
+        ({{ field.value.name }} :: {{ provider.schema.type }} -> {{ field.value.type }})
+        (\s a -> s { {{ field.value.name }} = a } :: {{ provider.schema.type }})
+{% endfor %}

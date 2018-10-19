@@ -11,19 +11,21 @@ import Data.Version   (Version)
 import GHC.Generics (Generic)
 
 import Terrafomo.Gen.JSON ((.=))
-import Terrafomo.Gen.Name
+import Terrafomo.Gen.Name (ConName, DataName, Key, LabelName, ProviderName,
+                           VarName)
 import Terrafomo.Gen.Type (Type)
 
 import qualified Data.Foldable                    as Fold
 import qualified Data.HashMap.Strict              as HashMap
 import qualified Data.List                        as List
-import qualified Data.Set                         as Set
 import qualified Data.Text                        as Text
 import qualified Data.Text.Lazy                   as LText
 import qualified Data.Text.Lazy.Builder           as Build
 import qualified Data.Text.Lazy.Builder.Int       as Build
 import qualified Data.Text.Lazy.Builder.RealFloat as Build
+import qualified Data.Version                     as Version
 import qualified Terrafomo.Gen.JSON               as JSON
+import qualified Terrafomo.Gen.Name               as Name
 import qualified Terrafomo.Gen.Text               as Text
 import qualified Terrafomo.Gen.Type               as Type
 import qualified Text.Wrap                        as Wrap
@@ -32,11 +34,11 @@ data Provider = Provider'
     { providerName         :: !ProviderName
     , providerPackage      :: !Text
     , providerDependencies :: !(Set Text)
-    , providerVersion      :: !Version
+    , providerVersion      :: ![Int]
     , providerOriginal     :: !Text
     , providerUrl          :: !Text
-    , providerResources    :: ![Resource]
     , providerDataSources  :: ![Resource]
+    , providerResources    :: ![Resource]
     , providerSettings     :: ![Settings]
     , providerPrimitives   :: ![Primitive]
     , providerSchema       :: !Settings
@@ -44,6 +46,16 @@ data Provider = Provider'
 
 instance JSON.ToJSON Provider where
     toJSON = JSON.genericToJSON (JSON.options "provider")
+
+providerPackageVersion :: Version -> Provider -> Version
+providerPackageVersion x = bumpVersion x . providerVersion
+
+bumpVersion :: Version -> [Int] -> Version
+bumpVersion x ys =
+    let pvp       = take 4 . (++ repeat 0)
+        [a,b,c,d] = pvp (Version.versionBranch x)
+        [e,f,g,_] = pvp ys
+     in Version.makeVersion [a, b + e, c + f, d + g]
 
 data Resource = Resource'
     { resourceUrl    :: !Text
@@ -74,29 +86,37 @@ instance JSON.ToJSON Primitive where
 
 data Schema a = Schema'
     { schemaName       :: !DataName
+    , schemaProvider   :: !ProviderName
     , schemaOriginal   :: !Text
     , schemaKey        :: !Key
     , schemaType       :: !Type
     , schemaCon        :: !Con
+    , schemaRequired   :: !Required
     , schemaThreaded   :: !Bool
     , schemaArguments  :: ![Field a]
-    , schemaAttributes :: ![Field LabelName]
+    , schemaAttributes :: ![Field a]
+    , schemaConflicts  :: !(Maybe [Variant])
     } deriving (Show, Eq, Ord, Generic)
 
 instance JSON.ToJSON a => JSON.ToJSON (Schema a) where
     toJSON x@Schema'{..} =
-        JSON.object
+        -- FIXME: Move constructor related into elab phase, not serialisation.
+        let mode = schemaMode x
+         in JSON.object
             [ "name"         .= schemaName
+            , "provider"     .= schemaProvider
             , "original"     .= schemaOriginal
             , "key"          .= schemaKey
             , "type"         .= schemaType
-            , "con"          .= schemaCon
+            , "con"          .= conModeRename schemaCon mode
             , "threaded"     .= schemaThreaded
             , "dependencies" .= schemaDependencies x
             , "arguments"    .= schemaArguments
             , "attributes"   .= schemaAttributes
             , "parameters"   .= schemaParameters x
-            , "conflicts"    .= schemaConflicts  x
+            , "required"     .= schemaRequired
+            , "conflicts"    .= schemaConflicts
+            , "mode"         .= mode
             ]
 
 schemaParameters :: Schema a -> [Field a]
@@ -112,29 +132,66 @@ schemaParameters =
         , fieldOriginal x
         )
 
-schemaConflicts :: Schema a -> [Field a]
-schemaConflicts = filter (not . Set.null . fieldConflicts) . schemaArguments
-
 schemaDependencies :: Schema a -> [DataName]
 schemaDependencies x =
         let go = concatMap (Fold.toList . fieldType)
          in go (schemaArguments  x)
          ++ go (schemaAttributes x)
 
+data Mode
+    = Record
+    -- ^ All required parameters with no defaults, only a record is needed.
+    | RecordCon
+    -- ^ No required parameters, only a record and smart constructor are needed.
+    | RecordConData
+    -- ^ A data instance, record, and smart constructor are needed.
+      deriving (Show, Eq, Ord)
+
+instance JSON.ToJSON Mode where
+    toJSON = JSON.toJSON . Text.toLower . Text.pack . show
+
+schemaMode :: Schema a -> Mode
+schemaMode x
+    | null (schemaArguments x)       = Record
+    | allRequired && not anyDefaults = Record
+    | null (schemaParameters x)      = RecordCon
+    | otherwise                      = RecordConData
+  where
+    allRequired =
+        on (==) length (schemaParameters x) (schemaArguments x)
+
+    anyDefaults =
+        all (go . fieldDefault) (schemaArguments x)
+      where
+        go = \case
+            DefaultNothing  -> False
+            DefaultParam {} -> False
+            _               -> True
+
+conModeRename :: Con -> Mode -> Con
+conModeRename x = \case
+    Record        -> x
+    RecordCon     -> renamed
+    RecordConData -> renamed
+  where
+    renamed =
+        x { conName = Name.unsafeRename (<> "_Internal") (conName x)
+          }
+
 data Field a = Field'
     { fieldName      :: !LabelName
     , fieldOriginal  :: !Text
-    , fieldHelp      :: !Help
-    , fieldClass     :: !DataName
     , fieldMethod    :: !VarName
+    , fieldHelp      :: !Help
     , fieldType      :: !Type
-    , fieldConflicts :: !(Set a)
     , fieldThreaded  :: !Bool
     , fieldRequired  :: !Bool
     , fieldComputed  :: !Bool
     , fieldForceNew  :: !Bool
     , fieldDefault   :: !Default
     , fieldDefaults  :: !(Maybe Text)
+    , fieldConflicts :: !(Set a)
+    , fieldVariant   :: !Bool
     } deriving (Show, Eq, Ord, Generic)
 
 instance JSON.ToJSON a => JSON.ToJSON (Field a) where
@@ -143,18 +200,17 @@ instance JSON.ToJSON a => JSON.ToJSON (Field a) where
             [ "name"      .= fieldName
             , "original"  .= fieldOriginal
             , "help"      .= fieldHelp
-            , "class"     .= fieldClass
-            , "method"    .= fieldMethod
             , "type"      .= fieldType
-            , "conflicts" .= fieldConflicts
             , "threaded"  .= fieldThreaded
             , "required"  .= fieldRequired
             , "computed"  .= fieldComputed
             , "forceNew"  .= fieldForceNew
             , "default"   .= fieldDefault
             , "defaults"  .= fieldDefaults
+            , "conflicts" .= fieldConflicts
             , "validate"  .= fieldValidate x
             , "encoder"   .= fieldEncoder  x
+            , "variant"   .= fieldVariant
             ]
 
 fieldValidate :: Field a -> Bool
@@ -164,8 +220,62 @@ fieldEncoder :: Field a -> Text
 fieldEncoder Field'{fieldOriginal, fieldDefault}
     | DefaultNothing == fieldDefault =
         "P.maybe P.mempty (TF.pair " <> Text.quotes fieldOriginal <> ")"
-    | otherwise =
+    | otherwise      =
         "TF.pair " <> Text.quotes fieldOriginal
+
+fieldConflictEncoder :: Field a -> Text
+fieldConflictEncoder Field'{fieldDefault}
+    | DefaultNothing == fieldDefault =
+        "P.flip (P.maybe P.mempty)"
+    | otherwise      =
+        "P.flip ($)"
+
+data Variant = Variant
+    { variantName    :: !DataName
+    , variantLabel   :: !LabelName
+    , variantMethod  :: !VarName
+    , variantType    :: !Type
+    , variantEncoder :: !Text
+    , variantCons    :: ![(ConName, Field Conflict)]
+    } deriving (Show, Eq, Ord, Generic)
+
+instance JSON.ToJSON Variant where
+    toJSON Variant{..} =
+        let field (k, Field'{..}) =
+                JSON.object
+                    [ "name"     .= k
+                    , "original" .= fieldOriginal
+                    , "type"     .= fieldType
+                    , "help"     .= fieldHelp
+                    , "forceNew" .= fieldForceNew
+                    ]
+
+         in JSON.object
+                [ "name"    .= variantName
+                , "label"   .= variantLabel
+                , "method"  .= variantMethod
+                , "type"    .= variantType
+                , "encoder" .= variantEncoder
+                , "cons"    .= map field variantCons
+                ]
+
+data Required = Required
+    { requiredName :: !DataName
+    , requiredCon  :: !ConName
+    , requiredType :: !Type
+    } deriving (Show, Eq, Ord, Generic)
+
+instance JSON.ToJSON Required where
+    toJSON = JSON.genericToJSON (JSON.options "required")
+
+data Conflict = Conflict
+    { conflictName     :: !LabelName
+    , conflictOriginal :: !Text
+    , conflictDefault  :: !Default
+    } deriving (Show, Eq, Ord, Generic)
+
+instance JSON.ToJSON Conflict where
+    toJSON = JSON.genericToJSON (JSON.options "conflict")
 
 data Con = Con
     { conName  :: !ConName
@@ -174,15 +284,6 @@ data Con = Con
 
 instance JSON.ToJSON Con where
     toJSON = JSON.genericToJSON (JSON.options "con")
-
-data Conflict = Conflict
-    { conflictName    :: !LabelName
-    , conflictMethod  :: !VarName
-    , conflictDefault :: !Default
-    } deriving (Show, Eq, Ord, Generic)
-
-instance JSON.ToJSON Conflict where
-    toJSON = JSON.genericToJSON (JSON.options "conflict")
 
 data Default
     = DefaultNothing
@@ -200,8 +301,8 @@ instance JSON.ToJSON Default where
       where
         go = \case
             DefaultNothing     -> "P.Nothing"
-            DefaultParam l     -> fromName l
-            DefaultExpr  x     -> "TF.value " <> go x
+            DefaultParam l     -> Name.fromName l
+            DefaultExpr  x     -> "TF.expr " <> go x
             DefaultText  x     -> Text.quotes (Text.escape x)
             DefaultBool  True  -> "P.True"
             DefaultBool  False -> "P.False"
@@ -223,8 +324,8 @@ instance JSON.ToJSON Default where
                   DefaultNothing  -> go x
                   DefaultParam {} -> go x
                   DefaultExpr  {} ->
-                      "TF.value " <> Text.parens (fromName c <> " " <> go (unwrap x))
-                  _               -> fromName c <> " " <> go x
+                      "TF.expr " <> Text.parens (Name.fromName c <> " " <> go (unwrap x))
+                  _               -> Name.fromName c <> " " <> go x
 
         unwrap = \case
             DefaultExpr x -> unwrap x
@@ -241,15 +342,6 @@ defaultParameter = go
         DefaultExpr    x -> go x
         _                -> False
 
-data Class = Class'
-    { className     :: !DataName
-    , classMethod   :: !VarName
-    , classComputed :: !Bool
-    } deriving (Show, Eq, Ord, Generic)
-
-instance JSON.ToJSON Class where
-    toJSON = JSON.genericToJSON (JSON.options "class")
-
 newtype Help = Help [Text]
    deriving (Show, Eq, Ord, JSON.ToJSON)
 
@@ -261,3 +353,12 @@ newHelp = \case
              . Text.unwords
              . Text.lines
              $ Text.upperHead x
+
+data Class = Class'
+    { classOriginal :: !Text
+    , classMethod   :: !VarName
+    , classComputed :: !Bool
+    } deriving (Show, Eq, Ord, Generic)
+
+instance JSON.ToJSON Class where
+    toJSON = JSON.genericToJSON (JSON.options "class")

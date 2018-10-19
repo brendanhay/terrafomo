@@ -16,119 +16,103 @@
 --
 module Terrafomo.Google.Provider
     (
-    -- * Google Provider Datatype
-      Google (..)
-    , newProvider
-    , defaultProvider
-
     -- * Google Specific Aliases
+      Provider
     , DataSource
     , Resource
+
+    -- * Google Configuration
+    , currentVersion
+    , newProvider
+    , Google (..)
     ) where
 
-import Data.Function ((&))
-import Data.Functor  ((<$>))
-import Data.Proxy    (Proxy (Proxy))
+import Data.Function  ((&))
+import Data.Functor   ((<$>))
+import Data.Semigroup ((<>))
+import Data.Version   (Version, makeVersion, showVersion)
 
 import GHC.Base (($))
 
 import Terrafomo.Google.Settings
 
-import qualified Data.Hashable          as P
-import qualified Data.HashMap.Strict    as P
+import qualified Data.Functor.Const     as P
 import qualified Data.List.NonEmpty     as P
+import qualified Data.Map.Strict        as P
 import qualified Data.Maybe             as P
 import qualified Data.Text.Lazy         as P
-import qualified GHC.Generics           as P
-import qualified Lens.Micro             as P
 import qualified Prelude                as P
-import qualified Terrafomo.Google.Lens  as P
 import qualified Terrafomo.Google.Types as P
 import qualified Terrafomo.HCL          as TF
+import qualified Terrafomo.Lens         as Lens
 import qualified Terrafomo.Schema       as TF
 
-type DataSource a = TF.Resource Google ()               a
-type Resource   a = TF.Resource Google (TF.Lifecycle a) a
+type Provider   = TF.Provider Google
+type DataSource = TF.Resource Google TF.Ignored
+type Resource   = TF.Resource Google TF.Meta
+
+type instance TF.ProviderName Google = "google"
+
+currentVersion :: Version
+currentVersion = makeVersion [1, 18, 0]
 
 -- | The @google@ Terraform provider configuration.
---
--- See the <https://www.terraform.io/docs/providers/google/index.html terraform documentation>
--- for more information.
-data Google = Google'
-    { _credentials :: P.Maybe P.Text
-    -- ^ @credentials@ - (Optional)
-    --
-    , _project     :: P.Maybe P.Text
-    -- ^ @project@ - (Optional)
-    --
-    , _region      :: P.Maybe P.Text
-    -- ^ @region@ - (Optional)
-    --
-    , _zone        :: P.Maybe P.Text
-    -- ^ @zone@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
+data Google = Google_Internal
+    { credentials :: P.Maybe P.Text
+    -- ^ @credentials@
+    -- - (Optional)
+    , project     :: P.Maybe P.Text
+    -- ^ @project@
+    -- - (Optional)
+    , region      :: P.Maybe P.Text
+    -- ^ @region@
+    -- - (Optional)
+    , zone        :: P.Maybe P.Text
+    -- ^ @zone@
+    -- - (Optional)
+    } deriving (P.Show)
 
-instance P.Hashable (Google)
-
--- | Specify a new Google provider configuration.
+{- | Specify a new Google provider configuration.
+See the <https://www.terraform.io/docs/providers/google/index.html terraform documentation> for more information.
+-}
 newProvider
-    :: Google
+    :: Provider
 newProvider =
-    Google'
-        { _credentials = P.Nothing
-        , _project = P.Nothing
-        , _region = P.Nothing
-        , _zone = P.Nothing
+    TF.Provider
+        { TF.providerVersion = P.Just ("~> " P.++ showVersion currentVersion)
+        , TF.providerConfig  =
+            (Google_Internal
+                { credentials = P.Nothing
+                , project = P.Nothing
+                , region = P.Nothing
+                , zone = P.Nothing
+                })
+        , TF.providerEncoder =
+            (\Google_Internal{..} ->
+          P.mempty
+       <> P.maybe P.mempty (TF.pair "credentials") credentials
+       <> P.maybe P.mempty (TF.pair "project") project
+       <> P.maybe P.mempty (TF.pair "region") region
+       <> P.maybe P.mempty (TF.pair "zone") zone
+            )
         }
 
-{- | The 'Google' provider with absent configuration that is used
-to instantiate new 'Resource's and 'DataSource's. Provider configuration can be
-overridden on a per-resource basis by using the 'Terrafomo.provider' lens, the
-'newProvider' constructor, and any of the applicable lenses.
+instance Lens.HasField "credentials" f Provider (P.Maybe P.Text) where
+    field = Lens.providerLens P.. Lens.lens'
+        (credentials :: Google -> P.Maybe P.Text)
+        (\s a -> s { credentials = a } :: Google)
 
-For example:
+instance Lens.HasField "project" f Provider (P.Maybe P.Text) where
+    field = Lens.providerLens P.. Lens.lens'
+        (project :: Google -> P.Maybe P.Text)
+        (\s a -> s { project = a } :: Google)
 
-@
-import qualified Terrafomo as TF
-import qualified Terrafomo.Google.Provider as Google
+instance Lens.HasField "region" f Provider (P.Maybe P.Text) where
+    field = Lens.providerLens P.. Lens.lens'
+        (region :: Google -> P.Maybe P.Text)
+        (\s a -> s { region = a } :: Google)
 
-TF.newExampleResource "foo"
-    & TF.provider ?~
-          Google.(newProvider
-              -- Lenses
-              & Google.credentials .~ Nothing -- 'P.Maybe P.Text'
-              & Google.project .~ Nothing -- 'P.Maybe P.Text'
-              & Google.region .~ Nothing -- 'P.Maybe P.Text'
-              & Google.zone .~ Nothing -- 'P.Maybe P.Text'
-@
--}
-defaultProvider :: TF.Provider Google
-defaultProvider =
-    TF.defaultProvider "google" (P.Just "~> 1.16")
-        (\Google'{..} -> P.mconcat
-            [ P.maybe P.mempty (TF.pair "credentials") _credentials
-            , P.maybe P.mempty (TF.pair "project") _project
-            , P.maybe P.mempty (TF.pair "region") _region
-            , P.maybe P.mempty (TF.pair "zone") _zone
-            ])
-
-instance P.HasCredentials (Google) (P.Maybe P.Text) where
-    credentials =
-        P.lens (_credentials :: Google -> P.Maybe P.Text)
-            (\s a -> s { _credentials = a } :: Google)
-
-instance P.HasProject (Google) (P.Maybe P.Text) where
-    project =
-        P.lens (_project :: Google -> P.Maybe P.Text)
-            (\s a -> s { _project = a } :: Google)
-
-instance P.HasRegion (Google) (P.Maybe P.Text) where
-    region =
-        P.lens (_region :: Google -> P.Maybe P.Text)
-            (\s a -> s { _region = a } :: Google)
-
-instance P.HasZone (Google) (P.Maybe P.Text) where
-    zone =
-        P.lens (_zone :: Google -> P.Maybe P.Text)
-            (\s a -> s { _zone = a } :: Google)
+instance Lens.HasField "zone" f Provider (P.Maybe P.Text) where
+    field = Lens.providerLens P.. Lens.lens'
+        (zone :: Google -> P.Maybe P.Text)
+        (\s a -> s { zone = a } :: Google)

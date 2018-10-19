@@ -1,3 +1,3 @@
 output "computed" {
-  value = "${data.foo.default.attr}"
+  value = "${var.name.attr}"
 }

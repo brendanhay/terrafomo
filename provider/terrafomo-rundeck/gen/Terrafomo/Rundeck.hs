@@ -22,18 +22,11 @@ module Terrafomo.Rundeck
     -- * Resources
     , module Terrafomo.Rundeck.Resources
 
-    -- * DataSources
-    , module Terrafomo.Rundeck.DataSources
-
     -- * Settings
     , module Terrafomo.Rundeck.Settings
 
-    -- * Overloaded Lenses
-    , module Terrafomo.Rundeck.Lens
     ) where
 
-import Terrafomo.Rundeck.DataSources
-import Terrafomo.Rundeck.Lens
 import Terrafomo.Rundeck.Provider
 import Terrafomo.Rundeck.Resources
 import Terrafomo.Rundeck.Settings

@@ -22,18 +22,11 @@ module Terrafomo.Datadog
     -- * Resources
     , module Terrafomo.Datadog.Resources
 
-    -- * DataSources
-    , module Terrafomo.Datadog.DataSources
-
     -- * Settings
     , module Terrafomo.Datadog.Settings
 
-    -- * Overloaded Lenses
-    , module Terrafomo.Datadog.Lens
     ) where
 
-import Terrafomo.Datadog.DataSources
-import Terrafomo.Datadog.Lens
 import Terrafomo.Datadog.Provider
 import Terrafomo.Datadog.Resources
 import Terrafomo.Datadog.Settings

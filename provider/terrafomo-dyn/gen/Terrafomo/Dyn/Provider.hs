@@ -16,118 +16,92 @@
 --
 module Terrafomo.Dyn.Provider
     (
-    -- * Dyn Provider Datatype
-      Dyn (..)
-    , newProvider
-    , defaultProvider
-
     -- * Dyn Specific Aliases
+      Provider
     , DataSource
     , Resource
+
+    -- * Dyn Configuration
+    , currentVersion
+    , newProvider
+    , Dyn (..)
     ) where
 
-import Data.Function ((&))
-import Data.Functor  ((<$>))
-import Data.Proxy    (Proxy (Proxy))
+import Data.Function  ((&))
+import Data.Functor   ((<$>))
+import Data.Semigroup ((<>))
+import Data.Version   (Version, makeVersion, showVersion)
 
 import GHC.Base (($))
 
-import Terrafomo.Dyn.Settings
 
-import qualified Data.Hashable       as P
-import qualified Data.HashMap.Strict as P
+import qualified Data.Functor.Const  as P
 import qualified Data.List.NonEmpty  as P
+import qualified Data.Map.Strict     as P
 import qualified Data.Maybe          as P
 import qualified Data.Text.Lazy      as P
-import qualified GHC.Generics        as P
-import qualified Lens.Micro          as P
 import qualified Prelude             as P
-import qualified Terrafomo.Dyn.Lens  as P
 import qualified Terrafomo.Dyn.Types as P
 import qualified Terrafomo.HCL       as TF
+import qualified Terrafomo.Lens      as Lens
 import qualified Terrafomo.Schema    as TF
 
-type DataSource a = TF.Resource Dyn ()               a
-type Resource   a = TF.Resource Dyn (TF.Lifecycle a) a
+type Provider   = TF.Provider Dyn
+type DataSource = TF.Resource Dyn TF.Ignored
+type Resource   = TF.Resource Dyn TF.Meta
+
+type instance TF.ProviderName Dyn = "dyn"
+
+currentVersion :: Version
+currentVersion = makeVersion [1, 1, 0]
 
 -- | The @dyn@ Terraform provider configuration.
---
--- See the <https://www.terraform.io/docs/providers/dyn/index.html terraform documentation>
--- for more information.
-data Dyn = Dyn'
-    { _customerName :: P.Text
-    -- ^ @customer_name@ - (Required)
+data Dyn = Dyn
+    { customer_name :: P.Text
+    -- ^ @customer_name@
+    -- - (Required)
     -- A Dyn customer name.
-    --
-    , _password     :: P.Text
-    -- ^ @password@ - (Required)
+    , password      :: P.Text
+    -- ^ @password@
+    -- - (Required)
     -- The Dyn password.
-    --
-    , _username     :: P.Text
-    -- ^ @username@ - (Required)
+    , username      :: P.Text
+    -- ^ @username@
+    -- - (Required)
     -- A Dyn username.
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show)
 
-instance P.Hashable (Dyn)
-
--- | Specify a new Dyn provider configuration.
+{- | Specify a new Dyn provider configuration.
+See the <https://www.terraform.io/docs/providers/dyn/index.html terraform documentation> for more information.
+-}
 newProvider
-    :: P.Text -- ^ Lens: 'P.customerName', Field: '_customerName', HCL: @customer_name@
-    -> P.Text -- ^ Lens: 'P.password', Field: '_password', HCL: @password@
-    -> P.Text -- ^ Lens: 'P.username', Field: '_username', HCL: @username@
-    -> Dyn
-newProvider _customerName _password _username =
-    Dyn'
-        { _customerName = _customerName
-        , _password = _password
-        , _username = _username
+    :: Dyn -- ^ The minimal/required arguments.
+    -> Provider
+newProvider x =
+    TF.Provider
+        { TF.providerVersion = P.Just ("~> " P.++ showVersion currentVersion)
+        , TF.providerConfig  =
+            x
+        , TF.providerEncoder =
+            (\Dyn{..} ->
+          P.mempty
+       <> TF.pair "customer_name" customer_name
+       <> TF.pair "password" password
+       <> TF.pair "username" username
+            )
         }
 
-{- | The 'Dyn' provider with absent configuration that is used
-to instantiate new 'Resource's and 'DataSource's. Provider configuration can be
-overridden on a per-resource basis by using the 'Terrafomo.provider' lens, the
-'newProvider' constructor, and any of the applicable lenses.
+instance Lens.HasField "customer_name" f Provider (P.Text) where
+    field = Lens.providerLens P.. Lens.lens'
+        (customer_name :: Dyn -> P.Text)
+        (\s a -> s { customer_name = a } :: Dyn)
 
-For example:
+instance Lens.HasField "password" f Provider (P.Text) where
+    field = Lens.providerLens P.. Lens.lens'
+        (password :: Dyn -> P.Text)
+        (\s a -> s { password = a } :: Dyn)
 
-@
-import qualified Terrafomo as TF
-import qualified Terrafomo.Dyn.Provider as Dyn
-
-TF.newExampleResource "foo"
-    & TF.provider ?~
-          Dyn.(newProvider
-              -- Required arguments
-              _customerName -- (Required) 'P.Text'
-              _password -- (Required) 'P.Text'
-              _username -- (Required) 'P.Text'
-              -- Lenses
-              & Dyn.customerName .~ _customerName -- 'P.Text'
-              & Dyn.password .~ _password -- 'P.Text'
-              & Dyn.username .~ _username -- 'P.Text'
-@
--}
-defaultProvider :: TF.Provider Dyn
-defaultProvider =
-    TF.defaultProvider "dyn" (P.Just "~> 1.1")
-        (\Dyn'{..} -> P.mconcat
-            [ TF.pair "customer_name" _customerName
-            , TF.pair "password" _password
-            , TF.pair "username" _username
-            ])
-
-instance P.HasCustomerName (Dyn) (P.Text) where
-    customerName =
-        P.lens (_customerName :: Dyn -> P.Text)
-            (\s a -> s { _customerName = a } :: Dyn)
-
-instance P.HasPassword (Dyn) (P.Text) where
-    password =
-        P.lens (_password :: Dyn -> P.Text)
-            (\s a -> s { _password = a } :: Dyn)
-
-instance P.HasUsername (Dyn) (P.Text) where
-    username =
-        P.lens (_username :: Dyn -> P.Text)
-            (\s a -> s { _username = a } :: Dyn)
+instance Lens.HasField "username" f Provider (P.Text) where
+    field = Lens.providerLens P.. Lens.lens'
+        (username :: Dyn -> P.Text)
+        (\s a -> s { username = a } :: Dyn)

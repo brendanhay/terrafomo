@@ -28,12 +28,9 @@ module Terrafomo.Rancher
     -- * Settings
     , module Terrafomo.Rancher.Settings
 
-    -- * Overloaded Lenses
-    , module Terrafomo.Rancher.Lens
     ) where
 
 import Terrafomo.Rancher.DataSources
-import Terrafomo.Rancher.Lens
 import Terrafomo.Rancher.Provider
 import Terrafomo.Rancher.Resources
 import Terrafomo.Rancher.Settings

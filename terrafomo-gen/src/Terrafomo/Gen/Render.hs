@@ -1,8 +1,9 @@
 module Terrafomo.Gen.Render where
 
+import Data.Version (Version)
 import Data.Aeson     ((.=))
 import Data.Bifunctor (second)
-import Data.Maybe     (fromMaybe)
+import Data.Maybe     (catMaybes)
 import Data.Semigroup ((<>))
 import Data.Set       (Set)
 import Data.Text      (Text)
@@ -13,6 +14,7 @@ import Terrafomo.Gen.Name (ProviderName)
 
 import Text.EDE.Filters ((@:))
 
+import qualified Data.Version as Version
 import qualified Data.Aeson.Types    as JSON
 import qualified Data.HashMap.Strict as HashMap
 import qualified Data.Set            as Set
@@ -22,52 +24,64 @@ import qualified Terrafomo.Gen.NS    as NS
 import qualified Text.EDE            as EDE
 
 data Templates a = Templates
-    { packageTemplate  :: !a -- ^ Package YAML
+    { cabalTemplate    :: !a -- ^ Cabal file
     , preludeTemplate  :: !a -- ^ Top-level export everything
     , providerTemplate :: !a -- ^ Provider type
     , contentsTemplate :: !a -- ^ Re-export of {DataSource,Resource,Settings}0..N
     , resourceTemplate :: !a -- ^ DataSource/Resource types
     , settingsTemplate :: !a -- ^ Settings types
     , typesTemplate    :: !a -- ^ Skeleton src/*/Types.hs
-    , lensesTemplate   :: !a -- ^ Overloaded lens classes
---    , primitivesTemplate :: !a
     } deriving (Show, Functor, Foldable, Traversable)
 
-package
+cabal
     :: Templates EDE.Template
     -> Provider
+    -> Version
+    -> Integer
+    -> [NS]
     -> Either String LText.Text
-package tmpls p =
-    let name = providerName p
-     in render (packageTemplate tmpls)
-        [ "package"      .= providerPackage      p
-        , "dependencies" .= providerDependencies p
-        , "exposed"      .=
-            Set.fromList
-                [ NS.contents    name
-                , NS.provider    name
-                , NS.datasources name
-                , NS.resources   name
-                , NS.settings    name
-                , NS.lenses      name
-                , NS.types       name
-                ]
+cabal tmpls p version year (Set.fromList -> namespaces) =
+    let name    = providerName p
+        showVer = Text.pack . Version.showVersion
+        exposed = Set.fromList $ catMaybes
+            [ Just (NS.contents name)
+            , Just (NS.provider name)
+            , Just (NS.types    name)
+            , just (providerSettings    p) (NS.settings    name)
+            , just (providerDataSources p) (NS.datasources name)
+            , just (providerResources   p) (NS.resources   name)
+            ]
+     in render (cabalTemplate tmpls)
+        [ "package"      .= providerPackage p
+        , "original"     .= providerOriginal p
+        , "year"         .= year
+        , "exposed"      .= exposed
+        , "other"        .= Set.difference namespaces exposed
+        , "version"      .=
+            JSON.object
+              [ "terrafomo" .= showVer version
+              , "package"   .= showVer (providerPackageVersion version p)
+              , "provider"  .= showVer (Version.makeVersion (providerVersion p))
+              ]
+        , "dependencies" .=
+            Set.insert ("terrafomo ^>= " <> showVer version)
+                       (providerDependencies p)
         ]
 
 prelude
     :: Templates EDE.Template
-    -> ProviderName
+    -> Provider
     -> Either String (NS, LText.Text)
 prelude tmpls p =
-    let ns = NS.contents p
+    let name = providerName p
+        ns   = NS.contents name
      in second (ns,) $ render (preludeTemplate tmpls)
         [ "namespace"   .= ns
-        , "provider"    .= NS.provider    p
-        , "datasources" .= NS.datasources p
-        , "resources"   .= NS.resources   p
-        , "settings"    .= NS.settings    p
-        , "lenses"      .= NS.lenses      p
-        , "types"       .= NS.types       p
+        , "provider"    .= NS.provider name
+        , "types"       .= NS.types    name
+        , "settings"    .= just (providerSettings    p) (NS.settings    name)
+        , "datasources" .= just (providerDataSources p) (NS.datasources name)
+        , "resources"   .= just (providerResources   p) (NS.resources   name)
         ]
 
 provider
@@ -81,31 +95,14 @@ provider tmpls p =
         [ "namespace"   .= ns
         , "provider"    .= p
         , "unqualified" .=
-            (Set.fromList
-                [ NS.settings name
+            (Set.fromList $ catMaybes
+                [ just (providerSettings p) (NS.settings name)
                 ])
         , "qualified"   .=
             (Set.fromList
-                [ NS.lenses name
-                , NS.types  name
+                [ NS.types name
                 ] <> NS.prelude)
         ]
-
--- primitives
---     :: Templates EDE.Template
---     -> ProviderName
---     -> NS
---     -> [Primitive]
---     -> Either String LText.Text
--- primitives tmpls p ns xs =
---     render (primitivesTemplate tmpls)
---         [ "namespace"  .= ns
---         , "primitives" .= xs
---         , "qualified"  .=
---             (Set.fromList
---                 [ NS.types p
---                 ] <> NS.prelude)
---         ]
 
 contents
     :: Templates EDE.Template
@@ -122,27 +119,26 @@ contents tmpls heading ns namespaces =
 
 resources
     :: Templates EDE.Template
-    -> ProviderName
+    -> Provider
     -> Text
     -> NS
     -> [Resource]
     -> Either String LText.Text
 resources tmpls p typ ns xs =
-    render (resourceTemplate tmpls)
+    let name = providerName p
+     in render (resourceTemplate tmpls)
         [ "namespace"   .= ns
-        , "provider"    .= p
+        , "provider"    .= name
         , "type"        .= typ
         , "resources"   .= xs
         , "unqualified" .=
-            (Set.fromList
-                [ NS.settings p
+            (Set.fromList $ catMaybes
+                [ just (providerSettings p) (NS.settings name)
                 ])
         , "qualified"   .=
             (Set.fromList
-                [ NS.lenses     p
---                , NS.primitives p
-                , NS.provider   p
-                , NS.types      p
+                [ NS.provider name
+                , NS.types    name
                 ] <> NS.prelude)
         ]
 
@@ -152,45 +148,39 @@ settings
     -> NS
     -> [Settings]
     -> Either String LText.Text
-settings tmpls p ns xs =
+settings tmpls name ns xs =
     render (settingsTemplate tmpls)
         [ "namespace"   .= ns
         , "settings"    .= xs
         , "unqualified" .= (Set.empty :: Set NS) -- (NS.primitives p)
         , "qualified"   .=
             (Set.fromList
-                [ NS.lenses p
-                , NS.types  p
+                [ NS.types name
                 ] <> NS.prelude)
-        ]
-
-lenses
-    :: Templates EDE.Template
-    -> NS
-    -> (Set Class, Set Class)
-    -> Either String LText.Text
-lenses tmpls ns (args, attrs) =
-    render (lensesTemplate tmpls)
-        [ "namespace"  .= ns
-        , "arguments"  .= args
-        , "attributes" .= attrs
         ]
 
 types
     :: Templates EDE.Template
     -> ProviderName
     -> Either String (NS, LText.Text)
-types tmpls p =
-    let ns = NS.types p
+types tmpls name =
+    let ns = NS.types name
      in second (ns,) $ render (typesTemplate tmpls)
         [ "namespace"   .= ns
-        , "unqualified" .= [NS.lenses p]
+        , "unqualified" .= (Set.empty :: Set NS)
         ]
 
 render :: EDE.Template -> [JSON.Pair] -> Either String LText.Text
 render tmpl = EDE.eitherRenderWith filters tmpl . EDE.fromPairs
   where
     filters = HashMap.fromList
-        [ "head"    @: Text.take 1
-        , "prelude" @: (\x -> fromMaybe x (Text.stripPrefix "P." x))
+        [ "head"      @: Text.take 1
+        , "unqualify" @: (\x -> Text.replace "TF." "" (Text.replace "P." "" x))
+        , "prime"     @: (Text.replace " s " " s' ")
+        , "pad"       @: (\x -> x <> Text.replicate (max 0 (30 - Text.length x)) " ")
+        , "join"      @: Text.intercalate " "
         ]
+
+just :: [a] -> b -> Maybe b
+just xs x = if null xs then Nothing else Just x
+

@@ -22,18 +22,11 @@ module Terrafomo.Spotinst
     -- * Resources
     , module Terrafomo.Spotinst.Resources
 
-    -- * DataSources
-    , module Terrafomo.Spotinst.DataSources
-
     -- * Settings
     , module Terrafomo.Spotinst.Settings
 
-    -- * Overloaded Lenses
-    , module Terrafomo.Spotinst.Lens
     ) where
 
-import Terrafomo.Spotinst.DataSources
-import Terrafomo.Spotinst.Lens
 import Terrafomo.Spotinst.Provider
 import Terrafomo.Spotinst.Resources
 import Terrafomo.Spotinst.Settings

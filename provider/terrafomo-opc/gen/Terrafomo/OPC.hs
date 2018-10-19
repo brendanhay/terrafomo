@@ -28,12 +28,9 @@ module Terrafomo.OPC
     -- * Settings
     , module Terrafomo.OPC.Settings
 
-    -- * Overloaded Lenses
-    , module Terrafomo.OPC.Lens
     ) where
 
 import Terrafomo.OPC.DataSources
-import Terrafomo.OPC.Lens
 import Terrafomo.OPC.Provider
 import Terrafomo.OPC.Resources
 import Terrafomo.OPC.Settings

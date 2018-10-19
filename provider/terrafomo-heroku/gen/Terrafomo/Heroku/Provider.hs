@@ -16,108 +16,93 @@
 --
 module Terrafomo.Heroku.Provider
     (
-    -- * Heroku Provider Datatype
-      Heroku (..)
-    , newProvider
-    , defaultProvider
-
     -- * Heroku Specific Aliases
+      Provider
     , DataSource
     , Resource
+
+    -- * Heroku Configuration
+    , currentVersion
+    , newProvider
+    , Heroku (..)
     ) where
 
-import Data.Function ((&))
-import Data.Functor  ((<$>))
-import Data.Proxy    (Proxy (Proxy))
+import Data.Function  ((&))
+import Data.Functor   ((<$>))
+import Data.Semigroup ((<>))
+import Data.Version   (Version, makeVersion, showVersion)
 
 import GHC.Base (($))
 
 import Terrafomo.Heroku.Settings
 
-import qualified Data.Hashable          as P
-import qualified Data.HashMap.Strict    as P
+import qualified Data.Functor.Const     as P
 import qualified Data.List.NonEmpty     as P
+import qualified Data.Map.Strict        as P
 import qualified Data.Maybe             as P
 import qualified Data.Text.Lazy         as P
-import qualified GHC.Generics           as P
-import qualified Lens.Micro             as P
 import qualified Prelude                as P
 import qualified Terrafomo.HCL          as TF
-import qualified Terrafomo.Heroku.Lens  as P
 import qualified Terrafomo.Heroku.Types as P
+import qualified Terrafomo.Lens         as Lens
 import qualified Terrafomo.Schema       as TF
 
-type DataSource a = TF.Resource Heroku ()               a
-type Resource   a = TF.Resource Heroku (TF.Lifecycle a) a
+type Provider   = TF.Provider Heroku
+type DataSource = TF.Resource Heroku TF.Ignored
+type Resource   = TF.Resource Heroku TF.Meta
+
+type instance TF.ProviderName Heroku = "heroku"
+
+currentVersion :: Version
+currentVersion = makeVersion [1, 4, 0]
 
 -- | The @heroku@ Terraform provider configuration.
---
--- See the <https://www.terraform.io/docs/providers/heroku/index.html terraform documentation>
--- for more information.
-data Heroku = Heroku'
-    { _apiKey  :: P.Maybe P.Text
-    -- ^ @api_key@ - (Optional)
-    --
-    , _email   :: P.Maybe P.Text
-    -- ^ @email@ - (Optional)
-    --
-    , _headers :: P.Maybe P.Text
-    -- ^ @headers@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
+data Heroku = Heroku_Internal
+    { api_key :: P.Maybe P.Text
+    -- ^ @api_key@
+    -- - (Optional)
+    , email   :: P.Maybe P.Text
+    -- ^ @email@
+    -- - (Optional)
+    , headers :: P.Maybe P.Text
+    -- ^ @headers@
+    -- - (Optional)
+    } deriving (P.Show)
 
-instance P.Hashable (Heroku)
-
--- | Specify a new Heroku provider configuration.
+{- | Specify a new Heroku provider configuration.
+See the <https://www.terraform.io/docs/providers/heroku/index.html terraform documentation> for more information.
+-}
 newProvider
-    :: Heroku
+    :: Provider
 newProvider =
-    Heroku'
-        { _apiKey = P.Nothing
-        , _email = P.Nothing
-        , _headers = P.Nothing
+    TF.Provider
+        { TF.providerVersion = P.Just ("~> " P.++ showVersion currentVersion)
+        , TF.providerConfig  =
+            (Heroku_Internal
+                { api_key = P.Nothing
+                , email = P.Nothing
+                , headers = P.Nothing
+                })
+        , TF.providerEncoder =
+            (\Heroku_Internal{..} ->
+          P.mempty
+       <> P.maybe P.mempty (TF.pair "api_key") api_key
+       <> P.maybe P.mempty (TF.pair "email") email
+       <> P.maybe P.mempty (TF.pair "headers") headers
+            )
         }
 
-{- | The 'Heroku' provider with absent configuration that is used
-to instantiate new 'Resource's and 'DataSource's. Provider configuration can be
-overridden on a per-resource basis by using the 'Terrafomo.provider' lens, the
-'newProvider' constructor, and any of the applicable lenses.
+instance Lens.HasField "api_key" f Provider (P.Maybe P.Text) where
+    field = Lens.providerLens P.. Lens.lens'
+        (api_key :: Heroku -> P.Maybe P.Text)
+        (\s a -> s { api_key = a } :: Heroku)
 
-For example:
+instance Lens.HasField "email" f Provider (P.Maybe P.Text) where
+    field = Lens.providerLens P.. Lens.lens'
+        (email :: Heroku -> P.Maybe P.Text)
+        (\s a -> s { email = a } :: Heroku)
 
-@
-import qualified Terrafomo as TF
-import qualified Terrafomo.Heroku.Provider as Heroku
-
-TF.newExampleResource "foo"
-    & TF.provider ?~
-          Heroku.(newProvider
-              -- Lenses
-              & Heroku.apiKey .~ Nothing -- 'P.Maybe P.Text'
-              & Heroku.email .~ Nothing -- 'P.Maybe P.Text'
-              & Heroku.headers .~ Nothing -- 'P.Maybe P.Text'
-@
--}
-defaultProvider :: TF.Provider Heroku
-defaultProvider =
-    TF.defaultProvider "heroku" (P.Just "~> 1.2")
-        (\Heroku'{..} -> P.mconcat
-            [ P.maybe P.mempty (TF.pair "api_key") _apiKey
-            , P.maybe P.mempty (TF.pair "email") _email
-            , P.maybe P.mempty (TF.pair "headers") _headers
-            ])
-
-instance P.HasApiKey (Heroku) (P.Maybe P.Text) where
-    apiKey =
-        P.lens (_apiKey :: Heroku -> P.Maybe P.Text)
-            (\s a -> s { _apiKey = a } :: Heroku)
-
-instance P.HasEmail (Heroku) (P.Maybe P.Text) where
-    email =
-        P.lens (_email :: Heroku -> P.Maybe P.Text)
-            (\s a -> s { _email = a } :: Heroku)
-
-instance P.HasHeaders (Heroku) (P.Maybe P.Text) where
-    headers =
-        P.lens (_headers :: Heroku -> P.Maybe P.Text)
-            (\s a -> s { _headers = a } :: Heroku)
+instance Lens.HasField "headers" f Provider (P.Maybe P.Text) where
+    field = Lens.providerLens P.. Lens.lens'
+        (headers :: Heroku -> P.Maybe P.Text)
+        (\s a -> s { headers = a } :: Heroku)

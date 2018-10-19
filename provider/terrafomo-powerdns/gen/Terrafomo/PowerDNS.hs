@@ -22,19 +22,8 @@ module Terrafomo.PowerDNS
     -- * Resources
     , module Terrafomo.PowerDNS.Resources
 
-    -- * DataSources
-    , module Terrafomo.PowerDNS.DataSources
-
-    -- * Settings
-    , module Terrafomo.PowerDNS.Settings
-
-    -- * Overloaded Lenses
-    , module Terrafomo.PowerDNS.Lens
     ) where
 
-import Terrafomo.PowerDNS.DataSources
-import Terrafomo.PowerDNS.Lens
 import Terrafomo.PowerDNS.Provider
 import Terrafomo.PowerDNS.Resources
-import Terrafomo.PowerDNS.Settings
 import Terrafomo.PowerDNS.Types

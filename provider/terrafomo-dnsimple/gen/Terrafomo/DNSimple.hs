@@ -22,19 +22,8 @@ module Terrafomo.DNSimple
     -- * Resources
     , module Terrafomo.DNSimple.Resources
 
-    -- * DataSources
-    , module Terrafomo.DNSimple.DataSources
-
-    -- * Settings
-    , module Terrafomo.DNSimple.Settings
-
-    -- * Overloaded Lenses
-    , module Terrafomo.DNSimple.Lens
     ) where
 
-import Terrafomo.DNSimple.DataSources
-import Terrafomo.DNSimple.Lens
 import Terrafomo.DNSimple.Provider
 import Terrafomo.DNSimple.Resources
-import Terrafomo.DNSimple.Settings
 import Terrafomo.DNSimple.Types

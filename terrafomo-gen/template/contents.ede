@@ -3,7 +3,6 @@
 {% include "_include/license.ede" %}
 module {{ namespace }}
     (
-    -- * {{ heading }}
     {% for export in exports %}
     {% if export.first %}  {% else %}, {% endif %}module {{ export.value }}
     {% endfor %}

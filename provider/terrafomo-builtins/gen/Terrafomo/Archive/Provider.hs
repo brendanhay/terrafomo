@@ -16,72 +16,61 @@
 --
 module Terrafomo.Archive.Provider
     (
-    -- * Archive Provider Datatype
-      Archive (..)
-    , newProvider
-    , defaultProvider
-
     -- * Archive Specific Aliases
+      Provider
     , DataSource
     , Resource
+
+    -- * Archive Configuration
+    , currentVersion
+    , newProvider
+    , Archive (..)
     ) where
 
-import Data.Function ((&))
-import Data.Functor  ((<$>))
-import Data.Proxy    (Proxy (Proxy))
+import Data.Function  ((&))
+import Data.Functor   ((<$>))
+import Data.Semigroup ((<>))
+import Data.Version   (Version, makeVersion, showVersion)
 
 import GHC.Base (($))
 
 import Terrafomo.Archive.Settings
 
-import qualified Data.Hashable           as P
-import qualified Data.HashMap.Strict     as P
+import qualified Data.Functor.Const      as P
 import qualified Data.List.NonEmpty      as P
+import qualified Data.Map.Strict         as P
 import qualified Data.Maybe              as P
 import qualified Data.Text.Lazy          as P
-import qualified GHC.Generics            as P
-import qualified Lens.Micro              as P
 import qualified Prelude                 as P
-import qualified Terrafomo.Archive.Lens  as P
 import qualified Terrafomo.Archive.Types as P
 import qualified Terrafomo.HCL           as TF
+import qualified Terrafomo.Lens          as Lens
 import qualified Terrafomo.Schema        as TF
 
-type DataSource a = TF.Resource Archive ()               a
-type Resource   a = TF.Resource Archive (TF.Lifecycle a) a
+type Provider   = TF.Provider Archive
+type DataSource = TF.Resource Archive TF.Ignored
+type Resource   = TF.Resource Archive TF.Meta
+
+type instance TF.ProviderName Archive = "archive"
+
+currentVersion :: Version
+currentVersion = makeVersion [1, 1, 0]
 
 -- | The @archive@ Terraform provider configuration.
---
--- See the <https://www.terraform.io/docs/providers/archive/index.html terraform documentation>
--- for more information.
-data Archive = Archive'
-    deriving (P.Show, P.Eq, P.Generic)
+data Archive = Archive
+    deriving (P.Show)
 
-instance P.Hashable (Archive)
-
--- | Specify a new Archive provider configuration.
-newProvider
-    :: Archive
-newProvider =
-    Archive'
-
-{- | The 'Archive' provider with absent configuration that is used
-to instantiate new 'Resource's and 'DataSource's. Provider configuration can be
-overridden on a per-resource basis by using the 'Terrafomo.provider' lens, the
-'newProvider' constructor, and any of the applicable lenses.
-
-For example:
-
-@
-import qualified Terrafomo as TF
-import qualified Terrafomo.Archive.Provider as Archive
-
-TF.newExampleResource "foo"
-    & TF.provider ?~
-          Archive.(newProvider
-@
+{- | Specify a new Archive provider configuration.
+See the <https://www.terraform.io/docs/providers/archive/index.html terraform documentation> for more information.
 -}
-defaultProvider :: TF.Provider Archive
-defaultProvider =
-    TF.defaultProvider "archive" (P.Just "~> 1.1")
-        P.mempty
+newProvider
+    :: Archive -- ^ The minimal/required arguments.
+    -> Provider
+newProvider x =
+    TF.Provider
+        { TF.providerVersion = P.Just ("~> " P.++ showVersion currentVersion)
+        , TF.providerConfig  =
+            x
+        , TF.providerEncoder =
+            P.mempty
+        }

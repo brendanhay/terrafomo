@@ -16,116 +16,108 @@
 --
 module Terrafomo.Scaleway.Provider
     (
-    -- * Scaleway Provider Datatype
-      Scaleway (..)
-    , newProvider
-    , defaultProvider
-
     -- * Scaleway Specific Aliases
+      Provider
     , DataSource
     , Resource
+
+    -- * Scaleway Configuration
+    , currentVersion
+    , newProvider
+    , Scaleway (..)
+    , Scaleway_Required (..)
     ) where
 
-import Data.Function ((&))
-import Data.Functor  ((<$>))
-import Data.Proxy    (Proxy (Proxy))
+import Data.Function  ((&))
+import Data.Functor   ((<$>))
+import Data.Semigroup ((<>))
+import Data.Version   (Version, makeVersion, showVersion)
 
 import GHC.Base (($))
 
 import Terrafomo.Scaleway.Settings
 
-import qualified Data.Hashable            as P
-import qualified Data.HashMap.Strict      as P
+import qualified Data.Functor.Const       as P
 import qualified Data.List.NonEmpty       as P
+import qualified Data.Map.Strict          as P
 import qualified Data.Maybe               as P
 import qualified Data.Text.Lazy           as P
-import qualified GHC.Generics             as P
-import qualified Lens.Micro               as P
 import qualified Prelude                  as P
 import qualified Terrafomo.HCL            as TF
-import qualified Terrafomo.Scaleway.Lens  as P
+import qualified Terrafomo.Lens           as Lens
 import qualified Terrafomo.Scaleway.Types as P
 import qualified Terrafomo.Schema         as TF
 
-type DataSource a = TF.Resource Scaleway ()               a
-type Resource   a = TF.Resource Scaleway (TF.Lifecycle a) a
+type Provider   = TF.Provider Scaleway
+type DataSource = TF.Resource Scaleway TF.Ignored
+type Resource   = TF.Resource Scaleway TF.Meta
+
+type instance TF.ProviderName Scaleway = "scaleway"
+
+currentVersion :: Version
+currentVersion = makeVersion [1, 6, 0]
 
 -- | The @scaleway@ Terraform provider configuration.
---
--- See the <https://www.terraform.io/docs/providers/scaleway/index.html terraform documentation>
--- for more information.
-data Scaleway = Scaleway'
-    { _organization :: P.Text
-    -- ^ @organization@ - (Required)
+data Scaleway = Scaleway_Internal
+    { organization :: P.Text
+    -- ^ @organization@
+    -- - (Required)
     -- The Organization ID (a.k.a. 'access key') for Scaleway API operations.
-    --
-    , _region       :: P.Maybe P.Text
-    -- ^ @region@ - (Optional)
+    , region       :: P.Maybe P.Text
+    -- ^ @region@
+    -- - (Optional)
     -- The Scaleway API region to use.
-    --
-    , _token        :: P.Text
-    -- ^ @token@ - (Required)
+    , token        :: P.Text
+    -- ^ @token@
+    -- - (Required)
     -- The API key for Scaleway API operations.
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show)
 
-instance P.Hashable (Scaleway)
-
--- | Specify a new Scaleway provider configuration.
+{- | Specify a new Scaleway provider configuration.
+See the <https://www.terraform.io/docs/providers/scaleway/index.html terraform documentation> for more information.
+-}
 newProvider
-    :: P.Text -- ^ Lens: 'P.organization', Field: '_organization', HCL: @organization@
-    -> P.Text -- ^ Lens: 'P.token', Field: '_token', HCL: @token@
-    -> Scaleway
-newProvider _organization _token =
-    Scaleway'
-        { _organization = _organization
-        , _region = P.Nothing
-        , _token = _token
+    :: Scaleway_Required -- ^ The minimal/required arguments.
+    -> Provider
+newProvider x =
+    TF.Provider
+        { TF.providerVersion = P.Just ("~> " P.++ showVersion currentVersion)
+        , TF.providerConfig  =
+            (let Scaleway{..} = x in Scaleway_Internal
+                { organization = organization
+                , region = P.Nothing
+                , token = token
+                })
+        , TF.providerEncoder =
+            (\Scaleway_Internal{..} ->
+          P.mempty
+       <> TF.pair "organization" organization
+       <> P.maybe P.mempty (TF.pair "region") region
+       <> TF.pair "token" token
+            )
         }
 
-{- | The 'Scaleway' provider with absent configuration that is used
-to instantiate new 'Resource's and 'DataSource's. Provider configuration can be
-overridden on a per-resource basis by using the 'Terrafomo.provider' lens, the
-'newProvider' constructor, and any of the applicable lenses.
+-- | The required arguments for 'newProvider'.
+data Scaleway_Required = Scaleway
+    { organization :: P.Text
+    -- ^ (Required)
+    -- The Organization ID (a.k.a. 'access key') for Scaleway API operations.
+    , token        :: P.Text
+    -- ^ (Required)
+    -- The API key for Scaleway API operations.
+    } deriving (P.Show)
 
-For example:
+instance Lens.HasField "organization" f Provider (P.Text) where
+    field = Lens.providerLens P.. Lens.lens'
+        (organization :: Scaleway -> P.Text)
+        (\s a -> s { organization = a } :: Scaleway)
 
-@
-import qualified Terrafomo as TF
-import qualified Terrafomo.Scaleway.Provider as Scaleway
+instance Lens.HasField "region" f Provider (P.Maybe P.Text) where
+    field = Lens.providerLens P.. Lens.lens'
+        (region :: Scaleway -> P.Maybe P.Text)
+        (\s a -> s { region = a } :: Scaleway)
 
-TF.newExampleResource "foo"
-    & TF.provider ?~
-          Scaleway.(newProvider
-              -- Required arguments
-              _organization -- (Required) 'P.Text'
-              _token -- (Required) 'P.Text'
-              -- Lenses
-              & Scaleway.organization .~ _organization -- 'P.Text'
-              & Scaleway.region .~ Nothing -- 'P.Maybe P.Text'
-              & Scaleway.token .~ _token -- 'P.Text'
-@
--}
-defaultProvider :: TF.Provider Scaleway
-defaultProvider =
-    TF.defaultProvider "scaleway" (P.Just "~> 1.5")
-        (\Scaleway'{..} -> P.mconcat
-            [ TF.pair "organization" _organization
-            , P.maybe P.mempty (TF.pair "region") _region
-            , TF.pair "token" _token
-            ])
-
-instance P.HasOrganization (Scaleway) (P.Text) where
-    organization =
-        P.lens (_organization :: Scaleway -> P.Text)
-            (\s a -> s { _organization = a } :: Scaleway)
-
-instance P.HasRegion (Scaleway) (P.Maybe P.Text) where
-    region =
-        P.lens (_region :: Scaleway -> P.Maybe P.Text)
-            (\s a -> s { _region = a } :: Scaleway)
-
-instance P.HasToken (Scaleway) (P.Text) where
-    token =
-        P.lens (_token :: Scaleway -> P.Text)
-            (\s a -> s { _token = a } :: Scaleway)
+instance Lens.HasField "token" f Provider (P.Text) where
+    field = Lens.providerLens P.. Lens.lens'
+        (token :: Scaleway -> P.Text)
+        (\s a -> s { token = a } :: Scaleway)

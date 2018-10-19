@@ -28,12 +28,9 @@ module Terrafomo.Vault
     -- * Settings
     , module Terrafomo.Vault.Settings
 
-    -- * Overloaded Lenses
-    , module Terrafomo.Vault.Lens
     ) where
 
 import Terrafomo.Vault.DataSources
-import Terrafomo.Vault.Lens
 import Terrafomo.Vault.Provider
 import Terrafomo.Vault.Resources
 import Terrafomo.Vault.Settings

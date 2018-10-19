@@ -16,89 +16,72 @@
 --
 module Terrafomo.OpsGenie.Provider
     (
-    -- * OpsGenie Provider Datatype
-      OpsGenie (..)
-    , newProvider
-    , defaultProvider
-
     -- * OpsGenie Specific Aliases
+      Provider
     , DataSource
     , Resource
+
+    -- * OpsGenie Configuration
+    , currentVersion
+    , newProvider
+    , OpsGenie (..)
     ) where
 
-import Data.Function ((&))
-import Data.Functor  ((<$>))
-import Data.Proxy    (Proxy (Proxy))
+import Data.Function  ((&))
+import Data.Functor   ((<$>))
+import Data.Semigroup ((<>))
+import Data.Version   (Version, makeVersion, showVersion)
 
 import GHC.Base (($))
 
 import Terrafomo.OpsGenie.Settings
 
-import qualified Data.Hashable            as P
-import qualified Data.HashMap.Strict      as P
+import qualified Data.Functor.Const       as P
 import qualified Data.List.NonEmpty       as P
+import qualified Data.Map.Strict          as P
 import qualified Data.Maybe               as P
 import qualified Data.Text.Lazy           as P
-import qualified GHC.Generics             as P
-import qualified Lens.Micro               as P
 import qualified Prelude                  as P
 import qualified Terrafomo.HCL            as TF
-import qualified Terrafomo.OpsGenie.Lens  as P
+import qualified Terrafomo.Lens           as Lens
 import qualified Terrafomo.OpsGenie.Types as P
 import qualified Terrafomo.Schema         as TF
 
-type DataSource a = TF.Resource OpsGenie ()               a
-type Resource   a = TF.Resource OpsGenie (TF.Lifecycle a) a
+type Provider   = TF.Provider OpsGenie
+type DataSource = TF.Resource OpsGenie TF.Ignored
+type Resource   = TF.Resource OpsGenie TF.Meta
+
+type instance TF.ProviderName OpsGenie = "opsgenie"
+
+currentVersion :: Version
+currentVersion = makeVersion [0, 1, 0]
 
 -- | The @opsgenie@ Terraform provider configuration.
---
--- See the <https://www.terraform.io/docs/providers/opsgenie/index.html terraform documentation>
--- for more information.
-data OpsGenie = OpsGenie'
-    { _apiKey :: P.Text
-    -- ^ @api_key@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
+newtype OpsGenie = OpsGenie
+    { api_key :: P.Text
+    -- ^ @api_key@
+    -- - (Required)
+    } deriving (P.Show)
 
-instance P.Hashable (OpsGenie)
-
--- | Specify a new OpsGenie provider configuration.
+{- | Specify a new OpsGenie provider configuration.
+See the <https://www.terraform.io/docs/providers/opsgenie/index.html terraform documentation> for more information.
+-}
 newProvider
-    :: P.Text -- ^ Lens: 'P.apiKey', Field: '_apiKey', HCL: @api_key@
-    -> OpsGenie
-newProvider _apiKey =
-    OpsGenie'
-        { _apiKey = _apiKey
+    :: OpsGenie -- ^ The minimal/required arguments.
+    -> Provider
+newProvider x =
+    TF.Provider
+        { TF.providerVersion = P.Just ("~> " P.++ showVersion currentVersion)
+        , TF.providerConfig  =
+            x
+        , TF.providerEncoder =
+            (\OpsGenie{..} ->
+          P.mempty
+       <> TF.pair "api_key" api_key
+            )
         }
 
-{- | The 'OpsGenie' provider with absent configuration that is used
-to instantiate new 'Resource's and 'DataSource's. Provider configuration can be
-overridden on a per-resource basis by using the 'Terrafomo.provider' lens, the
-'newProvider' constructor, and any of the applicable lenses.
-
-For example:
-
-@
-import qualified Terrafomo as TF
-import qualified Terrafomo.OpsGenie.Provider as OpsGenie
-
-TF.newExampleResource "foo"
-    & TF.provider ?~
-          OpsGenie.(newProvider
-              -- Required arguments
-              _apiKey -- (Required) 'P.Text'
-              -- Lenses
-              & OpsGenie.apiKey .~ _apiKey -- 'P.Text'
-@
--}
-defaultProvider :: TF.Provider OpsGenie
-defaultProvider =
-    TF.defaultProvider "opsgenie" (P.Just "~> 0.1")
-        (\OpsGenie'{..} -> P.mconcat
-            [ TF.pair "api_key" _apiKey
-            ])
-
-instance P.HasApiKey (OpsGenie) (P.Text) where
-    apiKey =
-        P.lens (_apiKey :: OpsGenie -> P.Text)
-            (\s a -> s { _apiKey = a } :: OpsGenie)
+instance Lens.HasField "api_key" f Provider (P.Text) where
+    field = Lens.providerLens P.. Lens.lens'
+        (api_key :: OpsGenie -> P.Text)
+        (\s a -> s { api_key = a } :: OpsGenie)

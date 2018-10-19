@@ -1,29 +1,33 @@
 locals {
   list_bool = [
     true,
-    false,
+    false
   ]
   list_int = [
     1,
-    2,
+    2
   ]
   list_float = [
     3.333,
-    5.5,
+    5.5
   ]
   list_string = [
     "Foo",
     "Bar",
-    "Baz",
+    "Baz"
+  ]
+  list_expr = [
+    null,
+    "${file("/etc/foo")}"
   ]
   list_list = [
     [
       true,
-      false,
+      false
     ],
     [
-      false,
-    ],
+      false
+    ]
   ]
   list_map = [
     {
@@ -31,10 +35,6 @@ locals {
     },
     {
       false = false
-    },
-  ]
-  list_expr = [
-    null,
-    "${file("/etc/foo")}",
+    }
   ]
 }

@@ -22,19 +22,8 @@ module Terrafomo.Bitbucket
     -- * Resources
     , module Terrafomo.Bitbucket.Resources
 
-    -- * DataSources
-    , module Terrafomo.Bitbucket.DataSources
-
-    -- * Settings
-    , module Terrafomo.Bitbucket.Settings
-
-    -- * Overloaded Lenses
-    , module Terrafomo.Bitbucket.Lens
     ) where
 
-import Terrafomo.Bitbucket.DataSources
-import Terrafomo.Bitbucket.Lens
 import Terrafomo.Bitbucket.Provider
 import Terrafomo.Bitbucket.Resources
-import Terrafomo.Bitbucket.Settings
 import Terrafomo.Bitbucket.Types

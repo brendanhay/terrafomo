@@ -28,12 +28,9 @@ module Terrafomo.AliCloud
     -- * Settings
     , module Terrafomo.AliCloud.Settings
 
-    -- * Overloaded Lenses
-    , module Terrafomo.AliCloud.Lens
     ) where
 
 import Terrafomo.AliCloud.DataSources
-import Terrafomo.AliCloud.Lens
 import Terrafomo.AliCloud.Provider
 import Terrafomo.AliCloud.Resources
 import Terrafomo.AliCloud.Settings

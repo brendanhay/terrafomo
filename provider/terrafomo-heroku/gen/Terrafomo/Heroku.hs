@@ -28,12 +28,9 @@ module Terrafomo.Heroku
     -- * Settings
     , module Terrafomo.Heroku.Settings
 
-    -- * Overloaded Lenses
-    , module Terrafomo.Heroku.Lens
     ) where
 
 import Terrafomo.Heroku.DataSources
-import Terrafomo.Heroku.Lens
 import Terrafomo.Heroku.Provider
 import Terrafomo.Heroku.Resources
 import Terrafomo.Heroku.Settings

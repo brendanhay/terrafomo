@@ -19,22 +19,15 @@ module Terrafomo.Ignition
     -- * Types
     , module Terrafomo.Ignition.Types
 
-    -- * Resources
-    , module Terrafomo.Ignition.Resources
-
     -- * DataSources
     , module Terrafomo.Ignition.DataSources
 
     -- * Settings
     , module Terrafomo.Ignition.Settings
 
-    -- * Overloaded Lenses
-    , module Terrafomo.Ignition.Lens
     ) where
 
 import Terrafomo.Ignition.DataSources
-import Terrafomo.Ignition.Lens
 import Terrafomo.Ignition.Provider
-import Terrafomo.Ignition.Resources
 import Terrafomo.Ignition.Settings
 import Terrafomo.Ignition.Types

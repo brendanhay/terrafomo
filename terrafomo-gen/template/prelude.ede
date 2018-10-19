@@ -12,22 +12,31 @@ module {{ namespace }}
     -- * Types
     , module {{ types }}
 
+{% if resources %}
     -- * Resources
     , module {{ resources }}
 
+{% endif %}
+{% if datasources %}
     -- * DataSources
     , module {{ datasources }}
 
+{% endif %}
+{% if settings %}
     -- * Settings
     , module {{ settings }}
 
-    -- * Overloaded Lenses
-    , module {{ lenses }}
+{% endif %}
     ) where
 
 import {{ provider }}
 import {{ types }}
+{% if resources %}
 import {{ resources }}
+{% endif %}
+{% if datasources %}
 import {{ datasources }}
+{% endif %}
+{% if settings %}
 import {{ settings }}
-import {{ lenses }}
+{% endif %}

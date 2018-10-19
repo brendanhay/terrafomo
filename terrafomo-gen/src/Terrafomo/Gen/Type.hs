@@ -2,22 +2,32 @@
 
 module Terrafomo.Gen.Type where
 
+import Data.Bifunctor (Bifunctor (first, second))
 import Data.Semigroup ((<>))
 import Data.Text      (Text)
 
 import Terrafomo.Gen.Name
 
+import qualified Data.Text          as Text
 import qualified Terrafomo.Gen.JSON as JSON
 import qualified Terrafomo.Gen.Text as Text
 
-data TypeF a
-    = Free !Text
-    | Data !Bool !a
-    | Expr !(TypeF a)
-    | App  !(TypeF a) !(TypeF a)
+data TypeF a b
+    = Free !a
+    | Data !Bool !b
+    | Expr !(TypeF a b)
+    | App  !(TypeF a b) !(TypeF a b)
       deriving (Show, Eq, Ord, Functor, Foldable, Traversable)
 
-type Type = TypeF DataName
+instance Bifunctor TypeF where
+    second  = fmap
+    first f = \case
+        Free v   -> Free (f v)
+        Data t v -> Data t v
+        Expr x   -> Expr (first f x)
+        App  a b -> App  (first f a) (first f b)
+
+type Type = TypeF Text DataName
 
 instance JSON.ToJSON Type where
     toJSON = JSON.String . typeName
@@ -28,7 +38,7 @@ pattern Double  = Free "P.Double"
 pattern Bool    = Free "P.Bool"
 pattern List    = Free "P.[]"
 pattern List1   = Free "P.NonEmpty"
-pattern Map     = Free "P.HashMap"
+pattern Map     = Free "P.Map"
 pattern Maybe   = Free "P.Maybe"
 
 typeName :: Type -> Text
@@ -73,6 +83,9 @@ settings = \case
     Data {}  -> True
     Expr x   -> settings x
     App  a b -> settings a && settings b
+
+singleton :: LabelName -> Type
+singleton x = Free ('\"' `Text.cons` fromName x `Text.snoc` '\"')
 
 -- derive :: Go.Type -> Set Text
 -- derive = Set.fromList . mappend base . \case

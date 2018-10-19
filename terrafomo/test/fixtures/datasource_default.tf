@@ -1,4 +1,5 @@
 data "foo" "default" {
+  provider = "provider.1"
   name = "abc-i123d"
   enabled = true
   settings = [
@@ -13,6 +14,6 @@ data "foo" "default" {
       configuration = {
         name = "parameters"
       }
-    },
+    }
   ]
 }

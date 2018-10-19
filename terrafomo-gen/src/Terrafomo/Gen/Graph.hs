@@ -2,6 +2,7 @@ module Terrafomo.Gen.Graph
     ( Graph
     , new
     , partition
+    , components
     , binpack
     ) where
 
@@ -36,10 +37,16 @@ partition
     -> Graph a
     -> [[a]]
 partition c g =
-      map (map (node g) . concat)
-    . binpack c length
-    . map Tree.flatten
-    $ Graph.components (graph g)
+    map concat
+        . binpack c length
+            $ components g
+
+components
+     :: Graph a
+     -> [[a]]
+components g =
+    map (fmap (node g) . Tree.flatten)
+        $ Graph.components (graph g)
 
 -- | Bin-packing using online Next Fit.
 binpack
@@ -48,7 +55,7 @@ binpack
     -> [a]
     -> [[a]]
 binpack c weight xs =
-    filter (not . null) (y : ys)
+    compact c $ filter (not . null) (y : ys)
   where
     (_, y, ys) = Fold.foldr' go (c, [], []) xs
 
@@ -57,3 +64,16 @@ binpack c weight xs =
         | otherwise = (rem - w, x : bin, bins)
       where
         w = weight x
+
+-- FIXME: shouldn't be needed, add properties for binpack.
+compact
+    :: Int
+    -> [[a]]
+    -> [[a]]
+compact c = go
+  where
+    go = \case
+        x:y:z | length x >= c -> x : go (y : z)
+              | otherwise     -> (x ++ y) : go z
+        x:y                   -> x : go y
+        []                    -> []

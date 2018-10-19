@@ -16,115 +16,90 @@
 --
 module Terrafomo.LogicMonitor.Provider
     (
-    -- * LogicMonitor Provider Datatype
-      LogicMonitor (..)
-    , newProvider
-    , defaultProvider
-
     -- * LogicMonitor Specific Aliases
+      Provider
     , DataSource
     , Resource
+
+    -- * LogicMonitor Configuration
+    , currentVersion
+    , newProvider
+    , LogicMonitor (..)
     ) where
 
-import Data.Function ((&))
-import Data.Functor  ((<$>))
-import Data.Proxy    (Proxy (Proxy))
+import Data.Function  ((&))
+import Data.Functor   ((<$>))
+import Data.Semigroup ((<>))
+import Data.Version   (Version, makeVersion, showVersion)
 
 import GHC.Base (($))
 
 import Terrafomo.LogicMonitor.Settings
 
-import qualified Data.Hashable                as P
-import qualified Data.HashMap.Strict          as P
+import qualified Data.Functor.Const           as P
 import qualified Data.List.NonEmpty           as P
+import qualified Data.Map.Strict              as P
 import qualified Data.Maybe                   as P
 import qualified Data.Text.Lazy               as P
-import qualified GHC.Generics                 as P
-import qualified Lens.Micro                   as P
 import qualified Prelude                      as P
 import qualified Terrafomo.HCL                as TF
-import qualified Terrafomo.LogicMonitor.Lens  as P
+import qualified Terrafomo.Lens               as Lens
 import qualified Terrafomo.LogicMonitor.Types as P
 import qualified Terrafomo.Schema             as TF
 
-type DataSource a = TF.Resource LogicMonitor ()               a
-type Resource   a = TF.Resource LogicMonitor (TF.Lifecycle a) a
+type Provider   = TF.Provider LogicMonitor
+type DataSource = TF.Resource LogicMonitor TF.Ignored
+type Resource   = TF.Resource LogicMonitor TF.Meta
+
+type instance TF.ProviderName LogicMonitor = "logicmonitor"
+
+currentVersion :: Version
+currentVersion = makeVersion [1, 2, 0]
 
 -- | The @logicmonitor@ Terraform provider configuration.
---
--- See the <https://www.terraform.io/docs/providers/logicmonitor/index.html terraform documentation>
--- for more information.
-data LogicMonitor = LogicMonitor'
-    { _apiId   :: P.Text
-    -- ^ @api_id@ - (Required)
-    --
-    , _apiKey  :: P.Text
-    -- ^ @api_key@ - (Required)
-    --
-    , _company :: P.Text
-    -- ^ @company@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
+data LogicMonitor = LogicMonitor
+    { api_id  :: TF.Id
+    -- ^ @api_id@
+    -- - (Required)
+    , api_key :: P.Text
+    -- ^ @api_key@
+    -- - (Required)
+    , company :: P.Text
+    -- ^ @company@
+    -- - (Required)
+    } deriving (P.Show)
 
-instance P.Hashable (LogicMonitor)
-
--- | Specify a new LogicMonitor provider configuration.
+{- | Specify a new LogicMonitor provider configuration.
+See the <https://www.terraform.io/docs/providers/logicmonitor/index.html terraform documentation> for more information.
+-}
 newProvider
-    :: P.Text -- ^ Lens: 'P.company', Field: '_company', HCL: @company@
-    -> P.Text -- ^ Lens: 'P.apiId', Field: '_apiId', HCL: @api_id@
-    -> P.Text -- ^ Lens: 'P.apiKey', Field: '_apiKey', HCL: @api_key@
-    -> LogicMonitor
-newProvider _company _apiId _apiKey =
-    LogicMonitor'
-        { _apiId = _apiId
-        , _apiKey = _apiKey
-        , _company = _company
+    :: LogicMonitor -- ^ The minimal/required arguments.
+    -> Provider
+newProvider x =
+    TF.Provider
+        { TF.providerVersion = P.Just ("~> " P.++ showVersion currentVersion)
+        , TF.providerConfig  =
+            x
+        , TF.providerEncoder =
+            (\LogicMonitor{..} ->
+          P.mempty
+       <> TF.pair "api_id" api_id
+       <> TF.pair "api_key" api_key
+       <> TF.pair "company" company
+            )
         }
 
-{- | The 'LogicMonitor' provider with absent configuration that is used
-to instantiate new 'Resource's and 'DataSource's. Provider configuration can be
-overridden on a per-resource basis by using the 'Terrafomo.provider' lens, the
-'newProvider' constructor, and any of the applicable lenses.
+instance Lens.HasField "api_id" f Provider (TF.Id) where
+    field = Lens.providerLens P.. Lens.lens'
+        (api_id :: LogicMonitor -> TF.Id)
+        (\s a -> s { api_id = a } :: LogicMonitor)
 
-For example:
+instance Lens.HasField "api_key" f Provider (P.Text) where
+    field = Lens.providerLens P.. Lens.lens'
+        (api_key :: LogicMonitor -> P.Text)
+        (\s a -> s { api_key = a } :: LogicMonitor)
 
-@
-import qualified Terrafomo as TF
-import qualified Terrafomo.LogicMonitor.Provider as LogicMonitor
-
-TF.newExampleResource "foo"
-    & TF.provider ?~
-          LogicMonitor.(newProvider
-              -- Required arguments
-              _company -- (Required) 'P.Text'
-              _apiId -- (Required) 'P.Text'
-              _apiKey -- (Required) 'P.Text'
-              -- Lenses
-              & LogicMonitor.apiId .~ _apiId -- 'P.Text'
-              & LogicMonitor.apiKey .~ _apiKey -- 'P.Text'
-              & LogicMonitor.company .~ _company -- 'P.Text'
-@
--}
-defaultProvider :: TF.Provider LogicMonitor
-defaultProvider =
-    TF.defaultProvider "logicmonitor" (P.Just "~> 1.2")
-        (\LogicMonitor'{..} -> P.mconcat
-            [ TF.pair "api_id" _apiId
-            , TF.pair "api_key" _apiKey
-            , TF.pair "company" _company
-            ])
-
-instance P.HasApiId (LogicMonitor) (P.Text) where
-    apiId =
-        P.lens (_apiId :: LogicMonitor -> P.Text)
-            (\s a -> s { _apiId = a } :: LogicMonitor)
-
-instance P.HasApiKey (LogicMonitor) (P.Text) where
-    apiKey =
-        P.lens (_apiKey :: LogicMonitor -> P.Text)
-            (\s a -> s { _apiKey = a } :: LogicMonitor)
-
-instance P.HasCompany (LogicMonitor) (P.Text) where
-    company =
-        P.lens (_company :: LogicMonitor -> P.Text)
-            (\s a -> s { _company = a } :: LogicMonitor)
+instance Lens.HasField "company" f Provider (P.Text) where
+    field = Lens.providerLens P.. Lens.lens'
+        (company :: LogicMonitor -> P.Text)
+        (\s a -> s { company = a } :: LogicMonitor)

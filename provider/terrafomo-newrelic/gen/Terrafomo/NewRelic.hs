@@ -28,12 +28,9 @@ module Terrafomo.NewRelic
     -- * Settings
     , module Terrafomo.NewRelic.Settings
 
-    -- * Overloaded Lenses
-    , module Terrafomo.NewRelic.Lens
     ) where
 
 import Terrafomo.NewRelic.DataSources
-import Terrafomo.NewRelic.Lens
 import Terrafomo.NewRelic.Provider
 import Terrafomo.NewRelic.Resources
 import Terrafomo.NewRelic.Settings

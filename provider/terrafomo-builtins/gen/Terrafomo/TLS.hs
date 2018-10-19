@@ -28,12 +28,9 @@ module Terrafomo.TLS
     -- * Settings
     , module Terrafomo.TLS.Settings
 
-    -- * Overloaded Lenses
-    , module Terrafomo.TLS.Lens
     ) where
 
 import Terrafomo.TLS.DataSources
-import Terrafomo.TLS.Lens
 import Terrafomo.TLS.Provider
 import Terrafomo.TLS.Resources
 import Terrafomo.TLS.Settings

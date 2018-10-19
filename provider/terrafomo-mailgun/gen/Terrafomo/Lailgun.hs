@@ -22,18 +22,11 @@ module Terrafomo.Lailgun
     -- * Resources
     , module Terrafomo.Lailgun.Resources
 
-    -- * DataSources
-    , module Terrafomo.Lailgun.DataSources
-
     -- * Settings
     , module Terrafomo.Lailgun.Settings
 
-    -- * Overloaded Lenses
-    , module Terrafomo.Lailgun.Lens
     ) where
 
-import Terrafomo.Lailgun.DataSources
-import Terrafomo.Lailgun.Lens
 import Terrafomo.Lailgun.Provider
 import Terrafomo.Lailgun.Resources
 import Terrafomo.Lailgun.Settings

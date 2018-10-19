@@ -38,9 +38,13 @@ import qualified Data.Text.Read             as Text
 import qualified Data.Version               as Version
 import qualified Terrafomo.Gen.Diff         as Diff
 import qualified Terrafomo.Gen.Go           as Go
+import qualified Terrafomo.Gen.Graph        as Graph
 import qualified Terrafomo.Gen.Name         as Name
 import qualified Terrafomo.Gen.Type         as Type
 import qualified Terrafomo.Gen.URL          as URL
+
+-- FIXME: when all fields conflict - ie. the resulting schema is only one
+-- field, replace it.
 
 data Env = Env
     { _config :: !Config
@@ -85,10 +89,8 @@ run cfg provider =
                let settings =
                        Map.elems (Map.delete (schemaName (fromSettings schema)) _settings)
 
-               let version = Version.makeVersion
-                           . take 2
-                           . Version.versionBranch
-                           $ Go.providerVersion provider
+               let version =
+                       Version.versionBranch $ Go.providerVersion provider
 
                validate provider $ Provider'
                    { providerName         = configProviderName cfg
@@ -256,20 +258,98 @@ elabSchema original (data_, con, smart) schemas =
         key    <- getCurrentKey
         thread <- isThreaded
         args   <- elabArguments  schemas
-        attrs  <- elabExpributes schemas
+        attrs  <- elabAttributes schemas
         typ    <- elabData data_
 
-        pure $! overrideSchema (configOverrides cfg)
+        let (rdata, rcon) = Name.requiredNames data_
+
+        rtyp <- elabData rdata
+
+        pure $! elabConflicts
+              $ overrideSchema (configOverrides cfg) (configPatterns cfg)
               $ Schema'
                 { schemaName       = data_
+                , schemaProvider   = configProviderName cfg
                 , schemaOriginal   = original
                 , schemaKey        = key
                 , schemaType       = typ
                 , schemaCon        = Con con smart
+                , schemaRequired   = Required rdata rcon rtyp
                 , schemaThreaded   = thread
                 , schemaArguments  = args
                 , schemaAttributes = attrs
+                , schemaConflicts  = Nothing
                 }
+
+elabConflicts
+    :: Schema Conflict
+    -> Schema Conflict
+elabConflicts x
+    | null argumentConflicts && null attributeConflicts = x
+    | otherwise                                         =
+          x { schemaArguments  = arguments  ++ map fst arguments'
+            , schemaAttributes = attributes ++ map fst attributes'
+            , schemaConflicts  =
+                Just ( map snd arguments'
+                    ++ map snd attributes'
+                     )
+            }
+  where
+    arguments'  = map collapse (components argumentConflicts)
+    attributes' = map collapse (components attributeConflicts)
+
+    collapse ys =
+        let (data_, label, method, original) =
+                Name.variantNames (schemaName x) (map fieldName ys)
+
+            required = any fieldRequired ys
+            threaded = any fieldThreaded ys
+            default_ = if required then DefaultParam label else DefaultNothing
+            typ      = Type.Data threaded data_
+            field    = Field'
+                { fieldName      = label
+                , fieldOriginal  = original
+                , fieldMethod    = method
+                , fieldHelp      = newHelp Nothing
+                , fieldType      = if required then typ else Type.typeMaybe typ
+                , fieldThreaded  = threaded
+                , fieldRequired  = required
+                , fieldComputed  = False
+                , fieldForceNew  = False
+                , fieldDefault   = default_
+                , fieldDefaults  = Nothing
+                , fieldConflicts = Set.unions (map fieldConflicts ys)
+                , fieldVariant   = True
+                }
+
+         in ( field
+            , Variant
+                { variantName    = data_
+                , variantLabel   = label
+                , variantMethod  = method
+                , variantEncoder = fieldConflictEncoder field
+                , variantType    = typ
+                , variantCons    =
+                    flip map ys $ \y ->
+                        ( Name.variantCon (schemaName x) (fieldName y)
+                        , y { fieldType =
+                                case fieldType y of
+                                    Type.App Type.Maybe t -> t
+                                    t                     -> t
+                            }
+                        )
+                }
+            )
+
+    components =
+        Graph.components .
+            Graph.new fieldName (map conflictName . Set.toList . fieldConflicts)
+
+    (arguments,  argumentConflicts) =
+        List.partition (Set.null . fieldConflicts) (schemaArguments  x)
+
+    (attributes, attributeConflicts) =
+        List.partition (Set.null . fieldConflicts) (schemaAttributes x)
 
 elabArguments :: [Go.Schema] -> Elab [Field Conflict]
 elabArguments =
@@ -281,49 +361,51 @@ elabArguments =
       . filter Go.schemaArgument
       . filter (isNothing . Go.schemaDeprecated)
 
-elabExpributes :: [Go.Schema] -> Elab [Field LabelName]
-elabExpributes =
+elabAttributes :: [Go.Schema] -> Elab [Field Conflict]
+elabAttributes =
     let unArgument x =
            x { Go.schemaRequired = False
              , Go.schemaOptional = False
              }
-     in traverse (elabField . unArgument)
+     in fmap applyConflicts
+      . traverse (elabField . unArgument)
       . filter Go.schemaComputed
       . filter (isNothing . Go.schemaDeprecated)
 
 elabIdAttribute :: Schema Conflict -> Elab (Schema Conflict)
-elabIdAttribute schema =
-    let attrs         = schemaAttributes schema
-        name          = "id"
-        (label, _, _) = Name.fieldNames True name
-        input         =
-            Go.Schema
-                { Go.schemaName          = name
-                , Go.schemaType          = Go.TypeString
-                , Go.schemaDescription   = Nothing
-                , Go.schemaDeprecated    = Nothing
-                , Go.schemaRemoved       = Nothing
-                , Go.schemaConflictsWith = mempty
-                , Go.schemaOptional      = False
-                , Go.schemaRequired      = False
-                , Go.schemaComputed      = True
-                , Go.schemaForceNew      = False
-                , Go.schemaSensitive     = False
-                , Go.schemaMinItems      = 0
-                , Go.schemaMaxItems      = 0
-                , Go.schemaPrimitive     = Nothing
-                , Go.schemaDefault       = Nothing
-                , Go.schemaSchema        = Nothing
-                , Go.schemaResource      = Nothing
-                }
+elabIdAttribute schema = do
+    let attrs      = schemaAttributes schema
+        name       = "id"
+        (label, _) = Name.fieldNames True name
+        input      =  Go.Schema
+            { Go.schemaName          = name
+            , Go.schemaType          = Go.TypeString
+            , Go.schemaDescription   = Nothing
+            , Go.schemaDeprecated    = Nothing
+            , Go.schemaRemoved       = Nothing
+            , Go.schemaConflictsWith = mempty
+            , Go.schemaOptional      = False
+            , Go.schemaRequired      = False
+            , Go.schemaComputed      = True
+            , Go.schemaForceNew      = False
+            , Go.schemaSensitive     = False
+            , Go.schemaMinItems      = 0
+            , Go.schemaMaxItems      = 0
+            , Go.schemaPrimitive     = Nothing
+            , Go.schemaDefault       = Nothing
+            , Go.schemaSchema        = Nothing
+            , Go.schemaResource      = Nothing
+            }
 
      in case List.find ((label ==) . fieldName) attrs of
             Just _  -> pure schema
             Nothing -> do
+                cfg   <- Reader.asks _config
                 field <- elabField input
-                pure $! schema
-                    { schemaAttributes = field : attrs
-                    }
+                pure $ overrideSchema (configOverrides cfg) (configPatterns cfg)
+                     $! schema
+                          { schemaAttributes = applyConflicts [field] ++ attrs
+                          }
 
 elabType :: Go.Schema -> Elab Type
 elabType schema
@@ -358,9 +440,9 @@ elabType schema
 
 elabField :: Go.Schema -> Elab (Field LabelName)
 elabField schema = do
-    let original                = Go.schemaName schema
-        (label, class_, method) =
-             Name.fieldNames (Go.schemaComputed schema) original
+    let original        = Go.schemaName schema
+        (label, method) =
+            Name.fieldNames (Go.schemaComputed schema) original
 
     thread   <- isThreaded
     default_ <- elabDefault label schema
@@ -407,9 +489,8 @@ elabField schema = do
     pure $! Field'
         { fieldName      = label
         , fieldOriginal  = original
-        , fieldHelp      = newHelp (Go.schemaDescription schema)
-        , fieldClass     = class_
         , fieldMethod    = method
+        , fieldHelp      = newHelp (Go.schemaDescription schema)
         , fieldType      = required typ
         , fieldThreaded  = thread
         , fieldRequired  = Go.schemaRequired schema
@@ -419,6 +500,7 @@ elabField schema = do
         , fieldDefaults  = Go.schemaDefault schema
         , fieldConflicts =
             Set.map Name.conflictName (Go.schemaConflictsWith schema)
+        , fieldVariant   = False
         }
 
 elabDefault
@@ -473,31 +555,48 @@ elabDefault label schema = do
 
 -- Overrides
 
-overrideSchema :: Overrides -> Schema a -> Schema a
-overrideSchema m x =
-    case Map.lookup (schemaName x) m of
-        Nothing -> x
-        Just n  -> x
-            { schemaArguments  = overrideFields n (schemaArguments  x)
-            , schemaAttributes = overrideFields n (schemaAttributes x)
-            }
-
-overrideFields :: Map VarName Override -> [Field a] -> [Field a]
-overrideFields m = map field
-  where
-    field x =
-        x { fieldType =
-              case Map.lookup (fieldMethod x) m of
-                  Nothing              -> fieldType x
-                  Just (Verbatim free) -> Type.Free free
-                  Just (Leaf     name) -> replace ("P." <> name) (fieldType x)
+overrideSchema :: Overrides -> CompiledPattern -> Schema a -> Schema a
+overrideSchema m p x =
+    let f :: [Field a] -> [Field a]
+        f = maybe id overrideFields (Map.lookup (schemaName x) m)
+     in x { schemaArguments  = f . overridePatterns p $ schemaArguments  x
+          , schemaAttributes = f . overridePatterns p $ schemaAttributes x
           }
 
-    replace name = \case
-        Type.Free   _ -> Type.Free name
-        Type.Data t _ -> Type.Data t (Name.Name name)
-        Type.Expr x   -> Type.Expr   (replace name x)
-        Type.App  a b -> Type.App  a (replace name b)
+overridePatterns :: CompiledPattern -> [Field a] -> [Field a]
+overridePatterns (CompiledPattern f) =
+    map $ \x -> overrideField (f (fieldOriginal x)) x
+
+overrideFields :: Map Text Override -> [Field a] -> [Field a]
+overrideFields m =
+    map $ \x -> overrideField (Map.lookup (fieldOriginal x) m) x
+
+overrideField :: Maybe Override -> Field a -> Field a
+overrideField o x =
+    x { fieldType = maybe (fieldType x) (`overrideType` fieldType x) o
+      }
+
+overrideType :: Override -> Type -> Type
+overrideType o =
+    -- We can't use fmap/bimap here since we only want to replace only the
+    -- right-most leaf expression under function application.
+    let rightmost match f g = \case
+            e@(Type.Free   v)
+                | Nothing <- match -> f e
+                | Just v  == match -> f e
+            e@(Type.Data _ (Name.Name v))
+                | Nothing <- match -> g e
+                | Just v  == match -> g e
+            Type.Expr e           -> Type.Expr  (rightmost match f g e)
+            Type.App  a b         -> Type.App a (rightmost match f g b)
+            e                     -> e
+
+     in case o of
+        Verbatim free    ->
+            const (Type.Free free)
+
+        Leaf match name  ->
+           rightmost match (const (Type.Free name)) (Name.Name name <$)
 
 -- Conflicts
 
@@ -515,9 +614,9 @@ applyConflicts xs = map go xs
 
     mk k v =
         Conflict
-            { conflictName    = k
-            , conflictMethod  = fieldMethod v
-            , conflictDefault = fieldDefault v
+            { conflictName     = k
+            , conflictOriginal = fieldOriginal v
+            , conflictDefault  = fieldDefault v
             }
 
 conflictIndex
@@ -554,10 +653,6 @@ elabData x =
 isThreaded :: Elab Bool
 isThreaded =
     Reader.asks _thread
-
--- withoutThreaded :: Elab a -> Elab a
--- withoutThreaded =
---     Reader.local (\env -> env { _thread = False })
 
 withThreaded :: Elab a -> Elab a
 withThreaded =

@@ -1,0 +1,15 @@
+{% if schema.conflicts %}
+{% for conflict in schema.conflicts %}
+
+{- | A sum representing possible conflicting arguments for
+'{{ conflict.value.label }}'
+-}
+data {{ conflict.value.type }}
+      {% for con in conflict.value.cons %}
+    {% if con.first %}= {% else %}| {% endif %}{{ con.value.name }} !({{ con.value.type }})
+    -- ^ @{{ con.value.original }}@{% if con.value.forceNew %} - (Forces New){% endif %}{% for line in con.value.help %}
+    -- {{ line.value }}{% endfor %}
+      {% endfor %}
+      deriving (P.Show)
+{% endfor %}
+{% endif %}

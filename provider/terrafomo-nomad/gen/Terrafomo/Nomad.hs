@@ -28,12 +28,9 @@ module Terrafomo.Nomad
     -- * Settings
     , module Terrafomo.Nomad.Settings
 
-    -- * Overloaded Lenses
-    , module Terrafomo.Nomad.Lens
     ) where
 
 import Terrafomo.Nomad.DataSources
-import Terrafomo.Nomad.Lens
 import Terrafomo.Nomad.Provider
 import Terrafomo.Nomad.Resources
 import Terrafomo.Nomad.Settings

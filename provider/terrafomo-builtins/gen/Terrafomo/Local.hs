@@ -25,16 +25,9 @@ module Terrafomo.Local
     -- * DataSources
     , module Terrafomo.Local.DataSources
 
-    -- * Settings
-    , module Terrafomo.Local.Settings
-
-    -- * Overloaded Lenses
-    , module Terrafomo.Local.Lens
     ) where
 
 import Terrafomo.Local.DataSources
-import Terrafomo.Local.Lens
 import Terrafomo.Local.Provider
 import Terrafomo.Local.Resources
-import Terrafomo.Local.Settings
 import Terrafomo.Local.Types

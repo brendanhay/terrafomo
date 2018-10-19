@@ -28,12 +28,9 @@ module Terrafomo.Scaleway
     -- * Settings
     , module Terrafomo.Scaleway.Settings
 
-    -- * Overloaded Lenses
-    , module Terrafomo.Scaleway.Lens
     ) where
 
 import Terrafomo.Scaleway.DataSources
-import Terrafomo.Scaleway.Lens
 import Terrafomo.Scaleway.Provider
 import Terrafomo.Scaleway.Resources
 import Terrafomo.Scaleway.Settings

@@ -28,12 +28,9 @@ module Terrafomo.GitHub
     -- * Settings
     , module Terrafomo.GitHub.Settings
 
-    -- * Overloaded Lenses
-    , module Terrafomo.GitHub.Lens
     ) where
 
 import Terrafomo.GitHub.DataSources
-import Terrafomo.GitHub.Lens
 import Terrafomo.GitHub.Provider
 import Terrafomo.GitHub.Resources
 import Terrafomo.GitHub.Settings

@@ -28,12 +28,9 @@ module Terrafomo.Consul
     -- * Settings
     , module Terrafomo.Consul.Settings
 
-    -- * Overloaded Lenses
-    , module Terrafomo.Consul.Lens
     ) where
 
 import Terrafomo.Consul.DataSources
-import Terrafomo.Consul.Lens
 import Terrafomo.Consul.Provider
 import Terrafomo.Consul.Resources
 import Terrafomo.Consul.Settings

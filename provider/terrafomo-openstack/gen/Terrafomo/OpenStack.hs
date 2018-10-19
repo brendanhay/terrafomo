@@ -28,12 +28,9 @@ module Terrafomo.OpenStack
     -- * Settings
     , module Terrafomo.OpenStack.Settings
 
-    -- * Overloaded Lenses
-    , module Terrafomo.OpenStack.Lens
     ) where
 
 import Terrafomo.OpenStack.DataSources
-import Terrafomo.OpenStack.Lens
 import Terrafomo.OpenStack.Provider
 import Terrafomo.OpenStack.Resources
 import Terrafomo.OpenStack.Settings

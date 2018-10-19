@@ -16,166 +16,155 @@
 --
 module Terrafomo.AliCloud.Provider
     (
-    -- * AliCloud Provider Datatype
-      AliCloud (..)
-    , newProvider
-    , defaultProvider
-
     -- * AliCloud Specific Aliases
+      Provider
     , DataSource
     , Resource
+
+    -- * AliCloud Configuration
+    , currentVersion
+    , newProvider
+    , AliCloud (..)
+    , AliCloud_Required (..)
     ) where
 
-import Data.Function ((&))
-import Data.Functor  ((<$>))
-import Data.Proxy    (Proxy (Proxy))
+import Data.Function  ((&))
+import Data.Functor   ((<$>))
+import Data.Semigroup ((<>))
+import Data.Version   (Version, makeVersion, showVersion)
 
 import GHC.Base (($))
 
 import Terrafomo.AliCloud.Settings
 
-import qualified Data.Hashable            as P
-import qualified Data.HashMap.Strict      as P
+import qualified Data.Functor.Const       as P
 import qualified Data.List.NonEmpty       as P
+import qualified Data.Map.Strict          as P
 import qualified Data.Maybe               as P
 import qualified Data.Text.Lazy           as P
-import qualified GHC.Generics             as P
-import qualified Lens.Micro               as P
 import qualified Prelude                  as P
-import qualified Terrafomo.AliCloud.Lens  as P
 import qualified Terrafomo.AliCloud.Types as P
 import qualified Terrafomo.HCL            as TF
+import qualified Terrafomo.Lens           as Lens
 import qualified Terrafomo.Schema         as TF
 
-type DataSource a = TF.Resource AliCloud ()               a
-type Resource   a = TF.Resource AliCloud (TF.Lifecycle a) a
+type Provider   = TF.Provider AliCloud
+type DataSource = TF.Resource AliCloud TF.Ignored
+type Resource   = TF.Resource AliCloud TF.Meta
+
+type instance TF.ProviderName AliCloud = "alicloud"
+
+currentVersion :: Version
+currentVersion = makeVersion [1, 16, 0]
 
 -- | The @alicloud@ Terraform provider configuration.
---
--- See the <https://www.terraform.io/docs/providers/alicloud/index.html terraform documentation>
--- for more information.
-data AliCloud = AliCloud'
-    { _accessKey     :: P.Text
-    -- ^ @access_key@ - (Required)
+data AliCloud = AliCloud_Internal
+    { access_key     :: P.Text
+    -- ^ @access_key@
+    -- - (Required)
     -- Access key of alicloud
-    --
-    , _accountId     :: P.Maybe P.Text
-    -- ^ @account_id@ - (Optional)
+    , account_id     :: P.Maybe TF.Id
+    -- ^ @account_id@
+    -- - (Optional)
     -- Alibaba Cloud account ID
-    --
-    , _fc            :: P.Maybe P.Text
-    -- ^ @fc@ - (Optional)
+    , fc             :: P.Maybe P.Text
+    -- ^ @fc@
+    -- - (Optional)
     -- Custom function compute endpoints
-    --
-    , _logEndpoint   :: P.Maybe P.Text
-    -- ^ @log_endpoint@ - (Optional)
+    , log_endpoint   :: P.Maybe P.Text
+    -- ^ @log_endpoint@
+    -- - (Optional)
     -- Alibaba Cloud log service self-define endpoint
-    --
-    , _region        :: P.Text
-    -- ^ @region@ - (Required)
+    , region         :: P.Text
+    -- ^ @region@
+    -- - (Required)
     -- Region of alicloud
-    --
-    , _secretKey     :: P.Text
-    -- ^ @secret_key@ - (Required)
+    , secret_key     :: P.Text
+    -- ^ @secret_key@
+    -- - (Required)
     -- Secret key of alicloud
-    --
-    , _securityToken :: P.Maybe P.Text
-    -- ^ @security_token@ - (Optional)
+    , security_token :: P.Maybe P.Text
+    -- ^ @security_token@
+    -- - (Optional)
     -- Alibaba Cloud Security Token
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
+    } deriving (P.Show)
 
-instance P.Hashable (AliCloud)
-
--- | Specify a new AliCloud provider configuration.
+{- | Specify a new AliCloud provider configuration.
+See the <https://www.terraform.io/docs/providers/alicloud/index.html terraform documentation> for more information.
+-}
 newProvider
-    :: P.Text -- ^ Lens: 'P.accessKey', Field: '_accessKey', HCL: @access_key@
-    -> P.Text -- ^ Lens: 'P.secretKey', Field: '_secretKey', HCL: @secret_key@
-    -> P.Text -- ^ Lens: 'P.region', Field: '_region', HCL: @region@
-    -> AliCloud
-newProvider _accessKey _secretKey _region =
-    AliCloud'
-        { _accessKey = _accessKey
-        , _accountId = P.Nothing
-        , _fc = P.Nothing
-        , _logEndpoint = P.Nothing
-        , _region = _region
-        , _secretKey = _secretKey
-        , _securityToken = P.Nothing
+    :: AliCloud_Required -- ^ The minimal/required arguments.
+    -> Provider
+newProvider x =
+    TF.Provider
+        { TF.providerVersion = P.Just ("~> " P.++ showVersion currentVersion)
+        , TF.providerConfig  =
+            (let AliCloud{..} = x in AliCloud_Internal
+                { access_key = access_key
+                , account_id = P.Nothing
+                , fc = P.Nothing
+                , log_endpoint = P.Nothing
+                , region = region
+                , secret_key = secret_key
+                , security_token = P.Nothing
+                })
+        , TF.providerEncoder =
+            (\AliCloud_Internal{..} ->
+          P.mempty
+       <> TF.pair "access_key" access_key
+       <> P.maybe P.mempty (TF.pair "account_id") account_id
+       <> P.maybe P.mempty (TF.pair "fc") fc
+       <> P.maybe P.mempty (TF.pair "log_endpoint") log_endpoint
+       <> TF.pair "region" region
+       <> TF.pair "secret_key" secret_key
+       <> P.maybe P.mempty (TF.pair "security_token") security_token
+            )
         }
 
-{- | The 'AliCloud' provider with absent configuration that is used
-to instantiate new 'Resource's and 'DataSource's. Provider configuration can be
-overridden on a per-resource basis by using the 'Terrafomo.provider' lens, the
-'newProvider' constructor, and any of the applicable lenses.
+-- | The required arguments for 'newProvider'.
+data AliCloud_Required = AliCloud
+    { access_key :: P.Text
+    -- ^ (Required)
+    -- Access key of alicloud
+    , secret_key :: P.Text
+    -- ^ (Required)
+    -- Secret key of alicloud
+    , region     :: P.Text
+    -- ^ (Required)
+    -- Region of alicloud
+    } deriving (P.Show)
 
-For example:
+instance Lens.HasField "access_key" f Provider (P.Text) where
+    field = Lens.providerLens P.. Lens.lens'
+        (access_key :: AliCloud -> P.Text)
+        (\s a -> s { access_key = a } :: AliCloud)
 
-@
-import qualified Terrafomo as TF
-import qualified Terrafomo.AliCloud.Provider as AliCloud
+instance Lens.HasField "account_id" f Provider (P.Maybe TF.Id) where
+    field = Lens.providerLens P.. Lens.lens'
+        (account_id :: AliCloud -> P.Maybe TF.Id)
+        (\s a -> s { account_id = a } :: AliCloud)
 
-TF.newExampleResource "foo"
-    & TF.provider ?~
-          AliCloud.(newProvider
-              -- Required arguments
-              _accessKey -- (Required) 'P.Text'
-              _secretKey -- (Required) 'P.Text'
-              _region -- (Required) 'P.Text'
-              -- Lenses
-              & AliCloud.accessKey .~ _accessKey -- 'P.Text'
-              & AliCloud.accountId .~ Nothing -- 'P.Maybe P.Text'
-              & AliCloud.fc .~ Nothing -- 'P.Maybe P.Text'
-              & AliCloud.logEndpoint .~ Nothing -- 'P.Maybe P.Text'
-              & AliCloud.region .~ _region -- 'P.Text'
-              & AliCloud.secretKey .~ _secretKey -- 'P.Text'
-              & AliCloud.securityToken .~ Nothing -- 'P.Maybe P.Text'
-@
--}
-defaultProvider :: TF.Provider AliCloud
-defaultProvider =
-    TF.defaultProvider "alicloud" (P.Just "~> 1.12")
-        (\AliCloud'{..} -> P.mconcat
-            [ TF.pair "access_key" _accessKey
-            , P.maybe P.mempty (TF.pair "account_id") _accountId
-            , P.maybe P.mempty (TF.pair "fc") _fc
-            , P.maybe P.mempty (TF.pair "log_endpoint") _logEndpoint
-            , TF.pair "region" _region
-            , TF.pair "secret_key" _secretKey
-            , P.maybe P.mempty (TF.pair "security_token") _securityToken
-            ])
+instance Lens.HasField "fc" f Provider (P.Maybe P.Text) where
+    field = Lens.providerLens P.. Lens.lens'
+        (fc :: AliCloud -> P.Maybe P.Text)
+        (\s a -> s { fc = a } :: AliCloud)
 
-instance P.HasAccessKey (AliCloud) (P.Text) where
-    accessKey =
-        P.lens (_accessKey :: AliCloud -> P.Text)
-            (\s a -> s { _accessKey = a } :: AliCloud)
+instance Lens.HasField "log_endpoint" f Provider (P.Maybe P.Text) where
+    field = Lens.providerLens P.. Lens.lens'
+        (log_endpoint :: AliCloud -> P.Maybe P.Text)
+        (\s a -> s { log_endpoint = a } :: AliCloud)
 
-instance P.HasAccountId (AliCloud) (P.Maybe P.Text) where
-    accountId =
-        P.lens (_accountId :: AliCloud -> P.Maybe P.Text)
-            (\s a -> s { _accountId = a } :: AliCloud)
+instance Lens.HasField "region" f Provider (P.Text) where
+    field = Lens.providerLens P.. Lens.lens'
+        (region :: AliCloud -> P.Text)
+        (\s a -> s { region = a } :: AliCloud)
 
-instance P.HasFc (AliCloud) (P.Maybe P.Text) where
-    fc =
-        P.lens (_fc :: AliCloud -> P.Maybe P.Text)
-            (\s a -> s { _fc = a } :: AliCloud)
+instance Lens.HasField "secret_key" f Provider (P.Text) where
+    field = Lens.providerLens P.. Lens.lens'
+        (secret_key :: AliCloud -> P.Text)
+        (\s a -> s { secret_key = a } :: AliCloud)
 
-instance P.HasLogEndpoint (AliCloud) (P.Maybe P.Text) where
-    logEndpoint =
-        P.lens (_logEndpoint :: AliCloud -> P.Maybe P.Text)
-            (\s a -> s { _logEndpoint = a } :: AliCloud)
-
-instance P.HasRegion (AliCloud) (P.Text) where
-    region =
-        P.lens (_region :: AliCloud -> P.Text)
-            (\s a -> s { _region = a } :: AliCloud)
-
-instance P.HasSecretKey (AliCloud) (P.Text) where
-    secretKey =
-        P.lens (_secretKey :: AliCloud -> P.Text)
-            (\s a -> s { _secretKey = a } :: AliCloud)
-
-instance P.HasSecurityToken (AliCloud) (P.Maybe P.Text) where
-    securityToken =
-        P.lens (_securityToken :: AliCloud -> P.Maybe P.Text)
-            (\s a -> s { _securityToken = a } :: AliCloud)
+instance Lens.HasField "security_token" f Provider (P.Maybe P.Text) where
+    field = Lens.providerLens P.. Lens.lens'
+        (security_token :: AliCloud -> P.Maybe P.Text)
+        (\s a -> s { security_token = a } :: AliCloud)

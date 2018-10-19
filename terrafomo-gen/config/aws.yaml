@@ -5,71 +5,85 @@ extra-deps:
   - amazonka-core
   - formatting
   - iproute
-  - amazonka-iam-policy >= 0.0.4
+  - amazonka-iam-policy ^>= 0.0.4
 
-#
-# field-overrides now support two modes of type substitution, allowing for a
-# less verbose method of overriding only the generator assigned primitives.
+# field-patterns and field overrides support the following methods of type
+# substitution, to allow overriding the generator assigned primitives.
 #
 # 1. leaf - replace only the leaf of the calculated type expression.
 #    This automatically handles qualifiers:
 #
 # S3BucketResource:
-#   region: Region
+#   region: P.Region # This is equivalent to region: { leaf: P.Region }
+#
+# Additionally, a 'match: ..' key is supported to predicate the substitution
+# only if the leaf matches the expected type.
 #
 # 2. verbatim - replace the entire type expression.
-#    This requires the TF./P. qualifiers and completely supplants the calculated
-#    type via string substitution:
+#    This completely supplants the calculated type via string substitution:
 #
 # S3BucketResource:
-#   region:
-#     verbatim: 'TF.Expr s P.Region'
+#   region: { verbatim: TF.Expr s P.Region }
 #
+# All methods require that you prefix all types with TF./P. namespace qualifiers.
+
+field-patterns:
+  - permute:
+      region:     { leaf: P.Region, match: P.Text }
+
+  - permute:
+      cidr_block: { leaf: P.IPRange, match: P.Text }
+
+  - permute:
+      ip:         { leaf: P.IP, match: P.Text }
+
+  - permute:
+      arn:        { leaf: P.Arn, match: P.Text }
 
 field-overrides:
-  # Provider
+  # Settings
 
-  AWS:
-    region: Region
+  AssumeRole:
+    policy: P.Document
 
-  AssumeRoleSetting:
-    policy: Document
+  DynamodbTableAttribute:
+    type: P.TableAttributeType
+
+  # DataSources
+
+  AvailabilityZonesD:
+    computed_names: P.Region
 
   # Resources
 
-  IamRoleResource:
-    assumeRolePolicy: Document
+  IamRoleR:
+    assume_role_policy: P.Document
 
-  IamRolePolicyResource:
-    policy: Document
+  IamRolePolicyR:
+    policy: P.Document
 
-  IamPolicyResource:
-    policy: Document
+  IamPolicyR:
+    policy: P.Document
 
-  IamGroupPolicyResource:
-    policy: Document
+  IamGroupPolicyR:
+    policy: P.Document
 
-  S3BucketResource:
-    region: Region
+  S3BucketR:
+    region: P.Region
 
-  SecurityGroupRuleResource:
-    type': NetworkTraffic
-    protocol: NetworkProtocol
-    cidrBlocks: IPRange
-    ipv6CidrBlocks: IPRange
+  SecurityGroupRuleR:
+    type: P.NetworkTraffic
+    protocol: P.NetworkProtocol
+    cidr_blocks: P.IPRange
+    ipv6_cidr_blocks: P.IPRange
 
-  VpcResource:
-    cidrBlock: IPRange
+  VpcR:
+    cidr_block: P.IPRange
 
-  SubnetResource:
-    cidrBlock: IPRange
-    availabilityZone: Zone
+  SubnetR:
+    cidr_block: P.IPRange
+    availability_zone: P.Zone
 
-  RouteResource:
-    destinationCidrBlock: IPRange
-    destinationIpv6CidrBlock: IPRange
-
-  # Settings
-
-  DynamodbTableAttribute:
-    type': TableAttributeType
+  RouteR:
+    destination_cidr_block: P.IPRange
+    destination_ipv6_cidr_block: P.IPRange

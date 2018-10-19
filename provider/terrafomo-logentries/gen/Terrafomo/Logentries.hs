@@ -25,16 +25,9 @@ module Terrafomo.Logentries
     -- * DataSources
     , module Terrafomo.Logentries.DataSources
 
-    -- * Settings
-    , module Terrafomo.Logentries.Settings
-
-    -- * Overloaded Lenses
-    , module Terrafomo.Logentries.Lens
     ) where
 
 import Terrafomo.Logentries.DataSources
-import Terrafomo.Logentries.Lens
 import Terrafomo.Logentries.Provider
 import Terrafomo.Logentries.Resources
-import Terrafomo.Logentries.Settings
 import Terrafomo.Logentries.Types

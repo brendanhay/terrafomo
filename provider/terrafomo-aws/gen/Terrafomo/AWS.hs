@@ -28,12 +28,9 @@ module Terrafomo.AWS
     -- * Settings
     , module Terrafomo.AWS.Settings
 
-    -- * Overloaded Lenses
-    , module Terrafomo.AWS.Lens
     ) where
 
 import Terrafomo.AWS.DataSources
-import Terrafomo.AWS.Lens
 import Terrafomo.AWS.Provider
 import Terrafomo.AWS.Resources
 import Terrafomo.AWS.Settings

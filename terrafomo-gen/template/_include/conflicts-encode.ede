@@ -1,0 +1,14 @@
+          P.mempty
+  {% for field in schema.arguments %}
+    {% if !field.value.variant %}
+       <> {{ field.value.encoder}} {{ field.value.name }}
+    {% endif %}
+  {% endfor %}
+  {% if schema.conflicts %}
+    {% for conflict in schema.conflicts %}
+       <> {{ conflict.value.encoder }} {{ conflict.value.label }} (\case
+        {% for con in conflict.value.cons %}
+              {{ con.value.name }} y -> TF.pair "{{ con.value.original }}" y{% if con.last %}){% endif %}
+      {% endfor %}
+    {% endfor %}
+  {% endif %}

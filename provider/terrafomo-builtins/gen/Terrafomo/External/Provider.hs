@@ -16,72 +16,60 @@
 --
 module Terrafomo.External.Provider
     (
-    -- * External Provider Datatype
-      External (..)
-    , newProvider
-    , defaultProvider
-
     -- * External Specific Aliases
+      Provider
     , DataSource
     , Resource
+
+    -- * External Configuration
+    , currentVersion
+    , newProvider
+    , External (..)
     ) where
 
-import Data.Function ((&))
-import Data.Functor  ((<$>))
-import Data.Proxy    (Proxy (Proxy))
+import Data.Function  ((&))
+import Data.Functor   ((<$>))
+import Data.Semigroup ((<>))
+import Data.Version   (Version, makeVersion, showVersion)
 
 import GHC.Base (($))
 
-import Terrafomo.External.Settings
 
-import qualified Data.Hashable            as P
-import qualified Data.HashMap.Strict      as P
+import qualified Data.Functor.Const       as P
 import qualified Data.List.NonEmpty       as P
+import qualified Data.Map.Strict          as P
 import qualified Data.Maybe               as P
 import qualified Data.Text.Lazy           as P
-import qualified GHC.Generics             as P
-import qualified Lens.Micro               as P
 import qualified Prelude                  as P
-import qualified Terrafomo.External.Lens  as P
 import qualified Terrafomo.External.Types as P
 import qualified Terrafomo.HCL            as TF
+import qualified Terrafomo.Lens           as Lens
 import qualified Terrafomo.Schema         as TF
 
-type DataSource a = TF.Resource External ()               a
-type Resource   a = TF.Resource External (TF.Lifecycle a) a
+type Provider   = TF.Provider External
+type DataSource = TF.Resource External TF.Ignored
+type Resource   = TF.Resource External TF.Meta
+
+type instance TF.ProviderName External = "external"
+
+currentVersion :: Version
+currentVersion = makeVersion [1, 0, 0]
 
 -- | The @external@ Terraform provider configuration.
---
--- See the <https://www.terraform.io/docs/providers/external/index.html terraform documentation>
--- for more information.
-data External = External'
-    deriving (P.Show, P.Eq, P.Generic)
+data External = External
+    deriving (P.Show)
 
-instance P.Hashable (External)
-
--- | Specify a new External provider configuration.
-newProvider
-    :: External
-newProvider =
-    External'
-
-{- | The 'External' provider with absent configuration that is used
-to instantiate new 'Resource's and 'DataSource's. Provider configuration can be
-overridden on a per-resource basis by using the 'Terrafomo.provider' lens, the
-'newProvider' constructor, and any of the applicable lenses.
-
-For example:
-
-@
-import qualified Terrafomo as TF
-import qualified Terrafomo.External.Provider as External
-
-TF.newExampleResource "foo"
-    & TF.provider ?~
-          External.(newProvider
-@
+{- | Specify a new External provider configuration.
+See the <https://www.terraform.io/docs/providers/external/index.html terraform documentation> for more information.
 -}
-defaultProvider :: TF.Provider External
-defaultProvider =
-    TF.defaultProvider "external" (P.Just "~> 1.0")
-        P.mempty
+newProvider
+    :: External -- ^ The minimal/required arguments.
+    -> Provider
+newProvider x =
+    TF.Provider
+        { TF.providerVersion = P.Just ("~> " P.++ showVersion currentVersion)
+        , TF.providerConfig  =
+            x
+        , TF.providerEncoder =
+            P.mempty
+        }

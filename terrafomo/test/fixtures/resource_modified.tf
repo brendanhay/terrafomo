@@ -1,4 +1,5 @@
 resource "bar" "modified" {
+  provider = "provider.1"
   name = "xyz-j982r"
   enabled = false
   settings = [
@@ -13,17 +14,16 @@ resource "bar" "modified" {
       configuration = {
         name = "parameters"
       }
-    },
+    }
   ]
-  lifecycle = {
+  lifecycle {
     prevent_destroy = false
     create_before_destroy = true
     ignore_changes = [
-      "*",
+      "*"
     ]
   }
-  alias = "test.uproot_accrue_shadow_vapor_fallout"
   depends_on = [
-    "data.foo.default",
+    "data.foo.default"
   ]
 }

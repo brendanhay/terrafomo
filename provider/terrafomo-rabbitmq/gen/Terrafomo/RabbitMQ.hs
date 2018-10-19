@@ -22,18 +22,11 @@ module Terrafomo.RabbitMQ
     -- * Resources
     , module Terrafomo.RabbitMQ.Resources
 
-    -- * DataSources
-    , module Terrafomo.RabbitMQ.DataSources
-
     -- * Settings
     , module Terrafomo.RabbitMQ.Settings
 
-    -- * Overloaded Lenses
-    , module Terrafomo.RabbitMQ.Lens
     ) where
 
-import Terrafomo.RabbitMQ.DataSources
-import Terrafomo.RabbitMQ.Lens
 import Terrafomo.RabbitMQ.Provider
 import Terrafomo.RabbitMQ.Resources
 import Terrafomo.RabbitMQ.Settings

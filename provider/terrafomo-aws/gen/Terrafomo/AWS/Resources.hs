@@ -10,18 +10,21 @@
 --
 module Terrafomo.AWS.Resources
     (
-    -- * Resources
-      module Terrafomo.AWS.Resource01
-    , module Terrafomo.AWS.Resource02
-    , module Terrafomo.AWS.Resource03
-    , module Terrafomo.AWS.Resource04
-    , module Terrafomo.AWS.Resource05
-    , module Terrafomo.AWS.Resource06
+      module Terrafomo.AWS.Resources01
+    , module Terrafomo.AWS.Resources02
+    , module Terrafomo.AWS.Resources03
+    , module Terrafomo.AWS.Resources04
+    , module Terrafomo.AWS.Resources05
+    , module Terrafomo.AWS.Resources06
+    , module Terrafomo.AWS.Resources07
+    , module Terrafomo.AWS.Resources08
     ) where
 
-import Terrafomo.AWS.Resource01
-import Terrafomo.AWS.Resource02
-import Terrafomo.AWS.Resource03
-import Terrafomo.AWS.Resource04
-import Terrafomo.AWS.Resource05
-import Terrafomo.AWS.Resource06
+import Terrafomo.AWS.Resources01
+import Terrafomo.AWS.Resources02
+import Terrafomo.AWS.Resources03
+import Terrafomo.AWS.Resources04
+import Terrafomo.AWS.Resources05
+import Terrafomo.AWS.Resources06
+import Terrafomo.AWS.Resources07
+import Terrafomo.AWS.Resources08

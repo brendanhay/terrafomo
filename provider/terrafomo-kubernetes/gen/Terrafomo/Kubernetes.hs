@@ -28,12 +28,9 @@ module Terrafomo.Kubernetes
     -- * Settings
     , module Terrafomo.Kubernetes.Settings
 
-    -- * Overloaded Lenses
-    , module Terrafomo.Kubernetes.Lens
     ) where
 
 import Terrafomo.Kubernetes.DataSources
-import Terrafomo.Kubernetes.Lens
 import Terrafomo.Kubernetes.Provider
 import Terrafomo.Kubernetes.Resources
 import Terrafomo.Kubernetes.Settings

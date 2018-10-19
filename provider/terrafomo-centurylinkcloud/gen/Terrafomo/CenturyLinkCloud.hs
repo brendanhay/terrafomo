@@ -22,19 +22,8 @@ module Terrafomo.CenturyLinkCloud
     -- * Resources
     , module Terrafomo.CenturyLinkCloud.Resources
 
-    -- * DataSources
-    , module Terrafomo.CenturyLinkCloud.DataSources
-
-    -- * Settings
-    , module Terrafomo.CenturyLinkCloud.Settings
-
-    -- * Overloaded Lenses
-    , module Terrafomo.CenturyLinkCloud.Lens
     ) where
 
-import Terrafomo.CenturyLinkCloud.DataSources
-import Terrafomo.CenturyLinkCloud.Lens
 import Terrafomo.CenturyLinkCloud.Provider
 import Terrafomo.CenturyLinkCloud.Resources
-import Terrafomo.CenturyLinkCloud.Settings
 import Terrafomo.CenturyLinkCloud.Types

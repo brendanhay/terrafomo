@@ -22,19 +22,8 @@ module Terrafomo.StatusCake
     -- * Resources
     , module Terrafomo.StatusCake.Resources
 
-    -- * DataSources
-    , module Terrafomo.StatusCake.DataSources
-
-    -- * Settings
-    , module Terrafomo.StatusCake.Settings
-
-    -- * Overloaded Lenses
-    , module Terrafomo.StatusCake.Lens
     ) where
 
-import Terrafomo.StatusCake.DataSources
-import Terrafomo.StatusCake.Lens
 import Terrafomo.StatusCake.Provider
 import Terrafomo.StatusCake.Resources
-import Terrafomo.StatusCake.Settings
 import Terrafomo.StatusCake.Types

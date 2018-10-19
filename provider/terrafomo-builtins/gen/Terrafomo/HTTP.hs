@@ -19,22 +19,11 @@ module Terrafomo.HTTP
     -- * Types
     , module Terrafomo.HTTP.Types
 
-    -- * Resources
-    , module Terrafomo.HTTP.Resources
-
     -- * DataSources
     , module Terrafomo.HTTP.DataSources
 
-    -- * Settings
-    , module Terrafomo.HTTP.Settings
-
-    -- * Overloaded Lenses
-    , module Terrafomo.HTTP.Lens
     ) where
 
 import Terrafomo.HTTP.DataSources
-import Terrafomo.HTTP.Lens
 import Terrafomo.HTTP.Provider
-import Terrafomo.HTTP.Resources
-import Terrafomo.HTTP.Settings
 import Terrafomo.HTTP.Types

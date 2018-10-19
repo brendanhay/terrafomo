@@ -22,18 +22,11 @@ module Terrafomo.NS1
     -- * Resources
     , module Terrafomo.NS1.Resources
 
-    -- * DataSources
-    , module Terrafomo.NS1.DataSources
-
     -- * Settings
     , module Terrafomo.NS1.Settings
 
-    -- * Overloaded Lenses
-    , module Terrafomo.NS1.Lens
     ) where
 
-import Terrafomo.NS1.DataSources
-import Terrafomo.NS1.Lens
 import Terrafomo.NS1.Provider
 import Terrafomo.NS1.Resources
 import Terrafomo.NS1.Settings

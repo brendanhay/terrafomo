@@ -6,7 +6,7 @@ dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 config=".travis.yml"
 
-core=( terrafomo terrafomo-gen )
+core=( terrafomo terrafomo-gen terrafomo-example )
 packages=( $(${dir}/list-packages) )
 
 entry() {
@@ -14,9 +14,9 @@ entry() {
     local pkg="$2"
 
 cat <<-ENTRY
-    - env: PACKAGE=${pkg} STACK_YAML=stack-${ver}.yaml
-      compiler: ": #stack ${ver}"
-      addons: {apt: {packages: [libgmp-dev]}}
+    - env: CABALVER=2.2 GHCVER=${ver} PACKAGE=${pkg}
+      compiler: ": #GHC ${ver}"
+      addons: {apt: {packages: [cabal-install-2.2,ghc-8.4.3,alex-3.1.7,happy-1.19.5], sources: [hvr-ghc]}}
 
 ENTRY
 }

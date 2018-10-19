@@ -16,111 +16,101 @@
 --
 module Terrafomo.NewRelic.Provider
     (
-    -- * NewRelic Provider Datatype
-      NewRelic (..)
-    , newProvider
-    , defaultProvider
-
     -- * NewRelic Specific Aliases
+      Provider
     , DataSource
     , Resource
+
+    -- * NewRelic Configuration
+    , currentVersion
+    , newProvider
+    , NewRelic (..)
+    , NewRelic_Required (..)
     ) where
 
-import Data.Function ((&))
-import Data.Functor  ((<$>))
-import Data.Proxy    (Proxy (Proxy))
+import Data.Function  ((&))
+import Data.Functor   ((<$>))
+import Data.Semigroup ((<>))
+import Data.Version   (Version, makeVersion, showVersion)
 
 import GHC.Base (($))
 
 import Terrafomo.NewRelic.Settings
 
-import qualified Data.Hashable            as P
-import qualified Data.HashMap.Strict      as P
+import qualified Data.Functor.Const       as P
 import qualified Data.List.NonEmpty       as P
+import qualified Data.Map.Strict          as P
 import qualified Data.Maybe               as P
 import qualified Data.Text.Lazy           as P
-import qualified GHC.Generics             as P
-import qualified Lens.Micro               as P
 import qualified Prelude                  as P
 import qualified Terrafomo.HCL            as TF
-import qualified Terrafomo.NewRelic.Lens  as P
+import qualified Terrafomo.Lens           as Lens
 import qualified Terrafomo.NewRelic.Types as P
 import qualified Terrafomo.Schema         as TF
 
-type DataSource a = TF.Resource NewRelic ()               a
-type Resource   a = TF.Resource NewRelic (TF.Lifecycle a) a
+type Provider   = TF.Provider NewRelic
+type DataSource = TF.Resource NewRelic TF.Ignored
+type Resource   = TF.Resource NewRelic TF.Meta
+
+type instance TF.ProviderName NewRelic = "newrelic"
+
+currentVersion :: Version
+currentVersion = makeVersion [1, 0, 1]
 
 -- | The @newrelic@ Terraform provider configuration.
---
--- See the <https://www.terraform.io/docs/providers/newrelic/index.html terraform documentation>
--- for more information.
-data NewRelic = NewRelic'
-    { _apiKey      :: P.Text
-    -- ^ @api_key@ - (Required)
-    --
-    , _apiUrl      :: P.Maybe P.Text
-    -- ^ @api_url@ - (Optional)
-    --
-    , _infraApiUrl :: P.Maybe P.Text
-    -- ^ @infra_api_url@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
+data NewRelic = NewRelic_Internal
+    { api_key       :: P.Text
+    -- ^ @api_key@
+    -- - (Required)
+    , api_url       :: P.Maybe P.Text
+    -- ^ @api_url@
+    -- - (Optional)
+    , infra_api_url :: P.Maybe P.Text
+    -- ^ @infra_api_url@
+    -- - (Optional)
+    } deriving (P.Show)
 
-instance P.Hashable (NewRelic)
-
--- | Specify a new NewRelic provider configuration.
+{- | Specify a new NewRelic provider configuration.
+See the <https://www.terraform.io/docs/providers/newrelic/index.html terraform documentation> for more information.
+-}
 newProvider
-    :: P.Text -- ^ Lens: 'P.apiKey', Field: '_apiKey', HCL: @api_key@
-    -> NewRelic
-newProvider _apiKey =
-    NewRelic'
-        { _apiKey = _apiKey
-        , _apiUrl = P.Nothing
-        , _infraApiUrl = P.Nothing
+    :: NewRelic_Required -- ^ The minimal/required arguments.
+    -> Provider
+newProvider x =
+    TF.Provider
+        { TF.providerVersion = P.Just ("~> " P.++ showVersion currentVersion)
+        , TF.providerConfig  =
+            (let NewRelic{..} = x in NewRelic_Internal
+                { api_key = api_key
+                , api_url = P.Nothing
+                , infra_api_url = P.Nothing
+                })
+        , TF.providerEncoder =
+            (\NewRelic_Internal{..} ->
+          P.mempty
+       <> TF.pair "api_key" api_key
+       <> P.maybe P.mempty (TF.pair "api_url") api_url
+       <> P.maybe P.mempty (TF.pair "infra_api_url") infra_api_url
+            )
         }
 
-{- | The 'NewRelic' provider with absent configuration that is used
-to instantiate new 'Resource's and 'DataSource's. Provider configuration can be
-overridden on a per-resource basis by using the 'Terrafomo.provider' lens, the
-'newProvider' constructor, and any of the applicable lenses.
+-- | The required arguments for 'newProvider'.
+data NewRelic_Required = NewRelic
+    { api_key :: P.Text
+    -- ^ (Required)
+    } deriving (P.Show)
 
-For example:
+instance Lens.HasField "api_key" f Provider (P.Text) where
+    field = Lens.providerLens P.. Lens.lens'
+        (api_key :: NewRelic -> P.Text)
+        (\s a -> s { api_key = a } :: NewRelic)
 
-@
-import qualified Terrafomo as TF
-import qualified Terrafomo.NewRelic.Provider as NewRelic
+instance Lens.HasField "api_url" f Provider (P.Maybe P.Text) where
+    field = Lens.providerLens P.. Lens.lens'
+        (api_url :: NewRelic -> P.Maybe P.Text)
+        (\s a -> s { api_url = a } :: NewRelic)
 
-TF.newExampleResource "foo"
-    & TF.provider ?~
-          NewRelic.(newProvider
-              -- Required arguments
-              _apiKey -- (Required) 'P.Text'
-              -- Lenses
-              & NewRelic.apiKey .~ _apiKey -- 'P.Text'
-              & NewRelic.apiUrl .~ Nothing -- 'P.Maybe P.Text'
-              & NewRelic.infraApiUrl .~ Nothing -- 'P.Maybe P.Text'
-@
--}
-defaultProvider :: TF.Provider NewRelic
-defaultProvider =
-    TF.defaultProvider "newrelic" (P.Just "~> 1.0")
-        (\NewRelic'{..} -> P.mconcat
-            [ TF.pair "api_key" _apiKey
-            , P.maybe P.mempty (TF.pair "api_url") _apiUrl
-            , P.maybe P.mempty (TF.pair "infra_api_url") _infraApiUrl
-            ])
-
-instance P.HasApiKey (NewRelic) (P.Text) where
-    apiKey =
-        P.lens (_apiKey :: NewRelic -> P.Text)
-            (\s a -> s { _apiKey = a } :: NewRelic)
-
-instance P.HasApiUrl (NewRelic) (P.Maybe P.Text) where
-    apiUrl =
-        P.lens (_apiUrl :: NewRelic -> P.Maybe P.Text)
-            (\s a -> s { _apiUrl = a } :: NewRelic)
-
-instance P.HasInfraApiUrl (NewRelic) (P.Maybe P.Text) where
-    infraApiUrl =
-        P.lens (_infraApiUrl :: NewRelic -> P.Maybe P.Text)
-            (\s a -> s { _infraApiUrl = a } :: NewRelic)
+instance Lens.HasField "infra_api_url" f Provider (P.Maybe P.Text) where
+    field = Lens.providerLens P.. Lens.lens'
+        (infra_api_url :: NewRelic -> P.Maybe P.Text)
+        (\s a -> s { infra_api_url = a } :: NewRelic)

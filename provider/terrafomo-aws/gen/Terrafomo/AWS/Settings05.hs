@@ -1,8 +1,9 @@
 -- This module is auto-generated.
 
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE RecordWildCards   #-}
-{-# LANGUAGE StrictData        #-}
+{-# LANGUAGE NoImplicitPrelude    #-}
+{-# LANGUAGE RecordWildCards      #-}
+{-# LANGUAGE StrictData           #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -14,5336 +15,4795 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
+
 module Terrafomo.AWS.Settings05
     (
-    -- ** properties
-      IotThingTypeProperties (..)
-    , newIotThingTypeProperties
-
-    -- ** cloudwatch_alarm
-    , IotTopicRuleCloudwatchAlarm (..)
-    , newIotTopicRuleCloudwatchAlarm
-
-    -- ** cloudwatch_metric
-    , IotTopicRuleCloudwatchMetric (..)
-    , newIotTopicRuleCloudwatchMetric
-
-    -- ** dynamodb
-    , IotTopicRuleDynamodb (..)
-    , newIotTopicRuleDynamodb
-
-    -- ** elasticsearch
-    , IotTopicRuleElasticsearch (..)
-    , newIotTopicRuleElasticsearch
-
-    -- ** firehose
-    , IotTopicRuleFirehose (..)
-    , newIotTopicRuleFirehose
-
-    -- ** kinesis
-    , IotTopicRuleKinesis (..)
-    , newIotTopicRuleKinesis
-
-    -- ** lambda
-    , IotTopicRuleLambda (..)
-    , newIotTopicRuleLambda
-
-    -- ** republish
-    , IotTopicRuleRepublish (..)
-    , newIotTopicRuleRepublish
-
-    -- ** s3
-    , IotTopicRuleS3 (..)
-    , newIotTopicRuleS3
-
-    -- ** sns
-    , IotTopicRuleSns (..)
-    , newIotTopicRuleSns
-
-    -- ** sqs
-    , IotTopicRuleSqs (..)
-    , newIotTopicRuleSqs
-
-    -- ** cloudwatch_logging_options
-    , KinesisFirehoseDeliveryStreamCloudwatchLoggingOptions (..)
-    , newKinesisFirehoseDeliveryStreamCloudwatchLoggingOptions
-
-    -- ** splunk_configuration
-    , KinesisFirehoseDeliveryStreamSplunkConfiguration (..)
-    , newKinesisFirehoseDeliveryStreamSplunkConfiguration
-
-    -- ** processing_configuration
-    , KinesisFirehoseDeliveryStreamProcessingConfiguration (..)
-    , newKinesisFirehoseDeliveryStreamProcessingConfiguration
-
-    -- ** redshift_configuration
-    , KinesisFirehoseDeliveryStreamRedshiftConfiguration (..)
-    , newKinesisFirehoseDeliveryStreamRedshiftConfiguration
-
-    -- ** s3_backup_configuration
-    , KinesisFirehoseDeliveryStreamS3BackupConfiguration (..)
-    , newKinesisFirehoseDeliveryStreamS3BackupConfiguration
-
-    -- ** extended_s3_configuration
-    , KinesisFirehoseDeliveryStreamExtendedS3Configuration (..)
-    , newKinesisFirehoseDeliveryStreamExtendedS3Configuration
-
-    -- ** data_format_conversion_configuration
-    , KinesisFirehoseDeliveryStreamDataFormatConversionConfiguration (..)
-    , newKinesisFirehoseDeliveryStreamDataFormatConversionConfiguration
-
-    -- ** schema_configuration
-    , KinesisFirehoseDeliveryStreamSchemaConfiguration (..)
-    , newKinesisFirehoseDeliveryStreamSchemaConfiguration
-
-    -- ** output_format_configuration
-    , KinesisFirehoseDeliveryStreamOutputFormatConfiguration (..)
-    , newKinesisFirehoseDeliveryStreamOutputFormatConfiguration
-
-    -- ** serializer
-    , KinesisFirehoseDeliveryStreamSerializer (..)
-    , newKinesisFirehoseDeliveryStreamSerializer
-
-    -- ** parquet_ser_de
-    , KinesisFirehoseDeliveryStreamParquetSerDe (..)
-    , newKinesisFirehoseDeliveryStreamParquetSerDe
-
-    -- ** orc_ser_de
-    , KinesisFirehoseDeliveryStreamOrcSerDe (..)
-    , newKinesisFirehoseDeliveryStreamOrcSerDe
-
-    -- ** input_format_configuration
-    , KinesisFirehoseDeliveryStreamInputFormatConfiguration (..)
-    , newKinesisFirehoseDeliveryStreamInputFormatConfiguration
-
-    -- ** deserializer
-    , KinesisFirehoseDeliveryStreamDeserializer (..)
-    , newKinesisFirehoseDeliveryStreamDeserializer
-
-    -- ** open_x_json_ser_de
-    , KinesisFirehoseDeliveryStreamOpenXJsonSerDe (..)
-    , newKinesisFirehoseDeliveryStreamOpenXJsonSerDe
-
-    -- ** hive_json_ser_de
-    , KinesisFirehoseDeliveryStreamHiveJsonSerDe (..)
-    , newKinesisFirehoseDeliveryStreamHiveJsonSerDe
-
-    -- ** elasticsearch_configuration
-    , KinesisFirehoseDeliveryStreamElasticsearchConfiguration (..)
-    , newKinesisFirehoseDeliveryStreamElasticsearchConfiguration
-
-    -- ** processors
-    , KinesisFirehoseDeliveryStreamProcessors (..)
-    , newKinesisFirehoseDeliveryStreamProcessors
-
-    -- ** parameters
-    , KinesisFirehoseDeliveryStreamParameters (..)
-    , newKinesisFirehoseDeliveryStreamParameters
-
-    -- ** s3_configuration
-    , KinesisFirehoseDeliveryStreamS3Configuration (..)
-    , newKinesisFirehoseDeliveryStreamS3Configuration
-
-    -- ** kinesis_source_configuration
-    , KinesisFirehoseDeliveryStreamKinesisSourceConfiguration (..)
-    , newKinesisFirehoseDeliveryStreamKinesisSourceConfiguration
-
-    -- ** constraints
-    , KmsGrantConstraints (..)
-    , newKmsGrantConstraints
-
-    -- ** secret
-    , KmsSecretSecret (..)
-    , newKmsSecretSecret
-
-    -- ** secret
-    , KmsSecretsSecret (..)
-    , newKmsSecretsSecret
-
-    -- ** routing_config
-    , LambdaAliasRoutingConfig (..)
-    , newLambdaAliasRoutingConfig
-
-    -- ** dead_letter_config
-    , LambdaFunctionDeadLetterConfig (..)
-    , newLambdaFunctionDeadLetterConfig
-
-    -- ** environment
-    , LambdaFunctionEnvironment (..)
-    , newLambdaFunctionEnvironment
-
-    -- ** tracing_config
-    , LambdaFunctionTracingConfig (..)
-    , newLambdaFunctionTracingConfig
-
-    -- ** vpc_config
-    , LambdaFunctionVpcConfig (..)
-    , newLambdaFunctionVpcConfig
-
-    -- ** ebs_block_device
-    , LaunchConfigurationEbsBlockDevice (..)
-    , newLaunchConfigurationEbsBlockDevice
-
-    -- ** ephemeral_block_device
-    , LaunchConfigurationEphemeralBlockDevice (..)
-    , newLaunchConfigurationEphemeralBlockDevice
-
-    -- ** root_block_device
-    , LaunchConfigurationRootBlockDevice (..)
-    , newLaunchConfigurationRootBlockDevice
-
-    -- ** block_device_mappings
-    , LaunchTemplateBlockDeviceMappings (..)
-    , newLaunchTemplateBlockDeviceMappings
-
-    -- ** ebs
-    , LaunchTemplateEbs (..)
-    , newLaunchTemplateEbs
-
-    -- ** credit_specification
-    , LaunchTemplateCreditSpecification (..)
-    , newLaunchTemplateCreditSpecification
-
-    -- ** elastic_gpu_specifications
-    , LaunchTemplateElasticGpuSpecifications (..)
-    , newLaunchTemplateElasticGpuSpecifications
-
-    -- ** iam_instance_profile
-    , LaunchTemplateIamInstanceProfile (..)
-    , newLaunchTemplateIamInstanceProfile
-
-    -- ** instance_market_options
-    , LaunchTemplateInstanceMarketOptions (..)
-    , newLaunchTemplateInstanceMarketOptions
-
-    -- ** spot_options
-    , LaunchTemplateSpotOptions (..)
-    , newLaunchTemplateSpotOptions
-
-    -- ** monitoring
-    , LaunchTemplateMonitoring (..)
-    , newLaunchTemplateMonitoring
-
-    -- ** network_interfaces
-    , LaunchTemplateNetworkInterfaces (..)
-    , newLaunchTemplateNetworkInterfaces
-
-    -- ** placement
-    , LaunchTemplatePlacement (..)
-    , newLaunchTemplatePlacement
-
-    -- ** tag_specifications
-    , LaunchTemplateTagSpecifications (..)
-    , newLaunchTemplateTagSpecifications
-
-    -- ** access_logs
-    , LbAccessLogs (..)
-    , newLbAccessLogs
-
-    -- ** default_action
-    , LbListenerDefaultAction (..)
-    , newLbListenerDefaultAction
-
-    -- ** action
-    , LbListenerRuleAction (..)
-    , newLbListenerRuleAction
-
-    -- ** condition
-    , LbListenerRuleCondition (..)
-    , newLbListenerRuleCondition
-
-    -- ** attribute
-    , LbSslNegotiationPolicyAttribute (..)
-    , newLbSslNegotiationPolicyAttribute
-
-    -- ** subnet_mapping
-    , LbSubnetMapping (..)
-    , newLbSubnetMapping
-
-    -- ** health_check
-    , LbTargetGroupHealthCheck (..)
-    , newLbTargetGroupHealthCheck
-
-    -- ** stickiness
-    , LbTargetGroupStickiness (..)
-    , newLbTargetGroupStickiness
-
-    -- ** policy_attribute
-    , LoadBalancerPolicyPolicyAttribute (..)
-    , newLoadBalancerPolicyPolicyAttribute
-
-    -- ** classification_type
-    , MacieS3BucketAssociationClassificationType (..)
-    , newMacieS3BucketAssociationClassificationType
-
-    -- ** configuration
-    , MqBrokerConfiguration (..)
-    , newMqBrokerConfiguration
-
-    -- ** instances
-    , MqBrokerInstances (..)
-    , newMqBrokerInstances
-
-    -- ** maintenance_window_start_time
-    , MqBrokerMaintenanceWindowStartTime (..)
-    , newMqBrokerMaintenanceWindowStartTime
-
-    -- ** user
-    , MqBrokerUser (..)
-    , newMqBrokerUser
-
-    -- ** filter
-    , NatGatewayFilter (..)
-    , newNatGatewayFilter
-
-    -- ** parameter
-    , NeptuneClusterParameterGroupParameter (..)
-    , newNeptuneClusterParameterGroupParameter
-
-    -- ** parameter
-    , NeptuneParameterGroupParameter (..)
-    , newNeptuneParameterGroupParameter
-
-    -- ** egress
-    , NetworkAclEgress (..)
-    , newNetworkAclEgress
-
-    -- ** ingress
-    , NetworkAclIngress (..)
-    , newNetworkAclIngress
-
-    -- ** filter
-    , NetworkAclsFilter (..)
-    , newNetworkAclsFilter
-
-    -- ** association
-    , NetworkInterfaceAssociation (..)
-    , newNetworkInterfaceAssociation
-
-    -- ** attachment
-    , NetworkInterfaceAttachment (..)
-    , newNetworkInterfaceAttachment
-
-    -- ** filter
-    , NetworkInterfaceFilter (..)
-    , newNetworkInterfaceFilter
-
-    -- ** filter
-    , NetworkInterfacesFilter (..)
-    , newNetworkInterfacesFilter
-
-    -- ** app_source
-    , OpsworksApplicationAppSource (..)
-    , newOpsworksApplicationAppSource
+    -- * S3BucketWebsite
+      newS3BucketWebsite
+    , S3BucketWebsite (..)
+
+    -- * SecretsmanagerSecretRotationRules
+    , SecretsmanagerSecretRotationRules (..)
+
+    -- * SecurityGroupEgress
+    , newSecurityGroupEgress
+    , SecurityGroupEgress (..)
+    , SecurityGroupEgress_Required (..)
+
+    -- * SecurityGroupFilter
+    , SecurityGroupFilter (..)
+
+    -- * SecurityGroupIngress
+    , newSecurityGroupIngress
+    , SecurityGroupIngress (..)
+    , SecurityGroupIngress_Required (..)
+
+    -- * SecurityGroupsFilter
+    , SecurityGroupsFilter (..)
+
+    -- * ServiceDiscoveryServiceDnsConfig
+    , newServiceDiscoveryServiceDnsConfig
+    , ServiceDiscoveryServiceDnsConfig (..)
+    , ServiceDiscoveryServiceDnsConfig_Required (..)
+
+    -- * ServiceDiscoveryServiceDnsRecords
+    , ServiceDiscoveryServiceDnsRecords (..)
+
+    -- * ServiceDiscoveryServiceHealthCheckConfig
+    , newServiceDiscoveryServiceHealthCheckConfig
+    , ServiceDiscoveryServiceHealthCheckConfig (..)
+
+    -- * ServiceDiscoveryServiceHealthCheckCustomConfig
+    , newServiceDiscoveryServiceHealthCheckCustomConfig
+    , ServiceDiscoveryServiceHealthCheckCustomConfig (..)
+
+    -- * SesEventDestinationCloudwatchDestination
+    , SesEventDestinationCloudwatchDestination (..)
+
+    -- * SesEventDestinationKinesisDestination
+    , SesEventDestinationKinesisDestination (..)
+
+    -- * SesEventDestinationSnsDestination
+    , SesEventDestinationSnsDestination (..)
+
+    -- * SesReceiptRuleAddHeaderAction
+    , SesReceiptRuleAddHeaderAction (..)
+
+    -- * SesReceiptRuleBounceAction
+    , newSesReceiptRuleBounceAction
+    , SesReceiptRuleBounceAction (..)
+    , SesReceiptRuleBounceAction_Required (..)
+
+    -- * SesReceiptRuleLambdaAction
+    , newSesReceiptRuleLambdaAction
+    , SesReceiptRuleLambdaAction (..)
+    , SesReceiptRuleLambdaAction_Required (..)
+
+    -- * SesReceiptRuleS3Action
+    , newSesReceiptRuleS3Action
+    , SesReceiptRuleS3Action (..)
+    , SesReceiptRuleS3Action_Required (..)
+
+    -- * SesReceiptRuleSnsAction
+    , SesReceiptRuleSnsAction (..)
+
+    -- * SesReceiptRuleStopAction
+    , newSesReceiptRuleStopAction
+    , SesReceiptRuleStopAction (..)
+    , SesReceiptRuleStopAction_Required (..)
+
+    -- * SesReceiptRuleWorkmailAction
+    , newSesReceiptRuleWorkmailAction
+    , SesReceiptRuleWorkmailAction (..)
+    , SesReceiptRuleWorkmailAction_Required (..)
+
+    -- * SpotFleetRequestEbsBlockDevice
+    , newSpotFleetRequestEbsBlockDevice
+    , SpotFleetRequestEbsBlockDevice (..)
+    , SpotFleetRequestEbsBlockDevice_Required (..)
+
+    -- * SpotFleetRequestLaunchSpecification
+    , newSpotFleetRequestLaunchSpecification
+    , SpotFleetRequestLaunchSpecification (..)
+    , SpotFleetRequestLaunchSpecification_Required (..)
+
+    -- * SpotFleetRequestRootBlockDevice
+    , newSpotFleetRequestRootBlockDevice
+    , SpotFleetRequestRootBlockDevice (..)
+
+    -- * SpotFleetRequestEphemeralBlockDevice
+    , SpotFleetRequestEphemeralBlockDevice (..)
+
+    -- * SpotInstanceRequestCreditSpecification
+    , newSpotInstanceRequestCreditSpecification
+    , SpotInstanceRequestCreditSpecification (..)
+
+    -- * SpotInstanceRequestEbsBlockDevice
+    , newSpotInstanceRequestEbsBlockDevice
+    , SpotInstanceRequestEbsBlockDevice (..)
+    , SpotInstanceRequestEbsBlockDevice_Required (..)
+
+    -- * SpotInstanceRequestEphemeralBlockDevice
+    , newSpotInstanceRequestEphemeralBlockDevice
+    , SpotInstanceRequestEphemeralBlockDevice (..)
+    , SpotInstanceRequestEphemeralBlockDevice_Required (..)
+
+    -- * SpotInstanceRequestNetworkInterface
+    , newSpotInstanceRequestNetworkInterface
+    , SpotInstanceRequestNetworkInterface (..)
+    , SpotInstanceRequestNetworkInterface_Required (..)
+
+    -- * SpotInstanceRequestRootBlockDevice
+    , newSpotInstanceRequestRootBlockDevice
+    , SpotInstanceRequestRootBlockDevice (..)
+
+    -- * SsmAssociationOutputLocation
+    , newSsmAssociationOutputLocation
+    , SsmAssociationOutputLocation (..)
+    , SsmAssociationOutputLocation_Required (..)
+
+    -- * SsmAssociationTargets
+    , SsmAssociationTargets (..)
+
+    -- * SsmDocumentParameter
+    , newSsmDocumentParameter
+    , SsmDocumentParameter (..)
+
+    -- * SsmDocumentPermissions
+    , SsmDocumentPermissions (..)
+
+    -- * SsmMaintenanceWindowTargetTargets
+    , SsmMaintenanceWindowTargetTargets (..)
+
+    -- * SsmMaintenanceWindowTaskLoggingInfo
+    , newSsmMaintenanceWindowTaskLoggingInfo
+    , SsmMaintenanceWindowTaskLoggingInfo (..)
+    , SsmMaintenanceWindowTaskLoggingInfo_Required (..)
+
+    -- * SsmMaintenanceWindowTaskTargets
+    , SsmMaintenanceWindowTaskTargets (..)
+
+    -- * SsmMaintenanceWindowTaskTaskParameters
+    , SsmMaintenanceWindowTaskTaskParameters (..)
+
+    -- * SsmPatchBaselineApprovalRule
+    , newSsmPatchBaselineApprovalRule
+    , SsmPatchBaselineApprovalRule (..)
+    , SsmPatchBaselineApprovalRule_Required (..)
+
+    -- * SsmPatchBaselinePatchFilter
+    , SsmPatchBaselinePatchFilter (..)
+
+    -- * SsmPatchBaselineGlobalFilter
+    , SsmPatchBaselineGlobalFilter (..)
+
+    -- * SsmResourceDataSyncS3Destination
+    , newSsmResourceDataSyncS3Destination
+    , SsmResourceDataSyncS3Destination (..)
+    , SsmResourceDataSyncS3Destination_Required (..)
+
+    -- * StoragegatewayGatewaySmbActiveDirectorySettings
+    , StoragegatewayGatewaySmbActiveDirectorySettings (..)
+
+    -- * StoragegatewayNfsFileShareNfsFileShareDefaults
+    , newStoragegatewayNfsFileShareNfsFileShareDefaults
+    , StoragegatewayNfsFileShareNfsFileShareDefaults (..)
+
+    -- * SubnetFilter
+    , SubnetFilter (..)
+
+    -- * SubnetIdsFilter
+    , SubnetIdsFilter (..)
+
+    -- * VpcCidrBlockAssociations
+    , VpcCidrBlockAssociations (..)
+
+    -- * VpcDhcpOptionsFilter
+    , VpcDhcpOptionsFilter (..)
+
+    -- * VpcEndpointDnsEntry
+    , VpcEndpointDnsEntry (..)
+
+    -- * VpcFilter
+    , VpcFilter (..)
+
+    -- * VpcPeeringConnectionAccepter
+    , newVpcPeeringConnectionAccepter
+    , VpcPeeringConnectionAccepter (..)
+
+    -- * VpcPeeringConnectionAccepterAccepter
+    , newVpcPeeringConnectionAccepterAccepter
+    , VpcPeeringConnectionAccepterAccepter (..)
+
+    -- * VpcPeeringConnectionAccepterRequester
+    , newVpcPeeringConnectionAccepterRequester
+    , VpcPeeringConnectionAccepterRequester (..)
+
+    -- * VpcPeeringConnectionFilter
+    , VpcPeeringConnectionFilter (..)
+
+    -- * VpcPeeringConnectionOptionsAccepter
+    , newVpcPeeringConnectionOptionsAccepter
+    , VpcPeeringConnectionOptionsAccepter (..)
+
+    -- * VpcPeeringConnectionOptionsRequester
+    , newVpcPeeringConnectionOptionsRequester
+    , VpcPeeringConnectionOptionsRequester (..)
+
+    -- * VpcPeeringConnectionRequester
+    , newVpcPeeringConnectionRequester
+    , VpcPeeringConnectionRequester (..)
+
+    -- * VpcsFilter
+    , VpcsFilter (..)
+
+    -- * VpnConnectionRoutes
+    , newVpnConnectionRoutes
+    , VpnConnectionRoutes (..)
+
+    -- * VpnConnectionVgwTelemetry
+    , newVpnConnectionVgwTelemetry
+    , VpnConnectionVgwTelemetry (..)
+
+    -- * VpnGatewayFilter
+    , VpnGatewayFilter (..)
+
+    -- * WafByteMatchSetByteMatchTuples
+    , newWafByteMatchSetByteMatchTuples
+    , WafByteMatchSetByteMatchTuples (..)
+    , WafByteMatchSetByteMatchTuples_Required (..)
+
+    -- * WafByteMatchSetFieldToMatch
+    , newWafByteMatchSetFieldToMatch
+    , WafByteMatchSetFieldToMatch (..)
+    , WafByteMatchSetFieldToMatch_Required (..)
+
+    -- * WafGeoMatchSetGeoMatchConstraint
+    , WafGeoMatchSetGeoMatchConstraint (..)
+
+    -- * WafIpsetIpSetDescriptors
+    , WafIpsetIpSetDescriptors (..)
+
+    -- * WafRateBasedRulePredicates
+    , WafRateBasedRulePredicates (..)
+
+    -- * WafRegexMatchSetFieldToMatch
+    , newWafRegexMatchSetFieldToMatch
+    , WafRegexMatchSetFieldToMatch (..)
+    , WafRegexMatchSetFieldToMatch_Required (..)
+
+    -- * WafRegexMatchSetRegexMatchTuple
+    , WafRegexMatchSetRegexMatchTuple (..)
+
+    -- * WafRuleGroupAction
+    , WafRuleGroupAction (..)
+
+    -- * WafRuleGroupActivatedRule
+    , newWafRuleGroupActivatedRule
+    , WafRuleGroupActivatedRule (..)
+    , WafRuleGroupActivatedRule_Required (..)
+
+    -- * WafRulePredicates
+    , WafRulePredicates (..)
+
+    -- * WafSizeConstraintSetFieldToMatch
+    , newWafSizeConstraintSetFieldToMatch
+    , WafSizeConstraintSetFieldToMatch (..)
+    , WafSizeConstraintSetFieldToMatch_Required (..)
+
+    -- * WafSizeConstraintSetSizeConstraints
+    , WafSizeConstraintSetSizeConstraints (..)
+
+    -- * WafSqlInjectionMatchSetFieldToMatch
+    , newWafSqlInjectionMatchSetFieldToMatch
+    , WafSqlInjectionMatchSetFieldToMatch (..)
+    , WafSqlInjectionMatchSetFieldToMatch_Required (..)
+
+    -- * WafSqlInjectionMatchSetSqlInjectionMatchTuples
+    , WafSqlInjectionMatchSetSqlInjectionMatchTuples (..)
+
+    -- * WafWebAclAction
+    , WafWebAclAction (..)
+
+    -- * WafWebAclRules
+    , newWafWebAclRules
+    , WafWebAclRules (..)
+    , WafWebAclRules_Required (..)
+
+    -- * WafWebAclOverrideAction
+    , WafWebAclOverrideAction (..)
+
+    -- * WafWebAclDefaultAction
+    , WafWebAclDefaultAction (..)
+
+    -- * WafXssMatchSetFieldToMatch
+    , newWafXssMatchSetFieldToMatch
+    , WafXssMatchSetFieldToMatch (..)
+    , WafXssMatchSetFieldToMatch_Required (..)
+
+    -- * WafXssMatchSetXssMatchTuples
+    , WafXssMatchSetXssMatchTuples (..)
+
+    -- * WafregionalByteMatchSetByteMatchTuples
+    , newWafregionalByteMatchSetByteMatchTuples
+    , WafregionalByteMatchSetByteMatchTuples (..)
+    , WafregionalByteMatchSetByteMatchTuples_Required (..)
+
+    -- * WafregionalByteMatchSetFieldToMatch
+    , newWafregionalByteMatchSetFieldToMatch
+    , WafregionalByteMatchSetFieldToMatch (..)
+    , WafregionalByteMatchSetFieldToMatch_Required (..)
+
+    -- * WafregionalGeoMatchSetGeoMatchConstraint
+    , WafregionalGeoMatchSetGeoMatchConstraint (..)
+
+    -- * WafregionalIpsetIpSetDescriptor
+    , WafregionalIpsetIpSetDescriptor (..)
+
+    -- * WafregionalRateBasedRulePredicate
+    , WafregionalRateBasedRulePredicate (..)
+
+    -- * WafregionalRegexMatchSetFieldToMatch
+    , newWafregionalRegexMatchSetFieldToMatch
+    , WafregionalRegexMatchSetFieldToMatch (..)
+    , WafregionalRegexMatchSetFieldToMatch_Required (..)
+
+    -- * WafregionalRegexMatchSetRegexMatchTuple
+    , WafregionalRegexMatchSetRegexMatchTuple (..)
+
+    -- * WafregionalRuleGroupAction
+    , WafregionalRuleGroupAction (..)
+
+    -- * WafregionalRuleGroupActivatedRule
+    , newWafregionalRuleGroupActivatedRule
+    , WafregionalRuleGroupActivatedRule (..)
+    , WafregionalRuleGroupActivatedRule_Required (..)
+
+    -- * WafregionalRulePredicate
+    , WafregionalRulePredicate (..)
+
+    -- * WafregionalSizeConstraintSetFieldToMatch
+    , newWafregionalSizeConstraintSetFieldToMatch
+    , WafregionalSizeConstraintSetFieldToMatch (..)
+    , WafregionalSizeConstraintSetFieldToMatch_Required (..)
+
+    -- * WafregionalSizeConstraintSetSizeConstraints
+    , WafregionalSizeConstraintSetSizeConstraints (..)
+
+    -- * WafregionalSqlInjectionMatchSetFieldToMatch
+    , newWafregionalSqlInjectionMatchSetFieldToMatch
+    , WafregionalSqlInjectionMatchSetFieldToMatch (..)
+    , WafregionalSqlInjectionMatchSetFieldToMatch_Required (..)
+
+    -- * WafregionalSqlInjectionMatchSetSqlInjectionMatchTuple
+    , WafregionalSqlInjectionMatchSetSqlInjectionMatchTuple (..)
+
+    -- * WafregionalWebAclAction
+    , WafregionalWebAclAction (..)
+
+    -- * WafregionalWebAclRule
+    , newWafregionalWebAclRule
+    , WafregionalWebAclRule (..)
+    , WafregionalWebAclRule_Required (..)
+
+    -- * WafregionalWebAclOverrideAction
+    , WafregionalWebAclOverrideAction (..)
+
+    -- * WafregionalWebAclDefaultAction
+    , WafregionalWebAclDefaultAction (..)
+
+    -- * WafregionalXssMatchSetFieldToMatch
+    , newWafregionalXssMatchSetFieldToMatch
+    , WafregionalXssMatchSetFieldToMatch (..)
+    , WafregionalXssMatchSetFieldToMatch_Required (..)
+
+    -- * WafregionalXssMatchSetXssMatchTuple
+    , WafregionalXssMatchSetXssMatchTuple (..)
 
     ) where
 
-import Data.Functor ((<$>))
+import Data.Functor   ((<$>))
+import Data.Semigroup ((<>))
 
-import GHC.Base (($))
+import GHC.Base (Proxy#, proxy#, ($))
 
-import qualified Data.Hashable       as P
-import qualified Data.HashMap.Strict as P
-import qualified Data.HashMap.Strict as HashMap
+import qualified Data.Functor.Const  as P
 import qualified Data.List.NonEmpty  as P
+import qualified Data.Map.Strict     as P
 import qualified Data.Maybe          as P
 import qualified Data.Text.Lazy      as P
-import qualified GHC.Generics        as P
-import qualified Lens.Micro          as P
 import qualified Prelude             as P
-import qualified Terrafomo.AWS.Lens  as P
 import qualified Terrafomo.AWS.Types as P
-import qualified Terrafomo.Encode    as TF
+import qualified Terrafomo.Encode    as Encode
 import qualified Terrafomo.HCL       as TF
 import qualified Terrafomo.HIL       as TF
+import qualified Terrafomo.Lens      as Lens
 import qualified Terrafomo.Schema    as TF
-import qualified Terrafomo.Validate  as TF
 
--- | @properties@ nested settings.
-data IotThingTypeProperties s = IotThingTypeProperties'
-    { _description          :: P.Maybe (TF.Expr s P.Text)
-    -- ^ @description@ - (Optional, Forces New)
-    --
-    , _searchableAttributes :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
-    -- ^ @searchable_attributes@ - (Optional, Forces New)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @properties@ settings value.
-newIotThingTypeProperties
-    :: IotThingTypeProperties s
-newIotThingTypeProperties =
-    IotThingTypeProperties'
-        { _description = P.Nothing
-        , _searchableAttributes = P.Nothing
-        }
-
-instance TF.ToHCL (IotThingTypeProperties s) where
-     toHCL IotThingTypeProperties'{..} = TF.pairs $ P.mconcat
-        [ P.maybe P.mempty (TF.pair "description") _description
-        , P.maybe P.mempty (TF.pair "searchable_attributes") _searchableAttributes
-        ]
-
-instance P.Hashable (IotThingTypeProperties s)
-
-instance TF.HasValidator (IotThingTypeProperties s) where
-    validator = P.mempty
-
-instance P.HasDescription (IotThingTypeProperties s) (P.Maybe (TF.Expr s P.Text)) where
-    description =
-        P.lens (_description :: IotThingTypeProperties s -> P.Maybe (TF.Expr s P.Text))
-            (\s a -> s { _description = a } :: IotThingTypeProperties s)
-
-instance P.HasSearchableAttributes (IotThingTypeProperties s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
-    searchableAttributes =
-        P.lens (_searchableAttributes :: IotThingTypeProperties s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
-            (\s a -> s { _searchableAttributes = a } :: IotThingTypeProperties s)
-
-instance s ~ s' => P.HasComputedSearchableAttributes (TF.Ref s' (IotThingTypeProperties s)) (TF.Expr s [TF.Expr s P.Text]) where
-    computedSearchableAttributes x =
-        TF.unsafeCompute TF.encodeAttr x "searchable_attributes"
-
--- | @cloudwatch_alarm@ nested settings.
-data IotTopicRuleCloudwatchAlarm s = IotTopicRuleCloudwatchAlarm'
-    { _alarmName   :: TF.Expr s P.Text
-    -- ^ @alarm_name@ - (Required)
-    --
-    , _roleArn     :: TF.Expr s P.Text
-    -- ^ @role_arn@ - (Required)
-    --
-    , _stateReason :: TF.Expr s P.Text
-    -- ^ @state_reason@ - (Required)
-    --
-    , _stateValue  :: TF.Expr s P.Text
-    -- ^ @state_value@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @cloudwatch_alarm@ settings value.
-newIotTopicRuleCloudwatchAlarm
-    :: TF.Expr s P.Text -- ^ Lens: 'P.roleArn', Field: '_roleArn', HCL: @role_arn@
-    -> TF.Expr s P.Text -- ^ Lens: 'P.alarmName', Field: '_alarmName', HCL: @alarm_name@
-    -> TF.Expr s P.Text -- ^ Lens: 'P.stateReason', Field: '_stateReason', HCL: @state_reason@
-    -> TF.Expr s P.Text -- ^ Lens: 'P.stateValue', Field: '_stateValue', HCL: @state_value@
-    -> IotTopicRuleCloudwatchAlarm s
-newIotTopicRuleCloudwatchAlarm _roleArn _alarmName _stateReason _stateValue =
-    IotTopicRuleCloudwatchAlarm'
-        { _alarmName = _alarmName
-        , _roleArn = _roleArn
-        , _stateReason = _stateReason
-        , _stateValue = _stateValue
-        }
-
-instance TF.ToHCL (IotTopicRuleCloudwatchAlarm s) where
-     toHCL IotTopicRuleCloudwatchAlarm'{..} = TF.pairs $ P.mconcat
-        [ TF.pair "alarm_name" _alarmName
-        , TF.pair "role_arn" _roleArn
-        , TF.pair "state_reason" _stateReason
-        , TF.pair "state_value" _stateValue
-        ]
-
-instance P.Hashable (IotTopicRuleCloudwatchAlarm s)
-
-instance TF.HasValidator (IotTopicRuleCloudwatchAlarm s) where
-    validator = P.mempty
-
-instance P.HasAlarmName (IotTopicRuleCloudwatchAlarm s) (TF.Expr s P.Text) where
-    alarmName =
-        P.lens (_alarmName :: IotTopicRuleCloudwatchAlarm s -> TF.Expr s P.Text)
-            (\s a -> s { _alarmName = a } :: IotTopicRuleCloudwatchAlarm s)
-
-instance P.HasRoleArn (IotTopicRuleCloudwatchAlarm s) (TF.Expr s P.Text) where
-    roleArn =
-        P.lens (_roleArn :: IotTopicRuleCloudwatchAlarm s -> TF.Expr s P.Text)
-            (\s a -> s { _roleArn = a } :: IotTopicRuleCloudwatchAlarm s)
-
-instance P.HasStateReason (IotTopicRuleCloudwatchAlarm s) (TF.Expr s P.Text) where
-    stateReason =
-        P.lens (_stateReason :: IotTopicRuleCloudwatchAlarm s -> TF.Expr s P.Text)
-            (\s a -> s { _stateReason = a } :: IotTopicRuleCloudwatchAlarm s)
-
-instance P.HasStateValue (IotTopicRuleCloudwatchAlarm s) (TF.Expr s P.Text) where
-    stateValue =
-        P.lens (_stateValue :: IotTopicRuleCloudwatchAlarm s -> TF.Expr s P.Text)
-            (\s a -> s { _stateValue = a } :: IotTopicRuleCloudwatchAlarm s)
-
--- | @cloudwatch_metric@ nested settings.
-data IotTopicRuleCloudwatchMetric s = IotTopicRuleCloudwatchMetric'
-    { _metricName      :: TF.Expr s P.Text
-    -- ^ @metric_name@ - (Required)
-    --
-    , _metricNamespace :: TF.Expr s P.Text
-    -- ^ @metric_namespace@ - (Required)
-    --
-    , _metricTimestamp :: P.Maybe (TF.Expr s P.Text)
-    -- ^ @metric_timestamp@ - (Optional)
-    --
-    , _metricUnit      :: TF.Expr s P.Text
-    -- ^ @metric_unit@ - (Required)
-    --
-    , _metricValue     :: TF.Expr s P.Text
-    -- ^ @metric_value@ - (Required)
-    --
-    , _roleArn         :: TF.Expr s P.Text
-    -- ^ @role_arn@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @cloudwatch_metric@ settings value.
-newIotTopicRuleCloudwatchMetric
-    :: TF.Expr s P.Text -- ^ Lens: 'P.roleArn', Field: '_roleArn', HCL: @role_arn@
-    -> TF.Expr s P.Text -- ^ Lens: 'P.metricName', Field: '_metricName', HCL: @metric_name@
-    -> TF.Expr s P.Text -- ^ Lens: 'P.metricNamespace', Field: '_metricNamespace', HCL: @metric_namespace@
-    -> TF.Expr s P.Text -- ^ Lens: 'P.metricUnit', Field: '_metricUnit', HCL: @metric_unit@
-    -> TF.Expr s P.Text -- ^ Lens: 'P.metricValue', Field: '_metricValue', HCL: @metric_value@
-    -> IotTopicRuleCloudwatchMetric s
-newIotTopicRuleCloudwatchMetric _roleArn _metricName _metricNamespace _metricUnit _metricValue =
-    IotTopicRuleCloudwatchMetric'
-        { _metricName = _metricName
-        , _metricNamespace = _metricNamespace
-        , _metricTimestamp = P.Nothing
-        , _metricUnit = _metricUnit
-        , _metricValue = _metricValue
-        , _roleArn = _roleArn
-        }
-
-instance TF.ToHCL (IotTopicRuleCloudwatchMetric s) where
-     toHCL IotTopicRuleCloudwatchMetric'{..} = TF.pairs $ P.mconcat
-        [ TF.pair "metric_name" _metricName
-        , TF.pair "metric_namespace" _metricNamespace
-        , P.maybe P.mempty (TF.pair "metric_timestamp") _metricTimestamp
-        , TF.pair "metric_unit" _metricUnit
-        , TF.pair "metric_value" _metricValue
-        , TF.pair "role_arn" _roleArn
-        ]
-
-instance P.Hashable (IotTopicRuleCloudwatchMetric s)
-
-instance TF.HasValidator (IotTopicRuleCloudwatchMetric s) where
-    validator = P.mempty
-
-instance P.HasMetricName (IotTopicRuleCloudwatchMetric s) (TF.Expr s P.Text) where
-    metricName =
-        P.lens (_metricName :: IotTopicRuleCloudwatchMetric s -> TF.Expr s P.Text)
-            (\s a -> s { _metricName = a } :: IotTopicRuleCloudwatchMetric s)
-
-instance P.HasMetricNamespace (IotTopicRuleCloudwatchMetric s) (TF.Expr s P.Text) where
-    metricNamespace =
-        P.lens (_metricNamespace :: IotTopicRuleCloudwatchMetric s -> TF.Expr s P.Text)
-            (\s a -> s { _metricNamespace = a } :: IotTopicRuleCloudwatchMetric s)
-
-instance P.HasMetricTimestamp (IotTopicRuleCloudwatchMetric s) (P.Maybe (TF.Expr s P.Text)) where
-    metricTimestamp =
-        P.lens (_metricTimestamp :: IotTopicRuleCloudwatchMetric s -> P.Maybe (TF.Expr s P.Text))
-            (\s a -> s { _metricTimestamp = a } :: IotTopicRuleCloudwatchMetric s)
-
-instance P.HasMetricUnit (IotTopicRuleCloudwatchMetric s) (TF.Expr s P.Text) where
-    metricUnit =
-        P.lens (_metricUnit :: IotTopicRuleCloudwatchMetric s -> TF.Expr s P.Text)
-            (\s a -> s { _metricUnit = a } :: IotTopicRuleCloudwatchMetric s)
-
-instance P.HasMetricValue (IotTopicRuleCloudwatchMetric s) (TF.Expr s P.Text) where
-    metricValue =
-        P.lens (_metricValue :: IotTopicRuleCloudwatchMetric s -> TF.Expr s P.Text)
-            (\s a -> s { _metricValue = a } :: IotTopicRuleCloudwatchMetric s)
-
-instance P.HasRoleArn (IotTopicRuleCloudwatchMetric s) (TF.Expr s P.Text) where
-    roleArn =
-        P.lens (_roleArn :: IotTopicRuleCloudwatchMetric s -> TF.Expr s P.Text)
-            (\s a -> s { _roleArn = a } :: IotTopicRuleCloudwatchMetric s)
-
--- | @dynamodb@ nested settings.
-data IotTopicRuleDynamodb s = IotTopicRuleDynamodb'
-    { _hashKeyField  :: TF.Expr s P.Text
-    -- ^ @hash_key_field@ - (Required)
-    --
-    , _hashKeyType   :: P.Maybe (TF.Expr s P.Text)
-    -- ^ @hash_key_type@ - (Optional)
-    --
-    , _hashKeyValue  :: TF.Expr s P.Text
-    -- ^ @hash_key_value@ - (Required)
-    --
-    , _payloadField  :: P.Maybe (TF.Expr s P.Text)
-    -- ^ @payload_field@ - (Optional)
-    --
-    , _rangeKeyField :: TF.Expr s P.Text
-    -- ^ @range_key_field@ - (Required)
-    --
-    , _rangeKeyType  :: P.Maybe (TF.Expr s P.Text)
-    -- ^ @range_key_type@ - (Optional)
-    --
-    , _rangeKeyValue :: TF.Expr s P.Text
-    -- ^ @range_key_value@ - (Required)
-    --
-    , _roleArn       :: TF.Expr s P.Text
-    -- ^ @role_arn@ - (Required)
-    --
-    , _tableName     :: TF.Expr s P.Text
-    -- ^ @table_name@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @dynamodb@ settings value.
-newIotTopicRuleDynamodb
-    :: TF.Expr s P.Text -- ^ Lens: 'P.roleArn', Field: '_roleArn', HCL: @role_arn@
-    -> TF.Expr s P.Text -- ^ Lens: 'P.hashKeyField', Field: '_hashKeyField', HCL: @hash_key_field@
-    -> TF.Expr s P.Text -- ^ Lens: 'P.rangeKeyField', Field: '_rangeKeyField', HCL: @range_key_field@
-    -> TF.Expr s P.Text -- ^ Lens: 'P.tableName', Field: '_tableName', HCL: @table_name@
-    -> TF.Expr s P.Text -- ^ Lens: 'P.hashKeyValue', Field: '_hashKeyValue', HCL: @hash_key_value@
-    -> TF.Expr s P.Text -- ^ Lens: 'P.rangeKeyValue', Field: '_rangeKeyValue', HCL: @range_key_value@
-    -> IotTopicRuleDynamodb s
-newIotTopicRuleDynamodb _roleArn _hashKeyField _rangeKeyField _tableName _hashKeyValue _rangeKeyValue =
-    IotTopicRuleDynamodb'
-        { _hashKeyField = _hashKeyField
-        , _hashKeyType = P.Nothing
-        , _hashKeyValue = _hashKeyValue
-        , _payloadField = P.Nothing
-        , _rangeKeyField = _rangeKeyField
-        , _rangeKeyType = P.Nothing
-        , _rangeKeyValue = _rangeKeyValue
-        , _roleArn = _roleArn
-        , _tableName = _tableName
-        }
-
-instance TF.ToHCL (IotTopicRuleDynamodb s) where
-     toHCL IotTopicRuleDynamodb'{..} = TF.pairs $ P.mconcat
-        [ TF.pair "hash_key_field" _hashKeyField
-        , P.maybe P.mempty (TF.pair "hash_key_type") _hashKeyType
-        , TF.pair "hash_key_value" _hashKeyValue
-        , P.maybe P.mempty (TF.pair "payload_field") _payloadField
-        , TF.pair "range_key_field" _rangeKeyField
-        , P.maybe P.mempty (TF.pair "range_key_type") _rangeKeyType
-        , TF.pair "range_key_value" _rangeKeyValue
-        , TF.pair "role_arn" _roleArn
-        , TF.pair "table_name" _tableName
-        ]
-
-instance P.Hashable (IotTopicRuleDynamodb s)
-
-instance TF.HasValidator (IotTopicRuleDynamodb s) where
-    validator = P.mempty
-
-instance P.HasHashKeyField (IotTopicRuleDynamodb s) (TF.Expr s P.Text) where
-    hashKeyField =
-        P.lens (_hashKeyField :: IotTopicRuleDynamodb s -> TF.Expr s P.Text)
-            (\s a -> s { _hashKeyField = a } :: IotTopicRuleDynamodb s)
-
-instance P.HasHashKeyType (IotTopicRuleDynamodb s) (P.Maybe (TF.Expr s P.Text)) where
-    hashKeyType =
-        P.lens (_hashKeyType :: IotTopicRuleDynamodb s -> P.Maybe (TF.Expr s P.Text))
-            (\s a -> s { _hashKeyType = a } :: IotTopicRuleDynamodb s)
-
-instance P.HasHashKeyValue (IotTopicRuleDynamodb s) (TF.Expr s P.Text) where
-    hashKeyValue =
-        P.lens (_hashKeyValue :: IotTopicRuleDynamodb s -> TF.Expr s P.Text)
-            (\s a -> s { _hashKeyValue = a } :: IotTopicRuleDynamodb s)
-
-instance P.HasPayloadField (IotTopicRuleDynamodb s) (P.Maybe (TF.Expr s P.Text)) where
-    payloadField =
-        P.lens (_payloadField :: IotTopicRuleDynamodb s -> P.Maybe (TF.Expr s P.Text))
-            (\s a -> s { _payloadField = a } :: IotTopicRuleDynamodb s)
-
-instance P.HasRangeKeyField (IotTopicRuleDynamodb s) (TF.Expr s P.Text) where
-    rangeKeyField =
-        P.lens (_rangeKeyField :: IotTopicRuleDynamodb s -> TF.Expr s P.Text)
-            (\s a -> s { _rangeKeyField = a } :: IotTopicRuleDynamodb s)
-
-instance P.HasRangeKeyType (IotTopicRuleDynamodb s) (P.Maybe (TF.Expr s P.Text)) where
-    rangeKeyType =
-        P.lens (_rangeKeyType :: IotTopicRuleDynamodb s -> P.Maybe (TF.Expr s P.Text))
-            (\s a -> s { _rangeKeyType = a } :: IotTopicRuleDynamodb s)
-
-instance P.HasRangeKeyValue (IotTopicRuleDynamodb s) (TF.Expr s P.Text) where
-    rangeKeyValue =
-        P.lens (_rangeKeyValue :: IotTopicRuleDynamodb s -> TF.Expr s P.Text)
-            (\s a -> s { _rangeKeyValue = a } :: IotTopicRuleDynamodb s)
-
-instance P.HasRoleArn (IotTopicRuleDynamodb s) (TF.Expr s P.Text) where
-    roleArn =
-        P.lens (_roleArn :: IotTopicRuleDynamodb s -> TF.Expr s P.Text)
-            (\s a -> s { _roleArn = a } :: IotTopicRuleDynamodb s)
-
-instance P.HasTableName (IotTopicRuleDynamodb s) (TF.Expr s P.Text) where
-    tableName =
-        P.lens (_tableName :: IotTopicRuleDynamodb s -> TF.Expr s P.Text)
-            (\s a -> s { _tableName = a } :: IotTopicRuleDynamodb s)
-
--- | @elasticsearch@ nested settings.
-data IotTopicRuleElasticsearch s = IotTopicRuleElasticsearch'
-    { _endpoint :: TF.Expr s P.Text
-    -- ^ @endpoint@ - (Required)
-    --
-    , _id       :: TF.Expr s P.Text
-    -- ^ @id@ - (Required)
-    --
-    , _index    :: TF.Expr s P.Text
-    -- ^ @index@ - (Required)
-    --
-    , _roleArn  :: TF.Expr s P.Text
-    -- ^ @role_arn@ - (Required)
-    --
-    , _type'    :: TF.Expr s P.Text
-    -- ^ @type@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @elasticsearch@ settings value.
-newIotTopicRuleElasticsearch
-    :: TF.Expr s P.Text -- ^ Lens: 'P.roleArn', Field: '_roleArn', HCL: @role_arn@
-    -> TF.Expr s P.Text -- ^ Lens: 'P.endpoint', Field: '_endpoint', HCL: @endpoint@
-    -> TF.Expr s P.Text -- ^ Lens: 'P.id', Field: '_id', HCL: @id@
-    -> TF.Expr s P.Text -- ^ Lens: 'P.index', Field: '_index', HCL: @index@
-    -> TF.Expr s P.Text -- ^ Lens: 'P.type'', Field: '_type'', HCL: @type@
-    -> IotTopicRuleElasticsearch s
-newIotTopicRuleElasticsearch _roleArn _endpoint _id _index _type' =
-    IotTopicRuleElasticsearch'
-        { _endpoint = _endpoint
-        , _id = _id
-        , _index = _index
-        , _roleArn = _roleArn
-        , _type' = _type'
-        }
-
-instance TF.ToHCL (IotTopicRuleElasticsearch s) where
-     toHCL IotTopicRuleElasticsearch'{..} = TF.pairs $ P.mconcat
-        [ TF.pair "endpoint" _endpoint
-        , TF.pair "id" _id
-        , TF.pair "index" _index
-        , TF.pair "role_arn" _roleArn
-        , TF.pair "type" _type'
-        ]
-
-instance P.Hashable (IotTopicRuleElasticsearch s)
-
-instance TF.HasValidator (IotTopicRuleElasticsearch s) where
-    validator = P.mempty
-
-instance P.HasEndpoint (IotTopicRuleElasticsearch s) (TF.Expr s P.Text) where
-    endpoint =
-        P.lens (_endpoint :: IotTopicRuleElasticsearch s -> TF.Expr s P.Text)
-            (\s a -> s { _endpoint = a } :: IotTopicRuleElasticsearch s)
-
-instance P.HasId (IotTopicRuleElasticsearch s) (TF.Expr s P.Text) where
-    id =
-        P.lens (_id :: IotTopicRuleElasticsearch s -> TF.Expr s P.Text)
-            (\s a -> s { _id = a } :: IotTopicRuleElasticsearch s)
-
-instance P.HasIndex (IotTopicRuleElasticsearch s) (TF.Expr s P.Text) where
-    index =
-        P.lens (_index :: IotTopicRuleElasticsearch s -> TF.Expr s P.Text)
-            (\s a -> s { _index = a } :: IotTopicRuleElasticsearch s)
-
-instance P.HasRoleArn (IotTopicRuleElasticsearch s) (TF.Expr s P.Text) where
-    roleArn =
-        P.lens (_roleArn :: IotTopicRuleElasticsearch s -> TF.Expr s P.Text)
-            (\s a -> s { _roleArn = a } :: IotTopicRuleElasticsearch s)
-
-instance P.HasType' (IotTopicRuleElasticsearch s) (TF.Expr s P.Text) where
-    type' =
-        P.lens (_type' :: IotTopicRuleElasticsearch s -> TF.Expr s P.Text)
-            (\s a -> s { _type' = a } :: IotTopicRuleElasticsearch s)
-
--- | @firehose@ nested settings.
-data IotTopicRuleFirehose s = IotTopicRuleFirehose'
-    { _deliveryStreamName :: TF.Expr s P.Text
-    -- ^ @delivery_stream_name@ - (Required)
-    --
-    , _roleArn            :: TF.Expr s P.Text
-    -- ^ @role_arn@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @firehose@ settings value.
-newIotTopicRuleFirehose
-    :: TF.Expr s P.Text -- ^ Lens: 'P.roleArn', Field: '_roleArn', HCL: @role_arn@
-    -> TF.Expr s P.Text -- ^ Lens: 'P.deliveryStreamName', Field: '_deliveryStreamName', HCL: @delivery_stream_name@
-    -> IotTopicRuleFirehose s
-newIotTopicRuleFirehose _roleArn _deliveryStreamName =
-    IotTopicRuleFirehose'
-        { _deliveryStreamName = _deliveryStreamName
-        , _roleArn = _roleArn
-        }
-
-instance TF.ToHCL (IotTopicRuleFirehose s) where
-     toHCL IotTopicRuleFirehose'{..} = TF.pairs $ P.mconcat
-        [ TF.pair "delivery_stream_name" _deliveryStreamName
-        , TF.pair "role_arn" _roleArn
-        ]
-
-instance P.Hashable (IotTopicRuleFirehose s)
-
-instance TF.HasValidator (IotTopicRuleFirehose s) where
-    validator = P.mempty
-
-instance P.HasDeliveryStreamName (IotTopicRuleFirehose s) (TF.Expr s P.Text) where
-    deliveryStreamName =
-        P.lens (_deliveryStreamName :: IotTopicRuleFirehose s -> TF.Expr s P.Text)
-            (\s a -> s { _deliveryStreamName = a } :: IotTopicRuleFirehose s)
-
-instance P.HasRoleArn (IotTopicRuleFirehose s) (TF.Expr s P.Text) where
-    roleArn =
-        P.lens (_roleArn :: IotTopicRuleFirehose s -> TF.Expr s P.Text)
-            (\s a -> s { _roleArn = a } :: IotTopicRuleFirehose s)
-
--- | @kinesis@ nested settings.
-data IotTopicRuleKinesis s = IotTopicRuleKinesis'
-    { _partitionKey :: P.Maybe (TF.Expr s P.Text)
-    -- ^ @partition_key@ - (Optional)
-    --
-    , _roleArn      :: TF.Expr s P.Text
-    -- ^ @role_arn@ - (Required)
-    --
-    , _streamName   :: TF.Expr s P.Text
-    -- ^ @stream_name@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @kinesis@ settings value.
-newIotTopicRuleKinesis
-    :: TF.Expr s P.Text -- ^ Lens: 'P.roleArn', Field: '_roleArn', HCL: @role_arn@
-    -> TF.Expr s P.Text -- ^ Lens: 'P.streamName', Field: '_streamName', HCL: @stream_name@
-    -> IotTopicRuleKinesis s
-newIotTopicRuleKinesis _roleArn _streamName =
-    IotTopicRuleKinesis'
-        { _partitionKey = P.Nothing
-        , _roleArn = _roleArn
-        , _streamName = _streamName
-        }
-
-instance TF.ToHCL (IotTopicRuleKinesis s) where
-     toHCL IotTopicRuleKinesis'{..} = TF.pairs $ P.mconcat
-        [ P.maybe P.mempty (TF.pair "partition_key") _partitionKey
-        , TF.pair "role_arn" _roleArn
-        , TF.pair "stream_name" _streamName
-        ]
-
-instance P.Hashable (IotTopicRuleKinesis s)
-
-instance TF.HasValidator (IotTopicRuleKinesis s) where
-    validator = P.mempty
-
-instance P.HasPartitionKey (IotTopicRuleKinesis s) (P.Maybe (TF.Expr s P.Text)) where
-    partitionKey =
-        P.lens (_partitionKey :: IotTopicRuleKinesis s -> P.Maybe (TF.Expr s P.Text))
-            (\s a -> s { _partitionKey = a } :: IotTopicRuleKinesis s)
-
-instance P.HasRoleArn (IotTopicRuleKinesis s) (TF.Expr s P.Text) where
-    roleArn =
-        P.lens (_roleArn :: IotTopicRuleKinesis s -> TF.Expr s P.Text)
-            (\s a -> s { _roleArn = a } :: IotTopicRuleKinesis s)
-
-instance P.HasStreamName (IotTopicRuleKinesis s) (TF.Expr s P.Text) where
-    streamName =
-        P.lens (_streamName :: IotTopicRuleKinesis s -> TF.Expr s P.Text)
-            (\s a -> s { _streamName = a } :: IotTopicRuleKinesis s)
-
--- | @lambda@ nested settings.
-data IotTopicRuleLambda s = IotTopicRuleLambda'
-    { _functionArn :: TF.Expr s P.Text
-    -- ^ @function_arn@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @lambda@ settings value.
-newIotTopicRuleLambda
-    :: TF.Expr s P.Text -- ^ Lens: 'P.functionArn', Field: '_functionArn', HCL: @function_arn@
-    -> IotTopicRuleLambda s
-newIotTopicRuleLambda _functionArn =
-    IotTopicRuleLambda'
-        { _functionArn = _functionArn
-        }
-
-instance TF.ToHCL (IotTopicRuleLambda s) where
-     toHCL IotTopicRuleLambda'{..} = TF.pairs $ P.mconcat
-        [ TF.pair "function_arn" _functionArn
-        ]
-
-instance P.Hashable (IotTopicRuleLambda s)
-
-instance TF.HasValidator (IotTopicRuleLambda s) where
-    validator = P.mempty
-
-instance P.HasFunctionArn (IotTopicRuleLambda s) (TF.Expr s P.Text) where
-    functionArn =
-        P.lens (_functionArn :: IotTopicRuleLambda s -> TF.Expr s P.Text)
-            (\s a -> s { _functionArn = a } :: IotTopicRuleLambda s)
-
--- | @republish@ nested settings.
-data IotTopicRuleRepublish s = IotTopicRuleRepublish'
-    { _roleArn :: TF.Expr s P.Text
-    -- ^ @role_arn@ - (Required)
-    --
-    , _topic   :: TF.Expr s P.Text
-    -- ^ @topic@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @republish@ settings value.
-newIotTopicRuleRepublish
-    :: TF.Expr s P.Text -- ^ Lens: 'P.roleArn', Field: '_roleArn', HCL: @role_arn@
-    -> TF.Expr s P.Text -- ^ Lens: 'P.topic', Field: '_topic', HCL: @topic@
-    -> IotTopicRuleRepublish s
-newIotTopicRuleRepublish _roleArn _topic =
-    IotTopicRuleRepublish'
-        { _roleArn = _roleArn
-        , _topic = _topic
-        }
-
-instance TF.ToHCL (IotTopicRuleRepublish s) where
-     toHCL IotTopicRuleRepublish'{..} = TF.pairs $ P.mconcat
-        [ TF.pair "role_arn" _roleArn
-        , TF.pair "topic" _topic
-        ]
-
-instance P.Hashable (IotTopicRuleRepublish s)
-
-instance TF.HasValidator (IotTopicRuleRepublish s) where
-    validator = P.mempty
-
-instance P.HasRoleArn (IotTopicRuleRepublish s) (TF.Expr s P.Text) where
-    roleArn =
-        P.lens (_roleArn :: IotTopicRuleRepublish s -> TF.Expr s P.Text)
-            (\s a -> s { _roleArn = a } :: IotTopicRuleRepublish s)
-
-instance P.HasTopic (IotTopicRuleRepublish s) (TF.Expr s P.Text) where
-    topic =
-        P.lens (_topic :: IotTopicRuleRepublish s -> TF.Expr s P.Text)
-            (\s a -> s { _topic = a } :: IotTopicRuleRepublish s)
-
--- | @s3@ nested settings.
-data IotTopicRuleS3 s = IotTopicRuleS3'
-    { _bucketName :: TF.Expr s P.Text
-    -- ^ @bucket_name@ - (Required)
-    --
-    , _key        :: TF.Expr s P.Text
-    -- ^ @key@ - (Required)
-    --
-    , _roleArn    :: TF.Expr s P.Text
-    -- ^ @role_arn@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @s3@ settings value.
-newIotTopicRuleS3
-    :: TF.Expr s P.Text -- ^ Lens: 'P.roleArn', Field: '_roleArn', HCL: @role_arn@
-    -> TF.Expr s P.Text -- ^ Lens: 'P.key', Field: '_key', HCL: @key@
-    -> TF.Expr s P.Text -- ^ Lens: 'P.bucketName', Field: '_bucketName', HCL: @bucket_name@
-    -> IotTopicRuleS3 s
-newIotTopicRuleS3 _roleArn _key _bucketName =
-    IotTopicRuleS3'
-        { _bucketName = _bucketName
-        , _key = _key
-        , _roleArn = _roleArn
-        }
-
-instance TF.ToHCL (IotTopicRuleS3 s) where
-     toHCL IotTopicRuleS3'{..} = TF.pairs $ P.mconcat
-        [ TF.pair "bucket_name" _bucketName
-        , TF.pair "key" _key
-        , TF.pair "role_arn" _roleArn
-        ]
-
-instance P.Hashable (IotTopicRuleS3 s)
-
-instance TF.HasValidator (IotTopicRuleS3 s) where
-    validator = P.mempty
-
-instance P.HasBucketName (IotTopicRuleS3 s) (TF.Expr s P.Text) where
-    bucketName =
-        P.lens (_bucketName :: IotTopicRuleS3 s -> TF.Expr s P.Text)
-            (\s a -> s { _bucketName = a } :: IotTopicRuleS3 s)
-
-instance P.HasKey (IotTopicRuleS3 s) (TF.Expr s P.Text) where
-    key =
-        P.lens (_key :: IotTopicRuleS3 s -> TF.Expr s P.Text)
-            (\s a -> s { _key = a } :: IotTopicRuleS3 s)
-
-instance P.HasRoleArn (IotTopicRuleS3 s) (TF.Expr s P.Text) where
-    roleArn =
-        P.lens (_roleArn :: IotTopicRuleS3 s -> TF.Expr s P.Text)
-            (\s a -> s { _roleArn = a } :: IotTopicRuleS3 s)
-
--- | @sns@ nested settings.
-data IotTopicRuleSns s = IotTopicRuleSns'
-    { _messageFormat :: TF.Expr s P.Text
-    -- ^ @message_format@ - (Default @RAW@)
-    --
-    , _roleArn       :: TF.Expr s P.Text
-    -- ^ @role_arn@ - (Required)
-    --
-    , _targetArn     :: TF.Expr s P.Text
-    -- ^ @target_arn@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @sns@ settings value.
-newIotTopicRuleSns
-    :: TF.Expr s P.Text -- ^ Lens: 'P.roleArn', Field: '_roleArn', HCL: @role_arn@
-    -> TF.Expr s P.Text -- ^ Lens: 'P.targetArn', Field: '_targetArn', HCL: @target_arn@
-    -> IotTopicRuleSns s
-newIotTopicRuleSns _roleArn _targetArn =
-    IotTopicRuleSns'
-        { _messageFormat = TF.value "RAW"
-        , _roleArn = _roleArn
-        , _targetArn = _targetArn
-        }
-
-instance TF.ToHCL (IotTopicRuleSns s) where
-     toHCL IotTopicRuleSns'{..} = TF.pairs $ P.mconcat
-        [ TF.pair "message_format" _messageFormat
-        , TF.pair "role_arn" _roleArn
-        , TF.pair "target_arn" _targetArn
-        ]
-
-instance P.Hashable (IotTopicRuleSns s)
-
-instance TF.HasValidator (IotTopicRuleSns s) where
-    validator = P.mempty
-
-instance P.HasMessageFormat (IotTopicRuleSns s) (TF.Expr s P.Text) where
-    messageFormat =
-        P.lens (_messageFormat :: IotTopicRuleSns s -> TF.Expr s P.Text)
-            (\s a -> s { _messageFormat = a } :: IotTopicRuleSns s)
-
-instance P.HasRoleArn (IotTopicRuleSns s) (TF.Expr s P.Text) where
-    roleArn =
-        P.lens (_roleArn :: IotTopicRuleSns s -> TF.Expr s P.Text)
-            (\s a -> s { _roleArn = a } :: IotTopicRuleSns s)
-
-instance P.HasTargetArn (IotTopicRuleSns s) (TF.Expr s P.Text) where
-    targetArn =
-        P.lens (_targetArn :: IotTopicRuleSns s -> TF.Expr s P.Text)
-            (\s a -> s { _targetArn = a } :: IotTopicRuleSns s)
-
--- | @sqs@ nested settings.
-data IotTopicRuleSqs s = IotTopicRuleSqs'
-    { _queueUrl  :: TF.Expr s P.Text
-    -- ^ @queue_url@ - (Required)
-    --
-    , _roleArn   :: TF.Expr s P.Text
-    -- ^ @role_arn@ - (Required)
-    --
-    , _useBase64 :: TF.Expr s P.Bool
-    -- ^ @use_base64@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @sqs@ settings value.
-newIotTopicRuleSqs
-    :: TF.Expr s P.Text -- ^ Lens: 'P.roleArn', Field: '_roleArn', HCL: @role_arn@
-    -> TF.Expr s P.Bool -- ^ Lens: 'P.useBase64', Field: '_useBase64', HCL: @use_base64@
-    -> TF.Expr s P.Text -- ^ Lens: 'P.queueUrl', Field: '_queueUrl', HCL: @queue_url@
-    -> IotTopicRuleSqs s
-newIotTopicRuleSqs _roleArn _useBase64 _queueUrl =
-    IotTopicRuleSqs'
-        { _queueUrl = _queueUrl
-        , _roleArn = _roleArn
-        , _useBase64 = _useBase64
-        }
-
-instance TF.ToHCL (IotTopicRuleSqs s) where
-     toHCL IotTopicRuleSqs'{..} = TF.pairs $ P.mconcat
-        [ TF.pair "queue_url" _queueUrl
-        , TF.pair "role_arn" _roleArn
-        , TF.pair "use_base64" _useBase64
-        ]
-
-instance P.Hashable (IotTopicRuleSqs s)
-
-instance TF.HasValidator (IotTopicRuleSqs s) where
-    validator = P.mempty
-
-instance P.HasQueueUrl (IotTopicRuleSqs s) (TF.Expr s P.Text) where
-    queueUrl =
-        P.lens (_queueUrl :: IotTopicRuleSqs s -> TF.Expr s P.Text)
-            (\s a -> s { _queueUrl = a } :: IotTopicRuleSqs s)
-
-instance P.HasRoleArn (IotTopicRuleSqs s) (TF.Expr s P.Text) where
-    roleArn =
-        P.lens (_roleArn :: IotTopicRuleSqs s -> TF.Expr s P.Text)
-            (\s a -> s { _roleArn = a } :: IotTopicRuleSqs s)
-
-instance P.HasUseBase64 (IotTopicRuleSqs s) (TF.Expr s P.Bool) where
-    useBase64 =
-        P.lens (_useBase64 :: IotTopicRuleSqs s -> TF.Expr s P.Bool)
-            (\s a -> s { _useBase64 = a } :: IotTopicRuleSqs s)
-
--- | @cloudwatch_logging_options@ nested settings.
-data KinesisFirehoseDeliveryStreamCloudwatchLoggingOptions s = KinesisFirehoseDeliveryStreamCloudwatchLoggingOptions'
-    { _enabled       :: TF.Expr s P.Bool
-    -- ^ @enabled@ - (Default @false@)
-    --
-    , _logGroupName  :: P.Maybe (TF.Expr s P.Text)
-    -- ^ @log_group_name@ - (Optional)
-    --
-    , _logStreamName :: P.Maybe (TF.Expr s P.Text)
-    -- ^ @log_stream_name@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @cloudwatch_logging_options@ settings value.
-newKinesisFirehoseDeliveryStreamCloudwatchLoggingOptions
-    :: KinesisFirehoseDeliveryStreamCloudwatchLoggingOptions s
-newKinesisFirehoseDeliveryStreamCloudwatchLoggingOptions =
-    KinesisFirehoseDeliveryStreamCloudwatchLoggingOptions'
-        { _enabled = TF.value P.False
-        , _logGroupName = P.Nothing
-        , _logStreamName = P.Nothing
-        }
-
-instance TF.ToHCL (KinesisFirehoseDeliveryStreamCloudwatchLoggingOptions s) where
-     toHCL KinesisFirehoseDeliveryStreamCloudwatchLoggingOptions'{..} = TF.pairs $ P.mconcat
-        [ TF.pair "enabled" _enabled
-        , P.maybe P.mempty (TF.pair "log_group_name") _logGroupName
-        , P.maybe P.mempty (TF.pair "log_stream_name") _logStreamName
-        ]
-
-instance P.Hashable (KinesisFirehoseDeliveryStreamCloudwatchLoggingOptions s)
-
-instance TF.HasValidator (KinesisFirehoseDeliveryStreamCloudwatchLoggingOptions s) where
-    validator = P.mempty
-
-instance P.HasEnabled (KinesisFirehoseDeliveryStreamCloudwatchLoggingOptions s) (TF.Expr s P.Bool) where
-    enabled =
-        P.lens (_enabled :: KinesisFirehoseDeliveryStreamCloudwatchLoggingOptions s -> TF.Expr s P.Bool)
-            (\s a -> s { _enabled = a } :: KinesisFirehoseDeliveryStreamCloudwatchLoggingOptions s)
-
-instance P.HasLogGroupName (KinesisFirehoseDeliveryStreamCloudwatchLoggingOptions s) (P.Maybe (TF.Expr s P.Text)) where
-    logGroupName =
-        P.lens (_logGroupName :: KinesisFirehoseDeliveryStreamCloudwatchLoggingOptions s -> P.Maybe (TF.Expr s P.Text))
-            (\s a -> s { _logGroupName = a } :: KinesisFirehoseDeliveryStreamCloudwatchLoggingOptions s)
-
-instance P.HasLogStreamName (KinesisFirehoseDeliveryStreamCloudwatchLoggingOptions s) (P.Maybe (TF.Expr s P.Text)) where
-    logStreamName =
-        P.lens (_logStreamName :: KinesisFirehoseDeliveryStreamCloudwatchLoggingOptions s -> P.Maybe (TF.Expr s P.Text))
-            (\s a -> s { _logStreamName = a } :: KinesisFirehoseDeliveryStreamCloudwatchLoggingOptions s)
-
--- | @splunk_configuration@ nested settings.
-data KinesisFirehoseDeliveryStreamSplunkConfiguration s = KinesisFirehoseDeliveryStreamSplunkConfiguration'
-    { _cloudwatchLoggingOptions :: P.Maybe (TF.Expr s (KinesisFirehoseDeliveryStreamCloudwatchLoggingOptions s))
-    -- ^ @cloudwatch_logging_options@ - (Optional)
-    --
-    , _hecAcknowledgmentTimeout :: TF.Expr s P.Int
-    -- ^ @hec_acknowledgment_timeout@ - (Default @180@)
-    --
-    , _hecEndpoint :: TF.Expr s P.Text
-    -- ^ @hec_endpoint@ - (Required)
-    --
-    , _hecEndpointType :: TF.Expr s P.Text
-    -- ^ @hec_endpoint_type@ - (Default @Raw@)
-    --
-    , _hecToken :: TF.Expr s P.Text
-    -- ^ @hec_token@ - (Required)
-    --
-    , _processingConfiguration :: P.Maybe (TF.Expr s (KinesisFirehoseDeliveryStreamProcessingConfiguration s))
-    -- ^ @processing_configuration@ - (Optional)
-    --
-    , _retryDuration :: TF.Expr s P.Int
-    -- ^ @retry_duration@ - (Default @3600@)
-    --
-    , _s3BackupMode :: TF.Expr s P.Text
-    -- ^ @s3_backup_mode@ - (Default @FailedEventsOnly@)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @splunk_configuration@ settings value.
-newKinesisFirehoseDeliveryStreamSplunkConfiguration
-    :: TF.Expr s P.Text -- ^ Lens: 'P.hecEndpoint', Field: '_hecEndpoint', HCL: @hec_endpoint@
-    -> TF.Expr s P.Text -- ^ Lens: 'P.hecToken', Field: '_hecToken', HCL: @hec_token@
-    -> KinesisFirehoseDeliveryStreamSplunkConfiguration s
-newKinesisFirehoseDeliveryStreamSplunkConfiguration _hecEndpoint _hecToken =
-    KinesisFirehoseDeliveryStreamSplunkConfiguration'
-        { _cloudwatchLoggingOptions = P.Nothing
-        , _hecAcknowledgmentTimeout = TF.value 180
-        , _hecEndpoint = _hecEndpoint
-        , _hecEndpointType = TF.value "Raw"
-        , _hecToken = _hecToken
-        , _processingConfiguration = P.Nothing
-        , _retryDuration = TF.value 3600
-        , _s3BackupMode = TF.value "FailedEventsOnly"
-        }
-
-instance TF.ToHCL (KinesisFirehoseDeliveryStreamSplunkConfiguration s) where
-     toHCL KinesisFirehoseDeliveryStreamSplunkConfiguration'{..} = TF.pairs $ P.mconcat
-        [ P.maybe P.mempty (TF.pair "cloudwatch_logging_options") _cloudwatchLoggingOptions
-        , TF.pair "hec_acknowledgment_timeout" _hecAcknowledgmentTimeout
-        , TF.pair "hec_endpoint" _hecEndpoint
-        , TF.pair "hec_endpoint_type" _hecEndpointType
-        , TF.pair "hec_token" _hecToken
-        , P.maybe P.mempty (TF.pair "processing_configuration") _processingConfiguration
-        , TF.pair "retry_duration" _retryDuration
-        , TF.pair "s3_backup_mode" _s3BackupMode
-        ]
-
-instance P.Hashable (KinesisFirehoseDeliveryStreamSplunkConfiguration s)
-
-instance TF.HasValidator (KinesisFirehoseDeliveryStreamSplunkConfiguration s) where
-    validator = P.mempty
-
-instance P.HasCloudwatchLoggingOptions (KinesisFirehoseDeliveryStreamSplunkConfiguration s) (P.Maybe (TF.Expr s (KinesisFirehoseDeliveryStreamCloudwatchLoggingOptions s))) where
-    cloudwatchLoggingOptions =
-        P.lens (_cloudwatchLoggingOptions :: KinesisFirehoseDeliveryStreamSplunkConfiguration s -> P.Maybe (TF.Expr s (KinesisFirehoseDeliveryStreamCloudwatchLoggingOptions s)))
-            (\s a -> s { _cloudwatchLoggingOptions = a } :: KinesisFirehoseDeliveryStreamSplunkConfiguration s)
-
-instance P.HasHecAcknowledgmentTimeout (KinesisFirehoseDeliveryStreamSplunkConfiguration s) (TF.Expr s P.Int) where
-    hecAcknowledgmentTimeout =
-        P.lens (_hecAcknowledgmentTimeout :: KinesisFirehoseDeliveryStreamSplunkConfiguration s -> TF.Expr s P.Int)
-            (\s a -> s { _hecAcknowledgmentTimeout = a } :: KinesisFirehoseDeliveryStreamSplunkConfiguration s)
-
-instance P.HasHecEndpoint (KinesisFirehoseDeliveryStreamSplunkConfiguration s) (TF.Expr s P.Text) where
-    hecEndpoint =
-        P.lens (_hecEndpoint :: KinesisFirehoseDeliveryStreamSplunkConfiguration s -> TF.Expr s P.Text)
-            (\s a -> s { _hecEndpoint = a } :: KinesisFirehoseDeliveryStreamSplunkConfiguration s)
-
-instance P.HasHecEndpointType (KinesisFirehoseDeliveryStreamSplunkConfiguration s) (TF.Expr s P.Text) where
-    hecEndpointType =
-        P.lens (_hecEndpointType :: KinesisFirehoseDeliveryStreamSplunkConfiguration s -> TF.Expr s P.Text)
-            (\s a -> s { _hecEndpointType = a } :: KinesisFirehoseDeliveryStreamSplunkConfiguration s)
-
-instance P.HasHecToken (KinesisFirehoseDeliveryStreamSplunkConfiguration s) (TF.Expr s P.Text) where
-    hecToken =
-        P.lens (_hecToken :: KinesisFirehoseDeliveryStreamSplunkConfiguration s -> TF.Expr s P.Text)
-            (\s a -> s { _hecToken = a } :: KinesisFirehoseDeliveryStreamSplunkConfiguration s)
-
-instance P.HasProcessingConfiguration (KinesisFirehoseDeliveryStreamSplunkConfiguration s) (P.Maybe (TF.Expr s (KinesisFirehoseDeliveryStreamProcessingConfiguration s))) where
-    processingConfiguration =
-        P.lens (_processingConfiguration :: KinesisFirehoseDeliveryStreamSplunkConfiguration s -> P.Maybe (TF.Expr s (KinesisFirehoseDeliveryStreamProcessingConfiguration s)))
-            (\s a -> s { _processingConfiguration = a } :: KinesisFirehoseDeliveryStreamSplunkConfiguration s)
-
-instance P.HasRetryDuration (KinesisFirehoseDeliveryStreamSplunkConfiguration s) (TF.Expr s P.Int) where
-    retryDuration =
-        P.lens (_retryDuration :: KinesisFirehoseDeliveryStreamSplunkConfiguration s -> TF.Expr s P.Int)
-            (\s a -> s { _retryDuration = a } :: KinesisFirehoseDeliveryStreamSplunkConfiguration s)
-
-instance P.HasS3BackupMode (KinesisFirehoseDeliveryStreamSplunkConfiguration s) (TF.Expr s P.Text) where
-    s3BackupMode =
-        P.lens (_s3BackupMode :: KinesisFirehoseDeliveryStreamSplunkConfiguration s -> TF.Expr s P.Text)
-            (\s a -> s { _s3BackupMode = a } :: KinesisFirehoseDeliveryStreamSplunkConfiguration s)
-
-instance s ~ s' => P.HasComputedCloudwatchLoggingOptions (TF.Ref s' (KinesisFirehoseDeliveryStreamSplunkConfiguration s)) (TF.Expr s (KinesisFirehoseDeliveryStreamCloudwatchLoggingOptions s)) where
-    computedCloudwatchLoggingOptions x =
-        TF.unsafeCompute TF.encodeAttr x "cloudwatch_logging_options"
-
--- | @processing_configuration@ nested settings.
-data KinesisFirehoseDeliveryStreamProcessingConfiguration s = KinesisFirehoseDeliveryStreamProcessingConfiguration'
-    { _enabled :: P.Maybe (TF.Expr s P.Bool)
-    -- ^ @enabled@ - (Optional)
-    --
-    , _processors :: P.Maybe (TF.Expr s [TF.Expr s (KinesisFirehoseDeliveryStreamProcessors s)])
-    -- ^ @processors@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @processing_configuration@ settings value.
-newKinesisFirehoseDeliveryStreamProcessingConfiguration
-    :: KinesisFirehoseDeliveryStreamProcessingConfiguration s
-newKinesisFirehoseDeliveryStreamProcessingConfiguration =
-    KinesisFirehoseDeliveryStreamProcessingConfiguration'
-        { _enabled = P.Nothing
-        , _processors = P.Nothing
-        }
-
-instance TF.ToHCL (KinesisFirehoseDeliveryStreamProcessingConfiguration s) where
-     toHCL KinesisFirehoseDeliveryStreamProcessingConfiguration'{..} = TF.pairs $ P.mconcat
-        [ P.maybe P.mempty (TF.pair "enabled") _enabled
-        , P.maybe P.mempty (TF.pair "processors") _processors
-        ]
-
-instance P.Hashable (KinesisFirehoseDeliveryStreamProcessingConfiguration s)
-
-instance TF.HasValidator (KinesisFirehoseDeliveryStreamProcessingConfiguration s) where
-    validator = P.mempty
-
-instance P.HasEnabled (KinesisFirehoseDeliveryStreamProcessingConfiguration s) (P.Maybe (TF.Expr s P.Bool)) where
-    enabled =
-        P.lens (_enabled :: KinesisFirehoseDeliveryStreamProcessingConfiguration s -> P.Maybe (TF.Expr s P.Bool))
-            (\s a -> s { _enabled = a } :: KinesisFirehoseDeliveryStreamProcessingConfiguration s)
-
-instance P.HasProcessors (KinesisFirehoseDeliveryStreamProcessingConfiguration s) (P.Maybe (TF.Expr s [TF.Expr s (KinesisFirehoseDeliveryStreamProcessors s)])) where
-    processors =
-        P.lens (_processors :: KinesisFirehoseDeliveryStreamProcessingConfiguration s -> P.Maybe (TF.Expr s [TF.Expr s (KinesisFirehoseDeliveryStreamProcessors s)]))
-            (\s a -> s { _processors = a } :: KinesisFirehoseDeliveryStreamProcessingConfiguration s)
-
--- | @redshift_configuration@ nested settings.
-data KinesisFirehoseDeliveryStreamRedshiftConfiguration s = KinesisFirehoseDeliveryStreamRedshiftConfiguration'
-    { _cloudwatchLoggingOptions :: P.Maybe (TF.Expr s (KinesisFirehoseDeliveryStreamCloudwatchLoggingOptions s))
-    -- ^ @cloudwatch_logging_options@ - (Optional)
-    --
-    , _clusterJdbcurl :: TF.Expr s P.Text
-    -- ^ @cluster_jdbcurl@ - (Required)
-    --
-    , _copyOptions :: P.Maybe (TF.Expr s P.Text)
-    -- ^ @copy_options@ - (Optional)
-    --
-    , _dataTableColumns :: P.Maybe (TF.Expr s P.Text)
-    -- ^ @data_table_columns@ - (Optional)
-    --
-    , _dataTableName :: TF.Expr s P.Text
-    -- ^ @data_table_name@ - (Required)
-    --
-    , _password :: TF.Expr s P.Text
-    -- ^ @password@ - (Required)
-    --
-    , _processingConfiguration :: P.Maybe (TF.Expr s (KinesisFirehoseDeliveryStreamProcessingConfiguration s))
-    -- ^ @processing_configuration@ - (Optional)
-    --
-    , _retryDuration :: TF.Expr s P.Int
-    -- ^ @retry_duration@ - (Default @3600@)
-    --
-    , _roleArn :: TF.Expr s P.Text
-    -- ^ @role_arn@ - (Required)
-    --
-    , _s3BackupConfiguration :: P.Maybe (TF.Expr s (KinesisFirehoseDeliveryStreamS3BackupConfiguration s))
-    -- ^ @s3_backup_configuration@ - (Optional)
-    --
-    , _s3BackupMode :: TF.Expr s P.Text
-    -- ^ @s3_backup_mode@ - (Default @Disabled@)
-    --
-    , _username :: TF.Expr s P.Text
-    -- ^ @username@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @redshift_configuration@ settings value.
-newKinesisFirehoseDeliveryStreamRedshiftConfiguration
-    :: TF.Expr s P.Text -- ^ Lens: 'P.roleArn', Field: '_roleArn', HCL: @role_arn@
-    -> TF.Expr s P.Text -- ^ Lens: 'P.clusterJdbcurl', Field: '_clusterJdbcurl', HCL: @cluster_jdbcurl@
-    -> TF.Expr s P.Text -- ^ Lens: 'P.dataTableName', Field: '_dataTableName', HCL: @data_table_name@
-    -> TF.Expr s P.Text -- ^ Lens: 'P.password', Field: '_password', HCL: @password@
-    -> TF.Expr s P.Text -- ^ Lens: 'P.username', Field: '_username', HCL: @username@
-    -> KinesisFirehoseDeliveryStreamRedshiftConfiguration s
-newKinesisFirehoseDeliveryStreamRedshiftConfiguration _roleArn _clusterJdbcurl _dataTableName _password _username =
-    KinesisFirehoseDeliveryStreamRedshiftConfiguration'
-        { _cloudwatchLoggingOptions = P.Nothing
-        , _clusterJdbcurl = _clusterJdbcurl
-        , _copyOptions = P.Nothing
-        , _dataTableColumns = P.Nothing
-        , _dataTableName = _dataTableName
-        , _password = _password
-        , _processingConfiguration = P.Nothing
-        , _retryDuration = TF.value 3600
-        , _roleArn = _roleArn
-        , _s3BackupConfiguration = P.Nothing
-        , _s3BackupMode = TF.value "Disabled"
-        , _username = _username
-        }
-
-instance TF.ToHCL (KinesisFirehoseDeliveryStreamRedshiftConfiguration s) where
-     toHCL KinesisFirehoseDeliveryStreamRedshiftConfiguration'{..} = TF.pairs $ P.mconcat
-        [ P.maybe P.mempty (TF.pair "cloudwatch_logging_options") _cloudwatchLoggingOptions
-        , TF.pair "cluster_jdbcurl" _clusterJdbcurl
-        , P.maybe P.mempty (TF.pair "copy_options") _copyOptions
-        , P.maybe P.mempty (TF.pair "data_table_columns") _dataTableColumns
-        , TF.pair "data_table_name" _dataTableName
-        , TF.pair "password" _password
-        , P.maybe P.mempty (TF.pair "processing_configuration") _processingConfiguration
-        , TF.pair "retry_duration" _retryDuration
-        , TF.pair "role_arn" _roleArn
-        , P.maybe P.mempty (TF.pair "s3_backup_configuration") _s3BackupConfiguration
-        , TF.pair "s3_backup_mode" _s3BackupMode
-        , TF.pair "username" _username
-        ]
-
-instance P.Hashable (KinesisFirehoseDeliveryStreamRedshiftConfiguration s)
-
-instance TF.HasValidator (KinesisFirehoseDeliveryStreamRedshiftConfiguration s) where
-    validator = P.mempty
-
-instance P.HasCloudwatchLoggingOptions (KinesisFirehoseDeliveryStreamRedshiftConfiguration s) (P.Maybe (TF.Expr s (KinesisFirehoseDeliveryStreamCloudwatchLoggingOptions s))) where
-    cloudwatchLoggingOptions =
-        P.lens (_cloudwatchLoggingOptions :: KinesisFirehoseDeliveryStreamRedshiftConfiguration s -> P.Maybe (TF.Expr s (KinesisFirehoseDeliveryStreamCloudwatchLoggingOptions s)))
-            (\s a -> s { _cloudwatchLoggingOptions = a } :: KinesisFirehoseDeliveryStreamRedshiftConfiguration s)
-
-instance P.HasClusterJdbcurl (KinesisFirehoseDeliveryStreamRedshiftConfiguration s) (TF.Expr s P.Text) where
-    clusterJdbcurl =
-        P.lens (_clusterJdbcurl :: KinesisFirehoseDeliveryStreamRedshiftConfiguration s -> TF.Expr s P.Text)
-            (\s a -> s { _clusterJdbcurl = a } :: KinesisFirehoseDeliveryStreamRedshiftConfiguration s)
-
-instance P.HasCopyOptions (KinesisFirehoseDeliveryStreamRedshiftConfiguration s) (P.Maybe (TF.Expr s P.Text)) where
-    copyOptions =
-        P.lens (_copyOptions :: KinesisFirehoseDeliveryStreamRedshiftConfiguration s -> P.Maybe (TF.Expr s P.Text))
-            (\s a -> s { _copyOptions = a } :: KinesisFirehoseDeliveryStreamRedshiftConfiguration s)
-
-instance P.HasDataTableColumns (KinesisFirehoseDeliveryStreamRedshiftConfiguration s) (P.Maybe (TF.Expr s P.Text)) where
-    dataTableColumns =
-        P.lens (_dataTableColumns :: KinesisFirehoseDeliveryStreamRedshiftConfiguration s -> P.Maybe (TF.Expr s P.Text))
-            (\s a -> s { _dataTableColumns = a } :: KinesisFirehoseDeliveryStreamRedshiftConfiguration s)
-
-instance P.HasDataTableName (KinesisFirehoseDeliveryStreamRedshiftConfiguration s) (TF.Expr s P.Text) where
-    dataTableName =
-        P.lens (_dataTableName :: KinesisFirehoseDeliveryStreamRedshiftConfiguration s -> TF.Expr s P.Text)
-            (\s a -> s { _dataTableName = a } :: KinesisFirehoseDeliveryStreamRedshiftConfiguration s)
-
-instance P.HasPassword (KinesisFirehoseDeliveryStreamRedshiftConfiguration s) (TF.Expr s P.Text) where
-    password =
-        P.lens (_password :: KinesisFirehoseDeliveryStreamRedshiftConfiguration s -> TF.Expr s P.Text)
-            (\s a -> s { _password = a } :: KinesisFirehoseDeliveryStreamRedshiftConfiguration s)
-
-instance P.HasProcessingConfiguration (KinesisFirehoseDeliveryStreamRedshiftConfiguration s) (P.Maybe (TF.Expr s (KinesisFirehoseDeliveryStreamProcessingConfiguration s))) where
-    processingConfiguration =
-        P.lens (_processingConfiguration :: KinesisFirehoseDeliveryStreamRedshiftConfiguration s -> P.Maybe (TF.Expr s (KinesisFirehoseDeliveryStreamProcessingConfiguration s)))
-            (\s a -> s { _processingConfiguration = a } :: KinesisFirehoseDeliveryStreamRedshiftConfiguration s)
-
-instance P.HasRetryDuration (KinesisFirehoseDeliveryStreamRedshiftConfiguration s) (TF.Expr s P.Int) where
-    retryDuration =
-        P.lens (_retryDuration :: KinesisFirehoseDeliveryStreamRedshiftConfiguration s -> TF.Expr s P.Int)
-            (\s a -> s { _retryDuration = a } :: KinesisFirehoseDeliveryStreamRedshiftConfiguration s)
-
-instance P.HasRoleArn (KinesisFirehoseDeliveryStreamRedshiftConfiguration s) (TF.Expr s P.Text) where
-    roleArn =
-        P.lens (_roleArn :: KinesisFirehoseDeliveryStreamRedshiftConfiguration s -> TF.Expr s P.Text)
-            (\s a -> s { _roleArn = a } :: KinesisFirehoseDeliveryStreamRedshiftConfiguration s)
-
-instance P.HasS3BackupConfiguration (KinesisFirehoseDeliveryStreamRedshiftConfiguration s) (P.Maybe (TF.Expr s (KinesisFirehoseDeliveryStreamS3BackupConfiguration s))) where
-    s3BackupConfiguration =
-        P.lens (_s3BackupConfiguration :: KinesisFirehoseDeliveryStreamRedshiftConfiguration s -> P.Maybe (TF.Expr s (KinesisFirehoseDeliveryStreamS3BackupConfiguration s)))
-            (\s a -> s { _s3BackupConfiguration = a } :: KinesisFirehoseDeliveryStreamRedshiftConfiguration s)
-
-instance P.HasS3BackupMode (KinesisFirehoseDeliveryStreamRedshiftConfiguration s) (TF.Expr s P.Text) where
-    s3BackupMode =
-        P.lens (_s3BackupMode :: KinesisFirehoseDeliveryStreamRedshiftConfiguration s -> TF.Expr s P.Text)
-            (\s a -> s { _s3BackupMode = a } :: KinesisFirehoseDeliveryStreamRedshiftConfiguration s)
-
-instance P.HasUsername (KinesisFirehoseDeliveryStreamRedshiftConfiguration s) (TF.Expr s P.Text) where
-    username =
-        P.lens (_username :: KinesisFirehoseDeliveryStreamRedshiftConfiguration s -> TF.Expr s P.Text)
-            (\s a -> s { _username = a } :: KinesisFirehoseDeliveryStreamRedshiftConfiguration s)
-
-instance s ~ s' => P.HasComputedCloudwatchLoggingOptions (TF.Ref s' (KinesisFirehoseDeliveryStreamRedshiftConfiguration s)) (TF.Expr s (KinesisFirehoseDeliveryStreamCloudwatchLoggingOptions s)) where
-    computedCloudwatchLoggingOptions x =
-        TF.unsafeCompute TF.encodeAttr x "cloudwatch_logging_options"
-
--- | @s3_backup_configuration@ nested settings.
-data KinesisFirehoseDeliveryStreamS3BackupConfiguration s = KinesisFirehoseDeliveryStreamS3BackupConfiguration'
-    { _bucketArn :: TF.Expr s P.Text
-    -- ^ @bucket_arn@ - (Required)
-    --
-    , _bufferInterval :: TF.Expr s P.Int
-    -- ^ @buffer_interval@ - (Default @300@)
-    --
-    , _bufferSize :: TF.Expr s P.Int
-    -- ^ @buffer_size@ - (Default @5@)
-    --
-    , _cloudwatchLoggingOptions :: P.Maybe (TF.Expr s (KinesisFirehoseDeliveryStreamCloudwatchLoggingOptions s))
-    -- ^ @cloudwatch_logging_options@ - (Optional)
-    --
-    , _compressionFormat :: TF.Expr s P.Text
-    -- ^ @compression_format@ - (Default @UNCOMPRESSED@)
-    --
-    , _kmsKeyArn :: P.Maybe (TF.Expr s P.Text)
-    -- ^ @kms_key_arn@ - (Optional)
-    --
-    , _prefix :: P.Maybe (TF.Expr s P.Text)
-    -- ^ @prefix@ - (Optional)
-    --
-    , _roleArn :: TF.Expr s P.Text
-    -- ^ @role_arn@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @s3_backup_configuration@ settings value.
-newKinesisFirehoseDeliveryStreamS3BackupConfiguration
-    :: TF.Expr s P.Text -- ^ Lens: 'P.bucketArn', Field: '_bucketArn', HCL: @bucket_arn@
-    -> TF.Expr s P.Text -- ^ Lens: 'P.roleArn', Field: '_roleArn', HCL: @role_arn@
-    -> KinesisFirehoseDeliveryStreamS3BackupConfiguration s
-newKinesisFirehoseDeliveryStreamS3BackupConfiguration _bucketArn _roleArn =
-    KinesisFirehoseDeliveryStreamS3BackupConfiguration'
-        { _bucketArn = _bucketArn
-        , _bufferInterval = TF.value 300
-        , _bufferSize = TF.value 5
-        , _cloudwatchLoggingOptions = P.Nothing
-        , _compressionFormat = TF.value "UNCOMPRESSED"
-        , _kmsKeyArn = P.Nothing
-        , _prefix = P.Nothing
-        , _roleArn = _roleArn
-        }
-
-instance TF.ToHCL (KinesisFirehoseDeliveryStreamS3BackupConfiguration s) where
-     toHCL KinesisFirehoseDeliveryStreamS3BackupConfiguration'{..} = TF.pairs $ P.mconcat
-        [ TF.pair "bucket_arn" _bucketArn
-        , TF.pair "buffer_interval" _bufferInterval
-        , TF.pair "buffer_size" _bufferSize
-        , P.maybe P.mempty (TF.pair "cloudwatch_logging_options") _cloudwatchLoggingOptions
-        , TF.pair "compression_format" _compressionFormat
-        , P.maybe P.mempty (TF.pair "kms_key_arn") _kmsKeyArn
-        , P.maybe P.mempty (TF.pair "prefix") _prefix
-        , TF.pair "role_arn" _roleArn
-        ]
-
-instance P.Hashable (KinesisFirehoseDeliveryStreamS3BackupConfiguration s)
-
-instance TF.HasValidator (KinesisFirehoseDeliveryStreamS3BackupConfiguration s) where
-    validator = P.mempty
-
-instance P.HasBucketArn (KinesisFirehoseDeliveryStreamS3BackupConfiguration s) (TF.Expr s P.Text) where
-    bucketArn =
-        P.lens (_bucketArn :: KinesisFirehoseDeliveryStreamS3BackupConfiguration s -> TF.Expr s P.Text)
-            (\s a -> s { _bucketArn = a } :: KinesisFirehoseDeliveryStreamS3BackupConfiguration s)
-
-instance P.HasBufferInterval (KinesisFirehoseDeliveryStreamS3BackupConfiguration s) (TF.Expr s P.Int) where
-    bufferInterval =
-        P.lens (_bufferInterval :: KinesisFirehoseDeliveryStreamS3BackupConfiguration s -> TF.Expr s P.Int)
-            (\s a -> s { _bufferInterval = a } :: KinesisFirehoseDeliveryStreamS3BackupConfiguration s)
-
-instance P.HasBufferSize (KinesisFirehoseDeliveryStreamS3BackupConfiguration s) (TF.Expr s P.Int) where
-    bufferSize =
-        P.lens (_bufferSize :: KinesisFirehoseDeliveryStreamS3BackupConfiguration s -> TF.Expr s P.Int)
-            (\s a -> s { _bufferSize = a } :: KinesisFirehoseDeliveryStreamS3BackupConfiguration s)
-
-instance P.HasCloudwatchLoggingOptions (KinesisFirehoseDeliveryStreamS3BackupConfiguration s) (P.Maybe (TF.Expr s (KinesisFirehoseDeliveryStreamCloudwatchLoggingOptions s))) where
-    cloudwatchLoggingOptions =
-        P.lens (_cloudwatchLoggingOptions :: KinesisFirehoseDeliveryStreamS3BackupConfiguration s -> P.Maybe (TF.Expr s (KinesisFirehoseDeliveryStreamCloudwatchLoggingOptions s)))
-            (\s a -> s { _cloudwatchLoggingOptions = a } :: KinesisFirehoseDeliveryStreamS3BackupConfiguration s)
-
-instance P.HasCompressionFormat (KinesisFirehoseDeliveryStreamS3BackupConfiguration s) (TF.Expr s P.Text) where
-    compressionFormat =
-        P.lens (_compressionFormat :: KinesisFirehoseDeliveryStreamS3BackupConfiguration s -> TF.Expr s P.Text)
-            (\s a -> s { _compressionFormat = a } :: KinesisFirehoseDeliveryStreamS3BackupConfiguration s)
-
-instance P.HasKmsKeyArn (KinesisFirehoseDeliveryStreamS3BackupConfiguration s) (P.Maybe (TF.Expr s P.Text)) where
-    kmsKeyArn =
-        P.lens (_kmsKeyArn :: KinesisFirehoseDeliveryStreamS3BackupConfiguration s -> P.Maybe (TF.Expr s P.Text))
-            (\s a -> s { _kmsKeyArn = a } :: KinesisFirehoseDeliveryStreamS3BackupConfiguration s)
-
-instance P.HasPrefix (KinesisFirehoseDeliveryStreamS3BackupConfiguration s) (P.Maybe (TF.Expr s P.Text)) where
-    prefix =
-        P.lens (_prefix :: KinesisFirehoseDeliveryStreamS3BackupConfiguration s -> P.Maybe (TF.Expr s P.Text))
-            (\s a -> s { _prefix = a } :: KinesisFirehoseDeliveryStreamS3BackupConfiguration s)
-
-instance P.HasRoleArn (KinesisFirehoseDeliveryStreamS3BackupConfiguration s) (TF.Expr s P.Text) where
-    roleArn =
-        P.lens (_roleArn :: KinesisFirehoseDeliveryStreamS3BackupConfiguration s -> TF.Expr s P.Text)
-            (\s a -> s { _roleArn = a } :: KinesisFirehoseDeliveryStreamS3BackupConfiguration s)
-
-instance s ~ s' => P.HasComputedCloudwatchLoggingOptions (TF.Ref s' (KinesisFirehoseDeliveryStreamS3BackupConfiguration s)) (TF.Expr s (KinesisFirehoseDeliveryStreamCloudwatchLoggingOptions s)) where
-    computedCloudwatchLoggingOptions x =
-        TF.unsafeCompute TF.encodeAttr x "cloudwatch_logging_options"
-
--- | @extended_s3_configuration@ nested settings.
-data KinesisFirehoseDeliveryStreamExtendedS3Configuration s = KinesisFirehoseDeliveryStreamExtendedS3Configuration'
-    { _bucketArn :: TF.Expr s P.Text
-    -- ^ @bucket_arn@ - (Required)
-    --
-    , _bufferInterval :: TF.Expr s P.Int
-    -- ^ @buffer_interval@ - (Default @300@)
-    --
-    , _bufferSize :: TF.Expr s P.Int
-    -- ^ @buffer_size@ - (Default @5@)
-    --
-    , _cloudwatchLoggingOptions :: P.Maybe (TF.Expr s (KinesisFirehoseDeliveryStreamCloudwatchLoggingOptions s))
-    -- ^ @cloudwatch_logging_options@ - (Optional)
-    --
-    , _compressionFormat :: TF.Expr s P.Text
-    -- ^ @compression_format@ - (Default @UNCOMPRESSED@)
-    --
-    , _dataFormatConversionConfiguration :: P.Maybe (TF.Expr s (KinesisFirehoseDeliveryStreamDataFormatConversionConfiguration s))
-    -- ^ @data_format_conversion_configuration@ - (Optional)
-    --
-    , _kmsKeyArn :: P.Maybe (TF.Expr s P.Text)
-    -- ^ @kms_key_arn@ - (Optional)
-    --
-    , _prefix :: P.Maybe (TF.Expr s P.Text)
-    -- ^ @prefix@ - (Optional)
-    --
-    , _processingConfiguration :: P.Maybe (TF.Expr s (KinesisFirehoseDeliveryStreamProcessingConfiguration s))
-    -- ^ @processing_configuration@ - (Optional)
-    --
-    , _roleArn :: TF.Expr s P.Text
-    -- ^ @role_arn@ - (Required)
-    --
-    , _s3BackupConfiguration :: P.Maybe (TF.Expr s (KinesisFirehoseDeliveryStreamS3BackupConfiguration s))
-    -- ^ @s3_backup_configuration@ - (Optional)
-    --
-    , _s3BackupMode :: TF.Expr s P.Text
-    -- ^ @s3_backup_mode@ - (Default @Disabled@)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @extended_s3_configuration@ settings value.
-newKinesisFirehoseDeliveryStreamExtendedS3Configuration
-    :: TF.Expr s P.Text -- ^ Lens: 'P.bucketArn', Field: '_bucketArn', HCL: @bucket_arn@
-    -> TF.Expr s P.Text -- ^ Lens: 'P.roleArn', Field: '_roleArn', HCL: @role_arn@
-    -> KinesisFirehoseDeliveryStreamExtendedS3Configuration s
-newKinesisFirehoseDeliveryStreamExtendedS3Configuration _bucketArn _roleArn =
-    KinesisFirehoseDeliveryStreamExtendedS3Configuration'
-        { _bucketArn = _bucketArn
-        , _bufferInterval = TF.value 300
-        , _bufferSize = TF.value 5
-        , _cloudwatchLoggingOptions = P.Nothing
-        , _compressionFormat = TF.value "UNCOMPRESSED"
-        , _dataFormatConversionConfiguration = P.Nothing
-        , _kmsKeyArn = P.Nothing
-        , _prefix = P.Nothing
-        , _processingConfiguration = P.Nothing
-        , _roleArn = _roleArn
-        , _s3BackupConfiguration = P.Nothing
-        , _s3BackupMode = TF.value "Disabled"
-        }
-
-instance TF.ToHCL (KinesisFirehoseDeliveryStreamExtendedS3Configuration s) where
-     toHCL KinesisFirehoseDeliveryStreamExtendedS3Configuration'{..} = TF.pairs $ P.mconcat
-        [ TF.pair "bucket_arn" _bucketArn
-        , TF.pair "buffer_interval" _bufferInterval
-        , TF.pair "buffer_size" _bufferSize
-        , P.maybe P.mempty (TF.pair "cloudwatch_logging_options") _cloudwatchLoggingOptions
-        , TF.pair "compression_format" _compressionFormat
-        , P.maybe P.mempty (TF.pair "data_format_conversion_configuration") _dataFormatConversionConfiguration
-        , P.maybe P.mempty (TF.pair "kms_key_arn") _kmsKeyArn
-        , P.maybe P.mempty (TF.pair "prefix") _prefix
-        , P.maybe P.mempty (TF.pair "processing_configuration") _processingConfiguration
-        , TF.pair "role_arn" _roleArn
-        , P.maybe P.mempty (TF.pair "s3_backup_configuration") _s3BackupConfiguration
-        , TF.pair "s3_backup_mode" _s3BackupMode
-        ]
-
-instance P.Hashable (KinesisFirehoseDeliveryStreamExtendedS3Configuration s)
-
-instance TF.HasValidator (KinesisFirehoseDeliveryStreamExtendedS3Configuration s) where
-    validator = P.mempty
-
-instance P.HasBucketArn (KinesisFirehoseDeliveryStreamExtendedS3Configuration s) (TF.Expr s P.Text) where
-    bucketArn =
-        P.lens (_bucketArn :: KinesisFirehoseDeliveryStreamExtendedS3Configuration s -> TF.Expr s P.Text)
-            (\s a -> s { _bucketArn = a } :: KinesisFirehoseDeliveryStreamExtendedS3Configuration s)
-
-instance P.HasBufferInterval (KinesisFirehoseDeliveryStreamExtendedS3Configuration s) (TF.Expr s P.Int) where
-    bufferInterval =
-        P.lens (_bufferInterval :: KinesisFirehoseDeliveryStreamExtendedS3Configuration s -> TF.Expr s P.Int)
-            (\s a -> s { _bufferInterval = a } :: KinesisFirehoseDeliveryStreamExtendedS3Configuration s)
-
-instance P.HasBufferSize (KinesisFirehoseDeliveryStreamExtendedS3Configuration s) (TF.Expr s P.Int) where
-    bufferSize =
-        P.lens (_bufferSize :: KinesisFirehoseDeliveryStreamExtendedS3Configuration s -> TF.Expr s P.Int)
-            (\s a -> s { _bufferSize = a } :: KinesisFirehoseDeliveryStreamExtendedS3Configuration s)
-
-instance P.HasCloudwatchLoggingOptions (KinesisFirehoseDeliveryStreamExtendedS3Configuration s) (P.Maybe (TF.Expr s (KinesisFirehoseDeliveryStreamCloudwatchLoggingOptions s))) where
-    cloudwatchLoggingOptions =
-        P.lens (_cloudwatchLoggingOptions :: KinesisFirehoseDeliveryStreamExtendedS3Configuration s -> P.Maybe (TF.Expr s (KinesisFirehoseDeliveryStreamCloudwatchLoggingOptions s)))
-            (\s a -> s { _cloudwatchLoggingOptions = a } :: KinesisFirehoseDeliveryStreamExtendedS3Configuration s)
-
-instance P.HasCompressionFormat (KinesisFirehoseDeliveryStreamExtendedS3Configuration s) (TF.Expr s P.Text) where
-    compressionFormat =
-        P.lens (_compressionFormat :: KinesisFirehoseDeliveryStreamExtendedS3Configuration s -> TF.Expr s P.Text)
-            (\s a -> s { _compressionFormat = a } :: KinesisFirehoseDeliveryStreamExtendedS3Configuration s)
-
-instance P.HasDataFormatConversionConfiguration (KinesisFirehoseDeliveryStreamExtendedS3Configuration s) (P.Maybe (TF.Expr s (KinesisFirehoseDeliveryStreamDataFormatConversionConfiguration s))) where
-    dataFormatConversionConfiguration =
-        P.lens (_dataFormatConversionConfiguration :: KinesisFirehoseDeliveryStreamExtendedS3Configuration s -> P.Maybe (TF.Expr s (KinesisFirehoseDeliveryStreamDataFormatConversionConfiguration s)))
-            (\s a -> s { _dataFormatConversionConfiguration = a } :: KinesisFirehoseDeliveryStreamExtendedS3Configuration s)
-
-instance P.HasKmsKeyArn (KinesisFirehoseDeliveryStreamExtendedS3Configuration s) (P.Maybe (TF.Expr s P.Text)) where
-    kmsKeyArn =
-        P.lens (_kmsKeyArn :: KinesisFirehoseDeliveryStreamExtendedS3Configuration s -> P.Maybe (TF.Expr s P.Text))
-            (\s a -> s { _kmsKeyArn = a } :: KinesisFirehoseDeliveryStreamExtendedS3Configuration s)
-
-instance P.HasPrefix (KinesisFirehoseDeliveryStreamExtendedS3Configuration s) (P.Maybe (TF.Expr s P.Text)) where
-    prefix =
-        P.lens (_prefix :: KinesisFirehoseDeliveryStreamExtendedS3Configuration s -> P.Maybe (TF.Expr s P.Text))
-            (\s a -> s { _prefix = a } :: KinesisFirehoseDeliveryStreamExtendedS3Configuration s)
-
-instance P.HasProcessingConfiguration (KinesisFirehoseDeliveryStreamExtendedS3Configuration s) (P.Maybe (TF.Expr s (KinesisFirehoseDeliveryStreamProcessingConfiguration s))) where
-    processingConfiguration =
-        P.lens (_processingConfiguration :: KinesisFirehoseDeliveryStreamExtendedS3Configuration s -> P.Maybe (TF.Expr s (KinesisFirehoseDeliveryStreamProcessingConfiguration s)))
-            (\s a -> s { _processingConfiguration = a } :: KinesisFirehoseDeliveryStreamExtendedS3Configuration s)
-
-instance P.HasRoleArn (KinesisFirehoseDeliveryStreamExtendedS3Configuration s) (TF.Expr s P.Text) where
-    roleArn =
-        P.lens (_roleArn :: KinesisFirehoseDeliveryStreamExtendedS3Configuration s -> TF.Expr s P.Text)
-            (\s a -> s { _roleArn = a } :: KinesisFirehoseDeliveryStreamExtendedS3Configuration s)
-
-instance P.HasS3BackupConfiguration (KinesisFirehoseDeliveryStreamExtendedS3Configuration s) (P.Maybe (TF.Expr s (KinesisFirehoseDeliveryStreamS3BackupConfiguration s))) where
-    s3BackupConfiguration =
-        P.lens (_s3BackupConfiguration :: KinesisFirehoseDeliveryStreamExtendedS3Configuration s -> P.Maybe (TF.Expr s (KinesisFirehoseDeliveryStreamS3BackupConfiguration s)))
-            (\s a -> s { _s3BackupConfiguration = a } :: KinesisFirehoseDeliveryStreamExtendedS3Configuration s)
-
-instance P.HasS3BackupMode (KinesisFirehoseDeliveryStreamExtendedS3Configuration s) (TF.Expr s P.Text) where
-    s3BackupMode =
-        P.lens (_s3BackupMode :: KinesisFirehoseDeliveryStreamExtendedS3Configuration s -> TF.Expr s P.Text)
-            (\s a -> s { _s3BackupMode = a } :: KinesisFirehoseDeliveryStreamExtendedS3Configuration s)
-
-instance s ~ s' => P.HasComputedCloudwatchLoggingOptions (TF.Ref s' (KinesisFirehoseDeliveryStreamExtendedS3Configuration s)) (TF.Expr s (KinesisFirehoseDeliveryStreamCloudwatchLoggingOptions s)) where
-    computedCloudwatchLoggingOptions x =
-        TF.unsafeCompute TF.encodeAttr x "cloudwatch_logging_options"
-
--- | @data_format_conversion_configuration@ nested settings.
-data KinesisFirehoseDeliveryStreamDataFormatConversionConfiguration s = KinesisFirehoseDeliveryStreamDataFormatConversionConfiguration'
-    { _enabled :: TF.Expr s P.Bool
-    -- ^ @enabled@ - (Default @true@)
-    --
-    , _inputFormatConfiguration :: TF.Expr s (KinesisFirehoseDeliveryStreamInputFormatConfiguration s)
-    -- ^ @input_format_configuration@ - (Required)
-    --
-    , _outputFormatConfiguration :: TF.Expr s (KinesisFirehoseDeliveryStreamOutputFormatConfiguration s)
-    -- ^ @output_format_configuration@ - (Required)
-    --
-    , _schemaConfiguration :: TF.Expr s (KinesisFirehoseDeliveryStreamSchemaConfiguration s)
-    -- ^ @schema_configuration@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @data_format_conversion_configuration@ settings value.
-newKinesisFirehoseDeliveryStreamDataFormatConversionConfiguration
-    :: TF.Expr s (KinesisFirehoseDeliveryStreamInputFormatConfiguration s) -- ^ Lens: 'P.inputFormatConfiguration', Field: '_inputFormatConfiguration', HCL: @input_format_configuration@
-    -> TF.Expr s (KinesisFirehoseDeliveryStreamOutputFormatConfiguration s) -- ^ Lens: 'P.outputFormatConfiguration', Field: '_outputFormatConfiguration', HCL: @output_format_configuration@
-    -> TF.Expr s (KinesisFirehoseDeliveryStreamSchemaConfiguration s) -- ^ Lens: 'P.schemaConfiguration', Field: '_schemaConfiguration', HCL: @schema_configuration@
-    -> KinesisFirehoseDeliveryStreamDataFormatConversionConfiguration s
-newKinesisFirehoseDeliveryStreamDataFormatConversionConfiguration _inputFormatConfiguration _outputFormatConfiguration _schemaConfiguration =
-    KinesisFirehoseDeliveryStreamDataFormatConversionConfiguration'
-        { _enabled = TF.value P.True
-        , _inputFormatConfiguration = _inputFormatConfiguration
-        , _outputFormatConfiguration = _outputFormatConfiguration
-        , _schemaConfiguration = _schemaConfiguration
-        }
-
-instance TF.ToHCL (KinesisFirehoseDeliveryStreamDataFormatConversionConfiguration s) where
-     toHCL KinesisFirehoseDeliveryStreamDataFormatConversionConfiguration'{..} = TF.pairs $ P.mconcat
-        [ TF.pair "enabled" _enabled
-        , TF.pair "input_format_configuration" _inputFormatConfiguration
-        , TF.pair "output_format_configuration" _outputFormatConfiguration
-        , TF.pair "schema_configuration" _schemaConfiguration
-        ]
-
-instance P.Hashable (KinesisFirehoseDeliveryStreamDataFormatConversionConfiguration s)
-
-instance TF.HasValidator (KinesisFirehoseDeliveryStreamDataFormatConversionConfiguration s) where
-    validator = P.mempty
-           P.<> TF.fieldValidator "_inputFormatConfiguration" (_inputFormatConfiguration :: KinesisFirehoseDeliveryStreamDataFormatConversionConfiguration s -> TF.Expr s (KinesisFirehoseDeliveryStreamInputFormatConfiguration s))
-           P.<> TF.fieldValidator "_outputFormatConfiguration" (_outputFormatConfiguration :: KinesisFirehoseDeliveryStreamDataFormatConversionConfiguration s -> TF.Expr s (KinesisFirehoseDeliveryStreamOutputFormatConfiguration s))
-           P.<> TF.fieldValidator "_schemaConfiguration" (_schemaConfiguration :: KinesisFirehoseDeliveryStreamDataFormatConversionConfiguration s -> TF.Expr s (KinesisFirehoseDeliveryStreamSchemaConfiguration s))
-
-instance P.HasEnabled (KinesisFirehoseDeliveryStreamDataFormatConversionConfiguration s) (TF.Expr s P.Bool) where
-    enabled =
-        P.lens (_enabled :: KinesisFirehoseDeliveryStreamDataFormatConversionConfiguration s -> TF.Expr s P.Bool)
-            (\s a -> s { _enabled = a } :: KinesisFirehoseDeliveryStreamDataFormatConversionConfiguration s)
-
-instance P.HasInputFormatConfiguration (KinesisFirehoseDeliveryStreamDataFormatConversionConfiguration s) (TF.Expr s (KinesisFirehoseDeliveryStreamInputFormatConfiguration s)) where
-    inputFormatConfiguration =
-        P.lens (_inputFormatConfiguration :: KinesisFirehoseDeliveryStreamDataFormatConversionConfiguration s -> TF.Expr s (KinesisFirehoseDeliveryStreamInputFormatConfiguration s))
-            (\s a -> s { _inputFormatConfiguration = a } :: KinesisFirehoseDeliveryStreamDataFormatConversionConfiguration s)
-
-instance P.HasOutputFormatConfiguration (KinesisFirehoseDeliveryStreamDataFormatConversionConfiguration s) (TF.Expr s (KinesisFirehoseDeliveryStreamOutputFormatConfiguration s)) where
-    outputFormatConfiguration =
-        P.lens (_outputFormatConfiguration :: KinesisFirehoseDeliveryStreamDataFormatConversionConfiguration s -> TF.Expr s (KinesisFirehoseDeliveryStreamOutputFormatConfiguration s))
-            (\s a -> s { _outputFormatConfiguration = a } :: KinesisFirehoseDeliveryStreamDataFormatConversionConfiguration s)
-
-instance P.HasSchemaConfiguration (KinesisFirehoseDeliveryStreamDataFormatConversionConfiguration s) (TF.Expr s (KinesisFirehoseDeliveryStreamSchemaConfiguration s)) where
-    schemaConfiguration =
-        P.lens (_schemaConfiguration :: KinesisFirehoseDeliveryStreamDataFormatConversionConfiguration s -> TF.Expr s (KinesisFirehoseDeliveryStreamSchemaConfiguration s))
-            (\s a -> s { _schemaConfiguration = a } :: KinesisFirehoseDeliveryStreamDataFormatConversionConfiguration s)
-
--- | @schema_configuration@ nested settings.
-data KinesisFirehoseDeliveryStreamSchemaConfiguration s = KinesisFirehoseDeliveryStreamSchemaConfiguration'
-    { _catalogId    :: P.Maybe (TF.Expr s P.Text)
-    -- ^ @catalog_id@ - (Optional)
-    --
-    , _databaseName :: TF.Expr s P.Text
-    -- ^ @database_name@ - (Required)
-    --
-    , _region       :: P.Maybe (TF.Expr s P.Text)
-    -- ^ @region@ - (Optional)
-    --
-    , _roleArn      :: TF.Expr s P.Text
-    -- ^ @role_arn@ - (Required)
-    --
-    , _tableName    :: TF.Expr s P.Text
-    -- ^ @table_name@ - (Required)
-    --
-    , _versionId    :: TF.Expr s P.Text
-    -- ^ @version_id@ - (Default @LATEST@)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @schema_configuration@ settings value.
-newKinesisFirehoseDeliveryStreamSchemaConfiguration
-    :: TF.Expr s P.Text -- ^ Lens: 'P.roleArn', Field: '_roleArn', HCL: @role_arn@
-    -> TF.Expr s P.Text -- ^ Lens: 'P.databaseName', Field: '_databaseName', HCL: @database_name@
-    -> TF.Expr s P.Text -- ^ Lens: 'P.tableName', Field: '_tableName', HCL: @table_name@
-    -> KinesisFirehoseDeliveryStreamSchemaConfiguration s
-newKinesisFirehoseDeliveryStreamSchemaConfiguration _roleArn _databaseName _tableName =
-    KinesisFirehoseDeliveryStreamSchemaConfiguration'
-        { _catalogId = P.Nothing
-        , _databaseName = _databaseName
-        , _region = P.Nothing
-        , _roleArn = _roleArn
-        , _tableName = _tableName
-        , _versionId = TF.value "LATEST"
-        }
-
-instance TF.ToHCL (KinesisFirehoseDeliveryStreamSchemaConfiguration s) where
-     toHCL KinesisFirehoseDeliveryStreamSchemaConfiguration'{..} = TF.pairs $ P.mconcat
-        [ P.maybe P.mempty (TF.pair "catalog_id") _catalogId
-        , TF.pair "database_name" _databaseName
-        , P.maybe P.mempty (TF.pair "region") _region
-        , TF.pair "role_arn" _roleArn
-        , TF.pair "table_name" _tableName
-        , TF.pair "version_id" _versionId
-        ]
-
-instance P.Hashable (KinesisFirehoseDeliveryStreamSchemaConfiguration s)
-
-instance TF.HasValidator (KinesisFirehoseDeliveryStreamSchemaConfiguration s) where
-    validator = P.mempty
-
-instance P.HasCatalogId (KinesisFirehoseDeliveryStreamSchemaConfiguration s) (P.Maybe (TF.Expr s P.Text)) where
-    catalogId =
-        P.lens (_catalogId :: KinesisFirehoseDeliveryStreamSchemaConfiguration s -> P.Maybe (TF.Expr s P.Text))
-            (\s a -> s { _catalogId = a } :: KinesisFirehoseDeliveryStreamSchemaConfiguration s)
-
-instance P.HasDatabaseName (KinesisFirehoseDeliveryStreamSchemaConfiguration s) (TF.Expr s P.Text) where
-    databaseName =
-        P.lens (_databaseName :: KinesisFirehoseDeliveryStreamSchemaConfiguration s -> TF.Expr s P.Text)
-            (\s a -> s { _databaseName = a } :: KinesisFirehoseDeliveryStreamSchemaConfiguration s)
-
-instance P.HasRegion (KinesisFirehoseDeliveryStreamSchemaConfiguration s) (P.Maybe (TF.Expr s P.Text)) where
-    region =
-        P.lens (_region :: KinesisFirehoseDeliveryStreamSchemaConfiguration s -> P.Maybe (TF.Expr s P.Text))
-            (\s a -> s { _region = a } :: KinesisFirehoseDeliveryStreamSchemaConfiguration s)
-
-instance P.HasRoleArn (KinesisFirehoseDeliveryStreamSchemaConfiguration s) (TF.Expr s P.Text) where
-    roleArn =
-        P.lens (_roleArn :: KinesisFirehoseDeliveryStreamSchemaConfiguration s -> TF.Expr s P.Text)
-            (\s a -> s { _roleArn = a } :: KinesisFirehoseDeliveryStreamSchemaConfiguration s)
-
-instance P.HasTableName (KinesisFirehoseDeliveryStreamSchemaConfiguration s) (TF.Expr s P.Text) where
-    tableName =
-        P.lens (_tableName :: KinesisFirehoseDeliveryStreamSchemaConfiguration s -> TF.Expr s P.Text)
-            (\s a -> s { _tableName = a } :: KinesisFirehoseDeliveryStreamSchemaConfiguration s)
-
-instance P.HasVersionId (KinesisFirehoseDeliveryStreamSchemaConfiguration s) (TF.Expr s P.Text) where
-    versionId =
-        P.lens (_versionId :: KinesisFirehoseDeliveryStreamSchemaConfiguration s -> TF.Expr s P.Text)
-            (\s a -> s { _versionId = a } :: KinesisFirehoseDeliveryStreamSchemaConfiguration s)
-
-instance s ~ s' => P.HasComputedCatalogId (TF.Ref s' (KinesisFirehoseDeliveryStreamSchemaConfiguration s)) (TF.Expr s P.Text) where
-    computedCatalogId x =
-        TF.unsafeCompute TF.encodeAttr x "catalog_id"
-
-instance s ~ s' => P.HasComputedRegion (TF.Ref s' (KinesisFirehoseDeliveryStreamSchemaConfiguration s)) (TF.Expr s P.Text) where
-    computedRegion x =
-        TF.unsafeCompute TF.encodeAttr x "region"
-
--- | @output_format_configuration@ nested settings.
-data KinesisFirehoseDeliveryStreamOutputFormatConfiguration s = KinesisFirehoseDeliveryStreamOutputFormatConfiguration'
-    { _serializer :: TF.Expr s (KinesisFirehoseDeliveryStreamSerializer s)
-    -- ^ @serializer@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @output_format_configuration@ settings value.
-newKinesisFirehoseDeliveryStreamOutputFormatConfiguration
-    :: TF.Expr s (KinesisFirehoseDeliveryStreamSerializer s) -- ^ Lens: 'P.serializer', Field: '_serializer', HCL: @serializer@
-    -> KinesisFirehoseDeliveryStreamOutputFormatConfiguration s
-newKinesisFirehoseDeliveryStreamOutputFormatConfiguration _serializer =
-    KinesisFirehoseDeliveryStreamOutputFormatConfiguration'
-        { _serializer = _serializer
-        }
-
-instance TF.ToHCL (KinesisFirehoseDeliveryStreamOutputFormatConfiguration s) where
-     toHCL KinesisFirehoseDeliveryStreamOutputFormatConfiguration'{..} = TF.pairs $ P.mconcat
-        [ TF.pair "serializer" _serializer
-        ]
-
-instance P.Hashable (KinesisFirehoseDeliveryStreamOutputFormatConfiguration s)
-
-instance TF.HasValidator (KinesisFirehoseDeliveryStreamOutputFormatConfiguration s) where
-    validator = P.mempty
-           P.<> TF.fieldValidator "_serializer" (_serializer :: KinesisFirehoseDeliveryStreamOutputFormatConfiguration s -> TF.Expr s (KinesisFirehoseDeliveryStreamSerializer s))
-
-instance P.HasSerializer (KinesisFirehoseDeliveryStreamOutputFormatConfiguration s) (TF.Expr s (KinesisFirehoseDeliveryStreamSerializer s)) where
-    serializer =
-        P.lens (_serializer :: KinesisFirehoseDeliveryStreamOutputFormatConfiguration s -> TF.Expr s (KinesisFirehoseDeliveryStreamSerializer s))
-            (\s a -> s { _serializer = a } :: KinesisFirehoseDeliveryStreamOutputFormatConfiguration s)
-
--- | @serializer@ nested settings.
-data KinesisFirehoseDeliveryStreamSerializer s = KinesisFirehoseDeliveryStreamSerializer'
-    { _orcSerDe :: P.Maybe (TF.Expr s (KinesisFirehoseDeliveryStreamOrcSerDe s))
-    -- ^ @orc_ser_de@ - (Optional)
-    --
-    -- Conflicts with:
-    --
-    -- * 'parquetSerDe'
-    , _parquetSerDe :: P.Maybe (TF.Expr s (KinesisFirehoseDeliveryStreamParquetSerDe s))
-    -- ^ @parquet_ser_de@ - (Optional)
-    --
-    -- Conflicts with:
-    --
-    -- * 'orcSerDe'
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @serializer@ settings value.
-newKinesisFirehoseDeliveryStreamSerializer
-    :: KinesisFirehoseDeliveryStreamSerializer s
-newKinesisFirehoseDeliveryStreamSerializer =
-    KinesisFirehoseDeliveryStreamSerializer'
-        { _orcSerDe = P.Nothing
-        , _parquetSerDe = P.Nothing
-        }
-
-instance TF.ToHCL (KinesisFirehoseDeliveryStreamSerializer s) where
-     toHCL KinesisFirehoseDeliveryStreamSerializer'{..} = TF.pairs $ P.mconcat
-        [ P.maybe P.mempty (TF.pair "orc_ser_de") _orcSerDe
-        , P.maybe P.mempty (TF.pair "parquet_ser_de") _parquetSerDe
-        ]
-
-instance P.Hashable (KinesisFirehoseDeliveryStreamSerializer s)
-
-instance TF.HasValidator (KinesisFirehoseDeliveryStreamSerializer s) where
-    validator = TF.conflictValidator (\KinesisFirehoseDeliveryStreamSerializer'{..} -> HashMap.fromList $ P.catMaybes
-        [ TF.conflictsWith (_orcSerDe P.== P.Nothing) "_orcSerDe"
-            ["_parquetSerDe"]
-        , TF.conflictsWith (_parquetSerDe P.== P.Nothing) "_parquetSerDe"
-            ["_orcSerDe"]
-        ])
-
-instance P.HasOrcSerDe (KinesisFirehoseDeliveryStreamSerializer s) (P.Maybe (TF.Expr s (KinesisFirehoseDeliveryStreamOrcSerDe s))) where
-    orcSerDe =
-        P.lens (_orcSerDe :: KinesisFirehoseDeliveryStreamSerializer s -> P.Maybe (TF.Expr s (KinesisFirehoseDeliveryStreamOrcSerDe s)))
-            (\s a -> s { _orcSerDe = a } :: KinesisFirehoseDeliveryStreamSerializer s)
-
-instance P.HasParquetSerDe (KinesisFirehoseDeliveryStreamSerializer s) (P.Maybe (TF.Expr s (KinesisFirehoseDeliveryStreamParquetSerDe s))) where
-    parquetSerDe =
-        P.lens (_parquetSerDe :: KinesisFirehoseDeliveryStreamSerializer s -> P.Maybe (TF.Expr s (KinesisFirehoseDeliveryStreamParquetSerDe s)))
-            (\s a -> s { _parquetSerDe = a } :: KinesisFirehoseDeliveryStreamSerializer s)
-
--- | @parquet_ser_de@ nested settings.
-data KinesisFirehoseDeliveryStreamParquetSerDe s = KinesisFirehoseDeliveryStreamParquetSerDe'
-    { _blockSizeBytes              :: TF.Expr s P.Int
-    -- ^ @block_size_bytes@ - (Default @268435456@)
-    --
-    , _compression                 :: TF.Expr s P.Text
-    -- ^ @compression@ - (Default @SNAPPY@)
-    --
-    , _enableDictionaryCompression :: TF.Expr s P.Bool
-    -- ^ @enable_dictionary_compression@ - (Default @false@)
-    --
-    , _maxPaddingBytes             :: TF.Expr s P.Int
-    -- ^ @max_padding_bytes@ - (Default @0@)
-    --
-    , _pageSizeBytes               :: TF.Expr s P.Int
-    -- ^ @page_size_bytes@ - (Default @1048576@)
-    --
-    , _writerVersion               :: TF.Expr s P.Text
-    -- ^ @writer_version@ - (Default @V1@)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @parquet_ser_de@ settings value.
-newKinesisFirehoseDeliveryStreamParquetSerDe
-    :: KinesisFirehoseDeliveryStreamParquetSerDe s
-newKinesisFirehoseDeliveryStreamParquetSerDe =
-    KinesisFirehoseDeliveryStreamParquetSerDe'
-        { _blockSizeBytes = TF.value 268435456
-        , _compression = TF.value "SNAPPY"
-        , _enableDictionaryCompression = TF.value P.False
-        , _maxPaddingBytes = TF.value 0
-        , _pageSizeBytes = TF.value 1048576
-        , _writerVersion = TF.value "V1"
-        }
-
-instance TF.ToHCL (KinesisFirehoseDeliveryStreamParquetSerDe s) where
-     toHCL KinesisFirehoseDeliveryStreamParquetSerDe'{..} = TF.pairs $ P.mconcat
-        [ TF.pair "block_size_bytes" _blockSizeBytes
-        , TF.pair "compression" _compression
-        , TF.pair "enable_dictionary_compression" _enableDictionaryCompression
-        , TF.pair "max_padding_bytes" _maxPaddingBytes
-        , TF.pair "page_size_bytes" _pageSizeBytes
-        , TF.pair "writer_version" _writerVersion
-        ]
-
-instance P.Hashable (KinesisFirehoseDeliveryStreamParquetSerDe s)
-
-instance TF.HasValidator (KinesisFirehoseDeliveryStreamParquetSerDe s) where
-    validator = P.mempty
-
-instance P.HasBlockSizeBytes (KinesisFirehoseDeliveryStreamParquetSerDe s) (TF.Expr s P.Int) where
-    blockSizeBytes =
-        P.lens (_blockSizeBytes :: KinesisFirehoseDeliveryStreamParquetSerDe s -> TF.Expr s P.Int)
-            (\s a -> s { _blockSizeBytes = a } :: KinesisFirehoseDeliveryStreamParquetSerDe s)
-
-instance P.HasCompression (KinesisFirehoseDeliveryStreamParquetSerDe s) (TF.Expr s P.Text) where
-    compression =
-        P.lens (_compression :: KinesisFirehoseDeliveryStreamParquetSerDe s -> TF.Expr s P.Text)
-            (\s a -> s { _compression = a } :: KinesisFirehoseDeliveryStreamParquetSerDe s)
-
-instance P.HasEnableDictionaryCompression (KinesisFirehoseDeliveryStreamParquetSerDe s) (TF.Expr s P.Bool) where
-    enableDictionaryCompression =
-        P.lens (_enableDictionaryCompression :: KinesisFirehoseDeliveryStreamParquetSerDe s -> TF.Expr s P.Bool)
-            (\s a -> s { _enableDictionaryCompression = a } :: KinesisFirehoseDeliveryStreamParquetSerDe s)
-
-instance P.HasMaxPaddingBytes (KinesisFirehoseDeliveryStreamParquetSerDe s) (TF.Expr s P.Int) where
-    maxPaddingBytes =
-        P.lens (_maxPaddingBytes :: KinesisFirehoseDeliveryStreamParquetSerDe s -> TF.Expr s P.Int)
-            (\s a -> s { _maxPaddingBytes = a } :: KinesisFirehoseDeliveryStreamParquetSerDe s)
-
-instance P.HasPageSizeBytes (KinesisFirehoseDeliveryStreamParquetSerDe s) (TF.Expr s P.Int) where
-    pageSizeBytes =
-        P.lens (_pageSizeBytes :: KinesisFirehoseDeliveryStreamParquetSerDe s -> TF.Expr s P.Int)
-            (\s a -> s { _pageSizeBytes = a } :: KinesisFirehoseDeliveryStreamParquetSerDe s)
-
-instance P.HasWriterVersion (KinesisFirehoseDeliveryStreamParquetSerDe s) (TF.Expr s P.Text) where
-    writerVersion =
-        P.lens (_writerVersion :: KinesisFirehoseDeliveryStreamParquetSerDe s -> TF.Expr s P.Text)
-            (\s a -> s { _writerVersion = a } :: KinesisFirehoseDeliveryStreamParquetSerDe s)
-
--- | @orc_ser_de@ nested settings.
-data KinesisFirehoseDeliveryStreamOrcSerDe s = KinesisFirehoseDeliveryStreamOrcSerDe'
-    { _blockSizeBytes :: TF.Expr s P.Int
-    -- ^ @block_size_bytes@ - (Default @268435456@)
-    --
-    , _bloomFilterColumns :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
-    -- ^ @bloom_filter_columns@ - (Optional)
-    --
-    , _bloomFilterFalsePositiveProbability :: TF.Expr s P.Double
-    -- ^ @bloom_filter_false_positive_probability@ - (Default @5E-02@)
-    --
-    , _compression :: TF.Expr s P.Text
-    -- ^ @compression@ - (Default @SNAPPY@)
-    --
-    , _dictionaryKeyThreshold :: TF.Expr s P.Double
-    -- ^ @dictionary_key_threshold@ - (Default @0E+00@)
-    --
-    , _enablePadding :: TF.Expr s P.Bool
-    -- ^ @enable_padding@ - (Default @false@)
-    --
-    , _formatVersion :: TF.Expr s P.Text
-    -- ^ @format_version@ - (Default @V0_12@)
-    --
-    , _paddingTolerance :: TF.Expr s P.Double
-    -- ^ @padding_tolerance@ - (Default @5E-02@)
-    --
-    , _rowIndexStride :: TF.Expr s P.Int
-    -- ^ @row_index_stride@ - (Default @10000@)
-    --
-    , _stripeSizeBytes :: TF.Expr s P.Int
-    -- ^ @stripe_size_bytes@ - (Default @67108864@)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @orc_ser_de@ settings value.
-newKinesisFirehoseDeliveryStreamOrcSerDe
-    :: KinesisFirehoseDeliveryStreamOrcSerDe s
-newKinesisFirehoseDeliveryStreamOrcSerDe =
-    KinesisFirehoseDeliveryStreamOrcSerDe'
-        { _blockSizeBytes = TF.value 268435456
-        , _bloomFilterColumns = P.Nothing
-        , _bloomFilterFalsePositiveProbability = TF.value 5.0e-2
-        , _compression = TF.value "SNAPPY"
-        , _dictionaryKeyThreshold = TF.value 0.0
-        , _enablePadding = TF.value P.False
-        , _formatVersion = TF.value "V0_12"
-        , _paddingTolerance = TF.value 5.0e-2
-        , _rowIndexStride = TF.value 10000
-        , _stripeSizeBytes = TF.value 67108864
-        }
-
-instance TF.ToHCL (KinesisFirehoseDeliveryStreamOrcSerDe s) where
-     toHCL KinesisFirehoseDeliveryStreamOrcSerDe'{..} = TF.pairs $ P.mconcat
-        [ TF.pair "block_size_bytes" _blockSizeBytes
-        , P.maybe P.mempty (TF.pair "bloom_filter_columns") _bloomFilterColumns
-        , TF.pair "bloom_filter_false_positive_probability" _bloomFilterFalsePositiveProbability
-        , TF.pair "compression" _compression
-        , TF.pair "dictionary_key_threshold" _dictionaryKeyThreshold
-        , TF.pair "enable_padding" _enablePadding
-        , TF.pair "format_version" _formatVersion
-        , TF.pair "padding_tolerance" _paddingTolerance
-        , TF.pair "row_index_stride" _rowIndexStride
-        , TF.pair "stripe_size_bytes" _stripeSizeBytes
-        ]
-
-instance P.Hashable (KinesisFirehoseDeliveryStreamOrcSerDe s)
-
-instance TF.HasValidator (KinesisFirehoseDeliveryStreamOrcSerDe s) where
-    validator = P.mempty
-
-instance P.HasBlockSizeBytes (KinesisFirehoseDeliveryStreamOrcSerDe s) (TF.Expr s P.Int) where
-    blockSizeBytes =
-        P.lens (_blockSizeBytes :: KinesisFirehoseDeliveryStreamOrcSerDe s -> TF.Expr s P.Int)
-            (\s a -> s { _blockSizeBytes = a } :: KinesisFirehoseDeliveryStreamOrcSerDe s)
-
-instance P.HasBloomFilterColumns (KinesisFirehoseDeliveryStreamOrcSerDe s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
-    bloomFilterColumns =
-        P.lens (_bloomFilterColumns :: KinesisFirehoseDeliveryStreamOrcSerDe s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
-            (\s a -> s { _bloomFilterColumns = a } :: KinesisFirehoseDeliveryStreamOrcSerDe s)
-
-instance P.HasBloomFilterFalsePositiveProbability (KinesisFirehoseDeliveryStreamOrcSerDe s) (TF.Expr s P.Double) where
-    bloomFilterFalsePositiveProbability =
-        P.lens (_bloomFilterFalsePositiveProbability :: KinesisFirehoseDeliveryStreamOrcSerDe s -> TF.Expr s P.Double)
-            (\s a -> s { _bloomFilterFalsePositiveProbability = a } :: KinesisFirehoseDeliveryStreamOrcSerDe s)
-
-instance P.HasCompression (KinesisFirehoseDeliveryStreamOrcSerDe s) (TF.Expr s P.Text) where
-    compression =
-        P.lens (_compression :: KinesisFirehoseDeliveryStreamOrcSerDe s -> TF.Expr s P.Text)
-            (\s a -> s { _compression = a } :: KinesisFirehoseDeliveryStreamOrcSerDe s)
-
-instance P.HasDictionaryKeyThreshold (KinesisFirehoseDeliveryStreamOrcSerDe s) (TF.Expr s P.Double) where
-    dictionaryKeyThreshold =
-        P.lens (_dictionaryKeyThreshold :: KinesisFirehoseDeliveryStreamOrcSerDe s -> TF.Expr s P.Double)
-            (\s a -> s { _dictionaryKeyThreshold = a } :: KinesisFirehoseDeliveryStreamOrcSerDe s)
-
-instance P.HasEnablePadding (KinesisFirehoseDeliveryStreamOrcSerDe s) (TF.Expr s P.Bool) where
-    enablePadding =
-        P.lens (_enablePadding :: KinesisFirehoseDeliveryStreamOrcSerDe s -> TF.Expr s P.Bool)
-            (\s a -> s { _enablePadding = a } :: KinesisFirehoseDeliveryStreamOrcSerDe s)
-
-instance P.HasFormatVersion (KinesisFirehoseDeliveryStreamOrcSerDe s) (TF.Expr s P.Text) where
-    formatVersion =
-        P.lens (_formatVersion :: KinesisFirehoseDeliveryStreamOrcSerDe s -> TF.Expr s P.Text)
-            (\s a -> s { _formatVersion = a } :: KinesisFirehoseDeliveryStreamOrcSerDe s)
-
-instance P.HasPaddingTolerance (KinesisFirehoseDeliveryStreamOrcSerDe s) (TF.Expr s P.Double) where
-    paddingTolerance =
-        P.lens (_paddingTolerance :: KinesisFirehoseDeliveryStreamOrcSerDe s -> TF.Expr s P.Double)
-            (\s a -> s { _paddingTolerance = a } :: KinesisFirehoseDeliveryStreamOrcSerDe s)
-
-instance P.HasRowIndexStride (KinesisFirehoseDeliveryStreamOrcSerDe s) (TF.Expr s P.Int) where
-    rowIndexStride =
-        P.lens (_rowIndexStride :: KinesisFirehoseDeliveryStreamOrcSerDe s -> TF.Expr s P.Int)
-            (\s a -> s { _rowIndexStride = a } :: KinesisFirehoseDeliveryStreamOrcSerDe s)
-
-instance P.HasStripeSizeBytes (KinesisFirehoseDeliveryStreamOrcSerDe s) (TF.Expr s P.Int) where
-    stripeSizeBytes =
-        P.lens (_stripeSizeBytes :: KinesisFirehoseDeliveryStreamOrcSerDe s -> TF.Expr s P.Int)
-            (\s a -> s { _stripeSizeBytes = a } :: KinesisFirehoseDeliveryStreamOrcSerDe s)
-
--- | @input_format_configuration@ nested settings.
-data KinesisFirehoseDeliveryStreamInputFormatConfiguration s = KinesisFirehoseDeliveryStreamInputFormatConfiguration'
-    { _deserializer :: TF.Expr s (KinesisFirehoseDeliveryStreamDeserializer s)
-    -- ^ @deserializer@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @input_format_configuration@ settings value.
-newKinesisFirehoseDeliveryStreamInputFormatConfiguration
-    :: TF.Expr s (KinesisFirehoseDeliveryStreamDeserializer s) -- ^ Lens: 'P.deserializer', Field: '_deserializer', HCL: @deserializer@
-    -> KinesisFirehoseDeliveryStreamInputFormatConfiguration s
-newKinesisFirehoseDeliveryStreamInputFormatConfiguration _deserializer =
-    KinesisFirehoseDeliveryStreamInputFormatConfiguration'
-        { _deserializer = _deserializer
-        }
-
-instance TF.ToHCL (KinesisFirehoseDeliveryStreamInputFormatConfiguration s) where
-     toHCL KinesisFirehoseDeliveryStreamInputFormatConfiguration'{..} = TF.pairs $ P.mconcat
-        [ TF.pair "deserializer" _deserializer
-        ]
-
-instance P.Hashable (KinesisFirehoseDeliveryStreamInputFormatConfiguration s)
-
-instance TF.HasValidator (KinesisFirehoseDeliveryStreamInputFormatConfiguration s) where
-    validator = P.mempty
-           P.<> TF.fieldValidator "_deserializer" (_deserializer :: KinesisFirehoseDeliveryStreamInputFormatConfiguration s -> TF.Expr s (KinesisFirehoseDeliveryStreamDeserializer s))
-
-instance P.HasDeserializer (KinesisFirehoseDeliveryStreamInputFormatConfiguration s) (TF.Expr s (KinesisFirehoseDeliveryStreamDeserializer s)) where
-    deserializer =
-        P.lens (_deserializer :: KinesisFirehoseDeliveryStreamInputFormatConfiguration s -> TF.Expr s (KinesisFirehoseDeliveryStreamDeserializer s))
-            (\s a -> s { _deserializer = a } :: KinesisFirehoseDeliveryStreamInputFormatConfiguration s)
-
--- | @deserializer@ nested settings.
-data KinesisFirehoseDeliveryStreamDeserializer s = KinesisFirehoseDeliveryStreamDeserializer'
-    { _hiveJsonSerDe :: P.Maybe (TF.Expr s (KinesisFirehoseDeliveryStreamHiveJsonSerDe s))
-    -- ^ @hive_json_ser_de@ - (Optional)
-    --
-    -- Conflicts with:
-    --
-    -- * 'openXJsonSerDe'
-    , _openXJsonSerDe :: P.Maybe (TF.Expr s (KinesisFirehoseDeliveryStreamOpenXJsonSerDe s))
-    -- ^ @open_x_json_ser_de@ - (Optional)
-    --
-    -- Conflicts with:
-    --
-    -- * 'hiveJsonSerDe'
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @deserializer@ settings value.
-newKinesisFirehoseDeliveryStreamDeserializer
-    :: KinesisFirehoseDeliveryStreamDeserializer s
-newKinesisFirehoseDeliveryStreamDeserializer =
-    KinesisFirehoseDeliveryStreamDeserializer'
-        { _hiveJsonSerDe = P.Nothing
-        , _openXJsonSerDe = P.Nothing
-        }
-
-instance TF.ToHCL (KinesisFirehoseDeliveryStreamDeserializer s) where
-     toHCL KinesisFirehoseDeliveryStreamDeserializer'{..} = TF.pairs $ P.mconcat
-        [ P.maybe P.mempty (TF.pair "hive_json_ser_de") _hiveJsonSerDe
-        , P.maybe P.mempty (TF.pair "open_x_json_ser_de") _openXJsonSerDe
-        ]
-
-instance P.Hashable (KinesisFirehoseDeliveryStreamDeserializer s)
-
-instance TF.HasValidator (KinesisFirehoseDeliveryStreamDeserializer s) where
-    validator = TF.conflictValidator (\KinesisFirehoseDeliveryStreamDeserializer'{..} -> HashMap.fromList $ P.catMaybes
-        [ TF.conflictsWith (_hiveJsonSerDe P.== P.Nothing) "_hiveJsonSerDe"
-            ["_openXJsonSerDe"]
-        , TF.conflictsWith (_openXJsonSerDe P.== P.Nothing) "_openXJsonSerDe"
-            ["_hiveJsonSerDe"]
-        ])
-
-instance P.HasHiveJsonSerDe (KinesisFirehoseDeliveryStreamDeserializer s) (P.Maybe (TF.Expr s (KinesisFirehoseDeliveryStreamHiveJsonSerDe s))) where
-    hiveJsonSerDe =
-        P.lens (_hiveJsonSerDe :: KinesisFirehoseDeliveryStreamDeserializer s -> P.Maybe (TF.Expr s (KinesisFirehoseDeliveryStreamHiveJsonSerDe s)))
-            (\s a -> s { _hiveJsonSerDe = a } :: KinesisFirehoseDeliveryStreamDeserializer s)
-
-instance P.HasOpenXJsonSerDe (KinesisFirehoseDeliveryStreamDeserializer s) (P.Maybe (TF.Expr s (KinesisFirehoseDeliveryStreamOpenXJsonSerDe s))) where
-    openXJsonSerDe =
-        P.lens (_openXJsonSerDe :: KinesisFirehoseDeliveryStreamDeserializer s -> P.Maybe (TF.Expr s (KinesisFirehoseDeliveryStreamOpenXJsonSerDe s)))
-            (\s a -> s { _openXJsonSerDe = a } :: KinesisFirehoseDeliveryStreamDeserializer s)
-
--- | @open_x_json_ser_de@ nested settings.
-data KinesisFirehoseDeliveryStreamOpenXJsonSerDe s = KinesisFirehoseDeliveryStreamOpenXJsonSerDe'
-    { _caseInsensitive :: TF.Expr s P.Bool
-    -- ^ @case_insensitive@ - (Default @true@)
-    --
-    , _columnToJsonKeyMappings :: P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text)))
-    -- ^ @column_to_json_key_mappings@ - (Optional)
-    --
-    , _convertDotsInJsonKeysToUnderscores :: TF.Expr s P.Bool
-    -- ^ @convert_dots_in_json_keys_to_underscores@ - (Default @false@)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @open_x_json_ser_de@ settings value.
-newKinesisFirehoseDeliveryStreamOpenXJsonSerDe
-    :: KinesisFirehoseDeliveryStreamOpenXJsonSerDe s
-newKinesisFirehoseDeliveryStreamOpenXJsonSerDe =
-    KinesisFirehoseDeliveryStreamOpenXJsonSerDe'
-        { _caseInsensitive = TF.value P.True
-        , _columnToJsonKeyMappings = P.Nothing
-        , _convertDotsInJsonKeysToUnderscores = TF.value P.False
-        }
-
-instance TF.ToHCL (KinesisFirehoseDeliveryStreamOpenXJsonSerDe s) where
-     toHCL KinesisFirehoseDeliveryStreamOpenXJsonSerDe'{..} = TF.pairs $ P.mconcat
-        [ TF.pair "case_insensitive" _caseInsensitive
-        , P.maybe P.mempty (TF.pair "column_to_json_key_mappings") _columnToJsonKeyMappings
-        , TF.pair "convert_dots_in_json_keys_to_underscores" _convertDotsInJsonKeysToUnderscores
-        ]
-
-instance P.Hashable (KinesisFirehoseDeliveryStreamOpenXJsonSerDe s)
-
-instance TF.HasValidator (KinesisFirehoseDeliveryStreamOpenXJsonSerDe s) where
-    validator = P.mempty
-
-instance P.HasCaseInsensitive (KinesisFirehoseDeliveryStreamOpenXJsonSerDe s) (TF.Expr s P.Bool) where
-    caseInsensitive =
-        P.lens (_caseInsensitive :: KinesisFirehoseDeliveryStreamOpenXJsonSerDe s -> TF.Expr s P.Bool)
-            (\s a -> s { _caseInsensitive = a } :: KinesisFirehoseDeliveryStreamOpenXJsonSerDe s)
-
-instance P.HasColumnToJsonKeyMappings (KinesisFirehoseDeliveryStreamOpenXJsonSerDe s) (P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text)))) where
-    columnToJsonKeyMappings =
-        P.lens (_columnToJsonKeyMappings :: KinesisFirehoseDeliveryStreamOpenXJsonSerDe s -> P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text))))
-            (\s a -> s { _columnToJsonKeyMappings = a } :: KinesisFirehoseDeliveryStreamOpenXJsonSerDe s)
-
-instance P.HasConvertDotsInJsonKeysToUnderscores (KinesisFirehoseDeliveryStreamOpenXJsonSerDe s) (TF.Expr s P.Bool) where
-    convertDotsInJsonKeysToUnderscores =
-        P.lens (_convertDotsInJsonKeysToUnderscores :: KinesisFirehoseDeliveryStreamOpenXJsonSerDe s -> TF.Expr s P.Bool)
-            (\s a -> s { _convertDotsInJsonKeysToUnderscores = a } :: KinesisFirehoseDeliveryStreamOpenXJsonSerDe s)
-
--- | @hive_json_ser_de@ nested settings.
-data KinesisFirehoseDeliveryStreamHiveJsonSerDe s = KinesisFirehoseDeliveryStreamHiveJsonSerDe'
-    { _timestampFormats :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
-    -- ^ @timestamp_formats@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @hive_json_ser_de@ settings value.
-newKinesisFirehoseDeliveryStreamHiveJsonSerDe
-    :: KinesisFirehoseDeliveryStreamHiveJsonSerDe s
-newKinesisFirehoseDeliveryStreamHiveJsonSerDe =
-    KinesisFirehoseDeliveryStreamHiveJsonSerDe'
-        { _timestampFormats = P.Nothing
-        }
-
-instance TF.ToHCL (KinesisFirehoseDeliveryStreamHiveJsonSerDe s) where
-     toHCL KinesisFirehoseDeliveryStreamHiveJsonSerDe'{..} = TF.pairs $ P.mconcat
-        [ P.maybe P.mempty (TF.pair "timestamp_formats") _timestampFormats
-        ]
-
-instance P.Hashable (KinesisFirehoseDeliveryStreamHiveJsonSerDe s)
-
-instance TF.HasValidator (KinesisFirehoseDeliveryStreamHiveJsonSerDe s) where
-    validator = P.mempty
-
-instance P.HasTimestampFormats (KinesisFirehoseDeliveryStreamHiveJsonSerDe s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
-    timestampFormats =
-        P.lens (_timestampFormats :: KinesisFirehoseDeliveryStreamHiveJsonSerDe s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
-            (\s a -> s { _timestampFormats = a } :: KinesisFirehoseDeliveryStreamHiveJsonSerDe s)
-
--- | @elasticsearch_configuration@ nested settings.
-data KinesisFirehoseDeliveryStreamElasticsearchConfiguration s = KinesisFirehoseDeliveryStreamElasticsearchConfiguration'
-    { _bufferingInterval :: TF.Expr s P.Int
-    -- ^ @buffering_interval@ - (Default @300@)
-    --
-    , _bufferingSize :: TF.Expr s P.Int
-    -- ^ @buffering_size@ - (Default @5@)
-    --
-    , _cloudwatchLoggingOptions :: P.Maybe (TF.Expr s (KinesisFirehoseDeliveryStreamCloudwatchLoggingOptions s))
-    -- ^ @cloudwatch_logging_options@ - (Optional)
-    --
-    , _domainArn :: TF.Expr s P.Text
-    -- ^ @domain_arn@ - (Required)
-    --
-    , _indexName :: TF.Expr s P.Text
-    -- ^ @index_name@ - (Required)
-    --
-    , _indexRotationPeriod :: TF.Expr s P.Text
-    -- ^ @index_rotation_period@ - (Default @OneDay@)
-    --
-    , _processingConfiguration :: P.Maybe (TF.Expr s (KinesisFirehoseDeliveryStreamProcessingConfiguration s))
-    -- ^ @processing_configuration@ - (Optional)
-    --
-    , _retryDuration :: TF.Expr s P.Int
-    -- ^ @retry_duration@ - (Default @300@)
-    --
-    , _roleArn :: TF.Expr s P.Text
-    -- ^ @role_arn@ - (Required)
-    --
-    , _s3BackupMode :: TF.Expr s P.Text
-    -- ^ @s3_backup_mode@ - (Default @FailedDocumentsOnly@)
-    --
-    , _typeName :: P.Maybe (TF.Expr s P.Text)
-    -- ^ @type_name@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @elasticsearch_configuration@ settings value.
-newKinesisFirehoseDeliveryStreamElasticsearchConfiguration
-    :: TF.Expr s P.Text -- ^ Lens: 'P.domainArn', Field: '_domainArn', HCL: @domain_arn@
-    -> TF.Expr s P.Text -- ^ Lens: 'P.roleArn', Field: '_roleArn', HCL: @role_arn@
-    -> TF.Expr s P.Text -- ^ Lens: 'P.indexName', Field: '_indexName', HCL: @index_name@
-    -> KinesisFirehoseDeliveryStreamElasticsearchConfiguration s
-newKinesisFirehoseDeliveryStreamElasticsearchConfiguration _domainArn _roleArn _indexName =
-    KinesisFirehoseDeliveryStreamElasticsearchConfiguration'
-        { _bufferingInterval = TF.value 300
-        , _bufferingSize = TF.value 5
-        , _cloudwatchLoggingOptions = P.Nothing
-        , _domainArn = _domainArn
-        , _indexName = _indexName
-        , _indexRotationPeriod = TF.value "OneDay"
-        , _processingConfiguration = P.Nothing
-        , _retryDuration = TF.value 300
-        , _roleArn = _roleArn
-        , _s3BackupMode = TF.value "FailedDocumentsOnly"
-        , _typeName = P.Nothing
-        }
-
-instance TF.ToHCL (KinesisFirehoseDeliveryStreamElasticsearchConfiguration s) where
-     toHCL KinesisFirehoseDeliveryStreamElasticsearchConfiguration'{..} = TF.pairs $ P.mconcat
-        [ TF.pair "buffering_interval" _bufferingInterval
-        , TF.pair "buffering_size" _bufferingSize
-        , P.maybe P.mempty (TF.pair "cloudwatch_logging_options") _cloudwatchLoggingOptions
-        , TF.pair "domain_arn" _domainArn
-        , TF.pair "index_name" _indexName
-        , TF.pair "index_rotation_period" _indexRotationPeriod
-        , P.maybe P.mempty (TF.pair "processing_configuration") _processingConfiguration
-        , TF.pair "retry_duration" _retryDuration
-        , TF.pair "role_arn" _roleArn
-        , TF.pair "s3_backup_mode" _s3BackupMode
-        , P.maybe P.mempty (TF.pair "type_name") _typeName
-        ]
-
-instance P.Hashable (KinesisFirehoseDeliveryStreamElasticsearchConfiguration s)
-
-instance TF.HasValidator (KinesisFirehoseDeliveryStreamElasticsearchConfiguration s) where
-    validator = P.mempty
-
-instance P.HasBufferingInterval (KinesisFirehoseDeliveryStreamElasticsearchConfiguration s) (TF.Expr s P.Int) where
-    bufferingInterval =
-        P.lens (_bufferingInterval :: KinesisFirehoseDeliveryStreamElasticsearchConfiguration s -> TF.Expr s P.Int)
-            (\s a -> s { _bufferingInterval = a } :: KinesisFirehoseDeliveryStreamElasticsearchConfiguration s)
-
-instance P.HasBufferingSize (KinesisFirehoseDeliveryStreamElasticsearchConfiguration s) (TF.Expr s P.Int) where
-    bufferingSize =
-        P.lens (_bufferingSize :: KinesisFirehoseDeliveryStreamElasticsearchConfiguration s -> TF.Expr s P.Int)
-            (\s a -> s { _bufferingSize = a } :: KinesisFirehoseDeliveryStreamElasticsearchConfiguration s)
-
-instance P.HasCloudwatchLoggingOptions (KinesisFirehoseDeliveryStreamElasticsearchConfiguration s) (P.Maybe (TF.Expr s (KinesisFirehoseDeliveryStreamCloudwatchLoggingOptions s))) where
-    cloudwatchLoggingOptions =
-        P.lens (_cloudwatchLoggingOptions :: KinesisFirehoseDeliveryStreamElasticsearchConfiguration s -> P.Maybe (TF.Expr s (KinesisFirehoseDeliveryStreamCloudwatchLoggingOptions s)))
-            (\s a -> s { _cloudwatchLoggingOptions = a } :: KinesisFirehoseDeliveryStreamElasticsearchConfiguration s)
-
-instance P.HasDomainArn (KinesisFirehoseDeliveryStreamElasticsearchConfiguration s) (TF.Expr s P.Text) where
-    domainArn =
-        P.lens (_domainArn :: KinesisFirehoseDeliveryStreamElasticsearchConfiguration s -> TF.Expr s P.Text)
-            (\s a -> s { _domainArn = a } :: KinesisFirehoseDeliveryStreamElasticsearchConfiguration s)
-
-instance P.HasIndexName (KinesisFirehoseDeliveryStreamElasticsearchConfiguration s) (TF.Expr s P.Text) where
-    indexName =
-        P.lens (_indexName :: KinesisFirehoseDeliveryStreamElasticsearchConfiguration s -> TF.Expr s P.Text)
-            (\s a -> s { _indexName = a } :: KinesisFirehoseDeliveryStreamElasticsearchConfiguration s)
-
-instance P.HasIndexRotationPeriod (KinesisFirehoseDeliveryStreamElasticsearchConfiguration s) (TF.Expr s P.Text) where
-    indexRotationPeriod =
-        P.lens (_indexRotationPeriod :: KinesisFirehoseDeliveryStreamElasticsearchConfiguration s -> TF.Expr s P.Text)
-            (\s a -> s { _indexRotationPeriod = a } :: KinesisFirehoseDeliveryStreamElasticsearchConfiguration s)
-
-instance P.HasProcessingConfiguration (KinesisFirehoseDeliveryStreamElasticsearchConfiguration s) (P.Maybe (TF.Expr s (KinesisFirehoseDeliveryStreamProcessingConfiguration s))) where
-    processingConfiguration =
-        P.lens (_processingConfiguration :: KinesisFirehoseDeliveryStreamElasticsearchConfiguration s -> P.Maybe (TF.Expr s (KinesisFirehoseDeliveryStreamProcessingConfiguration s)))
-            (\s a -> s { _processingConfiguration = a } :: KinesisFirehoseDeliveryStreamElasticsearchConfiguration s)
-
-instance P.HasRetryDuration (KinesisFirehoseDeliveryStreamElasticsearchConfiguration s) (TF.Expr s P.Int) where
-    retryDuration =
-        P.lens (_retryDuration :: KinesisFirehoseDeliveryStreamElasticsearchConfiguration s -> TF.Expr s P.Int)
-            (\s a -> s { _retryDuration = a } :: KinesisFirehoseDeliveryStreamElasticsearchConfiguration s)
-
-instance P.HasRoleArn (KinesisFirehoseDeliveryStreamElasticsearchConfiguration s) (TF.Expr s P.Text) where
-    roleArn =
-        P.lens (_roleArn :: KinesisFirehoseDeliveryStreamElasticsearchConfiguration s -> TF.Expr s P.Text)
-            (\s a -> s { _roleArn = a } :: KinesisFirehoseDeliveryStreamElasticsearchConfiguration s)
-
-instance P.HasS3BackupMode (KinesisFirehoseDeliveryStreamElasticsearchConfiguration s) (TF.Expr s P.Text) where
-    s3BackupMode =
-        P.lens (_s3BackupMode :: KinesisFirehoseDeliveryStreamElasticsearchConfiguration s -> TF.Expr s P.Text)
-            (\s a -> s { _s3BackupMode = a } :: KinesisFirehoseDeliveryStreamElasticsearchConfiguration s)
-
-instance P.HasTypeName (KinesisFirehoseDeliveryStreamElasticsearchConfiguration s) (P.Maybe (TF.Expr s P.Text)) where
-    typeName =
-        P.lens (_typeName :: KinesisFirehoseDeliveryStreamElasticsearchConfiguration s -> P.Maybe (TF.Expr s P.Text))
-            (\s a -> s { _typeName = a } :: KinesisFirehoseDeliveryStreamElasticsearchConfiguration s)
-
-instance s ~ s' => P.HasComputedCloudwatchLoggingOptions (TF.Ref s' (KinesisFirehoseDeliveryStreamElasticsearchConfiguration s)) (TF.Expr s (KinesisFirehoseDeliveryStreamCloudwatchLoggingOptions s)) where
-    computedCloudwatchLoggingOptions x =
-        TF.unsafeCompute TF.encodeAttr x "cloudwatch_logging_options"
-
--- | @processors@ nested settings.
-data KinesisFirehoseDeliveryStreamProcessors s = KinesisFirehoseDeliveryStreamProcessors'
-    { _parameters :: P.Maybe (TF.Expr s [TF.Expr s (KinesisFirehoseDeliveryStreamParameters s)])
-    -- ^ @parameters@ - (Optional)
-    --
-    , _type' :: TF.Expr s P.Text
-    -- ^ @type@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @processors@ settings value.
-newKinesisFirehoseDeliveryStreamProcessors
-    :: TF.Expr s P.Text -- ^ Lens: 'P.type'', Field: '_type'', HCL: @type@
-    -> KinesisFirehoseDeliveryStreamProcessors s
-newKinesisFirehoseDeliveryStreamProcessors _type' =
-    KinesisFirehoseDeliveryStreamProcessors'
-        { _parameters = P.Nothing
-        , _type' = _type'
-        }
-
-instance TF.ToHCL (KinesisFirehoseDeliveryStreamProcessors s) where
-     toHCL KinesisFirehoseDeliveryStreamProcessors'{..} = TF.pairs $ P.mconcat
-        [ P.maybe P.mempty (TF.pair "parameters") _parameters
-        , TF.pair "type" _type'
-        ]
-
-instance P.Hashable (KinesisFirehoseDeliveryStreamProcessors s)
-
-instance TF.HasValidator (KinesisFirehoseDeliveryStreamProcessors s) where
-    validator = P.mempty
-
-instance P.HasParameters (KinesisFirehoseDeliveryStreamProcessors s) (P.Maybe (TF.Expr s [TF.Expr s (KinesisFirehoseDeliveryStreamParameters s)])) where
-    parameters =
-        P.lens (_parameters :: KinesisFirehoseDeliveryStreamProcessors s -> P.Maybe (TF.Expr s [TF.Expr s (KinesisFirehoseDeliveryStreamParameters s)]))
-            (\s a -> s { _parameters = a } :: KinesisFirehoseDeliveryStreamProcessors s)
-
-instance P.HasType' (KinesisFirehoseDeliveryStreamProcessors s) (TF.Expr s P.Text) where
-    type' =
-        P.lens (_type' :: KinesisFirehoseDeliveryStreamProcessors s -> TF.Expr s P.Text)
-            (\s a -> s { _type' = a } :: KinesisFirehoseDeliveryStreamProcessors s)
-
--- | @parameters@ nested settings.
-data KinesisFirehoseDeliveryStreamParameters s = KinesisFirehoseDeliveryStreamParameters'
-    { _parameterName  :: TF.Expr s P.Text
-    -- ^ @parameter_name@ - (Required)
-    --
-    , _parameterValue :: TF.Expr s P.Text
-    -- ^ @parameter_value@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @parameters@ settings value.
-newKinesisFirehoseDeliveryStreamParameters
-    :: TF.Expr s P.Text -- ^ Lens: 'P.parameterName', Field: '_parameterName', HCL: @parameter_name@
-    -> TF.Expr s P.Text -- ^ Lens: 'P.parameterValue', Field: '_parameterValue', HCL: @parameter_value@
-    -> KinesisFirehoseDeliveryStreamParameters s
-newKinesisFirehoseDeliveryStreamParameters _parameterName _parameterValue =
-    KinesisFirehoseDeliveryStreamParameters'
-        { _parameterName = _parameterName
-        , _parameterValue = _parameterValue
-        }
-
-instance TF.ToHCL (KinesisFirehoseDeliveryStreamParameters s) where
-     toHCL KinesisFirehoseDeliveryStreamParameters'{..} = TF.pairs $ P.mconcat
-        [ TF.pair "parameter_name" _parameterName
-        , TF.pair "parameter_value" _parameterValue
-        ]
-
-instance P.Hashable (KinesisFirehoseDeliveryStreamParameters s)
-
-instance TF.HasValidator (KinesisFirehoseDeliveryStreamParameters s) where
-    validator = P.mempty
-
-instance P.HasParameterName (KinesisFirehoseDeliveryStreamParameters s) (TF.Expr s P.Text) where
-    parameterName =
-        P.lens (_parameterName :: KinesisFirehoseDeliveryStreamParameters s -> TF.Expr s P.Text)
-            (\s a -> s { _parameterName = a } :: KinesisFirehoseDeliveryStreamParameters s)
-
-instance P.HasParameterValue (KinesisFirehoseDeliveryStreamParameters s) (TF.Expr s P.Text) where
-    parameterValue =
-        P.lens (_parameterValue :: KinesisFirehoseDeliveryStreamParameters s -> TF.Expr s P.Text)
-            (\s a -> s { _parameterValue = a } :: KinesisFirehoseDeliveryStreamParameters s)
-
--- | @s3_configuration@ nested settings.
-data KinesisFirehoseDeliveryStreamS3Configuration s = KinesisFirehoseDeliveryStreamS3Configuration'
-    { _bucketArn :: TF.Expr s P.Text
-    -- ^ @bucket_arn@ - (Required)
-    --
-    , _bufferInterval :: TF.Expr s P.Int
-    -- ^ @buffer_interval@ - (Default @300@)
-    --
-    , _bufferSize :: TF.Expr s P.Int
-    -- ^ @buffer_size@ - (Default @5@)
-    --
-    , _cloudwatchLoggingOptions :: P.Maybe (TF.Expr s (KinesisFirehoseDeliveryStreamCloudwatchLoggingOptions s))
-    -- ^ @cloudwatch_logging_options@ - (Optional)
-    --
-    , _compressionFormat :: TF.Expr s P.Text
-    -- ^ @compression_format@ - (Default @UNCOMPRESSED@)
-    --
-    , _kmsKeyArn :: P.Maybe (TF.Expr s P.Text)
-    -- ^ @kms_key_arn@ - (Optional)
-    --
-    , _prefix :: P.Maybe (TF.Expr s P.Text)
-    -- ^ @prefix@ - (Optional)
-    --
-    , _roleArn :: TF.Expr s P.Text
-    -- ^ @role_arn@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @s3_configuration@ settings value.
-newKinesisFirehoseDeliveryStreamS3Configuration
-    :: TF.Expr s P.Text -- ^ Lens: 'P.bucketArn', Field: '_bucketArn', HCL: @bucket_arn@
-    -> TF.Expr s P.Text -- ^ Lens: 'P.roleArn', Field: '_roleArn', HCL: @role_arn@
-    -> KinesisFirehoseDeliveryStreamS3Configuration s
-newKinesisFirehoseDeliveryStreamS3Configuration _bucketArn _roleArn =
-    KinesisFirehoseDeliveryStreamS3Configuration'
-        { _bucketArn = _bucketArn
-        , _bufferInterval = TF.value 300
-        , _bufferSize = TF.value 5
-        , _cloudwatchLoggingOptions = P.Nothing
-        , _compressionFormat = TF.value "UNCOMPRESSED"
-        , _kmsKeyArn = P.Nothing
-        , _prefix = P.Nothing
-        , _roleArn = _roleArn
-        }
-
-instance TF.ToHCL (KinesisFirehoseDeliveryStreamS3Configuration s) where
-     toHCL KinesisFirehoseDeliveryStreamS3Configuration'{..} = TF.pairs $ P.mconcat
-        [ TF.pair "bucket_arn" _bucketArn
-        , TF.pair "buffer_interval" _bufferInterval
-        , TF.pair "buffer_size" _bufferSize
-        , P.maybe P.mempty (TF.pair "cloudwatch_logging_options") _cloudwatchLoggingOptions
-        , TF.pair "compression_format" _compressionFormat
-        , P.maybe P.mempty (TF.pair "kms_key_arn") _kmsKeyArn
-        , P.maybe P.mempty (TF.pair "prefix") _prefix
-        , TF.pair "role_arn" _roleArn
-        ]
-
-instance P.Hashable (KinesisFirehoseDeliveryStreamS3Configuration s)
-
-instance TF.HasValidator (KinesisFirehoseDeliveryStreamS3Configuration s) where
-    validator = P.mempty
-
-instance P.HasBucketArn (KinesisFirehoseDeliveryStreamS3Configuration s) (TF.Expr s P.Text) where
-    bucketArn =
-        P.lens (_bucketArn :: KinesisFirehoseDeliveryStreamS3Configuration s -> TF.Expr s P.Text)
-            (\s a -> s { _bucketArn = a } :: KinesisFirehoseDeliveryStreamS3Configuration s)
-
-instance P.HasBufferInterval (KinesisFirehoseDeliveryStreamS3Configuration s) (TF.Expr s P.Int) where
-    bufferInterval =
-        P.lens (_bufferInterval :: KinesisFirehoseDeliveryStreamS3Configuration s -> TF.Expr s P.Int)
-            (\s a -> s { _bufferInterval = a } :: KinesisFirehoseDeliveryStreamS3Configuration s)
-
-instance P.HasBufferSize (KinesisFirehoseDeliveryStreamS3Configuration s) (TF.Expr s P.Int) where
-    bufferSize =
-        P.lens (_bufferSize :: KinesisFirehoseDeliveryStreamS3Configuration s -> TF.Expr s P.Int)
-            (\s a -> s { _bufferSize = a } :: KinesisFirehoseDeliveryStreamS3Configuration s)
-
-instance P.HasCloudwatchLoggingOptions (KinesisFirehoseDeliveryStreamS3Configuration s) (P.Maybe (TF.Expr s (KinesisFirehoseDeliveryStreamCloudwatchLoggingOptions s))) where
-    cloudwatchLoggingOptions =
-        P.lens (_cloudwatchLoggingOptions :: KinesisFirehoseDeliveryStreamS3Configuration s -> P.Maybe (TF.Expr s (KinesisFirehoseDeliveryStreamCloudwatchLoggingOptions s)))
-            (\s a -> s { _cloudwatchLoggingOptions = a } :: KinesisFirehoseDeliveryStreamS3Configuration s)
-
-instance P.HasCompressionFormat (KinesisFirehoseDeliveryStreamS3Configuration s) (TF.Expr s P.Text) where
-    compressionFormat =
-        P.lens (_compressionFormat :: KinesisFirehoseDeliveryStreamS3Configuration s -> TF.Expr s P.Text)
-            (\s a -> s { _compressionFormat = a } :: KinesisFirehoseDeliveryStreamS3Configuration s)
-
-instance P.HasKmsKeyArn (KinesisFirehoseDeliveryStreamS3Configuration s) (P.Maybe (TF.Expr s P.Text)) where
-    kmsKeyArn =
-        P.lens (_kmsKeyArn :: KinesisFirehoseDeliveryStreamS3Configuration s -> P.Maybe (TF.Expr s P.Text))
-            (\s a -> s { _kmsKeyArn = a } :: KinesisFirehoseDeliveryStreamS3Configuration s)
-
-instance P.HasPrefix (KinesisFirehoseDeliveryStreamS3Configuration s) (P.Maybe (TF.Expr s P.Text)) where
-    prefix =
-        P.lens (_prefix :: KinesisFirehoseDeliveryStreamS3Configuration s -> P.Maybe (TF.Expr s P.Text))
-            (\s a -> s { _prefix = a } :: KinesisFirehoseDeliveryStreamS3Configuration s)
-
-instance P.HasRoleArn (KinesisFirehoseDeliveryStreamS3Configuration s) (TF.Expr s P.Text) where
-    roleArn =
-        P.lens (_roleArn :: KinesisFirehoseDeliveryStreamS3Configuration s -> TF.Expr s P.Text)
-            (\s a -> s { _roleArn = a } :: KinesisFirehoseDeliveryStreamS3Configuration s)
-
-instance s ~ s' => P.HasComputedCloudwatchLoggingOptions (TF.Ref s' (KinesisFirehoseDeliveryStreamS3Configuration s)) (TF.Expr s (KinesisFirehoseDeliveryStreamCloudwatchLoggingOptions s)) where
-    computedCloudwatchLoggingOptions x =
-        TF.unsafeCompute TF.encodeAttr x "cloudwatch_logging_options"
-
--- | @kinesis_source_configuration@ nested settings.
-data KinesisFirehoseDeliveryStreamKinesisSourceConfiguration s = KinesisFirehoseDeliveryStreamKinesisSourceConfiguration'
-    { _kinesisStreamArn :: TF.Expr s P.Text
-    -- ^ @kinesis_stream_arn@ - (Required, Forces New)
-    --
-    , _roleArn          :: TF.Expr s P.Text
-    -- ^ @role_arn@ - (Required, Forces New)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @kinesis_source_configuration@ settings value.
-newKinesisFirehoseDeliveryStreamKinesisSourceConfiguration
-    :: TF.Expr s P.Text -- ^ Lens: 'P.kinesisStreamArn', Field: '_kinesisStreamArn', HCL: @kinesis_stream_arn@
-    -> TF.Expr s P.Text -- ^ Lens: 'P.roleArn', Field: '_roleArn', HCL: @role_arn@
-    -> KinesisFirehoseDeliveryStreamKinesisSourceConfiguration s
-newKinesisFirehoseDeliveryStreamKinesisSourceConfiguration _kinesisStreamArn _roleArn =
-    KinesisFirehoseDeliveryStreamKinesisSourceConfiguration'
-        { _kinesisStreamArn = _kinesisStreamArn
-        , _roleArn = _roleArn
-        }
-
-instance TF.ToHCL (KinesisFirehoseDeliveryStreamKinesisSourceConfiguration s) where
-     toHCL KinesisFirehoseDeliveryStreamKinesisSourceConfiguration'{..} = TF.pairs $ P.mconcat
-        [ TF.pair "kinesis_stream_arn" _kinesisStreamArn
-        , TF.pair "role_arn" _roleArn
-        ]
-
-instance P.Hashable (KinesisFirehoseDeliveryStreamKinesisSourceConfiguration s)
-
-instance TF.HasValidator (KinesisFirehoseDeliveryStreamKinesisSourceConfiguration s) where
-    validator = P.mempty
-
-instance P.HasKinesisStreamArn (KinesisFirehoseDeliveryStreamKinesisSourceConfiguration s) (TF.Expr s P.Text) where
-    kinesisStreamArn =
-        P.lens (_kinesisStreamArn :: KinesisFirehoseDeliveryStreamKinesisSourceConfiguration s -> TF.Expr s P.Text)
-            (\s a -> s { _kinesisStreamArn = a } :: KinesisFirehoseDeliveryStreamKinesisSourceConfiguration s)
-
-instance P.HasRoleArn (KinesisFirehoseDeliveryStreamKinesisSourceConfiguration s) (TF.Expr s P.Text) where
-    roleArn =
-        P.lens (_roleArn :: KinesisFirehoseDeliveryStreamKinesisSourceConfiguration s -> TF.Expr s P.Text)
-            (\s a -> s { _roleArn = a } :: KinesisFirehoseDeliveryStreamKinesisSourceConfiguration s)
-
--- | @constraints@ nested settings.
-data KmsGrantConstraints s = KmsGrantConstraints'
-    { _encryptionContextEquals :: P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text)))
-    -- ^ @encryption_context_equals@ - (Optional, Forces New)
-    --
-    , _encryptionContextSubset :: P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text)))
-    -- ^ @encryption_context_subset@ - (Optional, Forces New)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @constraints@ settings value.
-newKmsGrantConstraints
-    :: KmsGrantConstraints s
-newKmsGrantConstraints =
-    KmsGrantConstraints'
-        { _encryptionContextEquals = P.Nothing
-        , _encryptionContextSubset = P.Nothing
-        }
-
-instance TF.ToHCL (KmsGrantConstraints s) where
-     toHCL KmsGrantConstraints'{..} = TF.pairs $ P.mconcat
-        [ P.maybe P.mempty (TF.pair "encryption_context_equals") _encryptionContextEquals
-        , P.maybe P.mempty (TF.pair "encryption_context_subset") _encryptionContextSubset
-        ]
-
-instance P.Hashable (KmsGrantConstraints s)
-
-instance TF.HasValidator (KmsGrantConstraints s) where
-    validator = P.mempty
-
-instance P.HasEncryptionContextEquals (KmsGrantConstraints s) (P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text)))) where
-    encryptionContextEquals =
-        P.lens (_encryptionContextEquals :: KmsGrantConstraints s -> P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text))))
-            (\s a -> s { _encryptionContextEquals = a } :: KmsGrantConstraints s)
-
-instance P.HasEncryptionContextSubset (KmsGrantConstraints s) (P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text)))) where
-    encryptionContextSubset =
-        P.lens (_encryptionContextSubset :: KmsGrantConstraints s -> P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text))))
-            (\s a -> s { _encryptionContextSubset = a } :: KmsGrantConstraints s)
-
--- | @secret@ nested settings.
-data KmsSecretSecret s = KmsSecretSecret'
-    { _context     :: P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text)))
-    -- ^ @context@ - (Optional)
-    --
-    , _grantTokens :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
-    -- ^ @grant_tokens@ - (Optional)
-    --
-    , _name        :: TF.Expr s P.Text
-    -- ^ @name@ - (Required)
-    --
-    , _payload     :: TF.Expr s P.Text
-    -- ^ @payload@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @secret@ settings value.
-newKmsSecretSecret
-    :: TF.Expr s P.Text -- ^ Lens: 'P.name', Field: '_name', HCL: @name@
-    -> TF.Expr s P.Text -- ^ Lens: 'P.payload', Field: '_payload', HCL: @payload@
-    -> KmsSecretSecret s
-newKmsSecretSecret _name _payload =
-    KmsSecretSecret'
-        { _context = P.Nothing
-        , _grantTokens = P.Nothing
-        , _name = _name
-        , _payload = _payload
-        }
-
-instance TF.ToHCL (KmsSecretSecret s) where
-     toHCL KmsSecretSecret'{..} = TF.pairs $ P.mconcat
-        [ P.maybe P.mempty (TF.pair "context") _context
-        , P.maybe P.mempty (TF.pair "grant_tokens") _grantTokens
-        , TF.pair "name" _name
-        , TF.pair "payload" _payload
-        ]
-
-instance P.Hashable (KmsSecretSecret s)
-
-instance TF.HasValidator (KmsSecretSecret s) where
-    validator = P.mempty
-
-instance P.HasContext (KmsSecretSecret s) (P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text)))) where
-    context =
-        P.lens (_context :: KmsSecretSecret s -> P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text))))
-            (\s a -> s { _context = a } :: KmsSecretSecret s)
-
-instance P.HasGrantTokens (KmsSecretSecret s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
-    grantTokens =
-        P.lens (_grantTokens :: KmsSecretSecret s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
-            (\s a -> s { _grantTokens = a } :: KmsSecretSecret s)
-
-instance P.HasName (KmsSecretSecret s) (TF.Expr s P.Text) where
-    name =
-        P.lens (_name :: KmsSecretSecret s -> TF.Expr s P.Text)
-            (\s a -> s { _name = a } :: KmsSecretSecret s)
-
-instance P.HasPayload (KmsSecretSecret s) (TF.Expr s P.Text) where
-    payload =
-        P.lens (_payload :: KmsSecretSecret s -> TF.Expr s P.Text)
-            (\s a -> s { _payload = a } :: KmsSecretSecret s)
-
--- | @secret@ nested settings.
-data KmsSecretsSecret s = KmsSecretsSecret'
-    { _context     :: P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text)))
-    -- ^ @context@ - (Optional)
-    --
-    , _grantTokens :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
-    -- ^ @grant_tokens@ - (Optional)
-    --
-    , _name        :: TF.Expr s P.Text
-    -- ^ @name@ - (Required)
-    --
-    , _payload     :: TF.Expr s P.Text
-    -- ^ @payload@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @secret@ settings value.
-newKmsSecretsSecret
-    :: TF.Expr s P.Text -- ^ Lens: 'P.name', Field: '_name', HCL: @name@
-    -> TF.Expr s P.Text -- ^ Lens: 'P.payload', Field: '_payload', HCL: @payload@
-    -> KmsSecretsSecret s
-newKmsSecretsSecret _name _payload =
-    KmsSecretsSecret'
-        { _context = P.Nothing
-        , _grantTokens = P.Nothing
-        , _name = _name
-        , _payload = _payload
-        }
-
-instance TF.ToHCL (KmsSecretsSecret s) where
-     toHCL KmsSecretsSecret'{..} = TF.pairs $ P.mconcat
-        [ P.maybe P.mempty (TF.pair "context") _context
-        , P.maybe P.mempty (TF.pair "grant_tokens") _grantTokens
-        , TF.pair "name" _name
-        , TF.pair "payload" _payload
-        ]
-
-instance P.Hashable (KmsSecretsSecret s)
-
-instance TF.HasValidator (KmsSecretsSecret s) where
-    validator = P.mempty
-
-instance P.HasContext (KmsSecretsSecret s) (P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text)))) where
-    context =
-        P.lens (_context :: KmsSecretsSecret s -> P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text))))
-            (\s a -> s { _context = a } :: KmsSecretsSecret s)
-
-instance P.HasGrantTokens (KmsSecretsSecret s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
-    grantTokens =
-        P.lens (_grantTokens :: KmsSecretsSecret s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
-            (\s a -> s { _grantTokens = a } :: KmsSecretsSecret s)
-
-instance P.HasName (KmsSecretsSecret s) (TF.Expr s P.Text) where
-    name =
-        P.lens (_name :: KmsSecretsSecret s -> TF.Expr s P.Text)
-            (\s a -> s { _name = a } :: KmsSecretsSecret s)
-
-instance P.HasPayload (KmsSecretsSecret s) (TF.Expr s P.Text) where
-    payload =
-        P.lens (_payload :: KmsSecretsSecret s -> TF.Expr s P.Text)
-            (\s a -> s { _payload = a } :: KmsSecretsSecret s)
-
--- | @routing_config@ nested settings.
-data LambdaAliasRoutingConfig s = LambdaAliasRoutingConfig'
-    { _additionalVersionWeights :: P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Double)))
-    -- ^ @additional_version_weights@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @routing_config@ settings value.
-newLambdaAliasRoutingConfig
-    :: LambdaAliasRoutingConfig s
-newLambdaAliasRoutingConfig =
-    LambdaAliasRoutingConfig'
-        { _additionalVersionWeights = P.Nothing
-        }
-
-instance TF.ToHCL (LambdaAliasRoutingConfig s) where
-     toHCL LambdaAliasRoutingConfig'{..} = TF.pairs $ P.mconcat
-        [ P.maybe P.mempty (TF.pair "additional_version_weights") _additionalVersionWeights
-        ]
-
-instance P.Hashable (LambdaAliasRoutingConfig s)
-
-instance TF.HasValidator (LambdaAliasRoutingConfig s) where
-    validator = P.mempty
-
-instance P.HasAdditionalVersionWeights (LambdaAliasRoutingConfig s) (P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Double)))) where
-    additionalVersionWeights =
-        P.lens (_additionalVersionWeights :: LambdaAliasRoutingConfig s -> P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Double))))
-            (\s a -> s { _additionalVersionWeights = a } :: LambdaAliasRoutingConfig s)
-
--- | @dead_letter_config@ nested settings.
-data LambdaFunctionDeadLetterConfig s = LambdaFunctionDeadLetterConfig'
-    { _targetArn :: TF.Expr s P.Text
-    -- ^ @target_arn@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @dead_letter_config@ settings value.
-newLambdaFunctionDeadLetterConfig
-    :: TF.Expr s P.Text -- ^ Lens: 'P.targetArn', Field: '_targetArn', HCL: @target_arn@
-    -> LambdaFunctionDeadLetterConfig s
-newLambdaFunctionDeadLetterConfig _targetArn =
-    LambdaFunctionDeadLetterConfig'
-        { _targetArn = _targetArn
-        }
-
-instance TF.ToHCL (LambdaFunctionDeadLetterConfig s) where
-     toHCL LambdaFunctionDeadLetterConfig'{..} = TF.pairs $ P.mconcat
-        [ TF.pair "target_arn" _targetArn
-        ]
-
-instance P.Hashable (LambdaFunctionDeadLetterConfig s)
-
-instance TF.HasValidator (LambdaFunctionDeadLetterConfig s) where
-    validator = P.mempty
-
-instance P.HasTargetArn (LambdaFunctionDeadLetterConfig s) (TF.Expr s P.Text) where
-    targetArn =
-        P.lens (_targetArn :: LambdaFunctionDeadLetterConfig s -> TF.Expr s P.Text)
-            (\s a -> s { _targetArn = a } :: LambdaFunctionDeadLetterConfig s)
-
-instance s ~ s' => P.HasComputedTargetArn (TF.Ref s' (LambdaFunctionDeadLetterConfig s)) (TF.Expr s P.Text) where
-    computedTargetArn x =
-        TF.unsafeCompute TF.encodeAttr x "target_arn"
-
--- | @environment@ nested settings.
-data LambdaFunctionEnvironment s = LambdaFunctionEnvironment'
-    { _variables :: P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text)))
-    -- ^ @variables@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @environment@ settings value.
-newLambdaFunctionEnvironment
-    :: LambdaFunctionEnvironment s
-newLambdaFunctionEnvironment =
-    LambdaFunctionEnvironment'
-        { _variables = P.Nothing
-        }
-
-instance TF.ToHCL (LambdaFunctionEnvironment s) where
-     toHCL LambdaFunctionEnvironment'{..} = TF.pairs $ P.mconcat
-        [ P.maybe P.mempty (TF.pair "variables") _variables
-        ]
-
-instance P.Hashable (LambdaFunctionEnvironment s)
-
-instance TF.HasValidator (LambdaFunctionEnvironment s) where
-    validator = P.mempty
-
-instance P.HasVariables (LambdaFunctionEnvironment s) (P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text)))) where
-    variables =
-        P.lens (_variables :: LambdaFunctionEnvironment s -> P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text))))
-            (\s a -> s { _variables = a } :: LambdaFunctionEnvironment s)
-
-instance s ~ s' => P.HasComputedVariables (TF.Ref s' (LambdaFunctionEnvironment s)) (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text))) where
-    computedVariables x =
-        TF.unsafeCompute TF.encodeAttr x "variables"
-
--- | @tracing_config@ nested settings.
-data LambdaFunctionTracingConfig s = LambdaFunctionTracingConfig'
-    { _mode :: TF.Expr s P.Text
-    -- ^ @mode@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @tracing_config@ settings value.
-newLambdaFunctionTracingConfig
-    :: TF.Expr s P.Text -- ^ Lens: 'P.mode', Field: '_mode', HCL: @mode@
-    -> LambdaFunctionTracingConfig s
-newLambdaFunctionTracingConfig _mode =
-    LambdaFunctionTracingConfig'
-        { _mode = _mode
-        }
-
-instance TF.ToHCL (LambdaFunctionTracingConfig s) where
-     toHCL LambdaFunctionTracingConfig'{..} = TF.pairs $ P.mconcat
-        [ TF.pair "mode" _mode
-        ]
-
-instance P.Hashable (LambdaFunctionTracingConfig s)
-
-instance TF.HasValidator (LambdaFunctionTracingConfig s) where
-    validator = P.mempty
-
-instance P.HasMode (LambdaFunctionTracingConfig s) (TF.Expr s P.Text) where
-    mode =
-        P.lens (_mode :: LambdaFunctionTracingConfig s -> TF.Expr s P.Text)
-            (\s a -> s { _mode = a } :: LambdaFunctionTracingConfig s)
-
-instance s ~ s' => P.HasComputedMode (TF.Ref s' (LambdaFunctionTracingConfig s)) (TF.Expr s P.Text) where
-    computedMode x =
-        TF.unsafeCompute TF.encodeAttr x "mode"
-
--- | @vpc_config@ nested settings.
-data LambdaFunctionVpcConfig s = LambdaFunctionVpcConfig'
-    { _securityGroupIds :: TF.Expr s [TF.Expr s P.Text]
-    -- ^ @security_group_ids@ - (Required)
-    --
-    , _subnetIds        :: TF.Expr s [TF.Expr s P.Text]
-    -- ^ @subnet_ids@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @vpc_config@ settings value.
-newLambdaFunctionVpcConfig
-    :: TF.Expr s [TF.Expr s P.Text] -- ^ Lens: 'P.securityGroupIds', Field: '_securityGroupIds', HCL: @security_group_ids@
-    -> TF.Expr s [TF.Expr s P.Text] -- ^ Lens: 'P.subnetIds', Field: '_subnetIds', HCL: @subnet_ids@
-    -> LambdaFunctionVpcConfig s
-newLambdaFunctionVpcConfig _securityGroupIds _subnetIds =
-    LambdaFunctionVpcConfig'
-        { _securityGroupIds = _securityGroupIds
-        , _subnetIds = _subnetIds
-        }
-
-instance TF.ToHCL (LambdaFunctionVpcConfig s) where
-     toHCL LambdaFunctionVpcConfig'{..} = TF.pairs $ P.mconcat
-        [ TF.pair "security_group_ids" _securityGroupIds
-        , TF.pair "subnet_ids" _subnetIds
-        ]
-
-instance P.Hashable (LambdaFunctionVpcConfig s)
-
-instance TF.HasValidator (LambdaFunctionVpcConfig s) where
-    validator = P.mempty
-
-instance P.HasSecurityGroupIds (LambdaFunctionVpcConfig s) (TF.Expr s [TF.Expr s P.Text]) where
-    securityGroupIds =
-        P.lens (_securityGroupIds :: LambdaFunctionVpcConfig s -> TF.Expr s [TF.Expr s P.Text])
-            (\s a -> s { _securityGroupIds = a } :: LambdaFunctionVpcConfig s)
-
-instance P.HasSubnetIds (LambdaFunctionVpcConfig s) (TF.Expr s [TF.Expr s P.Text]) where
-    subnetIds =
-        P.lens (_subnetIds :: LambdaFunctionVpcConfig s -> TF.Expr s [TF.Expr s P.Text])
-            (\s a -> s { _subnetIds = a } :: LambdaFunctionVpcConfig s)
-
-instance s ~ s' => P.HasComputedSecurityGroupIds (TF.Ref s' (LambdaFunctionVpcConfig s)) (TF.Expr s [TF.Expr s P.Text]) where
-    computedSecurityGroupIds x =
-        TF.unsafeCompute TF.encodeAttr x "security_group_ids"
-
-instance s ~ s' => P.HasComputedSubnetIds (TF.Ref s' (LambdaFunctionVpcConfig s)) (TF.Expr s [TF.Expr s P.Text]) where
-    computedSubnetIds x =
-        TF.unsafeCompute TF.encodeAttr x "subnet_ids"
-
-instance s ~ s' => P.HasComputedVpcId (TF.Ref s' (LambdaFunctionVpcConfig s)) (TF.Expr s P.Text) where
-    computedVpcId x =
-        TF.unsafeCompute TF.encodeAttr x "vpc_id"
-
--- | @ebs_block_device@ nested settings.
-data LaunchConfigurationEbsBlockDevice s = LaunchConfigurationEbsBlockDevice'
-    { _deleteOnTermination :: TF.Expr s P.Bool
-    -- ^ @delete_on_termination@ - (Default @true@, Forces New)
-    --
-    , _deviceName          :: TF.Expr s P.Text
-    -- ^ @device_name@ - (Required, Forces New)
-    --
-    , _encrypted           :: P.Maybe (TF.Expr s P.Bool)
-    -- ^ @encrypted@ - (Optional, Forces New)
-    --
-    , _iops                :: P.Maybe (TF.Expr s P.Int)
-    -- ^ @iops@ - (Optional, Forces New)
-    --
-    , _noDevice            :: P.Maybe (TF.Expr s P.Bool)
-    -- ^ @no_device@ - (Optional, Forces New)
-    --
-    , _snapshotId          :: P.Maybe (TF.Expr s P.Text)
-    -- ^ @snapshot_id@ - (Optional, Forces New)
-    --
-    , _volumeSize          :: P.Maybe (TF.Expr s P.Int)
-    -- ^ @volume_size@ - (Optional, Forces New)
-    --
-    , _volumeType          :: P.Maybe (TF.Expr s P.Text)
-    -- ^ @volume_type@ - (Optional, Forces New)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @ebs_block_device@ settings value.
-newLaunchConfigurationEbsBlockDevice
-    :: TF.Expr s P.Text -- ^ Lens: 'P.deviceName', Field: '_deviceName', HCL: @device_name@
-    -> LaunchConfigurationEbsBlockDevice s
-newLaunchConfigurationEbsBlockDevice _deviceName =
-    LaunchConfigurationEbsBlockDevice'
-        { _deleteOnTermination = TF.value P.True
-        , _deviceName = _deviceName
-        , _encrypted = P.Nothing
-        , _iops = P.Nothing
-        , _noDevice = P.Nothing
-        , _snapshotId = P.Nothing
-        , _volumeSize = P.Nothing
-        , _volumeType = P.Nothing
-        }
-
-instance TF.ToHCL (LaunchConfigurationEbsBlockDevice s) where
-     toHCL LaunchConfigurationEbsBlockDevice'{..} = TF.pairs $ P.mconcat
-        [ TF.pair "delete_on_termination" _deleteOnTermination
-        , TF.pair "device_name" _deviceName
-        , P.maybe P.mempty (TF.pair "encrypted") _encrypted
-        , P.maybe P.mempty (TF.pair "iops") _iops
-        , P.maybe P.mempty (TF.pair "no_device") _noDevice
-        , P.maybe P.mempty (TF.pair "snapshot_id") _snapshotId
-        , P.maybe P.mempty (TF.pair "volume_size") _volumeSize
-        , P.maybe P.mempty (TF.pair "volume_type") _volumeType
-        ]
-
-instance P.Hashable (LaunchConfigurationEbsBlockDevice s)
-
-instance TF.HasValidator (LaunchConfigurationEbsBlockDevice s) where
-    validator = P.mempty
-
-instance P.HasDeleteOnTermination (LaunchConfigurationEbsBlockDevice s) (TF.Expr s P.Bool) where
-    deleteOnTermination =
-        P.lens (_deleteOnTermination :: LaunchConfigurationEbsBlockDevice s -> TF.Expr s P.Bool)
-            (\s a -> s { _deleteOnTermination = a } :: LaunchConfigurationEbsBlockDevice s)
-
-instance P.HasDeviceName (LaunchConfigurationEbsBlockDevice s) (TF.Expr s P.Text) where
-    deviceName =
-        P.lens (_deviceName :: LaunchConfigurationEbsBlockDevice s -> TF.Expr s P.Text)
-            (\s a -> s { _deviceName = a } :: LaunchConfigurationEbsBlockDevice s)
-
-instance P.HasEncrypted (LaunchConfigurationEbsBlockDevice s) (P.Maybe (TF.Expr s P.Bool)) where
-    encrypted =
-        P.lens (_encrypted :: LaunchConfigurationEbsBlockDevice s -> P.Maybe (TF.Expr s P.Bool))
-            (\s a -> s { _encrypted = a } :: LaunchConfigurationEbsBlockDevice s)
-
-instance P.HasIops (LaunchConfigurationEbsBlockDevice s) (P.Maybe (TF.Expr s P.Int)) where
-    iops =
-        P.lens (_iops :: LaunchConfigurationEbsBlockDevice s -> P.Maybe (TF.Expr s P.Int))
-            (\s a -> s { _iops = a } :: LaunchConfigurationEbsBlockDevice s)
-
-instance P.HasNoDevice (LaunchConfigurationEbsBlockDevice s) (P.Maybe (TF.Expr s P.Bool)) where
-    noDevice =
-        P.lens (_noDevice :: LaunchConfigurationEbsBlockDevice s -> P.Maybe (TF.Expr s P.Bool))
-            (\s a -> s { _noDevice = a } :: LaunchConfigurationEbsBlockDevice s)
-
-instance P.HasSnapshotId (LaunchConfigurationEbsBlockDevice s) (P.Maybe (TF.Expr s P.Text)) where
-    snapshotId =
-        P.lens (_snapshotId :: LaunchConfigurationEbsBlockDevice s -> P.Maybe (TF.Expr s P.Text))
-            (\s a -> s { _snapshotId = a } :: LaunchConfigurationEbsBlockDevice s)
-
-instance P.HasVolumeSize (LaunchConfigurationEbsBlockDevice s) (P.Maybe (TF.Expr s P.Int)) where
-    volumeSize =
-        P.lens (_volumeSize :: LaunchConfigurationEbsBlockDevice s -> P.Maybe (TF.Expr s P.Int))
-            (\s a -> s { _volumeSize = a } :: LaunchConfigurationEbsBlockDevice s)
-
-instance P.HasVolumeType (LaunchConfigurationEbsBlockDevice s) (P.Maybe (TF.Expr s P.Text)) where
-    volumeType =
-        P.lens (_volumeType :: LaunchConfigurationEbsBlockDevice s -> P.Maybe (TF.Expr s P.Text))
-            (\s a -> s { _volumeType = a } :: LaunchConfigurationEbsBlockDevice s)
-
-instance s ~ s' => P.HasComputedDeleteOnTermination (TF.Ref s' (LaunchConfigurationEbsBlockDevice s)) (TF.Expr s P.Bool) where
-    computedDeleteOnTermination x =
-        TF.unsafeCompute TF.encodeAttr x "delete_on_termination"
-
-instance s ~ s' => P.HasComputedDeviceName (TF.Ref s' (LaunchConfigurationEbsBlockDevice s)) (TF.Expr s P.Text) where
-    computedDeviceName x =
-        TF.unsafeCompute TF.encodeAttr x "device_name"
-
-instance s ~ s' => P.HasComputedEncrypted (TF.Ref s' (LaunchConfigurationEbsBlockDevice s)) (TF.Expr s P.Bool) where
-    computedEncrypted x =
-        TF.unsafeCompute TF.encodeAttr x "encrypted"
-
-instance s ~ s' => P.HasComputedIops (TF.Ref s' (LaunchConfigurationEbsBlockDevice s)) (TF.Expr s P.Int) where
-    computedIops x =
-        TF.unsafeCompute TF.encodeAttr x "iops"
-
-instance s ~ s' => P.HasComputedSnapshotId (TF.Ref s' (LaunchConfigurationEbsBlockDevice s)) (TF.Expr s P.Text) where
-    computedSnapshotId x =
-        TF.unsafeCompute TF.encodeAttr x "snapshot_id"
-
-instance s ~ s' => P.HasComputedVolumeSize (TF.Ref s' (LaunchConfigurationEbsBlockDevice s)) (TF.Expr s P.Int) where
-    computedVolumeSize x =
-        TF.unsafeCompute TF.encodeAttr x "volume_size"
-
-instance s ~ s' => P.HasComputedVolumeType (TF.Ref s' (LaunchConfigurationEbsBlockDevice s)) (TF.Expr s P.Text) where
-    computedVolumeType x =
-        TF.unsafeCompute TF.encodeAttr x "volume_type"
-
--- | @ephemeral_block_device@ nested settings.
-data LaunchConfigurationEphemeralBlockDevice s = LaunchConfigurationEphemeralBlockDevice'
-    { _deviceName  :: TF.Expr s P.Text
-    -- ^ @device_name@ - (Required)
-    --
-    , _virtualName :: TF.Expr s P.Text
-    -- ^ @virtual_name@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @ephemeral_block_device@ settings value.
-newLaunchConfigurationEphemeralBlockDevice
-    :: TF.Expr s P.Text -- ^ Lens: 'P.deviceName', Field: '_deviceName', HCL: @device_name@
-    -> TF.Expr s P.Text -- ^ Lens: 'P.virtualName', Field: '_virtualName', HCL: @virtual_name@
-    -> LaunchConfigurationEphemeralBlockDevice s
-newLaunchConfigurationEphemeralBlockDevice _deviceName _virtualName =
-    LaunchConfigurationEphemeralBlockDevice'
-        { _deviceName = _deviceName
-        , _virtualName = _virtualName
-        }
-
-instance TF.ToHCL (LaunchConfigurationEphemeralBlockDevice s) where
-     toHCL LaunchConfigurationEphemeralBlockDevice'{..} = TF.pairs $ P.mconcat
-        [ TF.pair "device_name" _deviceName
-        , TF.pair "virtual_name" _virtualName
-        ]
-
-instance P.Hashable (LaunchConfigurationEphemeralBlockDevice s)
-
-instance TF.HasValidator (LaunchConfigurationEphemeralBlockDevice s) where
-    validator = P.mempty
-
-instance P.HasDeviceName (LaunchConfigurationEphemeralBlockDevice s) (TF.Expr s P.Text) where
-    deviceName =
-        P.lens (_deviceName :: LaunchConfigurationEphemeralBlockDevice s -> TF.Expr s P.Text)
-            (\s a -> s { _deviceName = a } :: LaunchConfigurationEphemeralBlockDevice s)
-
-instance P.HasVirtualName (LaunchConfigurationEphemeralBlockDevice s) (TF.Expr s P.Text) where
-    virtualName =
-        P.lens (_virtualName :: LaunchConfigurationEphemeralBlockDevice s -> TF.Expr s P.Text)
-            (\s a -> s { _virtualName = a } :: LaunchConfigurationEphemeralBlockDevice s)
-
-instance s ~ s' => P.HasComputedDeviceName (TF.Ref s' (LaunchConfigurationEphemeralBlockDevice s)) (TF.Expr s P.Text) where
-    computedDeviceName x =
-        TF.unsafeCompute TF.encodeAttr x "device_name"
-
-instance s ~ s' => P.HasComputedVirtualName (TF.Ref s' (LaunchConfigurationEphemeralBlockDevice s)) (TF.Expr s P.Text) where
-    computedVirtualName x =
-        TF.unsafeCompute TF.encodeAttr x "virtual_name"
-
--- | @root_block_device@ nested settings.
-data LaunchConfigurationRootBlockDevice s = LaunchConfigurationRootBlockDevice'
-    { _deleteOnTermination :: TF.Expr s P.Bool
-    -- ^ @delete_on_termination@ - (Default @true@, Forces New)
-    --
-    , _iops                :: P.Maybe (TF.Expr s P.Int)
-    -- ^ @iops@ - (Optional, Forces New)
-    --
-    , _volumeSize          :: P.Maybe (TF.Expr s P.Int)
-    -- ^ @volume_size@ - (Optional, Forces New)
-    --
-    , _volumeType          :: P.Maybe (TF.Expr s P.Text)
-    -- ^ @volume_type@ - (Optional, Forces New)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @root_block_device@ settings value.
-newLaunchConfigurationRootBlockDevice
-    :: LaunchConfigurationRootBlockDevice s
-newLaunchConfigurationRootBlockDevice =
-    LaunchConfigurationRootBlockDevice'
-        { _deleteOnTermination = TF.value P.True
-        , _iops = P.Nothing
-        , _volumeSize = P.Nothing
-        , _volumeType = P.Nothing
-        }
-
-instance TF.ToHCL (LaunchConfigurationRootBlockDevice s) where
-     toHCL LaunchConfigurationRootBlockDevice'{..} = TF.pairs $ P.mconcat
-        [ TF.pair "delete_on_termination" _deleteOnTermination
-        , P.maybe P.mempty (TF.pair "iops") _iops
-        , P.maybe P.mempty (TF.pair "volume_size") _volumeSize
-        , P.maybe P.mempty (TF.pair "volume_type") _volumeType
-        ]
-
-instance P.Hashable (LaunchConfigurationRootBlockDevice s)
-
-instance TF.HasValidator (LaunchConfigurationRootBlockDevice s) where
-    validator = P.mempty
-
-instance P.HasDeleteOnTermination (LaunchConfigurationRootBlockDevice s) (TF.Expr s P.Bool) where
-    deleteOnTermination =
-        P.lens (_deleteOnTermination :: LaunchConfigurationRootBlockDevice s -> TF.Expr s P.Bool)
-            (\s a -> s { _deleteOnTermination = a } :: LaunchConfigurationRootBlockDevice s)
-
-instance P.HasIops (LaunchConfigurationRootBlockDevice s) (P.Maybe (TF.Expr s P.Int)) where
-    iops =
-        P.lens (_iops :: LaunchConfigurationRootBlockDevice s -> P.Maybe (TF.Expr s P.Int))
-            (\s a -> s { _iops = a } :: LaunchConfigurationRootBlockDevice s)
-
-instance P.HasVolumeSize (LaunchConfigurationRootBlockDevice s) (P.Maybe (TF.Expr s P.Int)) where
-    volumeSize =
-        P.lens (_volumeSize :: LaunchConfigurationRootBlockDevice s -> P.Maybe (TF.Expr s P.Int))
-            (\s a -> s { _volumeSize = a } :: LaunchConfigurationRootBlockDevice s)
-
-instance P.HasVolumeType (LaunchConfigurationRootBlockDevice s) (P.Maybe (TF.Expr s P.Text)) where
-    volumeType =
-        P.lens (_volumeType :: LaunchConfigurationRootBlockDevice s -> P.Maybe (TF.Expr s P.Text))
-            (\s a -> s { _volumeType = a } :: LaunchConfigurationRootBlockDevice s)
-
-instance s ~ s' => P.HasComputedDeleteOnTermination (TF.Ref s' (LaunchConfigurationRootBlockDevice s)) (TF.Expr s P.Bool) where
-    computedDeleteOnTermination x =
-        TF.unsafeCompute TF.encodeAttr x "delete_on_termination"
-
-instance s ~ s' => P.HasComputedIops (TF.Ref s' (LaunchConfigurationRootBlockDevice s)) (TF.Expr s P.Int) where
-    computedIops x =
-        TF.unsafeCompute TF.encodeAttr x "iops"
-
-instance s ~ s' => P.HasComputedVolumeSize (TF.Ref s' (LaunchConfigurationRootBlockDevice s)) (TF.Expr s P.Int) where
-    computedVolumeSize x =
-        TF.unsafeCompute TF.encodeAttr x "volume_size"
-
-instance s ~ s' => P.HasComputedVolumeType (TF.Ref s' (LaunchConfigurationRootBlockDevice s)) (TF.Expr s P.Text) where
-    computedVolumeType x =
-        TF.unsafeCompute TF.encodeAttr x "volume_type"
-
--- | @block_device_mappings@ nested settings.
-data LaunchTemplateBlockDeviceMappings s = LaunchTemplateBlockDeviceMappings'
-    { _deviceName  :: P.Maybe (TF.Expr s P.Text)
-    -- ^ @device_name@ - (Optional)
-    --
-    , _ebs         :: P.Maybe (TF.Expr s (LaunchTemplateEbs s))
-    -- ^ @ebs@ - (Optional)
-    --
-    , _noDevice    :: P.Maybe (TF.Expr s P.Text)
-    -- ^ @no_device@ - (Optional)
-    --
-    , _virtualName :: P.Maybe (TF.Expr s P.Text)
-    -- ^ @virtual_name@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @block_device_mappings@ settings value.
-newLaunchTemplateBlockDeviceMappings
-    :: LaunchTemplateBlockDeviceMappings s
-newLaunchTemplateBlockDeviceMappings =
-    LaunchTemplateBlockDeviceMappings'
-        { _deviceName = P.Nothing
-        , _ebs = P.Nothing
-        , _noDevice = P.Nothing
-        , _virtualName = P.Nothing
-        }
-
-instance TF.ToHCL (LaunchTemplateBlockDeviceMappings s) where
-     toHCL LaunchTemplateBlockDeviceMappings'{..} = TF.pairs $ P.mconcat
-        [ P.maybe P.mempty (TF.pair "device_name") _deviceName
-        , P.maybe P.mempty (TF.pair "ebs") _ebs
-        , P.maybe P.mempty (TF.pair "no_device") _noDevice
-        , P.maybe P.mempty (TF.pair "virtual_name") _virtualName
-        ]
-
-instance P.Hashable (LaunchTemplateBlockDeviceMappings s)
-
-instance TF.HasValidator (LaunchTemplateBlockDeviceMappings s) where
-    validator = P.mempty
-
-instance P.HasDeviceName (LaunchTemplateBlockDeviceMappings s) (P.Maybe (TF.Expr s P.Text)) where
-    deviceName =
-        P.lens (_deviceName :: LaunchTemplateBlockDeviceMappings s -> P.Maybe (TF.Expr s P.Text))
-            (\s a -> s { _deviceName = a } :: LaunchTemplateBlockDeviceMappings s)
-
-instance P.HasEbs (LaunchTemplateBlockDeviceMappings s) (P.Maybe (TF.Expr s (LaunchTemplateEbs s))) where
-    ebs =
-        P.lens (_ebs :: LaunchTemplateBlockDeviceMappings s -> P.Maybe (TF.Expr s (LaunchTemplateEbs s)))
-            (\s a -> s { _ebs = a } :: LaunchTemplateBlockDeviceMappings s)
-
-instance P.HasNoDevice (LaunchTemplateBlockDeviceMappings s) (P.Maybe (TF.Expr s P.Text)) where
-    noDevice =
-        P.lens (_noDevice :: LaunchTemplateBlockDeviceMappings s -> P.Maybe (TF.Expr s P.Text))
-            (\s a -> s { _noDevice = a } :: LaunchTemplateBlockDeviceMappings s)
-
-instance P.HasVirtualName (LaunchTemplateBlockDeviceMappings s) (P.Maybe (TF.Expr s P.Text)) where
-    virtualName =
-        P.lens (_virtualName :: LaunchTemplateBlockDeviceMappings s -> P.Maybe (TF.Expr s P.Text))
-            (\s a -> s { _virtualName = a } :: LaunchTemplateBlockDeviceMappings s)
-
--- | @ebs@ nested settings.
-data LaunchTemplateEbs s = LaunchTemplateEbs'
-    { _deleteOnTermination :: P.Maybe (TF.Expr s P.Bool)
-    -- ^ @delete_on_termination@ - (Optional)
-    --
-    , _encrypted           :: P.Maybe (TF.Expr s P.Bool)
-    -- ^ @encrypted@ - (Optional)
-    --
-    , _iops                :: P.Maybe (TF.Expr s P.Int)
-    -- ^ @iops@ - (Optional)
-    --
-    , _kmsKeyId            :: P.Maybe (TF.Expr s P.Text)
-    -- ^ @kms_key_id@ - (Optional)
-    --
-    , _snapshotId          :: P.Maybe (TF.Expr s P.Text)
-    -- ^ @snapshot_id@ - (Optional)
-    --
-    , _volumeSize          :: P.Maybe (TF.Expr s P.Int)
-    -- ^ @volume_size@ - (Optional)
-    --
-    , _volumeType          :: P.Maybe (TF.Expr s P.Text)
-    -- ^ @volume_type@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @ebs@ settings value.
-newLaunchTemplateEbs
-    :: LaunchTemplateEbs s
-newLaunchTemplateEbs =
-    LaunchTemplateEbs'
-        { _deleteOnTermination = P.Nothing
-        , _encrypted = P.Nothing
-        , _iops = P.Nothing
-        , _kmsKeyId = P.Nothing
-        , _snapshotId = P.Nothing
-        , _volumeSize = P.Nothing
-        , _volumeType = P.Nothing
-        }
-
-instance TF.ToHCL (LaunchTemplateEbs s) where
-     toHCL LaunchTemplateEbs'{..} = TF.pairs $ P.mconcat
-        [ P.maybe P.mempty (TF.pair "delete_on_termination") _deleteOnTermination
-        , P.maybe P.mempty (TF.pair "encrypted") _encrypted
-        , P.maybe P.mempty (TF.pair "iops") _iops
-        , P.maybe P.mempty (TF.pair "kms_key_id") _kmsKeyId
-        , P.maybe P.mempty (TF.pair "snapshot_id") _snapshotId
-        , P.maybe P.mempty (TF.pair "volume_size") _volumeSize
-        , P.maybe P.mempty (TF.pair "volume_type") _volumeType
-        ]
-
-instance P.Hashable (LaunchTemplateEbs s)
-
-instance TF.HasValidator (LaunchTemplateEbs s) where
-    validator = P.mempty
-
-instance P.HasDeleteOnTermination (LaunchTemplateEbs s) (P.Maybe (TF.Expr s P.Bool)) where
-    deleteOnTermination =
-        P.lens (_deleteOnTermination :: LaunchTemplateEbs s -> P.Maybe (TF.Expr s P.Bool))
-            (\s a -> s { _deleteOnTermination = a } :: LaunchTemplateEbs s)
-
-instance P.HasEncrypted (LaunchTemplateEbs s) (P.Maybe (TF.Expr s P.Bool)) where
-    encrypted =
-        P.lens (_encrypted :: LaunchTemplateEbs s -> P.Maybe (TF.Expr s P.Bool))
-            (\s a -> s { _encrypted = a } :: LaunchTemplateEbs s)
-
-instance P.HasIops (LaunchTemplateEbs s) (P.Maybe (TF.Expr s P.Int)) where
-    iops =
-        P.lens (_iops :: LaunchTemplateEbs s -> P.Maybe (TF.Expr s P.Int))
-            (\s a -> s { _iops = a } :: LaunchTemplateEbs s)
-
-instance P.HasKmsKeyId (LaunchTemplateEbs s) (P.Maybe (TF.Expr s P.Text)) where
-    kmsKeyId =
-        P.lens (_kmsKeyId :: LaunchTemplateEbs s -> P.Maybe (TF.Expr s P.Text))
-            (\s a -> s { _kmsKeyId = a } :: LaunchTemplateEbs s)
-
-instance P.HasSnapshotId (LaunchTemplateEbs s) (P.Maybe (TF.Expr s P.Text)) where
-    snapshotId =
-        P.lens (_snapshotId :: LaunchTemplateEbs s -> P.Maybe (TF.Expr s P.Text))
-            (\s a -> s { _snapshotId = a } :: LaunchTemplateEbs s)
-
-instance P.HasVolumeSize (LaunchTemplateEbs s) (P.Maybe (TF.Expr s P.Int)) where
-    volumeSize =
-        P.lens (_volumeSize :: LaunchTemplateEbs s -> P.Maybe (TF.Expr s P.Int))
-            (\s a -> s { _volumeSize = a } :: LaunchTemplateEbs s)
-
-instance P.HasVolumeType (LaunchTemplateEbs s) (P.Maybe (TF.Expr s P.Text)) where
-    volumeType =
-        P.lens (_volumeType :: LaunchTemplateEbs s -> P.Maybe (TF.Expr s P.Text))
-            (\s a -> s { _volumeType = a } :: LaunchTemplateEbs s)
-
-instance s ~ s' => P.HasComputedIops (TF.Ref s' (LaunchTemplateEbs s)) (TF.Expr s P.Int) where
-    computedIops x =
-        TF.unsafeCompute TF.encodeAttr x "iops"
-
-instance s ~ s' => P.HasComputedVolumeSize (TF.Ref s' (LaunchTemplateEbs s)) (TF.Expr s P.Int) where
-    computedVolumeSize x =
-        TF.unsafeCompute TF.encodeAttr x "volume_size"
-
-instance s ~ s' => P.HasComputedVolumeType (TF.Ref s' (LaunchTemplateEbs s)) (TF.Expr s P.Text) where
-    computedVolumeType x =
-        TF.unsafeCompute TF.encodeAttr x "volume_type"
-
--- | @credit_specification@ nested settings.
-data LaunchTemplateCreditSpecification s = LaunchTemplateCreditSpecification'
-    { _cpuCredits :: P.Maybe (TF.Expr s P.Text)
-    -- ^ @cpu_credits@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @credit_specification@ settings value.
-newLaunchTemplateCreditSpecification
-    :: LaunchTemplateCreditSpecification s
-newLaunchTemplateCreditSpecification =
-    LaunchTemplateCreditSpecification'
-        { _cpuCredits = P.Nothing
-        }
-
-instance TF.ToHCL (LaunchTemplateCreditSpecification s) where
-     toHCL LaunchTemplateCreditSpecification'{..} = TF.pairs $ P.mconcat
-        [ P.maybe P.mempty (TF.pair "cpu_credits") _cpuCredits
-        ]
-
-instance P.Hashable (LaunchTemplateCreditSpecification s)
-
-instance TF.HasValidator (LaunchTemplateCreditSpecification s) where
-    validator = P.mempty
-
-instance P.HasCpuCredits (LaunchTemplateCreditSpecification s) (P.Maybe (TF.Expr s P.Text)) where
-    cpuCredits =
-        P.lens (_cpuCredits :: LaunchTemplateCreditSpecification s -> P.Maybe (TF.Expr s P.Text))
-            (\s a -> s { _cpuCredits = a } :: LaunchTemplateCreditSpecification s)
-
--- | @elastic_gpu_specifications@ nested settings.
-data LaunchTemplateElasticGpuSpecifications s = LaunchTemplateElasticGpuSpecifications'
-    { _type' :: TF.Expr s P.Text
-    -- ^ @type@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @elastic_gpu_specifications@ settings value.
-newLaunchTemplateElasticGpuSpecifications
-    :: TF.Expr s P.Text -- ^ Lens: 'P.type'', Field: '_type'', HCL: @type@
-    -> LaunchTemplateElasticGpuSpecifications s
-newLaunchTemplateElasticGpuSpecifications _type' =
-    LaunchTemplateElasticGpuSpecifications'
-        { _type' = _type'
-        }
-
-instance TF.ToHCL (LaunchTemplateElasticGpuSpecifications s) where
-     toHCL LaunchTemplateElasticGpuSpecifications'{..} = TF.pairs $ P.mconcat
-        [ TF.pair "type" _type'
-        ]
-
-instance P.Hashable (LaunchTemplateElasticGpuSpecifications s)
-
-instance TF.HasValidator (LaunchTemplateElasticGpuSpecifications s) where
-    validator = P.mempty
-
-instance P.HasType' (LaunchTemplateElasticGpuSpecifications s) (TF.Expr s P.Text) where
-    type' =
-        P.lens (_type' :: LaunchTemplateElasticGpuSpecifications s -> TF.Expr s P.Text)
-            (\s a -> s { _type' = a } :: LaunchTemplateElasticGpuSpecifications s)
-
--- | @iam_instance_profile@ nested settings.
-data LaunchTemplateIamInstanceProfile s = LaunchTemplateIamInstanceProfile'
-    { _arn  :: P.Maybe (TF.Expr s P.Text)
-    -- ^ @arn@ - (Optional)
-    --
-    -- Conflicts with:
-    --
-    -- * 'name'
-    , _name :: P.Maybe (TF.Expr s P.Text)
-    -- ^ @name@ - (Optional)
-    --
-    -- Conflicts with:
-    --
-    -- * 'arn'
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @iam_instance_profile@ settings value.
-newLaunchTemplateIamInstanceProfile
-    :: LaunchTemplateIamInstanceProfile s
-newLaunchTemplateIamInstanceProfile =
-    LaunchTemplateIamInstanceProfile'
-        { _arn = P.Nothing
-        , _name = P.Nothing
-        }
-
-instance TF.ToHCL (LaunchTemplateIamInstanceProfile s) where
-     toHCL LaunchTemplateIamInstanceProfile'{..} = TF.pairs $ P.mconcat
-        [ P.maybe P.mempty (TF.pair "arn") _arn
-        , P.maybe P.mempty (TF.pair "name") _name
-        ]
-
-instance P.Hashable (LaunchTemplateIamInstanceProfile s)
-
-instance TF.HasValidator (LaunchTemplateIamInstanceProfile s) where
-    validator = TF.conflictValidator (\LaunchTemplateIamInstanceProfile'{..} -> HashMap.fromList $ P.catMaybes
-        [ TF.conflictsWith (_arn P.== P.Nothing) "_arn"
-            ["_name"]
-        , TF.conflictsWith (_name P.== P.Nothing) "_name"
-            ["_arn"]
-        ])
-
-instance P.HasArn (LaunchTemplateIamInstanceProfile s) (P.Maybe (TF.Expr s P.Text)) where
-    arn =
-        P.lens (_arn :: LaunchTemplateIamInstanceProfile s -> P.Maybe (TF.Expr s P.Text))
-            (\s a -> s { _arn = a } :: LaunchTemplateIamInstanceProfile s)
-
-instance P.HasName (LaunchTemplateIamInstanceProfile s) (P.Maybe (TF.Expr s P.Text)) where
-    name =
-        P.lens (_name :: LaunchTemplateIamInstanceProfile s -> P.Maybe (TF.Expr s P.Text))
-            (\s a -> s { _name = a } :: LaunchTemplateIamInstanceProfile s)
-
--- | @instance_market_options@ nested settings.
-data LaunchTemplateInstanceMarketOptions s = LaunchTemplateInstanceMarketOptions'
-    { _marketType  :: P.Maybe (TF.Expr s P.Text)
-    -- ^ @market_type@ - (Optional)
-    --
-    , _spotOptions :: P.Maybe (TF.Expr s (LaunchTemplateSpotOptions s))
-    -- ^ @spot_options@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @instance_market_options@ settings value.
-newLaunchTemplateInstanceMarketOptions
-    :: LaunchTemplateInstanceMarketOptions s
-newLaunchTemplateInstanceMarketOptions =
-    LaunchTemplateInstanceMarketOptions'
-        { _marketType = P.Nothing
-        , _spotOptions = P.Nothing
-        }
-
-instance TF.ToHCL (LaunchTemplateInstanceMarketOptions s) where
-     toHCL LaunchTemplateInstanceMarketOptions'{..} = TF.pairs $ P.mconcat
-        [ P.maybe P.mempty (TF.pair "market_type") _marketType
-        , P.maybe P.mempty (TF.pair "spot_options") _spotOptions
-        ]
-
-instance P.Hashable (LaunchTemplateInstanceMarketOptions s)
-
-instance TF.HasValidator (LaunchTemplateInstanceMarketOptions s) where
-    validator = P.mempty
-
-instance P.HasMarketType (LaunchTemplateInstanceMarketOptions s) (P.Maybe (TF.Expr s P.Text)) where
-    marketType =
-        P.lens (_marketType :: LaunchTemplateInstanceMarketOptions s -> P.Maybe (TF.Expr s P.Text))
-            (\s a -> s { _marketType = a } :: LaunchTemplateInstanceMarketOptions s)
-
-instance P.HasSpotOptions (LaunchTemplateInstanceMarketOptions s) (P.Maybe (TF.Expr s (LaunchTemplateSpotOptions s))) where
-    spotOptions =
-        P.lens (_spotOptions :: LaunchTemplateInstanceMarketOptions s -> P.Maybe (TF.Expr s (LaunchTemplateSpotOptions s)))
-            (\s a -> s { _spotOptions = a } :: LaunchTemplateInstanceMarketOptions s)
-
--- | @spot_options@ nested settings.
-data LaunchTemplateSpotOptions s = LaunchTemplateSpotOptions'
-    { _blockDurationMinutes         :: P.Maybe (TF.Expr s P.Int)
-    -- ^ @block_duration_minutes@ - (Optional)
-    --
-    , _instanceInterruptionBehavior :: P.Maybe (TF.Expr s P.Text)
-    -- ^ @instance_interruption_behavior@ - (Optional)
-    --
-    , _maxPrice                     :: P.Maybe (TF.Expr s P.Text)
-    -- ^ @max_price@ - (Optional)
-    --
-    , _spotInstanceType             :: P.Maybe (TF.Expr s P.Text)
-    -- ^ @spot_instance_type@ - (Optional)
-    --
-    , _validUntil                   :: P.Maybe (TF.Expr s P.Text)
-    -- ^ @valid_until@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @spot_options@ settings value.
-newLaunchTemplateSpotOptions
-    :: LaunchTemplateSpotOptions s
-newLaunchTemplateSpotOptions =
-    LaunchTemplateSpotOptions'
-        { _blockDurationMinutes = P.Nothing
-        , _instanceInterruptionBehavior = P.Nothing
-        , _maxPrice = P.Nothing
-        , _spotInstanceType = P.Nothing
-        , _validUntil = P.Nothing
-        }
-
-instance TF.ToHCL (LaunchTemplateSpotOptions s) where
-     toHCL LaunchTemplateSpotOptions'{..} = TF.pairs $ P.mconcat
-        [ P.maybe P.mempty (TF.pair "block_duration_minutes") _blockDurationMinutes
-        , P.maybe P.mempty (TF.pair "instance_interruption_behavior") _instanceInterruptionBehavior
-        , P.maybe P.mempty (TF.pair "max_price") _maxPrice
-        , P.maybe P.mempty (TF.pair "spot_instance_type") _spotInstanceType
-        , P.maybe P.mempty (TF.pair "valid_until") _validUntil
-        ]
-
-instance P.Hashable (LaunchTemplateSpotOptions s)
-
-instance TF.HasValidator (LaunchTemplateSpotOptions s) where
-    validator = P.mempty
-
-instance P.HasBlockDurationMinutes (LaunchTemplateSpotOptions s) (P.Maybe (TF.Expr s P.Int)) where
-    blockDurationMinutes =
-        P.lens (_blockDurationMinutes :: LaunchTemplateSpotOptions s -> P.Maybe (TF.Expr s P.Int))
-            (\s a -> s { _blockDurationMinutes = a } :: LaunchTemplateSpotOptions s)
-
-instance P.HasInstanceInterruptionBehavior (LaunchTemplateSpotOptions s) (P.Maybe (TF.Expr s P.Text)) where
-    instanceInterruptionBehavior =
-        P.lens (_instanceInterruptionBehavior :: LaunchTemplateSpotOptions s -> P.Maybe (TF.Expr s P.Text))
-            (\s a -> s { _instanceInterruptionBehavior = a } :: LaunchTemplateSpotOptions s)
-
-instance P.HasMaxPrice (LaunchTemplateSpotOptions s) (P.Maybe (TF.Expr s P.Text)) where
-    maxPrice =
-        P.lens (_maxPrice :: LaunchTemplateSpotOptions s -> P.Maybe (TF.Expr s P.Text))
-            (\s a -> s { _maxPrice = a } :: LaunchTemplateSpotOptions s)
-
-instance P.HasSpotInstanceType (LaunchTemplateSpotOptions s) (P.Maybe (TF.Expr s P.Text)) where
-    spotInstanceType =
-        P.lens (_spotInstanceType :: LaunchTemplateSpotOptions s -> P.Maybe (TF.Expr s P.Text))
-            (\s a -> s { _spotInstanceType = a } :: LaunchTemplateSpotOptions s)
-
-instance P.HasValidUntil (LaunchTemplateSpotOptions s) (P.Maybe (TF.Expr s P.Text)) where
-    validUntil =
-        P.lens (_validUntil :: LaunchTemplateSpotOptions s -> P.Maybe (TF.Expr s P.Text))
-            (\s a -> s { _validUntil = a } :: LaunchTemplateSpotOptions s)
-
-instance s ~ s' => P.HasComputedValidUntil (TF.Ref s' (LaunchTemplateSpotOptions s)) (TF.Expr s P.Text) where
-    computedValidUntil x =
-        TF.unsafeCompute TF.encodeAttr x "valid_until"
-
--- | @monitoring@ nested settings.
-data LaunchTemplateMonitoring s = LaunchTemplateMonitoring'
-    { _enabled :: P.Maybe (TF.Expr s P.Bool)
-    -- ^ @enabled@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @monitoring@ settings value.
-newLaunchTemplateMonitoring
-    :: LaunchTemplateMonitoring s
-newLaunchTemplateMonitoring =
-    LaunchTemplateMonitoring'
-        { _enabled = P.Nothing
-        }
-
-instance TF.ToHCL (LaunchTemplateMonitoring s) where
-     toHCL LaunchTemplateMonitoring'{..} = TF.pairs $ P.mconcat
-        [ P.maybe P.mempty (TF.pair "enabled") _enabled
-        ]
-
-instance P.Hashable (LaunchTemplateMonitoring s)
-
-instance TF.HasValidator (LaunchTemplateMonitoring s) where
-    validator = P.mempty
-
-instance P.HasEnabled (LaunchTemplateMonitoring s) (P.Maybe (TF.Expr s P.Bool)) where
-    enabled =
-        P.lens (_enabled :: LaunchTemplateMonitoring s -> P.Maybe (TF.Expr s P.Bool))
-            (\s a -> s { _enabled = a } :: LaunchTemplateMonitoring s)
-
--- | @network_interfaces@ nested settings.
-data LaunchTemplateNetworkInterfaces s = LaunchTemplateNetworkInterfaces'
-    { _associatePublicIpAddress :: P.Maybe (TF.Expr s P.Bool)
-    -- ^ @associate_public_ip_address@ - (Optional)
-    --
-    , _deleteOnTermination      :: P.Maybe (TF.Expr s P.Bool)
-    -- ^ @delete_on_termination@ - (Optional)
-    --
-    , _description              :: P.Maybe (TF.Expr s P.Text)
-    -- ^ @description@ - (Optional)
-    --
-    , _deviceIndex              :: P.Maybe (TF.Expr s P.Int)
-    -- ^ @device_index@ - (Optional)
-    --
-    , _ipv4Addresses            :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
-    -- ^ @ipv4_addresses@ - (Optional)
-    --
-    , _ipv6Addresses            :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
-    -- ^ @ipv6_addresses@ - (Optional)
-    --
-    , _networkInterfaceId       :: P.Maybe (TF.Expr s P.Text)
-    -- ^ @network_interface_id@ - (Optional)
-    --
-    , _privateIpAddress         :: P.Maybe (TF.Expr s P.Text)
-    -- ^ @private_ip_address@ - (Optional)
-    --
-    , _securityGroups           :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
-    -- ^ @security_groups@ - (Optional)
-    --
-    , _subnetId                 :: P.Maybe (TF.Expr s P.Text)
-    -- ^ @subnet_id@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @network_interfaces@ settings value.
-newLaunchTemplateNetworkInterfaces
-    :: LaunchTemplateNetworkInterfaces s
-newLaunchTemplateNetworkInterfaces =
-    LaunchTemplateNetworkInterfaces'
-        { _associatePublicIpAddress = P.Nothing
-        , _deleteOnTermination = P.Nothing
-        , _description = P.Nothing
-        , _deviceIndex = P.Nothing
-        , _ipv4Addresses = P.Nothing
-        , _ipv6Addresses = P.Nothing
-        , _networkInterfaceId = P.Nothing
-        , _privateIpAddress = P.Nothing
-        , _securityGroups = P.Nothing
-        , _subnetId = P.Nothing
-        }
-
-instance TF.ToHCL (LaunchTemplateNetworkInterfaces s) where
-     toHCL LaunchTemplateNetworkInterfaces'{..} = TF.pairs $ P.mconcat
-        [ P.maybe P.mempty (TF.pair "associate_public_ip_address") _associatePublicIpAddress
-        , P.maybe P.mempty (TF.pair "delete_on_termination") _deleteOnTermination
-        , P.maybe P.mempty (TF.pair "description") _description
-        , P.maybe P.mempty (TF.pair "device_index") _deviceIndex
-        , P.maybe P.mempty (TF.pair "ipv4_addresses") _ipv4Addresses
-        , P.maybe P.mempty (TF.pair "ipv6_addresses") _ipv6Addresses
-        , P.maybe P.mempty (TF.pair "network_interface_id") _networkInterfaceId
-        , P.maybe P.mempty (TF.pair "private_ip_address") _privateIpAddress
-        , P.maybe P.mempty (TF.pair "security_groups") _securityGroups
-        , P.maybe P.mempty (TF.pair "subnet_id") _subnetId
-        ]
-
-instance P.Hashable (LaunchTemplateNetworkInterfaces s)
-
-instance TF.HasValidator (LaunchTemplateNetworkInterfaces s) where
-    validator = P.mempty
-
-instance P.HasAssociatePublicIpAddress (LaunchTemplateNetworkInterfaces s) (P.Maybe (TF.Expr s P.Bool)) where
-    associatePublicIpAddress =
-        P.lens (_associatePublicIpAddress :: LaunchTemplateNetworkInterfaces s -> P.Maybe (TF.Expr s P.Bool))
-            (\s a -> s { _associatePublicIpAddress = a } :: LaunchTemplateNetworkInterfaces s)
-
-instance P.HasDeleteOnTermination (LaunchTemplateNetworkInterfaces s) (P.Maybe (TF.Expr s P.Bool)) where
-    deleteOnTermination =
-        P.lens (_deleteOnTermination :: LaunchTemplateNetworkInterfaces s -> P.Maybe (TF.Expr s P.Bool))
-            (\s a -> s { _deleteOnTermination = a } :: LaunchTemplateNetworkInterfaces s)
-
-instance P.HasDescription (LaunchTemplateNetworkInterfaces s) (P.Maybe (TF.Expr s P.Text)) where
-    description =
-        P.lens (_description :: LaunchTemplateNetworkInterfaces s -> P.Maybe (TF.Expr s P.Text))
-            (\s a -> s { _description = a } :: LaunchTemplateNetworkInterfaces s)
-
-instance P.HasDeviceIndex (LaunchTemplateNetworkInterfaces s) (P.Maybe (TF.Expr s P.Int)) where
-    deviceIndex =
-        P.lens (_deviceIndex :: LaunchTemplateNetworkInterfaces s -> P.Maybe (TF.Expr s P.Int))
-            (\s a -> s { _deviceIndex = a } :: LaunchTemplateNetworkInterfaces s)
-
-instance P.HasIpv4Addresses (LaunchTemplateNetworkInterfaces s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
-    ipv4Addresses =
-        P.lens (_ipv4Addresses :: LaunchTemplateNetworkInterfaces s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
-            (\s a -> s { _ipv4Addresses = a } :: LaunchTemplateNetworkInterfaces s)
-
-instance P.HasIpv6Addresses (LaunchTemplateNetworkInterfaces s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
-    ipv6Addresses =
-        P.lens (_ipv6Addresses :: LaunchTemplateNetworkInterfaces s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
-            (\s a -> s { _ipv6Addresses = a } :: LaunchTemplateNetworkInterfaces s)
-
-instance P.HasNetworkInterfaceId (LaunchTemplateNetworkInterfaces s) (P.Maybe (TF.Expr s P.Text)) where
-    networkInterfaceId =
-        P.lens (_networkInterfaceId :: LaunchTemplateNetworkInterfaces s -> P.Maybe (TF.Expr s P.Text))
-            (\s a -> s { _networkInterfaceId = a } :: LaunchTemplateNetworkInterfaces s)
-
-instance P.HasPrivateIpAddress (LaunchTemplateNetworkInterfaces s) (P.Maybe (TF.Expr s P.Text)) where
-    privateIpAddress =
-        P.lens (_privateIpAddress :: LaunchTemplateNetworkInterfaces s -> P.Maybe (TF.Expr s P.Text))
-            (\s a -> s { _privateIpAddress = a } :: LaunchTemplateNetworkInterfaces s)
-
-instance P.HasSecurityGroups (LaunchTemplateNetworkInterfaces s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
-    securityGroups =
-        P.lens (_securityGroups :: LaunchTemplateNetworkInterfaces s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
-            (\s a -> s { _securityGroups = a } :: LaunchTemplateNetworkInterfaces s)
-
-instance P.HasSubnetId (LaunchTemplateNetworkInterfaces s) (P.Maybe (TF.Expr s P.Text)) where
-    subnetId =
-        P.lens (_subnetId :: LaunchTemplateNetworkInterfaces s -> P.Maybe (TF.Expr s P.Text))
-            (\s a -> s { _subnetId = a } :: LaunchTemplateNetworkInterfaces s)
-
-instance s ~ s' => P.HasComputedIpv4AddressCount (TF.Ref s' (LaunchTemplateNetworkInterfaces s)) (TF.Expr s P.Int) where
-    computedIpv4AddressCount x =
-        TF.unsafeCompute TF.encodeAttr x "ipv4_address_count"
-
-instance s ~ s' => P.HasComputedIpv6AddressCount (TF.Ref s' (LaunchTemplateNetworkInterfaces s)) (TF.Expr s P.Int) where
-    computedIpv6AddressCount x =
-        TF.unsafeCompute TF.encodeAttr x "ipv6_address_count"
-
--- | @placement@ nested settings.
-data LaunchTemplatePlacement s = LaunchTemplatePlacement'
-    { _affinity         :: P.Maybe (TF.Expr s P.Text)
-    -- ^ @affinity@ - (Optional)
-    --
-    , _availabilityZone :: P.Maybe (TF.Expr s P.Text)
-    -- ^ @availability_zone@ - (Optional)
-    --
-    , _groupName        :: P.Maybe (TF.Expr s P.Text)
-    -- ^ @group_name@ - (Optional)
-    --
-    , _hostId           :: P.Maybe (TF.Expr s P.Text)
-    -- ^ @host_id@ - (Optional)
-    --
-    , _spreadDomain     :: P.Maybe (TF.Expr s P.Text)
-    -- ^ @spread_domain@ - (Optional)
-    --
-    , _tenancy          :: P.Maybe (TF.Expr s P.Text)
-    -- ^ @tenancy@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @placement@ settings value.
-newLaunchTemplatePlacement
-    :: LaunchTemplatePlacement s
-newLaunchTemplatePlacement =
-    LaunchTemplatePlacement'
-        { _affinity = P.Nothing
-        , _availabilityZone = P.Nothing
-        , _groupName = P.Nothing
-        , _hostId = P.Nothing
-        , _spreadDomain = P.Nothing
-        , _tenancy = P.Nothing
-        }
-
-instance TF.ToHCL (LaunchTemplatePlacement s) where
-     toHCL LaunchTemplatePlacement'{..} = TF.pairs $ P.mconcat
-        [ P.maybe P.mempty (TF.pair "affinity") _affinity
-        , P.maybe P.mempty (TF.pair "availability_zone") _availabilityZone
-        , P.maybe P.mempty (TF.pair "group_name") _groupName
-        , P.maybe P.mempty (TF.pair "host_id") _hostId
-        , P.maybe P.mempty (TF.pair "spread_domain") _spreadDomain
-        , P.maybe P.mempty (TF.pair "tenancy") _tenancy
-        ]
-
-instance P.Hashable (LaunchTemplatePlacement s)
-
-instance TF.HasValidator (LaunchTemplatePlacement s) where
-    validator = P.mempty
-
-instance P.HasAffinity (LaunchTemplatePlacement s) (P.Maybe (TF.Expr s P.Text)) where
-    affinity =
-        P.lens (_affinity :: LaunchTemplatePlacement s -> P.Maybe (TF.Expr s P.Text))
-            (\s a -> s { _affinity = a } :: LaunchTemplatePlacement s)
-
-instance P.HasAvailabilityZone (LaunchTemplatePlacement s) (P.Maybe (TF.Expr s P.Text)) where
-    availabilityZone =
-        P.lens (_availabilityZone :: LaunchTemplatePlacement s -> P.Maybe (TF.Expr s P.Text))
-            (\s a -> s { _availabilityZone = a } :: LaunchTemplatePlacement s)
-
-instance P.HasGroupName (LaunchTemplatePlacement s) (P.Maybe (TF.Expr s P.Text)) where
-    groupName =
-        P.lens (_groupName :: LaunchTemplatePlacement s -> P.Maybe (TF.Expr s P.Text))
-            (\s a -> s { _groupName = a } :: LaunchTemplatePlacement s)
-
-instance P.HasHostId (LaunchTemplatePlacement s) (P.Maybe (TF.Expr s P.Text)) where
-    hostId =
-        P.lens (_hostId :: LaunchTemplatePlacement s -> P.Maybe (TF.Expr s P.Text))
-            (\s a -> s { _hostId = a } :: LaunchTemplatePlacement s)
-
-instance P.HasSpreadDomain (LaunchTemplatePlacement s) (P.Maybe (TF.Expr s P.Text)) where
-    spreadDomain =
-        P.lens (_spreadDomain :: LaunchTemplatePlacement s -> P.Maybe (TF.Expr s P.Text))
-            (\s a -> s { _spreadDomain = a } :: LaunchTemplatePlacement s)
-
-instance P.HasTenancy (LaunchTemplatePlacement s) (P.Maybe (TF.Expr s P.Text)) where
-    tenancy =
-        P.lens (_tenancy :: LaunchTemplatePlacement s -> P.Maybe (TF.Expr s P.Text))
-            (\s a -> s { _tenancy = a } :: LaunchTemplatePlacement s)
-
--- | @tag_specifications@ nested settings.
-data LaunchTemplateTagSpecifications s = LaunchTemplateTagSpecifications'
-    { _resourceType :: P.Maybe (TF.Expr s P.Text)
-    -- ^ @resource_type@ - (Optional)
-    --
-    , _tags         :: P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text)))
-    -- ^ @tags@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @tag_specifications@ settings value.
-newLaunchTemplateTagSpecifications
-    :: LaunchTemplateTagSpecifications s
-newLaunchTemplateTagSpecifications =
-    LaunchTemplateTagSpecifications'
-        { _resourceType = P.Nothing
-        , _tags = P.Nothing
-        }
-
-instance TF.ToHCL (LaunchTemplateTagSpecifications s) where
-     toHCL LaunchTemplateTagSpecifications'{..} = TF.pairs $ P.mconcat
-        [ P.maybe P.mempty (TF.pair "resource_type") _resourceType
-        , P.maybe P.mempty (TF.pair "tags") _tags
-        ]
-
-instance P.Hashable (LaunchTemplateTagSpecifications s)
-
-instance TF.HasValidator (LaunchTemplateTagSpecifications s) where
-    validator = P.mempty
-
-instance P.HasResourceType (LaunchTemplateTagSpecifications s) (P.Maybe (TF.Expr s P.Text)) where
-    resourceType =
-        P.lens (_resourceType :: LaunchTemplateTagSpecifications s -> P.Maybe (TF.Expr s P.Text))
-            (\s a -> s { _resourceType = a } :: LaunchTemplateTagSpecifications s)
-
-instance P.HasTags (LaunchTemplateTagSpecifications s) (P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text)))) where
-    tags =
-        P.lens (_tags :: LaunchTemplateTagSpecifications s -> P.Maybe (TF.Expr s (P.HashMap P.Text (TF.Expr s P.Text))))
-            (\s a -> s { _tags = a } :: LaunchTemplateTagSpecifications s)
-
--- | @access_logs@ nested settings.
-data LbAccessLogs s = LbAccessLogs'
-    { _bucket  :: TF.Expr s P.Text
-    -- ^ @bucket@ - (Required)
-    --
-    , _enabled :: P.Maybe (TF.Expr s P.Bool)
-    -- ^ @enabled@ - (Optional)
-    --
-    , _prefix  :: P.Maybe (TF.Expr s P.Text)
-    -- ^ @prefix@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @access_logs@ settings value.
-newLbAccessLogs
-    :: TF.Expr s P.Text -- ^ Lens: 'P.bucket', Field: '_bucket', HCL: @bucket@
-    -> LbAccessLogs s
-newLbAccessLogs _bucket =
-    LbAccessLogs'
-        { _bucket = _bucket
-        , _enabled = P.Nothing
-        , _prefix = P.Nothing
-        }
-
-instance TF.ToHCL (LbAccessLogs s) where
-     toHCL LbAccessLogs'{..} = TF.pairs $ P.mconcat
-        [ TF.pair "bucket" _bucket
-        , P.maybe P.mempty (TF.pair "enabled") _enabled
-        , P.maybe P.mempty (TF.pair "prefix") _prefix
-        ]
-
-instance P.Hashable (LbAccessLogs s)
-
-instance TF.HasValidator (LbAccessLogs s) where
-    validator = P.mempty
-
-instance P.HasBucket (LbAccessLogs s) (TF.Expr s P.Text) where
-    bucket =
-        P.lens (_bucket :: LbAccessLogs s -> TF.Expr s P.Text)
-            (\s a -> s { _bucket = a } :: LbAccessLogs s)
-
-instance P.HasEnabled (LbAccessLogs s) (P.Maybe (TF.Expr s P.Bool)) where
-    enabled =
-        P.lens (_enabled :: LbAccessLogs s -> P.Maybe (TF.Expr s P.Bool))
-            (\s a -> s { _enabled = a } :: LbAccessLogs s)
-
-instance P.HasPrefix (LbAccessLogs s) (P.Maybe (TF.Expr s P.Text)) where
-    prefix =
-        P.lens (_prefix :: LbAccessLogs s -> P.Maybe (TF.Expr s P.Text))
-            (\s a -> s { _prefix = a } :: LbAccessLogs s)
-
-instance s ~ s' => P.HasComputedBucket (TF.Ref s' (LbAccessLogs s)) (TF.Expr s P.Text) where
-    computedBucket x =
-        TF.unsafeCompute TF.encodeAttr x "bucket"
-
-instance s ~ s' => P.HasComputedEnabled (TF.Ref s' (LbAccessLogs s)) (TF.Expr s P.Bool) where
-    computedEnabled x =
-        TF.unsafeCompute TF.encodeAttr x "enabled"
-
-instance s ~ s' => P.HasComputedPrefix (TF.Ref s' (LbAccessLogs s)) (TF.Expr s P.Text) where
-    computedPrefix x =
-        TF.unsafeCompute TF.encodeAttr x "prefix"
-
--- | @default_action@ nested settings.
-data LbListenerDefaultAction s = LbListenerDefaultAction'
-    { _targetGroupArn :: TF.Expr s P.Text
-    -- ^ @target_group_arn@ - (Required)
-    --
-    , _type'          :: TF.Expr s P.Text
-    -- ^ @type@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @default_action@ settings value.
-newLbListenerDefaultAction
-    :: TF.Expr s P.Text -- ^ Lens: 'P.targetGroupArn', Field: '_targetGroupArn', HCL: @target_group_arn@
-    -> TF.Expr s P.Text -- ^ Lens: 'P.type'', Field: '_type'', HCL: @type@
-    -> LbListenerDefaultAction s
-newLbListenerDefaultAction _targetGroupArn _type' =
-    LbListenerDefaultAction'
-        { _targetGroupArn = _targetGroupArn
-        , _type' = _type'
-        }
-
-instance TF.ToHCL (LbListenerDefaultAction s) where
-     toHCL LbListenerDefaultAction'{..} = TF.pairs $ P.mconcat
-        [ TF.pair "target_group_arn" _targetGroupArn
-        , TF.pair "type" _type'
-        ]
-
-instance P.Hashable (LbListenerDefaultAction s)
-
-instance TF.HasValidator (LbListenerDefaultAction s) where
-    validator = P.mempty
-
-instance P.HasTargetGroupArn (LbListenerDefaultAction s) (TF.Expr s P.Text) where
-    targetGroupArn =
-        P.lens (_targetGroupArn :: LbListenerDefaultAction s -> TF.Expr s P.Text)
-            (\s a -> s { _targetGroupArn = a } :: LbListenerDefaultAction s)
-
-instance P.HasType' (LbListenerDefaultAction s) (TF.Expr s P.Text) where
-    type' =
-        P.lens (_type' :: LbListenerDefaultAction s -> TF.Expr s P.Text)
-            (\s a -> s { _type' = a } :: LbListenerDefaultAction s)
-
-instance s ~ s' => P.HasComputedTargetGroupArn (TF.Ref s' (LbListenerDefaultAction s)) (TF.Expr s P.Text) where
-    computedTargetGroupArn x =
-        TF.unsafeCompute TF.encodeAttr x "target_group_arn"
-
-instance s ~ s' => P.HasComputedType (TF.Ref s' (LbListenerDefaultAction s)) (TF.Expr s P.Text) where
-    computedType x =
-        TF.unsafeCompute TF.encodeAttr x "type"
-
--- | @action@ nested settings.
-data LbListenerRuleAction s = LbListenerRuleAction'
-    { _targetGroupArn :: TF.Expr s P.Text
-    -- ^ @target_group_arn@ - (Required)
-    --
-    , _type'          :: TF.Expr s P.Text
-    -- ^ @type@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @action@ settings value.
-newLbListenerRuleAction
-    :: TF.Expr s P.Text -- ^ Lens: 'P.targetGroupArn', Field: '_targetGroupArn', HCL: @target_group_arn@
-    -> TF.Expr s P.Text -- ^ Lens: 'P.type'', Field: '_type'', HCL: @type@
-    -> LbListenerRuleAction s
-newLbListenerRuleAction _targetGroupArn _type' =
-    LbListenerRuleAction'
-        { _targetGroupArn = _targetGroupArn
-        , _type' = _type'
-        }
-
-instance TF.ToHCL (LbListenerRuleAction s) where
-     toHCL LbListenerRuleAction'{..} = TF.pairs $ P.mconcat
-        [ TF.pair "target_group_arn" _targetGroupArn
-        , TF.pair "type" _type'
-        ]
-
-instance P.Hashable (LbListenerRuleAction s)
-
-instance TF.HasValidator (LbListenerRuleAction s) where
-    validator = P.mempty
-
-instance P.HasTargetGroupArn (LbListenerRuleAction s) (TF.Expr s P.Text) where
-    targetGroupArn =
-        P.lens (_targetGroupArn :: LbListenerRuleAction s -> TF.Expr s P.Text)
-            (\s a -> s { _targetGroupArn = a } :: LbListenerRuleAction s)
-
-instance P.HasType' (LbListenerRuleAction s) (TF.Expr s P.Text) where
-    type' =
-        P.lens (_type' :: LbListenerRuleAction s -> TF.Expr s P.Text)
-            (\s a -> s { _type' = a } :: LbListenerRuleAction s)
-
--- | @condition@ nested settings.
-data LbListenerRuleCondition s = LbListenerRuleCondition'
-    { _field  :: P.Maybe (TF.Expr s P.Text)
-    -- ^ @field@ - (Optional)
-    --
-    , _values :: P.Maybe (TF.Expr s P.Text)
-    -- ^ @values@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @condition@ settings value.
-newLbListenerRuleCondition
-    :: LbListenerRuleCondition s
-newLbListenerRuleCondition =
-    LbListenerRuleCondition'
-        { _field = P.Nothing
-        , _values = P.Nothing
-        }
-
-instance TF.ToHCL (LbListenerRuleCondition s) where
-     toHCL LbListenerRuleCondition'{..} = TF.pairs $ P.mconcat
-        [ P.maybe P.mempty (TF.pair "field") _field
-        , P.maybe P.mempty (TF.pair "values") _values
-        ]
-
-instance P.Hashable (LbListenerRuleCondition s)
-
-instance TF.HasValidator (LbListenerRuleCondition s) where
-    validator = P.mempty
-
-instance P.HasField (LbListenerRuleCondition s) (P.Maybe (TF.Expr s P.Text)) where
-    field =
-        P.lens (_field :: LbListenerRuleCondition s -> P.Maybe (TF.Expr s P.Text))
-            (\s a -> s { _field = a } :: LbListenerRuleCondition s)
-
-instance P.HasValues (LbListenerRuleCondition s) (P.Maybe (TF.Expr s P.Text)) where
-    values =
-        P.lens (_values :: LbListenerRuleCondition s -> P.Maybe (TF.Expr s P.Text))
-            (\s a -> s { _values = a } :: LbListenerRuleCondition s)
-
--- | @attribute@ nested settings.
-data LbSslNegotiationPolicyAttribute s = LbSslNegotiationPolicyAttribute'
-    { _name  :: TF.Expr s P.Text
-    -- ^ @name@ - (Required)
-    --
-    , _value :: TF.Expr s P.Text
-    -- ^ @value@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @attribute@ settings value.
-newLbSslNegotiationPolicyAttribute
-    :: TF.Expr s P.Text -- ^ Lens: 'P.name', Field: '_name', HCL: @name@
-    -> TF.Expr s P.Text -- ^ Lens: 'P.value', Field: '_value', HCL: @value@
-    -> LbSslNegotiationPolicyAttribute s
-newLbSslNegotiationPolicyAttribute _name _value =
-    LbSslNegotiationPolicyAttribute'
-        { _name = _name
-        , _value = _value
-        }
-
-instance TF.ToHCL (LbSslNegotiationPolicyAttribute s) where
-     toHCL LbSslNegotiationPolicyAttribute'{..} = TF.pairs $ P.mconcat
-        [ TF.pair "name" _name
-        , TF.pair "value" _value
-        ]
-
-instance P.Hashable (LbSslNegotiationPolicyAttribute s)
-
-instance TF.HasValidator (LbSslNegotiationPolicyAttribute s) where
-    validator = P.mempty
-
-instance P.HasName (LbSslNegotiationPolicyAttribute s) (TF.Expr s P.Text) where
-    name =
-        P.lens (_name :: LbSslNegotiationPolicyAttribute s -> TF.Expr s P.Text)
-            (\s a -> s { _name = a } :: LbSslNegotiationPolicyAttribute s)
-
-instance P.HasValue (LbSslNegotiationPolicyAttribute s) (TF.Expr s P.Text) where
-    value =
-        P.lens (_value :: LbSslNegotiationPolicyAttribute s -> TF.Expr s P.Text)
-            (\s a -> s { _value = a } :: LbSslNegotiationPolicyAttribute s)
-
--- | @subnet_mapping@ nested settings.
-data LbSubnetMapping s = LbSubnetMapping'
-    { _allocationId :: P.Maybe (TF.Expr s P.Text)
-    -- ^ @allocation_id@ - (Optional)
-    --
-    , _subnetId     :: TF.Expr s P.Text
-    -- ^ @subnet_id@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @subnet_mapping@ settings value.
-newLbSubnetMapping
-    :: TF.Expr s P.Text -- ^ Lens: 'P.subnetId', Field: '_subnetId', HCL: @subnet_id@
-    -> LbSubnetMapping s
-newLbSubnetMapping _subnetId =
-    LbSubnetMapping'
-        { _allocationId = P.Nothing
-        , _subnetId = _subnetId
-        }
-
-instance TF.ToHCL (LbSubnetMapping s) where
-     toHCL LbSubnetMapping'{..} = TF.pairs $ P.mconcat
-        [ P.maybe P.mempty (TF.pair "allocation_id") _allocationId
-        , TF.pair "subnet_id" _subnetId
-        ]
-
-instance P.Hashable (LbSubnetMapping s)
-
-instance TF.HasValidator (LbSubnetMapping s) where
-    validator = P.mempty
-
-instance P.HasAllocationId (LbSubnetMapping s) (P.Maybe (TF.Expr s P.Text)) where
-    allocationId =
-        P.lens (_allocationId :: LbSubnetMapping s -> P.Maybe (TF.Expr s P.Text))
-            (\s a -> s { _allocationId = a } :: LbSubnetMapping s)
-
-instance P.HasSubnetId (LbSubnetMapping s) (TF.Expr s P.Text) where
-    subnetId =
-        P.lens (_subnetId :: LbSubnetMapping s -> TF.Expr s P.Text)
-            (\s a -> s { _subnetId = a } :: LbSubnetMapping s)
-
--- | @health_check@ nested settings.
-data LbTargetGroupHealthCheck s = LbTargetGroupHealthCheck'
-    { _healthyThreshold   :: TF.Expr s P.Int
-    -- ^ @healthy_threshold@ - (Default @3@)
-    --
-    , _interval           :: TF.Expr s P.Int
-    -- ^ @interval@ - (Default @30@)
-    --
-    , _matcher            :: P.Maybe (TF.Expr s P.Text)
-    -- ^ @matcher@ - (Optional)
-    --
-    , _path               :: P.Maybe (TF.Expr s P.Text)
-    -- ^ @path@ - (Optional)
-    --
-    , _port               :: TF.Expr s P.Text
-    -- ^ @port@ - (Default @traffic-port@)
-    --
-    , _protocol           :: TF.Expr s P.Text
-    -- ^ @protocol@ - (Default @HTTP@)
-    --
-    , _timeout            :: P.Maybe (TF.Expr s P.Int)
-    -- ^ @timeout@ - (Optional)
-    --
-    , _unhealthyThreshold :: TF.Expr s P.Int
-    -- ^ @unhealthy_threshold@ - (Default @3@)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @health_check@ settings value.
-newLbTargetGroupHealthCheck
-    :: LbTargetGroupHealthCheck s
-newLbTargetGroupHealthCheck =
-    LbTargetGroupHealthCheck'
-        { _healthyThreshold = TF.value 3
-        , _interval = TF.value 30
-        , _matcher = P.Nothing
-        , _path = P.Nothing
-        , _port = TF.value "traffic-port"
-        , _protocol = TF.value "HTTP"
-        , _timeout = P.Nothing
-        , _unhealthyThreshold = TF.value 3
-        }
-
-instance TF.ToHCL (LbTargetGroupHealthCheck s) where
-     toHCL LbTargetGroupHealthCheck'{..} = TF.pairs $ P.mconcat
-        [ TF.pair "healthy_threshold" _healthyThreshold
-        , TF.pair "interval" _interval
-        , P.maybe P.mempty (TF.pair "matcher") _matcher
-        , P.maybe P.mempty (TF.pair "path") _path
-        , TF.pair "port" _port
-        , TF.pair "protocol" _protocol
-        , P.maybe P.mempty (TF.pair "timeout") _timeout
-        , TF.pair "unhealthy_threshold" _unhealthyThreshold
-        ]
-
-instance P.Hashable (LbTargetGroupHealthCheck s)
-
-instance TF.HasValidator (LbTargetGroupHealthCheck s) where
-    validator = P.mempty
-
-instance P.HasHealthyThreshold (LbTargetGroupHealthCheck s) (TF.Expr s P.Int) where
-    healthyThreshold =
-        P.lens (_healthyThreshold :: LbTargetGroupHealthCheck s -> TF.Expr s P.Int)
-            (\s a -> s { _healthyThreshold = a } :: LbTargetGroupHealthCheck s)
-
-instance P.HasInterval (LbTargetGroupHealthCheck s) (TF.Expr s P.Int) where
-    interval =
-        P.lens (_interval :: LbTargetGroupHealthCheck s -> TF.Expr s P.Int)
-            (\s a -> s { _interval = a } :: LbTargetGroupHealthCheck s)
-
-instance P.HasMatcher (LbTargetGroupHealthCheck s) (P.Maybe (TF.Expr s P.Text)) where
-    matcher =
-        P.lens (_matcher :: LbTargetGroupHealthCheck s -> P.Maybe (TF.Expr s P.Text))
-            (\s a -> s { _matcher = a } :: LbTargetGroupHealthCheck s)
-
-instance P.HasPath (LbTargetGroupHealthCheck s) (P.Maybe (TF.Expr s P.Text)) where
-    path =
-        P.lens (_path :: LbTargetGroupHealthCheck s -> P.Maybe (TF.Expr s P.Text))
-            (\s a -> s { _path = a } :: LbTargetGroupHealthCheck s)
-
-instance P.HasPort (LbTargetGroupHealthCheck s) (TF.Expr s P.Text) where
-    port =
-        P.lens (_port :: LbTargetGroupHealthCheck s -> TF.Expr s P.Text)
-            (\s a -> s { _port = a } :: LbTargetGroupHealthCheck s)
-
-instance P.HasProtocol (LbTargetGroupHealthCheck s) (TF.Expr s P.Text) where
-    protocol =
-        P.lens (_protocol :: LbTargetGroupHealthCheck s -> TF.Expr s P.Text)
-            (\s a -> s { _protocol = a } :: LbTargetGroupHealthCheck s)
-
-instance P.HasTimeout (LbTargetGroupHealthCheck s) (P.Maybe (TF.Expr s P.Int)) where
-    timeout =
-        P.lens (_timeout :: LbTargetGroupHealthCheck s -> P.Maybe (TF.Expr s P.Int))
-            (\s a -> s { _timeout = a } :: LbTargetGroupHealthCheck s)
-
-instance P.HasUnhealthyThreshold (LbTargetGroupHealthCheck s) (TF.Expr s P.Int) where
-    unhealthyThreshold =
-        P.lens (_unhealthyThreshold :: LbTargetGroupHealthCheck s -> TF.Expr s P.Int)
-            (\s a -> s { _unhealthyThreshold = a } :: LbTargetGroupHealthCheck s)
-
-instance s ~ s' => P.HasComputedHealthyThreshold (TF.Ref s' (LbTargetGroupHealthCheck s)) (TF.Expr s P.Int) where
-    computedHealthyThreshold x =
-        TF.unsafeCompute TF.encodeAttr x "healthy_threshold"
-
-instance s ~ s' => P.HasComputedInterval (TF.Ref s' (LbTargetGroupHealthCheck s)) (TF.Expr s P.Int) where
-    computedInterval x =
-        TF.unsafeCompute TF.encodeAttr x "interval"
-
-instance s ~ s' => P.HasComputedMatcher (TF.Ref s' (LbTargetGroupHealthCheck s)) (TF.Expr s P.Text) where
-    computedMatcher x =
-        TF.unsafeCompute TF.encodeAttr x "matcher"
-
-instance s ~ s' => P.HasComputedPath (TF.Ref s' (LbTargetGroupHealthCheck s)) (TF.Expr s P.Text) where
-    computedPath x =
-        TF.unsafeCompute TF.encodeAttr x "path"
-
-instance s ~ s' => P.HasComputedPort (TF.Ref s' (LbTargetGroupHealthCheck s)) (TF.Expr s P.Text) where
-    computedPort x =
-        TF.unsafeCompute TF.encodeAttr x "port"
-
-instance s ~ s' => P.HasComputedProtocol (TF.Ref s' (LbTargetGroupHealthCheck s)) (TF.Expr s P.Text) where
-    computedProtocol x =
-        TF.unsafeCompute TF.encodeAttr x "protocol"
-
-instance s ~ s' => P.HasComputedTimeout (TF.Ref s' (LbTargetGroupHealthCheck s)) (TF.Expr s P.Int) where
-    computedTimeout x =
-        TF.unsafeCompute TF.encodeAttr x "timeout"
-
-instance s ~ s' => P.HasComputedUnhealthyThreshold (TF.Ref s' (LbTargetGroupHealthCheck s)) (TF.Expr s P.Int) where
-    computedUnhealthyThreshold x =
-        TF.unsafeCompute TF.encodeAttr x "unhealthy_threshold"
-
--- | @stickiness@ nested settings.
-data LbTargetGroupStickiness s = LbTargetGroupStickiness'
-    { _cookieDuration :: TF.Expr s P.Int
-    -- ^ @cookie_duration@ - (Default @86400@)
-    --
-    , _enabled        :: TF.Expr s P.Bool
-    -- ^ @enabled@ - (Default @true@)
-    --
-    , _type'          :: TF.Expr s P.Text
-    -- ^ @type@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @stickiness@ settings value.
-newLbTargetGroupStickiness
-    :: TF.Expr s P.Text -- ^ Lens: 'P.type'', Field: '_type'', HCL: @type@
-    -> LbTargetGroupStickiness s
-newLbTargetGroupStickiness _type' =
-    LbTargetGroupStickiness'
-        { _cookieDuration = TF.value 86400
-        , _enabled = TF.value P.True
-        , _type' = _type'
-        }
-
-instance TF.ToHCL (LbTargetGroupStickiness s) where
-     toHCL LbTargetGroupStickiness'{..} = TF.pairs $ P.mconcat
-        [ TF.pair "cookie_duration" _cookieDuration
-        , TF.pair "enabled" _enabled
-        , TF.pair "type" _type'
-        ]
-
-instance P.Hashable (LbTargetGroupStickiness s)
-
-instance TF.HasValidator (LbTargetGroupStickiness s) where
-    validator = P.mempty
-
-instance P.HasCookieDuration (LbTargetGroupStickiness s) (TF.Expr s P.Int) where
-    cookieDuration =
-        P.lens (_cookieDuration :: LbTargetGroupStickiness s -> TF.Expr s P.Int)
-            (\s a -> s { _cookieDuration = a } :: LbTargetGroupStickiness s)
-
-instance P.HasEnabled (LbTargetGroupStickiness s) (TF.Expr s P.Bool) where
-    enabled =
-        P.lens (_enabled :: LbTargetGroupStickiness s -> TF.Expr s P.Bool)
-            (\s a -> s { _enabled = a } :: LbTargetGroupStickiness s)
-
-instance P.HasType' (LbTargetGroupStickiness s) (TF.Expr s P.Text) where
-    type' =
-        P.lens (_type' :: LbTargetGroupStickiness s -> TF.Expr s P.Text)
-            (\s a -> s { _type' = a } :: LbTargetGroupStickiness s)
-
-instance s ~ s' => P.HasComputedCookieDuration (TF.Ref s' (LbTargetGroupStickiness s)) (TF.Expr s P.Int) where
-    computedCookieDuration x =
-        TF.unsafeCompute TF.encodeAttr x "cookie_duration"
-
-instance s ~ s' => P.HasComputedEnabled (TF.Ref s' (LbTargetGroupStickiness s)) (TF.Expr s P.Bool) where
-    computedEnabled x =
-        TF.unsafeCompute TF.encodeAttr x "enabled"
-
-instance s ~ s' => P.HasComputedType (TF.Ref s' (LbTargetGroupStickiness s)) (TF.Expr s P.Text) where
-    computedType x =
-        TF.unsafeCompute TF.encodeAttr x "type"
-
--- | @policy_attribute@ nested settings.
-data LoadBalancerPolicyPolicyAttribute s = LoadBalancerPolicyPolicyAttribute'
-    { _name  :: P.Maybe (TF.Expr s P.Text)
-    -- ^ @name@ - (Optional)
-    --
-    , _value :: P.Maybe (TF.Expr s P.Text)
-    -- ^ @value@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @policy_attribute@ settings value.
-newLoadBalancerPolicyPolicyAttribute
-    :: LoadBalancerPolicyPolicyAttribute s
-newLoadBalancerPolicyPolicyAttribute =
-    LoadBalancerPolicyPolicyAttribute'
-        { _name = P.Nothing
-        , _value = P.Nothing
-        }
-
-instance TF.ToHCL (LoadBalancerPolicyPolicyAttribute s) where
-     toHCL LoadBalancerPolicyPolicyAttribute'{..} = TF.pairs $ P.mconcat
-        [ P.maybe P.mempty (TF.pair "name") _name
-        , P.maybe P.mempty (TF.pair "value") _value
-        ]
-
-instance P.Hashable (LoadBalancerPolicyPolicyAttribute s)
-
-instance TF.HasValidator (LoadBalancerPolicyPolicyAttribute s) where
-    validator = P.mempty
-
-instance P.HasName (LoadBalancerPolicyPolicyAttribute s) (P.Maybe (TF.Expr s P.Text)) where
-    name =
-        P.lens (_name :: LoadBalancerPolicyPolicyAttribute s -> P.Maybe (TF.Expr s P.Text))
-            (\s a -> s { _name = a } :: LoadBalancerPolicyPolicyAttribute s)
-
-instance P.HasValue (LoadBalancerPolicyPolicyAttribute s) (P.Maybe (TF.Expr s P.Text)) where
-    value =
-        P.lens (_value :: LoadBalancerPolicyPolicyAttribute s -> P.Maybe (TF.Expr s P.Text))
-            (\s a -> s { _value = a } :: LoadBalancerPolicyPolicyAttribute s)
-
--- | @classification_type@ nested settings.
-data MacieS3BucketAssociationClassificationType s = MacieS3BucketAssociationClassificationType'
-    { _continuous :: TF.Expr s P.Text
-    -- ^ @continuous@ - (Default @FULL@)
-    --
-    , _oneTime    :: TF.Expr s P.Text
-    -- ^ @one_time@ - (Default @NONE@)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @classification_type@ settings value.
-newMacieS3BucketAssociationClassificationType
-    :: MacieS3BucketAssociationClassificationType s
-newMacieS3BucketAssociationClassificationType =
-    MacieS3BucketAssociationClassificationType'
-        { _continuous = TF.value "FULL"
-        , _oneTime = TF.value "NONE"
-        }
-
-instance TF.ToHCL (MacieS3BucketAssociationClassificationType s) where
-     toHCL MacieS3BucketAssociationClassificationType'{..} = TF.pairs $ P.mconcat
-        [ TF.pair "continuous" _continuous
-        , TF.pair "one_time" _oneTime
-        ]
-
-instance P.Hashable (MacieS3BucketAssociationClassificationType s)
-
-instance TF.HasValidator (MacieS3BucketAssociationClassificationType s) where
-    validator = P.mempty
-
-instance P.HasContinuous (MacieS3BucketAssociationClassificationType s) (TF.Expr s P.Text) where
-    continuous =
-        P.lens (_continuous :: MacieS3BucketAssociationClassificationType s -> TF.Expr s P.Text)
-            (\s a -> s { _continuous = a } :: MacieS3BucketAssociationClassificationType s)
-
-instance P.HasOneTime (MacieS3BucketAssociationClassificationType s) (TF.Expr s P.Text) where
-    oneTime =
-        P.lens (_oneTime :: MacieS3BucketAssociationClassificationType s -> TF.Expr s P.Text)
-            (\s a -> s { _oneTime = a } :: MacieS3BucketAssociationClassificationType s)
-
--- | @configuration@ nested settings.
-data MqBrokerConfiguration s = MqBrokerConfiguration'
-    { _id       :: P.Maybe (TF.Expr s P.Text)
-    -- ^ @id@ - (Optional)
-    --
-    , _revision :: P.Maybe (TF.Expr s P.Int)
-    -- ^ @revision@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @configuration@ settings value.
-newMqBrokerConfiguration
-    :: MqBrokerConfiguration s
-newMqBrokerConfiguration =
-    MqBrokerConfiguration'
-        { _id = P.Nothing
-        , _revision = P.Nothing
-        }
-
-instance TF.ToHCL (MqBrokerConfiguration s) where
-     toHCL MqBrokerConfiguration'{..} = TF.pairs $ P.mconcat
-        [ P.maybe P.mempty (TF.pair "id") _id
-        , P.maybe P.mempty (TF.pair "revision") _revision
-        ]
-
-instance P.Hashable (MqBrokerConfiguration s)
-
-instance TF.HasValidator (MqBrokerConfiguration s) where
-    validator = P.mempty
-
-instance P.HasId (MqBrokerConfiguration s) (P.Maybe (TF.Expr s P.Text)) where
-    id =
-        P.lens (_id :: MqBrokerConfiguration s -> P.Maybe (TF.Expr s P.Text))
-            (\s a -> s { _id = a } :: MqBrokerConfiguration s)
-
-instance P.HasRevision (MqBrokerConfiguration s) (P.Maybe (TF.Expr s P.Int)) where
-    revision =
-        P.lens (_revision :: MqBrokerConfiguration s -> P.Maybe (TF.Expr s P.Int))
-            (\s a -> s { _revision = a } :: MqBrokerConfiguration s)
-
-instance s ~ s' => P.HasComputedId (TF.Ref s' (MqBrokerConfiguration s)) (TF.Expr s P.Text) where
-    computedId x =
-        TF.unsafeCompute TF.encodeAttr x "id"
-
-instance s ~ s' => P.HasComputedRevision (TF.Ref s' (MqBrokerConfiguration s)) (TF.Expr s P.Int) where
-    computedRevision x =
-        TF.unsafeCompute TF.encodeAttr x "revision"
-
--- | @instances@ nested settings.
-data MqBrokerInstances s = MqBrokerInstances'
-    deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @instances@ settings value.
-newMqBrokerInstances
-    :: MqBrokerInstances s
-newMqBrokerInstances =
-    MqBrokerInstances'
-
-instance TF.ToHCL (MqBrokerInstances s) where
-    toHCL MqBrokerInstances' = P.mempty
-
-instance P.Hashable (MqBrokerInstances s)
-
-instance TF.HasValidator (MqBrokerInstances s)
-
-instance s ~ s' => P.HasComputedConsoleUrl (TF.Ref s' (MqBrokerInstances s)) (TF.Expr s P.Text) where
-    computedConsoleUrl x =
-        TF.unsafeCompute TF.encodeAttr x "console_url"
-
-instance s ~ s' => P.HasComputedEndpoints (TF.Ref s' (MqBrokerInstances s)) (TF.Expr s [TF.Expr s P.Text]) where
-    computedEndpoints x =
-        TF.unsafeCompute TF.encodeAttr x "endpoints"
-
--- | @maintenance_window_start_time@ nested settings.
-data MqBrokerMaintenanceWindowStartTime s = MqBrokerMaintenanceWindowStartTime'
-    { _dayOfWeek :: TF.Expr s P.Text
-    -- ^ @day_of_week@ - (Required)
-    --
-    , _timeOfDay :: TF.Expr s P.Text
-    -- ^ @time_of_day@ - (Required)
-    --
-    , _timeZone  :: TF.Expr s P.Text
-    -- ^ @time_zone@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @maintenance_window_start_time@ settings value.
-newMqBrokerMaintenanceWindowStartTime
-    :: TF.Expr s P.Text -- ^ Lens: 'P.timeOfDay', Field: '_timeOfDay', HCL: @time_of_day@
-    -> TF.Expr s P.Text -- ^ Lens: 'P.dayOfWeek', Field: '_dayOfWeek', HCL: @day_of_week@
-    -> TF.Expr s P.Text -- ^ Lens: 'P.timeZone', Field: '_timeZone', HCL: @time_zone@
-    -> MqBrokerMaintenanceWindowStartTime s
-newMqBrokerMaintenanceWindowStartTime _timeOfDay _dayOfWeek _timeZone =
-    MqBrokerMaintenanceWindowStartTime'
-        { _dayOfWeek = _dayOfWeek
-        , _timeOfDay = _timeOfDay
-        , _timeZone = _timeZone
-        }
-
-instance TF.ToHCL (MqBrokerMaintenanceWindowStartTime s) where
-     toHCL MqBrokerMaintenanceWindowStartTime'{..} = TF.pairs $ P.mconcat
-        [ TF.pair "day_of_week" _dayOfWeek
-        , TF.pair "time_of_day" _timeOfDay
-        , TF.pair "time_zone" _timeZone
-        ]
-
-instance P.Hashable (MqBrokerMaintenanceWindowStartTime s)
-
-instance TF.HasValidator (MqBrokerMaintenanceWindowStartTime s) where
-    validator = P.mempty
-
-instance P.HasDayOfWeek (MqBrokerMaintenanceWindowStartTime s) (TF.Expr s P.Text) where
-    dayOfWeek =
-        P.lens (_dayOfWeek :: MqBrokerMaintenanceWindowStartTime s -> TF.Expr s P.Text)
-            (\s a -> s { _dayOfWeek = a } :: MqBrokerMaintenanceWindowStartTime s)
-
-instance P.HasTimeOfDay (MqBrokerMaintenanceWindowStartTime s) (TF.Expr s P.Text) where
-    timeOfDay =
-        P.lens (_timeOfDay :: MqBrokerMaintenanceWindowStartTime s -> TF.Expr s P.Text)
-            (\s a -> s { _timeOfDay = a } :: MqBrokerMaintenanceWindowStartTime s)
-
-instance P.HasTimeZone (MqBrokerMaintenanceWindowStartTime s) (TF.Expr s P.Text) where
-    timeZone =
-        P.lens (_timeZone :: MqBrokerMaintenanceWindowStartTime s -> TF.Expr s P.Text)
-            (\s a -> s { _timeZone = a } :: MqBrokerMaintenanceWindowStartTime s)
-
-instance s ~ s' => P.HasComputedDayOfWeek (TF.Ref s' (MqBrokerMaintenanceWindowStartTime s)) (TF.Expr s P.Text) where
-    computedDayOfWeek x =
-        TF.unsafeCompute TF.encodeAttr x "day_of_week"
-
-instance s ~ s' => P.HasComputedTimeOfDay (TF.Ref s' (MqBrokerMaintenanceWindowStartTime s)) (TF.Expr s P.Text) where
-    computedTimeOfDay x =
-        TF.unsafeCompute TF.encodeAttr x "time_of_day"
-
-instance s ~ s' => P.HasComputedTimeZone (TF.Ref s' (MqBrokerMaintenanceWindowStartTime s)) (TF.Expr s P.Text) where
-    computedTimeZone x =
-        TF.unsafeCompute TF.encodeAttr x "time_zone"
-
--- | @user@ nested settings.
-data MqBrokerUser s = MqBrokerUser'
-    { _username      :: TF.Expr s P.Text
-    -- ^ @username@ - (Required)
-    --
-    , _consoleAccess :: TF.Expr s P.Bool
-    -- ^ @console_access@ - (Default @false@)
-    --
-    , _groups        :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
-    -- ^ @groups@ - (Optional)
-    --
-    , _password      :: TF.Expr s P.Text
-    -- ^ @password@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @user@ settings value.
-newMqBrokerUser
-    :: TF.Expr s P.Text -- ^ Lens: 'P.password', Field: '_password', HCL: @password@
-    -> TF.Expr s P.Text -- ^ Lens: 'P.username', Field: '_username', HCL: @username@
-    -> MqBrokerUser s
-newMqBrokerUser _password _username =
-    MqBrokerUser'
-        { _username = _username
-        , _consoleAccess = TF.value P.False
-        , _groups = P.Nothing
-        , _password = _password
-        }
-
-instance TF.ToHCL (MqBrokerUser s) where
-     toHCL MqBrokerUser'{..} = TF.pairs $ P.mconcat
-        [ TF.pair "username" _username
-        , TF.pair "console_access" _consoleAccess
-        , P.maybe P.mempty (TF.pair "groups") _groups
-        , TF.pair "password" _password
-        ]
-
-instance P.Hashable (MqBrokerUser s)
-
-instance TF.HasValidator (MqBrokerUser s) where
-    validator = P.mempty
-
-instance P.HasUsername (MqBrokerUser s) (TF.Expr s P.Text) where
-    username =
-        P.lens (_username :: MqBrokerUser s -> TF.Expr s P.Text)
-            (\s a -> s { _username = a } :: MqBrokerUser s)
-
-instance P.HasConsoleAccess (MqBrokerUser s) (TF.Expr s P.Bool) where
-    consoleAccess =
-        P.lens (_consoleAccess :: MqBrokerUser s -> TF.Expr s P.Bool)
-            (\s a -> s { _consoleAccess = a } :: MqBrokerUser s)
-
-instance P.HasGroups (MqBrokerUser s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
-    groups =
-        P.lens (_groups :: MqBrokerUser s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
-            (\s a -> s { _groups = a } :: MqBrokerUser s)
-
-instance P.HasPassword (MqBrokerUser s) (TF.Expr s P.Text) where
-    password =
-        P.lens (_password :: MqBrokerUser s -> TF.Expr s P.Text)
-            (\s a -> s { _password = a } :: MqBrokerUser s)
-
-instance s ~ s' => P.HasComputedConsoleAccess (TF.Ref s' (MqBrokerUser s)) (TF.Expr s P.Bool) where
-    computedConsoleAccess x =
-        TF.unsafeCompute TF.encodeAttr x "console_access"
-
-instance s ~ s' => P.HasComputedGroups (TF.Ref s' (MqBrokerUser s)) (TF.Expr s [TF.Expr s P.Text]) where
-    computedGroups x =
-        TF.unsafeCompute TF.encodeAttr x "groups"
-
--- | @filter@ nested settings.
-data NatGatewayFilter s = NatGatewayFilter'
-    { _name   :: TF.Expr s P.Text
-    -- ^ @name@ - (Required)
-    --
-    , _values :: TF.Expr s [TF.Expr s P.Text]
-    -- ^ @values@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @filter@ settings value.
-newNatGatewayFilter
-    :: TF.Expr s P.Text -- ^ Lens: 'P.name', Field: '_name', HCL: @name@
-    -> TF.Expr s [TF.Expr s P.Text] -- ^ Lens: 'P.values', Field: '_values', HCL: @values@
-    -> NatGatewayFilter s
-newNatGatewayFilter _name _values =
-    NatGatewayFilter'
-        { _name = _name
-        , _values = _values
-        }
-
-instance TF.ToHCL (NatGatewayFilter s) where
-     toHCL NatGatewayFilter'{..} = TF.pairs $ P.mconcat
-        [ TF.pair "name" _name
-        , TF.pair "values" _values
-        ]
-
-instance P.Hashable (NatGatewayFilter s)
-
-instance TF.HasValidator (NatGatewayFilter s) where
-    validator = P.mempty
-
-instance P.HasName (NatGatewayFilter s) (TF.Expr s P.Text) where
-    name =
-        P.lens (_name :: NatGatewayFilter s -> TF.Expr s P.Text)
-            (\s a -> s { _name = a } :: NatGatewayFilter s)
-
-instance P.HasValues (NatGatewayFilter s) (TF.Expr s [TF.Expr s P.Text]) where
-    values =
-        P.lens (_values :: NatGatewayFilter s -> TF.Expr s [TF.Expr s P.Text])
-            (\s a -> s { _values = a } :: NatGatewayFilter s)
-
--- | @parameter@ nested settings.
-data NeptuneClusterParameterGroupParameter s = NeptuneClusterParameterGroupParameter'
-    { _applyMethod :: TF.Expr s P.Text
-    -- ^ @apply_method@ - (Default @pending-reboot@)
-    --
-    , _name        :: TF.Expr s P.Text
-    -- ^ @name@ - (Required)
-    --
-    , _value       :: TF.Expr s P.Text
-    -- ^ @value@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @parameter@ settings value.
-newNeptuneClusterParameterGroupParameter
-    :: TF.Expr s P.Text -- ^ Lens: 'P.name', Field: '_name', HCL: @name@
-    -> TF.Expr s P.Text -- ^ Lens: 'P.value', Field: '_value', HCL: @value@
-    -> NeptuneClusterParameterGroupParameter s
-newNeptuneClusterParameterGroupParameter _name _value =
-    NeptuneClusterParameterGroupParameter'
-        { _applyMethod = TF.value "pending-reboot"
-        , _name = _name
-        , _value = _value
-        }
-
-instance TF.ToHCL (NeptuneClusterParameterGroupParameter s) where
-     toHCL NeptuneClusterParameterGroupParameter'{..} = TF.pairs $ P.mconcat
-        [ TF.pair "apply_method" _applyMethod
-        , TF.pair "name" _name
-        , TF.pair "value" _value
-        ]
-
-instance P.Hashable (NeptuneClusterParameterGroupParameter s)
-
-instance TF.HasValidator (NeptuneClusterParameterGroupParameter s) where
-    validator = P.mempty
-
-instance P.HasApplyMethod (NeptuneClusterParameterGroupParameter s) (TF.Expr s P.Text) where
-    applyMethod =
-        P.lens (_applyMethod :: NeptuneClusterParameterGroupParameter s -> TF.Expr s P.Text)
-            (\s a -> s { _applyMethod = a } :: NeptuneClusterParameterGroupParameter s)
-
-instance P.HasName (NeptuneClusterParameterGroupParameter s) (TF.Expr s P.Text) where
-    name =
-        P.lens (_name :: NeptuneClusterParameterGroupParameter s -> TF.Expr s P.Text)
-            (\s a -> s { _name = a } :: NeptuneClusterParameterGroupParameter s)
-
-instance P.HasValue (NeptuneClusterParameterGroupParameter s) (TF.Expr s P.Text) where
-    value =
-        P.lens (_value :: NeptuneClusterParameterGroupParameter s -> TF.Expr s P.Text)
-            (\s a -> s { _value = a } :: NeptuneClusterParameterGroupParameter s)
-
--- | @parameter@ nested settings.
-data NeptuneParameterGroupParameter s = NeptuneParameterGroupParameter'
-    { _applyMethod :: TF.Expr s P.Text
-    -- ^ @apply_method@ - (Default @pending-reboot@)
-    --
-    , _name        :: TF.Expr s P.Text
-    -- ^ @name@ - (Required)
-    --
-    , _value       :: TF.Expr s P.Text
-    -- ^ @value@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @parameter@ settings value.
-newNeptuneParameterGroupParameter
-    :: TF.Expr s P.Text -- ^ Lens: 'P.name', Field: '_name', HCL: @name@
-    -> TF.Expr s P.Text -- ^ Lens: 'P.value', Field: '_value', HCL: @value@
-    -> NeptuneParameterGroupParameter s
-newNeptuneParameterGroupParameter _name _value =
-    NeptuneParameterGroupParameter'
-        { _applyMethod = TF.value "pending-reboot"
-        , _name = _name
-        , _value = _value
-        }
-
-instance TF.ToHCL (NeptuneParameterGroupParameter s) where
-     toHCL NeptuneParameterGroupParameter'{..} = TF.pairs $ P.mconcat
-        [ TF.pair "apply_method" _applyMethod
-        , TF.pair "name" _name
-        , TF.pair "value" _value
-        ]
-
-instance P.Hashable (NeptuneParameterGroupParameter s)
-
-instance TF.HasValidator (NeptuneParameterGroupParameter s) where
-    validator = P.mempty
-
-instance P.HasApplyMethod (NeptuneParameterGroupParameter s) (TF.Expr s P.Text) where
-    applyMethod =
-        P.lens (_applyMethod :: NeptuneParameterGroupParameter s -> TF.Expr s P.Text)
-            (\s a -> s { _applyMethod = a } :: NeptuneParameterGroupParameter s)
-
-instance P.HasName (NeptuneParameterGroupParameter s) (TF.Expr s P.Text) where
-    name =
-        P.lens (_name :: NeptuneParameterGroupParameter s -> TF.Expr s P.Text)
-            (\s a -> s { _name = a } :: NeptuneParameterGroupParameter s)
-
-instance P.HasValue (NeptuneParameterGroupParameter s) (TF.Expr s P.Text) where
-    value =
-        P.lens (_value :: NeptuneParameterGroupParameter s -> TF.Expr s P.Text)
-            (\s a -> s { _value = a } :: NeptuneParameterGroupParameter s)
-
--- | @egress@ nested settings.
-data NetworkAclEgress s = NetworkAclEgress'
-    { _action        :: TF.Expr s P.Text
-    -- ^ @action@ - (Required)
-    --
-    , _cidrBlock     :: P.Maybe (TF.Expr s P.Text)
-    -- ^ @cidr_block@ - (Optional)
-    --
-    , _fromPort      :: TF.Expr s P.Int
-    -- ^ @from_port@ - (Required)
-    --
-    , _icmpCode      :: P.Maybe (TF.Expr s P.Int)
-    -- ^ @icmp_code@ - (Optional)
-    --
-    , _icmpType      :: P.Maybe (TF.Expr s P.Int)
-    -- ^ @icmp_type@ - (Optional)
-    --
-    , _ipv6CidrBlock :: P.Maybe (TF.Expr s P.Text)
-    -- ^ @ipv6_cidr_block@ - (Optional)
-    --
-    , _protocol      :: TF.Expr s P.Text
-    -- ^ @protocol@ - (Required)
-    --
-    , _ruleNo        :: TF.Expr s P.Int
-    -- ^ @rule_no@ - (Required)
-    --
-    , _toPort        :: TF.Expr s P.Int
-    -- ^ @to_port@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
+-- | The @website@ nested settings definition.
+data S3BucketWebsite s = S3BucketWebsite_Internal
+    { error_document           :: P.Maybe (TF.Expr s P.Text)
+    -- ^ @error_document@
+    -- - (Optional)
+    , index_document           :: P.Maybe (TF.Expr s P.Text)
+    -- ^ @index_document@
+    -- - (Optional)
+    , redirect_all_requests_to :: P.Maybe (TF.Expr s P.Text)
+    -- ^ @redirect_all_requests_to@
+    -- - (Optional)
+    , routing_rules            :: P.Maybe (TF.Expr s P.Text)
+    -- ^ @routing_rules@
+    -- - (Optional)
+    } deriving (P.Show)
+
+-- | Construct a new @website@ settings value.
+newS3BucketWebsite
+    :: S3BucketWebsite s
+newS3BucketWebsite =
+    S3BucketWebsite_Internal
+        { error_document = P.Nothing
+        , index_document = P.Nothing
+        , redirect_all_requests_to = P.Nothing
+        , routing_rules = P.Nothing
+        }
+
+instance Lens.HasField "error_document" f (S3BucketWebsite s) (P.Maybe (TF.Expr s P.Text)) where
+    field = Lens.lens'
+        (error_document :: S3BucketWebsite s -> P.Maybe (TF.Expr s P.Text))
+        (\s a -> s { error_document = a } :: S3BucketWebsite s)
+
+instance Lens.HasField "index_document" f (S3BucketWebsite s) (P.Maybe (TF.Expr s P.Text)) where
+    field = Lens.lens'
+        (index_document :: S3BucketWebsite s -> P.Maybe (TF.Expr s P.Text))
+        (\s a -> s { index_document = a } :: S3BucketWebsite s)
+
+instance Lens.HasField "redirect_all_requests_to" f (S3BucketWebsite s) (P.Maybe (TF.Expr s P.Text)) where
+    field = Lens.lens'
+        (redirect_all_requests_to :: S3BucketWebsite s -> P.Maybe (TF.Expr s P.Text))
+        (\s a -> s { redirect_all_requests_to = a } :: S3BucketWebsite s)
+
+instance Lens.HasField "routing_rules" f (S3BucketWebsite s) (P.Maybe (TF.Expr s P.Text)) where
+    field = Lens.lens'
+        (routing_rules :: S3BucketWebsite s -> P.Maybe (TF.Expr s P.Text))
+        (\s a -> s { routing_rules = a } :: S3BucketWebsite s)
+
+instance TF.ToHCL (S3BucketWebsite s) where
+    toHCL S3BucketWebsite_Internal{..} = TF.pairs $
+          P.mempty
+       <> P.maybe P.mempty (TF.pair "error_document") error_document
+       <> P.maybe P.mempty (TF.pair "index_document") index_document
+       <> P.maybe P.mempty (TF.pair "redirect_all_requests_to") redirect_all_requests_to
+       <> P.maybe P.mempty (TF.pair "routing_rules") routing_rules
+
+-- | The @rotation_rules@ nested settings definition.
+newtype SecretsmanagerSecretRotationRules s = SecretsmanagerSecretRotationRules
+    { automatically_after_days :: TF.Expr s P.Int
+    -- ^ @automatically_after_days@
+    -- - (Required)
+    } deriving (P.Show)
+
+instance Lens.HasField "automatically_after_days" f (SecretsmanagerSecretRotationRules s) (TF.Expr s P.Int) where
+    field = Lens.lens'
+        (automatically_after_days :: SecretsmanagerSecretRotationRules s -> TF.Expr s P.Int)
+        (\s a -> s { automatically_after_days = a } :: SecretsmanagerSecretRotationRules s)
+
+instance Lens.HasField "automatically_after_days" (P.Const r) (TF.Ref SecretsmanagerSecretRotationRules s) (TF.Expr s P.Int) where
+    field = Lens.to (TF.unsafeComputed Encode.attribute (proxy# :: Proxy# "automatically_after_days"))
+
+instance TF.ToHCL (SecretsmanagerSecretRotationRules s) where
+    toHCL SecretsmanagerSecretRotationRules{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "automatically_after_days" automatically_after_days
+
+-- | The @egress@ nested settings definition.
+data SecurityGroupEgress s = SecurityGroupEgress_Internal
+    { cidr_blocks      :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
+    -- ^ @cidr_blocks@
+    -- - (Optional)
+    , description      :: P.Maybe (TF.Expr s P.Text)
+    -- ^ @description@
+    -- - (Optional)
+    , from_port        :: TF.Expr s P.Int
+    -- ^ @from_port@
+    -- - (Required)
+    , ipv6_cidr_blocks :: P.Maybe (TF.Expr s [TF.Expr s P.IPRange])
+    -- ^ @ipv6_cidr_blocks@
+    -- - (Optional)
+    , prefix_list_ids  :: P.Maybe (TF.Expr s [TF.Expr s TF.Id])
+    -- ^ @prefix_list_ids@
+    -- - (Optional)
+    , protocol         :: TF.Expr s P.Text
+    -- ^ @protocol@
+    -- - (Required)
+    , security_groups  :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
+    -- ^ @security_groups@
+    -- - (Optional)
+    , self             :: TF.Expr s P.Bool
+    -- ^ @self@
+    -- - (Default __@false@__)
+    , to_port          :: TF.Expr s P.Int
+    -- ^ @to_port@
+    -- - (Required)
+    } deriving (P.Show)
 
 -- | Construct a new @egress@ settings value.
-newNetworkAclEgress
-    :: TF.Expr s P.Text -- ^ Lens: 'P.action', Field: '_action', HCL: @action@
-    -> TF.Expr s P.Int -- ^ Lens: 'P.ruleNo', Field: '_ruleNo', HCL: @rule_no@
-    -> TF.Expr s P.Int -- ^ Lens: 'P.fromPort', Field: '_fromPort', HCL: @from_port@
-    -> TF.Expr s P.Int -- ^ Lens: 'P.toPort', Field: '_toPort', HCL: @to_port@
-    -> TF.Expr s P.Text -- ^ Lens: 'P.protocol', Field: '_protocol', HCL: @protocol@
-    -> NetworkAclEgress s
-newNetworkAclEgress _action _ruleNo _fromPort _toPort _protocol =
-    NetworkAclEgress'
-        { _action = _action
-        , _cidrBlock = P.Nothing
-        , _fromPort = _fromPort
-        , _icmpCode = P.Nothing
-        , _icmpType = P.Nothing
-        , _ipv6CidrBlock = P.Nothing
-        , _protocol = _protocol
-        , _ruleNo = _ruleNo
-        , _toPort = _toPort
+newSecurityGroupEgress
+    :: SecurityGroupEgress_Required s
+    -> SecurityGroupEgress s
+newSecurityGroupEgress SecurityGroupEgress{..} =
+    SecurityGroupEgress_Internal
+        { cidr_blocks = P.Nothing
+        , description = P.Nothing
+        , from_port = from_port
+        , ipv6_cidr_blocks = P.Nothing
+        , prefix_list_ids = P.Nothing
+        , protocol = protocol
+        , security_groups = P.Nothing
+        , self = TF.expr P.False
+        , to_port = to_port
         }
 
-instance TF.ToHCL (NetworkAclEgress s) where
-     toHCL NetworkAclEgress'{..} = TF.pairs $ P.mconcat
-        [ TF.pair "action" _action
-        , P.maybe P.mempty (TF.pair "cidr_block") _cidrBlock
-        , TF.pair "from_port" _fromPort
-        , P.maybe P.mempty (TF.pair "icmp_code") _icmpCode
-        , P.maybe P.mempty (TF.pair "icmp_type") _icmpType
-        , P.maybe P.mempty (TF.pair "ipv6_cidr_block") _ipv6CidrBlock
-        , TF.pair "protocol" _protocol
-        , TF.pair "rule_no" _ruleNo
-        , TF.pair "to_port" _toPort
-        ]
+-- | The required arguments for 'newSecurityGroupEgress'.
+data SecurityGroupEgress_Required s = SecurityGroupEgress
+    { from_port :: TF.Expr s P.Int
+    -- ^ (Required)
+    , to_port   :: TF.Expr s P.Int
+    -- ^ (Required)
+    , protocol  :: TF.Expr s P.Text
+    -- ^ (Required)
+    } deriving (P.Show)
 
-instance P.Hashable (NetworkAclEgress s)
+instance Lens.HasField "cidr_blocks" f (SecurityGroupEgress s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
+    field = Lens.lens'
+        (cidr_blocks :: SecurityGroupEgress s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
+        (\s a -> s { cidr_blocks = a } :: SecurityGroupEgress s)
 
-instance TF.HasValidator (NetworkAclEgress s) where
-    validator = P.mempty
+instance Lens.HasField "description" f (SecurityGroupEgress s) (P.Maybe (TF.Expr s P.Text)) where
+    field = Lens.lens'
+        (description :: SecurityGroupEgress s -> P.Maybe (TF.Expr s P.Text))
+        (\s a -> s { description = a } :: SecurityGroupEgress s)
 
-instance P.HasAction (NetworkAclEgress s) (TF.Expr s P.Text) where
-    action =
-        P.lens (_action :: NetworkAclEgress s -> TF.Expr s P.Text)
-            (\s a -> s { _action = a } :: NetworkAclEgress s)
+instance Lens.HasField "from_port" f (SecurityGroupEgress s) (TF.Expr s P.Int) where
+    field = Lens.lens'
+        (from_port :: SecurityGroupEgress s -> TF.Expr s P.Int)
+        (\s a -> s { from_port = a } :: SecurityGroupEgress s)
 
-instance P.HasCidrBlock (NetworkAclEgress s) (P.Maybe (TF.Expr s P.Text)) where
-    cidrBlock =
-        P.lens (_cidrBlock :: NetworkAclEgress s -> P.Maybe (TF.Expr s P.Text))
-            (\s a -> s { _cidrBlock = a } :: NetworkAclEgress s)
+instance Lens.HasField "ipv6_cidr_blocks" f (SecurityGroupEgress s) (P.Maybe (TF.Expr s [TF.Expr s P.IPRange])) where
+    field = Lens.lens'
+        (ipv6_cidr_blocks :: SecurityGroupEgress s -> P.Maybe (TF.Expr s [TF.Expr s P.IPRange]))
+        (\s a -> s { ipv6_cidr_blocks = a } :: SecurityGroupEgress s)
 
-instance P.HasFromPort (NetworkAclEgress s) (TF.Expr s P.Int) where
-    fromPort =
-        P.lens (_fromPort :: NetworkAclEgress s -> TF.Expr s P.Int)
-            (\s a -> s { _fromPort = a } :: NetworkAclEgress s)
+instance Lens.HasField "prefix_list_ids" f (SecurityGroupEgress s) (P.Maybe (TF.Expr s [TF.Expr s TF.Id])) where
+    field = Lens.lens'
+        (prefix_list_ids :: SecurityGroupEgress s -> P.Maybe (TF.Expr s [TF.Expr s TF.Id]))
+        (\s a -> s { prefix_list_ids = a } :: SecurityGroupEgress s)
 
-instance P.HasIcmpCode (NetworkAclEgress s) (P.Maybe (TF.Expr s P.Int)) where
-    icmpCode =
-        P.lens (_icmpCode :: NetworkAclEgress s -> P.Maybe (TF.Expr s P.Int))
-            (\s a -> s { _icmpCode = a } :: NetworkAclEgress s)
+instance Lens.HasField "protocol" f (SecurityGroupEgress s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (protocol :: SecurityGroupEgress s -> TF.Expr s P.Text)
+        (\s a -> s { protocol = a } :: SecurityGroupEgress s)
 
-instance P.HasIcmpType (NetworkAclEgress s) (P.Maybe (TF.Expr s P.Int)) where
-    icmpType =
-        P.lens (_icmpType :: NetworkAclEgress s -> P.Maybe (TF.Expr s P.Int))
-            (\s a -> s { _icmpType = a } :: NetworkAclEgress s)
+instance Lens.HasField "security_groups" f (SecurityGroupEgress s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
+    field = Lens.lens'
+        (security_groups :: SecurityGroupEgress s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
+        (\s a -> s { security_groups = a } :: SecurityGroupEgress s)
 
-instance P.HasIpv6CidrBlock (NetworkAclEgress s) (P.Maybe (TF.Expr s P.Text)) where
-    ipv6CidrBlock =
-        P.lens (_ipv6CidrBlock :: NetworkAclEgress s -> P.Maybe (TF.Expr s P.Text))
-            (\s a -> s { _ipv6CidrBlock = a } :: NetworkAclEgress s)
+instance Lens.HasField "self" f (SecurityGroupEgress s) (TF.Expr s P.Bool) where
+    field = Lens.lens'
+        (self :: SecurityGroupEgress s -> TF.Expr s P.Bool)
+        (\s a -> s { self = a } :: SecurityGroupEgress s)
 
-instance P.HasProtocol (NetworkAclEgress s) (TF.Expr s P.Text) where
-    protocol =
-        P.lens (_protocol :: NetworkAclEgress s -> TF.Expr s P.Text)
-            (\s a -> s { _protocol = a } :: NetworkAclEgress s)
+instance Lens.HasField "to_port" f (SecurityGroupEgress s) (TF.Expr s P.Int) where
+    field = Lens.lens'
+        (to_port :: SecurityGroupEgress s -> TF.Expr s P.Int)
+        (\s a -> s { to_port = a } :: SecurityGroupEgress s)
 
-instance P.HasRuleNo (NetworkAclEgress s) (TF.Expr s P.Int) where
-    ruleNo =
-        P.lens (_ruleNo :: NetworkAclEgress s -> TF.Expr s P.Int)
-            (\s a -> s { _ruleNo = a } :: NetworkAclEgress s)
+instance TF.ToHCL (SecurityGroupEgress s) where
+    toHCL SecurityGroupEgress_Internal{..} = TF.pairs $
+          P.mempty
+       <> P.maybe P.mempty (TF.pair "cidr_blocks") cidr_blocks
+       <> P.maybe P.mempty (TF.pair "description") description
+       <> TF.pair "from_port" from_port
+       <> P.maybe P.mempty (TF.pair "ipv6_cidr_blocks") ipv6_cidr_blocks
+       <> P.maybe P.mempty (TF.pair "prefix_list_ids") prefix_list_ids
+       <> TF.pair "protocol" protocol
+       <> P.maybe P.mempty (TF.pair "security_groups") security_groups
+       <> TF.pair "self" self
+       <> TF.pair "to_port" to_port
 
-instance P.HasToPort (NetworkAclEgress s) (TF.Expr s P.Int) where
-    toPort =
-        P.lens (_toPort :: NetworkAclEgress s -> TF.Expr s P.Int)
-            (\s a -> s { _toPort = a } :: NetworkAclEgress s)
+-- | The @filter@ nested settings definition.
+data SecurityGroupFilter s = SecurityGroupFilter
+    { name   :: TF.Expr s P.Text
+    -- ^ @name@
+    -- - (Required)
+    , values :: TF.Expr s [TF.Expr s P.Text]
+    -- ^ @values@
+    -- - (Required)
+    } deriving (P.Show)
 
--- | @ingress@ nested settings.
-data NetworkAclIngress s = NetworkAclIngress'
-    { _action        :: TF.Expr s P.Text
-    -- ^ @action@ - (Required)
-    --
-    , _cidrBlock     :: P.Maybe (TF.Expr s P.Text)
-    -- ^ @cidr_block@ - (Optional)
-    --
-    , _fromPort      :: TF.Expr s P.Int
-    -- ^ @from_port@ - (Required)
-    --
-    , _icmpCode      :: P.Maybe (TF.Expr s P.Int)
-    -- ^ @icmp_code@ - (Optional)
-    --
-    , _icmpType      :: P.Maybe (TF.Expr s P.Int)
-    -- ^ @icmp_type@ - (Optional)
-    --
-    , _ipv6CidrBlock :: P.Maybe (TF.Expr s P.Text)
-    -- ^ @ipv6_cidr_block@ - (Optional)
-    --
-    , _protocol      :: TF.Expr s P.Text
-    -- ^ @protocol@ - (Required)
-    --
-    , _ruleNo        :: TF.Expr s P.Int
-    -- ^ @rule_no@ - (Required)
-    --
-    , _toPort        :: TF.Expr s P.Int
-    -- ^ @to_port@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
+instance Lens.HasField "name" f (SecurityGroupFilter s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (name :: SecurityGroupFilter s -> TF.Expr s P.Text)
+        (\s a -> s { name = a } :: SecurityGroupFilter s)
+
+instance Lens.HasField "values" f (SecurityGroupFilter s) (TF.Expr s [TF.Expr s P.Text]) where
+    field = Lens.lens'
+        (values :: SecurityGroupFilter s -> TF.Expr s [TF.Expr s P.Text])
+        (\s a -> s { values = a } :: SecurityGroupFilter s)
+
+instance TF.ToHCL (SecurityGroupFilter s) where
+    toHCL SecurityGroupFilter{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "name" name
+       <> TF.pair "values" values
+
+-- | The @ingress@ nested settings definition.
+data SecurityGroupIngress s = SecurityGroupIngress_Internal
+    { cidr_blocks      :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
+    -- ^ @cidr_blocks@
+    -- - (Optional)
+    , description      :: P.Maybe (TF.Expr s P.Text)
+    -- ^ @description@
+    -- - (Optional)
+    , from_port        :: TF.Expr s P.Int
+    -- ^ @from_port@
+    -- - (Required)
+    , ipv6_cidr_blocks :: P.Maybe (TF.Expr s [TF.Expr s P.IPRange])
+    -- ^ @ipv6_cidr_blocks@
+    -- - (Optional)
+    , prefix_list_ids  :: P.Maybe (TF.Expr s [TF.Expr s TF.Id])
+    -- ^ @prefix_list_ids@
+    -- - (Optional)
+    , protocol         :: TF.Expr s P.Text
+    -- ^ @protocol@
+    -- - (Required)
+    , security_groups  :: P.Maybe (TF.Expr s [TF.Expr s P.Text])
+    -- ^ @security_groups@
+    -- - (Optional)
+    , self             :: TF.Expr s P.Bool
+    -- ^ @self@
+    -- - (Default __@false@__)
+    , to_port          :: TF.Expr s P.Int
+    -- ^ @to_port@
+    -- - (Required)
+    } deriving (P.Show)
 
 -- | Construct a new @ingress@ settings value.
-newNetworkAclIngress
-    :: TF.Expr s P.Text -- ^ Lens: 'P.action', Field: '_action', HCL: @action@
-    -> TF.Expr s P.Int -- ^ Lens: 'P.ruleNo', Field: '_ruleNo', HCL: @rule_no@
-    -> TF.Expr s P.Int -- ^ Lens: 'P.fromPort', Field: '_fromPort', HCL: @from_port@
-    -> TF.Expr s P.Int -- ^ Lens: 'P.toPort', Field: '_toPort', HCL: @to_port@
-    -> TF.Expr s P.Text -- ^ Lens: 'P.protocol', Field: '_protocol', HCL: @protocol@
-    -> NetworkAclIngress s
-newNetworkAclIngress _action _ruleNo _fromPort _toPort _protocol =
-    NetworkAclIngress'
-        { _action = _action
-        , _cidrBlock = P.Nothing
-        , _fromPort = _fromPort
-        , _icmpCode = P.Nothing
-        , _icmpType = P.Nothing
-        , _ipv6CidrBlock = P.Nothing
-        , _protocol = _protocol
-        , _ruleNo = _ruleNo
-        , _toPort = _toPort
+newSecurityGroupIngress
+    :: SecurityGroupIngress_Required s
+    -> SecurityGroupIngress s
+newSecurityGroupIngress SecurityGroupIngress{..} =
+    SecurityGroupIngress_Internal
+        { cidr_blocks = P.Nothing
+        , description = P.Nothing
+        , from_port = from_port
+        , ipv6_cidr_blocks = P.Nothing
+        , prefix_list_ids = P.Nothing
+        , protocol = protocol
+        , security_groups = P.Nothing
+        , self = TF.expr P.False
+        , to_port = to_port
         }
 
-instance TF.ToHCL (NetworkAclIngress s) where
-     toHCL NetworkAclIngress'{..} = TF.pairs $ P.mconcat
-        [ TF.pair "action" _action
-        , P.maybe P.mempty (TF.pair "cidr_block") _cidrBlock
-        , TF.pair "from_port" _fromPort
-        , P.maybe P.mempty (TF.pair "icmp_code") _icmpCode
-        , P.maybe P.mempty (TF.pair "icmp_type") _icmpType
-        , P.maybe P.mempty (TF.pair "ipv6_cidr_block") _ipv6CidrBlock
-        , TF.pair "protocol" _protocol
-        , TF.pair "rule_no" _ruleNo
-        , TF.pair "to_port" _toPort
-        ]
+-- | The required arguments for 'newSecurityGroupIngress'.
+data SecurityGroupIngress_Required s = SecurityGroupIngress
+    { from_port :: TF.Expr s P.Int
+    -- ^ (Required)
+    , to_port   :: TF.Expr s P.Int
+    -- ^ (Required)
+    , protocol  :: TF.Expr s P.Text
+    -- ^ (Required)
+    } deriving (P.Show)
 
-instance P.Hashable (NetworkAclIngress s)
+instance Lens.HasField "cidr_blocks" f (SecurityGroupIngress s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
+    field = Lens.lens'
+        (cidr_blocks :: SecurityGroupIngress s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
+        (\s a -> s { cidr_blocks = a } :: SecurityGroupIngress s)
 
-instance TF.HasValidator (NetworkAclIngress s) where
-    validator = P.mempty
+instance Lens.HasField "description" f (SecurityGroupIngress s) (P.Maybe (TF.Expr s P.Text)) where
+    field = Lens.lens'
+        (description :: SecurityGroupIngress s -> P.Maybe (TF.Expr s P.Text))
+        (\s a -> s { description = a } :: SecurityGroupIngress s)
 
-instance P.HasAction (NetworkAclIngress s) (TF.Expr s P.Text) where
-    action =
-        P.lens (_action :: NetworkAclIngress s -> TF.Expr s P.Text)
-            (\s a -> s { _action = a } :: NetworkAclIngress s)
+instance Lens.HasField "from_port" f (SecurityGroupIngress s) (TF.Expr s P.Int) where
+    field = Lens.lens'
+        (from_port :: SecurityGroupIngress s -> TF.Expr s P.Int)
+        (\s a -> s { from_port = a } :: SecurityGroupIngress s)
 
-instance P.HasCidrBlock (NetworkAclIngress s) (P.Maybe (TF.Expr s P.Text)) where
-    cidrBlock =
-        P.lens (_cidrBlock :: NetworkAclIngress s -> P.Maybe (TF.Expr s P.Text))
-            (\s a -> s { _cidrBlock = a } :: NetworkAclIngress s)
+instance Lens.HasField "ipv6_cidr_blocks" f (SecurityGroupIngress s) (P.Maybe (TF.Expr s [TF.Expr s P.IPRange])) where
+    field = Lens.lens'
+        (ipv6_cidr_blocks :: SecurityGroupIngress s -> P.Maybe (TF.Expr s [TF.Expr s P.IPRange]))
+        (\s a -> s { ipv6_cidr_blocks = a } :: SecurityGroupIngress s)
 
-instance P.HasFromPort (NetworkAclIngress s) (TF.Expr s P.Int) where
-    fromPort =
-        P.lens (_fromPort :: NetworkAclIngress s -> TF.Expr s P.Int)
-            (\s a -> s { _fromPort = a } :: NetworkAclIngress s)
+instance Lens.HasField "prefix_list_ids" f (SecurityGroupIngress s) (P.Maybe (TF.Expr s [TF.Expr s TF.Id])) where
+    field = Lens.lens'
+        (prefix_list_ids :: SecurityGroupIngress s -> P.Maybe (TF.Expr s [TF.Expr s TF.Id]))
+        (\s a -> s { prefix_list_ids = a } :: SecurityGroupIngress s)
 
-instance P.HasIcmpCode (NetworkAclIngress s) (P.Maybe (TF.Expr s P.Int)) where
-    icmpCode =
-        P.lens (_icmpCode :: NetworkAclIngress s -> P.Maybe (TF.Expr s P.Int))
-            (\s a -> s { _icmpCode = a } :: NetworkAclIngress s)
+instance Lens.HasField "protocol" f (SecurityGroupIngress s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (protocol :: SecurityGroupIngress s -> TF.Expr s P.Text)
+        (\s a -> s { protocol = a } :: SecurityGroupIngress s)
 
-instance P.HasIcmpType (NetworkAclIngress s) (P.Maybe (TF.Expr s P.Int)) where
-    icmpType =
-        P.lens (_icmpType :: NetworkAclIngress s -> P.Maybe (TF.Expr s P.Int))
-            (\s a -> s { _icmpType = a } :: NetworkAclIngress s)
+instance Lens.HasField "security_groups" f (SecurityGroupIngress s) (P.Maybe (TF.Expr s [TF.Expr s P.Text])) where
+    field = Lens.lens'
+        (security_groups :: SecurityGroupIngress s -> P.Maybe (TF.Expr s [TF.Expr s P.Text]))
+        (\s a -> s { security_groups = a } :: SecurityGroupIngress s)
 
-instance P.HasIpv6CidrBlock (NetworkAclIngress s) (P.Maybe (TF.Expr s P.Text)) where
-    ipv6CidrBlock =
-        P.lens (_ipv6CidrBlock :: NetworkAclIngress s -> P.Maybe (TF.Expr s P.Text))
-            (\s a -> s { _ipv6CidrBlock = a } :: NetworkAclIngress s)
+instance Lens.HasField "self" f (SecurityGroupIngress s) (TF.Expr s P.Bool) where
+    field = Lens.lens'
+        (self :: SecurityGroupIngress s -> TF.Expr s P.Bool)
+        (\s a -> s { self = a } :: SecurityGroupIngress s)
 
-instance P.HasProtocol (NetworkAclIngress s) (TF.Expr s P.Text) where
-    protocol =
-        P.lens (_protocol :: NetworkAclIngress s -> TF.Expr s P.Text)
-            (\s a -> s { _protocol = a } :: NetworkAclIngress s)
+instance Lens.HasField "to_port" f (SecurityGroupIngress s) (TF.Expr s P.Int) where
+    field = Lens.lens'
+        (to_port :: SecurityGroupIngress s -> TF.Expr s P.Int)
+        (\s a -> s { to_port = a } :: SecurityGroupIngress s)
 
-instance P.HasRuleNo (NetworkAclIngress s) (TF.Expr s P.Int) where
-    ruleNo =
-        P.lens (_ruleNo :: NetworkAclIngress s -> TF.Expr s P.Int)
-            (\s a -> s { _ruleNo = a } :: NetworkAclIngress s)
+instance TF.ToHCL (SecurityGroupIngress s) where
+    toHCL SecurityGroupIngress_Internal{..} = TF.pairs $
+          P.mempty
+       <> P.maybe P.mempty (TF.pair "cidr_blocks") cidr_blocks
+       <> P.maybe P.mempty (TF.pair "description") description
+       <> TF.pair "from_port" from_port
+       <> P.maybe P.mempty (TF.pair "ipv6_cidr_blocks") ipv6_cidr_blocks
+       <> P.maybe P.mempty (TF.pair "prefix_list_ids") prefix_list_ids
+       <> TF.pair "protocol" protocol
+       <> P.maybe P.mempty (TF.pair "security_groups") security_groups
+       <> TF.pair "self" self
+       <> TF.pair "to_port" to_port
 
-instance P.HasToPort (NetworkAclIngress s) (TF.Expr s P.Int) where
-    toPort =
-        P.lens (_toPort :: NetworkAclIngress s -> TF.Expr s P.Int)
-            (\s a -> s { _toPort = a } :: NetworkAclIngress s)
+-- | The @filter@ nested settings definition.
+data SecurityGroupsFilter s = SecurityGroupsFilter
+    { name   :: TF.Expr s P.Text
+    -- ^ @name@
+    -- - (Required)
+    , values :: TF.Expr s [TF.Expr s P.Text]
+    -- ^ @values@
+    -- - (Required)
+    } deriving (P.Show)
 
--- | @filter@ nested settings.
-data NetworkAclsFilter s = NetworkAclsFilter'
-    { _name   :: TF.Expr s P.Text
-    -- ^ @name@ - (Required)
-    --
-    , _values :: TF.Expr s [TF.Expr s P.Text]
-    -- ^ @values@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
+instance Lens.HasField "name" f (SecurityGroupsFilter s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (name :: SecurityGroupsFilter s -> TF.Expr s P.Text)
+        (\s a -> s { name = a } :: SecurityGroupsFilter s)
 
--- | Construct a new @filter@ settings value.
-newNetworkAclsFilter
-    :: TF.Expr s P.Text -- ^ Lens: 'P.name', Field: '_name', HCL: @name@
-    -> TF.Expr s [TF.Expr s P.Text] -- ^ Lens: 'P.values', Field: '_values', HCL: @values@
-    -> NetworkAclsFilter s
-newNetworkAclsFilter _name _values =
-    NetworkAclsFilter'
-        { _name = _name
-        , _values = _values
+instance Lens.HasField "values" f (SecurityGroupsFilter s) (TF.Expr s [TF.Expr s P.Text]) where
+    field = Lens.lens'
+        (values :: SecurityGroupsFilter s -> TF.Expr s [TF.Expr s P.Text])
+        (\s a -> s { values = a } :: SecurityGroupsFilter s)
+
+instance TF.ToHCL (SecurityGroupsFilter s) where
+    toHCL SecurityGroupsFilter{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "name" name
+       <> TF.pair "values" values
+
+-- | The @dns_config@ nested settings definition.
+data ServiceDiscoveryServiceDnsConfig s = ServiceDiscoveryServiceDnsConfig_Internal
+    { dns_records :: TF.Expr s [TF.Expr s (ServiceDiscoveryServiceDnsRecords s)]
+    -- ^ @dns_records@
+    -- - (Required)
+    , namespace_id :: TF.Expr s TF.Id
+    -- ^ @namespace_id@
+    -- - (Required, Forces New)
+    , routing_policy :: TF.Expr s P.Text
+    -- ^ @routing_policy@
+    -- - (Default __@MULTIVALUE@__, Forces New)
+    } deriving (P.Show)
+
+-- | Construct a new @dns_config@ settings value.
+newServiceDiscoveryServiceDnsConfig
+    :: ServiceDiscoveryServiceDnsConfig_Required s
+    -> ServiceDiscoveryServiceDnsConfig s
+newServiceDiscoveryServiceDnsConfig ServiceDiscoveryServiceDnsConfig{..} =
+    ServiceDiscoveryServiceDnsConfig_Internal
+        { dns_records = dns_records
+        , namespace_id = namespace_id
+        , routing_policy = TF.expr "MULTIVALUE"
         }
 
-instance TF.ToHCL (NetworkAclsFilter s) where
-     toHCL NetworkAclsFilter'{..} = TF.pairs $ P.mconcat
-        [ TF.pair "name" _name
-        , TF.pair "values" _values
-        ]
+-- | The required arguments for 'newServiceDiscoveryServiceDnsConfig'.
+data ServiceDiscoveryServiceDnsConfig_Required s = ServiceDiscoveryServiceDnsConfig
+    { namespace_id :: TF.Expr s TF.Id
+    -- ^ (Required, Forces New)
+    , dns_records :: TF.Expr s [TF.Expr s (ServiceDiscoveryServiceDnsRecords s)]
+    -- ^ (Required)
+    } deriving (P.Show)
 
-instance P.Hashable (NetworkAclsFilter s)
+instance Lens.HasField "dns_records" f (ServiceDiscoveryServiceDnsConfig s) (TF.Expr s [TF.Expr s (ServiceDiscoveryServiceDnsRecords s)]) where
+    field = Lens.lens'
+        (dns_records :: ServiceDiscoveryServiceDnsConfig s -> TF.Expr s [TF.Expr s (ServiceDiscoveryServiceDnsRecords s)])
+        (\s a -> s { dns_records = a } :: ServiceDiscoveryServiceDnsConfig s)
 
-instance TF.HasValidator (NetworkAclsFilter s) where
-    validator = P.mempty
+instance Lens.HasField "namespace_id" f (ServiceDiscoveryServiceDnsConfig s) (TF.Expr s TF.Id) where
+    field = Lens.lens'
+        (namespace_id :: ServiceDiscoveryServiceDnsConfig s -> TF.Expr s TF.Id)
+        (\s a -> s { namespace_id = a } :: ServiceDiscoveryServiceDnsConfig s)
 
-instance P.HasName (NetworkAclsFilter s) (TF.Expr s P.Text) where
-    name =
-        P.lens (_name :: NetworkAclsFilter s -> TF.Expr s P.Text)
-            (\s a -> s { _name = a } :: NetworkAclsFilter s)
+instance Lens.HasField "routing_policy" f (ServiceDiscoveryServiceDnsConfig s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (routing_policy :: ServiceDiscoveryServiceDnsConfig s -> TF.Expr s P.Text)
+        (\s a -> s { routing_policy = a } :: ServiceDiscoveryServiceDnsConfig s)
 
-instance P.HasValues (NetworkAclsFilter s) (TF.Expr s [TF.Expr s P.Text]) where
-    values =
-        P.lens (_values :: NetworkAclsFilter s -> TF.Expr s [TF.Expr s P.Text])
-            (\s a -> s { _values = a } :: NetworkAclsFilter s)
+instance TF.ToHCL (ServiceDiscoveryServiceDnsConfig s) where
+    toHCL ServiceDiscoveryServiceDnsConfig_Internal{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "dns_records" dns_records
+       <> TF.pair "namespace_id" namespace_id
+       <> TF.pair "routing_policy" routing_policy
 
--- | @association@ nested settings.
-data NetworkInterfaceAssociation s = NetworkInterfaceAssociation'
-    deriving (P.Show, P.Eq, P.Generic)
+-- | The @dns_records@ nested settings definition.
+data ServiceDiscoveryServiceDnsRecords s = ServiceDiscoveryServiceDnsRecords
+    { ttl   :: TF.Expr s P.Int
+    -- ^ @ttl@
+    -- - (Required)
+    , type_ :: TF.Expr s P.Text
+    -- ^ @type@
+    -- - (Required, Forces New)
+    } deriving (P.Show)
 
--- | Construct a new @association@ settings value.
-newNetworkInterfaceAssociation
-    :: NetworkInterfaceAssociation s
-newNetworkInterfaceAssociation =
-    NetworkInterfaceAssociation'
+instance Lens.HasField "ttl" f (ServiceDiscoveryServiceDnsRecords s) (TF.Expr s P.Int) where
+    field = Lens.lens'
+        (ttl :: ServiceDiscoveryServiceDnsRecords s -> TF.Expr s P.Int)
+        (\s a -> s { ttl = a } :: ServiceDiscoveryServiceDnsRecords s)
 
-instance TF.ToHCL (NetworkInterfaceAssociation s) where
-    toHCL NetworkInterfaceAssociation' = P.mempty
+instance Lens.HasField "type" f (ServiceDiscoveryServiceDnsRecords s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (type_ :: ServiceDiscoveryServiceDnsRecords s -> TF.Expr s P.Text)
+        (\s a -> s { type_ = a } :: ServiceDiscoveryServiceDnsRecords s)
 
-instance P.Hashable (NetworkInterfaceAssociation s)
+instance TF.ToHCL (ServiceDiscoveryServiceDnsRecords s) where
+    toHCL ServiceDiscoveryServiceDnsRecords{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "ttl" ttl
+       <> TF.pair "type" type_
 
-instance TF.HasValidator (NetworkInterfaceAssociation s)
+-- | The @health_check_config@ nested settings definition.
+data ServiceDiscoveryServiceHealthCheckConfig s = ServiceDiscoveryServiceHealthCheckConfig_Internal
+    { failure_threshold :: P.Maybe (TF.Expr s P.Int)
+    -- ^ @failure_threshold@
+    -- - (Optional)
+    , resource_path     :: P.Maybe (TF.Expr s P.Text)
+    -- ^ @resource_path@
+    -- - (Optional)
+    , type_             :: P.Maybe (TF.Expr s P.Text)
+    -- ^ @type@
+    -- - (Optional, Forces New)
+    } deriving (P.Show)
 
-instance s ~ s' => P.HasComputedAllocationId (TF.Ref s' (NetworkInterfaceAssociation s)) (TF.Expr s P.Text) where
-    computedAllocationId x =
-        TF.unsafeCompute TF.encodeAttr x "allocation_id"
-
-instance s ~ s' => P.HasComputedAssociationId (TF.Ref s' (NetworkInterfaceAssociation s)) (TF.Expr s P.Text) where
-    computedAssociationId x =
-        TF.unsafeCompute TF.encodeAttr x "association_id"
-
-instance s ~ s' => P.HasComputedIpOwnerId (TF.Ref s' (NetworkInterfaceAssociation s)) (TF.Expr s P.Text) where
-    computedIpOwnerId x =
-        TF.unsafeCompute TF.encodeAttr x "ip_owner_id"
-
-instance s ~ s' => P.HasComputedPublicDnsName (TF.Ref s' (NetworkInterfaceAssociation s)) (TF.Expr s P.Text) where
-    computedPublicDnsName x =
-        TF.unsafeCompute TF.encodeAttr x "public_dns_name"
-
-instance s ~ s' => P.HasComputedPublicIp (TF.Ref s' (NetworkInterfaceAssociation s)) (TF.Expr s P.Text) where
-    computedPublicIp x =
-        TF.unsafeCompute TF.encodeAttr x "public_ip"
-
--- | @attachment@ nested settings.
-data NetworkInterfaceAttachment s = NetworkInterfaceAttachment'
-    { _deviceIndex :: TF.Expr s P.Int
-    -- ^ @device_index@ - (Required)
-    --
-    , _instance'   :: TF.Expr s P.Text
-    -- ^ @instance@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @attachment@ settings value.
-newNetworkInterfaceAttachment
-    :: TF.Expr s P.Int -- ^ Lens: 'P.deviceIndex', Field: '_deviceIndex', HCL: @device_index@
-    -> TF.Expr s P.Text -- ^ Lens: 'P.instance'', Field: '_instance'', HCL: @instance@
-    -> NetworkInterfaceAttachment s
-newNetworkInterfaceAttachment _deviceIndex _instance' =
-    NetworkInterfaceAttachment'
-        { _deviceIndex = _deviceIndex
-        , _instance' = _instance'
+-- | Construct a new @health_check_config@ settings value.
+newServiceDiscoveryServiceHealthCheckConfig
+    :: ServiceDiscoveryServiceHealthCheckConfig s
+newServiceDiscoveryServiceHealthCheckConfig =
+    ServiceDiscoveryServiceHealthCheckConfig_Internal
+        { failure_threshold = P.Nothing
+        , resource_path = P.Nothing
+        , type_ = P.Nothing
         }
 
-instance TF.ToHCL (NetworkInterfaceAttachment s) where
-     toHCL NetworkInterfaceAttachment'{..} = TF.pairs $ P.mconcat
-        [ TF.pair "device_index" _deviceIndex
-        , TF.pair "instance" _instance'
-        ]
+instance Lens.HasField "failure_threshold" f (ServiceDiscoveryServiceHealthCheckConfig s) (P.Maybe (TF.Expr s P.Int)) where
+    field = Lens.lens'
+        (failure_threshold :: ServiceDiscoveryServiceHealthCheckConfig s -> P.Maybe (TF.Expr s P.Int))
+        (\s a -> s { failure_threshold = a } :: ServiceDiscoveryServiceHealthCheckConfig s)
 
-instance P.Hashable (NetworkInterfaceAttachment s)
+instance Lens.HasField "resource_path" f (ServiceDiscoveryServiceHealthCheckConfig s) (P.Maybe (TF.Expr s P.Text)) where
+    field = Lens.lens'
+        (resource_path :: ServiceDiscoveryServiceHealthCheckConfig s -> P.Maybe (TF.Expr s P.Text))
+        (\s a -> s { resource_path = a } :: ServiceDiscoveryServiceHealthCheckConfig s)
 
-instance TF.HasValidator (NetworkInterfaceAttachment s) where
-    validator = P.mempty
+instance Lens.HasField "type" f (ServiceDiscoveryServiceHealthCheckConfig s) (P.Maybe (TF.Expr s P.Text)) where
+    field = Lens.lens'
+        (type_ :: ServiceDiscoveryServiceHealthCheckConfig s -> P.Maybe (TF.Expr s P.Text))
+        (\s a -> s { type_ = a } :: ServiceDiscoveryServiceHealthCheckConfig s)
 
-instance P.HasDeviceIndex (NetworkInterfaceAttachment s) (TF.Expr s P.Int) where
-    deviceIndex =
-        P.lens (_deviceIndex :: NetworkInterfaceAttachment s -> TF.Expr s P.Int)
-            (\s a -> s { _deviceIndex = a } :: NetworkInterfaceAttachment s)
+instance TF.ToHCL (ServiceDiscoveryServiceHealthCheckConfig s) where
+    toHCL ServiceDiscoveryServiceHealthCheckConfig_Internal{..} = TF.pairs $
+          P.mempty
+       <> P.maybe P.mempty (TF.pair "failure_threshold") failure_threshold
+       <> P.maybe P.mempty (TF.pair "resource_path") resource_path
+       <> P.maybe P.mempty (TF.pair "type") type_
 
-instance P.HasInstance' (NetworkInterfaceAttachment s) (TF.Expr s P.Text) where
-    instance' =
-        P.lens (_instance' :: NetworkInterfaceAttachment s -> TF.Expr s P.Text)
-            (\s a -> s { _instance' = a } :: NetworkInterfaceAttachment s)
+-- | The @health_check_custom_config@ nested settings definition.
+newtype ServiceDiscoveryServiceHealthCheckCustomConfig s = ServiceDiscoveryServiceHealthCheckCustomConfig_Internal
+    { failure_threshold :: P.Maybe (TF.Expr s P.Int)
+    -- ^ @failure_threshold@
+    -- - (Optional, Forces New)
+    } deriving (P.Show)
 
-instance s ~ s' => P.HasComputedAttachmentId (TF.Ref s' (NetworkInterfaceAttachment s)) (TF.Expr s P.Text) where
-    computedAttachmentId x =
-        TF.unsafeCompute TF.encodeAttr x "attachment_id"
-
-instance s ~ s' => P.HasComputedDeviceIndex (TF.Ref s' (NetworkInterfaceAttachment s)) (TF.Expr s P.Int) where
-    computedDeviceIndex x =
-        TF.unsafeCompute TF.encodeAttr x "device_index"
-
-instance s ~ s' => P.HasComputedInstanceId (TF.Ref s' (NetworkInterfaceAttachment s)) (TF.Expr s P.Text) where
-    computedInstanceId x =
-        TF.unsafeCompute TF.encodeAttr x "instance_id"
-
-instance s ~ s' => P.HasComputedInstanceOwnerId (TF.Ref s' (NetworkInterfaceAttachment s)) (TF.Expr s P.Text) where
-    computedInstanceOwnerId x =
-        TF.unsafeCompute TF.encodeAttr x "instance_owner_id"
-
--- | @filter@ nested settings.
-data NetworkInterfaceFilter s = NetworkInterfaceFilter'
-    { _name   :: TF.Expr s P.Text
-    -- ^ @name@ - (Required)
-    --
-    , _values :: TF.Expr s [TF.Expr s P.Text]
-    -- ^ @values@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
-
--- | Construct a new @filter@ settings value.
-newNetworkInterfaceFilter
-    :: TF.Expr s P.Text -- ^ Lens: 'P.name', Field: '_name', HCL: @name@
-    -> TF.Expr s [TF.Expr s P.Text] -- ^ Lens: 'P.values', Field: '_values', HCL: @values@
-    -> NetworkInterfaceFilter s
-newNetworkInterfaceFilter _name _values =
-    NetworkInterfaceFilter'
-        { _name = _name
-        , _values = _values
+-- | Construct a new @health_check_custom_config@ settings value.
+newServiceDiscoveryServiceHealthCheckCustomConfig
+    :: ServiceDiscoveryServiceHealthCheckCustomConfig s
+newServiceDiscoveryServiceHealthCheckCustomConfig =
+    ServiceDiscoveryServiceHealthCheckCustomConfig_Internal
+        { failure_threshold = P.Nothing
         }
 
-instance TF.ToHCL (NetworkInterfaceFilter s) where
-     toHCL NetworkInterfaceFilter'{..} = TF.pairs $ P.mconcat
-        [ TF.pair "name" _name
-        , TF.pair "values" _values
-        ]
+instance Lens.HasField "failure_threshold" f (ServiceDiscoveryServiceHealthCheckCustomConfig s) (P.Maybe (TF.Expr s P.Int)) where
+    field = Lens.lens'
+        (failure_threshold :: ServiceDiscoveryServiceHealthCheckCustomConfig s -> P.Maybe (TF.Expr s P.Int))
+        (\s a -> s { failure_threshold = a } :: ServiceDiscoveryServiceHealthCheckCustomConfig s)
 
-instance P.Hashable (NetworkInterfaceFilter s)
+instance TF.ToHCL (ServiceDiscoveryServiceHealthCheckCustomConfig s) where
+    toHCL ServiceDiscoveryServiceHealthCheckCustomConfig_Internal{..} = TF.pairs $
+          P.mempty
+       <> P.maybe P.mempty (TF.pair "failure_threshold") failure_threshold
 
-instance TF.HasValidator (NetworkInterfaceFilter s) where
-    validator = P.mempty
+-- | The @cloudwatch_destination@ nested settings definition.
+data SesEventDestinationCloudwatchDestination s = SesEventDestinationCloudwatchDestination
+    { default_value  :: TF.Expr s P.Text
+    -- ^ @default_value@
+    -- - (Required)
+    , dimension_name :: TF.Expr s P.Text
+    -- ^ @dimension_name@
+    -- - (Required)
+    , value_source   :: TF.Expr s P.Text
+    -- ^ @value_source@
+    -- - (Required)
+    } deriving (P.Show)
 
-instance P.HasName (NetworkInterfaceFilter s) (TF.Expr s P.Text) where
-    name =
-        P.lens (_name :: NetworkInterfaceFilter s -> TF.Expr s P.Text)
-            (\s a -> s { _name = a } :: NetworkInterfaceFilter s)
+instance Lens.HasField "default_value" f (SesEventDestinationCloudwatchDestination s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (default_value :: SesEventDestinationCloudwatchDestination s -> TF.Expr s P.Text)
+        (\s a -> s { default_value = a } :: SesEventDestinationCloudwatchDestination s)
 
-instance P.HasValues (NetworkInterfaceFilter s) (TF.Expr s [TF.Expr s P.Text]) where
-    values =
-        P.lens (_values :: NetworkInterfaceFilter s -> TF.Expr s [TF.Expr s P.Text])
-            (\s a -> s { _values = a } :: NetworkInterfaceFilter s)
+instance Lens.HasField "dimension_name" f (SesEventDestinationCloudwatchDestination s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (dimension_name :: SesEventDestinationCloudwatchDestination s -> TF.Expr s P.Text)
+        (\s a -> s { dimension_name = a } :: SesEventDestinationCloudwatchDestination s)
 
--- | @filter@ nested settings.
-data NetworkInterfacesFilter s = NetworkInterfacesFilter'
-    { _name   :: TF.Expr s P.Text
-    -- ^ @name@ - (Required)
-    --
-    , _values :: TF.Expr s [TF.Expr s P.Text]
-    -- ^ @values@ - (Required)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
+instance Lens.HasField "value_source" f (SesEventDestinationCloudwatchDestination s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (value_source :: SesEventDestinationCloudwatchDestination s -> TF.Expr s P.Text)
+        (\s a -> s { value_source = a } :: SesEventDestinationCloudwatchDestination s)
 
--- | Construct a new @filter@ settings value.
-newNetworkInterfacesFilter
-    :: TF.Expr s P.Text -- ^ Lens: 'P.name', Field: '_name', HCL: @name@
-    -> TF.Expr s [TF.Expr s P.Text] -- ^ Lens: 'P.values', Field: '_values', HCL: @values@
-    -> NetworkInterfacesFilter s
-newNetworkInterfacesFilter _name _values =
-    NetworkInterfacesFilter'
-        { _name = _name
-        , _values = _values
+instance TF.ToHCL (SesEventDestinationCloudwatchDestination s) where
+    toHCL SesEventDestinationCloudwatchDestination{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "default_value" default_value
+       <> TF.pair "dimension_name" dimension_name
+       <> TF.pair "value_source" value_source
+
+-- | The @kinesis_destination@ nested settings definition.
+data SesEventDestinationKinesisDestination s = SesEventDestinationKinesisDestination
+    { role_arn   :: TF.Expr s P.Arn
+    -- ^ @role_arn@
+    -- - (Required)
+    , stream_arn :: TF.Expr s P.Arn
+    -- ^ @stream_arn@
+    -- - (Required)
+    } deriving (P.Show)
+
+instance Lens.HasField "role_arn" f (SesEventDestinationKinesisDestination s) (TF.Expr s P.Arn) where
+    field = Lens.lens'
+        (role_arn :: SesEventDestinationKinesisDestination s -> TF.Expr s P.Arn)
+        (\s a -> s { role_arn = a } :: SesEventDestinationKinesisDestination s)
+
+instance Lens.HasField "stream_arn" f (SesEventDestinationKinesisDestination s) (TF.Expr s P.Arn) where
+    field = Lens.lens'
+        (stream_arn :: SesEventDestinationKinesisDestination s -> TF.Expr s P.Arn)
+        (\s a -> s { stream_arn = a } :: SesEventDestinationKinesisDestination s)
+
+instance TF.ToHCL (SesEventDestinationKinesisDestination s) where
+    toHCL SesEventDestinationKinesisDestination{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "role_arn" role_arn
+       <> TF.pair "stream_arn" stream_arn
+
+-- | The @sns_destination@ nested settings definition.
+newtype SesEventDestinationSnsDestination s = SesEventDestinationSnsDestination
+    { topic_arn :: TF.Expr s P.Arn
+    -- ^ @topic_arn@
+    -- - (Required)
+    } deriving (P.Show)
+
+instance Lens.HasField "topic_arn" f (SesEventDestinationSnsDestination s) (TF.Expr s P.Arn) where
+    field = Lens.lens'
+        (topic_arn :: SesEventDestinationSnsDestination s -> TF.Expr s P.Arn)
+        (\s a -> s { topic_arn = a } :: SesEventDestinationSnsDestination s)
+
+instance TF.ToHCL (SesEventDestinationSnsDestination s) where
+    toHCL SesEventDestinationSnsDestination{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "topic_arn" topic_arn
+
+-- | The @add_header_action@ nested settings definition.
+data SesReceiptRuleAddHeaderAction s = SesReceiptRuleAddHeaderAction
+    { header_name  :: TF.Expr s P.Text
+    -- ^ @header_name@
+    -- - (Required)
+    , header_value :: TF.Expr s P.Text
+    -- ^ @header_value@
+    -- - (Required)
+    , position     :: TF.Expr s P.Int
+    -- ^ @position@
+    -- - (Required)
+    } deriving (P.Show)
+
+instance Lens.HasField "header_name" f (SesReceiptRuleAddHeaderAction s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (header_name :: SesReceiptRuleAddHeaderAction s -> TF.Expr s P.Text)
+        (\s a -> s { header_name = a } :: SesReceiptRuleAddHeaderAction s)
+
+instance Lens.HasField "header_value" f (SesReceiptRuleAddHeaderAction s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (header_value :: SesReceiptRuleAddHeaderAction s -> TF.Expr s P.Text)
+        (\s a -> s { header_value = a } :: SesReceiptRuleAddHeaderAction s)
+
+instance Lens.HasField "position" f (SesReceiptRuleAddHeaderAction s) (TF.Expr s P.Int) where
+    field = Lens.lens'
+        (position :: SesReceiptRuleAddHeaderAction s -> TF.Expr s P.Int)
+        (\s a -> s { position = a } :: SesReceiptRuleAddHeaderAction s)
+
+instance TF.ToHCL (SesReceiptRuleAddHeaderAction s) where
+    toHCL SesReceiptRuleAddHeaderAction{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "header_name" header_name
+       <> TF.pair "header_value" header_value
+       <> TF.pair "position" position
+
+-- | The @bounce_action@ nested settings definition.
+data SesReceiptRuleBounceAction s = SesReceiptRuleBounceAction_Internal
+    { message         :: TF.Expr s P.Text
+    -- ^ @message@
+    -- - (Required)
+    , position        :: TF.Expr s P.Int
+    -- ^ @position@
+    -- - (Required)
+    , sender          :: TF.Expr s P.Text
+    -- ^ @sender@
+    -- - (Required)
+    , smtp_reply_code :: TF.Expr s P.Text
+    -- ^ @smtp_reply_code@
+    -- - (Required)
+    , status_code     :: P.Maybe (TF.Expr s P.Text)
+    -- ^ @status_code@
+    -- - (Optional)
+    , topic_arn       :: P.Maybe (TF.Expr s P.Arn)
+    -- ^ @topic_arn@
+    -- - (Optional)
+    } deriving (P.Show)
+
+-- | Construct a new @bounce_action@ settings value.
+newSesReceiptRuleBounceAction
+    :: SesReceiptRuleBounceAction_Required s
+    -> SesReceiptRuleBounceAction s
+newSesReceiptRuleBounceAction SesReceiptRuleBounceAction{..} =
+    SesReceiptRuleBounceAction_Internal
+        { message = message
+        , position = position
+        , sender = sender
+        , smtp_reply_code = smtp_reply_code
+        , status_code = P.Nothing
+        , topic_arn = P.Nothing
         }
 
-instance TF.ToHCL (NetworkInterfacesFilter s) where
-     toHCL NetworkInterfacesFilter'{..} = TF.pairs $ P.mconcat
-        [ TF.pair "name" _name
-        , TF.pair "values" _values
-        ]
+-- | The required arguments for 'newSesReceiptRuleBounceAction'.
+data SesReceiptRuleBounceAction_Required s = SesReceiptRuleBounceAction
+    { smtp_reply_code :: TF.Expr s P.Text
+    -- ^ (Required)
+    , message         :: TF.Expr s P.Text
+    -- ^ (Required)
+    , position        :: TF.Expr s P.Int
+    -- ^ (Required)
+    , sender          :: TF.Expr s P.Text
+    -- ^ (Required)
+    } deriving (P.Show)
 
-instance P.Hashable (NetworkInterfacesFilter s)
+instance Lens.HasField "message" f (SesReceiptRuleBounceAction s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (message :: SesReceiptRuleBounceAction s -> TF.Expr s P.Text)
+        (\s a -> s { message = a } :: SesReceiptRuleBounceAction s)
 
-instance TF.HasValidator (NetworkInterfacesFilter s) where
-    validator = P.mempty
+instance Lens.HasField "position" f (SesReceiptRuleBounceAction s) (TF.Expr s P.Int) where
+    field = Lens.lens'
+        (position :: SesReceiptRuleBounceAction s -> TF.Expr s P.Int)
+        (\s a -> s { position = a } :: SesReceiptRuleBounceAction s)
 
-instance P.HasName (NetworkInterfacesFilter s) (TF.Expr s P.Text) where
-    name =
-        P.lens (_name :: NetworkInterfacesFilter s -> TF.Expr s P.Text)
-            (\s a -> s { _name = a } :: NetworkInterfacesFilter s)
+instance Lens.HasField "sender" f (SesReceiptRuleBounceAction s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (sender :: SesReceiptRuleBounceAction s -> TF.Expr s P.Text)
+        (\s a -> s { sender = a } :: SesReceiptRuleBounceAction s)
 
-instance P.HasValues (NetworkInterfacesFilter s) (TF.Expr s [TF.Expr s P.Text]) where
-    values =
-        P.lens (_values :: NetworkInterfacesFilter s -> TF.Expr s [TF.Expr s P.Text])
-            (\s a -> s { _values = a } :: NetworkInterfacesFilter s)
+instance Lens.HasField "smtp_reply_code" f (SesReceiptRuleBounceAction s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (smtp_reply_code :: SesReceiptRuleBounceAction s -> TF.Expr s P.Text)
+        (\s a -> s { smtp_reply_code = a } :: SesReceiptRuleBounceAction s)
 
--- | @app_source@ nested settings.
-data OpsworksApplicationAppSource s = OpsworksApplicationAppSource'
-    { _password :: P.Maybe (TF.Expr s P.Text)
-    -- ^ @password@ - (Optional)
-    --
-    , _revision :: P.Maybe (TF.Expr s P.Text)
-    -- ^ @revision@ - (Optional)
-    --
-    , _sshKey   :: P.Maybe (TF.Expr s P.Text)
-    -- ^ @ssh_key@ - (Optional)
-    --
-    , _type'    :: TF.Expr s P.Text
-    -- ^ @type@ - (Required)
-    --
-    , _url      :: P.Maybe (TF.Expr s P.Text)
-    -- ^ @url@ - (Optional)
-    --
-    , _username :: P.Maybe (TF.Expr s P.Text)
-    -- ^ @username@ - (Optional)
-    --
-    } deriving (P.Show, P.Eq, P.Generic)
+instance Lens.HasField "status_code" f (SesReceiptRuleBounceAction s) (P.Maybe (TF.Expr s P.Text)) where
+    field = Lens.lens'
+        (status_code :: SesReceiptRuleBounceAction s -> P.Maybe (TF.Expr s P.Text))
+        (\s a -> s { status_code = a } :: SesReceiptRuleBounceAction s)
 
--- | Construct a new @app_source@ settings value.
-newOpsworksApplicationAppSource
-    :: TF.Expr s P.Text -- ^ Lens: 'P.type'', Field: '_type'', HCL: @type@
-    -> OpsworksApplicationAppSource s
-newOpsworksApplicationAppSource _type' =
-    OpsworksApplicationAppSource'
-        { _password = P.Nothing
-        , _revision = P.Nothing
-        , _sshKey = P.Nothing
-        , _type' = _type'
-        , _url = P.Nothing
-        , _username = P.Nothing
+instance Lens.HasField "topic_arn" f (SesReceiptRuleBounceAction s) (P.Maybe (TF.Expr s P.Arn)) where
+    field = Lens.lens'
+        (topic_arn :: SesReceiptRuleBounceAction s -> P.Maybe (TF.Expr s P.Arn))
+        (\s a -> s { topic_arn = a } :: SesReceiptRuleBounceAction s)
+
+instance TF.ToHCL (SesReceiptRuleBounceAction s) where
+    toHCL SesReceiptRuleBounceAction_Internal{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "message" message
+       <> TF.pair "position" position
+       <> TF.pair "sender" sender
+       <> TF.pair "smtp_reply_code" smtp_reply_code
+       <> P.maybe P.mempty (TF.pair "status_code") status_code
+       <> P.maybe P.mempty (TF.pair "topic_arn") topic_arn
+
+-- | The @lambda_action@ nested settings definition.
+data SesReceiptRuleLambdaAction s = SesReceiptRuleLambdaAction_Internal
+    { function_arn    :: TF.Expr s P.Arn
+    -- ^ @function_arn@
+    -- - (Required)
+    , invocation_type :: P.Maybe (TF.Expr s P.Text)
+    -- ^ @invocation_type@
+    -- - (Optional)
+    , position        :: TF.Expr s P.Int
+    -- ^ @position@
+    -- - (Required)
+    , topic_arn       :: P.Maybe (TF.Expr s P.Arn)
+    -- ^ @topic_arn@
+    -- - (Optional)
+    } deriving (P.Show)
+
+-- | Construct a new @lambda_action@ settings value.
+newSesReceiptRuleLambdaAction
+    :: SesReceiptRuleLambdaAction_Required s
+    -> SesReceiptRuleLambdaAction s
+newSesReceiptRuleLambdaAction SesReceiptRuleLambdaAction{..} =
+    SesReceiptRuleLambdaAction_Internal
+        { function_arn = function_arn
+        , invocation_type = P.Nothing
+        , position = position
+        , topic_arn = P.Nothing
         }
 
-instance TF.ToHCL (OpsworksApplicationAppSource s) where
-     toHCL OpsworksApplicationAppSource'{..} = TF.pairs $ P.mconcat
-        [ P.maybe P.mempty (TF.pair "password") _password
-        , P.maybe P.mempty (TF.pair "revision") _revision
-        , P.maybe P.mempty (TF.pair "ssh_key") _sshKey
-        , TF.pair "type" _type'
-        , P.maybe P.mempty (TF.pair "url") _url
-        , P.maybe P.mempty (TF.pair "username") _username
-        ]
+-- | The required arguments for 'newSesReceiptRuleLambdaAction'.
+data SesReceiptRuleLambdaAction_Required s = SesReceiptRuleLambdaAction
+    { function_arn :: TF.Expr s P.Arn
+    -- ^ (Required)
+    , position     :: TF.Expr s P.Int
+    -- ^ (Required)
+    } deriving (P.Show)
 
-instance P.Hashable (OpsworksApplicationAppSource s)
+instance Lens.HasField "function_arn" f (SesReceiptRuleLambdaAction s) (TF.Expr s P.Arn) where
+    field = Lens.lens'
+        (function_arn :: SesReceiptRuleLambdaAction s -> TF.Expr s P.Arn)
+        (\s a -> s { function_arn = a } :: SesReceiptRuleLambdaAction s)
 
-instance TF.HasValidator (OpsworksApplicationAppSource s) where
-    validator = P.mempty
+instance Lens.HasField "invocation_type" f (SesReceiptRuleLambdaAction s) (P.Maybe (TF.Expr s P.Text)) where
+    field = Lens.lens'
+        (invocation_type :: SesReceiptRuleLambdaAction s -> P.Maybe (TF.Expr s P.Text))
+        (\s a -> s { invocation_type = a } :: SesReceiptRuleLambdaAction s)
 
-instance P.HasPassword (OpsworksApplicationAppSource s) (P.Maybe (TF.Expr s P.Text)) where
-    password =
-        P.lens (_password :: OpsworksApplicationAppSource s -> P.Maybe (TF.Expr s P.Text))
-            (\s a -> s { _password = a } :: OpsworksApplicationAppSource s)
+instance Lens.HasField "position" f (SesReceiptRuleLambdaAction s) (TF.Expr s P.Int) where
+    field = Lens.lens'
+        (position :: SesReceiptRuleLambdaAction s -> TF.Expr s P.Int)
+        (\s a -> s { position = a } :: SesReceiptRuleLambdaAction s)
 
-instance P.HasRevision (OpsworksApplicationAppSource s) (P.Maybe (TF.Expr s P.Text)) where
-    revision =
-        P.lens (_revision :: OpsworksApplicationAppSource s -> P.Maybe (TF.Expr s P.Text))
-            (\s a -> s { _revision = a } :: OpsworksApplicationAppSource s)
+instance Lens.HasField "topic_arn" f (SesReceiptRuleLambdaAction s) (P.Maybe (TF.Expr s P.Arn)) where
+    field = Lens.lens'
+        (topic_arn :: SesReceiptRuleLambdaAction s -> P.Maybe (TF.Expr s P.Arn))
+        (\s a -> s { topic_arn = a } :: SesReceiptRuleLambdaAction s)
 
-instance P.HasSshKey (OpsworksApplicationAppSource s) (P.Maybe (TF.Expr s P.Text)) where
-    sshKey =
-        P.lens (_sshKey :: OpsworksApplicationAppSource s -> P.Maybe (TF.Expr s P.Text))
-            (\s a -> s { _sshKey = a } :: OpsworksApplicationAppSource s)
+instance Lens.HasField "invocation_type" (P.Const r) (TF.Ref SesReceiptRuleLambdaAction s) (TF.Expr s P.Text) where
+    field = Lens.to (TF.unsafeComputed Encode.attribute (proxy# :: Proxy# "invocation_type"))
 
-instance P.HasType' (OpsworksApplicationAppSource s) (TF.Expr s P.Text) where
-    type' =
-        P.lens (_type' :: OpsworksApplicationAppSource s -> TF.Expr s P.Text)
-            (\s a -> s { _type' = a } :: OpsworksApplicationAppSource s)
+instance TF.ToHCL (SesReceiptRuleLambdaAction s) where
+    toHCL SesReceiptRuleLambdaAction_Internal{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "function_arn" function_arn
+       <> P.maybe P.mempty (TF.pair "invocation_type") invocation_type
+       <> TF.pair "position" position
+       <> P.maybe P.mempty (TF.pair "topic_arn") topic_arn
 
-instance P.HasUrl (OpsworksApplicationAppSource s) (P.Maybe (TF.Expr s P.Text)) where
-    url =
-        P.lens (_url :: OpsworksApplicationAppSource s -> P.Maybe (TF.Expr s P.Text))
-            (\s a -> s { _url = a } :: OpsworksApplicationAppSource s)
+-- | The @s3_action@ nested settings definition.
+data SesReceiptRuleS3Action s = SesReceiptRuleS3Action_Internal
+    { bucket_name       :: TF.Expr s P.Text
+    -- ^ @bucket_name@
+    -- - (Required)
+    , kms_key_arn       :: P.Maybe (TF.Expr s P.Arn)
+    -- ^ @kms_key_arn@
+    -- - (Optional)
+    , object_key_prefix :: P.Maybe (TF.Expr s P.Text)
+    -- ^ @object_key_prefix@
+    -- - (Optional)
+    , position          :: TF.Expr s P.Int
+    -- ^ @position@
+    -- - (Required)
+    , topic_arn         :: P.Maybe (TF.Expr s P.Arn)
+    -- ^ @topic_arn@
+    -- - (Optional)
+    } deriving (P.Show)
 
-instance P.HasUsername (OpsworksApplicationAppSource s) (P.Maybe (TF.Expr s P.Text)) where
-    username =
-        P.lens (_username :: OpsworksApplicationAppSource s -> P.Maybe (TF.Expr s P.Text))
-            (\s a -> s { _username = a } :: OpsworksApplicationAppSource s)
+-- | Construct a new @s3_action@ settings value.
+newSesReceiptRuleS3Action
+    :: SesReceiptRuleS3Action_Required s
+    -> SesReceiptRuleS3Action s
+newSesReceiptRuleS3Action SesReceiptRuleS3Action{..} =
+    SesReceiptRuleS3Action_Internal
+        { bucket_name = bucket_name
+        , kms_key_arn = P.Nothing
+        , object_key_prefix = P.Nothing
+        , position = position
+        , topic_arn = P.Nothing
+        }
+
+-- | The required arguments for 'newSesReceiptRuleS3Action'.
+data SesReceiptRuleS3Action_Required s = SesReceiptRuleS3Action
+    { bucket_name :: TF.Expr s P.Text
+    -- ^ (Required)
+    , position    :: TF.Expr s P.Int
+    -- ^ (Required)
+    } deriving (P.Show)
+
+instance Lens.HasField "bucket_name" f (SesReceiptRuleS3Action s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (bucket_name :: SesReceiptRuleS3Action s -> TF.Expr s P.Text)
+        (\s a -> s { bucket_name = a } :: SesReceiptRuleS3Action s)
+
+instance Lens.HasField "kms_key_arn" f (SesReceiptRuleS3Action s) (P.Maybe (TF.Expr s P.Arn)) where
+    field = Lens.lens'
+        (kms_key_arn :: SesReceiptRuleS3Action s -> P.Maybe (TF.Expr s P.Arn))
+        (\s a -> s { kms_key_arn = a } :: SesReceiptRuleS3Action s)
+
+instance Lens.HasField "object_key_prefix" f (SesReceiptRuleS3Action s) (P.Maybe (TF.Expr s P.Text)) where
+    field = Lens.lens'
+        (object_key_prefix :: SesReceiptRuleS3Action s -> P.Maybe (TF.Expr s P.Text))
+        (\s a -> s { object_key_prefix = a } :: SesReceiptRuleS3Action s)
+
+instance Lens.HasField "position" f (SesReceiptRuleS3Action s) (TF.Expr s P.Int) where
+    field = Lens.lens'
+        (position :: SesReceiptRuleS3Action s -> TF.Expr s P.Int)
+        (\s a -> s { position = a } :: SesReceiptRuleS3Action s)
+
+instance Lens.HasField "topic_arn" f (SesReceiptRuleS3Action s) (P.Maybe (TF.Expr s P.Arn)) where
+    field = Lens.lens'
+        (topic_arn :: SesReceiptRuleS3Action s -> P.Maybe (TF.Expr s P.Arn))
+        (\s a -> s { topic_arn = a } :: SesReceiptRuleS3Action s)
+
+instance TF.ToHCL (SesReceiptRuleS3Action s) where
+    toHCL SesReceiptRuleS3Action_Internal{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "bucket_name" bucket_name
+       <> P.maybe P.mempty (TF.pair "kms_key_arn") kms_key_arn
+       <> P.maybe P.mempty (TF.pair "object_key_prefix") object_key_prefix
+       <> TF.pair "position" position
+       <> P.maybe P.mempty (TF.pair "topic_arn") topic_arn
+
+-- | The @sns_action@ nested settings definition.
+data SesReceiptRuleSnsAction s = SesReceiptRuleSnsAction
+    { position  :: TF.Expr s P.Int
+    -- ^ @position@
+    -- - (Required)
+    , topic_arn :: TF.Expr s P.Arn
+    -- ^ @topic_arn@
+    -- - (Required)
+    } deriving (P.Show)
+
+instance Lens.HasField "position" f (SesReceiptRuleSnsAction s) (TF.Expr s P.Int) where
+    field = Lens.lens'
+        (position :: SesReceiptRuleSnsAction s -> TF.Expr s P.Int)
+        (\s a -> s { position = a } :: SesReceiptRuleSnsAction s)
+
+instance Lens.HasField "topic_arn" f (SesReceiptRuleSnsAction s) (TF.Expr s P.Arn) where
+    field = Lens.lens'
+        (topic_arn :: SesReceiptRuleSnsAction s -> TF.Expr s P.Arn)
+        (\s a -> s { topic_arn = a } :: SesReceiptRuleSnsAction s)
+
+instance TF.ToHCL (SesReceiptRuleSnsAction s) where
+    toHCL SesReceiptRuleSnsAction{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "position" position
+       <> TF.pair "topic_arn" topic_arn
+
+-- | The @stop_action@ nested settings definition.
+data SesReceiptRuleStopAction s = SesReceiptRuleStopAction_Internal
+    { position  :: TF.Expr s P.Int
+    -- ^ @position@
+    -- - (Required)
+    , scope     :: TF.Expr s P.Text
+    -- ^ @scope@
+    -- - (Required)
+    , topic_arn :: P.Maybe (TF.Expr s P.Arn)
+    -- ^ @topic_arn@
+    -- - (Optional)
+    } deriving (P.Show)
+
+-- | Construct a new @stop_action@ settings value.
+newSesReceiptRuleStopAction
+    :: SesReceiptRuleStopAction_Required s
+    -> SesReceiptRuleStopAction s
+newSesReceiptRuleStopAction SesReceiptRuleStopAction{..} =
+    SesReceiptRuleStopAction_Internal
+        { position = position
+        , scope = scope
+        , topic_arn = P.Nothing
+        }
+
+-- | The required arguments for 'newSesReceiptRuleStopAction'.
+data SesReceiptRuleStopAction_Required s = SesReceiptRuleStopAction
+    { position :: TF.Expr s P.Int
+    -- ^ (Required)
+    , scope    :: TF.Expr s P.Text
+    -- ^ (Required)
+    } deriving (P.Show)
+
+instance Lens.HasField "position" f (SesReceiptRuleStopAction s) (TF.Expr s P.Int) where
+    field = Lens.lens'
+        (position :: SesReceiptRuleStopAction s -> TF.Expr s P.Int)
+        (\s a -> s { position = a } :: SesReceiptRuleStopAction s)
+
+instance Lens.HasField "scope" f (SesReceiptRuleStopAction s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (scope :: SesReceiptRuleStopAction s -> TF.Expr s P.Text)
+        (\s a -> s { scope = a } :: SesReceiptRuleStopAction s)
+
+instance Lens.HasField "topic_arn" f (SesReceiptRuleStopAction s) (P.Maybe (TF.Expr s P.Arn)) where
+    field = Lens.lens'
+        (topic_arn :: SesReceiptRuleStopAction s -> P.Maybe (TF.Expr s P.Arn))
+        (\s a -> s { topic_arn = a } :: SesReceiptRuleStopAction s)
+
+instance TF.ToHCL (SesReceiptRuleStopAction s) where
+    toHCL SesReceiptRuleStopAction_Internal{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "position" position
+       <> TF.pair "scope" scope
+       <> P.maybe P.mempty (TF.pair "topic_arn") topic_arn
+
+-- | The @workmail_action@ nested settings definition.
+data SesReceiptRuleWorkmailAction s = SesReceiptRuleWorkmailAction_Internal
+    { organization_arn :: TF.Expr s P.Arn
+    -- ^ @organization_arn@
+    -- - (Required)
+    , position         :: TF.Expr s P.Int
+    -- ^ @position@
+    -- - (Required)
+    , topic_arn        :: P.Maybe (TF.Expr s P.Arn)
+    -- ^ @topic_arn@
+    -- - (Optional)
+    } deriving (P.Show)
+
+-- | Construct a new @workmail_action@ settings value.
+newSesReceiptRuleWorkmailAction
+    :: SesReceiptRuleWorkmailAction_Required s
+    -> SesReceiptRuleWorkmailAction s
+newSesReceiptRuleWorkmailAction SesReceiptRuleWorkmailAction{..} =
+    SesReceiptRuleWorkmailAction_Internal
+        { organization_arn = organization_arn
+        , position = position
+        , topic_arn = P.Nothing
+        }
+
+-- | The required arguments for 'newSesReceiptRuleWorkmailAction'.
+data SesReceiptRuleWorkmailAction_Required s = SesReceiptRuleWorkmailAction
+    { organization_arn :: TF.Expr s P.Arn
+    -- ^ (Required)
+    , position         :: TF.Expr s P.Int
+    -- ^ (Required)
+    } deriving (P.Show)
+
+instance Lens.HasField "organization_arn" f (SesReceiptRuleWorkmailAction s) (TF.Expr s P.Arn) where
+    field = Lens.lens'
+        (organization_arn :: SesReceiptRuleWorkmailAction s -> TF.Expr s P.Arn)
+        (\s a -> s { organization_arn = a } :: SesReceiptRuleWorkmailAction s)
+
+instance Lens.HasField "position" f (SesReceiptRuleWorkmailAction s) (TF.Expr s P.Int) where
+    field = Lens.lens'
+        (position :: SesReceiptRuleWorkmailAction s -> TF.Expr s P.Int)
+        (\s a -> s { position = a } :: SesReceiptRuleWorkmailAction s)
+
+instance Lens.HasField "topic_arn" f (SesReceiptRuleWorkmailAction s) (P.Maybe (TF.Expr s P.Arn)) where
+    field = Lens.lens'
+        (topic_arn :: SesReceiptRuleWorkmailAction s -> P.Maybe (TF.Expr s P.Arn))
+        (\s a -> s { topic_arn = a } :: SesReceiptRuleWorkmailAction s)
+
+instance TF.ToHCL (SesReceiptRuleWorkmailAction s) where
+    toHCL SesReceiptRuleWorkmailAction_Internal{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "organization_arn" organization_arn
+       <> TF.pair "position" position
+       <> P.maybe P.mempty (TF.pair "topic_arn") topic_arn
+
+-- | The @ebs_block_device@ nested settings definition.
+data SpotFleetRequestEbsBlockDevice s = SpotFleetRequestEbsBlockDevice_Internal
+    { delete_on_termination :: TF.Expr s P.Bool
+    -- ^ @delete_on_termination@
+    -- - (Default __@true@__, Forces New)
+    , device_name           :: TF.Expr s P.Text
+    -- ^ @device_name@
+    -- - (Required, Forces New)
+    , encrypted             :: P.Maybe (TF.Expr s P.Bool)
+    -- ^ @encrypted@
+    -- - (Optional, Forces New)
+    , iops                  :: P.Maybe (TF.Expr s P.Int)
+    -- ^ @iops@
+    -- - (Optional, Forces New)
+    , snapshot_id           :: P.Maybe (TF.Expr s TF.Id)
+    -- ^ @snapshot_id@
+    -- - (Optional, Forces New)
+    , volume_size           :: P.Maybe (TF.Expr s P.Int)
+    -- ^ @volume_size@
+    -- - (Optional, Forces New)
+    , volume_type           :: P.Maybe (TF.Expr s P.Text)
+    -- ^ @volume_type@
+    -- - (Optional, Forces New)
+    } deriving (P.Show)
+
+-- | Construct a new @ebs_block_device@ settings value.
+newSpotFleetRequestEbsBlockDevice
+    :: SpotFleetRequestEbsBlockDevice_Required s
+    -> SpotFleetRequestEbsBlockDevice s
+newSpotFleetRequestEbsBlockDevice SpotFleetRequestEbsBlockDevice{..} =
+    SpotFleetRequestEbsBlockDevice_Internal
+        { delete_on_termination = TF.expr P.True
+        , device_name = device_name
+        , encrypted = P.Nothing
+        , iops = P.Nothing
+        , snapshot_id = P.Nothing
+        , volume_size = P.Nothing
+        , volume_type = P.Nothing
+        }
+
+-- | The required arguments for 'newSpotFleetRequestEbsBlockDevice'.
+data SpotFleetRequestEbsBlockDevice_Required s = SpotFleetRequestEbsBlockDevice
+    { device_name :: TF.Expr s P.Text
+    -- ^ (Required, Forces New)
+    } deriving (P.Show)
+
+instance Lens.HasField "delete_on_termination" f (SpotFleetRequestEbsBlockDevice s) (TF.Expr s P.Bool) where
+    field = Lens.lens'
+        (delete_on_termination :: SpotFleetRequestEbsBlockDevice s -> TF.Expr s P.Bool)
+        (\s a -> s { delete_on_termination = a } :: SpotFleetRequestEbsBlockDevice s)
+
+instance Lens.HasField "device_name" f (SpotFleetRequestEbsBlockDevice s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (device_name :: SpotFleetRequestEbsBlockDevice s -> TF.Expr s P.Text)
+        (\s a -> s { device_name = a } :: SpotFleetRequestEbsBlockDevice s)
+
+instance Lens.HasField "encrypted" f (SpotFleetRequestEbsBlockDevice s) (P.Maybe (TF.Expr s P.Bool)) where
+    field = Lens.lens'
+        (encrypted :: SpotFleetRequestEbsBlockDevice s -> P.Maybe (TF.Expr s P.Bool))
+        (\s a -> s { encrypted = a } :: SpotFleetRequestEbsBlockDevice s)
+
+instance Lens.HasField "iops" f (SpotFleetRequestEbsBlockDevice s) (P.Maybe (TF.Expr s P.Int)) where
+    field = Lens.lens'
+        (iops :: SpotFleetRequestEbsBlockDevice s -> P.Maybe (TF.Expr s P.Int))
+        (\s a -> s { iops = a } :: SpotFleetRequestEbsBlockDevice s)
+
+instance Lens.HasField "snapshot_id" f (SpotFleetRequestEbsBlockDevice s) (P.Maybe (TF.Expr s TF.Id)) where
+    field = Lens.lens'
+        (snapshot_id :: SpotFleetRequestEbsBlockDevice s -> P.Maybe (TF.Expr s TF.Id))
+        (\s a -> s { snapshot_id = a } :: SpotFleetRequestEbsBlockDevice s)
+
+instance Lens.HasField "volume_size" f (SpotFleetRequestEbsBlockDevice s) (P.Maybe (TF.Expr s P.Int)) where
+    field = Lens.lens'
+        (volume_size :: SpotFleetRequestEbsBlockDevice s -> P.Maybe (TF.Expr s P.Int))
+        (\s a -> s { volume_size = a } :: SpotFleetRequestEbsBlockDevice s)
+
+instance Lens.HasField "volume_type" f (SpotFleetRequestEbsBlockDevice s) (P.Maybe (TF.Expr s P.Text)) where
+    field = Lens.lens'
+        (volume_type :: SpotFleetRequestEbsBlockDevice s -> P.Maybe (TF.Expr s P.Text))
+        (\s a -> s { volume_type = a } :: SpotFleetRequestEbsBlockDevice s)
+
+instance Lens.HasField "encrypted" (P.Const r) (TF.Ref SpotFleetRequestEbsBlockDevice s) (TF.Expr s P.Bool) where
+    field = Lens.to (TF.unsafeComputed Encode.attribute (proxy# :: Proxy# "encrypted"))
+
+instance Lens.HasField "iops" (P.Const r) (TF.Ref SpotFleetRequestEbsBlockDevice s) (TF.Expr s P.Int) where
+    field = Lens.to (TF.unsafeComputed Encode.attribute (proxy# :: Proxy# "iops"))
+
+instance Lens.HasField "snapshot_id" (P.Const r) (TF.Ref SpotFleetRequestEbsBlockDevice s) (TF.Expr s TF.Id) where
+    field = Lens.to (TF.unsafeComputed Encode.attribute (proxy# :: Proxy# "snapshot_id"))
+
+instance Lens.HasField "volume_size" (P.Const r) (TF.Ref SpotFleetRequestEbsBlockDevice s) (TF.Expr s P.Int) where
+    field = Lens.to (TF.unsafeComputed Encode.attribute (proxy# :: Proxy# "volume_size"))
+
+instance Lens.HasField "volume_type" (P.Const r) (TF.Ref SpotFleetRequestEbsBlockDevice s) (TF.Expr s P.Text) where
+    field = Lens.to (TF.unsafeComputed Encode.attribute (proxy# :: Proxy# "volume_type"))
+
+instance TF.ToHCL (SpotFleetRequestEbsBlockDevice s) where
+    toHCL SpotFleetRequestEbsBlockDevice_Internal{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "delete_on_termination" delete_on_termination
+       <> TF.pair "device_name" device_name
+       <> P.maybe P.mempty (TF.pair "encrypted") encrypted
+       <> P.maybe P.mempty (TF.pair "iops") iops
+       <> P.maybe P.mempty (TF.pair "snapshot_id") snapshot_id
+       <> P.maybe P.mempty (TF.pair "volume_size") volume_size
+       <> P.maybe P.mempty (TF.pair "volume_type") volume_type
+
+-- | The @launch_specification@ nested settings definition.
+data SpotFleetRequestLaunchSpecification s = SpotFleetRequestLaunchSpecification_Internal
+    { ami :: TF.Expr s P.Text
+    -- ^ @ami@
+    -- - (Required, Forces New)
+    , associate_public_ip_address :: TF.Expr s P.Bool
+    -- ^ @associate_public_ip_address@
+    -- - (Default __@false@__)
+    , availability_zone :: P.Maybe (TF.Expr s P.Text)
+    -- ^ @availability_zone@
+    -- - (Optional, Forces New)
+    , ebs_block_device :: P.Maybe (TF.Expr s [TF.Expr s (SpotFleetRequestEbsBlockDevice s)])
+    -- ^ @ebs_block_device@
+    -- - (Optional)
+    , ebs_optimized :: TF.Expr s P.Bool
+    -- ^ @ebs_optimized@
+    -- - (Default __@false@__)
+    , ephemeral_block_device :: P.Maybe (TF.Expr s [TF.Expr s (SpotFleetRequestEphemeralBlockDevice s)])
+    -- ^ @ephemeral_block_device@
+    -- - (Optional, Forces New)
+    , iam_instance_profile :: P.Maybe (TF.Expr s P.Text)
+    -- ^ @iam_instance_profile@
+    -- - (Optional, Forces New)
+    , iam_instance_profile_arn :: P.Maybe (TF.Expr s P.Arn)
+    -- ^ @iam_instance_profile_arn@
+    -- - (Optional, Forces New)
+    , instance_type :: TF.Expr s P.Text
+    -- ^ @instance_type@
+    -- - (Required, Forces New)
+    , key_name :: P.Maybe (TF.Expr s P.Text)
+    -- ^ @key_name@
+    -- - (Optional, Forces New)
+    , monitoring :: TF.Expr s P.Bool
+    -- ^ @monitoring@
+    -- - (Default __@false@__)
+    , placement_group :: P.Maybe (TF.Expr s P.Text)
+    -- ^ @placement_group@
+    -- - (Optional, Forces New)
+    , placement_tenancy :: P.Maybe (TF.Expr s P.Text)
+    -- ^ @placement_tenancy@
+    -- - (Optional, Forces New)
+    , root_block_device :: P.Maybe (TF.Expr s [TF.Expr s (SpotFleetRequestRootBlockDevice s)])
+    -- ^ @root_block_device@
+    -- - (Optional)
+    , spot_price :: P.Maybe (TF.Expr s P.Text)
+    -- ^ @spot_price@
+    -- - (Optional, Forces New)
+    , subnet_id :: P.Maybe (TF.Expr s TF.Id)
+    -- ^ @subnet_id@
+    -- - (Optional, Forces New)
+    , tags :: P.Maybe (TF.Expr s (P.Map P.Text (TF.Expr s P.Text)))
+    -- ^ @tags@
+    -- - (Optional, Forces New)
+    , user_data :: P.Maybe (TF.Expr s P.Text)
+    -- ^ @user_data@
+    -- - (Optional, Forces New)
+    , vpc_security_group_ids :: P.Maybe (TF.Expr s [TF.Expr s TF.Id])
+    -- ^ @vpc_security_group_ids@
+    -- - (Optional)
+    , weighted_capacity :: P.Maybe (TF.Expr s P.Text)
+    -- ^ @weighted_capacity@
+    -- - (Optional, Forces New)
+    } deriving (P.Show)
+
+-- | Construct a new @launch_specification@ settings value.
+newSpotFleetRequestLaunchSpecification
+    :: SpotFleetRequestLaunchSpecification_Required s
+    -> SpotFleetRequestLaunchSpecification s
+newSpotFleetRequestLaunchSpecification SpotFleetRequestLaunchSpecification{..} =
+    SpotFleetRequestLaunchSpecification_Internal
+        { ami = ami
+        , associate_public_ip_address = TF.expr P.False
+        , availability_zone = P.Nothing
+        , ebs_block_device = P.Nothing
+        , ebs_optimized = TF.expr P.False
+        , ephemeral_block_device = P.Nothing
+        , iam_instance_profile = P.Nothing
+        , iam_instance_profile_arn = P.Nothing
+        , instance_type = instance_type
+        , key_name = P.Nothing
+        , monitoring = TF.expr P.False
+        , placement_group = P.Nothing
+        , placement_tenancy = P.Nothing
+        , root_block_device = P.Nothing
+        , spot_price = P.Nothing
+        , subnet_id = P.Nothing
+        , tags = P.Nothing
+        , user_data = P.Nothing
+        , vpc_security_group_ids = P.Nothing
+        , weighted_capacity = P.Nothing
+        }
+
+-- | The required arguments for 'newSpotFleetRequestLaunchSpecification'.
+data SpotFleetRequestLaunchSpecification_Required s = SpotFleetRequestLaunchSpecification
+    { ami           :: TF.Expr s P.Text
+    -- ^ (Required, Forces New)
+    , instance_type :: TF.Expr s P.Text
+    -- ^ (Required, Forces New)
+    } deriving (P.Show)
+
+instance Lens.HasField "ami" f (SpotFleetRequestLaunchSpecification s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (ami :: SpotFleetRequestLaunchSpecification s -> TF.Expr s P.Text)
+        (\s a -> s { ami = a } :: SpotFleetRequestLaunchSpecification s)
+
+instance Lens.HasField "associate_public_ip_address" f (SpotFleetRequestLaunchSpecification s) (TF.Expr s P.Bool) where
+    field = Lens.lens'
+        (associate_public_ip_address :: SpotFleetRequestLaunchSpecification s -> TF.Expr s P.Bool)
+        (\s a -> s { associate_public_ip_address = a } :: SpotFleetRequestLaunchSpecification s)
+
+instance Lens.HasField "availability_zone" f (SpotFleetRequestLaunchSpecification s) (P.Maybe (TF.Expr s P.Text)) where
+    field = Lens.lens'
+        (availability_zone :: SpotFleetRequestLaunchSpecification s -> P.Maybe (TF.Expr s P.Text))
+        (\s a -> s { availability_zone = a } :: SpotFleetRequestLaunchSpecification s)
+
+instance Lens.HasField "ebs_block_device" f (SpotFleetRequestLaunchSpecification s) (P.Maybe (TF.Expr s [TF.Expr s (SpotFleetRequestEbsBlockDevice s)])) where
+    field = Lens.lens'
+        (ebs_block_device :: SpotFleetRequestLaunchSpecification s -> P.Maybe (TF.Expr s [TF.Expr s (SpotFleetRequestEbsBlockDevice s)]))
+        (\s a -> s { ebs_block_device = a } :: SpotFleetRequestLaunchSpecification s)
+
+instance Lens.HasField "ebs_optimized" f (SpotFleetRequestLaunchSpecification s) (TF.Expr s P.Bool) where
+    field = Lens.lens'
+        (ebs_optimized :: SpotFleetRequestLaunchSpecification s -> TF.Expr s P.Bool)
+        (\s a -> s { ebs_optimized = a } :: SpotFleetRequestLaunchSpecification s)
+
+instance Lens.HasField "ephemeral_block_device" f (SpotFleetRequestLaunchSpecification s) (P.Maybe (TF.Expr s [TF.Expr s (SpotFleetRequestEphemeralBlockDevice s)])) where
+    field = Lens.lens'
+        (ephemeral_block_device :: SpotFleetRequestLaunchSpecification s -> P.Maybe (TF.Expr s [TF.Expr s (SpotFleetRequestEphemeralBlockDevice s)]))
+        (\s a -> s { ephemeral_block_device = a } :: SpotFleetRequestLaunchSpecification s)
+
+instance Lens.HasField "iam_instance_profile" f (SpotFleetRequestLaunchSpecification s) (P.Maybe (TF.Expr s P.Text)) where
+    field = Lens.lens'
+        (iam_instance_profile :: SpotFleetRequestLaunchSpecification s -> P.Maybe (TF.Expr s P.Text))
+        (\s a -> s { iam_instance_profile = a } :: SpotFleetRequestLaunchSpecification s)
+
+instance Lens.HasField "iam_instance_profile_arn" f (SpotFleetRequestLaunchSpecification s) (P.Maybe (TF.Expr s P.Arn)) where
+    field = Lens.lens'
+        (iam_instance_profile_arn :: SpotFleetRequestLaunchSpecification s -> P.Maybe (TF.Expr s P.Arn))
+        (\s a -> s { iam_instance_profile_arn = a } :: SpotFleetRequestLaunchSpecification s)
+
+instance Lens.HasField "instance_type" f (SpotFleetRequestLaunchSpecification s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (instance_type :: SpotFleetRequestLaunchSpecification s -> TF.Expr s P.Text)
+        (\s a -> s { instance_type = a } :: SpotFleetRequestLaunchSpecification s)
+
+instance Lens.HasField "key_name" f (SpotFleetRequestLaunchSpecification s) (P.Maybe (TF.Expr s P.Text)) where
+    field = Lens.lens'
+        (key_name :: SpotFleetRequestLaunchSpecification s -> P.Maybe (TF.Expr s P.Text))
+        (\s a -> s { key_name = a } :: SpotFleetRequestLaunchSpecification s)
+
+instance Lens.HasField "monitoring" f (SpotFleetRequestLaunchSpecification s) (TF.Expr s P.Bool) where
+    field = Lens.lens'
+        (monitoring :: SpotFleetRequestLaunchSpecification s -> TF.Expr s P.Bool)
+        (\s a -> s { monitoring = a } :: SpotFleetRequestLaunchSpecification s)
+
+instance Lens.HasField "placement_group" f (SpotFleetRequestLaunchSpecification s) (P.Maybe (TF.Expr s P.Text)) where
+    field = Lens.lens'
+        (placement_group :: SpotFleetRequestLaunchSpecification s -> P.Maybe (TF.Expr s P.Text))
+        (\s a -> s { placement_group = a } :: SpotFleetRequestLaunchSpecification s)
+
+instance Lens.HasField "placement_tenancy" f (SpotFleetRequestLaunchSpecification s) (P.Maybe (TF.Expr s P.Text)) where
+    field = Lens.lens'
+        (placement_tenancy :: SpotFleetRequestLaunchSpecification s -> P.Maybe (TF.Expr s P.Text))
+        (\s a -> s { placement_tenancy = a } :: SpotFleetRequestLaunchSpecification s)
+
+instance Lens.HasField "root_block_device" f (SpotFleetRequestLaunchSpecification s) (P.Maybe (TF.Expr s [TF.Expr s (SpotFleetRequestRootBlockDevice s)])) where
+    field = Lens.lens'
+        (root_block_device :: SpotFleetRequestLaunchSpecification s -> P.Maybe (TF.Expr s [TF.Expr s (SpotFleetRequestRootBlockDevice s)]))
+        (\s a -> s { root_block_device = a } :: SpotFleetRequestLaunchSpecification s)
+
+instance Lens.HasField "spot_price" f (SpotFleetRequestLaunchSpecification s) (P.Maybe (TF.Expr s P.Text)) where
+    field = Lens.lens'
+        (spot_price :: SpotFleetRequestLaunchSpecification s -> P.Maybe (TF.Expr s P.Text))
+        (\s a -> s { spot_price = a } :: SpotFleetRequestLaunchSpecification s)
+
+instance Lens.HasField "subnet_id" f (SpotFleetRequestLaunchSpecification s) (P.Maybe (TF.Expr s TF.Id)) where
+    field = Lens.lens'
+        (subnet_id :: SpotFleetRequestLaunchSpecification s -> P.Maybe (TF.Expr s TF.Id))
+        (\s a -> s { subnet_id = a } :: SpotFleetRequestLaunchSpecification s)
+
+instance Lens.HasField "tags" f (SpotFleetRequestLaunchSpecification s) (P.Maybe (TF.Expr s (P.Map P.Text (TF.Expr s P.Text)))) where
+    field = Lens.lens'
+        (tags :: SpotFleetRequestLaunchSpecification s -> P.Maybe (TF.Expr s (P.Map P.Text (TF.Expr s P.Text))))
+        (\s a -> s { tags = a } :: SpotFleetRequestLaunchSpecification s)
+
+instance Lens.HasField "user_data" f (SpotFleetRequestLaunchSpecification s) (P.Maybe (TF.Expr s P.Text)) where
+    field = Lens.lens'
+        (user_data :: SpotFleetRequestLaunchSpecification s -> P.Maybe (TF.Expr s P.Text))
+        (\s a -> s { user_data = a } :: SpotFleetRequestLaunchSpecification s)
+
+instance Lens.HasField "vpc_security_group_ids" f (SpotFleetRequestLaunchSpecification s) (P.Maybe (TF.Expr s [TF.Expr s TF.Id])) where
+    field = Lens.lens'
+        (vpc_security_group_ids :: SpotFleetRequestLaunchSpecification s -> P.Maybe (TF.Expr s [TF.Expr s TF.Id]))
+        (\s a -> s { vpc_security_group_ids = a } :: SpotFleetRequestLaunchSpecification s)
+
+instance Lens.HasField "weighted_capacity" f (SpotFleetRequestLaunchSpecification s) (P.Maybe (TF.Expr s P.Text)) where
+    field = Lens.lens'
+        (weighted_capacity :: SpotFleetRequestLaunchSpecification s -> P.Maybe (TF.Expr s P.Text))
+        (\s a -> s { weighted_capacity = a } :: SpotFleetRequestLaunchSpecification s)
+
+instance Lens.HasField "availability_zone" (P.Const r) (TF.Ref SpotFleetRequestLaunchSpecification s) (TF.Expr s P.Text) where
+    field = Lens.to (TF.unsafeComputed Encode.attribute (proxy# :: Proxy# "availability_zone"))
+
+instance Lens.HasField "ebs_block_device" (P.Const r) (TF.Ref SpotFleetRequestLaunchSpecification s) (TF.Expr s [TF.Expr s (SpotFleetRequestEbsBlockDevice s)]) where
+    field = Lens.to (TF.unsafeComputed Encode.attribute (proxy# :: Proxy# "ebs_block_device"))
+
+instance Lens.HasField "ephemeral_block_device" (P.Const r) (TF.Ref SpotFleetRequestLaunchSpecification s) (TF.Expr s [TF.Expr s (SpotFleetRequestEphemeralBlockDevice s)]) where
+    field = Lens.to (TF.unsafeComputed Encode.attribute (proxy# :: Proxy# "ephemeral_block_device"))
+
+instance Lens.HasField "key_name" (P.Const r) (TF.Ref SpotFleetRequestLaunchSpecification s) (TF.Expr s P.Text) where
+    field = Lens.to (TF.unsafeComputed Encode.attribute (proxy# :: Proxy# "key_name"))
+
+instance Lens.HasField "placement_group" (P.Const r) (TF.Ref SpotFleetRequestLaunchSpecification s) (TF.Expr s P.Text) where
+    field = Lens.to (TF.unsafeComputed Encode.attribute (proxy# :: Proxy# "placement_group"))
+
+instance Lens.HasField "root_block_device" (P.Const r) (TF.Ref SpotFleetRequestLaunchSpecification s) (TF.Expr s [TF.Expr s (SpotFleetRequestRootBlockDevice s)]) where
+    field = Lens.to (TF.unsafeComputed Encode.attribute (proxy# :: Proxy# "root_block_device"))
+
+instance Lens.HasField "subnet_id" (P.Const r) (TF.Ref SpotFleetRequestLaunchSpecification s) (TF.Expr s TF.Id) where
+    field = Lens.to (TF.unsafeComputed Encode.attribute (proxy# :: Proxy# "subnet_id"))
+
+instance Lens.HasField "vpc_security_group_ids" (P.Const r) (TF.Ref SpotFleetRequestLaunchSpecification s) (TF.Expr s [TF.Expr s TF.Id]) where
+    field = Lens.to (TF.unsafeComputed Encode.attribute (proxy# :: Proxy# "vpc_security_group_ids"))
+
+instance TF.ToHCL (SpotFleetRequestLaunchSpecification s) where
+    toHCL SpotFleetRequestLaunchSpecification_Internal{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "ami" ami
+       <> TF.pair "associate_public_ip_address" associate_public_ip_address
+       <> P.maybe P.mempty (TF.pair "availability_zone") availability_zone
+       <> P.maybe P.mempty (TF.pair "ebs_block_device") ebs_block_device
+       <> TF.pair "ebs_optimized" ebs_optimized
+       <> P.maybe P.mempty (TF.pair "ephemeral_block_device") ephemeral_block_device
+       <> P.maybe P.mempty (TF.pair "iam_instance_profile") iam_instance_profile
+       <> P.maybe P.mempty (TF.pair "iam_instance_profile_arn") iam_instance_profile_arn
+       <> TF.pair "instance_type" instance_type
+       <> P.maybe P.mempty (TF.pair "key_name") key_name
+       <> TF.pair "monitoring" monitoring
+       <> P.maybe P.mempty (TF.pair "placement_group") placement_group
+       <> P.maybe P.mempty (TF.pair "placement_tenancy") placement_tenancy
+       <> P.maybe P.mempty (TF.pair "root_block_device") root_block_device
+       <> P.maybe P.mempty (TF.pair "spot_price") spot_price
+       <> P.maybe P.mempty (TF.pair "subnet_id") subnet_id
+       <> P.maybe P.mempty (TF.pair "tags") tags
+       <> P.maybe P.mempty (TF.pair "user_data") user_data
+       <> P.maybe P.mempty (TF.pair "vpc_security_group_ids") vpc_security_group_ids
+       <> P.maybe P.mempty (TF.pair "weighted_capacity") weighted_capacity
+
+-- | The @root_block_device@ nested settings definition.
+data SpotFleetRequestRootBlockDevice s = SpotFleetRequestRootBlockDevice_Internal
+    { delete_on_termination :: TF.Expr s P.Bool
+    -- ^ @delete_on_termination@
+    -- - (Default __@true@__, Forces New)
+    , iops                  :: P.Maybe (TF.Expr s P.Int)
+    -- ^ @iops@
+    -- - (Optional, Forces New)
+    , volume_size           :: P.Maybe (TF.Expr s P.Int)
+    -- ^ @volume_size@
+    -- - (Optional, Forces New)
+    , volume_type           :: P.Maybe (TF.Expr s P.Text)
+    -- ^ @volume_type@
+    -- - (Optional, Forces New)
+    } deriving (P.Show)
+
+-- | Construct a new @root_block_device@ settings value.
+newSpotFleetRequestRootBlockDevice
+    :: SpotFleetRequestRootBlockDevice s
+newSpotFleetRequestRootBlockDevice =
+    SpotFleetRequestRootBlockDevice_Internal
+        { delete_on_termination = TF.expr P.True
+        , iops = P.Nothing
+        , volume_size = P.Nothing
+        , volume_type = P.Nothing
+        }
+
+instance Lens.HasField "delete_on_termination" f (SpotFleetRequestRootBlockDevice s) (TF.Expr s P.Bool) where
+    field = Lens.lens'
+        (delete_on_termination :: SpotFleetRequestRootBlockDevice s -> TF.Expr s P.Bool)
+        (\s a -> s { delete_on_termination = a } :: SpotFleetRequestRootBlockDevice s)
+
+instance Lens.HasField "iops" f (SpotFleetRequestRootBlockDevice s) (P.Maybe (TF.Expr s P.Int)) where
+    field = Lens.lens'
+        (iops :: SpotFleetRequestRootBlockDevice s -> P.Maybe (TF.Expr s P.Int))
+        (\s a -> s { iops = a } :: SpotFleetRequestRootBlockDevice s)
+
+instance Lens.HasField "volume_size" f (SpotFleetRequestRootBlockDevice s) (P.Maybe (TF.Expr s P.Int)) where
+    field = Lens.lens'
+        (volume_size :: SpotFleetRequestRootBlockDevice s -> P.Maybe (TF.Expr s P.Int))
+        (\s a -> s { volume_size = a } :: SpotFleetRequestRootBlockDevice s)
+
+instance Lens.HasField "volume_type" f (SpotFleetRequestRootBlockDevice s) (P.Maybe (TF.Expr s P.Text)) where
+    field = Lens.lens'
+        (volume_type :: SpotFleetRequestRootBlockDevice s -> P.Maybe (TF.Expr s P.Text))
+        (\s a -> s { volume_type = a } :: SpotFleetRequestRootBlockDevice s)
+
+instance Lens.HasField "iops" (P.Const r) (TF.Ref SpotFleetRequestRootBlockDevice s) (TF.Expr s P.Int) where
+    field = Lens.to (TF.unsafeComputed Encode.attribute (proxy# :: Proxy# "iops"))
+
+instance Lens.HasField "volume_size" (P.Const r) (TF.Ref SpotFleetRequestRootBlockDevice s) (TF.Expr s P.Int) where
+    field = Lens.to (TF.unsafeComputed Encode.attribute (proxy# :: Proxy# "volume_size"))
+
+instance Lens.HasField "volume_type" (P.Const r) (TF.Ref SpotFleetRequestRootBlockDevice s) (TF.Expr s P.Text) where
+    field = Lens.to (TF.unsafeComputed Encode.attribute (proxy# :: Proxy# "volume_type"))
+
+instance TF.ToHCL (SpotFleetRequestRootBlockDevice s) where
+    toHCL SpotFleetRequestRootBlockDevice_Internal{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "delete_on_termination" delete_on_termination
+       <> P.maybe P.mempty (TF.pair "iops") iops
+       <> P.maybe P.mempty (TF.pair "volume_size") volume_size
+       <> P.maybe P.mempty (TF.pair "volume_type") volume_type
+
+-- | The @ephemeral_block_device@ nested settings definition.
+data SpotFleetRequestEphemeralBlockDevice s = SpotFleetRequestEphemeralBlockDevice
+    { device_name  :: TF.Expr s P.Text
+    -- ^ @device_name@
+    -- - (Required)
+    , virtual_name :: TF.Expr s P.Text
+    -- ^ @virtual_name@
+    -- - (Required)
+    } deriving (P.Show)
+
+instance Lens.HasField "device_name" f (SpotFleetRequestEphemeralBlockDevice s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (device_name :: SpotFleetRequestEphemeralBlockDevice s -> TF.Expr s P.Text)
+        (\s a -> s { device_name = a } :: SpotFleetRequestEphemeralBlockDevice s)
+
+instance Lens.HasField "virtual_name" f (SpotFleetRequestEphemeralBlockDevice s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (virtual_name :: SpotFleetRequestEphemeralBlockDevice s -> TF.Expr s P.Text)
+        (\s a -> s { virtual_name = a } :: SpotFleetRequestEphemeralBlockDevice s)
+
+instance TF.ToHCL (SpotFleetRequestEphemeralBlockDevice s) where
+    toHCL SpotFleetRequestEphemeralBlockDevice{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "device_name" device_name
+       <> TF.pair "virtual_name" virtual_name
+
+-- | The @credit_specification@ nested settings definition.
+newtype SpotInstanceRequestCreditSpecification s = SpotInstanceRequestCreditSpecification_Internal
+    { cpu_credits :: P.Maybe (TF.Expr s P.Text)
+    -- ^ @cpu_credits@
+    -- - (Optional)
+    } deriving (P.Show)
+
+-- | Construct a new @credit_specification@ settings value.
+newSpotInstanceRequestCreditSpecification
+    :: SpotInstanceRequestCreditSpecification s
+newSpotInstanceRequestCreditSpecification =
+    SpotInstanceRequestCreditSpecification_Internal
+        { cpu_credits = P.Nothing
+        }
+
+instance Lens.HasField "cpu_credits" f (SpotInstanceRequestCreditSpecification s) (P.Maybe (TF.Expr s P.Text)) where
+    field = Lens.lens'
+        (cpu_credits :: SpotInstanceRequestCreditSpecification s -> P.Maybe (TF.Expr s P.Text))
+        (\s a -> s { cpu_credits = a } :: SpotInstanceRequestCreditSpecification s)
+
+instance TF.ToHCL (SpotInstanceRequestCreditSpecification s) where
+    toHCL SpotInstanceRequestCreditSpecification_Internal{..} = TF.pairs $
+          P.mempty
+       <> P.maybe P.mempty (TF.pair "cpu_credits") cpu_credits
+
+-- | The @ebs_block_device@ nested settings definition.
+data SpotInstanceRequestEbsBlockDevice s = SpotInstanceRequestEbsBlockDevice_Internal
+    { delete_on_termination :: TF.Expr s P.Bool
+    -- ^ @delete_on_termination@
+    -- - (Default __@true@__, Forces New)
+    , device_name           :: TF.Expr s P.Text
+    -- ^ @device_name@
+    -- - (Required, Forces New)
+    , encrypted             :: P.Maybe (TF.Expr s P.Bool)
+    -- ^ @encrypted@
+    -- - (Optional, Forces New)
+    , iops                  :: P.Maybe (TF.Expr s P.Int)
+    -- ^ @iops@
+    -- - (Optional, Forces New)
+    , snapshot_id           :: P.Maybe (TF.Expr s TF.Id)
+    -- ^ @snapshot_id@
+    -- - (Optional, Forces New)
+    , volume_size           :: P.Maybe (TF.Expr s P.Int)
+    -- ^ @volume_size@
+    -- - (Optional, Forces New)
+    , volume_type           :: P.Maybe (TF.Expr s P.Text)
+    -- ^ @volume_type@
+    -- - (Optional, Forces New)
+    } deriving (P.Show)
+
+-- | Construct a new @ebs_block_device@ settings value.
+newSpotInstanceRequestEbsBlockDevice
+    :: SpotInstanceRequestEbsBlockDevice_Required s
+    -> SpotInstanceRequestEbsBlockDevice s
+newSpotInstanceRequestEbsBlockDevice SpotInstanceRequestEbsBlockDevice{..} =
+    SpotInstanceRequestEbsBlockDevice_Internal
+        { delete_on_termination = TF.expr P.True
+        , device_name = device_name
+        , encrypted = P.Nothing
+        , iops = P.Nothing
+        , snapshot_id = P.Nothing
+        , volume_size = P.Nothing
+        , volume_type = P.Nothing
+        }
+
+-- | The required arguments for 'newSpotInstanceRequestEbsBlockDevice'.
+data SpotInstanceRequestEbsBlockDevice_Required s = SpotInstanceRequestEbsBlockDevice
+    { device_name :: TF.Expr s P.Text
+    -- ^ (Required, Forces New)
+    } deriving (P.Show)
+
+instance Lens.HasField "delete_on_termination" f (SpotInstanceRequestEbsBlockDevice s) (TF.Expr s P.Bool) where
+    field = Lens.lens'
+        (delete_on_termination :: SpotInstanceRequestEbsBlockDevice s -> TF.Expr s P.Bool)
+        (\s a -> s { delete_on_termination = a } :: SpotInstanceRequestEbsBlockDevice s)
+
+instance Lens.HasField "device_name" f (SpotInstanceRequestEbsBlockDevice s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (device_name :: SpotInstanceRequestEbsBlockDevice s -> TF.Expr s P.Text)
+        (\s a -> s { device_name = a } :: SpotInstanceRequestEbsBlockDevice s)
+
+instance Lens.HasField "encrypted" f (SpotInstanceRequestEbsBlockDevice s) (P.Maybe (TF.Expr s P.Bool)) where
+    field = Lens.lens'
+        (encrypted :: SpotInstanceRequestEbsBlockDevice s -> P.Maybe (TF.Expr s P.Bool))
+        (\s a -> s { encrypted = a } :: SpotInstanceRequestEbsBlockDevice s)
+
+instance Lens.HasField "iops" f (SpotInstanceRequestEbsBlockDevice s) (P.Maybe (TF.Expr s P.Int)) where
+    field = Lens.lens'
+        (iops :: SpotInstanceRequestEbsBlockDevice s -> P.Maybe (TF.Expr s P.Int))
+        (\s a -> s { iops = a } :: SpotInstanceRequestEbsBlockDevice s)
+
+instance Lens.HasField "snapshot_id" f (SpotInstanceRequestEbsBlockDevice s) (P.Maybe (TF.Expr s TF.Id)) where
+    field = Lens.lens'
+        (snapshot_id :: SpotInstanceRequestEbsBlockDevice s -> P.Maybe (TF.Expr s TF.Id))
+        (\s a -> s { snapshot_id = a } :: SpotInstanceRequestEbsBlockDevice s)
+
+instance Lens.HasField "volume_size" f (SpotInstanceRequestEbsBlockDevice s) (P.Maybe (TF.Expr s P.Int)) where
+    field = Lens.lens'
+        (volume_size :: SpotInstanceRequestEbsBlockDevice s -> P.Maybe (TF.Expr s P.Int))
+        (\s a -> s { volume_size = a } :: SpotInstanceRequestEbsBlockDevice s)
+
+instance Lens.HasField "volume_type" f (SpotInstanceRequestEbsBlockDevice s) (P.Maybe (TF.Expr s P.Text)) where
+    field = Lens.lens'
+        (volume_type :: SpotInstanceRequestEbsBlockDevice s -> P.Maybe (TF.Expr s P.Text))
+        (\s a -> s { volume_type = a } :: SpotInstanceRequestEbsBlockDevice s)
+
+instance Lens.HasField "encrypted" (P.Const r) (TF.Ref SpotInstanceRequestEbsBlockDevice s) (TF.Expr s P.Bool) where
+    field = Lens.to (TF.unsafeComputed Encode.attribute (proxy# :: Proxy# "encrypted"))
+
+instance Lens.HasField "iops" (P.Const r) (TF.Ref SpotInstanceRequestEbsBlockDevice s) (TF.Expr s P.Int) where
+    field = Lens.to (TF.unsafeComputed Encode.attribute (proxy# :: Proxy# "iops"))
+
+instance Lens.HasField "snapshot_id" (P.Const r) (TF.Ref SpotInstanceRequestEbsBlockDevice s) (TF.Expr s TF.Id) where
+    field = Lens.to (TF.unsafeComputed Encode.attribute (proxy# :: Proxy# "snapshot_id"))
+
+instance Lens.HasField "volume_id" (P.Const r) (TF.Ref SpotInstanceRequestEbsBlockDevice s) (TF.Expr s TF.Id) where
+    field = Lens.to (TF.unsafeComputed Encode.attribute (proxy# :: Proxy# "volume_id"))
+
+instance Lens.HasField "volume_size" (P.Const r) (TF.Ref SpotInstanceRequestEbsBlockDevice s) (TF.Expr s P.Int) where
+    field = Lens.to (TF.unsafeComputed Encode.attribute (proxy# :: Proxy# "volume_size"))
+
+instance Lens.HasField "volume_type" (P.Const r) (TF.Ref SpotInstanceRequestEbsBlockDevice s) (TF.Expr s P.Text) where
+    field = Lens.to (TF.unsafeComputed Encode.attribute (proxy# :: Proxy# "volume_type"))
+
+instance TF.ToHCL (SpotInstanceRequestEbsBlockDevice s) where
+    toHCL SpotInstanceRequestEbsBlockDevice_Internal{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "delete_on_termination" delete_on_termination
+       <> TF.pair "device_name" device_name
+       <> P.maybe P.mempty (TF.pair "encrypted") encrypted
+       <> P.maybe P.mempty (TF.pair "iops") iops
+       <> P.maybe P.mempty (TF.pair "snapshot_id") snapshot_id
+       <> P.maybe P.mempty (TF.pair "volume_size") volume_size
+       <> P.maybe P.mempty (TF.pair "volume_type") volume_type
+
+-- | The @ephemeral_block_device@ nested settings definition.
+data SpotInstanceRequestEphemeralBlockDevice s = SpotInstanceRequestEphemeralBlockDevice_Internal
+    { device_name  :: TF.Expr s P.Text
+    -- ^ @device_name@
+    -- - (Required)
+    , no_device    :: P.Maybe (TF.Expr s P.Bool)
+    -- ^ @no_device@
+    -- - (Optional)
+    , virtual_name :: P.Maybe (TF.Expr s P.Text)
+    -- ^ @virtual_name@
+    -- - (Optional)
+    } deriving (P.Show)
+
+-- | Construct a new @ephemeral_block_device@ settings value.
+newSpotInstanceRequestEphemeralBlockDevice
+    :: SpotInstanceRequestEphemeralBlockDevice_Required s
+    -> SpotInstanceRequestEphemeralBlockDevice s
+newSpotInstanceRequestEphemeralBlockDevice SpotInstanceRequestEphemeralBlockDevice{..} =
+    SpotInstanceRequestEphemeralBlockDevice_Internal
+        { device_name = device_name
+        , no_device = P.Nothing
+        , virtual_name = P.Nothing
+        }
+
+-- | The required arguments for 'newSpotInstanceRequestEphemeralBlockDevice'.
+data SpotInstanceRequestEphemeralBlockDevice_Required s = SpotInstanceRequestEphemeralBlockDevice
+    { device_name :: TF.Expr s P.Text
+    -- ^ (Required)
+    } deriving (P.Show)
+
+instance Lens.HasField "device_name" f (SpotInstanceRequestEphemeralBlockDevice s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (device_name :: SpotInstanceRequestEphemeralBlockDevice s -> TF.Expr s P.Text)
+        (\s a -> s { device_name = a } :: SpotInstanceRequestEphemeralBlockDevice s)
+
+instance Lens.HasField "no_device" f (SpotInstanceRequestEphemeralBlockDevice s) (P.Maybe (TF.Expr s P.Bool)) where
+    field = Lens.lens'
+        (no_device :: SpotInstanceRequestEphemeralBlockDevice s -> P.Maybe (TF.Expr s P.Bool))
+        (\s a -> s { no_device = a } :: SpotInstanceRequestEphemeralBlockDevice s)
+
+instance Lens.HasField "virtual_name" f (SpotInstanceRequestEphemeralBlockDevice s) (P.Maybe (TF.Expr s P.Text)) where
+    field = Lens.lens'
+        (virtual_name :: SpotInstanceRequestEphemeralBlockDevice s -> P.Maybe (TF.Expr s P.Text))
+        (\s a -> s { virtual_name = a } :: SpotInstanceRequestEphemeralBlockDevice s)
+
+instance TF.ToHCL (SpotInstanceRequestEphemeralBlockDevice s) where
+    toHCL SpotInstanceRequestEphemeralBlockDevice_Internal{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "device_name" device_name
+       <> P.maybe P.mempty (TF.pair "no_device") no_device
+       <> P.maybe P.mempty (TF.pair "virtual_name") virtual_name
+
+-- | The @network_interface@ nested settings definition.
+data SpotInstanceRequestNetworkInterface s = SpotInstanceRequestNetworkInterface_Internal
+    { delete_on_termination :: TF.Expr s P.Bool
+    -- ^ @delete_on_termination@
+    -- - (Default __@false@__, Forces New)
+    , device_index          :: TF.Expr s P.Int
+    -- ^ @device_index@
+    -- - (Required, Forces New)
+    , network_interface_id  :: TF.Expr s TF.Id
+    -- ^ @network_interface_id@
+    -- - (Required, Forces New)
+    } deriving (P.Show)
+
+-- | Construct a new @network_interface@ settings value.
+newSpotInstanceRequestNetworkInterface
+    :: SpotInstanceRequestNetworkInterface_Required s
+    -> SpotInstanceRequestNetworkInterface s
+newSpotInstanceRequestNetworkInterface SpotInstanceRequestNetworkInterface{..} =
+    SpotInstanceRequestNetworkInterface_Internal
+        { delete_on_termination = TF.expr P.False
+        , device_index = device_index
+        , network_interface_id = network_interface_id
+        }
+
+-- | The required arguments for 'newSpotInstanceRequestNetworkInterface'.
+data SpotInstanceRequestNetworkInterface_Required s = SpotInstanceRequestNetworkInterface
+    { network_interface_id :: TF.Expr s TF.Id
+    -- ^ (Required, Forces New)
+    , device_index         :: TF.Expr s P.Int
+    -- ^ (Required, Forces New)
+    } deriving (P.Show)
+
+instance Lens.HasField "delete_on_termination" f (SpotInstanceRequestNetworkInterface s) (TF.Expr s P.Bool) where
+    field = Lens.lens'
+        (delete_on_termination :: SpotInstanceRequestNetworkInterface s -> TF.Expr s P.Bool)
+        (\s a -> s { delete_on_termination = a } :: SpotInstanceRequestNetworkInterface s)
+
+instance Lens.HasField "device_index" f (SpotInstanceRequestNetworkInterface s) (TF.Expr s P.Int) where
+    field = Lens.lens'
+        (device_index :: SpotInstanceRequestNetworkInterface s -> TF.Expr s P.Int)
+        (\s a -> s { device_index = a } :: SpotInstanceRequestNetworkInterface s)
+
+instance Lens.HasField "network_interface_id" f (SpotInstanceRequestNetworkInterface s) (TF.Expr s TF.Id) where
+    field = Lens.lens'
+        (network_interface_id :: SpotInstanceRequestNetworkInterface s -> TF.Expr s TF.Id)
+        (\s a -> s { network_interface_id = a } :: SpotInstanceRequestNetworkInterface s)
+
+instance TF.ToHCL (SpotInstanceRequestNetworkInterface s) where
+    toHCL SpotInstanceRequestNetworkInterface_Internal{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "delete_on_termination" delete_on_termination
+       <> TF.pair "device_index" device_index
+       <> TF.pair "network_interface_id" network_interface_id
+
+-- | The @root_block_device@ nested settings definition.
+data SpotInstanceRequestRootBlockDevice s = SpotInstanceRequestRootBlockDevice_Internal
+    { delete_on_termination :: TF.Expr s P.Bool
+    -- ^ @delete_on_termination@
+    -- - (Default __@true@__, Forces New)
+    , iops                  :: P.Maybe (TF.Expr s P.Int)
+    -- ^ @iops@
+    -- - (Optional, Forces New)
+    , volume_size           :: P.Maybe (TF.Expr s P.Int)
+    -- ^ @volume_size@
+    -- - (Optional, Forces New)
+    , volume_type           :: P.Maybe (TF.Expr s P.Text)
+    -- ^ @volume_type@
+    -- - (Optional, Forces New)
+    } deriving (P.Show)
+
+-- | Construct a new @root_block_device@ settings value.
+newSpotInstanceRequestRootBlockDevice
+    :: SpotInstanceRequestRootBlockDevice s
+newSpotInstanceRequestRootBlockDevice =
+    SpotInstanceRequestRootBlockDevice_Internal
+        { delete_on_termination = TF.expr P.True
+        , iops = P.Nothing
+        , volume_size = P.Nothing
+        , volume_type = P.Nothing
+        }
+
+instance Lens.HasField "delete_on_termination" f (SpotInstanceRequestRootBlockDevice s) (TF.Expr s P.Bool) where
+    field = Lens.lens'
+        (delete_on_termination :: SpotInstanceRequestRootBlockDevice s -> TF.Expr s P.Bool)
+        (\s a -> s { delete_on_termination = a } :: SpotInstanceRequestRootBlockDevice s)
+
+instance Lens.HasField "iops" f (SpotInstanceRequestRootBlockDevice s) (P.Maybe (TF.Expr s P.Int)) where
+    field = Lens.lens'
+        (iops :: SpotInstanceRequestRootBlockDevice s -> P.Maybe (TF.Expr s P.Int))
+        (\s a -> s { iops = a } :: SpotInstanceRequestRootBlockDevice s)
+
+instance Lens.HasField "volume_size" f (SpotInstanceRequestRootBlockDevice s) (P.Maybe (TF.Expr s P.Int)) where
+    field = Lens.lens'
+        (volume_size :: SpotInstanceRequestRootBlockDevice s -> P.Maybe (TF.Expr s P.Int))
+        (\s a -> s { volume_size = a } :: SpotInstanceRequestRootBlockDevice s)
+
+instance Lens.HasField "volume_type" f (SpotInstanceRequestRootBlockDevice s) (P.Maybe (TF.Expr s P.Text)) where
+    field = Lens.lens'
+        (volume_type :: SpotInstanceRequestRootBlockDevice s -> P.Maybe (TF.Expr s P.Text))
+        (\s a -> s { volume_type = a } :: SpotInstanceRequestRootBlockDevice s)
+
+instance Lens.HasField "iops" (P.Const r) (TF.Ref SpotInstanceRequestRootBlockDevice s) (TF.Expr s P.Int) where
+    field = Lens.to (TF.unsafeComputed Encode.attribute (proxy# :: Proxy# "iops"))
+
+instance Lens.HasField "volume_id" (P.Const r) (TF.Ref SpotInstanceRequestRootBlockDevice s) (TF.Expr s TF.Id) where
+    field = Lens.to (TF.unsafeComputed Encode.attribute (proxy# :: Proxy# "volume_id"))
+
+instance Lens.HasField "volume_size" (P.Const r) (TF.Ref SpotInstanceRequestRootBlockDevice s) (TF.Expr s P.Int) where
+    field = Lens.to (TF.unsafeComputed Encode.attribute (proxy# :: Proxy# "volume_size"))
+
+instance Lens.HasField "volume_type" (P.Const r) (TF.Ref SpotInstanceRequestRootBlockDevice s) (TF.Expr s P.Text) where
+    field = Lens.to (TF.unsafeComputed Encode.attribute (proxy# :: Proxy# "volume_type"))
+
+instance TF.ToHCL (SpotInstanceRequestRootBlockDevice s) where
+    toHCL SpotInstanceRequestRootBlockDevice_Internal{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "delete_on_termination" delete_on_termination
+       <> P.maybe P.mempty (TF.pair "iops") iops
+       <> P.maybe P.mempty (TF.pair "volume_size") volume_size
+       <> P.maybe P.mempty (TF.pair "volume_type") volume_type
+
+-- | The @output_location@ nested settings definition.
+data SsmAssociationOutputLocation s = SsmAssociationOutputLocation_Internal
+    { s3_bucket_name :: TF.Expr s P.Text
+    -- ^ @s3_bucket_name@
+    -- - (Required)
+    , s3_key_prefix  :: P.Maybe (TF.Expr s P.Text)
+    -- ^ @s3_key_prefix@
+    -- - (Optional)
+    } deriving (P.Show)
+
+-- | Construct a new @output_location@ settings value.
+newSsmAssociationOutputLocation
+    :: SsmAssociationOutputLocation_Required s
+    -> SsmAssociationOutputLocation s
+newSsmAssociationOutputLocation SsmAssociationOutputLocation{..} =
+    SsmAssociationOutputLocation_Internal
+        { s3_bucket_name = s3_bucket_name
+        , s3_key_prefix = P.Nothing
+        }
+
+-- | The required arguments for 'newSsmAssociationOutputLocation'.
+data SsmAssociationOutputLocation_Required s = SsmAssociationOutputLocation
+    { s3_bucket_name :: TF.Expr s P.Text
+    -- ^ (Required)
+    } deriving (P.Show)
+
+instance Lens.HasField "s3_bucket_name" f (SsmAssociationOutputLocation s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (s3_bucket_name :: SsmAssociationOutputLocation s -> TF.Expr s P.Text)
+        (\s a -> s { s3_bucket_name = a } :: SsmAssociationOutputLocation s)
+
+instance Lens.HasField "s3_key_prefix" f (SsmAssociationOutputLocation s) (P.Maybe (TF.Expr s P.Text)) where
+    field = Lens.lens'
+        (s3_key_prefix :: SsmAssociationOutputLocation s -> P.Maybe (TF.Expr s P.Text))
+        (\s a -> s { s3_key_prefix = a } :: SsmAssociationOutputLocation s)
+
+instance TF.ToHCL (SsmAssociationOutputLocation s) where
+    toHCL SsmAssociationOutputLocation_Internal{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "s3_bucket_name" s3_bucket_name
+       <> P.maybe P.mempty (TF.pair "s3_key_prefix") s3_key_prefix
+
+-- | The @targets@ nested settings definition.
+data SsmAssociationTargets s = SsmAssociationTargets
+    { key    :: TF.Expr s P.Text
+    -- ^ @key@
+    -- - (Required)
+    , values :: TF.Expr s [TF.Expr s P.Text]
+    -- ^ @values@
+    -- - (Required)
+    } deriving (P.Show)
+
+instance Lens.HasField "key" f (SsmAssociationTargets s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (key :: SsmAssociationTargets s -> TF.Expr s P.Text)
+        (\s a -> s { key = a } :: SsmAssociationTargets s)
+
+instance Lens.HasField "values" f (SsmAssociationTargets s) (TF.Expr s [TF.Expr s P.Text]) where
+    field = Lens.lens'
+        (values :: SsmAssociationTargets s -> TF.Expr s [TF.Expr s P.Text])
+        (\s a -> s { values = a } :: SsmAssociationTargets s)
+
+instance TF.ToHCL (SsmAssociationTargets s) where
+    toHCL SsmAssociationTargets{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "key" key
+       <> TF.pair "values" values
+
+-- | The @parameter@ nested settings definition.
+data SsmDocumentParameter s = SsmDocumentParameter_Internal
+    { default_value :: P.Maybe (TF.Expr s P.Text)
+    -- ^ @default_value@
+    -- - (Optional)
+    , description   :: P.Maybe (TF.Expr s P.Text)
+    -- ^ @description@
+    -- - (Optional)
+    , name          :: P.Maybe (TF.Expr s P.Text)
+    -- ^ @name@
+    -- - (Optional)
+    , type_         :: P.Maybe (TF.Expr s P.Text)
+    -- ^ @type@
+    -- - (Optional)
+    } deriving (P.Show)
+
+-- | Construct a new @parameter@ settings value.
+newSsmDocumentParameter
+    :: SsmDocumentParameter s
+newSsmDocumentParameter =
+    SsmDocumentParameter_Internal
+        { default_value = P.Nothing
+        , description = P.Nothing
+        , name = P.Nothing
+        , type_ = P.Nothing
+        }
+
+instance Lens.HasField "default_value" f (SsmDocumentParameter s) (P.Maybe (TF.Expr s P.Text)) where
+    field = Lens.lens'
+        (default_value :: SsmDocumentParameter s -> P.Maybe (TF.Expr s P.Text))
+        (\s a -> s { default_value = a } :: SsmDocumentParameter s)
+
+instance Lens.HasField "description" f (SsmDocumentParameter s) (P.Maybe (TF.Expr s P.Text)) where
+    field = Lens.lens'
+        (description :: SsmDocumentParameter s -> P.Maybe (TF.Expr s P.Text))
+        (\s a -> s { description = a } :: SsmDocumentParameter s)
+
+instance Lens.HasField "name" f (SsmDocumentParameter s) (P.Maybe (TF.Expr s P.Text)) where
+    field = Lens.lens'
+        (name :: SsmDocumentParameter s -> P.Maybe (TF.Expr s P.Text))
+        (\s a -> s { name = a } :: SsmDocumentParameter s)
+
+instance Lens.HasField "type" f (SsmDocumentParameter s) (P.Maybe (TF.Expr s P.Text)) where
+    field = Lens.lens'
+        (type_ :: SsmDocumentParameter s -> P.Maybe (TF.Expr s P.Text))
+        (\s a -> s { type_ = a } :: SsmDocumentParameter s)
+
+instance TF.ToHCL (SsmDocumentParameter s) where
+    toHCL SsmDocumentParameter_Internal{..} = TF.pairs $
+          P.mempty
+       <> P.maybe P.mempty (TF.pair "default_value") default_value
+       <> P.maybe P.mempty (TF.pair "description") description
+       <> P.maybe P.mempty (TF.pair "name") name
+       <> P.maybe P.mempty (TF.pair "type") type_
+
+-- | The @permissions@ nested settings definition.
+data SsmDocumentPermissions s = SsmDocumentPermissions
+    { account_ids :: TF.Expr s TF.Id
+    -- ^ @account_ids@
+    -- - (Required)
+    , type_       :: TF.Expr s P.Text
+    -- ^ @type@
+    -- - (Required)
+    } deriving (P.Show)
+
+instance Lens.HasField "account_ids" f (SsmDocumentPermissions s) (TF.Expr s TF.Id) where
+    field = Lens.lens'
+        (account_ids :: SsmDocumentPermissions s -> TF.Expr s TF.Id)
+        (\s a -> s { account_ids = a } :: SsmDocumentPermissions s)
+
+instance Lens.HasField "type" f (SsmDocumentPermissions s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (type_ :: SsmDocumentPermissions s -> TF.Expr s P.Text)
+        (\s a -> s { type_ = a } :: SsmDocumentPermissions s)
+
+instance TF.ToHCL (SsmDocumentPermissions s) where
+    toHCL SsmDocumentPermissions{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "account_ids" account_ids
+       <> TF.pair "type" type_
+
+-- | The @targets@ nested settings definition.
+data SsmMaintenanceWindowTargetTargets s = SsmMaintenanceWindowTargetTargets
+    { key    :: TF.Expr s P.Text
+    -- ^ @key@
+    -- - (Required)
+    , values :: TF.Expr s [TF.Expr s P.Text]
+    -- ^ @values@
+    -- - (Required)
+    } deriving (P.Show)
+
+instance Lens.HasField "key" f (SsmMaintenanceWindowTargetTargets s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (key :: SsmMaintenanceWindowTargetTargets s -> TF.Expr s P.Text)
+        (\s a -> s { key = a } :: SsmMaintenanceWindowTargetTargets s)
+
+instance Lens.HasField "values" f (SsmMaintenanceWindowTargetTargets s) (TF.Expr s [TF.Expr s P.Text]) where
+    field = Lens.lens'
+        (values :: SsmMaintenanceWindowTargetTargets s -> TF.Expr s [TF.Expr s P.Text])
+        (\s a -> s { values = a } :: SsmMaintenanceWindowTargetTargets s)
+
+instance TF.ToHCL (SsmMaintenanceWindowTargetTargets s) where
+    toHCL SsmMaintenanceWindowTargetTargets{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "key" key
+       <> TF.pair "values" values
+
+-- | The @logging_info@ nested settings definition.
+data SsmMaintenanceWindowTaskLoggingInfo s = SsmMaintenanceWindowTaskLoggingInfo_Internal
+    { s3_bucket_name   :: TF.Expr s P.Text
+    -- ^ @s3_bucket_name@
+    -- - (Required)
+    , s3_bucket_prefix :: P.Maybe (TF.Expr s P.Text)
+    -- ^ @s3_bucket_prefix@
+    -- - (Optional)
+    , s3_region        :: TF.Expr s P.Region
+    -- ^ @s3_region@
+    -- - (Required)
+    } deriving (P.Show)
+
+-- | Construct a new @logging_info@ settings value.
+newSsmMaintenanceWindowTaskLoggingInfo
+    :: SsmMaintenanceWindowTaskLoggingInfo_Required s
+    -> SsmMaintenanceWindowTaskLoggingInfo s
+newSsmMaintenanceWindowTaskLoggingInfo SsmMaintenanceWindowTaskLoggingInfo{..} =
+    SsmMaintenanceWindowTaskLoggingInfo_Internal
+        { s3_bucket_name = s3_bucket_name
+        , s3_bucket_prefix = P.Nothing
+        , s3_region = s3_region
+        }
+
+-- | The required arguments for 'newSsmMaintenanceWindowTaskLoggingInfo'.
+data SsmMaintenanceWindowTaskLoggingInfo_Required s = SsmMaintenanceWindowTaskLoggingInfo
+    { s3_bucket_name :: TF.Expr s P.Text
+    -- ^ (Required)
+    , s3_region      :: TF.Expr s P.Region
+    -- ^ (Required)
+    } deriving (P.Show)
+
+instance Lens.HasField "s3_bucket_name" f (SsmMaintenanceWindowTaskLoggingInfo s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (s3_bucket_name :: SsmMaintenanceWindowTaskLoggingInfo s -> TF.Expr s P.Text)
+        (\s a -> s { s3_bucket_name = a } :: SsmMaintenanceWindowTaskLoggingInfo s)
+
+instance Lens.HasField "s3_bucket_prefix" f (SsmMaintenanceWindowTaskLoggingInfo s) (P.Maybe (TF.Expr s P.Text)) where
+    field = Lens.lens'
+        (s3_bucket_prefix :: SsmMaintenanceWindowTaskLoggingInfo s -> P.Maybe (TF.Expr s P.Text))
+        (\s a -> s { s3_bucket_prefix = a } :: SsmMaintenanceWindowTaskLoggingInfo s)
+
+instance Lens.HasField "s3_region" f (SsmMaintenanceWindowTaskLoggingInfo s) (TF.Expr s P.Region) where
+    field = Lens.lens'
+        (s3_region :: SsmMaintenanceWindowTaskLoggingInfo s -> TF.Expr s P.Region)
+        (\s a -> s { s3_region = a } :: SsmMaintenanceWindowTaskLoggingInfo s)
+
+instance TF.ToHCL (SsmMaintenanceWindowTaskLoggingInfo s) where
+    toHCL SsmMaintenanceWindowTaskLoggingInfo_Internal{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "s3_bucket_name" s3_bucket_name
+       <> P.maybe P.mempty (TF.pair "s3_bucket_prefix") s3_bucket_prefix
+       <> TF.pair "s3_region" s3_region
+
+-- | The @targets@ nested settings definition.
+data SsmMaintenanceWindowTaskTargets s = SsmMaintenanceWindowTaskTargets
+    { key    :: TF.Expr s P.Text
+    -- ^ @key@
+    -- - (Required, Forces New)
+    , values :: TF.Expr s [TF.Expr s P.Text]
+    -- ^ @values@
+    -- - (Required, Forces New)
+    } deriving (P.Show)
+
+instance Lens.HasField "key" f (SsmMaintenanceWindowTaskTargets s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (key :: SsmMaintenanceWindowTaskTargets s -> TF.Expr s P.Text)
+        (\s a -> s { key = a } :: SsmMaintenanceWindowTaskTargets s)
+
+instance Lens.HasField "values" f (SsmMaintenanceWindowTaskTargets s) (TF.Expr s [TF.Expr s P.Text]) where
+    field = Lens.lens'
+        (values :: SsmMaintenanceWindowTaskTargets s -> TF.Expr s [TF.Expr s P.Text])
+        (\s a -> s { values = a } :: SsmMaintenanceWindowTaskTargets s)
+
+instance TF.ToHCL (SsmMaintenanceWindowTaskTargets s) where
+    toHCL SsmMaintenanceWindowTaskTargets{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "key" key
+       <> TF.pair "values" values
+
+-- | The @task_parameters@ nested settings definition.
+data SsmMaintenanceWindowTaskTaskParameters s = SsmMaintenanceWindowTaskTaskParameters
+    { name   :: TF.Expr s P.Text
+    -- ^ @name@
+    -- - (Required, Forces New)
+    , values :: TF.Expr s [TF.Expr s P.Text]
+    -- ^ @values@
+    -- - (Required, Forces New)
+    } deriving (P.Show)
+
+instance Lens.HasField "name" f (SsmMaintenanceWindowTaskTaskParameters s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (name :: SsmMaintenanceWindowTaskTaskParameters s -> TF.Expr s P.Text)
+        (\s a -> s { name = a } :: SsmMaintenanceWindowTaskTaskParameters s)
+
+instance Lens.HasField "values" f (SsmMaintenanceWindowTaskTaskParameters s) (TF.Expr s [TF.Expr s P.Text]) where
+    field = Lens.lens'
+        (values :: SsmMaintenanceWindowTaskTaskParameters s -> TF.Expr s [TF.Expr s P.Text])
+        (\s a -> s { values = a } :: SsmMaintenanceWindowTaskTaskParameters s)
+
+instance TF.ToHCL (SsmMaintenanceWindowTaskTaskParameters s) where
+    toHCL SsmMaintenanceWindowTaskTaskParameters{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "name" name
+       <> TF.pair "values" values
+
+-- | The @approval_rule@ nested settings definition.
+data SsmPatchBaselineApprovalRule s = SsmPatchBaselineApprovalRule_Internal
+    { approve_after_days :: TF.Expr s P.Int
+    -- ^ @approve_after_days@
+    -- - (Required)
+    , compliance_level :: TF.Expr s P.Text
+    -- ^ @compliance_level@
+    -- - (Default __@UNSPECIFIED@__)
+    , enable_non_security :: TF.Expr s P.Bool
+    -- ^ @enable_non_security@
+    -- - (Default __@false@__)
+    , patch_filter :: TF.Expr s [TF.Expr s (SsmPatchBaselinePatchFilter s)]
+    -- ^ @patch_filter@
+    -- - (Required)
+    } deriving (P.Show)
+
+-- | Construct a new @approval_rule@ settings value.
+newSsmPatchBaselineApprovalRule
+    :: SsmPatchBaselineApprovalRule_Required s
+    -> SsmPatchBaselineApprovalRule s
+newSsmPatchBaselineApprovalRule SsmPatchBaselineApprovalRule{..} =
+    SsmPatchBaselineApprovalRule_Internal
+        { approve_after_days = approve_after_days
+        , compliance_level = TF.expr "UNSPECIFIED"
+        , enable_non_security = TF.expr P.False
+        , patch_filter = patch_filter
+        }
+
+-- | The required arguments for 'newSsmPatchBaselineApprovalRule'.
+data SsmPatchBaselineApprovalRule_Required s = SsmPatchBaselineApprovalRule
+    { approve_after_days :: TF.Expr s P.Int
+    -- ^ (Required)
+    , patch_filter :: TF.Expr s [TF.Expr s (SsmPatchBaselinePatchFilter s)]
+    -- ^ (Required)
+    } deriving (P.Show)
+
+instance Lens.HasField "approve_after_days" f (SsmPatchBaselineApprovalRule s) (TF.Expr s P.Int) where
+    field = Lens.lens'
+        (approve_after_days :: SsmPatchBaselineApprovalRule s -> TF.Expr s P.Int)
+        (\s a -> s { approve_after_days = a } :: SsmPatchBaselineApprovalRule s)
+
+instance Lens.HasField "compliance_level" f (SsmPatchBaselineApprovalRule s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (compliance_level :: SsmPatchBaselineApprovalRule s -> TF.Expr s P.Text)
+        (\s a -> s { compliance_level = a } :: SsmPatchBaselineApprovalRule s)
+
+instance Lens.HasField "enable_non_security" f (SsmPatchBaselineApprovalRule s) (TF.Expr s P.Bool) where
+    field = Lens.lens'
+        (enable_non_security :: SsmPatchBaselineApprovalRule s -> TF.Expr s P.Bool)
+        (\s a -> s { enable_non_security = a } :: SsmPatchBaselineApprovalRule s)
+
+instance Lens.HasField "patch_filter" f (SsmPatchBaselineApprovalRule s) (TF.Expr s [TF.Expr s (SsmPatchBaselinePatchFilter s)]) where
+    field = Lens.lens'
+        (patch_filter :: SsmPatchBaselineApprovalRule s -> TF.Expr s [TF.Expr s (SsmPatchBaselinePatchFilter s)])
+        (\s a -> s { patch_filter = a } :: SsmPatchBaselineApprovalRule s)
+
+instance TF.ToHCL (SsmPatchBaselineApprovalRule s) where
+    toHCL SsmPatchBaselineApprovalRule_Internal{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "approve_after_days" approve_after_days
+       <> TF.pair "compliance_level" compliance_level
+       <> TF.pair "enable_non_security" enable_non_security
+       <> TF.pair "patch_filter" patch_filter
+
+-- | The @patch_filter@ nested settings definition.
+data SsmPatchBaselinePatchFilter s = SsmPatchBaselinePatchFilter
+    { key    :: TF.Expr s P.Text
+    -- ^ @key@
+    -- - (Required)
+    , values :: TF.Expr s [TF.Expr s P.Text]
+    -- ^ @values@
+    -- - (Required)
+    } deriving (P.Show)
+
+instance Lens.HasField "key" f (SsmPatchBaselinePatchFilter s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (key :: SsmPatchBaselinePatchFilter s -> TF.Expr s P.Text)
+        (\s a -> s { key = a } :: SsmPatchBaselinePatchFilter s)
+
+instance Lens.HasField "values" f (SsmPatchBaselinePatchFilter s) (TF.Expr s [TF.Expr s P.Text]) where
+    field = Lens.lens'
+        (values :: SsmPatchBaselinePatchFilter s -> TF.Expr s [TF.Expr s P.Text])
+        (\s a -> s { values = a } :: SsmPatchBaselinePatchFilter s)
+
+instance TF.ToHCL (SsmPatchBaselinePatchFilter s) where
+    toHCL SsmPatchBaselinePatchFilter{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "key" key
+       <> TF.pair "values" values
+
+-- | The @global_filter@ nested settings definition.
+data SsmPatchBaselineGlobalFilter s = SsmPatchBaselineGlobalFilter
+    { key    :: TF.Expr s P.Text
+    -- ^ @key@
+    -- - (Required)
+    , values :: TF.Expr s [TF.Expr s P.Text]
+    -- ^ @values@
+    -- - (Required)
+    } deriving (P.Show)
+
+instance Lens.HasField "key" f (SsmPatchBaselineGlobalFilter s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (key :: SsmPatchBaselineGlobalFilter s -> TF.Expr s P.Text)
+        (\s a -> s { key = a } :: SsmPatchBaselineGlobalFilter s)
+
+instance Lens.HasField "values" f (SsmPatchBaselineGlobalFilter s) (TF.Expr s [TF.Expr s P.Text]) where
+    field = Lens.lens'
+        (values :: SsmPatchBaselineGlobalFilter s -> TF.Expr s [TF.Expr s P.Text])
+        (\s a -> s { values = a } :: SsmPatchBaselineGlobalFilter s)
+
+instance TF.ToHCL (SsmPatchBaselineGlobalFilter s) where
+    toHCL SsmPatchBaselineGlobalFilter{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "key" key
+       <> TF.pair "values" values
+
+-- | The @s3_destination@ nested settings definition.
+data SsmResourceDataSyncS3Destination s = SsmResourceDataSyncS3Destination_Internal
+    { bucket_name :: TF.Expr s P.Text
+    -- ^ @bucket_name@
+    -- - (Required)
+    , kms_key_arn :: P.Maybe (TF.Expr s P.Arn)
+    -- ^ @kms_key_arn@
+    -- - (Optional)
+    , prefix      :: P.Maybe (TF.Expr s P.Text)
+    -- ^ @prefix@
+    -- - (Optional)
+    , region      :: TF.Expr s P.Region
+    -- ^ @region@
+    -- - (Required)
+    , sync_format :: TF.Expr s P.Text
+    -- ^ @sync_format@
+    -- - (Default __@JsonSerDe@__)
+    } deriving (P.Show)
+
+-- | Construct a new @s3_destination@ settings value.
+newSsmResourceDataSyncS3Destination
+    :: SsmResourceDataSyncS3Destination_Required s
+    -> SsmResourceDataSyncS3Destination s
+newSsmResourceDataSyncS3Destination SsmResourceDataSyncS3Destination{..} =
+    SsmResourceDataSyncS3Destination_Internal
+        { bucket_name = bucket_name
+        , kms_key_arn = P.Nothing
+        , prefix = P.Nothing
+        , region = region
+        , sync_format = TF.expr "JsonSerDe"
+        }
+
+-- | The required arguments for 'newSsmResourceDataSyncS3Destination'.
+data SsmResourceDataSyncS3Destination_Required s = SsmResourceDataSyncS3Destination
+    { bucket_name :: TF.Expr s P.Text
+    -- ^ (Required)
+    , region      :: TF.Expr s P.Region
+    -- ^ (Required)
+    } deriving (P.Show)
+
+instance Lens.HasField "bucket_name" f (SsmResourceDataSyncS3Destination s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (bucket_name :: SsmResourceDataSyncS3Destination s -> TF.Expr s P.Text)
+        (\s a -> s { bucket_name = a } :: SsmResourceDataSyncS3Destination s)
+
+instance Lens.HasField "kms_key_arn" f (SsmResourceDataSyncS3Destination s) (P.Maybe (TF.Expr s P.Arn)) where
+    field = Lens.lens'
+        (kms_key_arn :: SsmResourceDataSyncS3Destination s -> P.Maybe (TF.Expr s P.Arn))
+        (\s a -> s { kms_key_arn = a } :: SsmResourceDataSyncS3Destination s)
+
+instance Lens.HasField "prefix" f (SsmResourceDataSyncS3Destination s) (P.Maybe (TF.Expr s P.Text)) where
+    field = Lens.lens'
+        (prefix :: SsmResourceDataSyncS3Destination s -> P.Maybe (TF.Expr s P.Text))
+        (\s a -> s { prefix = a } :: SsmResourceDataSyncS3Destination s)
+
+instance Lens.HasField "region" f (SsmResourceDataSyncS3Destination s) (TF.Expr s P.Region) where
+    field = Lens.lens'
+        (region :: SsmResourceDataSyncS3Destination s -> TF.Expr s P.Region)
+        (\s a -> s { region = a } :: SsmResourceDataSyncS3Destination s)
+
+instance Lens.HasField "sync_format" f (SsmResourceDataSyncS3Destination s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (sync_format :: SsmResourceDataSyncS3Destination s -> TF.Expr s P.Text)
+        (\s a -> s { sync_format = a } :: SsmResourceDataSyncS3Destination s)
+
+instance TF.ToHCL (SsmResourceDataSyncS3Destination s) where
+    toHCL SsmResourceDataSyncS3Destination_Internal{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "bucket_name" bucket_name
+       <> P.maybe P.mempty (TF.pair "kms_key_arn") kms_key_arn
+       <> P.maybe P.mempty (TF.pair "prefix") prefix
+       <> TF.pair "region" region
+       <> TF.pair "sync_format" sync_format
+
+-- | The @smb_active_directory_settings@ nested settings definition.
+data StoragegatewayGatewaySmbActiveDirectorySettings s = StoragegatewayGatewaySmbActiveDirectorySettings
+    { domain_name :: TF.Expr s P.Text
+    -- ^ @domain_name@
+    -- - (Required)
+    , password    :: TF.Expr s P.Text
+    -- ^ @password@
+    -- - (Required)
+    , username    :: TF.Expr s P.Text
+    -- ^ @username@
+    -- - (Required)
+    } deriving (P.Show)
+
+instance Lens.HasField "domain_name" f (StoragegatewayGatewaySmbActiveDirectorySettings s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (domain_name :: StoragegatewayGatewaySmbActiveDirectorySettings s -> TF.Expr s P.Text)
+        (\s a -> s { domain_name = a } :: StoragegatewayGatewaySmbActiveDirectorySettings s)
+
+instance Lens.HasField "password" f (StoragegatewayGatewaySmbActiveDirectorySettings s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (password :: StoragegatewayGatewaySmbActiveDirectorySettings s -> TF.Expr s P.Text)
+        (\s a -> s { password = a } :: StoragegatewayGatewaySmbActiveDirectorySettings s)
+
+instance Lens.HasField "username" f (StoragegatewayGatewaySmbActiveDirectorySettings s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (username :: StoragegatewayGatewaySmbActiveDirectorySettings s -> TF.Expr s P.Text)
+        (\s a -> s { username = a } :: StoragegatewayGatewaySmbActiveDirectorySettings s)
+
+instance TF.ToHCL (StoragegatewayGatewaySmbActiveDirectorySettings s) where
+    toHCL StoragegatewayGatewaySmbActiveDirectorySettings{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "domain_name" domain_name
+       <> TF.pair "password" password
+       <> TF.pair "username" username
+
+-- | The @nfs_file_share_defaults@ nested settings definition.
+data StoragegatewayNfsFileShareNfsFileShareDefaults s = StoragegatewayNfsFileShareNfsFileShareDefaults_Internal
+    { directory_mode :: TF.Expr s P.Text
+    -- ^ @directory_mode@
+    -- - (Default __@0777@__)
+    , file_mode      :: TF.Expr s P.Text
+    -- ^ @file_mode@
+    -- - (Default __@0666@__)
+    , group_id       :: TF.Expr s P.Int
+    -- ^ @group_id@
+    -- - (Default __@65534@__)
+    , owner_id       :: TF.Expr s P.Int
+    -- ^ @owner_id@
+    -- - (Default __@65534@__)
+    } deriving (P.Show)
+
+-- | Construct a new @nfs_file_share_defaults@ settings value.
+newStoragegatewayNfsFileShareNfsFileShareDefaults
+    :: StoragegatewayNfsFileShareNfsFileShareDefaults s
+newStoragegatewayNfsFileShareNfsFileShareDefaults =
+    StoragegatewayNfsFileShareNfsFileShareDefaults_Internal
+        { directory_mode = TF.expr "0777"
+        , file_mode = TF.expr "0666"
+        , group_id = TF.expr 65534
+        , owner_id = TF.expr 65534
+        }
+
+instance Lens.HasField "directory_mode" f (StoragegatewayNfsFileShareNfsFileShareDefaults s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (directory_mode :: StoragegatewayNfsFileShareNfsFileShareDefaults s -> TF.Expr s P.Text)
+        (\s a -> s { directory_mode = a } :: StoragegatewayNfsFileShareNfsFileShareDefaults s)
+
+instance Lens.HasField "file_mode" f (StoragegatewayNfsFileShareNfsFileShareDefaults s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (file_mode :: StoragegatewayNfsFileShareNfsFileShareDefaults s -> TF.Expr s P.Text)
+        (\s a -> s { file_mode = a } :: StoragegatewayNfsFileShareNfsFileShareDefaults s)
+
+instance Lens.HasField "group_id" f (StoragegatewayNfsFileShareNfsFileShareDefaults s) (TF.Expr s P.Int) where
+    field = Lens.lens'
+        (group_id :: StoragegatewayNfsFileShareNfsFileShareDefaults s -> TF.Expr s P.Int)
+        (\s a -> s { group_id = a } :: StoragegatewayNfsFileShareNfsFileShareDefaults s)
+
+instance Lens.HasField "owner_id" f (StoragegatewayNfsFileShareNfsFileShareDefaults s) (TF.Expr s P.Int) where
+    field = Lens.lens'
+        (owner_id :: StoragegatewayNfsFileShareNfsFileShareDefaults s -> TF.Expr s P.Int)
+        (\s a -> s { owner_id = a } :: StoragegatewayNfsFileShareNfsFileShareDefaults s)
+
+instance TF.ToHCL (StoragegatewayNfsFileShareNfsFileShareDefaults s) where
+    toHCL StoragegatewayNfsFileShareNfsFileShareDefaults_Internal{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "directory_mode" directory_mode
+       <> TF.pair "file_mode" file_mode
+       <> TF.pair "group_id" group_id
+       <> TF.pair "owner_id" owner_id
+
+-- | The @filter@ nested settings definition.
+data SubnetFilter s = SubnetFilter
+    { name   :: TF.Expr s P.Text
+    -- ^ @name@
+    -- - (Required)
+    , values :: TF.Expr s [TF.Expr s P.Text]
+    -- ^ @values@
+    -- - (Required)
+    } deriving (P.Show)
+
+instance Lens.HasField "name" f (SubnetFilter s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (name :: SubnetFilter s -> TF.Expr s P.Text)
+        (\s a -> s { name = a } :: SubnetFilter s)
+
+instance Lens.HasField "values" f (SubnetFilter s) (TF.Expr s [TF.Expr s P.Text]) where
+    field = Lens.lens'
+        (values :: SubnetFilter s -> TF.Expr s [TF.Expr s P.Text])
+        (\s a -> s { values = a } :: SubnetFilter s)
+
+instance TF.ToHCL (SubnetFilter s) where
+    toHCL SubnetFilter{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "name" name
+       <> TF.pair "values" values
+
+-- | The @filter@ nested settings definition.
+data SubnetIdsFilter s = SubnetIdsFilter
+    { name   :: TF.Expr s P.Text
+    -- ^ @name@
+    -- - (Required)
+    , values :: TF.Expr s [TF.Expr s P.Text]
+    -- ^ @values@
+    -- - (Required)
+    } deriving (P.Show)
+
+instance Lens.HasField "name" f (SubnetIdsFilter s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (name :: SubnetIdsFilter s -> TF.Expr s P.Text)
+        (\s a -> s { name = a } :: SubnetIdsFilter s)
+
+instance Lens.HasField "values" f (SubnetIdsFilter s) (TF.Expr s [TF.Expr s P.Text]) where
+    field = Lens.lens'
+        (values :: SubnetIdsFilter s -> TF.Expr s [TF.Expr s P.Text])
+        (\s a -> s { values = a } :: SubnetIdsFilter s)
+
+instance TF.ToHCL (SubnetIdsFilter s) where
+    toHCL SubnetIdsFilter{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "name" name
+       <> TF.pair "values" values
+
+-- | The @cidr_block_associations@ nested settings definition.
+data VpcCidrBlockAssociations s = VpcCidrBlockAssociations
+    deriving (P.Show)
+
+instance Lens.HasField "association_id" (P.Const r) (TF.Ref VpcCidrBlockAssociations s) (TF.Expr s TF.Id) where
+    field = Lens.to (TF.unsafeComputed Encode.attribute (proxy# :: Proxy# "association_id"))
+
+instance Lens.HasField "cidr_block" (P.Const r) (TF.Ref VpcCidrBlockAssociations s) (TF.Expr s P.IPRange) where
+    field = Lens.to (TF.unsafeComputed Encode.attribute (proxy# :: Proxy# "cidr_block"))
+
+instance Lens.HasField "state" (P.Const r) (TF.Ref VpcCidrBlockAssociations s) (TF.Expr s P.Text) where
+    field = Lens.to (TF.unsafeComputed Encode.attribute (proxy# :: Proxy# "state"))
+
+instance TF.ToHCL (VpcCidrBlockAssociations s) where
+    toHCL VpcCidrBlockAssociations = P.mempty
+
+-- | The @filter@ nested settings definition.
+data VpcDhcpOptionsFilter s = VpcDhcpOptionsFilter
+    { name   :: TF.Expr s P.Text
+    -- ^ @name@
+    -- - (Required)
+    , values :: TF.Expr s [TF.Expr s P.Text]
+    -- ^ @values@
+    -- - (Required)
+    } deriving (P.Show)
+
+instance Lens.HasField "name" f (VpcDhcpOptionsFilter s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (name :: VpcDhcpOptionsFilter s -> TF.Expr s P.Text)
+        (\s a -> s { name = a } :: VpcDhcpOptionsFilter s)
+
+instance Lens.HasField "values" f (VpcDhcpOptionsFilter s) (TF.Expr s [TF.Expr s P.Text]) where
+    field = Lens.lens'
+        (values :: VpcDhcpOptionsFilter s -> TF.Expr s [TF.Expr s P.Text])
+        (\s a -> s { values = a } :: VpcDhcpOptionsFilter s)
+
+instance TF.ToHCL (VpcDhcpOptionsFilter s) where
+    toHCL VpcDhcpOptionsFilter{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "name" name
+       <> TF.pair "values" values
+
+-- | The @dns_entry@ nested settings definition.
+data VpcEndpointDnsEntry s = VpcEndpointDnsEntry
+    deriving (P.Show)
+
+instance Lens.HasField "dns_name" (P.Const r) (TF.Ref VpcEndpointDnsEntry s) (TF.Expr s P.Text) where
+    field = Lens.to (TF.unsafeComputed Encode.attribute (proxy# :: Proxy# "dns_name"))
+
+instance Lens.HasField "hosted_zone_id" (P.Const r) (TF.Ref VpcEndpointDnsEntry s) (TF.Expr s TF.Id) where
+    field = Lens.to (TF.unsafeComputed Encode.attribute (proxy# :: Proxy# "hosted_zone_id"))
+
+instance TF.ToHCL (VpcEndpointDnsEntry s) where
+    toHCL VpcEndpointDnsEntry = P.mempty
+
+-- | The @filter@ nested settings definition.
+data VpcFilter s = VpcFilter
+    { name   :: TF.Expr s P.Text
+    -- ^ @name@
+    -- - (Required)
+    , values :: TF.Expr s [TF.Expr s P.Text]
+    -- ^ @values@
+    -- - (Required)
+    } deriving (P.Show)
+
+instance Lens.HasField "name" f (VpcFilter s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (name :: VpcFilter s -> TF.Expr s P.Text)
+        (\s a -> s { name = a } :: VpcFilter s)
+
+instance Lens.HasField "values" f (VpcFilter s) (TF.Expr s [TF.Expr s P.Text]) where
+    field = Lens.lens'
+        (values :: VpcFilter s -> TF.Expr s [TF.Expr s P.Text])
+        (\s a -> s { values = a } :: VpcFilter s)
+
+instance TF.ToHCL (VpcFilter s) where
+    toHCL VpcFilter{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "name" name
+       <> TF.pair "values" values
+
+-- | The @accepter@ nested settings definition.
+data VpcPeeringConnectionAccepter s = VpcPeeringConnectionAccepter_Internal
+    { allow_classic_link_to_remote_vpc :: TF.Expr s P.Bool
+    -- ^ @allow_classic_link_to_remote_vpc@
+    -- - (Default __@false@__)
+    , allow_remote_vpc_dns_resolution  :: TF.Expr s P.Bool
+    -- ^ @allow_remote_vpc_dns_resolution@
+    -- - (Default __@false@__)
+    , allow_vpc_to_remote_classic_link :: TF.Expr s P.Bool
+    -- ^ @allow_vpc_to_remote_classic_link@
+    -- - (Default __@false@__)
+    } deriving (P.Show)
+
+-- | Construct a new @accepter@ settings value.
+newVpcPeeringConnectionAccepter
+    :: VpcPeeringConnectionAccepter s
+newVpcPeeringConnectionAccepter =
+    VpcPeeringConnectionAccepter_Internal
+        { allow_classic_link_to_remote_vpc = TF.expr P.False
+        , allow_remote_vpc_dns_resolution = TF.expr P.False
+        , allow_vpc_to_remote_classic_link = TF.expr P.False
+        }
+
+instance Lens.HasField "allow_classic_link_to_remote_vpc" f (VpcPeeringConnectionAccepter s) (TF.Expr s P.Bool) where
+    field = Lens.lens'
+        (allow_classic_link_to_remote_vpc :: VpcPeeringConnectionAccepter s -> TF.Expr s P.Bool)
+        (\s a -> s { allow_classic_link_to_remote_vpc = a } :: VpcPeeringConnectionAccepter s)
+
+instance Lens.HasField "allow_remote_vpc_dns_resolution" f (VpcPeeringConnectionAccepter s) (TF.Expr s P.Bool) where
+    field = Lens.lens'
+        (allow_remote_vpc_dns_resolution :: VpcPeeringConnectionAccepter s -> TF.Expr s P.Bool)
+        (\s a -> s { allow_remote_vpc_dns_resolution = a } :: VpcPeeringConnectionAccepter s)
+
+instance Lens.HasField "allow_vpc_to_remote_classic_link" f (VpcPeeringConnectionAccepter s) (TF.Expr s P.Bool) where
+    field = Lens.lens'
+        (allow_vpc_to_remote_classic_link :: VpcPeeringConnectionAccepter s -> TF.Expr s P.Bool)
+        (\s a -> s { allow_vpc_to_remote_classic_link = a } :: VpcPeeringConnectionAccepter s)
+
+instance TF.ToHCL (VpcPeeringConnectionAccepter s) where
+    toHCL VpcPeeringConnectionAccepter_Internal{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "allow_classic_link_to_remote_vpc" allow_classic_link_to_remote_vpc
+       <> TF.pair "allow_remote_vpc_dns_resolution" allow_remote_vpc_dns_resolution
+       <> TF.pair "allow_vpc_to_remote_classic_link" allow_vpc_to_remote_classic_link
+
+-- | The @accepter@ nested settings definition.
+data VpcPeeringConnectionAccepterAccepter s = VpcPeeringConnectionAccepterAccepter_Internal
+    { allow_classic_link_to_remote_vpc :: TF.Expr s P.Bool
+    -- ^ @allow_classic_link_to_remote_vpc@
+    -- - (Default __@false@__)
+    , allow_remote_vpc_dns_resolution  :: TF.Expr s P.Bool
+    -- ^ @allow_remote_vpc_dns_resolution@
+    -- - (Default __@false@__)
+    , allow_vpc_to_remote_classic_link :: TF.Expr s P.Bool
+    -- ^ @allow_vpc_to_remote_classic_link@
+    -- - (Default __@false@__)
+    } deriving (P.Show)
+
+-- | Construct a new @accepter@ settings value.
+newVpcPeeringConnectionAccepterAccepter
+    :: VpcPeeringConnectionAccepterAccepter s
+newVpcPeeringConnectionAccepterAccepter =
+    VpcPeeringConnectionAccepterAccepter_Internal
+        { allow_classic_link_to_remote_vpc = TF.expr P.False
+        , allow_remote_vpc_dns_resolution = TF.expr P.False
+        , allow_vpc_to_remote_classic_link = TF.expr P.False
+        }
+
+instance Lens.HasField "allow_classic_link_to_remote_vpc" f (VpcPeeringConnectionAccepterAccepter s) (TF.Expr s P.Bool) where
+    field = Lens.lens'
+        (allow_classic_link_to_remote_vpc :: VpcPeeringConnectionAccepterAccepter s -> TF.Expr s P.Bool)
+        (\s a -> s { allow_classic_link_to_remote_vpc = a } :: VpcPeeringConnectionAccepterAccepter s)
+
+instance Lens.HasField "allow_remote_vpc_dns_resolution" f (VpcPeeringConnectionAccepterAccepter s) (TF.Expr s P.Bool) where
+    field = Lens.lens'
+        (allow_remote_vpc_dns_resolution :: VpcPeeringConnectionAccepterAccepter s -> TF.Expr s P.Bool)
+        (\s a -> s { allow_remote_vpc_dns_resolution = a } :: VpcPeeringConnectionAccepterAccepter s)
+
+instance Lens.HasField "allow_vpc_to_remote_classic_link" f (VpcPeeringConnectionAccepterAccepter s) (TF.Expr s P.Bool) where
+    field = Lens.lens'
+        (allow_vpc_to_remote_classic_link :: VpcPeeringConnectionAccepterAccepter s -> TF.Expr s P.Bool)
+        (\s a -> s { allow_vpc_to_remote_classic_link = a } :: VpcPeeringConnectionAccepterAccepter s)
+
+instance TF.ToHCL (VpcPeeringConnectionAccepterAccepter s) where
+    toHCL VpcPeeringConnectionAccepterAccepter_Internal{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "allow_classic_link_to_remote_vpc" allow_classic_link_to_remote_vpc
+       <> TF.pair "allow_remote_vpc_dns_resolution" allow_remote_vpc_dns_resolution
+       <> TF.pair "allow_vpc_to_remote_classic_link" allow_vpc_to_remote_classic_link
+
+-- | The @requester@ nested settings definition.
+data VpcPeeringConnectionAccepterRequester s = VpcPeeringConnectionAccepterRequester_Internal
+    { allow_classic_link_to_remote_vpc :: TF.Expr s P.Bool
+    -- ^ @allow_classic_link_to_remote_vpc@
+    -- - (Default __@false@__)
+    , allow_remote_vpc_dns_resolution  :: TF.Expr s P.Bool
+    -- ^ @allow_remote_vpc_dns_resolution@
+    -- - (Default __@false@__)
+    , allow_vpc_to_remote_classic_link :: TF.Expr s P.Bool
+    -- ^ @allow_vpc_to_remote_classic_link@
+    -- - (Default __@false@__)
+    } deriving (P.Show)
+
+-- | Construct a new @requester@ settings value.
+newVpcPeeringConnectionAccepterRequester
+    :: VpcPeeringConnectionAccepterRequester s
+newVpcPeeringConnectionAccepterRequester =
+    VpcPeeringConnectionAccepterRequester_Internal
+        { allow_classic_link_to_remote_vpc = TF.expr P.False
+        , allow_remote_vpc_dns_resolution = TF.expr P.False
+        , allow_vpc_to_remote_classic_link = TF.expr P.False
+        }
+
+instance Lens.HasField "allow_classic_link_to_remote_vpc" f (VpcPeeringConnectionAccepterRequester s) (TF.Expr s P.Bool) where
+    field = Lens.lens'
+        (allow_classic_link_to_remote_vpc :: VpcPeeringConnectionAccepterRequester s -> TF.Expr s P.Bool)
+        (\s a -> s { allow_classic_link_to_remote_vpc = a } :: VpcPeeringConnectionAccepterRequester s)
+
+instance Lens.HasField "allow_remote_vpc_dns_resolution" f (VpcPeeringConnectionAccepterRequester s) (TF.Expr s P.Bool) where
+    field = Lens.lens'
+        (allow_remote_vpc_dns_resolution :: VpcPeeringConnectionAccepterRequester s -> TF.Expr s P.Bool)
+        (\s a -> s { allow_remote_vpc_dns_resolution = a } :: VpcPeeringConnectionAccepterRequester s)
+
+instance Lens.HasField "allow_vpc_to_remote_classic_link" f (VpcPeeringConnectionAccepterRequester s) (TF.Expr s P.Bool) where
+    field = Lens.lens'
+        (allow_vpc_to_remote_classic_link :: VpcPeeringConnectionAccepterRequester s -> TF.Expr s P.Bool)
+        (\s a -> s { allow_vpc_to_remote_classic_link = a } :: VpcPeeringConnectionAccepterRequester s)
+
+instance TF.ToHCL (VpcPeeringConnectionAccepterRequester s) where
+    toHCL VpcPeeringConnectionAccepterRequester_Internal{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "allow_classic_link_to_remote_vpc" allow_classic_link_to_remote_vpc
+       <> TF.pair "allow_remote_vpc_dns_resolution" allow_remote_vpc_dns_resolution
+       <> TF.pair "allow_vpc_to_remote_classic_link" allow_vpc_to_remote_classic_link
+
+-- | The @filter@ nested settings definition.
+data VpcPeeringConnectionFilter s = VpcPeeringConnectionFilter
+    { name   :: TF.Expr s P.Text
+    -- ^ @name@
+    -- - (Required)
+    , values :: TF.Expr s [TF.Expr s P.Text]
+    -- ^ @values@
+    -- - (Required)
+    } deriving (P.Show)
+
+instance Lens.HasField "name" f (VpcPeeringConnectionFilter s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (name :: VpcPeeringConnectionFilter s -> TF.Expr s P.Text)
+        (\s a -> s { name = a } :: VpcPeeringConnectionFilter s)
+
+instance Lens.HasField "values" f (VpcPeeringConnectionFilter s) (TF.Expr s [TF.Expr s P.Text]) where
+    field = Lens.lens'
+        (values :: VpcPeeringConnectionFilter s -> TF.Expr s [TF.Expr s P.Text])
+        (\s a -> s { values = a } :: VpcPeeringConnectionFilter s)
+
+instance TF.ToHCL (VpcPeeringConnectionFilter s) where
+    toHCL VpcPeeringConnectionFilter{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "name" name
+       <> TF.pair "values" values
+
+-- | The @accepter@ nested settings definition.
+data VpcPeeringConnectionOptionsAccepter s = VpcPeeringConnectionOptionsAccepter_Internal
+    { allow_classic_link_to_remote_vpc :: TF.Expr s P.Bool
+    -- ^ @allow_classic_link_to_remote_vpc@
+    -- - (Default __@false@__)
+    , allow_remote_vpc_dns_resolution  :: TF.Expr s P.Bool
+    -- ^ @allow_remote_vpc_dns_resolution@
+    -- - (Default __@false@__)
+    , allow_vpc_to_remote_classic_link :: TF.Expr s P.Bool
+    -- ^ @allow_vpc_to_remote_classic_link@
+    -- - (Default __@false@__)
+    } deriving (P.Show)
+
+-- | Construct a new @accepter@ settings value.
+newVpcPeeringConnectionOptionsAccepter
+    :: VpcPeeringConnectionOptionsAccepter s
+newVpcPeeringConnectionOptionsAccepter =
+    VpcPeeringConnectionOptionsAccepter_Internal
+        { allow_classic_link_to_remote_vpc = TF.expr P.False
+        , allow_remote_vpc_dns_resolution = TF.expr P.False
+        , allow_vpc_to_remote_classic_link = TF.expr P.False
+        }
+
+instance Lens.HasField "allow_classic_link_to_remote_vpc" f (VpcPeeringConnectionOptionsAccepter s) (TF.Expr s P.Bool) where
+    field = Lens.lens'
+        (allow_classic_link_to_remote_vpc :: VpcPeeringConnectionOptionsAccepter s -> TF.Expr s P.Bool)
+        (\s a -> s { allow_classic_link_to_remote_vpc = a } :: VpcPeeringConnectionOptionsAccepter s)
+
+instance Lens.HasField "allow_remote_vpc_dns_resolution" f (VpcPeeringConnectionOptionsAccepter s) (TF.Expr s P.Bool) where
+    field = Lens.lens'
+        (allow_remote_vpc_dns_resolution :: VpcPeeringConnectionOptionsAccepter s -> TF.Expr s P.Bool)
+        (\s a -> s { allow_remote_vpc_dns_resolution = a } :: VpcPeeringConnectionOptionsAccepter s)
+
+instance Lens.HasField "allow_vpc_to_remote_classic_link" f (VpcPeeringConnectionOptionsAccepter s) (TF.Expr s P.Bool) where
+    field = Lens.lens'
+        (allow_vpc_to_remote_classic_link :: VpcPeeringConnectionOptionsAccepter s -> TF.Expr s P.Bool)
+        (\s a -> s { allow_vpc_to_remote_classic_link = a } :: VpcPeeringConnectionOptionsAccepter s)
+
+instance TF.ToHCL (VpcPeeringConnectionOptionsAccepter s) where
+    toHCL VpcPeeringConnectionOptionsAccepter_Internal{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "allow_classic_link_to_remote_vpc" allow_classic_link_to_remote_vpc
+       <> TF.pair "allow_remote_vpc_dns_resolution" allow_remote_vpc_dns_resolution
+       <> TF.pair "allow_vpc_to_remote_classic_link" allow_vpc_to_remote_classic_link
+
+-- | The @requester@ nested settings definition.
+data VpcPeeringConnectionOptionsRequester s = VpcPeeringConnectionOptionsRequester_Internal
+    { allow_classic_link_to_remote_vpc :: TF.Expr s P.Bool
+    -- ^ @allow_classic_link_to_remote_vpc@
+    -- - (Default __@false@__)
+    , allow_remote_vpc_dns_resolution  :: TF.Expr s P.Bool
+    -- ^ @allow_remote_vpc_dns_resolution@
+    -- - (Default __@false@__)
+    , allow_vpc_to_remote_classic_link :: TF.Expr s P.Bool
+    -- ^ @allow_vpc_to_remote_classic_link@
+    -- - (Default __@false@__)
+    } deriving (P.Show)
+
+-- | Construct a new @requester@ settings value.
+newVpcPeeringConnectionOptionsRequester
+    :: VpcPeeringConnectionOptionsRequester s
+newVpcPeeringConnectionOptionsRequester =
+    VpcPeeringConnectionOptionsRequester_Internal
+        { allow_classic_link_to_remote_vpc = TF.expr P.False
+        , allow_remote_vpc_dns_resolution = TF.expr P.False
+        , allow_vpc_to_remote_classic_link = TF.expr P.False
+        }
+
+instance Lens.HasField "allow_classic_link_to_remote_vpc" f (VpcPeeringConnectionOptionsRequester s) (TF.Expr s P.Bool) where
+    field = Lens.lens'
+        (allow_classic_link_to_remote_vpc :: VpcPeeringConnectionOptionsRequester s -> TF.Expr s P.Bool)
+        (\s a -> s { allow_classic_link_to_remote_vpc = a } :: VpcPeeringConnectionOptionsRequester s)
+
+instance Lens.HasField "allow_remote_vpc_dns_resolution" f (VpcPeeringConnectionOptionsRequester s) (TF.Expr s P.Bool) where
+    field = Lens.lens'
+        (allow_remote_vpc_dns_resolution :: VpcPeeringConnectionOptionsRequester s -> TF.Expr s P.Bool)
+        (\s a -> s { allow_remote_vpc_dns_resolution = a } :: VpcPeeringConnectionOptionsRequester s)
+
+instance Lens.HasField "allow_vpc_to_remote_classic_link" f (VpcPeeringConnectionOptionsRequester s) (TF.Expr s P.Bool) where
+    field = Lens.lens'
+        (allow_vpc_to_remote_classic_link :: VpcPeeringConnectionOptionsRequester s -> TF.Expr s P.Bool)
+        (\s a -> s { allow_vpc_to_remote_classic_link = a } :: VpcPeeringConnectionOptionsRequester s)
+
+instance TF.ToHCL (VpcPeeringConnectionOptionsRequester s) where
+    toHCL VpcPeeringConnectionOptionsRequester_Internal{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "allow_classic_link_to_remote_vpc" allow_classic_link_to_remote_vpc
+       <> TF.pair "allow_remote_vpc_dns_resolution" allow_remote_vpc_dns_resolution
+       <> TF.pair "allow_vpc_to_remote_classic_link" allow_vpc_to_remote_classic_link
+
+-- | The @requester@ nested settings definition.
+data VpcPeeringConnectionRequester s = VpcPeeringConnectionRequester_Internal
+    { allow_classic_link_to_remote_vpc :: TF.Expr s P.Bool
+    -- ^ @allow_classic_link_to_remote_vpc@
+    -- - (Default __@false@__)
+    , allow_remote_vpc_dns_resolution  :: TF.Expr s P.Bool
+    -- ^ @allow_remote_vpc_dns_resolution@
+    -- - (Default __@false@__)
+    , allow_vpc_to_remote_classic_link :: TF.Expr s P.Bool
+    -- ^ @allow_vpc_to_remote_classic_link@
+    -- - (Default __@false@__)
+    } deriving (P.Show)
+
+-- | Construct a new @requester@ settings value.
+newVpcPeeringConnectionRequester
+    :: VpcPeeringConnectionRequester s
+newVpcPeeringConnectionRequester =
+    VpcPeeringConnectionRequester_Internal
+        { allow_classic_link_to_remote_vpc = TF.expr P.False
+        , allow_remote_vpc_dns_resolution = TF.expr P.False
+        , allow_vpc_to_remote_classic_link = TF.expr P.False
+        }
+
+instance Lens.HasField "allow_classic_link_to_remote_vpc" f (VpcPeeringConnectionRequester s) (TF.Expr s P.Bool) where
+    field = Lens.lens'
+        (allow_classic_link_to_remote_vpc :: VpcPeeringConnectionRequester s -> TF.Expr s P.Bool)
+        (\s a -> s { allow_classic_link_to_remote_vpc = a } :: VpcPeeringConnectionRequester s)
+
+instance Lens.HasField "allow_remote_vpc_dns_resolution" f (VpcPeeringConnectionRequester s) (TF.Expr s P.Bool) where
+    field = Lens.lens'
+        (allow_remote_vpc_dns_resolution :: VpcPeeringConnectionRequester s -> TF.Expr s P.Bool)
+        (\s a -> s { allow_remote_vpc_dns_resolution = a } :: VpcPeeringConnectionRequester s)
+
+instance Lens.HasField "allow_vpc_to_remote_classic_link" f (VpcPeeringConnectionRequester s) (TF.Expr s P.Bool) where
+    field = Lens.lens'
+        (allow_vpc_to_remote_classic_link :: VpcPeeringConnectionRequester s -> TF.Expr s P.Bool)
+        (\s a -> s { allow_vpc_to_remote_classic_link = a } :: VpcPeeringConnectionRequester s)
+
+instance TF.ToHCL (VpcPeeringConnectionRequester s) where
+    toHCL VpcPeeringConnectionRequester_Internal{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "allow_classic_link_to_remote_vpc" allow_classic_link_to_remote_vpc
+       <> TF.pair "allow_remote_vpc_dns_resolution" allow_remote_vpc_dns_resolution
+       <> TF.pair "allow_vpc_to_remote_classic_link" allow_vpc_to_remote_classic_link
+
+-- | The @filter@ nested settings definition.
+data VpcsFilter s = VpcsFilter
+    { name   :: TF.Expr s P.Text
+    -- ^ @name@
+    -- - (Required)
+    , values :: TF.Expr s [TF.Expr s P.Text]
+    -- ^ @values@
+    -- - (Required)
+    } deriving (P.Show)
+
+instance Lens.HasField "name" f (VpcsFilter s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (name :: VpcsFilter s -> TF.Expr s P.Text)
+        (\s a -> s { name = a } :: VpcsFilter s)
+
+instance Lens.HasField "values" f (VpcsFilter s) (TF.Expr s [TF.Expr s P.Text]) where
+    field = Lens.lens'
+        (values :: VpcsFilter s -> TF.Expr s [TF.Expr s P.Text])
+        (\s a -> s { values = a } :: VpcsFilter s)
+
+instance TF.ToHCL (VpcsFilter s) where
+    toHCL VpcsFilter{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "name" name
+       <> TF.pair "values" values
+
+-- | The @routes@ nested settings definition.
+data VpnConnectionRoutes s = VpnConnectionRoutes_Internal
+    { destination_cidr_block :: P.Maybe (TF.Expr s P.IPRange)
+    -- ^ @destination_cidr_block@
+    -- - (Optional)
+    , source                 :: P.Maybe (TF.Expr s P.Text)
+    -- ^ @source@
+    -- - (Optional)
+    , state                  :: P.Maybe (TF.Expr s P.Text)
+    -- ^ @state@
+    -- - (Optional)
+    } deriving (P.Show)
+
+-- | Construct a new @routes@ settings value.
+newVpnConnectionRoutes
+    :: VpnConnectionRoutes s
+newVpnConnectionRoutes =
+    VpnConnectionRoutes_Internal
+        { destination_cidr_block = P.Nothing
+        , source = P.Nothing
+        , state = P.Nothing
+        }
+
+instance Lens.HasField "destination_cidr_block" f (VpnConnectionRoutes s) (P.Maybe (TF.Expr s P.IPRange)) where
+    field = Lens.lens'
+        (destination_cidr_block :: VpnConnectionRoutes s -> P.Maybe (TF.Expr s P.IPRange))
+        (\s a -> s { destination_cidr_block = a } :: VpnConnectionRoutes s)
+
+instance Lens.HasField "source" f (VpnConnectionRoutes s) (P.Maybe (TF.Expr s P.Text)) where
+    field = Lens.lens'
+        (source :: VpnConnectionRoutes s -> P.Maybe (TF.Expr s P.Text))
+        (\s a -> s { source = a } :: VpnConnectionRoutes s)
+
+instance Lens.HasField "state" f (VpnConnectionRoutes s) (P.Maybe (TF.Expr s P.Text)) where
+    field = Lens.lens'
+        (state :: VpnConnectionRoutes s -> P.Maybe (TF.Expr s P.Text))
+        (\s a -> s { state = a } :: VpnConnectionRoutes s)
+
+instance Lens.HasField "destination_cidr_block" (P.Const r) (TF.Ref VpnConnectionRoutes s) (TF.Expr s P.IPRange) where
+    field = Lens.to (TF.unsafeComputed Encode.attribute (proxy# :: Proxy# "destination_cidr_block"))
+
+instance Lens.HasField "source" (P.Const r) (TF.Ref VpnConnectionRoutes s) (TF.Expr s P.Text) where
+    field = Lens.to (TF.unsafeComputed Encode.attribute (proxy# :: Proxy# "source"))
+
+instance Lens.HasField "state" (P.Const r) (TF.Ref VpnConnectionRoutes s) (TF.Expr s P.Text) where
+    field = Lens.to (TF.unsafeComputed Encode.attribute (proxy# :: Proxy# "state"))
+
+instance TF.ToHCL (VpnConnectionRoutes s) where
+    toHCL VpnConnectionRoutes_Internal{..} = TF.pairs $
+          P.mempty
+       <> P.maybe P.mempty (TF.pair "destination_cidr_block") destination_cidr_block
+       <> P.maybe P.mempty (TF.pair "source") source
+       <> P.maybe P.mempty (TF.pair "state") state
+
+-- | The @vgw_telemetry@ nested settings definition.
+data VpnConnectionVgwTelemetry s = VpnConnectionVgwTelemetry_Internal
+    { accepted_route_count :: P.Maybe (TF.Expr s P.Int)
+    -- ^ @accepted_route_count@
+    -- - (Optional)
+    , last_status_change   :: P.Maybe (TF.Expr s P.Text)
+    -- ^ @last_status_change@
+    -- - (Optional)
+    , outside_ip_address   :: P.Maybe (TF.Expr s P.Text)
+    -- ^ @outside_ip_address@
+    -- - (Optional)
+    , status               :: P.Maybe (TF.Expr s P.Text)
+    -- ^ @status@
+    -- - (Optional)
+    , status_message       :: P.Maybe (TF.Expr s P.Text)
+    -- ^ @status_message@
+    -- - (Optional)
+    } deriving (P.Show)
+
+-- | Construct a new @vgw_telemetry@ settings value.
+newVpnConnectionVgwTelemetry
+    :: VpnConnectionVgwTelemetry s
+newVpnConnectionVgwTelemetry =
+    VpnConnectionVgwTelemetry_Internal
+        { accepted_route_count = P.Nothing
+        , last_status_change = P.Nothing
+        , outside_ip_address = P.Nothing
+        , status = P.Nothing
+        , status_message = P.Nothing
+        }
+
+instance Lens.HasField "accepted_route_count" f (VpnConnectionVgwTelemetry s) (P.Maybe (TF.Expr s P.Int)) where
+    field = Lens.lens'
+        (accepted_route_count :: VpnConnectionVgwTelemetry s -> P.Maybe (TF.Expr s P.Int))
+        (\s a -> s { accepted_route_count = a } :: VpnConnectionVgwTelemetry s)
+
+instance Lens.HasField "last_status_change" f (VpnConnectionVgwTelemetry s) (P.Maybe (TF.Expr s P.Text)) where
+    field = Lens.lens'
+        (last_status_change :: VpnConnectionVgwTelemetry s -> P.Maybe (TF.Expr s P.Text))
+        (\s a -> s { last_status_change = a } :: VpnConnectionVgwTelemetry s)
+
+instance Lens.HasField "outside_ip_address" f (VpnConnectionVgwTelemetry s) (P.Maybe (TF.Expr s P.Text)) where
+    field = Lens.lens'
+        (outside_ip_address :: VpnConnectionVgwTelemetry s -> P.Maybe (TF.Expr s P.Text))
+        (\s a -> s { outside_ip_address = a } :: VpnConnectionVgwTelemetry s)
+
+instance Lens.HasField "status" f (VpnConnectionVgwTelemetry s) (P.Maybe (TF.Expr s P.Text)) where
+    field = Lens.lens'
+        (status :: VpnConnectionVgwTelemetry s -> P.Maybe (TF.Expr s P.Text))
+        (\s a -> s { status = a } :: VpnConnectionVgwTelemetry s)
+
+instance Lens.HasField "status_message" f (VpnConnectionVgwTelemetry s) (P.Maybe (TF.Expr s P.Text)) where
+    field = Lens.lens'
+        (status_message :: VpnConnectionVgwTelemetry s -> P.Maybe (TF.Expr s P.Text))
+        (\s a -> s { status_message = a } :: VpnConnectionVgwTelemetry s)
+
+instance Lens.HasField "accepted_route_count" (P.Const r) (TF.Ref VpnConnectionVgwTelemetry s) (TF.Expr s P.Int) where
+    field = Lens.to (TF.unsafeComputed Encode.attribute (proxy# :: Proxy# "accepted_route_count"))
+
+instance Lens.HasField "last_status_change" (P.Const r) (TF.Ref VpnConnectionVgwTelemetry s) (TF.Expr s P.Text) where
+    field = Lens.to (TF.unsafeComputed Encode.attribute (proxy# :: Proxy# "last_status_change"))
+
+instance Lens.HasField "outside_ip_address" (P.Const r) (TF.Ref VpnConnectionVgwTelemetry s) (TF.Expr s P.Text) where
+    field = Lens.to (TF.unsafeComputed Encode.attribute (proxy# :: Proxy# "outside_ip_address"))
+
+instance Lens.HasField "status" (P.Const r) (TF.Ref VpnConnectionVgwTelemetry s) (TF.Expr s P.Text) where
+    field = Lens.to (TF.unsafeComputed Encode.attribute (proxy# :: Proxy# "status"))
+
+instance Lens.HasField "status_message" (P.Const r) (TF.Ref VpnConnectionVgwTelemetry s) (TF.Expr s P.Text) where
+    field = Lens.to (TF.unsafeComputed Encode.attribute (proxy# :: Proxy# "status_message"))
+
+instance TF.ToHCL (VpnConnectionVgwTelemetry s) where
+    toHCL VpnConnectionVgwTelemetry_Internal{..} = TF.pairs $
+          P.mempty
+       <> P.maybe P.mempty (TF.pair "accepted_route_count") accepted_route_count
+       <> P.maybe P.mempty (TF.pair "last_status_change") last_status_change
+       <> P.maybe P.mempty (TF.pair "outside_ip_address") outside_ip_address
+       <> P.maybe P.mempty (TF.pair "status") status
+       <> P.maybe P.mempty (TF.pair "status_message") status_message
+
+-- | The @filter@ nested settings definition.
+data VpnGatewayFilter s = VpnGatewayFilter
+    { name   :: TF.Expr s P.Text
+    -- ^ @name@
+    -- - (Required)
+    , values :: TF.Expr s [TF.Expr s P.Text]
+    -- ^ @values@
+    -- - (Required)
+    } deriving (P.Show)
+
+instance Lens.HasField "name" f (VpnGatewayFilter s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (name :: VpnGatewayFilter s -> TF.Expr s P.Text)
+        (\s a -> s { name = a } :: VpnGatewayFilter s)
+
+instance Lens.HasField "values" f (VpnGatewayFilter s) (TF.Expr s [TF.Expr s P.Text]) where
+    field = Lens.lens'
+        (values :: VpnGatewayFilter s -> TF.Expr s [TF.Expr s P.Text])
+        (\s a -> s { values = a } :: VpnGatewayFilter s)
+
+instance TF.ToHCL (VpnGatewayFilter s) where
+    toHCL VpnGatewayFilter{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "name" name
+       <> TF.pair "values" values
+
+-- | The @byte_match_tuples@ nested settings definition.
+data WafByteMatchSetByteMatchTuples s = WafByteMatchSetByteMatchTuples_Internal
+    { field_to_match        :: TF.Expr s (WafByteMatchSetFieldToMatch s)
+    -- ^ @field_to_match@
+    -- - (Required)
+    , positional_constraint :: TF.Expr s P.Text
+    -- ^ @positional_constraint@
+    -- - (Required)
+    , target_string         :: P.Maybe (TF.Expr s P.Text)
+    -- ^ @target_string@
+    -- - (Optional)
+    , text_transformation   :: TF.Expr s P.Text
+    -- ^ @text_transformation@
+    -- - (Required)
+    } deriving (P.Show)
+
+-- | Construct a new @byte_match_tuples@ settings value.
+newWafByteMatchSetByteMatchTuples
+    :: WafByteMatchSetByteMatchTuples_Required s
+    -> WafByteMatchSetByteMatchTuples s
+newWafByteMatchSetByteMatchTuples WafByteMatchSetByteMatchTuples{..} =
+    WafByteMatchSetByteMatchTuples_Internal
+        { field_to_match = field_to_match
+        , positional_constraint = positional_constraint
+        , target_string = P.Nothing
+        , text_transformation = text_transformation
+        }
+
+-- | The required arguments for 'newWafByteMatchSetByteMatchTuples'.
+data WafByteMatchSetByteMatchTuples_Required s = WafByteMatchSetByteMatchTuples
+    { positional_constraint :: TF.Expr s P.Text
+    -- ^ (Required)
+    , field_to_match        :: TF.Expr s (WafByteMatchSetFieldToMatch s)
+    -- ^ (Required)
+    , text_transformation   :: TF.Expr s P.Text
+    -- ^ (Required)
+    } deriving (P.Show)
+
+instance Lens.HasField "field_to_match" f (WafByteMatchSetByteMatchTuples s) (TF.Expr s (WafByteMatchSetFieldToMatch s)) where
+    field = Lens.lens'
+        (field_to_match :: WafByteMatchSetByteMatchTuples s -> TF.Expr s (WafByteMatchSetFieldToMatch s))
+        (\s a -> s { field_to_match = a } :: WafByteMatchSetByteMatchTuples s)
+
+instance Lens.HasField "positional_constraint" f (WafByteMatchSetByteMatchTuples s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (positional_constraint :: WafByteMatchSetByteMatchTuples s -> TF.Expr s P.Text)
+        (\s a -> s { positional_constraint = a } :: WafByteMatchSetByteMatchTuples s)
+
+instance Lens.HasField "target_string" f (WafByteMatchSetByteMatchTuples s) (P.Maybe (TF.Expr s P.Text)) where
+    field = Lens.lens'
+        (target_string :: WafByteMatchSetByteMatchTuples s -> P.Maybe (TF.Expr s P.Text))
+        (\s a -> s { target_string = a } :: WafByteMatchSetByteMatchTuples s)
+
+instance Lens.HasField "text_transformation" f (WafByteMatchSetByteMatchTuples s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (text_transformation :: WafByteMatchSetByteMatchTuples s -> TF.Expr s P.Text)
+        (\s a -> s { text_transformation = a } :: WafByteMatchSetByteMatchTuples s)
+
+instance TF.ToHCL (WafByteMatchSetByteMatchTuples s) where
+    toHCL WafByteMatchSetByteMatchTuples_Internal{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "field_to_match" field_to_match
+       <> TF.pair "positional_constraint" positional_constraint
+       <> P.maybe P.mempty (TF.pair "target_string") target_string
+       <> TF.pair "text_transformation" text_transformation
+
+-- | The @field_to_match@ nested settings definition.
+data WafByteMatchSetFieldToMatch s = WafByteMatchSetFieldToMatch_Internal
+    { data_ :: P.Maybe (TF.Expr s P.Text)
+    -- ^ @data@
+    -- - (Optional)
+    , type_ :: TF.Expr s P.Text
+    -- ^ @type@
+    -- - (Required)
+    } deriving (P.Show)
+
+-- | Construct a new @field_to_match@ settings value.
+newWafByteMatchSetFieldToMatch
+    :: WafByteMatchSetFieldToMatch_Required s
+    -> WafByteMatchSetFieldToMatch s
+newWafByteMatchSetFieldToMatch WafByteMatchSetFieldToMatch{..} =
+    WafByteMatchSetFieldToMatch_Internal
+        { data_ = P.Nothing
+        , type_ = type_
+        }
+
+-- | The required arguments for 'newWafByteMatchSetFieldToMatch'.
+data WafByteMatchSetFieldToMatch_Required s = WafByteMatchSetFieldToMatch
+    { type_ :: TF.Expr s P.Text
+    -- ^ (Required)
+    } deriving (P.Show)
+
+instance Lens.HasField "data" f (WafByteMatchSetFieldToMatch s) (P.Maybe (TF.Expr s P.Text)) where
+    field = Lens.lens'
+        (data_ :: WafByteMatchSetFieldToMatch s -> P.Maybe (TF.Expr s P.Text))
+        (\s a -> s { data_ = a } :: WafByteMatchSetFieldToMatch s)
+
+instance Lens.HasField "type" f (WafByteMatchSetFieldToMatch s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (type_ :: WafByteMatchSetFieldToMatch s -> TF.Expr s P.Text)
+        (\s a -> s { type_ = a } :: WafByteMatchSetFieldToMatch s)
+
+instance TF.ToHCL (WafByteMatchSetFieldToMatch s) where
+    toHCL WafByteMatchSetFieldToMatch_Internal{..} = TF.pairs $
+          P.mempty
+       <> P.maybe P.mempty (TF.pair "data") data_
+       <> TF.pair "type" type_
+
+-- | The @geo_match_constraint@ nested settings definition.
+data WafGeoMatchSetGeoMatchConstraint s = WafGeoMatchSetGeoMatchConstraint
+    { type_ :: TF.Expr s P.Text
+    -- ^ @type@
+    -- - (Required)
+    , value :: TF.Expr s P.Text
+    -- ^ @value@
+    -- - (Required)
+    } deriving (P.Show)
+
+instance Lens.HasField "type" f (WafGeoMatchSetGeoMatchConstraint s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (type_ :: WafGeoMatchSetGeoMatchConstraint s -> TF.Expr s P.Text)
+        (\s a -> s { type_ = a } :: WafGeoMatchSetGeoMatchConstraint s)
+
+instance Lens.HasField "value" f (WafGeoMatchSetGeoMatchConstraint s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (value :: WafGeoMatchSetGeoMatchConstraint s -> TF.Expr s P.Text)
+        (\s a -> s { value = a } :: WafGeoMatchSetGeoMatchConstraint s)
+
+instance TF.ToHCL (WafGeoMatchSetGeoMatchConstraint s) where
+    toHCL WafGeoMatchSetGeoMatchConstraint{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "type" type_
+       <> TF.pair "value" value
+
+-- | The @ip_set_descriptors@ nested settings definition.
+data WafIpsetIpSetDescriptors s = WafIpsetIpSetDescriptors
+    { type_ :: TF.Expr s P.Text
+    -- ^ @type@
+    -- - (Required)
+    , value :: TF.Expr s P.Text
+    -- ^ @value@
+    -- - (Required)
+    } deriving (P.Show)
+
+instance Lens.HasField "type" f (WafIpsetIpSetDescriptors s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (type_ :: WafIpsetIpSetDescriptors s -> TF.Expr s P.Text)
+        (\s a -> s { type_ = a } :: WafIpsetIpSetDescriptors s)
+
+instance Lens.HasField "value" f (WafIpsetIpSetDescriptors s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (value :: WafIpsetIpSetDescriptors s -> TF.Expr s P.Text)
+        (\s a -> s { value = a } :: WafIpsetIpSetDescriptors s)
+
+instance TF.ToHCL (WafIpsetIpSetDescriptors s) where
+    toHCL WafIpsetIpSetDescriptors{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "type" type_
+       <> TF.pair "value" value
+
+-- | The @predicates@ nested settings definition.
+data WafRateBasedRulePredicates s = WafRateBasedRulePredicates
+    { data_id :: TF.Expr s TF.Id
+    -- ^ @data_id@
+    -- - (Required)
+    , negated :: TF.Expr s P.Bool
+    -- ^ @negated@
+    -- - (Required)
+    , type_   :: TF.Expr s P.Text
+    -- ^ @type@
+    -- - (Required)
+    } deriving (P.Show)
+
+instance Lens.HasField "data_id" f (WafRateBasedRulePredicates s) (TF.Expr s TF.Id) where
+    field = Lens.lens'
+        (data_id :: WafRateBasedRulePredicates s -> TF.Expr s TF.Id)
+        (\s a -> s { data_id = a } :: WafRateBasedRulePredicates s)
+
+instance Lens.HasField "negated" f (WafRateBasedRulePredicates s) (TF.Expr s P.Bool) where
+    field = Lens.lens'
+        (negated :: WafRateBasedRulePredicates s -> TF.Expr s P.Bool)
+        (\s a -> s { negated = a } :: WafRateBasedRulePredicates s)
+
+instance Lens.HasField "type" f (WafRateBasedRulePredicates s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (type_ :: WafRateBasedRulePredicates s -> TF.Expr s P.Text)
+        (\s a -> s { type_ = a } :: WafRateBasedRulePredicates s)
+
+instance TF.ToHCL (WafRateBasedRulePredicates s) where
+    toHCL WafRateBasedRulePredicates{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "data_id" data_id
+       <> TF.pair "negated" negated
+       <> TF.pair "type" type_
+
+-- | The @field_to_match@ nested settings definition.
+data WafRegexMatchSetFieldToMatch s = WafRegexMatchSetFieldToMatch_Internal
+    { data_ :: P.Maybe (TF.Expr s P.Text)
+    -- ^ @data@
+    -- - (Optional)
+    , type_ :: TF.Expr s P.Text
+    -- ^ @type@
+    -- - (Required)
+    } deriving (P.Show)
+
+-- | Construct a new @field_to_match@ settings value.
+newWafRegexMatchSetFieldToMatch
+    :: WafRegexMatchSetFieldToMatch_Required s
+    -> WafRegexMatchSetFieldToMatch s
+newWafRegexMatchSetFieldToMatch WafRegexMatchSetFieldToMatch{..} =
+    WafRegexMatchSetFieldToMatch_Internal
+        { data_ = P.Nothing
+        , type_ = type_
+        }
+
+-- | The required arguments for 'newWafRegexMatchSetFieldToMatch'.
+data WafRegexMatchSetFieldToMatch_Required s = WafRegexMatchSetFieldToMatch
+    { type_ :: TF.Expr s P.Text
+    -- ^ (Required)
+    } deriving (P.Show)
+
+instance Lens.HasField "data" f (WafRegexMatchSetFieldToMatch s) (P.Maybe (TF.Expr s P.Text)) where
+    field = Lens.lens'
+        (data_ :: WafRegexMatchSetFieldToMatch s -> P.Maybe (TF.Expr s P.Text))
+        (\s a -> s { data_ = a } :: WafRegexMatchSetFieldToMatch s)
+
+instance Lens.HasField "type" f (WafRegexMatchSetFieldToMatch s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (type_ :: WafRegexMatchSetFieldToMatch s -> TF.Expr s P.Text)
+        (\s a -> s { type_ = a } :: WafRegexMatchSetFieldToMatch s)
+
+instance TF.ToHCL (WafRegexMatchSetFieldToMatch s) where
+    toHCL WafRegexMatchSetFieldToMatch_Internal{..} = TF.pairs $
+          P.mempty
+       <> P.maybe P.mempty (TF.pair "data") data_
+       <> TF.pair "type" type_
+
+-- | The @regex_match_tuple@ nested settings definition.
+data WafRegexMatchSetRegexMatchTuple s = WafRegexMatchSetRegexMatchTuple
+    { field_to_match       :: TF.Expr s (WafRegexMatchSetFieldToMatch s)
+    -- ^ @field_to_match@
+    -- - (Required)
+    , regex_pattern_set_id :: TF.Expr s TF.Id
+    -- ^ @regex_pattern_set_id@
+    -- - (Required)
+    , text_transformation  :: TF.Expr s P.Text
+    -- ^ @text_transformation@
+    -- - (Required)
+    } deriving (P.Show)
+
+instance Lens.HasField "field_to_match" f (WafRegexMatchSetRegexMatchTuple s) (TF.Expr s (WafRegexMatchSetFieldToMatch s)) where
+    field = Lens.lens'
+        (field_to_match :: WafRegexMatchSetRegexMatchTuple s -> TF.Expr s (WafRegexMatchSetFieldToMatch s))
+        (\s a -> s { field_to_match = a } :: WafRegexMatchSetRegexMatchTuple s)
+
+instance Lens.HasField "regex_pattern_set_id" f (WafRegexMatchSetRegexMatchTuple s) (TF.Expr s TF.Id) where
+    field = Lens.lens'
+        (regex_pattern_set_id :: WafRegexMatchSetRegexMatchTuple s -> TF.Expr s TF.Id)
+        (\s a -> s { regex_pattern_set_id = a } :: WafRegexMatchSetRegexMatchTuple s)
+
+instance Lens.HasField "text_transformation" f (WafRegexMatchSetRegexMatchTuple s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (text_transformation :: WafRegexMatchSetRegexMatchTuple s -> TF.Expr s P.Text)
+        (\s a -> s { text_transformation = a } :: WafRegexMatchSetRegexMatchTuple s)
+
+instance TF.ToHCL (WafRegexMatchSetRegexMatchTuple s) where
+    toHCL WafRegexMatchSetRegexMatchTuple{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "field_to_match" field_to_match
+       <> TF.pair "regex_pattern_set_id" regex_pattern_set_id
+       <> TF.pair "text_transformation" text_transformation
+
+-- | The @action@ nested settings definition.
+newtype WafRuleGroupAction s = WafRuleGroupAction
+    { type_ :: TF.Expr s P.Text
+    -- ^ @type@
+    -- - (Required)
+    } deriving (P.Show)
+
+instance Lens.HasField "type" f (WafRuleGroupAction s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (type_ :: WafRuleGroupAction s -> TF.Expr s P.Text)
+        (\s a -> s { type_ = a } :: WafRuleGroupAction s)
+
+instance TF.ToHCL (WafRuleGroupAction s) where
+    toHCL WafRuleGroupAction{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "type" type_
+
+-- | The @activated_rule@ nested settings definition.
+data WafRuleGroupActivatedRule s = WafRuleGroupActivatedRule_Internal
+    { action   :: TF.Expr s (WafRuleGroupAction s)
+    -- ^ @action@
+    -- - (Required)
+    , priority :: TF.Expr s P.Int
+    -- ^ @priority@
+    -- - (Required)
+    , rule_id  :: TF.Expr s TF.Id
+    -- ^ @rule_id@
+    -- - (Required)
+    , type_    :: TF.Expr s P.Text
+    -- ^ @type@
+    -- - (Default __@REGULAR@__)
+    } deriving (P.Show)
+
+-- | Construct a new @activated_rule@ settings value.
+newWafRuleGroupActivatedRule
+    :: WafRuleGroupActivatedRule_Required s
+    -> WafRuleGroupActivatedRule s
+newWafRuleGroupActivatedRule WafRuleGroupActivatedRule{..} =
+    WafRuleGroupActivatedRule_Internal
+        { action = action
+        , priority = priority
+        , rule_id = rule_id
+        , type_ = TF.expr "REGULAR"
+        }
+
+-- | The required arguments for 'newWafRuleGroupActivatedRule'.
+data WafRuleGroupActivatedRule_Required s = WafRuleGroupActivatedRule
+    { action   :: TF.Expr s (WafRuleGroupAction s)
+    -- ^ (Required)
+    , rule_id  :: TF.Expr s TF.Id
+    -- ^ (Required)
+    , priority :: TF.Expr s P.Int
+    -- ^ (Required)
+    } deriving (P.Show)
+
+instance Lens.HasField "action" f (WafRuleGroupActivatedRule s) (TF.Expr s (WafRuleGroupAction s)) where
+    field = Lens.lens'
+        (action :: WafRuleGroupActivatedRule s -> TF.Expr s (WafRuleGroupAction s))
+        (\s a -> s { action = a } :: WafRuleGroupActivatedRule s)
+
+instance Lens.HasField "priority" f (WafRuleGroupActivatedRule s) (TF.Expr s P.Int) where
+    field = Lens.lens'
+        (priority :: WafRuleGroupActivatedRule s -> TF.Expr s P.Int)
+        (\s a -> s { priority = a } :: WafRuleGroupActivatedRule s)
+
+instance Lens.HasField "rule_id" f (WafRuleGroupActivatedRule s) (TF.Expr s TF.Id) where
+    field = Lens.lens'
+        (rule_id :: WafRuleGroupActivatedRule s -> TF.Expr s TF.Id)
+        (\s a -> s { rule_id = a } :: WafRuleGroupActivatedRule s)
+
+instance Lens.HasField "type" f (WafRuleGroupActivatedRule s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (type_ :: WafRuleGroupActivatedRule s -> TF.Expr s P.Text)
+        (\s a -> s { type_ = a } :: WafRuleGroupActivatedRule s)
+
+instance TF.ToHCL (WafRuleGroupActivatedRule s) where
+    toHCL WafRuleGroupActivatedRule_Internal{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "action" action
+       <> TF.pair "priority" priority
+       <> TF.pair "rule_id" rule_id
+       <> TF.pair "type" type_
+
+-- | The @predicates@ nested settings definition.
+data WafRulePredicates s = WafRulePredicates
+    { data_id :: TF.Expr s TF.Id
+    -- ^ @data_id@
+    -- - (Required)
+    , negated :: TF.Expr s P.Bool
+    -- ^ @negated@
+    -- - (Required)
+    , type_   :: TF.Expr s P.Text
+    -- ^ @type@
+    -- - (Required)
+    } deriving (P.Show)
+
+instance Lens.HasField "data_id" f (WafRulePredicates s) (TF.Expr s TF.Id) where
+    field = Lens.lens'
+        (data_id :: WafRulePredicates s -> TF.Expr s TF.Id)
+        (\s a -> s { data_id = a } :: WafRulePredicates s)
+
+instance Lens.HasField "negated" f (WafRulePredicates s) (TF.Expr s P.Bool) where
+    field = Lens.lens'
+        (negated :: WafRulePredicates s -> TF.Expr s P.Bool)
+        (\s a -> s { negated = a } :: WafRulePredicates s)
+
+instance Lens.HasField "type" f (WafRulePredicates s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (type_ :: WafRulePredicates s -> TF.Expr s P.Text)
+        (\s a -> s { type_ = a } :: WafRulePredicates s)
+
+instance TF.ToHCL (WafRulePredicates s) where
+    toHCL WafRulePredicates{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "data_id" data_id
+       <> TF.pair "negated" negated
+       <> TF.pair "type" type_
+
+-- | The @field_to_match@ nested settings definition.
+data WafSizeConstraintSetFieldToMatch s = WafSizeConstraintSetFieldToMatch_Internal
+    { data_ :: P.Maybe (TF.Expr s P.Text)
+    -- ^ @data@
+    -- - (Optional)
+    , type_ :: TF.Expr s P.Text
+    -- ^ @type@
+    -- - (Required)
+    } deriving (P.Show)
+
+-- | Construct a new @field_to_match@ settings value.
+newWafSizeConstraintSetFieldToMatch
+    :: WafSizeConstraintSetFieldToMatch_Required s
+    -> WafSizeConstraintSetFieldToMatch s
+newWafSizeConstraintSetFieldToMatch WafSizeConstraintSetFieldToMatch{..} =
+    WafSizeConstraintSetFieldToMatch_Internal
+        { data_ = P.Nothing
+        , type_ = type_
+        }
+
+-- | The required arguments for 'newWafSizeConstraintSetFieldToMatch'.
+data WafSizeConstraintSetFieldToMatch_Required s = WafSizeConstraintSetFieldToMatch
+    { type_ :: TF.Expr s P.Text
+    -- ^ (Required)
+    } deriving (P.Show)
+
+instance Lens.HasField "data" f (WafSizeConstraintSetFieldToMatch s) (P.Maybe (TF.Expr s P.Text)) where
+    field = Lens.lens'
+        (data_ :: WafSizeConstraintSetFieldToMatch s -> P.Maybe (TF.Expr s P.Text))
+        (\s a -> s { data_ = a } :: WafSizeConstraintSetFieldToMatch s)
+
+instance Lens.HasField "type" f (WafSizeConstraintSetFieldToMatch s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (type_ :: WafSizeConstraintSetFieldToMatch s -> TF.Expr s P.Text)
+        (\s a -> s { type_ = a } :: WafSizeConstraintSetFieldToMatch s)
+
+instance TF.ToHCL (WafSizeConstraintSetFieldToMatch s) where
+    toHCL WafSizeConstraintSetFieldToMatch_Internal{..} = TF.pairs $
+          P.mempty
+       <> P.maybe P.mempty (TF.pair "data") data_
+       <> TF.pair "type" type_
+
+-- | The @size_constraints@ nested settings definition.
+data WafSizeConstraintSetSizeConstraints s = WafSizeConstraintSetSizeConstraints
+    { comparison_operator :: TF.Expr s P.Text
+    -- ^ @comparison_operator@
+    -- - (Required)
+    , field_to_match      :: TF.Expr s (WafSizeConstraintSetFieldToMatch s)
+    -- ^ @field_to_match@
+    -- - (Required)
+    , size                :: TF.Expr s P.Int
+    -- ^ @size@
+    -- - (Required)
+    , text_transformation :: TF.Expr s P.Text
+    -- ^ @text_transformation@
+    -- - (Required)
+    } deriving (P.Show)
+
+instance Lens.HasField "comparison_operator" f (WafSizeConstraintSetSizeConstraints s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (comparison_operator :: WafSizeConstraintSetSizeConstraints s -> TF.Expr s P.Text)
+        (\s a -> s { comparison_operator = a } :: WafSizeConstraintSetSizeConstraints s)
+
+instance Lens.HasField "field_to_match" f (WafSizeConstraintSetSizeConstraints s) (TF.Expr s (WafSizeConstraintSetFieldToMatch s)) where
+    field = Lens.lens'
+        (field_to_match :: WafSizeConstraintSetSizeConstraints s -> TF.Expr s (WafSizeConstraintSetFieldToMatch s))
+        (\s a -> s { field_to_match = a } :: WafSizeConstraintSetSizeConstraints s)
+
+instance Lens.HasField "size" f (WafSizeConstraintSetSizeConstraints s) (TF.Expr s P.Int) where
+    field = Lens.lens'
+        (size :: WafSizeConstraintSetSizeConstraints s -> TF.Expr s P.Int)
+        (\s a -> s { size = a } :: WafSizeConstraintSetSizeConstraints s)
+
+instance Lens.HasField "text_transformation" f (WafSizeConstraintSetSizeConstraints s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (text_transformation :: WafSizeConstraintSetSizeConstraints s -> TF.Expr s P.Text)
+        (\s a -> s { text_transformation = a } :: WafSizeConstraintSetSizeConstraints s)
+
+instance TF.ToHCL (WafSizeConstraintSetSizeConstraints s) where
+    toHCL WafSizeConstraintSetSizeConstraints{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "comparison_operator" comparison_operator
+       <> TF.pair "field_to_match" field_to_match
+       <> TF.pair "size" size
+       <> TF.pair "text_transformation" text_transformation
+
+-- | The @field_to_match@ nested settings definition.
+data WafSqlInjectionMatchSetFieldToMatch s = WafSqlInjectionMatchSetFieldToMatch_Internal
+    { data_ :: P.Maybe (TF.Expr s P.Text)
+    -- ^ @data@
+    -- - (Optional)
+    , type_ :: TF.Expr s P.Text
+    -- ^ @type@
+    -- - (Required)
+    } deriving (P.Show)
+
+-- | Construct a new @field_to_match@ settings value.
+newWafSqlInjectionMatchSetFieldToMatch
+    :: WafSqlInjectionMatchSetFieldToMatch_Required s
+    -> WafSqlInjectionMatchSetFieldToMatch s
+newWafSqlInjectionMatchSetFieldToMatch WafSqlInjectionMatchSetFieldToMatch{..} =
+    WafSqlInjectionMatchSetFieldToMatch_Internal
+        { data_ = P.Nothing
+        , type_ = type_
+        }
+
+-- | The required arguments for 'newWafSqlInjectionMatchSetFieldToMatch'.
+data WafSqlInjectionMatchSetFieldToMatch_Required s = WafSqlInjectionMatchSetFieldToMatch
+    { type_ :: TF.Expr s P.Text
+    -- ^ (Required)
+    } deriving (P.Show)
+
+instance Lens.HasField "data" f (WafSqlInjectionMatchSetFieldToMatch s) (P.Maybe (TF.Expr s P.Text)) where
+    field = Lens.lens'
+        (data_ :: WafSqlInjectionMatchSetFieldToMatch s -> P.Maybe (TF.Expr s P.Text))
+        (\s a -> s { data_ = a } :: WafSqlInjectionMatchSetFieldToMatch s)
+
+instance Lens.HasField "type" f (WafSqlInjectionMatchSetFieldToMatch s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (type_ :: WafSqlInjectionMatchSetFieldToMatch s -> TF.Expr s P.Text)
+        (\s a -> s { type_ = a } :: WafSqlInjectionMatchSetFieldToMatch s)
+
+instance TF.ToHCL (WafSqlInjectionMatchSetFieldToMatch s) where
+    toHCL WafSqlInjectionMatchSetFieldToMatch_Internal{..} = TF.pairs $
+          P.mempty
+       <> P.maybe P.mempty (TF.pair "data") data_
+       <> TF.pair "type" type_
+
+-- | The @sql_injection_match_tuples@ nested settings definition.
+data WafSqlInjectionMatchSetSqlInjectionMatchTuples s = WafSqlInjectionMatchSetSqlInjectionMatchTuples
+    { field_to_match      :: TF.Expr s (WafSqlInjectionMatchSetFieldToMatch s)
+    -- ^ @field_to_match@
+    -- - (Required)
+    , text_transformation :: TF.Expr s P.Text
+    -- ^ @text_transformation@
+    -- - (Required)
+    } deriving (P.Show)
+
+instance Lens.HasField "field_to_match" f (WafSqlInjectionMatchSetSqlInjectionMatchTuples s) (TF.Expr s (WafSqlInjectionMatchSetFieldToMatch s)) where
+    field = Lens.lens'
+        (field_to_match :: WafSqlInjectionMatchSetSqlInjectionMatchTuples s -> TF.Expr s (WafSqlInjectionMatchSetFieldToMatch s))
+        (\s a -> s { field_to_match = a } :: WafSqlInjectionMatchSetSqlInjectionMatchTuples s)
+
+instance Lens.HasField "text_transformation" f (WafSqlInjectionMatchSetSqlInjectionMatchTuples s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (text_transformation :: WafSqlInjectionMatchSetSqlInjectionMatchTuples s -> TF.Expr s P.Text)
+        (\s a -> s { text_transformation = a } :: WafSqlInjectionMatchSetSqlInjectionMatchTuples s)
+
+instance TF.ToHCL (WafSqlInjectionMatchSetSqlInjectionMatchTuples s) where
+    toHCL WafSqlInjectionMatchSetSqlInjectionMatchTuples{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "field_to_match" field_to_match
+       <> TF.pair "text_transformation" text_transformation
+
+-- | The @action@ nested settings definition.
+newtype WafWebAclAction s = WafWebAclAction
+    { type_ :: TF.Expr s P.Text
+    -- ^ @type@
+    -- - (Required)
+    } deriving (P.Show)
+
+instance Lens.HasField "type" f (WafWebAclAction s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (type_ :: WafWebAclAction s -> TF.Expr s P.Text)
+        (\s a -> s { type_ = a } :: WafWebAclAction s)
+
+instance TF.ToHCL (WafWebAclAction s) where
+    toHCL WafWebAclAction{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "type" type_
+
+-- | The @rules@ nested settings definition.
+data WafWebAclRules s = WafWebAclRules_Internal
+    { action          :: P.Maybe (TF.Expr s (WafWebAclAction s))
+    -- ^ @action@
+    -- - (Optional)
+    , override_action :: P.Maybe (TF.Expr s (WafWebAclOverrideAction s))
+    -- ^ @override_action@
+    -- - (Optional)
+    , priority        :: TF.Expr s P.Int
+    -- ^ @priority@
+    -- - (Required)
+    , rule_id         :: TF.Expr s TF.Id
+    -- ^ @rule_id@
+    -- - (Required)
+    , type_           :: TF.Expr s P.Text
+    -- ^ @type@
+    -- - (Default __@REGULAR@__)
+    } deriving (P.Show)
+
+-- | Construct a new @rules@ settings value.
+newWafWebAclRules
+    :: WafWebAclRules_Required s
+    -> WafWebAclRules s
+newWafWebAclRules WafWebAclRules{..} =
+    WafWebAclRules_Internal
+        { action = P.Nothing
+        , override_action = P.Nothing
+        , priority = priority
+        , rule_id = rule_id
+        , type_ = TF.expr "REGULAR"
+        }
+
+-- | The required arguments for 'newWafWebAclRules'.
+data WafWebAclRules_Required s = WafWebAclRules
+    { rule_id  :: TF.Expr s TF.Id
+    -- ^ (Required)
+    , priority :: TF.Expr s P.Int
+    -- ^ (Required)
+    } deriving (P.Show)
+
+instance Lens.HasField "action" f (WafWebAclRules s) (P.Maybe (TF.Expr s (WafWebAclAction s))) where
+    field = Lens.lens'
+        (action :: WafWebAclRules s -> P.Maybe (TF.Expr s (WafWebAclAction s)))
+        (\s a -> s { action = a } :: WafWebAclRules s)
+
+instance Lens.HasField "override_action" f (WafWebAclRules s) (P.Maybe (TF.Expr s (WafWebAclOverrideAction s))) where
+    field = Lens.lens'
+        (override_action :: WafWebAclRules s -> P.Maybe (TF.Expr s (WafWebAclOverrideAction s)))
+        (\s a -> s { override_action = a } :: WafWebAclRules s)
+
+instance Lens.HasField "priority" f (WafWebAclRules s) (TF.Expr s P.Int) where
+    field = Lens.lens'
+        (priority :: WafWebAclRules s -> TF.Expr s P.Int)
+        (\s a -> s { priority = a } :: WafWebAclRules s)
+
+instance Lens.HasField "rule_id" f (WafWebAclRules s) (TF.Expr s TF.Id) where
+    field = Lens.lens'
+        (rule_id :: WafWebAclRules s -> TF.Expr s TF.Id)
+        (\s a -> s { rule_id = a } :: WafWebAclRules s)
+
+instance Lens.HasField "type" f (WafWebAclRules s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (type_ :: WafWebAclRules s -> TF.Expr s P.Text)
+        (\s a -> s { type_ = a } :: WafWebAclRules s)
+
+instance TF.ToHCL (WafWebAclRules s) where
+    toHCL WafWebAclRules_Internal{..} = TF.pairs $
+          P.mempty
+       <> P.maybe P.mempty (TF.pair "action") action
+       <> P.maybe P.mempty (TF.pair "override_action") override_action
+       <> TF.pair "priority" priority
+       <> TF.pair "rule_id" rule_id
+       <> TF.pair "type" type_
+
+-- | The @override_action@ nested settings definition.
+newtype WafWebAclOverrideAction s = WafWebAclOverrideAction
+    { type_ :: TF.Expr s P.Text
+    -- ^ @type@
+    -- - (Required)
+    } deriving (P.Show)
+
+instance Lens.HasField "type" f (WafWebAclOverrideAction s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (type_ :: WafWebAclOverrideAction s -> TF.Expr s P.Text)
+        (\s a -> s { type_ = a } :: WafWebAclOverrideAction s)
+
+instance TF.ToHCL (WafWebAclOverrideAction s) where
+    toHCL WafWebAclOverrideAction{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "type" type_
+
+-- | The @default_action@ nested settings definition.
+newtype WafWebAclDefaultAction s = WafWebAclDefaultAction
+    { type_ :: TF.Expr s P.Text
+    -- ^ @type@
+    -- - (Required)
+    } deriving (P.Show)
+
+instance Lens.HasField "type" f (WafWebAclDefaultAction s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (type_ :: WafWebAclDefaultAction s -> TF.Expr s P.Text)
+        (\s a -> s { type_ = a } :: WafWebAclDefaultAction s)
+
+instance TF.ToHCL (WafWebAclDefaultAction s) where
+    toHCL WafWebAclDefaultAction{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "type" type_
+
+-- | The @field_to_match@ nested settings definition.
+data WafXssMatchSetFieldToMatch s = WafXssMatchSetFieldToMatch_Internal
+    { data_ :: P.Maybe (TF.Expr s P.Text)
+    -- ^ @data@
+    -- - (Optional)
+    , type_ :: TF.Expr s P.Text
+    -- ^ @type@
+    -- - (Required)
+    } deriving (P.Show)
+
+-- | Construct a new @field_to_match@ settings value.
+newWafXssMatchSetFieldToMatch
+    :: WafXssMatchSetFieldToMatch_Required s
+    -> WafXssMatchSetFieldToMatch s
+newWafXssMatchSetFieldToMatch WafXssMatchSetFieldToMatch{..} =
+    WafXssMatchSetFieldToMatch_Internal
+        { data_ = P.Nothing
+        , type_ = type_
+        }
+
+-- | The required arguments for 'newWafXssMatchSetFieldToMatch'.
+data WafXssMatchSetFieldToMatch_Required s = WafXssMatchSetFieldToMatch
+    { type_ :: TF.Expr s P.Text
+    -- ^ (Required)
+    } deriving (P.Show)
+
+instance Lens.HasField "data" f (WafXssMatchSetFieldToMatch s) (P.Maybe (TF.Expr s P.Text)) where
+    field = Lens.lens'
+        (data_ :: WafXssMatchSetFieldToMatch s -> P.Maybe (TF.Expr s P.Text))
+        (\s a -> s { data_ = a } :: WafXssMatchSetFieldToMatch s)
+
+instance Lens.HasField "type" f (WafXssMatchSetFieldToMatch s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (type_ :: WafXssMatchSetFieldToMatch s -> TF.Expr s P.Text)
+        (\s a -> s { type_ = a } :: WafXssMatchSetFieldToMatch s)
+
+instance TF.ToHCL (WafXssMatchSetFieldToMatch s) where
+    toHCL WafXssMatchSetFieldToMatch_Internal{..} = TF.pairs $
+          P.mempty
+       <> P.maybe P.mempty (TF.pair "data") data_
+       <> TF.pair "type" type_
+
+-- | The @xss_match_tuples@ nested settings definition.
+data WafXssMatchSetXssMatchTuples s = WafXssMatchSetXssMatchTuples
+    { field_to_match      :: TF.Expr s (WafXssMatchSetFieldToMatch s)
+    -- ^ @field_to_match@
+    -- - (Required)
+    , text_transformation :: TF.Expr s P.Text
+    -- ^ @text_transformation@
+    -- - (Required)
+    } deriving (P.Show)
+
+instance Lens.HasField "field_to_match" f (WafXssMatchSetXssMatchTuples s) (TF.Expr s (WafXssMatchSetFieldToMatch s)) where
+    field = Lens.lens'
+        (field_to_match :: WafXssMatchSetXssMatchTuples s -> TF.Expr s (WafXssMatchSetFieldToMatch s))
+        (\s a -> s { field_to_match = a } :: WafXssMatchSetXssMatchTuples s)
+
+instance Lens.HasField "text_transformation" f (WafXssMatchSetXssMatchTuples s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (text_transformation :: WafXssMatchSetXssMatchTuples s -> TF.Expr s P.Text)
+        (\s a -> s { text_transformation = a } :: WafXssMatchSetXssMatchTuples s)
+
+instance TF.ToHCL (WafXssMatchSetXssMatchTuples s) where
+    toHCL WafXssMatchSetXssMatchTuples{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "field_to_match" field_to_match
+       <> TF.pair "text_transformation" text_transformation
+
+-- | The @byte_match_tuples@ nested settings definition.
+data WafregionalByteMatchSetByteMatchTuples s = WafregionalByteMatchSetByteMatchTuples_Internal
+    { field_to_match        :: TF.Expr s (WafregionalByteMatchSetFieldToMatch s)
+    -- ^ @field_to_match@
+    -- - (Required)
+    , positional_constraint :: TF.Expr s P.Text
+    -- ^ @positional_constraint@
+    -- - (Required)
+    , target_string         :: P.Maybe (TF.Expr s P.Text)
+    -- ^ @target_string@
+    -- - (Optional)
+    , text_transformation   :: TF.Expr s P.Text
+    -- ^ @text_transformation@
+    -- - (Required)
+    } deriving (P.Show)
+
+-- | Construct a new @byte_match_tuples@ settings value.
+newWafregionalByteMatchSetByteMatchTuples
+    :: WafregionalByteMatchSetByteMatchTuples_Required s
+    -> WafregionalByteMatchSetByteMatchTuples s
+newWafregionalByteMatchSetByteMatchTuples WafregionalByteMatchSetByteMatchTuples{..} =
+    WafregionalByteMatchSetByteMatchTuples_Internal
+        { field_to_match = field_to_match
+        , positional_constraint = positional_constraint
+        , target_string = P.Nothing
+        , text_transformation = text_transformation
+        }
+
+-- | The required arguments for 'newWafregionalByteMatchSetByteMatchTuples'.
+data WafregionalByteMatchSetByteMatchTuples_Required s = WafregionalByteMatchSetByteMatchTuples
+    { positional_constraint :: TF.Expr s P.Text
+    -- ^ (Required)
+    , field_to_match        :: TF.Expr s (WafregionalByteMatchSetFieldToMatch s)
+    -- ^ (Required)
+    , text_transformation   :: TF.Expr s P.Text
+    -- ^ (Required)
+    } deriving (P.Show)
+
+instance Lens.HasField "field_to_match" f (WafregionalByteMatchSetByteMatchTuples s) (TF.Expr s (WafregionalByteMatchSetFieldToMatch s)) where
+    field = Lens.lens'
+        (field_to_match :: WafregionalByteMatchSetByteMatchTuples s -> TF.Expr s (WafregionalByteMatchSetFieldToMatch s))
+        (\s a -> s { field_to_match = a } :: WafregionalByteMatchSetByteMatchTuples s)
+
+instance Lens.HasField "positional_constraint" f (WafregionalByteMatchSetByteMatchTuples s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (positional_constraint :: WafregionalByteMatchSetByteMatchTuples s -> TF.Expr s P.Text)
+        (\s a -> s { positional_constraint = a } :: WafregionalByteMatchSetByteMatchTuples s)
+
+instance Lens.HasField "target_string" f (WafregionalByteMatchSetByteMatchTuples s) (P.Maybe (TF.Expr s P.Text)) where
+    field = Lens.lens'
+        (target_string :: WafregionalByteMatchSetByteMatchTuples s -> P.Maybe (TF.Expr s P.Text))
+        (\s a -> s { target_string = a } :: WafregionalByteMatchSetByteMatchTuples s)
+
+instance Lens.HasField "text_transformation" f (WafregionalByteMatchSetByteMatchTuples s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (text_transformation :: WafregionalByteMatchSetByteMatchTuples s -> TF.Expr s P.Text)
+        (\s a -> s { text_transformation = a } :: WafregionalByteMatchSetByteMatchTuples s)
+
+instance TF.ToHCL (WafregionalByteMatchSetByteMatchTuples s) where
+    toHCL WafregionalByteMatchSetByteMatchTuples_Internal{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "field_to_match" field_to_match
+       <> TF.pair "positional_constraint" positional_constraint
+       <> P.maybe P.mempty (TF.pair "target_string") target_string
+       <> TF.pair "text_transformation" text_transformation
+
+-- | The @field_to_match@ nested settings definition.
+data WafregionalByteMatchSetFieldToMatch s = WafregionalByteMatchSetFieldToMatch_Internal
+    { data_ :: P.Maybe (TF.Expr s P.Text)
+    -- ^ @data@
+    -- - (Optional)
+    , type_ :: TF.Expr s P.Text
+    -- ^ @type@
+    -- - (Required)
+    } deriving (P.Show)
+
+-- | Construct a new @field_to_match@ settings value.
+newWafregionalByteMatchSetFieldToMatch
+    :: WafregionalByteMatchSetFieldToMatch_Required s
+    -> WafregionalByteMatchSetFieldToMatch s
+newWafregionalByteMatchSetFieldToMatch WafregionalByteMatchSetFieldToMatch{..} =
+    WafregionalByteMatchSetFieldToMatch_Internal
+        { data_ = P.Nothing
+        , type_ = type_
+        }
+
+-- | The required arguments for 'newWafregionalByteMatchSetFieldToMatch'.
+data WafregionalByteMatchSetFieldToMatch_Required s = WafregionalByteMatchSetFieldToMatch
+    { type_ :: TF.Expr s P.Text
+    -- ^ (Required)
+    } deriving (P.Show)
+
+instance Lens.HasField "data" f (WafregionalByteMatchSetFieldToMatch s) (P.Maybe (TF.Expr s P.Text)) where
+    field = Lens.lens'
+        (data_ :: WafregionalByteMatchSetFieldToMatch s -> P.Maybe (TF.Expr s P.Text))
+        (\s a -> s { data_ = a } :: WafregionalByteMatchSetFieldToMatch s)
+
+instance Lens.HasField "type" f (WafregionalByteMatchSetFieldToMatch s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (type_ :: WafregionalByteMatchSetFieldToMatch s -> TF.Expr s P.Text)
+        (\s a -> s { type_ = a } :: WafregionalByteMatchSetFieldToMatch s)
+
+instance TF.ToHCL (WafregionalByteMatchSetFieldToMatch s) where
+    toHCL WafregionalByteMatchSetFieldToMatch_Internal{..} = TF.pairs $
+          P.mempty
+       <> P.maybe P.mempty (TF.pair "data") data_
+       <> TF.pair "type" type_
+
+-- | The @geo_match_constraint@ nested settings definition.
+data WafregionalGeoMatchSetGeoMatchConstraint s = WafregionalGeoMatchSetGeoMatchConstraint
+    { type_ :: TF.Expr s P.Text
+    -- ^ @type@
+    -- - (Required)
+    , value :: TF.Expr s P.Text
+    -- ^ @value@
+    -- - (Required)
+    } deriving (P.Show)
+
+instance Lens.HasField "type" f (WafregionalGeoMatchSetGeoMatchConstraint s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (type_ :: WafregionalGeoMatchSetGeoMatchConstraint s -> TF.Expr s P.Text)
+        (\s a -> s { type_ = a } :: WafregionalGeoMatchSetGeoMatchConstraint s)
+
+instance Lens.HasField "value" f (WafregionalGeoMatchSetGeoMatchConstraint s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (value :: WafregionalGeoMatchSetGeoMatchConstraint s -> TF.Expr s P.Text)
+        (\s a -> s { value = a } :: WafregionalGeoMatchSetGeoMatchConstraint s)
+
+instance TF.ToHCL (WafregionalGeoMatchSetGeoMatchConstraint s) where
+    toHCL WafregionalGeoMatchSetGeoMatchConstraint{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "type" type_
+       <> TF.pair "value" value
+
+-- | The @ip_set_descriptor@ nested settings definition.
+data WafregionalIpsetIpSetDescriptor s = WafregionalIpsetIpSetDescriptor
+    { type_ :: TF.Expr s P.Text
+    -- ^ @type@
+    -- - (Required)
+    , value :: TF.Expr s P.Text
+    -- ^ @value@
+    -- - (Required)
+    } deriving (P.Show)
+
+instance Lens.HasField "type" f (WafregionalIpsetIpSetDescriptor s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (type_ :: WafregionalIpsetIpSetDescriptor s -> TF.Expr s P.Text)
+        (\s a -> s { type_ = a } :: WafregionalIpsetIpSetDescriptor s)
+
+instance Lens.HasField "value" f (WafregionalIpsetIpSetDescriptor s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (value :: WafregionalIpsetIpSetDescriptor s -> TF.Expr s P.Text)
+        (\s a -> s { value = a } :: WafregionalIpsetIpSetDescriptor s)
+
+instance TF.ToHCL (WafregionalIpsetIpSetDescriptor s) where
+    toHCL WafregionalIpsetIpSetDescriptor{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "type" type_
+       <> TF.pair "value" value
+
+-- | The @predicate@ nested settings definition.
+data WafregionalRateBasedRulePredicate s = WafregionalRateBasedRulePredicate
+    { data_id :: TF.Expr s TF.Id
+    -- ^ @data_id@
+    -- - (Required)
+    , negated :: TF.Expr s P.Bool
+    -- ^ @negated@
+    -- - (Required)
+    , type_   :: TF.Expr s P.Text
+    -- ^ @type@
+    -- - (Required)
+    } deriving (P.Show)
+
+instance Lens.HasField "data_id" f (WafregionalRateBasedRulePredicate s) (TF.Expr s TF.Id) where
+    field = Lens.lens'
+        (data_id :: WafregionalRateBasedRulePredicate s -> TF.Expr s TF.Id)
+        (\s a -> s { data_id = a } :: WafregionalRateBasedRulePredicate s)
+
+instance Lens.HasField "negated" f (WafregionalRateBasedRulePredicate s) (TF.Expr s P.Bool) where
+    field = Lens.lens'
+        (negated :: WafregionalRateBasedRulePredicate s -> TF.Expr s P.Bool)
+        (\s a -> s { negated = a } :: WafregionalRateBasedRulePredicate s)
+
+instance Lens.HasField "type" f (WafregionalRateBasedRulePredicate s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (type_ :: WafregionalRateBasedRulePredicate s -> TF.Expr s P.Text)
+        (\s a -> s { type_ = a } :: WafregionalRateBasedRulePredicate s)
+
+instance TF.ToHCL (WafregionalRateBasedRulePredicate s) where
+    toHCL WafregionalRateBasedRulePredicate{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "data_id" data_id
+       <> TF.pair "negated" negated
+       <> TF.pair "type" type_
+
+-- | The @field_to_match@ nested settings definition.
+data WafregionalRegexMatchSetFieldToMatch s = WafregionalRegexMatchSetFieldToMatch_Internal
+    { data_ :: P.Maybe (TF.Expr s P.Text)
+    -- ^ @data@
+    -- - (Optional)
+    , type_ :: TF.Expr s P.Text
+    -- ^ @type@
+    -- - (Required)
+    } deriving (P.Show)
+
+-- | Construct a new @field_to_match@ settings value.
+newWafregionalRegexMatchSetFieldToMatch
+    :: WafregionalRegexMatchSetFieldToMatch_Required s
+    -> WafregionalRegexMatchSetFieldToMatch s
+newWafregionalRegexMatchSetFieldToMatch WafregionalRegexMatchSetFieldToMatch{..} =
+    WafregionalRegexMatchSetFieldToMatch_Internal
+        { data_ = P.Nothing
+        , type_ = type_
+        }
+
+-- | The required arguments for 'newWafregionalRegexMatchSetFieldToMatch'.
+data WafregionalRegexMatchSetFieldToMatch_Required s = WafregionalRegexMatchSetFieldToMatch
+    { type_ :: TF.Expr s P.Text
+    -- ^ (Required)
+    } deriving (P.Show)
+
+instance Lens.HasField "data" f (WafregionalRegexMatchSetFieldToMatch s) (P.Maybe (TF.Expr s P.Text)) where
+    field = Lens.lens'
+        (data_ :: WafregionalRegexMatchSetFieldToMatch s -> P.Maybe (TF.Expr s P.Text))
+        (\s a -> s { data_ = a } :: WafregionalRegexMatchSetFieldToMatch s)
+
+instance Lens.HasField "type" f (WafregionalRegexMatchSetFieldToMatch s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (type_ :: WafregionalRegexMatchSetFieldToMatch s -> TF.Expr s P.Text)
+        (\s a -> s { type_ = a } :: WafregionalRegexMatchSetFieldToMatch s)
+
+instance TF.ToHCL (WafregionalRegexMatchSetFieldToMatch s) where
+    toHCL WafregionalRegexMatchSetFieldToMatch_Internal{..} = TF.pairs $
+          P.mempty
+       <> P.maybe P.mempty (TF.pair "data") data_
+       <> TF.pair "type" type_
+
+-- | The @regex_match_tuple@ nested settings definition.
+data WafregionalRegexMatchSetRegexMatchTuple s = WafregionalRegexMatchSetRegexMatchTuple
+    { field_to_match       :: TF.Expr s (WafregionalRegexMatchSetFieldToMatch s)
+    -- ^ @field_to_match@
+    -- - (Required)
+    , regex_pattern_set_id :: TF.Expr s TF.Id
+    -- ^ @regex_pattern_set_id@
+    -- - (Required)
+    , text_transformation  :: TF.Expr s P.Text
+    -- ^ @text_transformation@
+    -- - (Required)
+    } deriving (P.Show)
+
+instance Lens.HasField "field_to_match" f (WafregionalRegexMatchSetRegexMatchTuple s) (TF.Expr s (WafregionalRegexMatchSetFieldToMatch s)) where
+    field = Lens.lens'
+        (field_to_match :: WafregionalRegexMatchSetRegexMatchTuple s -> TF.Expr s (WafregionalRegexMatchSetFieldToMatch s))
+        (\s a -> s { field_to_match = a } :: WafregionalRegexMatchSetRegexMatchTuple s)
+
+instance Lens.HasField "regex_pattern_set_id" f (WafregionalRegexMatchSetRegexMatchTuple s) (TF.Expr s TF.Id) where
+    field = Lens.lens'
+        (regex_pattern_set_id :: WafregionalRegexMatchSetRegexMatchTuple s -> TF.Expr s TF.Id)
+        (\s a -> s { regex_pattern_set_id = a } :: WafregionalRegexMatchSetRegexMatchTuple s)
+
+instance Lens.HasField "text_transformation" f (WafregionalRegexMatchSetRegexMatchTuple s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (text_transformation :: WafregionalRegexMatchSetRegexMatchTuple s -> TF.Expr s P.Text)
+        (\s a -> s { text_transformation = a } :: WafregionalRegexMatchSetRegexMatchTuple s)
+
+instance TF.ToHCL (WafregionalRegexMatchSetRegexMatchTuple s) where
+    toHCL WafregionalRegexMatchSetRegexMatchTuple{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "field_to_match" field_to_match
+       <> TF.pair "regex_pattern_set_id" regex_pattern_set_id
+       <> TF.pair "text_transformation" text_transformation
+
+-- | The @action@ nested settings definition.
+newtype WafregionalRuleGroupAction s = WafregionalRuleGroupAction
+    { type_ :: TF.Expr s P.Text
+    -- ^ @type@
+    -- - (Required)
+    } deriving (P.Show)
+
+instance Lens.HasField "type" f (WafregionalRuleGroupAction s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (type_ :: WafregionalRuleGroupAction s -> TF.Expr s P.Text)
+        (\s a -> s { type_ = a } :: WafregionalRuleGroupAction s)
+
+instance TF.ToHCL (WafregionalRuleGroupAction s) where
+    toHCL WafregionalRuleGroupAction{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "type" type_
+
+-- | The @activated_rule@ nested settings definition.
+data WafregionalRuleGroupActivatedRule s = WafregionalRuleGroupActivatedRule_Internal
+    { action   :: TF.Expr s (WafregionalRuleGroupAction s)
+    -- ^ @action@
+    -- - (Required)
+    , priority :: TF.Expr s P.Int
+    -- ^ @priority@
+    -- - (Required)
+    , rule_id  :: TF.Expr s TF.Id
+    -- ^ @rule_id@
+    -- - (Required)
+    , type_    :: TF.Expr s P.Text
+    -- ^ @type@
+    -- - (Default __@REGULAR@__)
+    } deriving (P.Show)
+
+-- | Construct a new @activated_rule@ settings value.
+newWafregionalRuleGroupActivatedRule
+    :: WafregionalRuleGroupActivatedRule_Required s
+    -> WafregionalRuleGroupActivatedRule s
+newWafregionalRuleGroupActivatedRule WafregionalRuleGroupActivatedRule{..} =
+    WafregionalRuleGroupActivatedRule_Internal
+        { action = action
+        , priority = priority
+        , rule_id = rule_id
+        , type_ = TF.expr "REGULAR"
+        }
+
+-- | The required arguments for 'newWafregionalRuleGroupActivatedRule'.
+data WafregionalRuleGroupActivatedRule_Required s = WafregionalRuleGroupActivatedRule
+    { action   :: TF.Expr s (WafregionalRuleGroupAction s)
+    -- ^ (Required)
+    , rule_id  :: TF.Expr s TF.Id
+    -- ^ (Required)
+    , priority :: TF.Expr s P.Int
+    -- ^ (Required)
+    } deriving (P.Show)
+
+instance Lens.HasField "action" f (WafregionalRuleGroupActivatedRule s) (TF.Expr s (WafregionalRuleGroupAction s)) where
+    field = Lens.lens'
+        (action :: WafregionalRuleGroupActivatedRule s -> TF.Expr s (WafregionalRuleGroupAction s))
+        (\s a -> s { action = a } :: WafregionalRuleGroupActivatedRule s)
+
+instance Lens.HasField "priority" f (WafregionalRuleGroupActivatedRule s) (TF.Expr s P.Int) where
+    field = Lens.lens'
+        (priority :: WafregionalRuleGroupActivatedRule s -> TF.Expr s P.Int)
+        (\s a -> s { priority = a } :: WafregionalRuleGroupActivatedRule s)
+
+instance Lens.HasField "rule_id" f (WafregionalRuleGroupActivatedRule s) (TF.Expr s TF.Id) where
+    field = Lens.lens'
+        (rule_id :: WafregionalRuleGroupActivatedRule s -> TF.Expr s TF.Id)
+        (\s a -> s { rule_id = a } :: WafregionalRuleGroupActivatedRule s)
+
+instance Lens.HasField "type" f (WafregionalRuleGroupActivatedRule s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (type_ :: WafregionalRuleGroupActivatedRule s -> TF.Expr s P.Text)
+        (\s a -> s { type_ = a } :: WafregionalRuleGroupActivatedRule s)
+
+instance TF.ToHCL (WafregionalRuleGroupActivatedRule s) where
+    toHCL WafregionalRuleGroupActivatedRule_Internal{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "action" action
+       <> TF.pair "priority" priority
+       <> TF.pair "rule_id" rule_id
+       <> TF.pair "type" type_
+
+-- | The @predicate@ nested settings definition.
+data WafregionalRulePredicate s = WafregionalRulePredicate
+    { data_id :: TF.Expr s TF.Id
+    -- ^ @data_id@
+    -- - (Required)
+    , negated :: TF.Expr s P.Bool
+    -- ^ @negated@
+    -- - (Required)
+    , type_   :: TF.Expr s P.Text
+    -- ^ @type@
+    -- - (Required)
+    } deriving (P.Show)
+
+instance Lens.HasField "data_id" f (WafregionalRulePredicate s) (TF.Expr s TF.Id) where
+    field = Lens.lens'
+        (data_id :: WafregionalRulePredicate s -> TF.Expr s TF.Id)
+        (\s a -> s { data_id = a } :: WafregionalRulePredicate s)
+
+instance Lens.HasField "negated" f (WafregionalRulePredicate s) (TF.Expr s P.Bool) where
+    field = Lens.lens'
+        (negated :: WafregionalRulePredicate s -> TF.Expr s P.Bool)
+        (\s a -> s { negated = a } :: WafregionalRulePredicate s)
+
+instance Lens.HasField "type" f (WafregionalRulePredicate s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (type_ :: WafregionalRulePredicate s -> TF.Expr s P.Text)
+        (\s a -> s { type_ = a } :: WafregionalRulePredicate s)
+
+instance TF.ToHCL (WafregionalRulePredicate s) where
+    toHCL WafregionalRulePredicate{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "data_id" data_id
+       <> TF.pair "negated" negated
+       <> TF.pair "type" type_
+
+-- | The @field_to_match@ nested settings definition.
+data WafregionalSizeConstraintSetFieldToMatch s = WafregionalSizeConstraintSetFieldToMatch_Internal
+    { data_ :: P.Maybe (TF.Expr s P.Text)
+    -- ^ @data@
+    -- - (Optional)
+    , type_ :: TF.Expr s P.Text
+    -- ^ @type@
+    -- - (Required)
+    } deriving (P.Show)
+
+-- | Construct a new @field_to_match@ settings value.
+newWafregionalSizeConstraintSetFieldToMatch
+    :: WafregionalSizeConstraintSetFieldToMatch_Required s
+    -> WafregionalSizeConstraintSetFieldToMatch s
+newWafregionalSizeConstraintSetFieldToMatch WafregionalSizeConstraintSetFieldToMatch{..} =
+    WafregionalSizeConstraintSetFieldToMatch_Internal
+        { data_ = P.Nothing
+        , type_ = type_
+        }
+
+-- | The required arguments for 'newWafregionalSizeConstraintSetFieldToMatch'.
+data WafregionalSizeConstraintSetFieldToMatch_Required s = WafregionalSizeConstraintSetFieldToMatch
+    { type_ :: TF.Expr s P.Text
+    -- ^ (Required)
+    } deriving (P.Show)
+
+instance Lens.HasField "data" f (WafregionalSizeConstraintSetFieldToMatch s) (P.Maybe (TF.Expr s P.Text)) where
+    field = Lens.lens'
+        (data_ :: WafregionalSizeConstraintSetFieldToMatch s -> P.Maybe (TF.Expr s P.Text))
+        (\s a -> s { data_ = a } :: WafregionalSizeConstraintSetFieldToMatch s)
+
+instance Lens.HasField "type" f (WafregionalSizeConstraintSetFieldToMatch s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (type_ :: WafregionalSizeConstraintSetFieldToMatch s -> TF.Expr s P.Text)
+        (\s a -> s { type_ = a } :: WafregionalSizeConstraintSetFieldToMatch s)
+
+instance TF.ToHCL (WafregionalSizeConstraintSetFieldToMatch s) where
+    toHCL WafregionalSizeConstraintSetFieldToMatch_Internal{..} = TF.pairs $
+          P.mempty
+       <> P.maybe P.mempty (TF.pair "data") data_
+       <> TF.pair "type" type_
+
+-- | The @size_constraints@ nested settings definition.
+data WafregionalSizeConstraintSetSizeConstraints s = WafregionalSizeConstraintSetSizeConstraints
+    { comparison_operator :: TF.Expr s P.Text
+    -- ^ @comparison_operator@
+    -- - (Required)
+    , field_to_match :: TF.Expr s (WafregionalSizeConstraintSetFieldToMatch s)
+    -- ^ @field_to_match@
+    -- - (Required)
+    , size :: TF.Expr s P.Int
+    -- ^ @size@
+    -- - (Required)
+    , text_transformation :: TF.Expr s P.Text
+    -- ^ @text_transformation@
+    -- - (Required)
+    } deriving (P.Show)
+
+instance Lens.HasField "comparison_operator" f (WafregionalSizeConstraintSetSizeConstraints s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (comparison_operator :: WafregionalSizeConstraintSetSizeConstraints s -> TF.Expr s P.Text)
+        (\s a -> s { comparison_operator = a } :: WafregionalSizeConstraintSetSizeConstraints s)
+
+instance Lens.HasField "field_to_match" f (WafregionalSizeConstraintSetSizeConstraints s) (TF.Expr s (WafregionalSizeConstraintSetFieldToMatch s)) where
+    field = Lens.lens'
+        (field_to_match :: WafregionalSizeConstraintSetSizeConstraints s -> TF.Expr s (WafregionalSizeConstraintSetFieldToMatch s))
+        (\s a -> s { field_to_match = a } :: WafregionalSizeConstraintSetSizeConstraints s)
+
+instance Lens.HasField "size" f (WafregionalSizeConstraintSetSizeConstraints s) (TF.Expr s P.Int) where
+    field = Lens.lens'
+        (size :: WafregionalSizeConstraintSetSizeConstraints s -> TF.Expr s P.Int)
+        (\s a -> s { size = a } :: WafregionalSizeConstraintSetSizeConstraints s)
+
+instance Lens.HasField "text_transformation" f (WafregionalSizeConstraintSetSizeConstraints s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (text_transformation :: WafregionalSizeConstraintSetSizeConstraints s -> TF.Expr s P.Text)
+        (\s a -> s { text_transformation = a } :: WafregionalSizeConstraintSetSizeConstraints s)
+
+instance TF.ToHCL (WafregionalSizeConstraintSetSizeConstraints s) where
+    toHCL WafregionalSizeConstraintSetSizeConstraints{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "comparison_operator" comparison_operator
+       <> TF.pair "field_to_match" field_to_match
+       <> TF.pair "size" size
+       <> TF.pair "text_transformation" text_transformation
+
+-- | The @field_to_match@ nested settings definition.
+data WafregionalSqlInjectionMatchSetFieldToMatch s = WafregionalSqlInjectionMatchSetFieldToMatch_Internal
+    { data_ :: P.Maybe (TF.Expr s P.Text)
+    -- ^ @data@
+    -- - (Optional)
+    , type_ :: TF.Expr s P.Text
+    -- ^ @type@
+    -- - (Required)
+    } deriving (P.Show)
+
+-- | Construct a new @field_to_match@ settings value.
+newWafregionalSqlInjectionMatchSetFieldToMatch
+    :: WafregionalSqlInjectionMatchSetFieldToMatch_Required s
+    -> WafregionalSqlInjectionMatchSetFieldToMatch s
+newWafregionalSqlInjectionMatchSetFieldToMatch WafregionalSqlInjectionMatchSetFieldToMatch{..} =
+    WafregionalSqlInjectionMatchSetFieldToMatch_Internal
+        { data_ = P.Nothing
+        , type_ = type_
+        }
+
+-- | The required arguments for 'newWafregionalSqlInjectionMatchSetFieldToMatch'.
+data WafregionalSqlInjectionMatchSetFieldToMatch_Required s = WafregionalSqlInjectionMatchSetFieldToMatch
+    { type_ :: TF.Expr s P.Text
+    -- ^ (Required)
+    } deriving (P.Show)
+
+instance Lens.HasField "data" f (WafregionalSqlInjectionMatchSetFieldToMatch s) (P.Maybe (TF.Expr s P.Text)) where
+    field = Lens.lens'
+        (data_ :: WafregionalSqlInjectionMatchSetFieldToMatch s -> P.Maybe (TF.Expr s P.Text))
+        (\s a -> s { data_ = a } :: WafregionalSqlInjectionMatchSetFieldToMatch s)
+
+instance Lens.HasField "type" f (WafregionalSqlInjectionMatchSetFieldToMatch s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (type_ :: WafregionalSqlInjectionMatchSetFieldToMatch s -> TF.Expr s P.Text)
+        (\s a -> s { type_ = a } :: WafregionalSqlInjectionMatchSetFieldToMatch s)
+
+instance TF.ToHCL (WafregionalSqlInjectionMatchSetFieldToMatch s) where
+    toHCL WafregionalSqlInjectionMatchSetFieldToMatch_Internal{..} = TF.pairs $
+          P.mempty
+       <> P.maybe P.mempty (TF.pair "data") data_
+       <> TF.pair "type" type_
+
+-- | The @sql_injection_match_tuple@ nested settings definition.
+data WafregionalSqlInjectionMatchSetSqlInjectionMatchTuple s = WafregionalSqlInjectionMatchSetSqlInjectionMatchTuple
+    { field_to_match :: TF.Expr s (WafregionalSqlInjectionMatchSetFieldToMatch s)
+    -- ^ @field_to_match@
+    -- - (Required)
+    , text_transformation :: TF.Expr s P.Text
+    -- ^ @text_transformation@
+    -- - (Required)
+    } deriving (P.Show)
+
+instance Lens.HasField "field_to_match" f (WafregionalSqlInjectionMatchSetSqlInjectionMatchTuple s) (TF.Expr s (WafregionalSqlInjectionMatchSetFieldToMatch s)) where
+    field = Lens.lens'
+        (field_to_match :: WafregionalSqlInjectionMatchSetSqlInjectionMatchTuple s -> TF.Expr s (WafregionalSqlInjectionMatchSetFieldToMatch s))
+        (\s a -> s { field_to_match = a } :: WafregionalSqlInjectionMatchSetSqlInjectionMatchTuple s)
+
+instance Lens.HasField "text_transformation" f (WafregionalSqlInjectionMatchSetSqlInjectionMatchTuple s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (text_transformation :: WafregionalSqlInjectionMatchSetSqlInjectionMatchTuple s -> TF.Expr s P.Text)
+        (\s a -> s { text_transformation = a } :: WafregionalSqlInjectionMatchSetSqlInjectionMatchTuple s)
+
+instance TF.ToHCL (WafregionalSqlInjectionMatchSetSqlInjectionMatchTuple s) where
+    toHCL WafregionalSqlInjectionMatchSetSqlInjectionMatchTuple{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "field_to_match" field_to_match
+       <> TF.pair "text_transformation" text_transformation
+
+-- | The @action@ nested settings definition.
+newtype WafregionalWebAclAction s = WafregionalWebAclAction
+    { type_ :: TF.Expr s P.Text
+    -- ^ @type@
+    -- - (Required)
+    } deriving (P.Show)
+
+instance Lens.HasField "type" f (WafregionalWebAclAction s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (type_ :: WafregionalWebAclAction s -> TF.Expr s P.Text)
+        (\s a -> s { type_ = a } :: WafregionalWebAclAction s)
+
+instance TF.ToHCL (WafregionalWebAclAction s) where
+    toHCL WafregionalWebAclAction{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "type" type_
+
+-- | The @rule@ nested settings definition.
+data WafregionalWebAclRule s = WafregionalWebAclRule_Internal
+    { action          :: P.Maybe (TF.Expr s (WafregionalWebAclAction s))
+    -- ^ @action@
+    -- - (Optional)
+    , override_action :: P.Maybe (TF.Expr s (WafregionalWebAclOverrideAction s))
+    -- ^ @override_action@
+    -- - (Optional)
+    , priority        :: TF.Expr s P.Int
+    -- ^ @priority@
+    -- - (Required)
+    , rule_id         :: TF.Expr s TF.Id
+    -- ^ @rule_id@
+    -- - (Required)
+    , type_           :: TF.Expr s P.Text
+    -- ^ @type@
+    -- - (Default __@REGULAR@__)
+    } deriving (P.Show)
+
+-- | Construct a new @rule@ settings value.
+newWafregionalWebAclRule
+    :: WafregionalWebAclRule_Required s
+    -> WafregionalWebAclRule s
+newWafregionalWebAclRule WafregionalWebAclRule{..} =
+    WafregionalWebAclRule_Internal
+        { action = P.Nothing
+        , override_action = P.Nothing
+        , priority = priority
+        , rule_id = rule_id
+        , type_ = TF.expr "REGULAR"
+        }
+
+-- | The required arguments for 'newWafregionalWebAclRule'.
+data WafregionalWebAclRule_Required s = WafregionalWebAclRule
+    { rule_id  :: TF.Expr s TF.Id
+    -- ^ (Required)
+    , priority :: TF.Expr s P.Int
+    -- ^ (Required)
+    } deriving (P.Show)
+
+instance Lens.HasField "action" f (WafregionalWebAclRule s) (P.Maybe (TF.Expr s (WafregionalWebAclAction s))) where
+    field = Lens.lens'
+        (action :: WafregionalWebAclRule s -> P.Maybe (TF.Expr s (WafregionalWebAclAction s)))
+        (\s a -> s { action = a } :: WafregionalWebAclRule s)
+
+instance Lens.HasField "override_action" f (WafregionalWebAclRule s) (P.Maybe (TF.Expr s (WafregionalWebAclOverrideAction s))) where
+    field = Lens.lens'
+        (override_action :: WafregionalWebAclRule s -> P.Maybe (TF.Expr s (WafregionalWebAclOverrideAction s)))
+        (\s a -> s { override_action = a } :: WafregionalWebAclRule s)
+
+instance Lens.HasField "priority" f (WafregionalWebAclRule s) (TF.Expr s P.Int) where
+    field = Lens.lens'
+        (priority :: WafregionalWebAclRule s -> TF.Expr s P.Int)
+        (\s a -> s { priority = a } :: WafregionalWebAclRule s)
+
+instance Lens.HasField "rule_id" f (WafregionalWebAclRule s) (TF.Expr s TF.Id) where
+    field = Lens.lens'
+        (rule_id :: WafregionalWebAclRule s -> TF.Expr s TF.Id)
+        (\s a -> s { rule_id = a } :: WafregionalWebAclRule s)
+
+instance Lens.HasField "type" f (WafregionalWebAclRule s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (type_ :: WafregionalWebAclRule s -> TF.Expr s P.Text)
+        (\s a -> s { type_ = a } :: WafregionalWebAclRule s)
+
+instance TF.ToHCL (WafregionalWebAclRule s) where
+    toHCL WafregionalWebAclRule_Internal{..} = TF.pairs $
+          P.mempty
+       <> P.maybe P.mempty (TF.pair "action") action
+       <> P.maybe P.mempty (TF.pair "override_action") override_action
+       <> TF.pair "priority" priority
+       <> TF.pair "rule_id" rule_id
+       <> TF.pair "type" type_
+
+-- | The @override_action@ nested settings definition.
+newtype WafregionalWebAclOverrideAction s = WafregionalWebAclOverrideAction
+    { type_ :: TF.Expr s P.Text
+    -- ^ @type@
+    -- - (Required)
+    } deriving (P.Show)
+
+instance Lens.HasField "type" f (WafregionalWebAclOverrideAction s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (type_ :: WafregionalWebAclOverrideAction s -> TF.Expr s P.Text)
+        (\s a -> s { type_ = a } :: WafregionalWebAclOverrideAction s)
+
+instance TF.ToHCL (WafregionalWebAclOverrideAction s) where
+    toHCL WafregionalWebAclOverrideAction{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "type" type_
+
+-- | The @default_action@ nested settings definition.
+newtype WafregionalWebAclDefaultAction s = WafregionalWebAclDefaultAction
+    { type_ :: TF.Expr s P.Text
+    -- ^ @type@
+    -- - (Required)
+    } deriving (P.Show)
+
+instance Lens.HasField "type" f (WafregionalWebAclDefaultAction s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (type_ :: WafregionalWebAclDefaultAction s -> TF.Expr s P.Text)
+        (\s a -> s { type_ = a } :: WafregionalWebAclDefaultAction s)
+
+instance TF.ToHCL (WafregionalWebAclDefaultAction s) where
+    toHCL WafregionalWebAclDefaultAction{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "type" type_
+
+-- | The @field_to_match@ nested settings definition.
+data WafregionalXssMatchSetFieldToMatch s = WafregionalXssMatchSetFieldToMatch_Internal
+    { data_ :: P.Maybe (TF.Expr s P.Text)
+    -- ^ @data@
+    -- - (Optional)
+    , type_ :: TF.Expr s P.Text
+    -- ^ @type@
+    -- - (Required)
+    } deriving (P.Show)
+
+-- | Construct a new @field_to_match@ settings value.
+newWafregionalXssMatchSetFieldToMatch
+    :: WafregionalXssMatchSetFieldToMatch_Required s
+    -> WafregionalXssMatchSetFieldToMatch s
+newWafregionalXssMatchSetFieldToMatch WafregionalXssMatchSetFieldToMatch{..} =
+    WafregionalXssMatchSetFieldToMatch_Internal
+        { data_ = P.Nothing
+        , type_ = type_
+        }
+
+-- | The required arguments for 'newWafregionalXssMatchSetFieldToMatch'.
+data WafregionalXssMatchSetFieldToMatch_Required s = WafregionalXssMatchSetFieldToMatch
+    { type_ :: TF.Expr s P.Text
+    -- ^ (Required)
+    } deriving (P.Show)
+
+instance Lens.HasField "data" f (WafregionalXssMatchSetFieldToMatch s) (P.Maybe (TF.Expr s P.Text)) where
+    field = Lens.lens'
+        (data_ :: WafregionalXssMatchSetFieldToMatch s -> P.Maybe (TF.Expr s P.Text))
+        (\s a -> s { data_ = a } :: WafregionalXssMatchSetFieldToMatch s)
+
+instance Lens.HasField "type" f (WafregionalXssMatchSetFieldToMatch s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (type_ :: WafregionalXssMatchSetFieldToMatch s -> TF.Expr s P.Text)
+        (\s a -> s { type_ = a } :: WafregionalXssMatchSetFieldToMatch s)
+
+instance TF.ToHCL (WafregionalXssMatchSetFieldToMatch s) where
+    toHCL WafregionalXssMatchSetFieldToMatch_Internal{..} = TF.pairs $
+          P.mempty
+       <> P.maybe P.mempty (TF.pair "data") data_
+       <> TF.pair "type" type_
+
+-- | The @xss_match_tuple@ nested settings definition.
+data WafregionalXssMatchSetXssMatchTuple s = WafregionalXssMatchSetXssMatchTuple
+    { field_to_match      :: TF.Expr s (WafregionalXssMatchSetFieldToMatch s)
+    -- ^ @field_to_match@
+    -- - (Required)
+    , text_transformation :: TF.Expr s P.Text
+    -- ^ @text_transformation@
+    -- - (Required)
+    } deriving (P.Show)
+
+instance Lens.HasField "field_to_match" f (WafregionalXssMatchSetXssMatchTuple s) (TF.Expr s (WafregionalXssMatchSetFieldToMatch s)) where
+    field = Lens.lens'
+        (field_to_match :: WafregionalXssMatchSetXssMatchTuple s -> TF.Expr s (WafregionalXssMatchSetFieldToMatch s))
+        (\s a -> s { field_to_match = a } :: WafregionalXssMatchSetXssMatchTuple s)
+
+instance Lens.HasField "text_transformation" f (WafregionalXssMatchSetXssMatchTuple s) (TF.Expr s P.Text) where
+    field = Lens.lens'
+        (text_transformation :: WafregionalXssMatchSetXssMatchTuple s -> TF.Expr s P.Text)
+        (\s a -> s { text_transformation = a } :: WafregionalXssMatchSetXssMatchTuple s)
+
+instance TF.ToHCL (WafregionalXssMatchSetXssMatchTuple s) where
+    toHCL WafregionalXssMatchSetXssMatchTuple{..} = TF.pairs $
+          P.mempty
+       <> TF.pair "field_to_match" field_to_match
+       <> TF.pair "text_transformation" text_transformation

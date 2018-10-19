@@ -16,72 +16,60 @@
 --
 module Terrafomo.Random.Provider
     (
-    -- * Random Provider Datatype
-      Random (..)
-    , newProvider
-    , defaultProvider
-
     -- * Random Specific Aliases
+      Provider
     , DataSource
     , Resource
+
+    -- * Random Configuration
+    , currentVersion
+    , newProvider
+    , Random (..)
     ) where
 
-import Data.Function ((&))
-import Data.Functor  ((<$>))
-import Data.Proxy    (Proxy (Proxy))
+import Data.Function  ((&))
+import Data.Functor   ((<$>))
+import Data.Semigroup ((<>))
+import Data.Version   (Version, makeVersion, showVersion)
 
 import GHC.Base (($))
 
-import Terrafomo.Random.Settings
 
-import qualified Data.Hashable          as P
-import qualified Data.HashMap.Strict    as P
+import qualified Data.Functor.Const     as P
 import qualified Data.List.NonEmpty     as P
+import qualified Data.Map.Strict        as P
 import qualified Data.Maybe             as P
 import qualified Data.Text.Lazy         as P
-import qualified GHC.Generics           as P
-import qualified Lens.Micro             as P
 import qualified Prelude                as P
 import qualified Terrafomo.HCL          as TF
-import qualified Terrafomo.Random.Lens  as P
+import qualified Terrafomo.Lens         as Lens
 import qualified Terrafomo.Random.Types as P
 import qualified Terrafomo.Schema       as TF
 
-type DataSource a = TF.Resource Random ()               a
-type Resource   a = TF.Resource Random (TF.Lifecycle a) a
+type Provider   = TF.Provider Random
+type DataSource = TF.Resource Random TF.Ignored
+type Resource   = TF.Resource Random TF.Meta
+
+type instance TF.ProviderName Random = "random"
+
+currentVersion :: Version
+currentVersion = makeVersion [2, 0, 0]
 
 -- | The @random@ Terraform provider configuration.
---
--- See the <https://www.terraform.io/docs/providers/random/index.html terraform documentation>
--- for more information.
-data Random = Random'
-    deriving (P.Show, P.Eq, P.Generic)
+data Random = Random
+    deriving (P.Show)
 
-instance P.Hashable (Random)
-
--- | Specify a new Random provider configuration.
-newProvider
-    :: Random
-newProvider =
-    Random'
-
-{- | The 'Random' provider with absent configuration that is used
-to instantiate new 'Resource's and 'DataSource's. Provider configuration can be
-overridden on a per-resource basis by using the 'Terrafomo.provider' lens, the
-'newProvider' constructor, and any of the applicable lenses.
-
-For example:
-
-@
-import qualified Terrafomo as TF
-import qualified Terrafomo.Random.Provider as Random
-
-TF.newExampleResource "foo"
-    & TF.provider ?~
-          Random.(newProvider
-@
+{- | Specify a new Random provider configuration.
+See the <https://www.terraform.io/docs/providers/random/index.html terraform documentation> for more information.
 -}
-defaultProvider :: TF.Provider Random
-defaultProvider =
-    TF.defaultProvider "random" (P.Just "~> 1.3")
-        P.mempty
+newProvider
+    :: Random -- ^ The minimal/required arguments.
+    -> Provider
+newProvider x =
+    TF.Provider
+        { TF.providerVersion = P.Just ("~> " P.++ showVersion currentVersion)
+        , TF.providerConfig  =
+            x
+        , TF.providerEncoder =
+            P.mempty
+        }

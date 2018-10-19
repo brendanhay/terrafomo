@@ -10,7 +10,6 @@
 --
 module Terrafomo.Kubernetes.Settings
     (
-    -- * Settings
       module Terrafomo.Kubernetes.Settings01
     , module Terrafomo.Kubernetes.Settings02
     , module Terrafomo.Kubernetes.Settings03

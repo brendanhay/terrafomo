@@ -28,12 +28,9 @@ module Terrafomo.Triton
     -- * Settings
     , module Terrafomo.Triton.Settings
 
-    -- * Overloaded Lenses
-    , module Terrafomo.Triton.Lens
     ) where
 
 import Terrafomo.Triton.DataSources
-import Terrafomo.Triton.Lens
 import Terrafomo.Triton.Provider
 import Terrafomo.Triton.Resources
 import Terrafomo.Triton.Settings
