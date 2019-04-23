@@ -140,7 +140,7 @@ The following additional configuration is supported:
 {% include "_include/conflicts.ede" with schema = resource.value %}
 {% for field in resource.value.arguments %}
 
-instance Lens.HasField "{{ field.value.original }}" f (P.Resource {{ resource.value.name }} s) ({{ field.value.type }}) where
+instance Lens.HasField "{{ field.value.original }}" f (P.{{ type }} {{ resource.value.name }} s) ({{ field.value.type }}) where
     field = Lens.resourceLens P.. Lens.lens'
         ({{ field.value.name }} :: {{ resource.value.type }} -> {{ field.value.type }})
         (\s a -> s { {{ field.value.name }} = a } :: {{ resource.value.type }})
