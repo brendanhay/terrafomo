@@ -40,6 +40,7 @@ module Terrafomo.HIL
     , function
     ) where
 
+import Lens.Micro             (over, _init)
 import Data.ByteString.Lazy (ByteString)
 import Data.String            (IsString (fromString))
 import Data.Text.Lazy         (Text)
@@ -146,9 +147,9 @@ json = heredoc . HCL.render (HCL.layout { Pretty.pairs = pairs }) . HCL.fromJSON
   where
     pairs =
         HCL.fromEncoding . HCL.pairs
-            . foldMap (uncurry pair)
+            . foldMap HCL.Value . over (_init . traverse) (<> ",") . fmap (uncurry pair)
 
-    pair k v = HCL.Value (Pretty.string k <> ": " <> HCL.encode v)
+    pair k v = Pretty.string k <> ": " <> HCL.encode v
 
 -- Builtin Functions
 

@@ -76,6 +76,7 @@ library
         mtl,
         scientific,
         text,
+        microlens,
     exposed-modules:
         Terrafomo
         Terrafomo.Document
